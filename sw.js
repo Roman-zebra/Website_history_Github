@@ -6,7 +6,7 @@
      B. 地図タイル・碑の写真      … cache-first で溜める（一度見た場所は圏外でも出る、枚数上限あり）
      C. Overpass / Wikipedia      … network-only（結果は app.js 側が localStorage に残す）
 */
-const VERSION = 'v0.42.0';
+const VERSION = 'v0.43.0';
 const SHELL = `shell-${VERSION}`;
 const TILES = `tiles-${VERSION}`;
 const TILE_MAX = 700;                       // 端末を圧迫しない範囲。1タイル20-90KB
@@ -25,8 +25,8 @@ const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。�
      2026-09-08 追記: app.js の ?v= 直書きは const DATA_V に集約した。
      版の数字を直に書いた行が app.js / explore.js に1つでもあれば
      tools/bump_version.py が exit 1 で止める（見張りをコメントでなく道具に置いた）。 */
-const DATA_V = '0.38';
-const ASSET_V = '0.47';
+const DATA_V = '0.39';
+const ASSET_V = '0.48';
 const DATA_FILES = [
   'monuments.json', 'monuments-index.json', 'kid-text.json', 'places-index.json',
   'landmarks.json', 'liminal.json', 'places-world.json', 'affiliate.json',
@@ -135,13 +135,25 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // B': 地域JSONは network-first だが、SHELL とは別の枠に入れて上限で切る。
+  // B': 地域JSONは cache-first。URL に ?v=DATA_V が入っているので、データを変えれば
+  // URL が変わり必ず取り直しになる（古いまま残る事故は起きない。版ずれは
+  // make_deploy.py が公開前に止める）。SHELL とは別の枠に入れて上限で切る。
+  //
+  // 2026-09-09 に network-first から変えた。理由は実測: 新宿(z16)へ寄ると地域JSONを
+  // 4本読むが、network-first だと**キャッシュにあっても毎回**343-426ms 待っていた
+  // （4本で約1.5秒）。長時間タスクは0件だったので、重さの正体は計算ではなく待ち時間。
   // 保存を await してから返してはいけない。最初にそう書いたとき、同じSWの
   // 同じ瞬間に landmarks.json は通るのに地域JSONだけ58本連続で ERR_FAILED に
   // なった（実測）。原因は特定できていないが、保存の失敗が返事を巻き込む形
   // そのものが危険なので、返事は先に返し、保存は後ろで黙って行う。
   if (isRegion(url)){
     e.respondWith((async () => {
+      // まずキャッシュ。あれば通信を待たずに返す。
+      try{
+        const c0 = await caches.open(REGIONS);
+        const hit = await c0.match(request);
+        if (hit) return hit;
+      } catch(err){ /* キャッシュが使えないだけ。通信で続ける */ }
       try{
         const res = await fetch(request);
         if (res.ok){

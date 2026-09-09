@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://roman-zebra.github.io/Website_history_Github/sitemap.xml
