@@ -74,7 +74,7 @@ const CLOSE_ZOOM  = 18;      // everything left: the stone by the roadside
 /* =========================================================================
    0. Language
    ========================================================================= */
-let LANG = localStorage.getItem('tn-lang') || 'en';
+let LANG = 'en';   // 実際の値は T の定義後に detectLang() で決める
 
 const T = {
   en: {
@@ -316,7 +316,197 @@ const T = {
       <p class="faq-a">地図と空中写真は国土地理院のもので、出典表示が必要です。ホーム下部の出典をご覧ください。</p>`
   }
 };
-const t = k => T[LANG][k];
+/* 訳の無いキーは英語に落とす。落ちること自体は異常ではない（長文は未訳）。 */
+const t = k => {
+  const tbl = T[LANG] || T.en;
+  return tbl[k] !== undefined ? tbl[k] : T.en[k];
+};
+
+/* --- 5言語化（2026-09-09） -------------------------------------------
+   訪日客の実績（JNTO 2025年）で選んだ: 韓国945.9万・中国909.6万・台湾676.3万・
+   米国330.7万・香港251.7万 → 英語 / 韓国語 / 簡体字 / 繁体字 / 日本語。
+
+   **en と ja のブロックには触っていない。**新しい言語は下に足すだけで、
+   訳の無いキーは t() が英語へ落とす。触る面積を小さくして壊さないための形。
+
+   **長文は未訳**（guideHTML / limIntroHTML / credits）。韓国語・中国語では
+   ここだけ英語が出る。訳したふりをしないよう、この行を残しておく。 */
+T.ko = {
+  lead: '비행기에서 찍은 실제 항공사진입니다.<br>슬라이더를 움직여 <b>80년</b>의 변화를 보세요.',
+  modePlaces: '주요 장소', modeMap: '전체 지도', modeLiminal: '리미널 재팬',
+  noteLiminal: '어디에도 속하지 않은 듯한 장소들. 대부분 도시 근처라 실제로 갈 수 있습니다.',
+  heroSub: '제2차 세계대전 전후 — 1945년과 오늘을 한 장의 지도에서',
+  liminalWhat: '어떤 점이 리미널한가',
+  photoBy: '사진: Wikimedia Commons',
+  notePlaces: '짧은 이야기가 있는 엄선된 장소들.',
+  noteMap: '일본 어디든 검색해서 1945년과 비교해 보세요.',
+  search: '장소, 역, 주소 검색',
+  roamTip: '마커를 눌러 설명을 읽고, 1945년과 비교해 보세요.',
+  dragHint: '드래그', stopCompare: '비교 끝내기',
+  compareYear: y => y + '년과 오늘을 비교',
+  noOldPhoto: '이 지점을 담은 옛 항공사진이 없습니다.',
+  readWiki: '위키백과에서 더 읽기',
+  aboutLead: '이 지점 자체에 대한 위키백과 문서는 없습니다. 대신 이런 것을 읽을 수 있습니다:',
+  aboutLeadAlso: '이런 것도 읽을 수 있습니다:',
+  aboutArea: n => '이 지역에 대해: ' + n,
+  readWikiJa: '일본어 문서 읽기',
+  readWikiEn: '영어 위키백과에서 읽기', gmap: 'Google 지도', share: '공유',
+  zoomIn: '확대하면 1945년과 비교할 수 있습니다.',
+  noPhoto: p => '여기에는 ' + p + ' 사진이 없습니다. 히로시마, 도쿄, 오사카, 교토를 시도해 보세요.',
+  jaOnly: '일본어 출처 — 영어 문서 없음',
+  loading: '불러오는 중…', noSummary: '설명이 없습니다.',
+  srcWikiEn: '출처: 영어 위키백과 (CC BY-SA)',
+  srcWikiJaTr: '출처: 일본어 위키백과 요약을 번역 (CC BY-SA)',
+  srcAggregated: '이 설명은 여러 공개 웹페이지에서 모아 정리한 것입니다. 하나의 출처가 뒷받침하지 않으므로, 확인된 사실이 아니라 참고로 읽어 주세요.',
+  srcTags: '이 설명은 이 지점에 붙은 지도(OpenStreetMap) 태그에서 자동으로 만든 것입니다. 쓰여진 해설을 바탕으로 한 것이 아니므로 참고로만 읽어 주세요.',
+  photoAir: '오늘 하늘에서 본 이 지점 (GSI 타일)',
+  tapRed: '빨간 버튼을 누르면 전문을 읽을 수 있습니다.',
+  memorial: '비', memorialStone: '재해 전승비',
+  stoneBody: '이것은 <b>자연재해 전승비</b>입니다. 이 땅에서 일어난 일을 후세에 전하기 위해 세워졌습니다.',
+  stoneRecords: '기록된 재해',
+  stoneJa: '비문은 일본어로 기록되어 있습니다:',
+  erected: '건립', yearsAgo: n => n + '년 전',
+  famous: '일본에서 가장 잘 알려진 장소 중 하나입니다. 아래를 눌러 읽어 보세요.',
+  noResults: '찾을 수 없습니다.', located: '현재 위치입니다.',
+  noGeo: '위치를 사용할 수 없습니다.', copied: '링크를 복사했습니다.',
+  address: '주소', localSpot: '동네의 명소',
+  official: '공식 / 지자체 페이지 찾기',
+  aKind: k => k + '입니다. 아직 영어 위키백과 문서가 없습니다.',
+  showOriginal: '일본어 원문 보기',
+  save: '☆ 저장', saved: '★ 저장됨', myTitle: '내 장소',
+  savedToast: n => '★ 저장: ' + n,
+  unsavedToast: n => '삭제: ' + n,
+  closeTip: '가장 크게 확대한 상태입니다 — 길가의 비석, 폐허, 옛터 같은 작은 것들이 여기서 보입니다.',
+  myEmpty: '아직 저장한 것이 없습니다. 장소를 열고 저장을 누르세요.',
+  guideBtn: '? 가이드', guideTitle: '가이드 & FAQ'
+};
+
+T['zh-Hans'] = {
+  lead: '这些是从飞机上拍摄的真实航空照片。<br>拖动滑块，看<b>八十年</b>的变化。',
+  modePlaces: '精选地点', modeMap: '全图', modeLiminal: '阈限日本',
+  noteLiminal: '仿佛不属于任何地方的场所——多数就在城市附近，你可以真的去。',
+  heroSub: '二战前后 —— 1945年与今天，在同一张地图上',
+  liminalWhat: '它为何显得阈限',
+  photoBy: '照片：Wikimedia Commons',
+  notePlaces: '精选地点，每处都有一段短故事。',
+  noteMap: '搜索日本任何地方，再与1945年对照。',
+  search: '搜索地点、车站或地址',
+  roamTip: '点一个标记读它的说明，再与1945年对照。',
+  dragHint: '拖动', stopCompare: '结束对照',
+  compareYear: y => '把' + y + '年与今天对照',
+  noOldPhoto: '没有覆盖此处的旧航空照片。',
+  readWiki: '在维基百科上继续读',
+  aboutLead: '维基百科没有关于这个具体地点的条目。你可以读：',
+  aboutLeadAlso: '也可以读：',
+  aboutArea: n => '关于这一带：' + n,
+  readWikiJa: '阅读日文条目',
+  readWikiEn: '在英文维基百科阅读', gmap: '谷歌地图', share: '分享',
+  zoomIn: '放大后可与1945年对照。',
+  noPhoto: p => '此处没有拍摄' + p + '的照片。可以试试广岛、东京、大阪或京都。',
+  jaOnly: '日文来源 —— 没有英文条目',
+  loading: '载入中…', noSummary: '暂无说明。',
+  srcWikiEn: '来源：英文维基百科（CC BY-SA）',
+  srcWikiJaTr: '来源：日文维基百科摘要的翻译（CC BY-SA）',
+  srcAggregated: '这段说明是从若干公开网页拼合而成的。没有单一来源为它背书，请当作大致参考，而非已核实的事实。',
+  srcTags: '这段说明是根据此地点的地图（OpenStreetMap）标签自动拼出的，并非依据现成的文字说明，请当作大致参考。',
+  photoAir: '今天从空中看这个地点（国土地理院瓦片）',
+  tapRed: '点红色按钮可读全文。',
+  memorial: '碑', memorialStone: '灾害传承碑',
+  stoneBody: '这是一座<b>自然灾害传承碑</b>。人们立碑，是为了让后人记住这片土地上发生过的事。',
+  stoneRecords: '碑上记录的灾害',
+  stoneJa: '碑文以日文记录：',
+  erected: '建立', yearsAgo: n => n + '年前',
+  famous: '日本最广为人知的地点之一。点下面继续读。',
+  noResults: '没有找到。', located: '你在这里。',
+  noGeo: '无法获取位置。', copied: '已复制链接。',
+  address: '地址', localSpot: '本地的名胜',
+  official: '查找官方／市政页面',
+  aKind: k => '这是' + k + '。目前还没有英文维基百科条目。',
+  showOriginal: '显示日文原文',
+  save: '☆ 收藏', saved: '★ 已收藏', myTitle: '我的地点',
+  savedToast: n => '★ 已收藏：' + n,
+  unsavedToast: n => '已移除：' + n,
+  closeTip: '已放到最大 —— 路边的石碑、废墟、旧址这些小东西会在这里出现。',
+  myEmpty: '还没有收藏。打开一个地点后点收藏。',
+  guideBtn: '? 指南', guideTitle: '指南与常见问题'
+};
+
+T['zh-Hant'] = {
+  lead: '這些是從飛機上拍攝的真實航空照片。<br>拖動滑桿，看<b>八十年</b>的變化。',
+  modePlaces: '精選地點', modeMap: '全圖', modeLiminal: '閾限日本',
+  noteLiminal: '彷彿不屬於任何地方的場所——多數就在城市附近，你可以真的去。',
+  heroSub: '二戰前後 —— 1945年與今天，在同一張地圖上',
+  liminalWhat: '它為何顯得閾限',
+  photoBy: '照片：Wikimedia Commons',
+  notePlaces: '精選地點，每處都有一段短故事。',
+  noteMap: '搜尋日本任何地方，再與1945年對照。',
+  search: '搜尋地點、車站或地址',
+  roamTip: '點一個標記讀它的說明，再與1945年對照。',
+  dragHint: '拖動', stopCompare: '結束對照',
+  compareYear: y => '把' + y + '年與今天對照',
+  noOldPhoto: '沒有涵蓋此處的舊航空照片。',
+  readWiki: '在維基百科上繼續讀',
+  aboutLead: '維基百科沒有關於這個具體地點的條目。你可以讀：',
+  aboutLeadAlso: '也可以讀：',
+  aboutArea: n => '關於這一帶：' + n,
+  readWikiJa: '閱讀日文條目',
+  readWikiEn: '在英文維基百科閱讀', gmap: 'Google 地圖', share: '分享',
+  zoomIn: '放大後可與1945年對照。',
+  noPhoto: p => '此處沒有拍攝' + p + '的照片。可以試試廣島、東京、大阪或京都。',
+  jaOnly: '日文來源 —— 沒有英文條目',
+  loading: '載入中…', noSummary: '暫無說明。',
+  srcWikiEn: '來源：英文維基百科（CC BY-SA）',
+  srcWikiJaTr: '來源：日文維基百科摘要的翻譯（CC BY-SA）',
+  srcAggregated: '這段說明是從若干公開網頁拼合而成的。沒有單一來源為它背書，請當作大致參考，而非已核實的事實。',
+  srcTags: '這段說明是根據此地點的地圖（OpenStreetMap）標籤自動拼出的，並非依據現成的文字說明，請當作大致參考。',
+  photoAir: '今天從空中看這個地點（國土地理院圖磚）',
+  tapRed: '點紅色按鈕可讀全文。',
+  memorial: '碑', memorialStone: '災害傳承碑',
+  stoneBody: '這是一座<b>自然災害傳承碑</b>。人們立碑，是為了讓後人記住這片土地上發生過的事。',
+  stoneRecords: '碑上記錄的災害',
+  stoneJa: '碑文以日文記錄：',
+  erected: '建立', yearsAgo: n => n + '年前',
+  famous: '日本最廣為人知的地點之一。點下面繼續讀。',
+  noResults: '沒有找到。', located: '你在這裡。',
+  noGeo: '無法取得位置。', copied: '已複製連結。',
+  address: '地址', localSpot: '在地的名勝',
+  official: '尋找官方／市政頁面',
+  aKind: k => '這是' + k + '。目前還沒有英文維基百科條目。',
+  showOriginal: '顯示日文原文',
+  save: '☆ 收藏', saved: '★ 已收藏', myTitle: '我的地點',
+  savedToast: n => '★ 已收藏：' + n,
+  unsavedToast: n => '已移除：' + n,
+  closeTip: '已放到最大 —— 路邊的石碑、廢墟、舊址這些小東西會在這裡出現。',
+  myEmpty: '還沒有收藏。打開一個地點後點收藏。',
+  guideBtn: '? 指南', guideTitle: '指南與常見問題'
+};
+
+/* 端末の言語から選ぶ。国ではなく**端末の言語**で決める理由:
+   東京にいる韓国人旅行者に日本語を出しても読めない。読めるかどうかを決めるのは
+   居場所ではなく端末の設定なので、そちらに従う。
+   一度でも自分で切り替えたら、その選択を優先する。 */
+function detectLang(){
+  try {
+    const saved = localStorage.getItem('tn-lang');
+    if (saved && T[saved]) return saved;
+  } catch(e){}
+  const list = (navigator.languages && navigator.languages.length)
+             ? navigator.languages : [navigator.language || 'en'];
+  for (let i = 0; i < list.length; i++){
+    const l = String(list[i]).toLowerCase();
+    if (l.indexOf('ja') === 0) return 'ja';
+    if (l.indexOf('ko') === 0) return 'ko';
+    if (l.indexOf('zh') === 0)
+      return /hant|tw|hk|mo/.test(l) ? 'zh-Hant' : 'zh-Hans';
+  }
+  return 'en';                     // 5言語に無い国はすべて英語
+}
+const LANG_NAMES = { en: 'English', ja: '日本語', ko: '한국어',
+                     'zh-Hans': '简体中文', 'zh-Hant': '繁體中文' };
+const LANG_SHORT = { en: 'EN', ja: 'JA', ko: 'KO', 'zh-Hans': '简', 'zh-Hant': '繁' };
+const LANG_ORDER = ['en', 'ja', 'ko', 'zh-Hans', 'zh-Hant'];
+
+
 
 /* =========================================================================
    1. State
@@ -345,7 +535,7 @@ const KIND_EN = { '洪水':'Flood', '土砂災害':'Landslide', '高潮':'Storm 
 const KIND_EMOJI = { 'Flood':'🌀','Landslide':'⛰️','Storm surge':'🌊','Earthquake':'💥',
   'Tsunami':'🌊','Volcanic eruption':'🌋','Other':'🪧' };
 const kindsRaw = k => String(k || '').split('・').filter(x => KIND_EN[x]);
-const kindsOut = k => kindsRaw(k).map(x => LANG === 'en' ? KIND_EN[x] : x);
+const kindsOut = k => kindsRaw(k).map(x => LANG === 'ja' ? x : KIND_EN[x]);
 
 /* Google's translation proxy. Verified against an article with no English
    version at all: ルネスホール renders as "Runes Hall" in full English. */
@@ -513,8 +703,8 @@ function buildCards(){
 function applyLang(){
   document.documentElement.lang = LANG;
   for (const el of document.querySelectorAll('[data-t]')) el.innerHTML = t(el.dataset.t);
-  $('langLabel').textContent = LANG === 'en' ? '日本語' : 'English';
-  $('langBtn2').textContent  = LANG === 'en' ? 'JA' : 'EN';   // 2文字なら375pxでも折り返さない
+  $('langLabel').textContent = LANG_NAMES[nextLang()] || 'English';
+  $('langBtn2').textContent  = LANG_SHORT[nextLang()] || 'EN';   // 2文字なら375pxでも折り返さない
   $('q').placeholder         = t('search');
   $('modeNote').textContent  = modeNote();
   if (mode === 'liminal') $('limIntro').innerHTML = t('limIntroHTML');
@@ -1410,7 +1600,7 @@ function spotType(title){
 function spotEmoji(title){ const r = spotType(title); return r ? r[1] : '📖'; }
 function spotLabel(title){
   const r = spotType(title);
-  if (!r) return LANG === 'en' ? 'place' : '場所';
+  if (!r) return LANG === 'ja' ? '場所' : 'place';
   return LANG === 'en' ? r[2] : r[3];
 }
 
@@ -1739,7 +1929,7 @@ function showLandmark(p){
     img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
     share: { title: p.name, url: location.origin + location.pathname },
     searchName: p.ja,
-    src: LANG === 'en' ? 'Coordinates from Wikipedia.' : '座標の出典：ウィキペディア'
+    src: LANG === 'ja' ? '座標の出典：ウィキペディア' : 'Coordinates from Wikipedia.'
   });
   map.panTo([p.lat, p.lon]);
 }
@@ -2376,8 +2566,14 @@ function setMode(m){
   else buildCards();
 }
 
-$('langBtn').onclick  = () => setLang(LANG === 'en' ? 'ja' : 'en');
-$('langBtn2').onclick = () => setLang(LANG === 'en' ? 'ja' : 'en');
+/* 5言語を順に回す。ボタンには**次に切り替わる言語**の名前を出すので、
+   押す前に何になるか分かる。 */
+function nextLang(){
+  const i = LANG_ORDER.indexOf(LANG);
+  return LANG_ORDER[(i < 0 ? 0 : i + 1) % LANG_ORDER.length];
+}
+$('langBtn').onclick  = () => setLang(nextLang());
+$('langBtn2').onclick = () => setLang(nextLang());
 $('mPlaces').onclick  = () => setMode('places');
 $('mMap').onclick     = () => setMode('map');
 $('mLiminal').onclick = () => setMode('liminal');
@@ -2446,6 +2642,7 @@ document.addEventListener('keydown', e => {
 /* =========================================================================
    10. Start
    ========================================================================= */
+LANG = detectLang();
 applyLang();
 fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   PLACES = j.places;
