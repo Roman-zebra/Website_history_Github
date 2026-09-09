@@ -293,6 +293,9 @@ body.roaming .panel:not(.open){transform:translateY(100%)}
 .p-addr{margin:0 0 14px;font-size:13px;line-height:1.6;color:#9d968a}
 .p-when{color:var(--gold);font-weight:700}
 .p-hint{font-size:14px;color:#7d776c}
+/* 要約の出典。集めてまとめたものは「確かさが低い」と分かる見た目にする（2026-09-09）。 */
+.p-srcnote{font-size:12px;line-height:1.5;color:#8c877d;margin-top:6px}
+.p-weak{color:#a1662f;background:#fbf3e6;border-left:3px solid #d8a55a;padding:7px 10px;border-radius:4px}
 .p-row{display:flex;gap:9px;margin-bottom:14px}
 .p-mini{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
   border:1px solid var(--ink-3);background:var(--ink-2);color:var(--cream);

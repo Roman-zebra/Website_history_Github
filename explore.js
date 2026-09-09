@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.42';
+const DATA_V = '0.43';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
    empty: pull right back and you still see Fuji, Skytree and the places everyone
@@ -124,6 +124,9 @@ const T = {
     noPhoto: p => 'No ' + p + ' photograph was taken here. Try Hiroshima, Tokyo, Osaka or Kyoto.',
     jaOnly: 'Japanese source — no English article',
     loading: 'Loading…', noSummary: 'No summary available.',
+    srcWikiEn: 'Source: English Wikipedia (CC BY-SA)',
+    srcWikiJaTr: 'Source: summary of the Japanese Wikipedia article, translated (CC BY-SA)',
+    srcAggregated: 'This description was pieced together from several public web pages. No single source stands behind it, so treat it as a rough guide rather than a checked fact.',
     tapRed: 'Tap the red button to read the whole article in English.',
     memorial: 'memorial', memorialStone: 'Memorial stone',
     stoneBody: 'This is a <b>disaster memorial stone</b>. People carved it so that later generations would remember what happened on this spot.',
@@ -238,6 +241,9 @@ const T = {
     noPhoto: p => 'このあたりでは' + p + 'の写真は撮られていません。広島・東京・大阪・京都で試してください。',
     jaOnly: '日本語の記事',
     loading: '読み込み中…', noSummary: '説明がありません。',
+    srcWikiEn: '出典：英語版ウィキペディア（CC BY-SA）',
+    srcWikiJaTr: '出典：日本語版ウィキペディアの要約を翻訳（CC BY-SA）',
+    srcAggregated: 'この説明は複数の公開サイトの情報を集めてまとめたものです。出典が1つに定まらないため、確かさは高くありません。目安として読んでください。',
     tapRed: '下のボタンで全文が読めます。',
     memorial: 'の碑', memorialStone: '災害の碑',
     stoneBody: 'これは<b>自然災害伝承碑</b>です。ここで起きたことを後の人に伝えるために建てられました。',
@@ -1688,6 +1694,32 @@ function panelShell(o){
   }
 }
 
+
+/* 要約と、その出典の注意書きを1か所で決める。2026-09-09 追加。
+   extract=英語版、extract_ja=日本語版。無い言語は「出さない」。
+   extractSrc は出典の種類:
+     'en.wikipedia'            … 英語版そのまま
+     'ja.wikipedia (translated)' … 日本語版を訳したもの
+     'web (aggregated)'        … 複数の公開サイトから集めたもの。**確かさが低い旨を必ず出す**
+   花平さんの指示（2026-09-09）: 集めてまとめた説明には注釈を付ける。 */
+function extractOf(p){
+  const text = LANG === 'ja' ? (p.extract_ja || '') : (p.extract || '');
+  if (!text) return null;
+  const src = p.extractSrc || '';
+  const note = src === 'web (aggregated)'    ? t('srcAggregated')
+             : src === 'ja.wikipedia (translated)' ? t('srcWikiJaTr')
+             : src === 'en.wikipedia'        ? t('srcWikiEn')
+             : '';
+  return { text: text, note: note, weak: src === 'web (aggregated)' };
+}
+
+function extractHTML(p, limit){
+  const e = extractOf(p);
+  if (!e) return '';
+  return '<p class="p-hint">' + esc(e.text.slice(0, limit || 220)) + '</p>'
+       + (e.note ? '<p class="p-srcnote' + (e.weak ? ' p-weak' : '') + '">'
+                 + esc(e.note) + '</p>' : '');
+}
 function showLandmark(p){
   lastPanel = () => showLandmark(p);
   /* current は「物語つきの名所を開いている」という意味。ここで消さないと、
@@ -1697,7 +1729,7 @@ function showLandmark(p){
   panelShell({
     kicker: { emoji: p.emoji, label: p.kind, note: '  ' + p.ja },
     ja: p.ja, name: LANG === 'en' ? p.name : p.ja, at: [p.lat, p.lon], query: p.name,
-    bodyHTML: '<p>' + t('famous') + '</p>',
+    bodyHTML: '<p>' + t('famous') + '</p>' + extractHTML(p, 320),
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
     share: { title: p.name, url: location.origin + location.pathname },
@@ -1958,7 +1990,7 @@ function showLiminal(p, keepView){
     bodyHTML: '<p>' + esc(hook) + '</p>'
             + (why ? '<h3 class="p-h3">' + t('liminalWhat') + '</h3><p>' + esc(why) + '</p>' : '')
             + (p.note ? '<p class="p-pick">' + esc(p.note) + '</p>' : '')
-            + (extract ? '<p class="p-hint">' + esc(extract.slice(0, 220)) + '</p>' : ''),
+            + extractHTML(p, 220),
     img: p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 17),
     cap: p.img ? t('photoBy') : '',
     wiki: (articleLink(p) || {}).url || '',
