@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.43';
+const DATA_V = '0.44';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
    empty: pull right back and you still see Fuji, Skytree and the places everyone
@@ -1896,6 +1896,28 @@ function panelShell(o){
      'ja.wikipedia (translated)' … 日本語版を訳したもの
      'web (aggregated)'        … 複数の公開サイトから集めたもの。**確かさが低い旨を必ず出す**
    花平さんの指示（2026-09-09）: 集めてまとめた説明には注釈を付ける。 */
+/* 要約を読める長さに切る。**元データは触らない。**
+
+   百科事典の書き出しは「名前（よみ、別名）は、」で始まる。見出しに名前が出ている
+   画面では、この繰り返しがいちばん読みにくい（花平さんの指摘）。落とす。
+   切るときは必ず文末（。/./！/？）で切る。文の途中で終わると、書きかけに見える。 */
+function trimSummary(text, limit){
+  let s = String(text || '').split('\n')[0].trim();     // 最初の段落だけ
+  /* 「◯◯（よみ、英名…）は、」を落とす。括弧の中に「。」が無いものだけを対象にして、
+     長い一文を誤って削らないようにする。 */
+  s = s.replace(/^[^。]{1,40}（[^）。]{0,80}）(?:は、|は)/, '');
+  s = s.replace(/^[^.]{1,60}\([^).]{0,90}\)\s+(?:is|was|are|were)\s+/, m =>
+        m.replace(/^[^.]{1,60}\([^).]{0,90}\)\s+/, ''));
+  if (s.length <= limit) return s;
+  const cut = s.slice(0, limit);
+  let p = -1;
+  for (const mark of ['。', '！', '？', '. ', '! ', '? ']){
+    p = Math.max(p, cut.lastIndexOf(mark) + (mark.length > 1 ? 0 : 0));
+  }
+  /* 前半で切れてしまうくらい文が長いときは、無理に文末を探さず「…」で締める。 */
+  return p > limit * 0.35 ? cut.slice(0, p + 1) : cut.replace(/[、,\s]+$/, '') + '…';
+}
+
 function extractOf(p){
   const text = LANG === 'ja' ? (p.extract_ja || '') : (p.extract || '');
   if (!text) return null;
@@ -1910,7 +1932,7 @@ function extractOf(p){
 function extractHTML(p, limit){
   const e = extractOf(p);
   if (!e) return '';
-  return '<p class="p-hint">' + esc(e.text.slice(0, limit || 220)) + '</p>'
+  return '<p class="p-hint">' + esc(trimSummary(e.text, limit || 220)) + '</p>'
        + (e.note ? '<p class="p-srcnote' + (e.weak ? ' p-weak' : '') + '">'
                  + esc(e.note) + '</p>' : '');
 }
@@ -1974,11 +1996,11 @@ async function showWiki(w){
   let pg = null, body = '';
   if (LANG === 'en' && hasEn){
     pg = await wikiExtractByTitle(w.en, 'en');
-    const raw = ((pg && pg.extract) || '').replace(/\s+/g, ' ').slice(0, 260);
+    const raw = trimSummary(((pg && pg.extract) || '').replace(/\s+/g, ' '), 260);
     body = raw ? '<p>' + esc(raw) + '</p>' : '<p>' + t('noSummary') + '</p>';
   } else {
     pg = await wikiExtract(w.pageid, 'ja');
-    const raw = ((pg && pg.extract) || '').replace(/\s+/g, ' ').slice(0, 260);
+    const raw = trimSummary(((pg && pg.extract) || '').replace(/\s+/g, ' '), 260);
     if (LANG === 'ja'){
       body = raw ? '<p>' + esc(raw) + '</p>' : '<p>' + t('noSummary') + '</p>';
     } else {
@@ -2397,34 +2419,205 @@ let qSeq = 0;
 $('qClear').onclick = () => { ++qSeq; $('q').value = ''; $('qClear').hidden = true;
                               $('qResults').hidden = true; };
 
+/* --- 自前スポットの検索（2026-09-09） --------------------------------
+   照合用に文字を均す。ō→o、全角/半角、中黒や括弧の違いで外さないため。 */
+const qnorm = s => String(s || '').toLowerCase()
+  .normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[\s\u3000\-–—_,.'’"()（）・･:：]/g, '');
+
+function spotRows(){
+  const out = [];
+  for (const p of PLACES)
+    out.push({ kind: 'place', p,
+               names: [p.name, p.name_ja, p.ja, p.romaji, p.name_ko, p.name_zh] });
+  for (const p of LIMINAL)
+    out.push({ kind: 'liminal', p, names: [p.name, p.ja, p.name_ko, p.name_zh] });
+  for (const p of LANDMARKS)
+    out.push({ kind: 'landmark', p, names: [p.name, p.ja, p.name_ko, p.name_zh] });
+  return out;
+}
+
+/* 近い順に返す。完全一致 > 前方一致 > 部分一致。
+   打ちかけでも当たるよう、1文字から引く（日本語は1文字でも意味を持つ）。 */
+function searchSpots(q){
+  const nq = qnorm(q);
+  if (!nq) return [];
+  const hits = [];
+  for (const row of spotRows()){
+    let best = 0;
+    for (const n of row.names){
+      const nn = qnorm(n);
+      if (!nn) continue;
+      let sc = 0;
+      if (nn === nq) sc = 100;
+      else if (nn.indexOf(nq) === 0) sc = 80;
+      else if (nn.indexOf(nq) > 0) sc = 60;
+      else if (nq.length >= 3 && nq.indexOf(nn) >= 0) sc = 45;
+      if (sc > best) best = sc;
+    }
+    if (best) hits.push({ kind: row.kind, p: row.p, score: best });
+  }
+  hits.sort((a, b) => b.score - a.score);
+  return hits.slice(0, 5);
+}
+
+/* 表示名は読み手の言語で。無ければ英語に落とす。 */
+function spotLabelFor(row){
+  const p = row.p;
+  if (LANG === 'ja') return p.ja || p.name_ja || p.name;
+  if (LANG === 'ko') return p.name_ko || p.name;
+  if (LANG === 'zh-Hans' || LANG === 'zh-Hant') return p.name_zh || p.name;
+  return p.name || p.ja;
+}
+function spotSubFor(row){
+  const p = row.p;
+  const other = (LANG === 'ja') ? p.name : (p.ja || '');
+  const kind = row.kind === 'liminal' ? t('modeLiminal')
+             : row.kind === 'place'   ? t('modePlaces') : t('localSpot');
+  return other ? (kind + ' · ' + other) : kind;
+}
+function openSpot(row){
+  if (row.kind === 'liminal')  return showLiminal(row.p);
+  if (row.kind === 'landmark') return showLandmark(row.p);
+  return openPlace(row.p);
+}
+
+/* --- 全国の地点名検索（2026-09-09） ----------------------------------
+   名前のついた地点は210,486件ある。全部を1本のJSONにすると gzip 2.9MB あり、
+   検索のためだけに落とさせるには重い。先頭文字で64個に分けてあるので、
+   打ち始めた1文字目のバケツ（最大385KB）だけ取る。
+
+   引き換えの制限（正直に）: **先頭が一致する名前しか出ない。**
+   「公園」と打って「○○公園」は出ない。全文にすると索引が数倍になるため、
+   地名を頭から打つという実際の探し方に合わせた。 */
+const NAT_BUCKETS = 64;
+const natCache = new Map();          // バケツ番号 -> 行の配列
+function natBucketOf(q){
+  const k = qnorm(q).slice(0, 1) || '_';
+  let n = 0;
+  for (const c of k) n += c.codePointAt(0);
+  return n % NAT_BUCKETS;
+}
+async function natRows(q){
+  const b = natBucketOf(q);
+  if (natCache.has(b)) return natCache.get(b);
+  try{
+    const name = ('0' + b).slice(-2) + '.json';
+    const rows = await fetch(dj('search/' + name)).then(r => r.ok ? r.json() : []);
+    natCache.set(b, rows);
+    return rows;
+  } catch(e){ natCache.set(b, []); return []; }
+}
+/* 手で選んだ79スポットと重なるものは出さない（同じ場所が二度並ぶと迷う）。 */
+function natSearch(rows, q, skip){
+  const nq = qnorm(q);
+  if (!nq) return [];
+  const pre = [], mid = [];
+  for (const r of rows){
+    const nn = qnorm(r[0]);
+    if (!nn) continue;
+    if (skip.has(nn)) continue;
+    const i = nn.indexOf(nq);
+    if (i === 0) pre.push(r);
+    else if (i > 0) mid.push(r);
+    if (pre.length >= 8) break;
+  }
+  return pre.concat(mid).slice(0, 8);
+}
+/* 押されたら、その場所へ寄ってから、地域データが届くのを待って
+   その地点のパネルを開く（＝右に概要が出る）。 */
+function openNational(row){
+  if (!roaming) openMap();
+  map.setView([row[1], row[2]], 17);
+  let tries = 0;
+  const tick = () => {
+    let best = null, bd = 1e9;
+    for (const p of LOCALS){
+      const d = Math.abs(p.lat - row[1]) + Math.abs(p.lon - row[2]);
+      if (d < bd){ bd = d; best = p; }
+    }
+    if (best && bd < 0.0008){ showLocal(best); return; }
+    if (++tries < 8) setTimeout(tick, 500);   // 地域ファイルの到着を待つ
+    else drawDetail();
+  };
+  setTimeout(tick, 600);
+}
+
 async function runSearch(v, autoPick){
   const mine = ++qSeq;
-  try{
-    const j = await fetch(NOMINATIM + '/search?format=jsonv2&limit=6&countrycodes=jp'
-      + '&accept-language=' + LANG + '&q=' + encodeURIComponent(v)).then(r => r.json());
-    if (mine !== qSeq) return;        // もっと新しい検索が始まっている／✕で閉じられた
-    const box = $('qResults');
-    if (!j.length){ box.innerHTML = '<div class="q-none">' + t('noResults') + '</div>'; box.hidden = false; return; }
-    box.innerHTML = j.map((r, i) =>
+  const box = $('qResults');
+  const spots = searchSpots(v);          // 通信不要。先に出せる
+  let nomi = [], nat = [];
+
+  const paint = () => {
+    if (mine !== qSeq) return;
+    const a = spots.map((s, i) =>
+      '<button class="q-item q-spot" data-s="' + i + '"><b>'
+      + esc(spotLabelFor(s)) + '</b><span>' + esc(spotSubFor(s)) + '</span></button>').join('');
+    const n = nat.map((r, i) =>
+      '<button class="q-item" data-n="' + i + '"><b>'
+      + esc(r[0]) + '</b><span>' + t('localSpot') + '</span></button>').join('');
+    const b = nomi.map((r, i) =>
       '<button class="q-item" data-i="' + i + '"><b>'
       + esc(r.name || String(r.display_name).split(',')[0]) + '</b><span>'
       + esc(r.display_name) + '</span></button>').join('');
+    if (!a && !n && !b){
+      box.innerHTML = '<div class="q-none">' + t('noResults') + '</div>';
+      box.hidden = false; return;
+    }
+    box.innerHTML = a + n + b;
     box.hidden = false;
-    for (const b of box.querySelectorAll('.q-item'))
-      b.onclick = () => {
-        const r = j[+b.dataset.i];
+    for (const btn of box.querySelectorAll('.q-item')){
+      btn.onclick = () => {
         box.hidden = true; $('q').blur();
+        if (btn.dataset.s !== undefined){
+          /* 手で選んだスポット。パネルを開くと右に概要が出る。 */
+          openSpot(spots[+btn.dataset.s]);
+          return;
+        }
+        if (btn.dataset.n !== undefined){
+          openNational(nat[+btn.dataset.n]);
+          return;
+        }
+        const r = nomi[+btn.dataset.i];
         if (!roaming) openMap();
         map.setView([+r.lat, +r.lon], 16);
         setTimeout(drawDetail, 400);
       };
-    /* Enter から来たときは、先頭（＝一番近い場所）を自分で押す。
-       押す先は上で作った本物のボタンなので、クリックと完全に同じ道を通る。 */
+    }
+  };
+
+  paint();                               // まず自前のぶんを即表示
+
+  /* 全国の索引。手で選んだスポットと同じ名前は落とす。 */
+  const skip = new Set();
+  for (const sp of spots)
+    for (const nm of [sp.p.name, sp.p.ja, sp.p.name_ja]) if (nm) skip.add(qnorm(nm));
+  try{
+    const rows = await natRows(v);
+    if (mine !== qSeq) return;
+    nat = natSearch(rows, v, skip);
+    paint();
+  } catch(e){ /* 索引が無くても住所検索は続ける */ }
+  /* Enter から来たときは、住所検索の返事を待たずに先頭を押す。
+     自前の候補があるなら、それがいちばん近い場所。 */
+  if (autoPick && spots.length){
+    const f = box.querySelector('.q-item');
+    if (f){ f.click(); return; }
+  }
+  try{
+    const j = await fetch(NOMINATIM + '/search?format=jsonv2&limit=6&countrycodes=jp'
+      + '&accept-language=' + LANG + '&q=' + encodeURIComponent(v)).then(r => r.json());
+    if (mine !== qSeq) return;
+    nomi = Array.isArray(j) ? j : [];
+    paint();
     if (autoPick){
       const f = box.querySelector('.q-item');
       if (f) f.click();
     }
-  } catch(e){ toast(t('noResults')); }
+  } catch(e){
+    if (!spots.length) toast(t('noResults'));
+  }
 }
 
 $('locBtn').onclick = () => {

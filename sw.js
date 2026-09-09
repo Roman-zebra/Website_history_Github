@@ -6,7 +6,7 @@
      B. 地図タイル・碑の写真      … cache-first で溜める（一度見た場所は圏外でも出る、枚数上限あり）
      C. Overpass / Wikipedia      … network-only（結果は app.js 側が localStorage に残す）
 */
-const VERSION = 'v0.55.0';
+const VERSION = 'v0.56.0';
 const SHELL = `shell-${VERSION}`;
 const TILES = `tiles-${VERSION}`;
 const TILE_MAX = 700;                       // 端末を圧迫しない範囲。1タイル20-90KB
@@ -26,8 +26,8 @@ const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。�
      2026-09-08 追記: app.js の ?v= 直書きは const DATA_V に集約した。
      版の数字を直に書いた行が app.js / explore.js に1つでもあれば
      tools/bump_version.py が exit 1 で止める（見張りをコメントでなく道具に置いた）。 */
-const DATA_V = '0.43';
-const ASSET_V = '0.59';
+const DATA_V = '0.44';
+const ASSET_V = '0.60';
 const DATA_FILES = [
   'monuments.json', 'monuments-index.json', 'kid-text.json', 'places-index.json',
   'landmarks.json', 'liminal.json', 'places-world.json', 'affiliate.json',
