@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.40';
+const DATA_V = '0.41';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
    empty: pull right back and you still see Fuji, Skytree and the places everyone
@@ -1930,6 +1930,14 @@ function showLiminal(p, keepView){
   lastPanel = () => showLiminal(p, true);
   const hook = (LANG === 'ja' && p.hook_ja) ? p.hook_ja : p.hook;
   const why  = (LANG === 'ja' && p.why_ja)  ? p.why_ja  : (p.why || '');
+  /* Wikipedia の要約は言語ごとに別の記事から取る。2026-09-09 まで extract は1つしか無く、
+     どちらの言語から取れたかで中身の言語が変わっていた。explore.js 側もここだけ
+     言語で分岐していなかったため、**英語表示なのに説明が日本語で出ていた**
+     （花平さんの指摘。中野ブロードウェイで実測、日本語率84%。逆に日本語表示では
+     16件が英語のままだった）。
+     **無い言語は「出さない」を選ぶ。**機械翻訳を作って Wikipedia の文として
+     見せることはしない。説明は why（自前の英文・和文）が担う。 */
+  const extract = LANG === 'ja' ? (p.extract_ja || '') : (p.extract || '');
   document.body.classList.remove('roaming');
   $('home').hidden = true; $('place').hidden = false;
   ensureMap();
@@ -1950,7 +1958,7 @@ function showLiminal(p, keepView){
     bodyHTML: '<p>' + esc(hook) + '</p>'
             + (why ? '<h3 class="p-h3">' + t('liminalWhat') + '</h3><p>' + esc(why) + '</p>' : '')
             + (p.note ? '<p class="p-pick">' + esc(p.note) + '</p>' : '')
-            + (p.extract ? '<p class="p-hint">' + esc(p.extract.slice(0, 220)) + '</p>' : ''),
+            + (extract ? '<p class="p-hint">' + esc(extract.slice(0, 220)) + '</p>' : ''),
     img: p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 17),
     cap: p.img ? t('photoBy') : '',
     wiki: (articleLink(p) || {}).url || '',
