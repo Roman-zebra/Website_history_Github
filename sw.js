@@ -6,7 +6,7 @@
      B. 地図タイル・碑の写真      … cache-first で溜める（一度見た場所は圏外でも出る、枚数上限あり）
      C. Overpass / Wikipedia      … network-only（結果は app.js 側が localStorage に残す）
 */
-const VERSION = 'v0.43.0';
+const VERSION = 'v0.45.0';
 const SHELL = `shell-${VERSION}`;
 const TILES = `tiles-${VERSION}`;
 const TILE_MAX = 700;                       // 端末を圧迫しない範囲。1タイル20-90KB
@@ -18,22 +18,23 @@ const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。�
    だから版はここで1回だけ書き、URLは組み立てる。
    そろえる先（全部 tools/bump_version.py が見ている。手で書かない）:
      DATA_V  … explore.js の const DATA_V ＋ app.js の const DATA_V
-     ASSET_V … explore.html の ?v=（2箇所）＋ index.html の ?v=（2箇所）
+     ASSET_V … explore.html の ?v=（2箇所）＋ kids.html の ?v=（2箇所）
+     ※ ルートの index.html は explore.html の複製。make_deploy.py が作る。
    ※ 以前ここに「app.js に DATA_V は無い」と書いてあったのは、識別子だけを grep した
      ための誤り。app.js は ?v= を直に書いており、0.33 のまま取り残されていた（実測）。
      _headers が /data/* を1年 immutable にしているので、置き去りは「一生古いまま」になる。
      2026-09-08 追記: app.js の ?v= 直書きは const DATA_V に集約した。
      版の数字を直に書いた行が app.js / explore.js に1つでもあれば
      tools/bump_version.py が exit 1 で止める（見張りをコメントでなく道具に置いた）。 */
-const DATA_V = '0.39';
-const ASSET_V = '0.48';
+const DATA_V = '0.40';
+const ASSET_V = '0.49';
 const DATA_FILES = [
   'monuments.json', 'monuments-index.json', 'kid-text.json', 'places-index.json',
   'landmarks.json', 'liminal.json', 'places-world.json', 'affiliate.json',
   'topics.json', 'areas.json',
 ];
 const SHELL_FILES = [
-  './', './index.html', './manifest.webmanifest',
+  './', './index.html', './kids.html', './manifest.webmanifest',
   './explore.html', './explore.webmanifest',
   './style.css?v=' + ASSET_V, './app.js?v=' + ASSET_V,
   './explore.css?v=' + ASSET_V, './explore.js?v=' + ASSET_V,

@@ -5,7 +5,7 @@
   "description": "身のまわりの石碑・神社・土地から、そこで昔なにがあったかをたどる地図。1945年からの空中写真に切りかえられます。",
   "lang": "ja",
   "dir": "ltr",
-  "start_url": ".",
+  "start_url": "kids.html",
   "scope": ".",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],

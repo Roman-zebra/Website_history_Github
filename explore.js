@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.39';
+const DATA_V = '0.40';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
    empty: pull right back and you still see Fuji, Skytree and the places everyone
@@ -1976,13 +1976,30 @@ $('q').addEventListener('input', () => {
   if (v.length < 2){ $('qResults').hidden = true; return; }
   qTimer = setTimeout(() => runSearch(v), 450);   // stay inside Nominatim's policy
 });
+
+/* Enter で「入力にいちばん近い場所」へ飛ぶ。2026-09-09 追加。
+   それまで Enter は何も起きず、候補を指で押すしかなかった（実測で確認）。
+   候補が既に出ていれば先頭を押す。まだなら 450ms の待ちを飛ばして今すぐ引き、
+   返ってきた先頭へ飛ぶ。Nominatim は関連度順に返すので先頭＝一番近い場所。
+   記事名や地名を自分で組み立てることはしない。返ってきたものだけを使う。 */
+$('q').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();                       // フォーム送信やページ再読込を止める
+  const box = $('qResults');
+  const first = box.hidden ? null : box.querySelector('.q-item');
+  if (first){ first.click(); return; }
+  const v = $('q').value.trim();
+  if (v.length < 2) return;
+  clearTimeout(qTimer);
+  runSearch(v, true);                       // 引けたら先頭へ自動で飛ぶ
+});
 /* 飛んでいる検索の返事を無効にするための世代番号。これが無いと、✕で閉じたあとに
    古い返事が届いて結果が勝手に開き直る（[hidden] が効くようになった今は本当に再表示される）。 */
 let qSeq = 0;
 $('qClear').onclick = () => { ++qSeq; $('q').value = ''; $('qClear').hidden = true;
                               $('qResults').hidden = true; };
 
-async function runSearch(v){
+async function runSearch(v, autoPick){
   const mine = ++qSeq;
   try{
     const j = await fetch(NOMINATIM + '/search?format=jsonv2&limit=6&countrycodes=jp'
@@ -2003,6 +2020,12 @@ async function runSearch(v){
         map.setView([+r.lat, +r.lon], 16);
         setTimeout(drawDetail, 400);
       };
+    /* Enter から来たときは、先頭（＝一番近い場所）を自分で押す。
+       押す先は上で作った本物のボタンなので、クリックと完全に同じ道を通る。 */
+    if (autoPick){
+      const f = box.querySelector('.q-item');
+      if (f) f.click();
+    }
   } catch(e){ toast(t('noResults')); }
 }
 

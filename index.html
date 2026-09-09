@@ -1,109 +1,200 @@
-<!doctype html>
-<html lang="ja">
+﻿<!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>まちの れきし たんけんマップ</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<meta name="theme-color" content="#e2662c">
-<meta name="description" content="身のまわりの石碑・神社・土地から、そこで昔なにがあったかをたどる地図。">
-<link rel="manifest" href="manifest.webmanifest">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14161c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Then &amp; Now">
+<link rel="manifest" href="explore.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="れきしマップ">
-<link rel="stylesheet" href="style.css?v=0.48">
+<link rel="preconnect" href="https://cyberjapandata.gsi.go.jp" crossorigin>
+<link rel="preconnect" href="https://server.arcgisonline.com" crossorigin>
+<link rel="dns-prefetch" href="https://ja.wikipedia.org">
+<link rel="dns-prefetch" href="https://nominatim.openstreetmap.org">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="explore.css?v=0.49">
+<!--SEO-->
+<title>Japan Before and After WW2 - 1945 vs Today on a Map</title>
+<meta name="description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
+<meta name="keywords" content="Japan then and now, 1945 aerial photo, Hiroshima before after, Japan historical map, 空中写真 比較, 今昔マップ, 国土地理院">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Japan Before and After WW2 - 1945 vs Today on a Map">
+<meta property="og:description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Japan Before and After WW2 - 1945 vs Today on a Map">
+<meta name="twitter:description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
+<link rel="canonical" href="https://roman-zebra.github.io/Website_history_Github/explore.html">
+<meta property="og:url" content="https://roman-zebra.github.io/Website_history_Github/explore.html">
+<meta property="og:image" content="https://roman-zebra.github.io/Website_history_Github/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://roman-zebra.github.io/Website_history_Github/og.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Japan, Then and Now","applicationCategory":"EducationalApplication","operatingSystem":"Any","inLanguage":["en","ja"],"description":"See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"url":"https://roman-zebra.github.io/Website_history_Github/explore.html"},{"@type":"ItemList","name":"Places you can compare","numberOfItems":19,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Place","name":"Hiroshima","alternateName":"広島","description":"One building was left standing. It is still there.","geo":{"@type":"GeoCoordinates","latitude":34.3955,"longitude":132.4536}}},{"@type":"ListItem","position":2,"item":{"@type":"Place","name":"Tokyo — Asakusa","alternateName":"浅草","description":"A 1,400-year-old temple in a city that burned.","geo":{"@type":"GeoCoordinates","latitude":35.7148,"longitude":139.7967}}},{"@type":"ListItem","position":3,"item":{"@type":"Place","name":"Kyoto — Kiyomizu-dera","alternateName":"清水寺","description":"The city that was not bombed. Compare it with Tokyo.","geo":{"@type":"GeoCoordinates","latitude":34.9949,"longitude":135.785}}},{"@type":"ListItem","position":4,"item":{"@type":"Place","name":"Yokohama — Minato Mirai","alternateName":"みなとみらい","description":"This was a shipyard. Now it is a skyline.","geo":{"@type":"GeoCoordinates","latitude":35.4548,"longitude":139.6317}}},{"@type":"ListItem","position":5,"item":{"@type":"Place","name":"Osaka Castle","alternateName":"大阪城","description":"The castle survived. Everything around it did not.","geo":{"@type":"GeoCoordinates","latitude":34.6873,"longitude":135.5262}}},{"@type":"ListItem","position":6,"item":{"@type":"Place","name":"Kamakura — Great Buddha","alternateName":"鎌倉大仏","description":"It has been sitting outside in the rain since the 1400s.","geo":{"@type":"GeoCoordinates","latitude":35.3167,"longitude":139.5358}}},{"@type":"ListItem","position":7,"item":{"@type":"Place","name":"Kobe — Meriken Park","alternateName":"神戸","description":"Part of a broken pier was left broken on purpose.","geo":{"@type":"GeoCoordinates","latitude":34.682,"longitude":135.187}}},{"@type":"ListItem","position":8,"item":{"@type":"Place","name":"Okayama Castle","alternateName":"岡山城","description":"A stone here records how high the water came.","geo":{"@type":"GeoCoordinates","latitude":34.6656,"longitude":133.936}}},{"@type":"ListItem","position":9,"item":{"@type":"Place","name":"The Stone That Saved a Village","alternateName":"姉吉","description":"\"Do not build your homes below this point.\"","geo":{"@type":"GeoCoordinates","latitude":39.534243,"longitude":142.04534}}},{"@type":"ListItem","position":10,"item":{"@type":"Place","name":"Nagasaki","alternateName":"長崎","description":"A city in a valley, rebuilt from nothing.","geo":{"@type":"GeoCoordinates","latitude":32.7737,"longitude":129.8637}}},{"@type":"ListItem","position":11,"item":{"@type":"Place","name":"Sapporo","alternateName":"札幌","description":"A city built on a grid, only 150 years old.","geo":{"@type":"GeoCoordinates","latitude":43.0606,"longitude":141.3536}}},{"@type":"ListItem","position":12,"item":{"@type":"Place","name":"Hakodate","alternateName":"函館","description":"One of the first two ports Japan opened to the world.","geo":{"@type":"GeoCoordinates","latitude":41.764,"longitude":140.713}}},{"@type":"ListItem","position":13,"item":{"@type":"Place","name":"Nagoya Castle","alternateName":"名古屋城","description":"The keep burned in 1945. It was built again.","geo":{"@type":"GeoCoordinates","latitude":35.1855,"longitude":136.8986}}},{"@type":"ListItem","position":14,"item":{"@type":"Place","name":"Himeji Castle","alternateName":"姫路城","description":"The city burned around it. The castle did not.","geo":{"@type":"GeoCoordinates","latitude":34.8394,"longitude":134.6938}}},{"@type":"ListItem","position":15,"item":{"@type":"Place","name":"Nara — Tōdai-ji","alternateName":"東大寺","description":"Deer walk the streets. The hall is 1,300 years old.","geo":{"@type":"GeoCoordinates","latitude":34.6891,"longitude":135.8397}}},{"@type":"ListItem","position":16,"item":{"@type":"Place","name":"Kanazawa","alternateName":"金沢","description":"Never bombed, so the old streets are still here.","geo":{"@type":"GeoCoordinates","latitude":36.5619,"longitude":136.6625}}},{"@type":"ListItem","position":17,"item":{"@type":"Place","name":"Sendai","alternateName":"仙台","description":"They call it the City of Trees. Look why.","geo":{"@type":"GeoCoordinates","latitude":38.2601,"longitude":140.8819}}},{"@type":"ListItem","position":18,"item":{"@type":"Place","name":"Fukuoka — Hakata","alternateName":"博多","description":"Japan's doorway to the Asian mainland for 1,000 years.","geo":{"@type":"GeoCoordinates","latitude":33.5897,"longitude":130.4207}}},{"@type":"ListItem","position":19,"item":{"@type":"Place","name":"Naha — Shuri Castle","alternateName":"首里城","description":"Destroyed, rebuilt, burned again. Still being rebuilt.","geo":{"@type":"GeoCoordinates","latitude":26.217,"longitude":127.7195}}}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What did Japan look like in 1945?","acceptedAnswer":{"@type":"Answer","text":"You can see it directly. This map shows the aerial photographs the US military flew over Japan between 1945 and 1950, beside today's imagery, with a slider between them. Hiroshima, Tokyo, Osaka, Sapporo, Nagoya, Sendai and Fukuoka all have 1945 coverage."}},{"@type":"Question","name":"How can I see Hiroshima before and after the atomic bomb?","acceptedAnswer":{"@type":"Answer","text":"Open the Hiroshima entry and drag the slider. The 1945 photograph shows the flattened city around the one surviving dome; today the same ground is a park. The 1945-1950 survey was taken after the bombing, so it shows the aftermath rather than the city beforehand."}},{"@type":"Question","name":"Are there old aerial photographs of Tokyo?","acceptedAnswer":{"@type":"Answer","text":"Yes. The 1945 survey covers central Tokyo, including Asakusa, where you can see the burnt ground left by the March 1945 air raids."}},{"@type":"Question","name":"Is it free?","acceptedAnswer":{"@type":"Answer","text":"Yes. There is no account and no sign-up. It runs in a browser on a phone or a computer."}},{"@type":"Question","name":"Where do the old photographs come from?","acceptedAnswer":{"@type":"Answer","text":"From the Geospatial Information Authority of Japan. The 1945-1950 series was flown by the US military, so it covers the cities they photographed. Where it is missing, the site falls back to the next oldest survey - 1961, 1974 and so on - and tells you which year you are looking at."}},{"@type":"Question","name":"Why is half the screen unchanged in Kyoto?","acceptedAnswer":{"@type":"Answer","text":"Because Kyoto was not bombed. Comparing it with Tokyo or Hiroshima is the point."}},{"@type":"Question","name":"Some articles are in Japanese.","acceptedAnswer":{"@type":"Answer","text":"Japanese Wikipedia has about four times as many articles on the ground in Japan. Where no English article exists, the button opens the Japanese one, and your browser can translate it."}},{"@type":"Question","name":"Can I use it on my phone?","acceptedAnswer":{"@type":"Answer","text":"It is built for a phone first. You can also add it to your home screen and it will open full screen."}},{"@type":"Question","name":"Does it cover the whole of Japan, or only the famous places?","acceptedAnswer":{"@type":"Answer","text":"The whole country. Beyond the 19 featured comparisons, zooming in shows 216,417 small local places - shrines, stations, monuments, old schools - across all 47 prefectures, drawn from OpenStreetMap, plus 2,469 disaster memorial stones recorded by the Geospatial Information Authority of Japan. The old aerial photographs work anywhere the surveys reached, not only on the featured spots."}}]}]}</script>
+<!--/SEO-->
 </head>
 <body>
 
-<div id="map"></div>
-
-<!-- 上部バー -->
-<header class="topbar">
-  <div class="brand">
-    <span class="brand-ico">🔎</span>
-    <span class="brand-txt">まちの れきし<br><b>たんけんマップ</b></span>
+<!-- ============ 1. Home ============ -->
+<section id="home" class="home">
+  <div class="lang-row">
+    <button id="guideBtn" class="lang" type="button" data-t="guideBtn"></button>
+    <button id="myBtn" class="lang" type="button"><span id="myCount">☆ 0</span></button>
+    <button id="langBtn" class="lang" type="button"><span id="langLabel">日本語</span></button>
   </div>
-  <div class="top-right">
-    <button id="modeBtn" class="pill pill-mode" aria-pressed="true">
-      <span class="pill-ico">🧒</span><span id="modeLabel">こども</span>
+
+  <header class="hero">
+    <p class="hero-kicker">日本 · JAPAN</p>
+    <h1 class="hero-title">Then <span>&amp;</span> Now</h1>
+    <p class="hero-sub" data-t="heroSub"></p>
+    <p class="hero-lead" data-t="lead"></p>
+  </header>
+
+  <div class="modes" role="tablist">
+    <button id="mPlaces" class="mode is-on" role="tab" aria-selected="true">
+      <span>◎</span> <b data-t="modePlaces"></b>
     </button>
-    <button id="installBtn" class="pill pill-install" hidden title="ホーム画面に入れる">
-      <span class="pill-ico">⬇️</span><span>アプリに する</span>
+    <button id="mMap" class="mode" role="tab" aria-selected="false">
+      <span>▤</span> <b data-t="modeMap"></b>
     </button>
-    <button id="stampBtn" class="pill" title="みつけた ばしょ">
-      <span class="pill-ico">⭐</span><span id="stampCount">0</span>
+    <button id="mLiminal" class="mode mode-lim" role="tab" aria-selected="false">
+      <span>◌</span> <b data-t="modeLiminal"></b>
     </button>
   </div>
-</header>
+  <p id="modeNote" class="mode-note"></p>
 
-<!-- 読み込み中 -->
-<div id="hint" class="hint" hidden></div>
-<div id="loading" class="loading" hidden><span class="spin"></span><span id="loadingTxt">さがしています…</span></div>
+  <section id="limIntro" class="lim-intro" hidden></section>
 
-<!-- カテゴリの絞り込み -->
-<div id="filters" class="filters"></div>
+  <section id="mySection" class="my-section" hidden>
+    <h2 class="sec-h" data-t="myTitle"></h2>
+    <div id="myList" class="my-list"></div>
+  </section>
 
-<!-- 右下ボタン -->
-<div class="fabs">
-  <button id="landBtn" class="fab" title="土地のなりたちを見る">🏞️</button>
-  <button id="locBtn"  class="fab fab-main" title="いまいる ばしょ">📍</button>
-</div>
+  <div id="cards" class="cards"></div>
 
-<!-- タイムスライダー -->
-<section class="timebar" id="timebar">
-  <div class="time-head">
-    <span class="time-emoji">🕰️</span>
-    <span class="time-label" id="eraLabel">1945年〜1950年</span>
-    <span class="time-sub" id="eraSub">せんそうが おわった ころ</span>
-  </div>
-  <input id="eraRange" class="range range-era" type="range" min="0" max="6" step="1" value="6">
-  <div class="range-ticks"><span>むかし</span><span>いま</span></div>
-  <div class="opa-row">
-    <span class="opa-end">🗺️ ちず</span>
-    <input id="opaRange" class="range range-opa" type="range" min="0" max="100" step="1" value="0">
-    <span class="opa-end">しゃしん 📷</span>
-  </div>
+  <section id="guide" class="guide" hidden>
+    <h2 class="sec-h" data-t="guideTitle"></h2>
+    <div id="guideBody" class="guide-body"></div>
+  </section>
+
+<!--SEOBODY-->
+<section class="seo-list">
+<h2>All 19 places</h2>
+<p class="seo-lead">See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.</p>
+<article><h3>Hiroshima <span>広島</span></h3><p>One building was left standing. It is still there.</p></article>
+<article><h3>Tokyo — Asakusa <span>浅草</span></h3><p>A 1,400-year-old temple in a city that burned.</p></article>
+<article><h3>Kyoto — Kiyomizu-dera <span>清水寺</span></h3><p>The city that was not bombed. Compare it with Tokyo.</p></article>
+<article><h3>Yokohama — Minato Mirai <span>みなとみらい</span></h3><p>This was a shipyard. Now it is a skyline.</p></article>
+<article><h3>Osaka Castle <span>大阪城</span></h3><p>The castle survived. Everything around it did not.</p></article>
+<article><h3>Kamakura — Great Buddha <span>鎌倉大仏</span></h3><p>It has been sitting outside in the rain since the 1400s.</p></article>
+<article><h3>Kobe — Meriken Park <span>神戸</span></h3><p>Part of a broken pier was left broken on purpose.</p></article>
+<article><h3>Okayama Castle <span>岡山城</span></h3><p>A stone here records how high the water came.</p></article>
+<article><h3>The Stone That Saved a Village <span>姉吉</span></h3><p>"Do not build your homes below this point."</p></article>
+<article><h3>Nagasaki <span>長崎</span></h3><p>A city in a valley, rebuilt from nothing.</p></article>
+<article><h3>Sapporo <span>札幌</span></h3><p>A city built on a grid, only 150 years old.</p></article>
+<article><h3>Hakodate <span>函館</span></h3><p>One of the first two ports Japan opened to the world.</p></article>
+<article><h3>Nagoya Castle <span>名古屋城</span></h3><p>The keep burned in 1945. It was built again.</p></article>
+<article><h3>Himeji Castle <span>姫路城</span></h3><p>The city burned around it. The castle did not.</p></article>
+<article><h3>Nara — Tōdai-ji <span>東大寺</span></h3><p>Deer walk the streets. The hall is 1,300 years old.</p></article>
+<article><h3>Kanazawa <span>金沢</span></h3><p>Never bombed, so the old streets are still here.</p></article>
+<article><h3>Sendai <span>仙台</span></h3><p>They call it the City of Trees. Look why.</p></article>
+<article><h3>Fukuoka — Hakata <span>博多</span></h3><p>Japan's doorway to the Asian mainland for 1,000 years.</p></article>
+<article><h3>Naha — Shuri Castle <span>首里城</span></h3><p>Destroyed, rebuilt, burned again. Still being rebuilt.</p></article>
+<h2>Abandoned and liminal places in Japan</h2>
+<p class="seo-lead">26 places that feel like nowhere: Hashima Island, Aokigahara, Doai Station, Ōkunoshima, Maya Kanko Hotel, Ikeshima and more. Each has a photograph, a map position and a link to read further.</p>
+<h2>Questions</h2>
+<h3>What did Japan look like in 1945?</h3><p>You can see it directly. This map shows the aerial photographs the US military flew over Japan between 1945 and 1950, beside today's imagery, with a slider between them. Hiroshima, Tokyo, Osaka, Sapporo, Nagoya, Sendai and Fukuoka all have 1945 coverage.</p>
+<h3>How can I see Hiroshima before and after the atomic bomb?</h3><p>Open the Hiroshima entry and drag the slider. The 1945 photograph shows the flattened city around the one surviving dome; today the same ground is a park. The 1945-1950 survey was taken after the bombing, so it shows the aftermath rather than the city beforehand.</p>
+<h3>Are there old aerial photographs of Tokyo?</h3><p>Yes. The 1945 survey covers central Tokyo, including Asakusa, where you can see the burnt ground left by the March 1945 air raids.</p>
+<h3>Is it free?</h3><p>Yes. There is no account and no sign-up. It runs in a browser on a phone or a computer.</p>
+<h3>Where do the old photographs come from?</h3><p>From the Geospatial Information Authority of Japan. The 1945-1950 series was flown by the US military, so it covers the cities they photographed. Where it is missing, the site falls back to the next oldest survey - 1961, 1974 and so on - and tells you which year you are looking at.</p>
+<h3>Why is half the screen unchanged in Kyoto?</h3><p>Because Kyoto was not bombed. Comparing it with Tokyo or Hiroshima is the point.</p>
+<h3>Some articles are in Japanese.</h3><p>Japanese Wikipedia has about four times as many articles on the ground in Japan. Where no English article exists, the button opens the Japanese one, and your browser can translate it.</p>
+<h3>Can I use it on my phone?</h3><p>It is built for a phone first. You can also add it to your home screen and it will open full screen.</p>
+<h3>Does it cover the whole of Japan, or only the famous places?</h3><p>The whole country. Beyond the 19 featured comparisons, zooming in shows 216,417 small local places - shrines, stations, monuments, old schools - across all 47 prefectures, drawn from OpenStreetMap, plus 2,469 disaster memorial stones recorded by the Geospatial Information Authority of Japan. The old aerial photographs work anywhere the surveys reached, not only on the featured spots.</p>
+<p class="seo-lead" lang="ja">広島・東京・京都など19か所で、1945年と現在の空中写真を指でくらべる地図。端島・青木ヶ原樹海・土合駅などリミナルな26か所も収録。無料・登録不要・日英対応。</p>
+</section>
+<!--/SEOBODY-->
+  <footer class="home-foot">
+    <p data-t="credits"></p>
+    <p><a href="kids.html">日本語版アプリ（まちの れきし たんけんマップ）</a></p>
+  </footer>
 </section>
 
-<!-- 詳細シート -->
-<div id="sheetBack" class="sheet-back" hidden></div>
-<section id="sheet" class="sheet" hidden aria-live="polite">
-  <button id="sheetClose" class="sheet-close" aria-label="とじる">✕</button>
-  <div class="sheet-grip"></div>
-  <div id="sheetBody" class="sheet-body"></div>
+<!-- ============ 2. Map / place ============ -->
+<section id="place" class="place" hidden>
+  <div id="map"></div>
+
+  <div class="topbar">
+    <button id="back" class="ctl" aria-label="Back">←</button>
+    <div class="search-wrap">
+      <input id="q" class="search" type="search" autocomplete="off" spellcheck="false">
+      <button id="qClear" class="q-clear" hidden aria-label="Clear">×</button>
+      <div id="qResults" class="q-results" hidden></div>
+    </div>
+    <button id="locBtn" class="ctl" aria-label="My location">◎</button>
+    <button id="myBtn2" class="ctl" aria-label="Saved spots"><span id="myCount2">☆0</span></button>
+    <button id="langBtn2" class="ctl ctl-lang">日本語</button>
+  </div>
+
+  <!-- swipe comparison: only after you ask for it -->
+  <div id="swipe" class="swipe" hidden>
+    <div class="swipe-line"></div>
+    <button class="swipe-grip" aria-label="Drag to compare"><span>◀</span><span>▶</span></button>
+  </div>
+  <button id="tagThen" class="tag tag-then" hidden>1945</button>
+  <div id="tagNow"  class="tag tag-now"  hidden>TODAY</div>
+  <div id="dragHint" class="drag-hint" hidden></div>
+  <div id="cover" class="cover" hidden></div>
+  <div id="roamTip" class="roam-tip" hidden></div>
+
+  <!-- story panel -->
+  <section id="panel" class="panel">
+    <button id="pClose" class="p-close" aria-label="Close">×</button>
+    <button id="grab" class="grab" aria-label="Open or close"></button>
+    <div class="panel-inner">
+      <p id="pJa"    class="p-ja"></p>
+      <h2 id="pName" class="p-name"></h2>
+      <p id="pAddr"  class="p-addr"></p>
+      <div id="pStory" class="p-story"></div>
+      <figure id="pFig" class="p-fig" hidden>
+        <!-- crossorigin="anonymous" を付けていたせいで、Wikimedia の写真が一枚も出なかった。
+           thumb.wikimedia.org は Access-Control-Allow-Origin を返さないので、CORS要求は
+           そのまま失敗する。canvas で読むわけでもないのに付いていた。
+           loading="lazy" も外す。パネルの写真は開いた時点で必ず見えている。 -->
+        <img id="pImg" alt="" decoding="async">
+        <figcaption id="pCap"></figcaption>
+      </figure>
+      <div id="pWord" class="p-word"></div>
+      <button id="pCompare" class="p-compare" hidden></button>
+      <p id="pNoOld" class="p-noold" hidden></p>
+      <a id="pWiki" class="p-wiki" target="_blank" rel="noopener"></a>
+      <a id="pOfficial" class="p-official" target="_blank" rel="noopener" hidden></a>
+      <div id="pAbout" class="p-about" hidden></div>
+      <div class="p-row">
+        <a id="pGmap" class="p-mini" target="_blank" rel="noopener"></a>
+        <button id="pSave" class="p-mini"></button>
+      </div>
+      <div class="p-row p-sns">
+        <button id="pShare" class="sns" title="Share">⇪</button>
+        <a id="snsX" class="sns" target="_blank" rel="noopener" title="X">X</a>
+        <a id="snsFb" class="sns" target="_blank" rel="noopener" title="Facebook">f</a>
+        <a id="snsLine" class="sns" target="_blank" rel="noopener" title="LINE">L</a>
+        <button id="snsCopy" class="sns" title="Copy link">⧉</button>
+      </div>
+      <div id="pAff" class="p-aff" hidden></div>
+      <p id="pSrc" class="p-src"></p>
+    </div>
+  </section>
 </section>
 
-<!-- 出典 -->
-<button id="creditBtn" class="credit-btn">出典</button>
-<div id="creditBox" class="credit-box" hidden>
-  <b>出典</b>
-  <ul>
-    <li><b>地図・空中写真・治水地形分類図</b>：
-      <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a>（国土地理院）</li>
-    <li><b>自然災害伝承碑</b>：国土地理院「自然災害伝承碑」
-      （<a href="https://www.gsi.go.jp/bousaichiri/denshouhi.html" target="_blank" rel="noopener">出典ページ</a>）。
-      石碑の写真も同出典。</li>
-    <li><b>こども向けの解説文</b>：国土地理院「自然災害伝承碑」の伝承内容を
-      <b>本アプリが加工して作成</b>。国土地理院が作成したものではありません。</li>
-    <li><b>神社・お寺・史跡などの地点</b>：
-      <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>。
-      同梱の <code>data/places-*.json</code> は OSM の派生データベースで、
-      <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener">ODbL 1.0</a> で提供します。</li>
-    <li><b>まちの話</b>：
-      <a href="https://ja.wikipedia.org/" target="_blank" rel="noopener">ウィキペディア日本語版</a>
-      （<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank" rel="noopener">CC BY-SA 4.0</a>）。
-      記事名は各画面に表示しています。</li>
-  </ul>
-  <p class="credit-note">
-    ※ 解説は自動取得と加工を含むため、誤りを含むことがあります。<br>
-    ※ 土地の成り立ちの表示は地形の分類であり、個々の建物の安全性を示すものではありません。<br>
-    ※ 個人のお住まいの履歴を示すものではありません。
-  </p>
-</div>
+<div id="toast" class="toast" hidden></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="app.js?v=0.48"></script>
+<script src="explore.js?v=0.49"></script>
 </body>
 </html>
