@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.45';
+const DATA_V = '0.46';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
    empty: pull right back and you still see Fuji, Skytree and the places everyone
@@ -78,7 +78,7 @@ let LANG = 'en';   // 実際の値は T の定義後に detectLang() で決め�
 /* A stable language URL lets a search result land in the visitor's language.
    The app still falls back to the browser language when no language URL was chosen. */
 const LANG_PARAM = { en: 'en', ja: 'ja', ko: 'ko', 'zh-Hans': 'zh-CN', 'zh-Hant': 'zh-TW' };
-const PARAM_LANG = Object.fromEntries(Object.entries(LANG_PARAM).map(([lang, param]) => [param, lang]));
+const PARAM_LANG = Object.fromEntries(Object.entries(LANG_PARAM).flatMap(([lang,param])=>[[param,lang],[lang,lang]]));
 
 const T = {
   en: {
@@ -720,9 +720,9 @@ function thumb(url, px){
 
 function buildLiminalCards(){
   $('cards').innerHTML = LIMINAL.map((p, i) => {
-    const hook = (LANG === 'ja' && p.hook_ja) ? p.hook_ja : p.hook;
+    const hook = (p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook);
     // 最初の数枚は即時に。上端が空のカードで埋まっていると壊れて見える
-    const lazy = i < 6 ? 'eager' : 'lazy';
+    const lazy = 'lazy';
     return '<button class="card card-lim" data-lim="' + esc(p.id) + '">'
       + '<img class="card-img card-photo" loading="' + lazy + '" decoding="async" alt="" '
       + 'src="' + esc(p.img ? thumb(p.img, 480) : tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16))
@@ -731,7 +731,7 @@ function buildLiminalCards(){
       + '<span class="card-emoji">' + p.emoji + '</span>'
       + '<div class="card-body">'
       + '<p class="card-ja">' + esc(p.ja) + '</p>'
-      + '<p class="card-name">' + esc(LANG === 'ja' ? p.ja : p.name) + '</p>'
+      + '<p class="card-name">' + esc(placeName(p)) + '</p>'
       + '<p class="card-hook">' + esc(hook) + '</p></div></button>';
   }).join('');
   for (const b of document.querySelectorAll('.card-lim'))
@@ -745,13 +745,13 @@ function buildCards(){
     const cfg = p.then && THEN[p.then];
     const ext = cfg ? cfg.ext : NOW_LAYER.ext;
     return '<button class="card" data-id="' + esc(p.id) + '">'
-      + '<div class="card-img" style="background-image:url(\'' + tileURL(lyr, ext, p.lat, p.lon, 15) + '\')"></div>'
+      + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="' + tileURL(lyr, ext, p.lat, p.lon, 15) + '">'
       + '<span class="card-emoji">' + p.emoji + '</span>'
       + (p.thenLabel ? '<span class="card-era">' + esc(p.thenLabel) + ' → NOW</span>' : '')
       + '<div class="card-body">'
       + '<p class="card-ja">' + esc(p.ja) + ' · ' + esc(p.romaji) + '</p>'
-      + '<p class="card-name">' + esc((LANG === 'ja' && p.name_ja) ? p.name_ja : p.name) + '</p>'
-      + '<p class="card-hook">' + esc((LANG === 'ja' && p.hook_ja) ? p.hook_ja : p.hook) + '</p>'
+      + '<p class="card-name">' + esc(placeName(p)) + '</p>'
+      + '<p class="card-hook">' + esc((p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook)) + '</p>'
       + '</div></button>';
   }).join('');
   for (const b of document.querySelectorAll('.card'))
@@ -760,6 +760,7 @@ function buildCards(){
 
 function applyLang(){
   document.documentElement.lang = LANG;
+  SEO[LANG].title = DIRECTORY_TEXT[LANG][0]; SEO[LANG].description = DIRECTORY_TEXT[LANG][1];
   applySEO();
   for (const el of document.querySelectorAll('[data-t]')) el.innerHTML = t(el.dataset.t);
   $('langLabel').textContent = LANG_NAMES[LANG] || 'English';
@@ -775,6 +776,7 @@ function applyLang(){
   paintOfficial();
   renderGuide();
   renderSaved();
+  paintAuxUI();
   if (PLACES.length) buildCards();
   if (current) openPlace(current, true);
   else {
@@ -796,6 +798,7 @@ function setLang(l){
     history.replaceState(null, '', url.pathname + '?' + url.searchParams.toString() + url.hash);
   } catch(e){}
   wikiSeen.clear(); wikiAsked.clear();     // titles differ per language
+  ++qSeq; $('qResults').hidden = true;
   applyLang();
 }
 
@@ -954,7 +957,7 @@ function clip(){
 function bigIcon(p, ring, withLabel, size){
   return L.divIcon({ className: 'big-pin ' + (size || 'p1'), iconSize: [0,0], iconAnchor: [0,0],
     html: '<div class="big ' + ring + '"><span>' + p.emoji + '</span></div>'
-        + (withLabel === false ? '' : '<div class="big-label">' + esc(p.name) + '</div>') });
+        + (withLabel === false ? '' : '<div class="big-label">' + esc(placeName(p)) + '</div>') });
 }
 const midIcon = (emoji, cls) => L.divIcon({ className: 'sm-pin', iconSize: [0,0], iconAnchor: [0,0],
   html: '<div class="sm ' + cls + '"><span>' + emoji + '</span></div>' });
@@ -968,7 +971,7 @@ function drawSpots(list, withLabel, onTap){
     const icon = withLabel ? bigIcon(p, 'ring-red')
       : L.divIcon({ className:'spot-pin', iconSize:[0,0], iconAnchor:[0,0],
                     html:'<div class="spot"><div class="spot-dot"></div></div>' });
-    const m = L.marker([p.lat, p.lon], { title: p.name, riseOnHover: true, icon: icon,
+    const m = L.marker([p.lat, p.lon], { title: placeName(p), riseOnHover: true, icon: icon,
                                          zIndexOffset: 500 });
     if (onTap) m.on('click', () => onTap(p));
     m.addTo(spotLayer);
@@ -1149,13 +1152,23 @@ async function wikiExtract(pageid, lang){
 /* 結果ではなく約束をしまっておく。同じパネルで住所と市町村名を続けて聞くので、
    結果をしまう形だと 1 件目が帰る前に 2 件目が出てしまい、日本語表示中は
    まったく同じ問いを 2 回 Nominatim に投げることになる。 */
+let geoQueue = Promise.resolve(), geoLast = 0;
+function geoFetch(url){
+  const task = geoQueue.then(async () => {
+    await new Promise(resolve => setTimeout(resolve, Math.max(0,1100-(Date.now()-geoLast))));
+    geoLast=Date.now();
+    const r=await fetch(url, {signal:AbortSignal.timeout(10000)});
+    if(!r.ok) throw new Error('Geocoder unavailable');
+    return r.json();
+  });
+  geoQueue=task.catch(()=>{});return task;
+}
 function revGeo(lat, lon, lang){
   const key = lang + ':' + lat.toFixed(5) + ',' + lon.toFixed(5);
   if (addrCache.has(key)) return addrCache.get(key);
-  const pr = fetch(NOMINATIM + '/reverse?format=jsonv2&zoom=18&addressdetails=1'
+  const pr = geoFetch(NOMINATIM + '/reverse?format=jsonv2&zoom=18&addressdetails=1'
       + '&accept-language=' + lang + '&lat=' + lat + '&lon=' + lon)
-    .then(r => r.json())
-    .catch(() => null);
+    .catch(() => {addrCache.delete(key);return null;});
   addrCache.set(key, pr);
   return pr;
 }
@@ -1266,7 +1279,9 @@ function spacer(gaps){
   };
 }
 
+let detailGeneration=0;
 async function drawDetail(){
+  const generation=++detailGeneration;
   // roaming は「スポットが選ばれていない」の意味で、「地図が出ている」ではない。
   // これを条件にしていたため、名所やリミナルから開くと周辺のマーカーが全部消えていた。
   if (!map || $('place').hidden) return;
@@ -1312,7 +1327,7 @@ async function drawDetail(){
   for (const p of PLACES){
     const k = (p.pop || 1) - 1;
     if (!b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
-    L.marker([p.lat, p.lon], { icon: bigIcon(p, 'ring-red', z >= 9 && freeLabel(p.lat, p.lon, 'lab'), CLS[k]), title: p.name })
+    L.marker([p.lat, p.lon], { icon: bigIcon(p, 'ring-red', z >= 9 && freeLabel(p.lat, p.lon, 'lab'), CLS[k]), title: placeName(p) })
      .on('click', () => openPlace(p)).addTo(group);
   }
 
@@ -1322,7 +1337,7 @@ async function drawDetail(){
     if (z < (TIER_ZOOM[p.tier || 3] || 8)) continue;
     const k = (p.pop || 3) - 1;
     if (!b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
-    L.marker([p.lat, p.lon], { icon: bigIcon(p, 'ring-gold', z >= 10 && freeLabel(p.lat, p.lon, 'lab'), CLS[k]), title: p.name })
+    L.marker([p.lat, p.lon], { icon: bigIcon(p, 'ring-gold', z >= 10 && freeLabel(p.lat, p.lon, 'lab'), CLS[k]), title: placeName(p) })
      .on('click', () => showLandmark(p)).addTo(group);
   }
 
@@ -1333,7 +1348,7 @@ async function drawDetail(){
     for (const p of LIMINAL){
       const k = POP_LIM - 1;
       if (!b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
-      const nm = LANG === 'ja' ? p.ja : p.name;
+      const nm = placeName(p);
       L.marker([p.lat, p.lon], { icon: bigIcon({ emoji: p.emoji, name: nm }, 'ring-lim',
                                                z >= 10 && freeLabel(p.lat, p.lon, 'lab'),
                                                CLS[k]), title: nm })
@@ -1341,7 +1356,7 @@ async function drawDetail(){
     }
 
   if (z >= MONU_ZOOM){
-    await loadMonumentIndex();
+    if(!MON_INDEX.length)loadMonumentIndex().then(()=>{if(MON_INDEX.length)drawDetail();});
     let m = 0;                                   // stones before articles: rarer
     for (const r of MON_INDEX){
       if (m >= CAP) break;
@@ -1386,6 +1401,7 @@ async function drawDetail(){
   // streaming) every run was cancelled by the next and nothing was ever put on
   // the map. The counter is gone too - it was only being written to, and a
   // write-only counter reads like an order guard that does not exist.
+  if(generation!==detailGeneration||$('place').hidden)return;
   if (detailLayer) map.removeLayer(detailLayer);
   detailLayer = group.addTo(map);
 }
@@ -1548,7 +1564,10 @@ const LOCAL_TAG_RULES = [
 ];
 
 function localType(tg){
-  const n = tg.name || tg.inscription || '';
+  const typed = PlaceUI.type(tg);
+  // A known station, museum or tree must not become a shrine because of its name.
+  if (typed && !['historic=memorial|historic=monument','tourism=attraction'].includes(typed[0])) return [null, typed[1], typed[2], typed[3]];
+  const n = tg['name:ja'] || tg.name || '';
   for (const r of LOCAL_NAME_RULES) if (r[0].test(n)) return r;
   for (const r of LOCAL_TAG_RULES)  if (r[0](tg))     return r;
   return null;
@@ -1556,7 +1575,7 @@ function localType(tg){
 function localEmoji(tg){ const r = localType(tg); return r ? r[1] : '📍'; }
 function localLabel(tg){
   const r = localType(tg);
-  return r ? (LANG === 'en' ? r[2] : r[3]) : t('localSpot');
+  return PlaceUI.type(tg) ? PlaceUI.label(tg, LANG) : (r && LANG === 'ja' ? r[3] : r && LANG === 'en' ? r[2] : t('localSpot'));
 }
 /* All the medium pins used to be the same book icon, which told you nothing.
    Japanese titles are highly regular, so a keyword pass gives a usable type. */
@@ -1690,7 +1709,7 @@ function articleLink(p){
                      src: 'Japanese Wikipedia (CC BY-SA 4.0). No English article exists.' };
   } else {
     if (ja) return { url: 'https://ja.wikipedia.org/wiki/' + wikiPath(ja),
-                     label: t('readWiki'), src: '日本語版ウィキペディア（CC BY-SA 4.0）' };
+                     label: LANG==='ja'?t('readWiki'):t('readWikiJa'), src: 'Wikipedia (CC BY-SA 4.0)' };
     if (en) return { url: 'https://en.wikipedia.org/wiki/' + wikiPath(en),
                      label: t('readWikiEn'), src: '英語版ウィキペディア（CC BY-SA 4.0）' };
   }
@@ -1744,8 +1763,8 @@ async function areaArticleOf(lat, lon){
   if (areaCache.has(key)) return areaCache.get(key);
   let out = null;
   try{
-    const j = await fetch(NOMINATIM + '/reverse?format=jsonv2&zoom=10&extratags=1'
-      + '&accept-language=en&lat=' + lat + '&lon=' + lon).then(r => r.json());
+    const j = await geoFetch(NOMINATIM + '/reverse?format=jsonv2&zoom=10&extratags=1'
+      + '&accept-language=en&lat=' + lat + '&lon=' + lon);
     const et = (j && j.extratags) || {};
     if (j && AREA_TYPES.indexOf(j.addresstype) >= 0 && et.wikipedia){
       const p = wikiTagParse(et.wikipedia);
@@ -1765,7 +1784,8 @@ async function areaArticleOf(lat, lon){
   return out;
 }
 
-const localName = tg => (LANG === 'en' && tg['name:en']) ? tg['name:en'] : (tg.name || tg.inscription || '');
+const localName = tg => PlaceUI.localName(tg, LANG);
+const placeName = p => PlaceUI.name(p, LANG);
 
 /* -------------------------------------------------------------------------
    Affiliate slot.
@@ -1850,11 +1870,11 @@ function paintCompareBtn(){
 
 function panelShell(o){
   compareAt = o.at || null;
-  sharePayload = o.share
-    ? { title: o.share.title, url: o.share.url || location.href }
-    : null;
+  const oldHash = o.share && o.share.url ? new URL(o.share.url, location.href).hash : '';
+  sharePayload = o.share ? {title:o.name, url:PlaceUI.spotURL(location.origin, LANG, o.at, oldHash, o.name)} : null;
   $('pCompare').hidden = true;          // shown once we know a photograph exists
   $('pShare').hidden   = !o.share;
+  $('pShare').textContent = '⇪ '+t('share');
   $('pJa').textContent = o.ja || '';
   $('pName').textContent = o.name;
   $('pAddr').textContent = '';
@@ -1913,22 +1933,7 @@ function panelShell(o){
 
   const myToken = ++panelToken;
   /* まちの記事は描画のあとで足す。地図の再描画も最初の表示も待たせない。 */
-  if (o.relatedArea && o.at) areaArticleOf(o.at[0], o.at[1]).then(a => {
-    if (myToken !== panelToken || !a) return;    // すでに別のスポットが開かれている
-    o._area = a; renderRelated(o);
-  });
-  if (o.at) addressOf(o.at[0], o.at[1]).then(a => {
-    if (myToken !== panelToken) return;           // a newer panel is on screen
-    if (a) $('pAddr').textContent = t('address') + ': ' + a;
-    /* 市町村名は必ず日本語で取る。英語表示中でも問いは日本語にする。
-       住所の返事のあとに聞く。Nominatim は 1 秒 1 件まで。 */
-    return muniOf(o.at[0], o.at[1]).then(m => {
-      if (myToken !== panelToken || !m) return;
-      const el = $('pOfficial');
-      el.dataset.muni = m;
-      paintOfficial();
-    });
-  });
+
 
   // Work out which old photograph is available here and label the button with
   // its actual year, rather than promising 1945 everywhere.
@@ -1983,8 +1988,9 @@ function trimSummary(text, limit){
 }
 
 function extractOf(p){
-  const text = LANG === 'ja' ? (p.extract_ja || '') : (p.extract || '');
+  const text = (p.summaries && p.summaries[LANG]) || (LANG === 'ja' ? p.extract_ja : LANG === 'en' ? p.extract : p['extract_' + LANG]) || '';
   if (!text) return null;
+  if(p.summaries && p.summaries[LANG]) return {text,note:PlaceUI.pick(['Short overview based on the linked source.','リンク先の資料に基づく短い概要です。','연결된 자료를 바탕으로 한 짧은 개요입니다.','根据链接资料整理的简短概要。','根據連結資料整理的簡短概要。'],LANG),weak:false};
   const src = p.extractSrc || '';
   const note = src === 'web (aggregated)'    ? t('srcAggregated')
              : src === 'ja.wikipedia (translated)' ? t('srcWikiJaTr')
@@ -1996,20 +2002,21 @@ function extractOf(p){
 function extractHTML(p, limit){
   const e = extractOf(p);
   if (!e) return '';
-  return '<p class="p-hint">' + esc(trimSummary(e.text, limit || 220)) + '</p>'
+  return '<p class="place-summary">' + esc(p.summaries && p.summaries[LANG] ? e.text : trimSummary(e.text, limit || 220)) + '</p>'
        + (e.note ? '<p class="p-srcnote' + (e.weak ? ' p-weak' : '') + '">'
                  + esc(e.note) + '</p>' : '');
 }
 function showLandmark(p){
+  if (!map || $('place').hidden) noPush(openMap);
   lastPanel = () => showLandmark(p);
   /* current は「物語つきの名所を開いている」という意味。ここで消さないと、
      名所を開いたあとに小さなスポットを開いても current が残り、言語を切り替えた
      applyLang() が画面に出ているスポットではなく前の名所を開き直してしまう。 */
   current = null;
   panelShell({
-    kicker: { emoji: p.emoji, label: p.kind, note: '  ' + p.ja },
-    ja: p.ja, name: LANG === 'en' ? p.name : p.ja, at: [p.lat, p.lon], query: p.name,
-    bodyHTML: '<p>' + t('famous') + '</p>' + extractHTML(p, 320),
+    kicker: { emoji: p.emoji, label: t('localSpot'), note: '  ' + placeName(p) },
+    ja: LANG === 'ja' ? '' : p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
+    bodyHTML: extractHTML(p, 240) || '<p>' + t('famous') + '</p>',
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
     img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
@@ -2020,70 +2027,40 @@ function showLandmark(p){
   map.panTo([p.lat, p.lon]);
 }
 
+const wikiTitles = new Map();
+async function localizedWikiTitle(ja,lang){
+  if(lang==='ja')return ja;
+  const target=lang.startsWith('zh')?'zh':lang,key=target+':'+ja;
+  if(wikiTitles.has(key))return wikiTitles.get(key);
+  try{
+    const r=await fetch('https://ja.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=langlinks&lllimit=1&lllang='+target+'&titles='+encodeURIComponent(ja));
+    if(!r.ok)return '';
+    const j=await r.json(),page=Object.values(j.query?.pages||{})[0],title=page?.langlinks?.[0]?.['*']||'';
+    wikiTitles.set(key,title);if(wikiTitles.size>200)wikiTitles.delete(wikiTitles.keys().next().value);return title;
+  }catch(e){return '';}
+}
 async function showWiki(w){
-  lastPanel = () => showWiki(w);
-  current = null;
-  /* null は「まだ聞いていない」、'' は「聞いたが英語版は無い」。
-     ここを区別せず !!w.en で判定していた。 */
-  if (LANG === 'en' && w.en === null){
-    const before = panelToken;
-    const en = await enTitleOf(w.ja);
-    if (before !== panelToken) return;      // 待っているあいだに別のパネルが開いた
-    w.en = en || '';
-    w.name = (LANG === 'en' && w.en) ? w.en : w.ja;
-  }
-  const hasEn = !!w.en;
-  const link = (hasEn && LANG === 'en')
-    ? 'https://en.wikipedia.org/wiki/' + encodeURIComponent(w.en.replace(/ /g,'_'))
-    : (LANG === 'ja' ? 'https://ja.wikipedia.org/wiki/' + encodeURIComponent(w.ja)
-                     : JA_ARTICLE(w.ja));
-  const tag = (!hasEn && LANG === 'en') ? '<span class="p-lang">' + t('jaOnly') + '</span>' : '';
-  panelShell({
-    ja: (LANG === 'en' && hasEn) ? w.ja : '',
-    name: (LANG === 'en' && hasEn) ? w.en : w.ja,
-    bodyHTML: tag + '<p>' + t('loading') + '</p>',
-    wiki: link, wikiLabel: (!hasEn && LANG === 'en') ? t('readWikiJa') : t('readWiki'),
-    at: [w.lat, w.lon], share: { title: w.name, url: location.origin + location.pathname },
-    searchName: w.ja,
-    src: hasEn ? 'Wikipedia (CC BY-SA 4.0)'
-               : (LANG === 'en' ? 'Japanese Wikipedia (CC BY-SA 4.0). No English article exists.'
-                                : '日本語版ウィキペディア（CC BY-SA 4.0）')
-  });
-  /* The summary must be in the chosen language. When an English article exists we
-     pull the English extract; when it does not, we say what the place is in English
-     and keep the Japanese original folded away rather than dumping it on the reader. */
-  /* panelShell が採番した番号を控える。await のあいだに別のスポットが開かれたら、
-     こちらの返事はもう画面に書いてはいけない。これが無いために「題名は晩翠草堂、
-     本文と写真は大町（仙台市）」という取り違えが起きていた（再現確認済み）。
-     panelShell 自身の住所・年代の書き込みは既に同じ守りを持っている。 */
-  const myToken = panelToken;
-  let pg = null, body = '';
-  if (LANG === 'en' && hasEn){
-    pg = await wikiExtractByTitle(w.en, 'en');
-    const raw = trimSummary(((pg && pg.extract) || '').replace(/\s+/g, ' '), 260);
-    body = raw ? '<p>' + esc(raw) + '</p>' : '<p>' + t('noSummary') + '</p>';
-  } else {
-    pg = await wikiExtract(w.pageid, 'ja');
-    const raw = trimSummary(((pg && pg.extract) || '').replace(/\s+/g, ' '), 260);
-    if (LANG === 'ja'){
-      body = raw ? '<p>' + esc(raw) + '</p>' : '<p>' + t('noSummary') + '</p>';
-    } else {
-      body = '<p>' + t('aKind')(spotLabel(w.ja)) + '</p>'
-           + '<p class="p-hint">' + t('tapRed') + '</p>'
-           + (raw ? '<details class="jp-fold"><summary>' + t('showOriginal')
-                    + '</summary><p class="jp-raw">' + esc(raw) + '</p></details>' : '');
-    }
-  }
-  if (myToken !== panelToken) return;          // すでに別のスポットが開かれている
-  $('pStory').innerHTML = tag + body;
-  if (pg && pg.thumbnail && pg.thumbnail.source){
-    $('pImg').src = pg.thumbnail.source; $('pImg').alt = w.name;
-    $('pCap').textContent = ''; $('pFig').hidden = false;
-  } else {
-    /* 記事はあるが写真が無い場合。空にせず、その地点の空中写真を出す。 */
-    $('pImg').src = airPhoto(w.lat, w.lon); $('pImg').alt = w.name;
-    $('pCap').textContent = t('photoAir'); $('pFig').hidden = false;
-  }
+  lastPanel=()=>showWiki(w);current=null;
+  const lang=LANG;
+  panelShell({name:lang==='ja'?w.ja:(w.en||w.ja),ja:lang==='ja'?'':w.ja,
+    bodyHTML:'<p>'+t('loading')+'</p>',at:[w.lat,w.lon],
+    share:{title:w.name,url:location.origin+location.pathname},searchName:w.ja,
+    src:'Wikipedia (CC BY-SA 4.0)'});
+  const token=panelToken;
+  const title=await localizedWikiTitle(w.ja,lang);
+  if(token!==panelToken||LANG!==lang)return;
+  const wikiLang=lang.startsWith('zh')?'zh':lang;
+  const pg=title?await wikiExtractByTitle(title,wikiLang):null;
+  if(token!==panelToken||LANG!==lang)return;
+  const nm=title||w.en||w.ja;
+  const raw=pg?.extract;
+  const summary=raw?trimSummary(raw,260):PlaceUI.summary({['name:'+lang]:nm},lang);
+  panelShell({name:nm,ja:lang==='ja'?'':w.ja,
+    bodyHTML:'<p class="place-summary">'+esc(summary)+'</p>'+(!raw?'<p class="p-srcnote">'+esc(t('noSummary'))+'</p>':''),
+    at:[w.lat,w.lon],img:pg?.thumbnail?.source||airPhoto(w.lat,w.lon),cap:pg?.thumbnail?'':t('photoAir'),
+    wiki:'https://'+(title?wikiLang:'ja')+'.wikipedia.org/wiki/'+encodeURIComponent(title||w.ja),
+    wikiLabel:title?t('readWiki'):t('readWikiJa'),searchName:w.ja,
+    share:{title:nm,url:location.origin+location.pathname},src:'Wikipedia (CC BY-SA 4.0)'});
 }
 
 /* Tapping a stone is the first moment we need the full text. */
@@ -2140,96 +2117,6 @@ function showMonument(r){
    データに焼き込まずここで組み立てる理由: 192,584件×3行は約29MBあり、
    いまの配信33MBをほぼ倍にする。地図が重くなる原因を自分で作ることになる。
    タグは既に手元にあるので、文章は0バイトで作れる。 */
-const LS_WORDS = {
-  'information=board':       ['an information board', '案内板'],
-  'information=map':         ['a map board', '案内図'],
-  'information=guidepost':   ['a guidepost', '道標'],
-  'information=office':      ['a tourist information office', '観光案内所'],
-  'information=route_marker':['a route marker', 'ルート標識'],
-  'memorial=stele':          ['a stone stele', '石碑'],
-  'memorial=stone':          ['a memorial stone', '記念の石'],
-  'memorial=statue':         ['a memorial statue', '記念像'],
-  'memorial=hazard_memorial':['a memorial to a natural disaster', '災害の伝承碑'],
-  'memorial=plaque':         ['a plaque', '銘板'],
-  'memorial=war_memorial':   ['a war memorial', '戦没者慰霊碑'],
-  'artwork_type=statue':     ['a statue', '像'],
-  'artwork_type=sculpture':  ['a sculpture', '彫刻'],
-  'artwork_type=mural':      ['a mural', '壁画'],
-  'natural=peak':            ['a mountain peak', '山頂'],
-  'natural=tree':            ['a notable tree', '木'],
-  'natural=spring':          ['a spring', '湧水'],
-  'natural=saddle':          ['a mountain saddle', '鞍部'],
-  'natural=hot_spring':      ['a hot spring', '温泉の湧出地'],
-  'natural=cave_entrance':   ['a cave entrance', '洞窟の入口'],
-  'man_made=survey_point':   ['a survey point', '三角点・水準点'],
-  'man_made=tower':          ['a tower', '塔'],
-  'man_made=lighthouse':     ['a lighthouse', '灯台'],
-  'man_made=water_well':     ['a well', '井戸'],
-  'man_made=ceremonial_gate':['a ceremonial gate', '鳥居・門'],
-  'waterway=canal':          ['a canal', '用水路'],
-  'waterway=waterfall':      ['a waterfall', '滝'],
-  'waterway=dam':            ['a dam', 'ダム'],
-  'waterway=weir':           ['a weir', '堰'],
-  'historic=wayside_shrine': ['a wayside shrine', '道端の祠'],
-  'historic=archaeological_site':['an archaeological site', '遺跡'],
-  'historic=monument':       ['a monument', '記念碑'],
-  'historic=boundary_stone': ['a boundary stone', '境界石'],
-  'historic=ruins':          ['ruins', '廃墟・跡'],
-  'religion=shinto':         ['Shinto', '神道'],
-  'religion=buddhist':       ['Buddhist', '仏教'],
-  'religion=christian':      ['Christian', 'キリスト教'],
-  'religion=tenrikyo':       ['Tenrikyo', '天理教'],
-  'tourism=viewpoint':       ['a viewpoint', '展望地'],
-  'tourism=museum':          ['a museum', '博物館・美術館'],
-  'tourism=attraction':      ['a visitor attraction', '見どころ'],
-  /* 下位タグが無い素の値。実測で3万件がここに落ちていた（historic=memorial 9,187 など）。 */
-  'historic=memorial':       ['a memorial', '記念碑'],
-  'historic=castle':         ['a castle or its site', '城・城跡'],
-  'historic=tomb':           ['a tomb', '墓'],
-  'historic=building':       ['a historic building', '歴史的な建物'],
-  'historic=fort':           ['a fort', '砦'],
-  'historic=battlefield':    ['a battlefield', '古戦場'],
-  'historic=tumulus':        ['a burial mound', '古墳'],
-  'historic=milestone':      ['a milestone', '里程標'],
-  'tourism=artwork':         ['a work of public art', '屋外の作品'],
-  'tourism=information':     ['an information point', '案内'],
-  'tourism=picnic_site':     ['a picnic site', '休憩地'],
-  'tourism=guest_house':     ['a guest house', '宿'],
-  'place=locality':          ['a named locality', '地名の付いた場所'],
-  'place=quarter':           ['a quarter of a town', 'まちの一角'],
-  'place=neighbourhood':     ['a neighbourhood', '集落・地区'],
-  'place=hamlet':            ['a hamlet', '小集落'],
-  'place=islet':             ['a small island', '小島'],
-  'highway=bus_stop':        ['a bus stop', 'バス停'],
-  'natural=water':           ['a body of water', '水面'],
-  'natural=cape':            ['a cape', '岬'],
-  'natural=rock':            ['a rock', '岩'],
-  'natural=wood':            ['woodland', '林'],
-  'waterway=stream':         ['a stream', '小川'],
-  'waterway=river':          ['a river', '川'],
-  'man_made=embankment':     ['an embankment', '堤'],
-  'man_made=bridge':         ['a bridge', '橋'],
-  'amenity=school':          ['a school', '学校'],
-  'amenity=library':         ['a library', '図書館'],
-  'amenity=townhall':        ['a town hall', '役場'],
-  'amenity=fountain':        ['a fountain', '噴水・水場'],
-  'amenity=grave_yard':      ['a graveyard', '墓地'],
-  /* 道路の種別は名前だけが手がかり。種別ごとに書き分ける意味は無いので同じ語にする。 */
-  'highway=unclassified':    ['a named road', '名前のついた道'],
-  'highway=tertiary':        ['a named road', '名前のついた道'],
-  'highway=secondary':       ['a named road', '名前のついた道'],
-  'highway=primary':         ['a named road', '名前のついた道'],
-  'highway=trunk':           ['a named road', '名前のついた道'],
-  'highway=residential':     ['a named street', '名前のついた通り'],
-  'highway=path':            ['a path', '小道'],
-  'highway=track':           ['a track', '作業道'],
-  'highway=footway':         ['a footpath', '歩道'],
-  'highway=steps':           ['steps', '階段'],
-  'highway=traffic_signals': ['a road junction', '交差点'],
-  'historic=yes':            ['a place recorded as historic', '歴史的な場所として記録された地点']
-};
-const lsw = (k, v) => LS_WORDS[k + '=' + v];
-
 /* その地点の空中写真。写真が1枚も無いスポットのための最後の受け皿。
    z17 は建物が1軒ずつ見える大きさ。地図が読むタイルと同じURLなので、
    Service Worker のタイルキャッシュにそのまま乗る（新しい通信先を増やさない）。 */
@@ -2237,64 +2124,24 @@ function airPhoto(lat, lon){
   return tileURL(NOW_LAYER.id, NOW_LAYER.ext, lat, lon, 17);
 }
 
-function localSummary(tg){
-  const en = LANG === 'en', i = en ? 0 : 1;
-  const bits = [];
-
-  /* 1行目: 何であるか。細かい語（案内板・山頂・石碑…）を先に見る。 */
-  let what = null;
-  const order = ['information', 'memorial', 'artwork_type', 'natural',
-                 'man_made', 'waterway', 'historic', 'tourism', 'place',
-                 'amenity', 'highway'];
-  for (let k = 0; k < order.length; k++){
-    const key = order[k];
-    if (tg[key] && lsw(key, tg[key])){ what = lsw(key, tg[key])[i]; break; }
-  }
-  const rel = tg.religion ? lsw('religion', tg.religion) : null;
-  if (!what && tg.amenity === 'place_of_worship')
-    what = rel ? (en ? 'a ' + rel[0] + ' place of worship' : rel[1] + 'の信仰の場')
-               : (en ? 'a place of worship' : '信仰の場');
-  if (!what) return '';                    // 材料が無い。組み立てない
-
-  bits.push(en ? ('OpenStreetMap records this spot as ' + what + '.')
-               : ('地図には' + what + 'とある。'));
-
-  /* 2行目: タグにある事実だけを足す。無ければ足さない。 */
-  const more = [];
-  if (rel && tg.amenity !== 'place_of_worship')
-    more.push(en ? (rel[0] + ' in tradition') : (rel[1] + 'にかかわる場所'));
-  if (tg.denomination)
-    more.push(en ? ('denomination recorded as ' + tg.denomination)
-                 : ('宗派は' + tg.denomination));
-  if (tg.start_date)
-    more.push(en ? ('dated ' + tg.start_date + ' in the map data')
-                 : (tg.start_date + 'のものとされる'));
-  if (tg.ruins && tg.ruins !== 'no')
-    more.push(en ? 'recorded as ruins' : 'いまは遺構・廃墟');
-  if (tg.heritage)
-    more.push(en ? 'listed in a heritage register' : '文化財に登録されている');
-  if (more.length){
-    let line = more.join(en ? '; ' : '、');
-    if (en) line = line.charAt(0).toUpperCase() + line.slice(1);
-    bits.push(line + (en ? '.' : '。'));
-  }
-  return bits.join(' ');
-}
+function localSummary(tg){ return PlaceUI.summary(tg, LANG); }
 
 function showLocal(p){
   lastPanel = () => showLocal(p);
   current = null;
   const tg = p.tags, nm = localName(tg) || t('localSpot');
   const bits = [];
-  if (tg.inscription) bits.push('<p class="jp-raw">' + esc(tg.inscription) + '</p>');
-  if (tg.description) bits.push('<p>' + esc(tg.description) + '</p>');
+  const description = tg['description:' + LANG] || (LANG==='zh-Hans'?tg['description:zh-CN']:LANG==='zh-Hant'?tg['description:zh-TW']:'') || (LANG === 'ja' ? tg.description : '');
+  if (description) bits.push('<p class="place-summary">' + esc(trimSummary(description, 220)) + '</p>');
+  else bits.push('<p class="place-summary">' + esc(localSummary(tg)) + '</p><p class="p-srcnote">' + esc(t('srcTags')) + '</p>');
+  if (tg.inscription) bits.push('<details class="original-text"><summary>' + esc(t('showOriginal')) + '</summary><p lang="ja">' + esc(tg.inscription) + '</p></details>');
   const wl = wikiTagLink(tg.wikipedia);
   panelShell({
-    kicker: { emoji: localEmoji(tg), label: localLabel(tg), note: tg.name ? '  ' + tg.name : '' },
+    kicker: { emoji: localEmoji(tg), label: localLabel(tg), note: '  ' + nm },
     /* 検索語には本当の名前だけを渡す。nm は名無しのとき
        t('localSpot')（「地元の名所」）に化けるので、そのまま問いにすると
        総称を検索してしまう。名前が無ければ市町村名だけで問う。 */
-    ja: (tg.name && tg['name:en']) ? tg.name : '', name: nm,
+    ja: LANG !== 'ja' && nm !== (tg['name:ja'] || tg.name) ? (tg['name:ja'] || tg.name || '') : '', name: nm,
     searchName: tg['name:ja'] || tg.name || '',
     bodyHTML: bits.length ? bits.join('')
             : (localSummary(tg)
@@ -2318,11 +2165,11 @@ function showLocal(p){
    ------------------------------------------------------------------------- */
 const SAVE_KEY = 'tn-saved';
 function readSaved(){
-  try { return JSON.parse(localStorage.getItem(SAVE_KEY) || '[]'); } catch(e){ return []; }
+  try { return PlaceUI.savedRows(JSON.parse(localStorage.getItem(SAVE_KEY) || '[]')); } catch(e){ return []; }
 }
 function writeSaved(v){
-  try { localStorage.setItem(SAVE_KEY, JSON.stringify(v.slice(-200))); } catch(e){}
-  renderSaved();
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(PlaceUI.savedRows(v))); } catch(e){ toast(uiText('saveFailed')); return false; }
+  renderSaved(); paintSaveBtn(); return true;
 }
 function savedKey(o){ return o.lat.toFixed(5) + ',' + o.lon.toFixed(5); }
 function isSaved(o){ return readSaved().some(x => x.k === savedKey(o)); }
@@ -2338,7 +2185,7 @@ function toggleSave(){
   const added = i < 0;
   if (added) list.push({ k: k, lat: o.lat, lon: o.lon, name: name });
   else list.splice(i, 1);
-  writeSaved(list);
+  if (!writeSaved(list)) return;
   paintSaveBtn();
   toast(added ? t('savedToast')(name) : t('unsavedToast')(name));
   const badge = $('myCount');
@@ -2350,6 +2197,10 @@ function paintSaveBtn(){
   $('pSave').classList.toggle('is-on', !!on);
   $('pSave').setAttribute('aria-pressed', String(!!on));
 }
+function savedDisplayName(row){
+  const p=[...PLACES,...LANDMARKS,...LIMINAL].find(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);
+  return p?placeName(p):row.name;
+}
 function renderSaved(){
   const list = readSaved();
   $('myCount').textContent = (list.length ? '★ ' : '☆ ') + list.length;
@@ -2358,18 +2209,14 @@ function renderSaved(){
   const box = $('myList');
   if (!box) return;
   box.innerHTML = list.length
-    ? list.slice().reverse().map((x, i) =>
-        '<button class="my-item" data-k="' + esc(x.k) + '">' + esc(x.name || 'spot')
-        + ' <span class="x" data-del="' + esc(x.k) + '">×</span></button>').join('')
-    : '<p class="my-empty">' + t('myEmpty') + '</p>';
-  for (const b of box.querySelectorAll('.my-item')) b.onclick = e => {
-    const k = b.dataset.k, row = readSaved().find(x => x.k === k);
-    if (!row) return;
-    if (e.target.dataset.del){ writeSaved(readSaved().filter(x => x.k !== k)); return; }
-    if (!roaming) openMap();
-    map.setView([row.lat, row.lon], 16);
-    setTimeout(drawDetail, 400);
+    ? list.slice().reverse().map(x => '<div class="saved-row"><button class="my-item" data-k="'+esc(x.k)+'">'+esc(savedDisplayName(x)||t('localSpot'))+'</button><button class="saved-delete" data-del="'+esc(x.k)+'" aria-label="'+esc(PlaceUI.pick(['Remove','削除','삭제','删除','刪除'],LANG)+' '+x.name)+'">×</button></div>').join('')
+    : '<p class="my-empty">'+t('myEmpty')+'</p>';
+  for(const b of box.querySelectorAll('.my-item'))b.onclick=()=>{
+    const row=readSaved().find(x=>x.k===b.dataset.k);if(!row)return;
+    if(!roaming)openMap();map.setView([row.lat,row.lon],17);showSavedSpot(row);
   };
+  for(const b of box.querySelectorAll('.saved-delete'))b.onclick=()=>writeSaved(readSaved().filter(x=>x.k!==b.dataset.del));
+
 }
 /* 案内文の数字はデータから入れる。手書きは必ず古くなる。
    実例（2026-09-07）: リミナルを 33→26 に削ったあともここは「31か所」のまま、
@@ -2404,8 +2251,8 @@ function snsLinks(){
 
 function showLiminal(p, keepView){
   lastPanel = () => showLiminal(p, true);
-  const hook = (LANG === 'ja' && p.hook_ja) ? p.hook_ja : p.hook;
-  const why  = (LANG === 'ja' && p.why_ja)  ? p.why_ja  : (p.why || '');
+  const hook = (p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook);
+  const why = LANG === 'ja' ? p.why_ja : LANG === 'en' ? p.why : '';
   /* Wikipedia の要約は言語ごとに別の記事から取る。2026-09-09 まで extract は1つしか無く、
      どちらの言語から取れたかで中身の言語が変わっていた。explore.js 側もここだけ
      言語で分岐していなかったため、**英語表示なのに説明が日本語で出ていた**
@@ -2422,19 +2269,19 @@ function showLiminal(p, keepView){
   if (!keepView) map.setView([p.lat, p.lon], 15);
   setTimeout(() => map.invalidateSize(), 60);
   setThenLayer(null, null);
-  drawSpots([{ lat: p.lat, lon: p.lon, name: LANG === 'ja' ? p.ja : p.name, emoji: p.emoji }],
+  drawSpots([{ lat: p.lat, lon: p.lon, name: placeName(p), emoji: p.emoji }],
             true, () => showLiminal(p, true));
   roaming = false; current = null;
   drawDetail();
   setTimeout(drawDetail, 900);
 
   panelShell({
-    kicker: { emoji: p.emoji, label: t('modeLiminal'), note: '  ' + p.ja },
-    ja: p.ja, name: LANG === 'ja' ? p.ja : p.name, at: [p.lat, p.lon], query: p.name,
+    kicker: { emoji: p.emoji, label: t('modeLiminal'), note: '  ' + placeName(p) },
+    ja: p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
     bodyHTML: '<p>' + esc(hook) + '</p>'
             + (why ? '<h3 class="p-h3">' + t('liminalWhat') + '</h3><p>' + esc(why) + '</p>' : '')
-            + (p.note ? '<p class="p-pick">' + esc(p.note) + '</p>' : '')
-            + extractHTML(p, 220),
+            + (p.note && LANG==='en' ? '<p class="p-pick">' + esc(p.note) + '</p>' : '')
+            + ((LANG==='en'||LANG==='ja') && (p.extract||p.extract_ja) ? extractHTML({...p,summaries:null},220) : ''),
     img: p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 17),
     cap: p.img ? t('photoBy') : '',
     wiki: (articleLink(p) || {}).url || '',
@@ -2452,12 +2299,16 @@ function showLiminal(p, keepView){
 /* =========================================================================
    8. Search / location / share
    ========================================================================= */
-let qTimer = null;
+let qTimer = null, qComposing = false;
+$('q').addEventListener('compositionstart', () => { qComposing = true; clearTimeout(qTimer); ++qSeq; });
+$('q').addEventListener('compositionend', () => { qComposing = false; $('q').dispatchEvent(new Event('input')); });
 $('q').addEventListener('input', () => {
+  ++qSeq;
   const v = $('q').value.trim();
   $('qClear').hidden = !v;
   clearTimeout(qTimer);
-  if (v.length < 2){ $('qResults').hidden = true; return; }
+  $('qResults').hidden = true;
+  if (!v || qComposing) return;
   qTimer = setTimeout(() => runSearch(v), 450);   // stay inside Nominatim's policy
 });
 
@@ -2467,13 +2318,16 @@ $('q').addEventListener('input', () => {
    返ってきた先頭へ飛ぶ。Nominatim は関連度順に返すので先頭＝一番近い場所。
    記事名や地名を自分で組み立てることはしない。返ってきたものだけを使う。 */
 $('q').addEventListener('keydown', e => {
+  if (e.isComposing || qComposing) return;
+  if (e.key === 'Escape'){ ++qSeq; $('qResults').hidden = true; return; }
+  if (e.key === 'ArrowDown'){ const first = $('qResults').querySelector('button'); if (first && !$('qResults').hidden){e.preventDefault();first.focus();} return; }
   if (e.key !== 'Enter') return;
   e.preventDefault();                       // フォーム送信やページ再読込を止める
   const box = $('qResults');
   const first = box.hidden ? null : box.querySelector('.q-item');
   if (first){ first.click(); return; }
   const v = $('q').value.trim();
-  if (v.length < 2) return;
+  if (!v) return;
   clearTimeout(qTimer);
   runSearch(v, true);                       // 引けたら先頭へ自動で飛ぶ
 });
@@ -2485,20 +2339,17 @@ $('qClear').onclick = () => { ++qSeq; $('q').value = ''; $('qClear').hidden = tr
 
 /* --- 自前スポットの検索（2026-09-09） --------------------------------
    照合用に文字を均す。ō→o、全角/半角、中黒や括弧の違いで外さないため。 */
-const qnorm = s => String(s || '').toLowerCase()
-  .normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
-  .replace(/[\s\u3000\-–—_,.'’"()（）・･:：]/g, '');
+const qnorm = PlaceUI.normalize;
 
+let searchIndex = null;
 function spotRows(){
-  const out = [];
-  for (const p of PLACES)
-    out.push({ kind: 'place', p,
-               names: [p.name, p.name_ja, p.ja, p.romaji, p.name_ko, p.name_zh] });
-  for (const p of LIMINAL)
-    out.push({ kind: 'liminal', p, names: [p.name, p.ja, p.name_ko, p.name_zh] });
-  for (const p of LANDMARKS)
-    out.push({ kind: 'landmark', p, names: [p.name, p.ja, p.name_ko, p.name_zh] });
-  return out;
+  const key = PLACES.length + ':' + LIMINAL.length + ':' + LANDMARKS.length;
+  if (searchIndex && searchIndex.key === key) return searchIndex.rows;
+  const rows = [];
+  for (const [kind, list] of [['place',PLACES],['liminal',LIMINAL],['landmark',LANDMARKS]])
+    for (const p of list) rows.push({kind,p,names:PlaceUI.names(p).map(qnorm)});
+  searchIndex = {key,rows};
+  return rows;
 }
 
 /* 近い順に返す。完全一致 > 前方一致 > 部分一致。
@@ -2526,13 +2377,7 @@ function searchSpots(q){
 }
 
 /* 表示名は読み手の言語で。無ければ英語に落とす。 */
-function spotLabelFor(row){
-  const p = row.p;
-  if (LANG === 'ja') return p.ja || p.name_ja || p.name;
-  if (LANG === 'ko') return p.name_ko || p.name;
-  if (LANG === 'zh-Hans' || LANG === 'zh-Hant') return p.name_zh || p.name;
-  return p.name || p.ja;
-}
+function spotLabelFor(row){ return placeName(row.p); }
 function spotSubFor(row){
   const p = row.p;
   const other = (LANG === 'ja') ? p.name : (p.ja || '');
@@ -2557,7 +2402,7 @@ function openSpot(row){
 const NAT_BUCKETS = 64;
 const natCache = new Map();          // バケツ番号 -> 行の配列
 function natBucketOf(q){
-  const k = qnorm(q).slice(0, 1) || '_';
+  const k = String(q || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[\s\u3000\-–—_,.'’"()（）・･:：]/g, '').slice(0,1) || '_';
   let n = 0;
   for (const c of k) n += c.codePointAt(0);
   return n % NAT_BUCKETS;
@@ -2569,19 +2414,22 @@ async function natRows(q){
     const name = ('0' + b).slice(-2) + '.json';
     const rows = await fetch(dj('search/' + name)).then(r => r.ok ? r.json() : []);
     natCache.set(b, rows);
+    if (natCache.size > 8) natCache.delete(natCache.keys().next().value);
     return rows;
-  } catch(e){ natCache.set(b, []); return []; }
+  } catch(e){ return []; }
 }
 /* 手で選んだ79スポットと重なるものは出さない（同じ場所が二度並ぶと迷う）。 */
 function natSearch(rows, q, skip){
   const nq = qnorm(q);
   if (!nq) return [];
-  const pre = [], mid = [];
+  const pre = [], mid = [], coords = new Set();
   for (const r of rows){
     const nn = qnorm(r[0]);
     if (!nn) continue;
     if (skip.has(nn)) continue;
+    const coordinate=r[1]+','+r[2];if(coords.has(coordinate))continue;
     const i = nn.indexOf(nq);
+    if(i<0)continue;coords.add(coordinate);
     if (i === 0) pre.push(r);
     else if (i > 0) mid.push(r);
     if (pre.length >= 8) break;
@@ -2591,20 +2439,9 @@ function natSearch(rows, q, skip){
 /* 押されたら、その場所へ寄ってから、地域データが届くのを待って
    その地点のパネルを開く（＝右に概要が出る）。 */
 function openNational(row){
-  if (!roaming) openMap();
-  map.setView([row[1], row[2]], 17);
-  let tries = 0;
-  const tick = () => {
-    let best = null, bd = 1e9;
-    for (const p of LOCALS){
-      const d = Math.abs(p.lat - row[1]) + Math.abs(p.lon - row[2]);
-      if (d < bd){ bd = d; best = p; }
-    }
-    if (best && bd < 0.0008){ showLocal(best); return; }
-    if (++tries < 8) setTimeout(tick, 500);   // 地域ファイルの到着を待つ
-    else drawDetail();
-  };
-  setTimeout(tick, 600);
+  if(!map||$('place').hidden||!roaming)noPush(openMap);
+  map.setView([row[1],row[2]],17);
+  showSavedSpot({name:row[0],lat:row[1],lon:row[2]});
 }
 
 async function runSearch(v, autoPick){
@@ -2633,7 +2470,7 @@ async function runSearch(v, autoPick){
     box.hidden = false;
     for (const btn of box.querySelectorAll('.q-item')){
       btn.onclick = () => {
-        box.hidden = true; $('q').blur();
+        ++qSeq; box.hidden = true; $('q').blur();
         if (btn.dataset.s !== undefined){
           /* 手で選んだスポット。パネルを開くと右に概要が出る。 */
           openSpot(spots[+btn.dataset.s]);
@@ -2658,7 +2495,9 @@ async function runSearch(v, autoPick){
   for (const sp of spots)
     for (const nm of [sp.p.name, sp.p.ja, sp.p.name_ja]) if (nm) skip.add(qnorm(nm));
   try{
-    const rows = await natRows(v);
+    const baseRows = await natRows(v);
+    const aliases = await loadLocalAliases(v);
+    const rows = baseRows.concat(aliases.filter(r => qnorm(r[0]).startsWith(qnorm(v))));
     if (mine !== qSeq) return;
     nat = natSearch(rows, v, skip);
     paint();
@@ -2669,19 +2508,15 @@ async function runSearch(v, autoPick){
     const f = box.querySelector('.q-item');
     if (f){ f.click(); return; }
   }
-  try{
-    const j = await fetch(NOMINATIM + '/search?format=jsonv2&limit=6&countrycodes=jp'
-      + '&accept-language=' + LANG + '&q=' + encodeURIComponent(v)).then(r => r.json());
-    if (mine !== qSeq) return;
-    nomi = Array.isArray(j) ? j : [];
-    paint();
-    if (autoPick){
-      const f = box.querySelector('.q-item');
-      if (f) f.click();
-    }
-  } catch(e){
-    if (!spots.length) toast(t('noResults'));
+  if (autoPick && nat.length){box.querySelector('.q-item')?.click();return;}
+  if(mine===qSeq){
+    const link=document.createElement('a');link.className='q-item q-external';
+    link.target='_blank';link.rel='noopener noreferrer';
+    link.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(v+' Japan');
+    link.textContent=PlaceUI.pick(['Search this address on Google Maps ↗','この地名・住所をGoogleマップで検索 ↗','Google 지도에서 이 주소 검색 ↗','在Google地图上搜索此地址 ↗','在Google地圖上搜尋此地址 ↗'],LANG);
+    box.appendChild(link);
   }
+
 }
 
 $('locBtn').onclick = () => {
@@ -2705,7 +2540,7 @@ $('pSave').onclick   = toggleSave;
 $('snsCopy').onclick = async () => {
   const url = (sharePayload && sharePayload.url) || location.href;
   try { await navigator.clipboard.writeText(url); toast(t('copied')); }
-  catch(e){ toast(url); }
+  catch(e){ showCopyLink(url); }
 };
 $('myBtn2').onclick = () => {
   closePlace(); setMode('places');
@@ -2729,11 +2564,10 @@ $('pShare').onclick = async () => {
   const title = ((sharePayload && sharePayload.title) ? sharePayload.title + ' — ' : '')
               + 'Japan, Then and Now';
   if (navigator.share){
-    try { await navigator.share({ title: title, url: url }); return; } catch(e){ /* cancelled */ }
+    try { await navigator.share({ title: title, url: url }); return; } catch(e){ if (e.name === 'AbortError') return; }
   }
   try { await navigator.clipboard.writeText(url); toast(t('copied')); }
-  catch(e){ window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title)
-                        + '&url=' + encodeURIComponent(url), '_blank', 'noopener'); }
+  catch(e){ showCopyLink(url); }
 };
 
 /* =========================================================================
@@ -2752,15 +2586,12 @@ function openPlace(p, keepView){
   drawDetail();                  // 周りの小さなスポットも出す
   setTimeout(drawDetail, 900);   // データと表示が落ち着いてからもう一度
 
-  const story = (LANG === 'ja' && p.story_ja) ? p.story_ja : p.story;
+  const story = LANG === 'ja' ? (p.story_ja || p.story) : LANG === 'en' ? p.story : [p.summaries[LANG]];
   const cap = p.monument && (LANG === 'ja' && p.monument.caption_ja
                              ? p.monument.caption_ja : p.monument.caption);
   panelShell({
-    kicker: p.word ? { emoji: p.word.jp, label: p.word.romaji,
-                       note: '  ' + (LANG === 'ja' && p.word.meaning_ja
-                                     ? p.word.meaning_ja : p.word.meaning) } : null,
-    ja: p.ja + ' · ' + p.romaji,
-    name: (LANG === 'ja' && p.name_ja) ? p.name_ja : p.name,
+    kicker: {emoji:p.emoji,label:t('modePlaces'),note:'  '+placeName(p)},
+    ja: LANG==='ja'?'':p.ja, name:placeName(p),
     query: p.name,
     bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join(''),
     img: p.monument && p.monument.img, cap: cap,
@@ -2802,7 +2633,7 @@ function closePlace(){
 function modeNote(){
   /* まだ届いていないものは 0 になる。guideFill と同じで「0か所」と言い切るのは嘘なので
      伏せ字を出す。読み込み前・読み込み失敗のどちらでも 0 なので、ここで一緒に受ける。 */
-  const n = c => (c ? c : '…') + (LANG === 'ja' ? 'か所。' : ' places. ');
+  const n = c => (c || '…') + PlaceUI.pick([' places. ','か所。','곳. ','处。','處。'], LANG);
   if (mode === 'map' || roaming) return t('noteMap');
   if (mode === 'liminal') return n(LIMINAL.length) + t('noteLiminal');
   return n(PLACES.length) + t('notePlaces');
@@ -2912,6 +2743,7 @@ function noPush(fn, arg){
   try { fn(arg); } finally { history.pushState = h; }
 }
 window.addEventListener('popstate', () => {
+  if (restoreSharedSpot()) return;
   if (location.hash === '#map' && PLACES.length){ noPush(openMap); return; }
   if (location.hash.startsWith('#l-') && LIMINAL.length){
     const q = LIMINAL.find(x => x.id === location.hash.slice(3));
@@ -2935,6 +2767,80 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') setSplit(splitX + 24);
 });
 
+
+const DIRECTORY_TEXT={"en":["Japan Then & Now — Historical Maps and Hidden Places","Compare historical aerial photographs with today. Explore Japan’s castles, temples, stations and local places in English, Japanese, Korean, Simplified Chinese and Traditional Chinese.","Explore Japan across time","Open the map","Featured places","Liminal Japan","Saved on this browser","Save your favourite places on this browser. No account required; other devices have separate lists.","Historical aerial photographs","Coverage and years vary by location. The map shows the available survey year.","Search in 5 languages","Search place names, local names, and aliases across five supported languages."],"ja":["日本の今昔マップ｜古い空中写真と名所を探す","古い空中写真と現在の日本を地図で比較。城・寺社・駅・地域の小さな名所を、日本語・英語・韓国語・簡体字・繁体字の5言語で探せます。","日本の風景を、時間をこえて","地図を開いて探す","物語のある名所","リミナルな日本","このブラウザに保存","気になる地点を登録不要で保存できます。保存先はこのブラウザで、別の端末とは共有されません。","昔と今の空中写真","撮影年と収録範囲は地点によって異なります。利用できる写真の年代を地図に表示します。","5言語で検索","地名・駅名・現地名・別名から、5つの対応言語で地点を探せます。"],"ko":["일본 과거와 현재 지도 | 옛 항공사진과 숨은 명소","옛 항공사진과 현재의 일본을 지도에서 비교하세요. 성, 사찰, 역과 작은 지역 명소를 한국어·일본어·영어·중국어 간체·번체로 찾아볼 수 있습니다.","시간을 넘어 일본의 풍경을 만나다","지도에서 장소 찾기","이야기가 있는 명소","리미널 재팬","이 브라우저에 저장","회원가입 없이 마음에 드는 장소를 저장하세요. 저장 목록은 다른 기기와 공유되지 않습니다.","과거와 현재의 항공사진","지역에 따라 촬영 연도와 사진의 범위가 다릅니다. 이용 가능한 촬영 연도를 지도에 표시합니다.","5개 언어로 검색","지명, 역 이름, 현지 이름과 별칭으로 장소를 찾아보세요."],"zh-Hans":["日本今昔地图｜历史航拍照片与当地景点","在地图上对比日本的历史航拍照片与今日风景。用简体中文、繁体中文、日语、英语和韩语探索城堡、寺社、车站与当地小景点。","跨越时间，探索日本风景","打开地图寻找地点","有故事的景点","日本的阈限空间","保存在此浏览器","无需注册即可收藏地点。列表仅保存在此浏览器，不与其他设备同步。","昔日与今日航拍照片","拍摄年份和覆盖范围因地点而异。地图会显示可用照片的年代。","5种语言搜索","通过地名、站名、当地名称和别名查找地点。"],"zh-Hant":["日本今昔地圖｜歷史航拍照片與當地景點","在地圖上對比日本的歷史航拍照片與今日風景。用繁體中文、簡體中文、日語、英語和韓語探索城堡、寺社、車站與當地小景點。","跨越時間，探索日本風景","開啟地圖尋找地點","有故事的景點","日本的閾限空間","儲存在此瀏覽器","無需註冊即可收藏地點。清單僅儲存在此瀏覽器，不與其他裝置同步。","昔日與今日航拍照片","拍攝年份和涵蓋範圍因地點而異。地圖會顯示可用照片的年代。","5種語言搜尋","透過地名、站名、當地名稱和別名尋找地點。"]};
+function paintDirectory(){
+ const box=document.querySelector('.seo-list');if(!box||!PLACES.length)return;
+ const d=DIRECTORY_TEXT[LANG];
+ box.innerHTML='<h2>'+esc(d[4])+'</h2><p>'+esc(d[1])+'</p>'+PLACES.map(p=>'<article><h3><a href="/?lang='+LANG+'#'+p.id+'">'+esc(placeName(p))+'</a></h3><p>'+esc(p.hooks[LANG])+'</p></article>').join('')+'<nav class="locale-nav" aria-label="Language">'+Object.entries({"en":"/","ja":"/ja.html","ko":"/ko.html","zh-Hans":"/zh-cn.html","zh-Hant":"/zh-tw.html"}).map(([l,p])=>'<a href="'+p+'">'+esc(LANG_NAMES[l])+'</a>').join('')+'</nav>';
+}
+
+const AUX_UI = {
+ saveFailed:['Could not save on this browser. Check storage permissions.','このブラウザでは保存できませんでした。保存領域の設定をご確認ください。','이 브라우저에 저장할 수 없습니다. 저장 권한을 확인하세요.','无法在此浏览器中保存，请检查存储权限。','無法在此瀏覽器中儲存，請檢查儲存權限。'],
+ saveNote:['Saved on this browser only. Other devices and browser profiles have separate lists.','保存先はこのブラウザです。別の端末・ブラウザのプロフィールとは共有されません。','이 브라우저에만 저장됩니다. 다른 기기·프로필과는 공유되지 않습니다.','仅保存在此浏览器中，不与其他设备或浏览器配置同步。','僅儲存在此瀏覽器中，不與其他裝置或瀏覽器設定檔同步。'],
+ copy:['Copy link','リンクをコピー','링크 복사','复制链接','複製連結'],
+ manual:['Select and copy this link','リンクを選択してコピー','링크를 선택해 복사하세요','请选择并复制链接','請選取並複製連結'],
+ close:['Close','閉じる','닫기','关闭','關閉'],
+ search:['Place or station in any of 5 languages','5言語で地名・駅名を検索','5개 언어로 장소·역 검색','用5种语言搜索地点或车站','用5種語言搜尋地點或車站']
+};
+const uiText = key => PlaceUI.pick(AUX_UI[key], LANG);
+function paintAuxUI(){
+  paintDirectory();
+  $('qClear').setAttribute('aria-label',PlaceUI.pick(['Clear search','検索を消去','검색 지우기','清除搜索','清除搜尋'],LANG));
+  $('q').placeholder=uiText('search');$('q').setAttribute('aria-label',uiText('search'));
+  $('snsCopy').title=uiText('copy');$('snsCopy').setAttribute('aria-label',uiText('copy'));
+  $('pShare').title=t('share');$('pShare').setAttribute('aria-label',t('share'));
+  const note=$('saveNote');if(note)note.textContent=uiText('saveNote');
+}
+const localAliases = new Map();
+function loadLocalAliases(q){
+  const b=(qnorm(q).charCodeAt(0)||0)%64;
+  if(!localAliases.has(b)){
+    const promise=fetch(dj('search/aliases/'+String(b).padStart(2,'0')+'.json')).then(r=>{if(!r.ok)throw Error('aliases');return r.json();}).catch(()=>{localAliases.delete(b);return [];});
+    localAliases.set(b,promise);if(localAliases.size>8)localAliases.delete(localAliases.keys().next().value);
+  }
+  return localAliases.get(b);
+}
+function showCopyLink(url){
+  let box=$('copyDialog');
+  if(!box){box=document.createElement('dialog');box.id='copyDialog';box.className='copy-dialog';document.body.appendChild(box);}
+  box.innerHTML='<form method="dialog"><label for="copyURL">'+esc(uiText('manual'))+'</label><input id="copyURL" readonly><button>'+esc(uiText('close'))+'</button></form>';
+  box.querySelector('input').value=url;box.showModal();box.querySelector('input').select();
+}
+function showSavedSpot(row){
+  const all=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal}))];
+  const known=all.find(x=>Math.abs(x.p.lat-row.lat)<0.00002&&Math.abs(x.p.lon-row.lon)<0.00002);
+  if(known){known.open(known.p);return;}
+  const local=LOCALS.find(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);
+  if(local){showLocal(local);return;}
+  showLocal({lat:row.lat,lon:row.lon,tags:{name:row.name||t('localSpot')}});
+  let tries=0;const token=panelToken;
+  const update=()=>{
+    if(token!==panelToken||$('place').hidden)return;
+    const known=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal}))].find(x=>Math.abs(x.p.lat-row.lat)<0.00002&&Math.abs(x.p.lon-row.lon)<0.00002);
+    if(known){noPush(known.open,known.p);return;}
+    const p=LOCALS.find(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);
+    if(p){showLocal(p);return;}
+    if(++tries<12)setTimeout(update,500);
+  };setTimeout(update,400);
+}
+function restoreSharedSpot(){
+  const m=/^#spot=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)$/.exec(location.hash);
+  if(!m)return false;
+  const lat=+m[1],lon=+m[2];if(Math.abs(lat)>90||Math.abs(lon)>180)return false;
+  const name=new URLSearchParams(location.search).get('name')||'';
+  const hash=location.hash;noPush(openMap);map.setView([lat,lon],17);
+  showSavedSpot({lat,lon,name:name.slice(0,200)});return true;
+}
+window.addEventListener('storage',e=>{if(e.key===SAVE_KEY||e.key===null){renderSaved();paintSaveBtn();}});
+$('qResults').addEventListener('keydown',e=>{
+  if(e.key==='Escape'){++qSeq;$('qResults').hidden=true;$('q').focus();return;}
+  if(!['ArrowDown','ArrowUp'].includes(e.key))return;
+  const buttons=[...$('qResults').querySelectorAll('button')],i=buttons.indexOf(document.activeElement);
+  if(i<0)return;e.preventDefault();const next=i+(e.key==='ArrowDown'?1:-1);
+  (buttons[next]||$('q')).focus();
+});
+
 /* =========================================================================
    10. Start
    ========================================================================= */
@@ -2942,6 +2848,7 @@ LANG = detectLang();
 applyLang();
 fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   PLACES = j.places;
+  paintDirectory();
   buildCards();
   /* 件数は起動時（applyLang → modeNote）に PLACES がまだ空のまま書かれる。
      ここで書き直さないと 19枚のカードの上に「0か所」が残る（タブを切り替えるまで直らない）。
@@ -2972,8 +2879,9 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
     fetch(dj('data/areas.json')).then(r => r.ok ? r.json() : null)
       .then(j => { if (j) AREAS = j; }).catch(() => {})
   ]).then(drawDetail);
-  setTimeout(loadMonuments, 2500);
+  // Detailed monument text is loaded on demand when a memorial is opened.
 
+  if (restoreSharedSpot()) return;
   if (location.hash === '#map') noPush(openMap);
   else if (location.hash.startsWith('#l-')){
     const want = location.hash.slice(3);

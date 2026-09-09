@@ -1,0 +1,16 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const code=fs.readFileSync(require('node:path').join(__dirname,'../atmosphere.js'),'utf8');
+function boot({reduced=false,saveData=false,effectiveType='4g',hidden=false}={}){
+ const listeners={},timers=[],images=[],observers=[];
+ const element=()=>({hidden:false,children:[],textContent:'',className:'',attrs:{},classList:{values:new Set(),add(x){this.values.add(x)},toggle(x,on){on?this.values.add(x):this.values.delete(x)}},appendChild(x){this.children.push(x)},remove(){},addEventListener(k,fn){this[k]=fn},setAttribute(k,v){this.attrs[k]=v}});
+ const els=Object.fromEntries(['home','heroScene','heroMotion','heroCaption','heroLine1','heroLine2','storiesTitle','allPlacesLink'].map(x=>[x,element()]));els.home.hidden=hidden;
+ const document={hidden:false,readyState:'complete',documentElement:{lang:'ja'},querySelector:()=>element(),getElementById:x=>els[x],createElement:element,addEventListener:(k,fn)=>listeners[k]=fn};
+ const connection={saveData,effectiveType,addEventListener(k,fn){this[k]=fn}},media={matches:reduced,addEventListener(k,fn){this[k]=fn}};
+ const context={document,navigator:{connection},matchMedia:()=>media,Image:function(){const x=element();images.push(x);return x},MutationObserver:function(fn){this.observe=()=>observers.push(fn)},setTimeout:fn=>timers.push(fn),window:{}};
+ vm.runInNewContext(code,context);return {els,images,document,connection,media,listeners,observers,async start(){timers.shift()();await this.finish()},async finish(){images.filter(x=>!x.done).forEach(x=>{x.done=true;x.onload()});for(let i=0;i<8;i++)await Promise.resolve()}};
+}
+test('background waits for content and never requests video or fonts',async()=>{const h=boot();assert.equal(h.images.length,0);await h.start();assert.equal(h.images.length,8);await h.finish();assert.equal(h.els.heroMotion.hidden,false);assert.ok(h.images.every(x=>x.src.startsWith('https://cyberjapandata.gsi.go.jp/xyz/')))});
+test('reduced motion and constrained connections load only one static four-tile layer',async()=>{for(const config of [{reduced:true},{saveData:true},{effectiveType:'3g'},{effectiveType:'slow-2g'}]){const h=boot(config);await h.start();assert.equal(h.images.length,4);assert.equal(h.els.heroMotion.hidden,true);assert.ok(!h.els.heroScene.classList.values.has('animated'))}});
+test('direct map entry does not fetch hero tiles',async()=>{const h=boot({hidden:true});await h.start();assert.equal(h.images.length,0);h.els.home.hidden=false;h.observers[1]();await h.finish();assert.equal(h.images.length,8)});
+test('pause control and hidden document suspend background animation',async()=>{const h=boot();await h.start();await h.finish();h.els.heroMotion.click();assert.equal(h.els.heroMotion.attrs['aria-pressed'],'true');assert.ok(h.els.heroScene.classList.values.has('paused'));h.els.heroMotion.click();h.document.hidden=true;h.listeners.visibilitychange();assert.ok(h.els.heroScene.classList.values.has('paused'))});
+test('a failed modern layer keeps the old image and hides the motion control',async()=>{const h=boot();await h.start();h.images.slice(4).forEach(x=>x.onerror());for(let i=0;i<8;i++)await Promise.resolve();assert.equal(h.els.heroMotion.hidden,true);assert.ok(!h.els.heroScene.classList.values.has('animated'))});

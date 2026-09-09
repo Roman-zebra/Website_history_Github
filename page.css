@@ -29,3 +29,16 @@ a{color:#a8391a}
   a{color:#f0a373} nav a,.where,.srcnote,ul.near span,ul.list span,footer{color:#9a948a}
   .weak{background:#2a2318;color:#e0b070}
 }
+
+/* Match the map's paper-and-teal visual language. */
+body{background:linear-gradient(135deg,#edf3ee,#fffaf0 50%,#f6f2eb);color:#263b4a;min-height:100vh}
+nav,main,footer{max-width:52rem}nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center}nav a{padding:8px 0}
+main{margin-top:20px;padding:28px;background:#fffdf8;border:1px solid #e2ded3;border-radius:22px;box-shadow:0 8px 25px #253b4a0a}
+h1{font-size:clamp(28px,5vw,42px);letter-spacing:-.025em}a{color:#285d60;text-underline-offset:3px}
+.cta a{background:#285d60;border-radius:999px;padding:13px 22px;min-height:44px}.where,.srcnote,footer{color:#65756a}
+a:focus-visible{outline:3px solid #217b86;outline-offset:3px}ul.list li,ul.near li{padding:12px 0}
+@media(max-width:600px){main{margin:16px 12px;padding:20px}nav,footer{padding-left:18px;padding-right:18px}.cta a{display:block;text-align:center}}
+@media(prefers-color-scheme:dark){body{background:#202e35;color:#e8e8df}main{background:#263940;border-color:#43565d}a{color:#b9ddd3}.where,.srcnote,footer{color:#b6c4bd}.cta a{background:#396e6c}}
+
+/* Editorial atlas surfaces. */
+body{background:#f3f1ea;color:#203a37;font-family:-apple-system,"Segoe UI","Yu Gothic",sans-serif}main{background:#faf9f4;border-color:#d3d8ce;border-radius:4px;box-shadow:none}h1,h2{font-family:Georgia,"Yu Mincho",serif;font-weight:400;line-height:1.4}.cta a{border-radius:3px;background:#234d44}nav{border-bottom:1px solid #d3d8ce;padding-bottom:14px}h1{font-size:clamp(30px,5vw,48px)}
