@@ -1,0 +1,30 @@
+{
+  "id": "/rekishi-map/",
+  "name": "まちの れきし たんけんマップ",
+  "short_name": "れきしマップ",
+  "description": "身のまわりの石碑・神社・土地から、そこで昔なにがあったかをたどる地図。1945年からの空中写真に切りかえられます。",
+  "lang": "ja",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#fbf8f1",
+  "theme_color": "#e2662c",
+  "categories": ["education", "navigation", "kids"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "いまいる ばしょ",
+      "short_name": "現在地",
+      "url": ".?go=here",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

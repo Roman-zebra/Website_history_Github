@@ -1,0 +1,28 @@
+{
+  "_readme": [
+    "アフィリエイト枠の設定。enabled を true にするまで画面には一切出ません。",
+    "各プログラムの審査に通ってIDを受け取ったら、下の id 欄に貼るだけで有効になります。",
+    "設計方針：パネル最下部に1枠だけ。地図上・ホーム・伝承碑には出しません。",
+    "景品表示法（2023年10月のステマ規制）により『PR』表記は必須です。自動で付きます。"
+  ],
+  "enabled": false,
+
+  "stay": {
+    "id": "",
+    "note": "Booking.com のアフィリエイトID（aid）。https://www.booking.com/affiliate-program/ で申請",
+    "url": "https://www.booking.com/searchresults.html?ss={query}&aid={id}",
+    "label_en": "Find a place to stay near {name}",
+    "label_ja": "{name} の近くに泊まる"
+  },
+
+  "things": {
+    "id": "",
+    "note": "Klook のアフィリエイトID。https://affiliate.klook.com/ で申請",
+    "url": "https://www.klook.com/search/?keyword={query}&aid={id}",
+    "label_en": "Tours and tickets around {name}",
+    "label_ja": "{name} まわりの体験・チケット"
+  },
+
+  "excludeKinds": ["lore"],
+  "_excludeNote": "伝承碑（慰霊碑）には広告を出しません。設計上の判断であり、外さないでください。"
+}

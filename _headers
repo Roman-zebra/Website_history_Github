@@ -1,0 +1,37 @@
+# Cloudflare Pages / Netlify が読むヘッダ設定。GitHub Pages は無視する（害はない）。
+#
+# 考え方: 版が URL に入っているもの（?v=）だけ長期キャッシュしてよい。
+# ?v= が変わると URL が変わる＝別のキャッシュ項目になるので、古い版が居座らない。
+# HTML と sw.js は版の入口なので、キャッシュさせると更新が一生届かなくなる。
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# 入口。ここが固まると版を上げても届かない
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/explore.html
+  Cache-Control: no-cache
+
+# Service Worker 本体。ブラウザは既定でも24時間で取り直すが、明示しておく
+/sw.js
+  Cache-Control: no-cache
+  Service-Worker-Allowed: /
+
+# ?v=ASSET_V が付いて呼ばれる。版が変われば URL が変わる
+/explore.js
+  Cache-Control: public, max-age=31536000, immutable
+/explore.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# ?v=DATA_V が付いて呼ばれる
+/data/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+/og.jpg
+  Cache-Control: public, max-age=604800

@@ -1,0 +1,21 @@
+{
+  "id": "/explore",
+  "name": "Japan Then & Now — 1945 and today, on one map",
+  "short_name": "Then & Now",
+  "description": "Compare aerial photographs of Japan from 1945 with the same place today, and find the history under your feet — shrines, castles, memorial stones and abandoned places, in English and Japanese.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "explore.html",
+  "scope": ".",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#14161c",
+  "theme_color": "#14161c",
+  "categories": ["education", "travel", "navigation"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

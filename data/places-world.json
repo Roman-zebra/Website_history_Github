@@ -1,0 +1,744 @@
+{
+ "_meta": {
+  "about": "Curated places for people outside Japan. English and Japanese text written from the sources credited in each entry.",
+  "rules": "Short sentences. No casualty figures in the main text - the Wikipedia link carries the detail. Every `then` layer below was checked to have tiles at that spot.",
+  "layers": "ort_USA10 = 1945-1950 (US military survey). ort_old10 = 1961-1969. gazo1 = 1974-1978.",
+  "author": "Claude (Opus 5), 2026-09-04",
+  "wiki_fields": "wiki_en / wiki_ja は tools/verify_wiki.py が API で検証して書いたもの。手で書いた英題は実在しないことがある（26件中7件が実際そうだった）。wiki は互換のため残してあるが、アプリは wiki_en / wiki_ja を見る。"
+ },
+ "places": [
+  {
+   "id": "hiroshima",
+   "emoji": "🕊️",
+   "name": "Hiroshima",
+   "name_ja": "広島",
+   "ja": "広島",
+   "romaji": "Hiroshima",
+   "lat": 34.3955,
+   "lon": 132.4536,
+   "zoom": 16,
+   "hook": "One building was left standing. It is still there.",
+   "hook_ja": "たった一つ残った建物が、いまもそこにある。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "On 6 August 1945, an atomic bomb exploded almost directly above this spot.",
+    "Look at the old photo. Almost the whole city is gone. The white shapes are empty ground where houses used to be.",
+    "One dome survived because the blast came from straight overhead. People decided to keep the ruin exactly as it was.",
+    "Now slide to today. The city grew back around it, and the ruin stands in a park full of trees."
+   ],
+   "story_ja": [
+    "1945年8月6日、この真上で原子爆弾が爆発しました。",
+    "古い写真を見てください。街がほとんど消えています。白く見えるのは、家があった場所の更地です。",
+    "ドームが一つだけ残りました。真上から爆風が来たためです。人々はその廃墟をそのまま残すことを決めました。",
+    "今にスライドしてみてください。街は元通りになり、廃墟は木々に囲まれた公園の中に立っています。"
+   ],
+   "word": {
+    "jp": "平和",
+    "romaji": "heiwa",
+    "meaning": "peace",
+    "meaning_ja": "へいわ"
+   },
+   "wiki": "Hiroshima Peace Memorial",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Hiroshima Peace Memorial",
+   "wiki_ja": "原爆ドーム"
+  },
+  {
+   "id": "tokyo",
+   "emoji": "🏮",
+   "name": "Tokyo — Asakusa",
+   "name_ja": "東京・浅草",
+   "ja": "浅草",
+   "romaji": "Asakusa",
+   "lat": 35.7148,
+   "lon": 139.7967,
+   "zoom": 16,
+   "hook": "A 1,400-year-old temple in a city that burned.",
+   "hook_ja": "焼けた街に立つ、1400年の寺。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "Asakusa is the oldest part of Tokyo. Its temple, Sensō-ji, was founded more than 1,400 years ago.",
+    "In March 1945, air raids burned huge areas of Tokyo. In the old photo you can see the burnt ground spreading in every direction.",
+    "The temple burned too. People rebuilt it in the 1950s.",
+    "Slide to today and you will find one of the busiest streets in Japan, packed with tiny shops."
+   ],
+   "story_ja": [
+    "浅草は東京でいちばん古い場所です。浅草寺は1400年以上前に建てられました。",
+    "1945年3月の空襲で、東京の広い範囲が焼けました。古い写真では、焼け跡がどこまでも広がっています。",
+    "寺も焼けましたが、1950年代に建て直されました。",
+    "今にスライドすると、小さな店がぎっしり並ぶ日本有数のにぎやかな通りが現れます。"
+   ],
+   "word": {
+    "jp": "寺",
+    "romaji": "tera",
+    "meaning": "temple",
+    "meaning_ja": "てら"
+   },
+   "wiki": "Sensō-ji",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Sensō-ji",
+   "wiki_ja": "浅草寺"
+  },
+  {
+   "id": "kyoto",
+   "emoji": "⛩️",
+   "name": "Kyoto — Kiyomizu-dera",
+   "name_ja": "京都・清水寺",
+   "ja": "清水寺",
+   "romaji": "Kiyomizu-dera",
+   "lat": 34.9949,
+   "lon": 135.785,
+   "zoom": 17,
+   "hook": "The city that was not bombed. Compare it with Tokyo.",
+   "hook_ja": "焼けなかった街。東京と見くらべてみて。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "Kyoto was the capital of Japan for over a thousand years.",
+    "Kiyomizu-dera stands on a wooden stage built out over the hillside. It was rebuilt in 1633 without using nails.",
+    "Kyoto escaped the heavy bombing that hit other cities, so many old wooden buildings are still standing.",
+    "Slide between 1945 and today. Unlike Tokyo or Hiroshima, this picture barely changes. That is the point."
+   ],
+   "story_ja": [
+    "京都は千年以上のあいだ日本の都でした。",
+    "清水寺は斜面にせり出した木の舞台の上に建っています。1633年に、釘を使わずに建て直されました。",
+    "京都は他の都市のような激しい空襲を受けなかったため、古い木造建築が数多く残っています。",
+    "1945年と今を行き来してみてください。東京や広島とちがい、ほとんど変わりません。それがこの場所の意味です。"
+   ],
+   "word": {
+    "jp": "水",
+    "romaji": "mizu",
+    "meaning": "water",
+    "meaning_ja": "みず"
+   },
+   "wiki": "Kiyomizu-dera",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Kiyomizu-dera",
+   "wiki_ja": "清水寺"
+  },
+  {
+   "id": "yokohama",
+   "emoji": "🎡",
+   "name": "Yokohama — Minato Mirai",
+   "name_ja": "横浜・みなとみらい",
+   "ja": "みなとみらい",
+   "romaji": "Minato Mirai",
+   "lat": 35.4548,
+   "lon": 139.6317,
+   "zoom": 16,
+   "hook": "This was a shipyard. Now it is a skyline.",
+   "hook_ja": "造船所だった場所が、いまは高層ビル群。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "In the old photo this is a working port, full of docks where ships were built and repaired.",
+    "The shipyard moved away, and from the 1980s the whole area was rebuilt.",
+    "Slide to today: towers, a ferris wheel, and a park sit where the docks used to be.",
+    "One old stone dock was kept and turned into a garden, so you can still find a piece of the old photo."
+   ],
+   "story_ja": [
+    "古い写真のここは、船をつくり直す造船所がならぶ港です。",
+    "造船所は移転し、1980年代からこの一帯がまるごと作り直されました。",
+    "今にスライドすると、ドックのあった場所にビルと観覧車と公園が並んでいます。",
+    "石造りのドックが一つだけ残され、庭になりました。古い写真のかけらが今も見つかります。"
+   ],
+   "word": {
+    "jp": "港",
+    "romaji": "minato",
+    "meaning": "harbour",
+    "meaning_ja": "みなと"
+   },
+   "wiki": "Minato Mirai 21",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Minato Mirai 21",
+   "wiki_ja": "横浜みなとみらい21"
+  },
+  {
+   "id": "osaka",
+   "emoji": "🏯",
+   "name": "Osaka Castle",
+   "name_ja": "大阪城",
+   "ja": "大阪城",
+   "romaji": "Ōsaka-jō",
+   "lat": 34.6873,
+   "lon": 135.5262,
+   "zoom": 16,
+   "hook": "The castle survived. Everything around it did not.",
+   "hook_ja": "城は残った。まわりは残らなかった。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "A castle has stood here since the 1580s. The tower you see now was rebuilt in 1931.",
+    "During the war, a huge weapons factory filled the ground around the castle. It was bombed heavily in 1945.",
+    "In the old photo you can see the scarred, empty ground. The castle tower itself came through it.",
+    "Slide to today and that same ground is a wide green park."
+   ],
+   "story_ja": [
+    "1580年代からここに城があります。いま見える天守は1931年に建てられたものです。",
+    "戦争中、城のまわりには巨大な兵器工場が広がっていました。1945年に激しい空襲を受けます。",
+    "古い写真には、傷ついた更地が写っています。天守そのものは残りました。",
+    "今にスライドすると、その同じ土地が広い緑の公園になっています。"
+   ],
+   "word": {
+    "jp": "城",
+    "romaji": "shiro",
+    "meaning": "castle",
+    "meaning_ja": "しろ"
+   },
+   "wiki": "Osaka Castle",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Osaka Castle",
+   "wiki_ja": "大坂城"
+  },
+  {
+   "id": "kamakura",
+   "emoji": "🧘",
+   "name": "Kamakura — Great Buddha",
+   "name_ja": "鎌倉大仏",
+   "ja": "鎌倉大仏",
+   "romaji": "Kamakura Daibutsu",
+   "lat": 35.3167,
+   "lon": 139.5358,
+   "zoom": 17,
+   "hook": "It has been sitting outside in the rain since the 1400s.",
+   "hook_ja": "1400年代から、ずっと雨ざらしのまま。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "This bronze Buddha was cast in 1252. It is about as tall as a four-storey building.",
+    "A big wooden hall used to cover it. The hall was destroyed long ago and never rebuilt.",
+    "So the Buddha has sat out in the open air, through storms and earthquakes, for over 500 years.",
+    "Slide between the photos: the trees change, the roads change, and the Buddha does not."
+   ],
+   "story_ja": [
+    "この銅の大仏は1252年につくられました。高さは4階建てのビルくらいあります。",
+    "むかしは大きな木造の建物が覆っていました。その建物は遠いむかしに失われ、建て直されませんでした。",
+    "以来500年以上、大仏は嵐にも地震にも屋外のまま耐えています。",
+    "写真を行き来してみてください。木も道も変わりますが、大仏だけは変わりません。"
+   ],
+   "word": {
+    "jp": "大仏",
+    "romaji": "daibutsu",
+    "meaning": "great Buddha",
+    "meaning_ja": "だいぶつ"
+   },
+   "wiki": "Kōtoku-in",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Kōtoku-in",
+   "wiki_ja": "高徳院"
+  },
+  {
+   "id": "kobe",
+   "emoji": "🌉",
+   "name": "Kobe — Meriken Park",
+   "name_ja": "神戸・メリケンパーク",
+   "ja": "神戸",
+   "romaji": "Kōbe",
+   "lat": 34.682,
+   "lon": 135.187,
+   "zoom": 17,
+   "hook": "Part of a broken pier was left broken on purpose.",
+   "hook_ja": "壊れた岸壁が、わざと壊れたまま残されている。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "Kobe is one of Japan's great port cities, open to foreign ships since the 1860s.",
+    "In January 1995 a huge earthquake struck before dawn. Roads fell over and much of the port was wrecked.",
+    "When the city rebuilt, it left one damaged stretch of waterfront exactly as the earthquake left it, tilted and cracked.",
+    "You can walk right up to it. It is a memorial you can touch."
+   ],
+   "story_ja": [
+    "神戸は1860年代から外国船を受け入れてきた、日本を代表する港町です。",
+    "1995年1月、夜明け前に大きな地震が起きました。高速道路が倒れ、港の多くが壊れました。",
+    "復興のとき、岸壁の一部だけが地震のときのまま、傾いて割れた姿で残されました。",
+    "すぐそばまで歩いて行けます。手で触れられる記念碑です。"
+   ],
+   "word": {
+    "jp": "地震",
+    "romaji": "jishin",
+    "meaning": "earthquake",
+    "meaning_ja": "じしん"
+   },
+   "wiki": "Great Hanshin earthquake",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "1995 Hanshin earthquake",
+   "wiki_ja": "兵庫県南部地震"
+  },
+  {
+   "id": "okayama",
+   "emoji": "🖤",
+   "name": "Okayama Castle",
+   "name_ja": "岡山城",
+   "ja": "岡山城",
+   "romaji": "Okayama-jō",
+   "lat": 34.6656,
+   "lon": 133.936,
+   "zoom": 16,
+   "hook": "A stone here records how high the water came.",
+   "hook_ja": "水がどこまで来たかを刻んだ石がある。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "This castle is nicknamed the Crow Castle because its walls are painted black.",
+    "In 1934 a typhoon pushed the river over its banks and broke the castle's inner moat. Water covered the whole city.",
+    "Someone set a stone here to record it, so that people would not forget how high the water reached.",
+    "Then in 1945 the city burned in an air raid. You can see the burnt ground in the old photo."
+   ],
+   "story_ja": [
+    "壁が黒く塗られていることから、この城は烏城と呼ばれます。",
+    "1934年、台風で川があふれ、城の内堀が決壊しました。街全体が水につかりました。",
+    "水がどこまで来たかを忘れないよう、ここに石が建てられました。",
+    "そして1945年、街は空襲で焼けます。古い写真に焼け跡が写っています。"
+   ],
+   "word": {
+    "jp": "川",
+    "romaji": "kawa",
+    "meaning": "river",
+    "meaning_ja": "かわ"
+   },
+   "monument": {
+    "img": "https://maps.gsi.go.jp/legend/disaster_lore/33100/33100-009.jpg",
+    "caption": "The 1934 typhoon stone, beside Okayama Castle",
+    "caption_ja": "岡山城のそばに立つ室戸台風伝承碑"
+   },
+   "wiki": "Okayama Castle",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Okayama Castle",
+   "wiki_ja": "岡山城"
+  },
+  {
+   "id": "aneyoshi",
+   "emoji": "🌊",
+   "name": "The Stone That Saved a Village",
+   "name_ja": "村を救った石",
+   "ja": "姉吉",
+   "romaji": "Aneyoshi",
+   "lat": 39.534243,
+   "lon": 142.04534,
+   "zoom": 16,
+   "hook": "\"Do not build your homes below this point.\"",
+   "hook_ja": "「此処より下に家を建てるな」",
+   "then": null,
+   "thenLabel": null,
+   "story": [
+    "On this steep coast, tsunami waves destroyed the village of Aneyoshi twice — in 1896, and again in 1933.",
+    "After the second time, the survivors carved a stone and set it on the hillside. It says: high dwellings bring peace to your children; remember the disaster of the great tsunami; do not build your homes below this point.",
+    "For almost 80 years, the families obeyed the stone. Every house stayed above it.",
+    "In March 2011 an enormous tsunami came again. It stopped just short of the stone. Not one house in the village was damaged."
+   ],
+   "story_ja": [
+    "この険しい海岸では、姉吉の集落が津波で二度全滅しました。1896年と1933年です。",
+    "二度目のあと、生き残った人たちが石を刻んで斜面に建てました。「高き住居は児孫の和楽、想へ惨禍の大津浪、此処より下に家を建てるな」。",
+    "以後およそ80年、住民は石の言いつけを守り、家はすべてその上に建てられました。",
+    "2011年3月、巨大な津波がまた来ました。波は石の少し手前で止まり、集落の家は一軒も壊れませんでした。"
+   ],
+   "word": {
+    "jp": "津波",
+    "romaji": "tsunami",
+    "meaning": "tsunami — a Japanese word the whole world now uses",
+    "meaning_ja": "つなみ。世界中で使われる日本語"
+   },
+   "monument": {
+    "img": "https://maps.gsi.go.jp/legend/disaster_lore/03202/03202-003.jpg",
+    "caption": "The Aneyoshi stone, Miyako, Iwate",
+    "caption_ja": "岩手県宮古市 姉吉の大津浪記念碑"
+   },
+   "source": "Text based on the record for this monument in the Natural Disaster Memorial Monuments database, Geospatial Information Authority of Japan.",
+   "wiki": "2011 Tōhoku earthquake and tsunami",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "2011 Tōhoku earthquake and tsunami",
+   "wiki_ja": "東北地方太平洋沖地震"
+  },
+  {
+   "id": "nagasaki",
+   "emoji": "🕯️",
+   "name": "Nagasaki",
+   "name_ja": "長崎",
+   "ja": "長崎",
+   "romaji": "Nagasaki",
+   "lat": 32.7737,
+   "lon": 129.8637,
+   "zoom": 16,
+   "hook": "A city in a valley, rebuilt from nothing.",
+   "hook_ja": "谷あいの街が、ゼロから建て直された。",
+   "then": "ort_old10",
+   "thenLabel": "1960s",
+   "story": [
+    "For over 200 years, when Japan was closed to the outside world, Nagasaki was almost the only port where foreign ships could come.",
+    "On 9 August 1945 an atomic bomb exploded above this valley.",
+    "The old photo here is from the 1960s, about twenty years after. The city had already been rebuilt.",
+    "Slide to today and look for the park. A single black pillar marks the point directly under the explosion."
+   ],
+   "story_ja": [
+    "日本が国を閉ざしていた200年あまりのあいだ、長崎はほとんど唯一、外国船が来られる港でした。",
+    "1945年8月9日、この谷の上空で原子爆弾が爆発しました。",
+    "ここの古い写真は1960年代、およそ20年後のものです。街はすでに建て直されていました。",
+    "今にスライドして公園を探してみてください。黒い柱が一本、爆心地を示しています。"
+   ],
+   "word": {
+    "jp": "港町",
+    "romaji": "minato-machi",
+    "meaning": "port town",
+    "meaning_ja": "みなとまち"
+   },
+   "wiki": "Nagasaki Peace Park",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Nagasaki Peace Park",
+   "wiki_ja": "平和公園"
+  },
+  {
+   "id": "sapporo",
+   "emoji": "❄️",
+   "name": "Sapporo",
+   "name_ja": "札幌",
+   "ja": "札幌",
+   "romaji": "Sapporo",
+   "lat": 43.0606,
+   "lon": 141.3536,
+   "zoom": 16,
+   "hook": "A city built on a grid, only 150 years old.",
+   "hook_ja": "碁盤の目の街。まだ150年しかたっていない。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "Sapporo is young. Most Japanese cities grew slowly over centuries, but this one was laid out on a grid in 1869, when Hokkaido was being settled.",
+    "In the old photo the grid is already there — but look between the blocks. There is still open ground and farmland.",
+    "Slide to today and the same streets are packed solid with buildings.",
+    "Hokkaido is the snowy north. Every February the city fills a whole street with giant snow sculptures."
+   ],
+   "story_ja": [
+    "札幌は若い街です。多くの日本の都市が何百年もかけて育ったのに対し、ここは1869年、北海道の開拓とともに碁盤の目に区切られました。",
+    "古い写真にはすでに碁盤の目があります。でもよく見ると、区画のあいだにはまだ空き地や畑が広がっています。",
+    "今にスライドすると、同じ通りがびっしりと建物で埋まっています。",
+    "北海道は雪の北国です。毎年2月には、大通に巨大な雪の像が並びます。"
+   ],
+   "word": {
+    "jp": "雪",
+    "romaji": "yuki",
+    "meaning": "snow",
+    "meaning_ja": "ゆき"
+   },
+   "wiki": "Sapporo",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Sapporo",
+   "wiki_ja": "札幌市"
+  },
+  {
+   "id": "hakodate",
+   "emoji": "🌃",
+   "name": "Hakodate",
+   "name_ja": "函館",
+   "ja": "函館",
+   "romaji": "Hakodate",
+   "lat": 41.764,
+   "lon": 140.713,
+   "zoom": 16,
+   "hook": "One of the first two ports Japan opened to the world.",
+   "hook_ja": "日本が世界に最初に開いた港のひとつ。",
+   "then": "ort_old10",
+   "thenLabel": "1960s",
+   "story": [
+    "In 1859 Hakodate became one of the first Japanese ports opened to foreign ships after more than two centuries of isolation.",
+    "Foreign traders, churches and consulates went up on the slope above the harbour, so the streets here look unlike anywhere else in Japan.",
+    "The old photo is from the 1960s. The shape of the harbour and the hillside streets is already the one you see now.",
+    "The town sits on a narrow neck of land between two seas, which is why the night view from the mountain is so famous."
+   ],
+   "story_ja": [
+    "1859年、200年以上の鎖国のあと、函館は外国船に開かれた最初の港のひとつになりました。",
+    "港を見下ろす坂に外国商館や教会、領事館が建ち、日本のほかのどことも違う街並みができました。",
+    "古い写真は1960年代のものです。港の形も坂の街並みも、いまとほぼ同じです。",
+    "二つの海にはさまれた細い土地の上にあるため、山から見る夜景がこれほど有名になりました。"
+   ],
+   "word": {
+    "jp": "夜景",
+    "romaji": "yakei",
+    "meaning": "night view",
+    "meaning_ja": "やけい"
+   },
+   "wiki": "Hakodate",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Hakodate",
+   "wiki_ja": "函館市"
+  },
+  {
+   "id": "nagoya",
+   "emoji": "🔥",
+   "name": "Nagoya Castle",
+   "name_ja": "名古屋城",
+   "ja": "名古屋城",
+   "romaji": "Nagoya-jō",
+   "lat": 35.1855,
+   "lon": 136.8986,
+   "zoom": 16,
+   "hook": "The keep burned in 1945. It was built again.",
+   "hook_ja": "1945年に天守は焼けた。そして建て直された。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "Nagoya Castle was finished in 1612 and its keep stood for over three hundred years.",
+    "Nagoya made aircraft during the war, so it was bombed hard. In May 1945 the keep burned down.",
+    "In the old photo the castle grounds and the city around them are scorched and empty.",
+    "The keep was rebuilt in 1959. Slide to today and it is back, with the city rebuilt around it."
+   ],
+   "story_ja": [
+    "名古屋城は1612年に完成し、天守は300年以上そこに立っていました。",
+    "戦争中の名古屋は航空機をつくる街だったため、激しい空襲を受けました。1945年5月、天守は焼け落ちます。",
+    "古い写真では、城の敷地もまわりの街も焼けて空白になっています。",
+    "天守は1959年に再建されました。今にスライドすると、街とともに戻っています。"
+   ],
+   "word": {
+    "jp": "天守",
+    "romaji": "tenshu",
+    "meaning": "castle keep",
+    "meaning_ja": "てんしゅ"
+   },
+   "wiki": "Nagoya Castle",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Nagoya Castle",
+   "wiki_ja": "名古屋城"
+  },
+  {
+   "id": "himeji",
+   "emoji": "🕊",
+   "name": "Himeji Castle",
+   "name_ja": "姫路城",
+   "ja": "姫路城",
+   "romaji": "Himeji-jō",
+   "lat": 34.8394,
+   "lon": 134.6938,
+   "zoom": 16,
+   "hook": "The city burned around it. The castle did not.",
+   "hook_ja": "まわりの街は焼けた。城だけが焼けなかった。",
+   "then": "ort_old10",
+   "thenLabel": "1960s",
+   "story": [
+    "Himeji Castle was completed in 1609 and has never been destroyed by war, fire or earthquake.",
+    "In July 1945 air raids burned most of the city around it. The castle came through and is still the original wooden building.",
+    "Its white walls give it the nickname the White Heron Castle.",
+    "The old photo here is from the 1960s, while the city was still being rebuilt. Slide across and watch the streets fill in."
+   ],
+   "story_ja": [
+    "姫路城は1609年に完成し、戦火にも火事にも地震にも壊されたことがありません。",
+    "1945年7月の空襲でまわりの街はほとんど焼けました。城は残り、いまも当時のままの木造建築です。",
+    "白い壁から白鷺城と呼ばれています。",
+    "ここの古い写真は1960年代、まだ街が復興の途中のものです。スライドして街が埋まっていく様子を見てください。"
+   ],
+   "word": {
+    "jp": "白鷺",
+    "romaji": "shirasagi",
+    "meaning": "white heron",
+    "meaning_ja": "しらさぎ"
+   },
+   "wiki": "Himeji Castle",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Himeji Castle",
+   "wiki_ja": "姫路城"
+  },
+  {
+   "id": "nara",
+   "emoji": "🦌",
+   "name": "Nara — Tōdai-ji",
+   "name_ja": "奈良・東大寺",
+   "ja": "東大寺",
+   "romaji": "Tōdai-ji",
+   "lat": 34.6891,
+   "lon": 135.8397,
+   "zoom": 17,
+   "hook": "Deer walk the streets. The hall is 1,300 years old.",
+   "hook_ja": "鹿が歩く街。1300年前からの大仏殿。",
+   "then": "ort_old10",
+   "thenLabel": "1960s",
+   "story": [
+    "Nara was Japan's capital before Kyoto, in the 700s.",
+    "Tōdai-ji holds a bronze Buddha even bigger than the one at Kamakura, inside one of the largest wooden buildings in the world.",
+    "Like Kyoto, Nara was spared the heavy bombing, so the old city is still here.",
+    "Around the temple, wild deer wander freely through the park and along the roads. They have been protected here for centuries."
+   ],
+   "story_ja": [
+    "奈良は京都より前、700年代の日本の都でした。",
+    "東大寺には鎌倉より大きな銅の大仏があり、世界有数の巨大な木造建築に納められています。",
+    "京都と同じく奈良も激しい空襲を免れたため、古い街がそのまま残っています。",
+    "寺のまわりでは、野生の鹿が公園や道路を自由に歩いています。何百年も大切にされてきました。"
+   ],
+   "word": {
+    "jp": "鹿",
+    "romaji": "shika",
+    "meaning": "deer",
+    "meaning_ja": "しか"
+   },
+   "wiki": "Tōdai-ji",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Tōdai-ji",
+   "wiki_ja": "東大寺"
+  },
+  {
+   "id": "kanazawa",
+   "emoji": "🌿",
+   "name": "Kanazawa",
+   "name_ja": "金沢",
+   "ja": "金沢",
+   "romaji": "Kanazawa",
+   "lat": 36.5619,
+   "lon": 136.6625,
+   "zoom": 16,
+   "hook": "Never bombed, so the old streets are still here.",
+   "hook_ja": "空襲を受けなかったから、古い街がそのまま残る。",
+   "then": "ort_old10",
+   "thenLabel": "1960s",
+   "story": [
+    "Kanazawa was one of the richest towns in Japan under the samurai lords, and it was never bombed in the war.",
+    "So whole districts of Edo-period streets survive: samurai houses, teahouse quarters, narrow lanes and water channels.",
+    "Kenroku-en, next to the castle, is counted among the three great gardens of Japan.",
+    "Almost all of Japan's gold leaf is still beaten here. You can eat ice cream covered in it."
+   ],
+   "story_ja": [
+    "金沢は武家の時代に日本有数の豊かな街で、戦争中も空襲を受けませんでした。",
+    "そのため江戸時代の町並みがまるごと残っています。武家屋敷、茶屋街、細い路地、そして用水。",
+    "城のとなりの兼六園は、日本三名園のひとつに数えられます。",
+    "日本の金箔のほとんどが、いまもここで作られています。金箔をのせたアイスも食べられます。"
+   ],
+   "word": {
+    "jp": "金",
+    "romaji": "kin",
+    "meaning": "gold",
+    "meaning_ja": "きん"
+   },
+   "wiki": "Kanazawa",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Kanazawa",
+   "wiki_ja": "金沢市"
+  },
+  {
+   "id": "sendai",
+   "emoji": "🌲",
+   "name": "Sendai",
+   "name_ja": "仙台",
+   "ja": "仙台",
+   "romaji": "Sendai",
+   "lat": 38.2601,
+   "lon": 140.8819,
+   "zoom": 16,
+   "hook": "They call it the City of Trees. Look why.",
+   "hook_ja": "杜の都と呼ばれる理由が、写真でわかる。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "Sendai is the largest city in northern Honshū, founded by the lord Date Masamune in 1600.",
+    "Air raids in July 1945 burned out the centre. The old photo shows how far the burnt ground reached.",
+    "When the city was rebuilt, wide streets were lined with zelkova trees. People call it the City of Trees.",
+    "Slide to today and you can pick out those green avenues running through the middle of the city."
+   ],
+   "story_ja": [
+    "仙台は東北で最大の都市で、1600年に伊達政宗が開きました。",
+    "1945年7月の空襲で中心部は焼け野原になりました。古い写真で焼け跡の広さがわかります。",
+    "復興のとき、広い通りにケヤキが植えられました。だから杜の都と呼ばれます。",
+    "今にスライドすると、街の真ん中を貫く緑の並木がはっきり見えます。"
+   ],
+   "word": {
+    "jp": "杜",
+    "romaji": "mori",
+    "meaning": "woods",
+    "meaning_ja": "もり"
+   },
+   "wiki": "Sendai",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Sendai",
+   "wiki_ja": "仙台市"
+  },
+  {
+   "id": "fukuoka",
+   "emoji": "🍜",
+   "name": "Fukuoka — Hakata",
+   "name_ja": "福岡・博多",
+   "ja": "博多",
+   "romaji": "Hakata",
+   "lat": 33.5897,
+   "lon": 130.4207,
+   "zoom": 16,
+   "hook": "Japan's doorway to the Asian mainland for 1,000 years.",
+   "hook_ja": "千年にわたる、アジアへの玄関口。",
+   "then": "ort_USA10",
+   "thenLabel": "1945",
+   "story": [
+    "Hakata is closer to Korea than it is to Tokyo, and it has been Japan's trading door to the Asian mainland for over a thousand years.",
+    "In June 1945 air raids burned much of the city. The old photo shows the cleared, blackened ground.",
+    "It rebuilt quickly and is now the biggest city on the island of Kyūshū.",
+    "It is also where tonkotsu ramen comes from — the white, rich pork-bone soup now sold all over the world."
+   ],
+   "story_ja": [
+    "博多は東京よりも韓国に近く、千年以上にわたってアジア大陸との貿易の玄関口でした。",
+    "1945年6月の空襲で街の多くが焼けました。古い写真に、黒く焼けた更地が写っています。",
+    "復興は早く、いまは九州最大の都市です。",
+    "とんこつラーメンが生まれた街でもあります。あの白く濃いスープは、いまや世界中で売られています。"
+   ],
+   "word": {
+    "jp": "船",
+    "romaji": "fune",
+    "meaning": "ship",
+    "meaning_ja": "ふね"
+   },
+   "wiki": "Fukuoka",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Fukuoka",
+   "wiki_ja": "福岡市"
+  },
+  {
+   "id": "shuri",
+   "emoji": "🏰",
+   "name": "Naha — Shuri Castle",
+   "name_ja": "那覇・首里城",
+   "ja": "首里城",
+   "romaji": "Shuri-jō",
+   "lat": 26.217,
+   "lon": 127.7195,
+   "zoom": 17,
+   "hook": "Destroyed, rebuilt, burned again. Still being rebuilt.",
+   "hook_ja": "壊され、建て直され、また焼けた。いまも再建中。",
+   "then": "gazo1",
+   "thenLabel": "1970s",
+   "story": [
+    "Okinawa was not part of Japan for most of its history. It was the Ryūkyū Kingdom, trading with China and southeast Asia, and Shuri Castle was its palace.",
+    "The castle was destroyed in the Battle of Okinawa in 1945. For decades afterwards a university stood on the site — that is what the 1970s photo shows.",
+    "It was rebuilt in 1992, and in 2019 a fire destroyed the main hall again.",
+    "It is being rebuilt once more. The colours and the shapes here are unlike castles anywhere else in Japan."
+   ],
+   "story_ja": [
+    "沖縄は歴史の大半で日本ではありませんでした。中国や東南アジアと交易する琉球王国であり、首里城はその王宮でした。",
+    "城は1945年の沖縄戦で破壊されました。その後長いあいだ跡地には大学が建っていました。1970年代の写真はその姿です。",
+    "1992年に再建され、2019年の火災で正殿がふたたび焼けました。",
+    "いまもう一度、建て直されています。ここの色も形も、日本のほかの城とはまったく違います。"
+   ],
+   "word": {
+    "jp": "琉球",
+    "romaji": "Ryūkyū",
+    "meaning": "the old kingdom of Okinawa",
+    "meaning_ja": "りゅうきゅう。沖縄の古い王国"
+   },
+   "wiki": "Shuri Castle",
+   "tier": 1,
+   "pop": 1,
+   "wiki_en": "Shuri Castle",
+   "wiki_ja": "首里城"
+  }
+ ]
+}

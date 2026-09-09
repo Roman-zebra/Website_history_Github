@@ -1,0 +1,198 @@
+{
+ "_meta": {
+  "about": "「これは何か」の記事。鍵は explore.js の規則表の 日本語ラベル|英語ラベル。",
+  "rule": "題名は手書き。APIで解決して、書いた題名と一致した行だけ出す。転送・曖昧さ回避・記事なしは落とす。langlinks からの自動生成は禁止（ja:常夜灯 の英語版は en:Nightlight＝豆電球）。",
+  "silent": {
+   "案内板|information board": "看板そのものの記事は子どもに何も教えない",
+   "山|peak": "「山とは」は中身がない",
+   "野外の作品|public artwork": "対象がばらばら",
+   "見どころ|local attraction": "tourism=attraction は何でも入る箱",
+   "〜跡|site of something gone": "何の跡かが決まらない",
+   "坂|named slope": "en:Slope (landform) は中身がない",
+   "名木|notable tree": "同上",
+   "古い地名|old place name": "個別の地名であって概念ではない",
+   "像|statue": "対象がばらばら",
+   "信仰の場|place of worship": "神道か仏教かが決まらない",
+   "古戦場|battlefield": "ja:古戦場 は 戦闘 へ転送＝主題がずれる",
+   "供養塔|memorial pagoda": "五輪塔・宝篋印塔・板碑が混在。1つの記事では2つを誤ラベルする",
+   "門|gate": "ja:山門 は曖昧さ回避ページ"
+  }
+ },
+ "t": {
+  "神社|Shinto shrine": {
+   "ok": 1,
+   "ja": "神社",
+   "en": "Shinto shrine",
+   "q_ja": "神社ってなに？",
+   "q_en": "What is a Shinto shrine?"
+  },
+  "お寺|Buddhist temple": {
+   "ok": 1,
+   "ja": "寺院",
+   "en": "Buddhist temple",
+   "q_ja": "お寺ってなに？",
+   "q_en": "What is a Buddhist temple?"
+  },
+  "記念碑|commemorative stone": {
+   "ok": 1,
+   "ja": "石碑",
+   "en": "Stele",
+   "q_ja": "石碑ってなに？",
+   "q_en": "What is a stone monument?"
+  },
+  "記念碑|memorial": {
+   "ok": 1,
+   "ja": "石碑",
+   "en": "Memorial",
+   "q_ja": "記念碑ってなに？",
+   "q_en": "What is a memorial?"
+  },
+  "お地蔵さん|roadside Jizō": {
+   "ok": 1,
+   "ja": "地蔵菩薩",
+   "en": "Kṣitigarbha",
+   "q_ja": "お地蔵さんってなに？",
+   "q_en": "What is a roadside Jizō?"
+  },
+  "教会|church": {
+   "ok": 1,
+   "ja": "教会堂",
+   "en": "Church (building)",
+   "q_ja": "教会ってなに？",
+   "q_en": "What is a church?"
+  },
+  "三角点・水準点|survey marker": {
+   "ok": 1,
+   "ja": "三角点",
+   "en": "Triangulation station",
+   "q_ja": "三角点ってなに？",
+   "q_en": "What is a triangulation station?"
+  },
+  "街道|old highway": {
+   "ok": 1,
+   "ja": "街道",
+   "en": "Kaidō",
+   "q_ja": "街道ってなに？",
+   "q_en": "What is an old Japanese highway?"
+  },
+  "城跡|castle site": {
+   "ok": 1,
+   "ja": "日本の城",
+   "en": "Japanese castle",
+   "q_ja": "日本の城ってなに？",
+   "q_en": "What is a Japanese castle?"
+  },
+  "城|castle": {
+   "ok": 1,
+   "ja": "日本の城",
+   "en": "Japanese castle",
+   "q_ja": "日本の城ってなに？",
+   "q_en": "What is a Japanese castle?"
+  },
+  "古墳|burial mound": {
+   "ok": 1,
+   "ja": "古墳",
+   "en": "Kofun",
+   "q_ja": "古墳ってなに？",
+   "q_en": "What is a kofun burial mound?"
+  },
+  "遺跡|archaeological site": {
+   "ok": 1,
+   "ja": "遺跡",
+   "en": "Archaeological site",
+   "q_ja": "遺跡ってなに？",
+   "q_en": "What is an archaeological site?"
+  },
+  "路傍の祠|wayside shrine": {
+   "ok": 1,
+   "ja": "祠",
+   "en": "Hokora",
+   "q_ja": "祠（ほこら）ってなに？",
+   "q_en": "What is a hokora?"
+  },
+  "常夜灯・灯籠|stone lantern": {
+   "ok": 1,
+   "ja": "灯籠",
+   "en": "Stone lantern",
+   "q_ja": "灯籠ってなに？",
+   "q_en": "What is a stone lantern?"
+  },
+  "一里塚|milestone mound": {
+   "ok": 1,
+   "ja": "一里塚",
+   "en": "Ichirizuka",
+   "q_ja": "一里塚ってなに？",
+   "q_en": "What is an ichirizuka?"
+  },
+  "宿場|post town": {
+   "ok": 1,
+   "ja": "宿場",
+   "en": "Shukuba",
+   "q_ja": "宿場ってなに？",
+   "q_en": "What is a post town?"
+  },
+  "慰霊碑|war memorial": {
+   "ok": 1,
+   "ja": "慰霊碑",
+   "en": "War memorial",
+   "q_ja": "慰霊碑ってなに？",
+   "q_en": "What is a war memorial?"
+  },
+  "温泉|hot spring": {
+   "ok": 1,
+   "ja": "温泉",
+   "en": "Onsen",
+   "q_ja": "温泉ってなに？",
+   "q_en": "What is an onsen?"
+  },
+  "力石|lifting stone": {
+   "ok": 1,
+   "ja": "力石",
+   "en": "Chikaraishi",
+   "q_ja": "力石ってなに？",
+   "q_en": "What is a chikaraishi?"
+  },
+  "石仏|stone figure": {
+   "ok": 1,
+   "ja": "石仏",
+   "en": null,
+   "q_ja": "石仏ってなに？",
+   "q_en": "What is a stone Buddha?"
+  },
+  "関所・番所|checkpoint": {
+   "ok": 1,
+   "ja": "関所",
+   "en": null,
+   "q_ja": "関所ってなに？",
+   "q_en": "What is a sekisho checkpoint?"
+  },
+  "道標|old signpost": {
+   "ok": 1,
+   "ja": "道標",
+   "en": null,
+   "q_ja": "道標ってなに？",
+   "q_en": "What is an old stone signpost?"
+  },
+  "道祖神|Dōsojin stone": {
+   "ok": 1,
+   "ja": "道祖神",
+   "en": "Dōsojin",
+   "q_ja": "道祖神ってなに？",
+   "q_en": "What is a Dōsojin stone?"
+  },
+  "庚申塔|Kōshin stone": {
+   "ok": 1,
+   "ja": "庚申信仰",
+   "en": "Kōshin",
+   "q_ja": "庚申さまってなに？",
+   "q_en": "What is a Kōshin stone?"
+  },
+  "馬頭観音|Batō Kannon stone": {
+   "ok": 1,
+   "ja": "馬頭観音",
+   "en": "Hayagriva (Buddhism)",
+   "q_ja": "馬頭観音ってなに？",
+   "q_en": "What is a Batō Kannon stone?"
+  }
+ }
+}
