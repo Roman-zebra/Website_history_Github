@@ -558,9 +558,9 @@ function applySEO(){
   set('twitterDescription', seo.description);
   set('ogLocale', seo.locale);
 
-  const selected = new URLSearchParams(location.search).get('lang');
-  const localized = selected && PARAM_LANG[selected] === LANG;
-  const url = location.origin + location.pathname + (localized ? '?lang=' + encodeURIComponent(selected) : '');
+  // The interactive ?lang= switch is a user preference, not a separate
+  // crawl target. Actual translated pages live at /ja.html, /ko.html and so on.
+  const url = location.origin + location.pathname;
   const canonical = document.getElementById('canonicalUrl');
   if (canonical) canonical.setAttribute('href', url);
   set('ogUrl', url);
