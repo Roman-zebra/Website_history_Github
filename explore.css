@@ -28,6 +28,12 @@ a{color:inherit}
 .hero-title{margin:0;font-size:clamp(42px,12vw,76px);line-height:.95;font-weight:800;letter-spacing:-.02em}
 .hero-title span{color:var(--red);font-style:italic}
 .hero-lead{margin:16px auto 0;max-width:34ch;font-size:16px;line-height:1.65;color:var(--cream-dim)}
+.hero-search{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;
+  border:1px solid rgba(224,168,60,.72);background:rgba(20,22,28,.52);color:var(--cream);
+  border-radius:999px;padding:11px 17px;font:700 14px/1 inherit;cursor:pointer;
+  box-shadow:0 5px 18px rgba(0,0,0,.2);transition:background .18s,border-color .18s,transform .18s}
+.hero-search:hover,.hero-search:focus-visible{background:var(--ink-2);border-color:var(--gold);transform:translateY(-1px)}
+.hero-search span[aria-hidden]{color:var(--gold);font-size:20px;line-height:.5}
 .hero-lead b{color:var(--cream)}
 
 .cards{display:grid;gap:14px;padding:14px 16px 30px;max-width:720px;margin:0 auto;
