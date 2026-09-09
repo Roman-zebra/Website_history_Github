@@ -82,7 +82,7 @@ const PARAM_LANG = Object.fromEntries(Object.entries(LANG_PARAM).flatMap(([lang,
 
 const T = {
   en: {
-    lead: 'These are real photographs taken from aeroplanes.<br>Drag the slider and watch <b>eighty years</b> go by.',
+    lead: 'Compare real aerial photographs on the map.<br>Drag the slider and watch <b>eighty years</b> go by.',
     modePlaces: 'Featured places', modeMap: 'Whole map', modeLiminal: 'Liminal Japan',
     noteLiminal: 'Places that feel like nowhere \u2014 and most are near a city, so you can go.',
     heroSub: 'Before and after WW2 — 1945 vs today, on one map',
@@ -205,7 +205,7 @@ const T = {
       <p class="faq-a">The maps and aerial photographs belong to the Geospatial Information Authority of Japan and must be credited. See the credits at the bottom of the home screen.</p>`
   },
   ja: {
-    lead: 'どれも飛行機から撮った本物の写真。<br>線をドラッグすると、<b>80年</b>が動きます。',
+    lead: '地図で、本物の航空写真を見くらべる。<br>線をドラッグすると、<b>80年</b>が動きます。',
     modePlaces: '名所を見る', modeMap: '日本全体の地図', modeLiminal: 'リミナル',
     noteLiminal: 'どこでもない感じのする場所。その多くは、街から行ける距離にある。',
     heroSub: '戦前と戦後 — 1945年と今を、ひとつの地図で',
@@ -338,7 +338,7 @@ const t = k => {
    **長文は未訳**（guideHTML / limIntroHTML / credits）。韓国語・中国語では
    ここだけ英語が出る。訳したふりをしないよう、この行を残しておく。 */
 T.ko = {
-  lead: '모두 비행기에서 찍은 진짜 사진.<br>슬라이더를 움직이면 <b>80년</b>이 지나갑니다.',
+  lead: '지도에서 실제 항공사진을 비교하세요.<br>슬라이더를 움직이면 <b>80년</b>이 지나갑니다.',
   modePlaces: '주요 장소', modeMap: '전체 지도', modeLiminal: '리미널 재팬',
   noteLiminal: '어디에도 속하지 않은 듯한 곳들. 대개는 도시에서 갈 만한 거리에 있다.',
   heroSub: '제2차 세계대전 전후 — 1945년과 오늘을 한 장의 지도에서',
@@ -389,7 +389,7 @@ T.ko = {
 };
 
 T['zh-Hans'] = {
-  lead: '都是从飞机上拍的真照片。<br>拖动滑块，<b>八十年</b>就过去了。',
+  lead: '在地图上比较真实的航空照片。<br>拖动滑块，<b>八十年</b>就过去了。',
   modePlaces: '精选地点', modeMap: '全图', modeLiminal: '阈限日本',
   noteLiminal: '像是不属于任何地方的地方。多半就在城边，真能去。',
   heroSub: '二战前后 —— 1945年与今天，在同一张地图上',
@@ -440,7 +440,7 @@ T['zh-Hans'] = {
 };
 
 T['zh-Hant'] = {
-  lead: '都是從飛機上拍的真照片。<br>拖動滑桿，<b>八十年</b>就過去了。',
+  lead: '在地圖上比較真實的航空照片。<br>拖動滑桿，<b>八十年</b>就過去了。',
   modePlaces: '精選地點', modeMap: '全圖', modeLiminal: '閾限日本',
   noteLiminal: '像是不屬於任何地方的地方。多半就在城邊，真能去。',
   heroSub: '二戰前後 —— 1945年與今天，在同一張地圖上',
