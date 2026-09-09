@@ -33,13 +33,13 @@
   function layer(id, ext, className) {
     const el = document.createElement('div');
     el.className = 'hero-layer ' + className;
-    // Four adjacent z14 tiles around the Imperial Palace, Tokyo.
+    // One z13 tile per era: the same Tokyo extent in 2 requests, about 193KB total.
     const promises = [];
-    for (let y = 6450; y <= 6451; y++) for (let x = 14551; x <= 14552; x++) {
+    for (let y = 3225; y <= 3225; y++) for (let x = 7276; x <= 7276; x++) {
       const img = new Image(256, 256);
       img.alt = ''; img.decoding = 'async'; img.fetchPriority = 'low';
       promises.push(new Promise(resolve => { img.onload = () => resolve(true); img.onerror = () => resolve(false); }));
-      img.src = 'https://cyberjapandata.gsi.go.jp/xyz/' + id + '/14/' + x + '/' + y + '.' + ext;
+      img.src = 'https://cyberjapandata.gsi.go.jp/xyz/' + id + '/13/' + x + '/' + y + '.' + ext;
       el.appendChild(img);
     }
     scene.appendChild(el);
