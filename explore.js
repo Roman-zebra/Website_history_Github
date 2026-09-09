@@ -75,6 +75,10 @@ const CLOSE_ZOOM  = 18;      // everything left: the stone by the roadside
    0. Language
    ========================================================================= */
 let LANG = 'en';   // 実際の値は T の定義後に detectLang() で決める
+/* A stable language URL lets a search result land in the visitor's language.
+   The app still falls back to the browser language when no language URL was chosen. */
+const LANG_PARAM = { en: 'en', ja: 'ja', ko: 'ko', 'zh-Hans': 'zh-CN', 'zh-Hant': 'zh-TW' };
+const PARAM_LANG = Object.fromEntries(Object.entries(LANG_PARAM).map(([lang, param]) => [param, lang]));
 
 const T = {
   en: {
@@ -82,6 +86,7 @@ const T = {
     modePlaces: 'Featured places', modeMap: 'Whole map', modeLiminal: 'Liminal Japan',
     noteLiminal: 'Places that feel like nowhere \u2014 and most are near a city, so you can go.',
     heroSub: 'Before and after WW2 — 1945 vs today, on one map',
+    heroSearch: 'Search a place on the map',
     liminalWhat: 'What makes it liminal',
     limIntroHTML: `<h2>What is a liminal space?</h2>
       <p>You have probably stood in one. A shopping centre ten minutes after it closes.
@@ -204,6 +209,7 @@ const T = {
     modePlaces: '名所を見る', modeMap: '日本全体の地図', modeLiminal: 'リミナル',
     noteLiminal: 'どこでもない感じのする場所。その多くは、街から行ける距離にある。',
     heroSub: '戦前と戦後 — 1945年と今を、ひとつの地図で',
+    heroSearch: '地図から場所・駅名を探す',
     liminalWhat: 'どこがリミナルなのか',
     limIntroHTML: `<h2>リミナルスペースって、なに？</h2>
       <p>たぶん、立ったことがあります。閉店10分後のショッピングモール。夏休みの学校。
@@ -336,6 +342,7 @@ T.ko = {
   modePlaces: '주요 장소', modeMap: '전체 지도', modeLiminal: '리미널 재팬',
   noteLiminal: '어디에도 속하지 않은 듯한 곳들. 대개는 도시에서 갈 만한 거리에 있다.',
   heroSub: '제2차 세계대전 전후 — 1945년과 오늘을 한 장의 지도에서',
+  heroSearch: '지도에서 장소 검색',
   liminalWhat: '어떤 점이 리미널한가',
   photoBy: '사진: Wikimedia Commons',
   notePlaces: '짧은 이야기가 있는 엄선된 장소들.',
@@ -386,6 +393,7 @@ T['zh-Hans'] = {
   modePlaces: '精选地点', modeMap: '全图', modeLiminal: '阈限日本',
   noteLiminal: '像是不属于任何地方的地方。多半就在城边，真能去。',
   heroSub: '二战前后 —— 1945年与今天，在同一张地图上',
+  heroSearch: '在地图上搜索地点',
   liminalWhat: '它为何显得阈限',
   photoBy: '照片：Wikimedia Commons',
   notePlaces: '精选地点，每处都有一段短故事。',
@@ -436,6 +444,7 @@ T['zh-Hant'] = {
   modePlaces: '精選地點', modeMap: '全圖', modeLiminal: '閾限日本',
   noteLiminal: '像是不屬於任何地方的地方。多半就在城邊，真能去。',
   heroSub: '二戰前後 —— 1945年與今天，在同一張地圖上',
+  heroSearch: '在地圖上搜尋地點',
   liminalWhat: '它為何顯得閾限',
   photoBy: '照片：Wikimedia Commons',
   notePlaces: '精選地點，每處都有一段短故事。',
@@ -486,6 +495,8 @@ T['zh-Hant'] = {
    居場所ではなく端末の設定なので、そちらに従う。
    一度でも自分で切り替えたら、その選択を優先する。 */
 function detectLang(){
+  const requested = new URLSearchParams(location.search).get('lang');
+  if (requested && PARAM_LANG[requested]) return PARAM_LANG[requested];
   try {
     const saved = localStorage.getItem('tn-lang');
     if (saved && T[saved]) return saved;
@@ -505,8 +516,55 @@ const LANG_NAMES = { en: 'English', ja: '日本語', ko: '한국어',
                      'zh-Hans': '简体中文', 'zh-Hant': '繁體中文' };
 const LANG_SHORT = { en: 'EN', ja: 'JA', ko: 'KO', 'zh-Hans': '简', 'zh-Hant': '繁' };
 const LANG_ORDER = ['en', 'ja', 'ko', 'zh-Hans', 'zh-Hant'];
+const SEO = {
+  en: {
+    title: 'Japan Before and After WW2 - 1945 vs Today on a Map',
+    description: 'Compare 1945 aerial photographs with today across Hiroshima, Tokyo, Kyoto and 16 more places in Japan. Explore historical maps, local places and Liminal Japan for free.',
+    locale: 'en_GB'
+  },
+  ja: {
+    title: '戦前と戦後の日本を地図で比較｜1945年の空中写真と現在',
+    description: '広島・東京・京都など日本19か所を、1945年の空中写真と現在の地図で比較。全国の歴史スポットやリミナルな場所も無料で探せます。',
+    locale: 'ja_JP'
+  },
+  ko: {
+    title: '전후 일본 지도 비교 | 1945년 항공사진과 오늘',
+    description: '히로시마, 도쿄, 교토 등 일본 19곳의 1945년 항공사진과 오늘의 지도를 비교하세요. 일본의 역사적 장소와 리미널 공간을 무료로 탐색할 수 있습니다.',
+    locale: 'ko_KR'
+  },
+  'zh-Hans': {
+    title: '日本战前战后地图对比｜1945年航拍照片与今日',
+    description: '对比广岛、东京、京都等日本19处地点的1945年航拍照片与今日地图。免费探索日本历史地点与边缘空间。',
+    locale: 'zh_CN'
+  },
+  'zh-Hant': {
+    title: '日本戰前戰後地圖比較｜1945年航拍照片與今日',
+    description: '比較廣島、東京、京都等日本19處地點的1945年航拍照片與今日地圖。免費探索日本歷史地點與邊緣空間。',
+    locale: 'zh_TW'
+  }
+};
 
+function applySEO(){
+  const seo = SEO[LANG] || SEO.en;
+  const set = (id, content) => {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute('content', content);
+  };
+  document.title = seo.title;
+  set('metaDescription', seo.description);
+  set('ogTitle', seo.title);
+  set('ogDescription', seo.description);
+  set('twitterTitle', seo.title);
+  set('twitterDescription', seo.description);
+  set('ogLocale', seo.locale);
 
+  const selected = new URLSearchParams(location.search).get('lang');
+  const localized = selected && PARAM_LANG[selected] === LANG;
+  const url = location.origin + location.pathname + (localized ? '?lang=' + encodeURIComponent(selected) : '');
+  const canonical = document.getElementById('canonicalUrl');
+  if (canonical) canonical.setAttribute('href', url);
+  set('ogUrl', url);
+}
 
 /* =========================================================================
    1. State
@@ -702,6 +760,7 @@ function buildCards(){
 
 function applyLang(){
   document.documentElement.lang = LANG;
+  applySEO();
   for (const el of document.querySelectorAll('[data-t]')) el.innerHTML = t(el.dataset.t);
   $('langLabel').textContent = LANG_NAMES[LANG] || 'English';
   $('langBtn2').textContent  = LANG_SHORT[LANG] || 'EN';   // 2文字なら375pxでも折り返さない
@@ -731,6 +790,11 @@ function applyLang(){
 function setLang(l){
   LANG = l;
   try { localStorage.setItem('tn-lang', l); } catch(e){}
+  try {
+    const url = new URL(location.href);
+    url.searchParams.set('lang', LANG_PARAM[l] || 'en');
+    history.replaceState(null, '', url.pathname + '?' + url.searchParams.toString() + url.hash);
+  } catch(e){}
   wikiSeen.clear(); wikiAsked.clear();     // titles differ per language
   applyLang();
 }
@@ -2804,6 +2868,10 @@ $('langBtn').onclick  = e => toggleLangMenu(e.currentTarget);
 $('langBtn2').onclick = e => toggleLangMenu(e.currentTarget);
 $('mPlaces').onclick  = () => setMode('places');
 $('mMap').onclick     = () => setMode('map');
+$('heroSearch').onclick = () => {
+  setMode('map');
+  requestAnimationFrame(() => $('q').focus());
+};
 $('mLiminal').onclick = () => setMode('liminal');
 /* Close for good, not just collapse. Without this the sheet sat over the map
    with no way to dismiss it, so the markers underneath were unreachable. */
