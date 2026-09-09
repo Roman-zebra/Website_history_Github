@@ -15,21 +15,27 @@
 <link rel="dns-prefetch" href="https://ja.wikipedia.org">
 <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="explore.css?v=0.60">
+<link rel="stylesheet" href="explore.css?v=0.61">
 <!--SEO-->
-<title>Japan Before and After WW2 - 1945 vs Today on a Map</title>
-<meta name="description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
+<title id="pageTitle">Japan Before and After WW2 - 1945 vs Today on a Map</title>
+<meta id="metaDescription" name="description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
 <meta name="keywords" content="Japan then and now, 1945 aerial photo, Hiroshima before after, Japan historical map, 空中写真 比較, 今昔マップ, 国土地理院">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Japan Before and After WW2 - 1945 vs Today on a Map">
-<meta property="og:description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
-<meta property="og:locale" content="en_GB">
+<meta id="ogTitle" property="og:title" content="Japan Before and After WW2 - 1945 vs Today on a Map">
+<meta id="ogDescription" property="og:description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
+<meta id="ogLocale" property="og:locale" content="en_GB">
 <meta property="og:locale:alternate" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Japan Before and After WW2 - 1945 vs Today on a Map">
-<meta name="twitter:description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
-<link rel="canonical" href="https://japan-then-and-now.hiddenjapan.workers.dev/">
-<meta property="og:url" content="https://japan-then-and-now.hiddenjapan.workers.dev/">
+<meta id="twitterTitle" name="twitter:title" content="Japan Before and After WW2 - 1945 vs Today on a Map">
+<meta id="twitterDescription" name="twitter:description" content="See Japan before and after the war. Drag a slider across Hiroshima, Tokyo, Kyoto and 16 more places to compare 1945 aerial photographs with today, then explore 26 of Japan's most liminal places - abandoned islands, empty resorts, a station 486 steps underground. Free, no account, English and Japanese.">
+<link id="canonicalUrl" rel="canonical" href="https://japan-then-and-now.hiddenjapan.workers.dev/">
+<link rel="alternate" hreflang="en" href="https://japan-then-and-now.hiddenjapan.workers.dev/?lang=en">
+<link rel="alternate" hreflang="ja" href="https://japan-then-and-now.hiddenjapan.workers.dev/ja.html">
+<link rel="alternate" hreflang="ko" href="https://japan-then-and-now.hiddenjapan.workers.dev/ko.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://japan-then-and-now.hiddenjapan.workers.dev/zh-cn.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://japan-then-and-now.hiddenjapan.workers.dev/zh-tw.html">
+<link rel="alternate" hreflang="x-default" href="https://japan-then-and-now.hiddenjapan.workers.dev/">
+<meta id="ogUrl" property="og:url" content="https://japan-then-and-now.hiddenjapan.workers.dev/">
 <meta property="og:image" content="https://japan-then-and-now.hiddenjapan.workers.dev/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -49,9 +55,12 @@
 
   <header class="hero">
     <p class="hero-kicker">日本 · JAPAN</p>
-    <h1 class="hero-title">Then <span>&amp;</span> Now</h1>
-    <p class="hero-sub" data-t="heroSub"></p>
-    <p class="hero-lead" data-t="lead"></p>
+    <h1 class="hero-title">Japan <span>Then &amp; Now</span></h1>
+    <p class="hero-sub" data-t="heroSub">Before and after WW2 — 1945 vs today, on one map</p>
+    <p class="hero-lead" data-t="lead">Compare real aerial photographs from 1945 with the Japan of today.</p>
+    <button id="heroSearch" class="hero-search" type="button">
+      <span aria-hidden="true">⌕</span> <span data-t="heroSearch"></span>
+    </button>
   </header>
 
   <div class="modes" role="tablist">
@@ -196,7 +205,7 @@
 <div id="toast" class="toast" hidden></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="explore.js?v=0.60"></script>
+<script src="explore.js?v=0.61"></script>
 <div id="langMenu" class="lang-menu" hidden></div>
 </body>
 </html>
