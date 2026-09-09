@@ -200,9 +200,9 @@ const T = {
       <p class="faq-a">The maps and aerial photographs belong to the Geospatial Information Authority of Japan and must be credited. See the credits at the bottom of the home screen.</p>`
   },
   ja: {
-    lead: 'すべて飛行機から撮った本物の写真です。<br>線をドラッグすると<b>80年</b>が動きます。',
+    lead: 'どれも飛行機から撮った本物の写真。<br>線をドラッグすると、<b>80年</b>が動きます。',
     modePlaces: '名所を見る', modeMap: '日本全体の地図', modeLiminal: 'リミナル',
-    noteLiminal: 'どこでもない感じのする場所。多くは街から行ける距離にあります。',
+    noteLiminal: 'どこでもない感じのする場所。その多くは、街から行ける距離にある。',
     heroSub: '戦前と戦後 — 1945年と今を、ひとつの地図で',
     liminalWhat: 'どこがリミナルなのか',
     limIntroHTML: `<h2>リミナルスペースって、なに？</h2>
@@ -229,32 +229,32 @@ const T = {
     noteMap: '日本のどこでも検索して、1945年と見くらべる。',
     credits: '地図・空中写真：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a>（国土地理院）。街路地図 © Esri。地点と住所：© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors（ODbL）。記事：ウィキペディア（CC BY-SA 4.0）。',
     search: '場所・駅名・住所で検索',
-    roamTip: 'マーカーを押すと説明が出ます。そこから1945年と比べられます。',
+    roamTip: 'マーカーを押すと説明が出ます。そのまま1945年と見くらべられる。',
     dragHint: 'ドラッグ', stopCompare: '比較をやめる',
     compareYear: y => y + '年と今を見くらべる',
-    noOldPhoto: 'この地点を写した古い空中写真はありません。',
+    noOldPhoto: 'この場所を写した古い空中写真は残っていません。',
     readWiki: 'ウィキペディアで読む',
-    aboutLead:     'この場所そのものの記事はありません。かわりに、こちらが読めます。',
+    aboutLead:     'この場所そのものの記事はありません。かわりに、こんなものが読めます。',
     aboutLeadAlso: 'こちらも読めます。',
     aboutArea:     n => 'このあたりのまち：' + n,
     readWikiJa: 'ウィキペディアで読む',
     readWikiEn: '英語版ウィキペディアで読む', gmap: 'Googleマップ', share: '共有',
-    zoomIn: '拡大すると1945年と比べられます。',
+    zoomIn: '拡大すると、1945年と見くらべられます。',
     noPhoto: p => 'このあたりでは' + p + 'の写真は撮られていません。広島・東京・大阪・京都で試してください。',
     jaOnly: '日本語の記事',
     loading: '読み込み中…', noSummary: '説明がありません。',
     srcWikiEn: '出典：英語版ウィキペディア（CC BY-SA）',
-    srcWikiJaTr: '出典：日本語版ウィキペディアの要約を翻訳（CC BY-SA）',
-    srcAggregated: 'この説明は複数の公開サイトの情報を集めてまとめたものです。出典が1つに定まらないため、確かさは高くありません。目安として読んでください。',
-    srcTags: 'この説明は、この地点に付けられた地図（OpenStreetMap）のタグから自動で組み立てたものです。書かれた解説をもとにしたものではないので、確かさは高くありません。目安として読んでください。',
-    photoAir: 'いまの空から見たようす（地理院タイル）',
+    srcWikiJaTr: '出典：日本語版ウィキペディアの要約を訳したもの（CC BY-SA）',
+    srcAggregated: 'いくつかの公開ページを突き合わせて書いています。出典がひとつに定まらないので、目安まで。',
+    srcTags: '地図（OpenStreetMap）に付いたタグから、機械的に組み立てた一文です。誰かが書いた解説ではないので、目安まで。',
+    photoAir: 'いま、空から見たこの場所（地理院タイル）',
     tapRed: '下のボタンで全文が読めます。',
     memorial: 'の碑', memorialStone: '災害の碑',
-    stoneBody: 'これは<b>自然災害伝承碑</b>です。ここで起きたことを後の人に伝えるために建てられました。',
+    stoneBody: '<b>自然災害伝承碑</b>。ここで起きたことを、後の人に伝えるために建てられた石碑です。',
     stoneRecords: '記録されている災害',
     stoneJa: '碑文の記録（原文）：',
     erected: '建立', yearsAgo: n => n + '年まえ',
-    famous: '日本を代表する名所のひとつです。下のボタンで詳しく読めます。',
+    famous: '日本でいちばん名の知られた場所のひとつ。下のボタンから詳しく読めます。',
     noResults: '見つかりませんでした。', located: '現在地です。',
     noGeo: '現在地を取得できませんでした。', copied: 'リンクをコピーしました。',
     address: '住所', localSpot: '地元の名所',
@@ -264,8 +264,8 @@ const T = {
     save: '☆ 保存', saved: '★ 保存済み', myTitle: 'お気に入り',
     savedToast: n => '★ 保存しました：' + n,
     unsavedToast: n => '保存を解除：' + n,
-    closeTip: 'いちばん拡大した状態です。道ばたの石碑・跡地・小さな史跡はここで出ます。',
-    myEmpty: 'まだありません。スポットを開いて「保存」を押してください。',
+    closeTip: 'いちばん拡大した状態。道ばたの石碑や跡地、小さな史跡はこの縮尺で出てきます。',
+    myEmpty: 'まだ何もありません。気になる場所を開いて「保存」を押すと、ここに並びます。',
     guideBtn: '? つかいかた', guideTitle: 'つかいかた・よくある質問',
     guideHTML: `<h3>つかいかた</h3><ol>
       <li><b>名所を見る</b> — 選んだ{places}か所。開くとすぐ1945年と今が並びます。</li>
@@ -332,16 +332,16 @@ const t = k => {
    **長文は未訳**（guideHTML / limIntroHTML / credits）。韓国語・中国語では
    ここだけ英語が出る。訳したふりをしないよう、この行を残しておく。 */
 T.ko = {
-  lead: '비행기에서 찍은 실제 항공사진입니다.<br>슬라이더를 움직여 <b>80년</b>의 변화를 보세요.',
+  lead: '모두 비행기에서 찍은 진짜 사진.<br>슬라이더를 움직이면 <b>80년</b>이 지나갑니다.',
   modePlaces: '주요 장소', modeMap: '전체 지도', modeLiminal: '리미널 재팬',
-  noteLiminal: '어디에도 속하지 않은 듯한 장소들. 대부분 도시 근처라 실제로 갈 수 있습니다.',
+  noteLiminal: '어디에도 속하지 않은 듯한 곳들. 대개는 도시에서 갈 만한 거리에 있다.',
   heroSub: '제2차 세계대전 전후 — 1945년과 오늘을 한 장의 지도에서',
   liminalWhat: '어떤 점이 리미널한가',
   photoBy: '사진: Wikimedia Commons',
   notePlaces: '짧은 이야기가 있는 엄선된 장소들.',
   noteMap: '일본 어디든 검색해서 1945년과 비교해 보세요.',
   search: '장소, 역, 주소 검색',
-  roamTip: '마커를 눌러 설명을 읽고, 1945년과 비교해 보세요.',
+  roamTip: '마커를 누르면 설명이 뜹니다. 그대로 1945년과 견줘 볼 수 있어요.',
   dragHint: '드래그', stopCompare: '비교 끝내기',
   compareYear: y => y + '년과 오늘을 비교',
   noOldPhoto: '이 지점을 담은 옛 항공사진이 없습니다.',
@@ -357,16 +357,16 @@ T.ko = {
   loading: '불러오는 중…', noSummary: '설명이 없습니다.',
   srcWikiEn: '출처: 영어 위키백과 (CC BY-SA)',
   srcWikiJaTr: '출처: 일본어 위키백과 요약을 번역 (CC BY-SA)',
-  srcAggregated: '이 설명은 여러 공개 웹페이지에서 모아 정리한 것입니다. 하나의 출처가 뒷받침하지 않으므로, 확인된 사실이 아니라 참고로 읽어 주세요.',
-  srcTags: '이 설명은 이 지점에 붙은 지도(OpenStreetMap) 태그에서 자동으로 만든 것입니다. 쓰여진 해설을 바탕으로 한 것이 아니므로 참고로만 읽어 주세요.',
+  srcAggregated: '여러 공개 웹페이지를 맞춰 보며 정리했습니다. 출처가 하나로 모이지 않으니 참고만 해 주세요.',
+  srcTags: '지도(OpenStreetMap)에 붙은 태그로 기계가 만든 한 줄입니다. 누가 쓴 설명이 아니니 참고만 해 주세요.',
   photoAir: '오늘 하늘에서 본 이 지점 (GSI 타일)',
   tapRed: '빨간 버튼을 누르면 전문을 읽을 수 있습니다.',
   memorial: '비', memorialStone: '재해 전승비',
-  stoneBody: '이것은 <b>자연재해 전승비</b>입니다. 이 땅에서 일어난 일을 후세에 전하기 위해 세워졌습니다.',
+  stoneBody: '<b>자연재해 전승비</b>. 이 땅에서 일어난 일을 뒷사람에게 전하려고 세운 비석입니다.',
   stoneRecords: '기록된 재해',
   stoneJa: '비문은 일본어로 기록되어 있습니다:',
   erected: '건립', yearsAgo: n => n + '년 전',
-  famous: '일본에서 가장 잘 알려진 장소 중 하나입니다. 아래를 눌러 읽어 보세요.',
+  famous: '일본에서 가장 이름난 곳 중 하나. 아래를 누르면 자세히 볼 수 있습니다.',
   noResults: '찾을 수 없습니다.', located: '현재 위치입니다.',
   noGeo: '위치를 사용할 수 없습니다.', copied: '링크를 복사했습니다.',
   address: '주소', localSpot: '동네의 명소',
@@ -377,21 +377,21 @@ T.ko = {
   savedToast: n => '★ 저장: ' + n,
   unsavedToast: n => '삭제: ' + n,
   closeTip: '가장 크게 확대한 상태입니다 — 길가의 비석, 폐허, 옛터 같은 작은 것들이 여기서 보입니다.',
-  myEmpty: '아직 저장한 것이 없습니다. 장소를 열고 저장을 누르세요.',
+  myEmpty: '아직 아무것도 없습니다. 마음에 드는 곳을 열고 저장을 누르면 여기에 쌓입니다.',
   guideBtn: '? 가이드', guideTitle: '가이드 & FAQ'
 };
 
 T['zh-Hans'] = {
-  lead: '这些是从飞机上拍摄的真实航空照片。<br>拖动滑块，看<b>八十年</b>的变化。',
+  lead: '都是从飞机上拍的真照片。<br>拖动滑块，<b>八十年</b>就过去了。',
   modePlaces: '精选地点', modeMap: '全图', modeLiminal: '阈限日本',
-  noteLiminal: '仿佛不属于任何地方的场所——多数就在城市附近，你可以真的去。',
+  noteLiminal: '像是不属于任何地方的地方。多半就在城边，真能去。',
   heroSub: '二战前后 —— 1945年与今天，在同一张地图上',
   liminalWhat: '它为何显得阈限',
   photoBy: '照片：Wikimedia Commons',
   notePlaces: '精选地点，每处都有一段短故事。',
   noteMap: '搜索日本任何地方，再与1945年对照。',
   search: '搜索地点、车站或地址',
-  roamTip: '点一个标记读它的说明，再与1945年对照。',
+  roamTip: '点一个标记，说明就出来了。接着就能和1945年对照着看。',
   dragHint: '拖动', stopCompare: '结束对照',
   compareYear: y => '把' + y + '年与今天对照',
   noOldPhoto: '没有覆盖此处的旧航空照片。',
@@ -407,16 +407,16 @@ T['zh-Hans'] = {
   loading: '载入中…', noSummary: '暂无说明。',
   srcWikiEn: '来源：英文维基百科（CC BY-SA）',
   srcWikiJaTr: '来源：日文维基百科摘要的翻译（CC BY-SA）',
-  srcAggregated: '这段说明是从若干公开网页拼合而成的。没有单一来源为它背书，请当作大致参考，而非已核实的事实。',
-  srcTags: '这段说明是根据此地点的地图（OpenStreetMap）标签自动拼出的，并非依据现成的文字说明，请当作大致参考。',
+  srcAggregated: '这段是把几个公开网页对着看、拼起来写的。出处不止一个，看个大概就好。',
+  srcTags: '这一句是机器照着地图（OpenStreetMap）的标签拼出来的，不是谁写的解说，看个大概就好。',
   photoAir: '今天从空中看这个地点（国土地理院瓦片）',
   tapRed: '点红色按钮可读全文。',
   memorial: '碑', memorialStone: '灾害传承碑',
-  stoneBody: '这是一座<b>自然灾害传承碑</b>。人们立碑，是为了让后人记住这片土地上发生过的事。',
+  stoneBody: '<b>自然灾害传承碑</b>。立在这里，是为了让后来的人记得这片土地上发生过的事。',
   stoneRecords: '碑上记录的灾害',
   stoneJa: '碑文以日文记录：',
   erected: '建立', yearsAgo: n => n + '年前',
-  famous: '日本最广为人知的地点之一。点下面继续读。',
+  famous: '日本最有名的地方之一。点下面可以看得更细。',
   noResults: '没有找到。', located: '你在这里。',
   noGeo: '无法获取位置。', copied: '已复制链接。',
   address: '地址', localSpot: '本地的名胜',
@@ -427,21 +427,21 @@ T['zh-Hans'] = {
   savedToast: n => '★ 已收藏：' + n,
   unsavedToast: n => '已移除：' + n,
   closeTip: '已放到最大 —— 路边的石碑、废墟、旧址这些小东西会在这里出现。',
-  myEmpty: '还没有收藏。打开一个地点后点收藏。',
+  myEmpty: '还什么都没有。打开一个地方按下收藏，就会攒在这里。',
   guideBtn: '? 指南', guideTitle: '指南与常见问题'
 };
 
 T['zh-Hant'] = {
-  lead: '這些是從飛機上拍攝的真實航空照片。<br>拖動滑桿，看<b>八十年</b>的變化。',
+  lead: '都是從飛機上拍的真照片。<br>拖動滑桿，<b>八十年</b>就過去了。',
   modePlaces: '精選地點', modeMap: '全圖', modeLiminal: '閾限日本',
-  noteLiminal: '彷彿不屬於任何地方的場所——多數就在城市附近，你可以真的去。',
+  noteLiminal: '像是不屬於任何地方的地方。多半就在城邊，真能去。',
   heroSub: '二戰前後 —— 1945年與今天，在同一張地圖上',
   liminalWhat: '它為何顯得閾限',
   photoBy: '照片：Wikimedia Commons',
   notePlaces: '精選地點，每處都有一段短故事。',
   noteMap: '搜尋日本任何地方，再與1945年對照。',
   search: '搜尋地點、車站或地址',
-  roamTip: '點一個標記讀它的說明，再與1945年對照。',
+  roamTip: '點一個標記，說明就出來了。接著就能和1945年對照著看。',
   dragHint: '拖動', stopCompare: '結束對照',
   compareYear: y => '把' + y + '年與今天對照',
   noOldPhoto: '沒有涵蓋此處的舊航空照片。',
@@ -457,16 +457,16 @@ T['zh-Hant'] = {
   loading: '載入中…', noSummary: '暫無說明。',
   srcWikiEn: '來源：英文維基百科（CC BY-SA）',
   srcWikiJaTr: '來源：日文維基百科摘要的翻譯（CC BY-SA）',
-  srcAggregated: '這段說明是從若干公開網頁拼合而成的。沒有單一來源為它背書，請當作大致參考，而非已核實的事實。',
-  srcTags: '這段說明是根據此地點的地圖（OpenStreetMap）標籤自動拼出的，並非依據現成的文字說明，請當作大致參考。',
+  srcAggregated: '這段是把幾個公開網頁對著看、拼起來寫的。出處不只一個，看個大概就好。',
+  srcTags: '這一句是機器照著地圖（OpenStreetMap）的標籤拼出來的，不是誰寫的解說，看個大概就好。',
   photoAir: '今天從空中看這個地點（國土地理院圖磚）',
   tapRed: '點紅色按鈕可讀全文。',
   memorial: '碑', memorialStone: '災害傳承碑',
-  stoneBody: '這是一座<b>自然災害傳承碑</b>。人們立碑，是為了讓後人記住這片土地上發生過的事。',
+  stoneBody: '<b>自然災害傳承碑</b>。立在這裡，是為了讓後來的人記得這片土地上發生過的事。',
   stoneRecords: '碑上記錄的災害',
   stoneJa: '碑文以日文記錄：',
   erected: '建立', yearsAgo: n => n + '年前',
-  famous: '日本最廣為人知的地點之一。點下面繼續讀。',
+  famous: '日本最有名的地方之一。點下面可以看得更細。',
   noResults: '沒有找到。', located: '你在這裡。',
   noGeo: '無法取得位置。', copied: '已複製連結。',
   address: '地址', localSpot: '在地的名勝',
@@ -477,7 +477,7 @@ T['zh-Hant'] = {
   savedToast: n => '★ 已收藏：' + n,
   unsavedToast: n => '已移除：' + n,
   closeTip: '已放到最大 —— 路邊的石碑、廢墟、舊址這些小東西會在這裡出現。',
-  myEmpty: '還沒有收藏。打開一個地點後點收藏。',
+  myEmpty: '還什麼都沒有。打開一個地方按下收藏，就會攢在這裡。',
   guideBtn: '? 指南', guideTitle: '指南與常見問題'
 };
 
@@ -703,8 +703,8 @@ function buildCards(){
 function applyLang(){
   document.documentElement.lang = LANG;
   for (const el of document.querySelectorAll('[data-t]')) el.innerHTML = t(el.dataset.t);
-  $('langLabel').textContent = LANG_NAMES[nextLang()] || 'English';
-  $('langBtn2').textContent  = LANG_SHORT[nextLang()] || 'EN';   // 2文字なら375pxでも折り返さない
+  $('langLabel').textContent = LANG_NAMES[LANG] || 'English';
+  $('langBtn2').textContent  = LANG_SHORT[LANG] || 'EN';   // 2文字なら375pxでも折り返さない
   $('q').placeholder         = t('search');
   $('modeNote').textContent  = modeNote();
   if (mode === 'liminal') $('limIntro').innerHTML = t('limIntroHTML');
@@ -2171,24 +2171,24 @@ function localSummary(tg){
   if (!what) return '';                    // 材料が無い。組み立てない
 
   bits.push(en ? ('OpenStreetMap records this spot as ' + what + '.')
-               : ('OpenStreetMapでは、この地点は' + what + 'として記録されています。'));
+               : ('地図には' + what + 'とある。'));
 
   /* 2行目: タグにある事実だけを足す。無ければ足さない。 */
   const more = [];
   if (rel && tg.amenity !== 'place_of_worship')
-    more.push(en ? (rel[0] + ' in tradition') : (rel[1] + 'にかかわるもの'));
+    more.push(en ? (rel[0] + ' in tradition') : (rel[1] + 'にかかわる場所'));
   if (tg.denomination)
     more.push(en ? ('denomination recorded as ' + tg.denomination)
-                 : ('宗派は' + tg.denomination + 'と記録'));
+                 : ('宗派は' + tg.denomination));
   if (tg.start_date)
     more.push(en ? ('dated ' + tg.start_date + ' in the map data')
-                 : ('地図の記録では' + tg.start_date + 'のもの'));
+                 : (tg.start_date + 'のものとされる'));
   if (tg.ruins && tg.ruins !== 'no')
-    more.push(en ? 'recorded as ruins' : '遺構・廃墟として記録');
+    more.push(en ? 'recorded as ruins' : 'いまは遺構・廃墟');
   if (tg.heritage)
-    more.push(en ? 'listed in a heritage register' : '文化財として登録');
+    more.push(en ? 'listed in a heritage register' : '文化財に登録されている');
   if (more.length){
-    let line = more.join(en ? '; ' : '。');
+    let line = more.join(en ? '; ' : '、');
     if (en) line = line.charAt(0).toUpperCase() + line.slice(1);
     bits.push(line + (en ? '.' : '。'));
   }
@@ -2568,12 +2568,47 @@ function setMode(m){
 
 /* 5言語を順に回す。ボタンには**次に切り替わる言語**の名前を出すので、
    押す前に何になるか分かる。 */
+/* 言語は一覧から選ぶ。5言語を順送りにすると繁体字→英語に4回押すことになる
+   （2026-09-09 花平さんの指摘）。ボタンを押すと全部出す。 */
+function buildLangMenu(){
+  const box = $('langMenu');
+  if (!box) return;
+  box.innerHTML = LANG_ORDER.map(l =>
+    '<button type="button" class="lang-item' + (l === LANG ? ' on' : '') +
+    '" data-lang="' + l + '">' + esc(LANG_NAMES[l]) + '</button>').join('');
+  for (const b of box.querySelectorAll('.lang-item'))
+    b.onclick = () => { closeLangMenu(); setLang(b.dataset.lang); };
+}
+function openLangMenu(anchor){
+  const box = $('langMenu');
+  if (!box) return;
+  buildLangMenu();
+  box.hidden = false;
+  /* 押したボタンの下に出す。地図側のボタンは画面右下にあるので、
+     はみ出さないよう右端を合わせる。 */
+  const r = anchor.getBoundingClientRect();
+  const w = box.offsetWidth || 160;
+  box.style.top  = Math.min(r.bottom + 6, innerHeight - box.offsetHeight - 8) + 'px';
+  box.style.left = Math.max(8, Math.min(r.right - w, innerWidth - w - 8)) + 'px';
+}
+function closeLangMenu(){ const b = $('langMenu'); if (b) b.hidden = true; }
+function toggleLangMenu(anchor){
+  const b = $('langMenu');
+  if (b && !b.hidden) closeLangMenu(); else openLangMenu(anchor);
+}
+document.addEventListener('click', e => {
+  const b = $('langMenu');
+  if (!b || b.hidden) return;
+  if (!b.contains(e.target) && !e.target.closest('#langBtn, #langBtn2')) closeLangMenu();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLangMenu(); });
+
 function nextLang(){
   const i = LANG_ORDER.indexOf(LANG);
   return LANG_ORDER[(i < 0 ? 0 : i + 1) % LANG_ORDER.length];
 }
-$('langBtn').onclick  = () => setLang(nextLang());
-$('langBtn2').onclick = () => setLang(nextLang());
+$('langBtn').onclick  = e => toggleLangMenu(e.currentTarget);
+$('langBtn2').onclick = e => toggleLangMenu(e.currentTarget);
 $('mPlaces').onclick  = () => setMode('places');
 $('mMap').onclick     = () => setMode('map');
 $('mLiminal').onclick = () => setMode('liminal');

@@ -598,3 +598,14 @@ body.roaming .panel.closed,
   .p-close{width:44px;height:44px;font-size:20px}
 }
 @media (min-width:860px){ .panel-inner{padding-top:52px} }
+
+/* 言語の一覧。5言語を順送りにしないための受け皿（2026-09-09）。 */
+.lang-menu{position:fixed;z-index:1200;background:var(--ink-2);
+border:1px solid var(--ink-3);border-radius:12px;padding:6px;
+box-shadow:0 10px 30px rgba(0,0,0,.45);min-width:150px}
+.lang-item{display:block;width:100%;text-align:left;background:none;border:0;
+color:var(--cream-dim);font:inherit;font-size:14px;padding:9px 12px;
+border-radius:8px;cursor:pointer}
+.lang-item:hover{background:var(--ink-3);color:var(--cream)}
+.lang-item.on{color:var(--gold);font-weight:700}
+.lang-item.on::after{content:" ✓"}
