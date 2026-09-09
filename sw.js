@@ -6,7 +6,7 @@
      B. 地図タイル・碑の写真      … cache-first で溜める（一度見た場所は圏外でも出る、枚数上限あり）
      C. Overpass / Wikipedia      … network-only（結果は app.js 側が localStorage に残す）
 */
-const VERSION = 'v0.58.0';
+const VERSION = 'v0.63.0';
 const SHELL = `shell-${VERSION}`;
 const TILES = `tiles-${VERSION}`;
 const TILE_MAX = 700;                       // 端末を圧迫しない範囲。1タイル20-90KB
@@ -26,10 +26,10 @@ const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。�
      2026-09-08 追記: app.js の ?v= 直書きは const DATA_V に集約した。
      版の数字を直に書いた行が app.js / explore.js に1つでもあれば
      tools/bump_version.py が exit 1 で止める（見張りをコメントでなく道具に置いた）。 */
-const DATA_V = '0.45';
-const ASSET_V = '0.61';
+const DATA_V = '0.46';
+const ASSET_V = '0.63';
 const DATA_FILES = [
-  'monuments.json', 'monuments-index.json', 'kid-text.json', 'places-index.json',
+  'monuments-index.json', 'kid-text.json', 'places-index.json',
   'landmarks.json', 'liminal.json', 'places-world.json', 'affiliate.json',
   'topics.json', 'areas.json',
 ];
@@ -37,6 +37,9 @@ const SHELL_FILES = [
   './', './index.html', './kids.html', './manifest.webmanifest',
   './explore.html', './explore.webmanifest',
   './style.css?v=' + ASSET_V, './app.js?v=' + ASSET_V,
+  './place-ui.js?v=' + ASSET_V,
+  './design.css?v=' + ASSET_V, './atmosphere.js?v=' + ASSET_V,
+  './ja.html', './ko.html', './zh-cn.html', './zh-tw.html',
   './explore.css?v=' + ASSET_V, './explore.js?v=' + ASSET_V,
   './og.jpg',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png',
@@ -147,7 +150,7 @@ self.addEventListener('fetch', e => {
   // 同じ瞬間に landmarks.json は通るのに地域JSONだけ58本連続で ERR_FAILED に
   // なった（実測）。原因は特定できていないが、保存の失敗が返事を巻き込む形
   // そのものが危険なので、返事は先に返し、保存は後ろで黙って行う。
-  if (isRegion(url)){
+  if (isRegion(url) || (new URL(url).origin===location.origin && new URL(url).pathname.startsWith('/search/'))){
     e.respondWith((async () => {
       // まずキャッシュ。あれば通信を待たずに返す。
       try{

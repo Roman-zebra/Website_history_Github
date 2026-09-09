@@ -35,3 +35,23 @@
   Cache-Control: public, max-age=31536000, immutable
 /og.jpg
   Cache-Control: public, max-age=604800
+
+/place-ui.js
+  Cache-Control: public, max-age=31536000, immutable
+/search/*
+  Cache-Control: public, max-age=86400
+/ja.html
+  Cache-Control: no-cache
+/ko.html
+  Cache-Control: no-cache
+/zh-cn.html
+  Cache-Control: no-cache
+/zh-tw.html
+  Cache-Control: no-cache
+
+/design.css
+  Cache-Control: public, max-age=31536000, immutable
+/atmosphere.js
+  Cache-Control: public, max-age=31536000, immutable
+/page.css
+  Cache-Control: no-cache
