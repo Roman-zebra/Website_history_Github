@@ -127,6 +127,7 @@ const T = {
     srcWikiEn: 'Source: English Wikipedia (CC BY-SA)',
     srcWikiJaTr: 'Source: summary of the Japanese Wikipedia article, translated (CC BY-SA)',
     srcAggregated: 'This description was pieced together from several public web pages. No single source stands behind it, so treat it as a rough guide rather than a checked fact.',
+    srcTags: 'This description was assembled automatically from the OpenStreetMap tags on this spot, not from anything written about it. Treat it as a rough guide rather than a checked fact.',
     tapRed: 'Tap the red button to read the whole article in English.',
     memorial: 'memorial', memorialStone: 'Memorial stone',
     stoneBody: 'This is a <b>disaster memorial stone</b>. People carved it so that later generations would remember what happened on this spot.',
@@ -244,6 +245,7 @@ const T = {
     srcWikiEn: '出典：英語版ウィキペディア（CC BY-SA）',
     srcWikiJaTr: '出典：日本語版ウィキペディアの要約を翻訳（CC BY-SA）',
     srcAggregated: 'この説明は複数の公開サイトの情報を集めてまとめたものです。出典が1つに定まらないため、確かさは高くありません。目安として読んでください。',
+    srcTags: 'この説明は、この地点に付けられた地図（OpenStreetMap）のタグから自動で組み立てたものです。書かれた解説をもとにしたものではないので、確かさは高くありません。目安として読んでください。',
     tapRed: '下のボタンで全文が読めます。',
     memorial: 'の碑', memorialStone: '災害の碑',
     stoneBody: 'これは<b>自然災害伝承碑</b>です。ここで起きたことを後の人に伝えるために建てられました。',
@@ -1842,6 +1844,153 @@ function showMonument(r){
   });
 }
 
+
+/* ---------------------------------------------------------------------
+   説明の無い地元スポットに、2〜3行の説明を組み立てる（2026-09-09 花平さんの指示）。
+
+   実測: 216,464件のうち **192,584件が説明を持たない**（wikipedia も description も
+   inscription も無い）。それらは『説明がありません』とだけ出ていた。
+
+   **タグに書いてあることしか書かない。** 推測・創作はしない。材料が無ければ
+   何も返さず、従来どおりの表示に任せる。出典が「地図のタグ」であることは必ず出す。
+
+   データに焼き込まずここで組み立てる理由: 192,584件×3行は約29MBあり、
+   いまの配信33MBをほぼ倍にする。地図が重くなる原因を自分で作ることになる。
+   タグは既に手元にあるので、文章は0バイトで作れる。 */
+const LS_WORDS = {
+  'information=board':       ['an information board', '案内板'],
+  'information=map':         ['a map board', '案内図'],
+  'information=guidepost':   ['a guidepost', '道標'],
+  'information=office':      ['a tourist information office', '観光案内所'],
+  'information=route_marker':['a route marker', 'ルート標識'],
+  'memorial=stele':          ['a stone stele', '石碑'],
+  'memorial=stone':          ['a memorial stone', '記念の石'],
+  'memorial=statue':         ['a memorial statue', '記念像'],
+  'memorial=hazard_memorial':['a memorial to a natural disaster', '災害の伝承碑'],
+  'memorial=plaque':         ['a plaque', '銘板'],
+  'memorial=war_memorial':   ['a war memorial', '戦没者慰霊碑'],
+  'artwork_type=statue':     ['a statue', '像'],
+  'artwork_type=sculpture':  ['a sculpture', '彫刻'],
+  'artwork_type=mural':      ['a mural', '壁画'],
+  'natural=peak':            ['a mountain peak', '山頂'],
+  'natural=tree':            ['a notable tree', '木'],
+  'natural=spring':          ['a spring', '湧水'],
+  'natural=saddle':          ['a mountain saddle', '鞍部'],
+  'natural=hot_spring':      ['a hot spring', '温泉の湧出地'],
+  'natural=cave_entrance':   ['a cave entrance', '洞窟の入口'],
+  'man_made=survey_point':   ['a survey point', '三角点・水準点'],
+  'man_made=tower':          ['a tower', '塔'],
+  'man_made=lighthouse':     ['a lighthouse', '灯台'],
+  'man_made=water_well':     ['a well', '井戸'],
+  'man_made=ceremonial_gate':['a ceremonial gate', '鳥居・門'],
+  'waterway=canal':          ['a canal', '用水路'],
+  'waterway=waterfall':      ['a waterfall', '滝'],
+  'waterway=dam':            ['a dam', 'ダム'],
+  'waterway=weir':           ['a weir', '堰'],
+  'historic=wayside_shrine': ['a wayside shrine', '道端の祠'],
+  'historic=archaeological_site':['an archaeological site', '遺跡'],
+  'historic=monument':       ['a monument', '記念碑'],
+  'historic=boundary_stone': ['a boundary stone', '境界石'],
+  'historic=ruins':          ['ruins', '廃墟・跡'],
+  'religion=shinto':         ['Shinto', '神道'],
+  'religion=buddhist':       ['Buddhist', '仏教'],
+  'religion=christian':      ['Christian', 'キリスト教'],
+  'religion=tenrikyo':       ['Tenrikyo', '天理教'],
+  'tourism=viewpoint':       ['a viewpoint', '展望地'],
+  'tourism=museum':          ['a museum', '博物館・美術館'],
+  'tourism=attraction':      ['a visitor attraction', '見どころ'],
+  /* 下位タグが無い素の値。実測で3万件がここに落ちていた（historic=memorial 9,187 など）。 */
+  'historic=memorial':       ['a memorial', '記念碑'],
+  'historic=castle':         ['a castle or its site', '城・城跡'],
+  'historic=tomb':           ['a tomb', '墓'],
+  'historic=building':       ['a historic building', '歴史的な建物'],
+  'historic=fort':           ['a fort', '砦'],
+  'historic=battlefield':    ['a battlefield', '古戦場'],
+  'historic=tumulus':        ['a burial mound', '古墳'],
+  'historic=milestone':      ['a milestone', '里程標'],
+  'tourism=artwork':         ['a work of public art', '屋外の作品'],
+  'tourism=information':     ['an information point', '案内'],
+  'tourism=picnic_site':     ['a picnic site', '休憩地'],
+  'tourism=guest_house':     ['a guest house', '宿'],
+  'place=locality':          ['a named locality', '地名の付いた場所'],
+  'place=quarter':           ['a quarter of a town', 'まちの一角'],
+  'place=neighbourhood':     ['a neighbourhood', '集落・地区'],
+  'place=hamlet':            ['a hamlet', '小集落'],
+  'place=islet':             ['a small island', '小島'],
+  'highway=bus_stop':        ['a bus stop', 'バス停'],
+  'natural=water':           ['a body of water', '水面'],
+  'natural=cape':            ['a cape', '岬'],
+  'natural=rock':            ['a rock', '岩'],
+  'natural=wood':            ['woodland', '林'],
+  'waterway=stream':         ['a stream', '小川'],
+  'waterway=river':          ['a river', '川'],
+  'man_made=embankment':     ['an embankment', '堤'],
+  'man_made=bridge':         ['a bridge', '橋'],
+  'amenity=school':          ['a school', '学校'],
+  'amenity=library':         ['a library', '図書館'],
+  'amenity=townhall':        ['a town hall', '役場'],
+  'amenity=fountain':        ['a fountain', '噴水・水場'],
+  'amenity=grave_yard':      ['a graveyard', '墓地'],
+  /* 道路の種別は名前だけが手がかり。種別ごとに書き分ける意味は無いので同じ語にする。 */
+  'highway=unclassified':    ['a named road', '名前のついた道'],
+  'highway=tertiary':        ['a named road', '名前のついた道'],
+  'highway=secondary':       ['a named road', '名前のついた道'],
+  'highway=primary':         ['a named road', '名前のついた道'],
+  'highway=trunk':           ['a named road', '名前のついた道'],
+  'highway=residential':     ['a named street', '名前のついた通り'],
+  'highway=path':            ['a path', '小道'],
+  'highway=track':           ['a track', '作業道'],
+  'highway=footway':         ['a footpath', '歩道'],
+  'highway=steps':           ['steps', '階段'],
+  'highway=traffic_signals': ['a road junction', '交差点'],
+  'historic=yes':            ['a place recorded as historic', '歴史的な場所として記録された地点']
+};
+const lsw = (k, v) => LS_WORDS[k + '=' + v];
+
+function localSummary(tg){
+  const en = LANG === 'en', i = en ? 0 : 1;
+  const bits = [];
+
+  /* 1行目: 何であるか。細かい語（案内板・山頂・石碑…）を先に見る。 */
+  let what = null;
+  const order = ['information', 'memorial', 'artwork_type', 'natural',
+                 'man_made', 'waterway', 'historic', 'tourism', 'place',
+                 'amenity', 'highway'];
+  for (let k = 0; k < order.length; k++){
+    const key = order[k];
+    if (tg[key] && lsw(key, tg[key])){ what = lsw(key, tg[key])[i]; break; }
+  }
+  const rel = tg.religion ? lsw('religion', tg.religion) : null;
+  if (!what && tg.amenity === 'place_of_worship')
+    what = rel ? (en ? 'a ' + rel[0] + ' place of worship' : rel[1] + 'の信仰の場')
+               : (en ? 'a place of worship' : '信仰の場');
+  if (!what) return '';                    // 材料が無い。組み立てない
+
+  bits.push(en ? ('OpenStreetMap records this spot as ' + what + '.')
+               : ('OpenStreetMapでは、この地点は' + what + 'として記録されています。'));
+
+  /* 2行目: タグにある事実だけを足す。無ければ足さない。 */
+  const more = [];
+  if (rel && tg.amenity !== 'place_of_worship')
+    more.push(en ? (rel[0] + ' in tradition') : (rel[1] + 'にかかわるもの'));
+  if (tg.denomination)
+    more.push(en ? ('denomination recorded as ' + tg.denomination)
+                 : ('宗派は' + tg.denomination + 'と記録'));
+  if (tg.start_date)
+    more.push(en ? ('dated ' + tg.start_date + ' in the map data')
+                 : ('地図の記録では' + tg.start_date + 'のもの'));
+  if (tg.ruins && tg.ruins !== 'no')
+    more.push(en ? 'recorded as ruins' : '遺構・廃墟として記録');
+  if (tg.heritage)
+    more.push(en ? 'listed in a heritage register' : '文化財として登録');
+  if (more.length){
+    let line = more.join(en ? '; ' : '。');
+    if (en) line = line.charAt(0).toUpperCase() + line.slice(1);
+    bits.push(line + (en ? '.' : '。'));
+  }
+  return bits.join(' ');
+}
+
 function showLocal(p){
   lastPanel = () => showLocal(p);
   current = null;
@@ -1857,7 +2006,11 @@ function showLocal(p){
        総称を検索してしまう。名前が無ければ市町村名だけで問う。 */
     ja: (tg.name && tg['name:en']) ? tg.name : '', name: nm,
     searchName: tg['name:ja'] || tg.name || '',
-    bodyHTML: bits.length ? bits.join('') : '<p class="p-hint">' + t('noSummary') + '</p>',
+    bodyHTML: bits.length ? bits.join('')
+            : (localSummary(tg)
+               ? '<p>' + esc(localSummary(tg)) + '</p>'
+                 + '<p class="p-srcnote p-weak">' + esc(t('srcTags')) + '</p>'
+               : '<p class="p-hint">' + t('noSummary') + '</p>'),
     at: [p.lat, p.lon], share: { title: nm, url: location.origin + location.pathname },
     wiki: wl ? wl.url : '',
     relatedKind: tg,
