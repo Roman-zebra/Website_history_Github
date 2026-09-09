@@ -128,6 +128,7 @@ const T = {
     srcWikiJaTr: 'Source: summary of the Japanese Wikipedia article, translated (CC BY-SA)',
     srcAggregated: 'This description was pieced together from several public web pages. No single source stands behind it, so treat it as a rough guide rather than a checked fact.',
     srcTags: 'This description was assembled automatically from the OpenStreetMap tags on this spot, not from anything written about it. Treat it as a rough guide rather than a checked fact.',
+    photoAir: 'This spot from the air today (GSI Tiles)',
     tapRed: 'Tap the red button to read the whole article in English.',
     memorial: 'memorial', memorialStone: 'Memorial stone',
     stoneBody: 'This is a <b>disaster memorial stone</b>. People carved it so that later generations would remember what happened on this spot.',
@@ -246,6 +247,7 @@ const T = {
     srcWikiJaTr: '出典：日本語版ウィキペディアの要約を翻訳（CC BY-SA）',
     srcAggregated: 'この説明は複数の公開サイトの情報を集めてまとめたものです。出典が1つに定まらないため、確かさは高くありません。目安として読んでください。',
     srcTags: 'この説明は、この地点に付けられた地図（OpenStreetMap）のタグから自動で組み立てたものです。書かれた解説をもとにしたものではないので、確かさは高くありません。目安として読んでください。',
+    photoAir: 'いまの空から見たようす（地理院タイル）',
     tapRed: '下のボタンで全文が読めます。',
     memorial: 'の碑', memorialStone: '災害の碑',
     stoneBody: 'これは<b>自然災害伝承碑</b>です。ここで起きたことを後の人に伝えるために建てられました。',
@@ -1734,6 +1736,7 @@ function showLandmark(p){
     bodyHTML: '<p>' + t('famous') + '</p>' + extractHTML(p, 320),
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
+    img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
     share: { title: p.name, url: location.origin + location.pathname },
     searchName: p.ja,
     src: LANG === 'en' ? 'Coordinates from Wikipedia.' : '座標の出典：ウィキペディア'
@@ -1800,6 +1803,10 @@ async function showWiki(w){
   if (pg && pg.thumbnail && pg.thumbnail.source){
     $('pImg').src = pg.thumbnail.source; $('pImg').alt = w.name;
     $('pCap').textContent = ''; $('pFig').hidden = false;
+  } else {
+    /* 記事はあるが写真が無い場合。空にせず、その地点の空中写真を出す。 */
+    $('pImg').src = airPhoto(w.lat, w.lon); $('pImg').alt = w.name;
+    $('pCap').textContent = t('photoAir'); $('pFig').hidden = false;
   }
 }
 
@@ -1947,6 +1954,13 @@ const LS_WORDS = {
 };
 const lsw = (k, v) => LS_WORDS[k + '=' + v];
 
+/* その地点の空中写真。写真が1枚も無いスポットのための最後の受け皿。
+   z17 は建物が1軒ずつ見える大きさ。地図が読むタイルと同じURLなので、
+   Service Worker のタイルキャッシュにそのまま乗る（新しい通信先を増やさない）。 */
+function airPhoto(lat, lon){
+  return tileURL(NOW_LAYER.id, NOW_LAYER.ext, lat, lon, 17);
+}
+
 function localSummary(tg){
   const en = LANG === 'en', i = en ? 0 : 1;
   const bits = [];
@@ -2011,6 +2025,7 @@ function showLocal(p){
                ? '<p>' + esc(localSummary(tg)) + '</p>'
                  + '<p class="p-srcnote p-weak">' + esc(t('srcTags')) + '</p>'
                : '<p class="p-hint">' + t('noSummary') + '</p>'),
+    img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
     at: [p.lat, p.lon], share: { title: nm, url: location.origin + location.pathname },
     wiki: wl ? wl.url : '',
     relatedKind: tg,
