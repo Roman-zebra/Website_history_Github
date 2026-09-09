@@ -84,3 +84,6 @@ html,body,.home{background:var(--atlas-paper);color:var(--atlas-ink)}
 @media(prefers-reduced-motion:reduce){.hero-layer{transition:none}.home{scroll-behavior:auto}}
 
 .home .hero-lead b{color:inherit}
+
+.hero-layer.current{animation:atlas-reveal 1.6s ease}@keyframes atlas-reveal{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.hero-layer.current{animation:none}}
