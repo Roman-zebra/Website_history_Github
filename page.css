@@ -1,0 +1,31 @@
+/* スポットページの見た目。アプリ本体とは別物なので軽く保つ。 */
+:root{color-scheme:light}
+body{margin:0;font:16px/1.7 system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;
+color:#2b2721;background:#faf7f2}
+nav,main,footer{max-width:44rem;margin:0 auto;padding:0 20px}
+nav{padding-top:18px;font-size:14px;color:#7d776c}
+nav a{color:#7d776c}
+h1{font-size:28px;line-height:1.3;margin:18px 0 6px}
+h2{font-size:19px;margin:28px 0 8px}
+.where{color:#7d776c;font-size:13px;margin:0 0 16px}
+.lead{font-size:18px}
+.cta{margin:18px 0 24px}
+.cta a{display:inline-block;background:#c8451f;color:#fff;text-decoration:none;
+padding:11px 18px;border-radius:8px;font-weight:700}
+.srcnote{font-size:12px;color:#8c877d;margin-top:6px;word-break:break-all}
+.weak{color:#a1662f;background:#fbf3e6;border-left:3px solid #d8a55a;
+padding:8px 11px;border-radius:4px}
+ul.near,ul.list{list-style:none;padding:0}
+ul.near li,ul.list li{padding:7px 0;border-bottom:1px solid #ece6dc}
+ul.near span,ul.list span{color:#8c877d;font-size:13px;margin-left:8px}
+section[lang=ja]{margin-top:28px;padding-top:18px;border-top:1px solid #ece6dc}
+footer{margin:40px auto;padding-top:18px;border-top:1px solid #ece6dc;
+font-size:12px;color:#8c877d}
+a{color:#a8391a}
+@media(prefers-color-scheme:dark){
+  body{background:#14161c;color:#e8e3da}
+  .cta a{background:#e2662c}
+  ul.near li,ul.list li,section[lang=ja],footer{border-color:#2a2e38}
+  a{color:#f0a373} nav a,.where,.srcnote,ul.near span,ul.list span,footer{color:#9a948a}
+  .weak{background:#2a2318;color:#e0b070}
+}
