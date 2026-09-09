@@ -105,7 +105,8 @@
     if(!settled || !active() || busy)return;
     if(pending && (!current || allowed()))show(pending.s,pending.el);
     if(!current) { if(slides.length>failed.size)advance(); return; }
-    if(allowed() && canRotate)timer=setTimeout(()=>{timer=null;advance();},14000);
+    // Keep each chapter long enough to read its source, with a brisk editorial rhythm.
+    if(allowed() && canRotate)timer=setTimeout(()=>{timer=null;advance();},8000);
   }
   button.addEventListener('click',()=>{paused=!paused;paint();sync();});
   new MutationObserver(()=>{paint();sync();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
