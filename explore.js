@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.46';
+const DATA_V = '0.47';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
    empty: pull right back and you still see Fuji, Skytree and the places everyone
@@ -507,6 +507,7 @@ function detectLang(){
              ? navigator.languages : [navigator.language || 'en'];
   for (let i = 0; i < list.length; i++){
     const l = String(list[i]).toLowerCase();
+    if (l.indexOf('en') === 0) return 'en';
     if (l.indexOf('ja') === 0) return 'ja';
     if (l.indexOf('ko') === 0) return 'ko';
     if (l.indexOf('zh') === 0)
@@ -1873,7 +1874,7 @@ function paintCompareBtn(){
   b.classList.remove('is-on');
   if (!compareLayer){ b.hidden = true; return; }
   b.hidden = false;
-  b.innerHTML = '<span>\u25c0\u25b6</span> ' + esc(t('compareYear')(compareLayer.year));
+  b.innerHTML = '<span>\u25c0\u25b6</span> ' + esc(t('compareYear')(compareLayer.span || compareLayer.year));
 }
 
 function panelShell(o){
@@ -2601,7 +2602,7 @@ function openPlace(p, keepView){
     kicker: {emoji:p.emoji,label:t('modePlaces'),note:'  '+placeName(p)},
     placeId:p.id, adTier:p.pop||1, ja: LANG==='ja'?'':p.ja, name:placeName(p),
     query: p.name,
-    bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join(''),
+    bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join('') + '<p class="place-guide-link"><a href="/place/' + ({en:'',ja:'ja/',ko:'ko/','zh-Hans':'zh-cn/','zh-Hant':'zh-tw/'}[LANG] || '') + encodeURIComponent(p.id) + '">' + esc(({en:'Read the place guide',ja:'この場所の解説を読む',ko:'장소 안내 읽기','zh-Hans':'阅读地点指南','zh-Hant':'閱讀地點指南'})[LANG] || 'Read the place guide') + '</a></p>',
     img: p.monument && p.monument.img, cap: cap,
     at: [p.lat, p.lon], share: { title: p.name, url: location.origin + location.pathname + '#' + p.id },
     searchName: p.name_ja || p.ja,
@@ -2736,7 +2737,7 @@ $('pCompare').onclick = () => {
   if (thenLayer){ setThenLayer(null, null); paintCompareBtn(); return; }   // press again to stop
   if (!compareAt || !compareLayer) return;
   map.setView(compareAt, Math.max(map.getZoom(), 16));
-  setThenLayer(compareLayer.id, compareLayer.year);
+  setThenLayer(compareLayer.id, compareLayer.span || compareLayer.year);
   paintCompareBtn();
   // Collapse the panel to its handle so the map is visible, but do NOT put the
   // body back into roaming state: `body.roaming .panel` slides the panel right
@@ -2878,7 +2879,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.70').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.71').then(r => r.ok ? r.json() : null)
       .then(a => { AFF = a; }).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が

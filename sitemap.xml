@@ -1,19 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://japantimeatlas.com/</loc></url>
+  <url><loc>https://japantimeatlas.com/about</loc></url>
+  <url><loc>https://japantimeatlas.com/guides/japan-historical-maps</loc></url>
+  <url><loc>https://japantimeatlas.com/guides/japan-walking-map</loc></url>
+  <url><loc>https://japantimeatlas.com/guides/liminal-japan</loc></url>
   <url><loc>https://japantimeatlas.com/ja</loc></url>
   <url><loc>https://japantimeatlas.com/ko</loc></url>
-  <url><loc>https://japantimeatlas.com/zh-cn</loc></url>
-  <url><loc>https://japantimeatlas.com/zh-tw</loc></url>
-  <url><loc>https://japantimeatlas.com/th</loc></url>
-  <url><loc>https://japantimeatlas.com/places</loc></url>
   <url><loc>https://japantimeatlas.com/place/aneyoshi</loc></url>
   <url><loc>https://japantimeatlas.com/place/fukuoka</loc></url>
   <url><loc>https://japantimeatlas.com/place/hakodate</loc></url>
   <url><loc>https://japantimeatlas.com/place/himeji</loc></url>
   <url><loc>https://japantimeatlas.com/place/hiroshima</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/aneyoshi</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/fukuoka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/hakodate</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/himeji</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/hiroshima</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/kamakura</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/kanazawa</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/kobe</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/kyoto</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/nagasaki</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/nagoya</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/nara</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/okayama</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/osaka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/sapporo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/sendai</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/shuri</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/tokyo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ja/yokohama</loc></url>
   <url><loc>https://japantimeatlas.com/place/kamakura</loc></url>
   <url><loc>https://japantimeatlas.com/place/kanazawa</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/aneyoshi</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/fukuoka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/hakodate</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/himeji</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/hiroshima</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/kamakura</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/kanazawa</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/kobe</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/kyoto</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/nagasaki</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/nagoya</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/nara</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/okayama</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/osaka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/sapporo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/sendai</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/shuri</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/tokyo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/ko/yokohama</loc></url>
   <url><loc>https://japantimeatlas.com/place/kobe</loc></url>
   <url><loc>https://japantimeatlas.com/place/kyoto</loc></url>
   <url><loc>https://japantimeatlas.com/place/l-aokigahara</loc></url>
@@ -84,10 +122,78 @@
   <url><loc>https://japantimeatlas.com/place/sapporo</loc></url>
   <url><loc>https://japantimeatlas.com/place/sendai</loc></url>
   <url><loc>https://japantimeatlas.com/place/shuri</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/aneyoshi</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/fukuoka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/hakodate</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/himeji</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/hiroshima</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/kamakura</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/kanazawa</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/kobe</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/kyoto</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/nagasaki</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/nagoya</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/nara</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/okayama</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/osaka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/sapporo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/sendai</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/shuri</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/tokyo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/th/yokohama</loc></url>
   <url><loc>https://japantimeatlas.com/place/tokyo</loc></url>
   <url><loc>https://japantimeatlas.com/place/yokohama</loc></url>
-  <url><loc>https://japantimeatlas.com/guides/japan-walking-map</loc></url>
-  <url><loc>https://japantimeatlas.com/guides/japan-historical-maps</loc></url>
-  <url><loc>https://japantimeatlas.com/guides/liminal-japan</loc></url>
-<url><loc>https://japantimeatlas.com/about</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/aneyoshi</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/fukuoka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/hakodate</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/himeji</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/hiroshima</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/kamakura</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/kanazawa</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/kobe</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/kyoto</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/nagasaki</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/nagoya</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/nara</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/okayama</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/osaka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/sapporo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/sendai</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/shuri</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/tokyo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-cn/yokohama</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/aneyoshi</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/fukuoka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/hakodate</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/himeji</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/hiroshima</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/kamakura</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/kanazawa</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/kobe</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/kyoto</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/nagasaki</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/nagoya</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/nara</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/okayama</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/osaka</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/sapporo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/sendai</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/shuri</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/tokyo</loc></url>
+  <url><loc>https://japantimeatlas.com/place/zh-tw/yokohama</loc></url>
+  <url><loc>https://japantimeatlas.com/places</loc></url>
+  <url><loc>https://japantimeatlas.com/th</loc></url>
+  <url><loc>https://japantimeatlas.com/visit</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/au</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/ca</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/cn</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/gb</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/hk</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/kr</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/sg</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/th</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/tw</loc></url>
+  <url><loc>https://japantimeatlas.com/visit/us</loc></url>
+  <url><loc>https://japantimeatlas.com/zh-cn</loc></url>
+  <url><loc>https://japantimeatlas.com/zh-tw</loc></url>
 </urlset>

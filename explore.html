@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#fffdf8">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,9 +14,9 @@
 <link rel="preconnect" href="https://server.arcgisonline.com" crossorigin>
 <link rel="dns-prefetch" href="https://ja.wikipedia.org">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="explore.css?v=0.70">
-<link rel="stylesheet" href="design.css?v=0.70">
+<link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="explore.css?v=0.71">
+<link rel="stylesheet" href="design.css?v=0.71">
 <!--SEO-->
 <title>Japan Time Atlas | Historic Maps, Hidden Gems &amp; Walking Japan</title>
 <meta id="metaDescription" name="description" content="Compare old maps and aerial photos with Japan today. Discover small towns, historic streets, local sights and liminal spaces for your next Japan walking trip.">
@@ -53,7 +52,7 @@
     <a class="atlas-brand" href="./">日本の今昔マップ<small>JAPAN TIME ATLAS</small></a>
     <button id="guideBtn" class="lang" type="button" data-t="guideBtn"></button>
     <button id="myBtn" class="lang" type="button"><span id="myCount">☆ 0</span></button>
-    <button id="langBtn" class="lang" type="button"><span id="langLabel">日本語</span></button>
+    <button id="langBtn" class="lang" type="button"><span id="langLabel">English</span></button>
   </div>
 
   <header class="hero">
@@ -63,10 +62,11 @@
     <p class="hero-sub" data-t="heroSub">Historic maps, hidden gems and walks through Japan</p>
     <p class="hero-lead" data-t="lead">Japan Time Atlas is a free map for curious walks through Japan. Compare historical aerial photographs with the present-day map, then explore castles, neighbourhood streets, small local sights and places with a liminal atmosphere.</p>
     <button id="heroSearch" class="hero-search" type="button">
-      <span aria-hidden="true">⌕</span> <span data-t="heroSearch"></span>
+      <span aria-hidden="true">⌕</span> <span data-t="heroSearch">Find a place</span>
     </button>
     <div class="hero-meta"><span id="heroCaption">Japan · Four photographic chapters</span><a id="heroCredit" href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院 / GSI</a><a id="heroLicense" href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener" hidden></a><span class="hero-treatment">Crop / overlay</span><button id="heroMotion" class="hero-motion" type="button" aria-pressed="false" hidden>Ⅱ Pause background</button></div>
   </header>
+  <nav class="discovery-entry" aria-label="Explore Japan"><a href="/places">Place guides</a><a href="/visit">Country &amp; region guides</a><a href="/ja" lang="ja">日本語</a><a href="/ko" lang="ko">한국어</a><a href="/zh-cn" lang="zh-Hans">简体中文</a><a href="/zh-tw" lang="zh-Hant">繁體中文</a><a href="/th" lang="th">ไทย</a></nav>
   <div class="stories-heading"><h2 id="storiesTitle">Explore the stories</h2><p>THE ATLAS · 01 — 03</p></div>
 
   <div class="modes" role="tablist">
@@ -98,7 +98,7 @@
 
 <div id="atlasReading"><section class="atlas-reading"><h2>Explore Japan on foot, across time</h2><p>Japan Time Atlas is a free map for curious walks through Japan. Compare historical aerial photographs with the present-day map, then explore castles, neighbourhood streets, small local sights and places with a liminal atmosphere.</p><h3>Plan a walk beyond the main sights</h3><p>Start with Tokyo, Kyoto or Osaka, then look closely at the surrounding streets. A station, a small shrine, a waterfront or the remains of an old railway can become the starting point for a different kind of Japan itinerary. Save interesting places in this browser and open them again while planning your walk.</p><h3>Old maps, street photography and everyday history</h3><p>Use the comparison slider to study how coastlines, street patterns and neighbourhoods have changed. This is also a way to explore Japanese architecture and urban history from home. Historical photo coverage and survey years vary by location; use the year shown on the map rather than assuming every photograph was taken in 1945.</p><h3>Liminal Japan and retro places</h3><p>Discover unusual stations, former industrial sites and quiet spaces where the past feels close. Liminal is an atmosphere, not a promise that a place is empty or abandoned. Check official opening and access information before visiting, and explore only public or permitted areas.</p></section></div><nav class="atlas-guides" aria-label="Japan travel guides"><a href="/guides/japan-walking-map">Japan walking map</a><a href="/guides/japan-historical-maps">Historic maps &amp; photography</a><a href="/guides/liminal-japan">Liminal Japan</a></nav>
 <!--SEOBODY-->
-<section class="seo-list"><h2>Featured places</h2><p>Compare historical aerial photographs with today. Explore Japan’s castles, temples, stations and local places in English, Japanese, Korean, Simplified Chinese and Traditional Chinese.</p><article><h3><a href="place/hiroshima.html">Hiroshima</a></h3><p>One building was left standing. It is still there.</p></article><article><h3><a href="place/tokyo.html">Tokyo — Asakusa</a></h3><p>A 1,400-year-old temple in a city that burned.</p></article><article><h3><a href="place/kyoto.html">Kyoto — Kiyomizu-dera</a></h3><p>The city that was not bombed. Compare it with Tokyo.</p></article><article><h3><a href="place/yokohama.html">Yokohama — Minato Mirai</a></h3><p>This was a shipyard. Now it is a skyline.</p></article><article><h3><a href="place/osaka.html">Osaka Castle</a></h3><p>The castle survived. Everything around it did not.</p></article><article><h3><a href="place/kamakura.html">Kamakura — Great Buddha</a></h3><p>It has been sitting outside in the rain since the 1400s.</p></article><article><h3><a href="place/kobe.html">Kobe — Meriken Park</a></h3><p>Part of a broken pier was left broken on purpose.</p></article><article><h3><a href="place/okayama.html">Okayama Castle</a></h3><p>A stone here records how high the water came.</p></article><article><h3><a href="place/aneyoshi.html">The Stone That Saved a Village</a></h3><p>&quot;Do not build your homes below this point.&quot;</p></article><article><h3><a href="place/nagasaki.html">Nagasaki</a></h3><p>A city in a valley, rebuilt from nothing.</p></article><article><h3><a href="place/sapporo.html">Sapporo</a></h3><p>A city built on a grid, only 150 years old.</p></article><article><h3><a href="place/hakodate.html">Hakodate</a></h3><p>One of the first two ports Japan opened to the world.</p></article><article><h3><a href="place/nagoya.html">Nagoya Castle</a></h3><p>The keep burned in 1945. It was built again.</p></article><article><h3><a href="place/himeji.html">Himeji Castle</a></h3><p>The city burned around it. The castle did not.</p></article><article><h3><a href="place/nara.html">Nara — Tōdai-ji</a></h3><p>Deer walk the streets. The hall is 1,300 years old.</p></article><article><h3><a href="place/kanazawa.html">Kanazawa</a></h3><p>Never bombed, so the old streets are still here.</p></article><article><h3><a href="place/sendai.html">Sendai</a></h3><p>They call it the City of Trees. Look why.</p></article><article><h3><a href="place/fukuoka.html">Fukuoka — Hakata</a></h3><p>Japan&#39;s doorway to the Asian mainland for 1,000 years.</p></article><article><h3><a href="place/shuri.html">Naha — Shuri Castle</a></h3><p>Destroyed, rebuilt, burned again. Still being rebuilt.</p></article><nav class="locale-nav" aria-label="Language"><a href="/" lang="en">English</a><a href="/ja" lang="ja">日本語</a><a href="/ko" lang="ko">한국어</a><a href="/zh-cn" lang="zh-Hans">简体中文</a><a href="/zh-tw" lang="zh-Hant">繁體中文</a><a href="/th" lang="th">ไทย</a></nav></section>
+<section class="seo-list"><h2>Featured places</h2><p>Compare historical aerial photographs with today. Explore Japan’s castles, temples, stations and local places in English, Japanese, Korean, Simplified Chinese and Traditional Chinese.</p><article><h3><a href="/place/hiroshima">Hiroshima</a></h3><p>Trace the Motoyasu River beside the Atomic Bomb Dome, then compare the surrounding blocks with Peace Memorial Park. The dome is one of the surviving atomic-bombed structures, not the only building that remained.</p></article><article><h3><a href="/place/tokyo">Tokyo — Asakusa</a></h3><p>Find Senso-ji and follow the approach towards the Sumida River. Compare the temple grounds, nearby shopping streets and the density of surrounding buildings.</p></article><article><h3><a href="/place/kyoto">Kyoto — Kiyomizu-dera</a></h3><p>Use Kiyomizu-dera as an anchor between the wooded hillside and the streets of Higashiyama. Look for the boundary between temple grounds, trees and the built-up city.</p></article><article><h3><a href="/place/yokohama">Yokohama — Minato Mirai</a></h3><p>Follow the waterfront around Minato Mirai. Compare the outlines of docks, reclaimed land and present-day parks; the coastline is as useful a clue as the buildings.</p></article><article><h3><a href="/place/osaka">Osaka Castle</a></h3><p>Start with Osaka Castle and its moats. Compare the land outside the walls with the park and railway corridors visible on the current map.</p></article><article><h3><a href="/place/kamakura">Kamakura — Great Buddha</a></h3><p>Locate the Great Buddha at Kotoku-in, then examine the temple grounds and roads towards Hase. Compare the wooded slopes with the neighbourhood below.</p></article><article><h3><a href="/place/kobe">Kobe — Meriken Park</a></h3><p>Use Meriken Park to explore Kobe’s harbour edge. Follow the piers and waterfront roads, looking for differences in the shape and use of the shoreline.</p></article><article><h3><a href="/place/okayama">Okayama Castle</a></h3><p>Follow the Asahi River around Okayama Castle. Compare the castle grounds and riverbanks before looking at the streets beyond them.</p></article><article><h3><a href="/place/aneyoshi">The Stone That Saved a Village</a></h3><p>Locate the tsunami memorial stone and read the surrounding hillside on the map. This is a place to learn about local disaster memory; this page is not an evacuation map.</p></article><article><h3><a href="/place/nagasaki">Nagasaki</a></h3><p>Look for Nagasaki Peace Park in the valley. The selected historical layer is from the 1960s, so it shows the city after reconstruction had begun, not the immediate aftermath of 1945.</p></article><article><h3><a href="/place/sapporo">Sapporo</a></h3><p>Find the grid of streets around central Sapporo. Follow a straight road across several blocks and compare open spaces, parks and the spread of buildings.</p></article><article><h3><a href="/place/hakodate">Hakodate</a></h3><p>Compare Hakodate’s harbour with the streets rising towards the mountain. The narrow landform helps you keep your bearings as you change between photo layers.</p></article><article><h3><a href="/place/nagoya">Nagoya Castle</a></h3><p>Use the moats of Nagoya Castle to align the two views. Compare the grounds inside them with the roads and city blocks outside.</p></article><article><h3><a href="/place/himeji">Himeji Castle</a></h3><p>Find Himeji Castle and follow the main approach south into the city. Compare the castle grounds, green spaces and the arrangement of streets around them.</p></article><article><h3><a href="/place/nara">Nara — Tōdai-ji</a></h3><p>Locate Todai-ji and compare its grounds with the open areas of Nara Park. Use the transition from town to wooded hills to orient the photographs.</p></article><article><h3><a href="/place/kanazawa">Kanazawa</a></h3><p>Compare the castle area and Kenroku-en with the surrounding streets. Look for contrasts between broad grounds, narrow lanes and waterways.</p></article><article><h3><a href="/place/sendai">Sendai</a></h3><p>Look for the tree-lined avenues in central Sendai. Compare the width of streets and the distribution of green space across the city blocks.</p></article><article><h3><a href="/place/fukuoka">Fukuoka — Hakata</a></h3><p>Explore Hakata’s streets and waterways, then widen the view towards the waterfront. Compare the size of city blocks and the shape of the built-up area.</p></article><article><h3><a href="/place/shuri">Naha — Shuri Castle</a></h3><p>Compare the hilltop grounds of Shuri Castle with Naha’s surrounding streets. The selected 1970s imagery predates the 1992 reconstruction; check the official park website for current restoration and access information.</p></article><nav class="locale-nav" aria-label="Language"><a href="/" lang="en">English</a><a href="/ja" lang="ja">日本語</a><a href="/ko" lang="ko">한국어</a><a href="/zh-cn" lang="zh-Hans">简体中文</a><a href="/zh-tw" lang="zh-Hant">繁體中文</a><a href="/th" lang="th">ไทย</a></nav></section>
 <!--/SEOBODY-->
   <footer class="home-foot">
     <p data-t="credits"></p>
@@ -176,11 +176,11 @@
 
 <div id="toast" class="toast" hidden></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="affiliate-router.js?v=0.70"></script>
-<script src="place-ui.js?v=0.70"></script>
-<script src="explore.js?v=0.70"></script>
-<script src="atmosphere.js?v=0.70" defer></script>
+<script src="/vendor/leaflet-1.9.4/leaflet.min.js"></script>
+<script src="affiliate-router.js?v=0.71"></script>
+<script src="place-ui.js?v=0.71"></script>
+<script src="explore.js?v=0.71"></script>
+<script src="atmosphere.js?v=0.71" defer></script>
 <div id="langMenu" class="lang-menu" hidden></div>
 </body>
 </html>

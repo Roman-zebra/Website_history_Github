@@ -72,6 +72,6 @@ test('local alias buckets obey runtime normalization and coordinate validity',()
 test('locale pages expose crawlable body, reciprocal languages, canonical and valid JSON-LD',()=>{
  for(const [file,l] of [['ja.html','ja'],['ko.html','ko'],['zh-cn.html','zh-Hans'],['zh-tw.html','zh-Hant']]){
   const h=fs.readFileSync(path.join(root,file),'utf8');assert.ok(h.includes('<html lang="'+l+'"'));for(const lang of UI.langs)assert.ok(h.includes('hreflang="'+lang+'"'));
-  const schema=JSON.parse(h.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);assert.equal(schema.inLanguage,l);assert.equal(schema.mainEntity.numberOfItems,45);assert.ok(h.includes('/?lang='+l+'#kyoto'));
+  const schema=JSON.parse(h.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);assert.equal(schema.inLanguage,l);assert.equal(schema.mainEntity.numberOfItems,45);const prefix={ja:'ja',ko:'ko','zh-Hans':'zh-cn','zh-Hant':'zh-tw'}[l];assert.ok(h.includes('/place/'+prefix+'/kyoto'));assert.ok(fs.readFileSync(path.join(root,'place',prefix,'kyoto.html'),'utf8').includes('/?lang='+l+'#kyoto'));
  }
 });
