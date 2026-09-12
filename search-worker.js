@@ -1,6 +1,6 @@
 /* Lazy nationwide index in a worker, so reading 200k places never blocks the map. */
-importScripts('place-ui.js?v=0.76','search-core.js?v=0.76');
-const VERSION='0.76-0.47',rows=[],loaded=new Set();
+importScripts('place-ui.js?v=0.77','search-core.js?v=0.77','gyg-products-data.js?v=0.77','gyg-products.js?v=0.77');
+const VERSION='0.77-0.47',rows=[],loaded=new Set();
 let pending=null,loading=null;
 async function json(url){const r=await fetch(url);if(!r.ok)throw Error(url);return r.json();}
 function emit(type,extra={}){if(pending)postMessage({type,seq:pending.seq,...extra});}
@@ -28,6 +28,6 @@ self.onmessage=e=>{
  pending=e.data;
  if(!loading)loading=load().catch(error=>{loading=null;throw error;});
  const request=pending;
- loading.then(()=>{if(pending!==request)return;emit('results',{rows:AtlasSearch.search(rows,request.query,request.lang),indexed:rows.length});})
+ loading.then(()=>{if(pending!==request)return;emit('results',{rows:AtlasSearch.search([...AtlasGygProducts.searchRecords(AtlasGygProducts.points(AtlasGygCatalog),AtlasSearch),...rows],request.query,request.lang),indexed:rows.length});})
  .catch(()=>{if(pending===request)emit('error');});
 };
