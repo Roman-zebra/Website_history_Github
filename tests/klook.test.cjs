@@ -1,7 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const router=require('../affiliate-router.js'),published=require('../affiliate-config.json');
 // Test generic local/fallback behavior separately from the published size restriction.
-const config={...published,klook:{...published.klook,topTwoOnly:false}};
+const config={...published,klook:{...published.klook,topTwoOnly:false,smallRadiusKm:undefined}};
 const now=Date.parse('2026-09-12T12:00:00Z'),langs=['en','ja','ko','zh-Hans','zh-Hant','th'];
 test('all 47 prefectures generate localized regional links with bounded source tags',()=>{
  assert.equal(config.klook.prefectures.length,47);assert.equal(new Set(config.klook.prefectures.map(p=>p.code)).size,47);

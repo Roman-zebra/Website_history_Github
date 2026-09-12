@@ -247,7 +247,121 @@
         "en": "Okinawa"
       }
     ],
-    "topTwoOnly": true
+    "topTwoOnly": false,
+    "smallRadiusKm": 1.609344,
+    "catalogCoverage": {
+      "scope": "Japan products with reviewed venue or meeting-point coordinates",
+      "complete": false,
+      "reviewedOn": "2026-09-12",
+      "source": "https://affiliate.klook.com/my_ads/product_explorer",
+      "note": "The portal exposes products without a complete geocoded feed. Nationwide passes and eSIMs have no single venue; they are not assigned artificial coordinates."
+    },
+    "internationalAirports": [
+      "OBO",
+      "CTS",
+      "HKD",
+      "AOJ",
+      "HNA",
+      "SDJ",
+      "IBR",
+      "NRT",
+      "HND",
+      "KIJ",
+      "TOY",
+      "KMQ",
+      "FSZ",
+      "NGO",
+      "KIX",
+      "OKJ",
+      "HIJ",
+      "YGJ",
+      "TAK",
+      "TKS",
+      "MYJ",
+      "KKJ",
+      "FUK",
+      "HSG",
+      "NGS",
+      "OIT",
+      "KMJ",
+      "KMI",
+      "KOJ",
+      "OKA",
+      "SHI",
+      "ISG"
+    ],
+    "internationalAirportsSource": "https://www.mlit.go.jp/koku/content/002000598.pdf",
+    "travelOffers": [
+      {
+        "productId": "109393",
+        "match": "esim",
+        "enabled": true,
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/",
+        "names": {
+          "en": "Japan eSIM — SoftBank / DOCOMO",
+          "ja": "日本向けeSIM — SoftBank / DOCOMO",
+          "ko": "일본 eSIM — SoftBank / DOCOMO",
+          "zh-Hans": "日本 eSIM — SoftBank / DOCOMO",
+          "zh-Hant": "日本 eSIM — SoftBank / DOCOMO",
+          "th": "eSIM ญี่ปุ่น — SoftBank / DOCOMO"
+        },
+        "notes": {
+          "en": "Digital delivery. Check device compatibility, data allowance and activation before purchase.",
+          "ja": "オンラインで受け取る商品です。対応端末・通信容量・開通方法をご確認ください。",
+          "ko": "온라인으로 받는 상품입니다. 지원 기기, 데이터와 개통 방법을 확인하세요.",
+          "zh-Hans": "线上交付。购买前请确认设备兼容性、流量和激活方式。",
+          "zh-Hant": "線上交付。購買前請確認裝置相容性、流量與啟用方式。",
+          "th": "รับทางออนไลน์ โปรดตรวจสอบอุปกรณ์ ปริมาณข้อมูล และวิธีเปิดใช้งาน"
+        }
+      },
+      {
+        "productId": "1420",
+        "match": "jr-national",
+        "enabled": true,
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/1420-7-day-whole-japan-rail-pass-jr-pass/",
+        "names": {
+          "en": "JR Whole Japan Rail Pass",
+          "ja": "ジャパン・レール・パス（全国版）",
+          "ko": "전국 JR 패스",
+          "zh-Hans": "日本铁路周游券（全国版）",
+          "zh-Hant": "日本鐵路周遊券（全國版）",
+          "th": "JR Pass ทั่วญี่ปุ่น"
+        },
+        "notes": {
+          "en": "For eligible visitors. Check covered JR services, exclusions, purchase deadlines and exchange locations. This station may not issue passes.",
+          "ja": "購入資格・対象路線・除外列車・購入期限・引換場所をご確認ください。この駅で購入・引換できるとは限りません。",
+          "ko": "구매 자격, 적용 노선, 제외 열차, 구매 기한과 교환 장소를 확인하세요. 이 역이 교환처라는 뜻은 아닙니다.",
+          "zh-Hans": "请确认购买资格、适用线路、除外列车、购买期限和兑换地点。本车站不一定可以兑换。",
+          "zh-Hant": "請確認購買資格、適用路線、除外列車、購買期限與兌換地點。本車站不一定可兌換。",
+          "th": "ตรวจสอบคุณสมบัติ เส้นทางที่ใช้ได้ ข้อยกเว้น กำหนดซื้อ และจุดแลกพาส สถานีนี้อาจไม่รับแลก"
+        }
+      },
+      {
+        "productId": "1552",
+        "match": "tokyo-subway",
+        "enabled": true,
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/1552-subway-ticket-tokyo/",
+        "names": {
+          "en": "Tokyo Subway Ticket",
+          "ja": "東京メトロ・都営地下鉄 共通乗車券",
+          "ko": "도쿄 서브웨이 티켓",
+          "zh-Hans": "东京地铁通票",
+          "zh-Hant": "東京地鐵通票",
+          "th": "Tokyo Subway Ticket"
+        },
+        "notes": {
+          "en": "Tokyo Metro and Toei Subway only. JR and other private railways are excluded. Check eligibility and redemption.",
+          "ja": "東京メトロ・都営地下鉄が対象です。JR・その他私鉄は対象外です。利用資格と引換方法をご確認ください。",
+          "ko": "도쿄 메트로·도에이 지하철 전용입니다. JR·다른 사철은 제외됩니다. 이용 자격과 교환 방법을 확인하세요.",
+          "zh-Hans": "仅限东京Metro及都营地铁，不适用JR和其他私铁。请确认资格及兑换方式。",
+          "zh-Hant": "僅限東京Metro及都營地鐵，不適用JR與其他私鐵。請確認資格與兌換方式。",
+          "th": "ใช้กับ Tokyo Metro และ Toei Subway เท่านั้น ไม่รวม JR หรือรถไฟเอกชนอื่น โปรดตรวจสอบเงื่อนไขและการแลก"
+        }
+      }
+    ]
   },
   "offers": [
     {
@@ -2495,14 +2609,57 @@
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E3%82%BF%E3%83%AF%E3%83%BC",
       "productSource": "https://www.klook.com/en-US/activity/4911/"
+    },
+    {
+      "id": "klook-35861",
+      "productId": "35861",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "Umeda Sky Building Observatory",
+        "ja": "梅田スカイビル 空中庭園展望台"
+      },
+      "at": [
+        34.705278,
+        135.489722
+      ],
+      "radiusKm": 1.609344,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "source": "https://www.klook.com/activity/35861-umeda-sky-building-kuchu-teien-observatory-ticket/",
+      "coordSource": "https://www.wikidata.org/wiki/Q1151808"
+    },
+    {
+      "id": "klook-99585",
+      "productId": "99585",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-15",
+      "names": {
+        "en": "GALA Yuzawa lift ticket and rental options",
+        "ja": "GALA湯沢 リフト券・レンタルプラン"
+      },
+      "at": [
+        36.9497559,
+        138.784406
+      ],
+      "radiusKm": 1.609344,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "source": "https://www.klook.com/en-US/activity/99585-everyone-beginners-experts-adults-children-enjoy-playing-snow/",
+      "coordSource": "https://www.openstreetmap.org/way/948328123"
     }
   ],
   "_instructions": [
-    "Only marker sizes pop=1 and pop=2 display advertisements. Do not confuse pop (size) with tier (appearance zoom) or the mid/tiny marker families.",
-    "For both eligible sizes, choose the closest reviewed venue in the catalog, regardless of local radius. Show the venue prefecture and straight-line distance. Never claim this catalog contains every Klook product.",
-    "All 47 prefectures retain region-search fallback configuration for eligible markers when no reviewed product can be selected. Other marker sizes show no advertisement.",
-    "Public affiliate ID 134890 is verified for JAPAN TIME ATLAS. Link format: https://affiliate.klook.com/custom_tag_guide; k_site is last. No secrets, visitor identifiers or click identifiers belong here.",
-    "Product coordinates are physical venues, not Klook destination categories. Recheck within 180 days. Prices, dates, entry rules and guide languages remain on Klook.",
-    "Klook landing pages returned a redirect error with attribution in the setup browser. Do not claim that booking attribution or payouts are verified; see KLOOK-MAINTENANCE.md."
+    "Marker sizes pop=1 and pop=2 choose the closest reviewed physical venue. Sizes 3 and 4, Wikipedia/memorial pins and local pins require a venue within one international mile (1.609344 km). Do not confuse pop (size) with tier (appearance zoom).",
+    "When no physical offer lies within one mile, identified international airports may show a Japan eSIM, JR stations a nationwide JR pass, and Tokyo Metro/Toei subway stations a Tokyo Subway ticket. Never assign fake coordinates to these products. Unverified operators receive no rail fallback.",
+    "All 47 prefectures retain region-search fallback for the largest two sizes only when no reviewed product or relevant travel fallback can be selected. Other sizes never fall back to distant regions.",
+    "This is a partial manually verified catalog, not all Klook Japan inventory. Official API/feed availability was not confirmed. The owner declined contacting support; do not send an inquiry.",
+    "Public affiliate ID 134890 is verified for JAPAN TIME ATLAS. Link format: https://affiliate.klook.com/custom_tag_guide; k_site is last. No secrets or visitor/click identifiers belong here.",
+    "Physical products require verified venue coordinates. Recheck all offers within 180 days; expired reviews are suppressed. Prices, dates, eligibility, exchange locations and available services remain on Klook.",
+    "Klook landing pages returned a redirect error with attribution in the setup browser. Do not claim booking attribution or payouts are verified; see KLOOK-MAINTENANCE.md."
   ]
 }

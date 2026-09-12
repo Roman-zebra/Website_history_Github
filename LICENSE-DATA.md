@@ -81,3 +81,7 @@ ODbL の **Derivative Database（派生データベース）** に該当する�
 OpenStreetMap の公共ジオコーダ。利用ポリシー上、**毎秒1リクエストまで**・大量利用は自前構築が前提。
 本アプリは検索を450msデバウンス、住所は1地点1回＋キャッシュにしてある。
 公開後にアクセスが増えたら移行が必要。
+
+## 7. Station, international-airport and ski-area points (2026-09-12)
+
+data/facilities-v1-*.json contains OpenStreetMap-derived names, coordinates and tags, © OpenStreetMap contributors, under ODbL 1.0: https://www.openstreetmap.org/copyright. Station nodes and ski-area way centers were retrieved through Overpass. The international-airport subset uses the MLIT summer 2026 scheduled-service list: https://www.mlit.go.jp/koku/content/002000598.pdf. Counts and source dates are in data/facilities-index-v1.json.
