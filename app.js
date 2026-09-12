@@ -209,7 +209,7 @@ const POIS = new Map();          // key -> poi
 /* データの版。?v= を手で書かないこと。7箇所そろっていないと Service Worker の
    precache が一生ヒットせず、しかも黙って通信に落ちるだけで気づけない。
    ここは tools/bump_version.py が書き換える（app.js 側は必ずこの定数を使う）。 */
-const DATA_V = '0.46';
+const DATA_V = '0.47';
 /* tools/kidify.py で事前生成した子ども向け文章。あれば辞書置換より優先する。
    無くてもアプリは動く（その場合はその場の辞書置換にフォールバック）。 */
 const KID = new Map();

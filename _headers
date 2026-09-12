@@ -65,3 +65,12 @@
   Cache-Control: public, max-age=0, must-revalidate
 /affiliate-config.json
   Cache-Control: public, max-age=0, must-revalidate
+
+/place/*
+  Cache-Control: no-cache
+/visit
+  Cache-Control: no-cache
+/visit/*
+  Cache-Control: no-cache
+/sitemap.xml
+  Cache-Control: no-cache
