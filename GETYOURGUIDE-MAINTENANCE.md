@@ -6,6 +6,8 @@ Do not substitute the different ID found in generic resource-center referral lin
 
 ## Scope and priority
 
+The 36 curated food/shopping collection destinations (`a-` IDs) use their explicitly selected Klook products. They bypass the geographical widget, including downtown matches such as Shibuya, to preserve the approved spot-specific advertisements. Other eligible places keep the GetYourGuide priority described below.
+
 GetYourGuide is the first advertisement at the largest two actual icon sizes, verified international airports, Shinkansen station hubs and curated downtown identities. At the same eligible point it replaces the Klook card instead of alternating the two providers. Other small pins keep the reviewed Klook physical-product limit of 1.609344 km. Airfield names alone do not prove an international airport. Existing station identity/service and downtown matching are reused.
 
 The official coordinate activity widget chooses one item from GetYourGuide's own marketplace. There is no fixed local whitelist of GetYourGuide products. This is NOT a downloaded complete Japan catalog, a verified nearest-product ranking, a one-mile filter, or a guarantee that the result is a guided tour rather than a ticket. The UI describes regional experiences and asks readers to verify meeting place, language and pickup. Reviewed airport-to-city mappings improve arrival-hub relevance without implying an airport pickup.

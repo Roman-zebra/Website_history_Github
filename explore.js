@@ -1950,7 +1950,7 @@ function renderAffiliate(o){
       const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
       const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=PlaceUI.pick(['Experiences around this area','この地域のツアー・体験','이 지역의 투어·체험','这一带的游览与体验','這一帶的遊覽與體驗'],lang);
       const frame=document.createElement('iframe');frame.className='aff-gyg-frame';frame.title=c.ad;frame.setAttribute('scrolling','no');
-      const src=new URL('/gyg-frame.html',location.origin);src.searchParams.set('v','0.75');src.searchParams.set('lat',offer.at[0].toFixed(5));src.searchParams.set('lon',offer.at[1].toFixed(5));src.searchParams.set('lang',offer.locale);src.searchParams.set('cmp',offer.campaign);frame.src=src.href;
+      const src=new URL('/gyg-frame.html',location.origin);src.searchParams.set('v','0.76');src.searchParams.set('lat',offer.at[0].toFixed(5));src.searchParams.set('lon',offer.at[1].toFixed(5));src.searchParams.set('lang',offer.locale);src.searchParams.set('cmp',offer.campaign);frame.src=src.href;
       const note=document.createElement('p');note.className='aff-note';note.textContent=PlaceUI.pick(['Check the activity location, meeting point and language before booking. Airport pickup is not implied.','実施場所・集合場所・対応言語を予約前にご確認ください。空港送迎付きとは限りません。','예약 전 체험 장소, 집합 장소와 언어를 확인하세요. 공항 픽업을 뜻하지 않습니다.','预订前请确认活动地点、集合地点和语言，并不表示包含机场接送。','預訂前請確認活動地點、集合地點和語言，並不表示包含機場接送。'],lang);
       const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
       const listener=e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow||e.data?.type!=='jta-gyg')return;
@@ -1962,7 +1962,7 @@ function renderAffiliate(o){
     }
     box.setAttribute('aria-label',c.ad);
     const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
-    const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.tour?PlaceUI.pick(['Tours for this area','この地域から出かけるツアー','이 지역 출발 투어','从这一带出发的游览','從這一帶出發的遊覽'],lang):offer.travel?PlaceUI.pick(['For your journey','旅の準備に','여행 준비','出行准备','出行準備'],lang):offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
+    const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.activity?(offer.match==='area'?c.near:PlaceUI.pick(['An experience for this stop','このスポットで楽しむ体験・商品','이 장소에서 즐길 체험·상품','这个地点的体验与商品','這個地點的體驗與商品'],lang)):offer.tour?PlaceUI.pick(['Tours for this area','この地域から出かけるツアー','이 지역 출발 투어','从这一带出发的游览','從這一帶出發的遊覽'],lang):offer.travel?PlaceUI.pick(['For your journey','旅の準備に','여행 준비','出行准备','出行準備'],lang):offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
     const a=document.createElement('a');a.className='aff-card';a.href=offer.url;a.target='_blank';a.rel='sponsored nofollow noopener';
     a.dataset.offerId=offer.id;a.dataset.provider=offer.provider;
     const title=document.createElement('strong');title.className='aff-title';title.textContent=offer.label;
@@ -1975,7 +1975,7 @@ function renderAffiliate(o){
       meta.textContent=[region,label+' ≈ '+(offer.km<1?offer.km.toFixed(1):Math.round(offer.km))+' km'].filter(Boolean).join(' · ');a.append(meta);
     }
     a.append(cta);
-    const note=document.createElement('p');note.className='aff-note';note.textContent=(offer.travel||offer.tour)?offer.note:offer.regional?c.searchNote:c.note;
+    const note=document.createElement('p');note.className='aff-note';note.textContent=(offer.travel||offer.tour||offer.activity)?offer.note:offer.regional?c.searchNote:c.note;
     const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
     box.append(heading,lead,a,note,disclosure);
     if(offer.choiceCount>1){const next=document.createElement('button');next.type='button';next.className='aff-next';next.textContent=PlaceUI.pick(['Another option','ほかの案内を見る','다른 옵션 보기','查看其他选项','查看其他選項'],lang);next.onclick=()=>{affiliateRotation.next(rotationKey);renderAffiliate(currentAffiliatePlace);};box.append(next);}
@@ -2678,7 +2678,7 @@ async function runSearch(v,autoPick){
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
  try{
-  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.75');
+  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.76');
    nationalWorker.onmessage=({data})=>{
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
@@ -2796,6 +2796,7 @@ function openMap(){
 }
 
 function closePlace(){
+  currentAffiliatePlace=null;clearGygFrame();
   document.body.classList.remove('roaming');
   roaming = false; current = null;
   lastPanel = null;                  // ホームに戻ったら、開き直す対象はもう無い
@@ -3047,7 +3048,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.75').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.76').then(r => r.ok ? r.json() : null)
       .then(setAffiliateConfig).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が

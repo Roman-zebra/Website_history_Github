@@ -831,6 +831,932 @@
         "commissionReviewedOn": "2026-09-12",
         "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
       }
+    ],
+    "activityOffers": [
+      {
+        "id": "klook-activity-197885",
+        "productId": "197885",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-01",
+        "placeIds": [
+          "a-nijo-market"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/197885/",
+        "names": {
+          "en": "Nijo Market seafood brunch tour",
+          "ja": "二条市場の海鮮ブランチツアー",
+          "ko": "니조 시장 해산물 브런치 투어",
+          "zh-Hans": "二条市场海鲜早午餐之旅",
+          "zh-Hant": "二條市場海鮮早午餐之旅"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-194995",
+        "productId": "194995",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-01",
+        "placeIds": [
+          "a-hakodate-market",
+          "a-kanemori-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/194995/",
+        "names": {
+          "en": "Hakodate private walk: morning market & red brick warehouses",
+          "ja": "函館朝市・赤レンガ倉庫を巡るプライベートツアー",
+          "ko": "하코다테 아침 시장·붉은 벽돌 창고 프라이빗 투어",
+          "zh-Hans": "函馆朝市与红砖仓库私人游",
+          "zh-Hant": "函館朝市與紅磚倉庫私人遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-230028",
+        "productId": "230028",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-02",
+        "placeIds": [
+          "a-aomori-nokkedon"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/230028/",
+        "names": {
+          "en": "Aomori seafood market & nokkedon experience",
+          "ja": "青森の海鮮市場・のっけ丼体験",
+          "ko": "아오모리 해산물 시장·놋케돈 체험",
+          "zh-Hans": "青森海鲜市场与自选海鲜盖饭体验",
+          "zh-Hant": "青森海鮮市場與自選海鮮蓋飯體驗"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-120479",
+        "productId": "120479",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-02",
+        "placeIds": [
+          "a-hasshoku-center"
+        ],
+        "match": "area",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/120479/",
+        "names": {
+          "en": "From Aomori: Hachinohe seafood & coast day trip · Plan 3",
+          "ja": "青森発・八戸の海鮮と海岸を巡る日帰り旅（プラン3）",
+          "ko": "아오모리 출발: 하치노헤 해산물·해안 당일 투어 · 플랜 3",
+          "zh-Hans": "青森出发：八户海鲜与海岸一日游 · 方案3",
+          "zh-Hant": "青森出發：八戶海鮮與海岸一日遊 · 方案3"
+        },
+        "notes": {
+          "en": "Departs from Aomori. Select Plan 3 for Hachinohe seafood and the coast; confirm the market stop and guide language.",
+          "ja": "青森発。八戸の海鮮と海岸を巡るプラン3を選び、立ち寄る市場・対応言語をご確認ください。",
+          "ko": "아오모리 출발. 하치노헤 해산물·해안 플랜 3을 선택하고 방문 시장과 안내 언어를 확인하세요.",
+          "zh-Hans": "青森出发。请选择八户海鲜与海岸方案3，并确认停靠市场和导游语言。",
+          "zh-Hant": "青森出發。請選擇八戶海鮮與海岸方案3，並確認停靠市場和導遊語言。"
+        }
+      },
+      {
+        "id": "klook-activity-115912",
+        "productId": "115912",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-04",
+        "placeIds": [
+          "a-sendai-market"
+        ],
+        "match": "area",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/115912/",
+        "names": {
+          "en": "Sendai local food walking tour",
+          "ja": "仙台市内のご当地グルメ散策ツアー",
+          "ko": "센다이 시내 현지 음식 도보 투어",
+          "zh-Hans": "仙台市内当地美食徒步游",
+          "zh-Hant": "仙台市內在地美食徒步遊"
+        },
+        "notes": {
+          "en": "A Sendai city food tour. Confirm the actual stops, meeting point and guide language.",
+          "ja": "仙台市内の食ツアーです。訪問店・集合場所・対応言語をご確認ください。",
+          "ko": "센다이 시내 미식 투어입니다. 방문 매장, 집합 장소와 안내 언어를 확인하세요.",
+          "zh-Hans": "仙台市内美食游，请确认实际餐厅、集合地点和导游语言。",
+          "zh-Hant": "仙台市內美食遊，請確認實際餐廳、集合地點和導遊語言。"
+        }
+      },
+      {
+        "id": "klook-activity-171908",
+        "productId": "171908",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-15",
+        "placeIds": [
+          "a-pier-bandai"
+        ],
+        "match": "area",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/171908/",
+        "names": {
+          "en": "Niigata Bandai: Japanese Dining Kura meal reservation",
+          "ja": "新潟・万代「日本料理 蔵」の食事予約",
+          "ko": "니가타 반다이: 일본 요리 쿠라 식사 예약",
+          "zh-Hans": "新潟万代：日本料理藏餐饮预订",
+          "zh-Hant": "新潟萬代：日本料理藏餐飲預訂"
+        },
+        "notes": {
+          "en": "Dining at ANA Crowne Plaza Niigata in Bandai, a separate restaurant from the market. Check course details.",
+          "ja": "万代のANAクラウンプラザホテル新潟内のレストランです。市場とは別店舗のため、場所・コース内容をご確認ください。",
+          "ko": "반다이 ANA 크라운 플라자 니가타 내 레스토랑입니다. 시장과 별도 매장이므로 위치와 코스를 확인하세요.",
+          "zh-Hans": "位于万代的ANA皇冠假日酒店内，是市场以外的餐厅。请确认地点与套餐。",
+          "zh-Hant": "位於萬代的ANA皇冠假日酒店內，是市場以外的餐廳。請確認地點與套餐。"
+        }
+      },
+      {
+        "id": "klook-activity-95063",
+        "productId": "95063",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-17",
+        "placeIds": [
+          "a-omicho-market",
+          "a-higashi-chaya-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/95063/",
+        "names": {
+          "en": "Kanazawa: Omicho Market & Higashi Chaya food walk",
+          "ja": "近江町市場・ひがし茶屋街の食べ歩きツアー",
+          "ko": "오미초 시장·히가시 차야가이 미식 투어",
+          "zh-Hans": "近江町市场与东茶屋街美食游",
+          "zh-Hant": "近江町市場與東茶屋街美食遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-91141",
+        "productId": "91141",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-21",
+        "placeIds": [
+          "a-miyagawa-market"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/91141/",
+        "names": {
+          "en": "From Takayama: morning market & Shirakawa-go day tour",
+          "ja": "高山発・宮川朝市と白川郷を巡る日帰りツアー",
+          "ko": "다카야마 출발: 미야가와 아침 시장·시라카와고 투어",
+          "zh-Hans": "高山出发：宫川早市与白川乡一日游",
+          "zh-Hant": "高山出發：宮川早市與白川鄉一日遊"
+        },
+        "notes": {
+          "en": "Departs from Takayama. Includes a Miyagawa Market stop and a trip to Shirakawa-go. Check the full itinerary.",
+          "ja": "高山発。宮川朝市への立ち寄りと白川郷観光を含むツアーです。全行程をご確認ください。",
+          "ko": "다카야마 출발. 미야가와 시장과 시라카와고를 방문합니다. 전체 일정을 확인하세요.",
+          "zh-Hans": "高山出发，行程包含宫川早市与白川乡。请确认完整行程。",
+          "zh-Hant": "高山出發，行程包含宮川早市與白川鄉。請確認完整行程。"
+        }
+      },
+      {
+        "id": "klook-activity-91388",
+        "productId": "91388",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-13",
+        "placeIds": [
+          "a-tsukiji-outer"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/91388/",
+        "names": {
+          "en": "Tsukiji market private half-day tour",
+          "ja": "築地市場のプライベート半日ツアー",
+          "ko": "쓰키지 시장 프라이빗 반일 투어",
+          "zh-Hans": "筑地市场私人半日游",
+          "zh-Hant": "築地市場私人半日遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-135117",
+        "productId": "135117",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-14",
+        "placeIds": [
+          "a-shin-yokohama-ramen"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/135117/",
+        "names": {
+          "en": "Shin-Yokohama Ramen Museum admission ticket",
+          "ja": "新横浜ラーメン博物館 入場券",
+          "ko": "신요코하마 라멘 박물관 입장권",
+          "zh-Hans": "新横滨拉面博物馆门票",
+          "zh-Hant": "新橫濱拉麵博物館門票"
+        },
+        "notes": {
+          "en": "Museum admission only; ramen and meals cost extra. Check ticket conditions.",
+          "ja": "博物館の入場券です。ラーメンなどの飲食代は別料金です。利用条件をご確認ください。",
+          "ko": "박물관 입장권입니다. 라멘 등 식사 비용은 별도입니다. 이용 조건을 확인하세요.",
+          "zh-Hans": "仅含博物馆门票，拉面等餐饮需另付费。请确认使用条件。",
+          "zh-Hant": "僅含博物館門票，拉麵等餐飲需另付費。請確認使用條件。"
+        }
+      },
+      {
+        "id": "klook-activity-160776",
+        "productId": "160776",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-26",
+        "placeIds": [
+          "a-nishiki-market"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/160776/",
+        "names": {
+          "en": "Nishiki Market guided food tour",
+          "ja": "錦市場のガイド付きグルメツアー",
+          "ko": "니시키 시장 가이드 미식 투어",
+          "zh-Hans": "锦市场导览美食游",
+          "zh-Hant": "錦市場導覽美食遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-92805",
+        "productId": "92805",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-27",
+        "placeIds": [
+          "a-kuromon-market"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/92805/",
+        "names": {
+          "en": "Kuromon Market food walking tour",
+          "ja": "黒門市場の食べ歩きツアー",
+          "ko": "구로몬 시장 미식 도보 투어",
+          "zh-Hans": "黑门市场美食徒步游",
+          "zh-Hant": "黑門市場美食徒步遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-94409",
+        "productId": "94409",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-27",
+        "placeIds": [
+          "a-dotonbori-food"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/94409/",
+        "names": {
+          "en": "Dotonbori & Shinsekai food tour",
+          "ja": "道頓堀・新世界のグルメツアー",
+          "ko": "도톤보리·신세카이 미식 투어",
+          "zh-Hans": "道顿堀与新世界美食游",
+          "zh-Hant": "道頓堀與新世界美食遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-93518",
+        "productId": "93518",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-34",
+        "placeIds": [
+          "a-okonomimura"
+        ],
+        "match": "area",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/93518/",
+        "names": {
+          "en": "Hiroshima okonomiyaki & bar-hopping food tour",
+          "ja": "広島のお好み焼き・はしご酒ツアー",
+          "ko": "히로시마 오코노미야키·바 호핑 투어",
+          "zh-Hans": "广岛御好烧与酒馆美食游",
+          "zh-Hant": "廣島御好燒與酒館美食遊"
+        },
+        "notes": {
+          "en": "A Hiroshima city food and bar tour. Confirm venues, age requirements and guide language.",
+          "ja": "広島市内の飲食店を巡るツアーです。訪問店・年齢条件・対応言語をご確認ください。",
+          "ko": "히로시마 시내 음식점·바 투어입니다. 방문점, 연령 조건과 안내 언어를 확인하세요.",
+          "zh-Hans": "广岛市内餐厅与酒馆之旅，请确认餐厅、年龄限制和导游语言。",
+          "zh-Hant": "廣島市內餐廳與酒館之旅，請確認餐廳、年齡限制和導遊語言。"
+        }
+      },
+      {
+        "id": "klook-activity-169345",
+        "productId": "169345",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-39",
+        "placeIds": [
+          "a-hirome-market"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/169345/",
+        "names": {
+          "en": "Kochi tour with Hirome Market, castle & botanical garden",
+          "ja": "ひろめ市場・高知城・植物園を巡るツアー",
+          "ko": "히로메 시장·고치성·식물원 투어",
+          "zh-Hans": "弘人市场、高知城与植物园之旅",
+          "zh-Hant": "弘人市場、高知城與植物園之旅"
+        },
+        "notes": {
+          "en": "Includes Hirome Market within a wider Kochi itinerary. Meals cost extra; check the full route and guide language.",
+          "ja": "ひろめ市場を含む高知観光ツアーです。食事代は別料金です。全行程・対応言語をご確認ください。",
+          "ko": "히로메 시장을 포함한 고치 관광 투어입니다. 식사 비용은 별도입니다. 전체 일정과 안내 언어를 확인하세요.",
+          "zh-Hans": "包含弘人市场的高知观光游。餐费另付，请确认完整行程和导游语言。",
+          "zh-Hant": "包含弘人市場的高知觀光遊。餐費另付，請確認完整行程和導遊語言。"
+        }
+      },
+      {
+        "id": "klook-activity-170647",
+        "productId": "170647",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-35",
+        "placeIds": [
+          "a-karato-market"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/170647/",
+        "names": {
+          "en": "From Fukuoka: Karato Market & Mojiko day tour",
+          "ja": "福岡発・唐戸市場と門司港の日帰りツアー",
+          "ko": "후쿠오카 출발: 가라토 시장·모지코 당일 투어",
+          "zh-Hans": "福冈出发：唐户市场与门司港一日游",
+          "zh-Hant": "福岡出發：唐戶市場與門司港一日遊"
+        },
+        "notes": {
+          "en": "Departs from Fukuoka. Check the Karato Market itinerary, departure point and guide language.",
+          "ja": "福岡発のツアーです。唐戸市場を含む行程・出発場所・対応言語をご確認ください。",
+          "ko": "후쿠오카 출발 투어입니다. 가라토 시장 포함 일정, 출발 장소와 안내 언어를 확인하세요.",
+          "zh-Hans": "福冈出发，请确认包含唐户市场的行程、出发地点和导游语言。",
+          "zh-Hant": "福岡出發，請確認包含唐戶市場的行程、出發地點和導遊語言。"
+        }
+      },
+      {
+        "id": "klook-activity-199474",
+        "productId": "199474",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-40",
+        "placeIds": [
+          "a-nakasu-yatai"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/199474/",
+        "names": {
+          "en": "Nakasu yatai private food tour",
+          "ja": "中洲屋台のプライベートグルメツアー",
+          "ko": "나카스 야타이 프라이빗 미식 투어",
+          "zh-Hans": "中洲屋台私人美食游",
+          "zh-Hant": "中洲屋台私人美食遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-206330",
+        "productId": "206330",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-47",
+        "placeIds": [
+          "a-makishi-market"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/206330/",
+        "names": {
+          "en": "Makishi Market visit & Okinawan cooking class",
+          "ja": "牧志公設市場めぐり・沖縄料理教室",
+          "ko": "마키시 공설 시장 방문·오키나와 요리 교실",
+          "zh-Hans": "牧志公设市场参观与冲绳料理课程",
+          "zh-Hant": "牧志公設市場參觀與沖繩料理課程"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-141407",
+        "productId": "141407",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-01",
+        "placeIds": [
+          "a-tanukikoji"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/141407/",
+        "names": {
+          "en": "Sapporo private walk with Tanukikoji shopping street",
+          "ja": "狸小路を巡る札幌プライベート街歩き",
+          "ko": "다누키코지 상점가를 둘러보는 삿포로 프라이빗 투어",
+          "zh-Hans": "札幌狸小路商店街私人徒步游",
+          "zh-Hant": "札幌狸小路商店街私人徒步遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-174237",
+        "productId": "174237",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-13",
+        "placeIds": [
+          "a-kappabashi"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/174237/",
+        "names": {
+          "en": "Kappabashi kitchenware street & Asakusa guided walk",
+          "ja": "かっぱ橋道具街・浅草のガイド付き散策",
+          "ko": "갓파바시 도구 거리·아사쿠사 가이드 투어",
+          "zh-Hans": "合羽桥道具街与浅草导览",
+          "zh-Hant": "合羽橋道具街與淺草導覽"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-169317",
+        "productId": "169317",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-13",
+        "placeIds": [
+          "a-ameyoko"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/169317/",
+        "names": {
+          "en": "Ueno Park & Ameyoko shopping street walking tour",
+          "ja": "上野公園・アメ横商店街の散策ツアー",
+          "ko": "우에노 공원·아메요코 상점가 도보 투어",
+          "zh-Hans": "上野公园与阿美横丁商店街徒步游",
+          "zh-Hant": "上野公園與阿美橫丁商店街徒步遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-44790",
+        "productId": "44790",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-13",
+        "placeIds": [
+          "a-nakano-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/44790/",
+        "names": {
+          "en": "Tokyo private otaku shopping tour: Nakano & Akihabara",
+          "ja": "中野・秋葉原のサブカルチャー買い物ツアー",
+          "ko": "나카노·아키하바라 서브컬처 쇼핑 투어",
+          "zh-Hans": "中野与秋叶原御宅文化购物游",
+          "zh-Hant": "中野與秋葉原御宅文化購物遊"
+        },
+        "notes": {
+          "en": "A personalized itinerary. Request Nakano Broadway and confirm the route with the operator. Purchases cost extra.",
+          "ja": "希望に合わせるツアーです。中野ブロードウェイ訪問と行程を催行会社にご確認ください。商品購入は別料金です。",
+          "ko": "맞춤 투어입니다. 나카노 브로드웨이 방문과 경로를 운영사에 확인하세요. 쇼핑 비용은 별도입니다.",
+          "zh-Hans": "定制行程，请向运营商确认中野百老汇的参观安排。购物另付费。",
+          "zh-Hant": "客製行程，請向業者確認中野百老匯的參觀安排。購物另付費。"
+        }
+      },
+      {
+        "id": "klook-activity-150558",
+        "productId": "150558",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-13",
+        "placeIds": [
+          "a-akihabara-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/150558/",
+        "names": {
+          "en": "Akihabara anime, manga & game shopping tour",
+          "ja": "秋葉原のアニメ・マンガ・ゲームショップ巡り",
+          "ko": "아키하바라 애니메이션·만화·게임 매장 투어",
+          "zh-Hans": "秋叶原动漫与游戏商店之旅",
+          "zh-Hant": "秋葉原動漫與遊戲商店之旅"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-103173",
+        "productId": "103173",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-13",
+        "placeIds": [
+          "a-harajuku-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/103173/",
+        "names": {
+          "en": "Harajuku & Takeshita Street guided walk",
+          "ja": "原宿・竹下通りのガイド付き散策",
+          "ko": "하라주쿠·다케시타 거리 가이드 투어",
+          "zh-Hans": "原宿与竹下通导览",
+          "zh-Hant": "原宿與竹下通導覽"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-184236",
+        "productId": "184236",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-13",
+        "placeIds": [
+          "a-ginza-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/184236/",
+        "names": {
+          "en": "Ginza shopping streets & hidden alleys walking tour",
+          "ja": "銀座の大通りと路地を巡る散策ツアー",
+          "ko": "긴자 쇼핑 거리·골목 도보 투어",
+          "zh-Hans": "银座购物街与小巷徒步游",
+          "zh-Hant": "銀座購物街與小巷徒步遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-128535",
+        "productId": "128535",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-13",
+        "placeIds": [
+          "a-shibuya-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/128535/",
+        "names": {
+          "en": "Shibuya personal shopping tour with a fashion guide",
+          "ja": "ファッションガイドと巡る渋谷ショッピングツアー",
+          "ko": "패션 가이드와 함께하는 시부야 쇼핑 투어",
+          "zh-Hans": "时尚导购陪同涩谷购物游",
+          "zh-Hant": "時尚導購陪同澀谷購物遊"
+        },
+        "notes": {
+          "en": "Select the Shibuya route. Check guide language and included services; merchandise costs extra.",
+          "ja": "渋谷コースをお選びください。対応言語とサービス内容をご確認ください。商品購入は別料金です。",
+          "ko": "시부야 코스를 선택하세요. 안내 언어와 서비스 내용을 확인하세요. 상품 구매 비용은 별도입니다.",
+          "zh-Hans": "请选择涩谷路线，确认导购语言与服务内容。购物另付费。",
+          "zh-Hant": "請選擇澀谷路線，確認導購語言與服務內容。購物另付費。"
+        }
+      },
+      {
+        "id": "klook-activity-80744",
+        "productId": "80744",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-23",
+        "placeIds": [
+          "a-osu-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/80744/",
+        "names": {
+          "en": "Osu shopping district private food walk",
+          "ja": "大須商店街のプライベートグルメ散策",
+          "ko": "오스 상점가 프라이빗 미식 투어",
+          "zh-Hans": "大须商店街私人美食徒步游",
+          "zh-Hant": "大須商店街私人美食徒步遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-183574",
+        "productId": "183574",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-26",
+        "placeIds": [
+          "a-teramachi-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/183574/",
+        "names": {
+          "en": "Kyoto Teramachi craftsmanship discovery tour",
+          "ja": "京都・寺町の職人文化を巡るツアー",
+          "ko": "교토 데라마치 장인 문화 투어",
+          "zh-Hans": "京都寺町工艺文化探索游",
+          "zh-Hant": "京都寺町工藝文化探索遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-92874",
+        "productId": "92874",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-27",
+        "placeIds": [
+          "a-tenjinbashisuji"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/92874/",
+        "names": {
+          "en": "Osaka bicycle tour with Tenjinbashisuji shopping street",
+          "ja": "天神橋筋商店街に立ち寄る大阪サイクリングツアー",
+          "ko": "덴진바시스지 상점가 경유 오사카 자전거 투어",
+          "zh-Hans": "途经天神桥筋商店街的大阪骑行游",
+          "zh-Hant": "途經天神橋筋商店街的大阪單車遊"
+        },
+        "notes": {
+          "en": "A bicycle tour with a short shopping-street stop. Check cycling requirements, the itinerary and guide language.",
+          "ja": "商店街に短時間立ち寄る自転車ツアーです。参加条件・行程・対応言語をご確認ください。",
+          "ko": "상점가에 잠시 들르는 자전거 투어입니다. 참가 조건, 일정과 안내 언어를 확인하세요.",
+          "zh-Hans": "骑行途中短暂停靠商店街，请确认骑行要求、行程与导游语言。",
+          "zh-Hant": "單車行程中短暫停靠商店街，請確認騎乘要求、行程與導遊語言。"
+        }
+      },
+      {
+        "id": "klook-activity-182858",
+        "productId": "182858",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-27",
+        "placeIds": [
+          "a-shinsaibashi-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/182858/",
+        "names": {
+          "en": "Shinsaibashi & Dotonbori private walking tour",
+          "ja": "心斎橋・道頓堀のプライベート散策ツアー",
+          "ko": "신사이바시·도톤보리 프라이빗 도보 투어",
+          "zh-Hans": "心斋桥与道顿堀私人徒步游",
+          "zh-Hant": "心齋橋與道頓堀私人徒步遊"
+        },
+        "notes": {
+          "en": "Check dates, meeting point, guide language and inclusions on Klook.",
+          "ja": "日程・集合場所・ガイドの対応言語・料金に含まれる内容はKlookでご確認ください。",
+          "ko": "날짜, 집합 장소, 가이드 언어와 포함 사항은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认日期、集合地点、导游语言与费用包含项目。",
+          "zh-Hant": "請在Klook確認日期、集合地點、導遊語言與費用包含項目。"
+        }
+      },
+      {
+        "id": "klook-activity-185197",
+        "productId": "185197",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-28",
+        "placeIds": [
+          "a-kobe-motomachi"
+        ],
+        "match": "area",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/185197/",
+        "names": {
+          "en": "Kobe private walking tour with a student guide",
+          "ja": "学生ガイドと巡る神戸のプライベート街歩き",
+          "ko": "학생 가이드와 함께하는 고베 프라이빗 투어",
+          "zh-Hans": "学生导游陪同神户私人徒步游",
+          "zh-Hant": "學生導遊陪同神戶私人徒步遊"
+        },
+        "notes": {
+          "en": "A customizable Kobe city tour. Request the Motomachi shopping area and confirm the route and guide language.",
+          "ja": "神戸市内の相談可能なツアーです。元町の買い物エリアへの訪問・行程・対応言語をご確認ください。",
+          "ko": "고베 시내 맞춤 투어입니다. 모토마치 쇼핑 지역 방문, 경로와 안내 언어를 확인하세요.",
+          "zh-Hans": "神户市内定制游，请确认元町购物区的参观安排、路线和导游语言。",
+          "zh-Hant": "神戶市內客製遊，請確認元町購物區的參觀安排、路線和導遊語言。"
+        }
+      },
+      {
+        "id": "klook-activity-154990",
+        "productId": "154990",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-33",
+        "placeIds": [
+          "a-kurashiki-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/154990/",
+        "names": {
+          "en": "Kurashiki Bikan district strolling coupons",
+          "ja": "倉敷美観地区のまち歩きクーポン",
+          "ko": "구라시키 미관 지구 산책 쿠폰",
+          "zh-Hans": "仓敷美观地区漫步优惠券",
+          "zh-Hant": "倉敷美觀地區漫步優惠券"
+        },
+        "notes": {
+          "en": "Check participating shops, redemption, eligible purchases and expiry on Klook.",
+          "ja": "対象店舗・引換方法・対象商品・有効期限はKlookでご確認ください。",
+          "ko": "대상 매장, 교환 방법, 적용 상품과 유효 기간은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认适用商店、兑换方式、适用商品与有效期。",
+          "zh-Hant": "請在Klook確認適用商店、兌換方式、適用商品與有效期。"
+        },
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      },
+      {
+        "id": "klook-activity-149059",
+        "productId": "149059",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-40",
+        "placeIds": [
+          "a-tenjin-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/149059/",
+        "names": {
+          "en": "Tenjin shopping: Ohga Pharmacy coupon",
+          "ja": "天神の買い物に・大賀薬局クーポン",
+          "ko": "덴진 쇼핑: 오가 약국 쿠폰",
+          "zh-Hans": "天神购物：大贺药局优惠券",
+          "zh-Hant": "天神購物：大賀藥局優惠券"
+        },
+        "notes": {
+          "en": "Check participating shops, redemption, eligible purchases and expiry on Klook.",
+          "ja": "対象店舗・引換方法・対象商品・有効期限はKlookでご確認ください。",
+          "ko": "대상 매장, 교환 방법, 적용 상품과 유효 기간은 Klook에서 확인하세요.",
+          "zh-Hans": "请在Klook确认适用商店、兑换方式、适用商品与有效期。",
+          "zh-Hant": "請在Klook確認適用商店、兌換方式、適用商品與有效期。"
+        },
+        "expiresOn": "2026-12-31T15:00:00Z"
+      },
+      {
+        "id": "klook-activity-94541",
+        "productId": "94541",
+        "provider": "klook",
+        "enabled": true,
+        "prefecture": "JP-47",
+        "placeIds": [
+          "a-kokusai-shopping"
+        ],
+        "match": "itinerary",
+        "reviewedOn": "2026-09-12",
+        "source": "https://www.klook.com/en-US/activity/94541/",
+        "names": {
+          "en": "Kokusai Street handmade souvenir workshop",
+          "ja": "国際通りの手作りおみやげ体験",
+          "ko": "국제 거리 수제 기념품 체험",
+          "zh-Hans": "国际通手作纪念品体验",
+          "zh-Hant": "國際通手作紀念品體驗"
+        },
+        "notes": {
+          "en": "The workshop lists Japanese instruction. Check language support, craft options and meeting point before booking.",
+          "ja": "日本語での体験案内です。制作メニュー・対応言語・集合場所をご確認ください。",
+          "ko": "일본어로 진행되는 체험입니다. 언어 지원, 제작 메뉴와 집합 장소를 예약 전에 확인하세요.",
+          "zh-Hans": "课程标注为日语教学，请在预订前确认语言支持、手作项目和集合地点。",
+          "zh-Hant": "課程標示為日語教學，請在預訂前確認語言支援、手作項目和集合地點。"
+        }
+      }
     ]
   },
   "offers": [
