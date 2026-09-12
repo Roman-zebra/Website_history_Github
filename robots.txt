@@ -1,7 +1,4 @@
-# Japan, Then & Now
-# 検索エンジンにもAIにも開いている。見つけてもらうことが目的。
-
 User-agent: *
 Allow: /
 
-Sitemap: https://japan-then-and-now.hiddenjapan.workers.dev/sitemap.xml
+Sitemap: https://japantimeatlas.com/sitemap.xml

@@ -2,10 +2,23 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "japan-then-and-now",
   "compatibility_date": "2026-09-09",
-  "build": { "command": "node scripts/build.cjs" },
+  "build": {
+    "command": "node scripts/build.cjs"
+  },
   "assets": {
     "directory": "./dist",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"
-  }
+  },
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "japantimeatlas.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.japantimeatlas.com",
+      "custom_domain": true
+    }
+  ]
 }
