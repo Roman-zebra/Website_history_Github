@@ -10,7 +10,7 @@ test('all 36 food/shopping destinations have one explicit Klook product in all f
  assert.equal(offers.length,34);assert.equal(ids.length,36);assert.equal(new Set(ids).size,36);
  assert.deepEqual([...ids].sort(),places.map(p=>'a-'+p.id).sort());
  for(const p of places)for(const lang of UI.langs){
-  const ad=router.resolveOffer(config,panel(p),lang,now);assert.ok(ad,p.id+' '+lang);assert.ok(ad.activity);assert.ok(ad.placeIds.includes('a-'+p.id));assert.equal(ad.km,undefined);
+  const ad=router.resolveOffer(config,panel(p),lang,now);assert.ok(ad,p.id+' '+lang);assert.ok(ad.activity);assert.ok(ad.placeIds.includes('a-'+p.id));assert.equal(ad.km,undefined);assert.equal(router.getYourGuide(config,panel(p),lang),null);
   assert.equal(ad.label,ad.names[lang]);assert.equal(ad.note,ad.notes[lang]);
   const u=new URL(ad.url),destination=new URL(u.searchParams.get('k_site'));
   assert.equal(u.hostname,'affiliate.klook.com');assert.equal(u.searchParams.get('aid'),'134890');assert.equal(u.searchParams.get('aff_label1'),'jta_map');assert.equal(u.searchParams.get('aff_label2'),ad.prefecture);assert.equal(u.searchParams.get('aff_label3'),ad.productId);
@@ -31,7 +31,7 @@ test('unreviewed, expired, disabled, invalid and unknown activity offers never b
  assert.equal(router.activity(config,panel(places.find(p=>p.id==='tenjin-shopping')),'ja',Date.parse(coupon.expiresOn)),null);
 });
 test('a previous regional lookup cannot replace a new activity card and unmatched activities skip geocoding',async()=>{
- const resolve=router.createResolver(),c=fresh(),paints=[];let finish;
+ const resolve=router.createResolver(),c=fresh(),paints=[];c.getyourguide.enabled=false;let finish;
  const older=resolve({...c,offers:[]},{at:[35,135],adTier:1},'en',()=>new Promise(r=>finish=r),o=>paints.push(o));
  await resolve(c,panel(places[0]),'ja',()=>{throw Error('Unexpected activity geocode');},o=>paints.push(o));
  const current=paints.at(-1);assert.ok(current.activity);finish({country_code:'jp',state:'東京都'});await older;assert.equal(paints.at(-1),current);

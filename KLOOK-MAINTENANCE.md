@@ -1,7 +1,7 @@
 # Klook place cards
 
 Registered website: JAPAN TIME ATLAS, https://japantimeatlas.com, public AID 134890.
-The overview card sits between the source credit and About this site. It is a disclosed sponsored link; no third-party widget, tracking script or automatic affiliate request runs when the map opens.
+The overview card sits between the source credit and About this site. Klook fallback cards are disclosed sponsored links without their own tracking script. GetYourGuide is now primary at eligible points and loads its official widget/analyzer; see GETYOURGUIDE-MAINTENANCE.md for current precedence and scope.
 
 ## Selection
 
@@ -9,6 +9,7 @@ The overview card sits between the source credit and About this site. It is a di
 - Some offers are related local alternatives rather than a guaranteed stop: Hachinohe coastal/seafood Plan 3 departs from Aomori (confirm the market), Sendai is a city food tour, Pier Bandai uses the separate Kura restaurant at ANA Crowne Plaza Niigata, Hiroshima uses a city okonomiyaki/bar tour, and Kobe uses a customizable city walk. These have `match: area` and explanatory notes. Nakano's personalized route must be confirmed. Shibuya requires selecting the Shibuya package. Karato departs from Fukuoka; Miyagawa's itinerary departs from Takayama and also visits Shirakawa-go.
 - The ramen museum offer covers admission, with food charged separately. The Kochi itinerary includes Hirome Market with meals charged separately. The Tenjinbashisuji visit is a brief stop on a bicycle tour. Kokusai Street's workshop lists Japanese instruction. Coupons require checking participating shops, redemption, eligible purchases and expiry; the Ohga coupon's published December 31, 2026 expiry is enforced in the catalog.
 - The affiliate configuration can load after a shared spot opens. Once loaded, it refreshes the currently visible panel without reopening a panel that the visitor has closed.
+
 
 - Sizes 1 and 2 choose the nearest reviewed physical product, including Aneyoshi. Cards show prefecture and straight-line distance, not a walking-distance claim. The 128 editorial markers (36 existing plus 92 regional additions) are not measured popularity rankings.
 - Sizes 3 and 4, including Wikipedia, memorial, liminal and local pins, choose the nearest physical product only within one international mile: 1.609344 km. The zoom appearance field is separate from visual size. There is no distant regional-search fallback for small pins.
@@ -64,7 +65,8 @@ The overview has one card. Relevant tours and the existing eligible experience o
 
 The expanded commission audit covers 105 product IDs: 100 at 5%, four at 2%, one at 0% disabled; 104 active products. These are observed base rates, not guaranteed commission or availability. No published minimum traffic, tenure or new-affiliate API approval criteria were located. Selected-partner API/feed access must not be inferred from ordinary affiliate registration.
 
-Major departure stations with incomplete OSM service tags are also matched by exact station identity within 800 m of the attributed station center. Service reference: https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf . This does not turn arbitrary nearby landmarks into station hubs. New food/shopping collection pins retain their third visual size. Their dedicated activityOffers now take precedence by exact destination ID; the hub rotation policy continues for the other places.
+Major departure stations with incomplete OSM service tags are also matched by exact station identity within 800 m of the attributed station center. Service reference: https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf . This does not turn arbitrary nearby landmarks into station hubs. New food/shopping collection pins retain their third visual size and use dedicated Klook activity offers by exact destination ID. GetYourGuide and hub rotation rules remain on other eligible places.
+
 
 Activity offers additionally need exact destination IDs, a Klook product reference, five localized names/notes, review dates and known expiry dates. Remove or disable an offer if its named itinerary or location changes. The September 12, 2026 activity review covers 34 product pages, not a live inventory feed; future dates, availability and commission eligibility remain subject to Klook. Free coupons do not imply a commission payment. `tests/activity-offers.test.cjs` checks all 36 destinations in five languages, expired/invalid/unmatched offers, stale asynchronous lookups, and loading the configuration after opening or closing a panel.
 

@@ -1,6 +1,6 @@
 /* Lazy nationwide index in a worker, so reading 200k places never blocks the map. */
-importScripts('place-ui.js?v=0.75','search-core.js?v=0.75');
-const VERSION='0.75-0.47',rows=[],loaded=new Set();
+importScripts('place-ui.js?v=0.76','search-core.js?v=0.76');
+const VERSION='0.76-0.47',rows=[],loaded=new Set();
 let pending=null,loading=null;
 async function json(url){const r=await fetch(url);if(!r.ok)throw Error(url);return r.json();}
 function emit(type,extra={}){if(pending)postMessage({type,seq:pending.seq,...extra});}

@@ -4340,5 +4340,21 @@
     "Public affiliate ID 134890 is verified for JAPAN TIME ATLAS. Link format: https://affiliate.klook.com/custom_tag_guide; k_site is last. No secrets or visitor/click identifiers belong here.",
     "Physical products require verified venue coordinates. Recheck all offers within 180 days; expired reviews are suppressed. Prices, dates, eligibility, exchange locations and available services remain on Klook.",
     "Klook landing pages returned a redirect error with attribution in the setup browser. Do not claim booking attribution or payouts are verified; see KLOOK-MAINTENANCE.md."
-  ]
+  ],
+  "getyourguide": {
+    "enabled": true,
+    "partnerId": "BHO3FAQ",
+    "reviewedOn": "2026-09-12",
+    "mode": "official-coordinate-widget",
+    "numberOfItems": 1,
+    "priority": "GetYourGuide is shown first at the same eligible point; Klook is a loading-failure fallback or remains on other small points.",
+    "source": "https://partner.getyourguide.com/en-us/solutions/activities",
+    "inventory": {
+      "scope": "GetYourGuide marketplace selected by the official geographical widget",
+      "completeLocalCatalog": false,
+      "apiAccessVerified": false,
+      "nearestDistanceGuaranteed": false,
+      "note": "The official widget chooses a regional activity from its own inventory. It does not expose a complete geocoded catalog or guarantee a radius, the closest product, availability of every product or tour-only results."
+    }
+  }
 }

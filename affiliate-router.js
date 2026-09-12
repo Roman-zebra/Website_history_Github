@@ -137,16 +137,30 @@
   const list=[...tours(config,place,lang,now),resolveOffer(config,place,lang,now)].filter(Boolean);
   return list.filter((o,i)=>list.findIndex(p=>p.id===o.id)===i);
  }
+ function getYourGuide(config,place,lang){
+  const g=config?.getyourguide,t=place?.travelTags||{};
+  if(activityPlace(place)||!eligible(config,place)||!g?.enabled||place.skipGyg||!['en','ja','ko','zh-Hans','zh-Hant'].includes(lang)||!/^[A-Z0-9]{5,12}$/.test(g.partnerId||''))return null;
+  const hub=tourHub(config,place),international=t.aeroway==='aerodrome'&&config.klook?.internationalAirports?.includes(t.iata);
+  if(!prominent(place)&&!international&&!['station','downtown'].includes(hub))return null;
+  if(place.at[0]<20||place.at[0]>46||place.at[1]<122||place.at[1]>154)return null;
+  // Airport recommendations use the served departure city where it is reviewed.
+  // These centers do not claim airport pickup or an exact meeting location.
+  const region=international?(config.klook.tourRegions||[]).find(r=>r.airports?.includes(t.iata)):null;
+  const at=region?.at||place.at,key=place.at.map(n=>n.toFixed(3)).join('_');
+  return {id:'gyg-'+key,provider:'getyourguide',widget:true,at,locale:({en:'en-US',ja:'ja-JP',ko:'ko-KR','zh-Hans':'zh-CN','zh-Hant':'zh-TW'})[lang],campaign:'jta_map_'+key,partnerId:g.partnerId,international:!!international};
+ }
+ function providerCopy(lang,provider){const c=copy[lang]||copy.en;return provider==='getyourguide'?{...c,ad:c.ad.replace('Klook','GetYourGuide'),cta:c.cta.replace('Klook','GetYourGuide')}:c;}
  // Counts actual overview openings, never configuration/language/data refreshes.
  function createRotation(){
   const visits=new Map();return {index(key,visit){let v=visits.get(key);if(!v){v={visit,index:0};visits.set(key,v);}else if(v.visit!==visit){v.visit=visit;v.index++;}if(visits.size>256)visits.delete(visits.keys().next().value);return v.index;},next(key){const v=visits.get(key);if(v)v.index++;return v?.index||0;}};
  }
  // Only the latest opened panel may display an asynchronous region lookup.
  function createResolver(){let revision=0;return async function(config,place,lang,lookup,publish){
-  const mine=++revision;publish(null);if(!eligible(config,place))return;
+  const mine=++revision,gyg=getYourGuide(config,place,lang);if(gyg){publish(gyg);return;}
+  publish(null);if(!eligible(config,place))return;
   const choices=offerChoices(config,place,lang);if(choices.length){const index=Math.max(0,Math.floor(place.adCycle||0))%choices.length;publish({...choices[index],choiceCount:choices.length});return;}
   if(activityPlace(place)||!config.klook?.regionalSearch||(sizePolicy(config)&&!prominent(place)))return;
   try{const address=await lookup();if(mine===revision)publish(regional(config,place,lang,address));}catch{/* No irrelevant fallback on lookup failure. */}
  };}
- const api={select,travel,activity,tourHub,tours,offerChoices,createRotation,resolveOffer,distance,regional,trackedURL,createResolver,copy};if(typeof module==='object'&&module.exports)module.exports=api;else root.AffiliateRouter=api;
+ const api={select,travel,activity,tourHub,tours,offerChoices,createRotation,getYourGuide,providerCopy,resolveOffer,distance,regional,trackedURL,createResolver,copy};if(typeof module==='object'&&module.exports)module.exports=api;else root.AffiliateRouter=api;
 })(typeof window==='object'?window:globalThis);

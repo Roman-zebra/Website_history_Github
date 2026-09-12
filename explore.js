@@ -1927,7 +1927,8 @@ function renderRelated(o){
   box.hidden = false;
 }
 
-let resolveAffiliate,currentAffiliatePlace=null,affiliateVisit=0,affiliateRotation;
+let resolveAffiliate,currentAffiliatePlace=null,affiliateVisit=0,affiliateRotation,activeGygFrame=null;
+function clearGygFrame(){if(activeGygFrame){window.removeEventListener("message",activeGygFrame.listener);activeGygFrame.frame.remove();activeGygFrame=null;}}
 function setAffiliateConfig(config){
  AFF=config;
  if(currentAffiliatePlace&&!$('place').hidden&&!$('panel').classList.contains('closed'))renderAffiliate(currentAffiliatePlace);
@@ -1936,13 +1937,29 @@ function renderAffiliate(o){
   currentAffiliatePlace=o;
   if(typeof AffiliateRouter==='undefined'){ $('pAff').hidden=true;return; }
   resolveAffiliate ||= AffiliateRouter.createResolver();
-  const box=$('pAff'),lang=LANG,c=AffiliateRouter.copy[lang]||AffiliateRouter.copy.en;
+  const box=$('pAff'),lang=LANG;
   affiliateRotation ||= AffiliateRouter.createRotation();
   const rotationKey=o.at.join(','),adCycle=affiliateRotation.index(rotationKey,affiliateVisit);
   resolveAffiliate(AFF,{...o,adCycle,travelTags:facilityTags(o)},lang,async()=>{
     const geo=await revGeo(o.at[0],o.at[1],lang);return geo?.address;
   },offer=>{
-    box.hidden=true;box.replaceChildren();if(!offer)return;
+    if(offer?.widget&&activeGygFrame?.key===offer.id+':'+lang&&!box.hidden)return;
+    clearGygFrame();box.hidden=true;box.replaceChildren();if(!offer)return;
+    const c=AffiliateRouter.providerCopy(lang,offer.provider);
+    if(offer.widget){
+      const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
+      const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=PlaceUI.pick(['Experiences around this area','この地域のツアー・体験','이 지역의 투어·체험','这一带的游览与体验','這一帶的遊覽與體驗'],lang);
+      const frame=document.createElement('iframe');frame.className='aff-gyg-frame';frame.title=c.ad;frame.setAttribute('scrolling','no');
+      const src=new URL('/gyg-frame.html',location.origin);src.searchParams.set('v','0.76');src.searchParams.set('lat',offer.at[0].toFixed(5));src.searchParams.set('lon',offer.at[1].toFixed(5));src.searchParams.set('lang',offer.locale);src.searchParams.set('cmp',offer.campaign);frame.src=src.href;
+      const note=document.createElement('p');note.className='aff-note';note.textContent=PlaceUI.pick(['Check the activity location, meeting point and language before booking. Airport pickup is not implied.','実施場所・集合場所・対応言語を予約前にご確認ください。空港送迎付きとは限りません。','예약 전 체험 장소, 집합 장소와 언어를 확인하세요. 공항 픽업을 뜻하지 않습니다.','预订前请确认活动地点、集合地点和语言，并不表示包含机场接送。','預訂前請確認活動地點、集合地點和語言，並不表示包含機場接送。'],lang);
+      const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
+      const listener=e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow||e.data?.type!=='jta-gyg')return;
+        if(e.data.phase==='error'){if(activeGygFrame?.frame===frame&&currentAffiliatePlace)renderAffiliate({...currentAffiliatePlace,skipGyg:true});return;}
+        if(e.data.phase==='ready'&&Number.isFinite(e.data.height))frame.style.height=Math.min(900,Math.max(180,e.data.height))+'px';
+      };
+      window.addEventListener('message',listener);activeGygFrame={key:offer.id+':'+lang,frame,listener};
+      box.setAttribute('aria-label',c.ad);box.append(heading,lead,frame,note,disclosure);box.hidden=false;return;
+    }
     box.setAttribute('aria-label',c.ad);
     const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
     const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.activity?(offer.match==='area'?c.near:PlaceUI.pick(['An experience for this stop','このスポットで楽しむ体験・商品','이 장소에서 즐길 체험·상품','这个地点的体验与商品','這個地點的體驗與商品'],lang)):offer.tour?PlaceUI.pick(['Tours for this area','この地域から出かけるツアー','이 지역 출발 투어','从这一带出发的游览','從這一帶出發的遊覽'],lang):offer.travel?PlaceUI.pick(['For your journey','旅の準備に','여행 준비','出行准备','出行準備'],lang):offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
@@ -2661,7 +2678,7 @@ async function runSearch(v,autoPick){
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
  try{
-  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.75');
+  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.76');
    nationalWorker.onmessage=({data})=>{
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
@@ -2779,7 +2796,7 @@ function openMap(){
 }
 
 function closePlace(){
-  currentAffiliatePlace=null;
+  currentAffiliatePlace=null;clearGygFrame();
   document.body.classList.remove('roaming');
   roaming = false; current = null;
   lastPanel = null;                  // ホームに戻ったら、開き直す対象はもう無い
@@ -2867,6 +2884,7 @@ $('mShopping').onclick = () => setMode('shopping');
 /* Close for good, not just collapse. Without this the sheet sat over the map
    with no way to dismiss it, so the markers underneath were unreachable. */
 function closePanel(){
+  clearGygFrame();
   const pn = $('panel');
   pn.classList.remove('open');
   pn.classList.add('closed');
@@ -2879,7 +2897,7 @@ function closePanel(){
 $('pClose').onclick   = closePanel;
 $('grab').onclick     = () => {
   const pn = $('panel');
-  if (pn.classList.contains('closed')){ pn.classList.remove('closed'); pn.classList.add('open'); }
+  if (pn.classList.contains('closed')){ pn.classList.remove('closed'); pn.classList.add('open'); if(currentAffiliatePlace)renderAffiliate(currentAffiliatePlace); }
   else pn.classList.toggle('open');
 };
 $('back').onclick     = () => history.back();
@@ -3030,7 +3048,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.75').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.76').then(r => r.ok ? r.json() : null)
       .then(setAffiliateConfig).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
