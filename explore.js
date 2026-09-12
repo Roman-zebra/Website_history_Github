@@ -572,6 +572,7 @@ function applySEO(){
 /* =========================================================================
    1. State
    ========================================================================= */
+const ACTIVITIES = window.AtlasActivities?.places || [];
 let PLACES = [], LANDMARKS = [], MONUMENTS = null, LOCALS = [], LIMINAL = [];
 let TOPICS = null, AREAS = null;   // 種類の記事 / まちの記事。無ければ黙る
 let mode = 'places';
@@ -741,7 +742,67 @@ function buildLiminalCards(){
     b.onclick = () => showLiminal(LIMINAL.find(p => p.id === b.dataset.lim));
 }
 
+
+/* Activity cards deliberately reuse the existing atlas card / map / panel flow. */
+const ACTIVITY_COPY = {
+ en: ['Enjoy Japanese food','Go shopping','Markets, local dishes and food streets across Japan.','Shopping streets, crafts and Japanese design.','Official visitor information','Map preview · GSI','Compare the surrounding streets across time. The marker indicates the area, not a specific shop entrance.','Opening days and services vary by shop. Check the official guide before visiting.','Food stalls may close in bad weather. Check the city guide for today’s options.','Enjoy purchases in the areas provided by each shop.','Shop hours vary; check the official guide for current information.','These destinations are editorial picks, arranged from north to south.'],
+ ja: ['日本食を楽しむ','買い物を楽しむ','市場、郷土料理、食の街を全国から。','商店街、工芸品、日本のデザインを探す。','公式の訪問案内','地図プレビュー · 国土地理院','今昔マップで周辺の道や町並みを見比べられます。ピンはエリアの代表地点で、個別店舗の入口ではありません。','営業日やサービスは店舗ごとに異なります。訪問前に公式案内をご確認ください。','屋台は天候などで休業することがあります。市の案内で営業情報をご確認ください。','購入した食べ物は、各店が案内する飲食スペースで楽しみましょう。','営業時間は店舗によって異なります。最新情報は公式案内をご確認ください。','スポットは編集部の選定で、北から南の順に掲載しています。'],
+ ko: ['일본 음식 즐기기','쇼핑 즐기기','일본 각지의 시장, 향토 요리와 음식 거리.','상점가와 공예품, 일본 디자인을 찾아보세요.','공식 방문 안내','지도 미리보기 · GSI','옛 지도와 현재 지도로 주변 거리를 비교하세요. 핀은 지역의 대표 지점이며 개별 가게 입구가 아닙니다.','영업일과 서비스는 가게마다 다릅니다. 방문 전 공식 안내를 확인하세요.','포장마차는 날씨에 따라 쉬기도 합니다. 시 공식 안내를 확인하세요.','음식은 각 가게가 안내하는 장소에서 즐겨주세요.','영업시간은 가게마다 다릅니다. 최신 공식 안내를 확인하세요.','편집 선정 장소를 북쪽에서 남쪽 순서로 소개합니다.'],
+ 'zh-Hans': ['品尝日本美食','购物寻宝','探索日本各地的市场、地方料理与美食街。','寻找商店街、工艺品与日本设计。','官方参观指南','地图预览 · GSI','比较周边街道的今昔变化。标记为区域代表地点，并非具体店铺入口。','营业日期和服务因店铺而异，请在到访前查看官方指南。','屋台可能因天气休息，请查看市政府的官方指南。','请在各店指定的用餐区域享用购买的食物。','营业时间因店铺而异，请查看最新官方指南。','地点由编辑精选，按从北到南的顺序排列。'],
+ 'zh-Hant': ['品嚐日本美食','購物尋寶','探索日本各地的市場、地方料理與美食街。','尋找商店街、工藝品與日本設計。','官方參觀指南','地圖預覽 · GSI','比較周邊街道的今昔變化。標記為區域代表地點，並非個別店鋪入口。','營業日期和服務因店鋪而異，請在到訪前查看官方指南。','屋台可能因天候休息，請查看市政府的官方指南。','請在各店指定的用餐區域享用購買的食物。','營業時間因店鋪而異，請查看最新官方指南。','地點由編輯精選，按從北到南的順序排列。']
+};
+const activityText = n => (ACTIVITY_COPY[LANG] || ACTIVITY_COPY.en)[n];
+const isActivityMode = m => m === 'food' || m === 'shopping';
+const activityLabel = category => activityText(category === 'food' ? 0 : 1);
+for (const [lang,copy] of Object.entries(ACTIVITY_COPY)) {
+ T[lang].modeFood = copy[0]; T[lang].modeShopping = copy[1];
+}
+function buildActivityCards(){
+ $('cards').innerHTML = ACTIVITIES.filter(p=>p.category===mode).map(p=>
+  '<button class="card card-activity" data-activity="'+esc(p.id)+'">'
+  +'<img class="card-img card-photo" width="480" height="320" alt="" loading="lazy" decoding="async" src="'+tileURL(NOW_LAYER.id,NOW_LAYER.ext,p.lat,p.lon,15)+'">'
+  +'<span class="card-emoji" aria-hidden="true">'+p.emoji+'</span>'
+  +'<span class="card-era">'+esc(activityText(5))+'</span>'
+  +'<div class="card-body"><p class="card-ja">'+esc(p.ja)+'</p>'
+  +'<p class="card-name">'+esc(placeName(p))+'</p>'
+  +'<p class="card-hook">'+esc(p.hooks[LANG]||p.hooks.en)+'</p></div></button>'
+ ).join('');
+ for(const b of $('cards').querySelectorAll('[data-activity]'))
+  b.onclick=()=>showActivity(ACTIVITIES.find(p=>p.id===b.dataset.activity));
+}
+function showActivity(p,keepView){
+ if(!p)return;
+ lastPanel=()=>showActivity(p,true);
+ document.body.classList.remove('roaming');
+ $('home').hidden=true; $('place').hidden=false;
+ ensureMap();
+ if(!keepView)map.setView([p.lat,p.lon],15);
+ setTimeout(()=>map.invalidateSize(),60);
+ setThenLayer(null,null);
+ drawSpots([{lat:p.lat,lon:p.lon,name:placeName(p),emoji:p.emoji}],true,()=>showActivity(p,true));
+ roaming=false; current=null;
+ drawDetail(); setTimeout(drawDetail,900);
+ panelShell({
+  kicker:{emoji:p.emoji,label:activityLabel(p.category),note:'  '+placeName(p)},
+  placeId:'a-'+p.id,kind:p.category,ja:LANG==='ja'?'':p.ja,name:placeName(p),at:[p.lat,p.lon],query:p.name,
+  bodyHTML:'<p>'+esc(p.hooks[LANG]||p.hooks.en)+'</p><p>'+esc(activityText(6))+'</p>'
+    +'<p class="p-pick">'+esc(activityText(p.category==='shopping'?10:p.id==='nakasu-yatai'?8:7))+'</p>'
+    +(p.category==='food'?'<p>'+esc(activityText(9))+'</p>':'')
+    +'<p class="place-guide-link"><a href="'+esc(p.official)+'" target="_blank" rel="noopener noreferrer">'+esc(activityText(4))+' ↗</a></p>',
+  img:tileURL(NOW_LAYER.id,NOW_LAYER.ext,p.lat,p.lon,16),cap:activityText(5),
+  share:{title:placeName(p),url:location.origin+location.pathname+'?lang='+(LANG_PARAM[LANG]||'en')+'#a-'+p.id},
+  searchName:p.ja,src:'GSI Tiles · '+activityText(11)
+ });
+ if(!keepView)history.pushState({activity:p.id},'','#a-'+p.id);
+}
+function restoreActivity(){
+ const p=location.hash.startsWith('#a-')&&ACTIVITIES.find(p=>p.id===location.hash.slice(3));
+ if(!p)return false;
+ setMode(p.category); noPush(showActivity,p); return true;
+}
+
 function buildCards(){
+  if (isActivityMode(mode)) return buildActivityCards();
   if (mode === 'liminal') return buildLiminalCards();
   $('cards').innerHTML = PLACES.map(p => {
     const lyr = (p.then && THEN[p.then]) ? p.then : NOW_LAYER.id;
@@ -1367,6 +1428,12 @@ async function drawDetail(){
      .on('click', () => showLandmark(p)).addTo(group);
   }
 
+  // Activity selections use equal-size pins; they are not measured popularity ranks.
+  if(z>=8)for(const p of ACTIVITIES){
+    if(!b.contains([p.lat,p.lon])||!free(p.lat,p.lon,POP_CLS[2]))continue;
+    L.marker([p.lat,p.lon],{icon:bigIcon(p,'ring-gold',z>=10&&freeLabel(p.lat,p.lon,'lab'),CLS[2]),title:placeName(p)})
+      .on('click',()=>showActivity(p)).addTo(group);
+  }
   // Liminal Japan was a list you could only reach from the home screen. Thirty-three
   // spots spread over the whole country is real map density, and stumbling on one
   // while panning is the point of them.
@@ -2237,7 +2304,7 @@ function paintSaveBtn(){
   $('pSave').setAttribute('aria-pressed', String(!!on));
 }
 function savedDisplayName(row){
-  const p=[...PLACES,...LANDMARKS,...LIMINAL].find(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);
+  const p=[...PLACES,...LANDMARKS,...LIMINAL,...ACTIVITIES].find(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);
   return p?placeName(p):row.name;
 }
 function renderSaved(){
@@ -2385,7 +2452,7 @@ function spotRows(){
   const key = PLACES.length + ':' + LIMINAL.length + ':' + LANDMARKS.length;
   if (searchIndex && searchIndex.key === key) return searchIndex.rows;
   const rows = [];
-  for (const [kind, list] of [['place',PLACES],['liminal',LIMINAL],['landmark',LANDMARKS]])
+  for (const [kind, list] of [['place',PLACES],['liminal',LIMINAL],['landmark',LANDMARKS],['activity',ACTIVITIES]])
     for (const p of list) rows.push({kind,p,names:PlaceUI.names(p).map(qnorm)});
   searchIndex = {key,rows};
   return rows;
@@ -2420,11 +2487,12 @@ function spotLabelFor(row){ return placeName(row.p); }
 function spotSubFor(row){
   const p = row.p;
   const other = (LANG === 'ja') ? p.name : (p.ja || '');
-  const kind = row.kind === 'liminal' ? t('modeLiminal')
+  const kind = row.kind === 'activity' ? activityLabel(p.category) : row.kind === 'liminal' ? t('modeLiminal')
              : row.kind === 'place'   ? t('modePlaces') : t('localSpot');
   return other ? (kind + ' · ' + other) : kind;
 }
 function openSpot(row){
+  if (row.kind === 'activity') return showActivity(row.p);
   if (row.kind === 'liminal')  return showLiminal(row.p);
   if (row.kind === 'landmark') return showLandmark(row.p);
   return openPlace(row.p);
@@ -2550,7 +2618,7 @@ async function runSearch(v,autoPick){
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
  try{
-  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.72');
+  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.73');
    nationalWorker.onmessage=({data})=>{
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
@@ -2587,7 +2655,7 @@ $('snsCopy').onclick = async () => {
   catch(e){ showCopyLink(url); }
 };
 $('myBtn2').onclick = () => {
-  closePlace(); setMode('places');
+  closePlace(); setMode(isActivityMode(mode)?mode:'places');
   const sec = $('mySection');
   sec.hidden = false; renderSaved();
   setTimeout(() => sec.scrollIntoView({ behavior: 'smooth' }), 60);
@@ -2679,13 +2747,14 @@ function modeNote(){
      伏せ字を出す。読み込み前・読み込み失敗のどちらでも 0 なので、ここで一緒に受ける。 */
   const n = c => (c || '…') + PlaceUI.pick([' places. ','か所。','곳. ','处。','處。'], LANG);
   if (mode === 'map' || roaming) return t('noteMap');
+  if (isActivityMode(mode)) return n(ACTIVITIES.filter(p=>p.category===mode).length) + activityText(mode==='food'?2:3);
   if (mode === 'liminal') return n(LIMINAL.length) + t('noteLiminal');
   return n(PLACES.length) + t('notePlaces');
 }
 
 function setMode(m){
   mode = m;
-  for (const [id, key] of [['mPlaces','places'], ['mMap','map'], ['mLiminal','liminal']]){
+  for (const [id, key] of [['mPlaces','places'], ['mMap','map'], ['mLiminal','liminal'], ['mFood','food'], ['mShopping','shopping']]){
     $(id).classList.toggle('is-on', m === key);
     $(id).setAttribute('aria-selected', String(m === key));
   }
@@ -2748,6 +2817,8 @@ $('heroSearch').onclick = () => {
   requestAnimationFrame(() => $('q').focus());
 };
 $('mLiminal').onclick = () => setMode('liminal');
+$('mFood').onclick = () => setMode('food');
+$('mShopping').onclick = () => setMode('shopping');
 /* Close for good, not just collapse. Without this the sheet sat over the map
    with no way to dismiss it, so the markers underneath were unreachable. */
 function closePanel(){
@@ -2787,7 +2858,7 @@ function noPush(fn, arg){
   try { fn(arg); } finally { history.pushState = h; }
 }
 window.addEventListener('popstate', () => {
-  if (restoreSharedSpot()) return;
+  if (restoreActivity() || restoreSharedSpot()) return;
   if (location.hash === '#map' && PLACES.length){ noPush(openMap); return; }
   if (location.hash.startsWith('#l-') && LIMINAL.length){
     const q = LIMINAL.find(x => x.id === location.hash.slice(3));
@@ -2795,7 +2866,7 @@ window.addEventListener('popstate', () => {
   }
   const p = location.hash && PLACES.filter(x => x.id === location.hash.slice(1))[0];
   if (p){ noPush(openPlace, p); return; }
-  closePlace(); setMode('places');
+  closePlace(); setMode(isActivityMode(mode)?mode:'places');
 });
 document.addEventListener('keydown', e => {
   /* 入力欄で打っているキーを横取りしない。#q は #place の中にあり、
@@ -2856,7 +2927,7 @@ function showCopyLink(url){
   box.querySelector('input').value=url;box.showModal();box.querySelector('input').select();
 }
 function showSavedSpot(row){
-  const all=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal}))];
+  const all=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal})),...ACTIVITIES.map(p=>({p,open:showActivity}))];
   const known=all.find(x=>Math.abs(x.p.lat-row.lat)<0.00002&&Math.abs(x.p.lon-row.lon)<0.00002);
   if(known){known.open(known.p);return;}
   const local=[...LOCALS,...FACILITIES].find(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);
@@ -2865,7 +2936,7 @@ function showSavedSpot(row){
   let tries=0;const token=panelToken;
   const update=()=>{
     if(token!==panelToken||$('place').hidden)return;
-    const known=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal}))].find(x=>Math.abs(x.p.lat-row.lat)<0.00002&&Math.abs(x.p.lon-row.lon)<0.00002);
+    const known=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal})),...ACTIVITIES.map(p=>({p,open:showActivity}))].find(x=>Math.abs(x.p.lat-row.lat)<0.00002&&Math.abs(x.p.lon-row.lon)<0.00002);
     if(known){noPush(known.open,known.p);return;}
     const p=[...LOCALS,...FACILITIES].find(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);
     if(p){showLocal(p);return;}
@@ -2914,7 +2985,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.72').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.73').then(r => r.ok ? r.json() : null)
       .then(a => { AFF = a; }).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
@@ -2930,7 +3001,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   ]).then(drawDetail);
   // Detailed monument text is loaded on demand when a memorial is opened.
 
-  if (restoreSharedSpot()) return;
+  if (restoreActivity() || restoreSharedSpot()) return;
   if (location.hash === '#map') noPush(openMap);
   else if (location.hash.startsWith('#l-')){
     const want = location.hash.slice(3);
