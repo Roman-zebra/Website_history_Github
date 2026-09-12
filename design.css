@@ -135,3 +135,5 @@ html,body,.home{background:var(--atlas-paper);color:var(--atlas-ink)}
 .q-categories{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px 12px}.q-categories button,.q-scope button{border:1px solid #bdc9bd;background:#fffdf8;color:#24493f;border-radius:18px;min-height:40px;padding:7px 11px;font:inherit;font-size:14px;cursor:pointer}.q-categories button:hover,.q-scope button[aria-pressed="true"]{background:#e6eee6;border-color:#41664e}.q-categories button:focus-visible,.q-scope button:focus-visible{outline:2px solid #967019;outline-offset:2px}.q-help{font-size:14px;line-height:1.6;color:#526154;padding:10px 14px;margin:0}.q-scope{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px}
 
 .aff-next{background:transparent;border:1px solid var(--line,#c9c1b0);border-radius:4px;padding:5px 9px;font:inherit;font-size:12px;color:inherit;cursor:pointer}.aff-next:focus-visible{outline:2px solid #236655;outline-offset:2px}
+
+.aff-gyg-frame{display:block;width:100%;max-width:100%;height:320px;border:0;background:transparent;border-radius:5px}
