@@ -60,3 +60,8 @@
   Cache-Control: no-cache
 /guides/*
   Cache-Control: no-cache
+
+/about
+  Cache-Control: public, max-age=0, must-revalidate
+/affiliate-config.json
+  Cache-Control: public, max-age=0, must-revalidate

@@ -574,7 +574,7 @@ let TOPICS = null, AREAS = null;   // 種類の記事 / まちの記事。無け
 let mode = 'places';
 let MON_INDEX = [], MON_BY_ID = new Map();
 let idxLoading = null;
-let AFF = null;      // data/affiliate.json
+let AFF = null;      // approved offers in affiliate-config.json
 let map = null, baseLayer = null, nowLayer = null, thenLayer = null;
 let spotLayer = null, detailLayer = null, meMarker = null;
 let roaming = false, current = null, compareAt = null, sharePayload = null;
@@ -760,7 +760,6 @@ function buildCards(){
 
 function applyLang(){
   document.documentElement.lang = LANG;
-  SEO[LANG].title = DIRECTORY_TEXT[LANG][0]; SEO[LANG].description = DIRECTORY_TEXT[LANG][1];
   applySEO();
   for (const el of document.querySelectorAll('[data-t]')) el.innerHTML = t(el.dataset.t);
   $('langLabel').textContent = LANG_NAMES[LANG] || 'English';
@@ -1795,7 +1794,7 @@ const placeName = p => PlaceUI.name(p, LANG);
      - never on a disaster memorial stone (an advert under a memorial to the
        dead would cost more trust than the click is worth)
      - always carries a PR label; Japan's disclosure rules require it
-   Nothing renders at all until data/affiliate.json has enabled:true and an id.
+   Nothing renders until affiliate-config.json contains enabled, approved offers.
    ------------------------------------------------------------------------- */
 /* #pWiki には tags.wikipedia しか入らない。関連記事はこの別の箱にしか入らない。
    「ウィキペディアで読む」という文言がこの箱に出る経路は存在しない。
@@ -1827,26 +1826,13 @@ function renderRelated(o){
 }
 
 function renderAffiliate(o){
-  const box = $('pAff');
-  box.hidden = true;
-  box.innerHTML = '';
-  if (!AFF || !AFF.enabled || !o.at) return;
-  if (o.kind && (AFF.excludeKinds || []).indexOf(o.kind) >= 0) return;
-
-  const name = o.name || '';
-  const query = encodeURIComponent(o.query || name);
-  const rows = [];
-  for (const slot of ['stay', 'things']){
-    const cfg = AFF[slot];
-    if (!cfg || !cfg.id) continue;
-    const href = cfg.url.replace('{query}', query).replace('{id}', encodeURIComponent(cfg.id));
-    const label = (LANG === 'ja' ? cfg.label_ja : cfg.label_en).replace('{name}', name);
-    rows.push('<a href="' + esc(href) + '" target="_blank" rel="nofollow sponsored noopener">'
-      + '<span class="pr">PR</span><span>' + esc(label) + '</span></a>');
-  }
-  if (!rows.length) return;
-  box.innerHTML = rows.join('');
-  box.hidden = false;
+  const box=$('pAff');box.hidden=true;box.replaceChildren();
+  const offer=AffiliateRouter.select(AFF,o,LANG);if(!offer)return;
+  const disclosure=document.createElement('p');disclosure.className='aff-disclosure';
+  disclosure.textContent=PlaceUI.pick(['Advertisement · Booking through this link may support this site.','広告・PR｜このリンクからの予約でサイト運営者に報酬が入ることがあります。','광고 · 이 링크로 예약하면 사이트 운영자에게 수수료가 지급될 수 있습니다.','广告 · 通过此链接预订，本站可能获得佣金。','廣告 · 透過此連結預訂，本站可能獲得佣金。'],LANG);
+  const a=document.createElement('a');a.href=offer.url;a.target='_blank';a.rel='sponsored nofollow noopener';
+  a.textContent=offer.label;a.dataset.offerId=offer.id;a.dataset.provider=offer.provider;
+  box.append(disclosure,a);box.hidden=false;
 }
 
 /* =========================================================================
@@ -2015,7 +2001,7 @@ function showLandmark(p){
   current = null;
   panelShell({
     kicker: { emoji: p.emoji, label: t('localSpot'), note: '  ' + placeName(p) },
-    ja: LANG === 'ja' ? '' : p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
+    placeId:p.id, ja: LANG === 'ja' ? '' : p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
     bodyHTML: extractHTML(p, 240) || '<p>' + t('famous') + '</p>',
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
@@ -2149,7 +2135,7 @@ function showLocal(p){
                  + '<p class="p-srcnote p-weak">' + esc(t('srcTags')) + '</p>'
                : '<p class="p-hint">' + t('noSummary') + '</p>'),
     img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
-    at: [p.lat, p.lon], share: { title: nm, url: location.origin + location.pathname },
+    kind:tg.historic==='memorial'?'memorial':(tg.tourism||tg.historic||tg.railway||''), at: [p.lat, p.lon], share: { title: nm, url: location.origin + location.pathname },
     wiki: wl ? wl.url : '',
     relatedKind: tg,
     relatedArea: !wl,          // 自分の記事があるならまちは要らない（Nominatimも叩かない）
@@ -2277,7 +2263,7 @@ function showLiminal(p, keepView){
 
   panelShell({
     kicker: { emoji: p.emoji, label: t('modeLiminal'), note: '  ' + placeName(p) },
-    ja: p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
+    placeId:'l-'+p.id, kind:'liminal', ja: p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
     bodyHTML: '<p>' + esc(hook) + '</p>'
             + (why ? '<h3 class="p-h3">' + t('liminalWhat') + '</h3><p>' + esc(why) + '</p>' : '')
             + (p.note && LANG==='en' ? '<p class="p-pick">' + esc(p.note) + '</p>' : '')
@@ -2591,7 +2577,7 @@ function openPlace(p, keepView){
                              ? p.monument.caption_ja : p.monument.caption);
   panelShell({
     kicker: {emoji:p.emoji,label:t('modePlaces'),note:'  '+placeName(p)},
-    ja: LANG==='ja'?'':p.ja, name:placeName(p),
+    placeId:p.id, ja: LANG==='ja'?'':p.ja, name:placeName(p),
     query: p.name,
     bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join(''),
     img: p.monument && p.monument.img, cap: cap,
@@ -2771,6 +2757,8 @@ document.addEventListener('keydown', e => {
 const DIRECTORY_TEXT={"en":["Japan Then & Now — Historical Maps and Hidden Places","Compare historical aerial photographs with today. Explore Japan’s castles, temples, stations and local places in English, Japanese, Korean, Simplified Chinese and Traditional Chinese.","Explore Japan across time","Open the map","Featured places","Liminal Japan","Saved on this browser","Save your favourite places on this browser. No account required; other devices have separate lists.","Historical aerial photographs","Coverage and years vary by location. The map shows the available survey year.","Search in 5 languages","Search place names, local names, and aliases across five supported languages."],"ja":["日本の今昔マップ｜古い空中写真と名所を探す","古い空中写真と現在の日本を地図で比較。城・寺社・駅・地域の小さな名所を、日本語・英語・韓国語・簡体字・繁体字の5言語で探せます。","日本の風景を、時間をこえて","地図を開いて探す","物語のある名所","リミナルな日本","このブラウザに保存","気になる地点を登録不要で保存できます。保存先はこのブラウザで、別の端末とは共有されません。","昔と今の空中写真","撮影年と収録範囲は地点によって異なります。利用できる写真の年代を地図に表示します。","5言語で検索","地名・駅名・現地名・別名から、5つの対応言語で地点を探せます。"],"ko":["일본 과거와 현재 지도 | 옛 항공사진과 숨은 명소","옛 항공사진과 현재의 일본을 지도에서 비교하세요. 성, 사찰, 역과 작은 지역 명소를 한국어·일본어·영어·중국어 간체·번체로 찾아볼 수 있습니다.","시간을 넘어 일본의 풍경을 만나다","지도에서 장소 찾기","이야기가 있는 명소","리미널 재팬","이 브라우저에 저장","회원가입 없이 마음에 드는 장소를 저장하세요. 저장 목록은 다른 기기와 공유되지 않습니다.","과거와 현재의 항공사진","지역에 따라 촬영 연도와 사진의 범위가 다릅니다. 이용 가능한 촬영 연도를 지도에 표시합니다.","5개 언어로 검색","지명, 역 이름, 현지 이름과 별칭으로 장소를 찾아보세요."],"zh-Hans":["日本今昔地图｜历史航拍照片与当地景点","在地图上对比日本的历史航拍照片与今日风景。用简体中文、繁体中文、日语、英语和韩语探索城堡、寺社、车站与当地小景点。","跨越时间，探索日本风景","打开地图寻找地点","有故事的景点","日本的阈限空间","保存在此浏览器","无需注册即可收藏地点。列表仅保存在此浏览器，不与其他设备同步。","昔日与今日航拍照片","拍摄年份和覆盖范围因地点而异。地图会显示可用照片的年代。","5种语言搜索","通过地名、站名、当地名称和别名查找地点。"],"zh-Hant":["日本今昔地圖｜歷史航拍照片與當地景點","在地圖上對比日本的歷史航拍照片與今日風景。用繁體中文、簡體中文、日語、英語和韓語探索城堡、寺社、車站與當地小景點。","跨越時間，探索日本風景","開啟地圖尋找地點","有故事的景點","日本的閾限空間","儲存在此瀏覽器","無需註冊即可收藏地點。清單僅儲存在此瀏覽器，不與其他裝置同步。","昔日與今日航拍照片","拍攝年份和涵蓋範圍因地點而異。地圖會顯示可用照片的年代。","5種語言搜尋","透過地名、站名、當地名稱和別名尋找地點。"]};
 const ATLAS_READING={"en":"<section class=\"atlas-reading\"><h2>Explore Japan on foot, across time</h2><p>Japan Time Atlas is a free map for curious walks through Japan. Compare historical aerial photographs with the present-day map, then explore castles, neighbourhood streets, small local sights and places with a liminal atmosphere.</p><h3>Plan a walk beyond the main sights</h3><p>Start with Tokyo, Kyoto or Osaka, then look closely at the surrounding streets. A station, a small shrine, a waterfront or the remains of an old railway can become the starting point for a different kind of Japan itinerary. Save interesting places in this browser and open them again while planning your walk.</p><h3>Old maps, street photography and everyday history</h3><p>Use the comparison slider to study how coastlines, street patterns and neighbourhoods have changed. This is also a way to explore Japanese architecture and urban history from home. Historical photo coverage and survey years vary by location; use the year shown on the map rather than assuming every photograph was taken in 1945.</p><h3>Liminal Japan and retro places</h3><p>Discover unusual stations, former industrial sites and quiet spaces where the past feels close. Liminal is an atmosphere, not a promise that a place is empty or abandoned. Check official opening and access information before visiting, and explore only public or permitted areas.</p></section>","ja":"<section class=\"atlas-reading\"><h2>古い地図から、次の街歩きへ</h2><p>Japan Time Atlasは、昔の航空写真と現在の地図を見比べながら、日本の街を歩きたい人のための無料地図です。有名な城や寺社だけでなく、路地、駅、地域の小さな名所にも目を向けてみてください。</p><h3>観光地の周りにある、小さな発見</h3><p>東京・京都・大阪などの名所を出発点に、周囲の道、水辺、小さな神社や鉄道跡を地図で探せます。気になった場所はこのブラウザに保存し、散歩や日帰り旅行の行き先を考えるときに見返せます。</p><h3>歴史散歩・古地図・街の写真撮影</h3><p>昔と今の写真をスライダーで比較し、街路や海岸線、建物の並びがどう変わったかを観察できます。旅行前の下調べだけでなく、日本の建築や都市の歴史を家から眺める楽しみ方にも向いています。撮影年と収録範囲は場所によって異なるため、地図に表示される年代をご確認ください。</p><h3>レトロな街並みとリミナルスペース</h3><p>独特な駅、産業遺産、時間が止まったように感じる場所を探します。静かに見える場所でも、現役の施設や私有地の場合があります。現地の公開情報と立入条件を確認し、公開・許可された範囲で楽しんでください。</p></section>","ko":"<section class=\"atlas-reading\"><h2>옛 지도에서 시작하는 일본 골목 여행</h2><p>Japan Time Atlas는 옛 항공사진과 현재 지도를 비교하며 일본을 걸어서 둘러보고 싶은 여행자를 위한 무료 지도입니다. 유명한 성과 사찰뿐 아니라 동네 골목, 작은 역, 지역의 숨은 명소도 찾아보세요.</p><h3>일본 자유여행과 소도시 산책</h3><p>도쿄, 교토, 오사카의 명소에서 출발해 주변 골목과 강변, 작은 신사, 옛 철도 흔적을 살펴보세요. 마음에 드는 장소를 이 브라우저에 저장해 산책이나 당일치기 여행을 계획할 때 다시 볼 수 있습니다.</p><h3>옛 사진으로 보는 일본의 거리와 건축</h3><p>슬라이더를 움직이며 도로와 해안선, 동네의 모습이 어떻게 달라졌는지 비교할 수 있습니다. 여행 준비는 물론 일본 건축, 도시의 역사, 거리 사진에 관심이 있는 분도 집에서 탐색할 수 있습니다. 촬영 연도와 범위는 장소마다 다르므로 지도에 표시된 연도를 확인하세요.</p><h3>레트로 감성과 리미널 스페이스</h3><p>독특한 역, 산업유산, 시간이 멈춘 듯한 공간을 찾아보세요. 리미널한 분위기라고 해서 폐허이거나 사람이 없는 곳이라는 뜻은 아닙니다. 방문 전에 공식 운영 정보와 출입 조건을 확인하고 공개되거나 허가된 구역만 이용하세요.</p></section>","zh-Hans":"<section class=\"atlas-reading\"><h2>从老地图出发，走进日本的街巷</h2><p>Japan Time Atlas是一张免费的日本探索地图。对比历史航拍照片与现在的地图，在城堡、寺社等名胜之外，寻找街巷、小车站和当地的小众景点。</p><h3>日本自由行与城市漫步</h3><p>从东京、京都、大阪的名胜出发，看看周围的街道、河岸、小神社与旧铁路痕迹。把喜欢的地点保存在此浏览器中，规划散步、一日游或下一次日本旅行时再打开。</p><h3>老照片、街头摄影与城市历史</h3><p>移动滑块，观察街道、海岸线与街区如何变化。除了旅行准备，也可以在家探索日本建筑与城市历史，寻找街头摄影的灵感。历史照片的拍摄年份与覆盖范围因地点而异，请以地图显示的年份为准。</p><h3>复古街区与日本阈限空间</h3><p>探索独特的车站、工业遗产和仿佛时间停驻的空间。阈限感不代表某处已废弃或空无一人。出发前请确认官方开放信息与参观条件，仅进入公开或获准进入的区域。</p></section>","zh-Hant":"<section class=\"atlas-reading\"><h2>從老地圖出發，走進日本的街巷</h2><p>Japan Time Atlas是一張免費的日本探索地圖。比較歷史航拍照片與現在的地圖，在城堡、寺社等名勝之外，尋找街巷、小車站與當地的私房景點。</p><h3>日本自由行與老街散策</h3><p>從東京、京都、大阪的名勝出發，看看周圍的街道、河岸、小神社與舊鐵路痕跡。將喜歡的地點儲存在此瀏覽器中，規劃散步、一日遊或下一趟日本旅行時再開啟。</p><h3>老照片、街頭攝影與城市歷史</h3><p>移動滑桿，觀察街道、海岸線與街區如何改變。除了旅行前的準備，也可以在家探索日本建築與城市歷史，尋找街頭攝影的靈感。歷史照片的拍攝年份與涵蓋範圍因地點而異，請以地圖顯示的年份為準。</p><h3>懷舊街景與日本閾限空間</h3><p>探索獨特的車站、產業遺產與彷彿時間停留的空間。閾限感不代表某處已廢棄或空無一人。出發前請確認官方開放資訊與參觀條件，僅進入公開或獲准進入的區域。</p></section>"};
 function paintDirectory(){
+ const aboutLabels={"en":"About this site","ja":"このサイトについて","ko":"이 사이트에 대하여","zh-Hans":"关于本站","zh-Hant":"關於本站","th":"เกี่ยวกับเว็บไซต์นี้"};
+ document.querySelectorAll('.site-about-link').forEach(a=>{a.textContent=aboutLabels[LANG]||aboutLabels.en;a.href='/about#'+LANG;});
  const reading=document.getElementById('atlasReading');if(reading)reading.innerHTML=ATLAS_READING[LANG]||ATLAS_READING.en;
  const box=document.querySelector('.seo-list');if(!box||!PLACES.length)return;
  const d=DIRECTORY_TEXT[LANG].slice();d[0]=SEO[LANG].title;d[1]=SEO[LANG].description;
@@ -2867,7 +2855,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(l => { if (l) LANDMARKS = l.landmarks.sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch(dj('data/affiliate.json')).then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.68').then(r => r.ok ? r.json() : null)
       .then(a => { AFF = a; }).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
