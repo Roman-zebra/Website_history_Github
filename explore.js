@@ -1825,14 +1825,34 @@ function renderRelated(o){
   box.hidden = false;
 }
 
+let resolveAffiliate;
 function renderAffiliate(o){
-  const box=$('pAff');box.hidden=true;box.replaceChildren();
-  const offer=AffiliateRouter.select(AFF,o,LANG);if(!offer)return;
-  const disclosure=document.createElement('p');disclosure.className='aff-disclosure';
-  disclosure.textContent=PlaceUI.pick(['Advertisement · Booking through this link may support this site.','広告・PR｜このリンクからの予約でサイト運営者に報酬が入ることがあります。','광고 · 이 링크로 예약하면 사이트 운영자에게 수수료가 지급될 수 있습니다.','广告 · 通过此链接预订，本站可能获得佣金。','廣告 · 透過此連結預訂，本站可能獲得佣金。'],LANG);
-  const a=document.createElement('a');a.href=offer.url;a.target='_blank';a.rel='sponsored nofollow noopener';
-  a.textContent=offer.label;a.dataset.offerId=offer.id;a.dataset.provider=offer.provider;
-  box.append(disclosure,a);box.hidden=false;
+  if(typeof AffiliateRouter==='undefined'){ $('pAff').hidden=true;return; }
+  resolveAffiliate ||= AffiliateRouter.createResolver();
+  const box=$('pAff'),lang=LANG,c=AffiliateRouter.copy[lang]||AffiliateRouter.copy.en;
+  resolveAffiliate(AFF,o,lang,async()=>{
+    const geo=await revGeo(o.at[0],o.at[1],lang);return geo?.address;
+  },offer=>{
+    box.hidden=true;box.replaceChildren();if(!offer)return;
+    box.setAttribute('aria-label',c.ad);
+    const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
+    const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
+    const a=document.createElement('a');a.className='aff-card';a.href=offer.url;a.target='_blank';a.rel='sponsored nofollow noopener';
+    a.dataset.offerId=offer.id;a.dataset.provider=offer.provider;
+    const title=document.createElement('strong');title.className='aff-title';title.textContent=offer.label;
+    const cta=document.createElement('span');cta.className='aff-cta';cta.textContent=c.cta;
+    a.append(title);
+    if(Number.isFinite(offer.km)){
+      const meta=document.createElement('span');meta.className='aff-distance';
+      const pref=AFF.klook?.prefectures?.find(p=>p.code===offer.prefecture),region=lang==='ja'?pref?.ja:pref?.en;
+      const label={en:'Straight-line distance',ja:'直線距離',ko:'직선 거리','zh-Hans':'直线距离','zh-Hant':'直線距離',th:'ระยะทางเส้นตรง'}[lang]||'Straight-line distance';
+      meta.textContent=[region,label+' ≈ '+(offer.km<1?offer.km.toFixed(1):Math.round(offer.km))+' km'].filter(Boolean).join(' · ');a.append(meta);
+    }
+    a.append(cta);
+    const note=document.createElement('p');note.className='aff-note';note.textContent=offer.regional?c.searchNote:c.note;
+    const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
+    box.append(heading,lead,a,note,disclosure);box.hidden=false;
+  });
 }
 
 /* =========================================================================
@@ -2001,7 +2021,7 @@ function showLandmark(p){
   current = null;
   panelShell({
     kicker: { emoji: p.emoji, label: t('localSpot'), note: '  ' + placeName(p) },
-    placeId:p.id, ja: LANG === 'ja' ? '' : p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
+    placeId:p.id, adTier:p.pop||3, ja: LANG === 'ja' ? '' : p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
     bodyHTML: extractHTML(p, 240) || '<p>' + t('famous') + '</p>',
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
@@ -2577,7 +2597,7 @@ function openPlace(p, keepView){
                              ? p.monument.caption_ja : p.monument.caption);
   panelShell({
     kicker: {emoji:p.emoji,label:t('modePlaces'),note:'  '+placeName(p)},
-    placeId:p.id, ja: LANG==='ja'?'':p.ja, name:placeName(p),
+    placeId:p.id, adTier:p.pop||1, ja: LANG==='ja'?'':p.ja, name:placeName(p),
     query: p.name,
     bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join(''),
     img: p.monument && p.monument.img, cap: cap,
@@ -2855,7 +2875,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(l => { if (l) LANDMARKS = l.landmarks.sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.68').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.69').then(r => r.ok ? r.json() : null)
       .then(a => { AFF = a; }).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
