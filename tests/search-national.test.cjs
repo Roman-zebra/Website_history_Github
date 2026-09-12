@@ -8,7 +8,7 @@ test('partial words, kana, categories and combined words match without a result 
 });
 test('the nationwide worker searches every region and monuments, latest request wins',async()=>{
  const out=[];let finish;const done=new Promise(r=>finish=r);
- const context={self:{},AtlasSearch:core,PlaceUI:UI,importScripts(){},caches:{open:async()=>({match:async()=>null,put:async()=>{}})},Response,
+ const context={self:{},AtlasSearch:core,AtlasGygProducts:require('../gyg-products.js'),AtlasGygCatalog:require('../gyg-products-data.js'),PlaceUI:UI,importScripts(){},caches:{open:async()=>({match:async()=>null,put:async()=>{}})},Response,
   fetch:async u=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path.join(root,u.split('?')[0]),'utf8'))}),
   postMessage:m=>{out.push(m);if(m.type==='results'||m.type==='error')finish(m);}};
  vm.runInNewContext(fs.readFileSync(path.join(root,'search-worker.js'),'utf8'),context);

@@ -573,6 +573,70 @@ function applySEO(){
    1. State
    ========================================================================= */
 const ACTIVITIES = window.AtlasActivities?.places || [];
+const GYG_POINTS = window.AtlasGygProducts?.points(window.AtlasGygCatalog) || [];
+let gygPinLayer=null,gygPinsVisible=true,gygControls=null;
+const gygText=(en,ja,ko,cn,tw)=>PlaceUI.pick([en,ja,ko,cn,tw],LANG);
+const gygTitle=p=>p.product.title[LANG]||p.product.title.en;
+const gygLocation=p=>p.label[LANG]||p.label.en;
+function paintGygControl(){
+ if(!gygControls)return;
+ gygControls.toggle.textContent='🎟 '+gygText('Ad pins','広告ピン','광고 핀','广告标记','廣告標記');
+ gygControls.toggle.setAttribute('aria-pressed',String(gygPinsVisible));
+ gygControls.all.textContent=gygText('Tour list','体験・ツアー一覧','체험 목록','体验列表','體驗列表');
+}
+function initGygControl(){
+ const control=L.control({position:'bottomleft'});
+ control.onAdd=()=>{const box=L.DomUtil.create('div','gyg-map-control');L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box);
+  const toggle=document.createElement('button'),all=document.createElement('button');toggle.type=all.type='button';
+  toggle.onclick=()=>{gygPinsVisible=!gygPinsVisible;paintGygControl();drawGygPins();};all.onclick=()=>showGygList();box.append(toggle,all);gygControls={toggle,all};paintGygControl();return box;};control.addTo(map);
+}
+function drawGygPins(){
+ if(!map)return;if(gygPinLayer)map.removeLayer(gygPinLayer);gygPinLayer=L.layerGroup().addTo(map);
+ if(!gygPinsVisible||!AFF?.enabled||!AFF.getyourguide?.enabled)return;
+ const visible=GYG_POINTS.filter(p=>AtlasGygProducts.validProduct(p.product)&&map.getBounds().pad(.05).contains([p.lat,p.lon]));
+ for(const group of AtlasGygProducts.clusters(visible,p=>map.latLngToContainerPoint([p.lat,p.lon]))){
+  const lat=group.reduce((n,p)=>n+p.lat,0)/group.length,lon=group.reduce((n,p)=>n+p.lon,0)/group.length;
+  const count=new Set(group.map(p=>p.product.id)).size,label=group.length===1?gygTitle(group[0]):gygText('Tours and experiences','体験・ツアー','투어 및 체험','旅行与体验','旅行與體驗')+' ('+count+')';
+  const icon=L.divIcon({className:'gyg-pin',iconSize:[36,42],iconAnchor:[18,21],html:'<span>🎟'+(group.length>1?'<b>'+count+'</b>':'')+'</span><small>'+esc(gygText('AD','広告','광고','广告','廣告'))+'</small>'});
+  L.marker([lat,lon],{icon,title:label+' · '+gygText('Advertisement','広告','광고','广告','廣告'),zIndexOffset:900}).on('click',()=>{
+   const bounds=L.latLngBounds(group.map(p=>[p.lat,p.lon]));
+   if(group.length>1&&map.getZoom()<17&&map.distance(bounds.getSouthWest(),bounds.getNorthEast())>90){map.fitBounds(bounds,{padding:[70,90],maxZoom:17});return;}
+   showGygPoints(group);
+  }).addTo(gygPinLayer);
+ }
+}
+function showGygPoints(points,keepView=false){
+ if(!points?.length)return;const p=points[0];lastPanel=()=>showGygPoints(points,true);
+ $('home').hidden=true;$('place').hidden=false;ensureMap();roaming=false;current=null;
+ if(!keepView)map.setView([p.lat,p.lon],17);setTimeout(()=>map.invalidateSize(),60);setThenLayer(null,null);
+ if(spotLayer){map.removeLayer(spotLayer);spotLayer=null;}
+ panelShell({placeId:p.id,adTier:0,kind:'gyg-product',gygPoints:points,at:[p.lat,p.lon],name:points.length===1?gygTitle(p):gygText('Experiences near this point','この地点付近の体験','이 지점 주변 체험','此地点附近的体验','此地點附近的體驗'),
+  kicker:{emoji:'🎟',label:gygText('Advertisement · GetYourGuide','広告 · GetYourGuide','광고 · GetYourGuide','广告 · GetYourGuide','廣告 · GetYourGuide')},
+  bodyHTML:'<p>'+esc(gygLocation(p))+'</p><p>'+esc(gygText('Pins show meeting points published on the product pages. Choose the matching option and check your booking instructions before travelling.','ピンは商品ページに記載された集合場所です。該当するプランを選び、予約後の案内で集合場所をご確認ください。','핀은 상품 페이지의 집합 장소입니다. 해당 옵션과 예약 안내를 확인하세요.','标记表示商品页上的集合地点。请选择对应套餐并确认预订说明。','標記表示商品頁上的集合地點。請選擇對應方案並確認預訂說明。'))+'</p>',
+  src:'GetYourGuide · '+gygText('Location checked','所在地確認','위치 확인','地点核对','地點核對')+' 2026-09-13',share:{url:location.origin+location.pathname+'#'+p.id}});
+ drawDetail();if(!keepView)history.pushState({gyg:p.id},'','#'+p.id);
+}
+function renderGygProducts(o){
+ const box=$('pAff');clearGygFrame();box.replaceChildren();box.hidden=true;
+ for(const p of o.gygPoints){const url=AtlasGygProducts.trackedURL(p,AFF);if(!url)continue;
+  const article=document.createElement('article');article.className='gyg-product-card';
+  const h=document.createElement('h3');h.textContent=gygTitle(p);const location=document.createElement('p');location.textContent=gygLocation(p);
+  const link=document.createElement('a');link.className='aff-link';link.target='_blank';link.rel='sponsored nofollow noopener';link.href=url;link.textContent=gygText('Details & availability on GetYourGuide ↗','GetYourGuideで詳細・空き状況を見る ↗','GetYourGuide 상세·예약 가능 여부 ↗','在GetYourGuide查看详情与可订日期 ↗','在GetYourGuide查看詳情與可訂日期 ↗');
+  const mapLink=document.createElement('a');mapLink.className='gyg-meeting-link';mapLink.target='_blank';mapLink.rel='noopener noreferrer';mapLink.href=p.mapSource;mapLink.textContent=gygText('Meeting point map ↗','このプランの集合場所 ↗','이 옵션의 집합 장소 ↗','此套餐的集合地点 ↗','此方案的集合地點 ↗');
+  article.append(h,location,link,mapLink);box.append(article);box.hidden=false;
+ }
+ if(!box.hidden){const note=document.createElement('p');note.className='aff-disclosure';note.textContent=gygText('Advertisement. We may earn a commission from eligible bookings. Prices and availability are confirmed on GetYourGuide.','広告です。対象の予約により当サイトに報酬が発生することがあります。価格と空き状況はGetYourGuideでご確認ください。','광고입니다. 해당 예약 시 사이트에 수수료가 지급될 수 있습니다. 가격과 예약 가능 여부는 GetYourGuide에서 확인하세요.','广告。符合条件的预订可能为本站带来佣金。价格与余位请在GetYourGuide确认。','廣告。符合條件的預訂可能為本站帶來佣金。價格與名額請在GetYourGuide確認。');box.append(note);}
+}
+function showGygList(){
+ let dialog=$('gygList');if(!dialog){dialog=document.createElement('dialog');dialog.id='gygList';dialog.className='gyg-list';document.body.append(dialog);dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});}
+ dialog.replaceChildren();const close=document.createElement('button');close.type='button';close.textContent=gygText('Close','閉じる','닫기','关闭','關閉');close.onclick=()=>dialog.close();
+ const heading=document.createElement('h2');heading.textContent=gygText('Tours & experiences · Ad','体験・ツアー · 広告','투어·체험 · 광고','旅行与体验 · 广告','旅行與體驗 · 廣告');
+ const note=document.createElement('p');note.textContent=gygText('Products with verified meeting points. This is not the complete Japan catalogue.','集合場所を確認できた商品を掲載しています。日本の全商品を網羅した一覧ではありません。','집합 장소를 확인한 상품입니다. 일본 전체 상품 목록은 아닙니다.','这里收录已核对集合地点的商品，并非日本全部商品。','這裡收錄已核對集合地點的商品，並非日本全部商品。');dialog.append(close,heading,note);
+ for(const p of GYG_POINTS.filter(p=>AtlasGygProducts.validProduct(p.product))){const b=document.createElement('button');b.type='button';b.className='gyg-list-item';b.textContent=gygTitle(p)+' — '+gygLocation(p);b.onclick=()=>{dialog.close();gygPinsVisible=true;paintGygControl();showGygPoints([p]);};dialog.append(b);}dialog.showModal();
+}
+function restoreGygPoint(){const p=GYG_POINTS.find(p=>location.hash==='#'+p.id);if(!p)return false;noPush(showGygPoints,[p]);return true;}
+
+
 let PLACES = [], LANDMARKS = [], MONUMENTS = null, LOCALS = [], LIMINAL = [];
 let TOPICS = null, AREAS = null;   // 種類の記事 / まちの記事。無ければ黙る
 let mode = 'places';
@@ -875,6 +939,7 @@ function ensureMap(){
   // layers' minZoom, and the aerial layer (14) would pin the whole map there.
   map = L.map('map', { zoomControl: false, attributionControl: true, minZoom: 4, maxZoom: 18 });
   L.control.zoom({ position: 'bottomright' }).addTo(map);
+  initGygControl();
   map.attributionControl.addAttribution(OSM_ATTR);   // レイヤーに紐づけない＝常時表示
 
   // Esri's street basemap labels Japan in both scripts (東京駅 / Tokyo Sta.),
@@ -1373,6 +1438,7 @@ async function drawDetail(){
   // roaming は「スポットが選ばれていない」の意味で、「地図が出ている」ではない。
   // これを条件にしていたため、名所やリミナルから開くと周辺のマーカーが全部消えていた。
   if (!map || $('place').hidden) return;
+  drawGygPins();
   const z = map.getZoom(), b = map.getBounds();
   loadFacilities();
   const group = L.layerGroup();
@@ -1931,12 +1997,14 @@ let resolveAffiliate,currentAffiliatePlace=null,affiliateVisit=0,affiliateRotati
 function clearGygFrame(){if(activeGygFrame){window.removeEventListener("message",activeGygFrame.listener);activeGygFrame.frame.remove();activeGygFrame=null;}}
 function setAffiliateConfig(config){
  AFF=config;
+ drawGygPins();
  if(currentAffiliatePlace&&!$('place').hidden&&!$('panel').classList.contains('closed'))renderAffiliate(currentAffiliatePlace);
 }
 function renderAffiliate(o){
   currentAffiliatePlace=o;
   if(typeof AffiliateRouter==='undefined'){ $('pAff').hidden=true;return; }
   resolveAffiliate ||= AffiliateRouter.createResolver();
+  if(o.gygPoints){resolveAffiliate(null,o,LANG,async()=>null,()=>{});renderGygProducts(o);return;}
   const box=$('pAff'),lang=LANG;
   affiliateRotation ||= AffiliateRouter.createRotation();
   const rotationKey=o.at.join(','),adCycle=affiliateRotation.index(rotationKey,affiliateVisit);
@@ -1950,7 +2018,7 @@ function renderAffiliate(o){
       const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
       const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=PlaceUI.pick(['Experiences around this area','この地域のツアー・体験','이 지역의 투어·체험','这一带的游览与体验','這一帶的遊覽與體驗'],lang);
       const frame=document.createElement('iframe');frame.className='aff-gyg-frame';frame.title=c.ad;frame.setAttribute('scrolling','no');
-      const src=new URL('/gyg-frame.html',location.origin);src.searchParams.set('v','0.76');src.searchParams.set('lat',offer.at[0].toFixed(5));src.searchParams.set('lon',offer.at[1].toFixed(5));src.searchParams.set('lang',offer.locale);src.searchParams.set('cmp',offer.campaign);frame.src=src.href;
+      const src=new URL('/gyg-frame.html',location.origin);src.searchParams.set('v','0.77');src.searchParams.set('lat',offer.at[0].toFixed(5));src.searchParams.set('lon',offer.at[1].toFixed(5));src.searchParams.set('lang',offer.locale);src.searchParams.set('cmp',offer.campaign);frame.src=src.href;
       const note=document.createElement('p');note.className='aff-note';note.textContent=PlaceUI.pick(['Check the activity location, meeting point and language before booking. Airport pickup is not implied.','実施場所・集合場所・対応言語を予約前にご確認ください。空港送迎付きとは限りません。','예약 전 체험 장소, 집합 장소와 언어를 확인하세요. 공항 픽업을 뜻하지 않습니다.','预订前请确认活动地点、集合地点和语言，并不表示包含机场接送。','預訂前請確認活動地點、集合地點和語言，並不表示包含機場接送。'],lang);
       const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
       const listener=e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow||e.data?.type!=='jta-gyg')return;
@@ -2640,6 +2708,7 @@ function openSearchHit(row){
  ++qSeq;nationalSeq=0;$('qResults').hidden=true;$('q').blur();
  if(!map||$('place').hidden)noPush(openMap);
  map.setView([row.lat,row.lon],17);
+ if(row.kind==='gyg'){const p=GYG_POINTS.find(p=>p.id===row.id);if(p){showGygPoints([p]);return;}}
  if(row.kind==='monument'){openMonument(row.id);return;}
  if(row.facilityTags){showLocal({lat:row.lat,lon:row.lon,tags:row.facilityTags});return;}
  showSavedSpot(row);
@@ -2678,7 +2747,7 @@ async function runSearch(v,autoPick){
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
  try{
-  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.76');
+  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.77');
    nationalWorker.onmessage=({data})=>{
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
@@ -2921,7 +2990,7 @@ function noPush(fn, arg){
   try { fn(arg); } finally { history.pushState = h; }
 }
 window.addEventListener('popstate', () => {
-  if (restoreActivity() || restoreSharedSpot()) return;
+  if (restoreGygPoint() || restoreActivity() || restoreSharedSpot()) return;
   if (location.hash === '#map' && PLACES.length){ noPush(openMap); return; }
   if (location.hash.startsWith('#l-') && LIMINAL.length){
     const q = LIMINAL.find(x => x.id === location.hash.slice(3));
@@ -2967,6 +3036,7 @@ const AUX_UI = {
 };
 const uiText = key => PlaceUI.pick(AUX_UI[key], LANG);
 function paintAuxUI(){
+  paintGygControl();
   paintDirectory();
   $('qClear').setAttribute('aria-label',PlaceUI.pick(['Clear search','検索を消去','검색 지우기','清除搜索','清除搜尋'],LANG));
   $('q').placeholder=uiText('search');$('q').setAttribute('aria-label',uiText('search'));
@@ -2990,6 +3060,7 @@ function showCopyLink(url){
   box.querySelector('input').value=url;box.showModal();box.querySelector('input').select();
 }
 function showSavedSpot(row){
+  const gp=GYG_POINTS.filter(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);if(gp.length){showGygPoints(gp);return;}
   const all=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal})),...ACTIVITIES.map(p=>({p,open:showActivity}))];
   const known=all.find(x=>Math.abs(x.p.lat-row.lat)<0.00002&&Math.abs(x.p.lon-row.lon)<0.00002);
   if(known){known.open(known.p);return;}
@@ -3048,7 +3119,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.76').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.77').then(r => r.ok ? r.json() : null)
       .then(setAffiliateConfig).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
@@ -3064,7 +3135,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   ]).then(drawDetail);
   // Detailed monument text is loaded on demand when a memorial is opened.
 
-  if (restoreActivity() || restoreSharedSpot()) return;
+  if (restoreGygPoint() || restoreActivity() || restoreSharedSpot()) return;
   if (location.hash === '#map') noPush(openMap);
   else if (location.hash.startsWith('#l-')){
     const want = location.hash.slice(3);

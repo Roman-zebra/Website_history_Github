@@ -1,7 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 function setup(){
  const element=()=>({hidden:false,children:[],dataset:{},style:{},contentWindow:{},classList:{contains(){return false;}},replaceChildren(){this.children=[];},append(...children){this.children.push(...children);},setAttribute(){},remove(){this.removed=true;}});
- const listeners=new Set(),els={pAff:element(),place:element(),panel:element()},ctx={URL,location:{origin:'https://japantimeatlas.com'},window:{addEventListener(t,f){listeners.add(f);},removeEventListener(t,f){listeners.delete(f);}},AFF:null,LANG:'ja',AffiliateRouter:require('../affiliate-router.js'),PlaceUI:require('../place-ui.js'),facilityTags:()=>null,$:id=>els[id],document:{createElement:element},revGeo:async()=>null};
+ const listeners=new Set(),els={pAff:element(),place:element(),panel:element()},ctx={drawGygPins:()=>{},URL,location:{origin:'https://japantimeatlas.com'},window:{addEventListener(t,f){listeners.add(f);},removeEventListener(t,f){listeners.delete(f);}},AFF:null,LANG:'ja',AffiliateRouter:require('../affiliate-router.js'),PlaceUI:require('../place-ui.js'),facilityTags:()=>null,$:id=>els[id],document:{createElement:element},revGeo:async()=>null};
  vm.createContext(ctx);const s=fs.readFileSync(require.resolve('../explore.js'),'utf8');vm.runInContext(s.slice(s.indexOf('let resolveAffiliate'),s.indexOf('/* =========================================================================',s.indexOf('let resolveAffiliate'))),ctx);
  return {ctx,els,listeners,run:code=>vm.runInContext(code,ctx)};
 }

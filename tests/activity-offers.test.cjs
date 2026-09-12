@@ -42,7 +42,7 @@ function runtime(){
  const ctx={AffiliateRouter:router,PlaceUI:UI,URL,URLSearchParams,Map,Set,console,AbortSignal,setTimeout(){},clearTimeout(){},requestAnimationFrame(){},navigator:{languages:['en']},location:{search:'',pathname:'/',origin:'https://example.com',href:'https://example.com/',hash:''},history:{pushState(){},replaceState(){}},localStorage:{getItem(){return null;},setItem(){}},document:{documentElement:{},body:{classList:element().classList},getElementById(id){if(!elements.has(id))elements.set(id,element());return elements.get(id);},createElement:element,querySelector(){return null;},querySelectorAll(){return [];},addEventListener(){}},window:{innerWidth:390,addEventListener(){}},L:{divIcon:o=>o},fetch:async()=>{throw Error('Unexpected network');}};
  ctx.ResizeObserver=class{observe(){}};vm.createContext(ctx);vm.runInContext(fs.readFileSync(path.join(root,'activities-data.js'),'utf8'),ctx);const js=fs.readFileSync(path.join(root,'explore.js'),'utf8');vm.runInContext(js.slice(0,js.indexOf('LANG = detectLang();')),ctx);
  const run=s=>vm.runInContext(s,ctx);ctx.config=fresh();ctx.mapStub={setView(){},invalidateSize(){}};
- run('map=mapStub;ensureMap=()=>{};drawDetail=()=>{};drawSpots=()=>{};setThenLayer=()=>{};facilityTags=()=>({});panelShell=o=>{ $("place").hidden=false;renderAffiliate(o); };');
+ run('map=mapStub;ensureMap=()=>{};drawDetail=()=>{};drawGygPins=()=>{};drawSpots=()=>{};setThenLayer=()=>{};facilityTags=()=>({});panelShell=o=>{ $("place").hidden=false;renderAffiliate(o); };');
  return {ctx,run,elements};
 }
 test('real activity panel metadata renders translated disclosed ads and refreshes after late config loading',()=>{
