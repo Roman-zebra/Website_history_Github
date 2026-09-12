@@ -33,3 +33,11 @@ test('all facility coordinates are usable and classifications yield real station
  assert.ok(stations.some(p=>!p.tags.operator&&!p.tags.website&&!p.tags['contact:website']&&!p.tags.network&&!router.travel(config,place(p.tags),'ja',now)));
  console.log('Operator-verified rail fallback points: '+matched.length+' of '+stations.length+' station nodes.');
 });
+test('known zero-commission products cannot displace an eligible physical or travel offer',()=>{
+ const base=config.offers[0],p=place({railway:'station',operator:'JR東日本'});
+ const zero={...base,enabled:true,at:p.at,commissionPercent:0};
+ assert.equal(router.select({...config,offers:[zero]},p,'ja',now),null);
+ assert.equal(router.resolveOffer({...config,offers:[zero]},p,'ja',now).match,'jr-national');
+ const klook={...config.klook,travelOffers:config.klook.travelOffers.map(o=>({...o,commissionPercent:0}))};
+ assert.equal(router.travel({...config,klook},p,'ja',now),null);
+});

@@ -17,3 +17,8 @@ test('a single result opens at street level and invalidates in-flight searches',
  const {ctx,state,run}=runtime();ctx.rows=[{lat:36.94,lon:138.78,name:'GALA'}];
  run('nationalHits=rows;nationalSeq=12;qSeq=12;frameNationalHits();');assert.equal(state.view.z,17);assert.equal(state.opened.length,1);assert.equal(state.bounds,null);assert.equal(run('nationalSeq'),0);assert.equal(run('qSeq'),13);
 });
+test('map-area filtering preserves the complete nationwide set for returning to All Japan',()=>{
+ const {ctx,run}=runtime();ctx.rows=[{lat:35,lon:139},{lat:43,lon:141}];ctx.bounds={contains:at=>at[0]<40};
+ run('nationalAllHits=rows;nationalHits=hitsInBounds(nationalAllHits,bounds);');assert.equal(run('nationalHits.length'),1);assert.equal(run('nationalAllHits.length'),2);
+ run('nationalHits=nationalAllHits;');assert.equal(run('nationalHits.length'),2);
+});

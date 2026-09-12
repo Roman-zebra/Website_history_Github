@@ -47,7 +47,7 @@
     const label=offer.names?.[lang]||offer.names?.en;
     offer={...offer,url:trackedURL(config,'https://www.klook.com/'+locales[lang]+'/activity/'+offer.productId+'/',offer.prefecture,offer.productId),labels:{[lang]:label},languages:[lang]};
    }
-   if(!offer.enabled||!offer.id||!providers[offer.provider]||!trustedURL(offer.url,offer.provider,config))continue;
+   if(!offer.enabled||offer.commissionPercent===0||!offer.id||!providers[offer.provider]||!trustedURL(offer.url,offer.provider,config))continue;
    if(!point(offer.at)||!Number.isFinite(offer.radiusKm)||offer.radiusKm<=0||offer.radiusKm>25)continue;
    const reviewed=Date.parse(offer.reviewedOn),expires=Date.parse(offer.expiresOn);
    if(!Number.isFinite(reviewed)||reviewed>now||now-reviewed>180*86400000||(Number.isFinite(expires)&&expires<=now))continue;
@@ -87,7 +87,7 @@
    else if(/JR|旅客鉄道|Japan Rail/i.test(operator))type='jr-national';
    else {try{const host=new URL(t['contact:website']||t.website).hostname;if(['jreast.co.jp','jr-central.co.jp','jr-odekake.net','jrhokkaido.co.jp','jr-shikoku.co.jp','jrkyushu.co.jp'].some(h=>host===h||host.endsWith('.'+h)))type='jr-national';}catch{}}
   }
-  const item=config.klook.travelOffers?.find(o=>o.match===type&&o.enabled);
+  const item=config.klook.travelOffers?.find(o=>o.match===type&&o.enabled&&o.commissionPercent!==0);
   if(!item||!/^\d+$/.test(item.productId)||!Number.isFinite(Date.parse(item.reviewedOn))||now-Date.parse(item.reviewedOn)>180*86400000||Date.parse(item.reviewedOn)>now)return null;
   const prefecture=place.prefecture||'JP',url=trackedURL(config,'https://www.klook.com/'+locales[lang]+'/activity/'+item.productId+'/',prefecture,item.productId);
   if(!url)return null;
@@ -97,12 +97,39 @@
   const direct=select(config,place,lang,now),extra=travel(config,place,lang,now);
   return extra&&(!direct||direct.km>MILE_KM)?extra:direct;
  }
+ function tourHub(config,place){
+  const t=place.travelTags||{};
+  if(t.aeroway==='aerodrome')return 'airport';
+  if(t.railway==='station'&&(t.highspeed==='yes'||(config.klook?.tourRegions||[]).some(r=>r.shinkansenStationNames?.some(n=>[t.name,t['name:ja'],place.name,place.ja,place.searchName].includes(n))&&distance(place.at,r.at)<0.8)))return 'station';
+  const names=[place.name,place.ja,place.searchName,place.searchNameJa].filter(Boolean).map(s=>s.normalize('NFKC').toLowerCase().trim());
+  return (config.klook?.tourRegions||[]).some(r=>point(r.at)&&distance(place.at,r.at)<=r.radiusKm&&(r.downtownNames||[]).some(n=>names.includes(n.toLowerCase())))?'downtown':null;
+ }
+ function tours(config,place,lang,now=Date.now()){
+  if(!eligible(config,place)||!locales[lang])return [];
+  const hub=tourHub(config,place);if(!hub)return [];
+  const regions=(config.klook.tourRegions||[]).filter(r=>hub==='airport'?(r.airports||[]).includes(place.travelTags.iata):point(r.at)&&distance(place.at,r.at)<=r.radiusKm);
+  return (config.klook.tourOffers||[]).flatMap(o=>{
+   const region=regions.find(r=>o.regions?.includes(r.id)),reviewed=Date.parse(o.reviewedOn);
+   if(!region||!o.enabled||o.commissionPercent===0||!/^\d+$/.test(o.productId)||!Number.isFinite(reviewed)||reviewed>now||now-reviewed>180*86400000||(o.expiresOn&&Date.parse(o.expiresOn)<=now))return [];
+   const url=trackedURL(config,'https://www.klook.com/'+locales[lang]+'/activity/'+o.productId+'/',region.prefecture,o.productId);
+   if(!url)return [];
+   return [{...o,id:'klook-'+o.productId,provider:'klook',url,label:o.names[lang]||o.names.en,tour:true,note:o.notes[lang]||o.notes.en}];
+  });
+ }
+ function offerChoices(config,place,lang,now=Date.now()){
+  const list=[...tours(config,place,lang,now),resolveOffer(config,place,lang,now)].filter(Boolean);
+  return list.filter((o,i)=>list.findIndex(p=>p.id===o.id)===i);
+ }
+ // Counts actual overview openings, never configuration/language/data refreshes.
+ function createRotation(){
+  const visits=new Map();return {index(key,visit){let v=visits.get(key);if(!v){v={visit,index:0};visits.set(key,v);}else if(v.visit!==visit){v.visit=visit;v.index++;}if(visits.size>256)visits.delete(visits.keys().next().value);return v.index;},next(key){const v=visits.get(key);if(v)v.index++;return v?.index||0;}};
+ }
  // Only the latest opened panel may display an asynchronous region lookup.
  function createResolver(){let revision=0;return async function(config,place,lang,lookup,publish){
   const mine=++revision;publish(null);if(!eligible(config,place))return;
-  const direct=resolveOffer(config,place,lang);if(direct){publish(direct);return;}
+  const choices=offerChoices(config,place,lang);if(choices.length){const index=Math.max(0,Math.floor(place.adCycle||0))%choices.length;publish({...choices[index],choiceCount:choices.length});return;}
   if(!config.klook?.regionalSearch||(sizePolicy(config)&&!prominent(place)))return;
   try{const address=await lookup();if(mine===revision)publish(regional(config,place,lang,address));}catch{/* No irrelevant fallback on lookup failure. */}
  };}
- const api={select,travel,resolveOffer,distance,regional,trackedURL,createResolver,copy};if(typeof module==='object'&&module.exports)module.exports=api;else root.AffiliateRouter=api;
+ const api={select,travel,tourHub,tours,offerChoices,createRotation,resolveOffer,distance,regional,trackedURL,createResolver,copy};if(typeof module==='object'&&module.exports)module.exports=api;else root.AffiliateRouter=api;
 })(typeof window==='object'?window:globalThis);

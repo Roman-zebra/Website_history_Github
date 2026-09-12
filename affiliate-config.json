@@ -254,7 +254,8 @@
       "complete": false,
       "reviewedOn": "2026-09-12",
       "source": "https://affiliate.klook.com/my_ads/product_explorer",
-      "note": "The portal exposes products without a complete geocoded feed. Nationwide passes and eSIMs have no single venue; they are not assigned artificial coordinates."
+      "note": "The portal exposes products without a complete geocoded feed. Nationwide passes and eSIMs have no single venue; they are not assigned artificial coordinates.",
+      "apiAvailability": "The signed-in Klook FAQ confirms activity search APIs and product feeds are provided to selected partners by individual request. This account has no verified feed/API access; Japan-wide coverage, geocoding and live inventory remain unconfirmed."
     },
     "internationalAirports": [
       "OBO",
@@ -313,7 +314,10 @@
           "zh-Hans": "线上交付。购买前请确认设备兼容性、流量和激活方式。",
           "zh-Hant": "線上交付。購買前請確認裝置相容性、流量與啟用方式。",
           "th": "รับทางออนไลน์ โปรดตรวจสอบอุปกรณ์ ปริมาณข้อมูล และวิธีเปิดใช้งาน"
-        }
+        },
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
       },
       {
         "productId": "1420",
@@ -336,7 +340,10 @@
           "zh-Hans": "请确认购买资格、适用线路、除外列车、购买期限和兑换地点。本车站不一定可以兑换。",
           "zh-Hant": "請確認購買資格、適用路線、除外列車、購買期限與兌換地點。本車站不一定可兌換。",
           "th": "ตรวจสอบคุณสมบัติ เส้นทางที่ใช้ได้ ข้อยกเว้น กำหนดซื้อ และจุดแลกพาส สถานีนี้อาจไม่รับแลก"
-        }
+        },
+        "commissionPercent": 2,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
       },
       {
         "productId": "1552",
@@ -359,7 +366,470 @@
           "zh-Hans": "仅限东京Metro及都营地铁，不适用JR和其他私铁。请确认资格及兑换方式。",
           "zh-Hant": "僅限東京Metro及都營地鐵，不適用JR與其他私鐵。請確認資格與兌換方式。",
           "th": "ใช้กับ Tokyo Metro และ Toei Subway เท่านั้น ไม่รวม JR หรือรถไฟเอกชนอื่น โปรดตรวจสอบเงื่อนไขและการแลก"
-        }
+        },
+        "commissionPercent": 2,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      }
+    ],
+    "commissionAudit": {
+      "reviewedOn": "2026-09-12",
+      "checked": 105,
+      "fivePercent": 100,
+      "twoPercent": 4,
+      "zeroPercent": 1,
+      "source": "https://affiliate.klook.com/ja/help/special_activity",
+      "scope": "All 94 physical, 3 travel and 8 regional tour products in this local catalog; not all Klook Japan products."
+    },
+    "tourRegions": [
+      {
+        "id": "sapporo",
+        "prefecture": "JP-01",
+        "at": [
+          43.0686365,
+          141.3509218
+        ],
+        "radiusKm": 18,
+        "airports": [
+          "CTS",
+          "OKD"
+        ],
+        "downtownNames": [
+          "すすきの",
+          "薄野",
+          "Susukino",
+          "狸小路",
+          "狸小路商店街",
+          "Tanukikoji"
+        ],
+        "coordSource": "https://www.openstreetmap.org/node/4086852685"
+      },
+      {
+        "id": "tokyo",
+        "prefecture": "JP-13",
+        "at": [
+          35.6812546,
+          139.766706
+        ],
+        "radiusKm": 22,
+        "airports": [
+          "HND",
+          "NRT"
+        ],
+        "downtownNames": [
+          "秋葉原",
+          "Akihabara",
+          "新宿",
+          "Shinjuku",
+          "歌舞伎町",
+          "Kabukicho",
+          "渋谷",
+          "Shibuya",
+          "渋谷スクランブル交差点",
+          "Shibuya Crossing",
+          "銀座",
+          "Ginza",
+          "池袋",
+          "Ikebukuro"
+        ],
+        "coordSource": "https://www.openstreetmap.org/node/2149761647",
+        "shinkansenStationNames": [
+          "東京駅"
+        ],
+        "serviceSource": "https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf"
+      },
+      {
+        "id": "osaka",
+        "prefecture": "JP-27",
+        "at": [
+          34.7328955,
+          135.4985436
+        ],
+        "radiusKm": 18,
+        "airports": [
+          "KIX",
+          "ITM",
+          "UKB"
+        ],
+        "downtownNames": [
+          "道頓堀",
+          "Dotonbori",
+          "Dōtonbori",
+          "心斎橋",
+          "Shinsaibashi",
+          "梅田",
+          "Umeda",
+          "難波",
+          "Namba",
+          "新世界",
+          "Shinsekai"
+        ],
+        "coordSource": "https://www.openstreetmap.org/node/534123201",
+        "shinkansenStationNames": [
+          "新大阪駅"
+        ],
+        "serviceSource": "https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf"
+      },
+      {
+        "id": "kyoto",
+        "prefecture": "JP-26",
+        "at": [
+          34.9853497,
+          135.758766
+        ],
+        "radiusKm": 12,
+        "airports": [],
+        "downtownNames": [
+          "祇園",
+          "Gion",
+          "先斗町",
+          "Pontocho",
+          "河原町",
+          "Kawaramachi",
+          "錦市場",
+          "Nishiki Market"
+        ],
+        "coordSource": "https://www.openstreetmap.org/node/267316272",
+        "shinkansenStationNames": [
+          "京都駅"
+        ],
+        "serviceSource": "https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf"
+      },
+      {
+        "id": "fukuoka",
+        "prefecture": "JP-40",
+        "at": [
+          33.5900436,
+          130.4203556
+        ],
+        "radiusKm": 16,
+        "airports": [
+          "FUK"
+        ],
+        "downtownNames": [
+          "天神",
+          "Tenjin",
+          "中洲",
+          "Nakasu",
+          "キャナルシティ博多",
+          "Canal City Hakata"
+        ],
+        "coordSource": "https://www.openstreetmap.org/node/3637038754",
+        "shinkansenStationNames": [
+          "博多駅"
+        ],
+        "serviceSource": "https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf"
+      },
+      {
+        "id": "naha",
+        "prefecture": "JP-47",
+        "at": [
+          26.1966506,
+          127.6442731
+        ],
+        "radiusKm": 15,
+        "airports": [
+          "OKA"
+        ],
+        "downtownNames": [
+          "国際通り",
+          "Kokusai Street",
+          "Kokusai-dori",
+          "Kokusai Dori",
+          "牧志公設市場",
+          "Makishi Public Market"
+        ],
+        "coordSource": "https://www.openstreetmap.org/way/324129153"
+      },
+      {
+        "id": "nagoya",
+        "prefecture": "JP-23",
+        "at": [
+          35.1707285,
+          136.8818431
+        ],
+        "radiusKm": 20,
+        "airports": [
+          "NGO",
+          "NKM"
+        ],
+        "downtownNames": [
+          "栄",
+          "Sakae",
+          "大須",
+          "Osu",
+          "大須商店街",
+          "Osu Shopping District"
+        ],
+        "coordSource": "https://www.openstreetmap.org/node/4919810141",
+        "shinkansenStationNames": [
+          "名古屋駅"
+        ],
+        "serviceSource": "https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf"
+      },
+      {
+        "id": "kanazawa",
+        "prefecture": "JP-17",
+        "at": [
+          36.5780499,
+          136.6480247
+        ],
+        "radiusKm": 12,
+        "airports": [
+          "KMQ"
+        ],
+        "downtownNames": [
+          "片町",
+          "Katamachi",
+          "香林坊",
+          "Korinbo",
+          "ひがし茶屋街",
+          "Higashi Chaya District",
+          "近江町市場",
+          "Omicho Market"
+        ],
+        "coordSource": "https://www.openstreetmap.org/node/3977645705",
+        "shinkansenStationNames": [
+          "金沢駅"
+        ],
+        "serviceSource": "https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf"
+      },
+      {
+        "id": "hiroshima",
+        "prefecture": "JP-34",
+        "at": [
+          34.3985139,
+          132.4753527
+        ],
+        "radiusKm": 15,
+        "airports": [
+          "HIJ"
+        ],
+        "downtownNames": [
+          "本通",
+          "広島本通商店街",
+          "Hondori",
+          "Hondori Shopping Street",
+          "流川",
+          "Nagarekawa"
+        ],
+        "coordSource": "https://www.openstreetmap.org/node/6624627173",
+        "shinkansenStationNames": [
+          "広島駅"
+        ],
+        "serviceSource": "https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf"
+      }
+    ],
+    "tourOffers": [
+      {
+        "productId": "75806",
+        "regions": [
+          "tokyo"
+        ],
+        "enabled": true,
+        "names": {
+          "ja": "東京発 富士山・箱根 日帰りツアー",
+          "en": "Mt. Fuji & Hakone day tour from Tokyo",
+          "ko": "도쿄 출발 후지산·하코네 투어",
+          "zh-Hans": "东京出发富士山・箱根一日游",
+          "zh-Hant": "東京出發富士山・箱根一日遊"
+        },
+        "notes": {
+          "ja": "集合：東京・西新宿。表示中の地点・空港からの送迎を意味しません。日程・集合場所・ガイドの言語は予約前にご確認ください。",
+          "en": "Meet at: Nishi-Shinjuku, Tokyo. This is not a pickup from the map pin or airport. Check dates, meeting point and guide language before booking.",
+          "ko": "집합: 도쿄 니시신주쿠. 지도 지점이나 공항 픽업을 의미하지 않습니다. 날짜, 집합 장소, 가이드 언어를 확인하세요。",
+          "zh-Hans": "集合：东京西新宿。不表示从地图标记或机场接送。预订前请确认日期、集合地点及导游语言。",
+          "zh-Hant": "集合：東京西新宿。不表示從地圖標記或機場接送。預訂前請確認日期、集合地點及導遊語言。"
+        },
+        "source": "https://www.klook.com/en-US/activity/75806-fuji-hakone-day-tour/",
+        "reviewedOn": "2026-09-12",
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      },
+      {
+        "productId": "204293",
+        "regions": [
+          "sapporo"
+        ],
+        "enabled": true,
+        "names": {
+          "ja": "札幌発 美瑛・富良野 花畑ツアー",
+          "en": "Biei & Furano flower fields from Sapporo",
+          "ko": "삿포로 출발 비에이·후라노 꽃밭 투어",
+          "zh-Hans": "札幌出发美瑛・富良野花田之旅",
+          "zh-Hant": "札幌出發美瑛・富良野花田之旅"
+        },
+        "notes": {
+          "ja": "集合：札幌駅北口など、選択した集合場所。表示中の地点・空港からの送迎を意味しません。日程・集合場所・ガイドの言語は予約前にご確認ください。",
+          "en": "Meet at: selected meeting point, including Sapporo Station North Exit. This is not a pickup from the map pin or airport. Check dates, meeting point and guide language before booking.",
+          "ko": "집합: 삿포로역 북쪽 출구 등 선택한 집합 장소. 지도 지점이나 공항 픽업을 의미하지 않습니다. 날짜, 집합 장소, 가이드 언어를 확인하세요。",
+          "zh-Hans": "集合：札幌站北口等所选集合地点。不表示从地图标记或机场接送。预订前请确认日期、集合地点及导游语言。",
+          "zh-Hant": "集合：札幌站北口等所選集合地點。不表示從地圖標記或機場接送。預訂前請確認日期、集合地點及導遊語言。"
+        },
+        "source": "https://www.klook.com/en-US/activity/204293-hokkaido-flower-fields-blue-pond-full-day-tour/",
+        "reviewedOn": "2026-09-12",
+        "expiresOn": "2026-10-31",
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      },
+      {
+        "productId": "16167",
+        "regions": [
+          "osaka",
+          "kyoto"
+        ],
+        "enabled": true,
+        "names": {
+          "ja": "大阪・京都発 京都・奈良 日帰りツアー",
+          "en": "Kyoto & Nara day tour from Osaka or Kyoto",
+          "ko": "오사카·교토 출발 교토·나라 투어",
+          "zh-Hans": "大阪・京都出发京都・奈良一日游",
+          "zh-Hant": "大阪・京都出發京都・奈良一日遊"
+        },
+        "notes": {
+          "ja": "集合：大阪または京都の、選択した集合場所。表示中の地点・空港からの送迎を意味しません。日程・集合場所・ガイドの言語は予約前にご確認ください。",
+          "en": "Meet at: selected meeting point in Osaka or Kyoto. This is not a pickup from the map pin or airport. Check dates, meeting point and guide language before booking.",
+          "ko": "집합: 오사카 또는 교토의 선택한 집합 장소. 지도 지점이나 공항 픽업을 의미하지 않습니다. 날짜, 집합 장소, 가이드 언어를 확인하세요。",
+          "zh-Hans": "集合：大阪或京都的所选集合地点。不表示从地图标记或机场接送。预订前请确认日期、集合地点及导游语言。",
+          "zh-Hant": "集合：大阪或京都的所選集合地點。不表示從地圖標記或機場接送。預訂前請確認日期、集合地點及導遊語言。"
+        },
+        "source": "https://www.klook.com/en-US/activity/16167-nara-day-tour-kyoto/",
+        "reviewedOn": "2026-09-12",
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      },
+      {
+        "productId": "156094",
+        "regions": [
+          "fukuoka"
+        ],
+        "enabled": true,
+        "names": {
+          "ja": "福岡発 太宰府・由布院・別府 日帰りツアー",
+          "en": "Dazaifu, Yufuin & Beppu day trip from Fukuoka",
+          "ko": "후쿠오카 출발 다자이후·유후인·벳푸 투어",
+          "zh-Hans": "福冈出发太宰府・由布院・别府一日游",
+          "zh-Hant": "福岡出發太宰府・由布院・別府一日遊"
+        },
+        "notes": {
+          "ja": "集合：博多駅筑紫口・オリエンタルホテル前ローソン。表示中の地点・空港からの送迎を意味しません。日程・集合場所・ガイドの言語は予約前にご確認ください。",
+          "en": "Meet at: Lawson outside Oriental Hotel, Hakata Station Chikushi Exit. This is not a pickup from the map pin or airport. Check dates, meeting point and guide language before booking.",
+          "ko": "집합: 하카타역 치쿠시 출구 오리엔탈 호텔 앞 로손. 지도 지점이나 공항 픽업을 의미하지 않습니다. 날짜, 집합 장소, 가이드 언어를 확인하세요。",
+          "zh-Hans": "集合：博多站筑紫口东方酒店前罗森。不表示从地图标记或机场接送。预订前请确认日期、集合地点及导游语言。",
+          "zh-Hant": "集合：博多站筑紫口東方酒店前羅森。不表示從地圖標記或機場接送。預訂前請確認日期、集合地點及導遊語言。"
+        },
+        "source": "https://www.klook.com/activity/156094-kyushu-oita-in-depth-day-trip-praying-at-dazaifu-tenmangu-shrine-ex/",
+        "reviewedOn": "2026-09-12",
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      },
+      {
+        "productId": "142932",
+        "regions": [
+          "naha"
+        ],
+        "enabled": true,
+        "names": {
+          "ja": "那覇発 沖縄南部・北部 観光バス",
+          "en": "Okinawa sightseeing bus from Naha",
+          "ko": "나하 출발 오키나와 관광 버스",
+          "zh-Hans": "那霸出发冲绳观光巴士",
+          "zh-Hant": "那霸出發沖繩觀光巴士"
+        },
+        "notes": {
+          "ja": "集合：那覇市内・パレットくもじ周辺（プランで確認）。表示中の地点・空港からの送迎を意味しません。日程・集合場所・ガイドの言語は予約前にご確認ください。",
+          "en": "Meet at: Palette Kumoji area, Naha; check your package. This is not a pickup from the map pin or airport. Check dates, meeting point and guide language before booking.",
+          "ko": "집합: 나하 팔레트 쿠모지 주변, 플랜 확인. 지도 지점이나 공항 픽업을 의미하지 않습니다. 날짜, 집합 장소, 가이드 언어를 확인하세요。",
+          "zh-Hans": "集合：那霸 Palette Kumoji 附近，请确认套餐。不表示从地图标记或机场接送。预订前请确认日期、集合地点及导游语言。",
+          "zh-Hant": "集合：那霸 Palette Kumoji 附近，請確認方案。不表示從地圖標記或機場接送。預訂前請確認日期、集合地點及導遊語言。"
+        },
+        "source": "https://www.klook.com/en-US/activity/142932-okinawa-south-north-1-day-bus-tour-churaumi-dmm-autoguiding/",
+        "reviewedOn": "2026-09-12",
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      },
+      {
+        "productId": "55295",
+        "regions": [
+          "nagoya"
+        ],
+        "enabled": true,
+        "names": {
+          "ja": "名古屋発 白川郷・飛騨高山 日帰りツアー",
+          "en": "Shirakawa-go & Takayama from Nagoya",
+          "ko": "나고야 출발 시라카와고·다카야마 투어",
+          "zh-Hans": "名古屋出发白川乡・高山一日游",
+          "zh-Hant": "名古屋出發白川鄉・高山一日遊"
+        },
+        "notes": {
+          "ja": "集合：名古屋駅太閤通口・駅前広場。表示中の地点・空港からの送迎を意味しません。日程・集合場所・ガイドの言語は予約前にご確認ください。",
+          "en": "Meet at: Nagoya Station Taiko-dori Exit station square. This is not a pickup from the map pin or airport. Check dates, meeting point and guide language before booking.",
+          "ko": "집합: 나고야역 다이코도리 출구 역 앞 광장. 지도 지점이나 공항 픽업을 의미하지 않습니다. 날짜, 집합 장소, 가이드 언어를 확인하세요。",
+          "zh-Hans": "集合：名古屋站太阁通口站前广场。不表示从地图标记或机场接送。预订前请确认日期、集合地点及导游语言。",
+          "zh-Hant": "集合：名古屋站太閣通口站前廣場。不表示從地圖標記或機場接送。預訂前請確認日期、集合地點及導遊語言。"
+        },
+        "source": "https://www.klook.com/en-US/activity/55295-shirakawa-go-takayama-city-join-bus-tour-nagoya/",
+        "reviewedOn": "2026-09-12",
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      },
+      {
+        "productId": "181355",
+        "regions": [
+          "kanazawa"
+        ],
+        "enabled": true,
+        "names": {
+          "ja": "金沢発 白川郷・金沢 ツアー",
+          "en": "Shirakawa-go & Kanazawa tour from Kanazawa",
+          "ko": "가나자와 출발 시라카와고·가나자와 투어",
+          "zh-Hans": "金泽出发白川乡・金泽之旅",
+          "zh-Hant": "金澤出發白川鄉・金澤之旅"
+        },
+        "notes": {
+          "ja": "集合：金沢駅・金沢市制百周年記念碑。表示中の地点・空港からの送迎を意味しません。日程・集合場所・ガイドの言語は予約前にご確認ください。",
+          "en": "Meet at: Kanazawa City Centennial Monument, Kanazawa Station. This is not a pickup from the map pin or airport. Check dates, meeting point and guide language before booking.",
+          "ko": "집합: 가나자와역 시제 100주년 기념비. 지도 지점이나 공항 픽업을 의미하지 않습니다. 날짜, 집합 장소, 가이드 언어를 확인하세요。",
+          "zh-Hans": "集合：金泽站市制百周年纪念碑。不表示从地图标记或机场接送。预订前请确认日期、集合地点及导游语言。",
+          "zh-Hant": "集合：金澤站市制百周年紀念碑。不表示從地圖標記或機場接送。預訂前請確認日期、集合地點及導遊語言。"
+        },
+        "source": "https://www.klook.com/en-US/activity/181355-shirakawago-and-kanazawa-day-tour/",
+        "reviewedOn": "2026-09-12",
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
+      },
+      {
+        "productId": "140942",
+        "regions": [
+          "hiroshima"
+        ],
+        "enabled": true,
+        "names": {
+          "ja": "広島発 広島・宮島 フェリー付きツアー",
+          "en": "Hiroshima & Miyajima with ferry from Hiroshima",
+          "ko": "히로시마 출발 히로시마·미야지마 페리 투어",
+          "zh-Hans": "广岛出发广岛・宫岛含渡轮之旅",
+          "zh-Hant": "廣島出發廣島・宮島含渡輪之旅"
+        },
+        "notes": {
+          "ja": "集合：広島駅新幹線口ひろば・バス乗り場。表示中の地点・空港からの送迎を意味しません。日程・集合場所・ガイドの言語は予約前にご確認ください。",
+          "en": "Meet at: Hiroshima Station Shinkansenguchi Hiroba bus berth. This is not a pickup from the map pin or airport. Check dates, meeting point and guide language before booking.",
+          "ko": "집합: 히로시마역 신칸센 출구 광장 버스 정류장. 지도 지점이나 공항 픽업을 의미하지 않습니다. 날짜, 집합 장소, 가이드 언어를 확인하세요。",
+          "zh-Hans": "集合：广岛站新干线口广场巴士站。不表示从地图标记或机场接送。预订前请确认日期、集合地点及导游语言。",
+          "zh-Hant": "集合：廣島站新幹線口廣場巴士站。不表示從地圖標記或機場接送。預訂前請確認日期、集合地點及導遊語言。"
+        },
+        "source": "https://www.klook.com/en-US/activity/140942-day-trip-to-hiroshima-and-miyajima-with-ferry-ride/",
+        "reviewedOn": "2026-09-12",
+        "commissionPercent": 5,
+        "commissionReviewedOn": "2026-09-12",
+        "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
       }
     ]
   },
@@ -385,7 +855,10 @@
       "radiusKm": 5,
       "category": "viewpoint",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-116925",
@@ -408,7 +881,10 @@
       "radiusKm": 12,
       "category": "nature",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-116919",
@@ -431,7 +907,10 @@
       "radiusKm": 25,
       "category": "nature",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-92169",
@@ -456,7 +935,10 @@
       "radiusKm": 6,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-152588",
@@ -479,7 +961,10 @@
       "radiusKm": 5,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-152953",
@@ -502,7 +987,10 @@
       "radiusKm": 4,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-48267",
@@ -525,7 +1013,10 @@
       "radiusKm": 6,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-95382",
@@ -548,7 +1039,10 @@
       "radiusKm": 5,
       "category": "rail",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-76575",
@@ -571,7 +1065,10 @@
       "radiusKm": 6,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-86540",
@@ -596,7 +1093,10 @@
       "radiusKm": 4,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-85699",
@@ -619,7 +1119,10 @@
       "radiusKm": 12,
       "category": "nature",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-66318",
@@ -642,7 +1145,10 @@
       "radiusKm": 6,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-35418",
@@ -665,7 +1171,10 @@
       "radiusKm": 6,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-135588",
@@ -688,7 +1197,10 @@
       "radiusKm": 5,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-79806",
@@ -711,7 +1223,10 @@
       "radiusKm": 8,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-22903",
@@ -734,7 +1249,10 @@
       "radiusKm": 8,
       "category": "nature",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-88377",
@@ -757,7 +1275,10 @@
       "radiusKm": 5,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-27246",
@@ -780,7 +1301,10 @@
       "radiusKm": 4,
       "category": "rail",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-30110",
@@ -803,7 +1327,10 @@
       "radiusKm": 5,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-2424",
@@ -826,7 +1353,10 @@
       "radiusKm": 3,
       "category": "viewpoint",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-82515",
@@ -849,7 +1379,10 @@
       "radiusKm": 5,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-154990",
@@ -872,7 +1405,10 @@
       "radiusKm": 5,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-38401",
@@ -897,7 +1433,10 @@
       "radiusKm": 5,
       "category": "nature",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-65253",
@@ -920,7 +1459,10 @@
       "radiusKm": 4,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-19854",
@@ -943,7 +1485,10 @@
       "radiusKm": 4,
       "category": "viewpoint",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-149422",
@@ -966,7 +1511,10 @@
       "radiusKm": 5,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-97168",
@@ -989,7 +1537,10 @@
       "radiusKm": 4,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-20071",
@@ -1012,7 +1563,10 @@
       "radiusKm": 3,
       "category": "viewpoint",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-38419",
@@ -1035,7 +1589,10 @@
       "radiusKm": 6,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-13427",
@@ -1058,7 +1615,10 @@
       "radiusKm": 6,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-5620",
@@ -1083,7 +1643,10 @@
       "radiusKm": 6,
       "category": "culture",
       "priority": 0,
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-12",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-43404",
@@ -1108,7 +1671,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%BB%99%E5%8F%B0%E3%81%86%E3%81%BF%E3%81%AE%E6%9D%9C%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/43404/"
+      "productSource": "https://www.klook.com/en-US/activity/43404/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-14723",
@@ -1133,7 +1699,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E7%99%BB%E5%88%A5%E3%83%9E%E3%83%AA%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AF%E3%83%8B%E3%82%AF%E3%82%B9",
-      "productSource": "https://www.klook.com/en-US/activity/14723/"
+      "productSource": "https://www.klook.com/en-US/activity/14723/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-25126",
@@ -1158,7 +1727,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://www.openstreetmap.org/node/4609097293",
-      "productSource": "https://www.klook.com/en-US/activity/25126/"
+      "productSource": "https://www.klook.com/en-US/activity/25126/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-45064",
@@ -1183,7 +1755,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://www.openstreetmap.org/way/585398984",
-      "productSource": "https://www.klook.com/en-US/activity/45064/"
+      "productSource": "https://www.klook.com/en-US/activity/45064/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-1421",
@@ -1208,7 +1783,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/1421/"
+      "productSource": "https://www.klook.com/en-US/activity/1421/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-1759",
@@ -1233,7 +1811,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/1759/"
+      "productSource": "https://www.klook.com/en-US/activity/1759/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-59360",
@@ -1258,7 +1839,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/59360/"
+      "productSource": "https://www.klook.com/en-US/activity/59360/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-14547",
@@ -1283,7 +1867,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%B3%E3%82%B7%E3%83%A3%E3%82%A4%E3%83%B3%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/14547/"
+      "productSource": "https://www.klook.com/en-US/activity/14547/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-55241",
@@ -1308,7 +1895,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/DMM%E3%81%8B%E3%82%8A%E3%82%86%E3%81%97%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/55241/"
+      "productSource": "https://www.klook.com/en-US/activity/55241/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-41174",
@@ -1333,7 +1923,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%96%B0%E6%B1%9F%E3%83%8E%E5%B3%B6%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/41174/"
+      "productSource": "https://www.klook.com/en-US/activity/41174/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-15334",
@@ -1358,7 +1951,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/15334/"
+      "productSource": "https://www.klook.com/en-US/activity/15334/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-37909",
@@ -1383,7 +1979,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%AF%E3%82%A2%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%83%BB%E5%A4%A7%E6%B4%97",
-      "productSource": "https://www.klook.com/en-US/activity/37909/"
+      "productSource": "https://www.klook.com/en-US/activity/37909/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-96306",
@@ -1408,7 +2007,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://www.openstreetmap.org/node/5603040428",
-      "productSource": "https://www.klook.com/en-US/activity/96306/"
+      "productSource": "https://www.klook.com/en-US/activity/96306/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-33911",
@@ -1433,7 +2035,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E9%B4%A8%E5%B7%9D%E3%82%B7%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89",
-      "productSource": "https://www.klook.com/en-US/activity/33911/"
+      "productSource": "https://www.klook.com/en-US/activity/33911/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-50447",
@@ -1458,7 +2063,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://www.openstreetmap.org/way/355646048",
-      "productSource": "https://www.klook.com/en-US/activity/50447/"
+      "productSource": "https://www.klook.com/en-US/activity/50447/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-5621",
@@ -1483,7 +2091,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%B6%E3%83%BC%E7%89%A7%E5%A0%B4",
-      "productSource": "https://www.klook.com/en-US/activity/5621/"
+      "productSource": "https://www.klook.com/en-US/activity/5621/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-85615",
@@ -1508,7 +2119,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%B8%89%E6%BA%AA%E5%9C%92",
-      "productSource": "https://www.klook.com/en-US/activity/85615/"
+      "productSource": "https://www.klook.com/en-US/activity/85615/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-88447",
@@ -1533,7 +2147,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%95%E3%81%8C%E3%81%BF%E6%B9%96MORI%20MORI",
-      "productSource": "https://www.klook.com/en-US/activity/88447/"
+      "productSource": "https://www.klook.com/en-US/activity/88447/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-28959",
@@ -1558,7 +2175,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%AA%E3%83%B3%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E6%B5%B7%E3%81%AE%E4%B8%AD%E9%81%93",
-      "productSource": "https://www.klook.com/en-US/activity/28959/"
+      "productSource": "https://www.klook.com/en-US/activity/28959/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-35833",
@@ -1583,7 +2203,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%B9%9D%E5%B7%9E%E5%9B%BD%E7%AB%8B%E5%8D%9A%E7%89%A9%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/35833/"
+      "productSource": "https://www.klook.com/en-US/activity/35833/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-95879",
@@ -1608,7 +2231,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E6%80%A5%E3%83%8F%E3%82%A4%E3%83%A9%E3%83%B3%E3%83%89",
-      "productSource": "https://www.klook.com/en-US/activity/95879/"
+      "productSource": "https://www.klook.com/en-US/activity/95879/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-32135",
@@ -1633,7 +2259,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%BC%8A%E8%B1%86%E3%82%B7%E3%83%A3%E3%83%9C%E3%83%86%E3%83%B3%E5%8B%95%E7%89%A9%E5%85%AC%E5%9C%92",
-      "productSource": "https://www.klook.com/en-US/activity/32135/"
+      "productSource": "https://www.klook.com/en-US/activity/32135/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-14575",
@@ -1658,7 +2287,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%B9%E3%83%91%E3%83%AB%E3%82%B9%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E3%83%97%E3%83%A9%E3%82%B6",
-      "productSource": "https://www.klook.com/en-US/activity/14575/"
+      "productSource": "https://www.klook.com/en-US/activity/14575/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-20949",
@@ -1683,7 +2315,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%B8%8B%E7%94%B0%E6%B5%B7%E4%B8%AD%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/20949/"
+      "productSource": "https://www.klook.com/en-US/activity/20949/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-52212",
@@ -1708,7 +2343,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%8E%9B%E5%B7%9D%E8%8A%B1%E9%B3%A5%E5%9C%92",
-      "productSource": "https://www.klook.com/en-US/activity/52212/"
+      "productSource": "https://www.klook.com/en-US/activity/52212/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-81734",
@@ -1733,7 +2371,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/ACAO%20FOREST",
-      "productSource": "https://www.klook.com/en-US/activity/81734/"
+      "productSource": "https://www.klook.com/en-US/activity/81734/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-85593",
@@ -1758,7 +2399,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/KawaZoo",
-      "productSource": "https://www.klook.com/en-US/activity/85593/"
+      "productSource": "https://www.klook.com/en-US/activity/85593/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-132673",
@@ -1783,7 +2427,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%96%E3%83%AA%E3%83%91%E3%83%BC%E3%82%AF",
-      "productSource": "https://www.klook.com/en-US/activity/132673/"
+      "productSource": "https://www.klook.com/en-US/activity/132673/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-79812",
@@ -1808,7 +2455,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%88%E3%83%AB%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89",
-      "productSource": "https://www.klook.com/en-US/activity/79812/"
+      "productSource": "https://www.klook.com/en-US/activity/79812/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-83638",
@@ -1833,7 +2483,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%8D%9A%E7%89%A9%E9%A4%A8%E6%98%8E%E6%B2%BB%E6%9D%91",
-      "productSource": "https://www.klook.com/en-US/activity/83638/"
+      "productSource": "https://www.klook.com/en-US/activity/83638/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-38434",
@@ -1858,7 +2511,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E9%88%B4%E9%B9%BF%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%83%E3%83%88",
-      "productSource": "https://www.klook.com/en-US/activity/38434/"
+      "productSource": "https://www.klook.com/en-US/activity/38434/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-83388",
@@ -1883,7 +2539,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%BF%97%E6%91%A9%E3%82%B9%E3%83%9A%E3%82%A4%E3%83%B3%E6%9D%91",
-      "productSource": "https://www.klook.com/en-US/activity/83388/"
+      "productSource": "https://www.klook.com/en-US/activity/83388/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-47068",
@@ -1908,7 +2567,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%B3%E3%82%8F%E6%B9%96%E3%83%90%E3%83%AC%E3%82%A4",
-      "productSource": "https://www.klook.com/en-US/activity/47068/"
+      "productSource": "https://www.klook.com/en-US/activity/47068/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-96363",
@@ -1933,7 +2595,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%BB%B6%E6%9A%A6%E5%AF%BA",
-      "productSource": "https://www.klook.com/en-US/activity/96363/"
+      "productSource": "https://www.klook.com/en-US/activity/96363/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-1464",
@@ -1958,7 +2623,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E3%82%BF%E3%83%AF%E3%83%BC",
-      "productSource": "https://www.klook.com/en-US/activity/1464/"
+      "productSource": "https://www.klook.com/en-US/activity/1464/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-48327",
@@ -1983,7 +2651,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E6%98%A0%E5%A4%AA%E7%A7%A6%E6%98%A0%E7%94%BB%E6%9D%91",
-      "productSource": "https://www.klook.com/en-US/activity/48327/"
+      "productSource": "https://www.klook.com/en-US/activity/48327/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-67219",
@@ -2008,7 +2679,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E5%9B%BD%E9%9A%9B%E3%83%9E%E3%83%B3%E3%82%AC%E3%83%9F%E3%83%A5%E3%83%BC%E3%82%B8%E3%82%A2%E3%83%A0",
-      "productSource": "https://www.klook.com/en-US/activity/67219/"
+      "productSource": "https://www.klook.com/en-US/activity/67219/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-73632",
@@ -2033,13 +2707,16 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E9%98%AA%E5%B8%82%E7%AB%8B%E9%95%B7%E5%B1%85%E6%A4%8D%E7%89%A9%E5%9C%92",
-      "productSource": "https://www.klook.com/en-US/activity/73632/"
+      "productSource": "https://www.klook.com/en-US/activity/73632/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-598",
       "productId": "598",
       "provider": "klook",
-      "enabled": true,
+      "enabled": false,
       "prefecture": "JP-27",
       "names": {
         "en": "Osaka Aquarium Kaiyukan",
@@ -2058,7 +2735,11 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%B5%B7%E9%81%8A%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/598/"
+      "productSource": "https://www.klook.com/en-US/activity/598/",
+      "commissionPercent": 0,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity",
+      "disabledReason": "Klook currently lists a 0% commission; excluded from revenue advertisements after account-side verification on 2026-09-12."
     },
     {
       "id": "klook-37845",
@@ -2083,7 +2764,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%83%E3%82%BA%E3%83%97%E3%83%A9%E3%82%B6%E5%A4%A7%E9%98%AA",
-      "productSource": "https://www.klook.com/en-US/activity/37845/"
+      "productSource": "https://www.klook.com/en-US/activity/37845/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-76766",
@@ -2108,7 +2792,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E9%80%9A%E5%A4%A9%E9%96%A3",
-      "productSource": "https://www.klook.com/en-US/activity/76766/"
+      "productSource": "https://www.klook.com/en-US/activity/76766/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-13116",
@@ -2133,7 +2820,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/NIFREL",
-      "productSource": "https://www.klook.com/en-US/activity/13116/"
+      "productSource": "https://www.klook.com/en-US/activity/13116/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-49191",
@@ -2158,7 +2848,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%B2%E3%82%89%E3%81%8B%E3%81%9F%E3%83%91%E3%83%BC%E3%82%AF",
-      "productSource": "https://www.klook.com/en-US/activity/49191/"
+      "productSource": "https://www.klook.com/en-US/activity/49191/",
+      "commissionPercent": 2,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-102808",
@@ -2183,7 +2876,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%88%E3%82%A2",
-      "productSource": "https://www.klook.com/en-US/activity/102808/"
+      "productSource": "https://www.klook.com/en-US/activity/102808/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-78852",
@@ -2208,7 +2904,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%B7%A1%E8%B7%AF%E3%83%95%E3%82%A1%E3%83%BC%E3%83%A0%E3%83%91%E3%83%BC%E3%82%AF%20%E3%82%A4%E3%83%B3%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%89%E3%81%AE%E4%B8%98",
-      "productSource": "https://www.klook.com/en-US/activity/78852/"
+      "productSource": "https://www.klook.com/en-US/activity/78852/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-95923",
@@ -2233,7 +2932,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%B7%A1%E8%B7%AF%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%83%91%E3%83%BC%E3%82%AFONOKORO",
-      "productSource": "https://www.klook.com/en-US/activity/95923/"
+      "productSource": "https://www.klook.com/en-US/activity/95923/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-97834",
@@ -2258,7 +2960,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%89%E3%83%99%E3%83%B3%E3%83%81%E3%83%A3%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89",
-      "productSource": "https://www.klook.com/en-US/activity/97834/"
+      "productSource": "https://www.klook.com/en-US/activity/97834/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-50439",
@@ -2283,7 +2988,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%B3%B6%E6%A0%B9%E7%9C%8C%E7%AB%8B%E3%81%97%E3%81%BE%E3%81%AD%E6%B5%B7%E6%B4%8B%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/50439/"
+      "productSource": "https://www.klook.com/en-US/activity/50439/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-140869",
@@ -2308,7 +3016,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%B9%AF%E6%9C%AC%E8%B1%AA%E4%B8%80%E8%A8%98%E5%BF%B5%E6%97%A5%E6%9C%AC%E5%A6%96%E6%80%AA%E5%8D%9A%E7%89%A9%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/140869/"
+      "productSource": "https://www.klook.com/en-US/activity/140869/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-99311",
@@ -2333,7 +3044,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%8A%E3%82%8A%E3%81%A5%E3%82%8B%E3%82%BF%E3%83%AF%E3%83%BC",
-      "productSource": "https://www.klook.com/en-US/activity/99311/"
+      "productSource": "https://www.klook.com/en-US/activity/99311/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-131634",
@@ -2358,7 +3072,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%94%90%E6%B4%A5%E5%9F%8E",
-      "productSource": "https://www.klook.com/en-US/activity/131634/"
+      "productSource": "https://www.klook.com/en-US/activity/131634/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-7254",
@@ -2383,7 +3100,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%8F%E3%82%A6%E3%82%B9%E3%83%86%E3%83%B3%E3%83%9C%E3%82%B9",
-      "productSource": "https://www.klook.com/en-US/activity/7254/"
+      "productSource": "https://www.klook.com/en-US/activity/7254/",
+      "commissionPercent": 2,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-96420",
@@ -2408,7 +3128,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%A9%E3%83%90%E3%83%BC%E5%9C%92",
-      "productSource": "https://www.klook.com/en-US/activity/96420/"
+      "productSource": "https://www.klook.com/en-US/activity/96420/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-45735",
@@ -2433,7 +3156,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%A9%E3%83%B3%E3%83%89%20(%E9%81%8A%E5%9C%92%E5%9C%B0)",
-      "productSource": "https://www.klook.com/en-US/activity/45735/"
+      "productSource": "https://www.klook.com/en-US/activity/45735/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-22209",
@@ -2458,7 +3184,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E5%88%86%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%91%E3%83%AC%E3%82%B9%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/22209/"
+      "productSource": "https://www.klook.com/en-US/activity/22209/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-37696",
@@ -2483,7 +3212,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%84%E3%81%8A%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%81%8B%E3%81%94%E3%81%97%E3%81%BE%E6%B0%B4%E6%97%8F%E9%A4%A8",
-      "productSource": "https://www.klook.com/en-US/activity/37696/"
+      "productSource": "https://www.klook.com/en-US/activity/37696/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-41471",
@@ -2508,7 +3240,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%B2%96%E7%B8%84%E3%81%93%E3%81%A9%E3%82%82%E3%81%AE%E5%9B%BD",
-      "productSource": "https://www.klook.com/en-US/activity/41471/"
+      "productSource": "https://www.klook.com/en-US/activity/41471/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-1657",
@@ -2533,7 +3268,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%82%AA%E3%83%91%E3%83%BC%E3%82%AF%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF",
-      "productSource": "https://www.klook.com/en-US/activity/1657/"
+      "productSource": "https://www.klook.com/en-US/activity/1657/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-29033",
@@ -2558,7 +3296,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://www.openstreetmap.org/node/4592400200",
-      "productSource": "https://www.klook.com/en-US/activity/29033/"
+      "productSource": "https://www.klook.com/en-US/activity/29033/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-41352",
@@ -2583,7 +3324,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%84%E3%83%AA%E3%83%BC",
-      "productSource": "https://www.klook.com/en-US/activity/41352/"
+      "productSource": "https://www.klook.com/en-US/activity/41352/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-4911",
@@ -2608,7 +3352,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E3%82%BF%E3%83%AF%E3%83%BC",
-      "productSource": "https://www.klook.com/en-US/activity/4911/"
+      "productSource": "https://www.klook.com/en-US/activity/4911/",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-35861",
@@ -2629,7 +3376,10 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "source": "https://www.klook.com/activity/35861-umeda-sky-building-kuchu-teien-observatory-ticket/",
-      "coordSource": "https://www.wikidata.org/wiki/Q1151808"
+      "coordSource": "https://www.wikidata.org/wiki/Q1151808",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     },
     {
       "id": "klook-99585",
@@ -2650,14 +3400,17 @@
       "priority": 0,
       "reviewedOn": "2026-09-12",
       "source": "https://www.klook.com/en-US/activity/99585-everyone-beginners-experts-adults-children-enjoy-playing-snow/",
-      "coordSource": "https://www.openstreetmap.org/way/948328123"
+      "coordSource": "https://www.openstreetmap.org/way/948328123",
+      "commissionPercent": 5,
+      "commissionReviewedOn": "2026-09-12",
+      "commissionSource": "https://affiliate.klook.com/ja/help/special_activity"
     }
   ],
   "_instructions": [
     "Marker sizes pop=1 and pop=2 choose the closest reviewed physical venue. Sizes 3 and 4, Wikipedia/memorial pins and local pins require a venue within one international mile (1.609344 km). Do not confuse pop (size) with tier (appearance zoom).",
     "When no physical offer lies within one mile, identified international airports may show a Japan eSIM, JR stations a nationwide JR pass, and Tokyo Metro/Toei subway stations a Tokyo Subway ticket. Never assign fake coordinates to these products. Unverified operators receive no rail fallback.",
     "All 47 prefectures retain region-search fallback for the largest two sizes only when no reviewed product or relevant travel fallback can be selected. Other sizes never fall back to distant regions.",
-    "This is a partial manually verified catalog, not all Klook Japan inventory. Official API/feed availability was not confirmed. The owner declined contacting support; do not send an inquiry.",
+    "This is a partial manually verified catalog, not all Klook Japan inventory. Official activity search API/product feeds exist for selected partners; this account has no verified access. The owner declined contacting support; do not send an inquiry.",
     "Public affiliate ID 134890 is verified for JAPAN TIME ATLAS. Link format: https://affiliate.klook.com/custom_tag_guide; k_site is last. No secrets or visitor/click identifiers belong here.",
     "Physical products require verified venue coordinates. Recheck all offers within 180 days; expired reviews are suppressed. Prices, dates, eligibility, exchange locations and available services remain on Klook.",
     "Klook landing pages returned a redirect error with attribution in the setup browser. Do not claim booking attribution or payouts are verified; see KLOOK-MAINTENANCE.md."
