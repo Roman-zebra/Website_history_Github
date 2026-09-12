@@ -1,15 +1,982 @@
 {
-  "enabled": false,
-  "excludeKinds": ["lore", "memorial"],
+  "enabled": true,
+  "excludeKinds": [
+    "lore",
+    "memorial"
+  ],
   "approvedRedirectHosts": {},
-  "offers": [],
+  "klook": {
+    "affiliateId": "134890",
+    "sourceTag": "jta_map",
+    "regionalSearch": true,
+    "reviewedOn": "2026-09-12",
+    "prefectures": [
+      {
+        "code": "JP-01",
+        "ja": "北海道",
+        "en": "Hokkaido"
+      },
+      {
+        "code": "JP-02",
+        "ja": "青森県",
+        "en": "Aomori"
+      },
+      {
+        "code": "JP-03",
+        "ja": "岩手県",
+        "en": "Iwate"
+      },
+      {
+        "code": "JP-04",
+        "ja": "宮城県",
+        "en": "Miyagi"
+      },
+      {
+        "code": "JP-05",
+        "ja": "秋田県",
+        "en": "Akita"
+      },
+      {
+        "code": "JP-06",
+        "ja": "山形県",
+        "en": "Yamagata"
+      },
+      {
+        "code": "JP-07",
+        "ja": "福島県",
+        "en": "Fukushima"
+      },
+      {
+        "code": "JP-08",
+        "ja": "茨城県",
+        "en": "Ibaraki"
+      },
+      {
+        "code": "JP-09",
+        "ja": "栃木県",
+        "en": "Tochigi"
+      },
+      {
+        "code": "JP-10",
+        "ja": "群馬県",
+        "en": "Gunma"
+      },
+      {
+        "code": "JP-11",
+        "ja": "埼玉県",
+        "en": "Saitama"
+      },
+      {
+        "code": "JP-12",
+        "ja": "千葉県",
+        "en": "Chiba"
+      },
+      {
+        "code": "JP-13",
+        "ja": "東京都",
+        "en": "Tokyo"
+      },
+      {
+        "code": "JP-14",
+        "ja": "神奈川県",
+        "en": "Kanagawa"
+      },
+      {
+        "code": "JP-15",
+        "ja": "新潟県",
+        "en": "Niigata"
+      },
+      {
+        "code": "JP-16",
+        "ja": "富山県",
+        "en": "Toyama"
+      },
+      {
+        "code": "JP-17",
+        "ja": "石川県",
+        "en": "Ishikawa"
+      },
+      {
+        "code": "JP-18",
+        "ja": "福井県",
+        "en": "Fukui"
+      },
+      {
+        "code": "JP-19",
+        "ja": "山梨県",
+        "en": "Yamanashi"
+      },
+      {
+        "code": "JP-20",
+        "ja": "長野県",
+        "en": "Nagano"
+      },
+      {
+        "code": "JP-21",
+        "ja": "岐阜県",
+        "en": "Gifu"
+      },
+      {
+        "code": "JP-22",
+        "ja": "静岡県",
+        "en": "Shizuoka"
+      },
+      {
+        "code": "JP-23",
+        "ja": "愛知県",
+        "en": "Aichi"
+      },
+      {
+        "code": "JP-24",
+        "ja": "三重県",
+        "en": "Mie"
+      },
+      {
+        "code": "JP-25",
+        "ja": "滋賀県",
+        "en": "Shiga"
+      },
+      {
+        "code": "JP-26",
+        "ja": "京都府",
+        "en": "Kyoto"
+      },
+      {
+        "code": "JP-27",
+        "ja": "大阪府",
+        "en": "Osaka"
+      },
+      {
+        "code": "JP-28",
+        "ja": "兵庫県",
+        "en": "Hyogo"
+      },
+      {
+        "code": "JP-29",
+        "ja": "奈良県",
+        "en": "Nara"
+      },
+      {
+        "code": "JP-30",
+        "ja": "和歌山県",
+        "en": "Wakayama"
+      },
+      {
+        "code": "JP-31",
+        "ja": "鳥取県",
+        "en": "Tottori"
+      },
+      {
+        "code": "JP-32",
+        "ja": "島根県",
+        "en": "Shimane"
+      },
+      {
+        "code": "JP-33",
+        "ja": "岡山県",
+        "en": "Okayama"
+      },
+      {
+        "code": "JP-34",
+        "ja": "広島県",
+        "en": "Hiroshima"
+      },
+      {
+        "code": "JP-35",
+        "ja": "山口県",
+        "en": "Yamaguchi"
+      },
+      {
+        "code": "JP-36",
+        "ja": "徳島県",
+        "en": "Tokushima"
+      },
+      {
+        "code": "JP-37",
+        "ja": "香川県",
+        "en": "Kagawa"
+      },
+      {
+        "code": "JP-38",
+        "ja": "愛媛県",
+        "en": "Ehime"
+      },
+      {
+        "code": "JP-39",
+        "ja": "高知県",
+        "en": "Kochi"
+      },
+      {
+        "code": "JP-40",
+        "ja": "福岡県",
+        "en": "Fukuoka"
+      },
+      {
+        "code": "JP-41",
+        "ja": "佐賀県",
+        "en": "Saga"
+      },
+      {
+        "code": "JP-42",
+        "ja": "長崎県",
+        "en": "Nagasaki"
+      },
+      {
+        "code": "JP-43",
+        "ja": "熊本県",
+        "en": "Kumamoto"
+      },
+      {
+        "code": "JP-44",
+        "ja": "大分県",
+        "en": "Oita"
+      },
+      {
+        "code": "JP-45",
+        "ja": "宮崎県",
+        "en": "Miyazaki"
+      },
+      {
+        "code": "JP-46",
+        "ja": "鹿児島県",
+        "en": "Kagoshima"
+      },
+      {
+        "code": "JP-47",
+        "ja": "沖縄県",
+        "en": "Okinawa"
+      }
+    ]
+  },
+  "offers": [
+    {
+      "id": "klook-14477",
+      "productId": "14477",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-01",
+      "names": {
+        "en": "JR Tower T38",
+        "ja": "JRタワー展望室 T38"
+      },
+      "aliases": [
+        "JRタワー",
+        "JR Tower"
+      ],
+      "at": [
+        43.068218,
+        141.352382
+      ],
+      "radiusKm": 5,
+      "category": "viewpoint",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-116925",
+      "productId": "116925",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-03",
+      "names": {
+        "en": "Geibikei Gorge boat ride",
+        "ja": "猊鼻渓 舟下り"
+      },
+      "aliases": [
+        "猊鼻渓",
+        "Geibikei"
+      ],
+      "at": [
+        38.989138,
+        141.255482
+      ],
+      "radiusKm": 12,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-116919",
+      "productId": "116919",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-04",
+      "names": {
+        "en": "Matsushima Bay sightseeing cruise",
+        "ja": "松島湾 観光クルーズ"
+      },
+      "aliases": [
+        "松島",
+        "Matsushima"
+      ],
+      "at": [
+        38.370132,
+        141.065562
+      ],
+      "radiusKm": 25,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-92169",
+      "productId": "92169",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-07",
+      "names": {
+        "en": "Tsurugajo Castle admission",
+        "ja": "鶴ヶ城 入場チケット"
+      },
+      "aliases": [
+        "鶴ヶ城",
+        "若松城",
+        "Tsuruga",
+        "Aizuwakamatsu Castle"
+      ],
+      "at": [
+        37.488321,
+        139.929509
+      ],
+      "radiusKm": 6,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-152588",
+      "productId": "152588",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-08",
+      "names": {
+        "en": "Kairakuen Garden admission",
+        "ja": "偕楽園 本園入園チケット"
+      },
+      "aliases": [
+        "偕楽園",
+        "Kairakuen"
+      ],
+      "at": [
+        36.375999,
+        140.454302
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-152953",
+      "productId": "152953",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-08",
+      "names": {
+        "en": "Kodokan admission",
+        "ja": "弘道館 入館チケット"
+      },
+      "aliases": [
+        "弘道館",
+        "Kodokan"
+      ],
+      "at": [
+        36.37634,
+        140.476864
+      ],
+      "radiusKm": 4,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-48267",
+      "productId": "48267",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-10",
+      "names": {
+        "en": "Lockheart Castle admission",
+        "ja": "ロックハート城 入場チケット"
+      },
+      "aliases": [
+        "ロックハート",
+        "Lockheart"
+      ],
+      "at": [
+        36.631802,
+        138.988612
+      ],
+      "radiusKm": 6,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-95382",
+      "productId": "95382",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-11",
+      "names": {
+        "en": "The Railway Museum admission",
+        "ja": "鉄道博物館 入館チケット"
+      },
+      "aliases": [
+        "鉄道博物館",
+        "Railway Museum"
+      ],
+      "at": [
+        35.921382,
+        139.618136
+      ],
+      "radiusKm": 5,
+      "category": "rail",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-76575",
+      "productId": "76575",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-14",
+      "names": {
+        "en": "Odawara Castle admission",
+        "ja": "小田原城 入場チケット"
+      },
+      "aliases": [
+        "小田原城",
+        "Odawara Castle"
+      ],
+      "at": [
+        35.250654,
+        139.154394
+      ],
+      "radiusKm": 6,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-86540",
+      "productId": "86540",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-14",
+      "names": {
+        "en": "Nippon Maru & Yokohama Port Museum",
+        "ja": "帆船日本丸・横浜みなと博物館"
+      },
+      "aliases": [
+        "日本丸",
+        "みなと博物館",
+        "Nippon Maru",
+        "Port Museum"
+      ],
+      "at": [
+        35.453708,
+        139.632308
+      ],
+      "radiusKm": 4,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-85699",
+      "productId": "85699",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-15",
+      "names": {
+        "en": "Kiyotsu Gorge Tunnel admission",
+        "ja": "清津峡渓谷トンネル 入坑チケット"
+      },
+      "aliases": [
+        "清津峡",
+        "Kiyotsu"
+      ],
+      "at": [
+        36.973494,
+        138.749938
+      ],
+      "radiusKm": 12,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-66318",
+      "productId": "66318",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-17",
+      "names": {
+        "en": "Motorcar Museum of Japan",
+        "ja": "日本自動車博物館 入館チケット"
+      },
+      "aliases": [
+        "自動車博物館",
+        "Motorcar Museum"
+      ],
+      "at": [
+        36.334346,
+        136.430454
+      ],
+      "radiusKm": 6,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-35418",
+      "productId": "35418",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-17",
+      "names": {
+        "en": "Yunokuni no Mori craft village",
+        "ja": "加賀伝統工芸村 ゆのくにの森"
+      },
+      "aliases": [
+        "ゆのくにの森",
+        "Yunokuni"
+      ],
+      "at": [
+        36.324478,
+        136.436087
+      ],
+      "radiusKm": 6,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-135588",
+      "productId": "135588",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-20",
+      "names": {
+        "en": "Former Kaichi School admission",
+        "ja": "国宝 旧開智学校 入館チケット"
+      },
+      "aliases": [
+        "開智学校",
+        "Kaichi"
+      ],
+      "at": [
+        36.243053,
+        137.968228
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-79806",
+      "productId": "79806",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-21",
+      "names": {
+        "en": "Stone Museum Hakusekikan",
+        "ja": "博石館 入場チケット"
+      },
+      "aliases": [
+        "博石館",
+        "Hakusekikan"
+      ],
+      "at": [
+        35.49674,
+        137.399331
+      ],
+      "radiusKm": 8,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-22903",
+      "productId": "22903",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-22",
+      "names": {
+        "en": "Mishima Skywalk admission",
+        "ja": "三島スカイウォーク 入場チケット"
+      },
+      "aliases": [
+        "三島スカイウォーク",
+        "Mishima Skywalk"
+      ],
+      "at": [
+        35.151879,
+        138.980628
+      ],
+      "radiusKm": 8,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-88377",
+      "productId": "88377",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-25",
+      "names": {
+        "en": "Lake Biwa Museum admission",
+        "ja": "琵琶湖博物館 入館チケット"
+      },
+      "aliases": [
+        "琵琶湖博物館",
+        "Biwa Museum"
+      ],
+      "at": [
+        35.073871,
+        135.934877
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-27246",
+      "productId": "27246",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-26",
+      "names": {
+        "en": "Kyoto Railway Museum",
+        "ja": "京都鉄道博物館 入館チケット"
+      },
+      "aliases": [
+        "京都鉄道博物館",
+        "Kyoto Railway"
+      ],
+      "at": [
+        34.986495,
+        135.742712
+      ],
+      "radiusKm": 4,
+      "category": "rail",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-30110",
+      "productId": "30110",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "Osaka Castle admission",
+        "ja": "大阪城天守閣 入館チケット"
+      },
+      "aliases": [
+        "大阪城",
+        "Osaka Castle"
+      ],
+      "at": [
+        34.687488,
+        135.525887
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-2424",
+      "productId": "2424",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "HARUKAS 300 observatory",
+        "ja": "ハルカス300 展望台チケット"
+      },
+      "aliases": [
+        "ハルカス",
+        "Harukas"
+      ],
+      "at": [
+        34.645843,
+        135.513169
+      ],
+      "radiusKm": 3,
+      "category": "viewpoint",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-82515",
+      "productId": "82515",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-33",
+      "names": {
+        "en": "Okayama Castle admission",
+        "ja": "岡山城 入場チケット"
+      },
+      "aliases": [
+        "岡山城",
+        "Okayama Castle"
+      ],
+      "at": [
+        34.664093,
+        133.935845
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-154990",
+      "productId": "154990",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-33",
+      "names": {
+        "en": "Kurashiki Bikan district coupons",
+        "ja": "倉敷美観地区 散策クーポン"
+      },
+      "aliases": [
+        "倉敷",
+        "Kurashiki"
+      ],
+      "at": [
+        34.596552,
+        133.772515
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-38401",
+      "productId": "38401",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-36",
+      "names": {
+        "en": "Uzu no Michi / Eddy admission",
+        "ja": "渦の道・大鳴門橋架橋記念館エディ"
+      },
+      "aliases": [
+        "渦の道",
+        "大鳴門橋",
+        "Uzu no Michi",
+        "Eddy"
+      ],
+      "at": [
+        34.236179,
+        134.642107
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-65253",
+      "productId": "65253",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-37",
+      "names": {
+        "en": "Yokai Art Museum, Shodoshima",
+        "ja": "小豆島 妖怪美術館"
+      },
+      "aliases": [
+        "妖怪美術館",
+        "Yokai Art"
+      ],
+      "at": [
+        34.485188,
+        134.185702
+      ],
+      "radiusKm": 4,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-19854",
+      "productId": "19854",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-40",
+      "names": {
+        "en": "Fukuoka Tower admission",
+        "ja": "福岡タワー 展望チケット"
+      },
+      "aliases": [
+        "福岡タワー",
+        "Fukuoka Tower"
+      ],
+      "at": [
+        33.593289,
+        130.351471
+      ],
+      "radiusKm": 4,
+      "category": "viewpoint",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-149422",
+      "productId": "149422",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-43",
+      "names": {
+        "en": "Kumamoto Castle admission",
+        "ja": "熊本城 入場チケット"
+      },
+      "aliases": [
+        "熊本城",
+        "Kumamoto Castle"
+      ],
+      "at": [
+        32.806022,
+        130.70446
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-97168",
+      "productId": "97168",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-44",
+      "names": {
+        "en": "Jigoku Onsen Museum, Beppu",
+        "ja": "別府鉄輪 地獄温泉ミュージアム"
+      },
+      "aliases": [
+        "地獄温泉ミュージアム",
+        "Jigoku Onsen Museum"
+      ],
+      "at": [
+        33.315658,
+        131.474062
+      ],
+      "radiusKm": 4,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-20071",
+      "productId": "20071",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-44",
+      "names": {
+        "en": "Beppu Tower admission",
+        "ja": "別府タワー 展望チケット"
+      },
+      "aliases": [
+        "別府タワー",
+        "Beppu Tower"
+      ],
+      "at": [
+        33.281711,
+        131.505924
+      ],
+      "radiusKm": 3,
+      "category": "viewpoint",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-38419",
+      "productId": "38419",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-46",
+      "names": {
+        "en": "Sengan-en Garden admission",
+        "ja": "仙巌園 入場チケット"
+      },
+      "aliases": [
+        "仙巌園",
+        "Sengan"
+      ],
+      "at": [
+        31.618611,
+        130.579873
+      ],
+      "radiusKm": 6,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-13427",
+      "productId": "13427",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-47",
+      "names": {
+        "en": "Ryukyu Mura Village admission",
+        "ja": "琉球村 入場チケット"
+      },
+      "aliases": [
+        "琉球村",
+        "Ryukyu Mura"
+      ],
+      "at": [
+        26.429641,
+        127.775314
+      ],
+      "radiusKm": 6,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-5620",
+      "productId": "5620",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-47",
+      "names": {
+        "en": "Okinawa World & cultural workshops",
+        "ja": "おきなわワールド・南城の文化体験"
+      },
+      "aliases": [
+        "おきなわワールド",
+        "玉泉洞",
+        "Okinawa World",
+        "Gyokusendo"
+      ],
+      "at": [
+        26.139828,
+        127.749014
+      ],
+      "radiusKm": 6,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12"
+    }
+  ],
   "_instructions": [
-    "Use the full tracked URL generated by the approved affiliate account. Never invent an affiliate ID or tracking parameter.",
-    "Each offer needs id, provider, enabled, url, labels, languages, at:[latitude,longitude], radiusKm (maximum 25), reviewedOn (ISO date), and priority. Optional: placeIds, kinds, expiresOn.",
-    "Allowed providers: viator, klook, getyourguide, stay22, booking. For a network redirect, add the exact approved host under approvedRedirectHosts[provider].",
-    "Review the actual destination, walking/transport access, bookability and supported languages before enabling. Review again within 180 days; expired or unreviewed offers stay hidden.",
-    "One matching offer is displayed beneath the place details. No match means no advert; memorial kinds always stay advertisement-free.",
-    "Priority is editorial relevance. Confirmed earnings per matched click should guide later comparisons between equally relevant offers.",
-    "This file replaces the unused legacy data/affiliate.json. It is public: never store API secrets here."
+    "Public affiliate ID 134890 verified in the signed-in JAPAN TIME ATLAS account. No API secrets belong in this file.",
+    "Tracking URL format and aff_label1/2/3 are documented at https://affiliate.klook.com/custom_tag_guide. k_site must be last. Tags identify editorial sources, never individual visitors.",
+    "31 reviewed product cards; all 47 prefectures have clearly labelled regional search fallbacks. A search card is not a claim that a particular product is available.",
+    "Use physical venue or departure-point coordinates, not Klook destination categories. Review products within 180 days. Prices, availability and guide languages must be checked on Klook.",
+    "Relevance: selected attraction name, then editorial priority, then distance with a small topic preference. Commission rate is not a relevance signal. No conversion-rate winner has been established yet.",
+    "Review confirmed earnings and clicks in Klook Performance: source jta_map, prefecture JP-xx, product ID or search. Do not add per-user, per-event or arbitrary per-place custom tags."
   ]
 }

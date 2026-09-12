@@ -117,3 +117,14 @@ html,body,.home{background:var(--atlas-paper);color:var(--atlas-ink)}
 .p-aff{margin-top:1.5rem}.p-aff .aff-disclosure{font-size:.875rem;line-height:1.7;color:#52635b}.p-aff a{min-height:48px;line-height:1.65}
 @media(max-width:620px){.hero-scene{left:0}.home .hero{padding:2rem 1.25rem 1.25rem;min-height:0}.home .hero-title{font-size:clamp(2rem,7.5vw,2.8rem)}.home .hero::before{background:linear-gradient(90deg,#203e39f5,#203e39c9 65%,#203e3980),linear-gradient(0deg,#203e39,transparent 45%)}.home .hero-meta{margin-top:1rem;padding-top:1rem}.home .hero-meta>span:first-child{flex-basis:100%}.hero-motion{margin-left:0}.home .lang-row .atlas-brand{flex-basis:100%;margin-bottom:.25rem}.atlas-brand small{font-size:.75rem;display:block}.home .lang{font-size:.875rem}}
 @media(max-height:540px) and (min-width:621px){.home .hero{min-height:0;padding-top:1.5rem;padding-bottom:1rem}.home .hero-kicker{margin-bottom:1rem}.home .hero-title{font-size:clamp(2rem,3.6vw,3rem)}.home .hero-sub{margin-top:1rem}.home .hero-search{margin-top:1rem}.home .hero-meta{padding-top:1rem}.stories-heading{margin-top:1.5rem}}
+/* Contextual booking card in the place overview, beside the site information. */
+.panel-inner .p-aff{margin:16px 0 0;padding:12px;border:1px solid var(--atlas-rule,#d9d1c4);border-radius:8px;background:#f4f1e8;color:#294e48;min-width:0;overflow-wrap:anywhere}
+.panel-inner .p-aff[hidden]{display:none}
+.p-aff .aff-heading{margin:0 0 5px;font-size:11px;line-height:1.5;font-weight:700;color:#6d5b3f;letter-spacing:.03em}
+.p-aff .aff-lead{margin:0 0 5px;font-size:12px;line-height:1.5;color:#50645d}
+.panel-inner .p-aff .aff-card{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:4px 0;min-height:44px;color:#234d43;text-decoration:none;line-height:1.55;white-space:normal}
+.p-aff .aff-title{font-size:14px;line-height:1.55;font-weight:700}
+.p-aff .aff-cta{font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.p-aff .aff-distance{font-size:11px;line-height:1.6;color:#59645b}
+.panel-inner .p-aff a:hover{color:#143b31}.panel-inner .p-aff a:focus-visible{outline:2px solid #24594b;outline-offset:4px;border-radius:3px}
+.p-aff .aff-note,.p-aff .aff-disclosure{margin:6px 0 0;font-size:11px;line-height:1.65;color:#59645b}
