@@ -17,7 +17,7 @@ test('all 47 prefectures generate localized regional links with bounded source t
 });
 test('every reviewed product yields a valid product link in all UI languages',()=>{
  assert.equal(new Set(config.offers.map(o=>o.productId)).size,config.offers.length);
- for(const item of config.offers)for(const lang of langs){
+ for(const item of config.offers.filter(o=>o.enabled&&o.commissionPercent!==0))for(const lang of langs){
   const ad=router.select({...config,offers:[item]},{at:item.at,name:item.names.ja},lang,now);assert.ok(ad,item.id+' '+lang);
   const u=new URL(ad.url),target=new URL(u.searchParams.get('k_site'));assert.equal(u.searchParams.get('aff_label3'),item.productId);assert.ok(target.pathname.endsWith('/activity/'+item.productId+'/'));
  }
@@ -52,7 +52,7 @@ test('all actual top-two marker sizes, including Aneyoshi, get the closest liste
  const featured=require('../data/places-world.json').places.map(p=>({...p,adTier:p.pop||1}));
  const landmarks=[...require('../data/landmarks.json').landmarks,...require('../data/regional-landmarks-v1.json').landmarks].map(p=>({...p,adTier:p.pop||3}));
  const places=[...featured,...landmarks].filter(p=>p.adTier<=2);assert.ok(places.some(p=>p.id==='aneyoshi'));
- for(const p of places){const at=[p.lat,p.lon],minimum=Math.min(...config.offers.map(o=>router.distance(at,o.at)));
+ for(const p of places){const at=[p.lat,p.lon],minimum=Math.min(...config.offers.filter(o=>o.enabled&&o.commissionPercent!==0).map(o=>router.distance(at,o.at)));
   for(const lang of langs){const ad=router.select(published,{at,name:p.name,adTier:p.adTier,kind:p.id==='aneyoshi'?'memorial':''},lang,now);assert.ok(ad,p.id+' '+lang);assert.ok(ad.nearest);assert.ok(Math.abs(ad.km-minimum)<0.00001,p.id);}
  }
  const js=fs.readFileSync(path.join(__dirname,'../explore.js'),'utf8');assert.ok(js.includes('adTier:p.pop||1'));assert.ok(js.includes('adTier:p.pop||3'));

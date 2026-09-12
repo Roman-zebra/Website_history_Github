@@ -770,9 +770,10 @@ function buildActivityCards(){
  for(const b of $('cards').querySelectorAll('[data-activity]'))
   b.onclick=()=>showActivity(ACTIVITIES.find(p=>p.id===b.dataset.activity));
 }
-function showActivity(p,keepView){
+function showActivity(p,keepView,refresh=false){
+ if(!refresh)affiliateVisit++;
  if(!p)return;
- lastPanel=()=>showActivity(p,true);
+ lastPanel=()=>showActivity(p,true,true);
  document.body.classList.remove('roaming');
  $('home').hidden=true; $('place').hidden=false;
  ensureMap();
@@ -784,7 +785,7 @@ function showActivity(p,keepView){
  drawDetail(); setTimeout(drawDetail,900);
  panelShell({
   kicker:{emoji:p.emoji,label:activityLabel(p.category),note:'  '+placeName(p)},
-  placeId:'a-'+p.id,kind:p.category,ja:LANG==='ja'?'':p.ja,name:placeName(p),at:[p.lat,p.lon],query:p.name,
+  placeId:'a-'+p.id,adTier:3,kind:p.category,ja:LANG==='ja'?'':p.ja,name:placeName(p),at:[p.lat,p.lon],query:p.name,
   bodyHTML:'<p>'+esc(p.hooks[LANG]||p.hooks.en)+'</p><p>'+esc(activityText(6))+'</p>'
     +'<p class="p-pick">'+esc(activityText(p.category==='shopping'?10:p.id==='nakasu-yatai'?8:7))+'</p>'
     +(p.category==='food'?'<p>'+esc(activityText(9))+'</p>':'')
@@ -841,7 +842,7 @@ function applyLang(){
   renderSaved();
   paintAuxUI();
   if (PLACES.length) buildCards();
-  if (current) openPlace(current, true);
+  if (current) openPlace(current, true,true);
   else {
     /* パネルが画面に出ているときだけ描き直す。ホーム画面に戻ったあとでも
        lastPanel は前に開いたスポットを覚えたままなので、そのまま呼ぶと
@@ -1354,16 +1355,17 @@ function loadFacilities(){
  return facilityPromise;
 }
 function facilityTags(o){
- if(o.travelTags)return o.travelTags;
  if(!o.at)return null;
  const normal=s=>PlaceUI.normalize(s).replace(/駅$|station$/g,'');
  const names=[o.name,o.ja,o.searchName].filter(Boolean).map(normal);
- let match=null,nearest=Infinity;
+ let match=o.travelTags||null,nearest=Infinity;
  for(const p of FACILITIES){if(!p.tags.railway&&!p.tags.aeroway)continue;
   const pn=[p.tags.name,p.tags['name:ja'],p.tags['name:en'],p.tags['full_name'],p.tags['full_name:en']].filter(Boolean).map(normal);
   if(!names.some(n=>pn.includes(n)))continue;
   const km=AffiliateRouter.distance(o.at,[p.lat,p.lon]);if(km<(p.tags.aeroway?4:0.4)&&km<nearest){match=p.tags;nearest=km;}
- }return match;
+ }
+ if(match?.railway==='station'&&FACILITIES.some(p=>p.tags.highspeed==='yes'&&[p.tags.name,p.tags['name:ja'],p.tags['name:en']].filter(Boolean).map(normal).some(n=>names.includes(n))&&AffiliateRouter.distance(o.at,[p.lat,p.lon])<0.4))return {...match,highspeed:'yes'};
+ return match;
 }
 let detailGeneration=0;
 async function drawDetail(){
@@ -1925,18 +1927,25 @@ function renderRelated(o){
   box.hidden = false;
 }
 
-let resolveAffiliate;
+let resolveAffiliate,currentAffiliatePlace=null,affiliateVisit=0,affiliateRotation;
+function setAffiliateConfig(config){
+ AFF=config;
+ if(currentAffiliatePlace&&!$('place').hidden&&!$('panel').classList.contains('closed'))renderAffiliate(currentAffiliatePlace);
+}
 function renderAffiliate(o){
+  currentAffiliatePlace=o;
   if(typeof AffiliateRouter==='undefined'){ $('pAff').hidden=true;return; }
   resolveAffiliate ||= AffiliateRouter.createResolver();
   const box=$('pAff'),lang=LANG,c=AffiliateRouter.copy[lang]||AffiliateRouter.copy.en;
-  resolveAffiliate(AFF,{...o,travelTags:facilityTags(o)},lang,async()=>{
+  affiliateRotation ||= AffiliateRouter.createRotation();
+  const rotationKey=o.at.join(','),adCycle=affiliateRotation.index(rotationKey,affiliateVisit);
+  resolveAffiliate(AFF,{...o,adCycle,travelTags:facilityTags(o)},lang,async()=>{
     const geo=await revGeo(o.at[0],o.at[1],lang);return geo?.address;
   },offer=>{
     box.hidden=true;box.replaceChildren();if(!offer)return;
     box.setAttribute('aria-label',c.ad);
     const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
-    const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.travel?PlaceUI.pick(['For your journey','旅の準備に','여행 준비','出行准备','出行準備'],lang):offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
+    const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.tour?PlaceUI.pick(['Tours for this area','この地域から出かけるツアー','이 지역 출발 투어','从这一带出发的游览','從這一帶出發的遊覽'],lang):offer.travel?PlaceUI.pick(['For your journey','旅の準備に','여행 준비','出行准备','出行準備'],lang):offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
     const a=document.createElement('a');a.className='aff-card';a.href=offer.url;a.target='_blank';a.rel='sponsored nofollow noopener';
     a.dataset.offerId=offer.id;a.dataset.provider=offer.provider;
     const title=document.createElement('strong');title.className='aff-title';title.textContent=offer.label;
@@ -1949,9 +1958,11 @@ function renderAffiliate(o){
       meta.textContent=[region,label+' ≈ '+(offer.km<1?offer.km.toFixed(1):Math.round(offer.km))+' km'].filter(Boolean).join(' · ');a.append(meta);
     }
     a.append(cta);
-    const note=document.createElement('p');note.className='aff-note';note.textContent=offer.travel?offer.note:offer.regional?c.searchNote:c.note;
+    const note=document.createElement('p');note.className='aff-note';note.textContent=(offer.travel||offer.tour)?offer.note:offer.regional?c.searchNote:c.note;
     const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
-    box.append(heading,lead,a,note,disclosure);box.hidden=false;
+    box.append(heading,lead,a,note,disclosure);
+    if(offer.choiceCount>1){const next=document.createElement('button');next.type='button';next.className='aff-next';next.textContent=PlaceUI.pick(['Another option','ほかの案内を見る','다른 옵션 보기','查看其他选项','查看其他選項'],lang);next.onclick=()=>{affiliateRotation.next(rotationKey);renderAffiliate(currentAffiliatePlace);};box.append(next);}
+    box.hidden=false;
   });
 }
 
@@ -2112,9 +2123,10 @@ function extractHTML(p, limit){
        + (e.note ? '<p class="p-srcnote' + (e.weak ? ' p-weak' : '') + '">'
                  + esc(e.note) + '</p>' : '');
 }
-function showLandmark(p){
+function showLandmark(p,refresh=false){
+  if(!refresh)affiliateVisit++;
   if (!map || $('place').hidden) noPush(openMap);
-  lastPanel = () => showLandmark(p);
+  lastPanel = () => showLandmark(p,true);
   /* current は「物語つきの名所を開いている」という意味。ここで消さないと、
      名所を開いたあとに小さなスポットを開いても current が残り、言語を切り替えた
      applyLang() が画面に出ているスポットではなく前の名所を開き直してしまう。 */
@@ -2145,8 +2157,9 @@ async function localizedWikiTitle(ja,lang){
     wikiTitles.set(key,title);if(wikiTitles.size>200)wikiTitles.delete(wikiTitles.keys().next().value);return title;
   }catch(e){return '';}
 }
-async function showWiki(w){
-  lastPanel=()=>showWiki(w);current=null;
+async function showWiki(w,refresh=false){
+  if(!refresh)affiliateVisit++;
+  lastPanel = () => showWiki(w,true);current=null;
   const lang=LANG;
   panelShell({adTier:3,name:lang==='ja'?w.ja:(w.en||w.ja),ja:lang==='ja'?'':w.ja,
     bodyHTML:'<p>'+t('loading')+'</p>',at:[w.lat,w.lon],
@@ -2183,8 +2196,9 @@ async function openMonument(id){
   if (r) showMonument(r);
 }
 
-function showMonument(r){
-  lastPanel = () => showMonument(r);
+function showMonument(r,refresh=false){
+  if(!refresh)affiliateVisit++;
+  lastPanel = () => showMonument(r,true);
   current = null;
   const en = kindsRaw(r.kind).map(k => KIND_EN[k]);
   const out = kindsOut(r.kind);
@@ -2232,8 +2246,9 @@ function airPhoto(lat, lon){
 
 function localSummary(tg){ return PlaceUI.summary(tg, LANG); }
 
-function showLocal(p){
-  lastPanel = () => showLocal(p);
+function showLocal(p,refresh=false){
+  if(!refresh)affiliateVisit++;
+  lastPanel = () => showLocal(p,true);
   current = null;
   const tg = p.tags, nm = localName(tg) || t('localSpot');
   const bits = [];
@@ -2355,8 +2370,9 @@ function snsLinks(){
   $('snsLine').href = 'https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(url);
 }
 
-function showLiminal(p, keepView){
-  lastPanel = () => showLiminal(p, true);
+function showLiminal(p, keepView,refresh=false){
+  if(!refresh)affiliateVisit++;
+  lastPanel = () => showLiminal(p, true,true);
   const hook = (p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook);
   const why = LANG === 'ja' ? p.why_ja : LANG === 'en' ? p.why : '';
   /* Wikipedia の要約は言語ごとに別の記事から取る。2026-09-09 まで extract は1つしか無く、
@@ -2415,7 +2431,8 @@ $('q').addEventListener('input', () => {
   clearTimeout(qTimer);
   $('qResults').hidden = true;
   clearNationalSearch();
-  if (!v || qComposing) return;
+  if (!v){showSearchSuggestions();return;}
+  if(qComposing)return;
   qTimer = setTimeout(() => runSearch(v), 450);   // stay inside Nominatim's policy
 });
 
@@ -2440,6 +2457,7 @@ $('q').addEventListener('keydown', e => {
 /* 飛んでいる検索の返事を無効にするための世代番号。これが無いと、✕で閉じたあとに
    古い返事が届いて結果が勝手に開き直る（[hidden] が効くようになった今は本当に再表示される）。 */
 let qSeq = 0;
+$('q').addEventListener('focus',()=>{if(!$('q').value.trim())showSearchSuggestions();else if(nationalHits.length){paintSearchList();$('qResults').hidden=false;}});
 $('qClear').onclick = () => { clearNationalSearch(); ++qSeq; $('q').value = ''; $('qClear').hidden = true;
                               $('qResults').hidden = true; };
 
@@ -2552,10 +2570,33 @@ function openNational(row){
 }
 
 /* Nationwide results: every match is painted on one canvas, with a keyboard list. */
-let nationalWorker=null,nationalHits=[],nationalLayer=null,nationalQuery='',nationalSeq=0;
+let nationalWorker=null,nationalHits=[],nationalLayer=null,nationalQuery='',nationalSeq=0,nationalAllHits=[],nationalScope='all';
 const searchText=(en,ja,ko,cn,tw)=>PlaceUI.pick([en,ja,ko,cn,tw],LANG);
+
+const searchChoices=[
+ ['♨️','Onsen','温泉','온천','温泉','溫泉'],['🏯','Castles','城','성','城堡','城堡'],['⛩️','Shrines','神社','신사','神社','神社'],['🛕','Temples','寺院','사찰','寺院','寺院'],
+ ['🏛️','Museums','博物館','박물관','博物馆','博物館'],['🖼️','Art museums','美術館','미술관','美术馆','美術館'],['💧','Waterfalls','滝','폭포','瀑布','瀑布'],['🌄','Viewpoints','展望台','전망대','观景','觀景'],
+ ['🚂','Abandoned railway','廃線跡','폐선','废弃铁路','廢棄鐵路'],['🕰️','Old town','古い町並み','옛 거리','老街','老街'],['🏭','Industrial heritage','産業遺産','산업유산','工业遗产','工業遺產'],['🚪','Liminal','リミナル','liminal','阈限','閾限'],
+ ['🎿','Ski','スキー','스키','滑雪','滑雪'],['🌳','Parks','公園','공원','公園','公園'],['🌿','Gardens','庭園','정원','庭园','庭園'],['⛰️','Hiking','登山','등산','爬山','爬山'],
+ ['🏖️','Beaches','海岸','해변','海滩','海灘'],['🕳️','Caves','洞窟','동굴','洞窟','洞窟'],['🦁','Zoos','動物園','동물원','动物园','動物園'],['🐠','Aquariums','水族館','아쿠아리움','水族馆','水族館'],
+ ['🎡','Theme park','遊園地','놀이공원','游乐园','遊樂園'],['🚉','Stations','駅','기차역','车站','車站'],['✈️','Airports','空港','공항','机场','機場'],['☕','Cafes','カフェ','카페','咖啡','咖啡']
+];
+function showSearchSuggestions(){
+ const box=$('qResults');box.replaceChildren();box.hidden=false;
+ const heading=document.createElement('p');heading.className='q-help';heading.textContent=searchText('What would you like to find?','何を探しますか？','무엇을 찾으세요?','想找什么？','想找什麼？');box.appendChild(heading);
+ const choices=document.createElement('div');choices.className='q-categories';
+ for(const row of searchChoices){const label=PlaceUI.pick(row.slice(1),LANG),btn=document.createElement('button');btn.type='button';btn.textContent=row[0]+' '+label;btn.onclick=()=>{clearTimeout(qTimer);clearNationalSearch();$('q').value=label;$('qClear').hidden=false;runSearch(label);};choices.appendChild(btn);}box.appendChild(choices);
+ const hint=document.createElement('p');hint.className='q-help';hint.textContent=searchText('Move the map, then choose Search this area to narrow the results.','地図を動かして「この範囲で探す」を選ぶと、地域を絞れます。','지도를 이동한 뒤 이 지역 검색으로 범위를 좁히세요.','移动地图后，选择搜索此区域来缩小范围。','移動地圖後，選擇搜尋此範圍來縮小範圍。');box.appendChild(hint);
+}
+function hitsInBounds(rows,bounds){return rows.filter(r=>bounds.contains([r.lat,r.lon]));}
+function setSearchScope(scope){
+ nationalScope=scope;nationalHits=scope==='view'&&map?hitsInBounds(nationalAllHits,map.getBounds()):nationalAllHits;
+ searchSummary();paintSearchList();
+ if(scope==='all'||nationalHits.length===1)frameNationalHits();else paintNationalHits();
+}
+
 function clearNationalSearch(){
- nationalSeq=0;nationalHits=[];nationalQuery='';nationalWorker?.postMessage({type:'cancel'});
+ nationalSeq=0;nationalHits=[];nationalAllHits=[];nationalScope='all';nationalQuery='';nationalWorker?.postMessage({type:'cancel'});
  if(map&&nationalLayer){map.removeLayer(nationalLayer);nationalLayer=null;}
  document.getElementById('qSummary')?.remove();
 }
@@ -2599,17 +2640,19 @@ function searchSummary(){
  let el=document.getElementById('qSummary');
  if(!el){el=document.createElement('button');el.id='qSummary';el.className='q-summary';el.type='button';$('q').closest('.search-wrap')?.appendChild(el);
   if(!el.isConnected)$('qResults').parentElement.appendChild(el);el.onclick=()=>{paintSearchList();$('qResults').hidden=false;};}
- el.textContent='“'+nationalQuery+'” · '+nationalHits.length.toLocaleString()+' '+searchText('places','地点','곳','处','處');
+ el.textContent='“'+nationalQuery+'” · '+nationalHits.length.toLocaleString()+' '+searchText('places','地点','곳','处','處')+(nationalScope==='view'?' · '+searchText('this area','この範囲','이 지역','此区域','此範圍'):'');
 }
 function paintSearchList(limit=30){
  const box=$('qResults');box.replaceChildren();box.hidden=false;
+ const filters=document.createElement('div');filters.className='q-scope';
+ for(const [scope,label] of [['all',searchText('All Japan','全国','일본 전국','全日本','全日本')],['view',searchText('Search this area','この範囲で探す','이 지역 검색','搜索此区域','搜尋此範圍')]]){const button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-pressed',String(nationalScope===scope));button.onclick=()=>setSearchScope(scope);filters.appendChild(button);}box.appendChild(filters);
  const count=document.createElement('button');count.type='button';count.className='q-item q-all';
  count.textContent=searchText('Show all matches on the map','一致した全地点を地図で見る','전체 결과를 지도에서 보기','在地图显示全部结果','在地圖顯示全部結果')+' ('+nationalHits.length.toLocaleString()+')';
  count.onclick=()=>{frameNationalHits();box.hidden=true;};box.appendChild(count);
  for(const row of nationalHits.slice(0,limit)){const btn=document.createElement('button');btn.type='button';btn.className='q-item';
   const name=document.createElement('b');name.textContent=row.name;btn.appendChild(name);btn.onclick=()=>openSearchHit(row);box.appendChild(btn);}
  if(nationalHits.length>limit){const more=document.createElement('button');more.type='button';more.className='q-item';more.textContent=searchText('Show more','もっと見る','더 보기','显示更多','顯示更多');more.onclick=()=>paintSearchList(limit+30);box.appendChild(more);}
- if(!nationalHits.length){const p=document.createElement('p');p.className='q-none';p.textContent=searchText('No matching places in this map’s data.','この地図の収録データには該当地点がありません。','이 지도에 수록된 일치 장소가 없습니다.','本地图收录的数据中没有匹配地点。','本地圖收錄的資料中沒有符合地點。');box.appendChild(p);}
+ if(!nationalHits.length){const p=document.createElement('p');p.className='q-none';p.textContent=nationalScope==='view'?searchText('No matches here. Move the map or choose All Japan.','この範囲には該当地点がありません。地図を広げるか「全国」を選んでください。','이 지역에는 결과가 없습니다. 지도를 넓히거나 일본 전국을 선택하세요.','此区域没有结果，请扩大地图或选择全日本。','此範圍沒有結果，請擴大地圖或選擇全日本。'):searchText('No matching places in this map’s data.','この地図の収録データには該当地点がありません。','이 지도에 수록된 일치 장소가 없습니다.','本地图收录的数据中没有匹配地点。','本地圖收錄的資料中沒有符合地點。');box.appendChild(p);}
  const link=document.createElement('a');link.className='q-item';link.target='_blank';link.rel='noopener noreferrer';
  link.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(nationalQuery+' Japan');link.textContent=searchText('Search Google Maps ↗','Googleマップでも探す ↗','Google 지도에서 검색 ↗','在Google地图搜索 ↗','在Google地圖搜尋 ↗');box.appendChild(link);
 }
@@ -2618,12 +2661,12 @@ async function runSearch(v,autoPick){
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
  try{
-  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.73');
+  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.74');
    nationalWorker.onmessage=({data})=>{
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
     if(data.type==='error'){box.innerHTML='<div class="q-none" role="status"></div>';box.firstChild.textContent=searchText('Some regions could not load. Please search again.','一部地域を読み込めませんでした。もう一度検索してください。','일부 지역을 불러오지 못했습니다. 다시 검색하세요.','部分地区加载失败，请重试。','部分地區載入失敗，請重試。');return;}
-    nationalHits=data.rows;searchSummary();paintSearchList();frameNationalHits();
+    nationalAllHits=data.rows;nationalScope='all';nationalHits=data.rows;searchSummary();paintSearchList();frameNationalHits();
    };
    nationalWorker.onerror=()=>{if(nationalSeq===qSeq){box.innerHTML='<div class="q-none">'+esc(searchText('Search could not load. Reload to try again.','検索を読み込めませんでした。再読み込みしてください。','검색을 불러오지 못했습니다. 새로고침하세요.','搜索加载失败，请刷新。','搜尋載入失敗，請重新整理。'))+'</div>';}nationalWorker.terminate();nationalWorker=null;};
   }
@@ -2685,7 +2728,8 @@ $('pShare').onclick = async () => {
 /* =========================================================================
    9. Modes and navigation
    ========================================================================= */
-function openPlace(p, keepView){
+function openPlace(p, keepView,refresh=false){
+  if(!refresh)affiliateVisit++;
   current = p; roaming = false;
   document.body.classList.remove('roaming');
   $('home').hidden = true; $('place').hidden = false;
@@ -2900,7 +2944,7 @@ const AUX_UI = {
  copy:['Copy link','リンクをコピー','링크 복사','复制链接','複製連結'],
  manual:['Select and copy this link','リンクを選択してコピー','링크를 선택해 복사하세요','请选择并复制链接','請選取並複製連結'],
  close:['Close','閉じる','닫기','关闭','關閉'],
- search:['Place or keyword: ski, temple…','地名・キーワード（スキー、寺など）','장소·키워드 (스키, 사찰 등)','地点或关键词：滑雪、寺院等','地點或關鍵字：滑雪、寺院等']
+ search:['Place or category: onsen, castle…','地名・温泉・城・神社など','장소·키워드 (스키, 사찰 등)','地点或关键词：滑雪、寺院等','地點或關鍵字：滑雪、寺院等']
 };
 const uiText = key => PlaceUI.pick(AUX_UI[key], LANG);
 function paintAuxUI(){
@@ -2985,8 +3029,8 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.73').then(r => r.ok ? r.json() : null)
-      .then(a => { AFF = a; }).catch(() => {}),
+    fetch('affiliate-config.json?v=0.74').then(r => r.ok ? r.json() : null)
+      .then(setAffiliateConfig).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
       // 残り続ける（drawDetail は #place が隠れていれば即 return するため）。
