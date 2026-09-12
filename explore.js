@@ -1945,7 +1945,7 @@ function renderAffiliate(o){
     box.hidden=true;box.replaceChildren();if(!offer)return;
     box.setAttribute('aria-label',c.ad);
     const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
-    const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.tour?PlaceUI.pick(['Tours for this area','この地域から出かけるツアー','이 지역 출발 투어','从这一带出发的游览','從這一帶出發的遊覽'],lang):offer.travel?PlaceUI.pick(['For your journey','旅の準備に','여행 준비','出行准备','出行準備'],lang):offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
+    const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.activity?(offer.match==='area'?c.near:PlaceUI.pick(['An experience for this stop','このスポットで楽しむ体験・商品','이 장소에서 즐길 체험·상품','这个地点的体验与商品','這個地點的體驗與商品'],lang)):offer.tour?PlaceUI.pick(['Tours for this area','この地域から出かけるツアー','이 지역 출발 투어','从这一带出发的游览','從這一帶出發的遊覽'],lang):offer.travel?PlaceUI.pick(['For your journey','旅の準備に','여행 준비','出行准备','出行準備'],lang):offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
     const a=document.createElement('a');a.className='aff-card';a.href=offer.url;a.target='_blank';a.rel='sponsored nofollow noopener';
     a.dataset.offerId=offer.id;a.dataset.provider=offer.provider;
     const title=document.createElement('strong');title.className='aff-title';title.textContent=offer.label;
@@ -1958,7 +1958,7 @@ function renderAffiliate(o){
       meta.textContent=[region,label+' ≈ '+(offer.km<1?offer.km.toFixed(1):Math.round(offer.km))+' km'].filter(Boolean).join(' · ');a.append(meta);
     }
     a.append(cta);
-    const note=document.createElement('p');note.className='aff-note';note.textContent=(offer.travel||offer.tour)?offer.note:offer.regional?c.searchNote:c.note;
+    const note=document.createElement('p');note.className='aff-note';note.textContent=(offer.travel||offer.tour||offer.activity)?offer.note:offer.regional?c.searchNote:c.note;
     const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
     box.append(heading,lead,a,note,disclosure);
     if(offer.choiceCount>1){const next=document.createElement('button');next.type='button';next.className='aff-next';next.textContent=PlaceUI.pick(['Another option','ほかの案内を見る','다른 옵션 보기','查看其他选项','查看其他選項'],lang);next.onclick=()=>{affiliateRotation.next(rotationKey);renderAffiliate(currentAffiliatePlace);};box.append(next);}
@@ -2661,7 +2661,7 @@ async function runSearch(v,autoPick){
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
  try{
-  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.74');
+  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.75');
    nationalWorker.onmessage=({data})=>{
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
@@ -2779,6 +2779,7 @@ function openMap(){
 }
 
 function closePlace(){
+  currentAffiliatePlace=null;
   document.body.classList.remove('roaming');
   roaming = false; current = null;
   lastPanel = null;                  // ホームに戻ったら、開き直す対象はもう無い
@@ -3029,7 +3030,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.74').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.75').then(r => r.ok ? r.json() : null)
       .then(setAffiliateConfig).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が

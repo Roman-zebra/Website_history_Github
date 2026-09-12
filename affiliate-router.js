@@ -16,7 +16,8 @@
  const small=place=>place?.adTier===3||place?.adTier===4;
  const MILE_KM=1.609344;
  const sizePolicy=config=>config.klook?.smallRadiusKm===MILE_KM;
- function eligible(config,place){return !!(config?.enabled&&point(place?.at)&&(sizePolicy(config)?(prominent(place)||small(place)):(!config.klook?.topTwoOnly||prominent(place))&&(prominent(place)||(!blocked.has(place.kind)&&!(config.excludeKinds||[]).includes(place.kind)))));}
+ const activityPlace=place=>['food','shopping'].includes(place?.kind)&&/^a-[a-z0-9-]+$/.test(place?.placeId||'');
+ function eligible(config,place){return !!(config?.enabled&&point(place?.at)&&(activityPlace(place)||(sizePolicy(config)?(prominent(place)||small(place)):(!config.klook?.topTwoOnly||prominent(place))&&(prominent(place)||(!blocked.has(place.kind)&&!(config.excludeKinds||[]).includes(place.kind))))));}
  function trackedURL(config,destination,prefecture,tag){
   const aid=config?.klook?.affiliateId;if(!/^\d+$/.test(aid||''))return null;
   try{const target=new URL(destination);if(target.protocol!=='https:'||target.hostname!=='www.klook.com'||target.username||target.password)return null;
@@ -38,7 +39,7 @@
   }catch{return false;}
  }
  function select(config,place,lang,now=Date.now()){
-  if(!eligible(config,place))return null;
+  if(!eligible(config,place)||activityPlace(place))return null;
   const matches=[];
   for(const original of config.offers||[]){
    let offer=original;
@@ -65,7 +66,7 @@
   return matches[0]||null;
  }
  function regional(config,place,lang,address){
-  if(!eligible(config,place)||(sizePolicy(config)&&!prominent(place))||!config.klook?.regionalSearch||!locales[lang]||address?.country_code!=='jp')return null;
+  if(!eligible(config,place)||activityPlace(place)||(sizePolicy(config)&&!prominent(place))||!config.klook?.regionalSearch||!locales[lang]||address?.country_code!=='jp')return null;
   const list=config.klook.prefectures||[],iso=Object.entries(address).find(([k,v])=>k.startsWith('ISO3166-2-')&&/^JP-\d{2}$/.test(v))?.[1];
   const state=String(address.state||address.province||'').toLowerCase().replace(/ prefecture| metropolis|都$|府$|県$/g,'');
   const pref=list.find(p=>p.code===iso)||list.find(p=>state===p.en.toLowerCase()||state===p.ja.replace(/[都府県]$/,''));
@@ -78,7 +79,7 @@
   return{id:'klook-search-'+pref.code,provider:'klook',label,url,regional:true,prefecture:pref.code};
  }
  function travel(config,place,lang,now=Date.now()){
-  if(!eligible(config,place)||!locales[lang])return null;
+  if(!eligible(config,place)||activityPlace(place)||!locales[lang])return null;
   const t=place.travelTags||{},operator=[t.operator,t.network,t['operator:en'],t['network:en']].filter(Boolean).join(' ');
   let type='';
   if(t.aeroway==='aerodrome'&&config.klook.internationalAirports?.includes(t.iata))type='esim';
@@ -93,7 +94,23 @@
   if(!url)return null;
   return {...item,id:'klook-'+item.productId,provider:'klook',url,label:item.names[lang]||item.names.en,travel:true,note:item.notes[lang]||item.notes.en};
  }
+ // Curated itineraries may have several stops. Match their reviewed place IDs,
+ // never an invented product coordinate or a distant nearest-neighbour offer.
+ function activity(config,place,lang,now=Date.now()){
+  if(!eligible(config,place)||!activityPlace(place)||!locales[lang])return null;
+  for(const item of config.klook.activityOffers||[]){
+   if(!item.enabled||item.commissionPercent===0||!item.id||item.provider!=='klook'||!item.placeIds?.includes(place.placeId)||!/^\d+$/.test(item.productId))continue;
+   if(!config.klook.prefectures?.some(p=>p.code===item.prefecture))continue;
+   const reviewed=Date.parse(item.reviewedOn),expires=Date.parse(item.expiresOn);
+   if(!Number.isFinite(reviewed)||reviewed>now||now-reviewed>180*86400000||(Number.isFinite(expires)&&expires<=now))continue;
+   const label=item.names?.[lang],note=item.notes?.[lang];if(!label?.trim()||!note?.trim())continue;
+   const url=trackedURL(config,'https://www.klook.com/'+locales[lang]+'/activity/'+item.productId+'/',item.prefecture,item.productId);
+   if(url)return {...item,label,note,url,activity:true};
+  }
+  return null;
+ }
  function resolveOffer(config,place,lang,now=Date.now()){
+  if(activityPlace(place))return activity(config,place,lang,now);
   const direct=select(config,place,lang,now),extra=travel(config,place,lang,now);
   return extra&&(!direct||direct.km>MILE_KM)?extra:direct;
  }
@@ -105,7 +122,7 @@
   return (config.klook?.tourRegions||[]).some(r=>point(r.at)&&distance(place.at,r.at)<=r.radiusKm&&(r.downtownNames||[]).some(n=>names.includes(n.toLowerCase())))?'downtown':null;
  }
  function tours(config,place,lang,now=Date.now()){
-  if(!eligible(config,place)||!locales[lang])return [];
+  if(!eligible(config,place)||activityPlace(place)||!locales[lang])return [];
   const hub=tourHub(config,place);if(!hub)return [];
   const regions=(config.klook.tourRegions||[]).filter(r=>hub==='airport'?(r.airports||[]).includes(place.travelTags.iata):point(r.at)&&distance(place.at,r.at)<=r.radiusKm);
   return (config.klook.tourOffers||[]).flatMap(o=>{
@@ -128,8 +145,8 @@
  function createResolver(){let revision=0;return async function(config,place,lang,lookup,publish){
   const mine=++revision;publish(null);if(!eligible(config,place))return;
   const choices=offerChoices(config,place,lang);if(choices.length){const index=Math.max(0,Math.floor(place.adCycle||0))%choices.length;publish({...choices[index],choiceCount:choices.length});return;}
-  if(!config.klook?.regionalSearch||(sizePolicy(config)&&!prominent(place)))return;
+  if(activityPlace(place)||!config.klook?.regionalSearch||(sizePolicy(config)&&!prominent(place)))return;
   try{const address=await lookup();if(mine===revision)publish(regional(config,place,lang,address));}catch{/* No irrelevant fallback on lookup failure. */}
  };}
- const api={select,travel,tourHub,tours,offerChoices,createRotation,resolveOffer,distance,regional,trackedURL,createResolver,copy};if(typeof module==='object'&&module.exports)module.exports=api;else root.AffiliateRouter=api;
+ const api={select,travel,activity,tourHub,tours,offerChoices,createRotation,resolveOffer,distance,regional,trackedURL,createResolver,copy};if(typeof module==='object'&&module.exports)module.exports=api;else root.AffiliateRouter=api;
 })(typeof window==='object'?window:globalThis);
