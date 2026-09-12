@@ -63,6 +63,8 @@ const TIER_ZOOM   = { 1: 4, 2: 6, 3: 8 };
 const POP_CLS      = ['p1', 'p2', 'p3', 'p4'];
 const POP_CLS_MINI = ['p1 mini', 'p2 mini', 'p3 mini', 'p4 mini'];
 const POP_LIM      = 3;   // minZoom is 4, so tier 1 is always on screen
+// Regional walking/historical selections use pop=2 in regional-landmarks-v1.json.
+// Their size is editorial; the original 34 landmarks retain their measured ranks.
 const LIM_ZOOM    = 8;       // the liminal spots, nationwide (件数は data/liminal.json が正本)
 const MONU_ZOOM   = 9;       // disaster memorial stones, 2,469 nationwide
 const DETAIL_ZOOM = 12;      // wikipedia articles nearby. The geosearch radius
@@ -2022,13 +2024,13 @@ function showLandmark(p){
   panelShell({
     kicker: { emoji: p.emoji, label: t('localSpot'), note: '  ' + placeName(p) },
     placeId:p.id, adTier:p.pop||3, ja: LANG === 'ja' ? '' : p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
-    bodyHTML: extractHTML(p, 240) || '<p>' + t('famous') + '</p>',
+    bodyHTML: extractHTML(p, 240) || '<p>' + (p.regional ? PlaceUI.pick(['Explore this place with the historical map. Details are available in the linked article.','歴史地図を重ねて周辺をたどれます。詳しい由来はリンク先の記事をご覧ください。','옛 지도와 함께 주변을 살펴보세요. 자세한 내용은 연결된 문서에서 확인할 수 있습니다.','叠加历史地图探索周边，详细介绍请参阅链接文章。','疊加歷史地圖探索周邊，詳細介紹請參閱連結文章。'],LANG) : t('famous')) + '</p>',
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
     img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
     share: { title: p.name, url: location.origin + location.pathname },
     searchName: p.ja,
-    src: LANG === 'ja' ? '座標の出典：ウィキペディア' : 'Coordinates from Wikipedia.'
+    src: p.regional ? ((articleLink(p)||{}).src||'Wikipedia (CC BY-SA 4.0)') + ' · ' + (p.coordSource.includes('openstreetmap')?'Coordinates © OpenStreetMap contributors.':'Coordinates from Wikipedia.') : (LANG === 'ja' ? '座標の出典：ウィキペディア' : 'Coordinates from Wikipedia.')
   });
   map.panTo([p.lat, p.lon]);
 }
@@ -2871,11 +2873,12 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   // before it lands.
   Promise.all([
     loadMonumentIndex(),
-    fetch(dj('data/landmarks.json')).then(r => r.ok ? r.json() : null)
-      .then(l => { if (l) LANDMARKS = l.landmarks.sort(
+    Promise.all(['data/landmarks.json','data/regional-landmarks-v1.json'].map(file =>
+      fetch(dj(file)).then(r => r.ok ? r.json() : null).catch(() => null)))
+      .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.69').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.70').then(r => r.ok ? r.json() : null)
       .then(a => { AFF = a; }).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が

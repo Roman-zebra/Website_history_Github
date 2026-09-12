@@ -13,7 +13,7 @@
   th:{ad:'โฆษณา · Klook',disclosure:'เว็บไซต์อาจได้รับค่าคอมมิชชันจากการจองผ่านลิงก์นี้',cta:'ดูตัวเลือกบน Klook ↗',near:'กิจกรรมน่าสนใจในบริเวณนี้',search:'ค้นหากิจกรรมใน ',searchNote:'ค้นหารายการในพื้นที่ โปรดตรวจสอบสถานที่ วันที่ และภาษาที่ให้บริการ',note:'ตรวจสอบวันที่ จุดนัดพบ และตัวเลือกบน Klook'}
  };
  const prominent=place=>place?.adTier===1||place?.adTier===2;
- function eligible(config,place){return !!(config?.enabled&&point(place?.at)&&(prominent(place)||(!blocked.has(place.kind)&&!(config.excludeKinds||[]).includes(place.kind))));}
+ function eligible(config,place){return !!(config?.enabled&&point(place?.at)&&(!config.klook?.topTwoOnly||prominent(place))&&(prominent(place)||(!blocked.has(place.kind)&&!(config.excludeKinds||[]).includes(place.kind))));}
  function trackedURL(config,destination,prefecture,tag){
   const aid=config?.klook?.affiliateId;if(!/^\d+$/.test(aid||''))return null;
   try{const target=new URL(destination);if(target.protocol!=='https:'||target.hostname!=='www.klook.com'||target.username||target.password)return null;
