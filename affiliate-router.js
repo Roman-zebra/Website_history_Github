@@ -13,7 +13,10 @@
   th:{ad:'โฆษณา · Klook',disclosure:'เว็บไซต์อาจได้รับค่าคอมมิชชันจากการจองผ่านลิงก์นี้',cta:'ดูตัวเลือกบน Klook ↗',near:'กิจกรรมน่าสนใจในบริเวณนี้',search:'ค้นหากิจกรรมใน ',searchNote:'ค้นหารายการในพื้นที่ โปรดตรวจสอบสถานที่ วันที่ และภาษาที่ให้บริการ',note:'ตรวจสอบวันที่ จุดนัดพบ และตัวเลือกบน Klook'}
  };
  const prominent=place=>place?.adTier===1||place?.adTier===2;
- function eligible(config,place){return !!(config?.enabled&&point(place?.at)&&(!config.klook?.topTwoOnly||prominent(place))&&(prominent(place)||(!blocked.has(place.kind)&&!(config.excludeKinds||[]).includes(place.kind))));}
+ const small=place=>place?.adTier===3||place?.adTier===4;
+ const MILE_KM=1.609344;
+ const sizePolicy=config=>config.klook?.smallRadiusKm===MILE_KM;
+ function eligible(config,place){return !!(config?.enabled&&point(place?.at)&&(sizePolicy(config)?(prominent(place)||small(place)):(!config.klook?.topTwoOnly||prominent(place))&&(prominent(place)||(!blocked.has(place.kind)&&!(config.excludeKinds||[]).includes(place.kind)))));}
  function trackedURL(config,destination,prefecture,tag){
   const aid=config?.klook?.affiliateId;if(!/^\d+$/.test(aid||''))return null;
   try{const target=new URL(destination);if(target.protocol!=='https:'||target.hostname!=='www.klook.com'||target.username||target.password)return null;
@@ -48,7 +51,7 @@
    if(!point(offer.at)||!Number.isFinite(offer.radiusKm)||offer.radiusKm<=0||offer.radiusKm>25)continue;
    const reviewed=Date.parse(offer.reviewedOn),expires=Date.parse(offer.expiresOn);
    if(!Number.isFinite(reviewed)||reviewed>now||now-reviewed>180*86400000||(Number.isFinite(expires)&&expires<=now))continue;
-   const km=distance(place.at,offer.at);if(!prominent(place)&&km>offer.radiusKm)continue;
+   const km=distance(place.at,offer.at);if(!prominent(place)&&km>(sizePolicy(config)?MILE_KM:offer.radiusKm))continue;
    const ids=offer.placeIds||[];if(ids.length&&!ids.includes(place.placeId))continue;
    if(offer.kinds?.length&&!offer.kinds.includes(place.kind))continue;
    // An offer needs copy and booking support in the reader's selected language.
@@ -56,13 +59,13 @@
    const label=offer.labels?.[lang];if(!offer.languages?.includes(lang)||!label?.trim())continue;
    const names=[place.name,place.ja,place.searchNameJa].filter(Boolean).join(' ').toLocaleLowerCase();
    const named=(offer.aliases||[]).some(s=>s.length>=3&&names.includes(s.toLocaleLowerCase()));
-   matches.push({...offer,label,km,nearest:prominent(place),exact:ids.includes(place.placeId)||named,score:km-(offer.category===topic(place)?2:0),priority:Number.isFinite(offer.priority)?offer.priority:0});
+   matches.push({...offer,label,km,nearest:prominent(place)||sizePolicy(config),exact:ids.includes(place.placeId)||named,score:km-(offer.category===topic(place)?2:0),priority:Number.isFinite(offer.priority)?offer.priority:0});
   }
-  matches.sort((a,b)=>(prominent(place)?a.km-b.km:Number(b.exact)-Number(a.exact)||b.priority-a.priority||a.score-b.score)||String(a.id).localeCompare(String(b.id)));
+  matches.sort((a,b)=>((prominent(place)||sizePolicy(config))?a.km-b.km:Number(b.exact)-Number(a.exact)||b.priority-a.priority||a.score-b.score)||String(a.id).localeCompare(String(b.id)));
   return matches[0]||null;
  }
  function regional(config,place,lang,address){
-  if(!eligible(config,place)||!config.klook?.regionalSearch||!locales[lang]||address?.country_code!=='jp')return null;
+  if(!eligible(config,place)||(sizePolicy(config)&&!prominent(place))||!config.klook?.regionalSearch||!locales[lang]||address?.country_code!=='jp')return null;
   const list=config.klook.prefectures||[],iso=Object.entries(address).find(([k,v])=>k.startsWith('ISO3166-2-')&&/^JP-\d{2}$/.test(v))?.[1];
   const state=String(address.state||address.province||'').toLowerCase().replace(/ prefecture| metropolis|都$|府$|県$/g,'');
   const pref=list.find(p=>p.code===iso)||list.find(p=>state===p.en.toLowerCase()||state===p.ja.replace(/[都府県]$/,''));
@@ -74,12 +77,32 @@
   const c=copy[lang],label=['en','th'].includes(lang)?c.search+region:region+c.search;
   return{id:'klook-search-'+pref.code,provider:'klook',label,url,regional:true,prefecture:pref.code};
  }
+ function travel(config,place,lang,now=Date.now()){
+  if(!eligible(config,place)||!locales[lang])return null;
+  const t=place.travelTags||{},operator=[t.operator,t.network,t['operator:en'],t['network:en']].filter(Boolean).join(' ');
+  let type='';
+  if(t.aeroway==='aerodrome'&&config.klook.internationalAirports?.includes(t.iata))type='esim';
+  else if(['station','halt'].includes(t.railway)){
+   if((/東京地下鉄|東京メトロ|Tokyo Metro|都営地下鉄|Toei Subway/i.test(operator)||(/東京都交通局/.test(operator)&&(t.station==='subway'||t.subway==='yes')))&&t.station!=='light_rail'&&t.tram!=='yes')type='tokyo-subway';
+   else if(/JR|旅客鉄道|Japan Rail/i.test(operator))type='jr-national';
+   else {try{const host=new URL(t['contact:website']||t.website).hostname;if(['jreast.co.jp','jr-central.co.jp','jr-odekake.net','jrhokkaido.co.jp','jr-shikoku.co.jp','jrkyushu.co.jp'].some(h=>host===h||host.endsWith('.'+h)))type='jr-national';}catch{}}
+  }
+  const item=config.klook.travelOffers?.find(o=>o.match===type&&o.enabled);
+  if(!item||!/^\d+$/.test(item.productId)||!Number.isFinite(Date.parse(item.reviewedOn))||now-Date.parse(item.reviewedOn)>180*86400000||Date.parse(item.reviewedOn)>now)return null;
+  const prefecture=place.prefecture||'JP',url=trackedURL(config,'https://www.klook.com/'+locales[lang]+'/activity/'+item.productId+'/',prefecture,item.productId);
+  if(!url)return null;
+  return {...item,id:'klook-'+item.productId,provider:'klook',url,label:item.names[lang]||item.names.en,travel:true,note:item.notes[lang]||item.notes.en};
+ }
+ function resolveOffer(config,place,lang,now=Date.now()){
+  const direct=select(config,place,lang,now),extra=travel(config,place,lang,now);
+  return extra&&(!direct||direct.km>MILE_KM)?extra:direct;
+ }
  // Only the latest opened panel may display an asynchronous region lookup.
  function createResolver(){let revision=0;return async function(config,place,lang,lookup,publish){
   const mine=++revision;publish(null);if(!eligible(config,place))return;
-  const direct=select(config,place,lang);if(direct){publish(direct);return;}
-  if(!config.klook?.regionalSearch)return;
+  const direct=resolveOffer(config,place,lang);if(direct){publish(direct);return;}
+  if(!config.klook?.regionalSearch||(sizePolicy(config)&&!prominent(place)))return;
   try{const address=await lookup();if(mine===revision)publish(regional(config,place,lang,address));}catch{/* No irrelevant fallback on lookup failure. */}
  };}
- const api={select,distance,regional,trackedURL,createResolver,copy};if(typeof module==='object'&&module.exports)module.exports=api;else root.AffiliateRouter=api;
+ const api={select,travel,resolveOffer,distance,regional,trackedURL,createResolver,copy};if(typeof module==='object'&&module.exports)module.exports=api;else root.AffiliateRouter=api;
 })(typeof window==='object'?window:globalThis);

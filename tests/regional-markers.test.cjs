@@ -6,11 +6,6 @@ test('regional additions cover all 47 prefectures and have verifiable place coor
  for(const p of regional){assert.equal(p.pop,2);assert.equal(p.tier,2);assert.ok(p.lat>=24&&p.lat<=46&&p.lon>=122&&p.lon<=146,p.ja);assert.ok(p.wiki_ja);assert.ok(!p.views);assert.match(p.coordSource,/^https:\/\/(ja.wikipedia.org\/wiki\/|www.openstreetmap.org\/(node|way)\/)/);assert.ok(p.sizeSource.includes('not a pageview rank'));}
  assert.equal([...featured,...old,...regional].filter(p=>(p.pop||3)<=2).length,128);
 });
-test('published advertisements use only sizes 1 and 2, not zoom tiers or all medium icons',()=>{
- assert.equal(config.klook.topTwoOnly,true);const at=config.offers[0].at;
- for(const adTier of [3,4,undefined]){assert.equal(router.select(config,{at,adTier,tier:1},'ja'),null);assert.equal(router.regional(config,{at,adTier},'ja',{country_code:'jp',state:'北海道'}),null);}
- for(const adTier of [1,2])assert.ok(router.select(config,{at,adTier},'ja'));
-});
 test('expanded products resolve to their physical locality and stay close to major Tokyo spots',()=>{
  assert.ok(config.offers.length>=90);
  for(const [name,at,id] of [['Tokyo Tower',[35.658611,139.745556],'4911'],['Tokyo Skytree',[35.7101,139.8107],'41352']]){const ad=router.select(config,{at,name,adTier:2},'en');assert.equal(ad.productId,id);assert.ok(ad.km<0.2);}

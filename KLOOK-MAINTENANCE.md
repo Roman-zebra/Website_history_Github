@@ -1,36 +1,36 @@
 # Klook place cards
 
-The account's registered website is JAPAN TIME ATLAS, https://japantimeatlas.com, AID 134890. The public ID is not an API secret.
-
-The overview card sits between the source credit and About this site. It uses a normal sponsored link, with no third-party widget script or automatic affiliate requests when the map is opened.
+Registered website: JAPAN TIME ATLAS, https://japantimeatlas.com, public AID 134890.
+The overview card sits between the source credit and About this site. It is a disclosed sponsored link; no third-party widget, tracking script or automatic affiliate request runs when the map opens.
 
 ## Selection
 
-- The two largest marker sizes (`pop` 1 and 2) always choose the closest reviewed product, using its physical venue or departure point. This includes the featured Aneyoshi marker as explicitly requested by the owner. Cards show the prefecture and straight-line distance; they do not claim the product is within walking distance.
-- Only `pop` sizes 1 and 2 display advertisements. Size 3, size 4, medium Wikipedia/memorial pins and tiny local pins do not. The owner's clarification refers to visual size, not the zoom `tier` field. Regional search remains a fallback for an eligible large marker only when no reviewed product is available.
-- Additions in `data/regional-landmarks-v1.json` provide 92 historical and walking destinations across all 47 prefectures, at size 2. This brings the two largest sizes from 36 to 128 entries. These additions are editorial selections with source-backed coordinates, not fabricated pageview rankings. Decluttering still controls how many markers can fit on screen at a particular zoom.
-- The expanded catalog contains 92 reviewed products. This does not mean 47 prefectures each have a reviewed product, or that the catalog contains every Klook product. No measured conversion-rate winner has been claimed.
-- Product references were checked in the signed-in Product Explorer on September 12, 2026. They expire from selection after 180 days without another review. Prices and review scores are deliberately omitted because they change.
+- Sizes 1 and 2 choose the nearest reviewed physical product, including Aneyoshi. Cards show prefecture and straight-line distance, not a walking-distance claim. The 128 editorial markers (36 existing plus 92 regional additions) are not measured popularity rankings.
+- Sizes 3 and 4, including Wikipedia, memorial, liminal and local pins, choose the nearest physical product only within one international mile: 1.609344 km. The zoom appearance field is separate from visual size. There is no distant regional-search fallback for small pins.
+- If no physical product is within one mile, a verified international airport can show a Japan eSIM. An identified JR station can show a nationwide JR pass; Tokyo Metro/Toei subway stations can show a Tokyo Subway ticket. These are context-based alternatives with no artificial venue coordinates. Nearby physical products take precedence. Station operators and eligibility matter: private railways and unknown operators receive no generic JR recommendation. A station card does not claim tickets can be exchanged at that station.
+- Transport data includes 9,071 named OSM station nodes (not a count of unique operating stations), 32 airports with scheduled international services and 416 named ski-area ways. The airport scope follows the MLIT summer 2026 timetable; charter-only airports are outside this verified set. Both large and small JR stations can receive fallback cards; unknown stopping-service data is not used to invent Shinkansen classifications.
+- The catalog has 94 physical products and 3 travel products. It is partial. Japan-wide product inventory, availability and coordinates could not be exported from Product Explorer; an official all-product API/feed was not confirmed. The owner declined a support inquiry. No message was sent. Do not claim all Klook Japan products, every prefecture's products, or a highest-conversion winner are covered.
+- Review dates expire after 180 days. Changed availability, prices and schedules are checked on Klook; live inventory is not synchronized. Umeda Sky Building and GALA Yuzawa were added in this release. All 128 large markers are checked against the available reviewed catalog by the regression tests.
 
-## Tracking and review
+## Sources and refresh
 
-The link format follows https://affiliate.klook.com/custom_tag_guide:
+Klook product references and physical coordinate sources are stored on individual offers. Travel references:
+- https://www.klook.com/activity/109393-japan-esim-high-speed-internet-qr-code-voucher/
+- https://www.klook.com/en-US/activity/1420-7-day-whole-japan-rail-pass-jr-pass/
+- https://www.klook.com/en-US/activity/1552-subway-ticket-tokyo/
 
-- `aff_label1=jta_map`
-- `aff_label2=JP-xx` identifies the product's prefecture (or the search region)
-- `aff_label3=<product ID>` or `search`
-- `k_site` is the final parameter and contains the encoded Klook destination URL.
+Facilities were retrieved September 12, 2026 from OpenStreetMap via https://overpass-api.de/api/interpreter. Station nodes use railway=station; ski ways use landuse=winter_sports and their center coordinates. International airport IATA codes were checked against https://www.mlit.go.jp/koku/content/002000598.pdf (March 29–October 24, 2026). See data/facilities-index-v1.json and LICENSE-DATA.md. Refresh these datasets when international schedules or operator data change; no recurring automation was installed.
 
-These are editorial source tags, not user IDs or individual click IDs. The expanded setup uses at most 139 combinations, below the documented 2,000-tag account quota. Page languages do not create extra combinations. No private API credentials are needed.
+## Nationwide search
 
-Compare confirmed commission, clicks and EPC in Klook Performance before changing priorities. The nearest rule for the top two marker sizes must stay distance-first unless the owner requests a different rule.
+search-worker.js builds a local searchable index from every regional file, curated markers, monuments and facilities. Names, aliases, categories and multilingual category synonyms support partial and combined words. All matches are sent to the map; only the accessible result list is paginated. A canvas displays every in-view match without the normal marker cap. One match opens at street level; multiple matches fit the map. Loading failures do not silently report a partial index as complete. This searches the site's recorded places, not Google's or all real-world places. First indexing requires downloading the dataset; the worker caches the completed index locally.
 
-## Account-side validation still required
+## Tracking
 
-During setup, both official custom-tag redirects and the documented direct `?aid=134890` format reached the correct Klook destination with attribution, but the test browser then reported `ERR_TOO_MANY_REDIRECTS`. The same product without tracking opened successfully; numeric product IDs also resolved to their canonical product pages. Therefore the error was not fixed by adding product slugs. Do not claim that completed-booking attribution or payouts have been verified. The owner has been asked to check an account-generated link in their browser. Financial and identity fields must be completed by the account owner when setting up payouts.
+The link format follows https://affiliate.klook.com/custom_tag_guide. aff_label1=jta_map; aff_label2 is the venue prefecture or JP for country-wide travel products; aff_label3 is the product ID or search. k_site is last. These are bounded editorial tags, not visitor or click identifiers. Languages do not create extra tags. No private API credentials are needed.
 
-No test booking was placed. The automatic city widget was not embedded: its Sendai preview returned a Hokkaido product. The static widget and generated link used during account setup are also not required by these custom cards.
+Compare confirmed commission, clicks and EPC in Klook Performance before changing priorities. During setup both official custom redirects and direct aid links reached the destination with attribution, then the test browser reported ERR_TOO_MANY_REDIRECTS. The untracked product opened successfully, and adding product slugs did not fix the error. Completed-booking attribution and payouts remain unverified. No test booking was placed. The account owner must complete financial and identity fields.
 
-## Editing
+## Editing and verification
 
-Edit `affiliate-config.json`, then run `node scripts/build.cjs`. A product needs a verified product ID, physical coordinates, prefecture, localized names, review date and a sensible local radius. Update the asset version when publishing config or routing changes so cached installations receive the release. Do not store secrets in this public file.
+Edit affiliate-config.json, then run node scripts/build.cjs. Physical offers need verified product IDs, coordinates, prefectures, localized copy and review dates. Travel offers need valid operator/airport scope and eligibility notes. Keep catalogCoverage.complete false until an authoritative complete inventory has been reconciled. Bump asset versions on publishing; keep data versions consistent. Do not store secrets in public files.

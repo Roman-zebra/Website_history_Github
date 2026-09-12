@@ -35,7 +35,7 @@ test('shared URL carries language and exact location or featured identity',()=>{
 });
 function runtime(){
  const elements=new Map(),storage=new Map();
- const element=()=>({textContent:'',innerHTML:'',hidden:true,value:'',dataset:{},style:{},classList:{add(){},remove(){},toggle(){},contains(){return false;}},setAttribute(){},addEventListener(){},querySelector(){return element();},querySelectorAll(){return [];},focus(){},blur(){}});
+ const element=()=>({textContent:'',innerHTML:'',hidden:true,value:'',dataset:{},style:{},classList:{add(){},remove(){},toggle(){},contains(){return false;}},setAttribute(){},addEventListener(){},querySelector(){return element();},querySelectorAll(){return [];},focus(){},blur(){},remove(){}});
  const ctx={ResizeObserver:class{observe(){}},PlaceUI:UI,URL,URLSearchParams,Map,Set,console,AbortSignal,Event:class{},setTimeout(){return 1;},clearTimeout(){},requestAnimationFrame(){},navigator:{languages:['en']},location:{search:'',pathname:'/',origin:'https://example.com',href:'https://example.com/',hash:''},history:{pushState(){},replaceState(){}},localStorage:{getItem:k=>storage.get(k)||null,setItem(k,v){storage.set(k,v);}},document:{documentElement:{},body:{classList:element().classList},getElementById(id){if(!elements.has(id))elements.set(id,element());return elements.get(id);},querySelector(){return null;},querySelectorAll(){return [];},addEventListener(){}},window:{innerWidth:390,addEventListener(){}},L:{divIcon:o=>o},fetch:async()=>{throw Error('Unexpected network');}};
  vm.createContext(ctx);const source=fs.readFileSync(path.join(root,'explore.js'),'utf8');
  vm.runInContext(source.slice(0,source.indexOf('LANG = detectLang();')),ctx);
