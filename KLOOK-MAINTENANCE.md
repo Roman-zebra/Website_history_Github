@@ -1,7 +1,7 @@
 # Klook place cards
 
 Registered website: JAPAN TIME ATLAS, https://japantimeatlas.com, public AID 134890.
-The overview card sits between the source credit and About this site. It is a disclosed sponsored link; no third-party widget, tracking script or automatic affiliate request runs when the map opens.
+The overview card sits between the source credit and About this site. Klook fallback cards are disclosed sponsored links without their own tracking script. GetYourGuide is now primary at eligible points and loads its official widget/analyzer; see GETYOURGUIDE-MAINTENANCE.md for current precedence and scope.
 
 ## Selection
 
@@ -60,3 +60,4 @@ The overview has one card. Relevant tours and the existing eligible experience o
 The expanded commission audit covers 105 product IDs: 100 at 5%, four at 2%, one at 0% disabled; 104 active products. These are observed base rates, not guaranteed commission or availability. No published minimum traffic, tenure or new-affiliate API approval criteria were located. Selected-partner API/feed access must not be inferred from ordinary affiliate registration.
 
 Major departure stations with incomplete OSM service tags are also matched by exact station identity within 800 m of the attributed station center. Service reference: https://japanrailpass.net/assets/pdf/Shinkansen_En_web_20260324.pdf . This does not turn arbitrary nearby landmarks into station hubs. New food/shopping collection pins use their actual third size and retain the one-mile physical rule, with the explicit downtown tour exception.
+

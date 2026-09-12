@@ -12,7 +12,7 @@ for(const name of ['index.html','explore.html','kids.html','ja.html','ko.html','
  for(const m of html.matchAll(/(?:src|href)="[^"?]+\.(?:js|css)\?v=([^"&]+)"/g))assert.equal(m[1],assetVersion,name+' asset version mismatch');
 }
 const directories=['data','icons','place','search','guides','visit','vendor'];
-const files=['activities-data.js','search-core.js','search-worker.js','visit.html','about.html','about.js','affiliate-router.js','affiliate-config.json','th.html','.nojekyll','LICENSE-DATA.md','_headers','app.js','atmosphere.js','design.css','explore.css','explore.html','explore.js','explore.webmanifest','index.html','ja.html','kids.html','ko.html','loop.js','manifest.webmanifest','og.jpg','page.css','place-ui.js','places.html','robots.txt','sitemap.xml','style.css','sw.js','zh-cn.html','zh-tw.html'];
+const files=['gyg-frame.html','gyg-widget.js','activities-data.js','search-core.js','search-worker.js','visit.html','about.html','about.js','affiliate-router.js','affiliate-config.json','th.html','.nojekyll','LICENSE-DATA.md','_headers','app.js','atmosphere.js','design.css','explore.css','explore.html','explore.js','explore.webmanifest','index.html','ja.html','kids.html','ko.html','loop.js','manifest.webmanifest','og.jpg','page.css','place-ui.js','places.html','robots.txt','sitemap.xml','style.css','sw.js','zh-cn.html','zh-tw.html'];
 assert.equal(path.dirname(dist),root);
 fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist);
 for(const name of [...directories,...files])fs.cpSync(path.join(root,name),path.join(dist,name),{recursive:true});
