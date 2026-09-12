@@ -246,7 +246,8 @@
         "ja": "沖縄県",
         "en": "Okinawa"
       }
-    ]
+    ],
+    "topTwoOnly": true
   },
   "offers": [
     {
@@ -969,14 +970,1539 @@
       "category": "culture",
       "priority": 0,
       "reviewedOn": "2026-09-12"
+    },
+    {
+      "id": "klook-43404",
+      "productId": "43404",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-04",
+      "names": {
+        "en": "Sendai Umino-Mori Aquarium",
+        "ja": "仙台うみの杜水族館"
+      },
+      "aliases": [
+        "仙台うみの杜水族館",
+        "Sendai Umino-Mori Aquarium"
+      ],
+      "at": [
+        38.27108333,
+        140.98066667
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E4%BB%99%E5%8F%B0%E3%81%86%E3%81%BF%E3%81%AE%E6%9D%9C%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/43404/"
+    },
+    {
+      "id": "klook-14723",
+      "productId": "14723",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-01",
+      "names": {
+        "en": "Noboribetsu Marine Park NIXE",
+        "ja": "登別マリンパークニクス"
+      },
+      "aliases": [
+        "登別マリンパークニクス",
+        "Noboribetsu Marine Park NIXE"
+      ],
+      "at": [
+        42.45497222,
+        141.18219444
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E7%99%BB%E5%88%A5%E3%83%9E%E3%83%AA%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AF%E3%83%8B%E3%82%AF%E3%82%B9",
+      "productSource": "https://www.klook.com/en-US/activity/14723/"
+    },
+    {
+      "id": "klook-25126",
+      "productId": "25126",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-01",
+      "names": {
+        "en": "Noboribetsu Date Jidaimura",
+        "ja": "登別伊達時代村"
+      },
+      "aliases": [
+        "登別伊達時代村",
+        "Noboribetsu Date Jidaimura"
+      ],
+      "at": [
+        42.463633,
+        141.161712
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://www.openstreetmap.org/node/4609097293",
+      "productSource": "https://www.klook.com/en-US/activity/25126/"
+    },
+    {
+      "id": "klook-45064",
+      "productId": "45064",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-01",
+      "names": {
+        "en": "Goryokaku Tower",
+        "ja": "五稜郭タワー"
+      },
+      "aliases": [
+        "五稜郭タワー",
+        "Goryokaku Tower"
+      ],
+      "at": [
+        41.794643,
+        140.753965
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://www.openstreetmap.org/way/585398984",
+      "productSource": "https://www.klook.com/en-US/activity/45064/"
+    },
+    {
+      "id": "klook-1421",
+      "productId": "1421",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-47",
+      "names": {
+        "en": "Okinawa Churaumi Aquarium",
+        "ja": "沖縄美ら海水族館"
+      },
+      "aliases": [
+        "沖縄美ら海水族館",
+        "Okinawa Churaumi Aquarium"
+      ],
+      "at": [
+        26.69472222,
+        127.87805556
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%B2%96%E7%B8%84%E7%BE%8E%E3%82%89%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/1421/"
+    },
+    {
+      "id": "klook-1759",
+      "productId": "1759",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-23",
+      "names": {
+        "en": "Port of Nagoya Public Aquarium",
+        "ja": "名古屋港水族館"
+      },
+      "aliases": [
+        "名古屋港水族館",
+        "Port of Nagoya Public Aquarium"
+      ],
+      "at": [
+        35.09068889,
+        136.87824167
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/1759/"
+    },
+    {
+      "id": "klook-59360",
+      "productId": "59360",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-13",
+      "names": {
+        "en": "Sumida Aquarium",
+        "ja": "すみだ水族館"
+      },
+      "aliases": [
+        "すみだ水族館",
+        "Sumida Aquarium"
+      ],
+      "at": [
+        35.70988889,
+        139.80986111
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/59360/"
+    },
+    {
+      "id": "klook-14547",
+      "productId": "14547",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-13",
+      "names": {
+        "en": "Sunshine Aquarium",
+        "ja": "サンシャイン水族館"
+      },
+      "aliases": [
+        "サンシャイン水族館",
+        "Sunshine Aquarium"
+      ],
+      "at": [
+        35.72916667,
+        139.71980556
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%B3%E3%82%B7%E3%83%A3%E3%82%A4%E3%83%B3%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/14547/"
+    },
+    {
+      "id": "klook-55241",
+      "productId": "55241",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-47",
+      "names": {
+        "en": "DMM Kariyushi Aquarium",
+        "ja": "DMMかりゆし水族館"
+      },
+      "aliases": [
+        "DMMかりゆし水族館",
+        "DMM Kariyushi Aquarium"
+      ],
+      "at": [
+        26.15630556,
+        127.65041667
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/DMM%E3%81%8B%E3%82%8A%E3%82%86%E3%81%97%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/55241/"
+    },
+    {
+      "id": "klook-41174",
+      "productId": "41174",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-14",
+      "names": {
+        "en": "Enoshima Aquarium",
+        "ja": "新江ノ島水族館"
+      },
+      "aliases": [
+        "新江ノ島水族館",
+        "Enoshima Aquarium"
+      ],
+      "at": [
+        35.30966667,
+        139.47988889
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%96%B0%E6%B1%9F%E3%83%8E%E5%B3%B6%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/41174/"
+    },
+    {
+      "id": "klook-15334",
+      "productId": "15334",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-26",
+      "names": {
+        "en": "Kyoto Aquarium",
+        "ja": "京都水族館"
+      },
+      "aliases": [
+        "京都水族館",
+        "Kyoto Aquarium"
+      ],
+      "at": [
+        34.98755556,
+        135.74761111
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/15334/"
+    },
+    {
+      "id": "klook-37909",
+      "productId": "37909",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-08",
+      "names": {
+        "en": "Aqua World Oarai Aquarium",
+        "ja": "アクアワールド・大洗"
+      },
+      "aliases": [
+        "アクアワールド・大洗",
+        "Aqua World Oarai Aquarium"
+      ],
+      "at": [
+        36.33333333,
+        140.59388889
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%AF%E3%82%A2%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%83%BB%E5%A4%A7%E6%B4%97",
+      "productSource": "https://www.klook.com/en-US/activity/37909/"
+    },
+    {
+      "id": "klook-96306",
+      "productId": "96306",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-10",
+      "names": {
+        "en": "Onioshidashi Park",
+        "ja": "鬼押出し園"
+      },
+      "aliases": [
+        "鬼押出し園",
+        "Onioshidashi Park"
+      ],
+      "at": [
+        36.444972,
+        138.536684
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://www.openstreetmap.org/node/5603040428",
+      "productSource": "https://www.klook.com/en-US/activity/96306/"
+    },
+    {
+      "id": "klook-33911",
+      "productId": "33911",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-12",
+      "names": {
+        "en": "Kamogawa Sea World",
+        "ja": "鴨川シーワールド"
+      },
+      "aliases": [
+        "鴨川シーワールド",
+        "Kamogawa Sea World"
+      ],
+      "at": [
+        35.11614167,
+        140.12058333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E9%B4%A8%E5%B7%9D%E3%82%B7%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89",
+      "productSource": "https://www.klook.com/en-US/activity/33911/"
+    },
+    {
+      "id": "klook-50447",
+      "productId": "50447",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-12",
+      "names": {
+        "en": "Museum of Aeronautical Sciences",
+        "ja": "航空科学博物館"
+      },
+      "aliases": [
+        "航空科学博物館",
+        "Museum of Aeronautical Sciences"
+      ],
+      "at": [
+        35.74004,
+        140.397954
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://www.openstreetmap.org/way/355646048",
+      "productSource": "https://www.klook.com/en-US/activity/50447/"
+    },
+    {
+      "id": "klook-5621",
+      "productId": "5621",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-12",
+      "names": {
+        "en": "Mother Farm",
+        "ja": "マザー牧場"
+      },
+      "aliases": [
+        "マザー牧場",
+        "Mother Farm"
+      ],
+      "at": [
+        35.24602778,
+        139.93483333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%B6%E3%83%BC%E7%89%A7%E5%A0%B4",
+      "productSource": "https://www.klook.com/en-US/activity/5621/"
+    },
+    {
+      "id": "klook-85615",
+      "productId": "85615",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-14",
+      "names": {
+        "en": "Sankeien Garden",
+        "ja": "三溪園"
+      },
+      "aliases": [
+        "三溪園",
+        "Sankeien Garden"
+      ],
+      "at": [
+        35.41694444,
+        139.65888889
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E4%B8%89%E6%BA%AA%E5%9C%92",
+      "productSource": "https://www.klook.com/en-US/activity/85615/"
+    },
+    {
+      "id": "klook-88447",
+      "productId": "88447",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-14",
+      "names": {
+        "en": "Sagamiko MORI MORI",
+        "ja": "さがみ湖MORI MORI"
+      },
+      "aliases": [
+        "さがみ湖MORI MORI",
+        "Sagamiko MORI MORI"
+      ],
+      "at": [
+        35.60486944,
+        139.20613333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%95%E3%81%8C%E3%81%BF%E6%B9%96MORI%20MORI",
+      "productSource": "https://www.klook.com/en-US/activity/88447/"
+    },
+    {
+      "id": "klook-28959",
+      "productId": "28959",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-40",
+      "names": {
+        "en": "Marine World Uminonakamichi",
+        "ja": "マリンワールド海の中道"
+      },
+      "aliases": [
+        "マリンワールド海の中道",
+        "Marine World Uminonakamichi"
+      ],
+      "at": [
+        33.66083333,
+        130.36333333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%AA%E3%83%B3%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E6%B5%B7%E3%81%AE%E4%B8%AD%E9%81%93",
+      "productSource": "https://www.klook.com/en-US/activity/28959/"
+    },
+    {
+      "id": "klook-35833",
+      "productId": "35833",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-40",
+      "names": {
+        "en": "Kyushu National Museum",
+        "ja": "九州国立博物館"
+      },
+      "aliases": [
+        "九州国立博物館",
+        "Kyushu National Museum"
+      ],
+      "at": [
+        33.51835556,
+        130.53829722
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E4%B9%9D%E5%B7%9E%E5%9B%BD%E7%AB%8B%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/35833/"
+    },
+    {
+      "id": "klook-95879",
+      "productId": "95879",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-19",
+      "names": {
+        "en": "Fuji-Q Highland",
+        "ja": "富士急ハイランド"
+      },
+      "aliases": [
+        "富士急ハイランド",
+        "Fuji-Q Highland"
+      ],
+      "at": [
+        35.48763889,
+        138.77916944
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E6%80%A5%E3%83%8F%E3%82%A4%E3%83%A9%E3%83%B3%E3%83%89",
+      "productSource": "https://www.klook.com/en-US/activity/95879/"
+    },
+    {
+      "id": "klook-32135",
+      "productId": "32135",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-22",
+      "names": {
+        "en": "Izu Shaboten Zoo",
+        "ja": "伊豆シャボテン動物公園"
+      },
+      "aliases": [
+        "伊豆シャボテン動物公園",
+        "Izu Shaboten Zoo"
+      ],
+      "at": [
+        34.90722222,
+        139.10083333
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E4%BC%8A%E8%B1%86%E3%82%B7%E3%83%A3%E3%83%9C%E3%83%86%E3%83%B3%E5%8B%95%E7%89%A9%E5%85%AC%E5%9C%92",
+      "productSource": "https://www.klook.com/en-US/activity/32135/"
+    },
+    {
+      "id": "klook-14575",
+      "productId": "14575",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-22",
+      "names": {
+        "en": "Chibi Maruko-chan Land",
+        "ja": "ちびまる子ちゃんランド"
+      },
+      "aliases": [
+        "ちびまる子ちゃんランド",
+        "Chibi Maruko-chan Land"
+      ],
+      "at": [
+        35.01058333,
+        138.49291667
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%B9%E3%83%91%E3%83%AB%E3%82%B9%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E3%83%97%E3%83%A9%E3%82%B6",
+      "productSource": "https://www.klook.com/en-US/activity/14575/"
+    },
+    {
+      "id": "klook-20949",
+      "productId": "20949",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-22",
+      "names": {
+        "en": "Shimoda Aquarium",
+        "ja": "下田海中水族館"
+      },
+      "aliases": [
+        "下田海中水族館",
+        "Shimoda Aquarium"
+      ],
+      "at": [
+        34.66605556,
+        138.94597222
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E4%B8%8B%E7%94%B0%E6%B5%B7%E4%B8%AD%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/20949/"
+    },
+    {
+      "id": "klook-52212",
+      "productId": "52212",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-22",
+      "names": {
+        "en": "Kakegawa Kachoen",
+        "ja": "掛川花鳥園"
+      },
+      "aliases": [
+        "掛川花鳥園",
+        "Kakegawa Kachoen"
+      ],
+      "at": [
+        34.76119444,
+        138.01505556
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%8E%9B%E5%B7%9D%E8%8A%B1%E9%B3%A5%E5%9C%92",
+      "productSource": "https://www.klook.com/en-US/activity/52212/"
+    },
+    {
+      "id": "klook-81734",
+      "productId": "81734",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-22",
+      "names": {
+        "en": "ACAO Forest",
+        "ja": "ACAO FOREST"
+      },
+      "aliases": [
+        "ACAO FOREST",
+        "ACAO Forest"
+      ],
+      "at": [
+        35.07989,
+        139.07261
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/ACAO%20FOREST",
+      "productSource": "https://www.klook.com/en-US/activity/81734/"
+    },
+    {
+      "id": "klook-85593",
+      "productId": "85593",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-22",
+      "names": {
+        "en": "KawaZoo Frog Museum",
+        "ja": "KawaZoo"
+      },
+      "aliases": [
+        "KawaZoo",
+        "KawaZoo Frog Museum"
+      ],
+      "at": [
+        34.7942061,
+        138.9347755
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/KawaZoo",
+      "productSource": "https://www.klook.com/en-US/activity/85593/"
+    },
+    {
+      "id": "klook-132673",
+      "productId": "132673",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-23",
+      "names": {
+        "en": "Ghibli Park",
+        "ja": "ジブリパーク"
+      },
+      "aliases": [
+        "ジブリパーク",
+        "Ghibli Park"
+      ],
+      "at": [
+        35.17277778,
+        137.08972222
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%96%E3%83%AA%E3%83%91%E3%83%BC%E3%82%AF",
+      "productSource": "https://www.klook.com/en-US/activity/132673/"
+    },
+    {
+      "id": "klook-79812",
+      "productId": "79812",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-23",
+      "names": {
+        "en": "Little World Museum of Man",
+        "ja": "リトルワールド"
+      },
+      "aliases": [
+        "リトルワールド",
+        "Little World Museum of Man"
+      ],
+      "at": [
+        35.37452222,
+        137.02294444
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%88%E3%83%AB%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89",
+      "productSource": "https://www.klook.com/en-US/activity/79812/"
+    },
+    {
+      "id": "klook-83638",
+      "productId": "83638",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-23",
+      "names": {
+        "en": "Meiji Mura",
+        "ja": "博物館明治村"
+      },
+      "aliases": [
+        "博物館明治村",
+        "Meiji Mura"
+      ],
+      "at": [
+        35.34175,
+        136.98925
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%8D%9A%E7%89%A9%E9%A4%A8%E6%98%8E%E6%B2%BB%E6%9D%91",
+      "productSource": "https://www.klook.com/en-US/activity/83638/"
+    },
+    {
+      "id": "klook-38434",
+      "productId": "38434",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-24",
+      "names": {
+        "en": "Suzuka Circuit Park",
+        "ja": "鈴鹿サーキット"
+      },
+      "aliases": [
+        "鈴鹿サーキット",
+        "Suzuka Circuit Park"
+      ],
+      "at": [
+        34.843825,
+        136.53439167
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E9%88%B4%E9%B9%BF%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%83%E3%83%88",
+      "productSource": "https://www.klook.com/en-US/activity/38434/"
+    },
+    {
+      "id": "klook-83388",
+      "productId": "83388",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-24",
+      "names": {
+        "en": "Shima Spain Village",
+        "ja": "志摩スペイン村"
+      },
+      "aliases": [
+        "志摩スペイン村",
+        "Shima Spain Village"
+      ],
+      "at": [
+        34.36180556,
+        136.84427778
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%BF%97%E6%91%A9%E3%82%B9%E3%83%9A%E3%82%A4%E3%83%B3%E6%9D%91",
+      "productSource": "https://www.klook.com/en-US/activity/83388/"
+    },
+    {
+      "id": "klook-47068",
+      "productId": "47068",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-25",
+      "names": {
+        "en": "Biwako Valley Ropeway",
+        "ja": "びわ湖バレイ"
+      },
+      "aliases": [
+        "びわ湖バレイ",
+        "Biwako Valley Ropeway"
+      ],
+      "at": [
+        35.20294444,
+        135.90705556
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%B3%E3%82%8F%E6%B9%96%E3%83%90%E3%83%AC%E3%82%A4",
+      "productSource": "https://www.klook.com/en-US/activity/47068/"
+    },
+    {
+      "id": "klook-96363",
+      "productId": "96363",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-25",
+      "names": {
+        "en": "Hieizan Enryaku-ji Temple",
+        "ja": "延暦寺"
+      },
+      "aliases": [
+        "延暦寺",
+        "Hieizan Enryaku-ji Temple"
+      ],
+      "at": [
+        35.07045,
+        135.840925
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%BB%B6%E6%9A%A6%E5%AF%BA",
+      "productSource": "https://www.klook.com/en-US/activity/96363/"
+    },
+    {
+      "id": "klook-1464",
+      "productId": "1464",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-26",
+      "names": {
+        "en": "Kyoto Tower",
+        "ja": "京都タワー"
+      },
+      "aliases": [
+        "京都タワー",
+        "Kyoto Tower"
+      ],
+      "at": [
+        34.98752778,
+        135.75936111
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E3%82%BF%E3%83%AF%E3%83%BC",
+      "productSource": "https://www.klook.com/en-US/activity/1464/"
+    },
+    {
+      "id": "klook-48327",
+      "productId": "48327",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-26",
+      "names": {
+        "en": "UZUMASA Kyoto Village",
+        "ja": "東映太秦映画村"
+      },
+      "aliases": [
+        "東映太秦映画村",
+        "UZUMASA Kyoto Village"
+      ],
+      "at": [
+        35.01638889,
+        135.70833333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E6%98%A0%E5%A4%AA%E7%A7%A6%E6%98%A0%E7%94%BB%E6%9D%91",
+      "productSource": "https://www.klook.com/en-US/activity/48327/"
+    },
+    {
+      "id": "klook-67219",
+      "productId": "67219",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-26",
+      "names": {
+        "en": "Kyoto International Manga Museum",
+        "ja": "京都国際マンガミュージアム"
+      },
+      "aliases": [
+        "京都国際マンガミュージアム",
+        "Kyoto International Manga Museum"
+      ],
+      "at": [
+        35.01166667,
+        135.75916667
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E5%9B%BD%E9%9A%9B%E3%83%9E%E3%83%B3%E3%82%AC%E3%83%9F%E3%83%A5%E3%83%BC%E3%82%B8%E3%82%A2%E3%83%A0",
+      "productSource": "https://www.klook.com/en-US/activity/67219/"
+    },
+    {
+      "id": "klook-73632",
+      "productId": "73632",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "teamLab Botanical Garden Osaka",
+        "ja": "大阪市立長居植物園"
+      },
+      "aliases": [
+        "大阪市立長居植物園",
+        "teamLab Botanical Garden Osaka"
+      ],
+      "at": [
+        34.6105,
+        135.52158333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E9%98%AA%E5%B8%82%E7%AB%8B%E9%95%B7%E5%B1%85%E6%A4%8D%E7%89%A9%E5%9C%92",
+      "productSource": "https://www.klook.com/en-US/activity/73632/"
+    },
+    {
+      "id": "klook-598",
+      "productId": "598",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "Osaka Aquarium Kaiyukan",
+        "ja": "海遊館"
+      },
+      "aliases": [
+        "海遊館",
+        "Osaka Aquarium Kaiyukan"
+      ],
+      "at": [
+        34.65447222,
+        135.42888889
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%B5%B7%E9%81%8A%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/598/"
+    },
+    {
+      "id": "klook-37845",
+      "productId": "37845",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "Kids Plaza Osaka",
+        "ja": "キッズプラザ大阪"
+      },
+      "aliases": [
+        "キッズプラザ大阪",
+        "Kids Plaza Osaka"
+      ],
+      "at": [
+        34.704697,
+        135.510267
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%83%E3%82%BA%E3%83%97%E3%83%A9%E3%82%B6%E5%A4%A7%E9%98%AA",
+      "productSource": "https://www.klook.com/en-US/activity/37845/"
+    },
+    {
+      "id": "klook-76766",
+      "productId": "76766",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "Tsutenkaku Tower",
+        "ja": "通天閣"
+      },
+      "aliases": [
+        "通天閣",
+        "Tsutenkaku Tower"
+      ],
+      "at": [
+        34.65253611,
+        135.506325
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E9%80%9A%E5%A4%A9%E9%96%A3",
+      "productSource": "https://www.klook.com/en-US/activity/76766/"
+    },
+    {
+      "id": "klook-13116",
+      "productId": "13116",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "NIFREL Aquazoo",
+        "ja": "NIFREL"
+      },
+      "aliases": [
+        "NIFREL",
+        "NIFREL Aquazoo"
+      ],
+      "at": [
+        34.80641667,
+        135.53358333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/NIFREL",
+      "productSource": "https://www.klook.com/en-US/activity/13116/"
+    },
+    {
+      "id": "klook-49191",
+      "productId": "49191",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-27",
+      "names": {
+        "en": "Hirakata Park",
+        "ja": "ひらかたパーク"
+      },
+      "aliases": [
+        "ひらかたパーク",
+        "Hirakata Park"
+      ],
+      "at": [
+        34.80577778,
+        135.63813056
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%B2%E3%82%89%E3%81%8B%E3%81%9F%E3%83%91%E3%83%BC%E3%82%AF",
+      "productSource": "https://www.klook.com/en-US/activity/49191/"
+    },
+    {
+      "id": "klook-102808",
+      "productId": "102808",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-28",
+      "names": {
+        "en": "Kobe Aquarium atoa",
+        "ja": "アトア"
+      },
+      "aliases": [
+        "アトア",
+        "Kobe Aquarium atoa"
+      ],
+      "at": [
+        34.80641667,
+        135.53358333
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%88%E3%82%A2",
+      "productSource": "https://www.klook.com/en-US/activity/102808/"
+    },
+    {
+      "id": "klook-78852",
+      "productId": "78852",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-28",
+      "names": {
+        "en": "Awaji England Hill",
+        "ja": "淡路ファームパーク イングランドの丘"
+      },
+      "aliases": [
+        "淡路ファームパーク イングランドの丘",
+        "Awaji England Hill"
+      ],
+      "at": [
+        34.30763889,
+        134.80152778
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%B7%A1%E8%B7%AF%E3%83%95%E3%82%A1%E3%83%BC%E3%83%A0%E3%83%91%E3%83%BC%E3%82%AF%20%E3%82%A4%E3%83%B3%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%89%E3%81%AE%E4%B8%98",
+      "productSource": "https://www.klook.com/en-US/activity/78852/"
+    },
+    {
+      "id": "klook-95923",
+      "productId": "95923",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-28",
+      "names": {
+        "en": "Awaji World Park ONOKORO",
+        "ja": "淡路ワールドパークONOKORO"
+      },
+      "aliases": [
+        "淡路ワールドパークONOKORO",
+        "Awaji World Park ONOKORO"
+      ],
+      "at": [
+        34.41663889,
+        134.89983333
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%B7%A1%E8%B7%AF%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%83%91%E3%83%BC%E3%82%AFONOKORO",
+      "productSource": "https://www.klook.com/en-US/activity/95923/"
+    },
+    {
+      "id": "klook-97834",
+      "productId": "97834",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-30",
+      "names": {
+        "en": "Adventure World",
+        "ja": "アドベンチャーワールド"
+      },
+      "aliases": [
+        "アドベンチャーワールド",
+        "Adventure World"
+      ],
+      "at": [
+        33.66671111,
+        135.37291389
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%89%E3%83%99%E3%83%B3%E3%83%81%E3%83%A3%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89",
+      "productSource": "https://www.klook.com/en-US/activity/97834/"
+    },
+    {
+      "id": "klook-50439",
+      "productId": "50439",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-32",
+      "names": {
+        "en": "Shimane AQUAS Aquarium",
+        "ja": "島根県立しまね海洋館"
+      },
+      "aliases": [
+        "島根県立しまね海洋館",
+        "Shimane AQUAS Aquarium"
+      ],
+      "at": [
+        34.95944444,
+        132.14458333
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%B3%B6%E6%A0%B9%E7%9C%8C%E7%AB%8B%E3%81%97%E3%81%BE%E3%81%AD%E6%B5%B7%E6%B4%8B%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/50439/"
+    },
+    {
+      "id": "klook-140869",
+      "productId": "140869",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-34",
+      "names": {
+        "en": "Miyoshi Mononoke Museum",
+        "ja": "湯本豪一記念日本妖怪博物館"
+      },
+      "aliases": [
+        "湯本豪一記念日本妖怪博物館",
+        "Miyoshi Mononoke Museum"
+      ],
+      "at": [
+        34.81536111,
+        132.84516667
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%B9%AF%E6%9C%AC%E8%B1%AA%E4%B8%80%E8%A8%98%E5%BF%B5%E6%97%A5%E6%9C%AC%E5%A6%96%E6%80%AA%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/140869/"
+    },
+    {
+      "id": "klook-99311",
+      "productId": "99311",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-34",
+      "names": {
+        "en": "Orizuru Tower",
+        "ja": "おりづるタワー"
+      },
+      "aliases": [
+        "おりづるタワー",
+        "Orizuru Tower"
+      ],
+      "at": [
+        34.39569444,
+        132.45469444
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%8A%E3%82%8A%E3%81%A5%E3%82%8B%E3%82%BF%E3%83%AF%E3%83%BC",
+      "productSource": "https://www.klook.com/en-US/activity/99311/"
+    },
+    {
+      "id": "klook-131634",
+      "productId": "131634",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-41",
+      "names": {
+        "en": "Karatsu Castle",
+        "ja": "唐津城"
+      },
+      "aliases": [
+        "唐津城",
+        "Karatsu Castle"
+      ],
+      "at": [
+        33.45353889,
+        129.97819444
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%94%90%E6%B4%A5%E5%9F%8E",
+      "productSource": "https://www.klook.com/en-US/activity/131634/"
+    },
+    {
+      "id": "klook-7254",
+      "productId": "7254",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-42",
+      "names": {
+        "en": "Huis Ten Bosch",
+        "ja": "ハウステンボス"
+      },
+      "aliases": [
+        "ハウステンボス",
+        "Huis Ten Bosch"
+      ],
+      "at": [
+        33.08593611,
+        129.78988333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%8F%E3%82%A6%E3%82%B9%E3%83%86%E3%83%B3%E3%83%9C%E3%82%B9",
+      "productSource": "https://www.klook.com/en-US/activity/7254/"
+    },
+    {
+      "id": "klook-96420",
+      "productId": "96420",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-42",
+      "names": {
+        "en": "Glover Garden",
+        "ja": "グラバー園"
+      },
+      "aliases": [
+        "グラバー園",
+        "Glover Garden"
+      ],
+      "at": [
+        32.73435833,
+        129.86914722
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%A9%E3%83%90%E3%83%BC%E5%9C%92",
+      "productSource": "https://www.klook.com/en-US/activity/96420/"
+    },
+    {
+      "id": "klook-45735",
+      "productId": "45735",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-43",
+      "names": {
+        "en": "Greenland Amusement Park",
+        "ja": "グリーンランド (遊園地)"
+      },
+      "aliases": [
+        "グリーンランド (遊園地)",
+        "Greenland Amusement Park"
+      ],
+      "at": [
+        32.9875,
+        130.46444444
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%A9%E3%83%B3%E3%83%89%20(%E9%81%8A%E5%9C%92%E5%9C%B0)",
+      "productSource": "https://www.klook.com/en-US/activity/45735/"
+    },
+    {
+      "id": "klook-22209",
+      "productId": "22209",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-44",
+      "names": {
+        "en": "Umitamago Aquarium",
+        "ja": "大分マリーンパレス水族館"
+      },
+      "aliases": [
+        "大分マリーンパレス水族館",
+        "Umitamago Aquarium"
+      ],
+      "at": [
+        33.25877778,
+        131.53555556
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E5%88%86%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%91%E3%83%AC%E3%82%B9%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/22209/"
+    },
+    {
+      "id": "klook-37696",
+      "productId": "37696",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-46",
+      "names": {
+        "en": "Kagoshima City Aquarium",
+        "ja": "いおワールドかごしま水族館"
+      },
+      "aliases": [
+        "いおワールドかごしま水族館",
+        "Kagoshima City Aquarium"
+      ],
+      "at": [
+        31.59597222,
+        130.56444444
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%84%E3%81%8A%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%81%8B%E3%81%94%E3%81%97%E3%81%BE%E6%B0%B4%E6%97%8F%E9%A4%A8",
+      "productSource": "https://www.klook.com/en-US/activity/37696/"
+    },
+    {
+      "id": "klook-41471",
+      "productId": "41471",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-47",
+      "names": {
+        "en": "Okinawa Zoo and Museum",
+        "ja": "沖縄こどもの国"
+      },
+      "aliases": [
+        "沖縄こどもの国",
+        "Okinawa Zoo and Museum"
+      ],
+      "at": [
+        26.32783333,
+        127.80341667
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%B2%96%E7%B8%84%E3%81%93%E3%81%A9%E3%82%82%E3%81%AE%E5%9B%BD",
+      "productSource": "https://www.klook.com/en-US/activity/41471/"
+    },
+    {
+      "id": "klook-1657",
+      "productId": "1657",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-47",
+      "names": {
+        "en": "Neo Park Okinawa",
+        "ja": "ネオパークオキナワ"
+      },
+      "aliases": [
+        "ネオパークオキナワ",
+        "Neo Park Okinawa"
+      ],
+      "at": [
+        26.61069444,
+        127.99147222
+      ],
+      "radiusKm": 5,
+      "category": "nature",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%82%AA%E3%83%91%E3%83%BC%E3%82%AF%E3%82%AA%E3%82%AD%E3%83%8A%E3%83%AF",
+      "productSource": "https://www.klook.com/en-US/activity/1657/"
+    },
+    {
+      "id": "klook-29033",
+      "productId": "29033",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-47",
+      "names": {
+        "en": "Kouri Ocean Tower",
+        "ja": "古宇利オーシャンタワー"
+      },
+      "aliases": [
+        "古宇利オーシャンタワー",
+        "Kouri Ocean Tower"
+      ],
+      "at": [
+        26.700129,
+        128.024161
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://www.openstreetmap.org/node/4592400200",
+      "productSource": "https://www.klook.com/en-US/activity/29033/"
+    },
+    {
+      "id": "klook-41352",
+      "productId": "41352",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-13",
+      "names": {
+        "en": "Tokyo Skytree",
+        "ja": "東京スカイツリー"
+      },
+      "aliases": [
+        "東京スカイツリー",
+        "Tokyo Skytree"
+      ],
+      "at": [
+        35.71013889,
+        139.81083333
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%84%E3%83%AA%E3%83%BC",
+      "productSource": "https://www.klook.com/en-US/activity/41352/"
+    },
+    {
+      "id": "klook-4911",
+      "productId": "4911",
+      "provider": "klook",
+      "enabled": true,
+      "prefecture": "JP-13",
+      "names": {
+        "en": "Tokyo Tower",
+        "ja": "東京タワー"
+      },
+      "aliases": [
+        "東京タワー",
+        "Tokyo Tower"
+      ],
+      "at": [
+        35.65861111,
+        139.74555556
+      ],
+      "radiusKm": 5,
+      "category": "culture",
+      "priority": 0,
+      "reviewedOn": "2026-09-12",
+      "coordSource": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E3%82%BF%E3%83%AF%E3%83%BC",
+      "productSource": "https://www.klook.com/en-US/activity/4911/"
     }
   ],
   "_instructions": [
-    "Public affiliate ID 134890 verified in the signed-in JAPAN TIME ATLAS account. No API secrets belong in this file.",
-    "Tracking URL format and aff_label1/2/3 are documented at https://affiliate.klook.com/custom_tag_guide. k_site must be last. Tags identify editorial sources, never individual visitors.",
-    "31 reviewed product cards; all 47 prefectures have clearly labelled regional search fallbacks. A search card is not a claim that a particular product is available.",
-    "Use physical venue or departure-point coordinates, not Klook destination categories. Review products within 180 days. Prices, availability and guide languages must be checked on Klook.",
-    "Relevance: selected attraction name, then editorial priority, then distance with a small topic preference. Commission rate is not a relevance signal. No conversion-rate winner has been established yet.",
-    "Review confirmed earnings and clicks in Klook Performance: source jta_map, prefecture JP-xx, product ID or search. Do not add per-user, per-event or arbitrary per-place custom tags."
+    "Only marker sizes pop=1 and pop=2 display advertisements. Do not confuse pop (size) with tier (appearance zoom) or the mid/tiny marker families.",
+    "For both eligible sizes, choose the closest reviewed venue in the catalog, regardless of local radius. Show the venue prefecture and straight-line distance. Never claim this catalog contains every Klook product.",
+    "All 47 prefectures retain region-search fallback configuration for eligible markers when no reviewed product can be selected. Other marker sizes show no advertisement.",
+    "Public affiliate ID 134890 is verified for JAPAN TIME ATLAS. Link format: https://affiliate.klook.com/custom_tag_guide; k_site is last. No secrets, visitor identifiers or click identifiers belong here.",
+    "Product coordinates are physical venues, not Klook destination categories. Recheck within 180 days. Prices, dates, entry rules and guide languages remain on Klook.",
+    "Klook landing pages returned a redirect error with attribution in the setup browser. Do not claim that booking attribution or payouts are verified; see KLOOK-MAINTENANCE.md."
   ]
 }

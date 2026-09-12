@@ -1,5 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
-const router=require('../affiliate-router.js'),config=require('../affiliate-config.json');
+const router=require('../affiliate-router.js'),published=require('../affiliate-config.json');
+// Test generic local/fallback behavior separately from the published size restriction.
+const config={...published,klook:{...published.klook,topTwoOnly:false}};
 const now=Date.parse('2026-09-12T12:00:00Z'),langs=['en','ja','ko','zh-Hans','zh-Hant','th'];
 test('all 47 prefectures generate localized regional links with bounded source tags',()=>{
  assert.equal(config.klook.prefectures.length,47);assert.equal(new Set(config.klook.prefectures.map(p=>p.code)).size,47);
@@ -48,10 +50,10 @@ test('actual map entry pages put one ad after the source and before the about li
 });
 test('all actual top-two marker sizes, including Aneyoshi, get the closest listed product',()=>{
  const featured=require('../data/places-world.json').places.map(p=>({...p,adTier:p.pop||1}));
- const landmarks=require('../data/landmarks.json').landmarks.map(p=>({...p,adTier:p.pop||3}));
+ const landmarks=[...require('../data/landmarks.json').landmarks,...require('../data/regional-landmarks-v1.json').landmarks].map(p=>({...p,adTier:p.pop||3}));
  const places=[...featured,...landmarks].filter(p=>p.adTier<=2);assert.ok(places.some(p=>p.id==='aneyoshi'));
  for(const p of places){const at=[p.lat,p.lon],minimum=Math.min(...config.offers.map(o=>router.distance(at,o.at)));
-  for(const lang of langs){const ad=router.select(config,{at,name:p.name,adTier:p.adTier,kind:p.id==='aneyoshi'?'memorial':''},lang,now);assert.ok(ad,p.id+' '+lang);assert.ok(ad.nearest);assert.ok(Math.abs(ad.km-minimum)<0.00001,p.id);}
+  for(const lang of langs){const ad=router.select(published,{at,name:p.name,adTier:p.adTier,kind:p.id==='aneyoshi'?'memorial':''},lang,now);assert.ok(ad,p.id+' '+lang);assert.ok(ad.nearest);assert.ok(Math.abs(ad.km-minimum)<0.00001,p.id);}
  }
  const js=fs.readFileSync(path.join(__dirname,'../explore.js'),'utf8');assert.ok(js.includes('adTier:p.pop||1'));assert.ok(js.includes('adTier:p.pop||3'));
 });
