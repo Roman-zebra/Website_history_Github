@@ -87,3 +87,6 @@ html,body,.home{background:var(--atlas-paper);color:var(--atlas-ink)}
 
 .hero-layer.current{animation:atlas-reveal 1.6s ease}@keyframes atlas-reveal{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.hero-layer.current{animation:none}}
+
+/* Readable editorial context below the map discovery controls. */
+.atlas-reading{max-width:70rem;margin:2.5rem auto;padding:clamp(1rem,3vw,2rem);background:#edf2ef;color:#163c36;border-top:3px solid #31594f;line-height:1.8;font-size:1rem}.atlas-reading h2{font-size:clamp(1.4rem,3vw,2rem);line-height:1.35}.atlas-reading h3{font-size:1.15rem;margin:1.5rem 0 .5rem}.atlas-reading p{max-width:70ch}.atlas-guides{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;margin:2rem auto;padding:1rem;max-width:70rem;font-size:1rem;line-height:1.6}.atlas-guides a{color:#164b43;text-underline-offset:.2em}html[lang="th"] body{line-height:1.9}

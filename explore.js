@@ -85,7 +85,7 @@ const T = {
     lead: 'Compare real aerial photographs on the map.<br>Drag the slider and watch <b>eighty years</b> go by.',
     modePlaces: 'Featured places', modeMap: 'Whole map', modeLiminal: 'Liminal Japan',
     noteLiminal: 'Places that feel like nowhere \u2014 and most are near a city, so you can go.',
-    heroSub: 'Before and after WW2 — 1945 vs today, on one map',
+    heroSub: 'Historic maps, hidden gems and walks through Japan',
     heroSearch: 'Search a place on the map',
     liminalWhat: 'What makes it liminal',
     limIntroHTML: `<h2>What is a liminal space?</h2>
@@ -208,7 +208,7 @@ const T = {
     lead: '地図で、本物の航空写真を見くらべる。<br>線をドラッグすると、<b>80年</b>が動きます。',
     modePlaces: '名所を見る', modeMap: '日本全体の地図', modeLiminal: 'リミナル',
     noteLiminal: 'どこでもない感じのする場所。その多くは、街から行ける距離にある。',
-    heroSub: '戦前と戦後 — 1945年と今を、ひとつの地図で',
+    heroSub: '昔の地図と写真から、小さな名所を歩く旅へ',
     heroSearch: '地図から場所・駅名を探す',
     liminalWhat: 'どこがリミナルなのか',
     limIntroHTML: `<h2>リミナルスペースって、なに？</h2>
@@ -341,7 +341,7 @@ T.ko = {
   lead: '지도에서 실제 항공사진을 비교하세요.<br>슬라이더를 움직이면 <b>80년</b>이 지나갑니다.',
   modePlaces: '주요 장소', modeMap: '전체 지도', modeLiminal: '리미널 재팬',
   noteLiminal: '어디에도 속하지 않은 듯한 곳들. 대개는 도시에서 갈 만한 거리에 있다.',
-  heroSub: '제2차 세계대전 전후 — 1945년과 오늘을 한 장의 지도에서',
+  heroSub: '옛 지도와 사진으로 만나는 일본 골목 여행',
   heroSearch: '지도에서 장소 검색',
   liminalWhat: '어떤 점이 리미널한가',
   photoBy: '사진: Wikimedia Commons',
@@ -392,7 +392,7 @@ T['zh-Hans'] = {
   lead: '在地图上比较真实的航空照片。<br>拖动滑块，<b>八十年</b>就过去了。',
   modePlaces: '精选地点', modeMap: '全图', modeLiminal: '阈限日本',
   noteLiminal: '像是不属于任何地方的地方。多半就在城边，真能去。',
-  heroSub: '二战前后 —— 1945年与今天，在同一张地图上',
+  heroSub: '从老地图与照片出发，探索日本小众景点',
   heroSearch: '在地图上搜索地点',
   liminalWhat: '它为何显得阈限',
   photoBy: '照片：Wikimedia Commons',
@@ -443,7 +443,7 @@ T['zh-Hant'] = {
   lead: '在地圖上比較真實的航空照片。<br>拖動滑桿，<b>八十年</b>就過去了。',
   modePlaces: '精選地點', modeMap: '全圖', modeLiminal: '閾限日本',
   noteLiminal: '像是不屬於任何地方的地方。多半就在城邊，真能去。',
-  heroSub: '二戰前後 —— 1945年與今天，在同一張地圖上',
+  heroSub: '從老地圖與照片出發，探索日本私房景點',
   heroSearch: '在地圖上搜尋地點',
   liminalWhat: '它為何顯得閾限',
   photoBy: '照片：Wikimedia Commons',
@@ -517,30 +517,30 @@ const LANG_NAMES = { en: 'English', ja: '日本語', ko: '한국어',
 const LANG_SHORT = { en: 'EN', ja: 'JA', ko: 'KO', 'zh-Hans': '简', 'zh-Hant': '繁' };
 const LANG_ORDER = ['en', 'ja', 'ko', 'zh-Hans', 'zh-Hant'];
 const SEO = {
-  en: {
-    title: 'Japan Before and After WW2 - 1945 vs Today on a Map',
-    description: 'Compare 1945 aerial photographs with today across Hiroshima, Tokyo, Kyoto and 16 more places in Japan. Explore historical maps, local places and Liminal Japan for free.',
-    locale: 'en_GB'
+  "en": {
+    "title": "Japan Time Atlas | Historic Maps, Hidden Gems & Walking Japan",
+    "description": "Compare old maps and aerial photos with Japan today. Discover small towns, historic streets, local sights and liminal spaces for your next Japan walking trip.",
+    "locale": "en_US"
   },
-  ja: {
-    title: '戦前と戦後の日本を地図で比較｜1945年の空中写真と現在',
-    description: '広島・東京・京都など日本19か所を、1945年の空中写真と現在の地図で比較。全国の歴史スポットやリミナルな場所も無料で探せます。',
-    locale: 'ja_JP'
+  "ja": {
+    "title": "日本の今昔マップ・街歩き・穴場観光 | Japan Time Atlas",
+    "description": "古い地図・航空写真と今の日本を比較。路地、古い街並み、小さな観光地やリミナルスペースを探して、歴史散歩や写真撮影の行き先を見つける無料地図。",
+    "locale": "ja_JP"
   },
-  ko: {
-    title: '전후 일본 지도 비교 | 1945년 항공사진과 오늘',
-    description: '히로시마, 도쿄, 교토 등 일본 19곳의 1945년 항공사진과 오늘의 지도를 비교하세요. 일본의 역사적 장소와 리미널 공간을 무료로 탐색할 수 있습니다.',
-    locale: 'ko_KR'
+  "ko": {
+    "title": "일본 소도시 여행·골목 산책·옛 지도 | Japan Time Atlas",
+    "description": "일본의 옛 지도와 항공사진을 현재 지도와 비교하세요. 소도시 여행, 숨은 명소, 골목 산책, 레트로 거리와 리미널 스페이스를 찾는 무료 지도입니다.",
+    "locale": "ko_KR"
   },
-  'zh-Hans': {
-    title: '日本战前战后地图对比｜1945年航拍照片与今日',
-    description: '对比广岛、东京、京都等日本19处地点的1945年航拍照片与今日地图。免费探索日本历史地点与边缘空间。',
-    locale: 'zh_CN'
+  "zh-Hans": {
+    "title": "日本小众旅行・城市漫步・历史地图 | Japan Time Atlas",
+    "description": "对比日本老地图、历史航拍照片与今日地图。寻找小众景点、复古街区、城市漫步和阈限空间，为日本自由行与街头摄影发现新目的地。",
+    "locale": "zh_CN"
   },
-  'zh-Hant': {
-    title: '日本戰前戰後地圖比較｜1945年航拍照片與今日',
-    description: '比較廣島、東京、京都等日本19處地點的1945年航拍照片與今日地圖。免費探索日本歷史地點與邊緣空間。',
-    locale: 'zh_TW'
+  "zh-Hant": {
+    "title": "日本自由行・私房景點・老街散策 | Japan Time Atlas",
+    "description": "比較日本老地圖、歷史航拍照片與今日地圖。探索小眾景點、懷舊街景、城市散步與閾限空間，為日本自由行及街頭攝影尋找新目的地。",
+    "locale": "zh_TW"
   }
 };
 
@@ -560,7 +560,7 @@ function applySEO(){
 
   // The interactive ?lang= switch is a user preference, not a separate
   // crawl target. Actual translated pages live at /ja.html, /ko.html and so on.
-  const url = location.origin + location.pathname;
+  const url = 'https://japantimeatlas.com/';
   const canonical = document.getElementById('canonicalUrl');
   if (canonical) canonical.setAttribute('href', url);
   set('ogUrl', url);
@@ -1871,7 +1871,7 @@ function paintCompareBtn(){
 function panelShell(o){
   compareAt = o.at || null;
   const oldHash = o.share && o.share.url ? new URL(o.share.url, location.href).hash : '';
-  sharePayload = o.share ? {title:o.name, url:PlaceUI.spotURL(location.origin, LANG, o.at, oldHash, o.name)} : null;
+  sharePayload = o.share ? {title:o.name, url:PlaceUI.spotURL('https://japantimeatlas.com', LANG, o.at, oldHash, o.name)} : null;
   $('pCompare').hidden = true;          // shown once we know a photograph exists
   $('pShare').hidden   = !o.share;
   $('pShare').textContent = '⇪ '+t('share');
@@ -2769,10 +2769,12 @@ document.addEventListener('keydown', e => {
 
 
 const DIRECTORY_TEXT={"en":["Japan Then & Now — Historical Maps and Hidden Places","Compare historical aerial photographs with today. Explore Japan’s castles, temples, stations and local places in English, Japanese, Korean, Simplified Chinese and Traditional Chinese.","Explore Japan across time","Open the map","Featured places","Liminal Japan","Saved on this browser","Save your favourite places on this browser. No account required; other devices have separate lists.","Historical aerial photographs","Coverage and years vary by location. The map shows the available survey year.","Search in 5 languages","Search place names, local names, and aliases across five supported languages."],"ja":["日本の今昔マップ｜古い空中写真と名所を探す","古い空中写真と現在の日本を地図で比較。城・寺社・駅・地域の小さな名所を、日本語・英語・韓国語・簡体字・繁体字の5言語で探せます。","日本の風景を、時間をこえて","地図を開いて探す","物語のある名所","リミナルな日本","このブラウザに保存","気になる地点を登録不要で保存できます。保存先はこのブラウザで、別の端末とは共有されません。","昔と今の空中写真","撮影年と収録範囲は地点によって異なります。利用できる写真の年代を地図に表示します。","5言語で検索","地名・駅名・現地名・別名から、5つの対応言語で地点を探せます。"],"ko":["일본 과거와 현재 지도 | 옛 항공사진과 숨은 명소","옛 항공사진과 현재의 일본을 지도에서 비교하세요. 성, 사찰, 역과 작은 지역 명소를 한국어·일본어·영어·중국어 간체·번체로 찾아볼 수 있습니다.","시간을 넘어 일본의 풍경을 만나다","지도에서 장소 찾기","이야기가 있는 명소","리미널 재팬","이 브라우저에 저장","회원가입 없이 마음에 드는 장소를 저장하세요. 저장 목록은 다른 기기와 공유되지 않습니다.","과거와 현재의 항공사진","지역에 따라 촬영 연도와 사진의 범위가 다릅니다. 이용 가능한 촬영 연도를 지도에 표시합니다.","5개 언어로 검색","지명, 역 이름, 현지 이름과 별칭으로 장소를 찾아보세요."],"zh-Hans":["日本今昔地图｜历史航拍照片与当地景点","在地图上对比日本的历史航拍照片与今日风景。用简体中文、繁体中文、日语、英语和韩语探索城堡、寺社、车站与当地小景点。","跨越时间，探索日本风景","打开地图寻找地点","有故事的景点","日本的阈限空间","保存在此浏览器","无需注册即可收藏地点。列表仅保存在此浏览器，不与其他设备同步。","昔日与今日航拍照片","拍摄年份和覆盖范围因地点而异。地图会显示可用照片的年代。","5种语言搜索","通过地名、站名、当地名称和别名查找地点。"],"zh-Hant":["日本今昔地圖｜歷史航拍照片與當地景點","在地圖上對比日本的歷史航拍照片與今日風景。用繁體中文、簡體中文、日語、英語和韓語探索城堡、寺社、車站與當地小景點。","跨越時間，探索日本風景","開啟地圖尋找地點","有故事的景點","日本的閾限空間","儲存在此瀏覽器","無需註冊即可收藏地點。清單僅儲存在此瀏覽器，不與其他裝置同步。","昔日與今日航拍照片","拍攝年份和涵蓋範圍因地點而異。地圖會顯示可用照片的年代。","5種語言搜尋","透過地名、站名、當地名稱和別名尋找地點。"]};
+const ATLAS_READING={"en":"<section class=\"atlas-reading\"><h2>Explore Japan on foot, across time</h2><p>Japan Time Atlas is a free map for curious walks through Japan. Compare historical aerial photographs with the present-day map, then explore castles, neighbourhood streets, small local sights and places with a liminal atmosphere.</p><h3>Plan a walk beyond the main sights</h3><p>Start with Tokyo, Kyoto or Osaka, then look closely at the surrounding streets. A station, a small shrine, a waterfront or the remains of an old railway can become the starting point for a different kind of Japan itinerary. Save interesting places in this browser and open them again while planning your walk.</p><h3>Old maps, street photography and everyday history</h3><p>Use the comparison slider to study how coastlines, street patterns and neighbourhoods have changed. This is also a way to explore Japanese architecture and urban history from home. Historical photo coverage and survey years vary by location; use the year shown on the map rather than assuming every photograph was taken in 1945.</p><h3>Liminal Japan and retro places</h3><p>Discover unusual stations, former industrial sites and quiet spaces where the past feels close. Liminal is an atmosphere, not a promise that a place is empty or abandoned. Check official opening and access information before visiting, and explore only public or permitted areas.</p></section>","ja":"<section class=\"atlas-reading\"><h2>古い地図から、次の街歩きへ</h2><p>Japan Time Atlasは、昔の航空写真と現在の地図を見比べながら、日本の街を歩きたい人のための無料地図です。有名な城や寺社だけでなく、路地、駅、地域の小さな名所にも目を向けてみてください。</p><h3>観光地の周りにある、小さな発見</h3><p>東京・京都・大阪などの名所を出発点に、周囲の道、水辺、小さな神社や鉄道跡を地図で探せます。気になった場所はこのブラウザに保存し、散歩や日帰り旅行の行き先を考えるときに見返せます。</p><h3>歴史散歩・古地図・街の写真撮影</h3><p>昔と今の写真をスライダーで比較し、街路や海岸線、建物の並びがどう変わったかを観察できます。旅行前の下調べだけでなく、日本の建築や都市の歴史を家から眺める楽しみ方にも向いています。撮影年と収録範囲は場所によって異なるため、地図に表示される年代をご確認ください。</p><h3>レトロな街並みとリミナルスペース</h3><p>独特な駅、産業遺産、時間が止まったように感じる場所を探します。静かに見える場所でも、現役の施設や私有地の場合があります。現地の公開情報と立入条件を確認し、公開・許可された範囲で楽しんでください。</p></section>","ko":"<section class=\"atlas-reading\"><h2>옛 지도에서 시작하는 일본 골목 여행</h2><p>Japan Time Atlas는 옛 항공사진과 현재 지도를 비교하며 일본을 걸어서 둘러보고 싶은 여행자를 위한 무료 지도입니다. 유명한 성과 사찰뿐 아니라 동네 골목, 작은 역, 지역의 숨은 명소도 찾아보세요.</p><h3>일본 자유여행과 소도시 산책</h3><p>도쿄, 교토, 오사카의 명소에서 출발해 주변 골목과 강변, 작은 신사, 옛 철도 흔적을 살펴보세요. 마음에 드는 장소를 이 브라우저에 저장해 산책이나 당일치기 여행을 계획할 때 다시 볼 수 있습니다.</p><h3>옛 사진으로 보는 일본의 거리와 건축</h3><p>슬라이더를 움직이며 도로와 해안선, 동네의 모습이 어떻게 달라졌는지 비교할 수 있습니다. 여행 준비는 물론 일본 건축, 도시의 역사, 거리 사진에 관심이 있는 분도 집에서 탐색할 수 있습니다. 촬영 연도와 범위는 장소마다 다르므로 지도에 표시된 연도를 확인하세요.</p><h3>레트로 감성과 리미널 스페이스</h3><p>독특한 역, 산업유산, 시간이 멈춘 듯한 공간을 찾아보세요. 리미널한 분위기라고 해서 폐허이거나 사람이 없는 곳이라는 뜻은 아닙니다. 방문 전에 공식 운영 정보와 출입 조건을 확인하고 공개되거나 허가된 구역만 이용하세요.</p></section>","zh-Hans":"<section class=\"atlas-reading\"><h2>从老地图出发，走进日本的街巷</h2><p>Japan Time Atlas是一张免费的日本探索地图。对比历史航拍照片与现在的地图，在城堡、寺社等名胜之外，寻找街巷、小车站和当地的小众景点。</p><h3>日本自由行与城市漫步</h3><p>从东京、京都、大阪的名胜出发，看看周围的街道、河岸、小神社与旧铁路痕迹。把喜欢的地点保存在此浏览器中，规划散步、一日游或下一次日本旅行时再打开。</p><h3>老照片、街头摄影与城市历史</h3><p>移动滑块，观察街道、海岸线与街区如何变化。除了旅行准备，也可以在家探索日本建筑与城市历史，寻找街头摄影的灵感。历史照片的拍摄年份与覆盖范围因地点而异，请以地图显示的年份为准。</p><h3>复古街区与日本阈限空间</h3><p>探索独特的车站、工业遗产和仿佛时间停驻的空间。阈限感不代表某处已废弃或空无一人。出发前请确认官方开放信息与参观条件，仅进入公开或获准进入的区域。</p></section>","zh-Hant":"<section class=\"atlas-reading\"><h2>從老地圖出發，走進日本的街巷</h2><p>Japan Time Atlas是一張免費的日本探索地圖。比較歷史航拍照片與現在的地圖，在城堡、寺社等名勝之外，尋找街巷、小車站與當地的私房景點。</p><h3>日本自由行與老街散策</h3><p>從東京、京都、大阪的名勝出發，看看周圍的街道、河岸、小神社與舊鐵路痕跡。將喜歡的地點儲存在此瀏覽器中，規劃散步、一日遊或下一趟日本旅行時再開啟。</p><h3>老照片、街頭攝影與城市歷史</h3><p>移動滑桿，觀察街道、海岸線與街區如何改變。除了旅行前的準備，也可以在家探索日本建築與城市歷史，尋找街頭攝影的靈感。歷史照片的拍攝年份與涵蓋範圍因地點而異，請以地圖顯示的年份為準。</p><h3>懷舊街景與日本閾限空間</h3><p>探索獨特的車站、產業遺產與彷彿時間停留的空間。閾限感不代表某處已廢棄或空無一人。出發前請確認官方開放資訊與參觀條件，僅進入公開或獲准進入的區域。</p></section>"};
 function paintDirectory(){
+ const reading=document.getElementById('atlasReading');if(reading)reading.innerHTML=ATLAS_READING[LANG]||ATLAS_READING.en;
  const box=document.querySelector('.seo-list');if(!box||!PLACES.length)return;
- const d=DIRECTORY_TEXT[LANG];
- box.innerHTML='<h2>'+esc(d[4])+'</h2><p>'+esc(d[1])+'</p>'+PLACES.map(p=>'<article><h3><a href="/?lang='+LANG+'#'+p.id+'">'+esc(placeName(p))+'</a></h3><p>'+esc(p.hooks[LANG])+'</p></article>').join('')+'<nav class="locale-nav" aria-label="Language">'+Object.entries({"en":"/","ja":"/ja.html","ko":"/ko.html","zh-Hans":"/zh-cn.html","zh-Hant":"/zh-tw.html"}).map(([l,p])=>'<a href="'+p+'">'+esc(LANG_NAMES[l])+'</a>').join('')+'</nav>';
+ const d=DIRECTORY_TEXT[LANG].slice();d[0]=SEO[LANG].title;d[1]=SEO[LANG].description;
+ box.innerHTML='<h2>'+esc(d[4])+'</h2><p>'+esc(d[1])+'</p>'+PLACES.map(p=>'<article><h3><a href="/?lang='+LANG+'#'+p.id+'">'+esc(placeName(p))+'</a></h3><p>'+esc(p.hooks[LANG])+'</p></article>').join('')+'<nav class="locale-nav" aria-label="Language">'+Object.entries({"en":"/","ja":"/ja.html","ko":"/ko.html","zh-Hans":"/zh-cn.html","zh-Hant":"/zh-tw.html"}).map(([l,p])=>'<a href="'+p+'">'+esc(LANG_NAMES[l])+'</a>').join('')+'<a href="/th" lang="th">ไทย</a></nav>';
 }
 
 const AUX_UI = {
