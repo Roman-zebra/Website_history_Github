@@ -6,7 +6,7 @@
      B. 地図タイル・碑の写真      … cache-first で溜める（一度見た場所は圏外でも出る、枚数上限あり）
      C. Overpass / Wikipedia      … network-only（結果は app.js 側が localStorage に残す）
 */
-const VERSION = 'v0.77.0';
+const VERSION = 'v0.78.0';
 const SHELL = `shell-${VERSION}`;
 const TILES = `tiles-${VERSION}`;
 const TILE_MAX = 700;                       // 端末を圧迫しない範囲。1タイル20-90KB
@@ -27,13 +27,14 @@ const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。�
      版の数字を直に書いた行が app.js / explore.js に1つでもあれば
      tools/bump_version.py が exit 1 で止める（見張りをコメントでなく道具に置いた）。 */
 const DATA_V = '0.47';
-const ASSET_V = '0.77';
+const ASSET_V = '0.78';
 const DATA_FILES = [
   'facilities-index-v1.json', 'monuments-index.json', 'kid-text.json', 'places-index.json',
   'landmarks.json', 'regional-landmarks-v1.json', 'liminal.json', 'places-world.json', 'affiliate.json',
   'topics.json', 'areas.json',
 ];
 const SHELL_FILES = [
+  './walking-data.js?v=' + ASSET_V, './walking-time.js?v=' + ASSET_V, './walking-time.css?v=' + ASSET_V,
   './', './index.html',
   './explore.html', './explore.webmanifest',
   './style.css?v=' + ASSET_V, './app.js?v=' + ASSET_V,
