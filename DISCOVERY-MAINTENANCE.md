@@ -16,10 +16,14 @@ English guides cover the USA, Australia, Canada, UK and Singapore. Korea uses Ko
 
 - `data/places-world.json`: curated locations, map summaries, existing English/Japanese histories and series labels.
 - `scripts/discovery-copy.cjs`: six-language comparison prompts and guide UI.
-- `scripts/market-copy.cjs`: ten country/region guides.
-- `scripts/build-discovery.cjs`: generates 114 place guides, 10 market guides, the market index, locale links and sitemap before the existing build tests run.
+- `scripts/market-copy.cjs`: eleven guides, including the Japanese domestic walking entry at `/visit/jp`.
+- `scripts/build-discovery.cjs`: generates 114 place guides, 11 market guides, the market index, locale links, shared icon metadata and sitemap before the existing build tests run.
+- `scripts/build-icons.cjs`: generates original clock-and-map-pin PNG/SVG icons without dependencies. The 96px PNG is the stable search favicon; 180px is the Apple touch icon. Do not add query versions to these URLs; their HTTP cache revalidates daily.
+- `explore.js`: `DISCOVERY_ENTRY` localizes the home-page guide and country links in five map languages. Thai remains a static guide with an explicitly English map.
 
 Edit these sources, then run `node scripts/build.cjs`. Do not hand-edit generated place or market pages. The build must remain network independent. New canonical routes must be included in the sitemap and internal links; update the route-count regression check when adding pages.
+
+The background cache installer runs at most four requests at a time and reuses browser-cached versioned assets. Regression tests cover its concurrency and failure handling, as well as Chinese hero repainting without extra image downloads. Browser checks use 390px and 1440px widths; these are layout checks, not field Core Web Vitals measurements.
 
 ## Imagery and accuracy
 

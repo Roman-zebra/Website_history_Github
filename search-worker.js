@@ -1,5 +1,5 @@
 /* Lazy nationwide index in a worker, so reading 200k places never blocks the map. */
-importScripts('place-ui.js?v=0.77','search-core.js?v=0.77','gyg-products-data.js?v=0.77','gyg-products.js?v=0.77');
+importScripts('place-ui.js?v=0.80','search-core.js?v=0.80','gyg-products-data.js?v=0.80','gyg-products.js?v=0.80');
 const VERSION='0.77-0.47',rows=[],loaded=new Set();
 let pending=null,loading=null;
 async function json(url){const r=await fetch(url);if(!r.ok)throw Error(url);return r.json();}

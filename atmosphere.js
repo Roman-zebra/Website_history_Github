@@ -15,8 +15,8 @@
     en: ['A journey through time.', 'Explore Japan, layer by layer.', 'Tokyo · Historical aerial photographs / present-day map', 'Pause background', 'Play background', 'Explore the stories', 'All places'],
     ja: ['時を重ねて、', '日本を旅する。', '東京 · 昔の航空写真 / 現在の地図', '背景を停止', '背景を再生', '場所の物語をたどる', 'すべての場所'],
     ko: ['시간을 겹쳐,', '일본을 여행하다.', '도쿄 · 과거 항공사진 / 현재 지도', '배경 일시정지', '배경 재생', '장소의 이야기 탐색', '모든 장소'],
-    'zh-CN': ['重叠时光，', '走进日本。', '东京 · 历史航空照片 / 现代地图', '暂停背景', '播放背景', '探索地方故事', '所有地点'],
-    'zh-TW': ['重疊時光，', '走進日本。', '東京 · 歷史航空照片 / 現代地圖', '暫停背景', '播放背景', '探索地方故事', '所有地點']
+    'zh-Hans': ['重叠时光，', '走进日本。', '东京 · 历史航空照片 / 现代地图', '暂停背景', '播放背景', '探索地方故事', '所有地点'],
+    'zh-Hant': ['重疊時光，', '走進日本。', '東京 · 歷史航空照片 / 現代地圖', '暫停背景', '播放背景', '探索地方故事', '所有地點']
   };
 
   const gsi = 'https://maps.gsi.go.jp/development/ichiran.html';
@@ -37,7 +37,7 @@
   const constrained = () => media.matches || !!(connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType) || connection.effectiveType === '3g'));
   const active = () => !home.hidden && inView && !document.hidden;
   const allowed = () => active() && !paused && !constrained();
-  const langIndex = () => Math.max(0,['en','ja','ko','zh-CN','zh-TW'].indexOf(document.documentElement.lang));
+  const langIndex = () => Math.max(0,['en','ja','ko','zh-Hans','zh-Hant'].indexOf(document.documentElement.lang));
   function paint() {
     const c = copy[document.documentElement.lang] || copy.en;
     document.getElementById('heroLine1').textContent = c[0];

@@ -24,3 +24,12 @@ test('pause and hidden tab/home stop scheduling; resume starts one timer',async(
 test('in-flight photo waits for resume without another request',async()=>{const h=boot();await h.start();const before=h.current();await h.tick(4500);h.els.heroMotion.click();await h.finish();assert.equal(h.current(),before);assert.equal(h.timers.size,0);const n=h.images.length;h.els.heroMotion.click();assert.notEqual(h.current(),before);assert.equal(h.images.length,n)});
 test('failed photos keep current image and are not requested again',async()=>{const h=boot();await h.start();const before=h.current();await h.tick(4500);const failedSrc=h.images.filter(x=>!x.done).map(x=>x.src);await h.finish(false);assert.equal(h.current(),before);for(let i=0;i<9;i++){await h.tick(4500);await h.finish()}for(const src of failedSrc)assert.equal(h.images.filter(x=>x.src===src).length,1)});
 test('localized captions and explicit photo source/license links',async()=>{const h=boot();await h.start();for(let i=0;i<4;i++){const ja=h.els.heroCaption.textContent;h.document.documentElement.lang='en';h.observers[0]();assert.notEqual(h.els.heroCaption.textContent,ja);assert.match(h.els.heroCredit.href,/^https:/);if(/landmark|liminal/.test(h.current())){assert.equal(h.els.heroLicense.hidden,false);assert.match(h.els.heroLicense.href,/creativecommons.org/)}h.document.documentElement.lang='ja';h.observers[0]();await h.tick(4500);await h.finish()}});
+
+test('Chinese script tags repaint all hero text without requesting more images',async()=>{
+ const h=boot();await h.start();const before=h.images.length;
+ for(const [lang,title,stories] of [['zh-Hans','重叠时光，','探索地方故事'],['zh-Hant','重疊時光，','探索地方故事']]){
+  h.document.documentElement.lang=lang;h.observers[0]();
+  assert.equal(h.els.heroLine1.textContent,title);assert.equal(h.els.storiesTitle.textContent,stories);
+  assert.equal(h.images.length,before);assert.ok(!h.els.heroCaption.textContent.startsWith('Tokyo'));
+ }
+});

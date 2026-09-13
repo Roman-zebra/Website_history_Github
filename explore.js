@@ -888,9 +888,21 @@ function buildCards(){
     b.onclick = () => openPlace(PLACES.find(p => p.id === b.dataset.id));
 }
 
+const DISCOVERY_ENTRY = {"en":["Choose your next walk","Places and photo stories","Country & region guides","Open a guide in your language. Thai guides open the interactive map in English.","/places",["United States","us"],["United Kingdom","gb"],["Australia","au"],["Canada","ca"],["Singapore","sg"]],"ja":["次の街歩きを見つける","場所の解説を読む","国・地域別の旅行案内","日本国内の散歩や、使いたい言語から探せます。タイ語の案内ページから開く地図は英語です。","/ja",["日本国内","jp"]],"ko":["다음 산책 찾기","장소 이야기 읽기","국가·지역별 여행 안내","원하는 언어로 가이드를 선택하세요. 태국어 가이드의 대화형 지도는 영어로 열립니다.","/ko",["한국에서 일본 여행","kr"]],"zh-Hans":["寻找下一段城市漫步","阅读地点故事","国家与地区旅行指南","按语言选择指南。泰语指南中的互动地图以英语打开。","/zh-cn",["从中国大陆出发","cn"],["从新加坡出发 · English","sg"]],"zh-Hant":["尋找下一段城市散步","閱讀地點故事","國家與地區旅行指南","依語言選擇指南。泰語指南中的互動地圖以英語開啟。","/zh-tw",["從台灣出發","tw"],["從香港出發","hk"]]};
+function paintDiscovery(){
+ const c=DISCOVERY_ENTRY[LANG]||DISCOVERY_ENTRY.en,box=document.getElementById('discoveryEntry');if(!box)return;
+ box.setAttribute('aria-label',c[0]);
+ box.querySelector('[data-entry-title]').textContent=c[0];
+ const guide=box.querySelector('[data-entry-guide]');guide.textContent=c[1];guide.href=c[4];
+ box.querySelector('[data-entry-regions]').textContent=c[2];
+ box.querySelector('[data-entry-note]').textContent=c[3];
+ box.querySelector('[data-entry-picks]').innerHTML=c.slice(5).map(p=>'<a href="/visit/'+p[1]+'">'+esc(p[0])+' ↗</a>').join('');
+}
+
 function applyLang(){
   document.documentElement.lang = LANG;
   applySEO();
+  paintDiscovery();
   for (const el of document.querySelectorAll('[data-t]')) el.innerHTML = t(el.dataset.t);
   $('langLabel').textContent = LANG_NAMES[LANG] || 'English';
   $('langBtn2').textContent  = LANG_SHORT[LANG] || 'EN';   // 2文字なら375pxでも折り返さない
@@ -2137,9 +2149,9 @@ function panelShell(o){
   $('panel').classList.add('open');
   document.body.classList.remove('roaming');
   $('panel').querySelector('.panel-inner').scrollTop = 0;
+  window.AtlasWalking?.attach(o);
 
   const myToken = ++panelToken;
-  window.AtlasWalking?.attach(o);
   /* まちの記事は描画のあとで足す。地図の再描画も最初の表示も待たせない。 */
 
 
@@ -2753,7 +2765,7 @@ async function runSearch(v,autoPick){
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
  try{
-  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.77');
+  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.80');
    nationalWorker.onmessage=({data})=>{
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
@@ -3117,7 +3129,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.77').then(r => r.ok ? r.json() : null)
+    fetch('affiliate-config.json?v=0.80').then(r => r.ok ? r.json() : null)
       .then(setAffiliateConfig).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
