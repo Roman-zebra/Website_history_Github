@@ -573,6 +573,7 @@ function applySEO(){
    1. State
    ========================================================================= */
 const ACTIVITIES = window.AtlasActivities?.places || [];
+const GYG_MIN_ZOOM = 14; // Show sponsored meeting points only at neighborhood scale.
 const GYG_POINTS = window.AtlasGygProducts?.points(window.AtlasGygCatalog) || [];
 let gygPinLayer=null,gygPinsVisible=true,gygControls=null;
 const gygText=(en,ja,ko,cn,tw)=>PlaceUI.pick([en,ja,ko,cn,tw],LANG);
@@ -592,7 +593,7 @@ function initGygControl(){
 }
 function drawGygPins(){
  if(!map)return;if(gygPinLayer)map.removeLayer(gygPinLayer);gygPinLayer=L.layerGroup().addTo(map);
- if(!gygPinsVisible||!AFF?.enabled||!AFF.getyourguide?.enabled)return;
+ if(map.getZoom()<GYG_MIN_ZOOM||!gygPinsVisible||!AFF?.enabled||!AFF.getyourguide?.enabled)return;
  const visible=GYG_POINTS.filter(p=>AtlasGygProducts.validProduct(p.product)&&map.getBounds().pad(.05).contains([p.lat,p.lon]));
  for(const group of AtlasGygProducts.clusters(visible,p=>map.latLngToContainerPoint([p.lat,p.lon]))){
   const lat=group.reduce((n,p)=>n+p.lat,0)/group.length,lon=group.reduce((n,p)=>n+p.lon,0)/group.length;
