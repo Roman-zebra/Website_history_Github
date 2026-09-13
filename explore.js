@@ -2139,6 +2139,7 @@ function panelShell(o){
   $('panel').querySelector('.panel-inner').scrollTop = 0;
 
   const myToken = ++panelToken;
+  window.AtlasWalking?.attach(o);
   /* まちの記事は描画のあとで足す。地図の再描画も最初の表示も待たせない。 */
 
 

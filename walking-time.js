@@ -15,6 +15,56 @@ window.AtlasWalking = (() => {
     return {d,r,walking,visiting,total,buffer:total-walking-visiting,slots:d.stay.map((stay,i)=>{const start=elapsed;elapsed+=stay;const end=elapsed;elapsed+=r.legs[i]?.minutes||0;return {start,end,stay};})};
   }
   function clear(){if(layer){layer.clearLayers();}selected=null;}
+  function eligible(o){return !!o.at&&(o.adTier===1||o.kind==='food'||o.kind==='shopping'||PLACES.some(p=>p.id===o.placeId));}
+  function distance(a,b){const rad=Math.PI/180,dlat=(b[0]-a[0])*rad,dlon=(b[1]-a[1])*rad;const h=Math.sin(dlat/2)**2+Math.cos(a[0]*rad)*Math.cos(b[0]*rad)*Math.sin(dlon/2)**2;return 6371000*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));}
+  function nearby(o,extra=[]){
+    const seen=[o.at],names=new Set([o.name]),points=[];
+    const candidates=[...ACTIVITIES,...PLACES,...LANDMARKS,...LOCALS,...extra].filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lon)).map(p=>({p,d:distance(o.at,[p.lat,p.lon])})).filter(x=>x.d>80&&x.d<=1800).sort((a,b)=>a.d-b.d);
+    for(const {p} of candidates){const at=[p.lat,p.lon],title=p.tags?localName(p.tags):placeName(p);if(!title||names.has(title)||['no','private'].includes(p.tags?.access)||seen.some(x=>distance(x,at)<80))continue;seen.push(at);names.add(title);points.push({at,name:title,description:p.hooks?.[LANG]||p.hooks?.en||p.summaries?.[LANG]||(p.tags?(p.tags['description:'+LANG]||(LANG==='ja'?p.tags.description:'')||localSummary(p.tags)):'')});if(points.length===2)break;}
+    return points;
+  }
+  function attach(o){
+    $('spotWalk')?.remove();if(!eligible(o))return;
+    const box=document.createElement('section');box.id='spotWalk';box.className='spot-walk';const toggle=document.createElement('button');toggle.type='button';toggle.className='walk-toggle';toggle.textContent='🚶 '+(labels[LANG]||labels.en);toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','spotWalkOptions');
+    const list=document.createElement('div');list.id='spotWalkOptions';list.hidden=true;
+    let built=false;
+    toggle.onclick=()=>{list.hidden=!list.hidden;toggle.setAttribute('aria-expanded',String(!list.hidden));if(built||list.hidden)return;built=true;
+      const courses=ATLAS_WALKS.places.filter(p=>distance(o.at,[p.lat,p.lng])<3000).sort((a,b)=>distance(o.at,[a.lat,a.lng])-distance(o.at,[b.lat,b.lng]));
+      for(const p of courses){const b=document.createElement('button');b.type='button';b.textContent=name(p)+' · '+plan(p).total+text('分',' min');b.onclick=()=>open(p.id);list.append(b);}
+      const b=document.createElement('button');b.type='button';b.textContent=text('このスポットから周辺を歩く','Walk nearby from this spot');b.onclick=()=>localRoute(o,list,b);list.append(b);
+    };
+    box.append(toggle,list);$('pStory').before(box);
+  }
+  async function localRoute(o,list,button){
+    list.querySelector('[data-nearby-result]')?.remove();const result=document.createElement('div');result.dataset.nearbyResult='';list.append(result);list=result;
+    button.disabled=true;const status=document.createElement('p');status.setAttribute('role','status');status.textContent=text('周辺のスポットと徒歩経路を確認中…','Finding nearby places and walking directions…');list.append(status);
+    // Load only catalog tiles intersecting this starting point, even if the map was moved.
+    let extra=[];
+    try{
+      const index=regionList||await fetch(dj('data/places-index.json'),{signal:AbortSignal.timeout(8000)}).then(r=>r.json());
+      const [lat,lon]=o.at,dy=.018,dx=dy/Math.cos(lat*Math.PI/180);
+      const regions=index.filter(r=>lat-dy<=r.b[2]&&lat+dy>=r.b[0]&&lon-dx<=r.b[3]&&lon+dx>=r.b[1]);
+      const responses=await Promise.allSettled(regions.map(r=>regionRows.get(r.n)||fetch(dj('data/places-'+r.n+'.json'),{signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('catalog');return r.json();})));
+      extra=responses.flatMap(r=>r.status==='fulfilled'&&Array.isArray(r.value)?r.value:[]);
+    }catch(e){/* Existing in-memory points still provide a useful fallback. */}
+    if(!list.isConnected)return;
+    const points=[{at:o.at,name:o.name,description:$('pStory').querySelector('p')?.textContent||''},...nearby(o,extra)];
+    if(points.length<2){status.textContent=text('近くに徒歩ルートを作れる登録スポットがありません。地図上の別のスポットからお試しください。','No nearby registered stops are available for a walk. Try another spot on the map.');button.disabled=false;return;}
+    const link=document.createElement('a');link.className='walk-route-link';link.target='_blank';link.rel='noopener';link.textContent=text('Google マップで徒歩経路を開く ↗','Open walking directions in Google Maps ↗');link.href='https://www.google.com/maps/dir/?api=1&travelmode=walking&origin='+points[0].at.join(',')+'&destination='+points.at(-1).at.join(',')+'&waypoints='+encodeURIComponent(points.slice(1,-1).map(p=>p.at.join(',')).join('|'));list.append(link);
+    try{
+      const coords=points.map(p=>p.at[1]+','+p.at[0]).join(';');
+      const response=await fetch('https://routing.openstreetmap.de/routed-foot/route/v1/driving/'+coords+'?overview=full&geometries=geojson&steps=true',{signal:AbortSignal.timeout(12000)});const json=await response.json();
+      if(!list.isConnected)return;if(!response.ok||json.code!=='Ok'||!json.routes?.length)throw Error('route');
+      const r=json.routes[0];if(r.distance>8000)throw Error('detour');clear();if(!layer)layer=L.layerGroup().addTo(map);
+      const legs=r.legs.map(l=>({minutes:Math.max(1,Math.ceil(l.duration/60)),path:l.steps.flatMap(s=>s.geometry.coordinates.map(c=>[c[1],c[0]]))}));
+      const walk=legs.reduce((a,l)=>a+l.minutes,0),stay=points.length*15;status.textContent=text('合計目安 ','Approx. total ')+(walk+stay+5)+text('分（徒歩',' min (walk ')+walk+text('・滞在',' / visits ')+stay+text('・余裕5分）。周辺の登録スポットからの提案です。営業・通行状況は現地で確認してください。',' / buffer 5 min). Suggested from nearby registered places; check opening and access conditions.');
+      const stops=document.createElement('ol');stops.className='walk-stops';let elapsed=0;
+      points.forEach((p,i)=>{const item=document.createElement('li');item.className='walk-stop';item.style.setProperty('--walk-color',colors[i]);const title=document.createElement('button');title.type='button';title.textContent=(i+1)+'. '+p.name;title.onclick=()=>{map.setView(p.at,17);$('panel').classList.remove('open');};const desc=document.createElement('p');desc.textContent=elapsed+'–'+(elapsed+15)+text('分：',' min: ')+(p.description||text('周辺の公開された道から景観を見て、昔と今の街並みを比較。写真撮影や短い休憩の目安です。施設内の見学は別途。','View the surroundings from public paths and compare past and present. Allow time for photos or a short rest; interior visits are separate.'));item.append(title,desc);elapsed+=15+(legs[i]?.minutes||0);stops.append(item);
+        L.marker(p.at,{title:p.name,icon:L.divIcon({className:'walk-number',html:'<span style="background:'+colors[i]+'">'+(i+1)+'</span>',iconSize:[32,32],iconAnchor:[16,16]})}).bindTooltip(p.name).addTo(layer);
+      });
+      legs.forEach((leg,i)=>{L.polyline(leg.path,{color:'#fff',weight:9,interactive:false}).addTo(layer);L.polyline(leg.path,{color:colors[i],weight:5}).bindTooltip(leg.minutes+text('分',' min')).addTo(layer);});list.insertBefore(stops,link);map.fitBounds(L.latLngBounds(r.geometry.coordinates.map(c=>[c[1],c[0]])),{padding:[50,100],maxZoom:17});map.attributionControl.addAttribution('<a href="https://routing.openstreetmap.de/about.html">Routing: FOSSGIS / OSM</a>');
+    }catch(e){if(!list.isConnected)return;status.textContent=text('徒歩経路を取得できませんでした。Google マップで次の地点を結ぶ経路を確認できます：','Walking geometry could not be loaded. Open Google Maps for directions via: ')+points.map(p=>p.name).join(' → ');button.disabled=false;}
+  }
   function refresh(){
     let box=document.getElementById('walkChooser');
     if(!box){box=document.createElement('section');box.id='walkChooser';box.className='walk-chooser';document.getElementById('cards').before(box);}
@@ -43,7 +93,7 @@ window.AtlasWalking = (() => {
     map.invalidateSize();fit();drawDetail();if(!keepHistory)history.pushState({walk:id},'','#walk-'+id);
   }
   function restore(){if(!location.hash.startsWith('#walk-'))return false;const id=location.hash.slice(6);if(!ATLAS_WALKS.places.some(p=>p.id===id))return false;open(id,true);return true;}
-  return {refresh,clear,open,restore,plan};
+  return {refresh,clear,open,restore,plan,attach,eligible,nearby};
 })();
 
 window.AtlasTime=(()=>{
