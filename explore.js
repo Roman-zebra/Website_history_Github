@@ -867,6 +867,7 @@ function restoreActivity(){
 }
 
 function buildCards(){
+  window.AtlasWalking?.refresh();
   if (isActivityMode(mode)) return buildActivityCards();
   if (mode === 'liminal') return buildLiminalCards();
   $('cards').innerHTML = PLACES.map(p => {
@@ -997,8 +998,8 @@ function setThenLayer(id, label){
   setThenLayer._reset = () => { ok = 0; ng = 0; };
   map.on('moveend', setThenLayer._reset);
 
-  splitSet = false;
-  centreSplit();
+  if (!window.AtlasTime?.active()) { splitSet = false; centreSplit(); }
+  else clip();
   $('dragHint').hidden = false;
   clearTimeout(setThenLayer._h);
   setThenLayer._h = setTimeout(() => { $('dragHint').hidden = true; }, 4200);
@@ -1348,7 +1349,7 @@ async function pickOldLayer(lat, lon){
     let ok = false;
     try {
       const r = await fetch(GSI + '/' + L.id + '/' + z + '/' + x + '/' + y + '.' + L.ext,
-                            { cache: 'force-cache' });
+                            { cache: 'force-cache', signal: AbortSignal.timeout(10000) });
       ok = r.ok;
     } catch(e){ ok = false; }
     coverCache.set(key, ok);
@@ -2065,16 +2066,20 @@ function paintCompareBtn(){
     return;
   }
   b.classList.remove('is-on');
+  if (window.AtlasTime){ window.AtlasTime.paintButton(); return; }
   if (!compareLayer){ b.hidden = true; return; }
   b.hidden = false;
   b.innerHTML = '<span>\u25c0\u25b6</span> ' + esc(t('compareYear')(compareLayer.span || compareLayer.year));
 }
 
 function panelShell(o){
+  window.AtlasWalking?.clear();
+  window.AtlasTime?.close();
   compareAt = o.at || null;
   const oldHash = o.share && o.share.url ? new URL(o.share.url, location.href).hash : '';
   sharePayload = o.share ? {title:o.name, url:PlaceUI.spotURL('https://japantimeatlas.com', LANG, o.at, oldHash, o.name)} : null;
-  $('pCompare').hidden = true;          // shown once we know a photograph exists
+  $('pCompare').hidden = !compareAt;
+  window.AtlasTime.paintButton();
   $('pShare').hidden   = !o.share;
   $('pShare').textContent = '⇪ '+t('share');
   $('pJa').textContent = o.ja || '';
@@ -2146,7 +2151,7 @@ function panelShell(o){
       if (myToken !== panelToken || compareAt !== at) return;   // panel changed while we asked
       compareLayer = L;
       if (!L){
-        $('pCompare').hidden = true;
+        window.AtlasTime.paintButton();
         $('pNoOld').hidden = false;
         $('pNoOld').textContent = t('noOldPhoto');
         return;
@@ -2870,7 +2875,8 @@ function closePlace(){
   roaming = false; current = null;
   lastPanel = null;                  // ホームに戻ったら、開き直す対象はもう無い
   $('cover').hidden = true; $('roamTip').hidden = true;
-  $('place').hidden = true; $('home').hidden = false;
+  $('place').hidden = true; window.AtlasWalking?.clear(); window.AtlasTime?.close(true);
+  $('home').hidden = false;
 }
 
 function modeNote(){
@@ -2885,6 +2891,7 @@ function modeNote(){
 
 function setMode(m){
   mode = m;
+  window.AtlasWalking?.refresh();
   for (const [id, key] of [['mPlaces','places'], ['mMap','map'], ['mLiminal','liminal'], ['mFood','food'], ['mShopping','shopping']]){
     $(id).classList.toggle('is-on', m === key);
     $(id).setAttribute('aria-selected', String(m === key));
@@ -2970,18 +2977,8 @@ $('grab').onclick     = () => {
   else pn.classList.toggle('open');
 };
 $('back').onclick     = () => history.back();
-$('tagThen').onclick  = () => { setThenLayer(null, null); paintCompareBtn(); };
-$('pCompare').onclick = () => {
-  if (thenLayer){ setThenLayer(null, null); paintCompareBtn(); return; }   // press again to stop
-  if (!compareAt || !compareLayer) return;
-  map.setView(compareAt, Math.max(map.getZoom(), 16));
-  setThenLayer(compareLayer.id, compareLayer.span || compareLayer.year);
-  paintCompareBtn();
-  // Collapse the panel to its handle so the map is visible, but do NOT put the
-  // body back into roaming state: `body.roaming .panel` slides the panel right
-  // off the screen, so the summary disappeared the moment you pressed compare.
-  $('panel').classList.remove('open');
-};
+$('tagThen').onclick  = () => window.AtlasTime?.close(true);
+$('pCompare').onclick = () => window.AtlasTime.open();
 
 function noPush(fn, arg){
   // fn が投げると pushState がスタブのまま固定され、以後どの画面も履歴を積まなくなる
@@ -2990,7 +2987,7 @@ function noPush(fn, arg){
   try { fn(arg); } finally { history.pushState = h; }
 }
 window.addEventListener('popstate', () => {
-  if (restoreGygPoint() || restoreActivity() || restoreSharedSpot()) return;
+  if (window.AtlasWalking?.restore() || restoreGygPoint() || restoreActivity() || restoreSharedSpot()) return;
   if (location.hash === '#map' && PLACES.length){ noPush(openMap); return; }
   if (location.hash.startsWith('#l-') && LIMINAL.length){
     const q = LIMINAL.find(x => x.id === location.hash.slice(3));
@@ -3135,7 +3132,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   ]).then(drawDetail);
   // Detailed monument text is loaded on demand when a memorial is opened.
 
-  if (restoreGygPoint() || restoreActivity() || restoreSharedSpot()) return;
+  if (window.AtlasWalking?.restore() || restoreGygPoint() || restoreActivity() || restoreSharedSpot()) return;
   if (location.hash === '#map') noPush(openMap);
   else if (location.hash.startsWith('#l-')){
     const want = location.hash.slice(3);
