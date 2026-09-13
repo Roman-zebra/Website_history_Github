@@ -6,7 +6,7 @@
      B. 地図タイル・碑の写真      … cache-first で溜める（一度見た場所は圏外でも出る、枚数上限あり）
      C. Overpass / Wikipedia      … network-only（結果は app.js 側が localStorage に残す）
 */
-const VERSION = 'v0.79.0';
+const VERSION = 'v0.80.0';
 const SHELL = `shell-${VERSION}`;
 const TILES = `tiles-${VERSION}`;
 const TILE_MAX = 700;                       // 端末を圧迫しない範囲。1タイル20-90KB
@@ -27,7 +27,7 @@ const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。�
      版の数字を直に書いた行が app.js / explore.js に1つでもあれば
      tools/bump_version.py が exit 1 で止める（見張りをコメントでなく道具に置いた）。 */
 const DATA_V = '0.47';
-const ASSET_V = '0.79';
+const ASSET_V = '0.80';
 const DATA_FILES = [
   'facilities-index-v1.json', 'monuments-index.json', 'kid-text.json', 'places-index.json',
   'landmarks.json', 'regional-landmarks-v1.json', 'liminal.json', 'places-world.json', 'affiliate.json',
@@ -44,7 +44,7 @@ const SHELL_FILES = [
   './ja.html', './ko.html', './zh-cn.html', './zh-tw.html',
   './explore.css?v=' + ASSET_V, './explore.js?v=' + ASSET_V,
   './og.jpg',
-  './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png',
+  './icons/atlas-96.png', './icons/atlas.svg', './icons/atlas-192.png', './icons/atlas-512.png', './icons/atlas-180.png',
   '/vendor/leaflet-1.9.4/leaflet.min.js',
   '/vendor/leaflet-1.9.4/leaflet.min.css',
   '/vendor/leaflet-1.9.4/images/marker-icon.png',
@@ -54,9 +54,16 @@ self.addEventListener('install', e => {
   e.waitUntil((async () => {
     const c = await caches.open(SHELL);
     // 1つでも失敗すると addAll は全部落ちるので、個別に入れて失敗は記録だけする
-    await Promise.all(SHELL_FILES.map(u =>
-      c.add(new Request(u, { cache: 'reload' }))
-       .catch(err => console.warn('[sw] precache失敗', u, err.message))));
+    // Bound background work so installation does not flood a mobile connection.
+    // Versioned assets can reuse the browser's already-downloaded response.
+    let next=0;
+    await Promise.all(Array.from({length:4},async()=>{
+      while(next<SHELL_FILES.length){
+        const u=SHELL_FILES[next++];
+        try { await c.add(new Request(u,{cache:u.includes('?v=')?'default':'reload'})); }
+        catch(err){ console.warn('[sw] precache失敗',u,err.message); }
+      }
+    }));
     self.skipWaiting();
   })());
 });

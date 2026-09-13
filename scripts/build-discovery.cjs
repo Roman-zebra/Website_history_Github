@@ -14,7 +14,7 @@ const period=p=>({ort_USA10:'1945–1950',ort_old10:'1961–1969',gazo1:'1974–
 const article=(p,l)=>rows[p.id][langs.indexOf(l)];
 const map=(p,l)=>'/?lang='+encodeURIComponent(l==='th'?'en':l)+'#'+p.id;
 function head(lang,title,description,url,alternates=[],type='article',schema){
- return '<!doctype html>\n<html lang="'+lang+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f1ea"><title>'+esc(title)+'</title><meta name="description" content="'+esc(description)+'"><link rel="canonical" href="'+base+url+'">'+alternates.map(([l,u])=>'<link rel="alternate" hreflang="'+l+'" href="'+base+u+'">').join('')+'<meta property="og:type" content="'+type+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(description)+'"><meta property="og:url" content="'+base+url+'"><meta property="og:image" content="'+base+'/og.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+base+'/og.jpg"><link rel="stylesheet" href="/page.css?v=0.77">'+(schema?'<script type="application/ld+json">'+json(schema)+'</script>':'')+'</head><body>';
+ return '<!doctype html>\n<html lang="'+lang+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f1ea"><title>'+esc(title)+'</title><meta name="description" content="'+esc(description)+'"><link rel="canonical" href="'+base+url+'">'+alternates.map(([l,u])=>'<link rel="alternate" hreflang="'+l+'" href="'+base+u+'">').join('')+'<meta property="og:type" content="'+type+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(description)+'"><meta property="og:url" content="'+base+url+'"><meta property="og:image" content="'+base+'/og.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+base+'/og.jpg"><link rel="stylesheet" href="/page.css?v=0.80">'+(schema?'<script type="application/ld+json">'+json(schema)+'</script>':'')+'</head><body>';
 }
 function footer(l){const t=labels[l];return '<footer><p>Japan Time Atlas · <a href="/about#'+(l==='th'?'en':l)+'">'+t.about+'</a></p><p><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · Wikipedia (CC BY-SA)</p></footer></body></html>';}
 function nav(l){const t=labels[l];return '<nav aria-label="'+t.home+'"><a href="/">Japan Time Atlas</a><a href="'+(l==='en'?'/places':'/'+t.route)+'">'+t.home+'</a><a href="/visit">'+t.markets+'</a></nav>';}
@@ -59,12 +59,23 @@ for(const l of langs.filter(l=>l!=='en')){
  }
  // Thai previously only had an introductory page: add all 19 place guides.
  if(l==='th'&&!html.includes('class="translated-places"'))html=html.replace('</main>','<section class="translated-places"><h2>'+t.home+'</h2><ul>'+places.map(p=>'<li><a href="'+route(p,l)+'">'+esc(pname(p,l))+'</a></li>').join('')+'</ul></section></main>');
- if(!html.includes('class="market-entry"'))html=html.replace('</header>','<p class="market-entry"><a href="/visit/'+({'ja':'','ko':'kr','zh-Hans':'cn','zh-Hant':'tw','th':'th'}[l])+'">'+t.markets+'</a>'+(l==='zh-Hant'?' · <a href="/visit/hk">香港</a>':'')+'</p></header>');
+ if(!html.includes('class="market-entry"'))html=html.replace('</header>','<p class="market-entry"><a href="/visit/'+({'ja':'jp','ko':'kr','zh-Hans':'cn','zh-Hant':'tw','th':'th'}[l])+'">'+t.markets+'</a>'+(l==='zh-Hant'?' · <a href="/visit/hk">香港</a>':'')+'</p></header>');
+ if(l==='ja')html=html.replace('<p class="market-entry"><a href="/visit">','<p class="market-entry"><a href="/visit/jp">');
  html=html.replace('href="/visit/"','href="/visit"');write(t.route+'.html',html);
+}
+// Refresh shared brand metadata for authored and generated HTML alike.
+const iconLinks='<link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/icons/atlas.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/atlas-180.png">';
+for(const dir of ['', 'place','guides','visit']){
+ const scan=d=>{for(const entry of fs.readdirSync(path.join(root,d),{withFileTypes:true})){
+  const file=path.join(d,entry.name);if(entry.isDirectory()){if(d)scan(file);continue;}
+  if(!file.endsWith('.html')||file==='gyg-frame.html')continue;
+  let html=read(file).replace(/<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g,'');
+  html=html.replace('</head>',iconLinks+'</head>');write(file,html);
+ }};scan(dir);
 }
 // Generate sitemap from the final canonical set, retaining existing articles and guides.
 const canonical=new Set([...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]));
 for(const p of places)for(const l of langs)canonical.add(base+route(p,l));
 canonical.add(base+'/visit');for(const m of markets)canonical.add(base+'/visit/'+m.id);
 write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+[...canonical].sort().map(u=>'  <url><loc>'+esc(u)+'</loc></url>').join('\n')+'\n</urlset>\n');
-console.log('Generated 114 place guides, 10 market guides and their index. Sitemap: '+canonical.size+' URLs.');
+console.log('Generated 114 place guides, 11 market guides and their index. Sitemap: '+canonical.size+' URLs.');
