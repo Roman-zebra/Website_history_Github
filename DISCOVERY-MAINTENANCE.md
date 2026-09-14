@@ -25,6 +25,21 @@ Edit these sources, then run `node scripts/build.cjs`. Do not hand-edit generate
 
 The background cache installer runs at most four requests at a time and reuses browser-cached versioned assets. Regression tests cover its concurrency and failure handling, as well as Chinese hero repainting without extra image downloads. Browser checks use 390px and 1440px widths; these are layout checks, not field Core Web Vitals measurements.
 
+## Canonical links (September 2026)
+
+- Every crawlable link to a place names its article: `/place/<id>`, `/place/<lang>/<id>` or `/place/l-<id>`. Build them with `placeURL()` / `liminalURL()` in `explore.js` or `route()` in `build-discovery.cjs`. Never write `#<id>` or a `.html` spelling into a page.
+- Home cards for featured and liminal places are `<a>` links to the article. A plain click still opens the map as before; Ctrl/⌘ or middle click opens the article.
+- Links that open the map from another page use `/?lang=<lang>&place=<id>` (landmarks: `&spot=lat,lon`). `consumeMapQuery()` turns the query into the in-app hash, and old `#hiroshima` bookmarks keep working. A #fragment never reaches the server, so it cannot be redirected with a 301.
+- `_redirects` (copied by `build.cjs`) answers `.html` and trailing-slash spellings of the entry pages with 301. Keep it to static rules: rules are matched against the requested path before html_handling, and a placeholder rule that lost its `.html` would loop. `/?lang=ja` cannot be matched there (no query matching), and it is the Japanese map itself, so it stays with its canonical pointing at `/`.
+- `tests/canonical-links.test.cjs` fails when a crawlable page or the rendered home directory links to a place by #hash or to a `.html` duplicate, and when an article, guide or language page carries tour or affiliate links.
+
+## In-depth place guides
+
+- `scripts/place-guides.cjs` holds the long English and Japanese sections for Hiroshima, Himeji and Aneyoshi (generated pages) and for Doai Station and Hashima (older liminal pages, patched between `<!--GUIDE-->` markers). Every sentence was checked against the source listed with it on 14 September 2026; photo descriptions come from the GSI tiles at zoom 16–17.
+- `fieldNotes` is for notes from an actual visit: the year and season, how busy it was, what you noticed on the ground. Leave it empty rather than write one nobody made.
+- Corrected against official sources in the same release: Hashima (about 5,300 people in 1960 on about 6.3 ha; "nine hectares" and "sixteen storeys" removed), Doai (about five trains each way a day, not four), Himeji (air raids in June and July 1945) and Nakano Broadway (an escalator sentence that the English and Japanese texts disagreed on, and that could not be confirmed, removed).
+- Home tabs: `MODE_INTRO` in `explore.js` explains each list in five languages. The static English copy of the first tab in `index.html` and `explore.html` is what crawlers see before scripts run. `tests/content-depth.test.cjs` checks the guides, the tab copy, the spot notes and the corrections.
+
 ## Imagery and accuracy
 
 GSI's `ort_USA10` and `ort_old10` use PNG, while `gazo1` and `seamlessphoto` use JPEG. Guide previews use the same tile coordinates for old and recent imagery. Both photographs are lazy loaded, with dimensions reserved. Keep visible GSI attribution and the series period; never describe all photographs as taken in 1945, and never imply recent imagery is live.

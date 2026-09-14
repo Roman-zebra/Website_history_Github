@@ -10,4 +10,6 @@ activities-data.js holds 18 food and 18 shopping destinations. Spots are editori
 
 Cards use the atlas's existing GSI aerial-map preview, with GSI labels. They are not photographs of dishes or products. Map panels share the existing compare, save and share controls. Activity deep links use #a-<id>; map search and saved places also resolve these records. The cache release is 0.73; the unchanged geographic-data release remains 0.47.
 
+Each spot also has a short `notes` text in five languages, shown on its card and in its panel, with `noteSources` (the pages it was checked against) and `notesChecked` (2026-09-14). A note says only what those official or tourism-organisation pages say. Opening hours appear only where the source publishes them, and are marked as varying by shop where the source says so. Re-check `noteSources` before changing a note, and do not add prices.
+
 Edit source and run node scripts/build.cjs. The build runs the regression suite and regenerates the existing guides. Keep the current Cloudflare custom-domain deployment; do not create a replacement Site or migrate hosting.

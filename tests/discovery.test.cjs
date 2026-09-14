@@ -8,7 +8,7 @@ test('all 114 place variants retain the same location and language through every
   assert.ok(s.includes('<html lang="'+l+'">'));assert.ok(s.includes('rel="canonical" href="'+base+u+'"'));
   assert.equal((s.match(/hreflang=/g)||[]).length,7);
   for(const k of langs)assert.ok(s.includes('hreflang="'+k+'" href="'+base+route(p,k)+'"'));
-  assert.ok(s.includes('href="/?lang='+(l==='th'?'en':l)+'#'+p.id+'"'));
+  assert.ok(s.includes('href="/?lang='+(l==='th'?'en':l)+'&amp;place='+p.id+'"'));assert.ok(!s.includes('#'+p.id+'"'));
   assert.equal((s.match(/<h1>/g)||[]).length,1);
   const schema=JSON.parse(s.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);assert.equal(schema['@graph'][0].inLanguage,l);assert.equal(schema['@graph'][0].about.geo.latitude,p.lat);
   assert.ok(!s.includes('undefined'));assert.ok(s.includes(labels[l].coverage)||s.includes(labels[l].none));

@@ -1,0 +1,24 @@
+# Permanent redirects for duplicate spellings of canonical pages.
+# Cloudflare already answers these with 307 (assets.html_handling: auto-trailing-slash).
+# A 301 tells search engines the move is permanent.
+#
+# Rules are matched against the requested path before html_handling resolves the file,
+# so "/ja.html /ja" cannot loop on a request for /ja. Keep to static paths: a placeholder
+# rule that lost its ".html" would send a page to itself.
+#
+# Not possible here: /?lang=ja (query strings are not matched) and #hash links (never sent
+# to the server). /?lang=ja is also the Japanese map itself, so it must keep working.
+/index.html / 301
+/ja.html /ja 301
+/ko.html /ko 301
+/zh-cn.html /zh-cn 301
+/zh-tw.html /zh-tw 301
+/th.html /th 301
+/places.html /places 301
+/about.html /about 301
+/visit.html /visit 301
+/ja/ /ja 301
+/ko/ /ko 301
+/zh-cn/ /zh-cn 301
+/zh-tw/ /zh-tw 301
+/th/ /th 301

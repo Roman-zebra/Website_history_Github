@@ -36,6 +36,7 @@ html,body,.home{background:var(--atlas-paper);color:var(--atlas-ink)}
 .home .card-body{position:relative;inset:auto;padding:16px 0 18px;width:100%;flex:1;border-bottom:1px solid var(--atlas-rule)}
 .home .card-name{color:#203a37;font-family:var(--atlas-serif);font-size:23px;font-weight:400;line-height:1.4;margin:6px 0 8px;text-wrap:pretty}
 .home .card-hook{color:#5b6861;font-size:13px;line-height:1.8}
+a.card{text-decoration:none}
 .home .card-ja{color:#66766b;font-size:10px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .home .card-era{top:12px;right:12px;background:#f3f1eaf2;color:#29483b;box-shadow:none;border-radius:2px;font-size:9px;font-weight:500;padding:5px 8px}
 .home .card-emoji{top:10px;left:10px;width:32px;height:32px;font-size:19px;box-shadow:none;background:#f3f1eae8;border-radius:3px;filter:none}
@@ -149,3 +150,12 @@ html,body,.home{background:var(--atlas-paper);color:var(--atlas-ink)}
 #discoveryEntry [data-entry-guide]{background:#234d44;color:#fff}#discoveryEntry p{font-size:12px;line-height:1.6;margin:12px 0 0}
 #discoveryEntry a:focus-visible{outline:3px solid #dc6c40;outline-offset:3px}
 @media(max-width:600px){#discoveryEntry{margin:0 12px 20px;padding:16px}#discoveryEntry nav a{flex:1 1 auto}.discovery-picks a{flex:1 1 auto}}
+
+/* Longer notes under the home tabs and on food/shopping cards. */
+.home .mode-intro{max-width:1120px;margin:12px auto 4px;padding:0 22px;color:#43524b;font-size:14px;line-height:1.85}
+.home .mode-intro h2{margin:0 0 8px;font-family:var(--atlas-serif);font-weight:400;font-size:21px;line-height:1.45;color:#203a37}
+.home .mode-intro p,.home .mode-intro ul{margin:0 0 10px;max-width:72ch}
+.home .mode-intro ul{padding-left:1.2em}.home .mode-intro li{margin:0 0 6px}
+.home .mode-intro b{font-weight:600;color:#203a37}.home .mode-intro a{color:#234d44;text-underline-offset:3px}
+.home .card-note{margin:6px 0 0;color:#5b6861;font-size:.8125rem;line-height:1.7;overflow-wrap:anywhere}
+@media(max-width:520px){.home .mode-intro{padding:0 16px;font-size:13.5px}.home .mode-intro h2{font-size:19px}.home .card-note{font-size:12px}}

@@ -18,5 +18,5 @@ test('every crawlable page has a real square PNG icon and Apple touch icon',()=>
 });
 test('domestic guide is directly linked from Japanese entry and indexed',()=>{
  assert.ok(read('ja.html').includes('href="/visit/jp"'));assert.ok(read('visit.html').includes('href="/visit/jp"'));assert.ok(read('sitemap.xml').includes('/visit/jp</loc>'));
- const s=read('visit/jp.html');assert.ok(s.includes('<html lang="ja">'));assert.ok(s.includes('href="/?lang=ja#kamakura"'));
+ const s=read('visit/jp.html');assert.ok(s.includes('<html lang="ja">'));assert.ok(s.includes('href="/?lang=ja&amp;place=kamakura"'));
 });

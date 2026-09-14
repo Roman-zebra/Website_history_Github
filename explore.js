@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.47';
+const DATA_V = '0.48';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
    empty: pull right back and you still see Fuji, Skytree and the places everyone
@@ -82,6 +82,16 @@ let LANG = 'en';   // 実際の値は T の定義後に detectLang() で決め�
 const LANG_PARAM = { en: 'en', ja: 'ja', ko: 'ko', 'zh-Hans': 'zh-CN', 'zh-Hant': 'zh-TW' };
 const PARAM_LANG = Object.fromEntries(Object.entries(LANG_PARAM).flatMap(([lang,param])=>[[param,lang],[lang,lang]]));
 
+/* Crawlable links are built here and nowhere else. Cards, the place list and the language
+   links point at the canonical page: never at a #hash on the map (Google reads
+   "/?lang=en#hiroshima" as the home page) and never at a .html spelling that only redirects. */
+const LOCALE_HOME = { en: '/', ja: '/ja', ko: '/ko', 'zh-Hans': '/zh-cn', 'zh-Hant': '/zh-tw', th: '/th' };
+const PLACE_DIR = { en: '', ja: 'ja/', ko: 'ko/', 'zh-Hans': 'zh-cn/', 'zh-Hant': 'zh-tw/' };
+const placeURL = (id, lang = LANG) => '/place/' + (PLACE_DIR[lang] || '') + id;
+const liminalURL = id => '/place/l-' + id;          // liminal articles are English pages
+/* Ctrl/⌘/Shift/middle-click on a card keeps the browser's own link behaviour (new tab). */
+const keepLinkClick = e => !!(e && (e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey));
+
 const T = {
   en: {
     lead: 'Compare real aerial photographs on the map.<br>Drag the slider and watch <b>eighty years</b> go by.',
@@ -106,7 +116,7 @@ const T = {
       <p>Japan has a lot of these, and there is a reason. The country built hard for a
       population that then stopped growing, and it would rather maintain a building than
       knock it down. So you get a hot-spring town with no guests, a mining town with no
-      mine, a station 486 steps underground served by four trains a day. Not ruins.
+      mine, a station 486 steps deep with about five trains each way a day. Not ruins.
       Not really alive either.</p>
       <p class="lim-note">Every place below is real and on the map, and most are close
       enough to Tokyo, Osaka or Fukuoka that you could actually go. A few cannot be
@@ -227,8 +237,8 @@ const T = {
       世界中に広がりました。みんな、あの感じを知っていたからです。</p>
       <p>日本にはこういう場所が多くて、それには理由があります。人口が増える前提で
       たくさん作り、そのあと増えなかった。そのうえ日本は、壊すより直して使い続けるほうを
-      選びがちです。だから、客のいない温泉街、鉱山の閉じた鉱山町、486段下りて一日4本しか
-      来ない駅が残る。廃墟ではない。かといって、生きているわけでもない。</p>
+      選びがちです。だから、客のいない温泉街、鉱山の閉じた鉱山町、486段下りた先に、上下とも一日5本ほどしか
+      列車が来ない駅が残る。廃墟ではない。かといって、生きているわけでもない。</p>
       <p class="lim-note">下に並んでいる場所はぜんぶ実在して、地図に載っています。
       多くは東京・大阪・福岡から行ける距離です。入れない場所もあります。
       その場合はページに書いてあります。入ってはいけないところには、入らないでください。</p>`,
@@ -562,7 +572,7 @@ function applySEO(){
   set('ogLocale', seo.locale);
 
   // The interactive ?lang= switch is a user preference, not a separate
-  // crawl target. Actual translated pages live at /ja.html, /ko.html and so on.
+  // crawl target. Actual translated pages live at /ja, /ko and so on.
   const url = 'https://japantimeatlas.com/';
   const canonical = document.getElementById('canonicalUrl');
   if (canonical) canonical.setAttribute('href', url);
@@ -792,7 +802,7 @@ function buildLiminalCards(){
     const hook = (p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook);
     // 最初の数枚は即時に。上端が空のカードで埋まっていると壊れて見える
     const lazy = 'lazy';
-    return '<button class="card card-lim" data-lim="' + esc(p.id) + '">'
+    return '<a class="card card-lim" data-lim="' + esc(p.id) + '" href="' + esc(liminalURL(p.id)) + '">'
       + '<img class="card-img card-photo" loading="' + lazy + '" decoding="async" alt="" '
       + 'src="' + esc(p.img ? thumb(p.img, 480) : tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16))
       + '" data-full="' + esc(p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16)) + '" '
@@ -801,10 +811,13 @@ function buildLiminalCards(){
       + '<div class="card-body">'
       + '<p class="card-ja">' + esc(p.ja) + '</p>'
       + '<p class="card-name">' + esc(placeName(p)) + '</p>'
-      + '<p class="card-hook">' + esc(hook) + '</p></div></button>';
+      + '<p class="card-hook">' + esc(hook) + '</p></div></a>';
   }).join('');
-  for (const b of document.querySelectorAll('.card-lim'))
-    b.onclick = () => showLiminal(LIMINAL.find(p => p.id === b.dataset.lim));
+  /* The card is a real link to the article, so crawlers and new tabs get the page.
+     A plain click still opens the map, as it always has. */
+  for (const b of $('cards').querySelectorAll('.card-lim'))
+    b.onclick = e => { if (keepLinkClick(e)) return; e.preventDefault();
+                       showLiminal(LIMINAL.find(p => p.id === b.dataset.lim)); };
 }
 
 
@@ -830,7 +843,8 @@ function buildActivityCards(){
   +'<span class="card-era">'+esc(activityText(5))+'</span>'
   +'<div class="card-body"><p class="card-ja">'+esc(p.ja)+'</p>'
   +'<p class="card-name">'+esc(placeName(p))+'</p>'
-  +'<p class="card-hook">'+esc(p.hooks[LANG]||p.hooks.en)+'</p></div></button>'
+  +'<p class="card-hook">'+esc(p.hooks[LANG]||p.hooks.en)+'</p>'
+  +(p.notes?'<p class="card-note">'+esc(p.notes[LANG]||p.notes.en)+'</p>':'')+'</div></button>'
  ).join('');
  for(const b of $('cards').querySelectorAll('[data-activity]'))
   b.onclick=()=>showActivity(ACTIVITIES.find(p=>p.id===b.dataset.activity));
@@ -851,7 +865,7 @@ function showActivity(p,keepView,refresh=false){
  panelShell({
   kicker:{emoji:p.emoji,label:activityLabel(p.category),note:'  '+placeName(p)},
   placeId:'a-'+p.id,adTier:3,kind:p.category,ja:LANG==='ja'?'':p.ja,name:placeName(p),at:[p.lat,p.lon],query:p.name,
-  bodyHTML:'<p>'+esc(p.hooks[LANG]||p.hooks.en)+'</p><p>'+esc(activityText(6))+'</p>'
+  bodyHTML:'<p>'+esc(p.hooks[LANG]||p.hooks.en)+'</p>'+(p.notes?'<p>'+esc(p.notes[LANG]||p.notes.en)+'</p>':'')+'<p>'+esc(activityText(6))+'</p>'
     +'<p class="p-pick">'+esc(activityText(p.category==='shopping'?10:p.id==='nakasu-yatai'?8:7))+'</p>'
     +(p.category==='food'?'<p>'+esc(activityText(9))+'</p>':'')
     +'<p class="place-guide-link"><a href="'+esc(p.official)+'" target="_blank" rel="noopener noreferrer">'+esc(activityText(4))+' ↗</a></p>',
@@ -875,7 +889,7 @@ function buildCards(){
     const lyr = (p.then && THEN[p.then]) ? p.then : NOW_LAYER.id;
     const cfg = p.then && THEN[p.then];
     const ext = cfg ? cfg.ext : NOW_LAYER.ext;
-    return '<button class="card" data-id="' + esc(p.id) + '">'
+    return '<a class="card" data-id="' + esc(p.id) + '" href="' + esc(placeURL(p.id)) + '">'
       + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="' + tileURL(lyr, ext, p.lat, p.lon, 15) + '">'
       + '<span class="card-emoji">' + p.emoji + '</span>'
       + (p.thenLabel ? '<span class="card-era">' + esc(p.thenLabel) + ' → NOW</span>' : '')
@@ -883,10 +897,11 @@ function buildCards(){
       + '<p class="card-ja">' + esc(p.ja) + ' · ' + esc(p.romaji) + '</p>'
       + '<p class="card-name">' + esc(placeName(p)) + '</p>'
       + '<p class="card-hook">' + esc((p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook)) + '</p>'
-      + '</div></button>';
+      + '</div></a>';
   }).join('');
-  for (const b of document.querySelectorAll('.card'))
-    b.onclick = () => openPlace(PLACES.find(p => p.id === b.dataset.id));
+  for (const b of $('cards').querySelectorAll('.card'))
+    b.onclick = e => { if (keepLinkClick(e)) return; e.preventDefault();
+                       openPlace(PLACES.find(p => p.id === b.dataset.id)); };
 }
 
 const DISCOVERY_ENTRY = {"en":["Choose your next walk","Places and photo stories","Country & region guides","Open a guide in your language. Thai guides open the interactive map in English.","/places",["United States","us"],["United Kingdom","gb"],["Australia","au"],["Canada","ca"],["Singapore","sg"]],"ja":["次の街歩きを見つける","場所の解説を読む","国・地域別の旅行案内","日本国内の散歩や、使いたい言語から探せます。タイ語の案内ページから開く地図は英語です。","/ja",["日本国内","jp"]],"ko":["다음 산책 찾기","장소 이야기 읽기","국가·지역별 여행 안내","원하는 언어로 가이드를 선택하세요. 태국어 가이드의 대화형 지도는 영어로 열립니다.","/ko",["한국에서 일본 여행","kr"]],"zh-Hans":["寻找下一段城市漫步","阅读地点故事","国家与地区旅行指南","按语言选择指南。泰语指南中的互动地图以英语打开。","/zh-cn",["从中国大陆出发","cn"],["从新加坡出发 · English","sg"]],"zh-Hant":["尋找下一段城市散步","閱讀地點故事","國家與地區旅行指南","依語言選擇指南。泰語指南中的互動地圖以英語開啟。","/zh-tw",["從台灣出發","tw"],["從香港出發","hk"]]};
@@ -910,6 +925,7 @@ function applyLang(){
   $('q').placeholder         = t('search');
   $('modeNote').textContent  = modeNote();
   if (mode === 'liminal') $('limIntro').innerHTML = t('limIntroHTML');
+  paintModeIntro();
   $('roamTip').textContent   = t('roamTip');
   $('dragHint').textContent  = t('dragHint');
   $('tagThen').title         = t('stopCompare');
@@ -2893,6 +2909,49 @@ function closePlace(){
   $('home').hidden = false;
 }
 
+/* The longer note under each home tab. modeNote keeps the count; this says what the list is
+   and how to use it. Facts were checked against official pages on 2026-09-14
+   (sources in DISCOVERY-MAINTENANCE.md and ACTIVITIES-MAINTENANCE.md). */
+const MODE_INTRO = {
+ en: {
+  places: `<h2>Nineteen places to compare, then and now</h2><p>Every place on this list has something you can find in both photographs: a moat, a bend in a river, a temple on a hillside, a harbour wall. Find that first, then look at what changed around it.</p><p>The years on the cards are photo series, not the day a picture was taken. Most of the list uses the 1945–1950 series. Nagasaki, Hakodate, Himeji, Nara and Kanazawa use photographs from the 1960s, and Shuri from the 1970s. The Aneyoshi stone has no old photograph on its card; its warning is carved into the stone.</p><ul><li>Tap a card to open the map with its story, then press Compare and drag the line across the screen.</li><li>Every place also has a written guide with sources, listed under Featured places further down this page.</li></ul>`,
+  liminal: `<h2>Before you go: what kind of place is it?</h2><p>Liminal describes a feeling, not the state of a place, and some of these places are busy on an ordinary day. Sorted by how you can visit:</p><ul><li><b>Still a working station.</b> Doai in Gunma is an unstaffed JR East station with about five trains each way a day. Its northbound platform is about 70 m underground, 486 steps down.</li><li><b>Still a working building.</b> Nakano Broadway in Tokyo opened in 1966 with shops below and homes above. People live upstairs.</li><li><b>Now a visitor site.</b> At the Ōya History Museum in Utsunomiya you walk into a former underground quarry. It keeps set opening hours and stays around 8°C inside all year.</li><li><b>Tour only.</b> You can land on Hashima (Gunkanjima) only with a landing tour from Nagasaki, and landings do not go ahead when waves or wind are outside the city’s limits.</li><li><b>Do not enter.</b> Closed hotels, ruins, anything fenced off or on private land. Look from public roads. A pin on this map is not permission to go inside.</li></ul><p><a href="/guides/liminal-japan">Read the full guide to visiting liminal places</a></p>`,
+  food: `<h2>Markets and food streets, Sapporo to Naha</h2><p>Hakodate’s morning market, Aomori’s build-your-own seafood bowls, Omicho in Kanazawa, Nishiki in Kyoto, Dotonbori, Fukuoka’s yatai and Naha’s public market: eighteen places where the food is the reason to go, listed from north to south.</p><p>Every shop keeps its own hours, and morning markets mean it. Hakodate Morning Market, for example, runs from about 5 a.m. to 2 p.m. Check the official page linked from each spot before you set out.</p><p>Some markets ask you not to eat while walking. Nishiki Market asks you to eat in front of or inside the shop where you bought the food. The pin marks the area rather than a particular stall, and the card picture is today’s aerial photograph of the area, not the food.</p>`,
+  shopping: `<h2>Shopping streets, old and new</h2><p>Covered arcades, specialist streets and a few districts everyone has heard of: Tanukikoji in Sapporo, the kitchen shops of Kappabashi, Ameyoko between Ueno and Okachimachi, Nakano Broadway, the canal district of Kurashiki and Kokusai-dori in Naha.</p><p>Several are older than they look. Kyoto’s Teramachi lines the street where Toyotomi Hideyoshi gathered temples in 1590, Tanukikoji has been trading since the early Meiji era, and Ameyoko began as a market just after the Second World War. Streets like these are worth checking with the comparison slider.</p><p>Pedestrian zones change the feel of a street: Ginza’s Chuo-dori at weekends and on public holidays (it can be cancelled for weather), and Akihabara’s on Sunday afternoons.</p><p>From 1 November 2026, tax-free shopping for visitors moves to a refund system: the tax is refunded once customs confirms, as you leave Japan within 90 days of purchase, that you are taking the goods out. Keep your passport with you, and see the <a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">National Tax Agency’s explanation</a>.</p>`
+ },
+ ja: {
+  places: `<h2>昔と今を見くらべる19か所</h2><p>このリストのどの場所にも、昔と今の両方の写真で見つけられる目印があります。城の堀、川の曲がり、山すその寺、港の岸壁。まずそれを両方の写真で見つけてから、まわりで何が変わったかを探してください。</p><p>カードの年代は写真シリーズの期間で、撮影日ではありません。多くは1945〜1950年のシリーズで、長崎・函館・姫路・奈良・金沢は1960年代、首里は1970年代の写真です。姉吉の石のカードには昔の写真がありません。伝えたいことは、石に刻まれています。</p><ul><li>カードを押すと、物語つきで地図が開きます。「1945年と今を見くらべる」などのボタンを押し、線を左右に動かしてください。</li><li>各地点には出典つきの解説ページがあります。このページの下にある「物語のある名所」から開けます。</li></ul>`,
+  liminal: `<h2>行く前に：どんな状態の場所か</h2><p>リミナルは雰囲気の名前で、場所の状態を表す言葉ではありません。ふだんは人でにぎわう場所も入っています。訪ね方で分けると、次のとおりです。</p><ul><li><b>いまも駅として使われている。</b>群馬の土合駅はJR東日本の無人駅で、列車は上下とも一日5本ほど。下りホームは地下約70m、486段の階段の先です。</li><li><b>いまも建物として使われている。</b>中野ブロードウェイは1966年開業の、下が店、上が住まいのビルです。上の階では人が暮らしています。</li><li><b>見学施設になっている。</b>宇都宮の大谷資料館では、大谷石の地下採掘場跡の中を歩けます。開館時間が決まっていて、中は一年を通して8℃前後です。</li><li><b>ツアーでしか行けない。</b>端島（軍艦島）に上陸できるのは長崎からの上陸ツアーだけで、波や風が市の基準を超えると上陸しません。</li><li><b>入らない。</b>閉鎖されたホテルや廃墟、柵の中や私有地。見るのは公道からにしてください。地図のピンは立ち入りの許可ではありません。</li></ul><p><a href="/guides/liminal-japan">リミナルな場所の訪ね方を詳しく読む（英語）</a></p>`,
+  food: `<h2>札幌から那覇まで、市場と食の通り</h2><p>函館朝市、自分で具を選ぶ青森ののっけ丼、金沢の近江町市場、京都の錦市場、道頓堀、福岡の屋台、那覇の公設市場。食べることが目的になる18か所を、北から南の順に並べています。</p><p>営業時間は店ごとに決まっていて、朝市は本当に朝の市場です。たとえば函館朝市は、おおむね朝5時から14時ごろまで。出かける前に、各スポットから開ける公式案内で確認してください。</p><p>食べ歩きを控えるよう求める市場もあります。錦市場は、買ったお店の前か店内で食べるよう呼びかけています。ピンは個別の店ではなくエリアの目印で、カードの画像は料理ではなく、その一帯の今の航空写真です。</p>`,
+  shopping: `<h2>昔からの通りと、今の繁華街</h2><p>アーケード商店街、専門店の通り、誰もが名前を知る繁華街。札幌の狸小路、かっぱ橋道具街、上野と御徒町のあいだのアメ横、中野ブロードウェイ、倉敷の美観地区、那覇の国際通りなど18か所です。</p><p>見た目より歴史の古い通りもあります。京都の寺町は1590年に豊臣秀吉が寺を集めた通り、狸小路は明治のはじめから続く商店街、アメ横は終戦直後の闇市が始まりです。こうした通りは、昔と今の写真で見くらべてみる価値があります。</p><p>歩行者天国の日は通りの雰囲気が変わります。銀座の中央通りは土日祝（天候などで中止あり）、秋葉原の中央通りは日曜の午後が歩行者天国です。</p><p>2026年11月1日から、外国人旅行者の免税制度はリファンド方式に変わります。購入日から90日以内の出国時に税関で確認を受けると、消費税相当額が返金される仕組みです。旅券を持ち歩き、詳しくは<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">国税庁の案内</a>を確認してください。</p>`
+ },
+ ko: {
+  places: `<h2>옛 사진과 오늘을 비교하는 19곳</h2><p>이 목록의 모든 장소에는 옛 사진과 지금 사진 양쪽에서 찾을 수 있는 기준점이 있습니다. 성의 해자, 강의 굽이, 산기슭의 절, 항구의 안벽 같은 것들입니다. 먼저 그것을 양쪽에서 찾은 뒤, 주변에서 무엇이 달라졌는지 살펴보세요.</p><p>카드에 적힌 연도는 사진 시리즈의 기간이며 촬영일이 아닙니다. 대부분은 1945~1950년 시리즈이고, 나가사키·하코다테·히메지·나라·가나자와는 1960년대, 슈리는 1970년대 사진입니다. 아네요시 비석 카드에는 옛 사진이 없습니다. 전하고 싶은 말은 비석에 새겨져 있습니다.</p><ul><li>카드를 누르면 이야기와 함께 지도가 열립니다. ‘1945년과 오늘을 비교’ 같은 버튼을 누르고 선을 좌우로 움직여 보세요.</li><li>각 장소에는 출처가 달린 안내 페이지가 있습니다. 이 페이지 아래쪽 ‘이야기가 있는 명소’에서 열 수 있습니다.</li></ul>`,
+  liminal: `<h2>가기 전에: 어떤 상태의 장소인가</h2><p>리미널은 분위기를 가리키는 말이지 장소의 상태가 아닙니다. 평소에는 사람이 많은 곳도 들어 있습니다. 방문 방법으로 나누면 다음과 같습니다.</p><ul><li><b>지금도 역으로 쓰인다.</b> 군마현의 도아이역은 JR 동일본의 무인역으로, 열차는 상하행 모두 하루 5편 정도입니다. 하행 승강장은 지하 약 70m, 486계단 아래에 있습니다.</li><li><b>지금도 건물로 쓰인다.</b> 나카노 브로드웨이는 1966년에 문을 연 상점·주거 복합 건물입니다. 위층에는 사람이 살고 있습니다.</li><li><b>견학 시설이 되었다.</b> 우쓰노미야의 오야 자료관에서는 오야석 지하 채굴장 터 안을 걸을 수 있습니다. 개관 시간이 정해져 있고, 안은 연중 8℃ 안팎입니다.</li><li><b>투어로만 갈 수 있다.</b> 하시마(군함도)는 나가사키에서 출발하는 상륙 투어로만 들어갈 수 있고, 파도나 바람이 시의 기준을 넘으면 상륙하지 않습니다.</li><li><b>들어가지 않는다.</b> 폐쇄된 호텔과 폐허, 울타리 안이나 사유지. 공공도로에서만 보세요. 지도 위의 핀은 출입 허가가 아닙니다.</li></ul><p><a href="/guides/liminal-japan">리미널 장소 방문 안내 전체 읽기(영어)</a></p>`,
+  food: `<h2>삿포로에서 나하까지, 시장과 먹거리 거리</h2><p>하코다테 아침시장, 해산물을 골라 올리는 아오모리의 놋케동, 가나자와의 오미초 시장, 교토의 니시키 시장, 도톤보리, 후쿠오카의 포장마차, 나하의 공설시장까지. 먹는 것이 여행의 목적이 되는 18곳을 북쪽부터 남쪽 순서로 소개합니다.</p><p>영업시간은 가게마다 다르고, 아침시장은 정말 아침에 열립니다. 예를 들어 하코다테 아침시장은 대략 오전 5시부터 오후 2시까지입니다. 출발 전에 각 장소에서 열 수 있는 공식 안내를 확인하세요.</p><p>걸으면서 먹지 말아 달라고 요청하는 시장도 있습니다. 니시키 시장은 산 가게 앞이나 가게 안에서 먹어 달라고 안내합니다. 핀은 개별 가게가 아니라 지역을 나타내며, 카드 이미지는 음식이 아닌 그 일대의 현재 항공사진입니다.</p>`,
+  shopping: `<h2>오래된 거리와 지금의 번화가</h2><p>아케이드 상점가, 전문점 거리, 누구나 이름을 아는 번화가. 삿포로의 다누키코지, 갓파바시 도구 거리, 우에노와 오카치마치 사이의 아메요코, 나카노 브로드웨이, 구라시키 미관지구, 나하의 국제거리 등 18곳입니다.</p><p>보기보다 역사가 오래된 거리도 있습니다. 교토의 데라마치는 1590년 도요토미 히데요시가 사찰을 모은 거리이고, 다누키코지는 메이지 시대 초기부터 이어진 상점가, 아메요코는 종전 직후의 암시장에서 시작되었습니다. 이런 거리는 옛 사진과 비교해 볼 만합니다.</p><p>보행자 천국인 날에는 거리 분위기가 달라집니다. 긴자 주오도리는 주말과 공휴일(날씨 등으로 중지될 수 있음), 아키하바라 주오도리는 일요일 오후에 보행자 천국이 됩니다.</p><p>2026년 11월 1일부터 외국인 여행자 면세 제도가 환급 방식으로 바뀝니다. 구입일로부터 90일 이내에 출국할 때 세관 확인을 받으면 소비세 상당액을 돌려받는 방식입니다. 여권을 지니고 다니고, 자세한 내용은 <a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">일본 국세청 안내</a>를 확인하세요.</p>`
+ },
+ 'zh-Hans': {
+  places: `<h2>对照今昔的19个地点</h2><p>列表中的每个地点，都有在新旧两张照片里都能找到的参照物：护城河、河流的弯道、山脚的寺院、港口的岸壁。先在两张照片中找到它，再看看周围发生了什么变化。</p><p>卡片上的年份是照片系列的时期，不是拍摄日期。大多数地点使用1945–1950年系列，长崎、函馆、姬路、奈良和金泽使用1960年代的照片，首里则是1970年代。姉吉石碑的卡片没有旧照片，它要传达的话刻在石头上。</p><ul><li>点按卡片即可打开附带故事的地图。按下“把1945年与今天对照”等按钮，再左右拖动分隔线。</li><li>每个地点都有附出处的介绍页，可从本页下方的“有故事的景点”打开。</li></ul>`,
+  liminal: `<h2>出发前：这是什么状态的地方？</h2><p>“阈限”描述的是一种氛围，而不是场所的状态。其中也有平常人来人往的地方。按照能否参观，可分为以下几类：</p><ul><li><b>仍在使用的车站。</b>群马县的土合站是JR东日本的无人车站，上下行每天各约5班列车。下行站台位于地下约70米，要走486级台阶。</li><li><b>仍在使用的建筑。</b>中野百老汇是1966年开业的商住综合楼，楼上仍有人居住。</li><li><b>已成为参观设施。</b>宇都宫的大谷资料馆可以走进大谷石地下采石场遗址，有固定开放时间，馆内全年约8℃。</li><li><b>只能随团前往。</b>端岛（军舰岛）只能参加从长崎出发的登岛团，浪高或风速超过市政府标准时不会登岛。</li><li><b>不要进入。</b>停业的酒店、废墟、围栏内或私人土地。请只在公共道路上观看。地图上的标记不代表可以进入。</li></ul><p><a href="/guides/liminal-japan">阅读完整的参观指南（英文）</a></p>`,
+  food: `<h2>从札幌到那霸的市场与美食街</h2><p>函馆朝市、自选配料的青森海鲜盖饭、金泽近江町市场、京都锦市场、道顿堀、福冈屋台和那霸公设市场。按从北到南的顺序，介绍18个值得专程去吃的地方。</p><p>营业时间由各店自定，早市真的只在早上。比如函馆朝市大约从早上5点营业到下午2点。出发前请先查看各地点链接的官方信息。</p><p>有些市场请游客不要边走边吃。锦市场请大家在购买的店门前或店内享用。地图标记代表区域而非某家店，卡片图片是该区域现在的航拍照片，并非食物照片。</p>`,
+  shopping: `<h2>老街与今日繁华街</h2><p>拱廊商店街、专门店街，以及人人都听过的繁华区：札幌狸小路、合羽桥道具街、上野与御徒町之间的阿美横、中野百老汇、仓敷美观地区和那霸国际通等18处。</p><p>有些街道的历史比外表更悠久。京都寺町是1590年丰臣秀吉集中寺院的街道，狸小路从明治初期延续至今，阿美横起源于战后初期的黑市。这样的街道值得用今昔对照看一看。</p><p>步行街开放的日子，街道气氛截然不同。银座中央通在周末和节假日（可能因天气取消）、秋叶原中央通在周日下午为步行街。</p><p>2026年11月1日起，日本面向外国游客的免税制度改为退税方式：在购买日起90天内出境时经海关确认后，退还相当于消费税的金额。请随身携带护照，详情请查看<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">日本国税厅的说明</a>。</p>`
+ },
+ 'zh-Hant': {
+  places: `<h2>對照今昔的19個地點</h2><p>清單中的每個地點，都有在新舊兩張照片裡都能找到的參照物：護城河、河流的彎道、山腳的寺院、港口的岸壁。先在兩張照片中找到它，再看看周圍發生了什麼變化。</p><p>卡片上的年份是照片系列的時期，不是拍攝日期。大多數地點使用1945–1950年系列，長崎、函館、姬路、奈良與金澤使用1960年代的照片，首里則是1970年代。姉吉石碑的卡片沒有舊照片，它要傳達的話刻在石頭上。</p><ul><li>點按卡片即可開啟附帶故事的地圖。按下「把1945年與今天對照」等按鈕，再左右拖曳分隔線。</li><li>每個地點都有附出處的介紹頁，可從本頁下方的「有故事的景點」開啟。</li></ul>`,
+  liminal: `<h2>出發前：這是什麼狀態的地方？</h2><p>「閾限」描述的是一種氛圍，而不是場所的狀態。其中也有平常人來人往的地方。依能否參觀，可分為以下幾類：</p><ul><li><b>仍在使用的車站。</b>群馬縣的土合站是JR東日本的無人車站，上下行每天各約5班列車。下行月台位於地下約70公尺，要走486級階梯。</li><li><b>仍在使用的建築。</b>中野百老匯是1966年開業的商住綜合大樓，樓上仍有人居住。</li><li><b>已成為參觀設施。</b>宇都宮的大谷資料館可以走進大谷石地下採石場遺址，有固定開放時間，館內全年約8℃。</li><li><b>只能跟團前往。</b>端島（軍艦島）只能參加從長崎出發的登島行程，浪高或風速超過市政府標準時不會登島。</li><li><b>不要進入。</b>停業的飯店、廢墟、圍欄內或私人土地。請只在公共道路上觀看。地圖上的標記不代表可以進入。</li></ul><p><a href="/guides/liminal-japan">閱讀完整的參觀指南（英文）</a></p>`,
+  food: `<h2>從札幌到那霸的市場與美食街</h2><p>函館朝市、自選配料的青森海鮮丼、金澤近江町市場、京都錦市場、道頓堀、福岡屋台與那霸公設市場。依由北到南的順序，介紹18個值得專程去吃的地方。</p><p>營業時間由各店自訂，早市真的只在早上。例如函館朝市大約從早上5點營業到下午2點。出發前請先查看各地點連結的官方資訊。</p><p>有些市場請遊客不要邊走邊吃。錦市場請大家在購買的店門前或店內享用。地圖標記代表區域而非某家店，卡片圖片是該區域現在的航拍照片，並非食物照片。</p>`,
+  shopping: `<h2>老街與今日繁華街</h2><p>拱廊商店街、專門店街，以及人人都聽過的繁華區：札幌狸小路、合羽橋道具街、上野與御徒町之間的阿美橫、中野百老匯、倉敷美觀地區與那霸國際通等18處。</p><p>有些街道的歷史比外表更悠久。京都寺町是1590年豐臣秀吉集中寺院的街道，狸小路從明治初期延續至今，阿美橫起源於戰後初期的黑市。這樣的街道值得用今昔對照看一看。</p><p>行人徒步區開放的日子，街道氣氛截然不同。銀座中央通在週末與國定假日（可能因天候取消）、秋葉原中央通在週日下午為行人徒步區。</p><p>2026年11月1日起，日本針對外國旅客的免稅制度改為退稅方式：在購買日起90天內出境時經海關確認後，退還相當於消費稅的金額。請隨身攜帶護照，詳情請參閱<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">日本國稅廳的說明</a>。</p>`
+ }
+};
+function paintModeIntro(){
+  const box = $('modeIntro');
+  if (!box) return;
+  const html = mode === 'map' ? '' : ((MODE_INTRO[LANG] || MODE_INTRO.en)[mode] || '');
+  box.hidden = !html;
+  box.innerHTML = html;
+}
+
 function modeNote(){
   /* まだ届いていないものは 0 になる。guideFill と同じで「0か所」と言い切るのは嘘なので
      伏せ字を出す。読み込み前・読み込み失敗のどちらでも 0 なので、ここで一緒に受ける。 */
@@ -2915,6 +2974,7 @@ function setMode(m){
   const intro = $('limIntro');
   intro.hidden = m !== 'liminal';
   if (m === 'liminal') intro.innerHTML = t('limIntroHTML');
+  paintModeIntro();
   if (m === 'map') openMap();
   else buildCards();
 }
@@ -2962,6 +3022,13 @@ function nextLang(){
 }
 $('langBtn').onclick  = e => toggleLangMenu(e.currentTarget);
 $('langBtn2').onclick = e => toggleLangMenu(e.currentTarget);
+/* "English" links point at "/" so crawlers see the canonical home page. On the map app a
+   plain link would come back in the saved or browser language, so switch in place. */
+document.addEventListener('click', e => {
+  const a = e.target.closest?.('a[data-set-lang]');
+  if (!a || keepLinkClick(e) || !T[a.dataset.setLang]) return;
+  e.preventDefault(); setLang(a.dataset.setLang);
+});
 $('mPlaces').onclick  = () => setMode('places');
 $('mMap').onclick     = () => setMode('map');
 $('heroSearch').onclick = () => {
@@ -3027,14 +3094,14 @@ document.addEventListener('keydown', e => {
 
 
 const DIRECTORY_TEXT={"en":["Japan Then & Now — Historical Maps and Hidden Places","Compare historical aerial photographs with today. Explore Japan’s castles, temples, stations and local places in English, Japanese, Korean, Simplified Chinese and Traditional Chinese.","Explore Japan across time","Open the map","Featured places","Liminal Japan","Saved on this browser","Save your favourite places on this browser. No account required; other devices have separate lists.","Historical aerial photographs","Coverage and years vary by location. The map shows the available survey year.","Search in 5 languages","Search place names, local names, and aliases across five supported languages."],"ja":["日本の今昔マップ｜古い空中写真と名所を探す","古い空中写真と現在の日本を地図で比較。城・寺社・駅・地域の小さな名所を、日本語・英語・韓国語・簡体字・繁体字の5言語で探せます。","日本の風景を、時間をこえて","地図を開いて探す","物語のある名所","リミナルな日本","このブラウザに保存","気になる地点を登録不要で保存できます。保存先はこのブラウザで、別の端末とは共有されません。","昔と今の空中写真","撮影年と収録範囲は地点によって異なります。利用できる写真の年代を地図に表示します。","5言語で検索","地名・駅名・現地名・別名から、5つの対応言語で地点を探せます。"],"ko":["일본 과거와 현재 지도 | 옛 항공사진과 숨은 명소","옛 항공사진과 현재의 일본을 지도에서 비교하세요. 성, 사찰, 역과 작은 지역 명소를 한국어·일본어·영어·중국어 간체·번체로 찾아볼 수 있습니다.","시간을 넘어 일본의 풍경을 만나다","지도에서 장소 찾기","이야기가 있는 명소","리미널 재팬","이 브라우저에 저장","회원가입 없이 마음에 드는 장소를 저장하세요. 저장 목록은 다른 기기와 공유되지 않습니다.","과거와 현재의 항공사진","지역에 따라 촬영 연도와 사진의 범위가 다릅니다. 이용 가능한 촬영 연도를 지도에 표시합니다.","5개 언어로 검색","지명, 역 이름, 현지 이름과 별칭으로 장소를 찾아보세요."],"zh-Hans":["日本今昔地图｜历史航拍照片与当地景点","在地图上对比日本的历史航拍照片与今日风景。用简体中文、繁体中文、日语、英语和韩语探索城堡、寺社、车站与当地小景点。","跨越时间，探索日本风景","打开地图寻找地点","有故事的景点","日本的阈限空间","保存在此浏览器","无需注册即可收藏地点。列表仅保存在此浏览器，不与其他设备同步。","昔日与今日航拍照片","拍摄年份和覆盖范围因地点而异。地图会显示可用照片的年代。","5种语言搜索","通过地名、站名、当地名称和别名查找地点。"],"zh-Hant":["日本今昔地圖｜歷史航拍照片與當地景點","在地圖上對比日本的歷史航拍照片與今日風景。用繁體中文、簡體中文、日語、英語和韓語探索城堡、寺社、車站與當地小景點。","跨越時間，探索日本風景","開啟地圖尋找地點","有故事的景點","日本的閾限空間","儲存在此瀏覽器","無需註冊即可收藏地點。清單僅儲存在此瀏覽器，不與其他裝置同步。","昔日與今日航拍照片","拍攝年份和涵蓋範圍因地點而異。地圖會顯示可用照片的年代。","5種語言搜尋","透過地名、站名、當地名稱和別名尋找地點。"]};
-const ATLAS_READING={"en":"<section class=\"atlas-reading\"><h2>Explore Japan on foot, across time</h2><p>Japan Time Atlas is a free map for curious walks through Japan. Compare historical aerial photographs with the present-day map, then explore castles, neighbourhood streets, small local sights and places with a liminal atmosphere.</p><h3>Plan a walk beyond the main sights</h3><p>Start with Tokyo, Kyoto or Osaka, then look closely at the surrounding streets. A station, a small shrine, a waterfront or the remains of an old railway can become the starting point for a different kind of Japan itinerary. Save interesting places in this browser and open them again while planning your walk.</p><h3>Old maps, street photography and everyday history</h3><p>Use the comparison slider to study how coastlines, street patterns and neighbourhoods have changed. This is also a way to explore Japanese architecture and urban history from home. Historical photo coverage and survey years vary by location; use the year shown on the map rather than assuming every photograph was taken in 1945.</p><h3>Liminal Japan and retro places</h3><p>Discover unusual stations, former industrial sites and quiet spaces where the past feels close. Liminal is an atmosphere, not a promise that a place is empty or abandoned. Check official opening and access information before visiting, and explore only public or permitted areas.</p></section>","ja":"<section class=\"atlas-reading\"><h2>古い地図から、次の街歩きへ</h2><p>Japan Time Atlasは、昔の航空写真と現在の地図を見比べながら、日本の街を歩きたい人のための無料地図です。有名な城や寺社だけでなく、路地、駅、地域の小さな名所にも目を向けてみてください。</p><h3>観光地の周りにある、小さな発見</h3><p>東京・京都・大阪などの名所を出発点に、周囲の道、水辺、小さな神社や鉄道跡を地図で探せます。気になった場所はこのブラウザに保存し、散歩や日帰り旅行の行き先を考えるときに見返せます。</p><h3>歴史散歩・古地図・街の写真撮影</h3><p>昔と今の写真をスライダーで比較し、街路や海岸線、建物の並びがどう変わったかを観察できます。旅行前の下調べだけでなく、日本の建築や都市の歴史を家から眺める楽しみ方にも向いています。撮影年と収録範囲は場所によって異なるため、地図に表示される年代をご確認ください。</p><h3>レトロな街並みとリミナルスペース</h3><p>独特な駅、産業遺産、時間が止まったように感じる場所を探します。静かに見える場所でも、現役の施設や私有地の場合があります。現地の公開情報と立入条件を確認し、公開・許可された範囲で楽しんでください。</p></section>","ko":"<section class=\"atlas-reading\"><h2>옛 지도에서 시작하는 일본 골목 여행</h2><p>Japan Time Atlas는 옛 항공사진과 현재 지도를 비교하며 일본을 걸어서 둘러보고 싶은 여행자를 위한 무료 지도입니다. 유명한 성과 사찰뿐 아니라 동네 골목, 작은 역, 지역의 숨은 명소도 찾아보세요.</p><h3>일본 자유여행과 소도시 산책</h3><p>도쿄, 교토, 오사카의 명소에서 출발해 주변 골목과 강변, 작은 신사, 옛 철도 흔적을 살펴보세요. 마음에 드는 장소를 이 브라우저에 저장해 산책이나 당일치기 여행을 계획할 때 다시 볼 수 있습니다.</p><h3>옛 사진으로 보는 일본의 거리와 건축</h3><p>슬라이더를 움직이며 도로와 해안선, 동네의 모습이 어떻게 달라졌는지 비교할 수 있습니다. 여행 준비는 물론 일본 건축, 도시의 역사, 거리 사진에 관심이 있는 분도 집에서 탐색할 수 있습니다. 촬영 연도와 범위는 장소마다 다르므로 지도에 표시된 연도를 확인하세요.</p><h3>레트로 감성과 리미널 스페이스</h3><p>독특한 역, 산업유산, 시간이 멈춘 듯한 공간을 찾아보세요. 리미널한 분위기라고 해서 폐허이거나 사람이 없는 곳이라는 뜻은 아닙니다. 방문 전에 공식 운영 정보와 출입 조건을 확인하고 공개되거나 허가된 구역만 이용하세요.</p></section>","zh-Hans":"<section class=\"atlas-reading\"><h2>从老地图出发，走进日本的街巷</h2><p>Japan Time Atlas是一张免费的日本探索地图。对比历史航拍照片与现在的地图，在城堡、寺社等名胜之外，寻找街巷、小车站和当地的小众景点。</p><h3>日本自由行与城市漫步</h3><p>从东京、京都、大阪的名胜出发，看看周围的街道、河岸、小神社与旧铁路痕迹。把喜欢的地点保存在此浏览器中，规划散步、一日游或下一次日本旅行时再打开。</p><h3>老照片、街头摄影与城市历史</h3><p>移动滑块，观察街道、海岸线与街区如何变化。除了旅行准备，也可以在家探索日本建筑与城市历史，寻找街头摄影的灵感。历史照片的拍摄年份与覆盖范围因地点而异，请以地图显示的年份为准。</p><h3>复古街区与日本阈限空间</h3><p>探索独特的车站、工业遗产和仿佛时间停驻的空间。阈限感不代表某处已废弃或空无一人。出发前请确认官方开放信息与参观条件，仅进入公开或获准进入的区域。</p></section>","zh-Hant":"<section class=\"atlas-reading\"><h2>從老地圖出發，走進日本的街巷</h2><p>Japan Time Atlas是一張免費的日本探索地圖。比較歷史航拍照片與現在的地圖，在城堡、寺社等名勝之外，尋找街巷、小車站與當地的私房景點。</p><h3>日本自由行與老街散策</h3><p>從東京、京都、大阪的名勝出發，看看周圍的街道、河岸、小神社與舊鐵路痕跡。將喜歡的地點儲存在此瀏覽器中，規劃散步、一日遊或下一趟日本旅行時再開啟。</p><h3>老照片、街頭攝影與城市歷史</h3><p>移動滑桿，觀察街道、海岸線與街區如何改變。除了旅行前的準備，也可以在家探索日本建築與城市歷史，尋找街頭攝影的靈感。歷史照片的拍攝年份與涵蓋範圍因地點而異，請以地圖顯示的年份為準。</p><h3>懷舊街景與日本閾限空間</h3><p>探索獨特的車站、產業遺產與彷彿時間停留的空間。閾限感不代表某處已廢棄或空無一人。出發前請確認官方開放資訊與參觀條件，僅進入公開或獲准進入的區域。</p></section>"};
+const ATLAS_READING={"en":"<section class=\"atlas-reading\"><h2>Explore Japan on foot, across time</h2><p>Japan Time Atlas is a free map for curious walks through Japan. Compare historical aerial photographs with the present-day map, then explore castles, neighbourhood streets, small local sights and places with a liminal atmosphere.</p><h3>Plan a walk beyond the main sights</h3><p>Start with Tokyo, Kyoto or Osaka, then look closely at the surrounding streets. A station, a small shrine, a waterfront or the remains of an old railway can become the starting point for a different kind of Japan itinerary. Save interesting places in this browser and open them again while planning your walk.</p><h3>Old maps, street photography and everyday history</h3><p>Use the comparison slider to study how coastlines, street patterns and neighbourhoods have changed. This is also a way to explore Japanese architecture and urban history from home. Historical photo coverage and survey years vary by location; use the year shown on the map rather than assuming every photograph was taken in 1945.</p><h3>Liminal Japan and retro places</h3><p>Discover unusual stations, former industrial sites and quiet spaces where the past feels close. Liminal is an atmosphere, not a promise that a place is empty or abandoned. Check official opening and access information before visiting, and explore only public or permitted areas.</p><h3>Markets and food streets</h3><p>The food list brings together morning markets, covered market streets, Fukuoka’s yatai and Naha’s public market, from Sapporo to Naha. Hours are set shop by shop, and some markets, such as Nishiki in Kyoto, ask visitors not to eat while walking.</p><h3>Shopping streets with a past</h3><p>The shopping list mixes covered arcades such as Tanukikoji, specialist streets such as Kappabashi, and districts such as Ginza and Harajuku. Some are much older than they look: Kyoto’s Teramachi lines the street where Toyotomi Hideyoshi gathered temples in 1590.</p></section>","ja":"<section class=\"atlas-reading\"><h2>古い地図から、次の街歩きへ</h2><p>Japan Time Atlasは、昔の航空写真と現在の地図を見比べながら、日本の街を歩きたい人のための無料地図です。有名な城や寺社だけでなく、路地、駅、地域の小さな名所にも目を向けてみてください。</p><h3>観光地の周りにある、小さな発見</h3><p>東京・京都・大阪などの名所を出発点に、周囲の道、水辺、小さな神社や鉄道跡を地図で探せます。気になった場所はこのブラウザに保存し、散歩や日帰り旅行の行き先を考えるときに見返せます。</p><h3>歴史散歩・古地図・街の写真撮影</h3><p>昔と今の写真をスライダーで比較し、街路や海岸線、建物の並びがどう変わったかを観察できます。旅行前の下調べだけでなく、日本の建築や都市の歴史を家から眺める楽しみ方にも向いています。撮影年と収録範囲は場所によって異なるため、地図に表示される年代をご確認ください。</p><h3>レトロな街並みとリミナルスペース</h3><p>独特な駅、産業遺産、時間が止まったように感じる場所を探します。静かに見える場所でも、現役の施設や私有地の場合があります。現地の公開情報と立入条件を確認し、公開・許可された範囲で楽しんでください。</p><h3>市場と食の通り</h3><p>札幌から那覇まで、朝市やアーケードの市場、福岡の屋台、那覇の公設市場を集めています。営業時間は店ごとに違い、京都の錦市場のように食べ歩きを控えるよう求める市場もあります。</p><h3>歴史のある商店街</h3><p>狸小路のようなアーケード商店街、かっぱ橋のような専門店の通り、銀座や原宿のような繁華街を集めています。京都の寺町は、1590年に豊臣秀吉が寺を集めた通りです。</p></section>","ko":"<section class=\"atlas-reading\"><h2>옛 지도에서 시작하는 일본 골목 여행</h2><p>Japan Time Atlas는 옛 항공사진과 현재 지도를 비교하며 일본을 걸어서 둘러보고 싶은 여행자를 위한 무료 지도입니다. 유명한 성과 사찰뿐 아니라 동네 골목, 작은 역, 지역의 숨은 명소도 찾아보세요.</p><h3>일본 자유여행과 소도시 산책</h3><p>도쿄, 교토, 오사카의 명소에서 출발해 주변 골목과 강변, 작은 신사, 옛 철도 흔적을 살펴보세요. 마음에 드는 장소를 이 브라우저에 저장해 산책이나 당일치기 여행을 계획할 때 다시 볼 수 있습니다.</p><h3>옛 사진으로 보는 일본의 거리와 건축</h3><p>슬라이더를 움직이며 도로와 해안선, 동네의 모습이 어떻게 달라졌는지 비교할 수 있습니다. 여행 준비는 물론 일본 건축, 도시의 역사, 거리 사진에 관심이 있는 분도 집에서 탐색할 수 있습니다. 촬영 연도와 범위는 장소마다 다르므로 지도에 표시된 연도를 확인하세요.</p><h3>레트로 감성과 리미널 스페이스</h3><p>독특한 역, 산업유산, 시간이 멈춘 듯한 공간을 찾아보세요. 리미널한 분위기라고 해서 폐허이거나 사람이 없는 곳이라는 뜻은 아닙니다. 방문 전에 공식 운영 정보와 출입 조건을 확인하고 공개되거나 허가된 구역만 이용하세요.</p><h3>시장과 먹거리 거리</h3><p>삿포로부터 나하까지 아침시장, 아케이드 시장, 후쿠오카의 포장마차, 나하의 공설시장을 모았습니다. 영업시간은 가게마다 다르며, 교토 니시키 시장처럼 걸으면서 먹지 말아 달라고 요청하는 곳도 있습니다.</p><h3>역사가 있는 상점가</h3><p>다누키코지 같은 아케이드 상점가, 갓파바시 같은 전문점 거리, 긴자와 하라주쿠 같은 번화가를 모았습니다. 교토의 데라마치는 1590년 도요토미 히데요시가 사찰을 모은 거리입니다.</p></section>","zh-Hans":"<section class=\"atlas-reading\"><h2>从老地图出发，走进日本的街巷</h2><p>Japan Time Atlas是一张免费的日本探索地图。对比历史航拍照片与现在的地图，在城堡、寺社等名胜之外，寻找街巷、小车站和当地的小众景点。</p><h3>日本自由行与城市漫步</h3><p>从东京、京都、大阪的名胜出发，看看周围的街道、河岸、小神社与旧铁路痕迹。把喜欢的地点保存在此浏览器中，规划散步、一日游或下一次日本旅行时再打开。</p><h3>老照片、街头摄影与城市历史</h3><p>移动滑块，观察街道、海岸线与街区如何变化。除了旅行准备，也可以在家探索日本建筑与城市历史，寻找街头摄影的灵感。历史照片的拍摄年份与覆盖范围因地点而异，请以地图显示的年份为准。</p><h3>复古街区与日本阈限空间</h3><p>探索独特的车站、工业遗产和仿佛时间停驻的空间。阈限感不代表某处已废弃或空无一人。出发前请确认官方开放信息与参观条件，仅进入公开或获准进入的区域。</p><h3>市场与美食街</h3><p>从札幌到那霸，收录早市、拱廊市场、福冈屋台和那霸公设市场。营业时间因店而异，也有像京都锦市场这样请游客不要边走边吃的市场。</p><h3>有历史的商店街</h3><p>收录狸小路等拱廊商店街、合羽桥等专门店街，以及银座、原宿等繁华区。京都寺町是1590年丰臣秀吉集中寺院的街道。</p></section>","zh-Hant":"<section class=\"atlas-reading\"><h2>從老地圖出發，走進日本的街巷</h2><p>Japan Time Atlas是一張免費的日本探索地圖。比較歷史航拍照片與現在的地圖，在城堡、寺社等名勝之外，尋找街巷、小車站與當地的私房景點。</p><h3>日本自由行與老街散策</h3><p>從東京、京都、大阪的名勝出發，看看周圍的街道、河岸、小神社與舊鐵路痕跡。將喜歡的地點儲存在此瀏覽器中，規劃散步、一日遊或下一趟日本旅行時再開啟。</p><h3>老照片、街頭攝影與城市歷史</h3><p>移動滑桿，觀察街道、海岸線與街區如何改變。除了旅行前的準備，也可以在家探索日本建築與城市歷史，尋找街頭攝影的靈感。歷史照片的拍攝年份與涵蓋範圍因地點而異，請以地圖顯示的年份為準。</p><h3>懷舊街景與日本閾限空間</h3><p>探索獨特的車站、產業遺產與彷彿時間停留的空間。閾限感不代表某處已廢棄或空無一人。出發前請確認官方開放資訊與參觀條件，僅進入公開或獲准進入的區域。</p><h3>市場與美食街</h3><p>從札幌到那霸，收錄早市、拱廊市場、福岡屋台與那霸公設市場。營業時間因店而異，也有像京都錦市場這樣請遊客不要邊走邊吃的市場。</p><h3>有歷史的商店街</h3><p>收錄狸小路等拱廊商店街、合羽橋等專門店街，以及銀座、原宿等繁華區。京都寺町是1590年豐臣秀吉集中寺院的街道。</p></section>"};
 function paintDirectory(){
  const aboutLabels={"en":"About this site","ja":"このサイトについて","ko":"이 사이트에 대하여","zh-Hans":"关于本站","zh-Hant":"關於本站","th":"เกี่ยวกับเว็บไซต์นี้"};
  document.querySelectorAll('.site-about-link').forEach(a=>{a.textContent=aboutLabels[LANG]||aboutLabels.en;a.href='/about#'+LANG;});
  const reading=document.getElementById('atlasReading');if(reading)reading.innerHTML=ATLAS_READING[LANG]||ATLAS_READING.en;
  const box=document.querySelector('.seo-list');if(!box||!PLACES.length)return;
  const d=DIRECTORY_TEXT[LANG].slice();d[0]=SEO[LANG].title;d[1]=SEO[LANG].description;
- box.innerHTML='<h2>'+esc(d[4])+'</h2><p>'+esc(d[1])+'</p>'+PLACES.map(p=>'<article><h3><a href="/?lang='+LANG+'#'+p.id+'">'+esc(placeName(p))+'</a></h3><p>'+esc(p.hooks[LANG])+'</p></article>').join('')+'<nav class="locale-nav" aria-label="Language">'+Object.entries({"en":"/","ja":"/ja.html","ko":"/ko.html","zh-Hans":"/zh-cn.html","zh-Hant":"/zh-tw.html"}).map(([l,p])=>'<a href="'+p+'">'+esc(LANG_NAMES[l])+'</a>').join('')+'<a href="/th" lang="th">ไทย</a></nav>';
+ box.innerHTML='<h2>'+esc(d[4])+'</h2><p>'+esc(d[1])+'</p>'+PLACES.map(p=>'<article><h3><a href="'+esc(placeURL(p.id))+'">'+esc(placeName(p))+'</a></h3><p>'+esc(p.hooks[LANG])+'</p></article>').join('')+'<nav class="locale-nav" aria-label="Language">'+Object.entries(LOCALE_HOME).map(([l,href])=>'<a href="'+href+'" lang="'+l+'"'+(l==='en'?' data-set-lang="en"':'')+'>'+esc(LANG_NAMES[l]||'ไทย')+'</a>').join('')+'</nav>';
 }
 
 const AUX_UI = {
@@ -3105,10 +3172,30 @@ $('qResults').addEventListener('keydown',e=>{
   (buttons[next]||$('q')).focus();
 });
 
+/* Other pages open the map with ?place=<id> (landmarks: ?spot=lat,lon) instead of a #hash,
+   so the canonical article and the map view are different URLs. The app's own history still
+   runs on hashes, so the query is turned into the hash the router already understands.
+   Old #hiroshima bookmarks keep working, and an explicit hash wins over the query. */
+function consumeMapQuery(){
+  try {
+    const url = new URL(location.href);
+    const place = url.searchParams.get('place'), spot = url.searchParams.get('spot');
+    if (place === null && spot === null) return;
+    url.searchParams.delete('place'); url.searchParams.delete('spot');
+    if (!url.hash){
+      if (place && /^[a-z0-9-]{1,80}$/i.test(place)) url.hash = place;
+      else if (spot && /^-?\d{1,3}(\.\d+)?,-?\d{1,3}(\.\d+)?$/.test(spot)) url.hash = 'spot=' + spot;
+    }
+    const q = url.searchParams.toString();
+    history.replaceState(history.state, '', url.pathname + (q ? '?' + q : '') + url.hash);
+  } catch(e){}
+}
+
 /* =========================================================================
    10. Start
    ========================================================================= */
 LANG = detectLang();
+consumeMapQuery();
 applyLang();
 fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   PLACES = j.places;
