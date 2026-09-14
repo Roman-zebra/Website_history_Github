@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://japantimeatlas.com/</loc></url>
+  <url><loc>https://japantimeatlas.com/3d/gunkanjima</loc></url>
+  <url><loc>https://japantimeatlas.com/3d/ja/gunkanjima</loc></url>
+  <url><loc>https://japantimeatlas.com/3d/ko/gunkanjima</loc></url>
+  <url><loc>https://japantimeatlas.com/3d/zh-cn/gunkanjima</loc></url>
+  <url><loc>https://japantimeatlas.com/3d/zh-tw/gunkanjima</loc></url>
   <url><loc>https://japantimeatlas.com/about</loc></url>
   <url><loc>https://japantimeatlas.com/guides/japan-historical-maps</loc></url>
   <url><loc>https://japantimeatlas.com/guides/japan-walking-map</loc></url>

@@ -6,7 +6,7 @@
   "B": "Andrew"
  },
  "voices": "Voices: Microsoft neural text-to-speech (Ava and Andrew). The script was written from the sources on this page; the two hosts are not real people.",
- "duration": 468.52,
+ "duration": 467.62,
  "chapters": [
   {
    "start": 0.25,
@@ -445,9 +445,9 @@
   },
   {
    "start": 441.75,
-   "end": 449.51,
+   "end": 448.62,
    "s": "A",
-   "t": "That's our lab test. Everything you just heard is on this page. Turn the island, slide through the years, tap the icons.",
+   "t": "That's the island. Everything you just heard is on this page. Turn it, slide through the years, tap the buildings.",
    "cue": {
     "year": "1962",
     "view": "overview",
@@ -455,14 +455,14 @@
    }
   },
   {
-   "start": 449.93,
-   "end": 465.85,
+   "start": 449.04,
+   "end": 464.95,
    "s": "B",
    "t": "The photographs come from the Geospatial Information Authority of Japan. The model is a first attempt, so it's a few metres out in places. And our voices are Microsoft's synthetic voices. We're not real people. The script was written from the sources on this page."
   },
   {
-   "start": 466.27,
-   "end": 467.72,
+   "start": 465.37,
+   "end": 466.82,
    "s": "A",
    "t": "See you on the next island."
   }

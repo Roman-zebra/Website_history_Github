@@ -1,9 +1,9 @@
 # lab-3d：空中写真から端島（軍艦島）を立体にする（テスト）
 
-トップの「06 テスト中」タブと `/lab/gunkanjima-3d`（noindex、サイトマップ外）が読み込むファイルを作る手順です。
+トップの「06 3D復元」タブと `/3d/gunkanjima`（英・日・韓・簡・繁の5ページ。`scripts/build-3d-pages.cjs` が `gunkanjima.template.html` から生成。canonical・hreflang・OGP・JSON-LD 付き、サイトマップ登録済み。旧 `/lab/gunkanjima-3d` は301）が読み込むファイルを作る手順です。
 公開ビルドには含まれません（`scripts/build.cjs` は `scripts/` を公開しない）。
 
-## できあがるもの（`lab/`）
+## できあがるもの（`3d/`）
 
 | ファイル | 中身 |
 |---|---|
