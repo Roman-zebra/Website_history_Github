@@ -124,7 +124,8 @@
    "h2010": 28.0,
    "images": {
     "1962": "spots/nikkyu-1962.jpg",
-    "latest": "spots/nikkyu-latest.jpg"
+    "latest": "spots/nikkyu-latest.jpg",
+    "photo": "spots/nikkyu-photo.jpg"
    }
   },
   "no65": {
@@ -156,7 +157,8 @@
    "h2010": 36.3,
    "images": {
     "1962": "spots/shrine-1962.jpg",
-    "latest": "spots/shrine-latest.jpg"
+    "latest": "spots/shrine-latest.jpg",
+    "photo": "spots/shrine-photo.jpg"
    }
   },
   "no3": {
@@ -228,5 +230,6 @@
    "islandM2": 72557,
    "lowerBy10mM2": 912
   }
- }
+ },
+ "buildings": "gunkanjima-buildings.json"
 }

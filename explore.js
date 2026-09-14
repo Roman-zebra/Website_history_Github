@@ -898,7 +898,7 @@ const LAB_CARD = {
 function buildLabCards(){
   const c = LAB_CARD[LANG] || LAB_CARD.en;
   $('cards').innerHTML = '<a class="card card-lab" href="/lab/gunkanjima-3d?lang=' + (LANG_PARAM[LANG] || 'en') + '">'
-    + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="/lab/gunkanjima-card.jpg?v=2">'
+    + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="/lab/gunkanjima-card.jpg?v=3">'
     + '<span class="card-emoji">🧪</span>'
     + '<span class="card-era">1947 → NOW · 3D</span>'
     + '<div class="card-body">'

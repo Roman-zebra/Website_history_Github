@@ -3,7 +3,7 @@
    turns that off. Nothing is loaded until the listener presses play or picks a language. */
 (function(){
   'use strict';
-  const V = '2';
+  const V = '3';
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
   const T = window.LAB_TEXT || {};

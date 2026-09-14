@@ -12,8 +12,10 @@
 | `gunkanjima-1962-height.bin`、`gunkanjima-2010-height.bin` | 高さ（Uint16、0.1m単位、1画素およそ0.8m） |
 | `gunkanjima-change.bin` | 1962→2010の高さの変化（Int8、m。±5m未満は0） |
 | `gunkanjima-spots.json` | スポットの名前と説明（5言語）、出典、写真のクレジット |
+| `gunkanjima-buildings.json` | 建物の輪郭（OpenStreetMap、1962年の切り出し座標）と、輪郭の内側で測った屋根の高さ（1962・2010）、外側の地面の高さ。30号棟だけは OSM に無いので高さ格子から輪郭を取った |
+| `island-from-sea.jpg`、`island-north-2024.jpg`、`gunkanjima-card.jpg` | 海上から撮った現地写真（Wikimedia Commons、CC BY-SA 3.0 / CC BY 4.0。ページとカードにクレジット） |
 | `spots/` | スポットごとの空中写真の切り抜き（1962年と最新）と写真 |
-| `audio/gunkanjima-podcast-{en,ja}.mp3` と `.json` | 音声ガイドと、時刻つきの台本・チャプター・立体を動かす合図 |
+| `audio/gunkanjima-podcast-{en,ja}.mp3` と `.json` | 音声ガイド（v3: Microsoft のニューラル音声を edge-tts で合成。日本語は常体の会話、英語も同じ調子）と、時刻つきの台本・チャプター・立体を動かす合図 |
 | `gunkanjima-3d.html`、`gunkanjima-3d.js`、`gunkanjima-podcast.js` | ページ、ビューア（WebGL、ライブラリなし）、音声プレーヤー |
 
 ## 入力（元データはリポジトリに入れていません）
@@ -42,8 +44,8 @@
 3. `python georef.py --year 1962`、`--year 2010` — 切り出しを地理院タイルに合わせる（1画素の大きさと北の向き）
 4. `python calibrate.py --year 1962`、`--year 2010` — 視差を高さに直す（h = H(1 − P_sea/P)）。海面の視差は、現在の5m標高のうち開けた地面の下包絡に平面で合わせる。外れ値、細い針、小さな塔を除いたあと、写真の輪郭に沿って平滑化（ガイデッドフィルタ）
 5. `python osm_extract.py`、`python osm_overlay.py` — OpenStreetMap の建物の位置を1962年の切り出し座標へ。`out/debug_osm_overlay.jpg` で目で確かめる
-6. `python export_web.py` — `web/` に全部を書き出す。1975年は1月の長い影でSIFTが効かないので島の輪郭＋ECC、1947年は向きと縮尺の探索＋ECC（`register_photo.py`）
-7. `python podcast/build_podcast.py --lang en`、`--lang ja` — Windows の WinRT 音声（`tts_build.ps1`）と ffmpeg。台本は `podcast/podcast_{en,ja}.json`
+6. `python export_web.py` — `web/` に全部を書き出す。続けて `python buildings.py` で OpenStreetMap の建物輪郭ごとに屋根と地面の高さを付けて `web/gunkanjima-buildings.json` を作る（ビューア v3 の壁。窓の並びは階数からの模式で、写真には写っていない）。1975年は1月の長い影でSIFTが効かないので島の輪郭＋ECC、1947年は向きと縮尺の探索＋ECC（`register_photo.py`）
+7. `python podcast/build_podcast.py --lang en`、`--lang ja` — 既定は `--engine edge`（`pip install edge-tts`。Microsoft のニューラル音声をネット経由で1行ずつ合成し `podcast/cache_edge/` に貯める）。`--engine winrt` で以前の Windows 標準音声（`tts_build.ps1`）。ffmpeg でラウドネスをそろえて MP3。台本は `podcast/podcast_{en,ja}.json`（`say` が読み仮名つきの読み上げ用、`t` が表示用）
 8. `python podcast/verify_podcast.py --lang en`、`--lang ja` — 手元の音声認識（faster-whisper、キャッシュ済みモデル）で聞き取り、台本と行ごとに比べる
 9. `web/` を `lab/` に、`podcast/out/` の mp3 と json を `lab/audio/` にコピー
 
@@ -53,7 +55,8 @@
 - 2010年：地図の縮尺から2,022m、写真の記録は2,008m。平面の傾きは500pxで3.3m。残差 RMS 0.99m（177ブロック）。埋めた点5.8%。高さは中央値9.6m、上位1%で43.9m、最大47.5m。
 - 変化：2010年に5m以上低くなった面積6,941m²（島72,557m²のおよそ1割）、5m以上高くなった面積503m²、10m以上低くなった面積912m²。護岸に沿った細い帯は位置合わせのずれの可能性がある。
 - 位置合わせ：2010年は地図経由の連結（直接の照合は15点しか取れず、補正には使っていない）。1975年は輪郭の重なり0.915、ECC相関0.463。1947年は探索でNCC 0.344、ECC相関0.449（回転0°、縮尺0.91）。
-- 音声：英語5分31秒、日本語8分45秒（どちらも46行、10章）。
+- 音声（v3, 2026-09-14）：英語7分53秒、日本語8分54秒（どちらも59行、10章）。faster-whisper の聞き取り照合は英0.97・日0.90（日本語の差はほぼ同音の漢字違い。「30年」が「10年」に聞こえたので読み仮名を付けて作り直した）。
+- 壁（v3）：OSM の建物66棟＋30号棟。屋根の高さは輪郭内の格子の上位30%点、地面は輪郭のすぐ外側の輪の下位25%点。65号棟 壁17m（実際は9階）、小中学校 壁24m（7階）。影は5月30日10時ごろの太陽で、1962年写真の影と向きを合わせた。
 
 ## 限界
 
@@ -61,4 +64,5 @@
 - 上から奥が見えない路地は埋まり、壁は斜面になります。煙突のような細いものは消しています。
 - 1975年と最新は別の年の形を借りています。1947年は平面です。
 - 海面の基準は現在の標高データで、当時の測量値ではありません。
-- 声は Windows 標準の合成音声です。より自然な声にするには、ローカルのニューラル音声合成が要ります（インストールが必要）。
+- 声は Microsoft のニューラル合成音声（edge-tts）です。合成にはネット接続が要ります。
+- 壁の窓は階数から描いた模式で、写真の解像度（1画素約0.8m）では壁面は写りません。壁は今の輪郭（OSM）なので、1962年にあった木造の建物には壁が付きません。

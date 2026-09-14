@@ -27,13 +27,13 @@ test('the lab page is kept out of search, credits its sources and loads nothing 
  assert.ok(s.includes('<meta name="robots" content="noindex">'));
  assert.ok(!/rel="canonical"/.test(s));
  for(const need of ['国土地理院の空中写真を加工して作成','MKU628 C18-2','CKU20103 C44-12','CKU7420 C45-6','USA M185-38','OpenStreetMap contributors','Wikimedia Commons'])assert.ok(s.includes(need),need);
- for(const l of LANGS)assert.equal((s.match(new RegExp('data-lang="'+l+'"','g'))||[]).length,3,l);
+ for(const l of LANGS)assert.equal((s.match(new RegExp('data-lang="'+l+'"','g'))||[]).length,4,l);
  assert.ok(!/<script[^>]+src="https?:/.test(s));
  assert.ok(!/href="\/[^"]*\.html/.test(s),'links inside the site use clean routes');
  for(const js of ['lab/gunkanjima-3d.js','lab/gunkanjima-podcast.js']){
   assert.ok(!/https?:\/\//.test(read(js)),js+' loads nothing from other sites');
-  assert.equal(read(js).match(/const V = '(\d+)'/)[1],'2',js);
-  assert.ok(s.includes('/'+js+'?v=2'),js+' version on the page');
+  assert.equal(read(js).match(/const V = '(\d+)'/)[1],'3',js);
+  assert.ok(s.includes('/'+js+'?v=3'),js+' version on the page');
  }
  assert.ok(!read('sitemap.xml').includes('/lab/'));
  assert.ok(/const directories=\[[^\]]*'lab'/.test(read('scripts/build.cjs')),'build copies lab/');
