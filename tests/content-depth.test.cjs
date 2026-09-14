@@ -50,6 +50,9 @@ test('facts corrected against official sources stay corrected',()=>{
  const lim=JSON.parse(read('data/liminal.json')).places,h=lim.find(p=>p.id==='hashima-island'),n=lim.find(p=>p.id==='nakano-broadway');
  assert.ok(!/sixteen storeys|nine hectares|16階建て|9ヘクタール/.test(h.why+h.why_ja));
  assert.ok(!/escalator|エスカレーター/.test(n.why+n.why_ja));
+ // The place pages are static, so they must be corrected too, not only the data they came from.
+ assert.ok(!/sixteen storeys|nine hectares|16階建て|9ヘクタール/.test(read('place/l-hashima-island.html')),'Hashima page lead');
+ assert.ok(!/(<p class='lead'>|<h2>日本語<\/h2><p>)[^<]*<\/p><p>[^<]*(escalator|エスカレーター)/i.test(read('place/l-nakano-broadway.html')),'Nakano Broadway page lead');
  assert.ok(!/four trains a day|一日4本/.test(read('explore.js')));
  const himeji=JSON.parse(read('data/places-world.json')).places.find(p=>p.id==='himeji');
  assert.ok(himeji.story[1].includes('June and July 1945')&&himeji.story_ja[1].includes('6月と7月'));
