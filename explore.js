@@ -97,6 +97,7 @@ const T = {
     lead: 'Compare real aerial photographs on the map.<br>Drag the slider and watch <b>eighty years</b> go by.',
     modePlaces: 'Featured places', modeMap: 'Whole map', modeLiminal: 'Liminal Japan',
     noteLiminal: 'Places that feel like nowhere \u2014 and most are near a city, so you can go.',
+    modeLab: 'Lab · testing', noteLab: 'One place, rebuilt in 3D from 1962 aerial photographs. Still a test.',
     heroSub: 'Historic maps, hidden gems and walks through Japan',
     heroSearch: 'Search a place on the map',
     liminalWhat: 'What makes it liminal',
@@ -220,6 +221,7 @@ const T = {
     lead: '地図で、本物の航空写真を見くらべる。<br>線をドラッグすると、<b>80年</b>が動きます。',
     modePlaces: '名所を見る', modeMap: '日本全体の地図', modeLiminal: 'リミナル',
     noteLiminal: 'どこでもない感じのする場所。その多くは、街から行ける距離にある。',
+    modeLab: 'テスト中', noteLab: '1962年の空中写真から立体にした場所がひとつ。まだテスト中です。',
     heroSub: '昔の地図と写真から、小さな名所を歩く旅へ',
     heroSearch: '地図から場所・駅名を探す',
     liminalWhat: 'どこがリミナルなのか',
@@ -353,6 +355,7 @@ T.ko = {
   lead: '지도에서 실제 항공사진을 비교하세요.<br>슬라이더를 움직이면 <b>80년</b>이 지나갑니다.',
   modePlaces: '주요 장소', modeMap: '전체 지도', modeLiminal: '리미널 재팬',
   noteLiminal: '어디에도 속하지 않은 듯한 곳들. 대개는 도시에서 갈 만한 거리에 있다.',
+  modeLab: '테스트 중', noteLab: '1962년 항공사진으로 입체를 만든 장소 한 곳. 아직 테스트 중입니다.',
   heroSub: '옛 지도와 사진으로 만나는 일본 골목 여행',
   heroSearch: '지도에서 장소 검색',
   liminalWhat: '어떤 점이 리미널한가',
@@ -404,6 +407,7 @@ T['zh-Hans'] = {
   lead: '在地图上比较真实的航空照片。<br>拖动滑块，<b>八十年</b>就过去了。',
   modePlaces: '精选地点', modeMap: '全图', modeLiminal: '阈限日本',
   noteLiminal: '像是不属于任何地方的地方。多半就在城边，真能去。',
+  modeLab: '测试中', noteLab: '用1962年航拍照片做成立体的一个地点。仍在测试中。',
   heroSub: '从老地图与照片出发，探索日本小众景点',
   heroSearch: '在地图上搜索地点',
   liminalWhat: '它为何显得阈限',
@@ -455,6 +459,7 @@ T['zh-Hant'] = {
   lead: '在地圖上比較真實的航空照片。<br>拖動滑桿，<b>八十年</b>就過去了。',
   modePlaces: '精選地點', modeMap: '全圖', modeLiminal: '閾限日本',
   noteLiminal: '像是不屬於任何地方的地方。多半就在城邊，真能去。',
+  modeLab: '測試中', noteLab: '用1962年航空照片做成立體的一個地點。仍在測試中。',
   heroSub: '從老地圖與照片出發，探索日本私房景點',
   heroSearch: '在地圖上搜尋地點',
   liminalWhat: '它為何顯得閾限',
@@ -881,10 +886,33 @@ function restoreActivity(){
  setMode(p.category); noPush(showActivity,p); return true;
 }
 
+/* Tab 06 is a test bench: one place, rebuilt in 3D from two 1962 aerial photographs.
+   The card is a plain link to the lab page, which is kept out of search (noindex). */
+const LAB_CARD = {
+  en: ['Gunkanjima (Hashima), 1962', 'The coal-mining island off Nagasaki, raised in 3D from two aerial photographs.'],
+  ja: ['端島（軍艦島）1962年', '長崎沖の炭鉱の島を、2枚の空中写真から立体にしました。'],
+  ko: ['하시마(군함도), 1962년', '나가사키 앞바다의 탄광 섬을 항공사진 두 장으로 입체화했습니다.'],
+  'zh-Hans': ['端岛（军舰岛），1962年', '长崎外海的煤矿岛，用两张航拍照片做成立体。'],
+  'zh-Hant': ['端島（軍艦島），1962年', '長崎外海的煤礦島，用兩張航空照片做成立體。']
+};
+function buildLabCards(){
+  const c = LAB_CARD[LANG] || LAB_CARD.en;
+  $('cards').innerHTML = '<a class="card card-lab" href="/lab/gunkanjima-3d?lang=' + (LANG_PARAM[LANG] || 'en') + '">'
+    + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="/lab/gunkanjima-1962-card.jpg?v=1">'
+    + '<span class="card-emoji">🧪</span>'
+    + '<span class="card-era">1962 · 3D</span>'
+    + '<div class="card-body">'
+    + '<p class="card-ja">端島 · Hashima</p>'
+    + '<p class="card-name">' + esc(c[0]) + '</p>'
+    + '<p class="card-hook">' + esc(c[1]) + '</p>'
+    + '</div></a>';
+}
+
 function buildCards(){
   window.AtlasWalking?.refresh();
   if (isActivityMode(mode)) return buildActivityCards();
   if (mode === 'liminal') return buildLiminalCards();
+  if (mode === 'lab') return buildLabCards();
   $('cards').innerHTML = PLACES.map(p => {
     const lyr = (p.then && THEN[p.then]) ? p.then : NOW_LAYER.id;
     const cfg = p.then && THEN[p.then];
@@ -2917,31 +2945,36 @@ const MODE_INTRO = {
   places: `<h2>Nineteen places to compare, then and now</h2><p>Every place on this list has something you can find in both photographs: a moat, a bend in a river, a temple on a hillside, a harbour wall. Find that first, then look at what changed around it.</p><p>The years on the cards are photo series, not the day a picture was taken. Most of the list uses the 1945–1950 series. Nagasaki, Hakodate, Himeji, Nara and Kanazawa use photographs from the 1960s, and Shuri from the 1970s. The Aneyoshi stone has no old photograph on its card; its warning is carved into the stone.</p><ul><li>Tap a card to open the map with its story, then press Compare and drag the line across the screen.</li><li>Every place also has a written guide with sources, listed under Featured places further down this page.</li></ul>`,
   liminal: `<h2>Before you go: what kind of place is it?</h2><p>Liminal describes a feeling, not the state of a place, and some of these places are busy on an ordinary day. Sorted by how you can visit:</p><ul><li><b>Still a working station.</b> Doai in Gunma is an unstaffed JR East station with about five trains each way a day. Its northbound platform is about 70 m underground, 486 steps down.</li><li><b>Still a working building.</b> Nakano Broadway in Tokyo opened in 1966 with shops below and homes above. People live upstairs.</li><li><b>Now a visitor site.</b> At the Ōya History Museum in Utsunomiya you walk into a former underground quarry. It keeps set opening hours and stays around 8°C inside all year.</li><li><b>Tour only.</b> You can land on Hashima (Gunkanjima) only with a landing tour from Nagasaki, and landings do not go ahead when waves or wind are outside the city’s limits.</li><li><b>Do not enter.</b> Closed hotels, ruins, anything fenced off or on private land. Look from public roads. A pin on this map is not permission to go inside.</li></ul><p><a href="/guides/liminal-japan">Read the full guide to visiting liminal places</a></p>`,
   food: `<h2>Markets and food streets, Sapporo to Naha</h2><p>Hakodate’s morning market, Aomori’s build-your-own seafood bowls, Omicho in Kanazawa, Nishiki in Kyoto, Dotonbori, Fukuoka’s yatai and Naha’s public market: eighteen places where the food is the reason to go, listed from north to south.</p><p>Every shop keeps its own hours, and morning markets mean it. Hakodate Morning Market, for example, runs from about 5 a.m. to 2 p.m. Check the official page linked from each spot before you set out.</p><p>Some markets ask you not to eat while walking. Nishiki Market asks you to eat in front of or inside the shop where you bought the food. The pin marks the area rather than a particular stall, and the card picture is today’s aerial photograph of the area, not the food.</p>`,
-  shopping: `<h2>Shopping streets, old and new</h2><p>Covered arcades, specialist streets and a few districts everyone has heard of: Tanukikoji in Sapporo, the kitchen shops of Kappabashi, Ameyoko between Ueno and Okachimachi, Nakano Broadway, the canal district of Kurashiki and Kokusai-dori in Naha.</p><p>Several are older than they look. Kyoto’s Teramachi lines the street where Toyotomi Hideyoshi gathered temples in 1590, Tanukikoji has been trading since the early Meiji era, and Ameyoko began as a market just after the Second World War. Streets like these are worth checking with the comparison slider.</p><p>Pedestrian zones change the feel of a street: Ginza’s Chuo-dori at weekends and on public holidays (it can be cancelled for weather), and Akihabara’s on Sunday afternoons.</p><p>From 1 November 2026, tax-free shopping for visitors moves to a refund system: the tax is refunded once customs confirms, as you leave Japan within 90 days of purchase, that you are taking the goods out. Keep your passport with you, and see the <a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">National Tax Agency’s explanation</a>.</p>`
+  shopping: `<h2>Shopping streets, old and new</h2><p>Covered arcades, specialist streets and a few districts everyone has heard of: Tanukikoji in Sapporo, the kitchen shops of Kappabashi, Ameyoko between Ueno and Okachimachi, Nakano Broadway, the canal district of Kurashiki and Kokusai-dori in Naha.</p><p>Several are older than they look. Kyoto’s Teramachi lines the street where Toyotomi Hideyoshi gathered temples in 1590, Tanukikoji has been trading since the early Meiji era, and Ameyoko began as a market just after the Second World War. Streets like these are worth checking with the comparison slider.</p><p>Pedestrian zones change the feel of a street: Ginza’s Chuo-dori at weekends and on public holidays (it can be cancelled for weather), and Akihabara’s on Sunday afternoons.</p><p>From 1 November 2026, tax-free shopping for visitors moves to a refund system: the tax is refunded once customs confirms, as you leave Japan within 90 days of purchase, that you are taking the goods out. Keep your passport with you, and see the <a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">National Tax Agency’s explanation</a>.</p>`,
+  lab: `<h2>Gunkanjima in 1962, raised from two photographs</h2><p>On 30 May 1962 a survey aircraft photographed Hashima twice, from points about a kilometre apart. The taller something is, the further it shifts between the two frames, so measuring that shift point by point gives its height. This tab is a first test of turning the old aerial photographs on this map into 3D.</p><p>It is still rough. Heights are a few metres out in places, narrow alleys that neither photograph can see into are filled in, and walls come out as slopes. Look at it as a picture of the island’s shape, not as a survey.</p>`
  },
  ja: {
   places: `<h2>昔と今を見くらべる19か所</h2><p>このリストのどの場所にも、昔と今の両方の写真で見つけられる目印があります。城の堀、川の曲がり、山すその寺、港の岸壁。まずそれを両方の写真で見つけてから、まわりで何が変わったかを探してください。</p><p>カードの年代は写真シリーズの期間で、撮影日ではありません。多くは1945〜1950年のシリーズで、長崎・函館・姫路・奈良・金沢は1960年代、首里は1970年代の写真です。姉吉の石のカードには昔の写真がありません。伝えたいことは、石に刻まれています。</p><ul><li>カードを押すと、物語つきで地図が開きます。「1945年と今を見くらべる」などのボタンを押し、線を左右に動かしてください。</li><li>各地点には出典つきの解説ページがあります。このページの下にある「物語のある名所」から開けます。</li></ul>`,
   liminal: `<h2>行く前に：どんな状態の場所か</h2><p>リミナルは雰囲気の名前で、場所の状態を表す言葉ではありません。ふだんは人でにぎわう場所も入っています。訪ね方で分けると、次のとおりです。</p><ul><li><b>いまも駅として使われている。</b>群馬の土合駅はJR東日本の無人駅で、列車は上下とも一日5本ほど。下りホームは地下約70m、486段の階段の先です。</li><li><b>いまも建物として使われている。</b>中野ブロードウェイは1966年開業の、下が店、上が住まいのビルです。上の階では人が暮らしています。</li><li><b>見学施設になっている。</b>宇都宮の大谷資料館では、大谷石の地下採掘場跡の中を歩けます。開館時間が決まっていて、中は一年を通して8℃前後です。</li><li><b>ツアーでしか行けない。</b>端島（軍艦島）に上陸できるのは長崎からの上陸ツアーだけで、波や風が市の基準を超えると上陸しません。</li><li><b>入らない。</b>閉鎖されたホテルや廃墟、柵の中や私有地。見るのは公道からにしてください。地図のピンは立ち入りの許可ではありません。</li></ul><p><a href="/guides/liminal-japan">リミナルな場所の訪ね方を詳しく読む（英語）</a></p>`,
   food: `<h2>札幌から那覇まで、市場と食の通り</h2><p>函館朝市、自分で具を選ぶ青森ののっけ丼、金沢の近江町市場、京都の錦市場、道頓堀、福岡の屋台、那覇の公設市場。食べることが目的になる18か所を、北から南の順に並べています。</p><p>営業時間は店ごとに決まっていて、朝市は本当に朝の市場です。たとえば函館朝市は、おおむね朝5時から14時ごろまで。出かける前に、各スポットから開ける公式案内で確認してください。</p><p>食べ歩きを控えるよう求める市場もあります。錦市場は、買ったお店の前か店内で食べるよう呼びかけています。ピンは個別の店ではなくエリアの目印で、カードの画像は料理ではなく、その一帯の今の航空写真です。</p>`,
-  shopping: `<h2>昔からの通りと、今の繁華街</h2><p>アーケード商店街、専門店の通り、誰もが名前を知る繁華街。札幌の狸小路、かっぱ橋道具街、上野と御徒町のあいだのアメ横、中野ブロードウェイ、倉敷の美観地区、那覇の国際通りなど18か所です。</p><p>見た目より歴史の古い通りもあります。京都の寺町は1590年に豊臣秀吉が寺を集めた通り、狸小路は明治のはじめから続く商店街、アメ横は終戦直後の闇市が始まりです。こうした通りは、昔と今の写真で見くらべてみる価値があります。</p><p>歩行者天国の日は通りの雰囲気が変わります。銀座の中央通りは土日祝（天候などで中止あり）、秋葉原の中央通りは日曜の午後が歩行者天国です。</p><p>2026年11月1日から、外国人旅行者の免税制度はリファンド方式に変わります。購入日から90日以内の出国時に税関で確認を受けると、消費税相当額が返金される仕組みです。旅券を持ち歩き、詳しくは<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">国税庁の案内</a>を確認してください。</p>`
+  shopping: `<h2>昔からの通りと、今の繁華街</h2><p>アーケード商店街、専門店の通り、誰もが名前を知る繁華街。札幌の狸小路、かっぱ橋道具街、上野と御徒町のあいだのアメ横、中野ブロードウェイ、倉敷の美観地区、那覇の国際通りなど18か所です。</p><p>見た目より歴史の古い通りもあります。京都の寺町は1590年に豊臣秀吉が寺を集めた通り、狸小路は明治のはじめから続く商店街、アメ横は終戦直後の闇市が始まりです。こうした通りは、昔と今の写真で見くらべてみる価値があります。</p><p>歩行者天国の日は通りの雰囲気が変わります。銀座の中央通りは土日祝（天候などで中止あり）、秋葉原の中央通りは日曜の午後が歩行者天国です。</p><p>2026年11月1日から、外国人旅行者の免税制度はリファンド方式に変わります。購入日から90日以内の出国時に税関で確認を受けると、消費税相当額が返金される仕組みです。旅券を持ち歩き、詳しくは<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">国税庁の案内</a>を確認してください。</p>`,
+  lab: `<h2>1962年の軍艦島を、2枚の写真から立体に</h2><p>1962年5月30日、測量の飛行機が端島を、約1キロ離れた2地点から撮影しました。高いものほど2枚の間で位置が大きくずれるので、そのずれを点ごとに測ると高さが分かります。このタブは、地図にある古い空中写真を立体にしてみる最初の試しです。</p><p>まだ粗いところがあります。場所によって高さが数メートルずれ、どちらの写真にも奥まで写らない狭い路地は埋まり、壁は斜面になります。測量図ではなく、島の形を見るものとしてご覧ください。</p>`
  },
  ko: {
   places: `<h2>옛 사진과 오늘을 비교하는 19곳</h2><p>이 목록의 모든 장소에는 옛 사진과 지금 사진 양쪽에서 찾을 수 있는 기준점이 있습니다. 성의 해자, 강의 굽이, 산기슭의 절, 항구의 안벽 같은 것들입니다. 먼저 그것을 양쪽에서 찾은 뒤, 주변에서 무엇이 달라졌는지 살펴보세요.</p><p>카드에 적힌 연도는 사진 시리즈의 기간이며 촬영일이 아닙니다. 대부분은 1945~1950년 시리즈이고, 나가사키·하코다테·히메지·나라·가나자와는 1960년대, 슈리는 1970년대 사진입니다. 아네요시 비석 카드에는 옛 사진이 없습니다. 전하고 싶은 말은 비석에 새겨져 있습니다.</p><ul><li>카드를 누르면 이야기와 함께 지도가 열립니다. ‘1945년과 오늘을 비교’ 같은 버튼을 누르고 선을 좌우로 움직여 보세요.</li><li>각 장소에는 출처가 달린 안내 페이지가 있습니다. 이 페이지 아래쪽 ‘이야기가 있는 명소’에서 열 수 있습니다.</li></ul>`,
   liminal: `<h2>가기 전에: 어떤 상태의 장소인가</h2><p>리미널은 분위기를 가리키는 말이지 장소의 상태가 아닙니다. 평소에는 사람이 많은 곳도 들어 있습니다. 방문 방법으로 나누면 다음과 같습니다.</p><ul><li><b>지금도 역으로 쓰인다.</b> 군마현의 도아이역은 JR 동일본의 무인역으로, 열차는 상하행 모두 하루 5편 정도입니다. 하행 승강장은 지하 약 70m, 486계단 아래에 있습니다.</li><li><b>지금도 건물로 쓰인다.</b> 나카노 브로드웨이는 1966년에 문을 연 상점·주거 복합 건물입니다. 위층에는 사람이 살고 있습니다.</li><li><b>견학 시설이 되었다.</b> 우쓰노미야의 오야 자료관에서는 오야석 지하 채굴장 터 안을 걸을 수 있습니다. 개관 시간이 정해져 있고, 안은 연중 8℃ 안팎입니다.</li><li><b>투어로만 갈 수 있다.</b> 하시마(군함도)는 나가사키에서 출발하는 상륙 투어로만 들어갈 수 있고, 파도나 바람이 시의 기준을 넘으면 상륙하지 않습니다.</li><li><b>들어가지 않는다.</b> 폐쇄된 호텔과 폐허, 울타리 안이나 사유지. 공공도로에서만 보세요. 지도 위의 핀은 출입 허가가 아닙니다.</li></ul><p><a href="/guides/liminal-japan">리미널 장소 방문 안내 전체 읽기(영어)</a></p>`,
   food: `<h2>삿포로에서 나하까지, 시장과 먹거리 거리</h2><p>하코다테 아침시장, 해산물을 골라 올리는 아오모리의 놋케동, 가나자와의 오미초 시장, 교토의 니시키 시장, 도톤보리, 후쿠오카의 포장마차, 나하의 공설시장까지. 먹는 것이 여행의 목적이 되는 18곳을 북쪽부터 남쪽 순서로 소개합니다.</p><p>영업시간은 가게마다 다르고, 아침시장은 정말 아침에 열립니다. 예를 들어 하코다테 아침시장은 대략 오전 5시부터 오후 2시까지입니다. 출발 전에 각 장소에서 열 수 있는 공식 안내를 확인하세요.</p><p>걸으면서 먹지 말아 달라고 요청하는 시장도 있습니다. 니시키 시장은 산 가게 앞이나 가게 안에서 먹어 달라고 안내합니다. 핀은 개별 가게가 아니라 지역을 나타내며, 카드 이미지는 음식이 아닌 그 일대의 현재 항공사진입니다.</p>`,
-  shopping: `<h2>오래된 거리와 지금의 번화가</h2><p>아케이드 상점가, 전문점 거리, 누구나 이름을 아는 번화가. 삿포로의 다누키코지, 갓파바시 도구 거리, 우에노와 오카치마치 사이의 아메요코, 나카노 브로드웨이, 구라시키 미관지구, 나하의 국제거리 등 18곳입니다.</p><p>보기보다 역사가 오래된 거리도 있습니다. 교토의 데라마치는 1590년 도요토미 히데요시가 사찰을 모은 거리이고, 다누키코지는 메이지 시대 초기부터 이어진 상점가, 아메요코는 종전 직후의 암시장에서 시작되었습니다. 이런 거리는 옛 사진과 비교해 볼 만합니다.</p><p>보행자 천국인 날에는 거리 분위기가 달라집니다. 긴자 주오도리는 주말과 공휴일(날씨 등으로 중지될 수 있음), 아키하바라 주오도리는 일요일 오후에 보행자 천국이 됩니다.</p><p>2026년 11월 1일부터 외국인 여행자 면세 제도가 환급 방식으로 바뀝니다. 구입일로부터 90일 이내에 출국할 때 세관 확인을 받으면 소비세 상당액을 돌려받는 방식입니다. 여권을 지니고 다니고, 자세한 내용은 <a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">일본 국세청 안내</a>를 확인하세요.</p>`
+  shopping: `<h2>오래된 거리와 지금의 번화가</h2><p>아케이드 상점가, 전문점 거리, 누구나 이름을 아는 번화가. 삿포로의 다누키코지, 갓파바시 도구 거리, 우에노와 오카치마치 사이의 아메요코, 나카노 브로드웨이, 구라시키 미관지구, 나하의 국제거리 등 18곳입니다.</p><p>보기보다 역사가 오래된 거리도 있습니다. 교토의 데라마치는 1590년 도요토미 히데요시가 사찰을 모은 거리이고, 다누키코지는 메이지 시대 초기부터 이어진 상점가, 아메요코는 종전 직후의 암시장에서 시작되었습니다. 이런 거리는 옛 사진과 비교해 볼 만합니다.</p><p>보행자 천국인 날에는 거리 분위기가 달라집니다. 긴자 주오도리는 주말과 공휴일(날씨 등으로 중지될 수 있음), 아키하바라 주오도리는 일요일 오후에 보행자 천국이 됩니다.</p><p>2026년 11월 1일부터 외국인 여행자 면세 제도가 환급 방식으로 바뀝니다. 구입일로부터 90일 이내에 출국할 때 세관 확인을 받으면 소비세 상당액을 돌려받는 방식입니다. 여권을 지니고 다니고, 자세한 내용은 <a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">일본 국세청 안내</a>를 확인하세요.</p>`,
+  lab: `<h2>사진 두 장으로 세운 1962년의 군함도</h2><p>1962년 5월 30일, 측량 비행기가 약 1킬로미터 떨어진 두 지점에서 하시마를 촬영했습니다. 높은 것일수록 두 사진 사이에서 더 많이 어긋나기 때문에, 그 어긋남을 점마다 재면 높이를 알 수 있습니다. 이 탭은 지도에 있는 옛 항공사진을 입체로 만들어 보는 첫 시험입니다.</p><p>아직 거친 부분이 있습니다. 곳에 따라 높이가 몇 미터씩 어긋나고, 어느 사진에서도 안쪽까지 보이지 않는 좁은 골목은 메워지며, 벽은 비탈처럼 나옵니다. 측량 자료가 아니라 섬의 모양을 보는 그림으로 봐 주세요.</p>`
  },
  'zh-Hans': {
   places: `<h2>对照今昔的19个地点</h2><p>列表中的每个地点，都有在新旧两张照片里都能找到的参照物：护城河、河流的弯道、山脚的寺院、港口的岸壁。先在两张照片中找到它，再看看周围发生了什么变化。</p><p>卡片上的年份是照片系列的时期，不是拍摄日期。大多数地点使用1945–1950年系列，长崎、函馆、姬路、奈良和金泽使用1960年代的照片，首里则是1970年代。姉吉石碑的卡片没有旧照片，它要传达的话刻在石头上。</p><ul><li>点按卡片即可打开附带故事的地图。按下“把1945年与今天对照”等按钮，再左右拖动分隔线。</li><li>每个地点都有附出处的介绍页，可从本页下方的“有故事的景点”打开。</li></ul>`,
   liminal: `<h2>出发前：这是什么状态的地方？</h2><p>“阈限”描述的是一种氛围，而不是场所的状态。其中也有平常人来人往的地方。按照能否参观，可分为以下几类：</p><ul><li><b>仍在使用的车站。</b>群马县的土合站是JR东日本的无人车站，上下行每天各约5班列车。下行站台位于地下约70米，要走486级台阶。</li><li><b>仍在使用的建筑。</b>中野百老汇是1966年开业的商住综合楼，楼上仍有人居住。</li><li><b>已成为参观设施。</b>宇都宫的大谷资料馆可以走进大谷石地下采石场遗址，有固定开放时间，馆内全年约8℃。</li><li><b>只能随团前往。</b>端岛（军舰岛）只能参加从长崎出发的登岛团，浪高或风速超过市政府标准时不会登岛。</li><li><b>不要进入。</b>停业的酒店、废墟、围栏内或私人土地。请只在公共道路上观看。地图上的标记不代表可以进入。</li></ul><p><a href="/guides/liminal-japan">阅读完整的参观指南（英文）</a></p>`,
   food: `<h2>从札幌到那霸的市场与美食街</h2><p>函馆朝市、自选配料的青森海鲜盖饭、金泽近江町市场、京都锦市场、道顿堀、福冈屋台和那霸公设市场。按从北到南的顺序，介绍18个值得专程去吃的地方。</p><p>营业时间由各店自定，早市真的只在早上。比如函馆朝市大约从早上5点营业到下午2点。出发前请先查看各地点链接的官方信息。</p><p>有些市场请游客不要边走边吃。锦市场请大家在购买的店门前或店内享用。地图标记代表区域而非某家店，卡片图片是该区域现在的航拍照片，并非食物照片。</p>`,
-  shopping: `<h2>老街与今日繁华街</h2><p>拱廊商店街、专门店街，以及人人都听过的繁华区：札幌狸小路、合羽桥道具街、上野与御徒町之间的阿美横、中野百老汇、仓敷美观地区和那霸国际通等18处。</p><p>有些街道的历史比外表更悠久。京都寺町是1590年丰臣秀吉集中寺院的街道，狸小路从明治初期延续至今，阿美横起源于战后初期的黑市。这样的街道值得用今昔对照看一看。</p><p>步行街开放的日子，街道气氛截然不同。银座中央通在周末和节假日（可能因天气取消）、秋叶原中央通在周日下午为步行街。</p><p>2026年11月1日起，日本面向外国游客的免税制度改为退税方式：在购买日起90天内出境时经海关确认后，退还相当于消费税的金额。请随身携带护照，详情请查看<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">日本国税厅的说明</a>。</p>`
+  shopping: `<h2>老街与今日繁华街</h2><p>拱廊商店街、专门店街，以及人人都听过的繁华区：札幌狸小路、合羽桥道具街、上野与御徒町之间的阿美横、中野百老汇、仓敷美观地区和那霸国际通等18处。</p><p>有些街道的历史比外表更悠久。京都寺町是1590年丰臣秀吉集中寺院的街道，狸小路从明治初期延续至今，阿美横起源于战后初期的黑市。这样的街道值得用今昔对照看一看。</p><p>步行街开放的日子，街道气氛截然不同。银座中央通在周末和节假日（可能因天气取消）、秋叶原中央通在周日下午为步行街。</p><p>2026年11月1日起，日本面向外国游客的免税制度改为退税方式：在购买日起90天内出境时经海关确认后，退还相当于消费税的金额。请随身携带护照，详情请查看<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">日本国税厅的说明</a>。</p>`,
+  lab: `<h2>用两张照片立起来的1962年军舰岛</h2><p>1962年5月30日，测量飞机从相距约1公里的两个位置拍下了端岛。越高的东西，在两张照片之间偏移得越多，逐点量出这个偏移就能得到高度。这个标签页是把地图上的老航拍照片做成立体的第一次尝试。</p><p>效果还比较粗糙。有些地方高度会差几米，两张照片都看不进去的窄巷被填平，墙面会变成斜坡。请把它当作看岛屿形状的图，而不是测量图。</p>`
  },
  'zh-Hant': {
   places: `<h2>對照今昔的19個地點</h2><p>清單中的每個地點，都有在新舊兩張照片裡都能找到的參照物：護城河、河流的彎道、山腳的寺院、港口的岸壁。先在兩張照片中找到它，再看看周圍發生了什麼變化。</p><p>卡片上的年份是照片系列的時期，不是拍攝日期。大多數地點使用1945–1950年系列，長崎、函館、姬路、奈良與金澤使用1960年代的照片，首里則是1970年代。姉吉石碑的卡片沒有舊照片，它要傳達的話刻在石頭上。</p><ul><li>點按卡片即可開啟附帶故事的地圖。按下「把1945年與今天對照」等按鈕，再左右拖曳分隔線。</li><li>每個地點都有附出處的介紹頁，可從本頁下方的「有故事的景點」開啟。</li></ul>`,
   liminal: `<h2>出發前：這是什麼狀態的地方？</h2><p>「閾限」描述的是一種氛圍，而不是場所的狀態。其中也有平常人來人往的地方。依能否參觀，可分為以下幾類：</p><ul><li><b>仍在使用的車站。</b>群馬縣的土合站是JR東日本的無人車站，上下行每天各約5班列車。下行月台位於地下約70公尺，要走486級階梯。</li><li><b>仍在使用的建築。</b>中野百老匯是1966年開業的商住綜合大樓，樓上仍有人居住。</li><li><b>已成為參觀設施。</b>宇都宮的大谷資料館可以走進大谷石地下採石場遺址，有固定開放時間，館內全年約8℃。</li><li><b>只能跟團前往。</b>端島（軍艦島）只能參加從長崎出發的登島行程，浪高或風速超過市政府標準時不會登島。</li><li><b>不要進入。</b>停業的飯店、廢墟、圍欄內或私人土地。請只在公共道路上觀看。地圖上的標記不代表可以進入。</li></ul><p><a href="/guides/liminal-japan">閱讀完整的參觀指南（英文）</a></p>`,
   food: `<h2>從札幌到那霸的市場與美食街</h2><p>函館朝市、自選配料的青森海鮮丼、金澤近江町市場、京都錦市場、道頓堀、福岡屋台與那霸公設市場。依由北到南的順序，介紹18個值得專程去吃的地方。</p><p>營業時間由各店自訂，早市真的只在早上。例如函館朝市大約從早上5點營業到下午2點。出發前請先查看各地點連結的官方資訊。</p><p>有些市場請遊客不要邊走邊吃。錦市場請大家在購買的店門前或店內享用。地圖標記代表區域而非某家店，卡片圖片是該區域現在的航拍照片，並非食物照片。</p>`,
-  shopping: `<h2>老街與今日繁華街</h2><p>拱廊商店街、專門店街，以及人人都聽過的繁華區：札幌狸小路、合羽橋道具街、上野與御徒町之間的阿美橫、中野百老匯、倉敷美觀地區與那霸國際通等18處。</p><p>有些街道的歷史比外表更悠久。京都寺町是1590年豐臣秀吉集中寺院的街道，狸小路從明治初期延續至今，阿美橫起源於戰後初期的黑市。這樣的街道值得用今昔對照看一看。</p><p>行人徒步區開放的日子，街道氣氛截然不同。銀座中央通在週末與國定假日（可能因天候取消）、秋葉原中央通在週日下午為行人徒步區。</p><p>2026年11月1日起，日本針對外國旅客的免稅制度改為退稅方式：在購買日起90天內出境時經海關確認後，退還相當於消費稅的金額。請隨身攜帶護照，詳情請參閱<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">日本國稅廳的說明</a>。</p>`
+  shopping: `<h2>老街與今日繁華街</h2><p>拱廊商店街、專門店街，以及人人都聽過的繁華區：札幌狸小路、合羽橋道具街、上野與御徒町之間的阿美橫、中野百老匯、倉敷美觀地區與那霸國際通等18處。</p><p>有些街道的歷史比外表更悠久。京都寺町是1590年豐臣秀吉集中寺院的街道，狸小路從明治初期延續至今，阿美橫起源於戰後初期的黑市。這樣的街道值得用今昔對照看一看。</p><p>行人徒步區開放的日子，街道氣氛截然不同。銀座中央通在週末與國定假日（可能因天候取消）、秋葉原中央通在週日下午為行人徒步區。</p><p>2026年11月1日起，日本針對外國旅客的免稅制度改為退稅方式：在購買日起90天內出境時經海關確認後，退還相當於消費稅的金額。請隨身攜帶護照，詳情請參閱<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">日本國稅廳的說明</a>。</p>`,
+  lab: `<h2>用兩張照片立起來的1962年軍艦島</h2><p>1962年5月30日，測量飛機從相距約1公里的兩個位置拍下了端島。越高的東西，在兩張照片之間偏移得越多，逐點量出這個偏移就能得到高度。這個分頁是把地圖上的舊航空照片做成立體的第一次嘗試。</p><p>效果還比較粗糙。有些地方高度會差幾公尺，兩張照片都看不進去的窄巷被填平，牆面會變成斜坡。請把它當作看島嶼形狀的圖，而不是測量圖。</p>`
  }
 };
 function paintModeIntro(){
@@ -2958,6 +2991,7 @@ function modeNote(){
   const n = c => (c || '…') + PlaceUI.pick([' places. ','か所。','곳. ','处。','處。'], LANG);
   if (mode === 'map' || roaming) return t('noteMap');
   if (isActivityMode(mode)) return n(ACTIVITIES.filter(p=>p.category===mode).length) + activityText(mode==='food'?2:3);
+  if (mode === 'lab') return t('noteLab');
   if (mode === 'liminal') return n(LIMINAL.length) + t('noteLiminal');
   return n(PLACES.length) + t('notePlaces');
 }
@@ -2965,7 +2999,7 @@ function modeNote(){
 function setMode(m){
   mode = m;
   window.AtlasWalking?.refresh();
-  for (const [id, key] of [['mPlaces','places'], ['mMap','map'], ['mLiminal','liminal'], ['mFood','food'], ['mShopping','shopping']]){
+  for (const [id, key] of [['mPlaces','places'], ['mMap','map'], ['mLiminal','liminal'], ['mFood','food'], ['mShopping','shopping'], ['mLab','lab']]){
     $(id).classList.toggle('is-on', m === key);
     $(id).setAttribute('aria-selected', String(m === key));
   }
@@ -3038,6 +3072,7 @@ $('heroSearch').onclick = () => {
 $('mLiminal').onclick = () => setMode('liminal');
 $('mFood').onclick = () => setMode('food');
 $('mShopping').onclick = () => setMode('shopping');
+$('mLab').onclick = () => setMode('lab');
 /* Close for good, not just collapse. Without this the sheet sat over the map
    with no way to dismiss it, so the markers underneath were unreachable. */
 function closePanel(){

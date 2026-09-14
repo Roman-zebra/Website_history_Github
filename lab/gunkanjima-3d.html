@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gunkanjima on 30 May 1962, in 3D (test) | Japan Time Atlas</title>
+<meta name="description" content="A test: Hashima (Gunkanjima) as it stood on 30 May 1962, raised in 3D from two GSI aerial photographs.">
+<link rel="stylesheet" href="/page.css?v=0.80">
+<link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/icons/atlas.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/atlas-180.png">
+<style>
+.lab-badge{display:inline-block;margin:0 0 .5rem;padding:.15rem .6rem;border:1px dashed #a35945;border-radius:2px;color:#793e30;font-size:.8rem;letter-spacing:.06em}
+.viewer{position:relative;margin:1.25rem 0 1.75rem;background:#0f191b;border-radius:6px;overflow:hidden}
+.viewer canvas{display:block;width:100%;height:min(68vh,36rem);touch-action:none;cursor:grab;outline:none}
+.viewer canvas:active{cursor:grabbing}
+.viewer canvas:focus-visible{box-shadow:inset 0 0 0 3px #d9b36e}
+.viewer img{display:block;width:100%;height:auto}
+.viewer [hidden]{display:none}
+.viewer-bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;padding:.6rem .75rem;background:#152326;color:#dfe7e3}
+.viewer-bar button{font:inherit;font-size:.9rem;line-height:1.3;padding:.45rem .8rem;border:1px solid #4d6a66;border-radius:3px;background:#1d3134;color:#eef3f0;cursor:pointer}
+.viewer-bar button:hover{background:#27424a}
+.viewer-bar button:disabled{opacity:.5;cursor:default}
+.viewer-status{margin:0 0 0 auto;font-size:.85rem;color:#b8c7c2}
+.compass{position:absolute;top:.75rem;right:.75rem;width:2.25rem;height:2.25rem;border-radius:50%;background:#0f191bcc;color:#f3f1ea;display:grid;place-items:center;font:600 .75rem/1 system-ui,sans-serif;pointer-events:none}
+.compass::before{content:"";position:absolute;top:.15rem;left:50%;margin-left:-.25rem;border-left:.25rem solid transparent;border-right:.25rem solid transparent;border-bottom:.4rem solid #d9694f}
+.lab-langs a{white-space:nowrap}
+.lab-credit{font-size:.9rem}
+@media (max-width:600px){.viewer canvas{height:60vh}.viewer-status{margin:0;width:100%}}
+</style>
+</head>
+<body>
+<nav><a href="/" data-home>Japan Time Atlas</a> &rsaquo; <span data-crumb>Lab · testing</span> · <span class="lab-langs"><a href="?lang=en" lang="en">English</a> · <a href="?lang=ja" lang="ja">日本語</a> · <a href="?lang=ko" lang="ko">한국어</a> · <a href="?lang=zh-CN" lang="zh-Hans">简体中文</a> · <a href="?lang=zh-TW" lang="zh-Hant">繁體中文</a></span></nav>
+<main>
+<div data-lang="en" lang="en">
+<p class="lab-badge">Lab · testing</p>
+<h1>Gunkanjima on 30 May 1962, in 3D</h1>
+<p class="lead">Hashima was still a working coal-mining island when a survey aircraft flew over it on 30 May 1962. In 1960, about 5,300 people lived on its roughly 6.3 hectares. This model was raised from two of the photographs taken that day.</p>
+</div>
+<div data-lang="ja" lang="ja" hidden>
+<p class="lab-badge">テスト中</p>
+<h1>1962年5月30日の軍艦島を立体で見る</h1>
+<p class="lead">端島がまだ炭鉱の島として動いていた1962年5月30日、測量の飛行機が島の上を飛びました。その2年前の1960年には、約6.3ヘクタールの島に約5,300人が暮らしていました。この立体は、その日に撮られた写真のうち2枚から起こしたものです。</p>
+</div>
+<div data-lang="ko" lang="ko" hidden>
+<p class="lab-badge">테스트 중</p>
+<h1>1962년 5월 30일의 군함도를 3D로</h1>
+<p class="lead">하시마가 아직 탄광 섬으로 돌아가던 1962년 5월 30일, 측량 비행기가 섬 위를 지나갔습니다. 2년 전인 1960년에는 약 6.3헥타르의 섬에 약 5,300명이 살았습니다. 이 입체 모델은 그날 찍은 사진 가운데 두 장으로 만들었습니다.</p>
+</div>
+<div data-lang="zh-Hans" lang="zh-Hans" hidden>
+<p class="lab-badge">测试中</p>
+<h1>立体查看1962年5月30日的军舰岛</h1>
+<p class="lead">1962年5月30日，端岛仍是一座运转中的煤矿岛，测量飞机从岛的上空飞过。两年前的1960年，约6.3公顷的岛上住着约5,300人。这个立体模型是用那天拍下的其中两张照片做成的。</p>
+</div>
+<div data-lang="zh-Hant" lang="zh-Hant" hidden>
+<p class="lab-badge">測試中</p>
+<h1>立體檢視1962年5月30日的軍艦島</h1>
+<p class="lead">1962年5月30日，端島仍是一座運作中的煤礦島，測量飛機從島的上空飛過。兩年前的1960年，約6.3公頃的島上住著約5,300人。這個立體模型是用那天拍下的其中兩張照片做成的。</p>
+</div>
+
+<div class="viewer">
+<canvas id="view" tabindex="0" role="img" aria-label="Interactive 3D model of Hashima in 1962"></canvas>
+<img id="viewFallback" src="/lab/gunkanjima-1962.jpg?v=1" alt="Aerial photograph of Hashima, 30 May 1962" hidden>
+<div id="viewCompass" class="compass" aria-hidden="true">N</div>
+<div class="viewer-bar"><button id="btnFlat" type="button" aria-pressed="false">Flat photo</button><button id="btnExag" type="button" aria-pressed="false">Heights ×2</button><button id="btnReset" type="button">Reset view</button><p id="viewStatus" class="viewer-status" aria-live="polite"></p></div>
+</div>
+
+<section data-lang="en" lang="en">
+<h2>How it was made</h2>
+<p>The two photographs were taken about a kilometre apart, from roughly 1,950 metres up. Seen from two points, a tall building shifts further between the frames than the sea wall at its foot. That shift was measured for every point on the island with computer stereo matching (OpenCV), then turned into height using the camera’s focal length (152.67 mm) and the flying height.</p>
+<p>The flying height worked out from the map scale is 1,950 m, the same figure the aircraft’s altimeter shows on the edge of the photograph.</p>
+<p>Sea level was set against GSI’s present-day 5 m elevation data on open ground that has not changed since, such as the yard at the north end. As a check, a floating pier moored on the east side comes out at about 2.5 m, a sensible height for a deck on the water.</p>
+<h2>What to keep in mind</h2>
+<ul>
+<li>This is a first test, made from only two photographs. Heights are a few metres out in places.</li>
+<li>From above you cannot see down into the narrow alleys between the apartment blocks, so they are filled in, and walls come out as slopes rather than sheer drops. Thin towers and chimneys are left out.</li>
+<li>About one point in six could not be matched and was filled in from its neighbours.</li>
+<li>The highest points, about 50 m above sea level, are along the rock ridge down the middle of the island, where buildings stood on top of the rock.</li>
+</ul>
+<h2>Visiting Hashima</h2>
+<p>You can land only on a tour from Nagasaki, and landings do not go ahead when waves, wind or visibility are outside Nagasaki City’s limits. <a href="/place/l-hashima-island">More on the Hashima page</a>.</p>
+<p>Hashima is also one of the places where the forced labour of many Koreans and others in the 1940s is remembered.</p>
+<h2>Sources</h2>
+<p class="lab-credit">Photographs: Geospatial Information Authority of Japan (GSI), aerial photographs MKU628 C18-2 and C18-3, taken on 30 May 1962, processed to make this model (国土地理院の空中写真を加工して作成). Sea level: GSI 5 m elevation data. Scale and north: GSI seamless aerial photo tiles. <a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">GSI map and aerial photo service</a></p>
+</section>
+
+<section data-lang="ja" lang="ja" hidden>
+<h2>作り方</h2>
+<p>2枚の写真は、約1キロ離れた2地点から、高さ約1,950メートルで撮られています。2地点から見ると、高い建物ほど足もとの護岸より大きく位置がずれます。そのずれを島のすべての点でコンピュータの画像照合（OpenCV）により測り、カメラの焦点距離（152.67ミリ）と飛行高度から高さに直しました。</p>
+<p>地図の縮尺から出した飛行高度は1,950メートルで、写真のふちに写っている機上の高度計も同じ1,950を示しています。</p>
+<p>海面の高さは、北端の広場のように当時から変わっていない開けた地面で、国土地理院の現在の5メートル標高データに合わせました。確かめとして、東側に係留された浮き桟橋は海面から約2.5メートルと出ており、水に浮かぶ甲板としておかしくない値です。</p>
+<h2>見るときの注意</h2>
+<ul>
+<li>写真2枚だけで作った最初の試しです。場所によって高さが数メートルずれています。</li>
+<li>上から奥まで見えない、アパートの間の狭い路地は埋まり、壁はまっすぐな崖ではなく斜面になります。細い塔や煙突は省いています。</li>
+<li>照合できなかった点（およそ6点に1点）は、まわりの値で埋めています。</li>
+<li>いちばん高いところは海抜約50メートルで、島の中央を走る岩の尾根の上に建物が載っていたあたりです。</li>
+</ul>
+<h2>端島を訪ねるには</h2>
+<p>上陸は長崎から出るツアーでしかできず、波や風、視程が長崎市の基準を外れると上陸は行われません。<a href="/place/l-hashima-island">詳しくは端島のページへ</a>。</p>
+<p>端島は、1940年代に多くの朝鮮半島出身者などが意思に反して連れて来られ、厳しい環境で働かされた歴史とともに記憶されている場所のひとつでもあります。</p>
+<h2>出典</h2>
+<p class="lab-credit">国土地理院の空中写真（MKU628 C18-2・C18-3、1962年5月30日撮影）を加工して作成。海面の基準：国土地理院 5mメッシュ標高。縮尺と方位：地理院タイル（シームレス空中写真）。<a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">地図・空中写真閲覧サービス</a></p>
+</section>
+
+<section data-lang="ko" lang="ko" hidden>
+<h2>만든 방법</h2>
+<p>두 장의 사진은 약 1킬로미터 떨어진 두 지점에서, 약 1,950미터 높이에서 찍었습니다. 두 지점에서 보면 높은 건물일수록 발치의 방파제보다 위치가 더 크게 어긋납니다. 섬의 모든 점에서 그 어긋남을 컴퓨터 영상 정합(OpenCV)으로 재고, 카메라 초점거리(152.67mm)와 비행 고도로 높이를 계산했습니다.</p>
+<p>지도 축척에서 계산한 비행 고도는 1,950미터로, 사진 가장자리에 찍힌 기내 고도계도 같은 1,950을 가리킵니다.</p>
+<p>해수면 높이는 북쪽 끝 광장처럼 당시와 달라지지 않은 트인 땅에서 일본 국토지리원의 현재 5미터 표고 자료에 맞췄습니다. 확인 삼아 보면, 동쪽에 매어 둔 부잔교는 해수면에서 약 2.5미터로 나와 물 위에 뜬 갑판으로서 무리 없는 값입니다.</p>
+<h2>볼 때 유의할 점</h2>
+<ul>
+<li>사진 두 장만으로 만든 첫 시험입니다. 곳에 따라 높이가 몇 미터씩 어긋납니다.</li>
+<li>위에서 안쪽까지 보이지 않는 아파트 사이의 좁은 골목은 메워지고, 벽은 수직 절벽이 아니라 비탈로 나옵니다. 가느다란 탑이나 굴뚝은 뺐습니다.</li>
+<li>정합하지 못한 점(대략 여섯 점 중 하나)은 주변 값으로 채웠습니다.</li>
+<li>가장 높은 곳은 해발 약 50미터로, 섬 가운데를 지나는 암반 능선 위에 건물이 서 있던 부분입니다.</li>
+</ul>
+<h2>하시마 방문</h2>
+<p>상륙은 나가사키에서 출발하는 투어로만 가능하며, 파도·바람·시정이 나가사키시 기준을 벗어나면 상륙하지 않습니다. <a href="/place/l-hashima-island">자세한 내용은 하시마 페이지(영어·일본어)</a>.</p>
+<p>하시마는 1940년대에 많은 한반도 출신자 등이 본인의 의사에 반해 끌려와 가혹한 환경에서 일해야 했던 역사와 함께 기억되는 곳이기도 합니다.</p>
+<h2>출처</h2>
+<p class="lab-credit">일본 국토지리원 항공사진(MKU628 C18-2·C18-3, 1962년 5월 30일 촬영)을 가공해 제작(国土地理院の空中写真を加工して作成). 해수면 기준: 국토지리원 5m 표고 자료. 축척과 방위: 지리원 타일(심리스 항공사진). <a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">국토지리원 지도·항공사진 열람 서비스(일본어)</a></p>
+</section>
+
+<section data-lang="zh-Hans" lang="zh-Hans" hidden>
+<h2>制作方法</h2>
+<p>两张照片是在相距约1公里的两个位置、约1,950米的高度拍摄的。从两个位置看，越高的建筑相对于脚下的护岸偏移得越多。我们用计算机图像匹配（OpenCV）量出岛上每一点的偏移，再根据相机焦距（152.67毫米）和飞行高度换算成高度。</p>
+<p>由地图比例尺算出的飞行高度是1,950米，与照片边缘拍到的机上高度计读数1,950一致。</p>
+<p>海面高度是在北端广场这类至今没有变化的空地上，按日本国土地理院现今的5米高程数据对齐的。作为检验，东侧系泊的浮码头算出来约高出海面2.5米，对浮在水面上的甲板来说是合理的数值。</p>
+<h2>注意事项</h2>
+<ul>
+<li>这是只用两张照片做的第一次尝试，有些地方高度会差几米。</li>
+<li>从上方看不进公寓楼之间的窄巷，所以窄巷被填平，墙面也会变成斜坡，而不是垂直的崖壁。细长的塔和烟囱没有做出来。</li>
+<li>无法匹配的点（大约每六个点有一个）用周围的数值补上。</li>
+<li>最高处海拔约50米，位于岛中央的岩石山脊上、当年建筑立在岩石上的地方。</li>
+</ul>
+<h2>参观端岛</h2>
+<p>只能参加从长崎出发的登岛团，浪高、风速或能见度超出长崎市标准时不会登岛。<a href="/place/l-hashima-island">详情请看端岛页面（英语、日语）</a>。</p>
+<p>端岛也是与1940年代许多朝鲜半岛出身者等人违背本人意愿被带来、在严酷环境下被迫劳动的历史一同被记住的地方之一。</p>
+<h2>出处</h2>
+<p class="lab-credit">使用日本国土地理院航拍照片（MKU628 C18-2、C18-3，1962年5月30日拍摄）加工制作（国土地理院の空中写真を加工して作成）。海面基准：国土地理院5米网格高程。比例尺与方位：地理院瓦片（无缝航拍照片）。<a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">国土地理院地图与航拍照片浏览服务（日语）</a></p>
+</section>
+
+<section data-lang="zh-Hant" lang="zh-Hant" hidden>
+<h2>製作方法</h2>
+<p>兩張照片是在相距約1公里的兩個位置、約1,950公尺的高度拍攝的。從兩個位置看，越高的建築相對於腳下的護岸偏移得越多。我們用電腦影像比對（OpenCV）量出島上每一點的偏移，再根據相機焦距（152.67毫米）和飛行高度換算成高度。</p>
+<p>由地圖比例尺算出的飛行高度是1,950公尺，與照片邊緣拍到的機上高度計讀數1,950一致。</p>
+<p>海面高度是在北端廣場這類至今沒有變化的空地上，依日本國土地理院現今的5公尺高程資料對齊的。作為檢驗，東側繫泊的浮動碼頭算出來約高出海面2.5公尺，對浮在水面上的甲板來說是合理的數值。</p>
+<h2>注意事項</h2>
+<ul>
+<li>這是只用兩張照片做的第一次嘗試，有些地方高度會差幾公尺。</li>
+<li>從上方看不進公寓大樓之間的窄巷，所以窄巷被填平，牆面也會變成斜坡，而不是垂直的崖壁。細長的塔和煙囪沒有做出來。</li>
+<li>無法比對的點（大約每六個點有一個）用周圍的數值補上。</li>
+<li>最高處海拔約50公尺，位於島中央的岩石山脊上、當年建築立在岩石上的地方。</li>
+</ul>
+<h2>參觀端島</h2>
+<p>只能參加從長崎出發的登島行程，浪高、風速或能見度超出長崎市標準時不會登島。<a href="/place/l-hashima-island">詳情請看端島頁面（英語、日語）</a>。</p>
+<p>端島也是與1940年代許多朝鮮半島出身者等人違反本人意願被帶來、在嚴酷環境下被迫勞動的歷史一同被記住的地方之一。</p>
+<h2>出處</h2>
+<p class="lab-credit">使用日本國土地理院航空照片（MKU628 C18-2、C18-3，1962年5月30日拍攝）加工製作（国土地理院の空中写真を加工して作成）。海面基準：國土地理院5公尺網格高程。比例尺與方位：地理院圖磚（無縫航空照片）。<a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">國土地理院地圖與航空照片瀏覽服務（日語）</a></p>
+</section>
+</main>
+<footer>
+<p>Aerial photographs: Geospatial Information Authority of Japan (GSI).</p>
+<p><a href="/" data-home>Back to the map</a> &middot; <a href="/place/l-hashima-island">Hashima</a></p>
+</footer>
+<script>
+/* Language: ?lang= first, then the language saved by the map (tn-lang), then the browser. */
+(function(){
+  var MAP = { en: 'en', ja: 'ja', ko: 'ko', 'zh-cn': 'zh-Hans', 'zh-hans': 'zh-Hans', 'zh-sg': 'zh-Hans', 'zh-tw': 'zh-Hant', 'zh-hant': 'zh-Hant', 'zh-hk': 'zh-Hant' };
+  var PARAM = { en: 'en', ja: 'ja', ko: 'ko', 'zh-Hans': 'zh-CN', 'zh-Hant': 'zh-TW' };
+  var lang = MAP[(new URLSearchParams(location.search).get('lang') || '').toLowerCase()];
+  if (!lang){ try { var saved = localStorage.getItem('tn-lang'); if (PARAM[saved]) lang = saved; } catch (e) {} }
+  if (!lang){
+    var n = ((navigator.languages && navigator.languages[0]) || navigator.language || 'en').toLowerCase();
+    lang = n.indexOf('ja') === 0 ? 'ja' : n.indexOf('ko') === 0 ? 'ko' : /^zh-(tw|hk|mo|hant)/.test(n) ? 'zh-Hant' : n.indexOf('zh') === 0 ? 'zh-Hans' : 'en';
+  }
+  var TEXT = {
+    en: { title: 'Gunkanjima on 30 May 1962, in 3D (test) | Japan Time Atlas', crumb: 'Lab · testing', label: 'Interactive 3D model of Hashima in 1962', alt: 'Aerial photograph of Hashima, 30 May 1962', back: 'Back to the map', place: 'Hashima', credit: 'Aerial photographs: Geospatial Information Authority of Japan (GSI).',
+          loading: 'Loading the 1962 photographs…', ready: 'Drag to turn. Scroll or pinch to zoom.', failed: 'The 3D data could not be loaded. Please try again later.', noWebgl: 'This browser cannot draw 3D, so the flat photograph is shown instead.', flat: 'Flat photo', raise: 'Raise in 3D', reset: 'Reset view', exag: 'Heights ×2', trueScale: 'True heights' },
+    ja: { title: '1962年5月30日の軍艦島を立体で見る（テスト中）| Japan Time Atlas', crumb: 'テスト中', label: '1962年の端島を回して見られる立体モデル', alt: '1962年5月30日に撮影された端島の空中写真', back: '地図に戻る', place: '端島', credit: '空中写真：国土地理院',
+          loading: '1962年の写真を読み込んでいます…', ready: 'ドラッグで回転、スクロールかピンチで拡大・縮小', failed: '立体データを読み込めませんでした。時間をおいてお試しください。', noWebgl: 'このブラウザでは立体を表示できないため、平面の写真を表示しています。', flat: '平面の写真', raise: '立体にする', reset: '視点を戻す', exag: '高さ×2', trueScale: '実際の高さ' },
+    ko: { title: '1962년 5월 30일의 군함도를 3D로 (테스트 중) | Japan Time Atlas', crumb: '테스트 중', label: '1962년 하시마를 돌려 볼 수 있는 3D 모델', alt: '1962년 5월 30일에 촬영한 하시마 항공사진', back: '지도로 돌아가기', place: '하시마', credit: '항공사진: 일본 국토지리원',
+          loading: '1962년 사진을 불러오는 중…', ready: '드래그해서 돌리고, 스크롤이나 핀치로 확대·축소하세요.', failed: '3D 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.', noWebgl: '이 브라우저에서는 3D를 그릴 수 없어 평면 사진을 보여 줍니다.', flat: '평면 사진', raise: '입체로 세우기', reset: '시점 초기화', exag: '높이 ×2', trueScale: '실제 높이' },
+    'zh-Hans': { title: '立体查看1962年5月30日的军舰岛（测试中）| Japan Time Atlas', crumb: '测试中', label: '可旋转查看的1962年端岛立体模型', alt: '1962年5月30日拍摄的端岛航拍照片', back: '返回地图', place: '端岛', credit: '航拍照片：日本国土地理院',
+          loading: '正在载入1962年的照片…', ready: '拖动旋转，滚轮或双指缩放。', failed: '无法载入立体数据，请稍后再试。', noWebgl: '此浏览器无法显示立体，因此改为显示平面照片。', flat: '平面照片', raise: '立起来', reset: '重置视角', exag: '高度×2', trueScale: '实际高度' },
+    'zh-Hant': { title: '立體檢視1962年5月30日的軍艦島（測試中）| Japan Time Atlas', crumb: '測試中', label: '可旋轉檢視的1962年端島立體模型', alt: '1962年5月30日拍攝的端島航空照片', back: '返回地圖', place: '端島', credit: '航空照片：日本國土地理院',
+          loading: '正在載入1962年的照片…', ready: '拖曳旋轉，滾輪或雙指縮放。', failed: '無法載入立體資料，請稍後再試。', noWebgl: '此瀏覽器無法顯示立體，因此改為顯示平面照片。', flat: '平面照片', raise: '立起來', reset: '重設視角', exag: '高度×2', trueScale: '實際高度' }
+  };
+  var t = TEXT[lang];
+  document.documentElement.lang = lang;
+  document.title = t.title;
+  document.querySelectorAll('[data-lang]').forEach(function(el){ el.hidden = el.getAttribute('data-lang') !== lang; });
+  document.querySelectorAll('[data-crumb]').forEach(function(el){ el.textContent = t.crumb; });
+  document.querySelectorAll('[data-home]').forEach(function(el){ el.href = '/?lang=' + PARAM[lang]; });
+  document.getElementById('view').setAttribute('aria-label', t.label);
+  document.getElementById('viewFallback').alt = t.alt;
+  var foot = document.querySelector('footer');
+  foot.firstElementChild.textContent = t.credit;
+  foot.querySelector('[data-home]').textContent = t.back;
+  foot.querySelector('a[href="/place/l-hashima-island"]').textContent = t.place;
+  window.LAB_TEXT = t;
+})();
+</script>
+<script src="/lab/gunkanjima-3d.js?v=1"></script>
+</body>
+</html>
