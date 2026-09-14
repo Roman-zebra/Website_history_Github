@@ -3,6 +3,7 @@
    Each page keeps only its own language blocks, carries its own title, description, canonical,
    hreflang set, Open Graph tags and structured data, and sends a ?lang= visitor to the sibling page. */
 const fs=require('node:fs'),path=require('node:path');
+const extras=require('./build-3d-extras.cjs');
 const root=path.resolve(__dirname,'..'),tpl=fs.readFileSync(path.join(__dirname,'lab-3d','gunkanjima.template.html'),'utf8').split(String.fromCharCode(13,10)).join(String.fromCharCode(10));
 const SITE='https://japantimeatlas.com';
 const LANGS=[
@@ -40,6 +41,7 @@ function ld(l){
      'geo':{'@type':'GeoCoordinates','latitude':32.6278,'longitude':129.7386},'address':{'@type':'PostalAddress','addressLocality':'Nagasaki','addressCountry':'JP'}},
    'hasPart':[{'@type':'AudioObject','name':l.code==='ja'?'岩の上の5,000人　空から見る軍艦島':'Five thousand people on a rock: Gunkanjima from the air','contentUrl':SITE+'/3d/audio/gunkanjima-podcast-'+(l.code==='ja'?'ja':'en')+'.mp3','encodingFormat':'audio/mpeg','inLanguage':l.code==='ja'?'ja':'en'}],
    'keywords':['Gunkanjima','Hashima','軍艦島','端島','3D','aerial photograph','Nagasaki','UNESCO World Heritage']},
+  ...extras.ld(l),
   {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Japan Time Atlas','item':SITE+'/'+(l.code==='en'?'':'?lang='+({ja:'ja',ko:'ko','zh-Hans':'zh-CN','zh-Hant':'zh-TW'})[l.code])},{'@type':'ListItem','position':2,'name':l.crumb,'item':url}]}
  ]});
 }
@@ -70,6 +72,8 @@ for(const l of LANGS){
     .replace(/<a href="\?lang=zh-CN" lang="zh-Hans">/,`<a href="/3d/zh-cn/gunkanjima" lang="zh-Hans"${l.code==='zh-Hans'?' aria-current="page"':''}>`)
     .replace(/<a href="\?lang=zh-TW" lang="zh-Hant">/,`<a href="/3d/zh-tw/gunkanjima" lang="zh-Hant"${l.code==='zh-Hant'?' aria-current="page"':''}>`);
  s=s.replace(/<p class="lab-badge">[^<]*<\/p>/,`<p class="lab-badge">${esc(l.badge)}</p>`);
+ s=s.replace('<section class="podcast" id="podcast">',extras.html(l)+'<section class="podcast" id="podcast">');
+ s=s.replace('</style>',' '+extras.css+' </style>');
  const out=path.join(root,'3d',l.dir,'gunkanjima.html');
  fs.mkdirSync(path.dirname(out),{recursive:true});
  fs.writeFileSync(out,s);
