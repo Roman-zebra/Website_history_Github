@@ -190,7 +190,8 @@
    "h2010": 0.0,
    "images": {
     "1962": "spots/pier-1962.jpg",
-    "latest": "spots/pier-latest.jpg"
+    "latest": "spots/pier-latest.jpg",
+    "photo": "spots/pier-photo.jpg"
    }
   },
   "seawall": {

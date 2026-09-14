@@ -105,3 +105,18 @@ test('the audio guide has both languages, a timed transcript and cues the model 
   for(let i=1;i<t.chapters.length;i++)assert.ok(t.chapters[i].start>t.chapters[i-1].start,lang+' chapters');
  }
 });
+
+test('every building photograph exists, is credited with a free licence and captioned in five languages',()=>{
+ const ph=JSON.parse(read('3d/gunkanjima-photos.json')).photos,model=JSON.parse(read('3d/gunkanjima-model.json'));
+ const names=new Set(model.buildings.map(b=>b.name).filter(Boolean));
+ assert.ok(Object.keys(ph).length>=25);
+ for(const [name,list] of Object.entries(ph)){
+  assert.ok(names.has(name),name+' is a building in the model');
+  for(const p of list){
+   assert.ok(isJpeg(bytes('3d/'+p.file)),name+' file');
+   assert.ok(p.author&&/^CC BY|^CC0|Public domain/.test(p.license)&&/^https:\/\//.test(p.licenseUrl)&&/^https:\/\/commons\.wikimedia\.org\//.test(p.page),name+' credit');
+   for(const l of LANGS)assert.ok(p.caption[l],name+' caption '+l);
+  }
+ }
+ assert.ok(!/loading="lazy"/.test(read('3d/gunkanjima-3d.js')),'panel images load at once (lazy images never appear inside the panel)');
+});

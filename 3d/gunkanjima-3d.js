@@ -403,7 +403,7 @@
   function centroid(poly){ let x = 0, y = 0; for (const p of poly){ x += p[0]; y += p[1]; } return [x / poly.length, y / poly.length]; }
 
   /* ---------- data ---------- */
-  let lab = null, model = null, texts = null, terrain = null, sea = null, walls = null, roofs = null, seawall = null;
+  let lab = null, model = null, texts = null, photos = {}, terrain = null, sea = null, walls = null, roofs = null, seawall = null;
   let rot = 0, mpp = 0.8, C = 512, PP = [512, 512], HF = 1950;
   const years = [], texCache = new Map();
   const YEAR_OF = { '1947': 1947, '1962': 1962, '1975': 1975, '2010': 2010, 'latest': 2024 };
@@ -880,7 +880,7 @@
   }
   function photoFigure(ph, src, extraClass){
     const cap = pick(ph.caption);
-    return '<figure' + (extraClass ? ' class="' + extraClass + '"' : '') + '><img src="' + esc(asset(src)) + '" alt="' + esc(cap) + '" loading="lazy" decoding="async"><figcaption>' + esc(cap)
+    return '<figure' + (extraClass ? ' class="' + extraClass + '"' : '') + '><img src="' + esc(asset(src)) + '" alt="' + esc(cap) + '" decoding="async"><figcaption>' + esc(cap)
       + ' <span class="credit">' + esc(T.photo) + ': ' + esc(ph.author) + (ph.year ? ' (' + esc(ph.year) + ')' : '')
       + ' · <a href="' + esc(ph.licenseUrl) + '" target="_blank" rel="noopener">' + esc(ph.license) + '</a> · <a href="' + esc(ph.page) + '" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>';
   }
@@ -889,7 +889,7 @@
     if (!info || !panel) return;
     activeSpot = id;
     for (const k of Object.keys(pins)) pins[k].classList.toggle('is-on', k === id);
-    const img = (src, alt, cap) => '<figure><img src="' + esc(asset(src)) + '" alt="' + esc(alt) + '" loading="lazy" decoding="async"><figcaption>' + cap + '</figcaption></figure>';
+    const img = (src, alt, cap) => '<figure><img src="' + esc(asset(src)) + '" alt="' + esc(alt) + '" decoding="async"><figcaption>' + cap + '</figcaption></figure>';
     let html = '<p>' + esc(pick(info.text)) + '</p>';
     const ph = texts.photos[id];
     if (ph && s.images.photo) html += photoFigure(ph, s.images.photo, 'spot-photo');
@@ -922,6 +922,7 @@
       + row(T.gone, b.gone ? esc(String(b.gone)) + (b.goneNote ? ' <small>' + esc(b.goneNote) + '</small>' : '') : null)
       + '</table>';
     if (b.notes) html += '<p>' + esc(b.notes) + '</p>';
+    for (const ph of (b.name && photos[b.name]) || []) html += photoFigure(ph, ph.file, 'spot-photo');
     if (b.source === 'traced1962') html += '<p><small>' + esc(T.traced) + '</small></p>';
     html += '<p class="credit"><a href="' + esc(model.facts.url) + '" target="_blank" rel="noopener">' + esc(T.factsSource) + '</a></p>';
     $('spotTitle').textContent = b.name || T.unknown;
@@ -1065,9 +1066,10 @@
   Promise.all([
     fetch(asset('gunkanjima-lab.json')).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
     fetch(asset('gunkanjima-model.json')).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
-    fetch(asset('gunkanjima-spots.json')).then(r => r.ok ? r.json() : null).catch(() => null)
-  ]).then(([meta, mdl, words]) => {
-    lab = meta; model = mdl; texts = words;
+    fetch(asset('gunkanjima-spots.json')).then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch(asset('gunkanjima-photos.json')).then(r => r.ok ? r.json() : null).catch(() => null)
+  ]).then(([meta, mdl, words, ph]) => {
+    lab = meta; model = mdl; texts = words; photos = ph && ph.photos ? ph.photos : {};
     return fetch(asset(model.terrain.file)).then(r => r.arrayBuffer()).then(buf => {
       const t = model.terrain;
       if (buf.byteLength !== t.w * t.h * 2) throw new Error('terrain size');
