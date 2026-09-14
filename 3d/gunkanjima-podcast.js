@@ -120,4 +120,9 @@
   for (const b of document.querySelectorAll('[data-pod-lang]')) b.onclick = () => load(b.dataset.podLang);
   paintLang();
   paintPlay();
+  /* /3d/…#play from the home tab: bring the player into view and pulse the button (browsers do not allow autoplay without a tap) */
+  if (location.hash === '#play' || /[?&]play=1/.test(location.search)){
+    const box = document.getElementById('play');
+    setTimeout(() => { if (box) box.scrollIntoView({ block: 'center', behavior: 'smooth' }); play.classList.add('pulse'); play.focus({ preventScroll: true }); }, 400);
+  }
 })();

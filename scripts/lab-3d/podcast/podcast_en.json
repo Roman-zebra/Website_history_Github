@@ -130,7 +130,8 @@
    "s": "B",
    "t": "Up. Find the square block with a hole in the middle, at the foot of the rock in the south-west. That's Building Number Thirty, finished in 1916. It's usually described as Japan's first high-rise apartment block in reinforced concrete.",
    "cue": {
-    "spot": "no30"
+    "spot": "no30",
+    "interior": "no30"
    }
   },
   {
@@ -197,7 +198,10 @@
   },
   {
    "s": "B",
-   "t": "Hashima Shrine, built in 1936. Every third of April the whole island turned out for the festival, and the highlight was the portable shrine being run down a staircase so steep that people called it the stairway to hell. The wooden hall has collapsed. What's left up there now is a small stone shrine."
+   "t": "Hashima Shrine, built in 1936. Every third of April the whole island turned out for the festival, and the highlight was the portable shrine being run down a staircase so steep that people called it the stairway to hell. The wooden hall has collapsed. What's left up there now is a small stone shrine.",
+   "cue": {
+    "interior": "shrine"
+   }
   },
   {
    "s": "A",

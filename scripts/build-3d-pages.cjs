@@ -55,10 +55,11 @@ for(const l of LANGS){
  // keep only this language's blocks
  for(const o of LANGS){
   if(o.code===l.code){
-   s=s.replace(new RegExp(`(<(?:div|section) data-lang="${o.code}" lang="[^"]*") hidden>`,'g'),'$1>');
+   s=s.replace(new RegExp(`(<(?:div|section|p) data-lang="${o.code}" lang="[^"]*"[^>]*) hidden>`,'g'),'$1>');
   } else {
    s=s.replace(new RegExp(`<div data-lang="${o.code}"[^>]*>[\\s\\S]*?<\\/div>\\n?`,'g'),'');
    s=s.replace(new RegExp(`<section data-lang="${o.code}"[^>]*>[\\s\\S]*?<\\/section>\\n?`,'g'),'');
+   s=s.replace(new RegExp(`<p[^>]*data-lang="${o.code}"[^>]*>[\\s\\S]*?<\\/p>\\n?`,'g'),'');
   }
  }
  // the page's language is fixed; a ?lang= for another language goes to that page

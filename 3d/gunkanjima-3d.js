@@ -24,7 +24,8 @@
     yearShape2010: 'Buildings still standing; collapsed ones are gone', close: 'Close', sources: 'Sources',
     aerial1962: '1962', aerialLatest: 'Latest', photo: 'Photo', built: 'Completed', storeys: 'Storeys', units: 'Units', use: 'Use',
     structure: 'Structure', gone: 'Collapsed', unknown: 'unknown', traced: 'Outline traced from the 1962 photograph; name unknown',
-    factsSource: 'Building list: Japanese Wikipedia, 端島 (長崎県)', schoolShort: 'School'
+    factsSource: 'Building list: Japanese Wikipedia, 端島 (長崎県)', schoolShort: 'School',
+    enter: 'Go inside', leave: 'Leave', interior: 'Inside (reconstruction):'
   }, window.LAB_TEXT || {});
 
   const $ = id => document.getElementById(id);
@@ -149,10 +150,12 @@
     }`;
   // building walls
   const WALL_VS = COMMON_VS + `
-    attribute vec2 aPos; attribute vec2 aY; attribute vec3 aNor; attribute vec3 aWall; attribute vec4 aInfo; attribute vec2 aLife;
-    varying vec3 vNor; varying vec3 vWall; varying vec4 vInfo; varying float vAlive; varying float vTop;
+    attribute vec2 aPos; attribute vec2 aY; attribute vec3 aNor; attribute vec3 aWall; attribute vec4 aInfo; attribute vec2 aLife; attribute float aBid;
+    uniform float uGhostId;
+    varying vec3 vNor; varying vec3 vWall; varying vec4 vInfo; varying float vAlive; varying float vTop; varying float vGhost;
     void main(){
       float alive = standing(aLife);
+      vGhost = abs(aBid - uGhostId) < 0.5 ? 1.0 : 0.0;
       float y = mix(aY.x, aY.x + (aY.y - aY.x) * alive, uLift);
       vNor = turn(aNor);
       vWall = vec3(aWall.x, (y - aY.x) * uExag, (aY.y - aY.x) * alive * uExag);
@@ -163,11 +166,14 @@
     precision mediump float;
     uniform float uChange, uFog, uShade, uYear;
     uniform vec3 uBg, uSun, uHorizon;
-    varying vec3 vNor; varying vec3 vWall; varying vec4 vInfo; varying float vAlive; varying float vTop;
+    varying vec3 vNor; varying vec3 vWall; varying vec4 vInfo; varying float vAlive; varying float vTop; varying float vGhost;
     varying vec4 vShadow; varying float vDepth;
+    uniform float uGhostPass;
     ` + SHADOW_FN + `
     void main(){
       if (vAlive < 0.02) discard;
+      if (uGhostPass < 0.5 && vGhost > 0.5) discard;   /* the host building is drawn later, translucent */
+      if (uGhostPass > 0.5 && vGhost < 0.5) discard;
       vec3 n = normalize(vNor);
       float d = max(dot(n, uSun), 0.0);
       float sh = shadowAt(vShadow, 0.003);
@@ -231,14 +237,16 @@
         col = mix(col, mix(grey, flag, 0.75) * (0.55 + 0.45 * d), uChange);
       }
       col = mix(col, uHorizon, uFog * smoothstep(500.0, 2400.0, vDepth));
-      gl_FragColor = vec4(col, 1.0);
+      gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.22 : 1.0);
     }`;
   // roofs: the aerial photograph of the year, drawn where the roof is in that photograph
   const ROOF_VS = COMMON_VS + `
-    attribute vec2 aPos; attribute vec2 aY; attribute vec2 aLife; attribute vec2 aInfo;
-    varying vec2 vUvP; varying vec2 vUvO; varying float vAlive; varying vec2 vInfo; varying vec2 vPos;
+    attribute vec2 aPos; attribute vec2 aY; attribute vec2 aLife; attribute vec2 aInfo; attribute float aBid;
+    uniform float uGhostId;
+    varying vec2 vUvP; varying vec2 vUvO; varying float vAlive; varying vec2 vInfo; varying vec2 vPos; varying float vGhost;
     void main(){
       float alive = standing(aLife);
+      vGhost = abs(aBid - uGhostId) < 0.5 ? 1.0 : 0.0;
       float y = mix(aY.x, aY.x + (aY.y - aY.x) * alive, uLift);
       vec2 photo = uPP + (aPos - uPP) / (1.0 - y / uHf);      /* where this roof appears in the photograph */
       vUvP = (photo + 0.5) / (2.0 * uC); vUvO = (aPos + 0.5) / (2.0 * uC);
@@ -250,11 +258,14 @@
     uniform sampler2D uTexA, uTexB;
     uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uYear;
     uniform vec3 uBg, uSun, uHorizon;
-    varying vec2 vUvP; varying vec2 vUvO; varying float vAlive; varying vec2 vInfo; varying vec2 vPos;
+    varying vec2 vUvP; varying vec2 vUvO; varying float vAlive; varying vec2 vInfo; varying vec2 vPos; varying float vGhost;
     varying vec4 vShadow; varying float vDepth;
+    uniform float uGhostPass;
     ` + SHADOW_FN + `
     void main(){
       if (vAlive < 0.02) discard;
+      if (uGhostPass < 0.5 && vGhost > 0.5) discard;
+      if (uGhostPass > 0.5 && vGhost < 0.5) discard;
       vec3 a = texture2D(uTexA, mix(vUvP, vUvO, uOrthoA)).rgb;
       vec3 b = texture2D(uTexB, mix(vUvP, vUvO, uOrthoB)).rgb;
       vec3 t = mix(a, b, uMix);
@@ -267,7 +278,7 @@
       col *= mix(1.0, 0.42 + 0.6 * d * mix(0.35, 1.0, sh), uShade);
       if (uChange > 0.001){ vec3 grey = vec3(dot(col, vec3(0.299, 0.587, 0.114))); col = mix(col, grey * 0.9, 0.5 * uChange); }
       col = mix(col, uHorizon, uFog * smoothstep(500.0, 2400.0, vDepth));
-      gl_FragColor = vec4(col, 1.0);
+      gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.18 : 1.0);
     }`;
   // the sea wall ring
   const SEAWALL_FS = `
@@ -295,7 +306,26 @@
   const SKY_FS = `precision mediump float; uniform vec3 uTop, uHorizon; uniform float uEl; varying vec2 vP;
     void main(){ float k = smoothstep(-0.2, 1.0, vP.y + uEl * 0.6); gl_FragColor = vec4(mix(uHorizon, uTop, k), 1.0); }`;
   const DEPTH_FS = `precision mediump float; void main(){ gl_FragColor = vec4(1.0); }`;
-  const DEPTH_FS_ALIVE = `precision mediump float; varying float vAlive; void main(){ if (vAlive < 0.02) discard; gl_FragColor = vec4(1.0); }`;
+  const DEPTH_FS_ALIVE = `precision mediump float; varying float vAlive; varying float vGhost; void main(){ if (vAlive < 0.02 || vGhost > 0.5) discard; gl_FragColor = vec4(1.0); }`;
+  // interior scenes: plain coloured boxes, lit and shadowed; assumed parts are translucent
+  const BOX_VS = COMMON_VS + `
+    attribute vec3 aPos3; attribute vec3 aNor; attribute vec4 aCol;
+    varying vec3 vNor; varying vec4 vCol;
+    void main(){ vNor = turn(aNor); vCol = aCol; finish(place(aPos3.xz, aPos3.y)); }`;
+  const BOX_FS = `
+    precision mediump float;
+    uniform float uFog, uShade, uChange; uniform vec3 uBg, uSun, uHorizon;
+    varying vec3 vNor; varying vec4 vCol; varying vec4 vShadow; varying float vDepth;
+    ` + SHADOW_FN + `
+    void main(){
+      vec3 n = normalize(vNor);
+      float d = max(dot(n, uSun), 0.0);
+      float sh = shadowAt(vShadow, 0.003);
+      vec3 col = vCol.rgb * (0.38 + 0.62 * d * mix(0.4, 1.0, sh));
+      col = mix(col, uHorizon, uFog * smoothstep(500.0, 2400.0, vDepth));
+      gl_FragColor = vec4(col, vCol.a);
+    }`;
+  const BOX_DEPTH_FS = `precision mediump float; varying vec4 vCol; void main(){ if (vCol.a < 0.9) discard; gl_FragColor = vec4(1.0); }`;
 
   function compile(type, src){
     const s = gl.createShader(type);
@@ -315,17 +345,18 @@
     for (const n of uniforms) U[n] = gl.getUniformLocation(p, n);
     return { p, U };
   }
-  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime'];
+  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uGhostId', 'uGhostPass'];
   const TEX_U = ['uTexA', 'uTexB', 'uMix', 'uOrthoA', 'uOrthoB'];
-  const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo'];
-  let progT, progW, progR, progS, progSky, depthT, depthW, depthR;
+  const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol'];
+  let progT, progW, progR, progS, progSky, progB, depthT, depthW, depthR, depthB;
   try {
     progT = program(TERRAIN_VS, TERRAIN_FS, TERRAIN_A, COMMON_U.concat(TEX_U));
     progW = program(WALL_VS, WALL_FS, WALL_A, COMMON_U);
     progR = program(ROOF_VS, ROOF_FS, ROOF_A, COMMON_U.concat(TEX_U));
     progS = program(WALL_VS, SEAWALL_FS, WALL_A, COMMON_U);
     progSky = program(SKY_VS, SKY_FS, ['aPos'], ['uTop', 'uHorizon', 'uEl']);
-    if (SHADOW){ depthT = program(TERRAIN_VS, DEPTH_FS, TERRAIN_A, COMMON_U); depthW = program(WALL_VS, DEPTH_FS_ALIVE, WALL_A, COMMON_U); depthR = program(ROOF_VS, DEPTH_FS_ALIVE, ROOF_A, COMMON_U); }
+    progB = program(BOX_VS, BOX_FS, BOX_A, COMMON_U);
+    if (SHADOW){ depthT = program(TERRAIN_VS, DEPTH_FS, TERRAIN_A, COMMON_U); depthW = program(WALL_VS, DEPTH_FS_ALIVE, WALL_A, COMMON_U); depthR = program(ROOF_VS, DEPTH_FS_ALIVE, ROOF_A, COMMON_U); depthB = program(BOX_VS, BOX_DEPTH_FS, BOX_A, COMMON_U); }
   } catch (err) { console.error(err); fallback(T.noWebgl); return; }
 
   function buffer(data, target){
@@ -403,6 +434,7 @@
   function centroid(poly){ let x = 0, y = 0; for (const p of poly){ x += p[0]; y += p[1]; } return [x / poly.length, y / poly.length]; }
 
   /* ---------- data ---------- */
+  let interiors = null, scene = null, sceneMesh = null, sceneMeshA = null, ghostId = 0;
   let lab = null, model = null, texts = null, photos = {}, terrain = null, sea = null, walls = null, roofs = null, seawall = null;
   let rot = 0, mpp = 0.8, C = 512, PP = [512, 512], HF = 1950;
   const years = [], texCache = new Map();
@@ -455,9 +487,10 @@
     return [built - 1900, b.gone ? b.gone - 1900 : 0];
   }
   function buildBuildings(list){
-    const W = { pos: [], y: [], nor: [], wall: [], info: [], life: [], idx: [] };
-    const R = { pos: [], y: [], life: [], info: [], idx: [] };
+    const W = { pos: [], y: [], nor: [], wall: [], info: [], life: [], bid: [], idx: [] };
+    const R = { pos: [], y: [], life: [], info: [], bid: [], idx: [] };
     let nw = 0, nr = 0, seedN = 0;
+    list.forEach((b, bi) => { b.bid = bi + 1; });
     for (const b of list){
       const parts = b.wings || [b.poly];
       const H = b.storeys * b.floorH, base = b.ground - 0.6, top = b.ground + H;
@@ -474,13 +507,13 @@
           const l = Math.hypot(nx, nz) || 1; nx /= l; nz /= l;
           for (const [pt, s, up] of [[p, 0, 0], [q, len, 0], [p, 0, 1], [q, len, 1]]){
             W.pos.push(pt[0], pt[1]); W.y.push(base, up ? top : base); W.nor.push(nx, 0, nz);
-            W.wall.push(s, b.ground, H); W.info.push(style, b.floorH, seed, b.gone ? b.gone - 1900 : 0); W.life.push(life[0], life[1]);
+            W.wall.push(s, b.ground, H); W.info.push(style, b.floorH, seed, b.gone ? b.gone - 1900 : 0); W.life.push(life[0], life[1]); W.bid.push(b.bid);
           }
           W.idx.push(nw, nw + 2, nw + 1, nw + 1, nw + 2, nw + 3);
           nw += 4;
         }
         const tri = triangulate(poly);
-        for (const p of poly){ R.pos.push(p[0], p[1]); R.y.push(base, top); R.life.push(life[0], life[1]); R.info.push(style, seed); }
+        for (const p of poly){ R.pos.push(p[0], p[1]); R.y.push(base, top); R.life.push(life[0], life[1]); R.info.push(style, seed); R.bid.push(b.bid); }
         for (const t of tri) R.idx.push(nr + t);
         nr += poly.length;
       }
@@ -494,10 +527,10 @@
       out.count = o.idx.length; out.type = big ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT;
       return out;
     };
-    return { walls: mk(W, ['pos', 'y', 'nor', 'wall', 'info', 'life']), roofs: mk(R, ['pos', 'y', 'life', 'info']) };
+    return { walls: mk(W, ['pos', 'y', 'nor', 'wall', 'info', 'life', 'bid']), roofs: mk(R, ['pos', 'y', 'life', 'info', 'bid']) };
   }
   function buildSeawall(ring){
-    const W = { pos: [], y: [], nor: [], wall: [], info: [], life: [], idx: [] };
+    const W = { pos: [], y: [], nor: [], wall: [], info: [], life: [], bid: [], idx: [] };
     let n = 0, s0 = 0;
     const cw = signedArea(ring.map(r => [r.u, r.v])) > 0;
     for (let i = 0; i < ring.length; i++){
@@ -509,17 +542,54 @@
       const l = Math.hypot(nx, nz) || 1; nx /= l; nz /= l;
       for (const [pt, s, up] of [[p, s0, 0], [q, s0 + len, 0], [p, s0, 1], [q, s0 + len, 1]]){
         W.pos.push(pt.u, pt.v); W.y.push(-1.5, up ? pt.top : -1.5); W.nor.push(nx, 0, nz);
-        W.wall.push(s, 0, pt.top); W.info.push(0, 1, 0, 0); W.life.push(-100, 0);
+        W.wall.push(s, 0, pt.top); W.info.push(0, 1, 0, 0); W.life.push(-100, 0); W.bid.push(0);
       }
       W.idx.push(n, n + 2, n + 1, n + 1, n + 2, n + 3);
       n += 4; s0 += len;
     }
     const out = {};
-    for (const k of ['pos', 'y', 'nor', 'wall', 'info', 'life']) out[k] = buffer(new Float32Array(W[k]));
+    for (const k of ['pos', 'y', 'nor', 'wall', 'info', 'life', 'bid']) out[k] = buffer(new Float32Array(W[k]));
     out.idx = buffer(new Uint16Array(W.idx), gl.ELEMENT_ARRAY_BUFFER); out.count = W.idx.length; out.type = gl.UNSIGNED_SHORT;
     return out;
   }
 
+  /* interior scene boxes: 6 faces x 2 triangles each, rotated about the vertical axis in the crop frame */
+  function buildBoxes(scene){
+    const P = [], N = [], Cc = [], I = [];
+    let n = 0;
+    for (const b of scene.boxes){
+      if ((scene.pass === 'assumed') !== !!b.a) continue;
+      const [sx, sy, sz] = b.s, hx = sx / 2 / mpp, hz = sz / 2 / mpp, a = (b.r || 0) * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      const col = b.a ? [b.c[0], b.c[1], b.c[2], 0.45] : [b.c[0], b.c[1], b.c[2], 1];
+      const corner = (dx, dz) => [b.u + dx * ca - dz * sa, b.v + dx * sa + dz * ca];
+      const faces = [
+        [[-hx, -hz], [hx, -hz], [hx, hz], [-hx, hz], 1, 1],       // top (y = top)
+        [[-hx, hz], [hx, hz], [hx, -hz], [-hx, -hz], -1, 0],      // bottom
+        [[-hx, -hz], [-hx, hz], [-hx, hz], [-hx, -hz], 0, 'w'],
+        [[hx, hz], [hx, -hz], [hx, -hz], [hx, hz], 0, 'e'],
+        [[hx, -hz], [-hx, -hz], [-hx, -hz], [hx, -hz], 0, 'n'],
+        [[-hx, hz], [hx, hz], [hx, hz], [-hx, hz], 0, 's'],
+      ];
+      const y0 = b.y, y1 = b.y + sy;
+      for (const f of faces){
+        let nor;
+        if (f[4] === 1) nor = [0, 1, 0]; else if (f[4] === -1) nor = [0, -1, 0];
+        else { const d = f[5] === 'w' ? [-1, 0] : f[5] === 'e' ? [1, 0] : f[5] === 'n' ? [0, -1] : [0, 1]; nor = [d[0] * ca - d[1] * sa, 0, d[0] * sa + d[1] * ca]; }
+        if (f[4] !== 0){
+          for (const c of f.slice(0, 4)){ const q = corner(c[0], c[1]); P.push(q[0], f[4] === 1 ? y1 : y0, q[1]); N.push(nor[0], nor[1], nor[2]); Cc.push(col[0], col[1], col[2], col[3]); }
+        } else {
+          const q0 = corner(f[0][0], f[0][1]), q1 = corner(f[1][0], f[1][1]);
+          for (const [q, y] of [[q0, y0], [q1, y0], [q1, y1], [q0, y1]]){ P.push(q[0], y, q[1]); N.push(nor[0], nor[1], nor[2]); Cc.push(col[0], col[1], col[2], col[3]); }
+        }
+        I.push(n, n + 1, n + 2, n, n + 2, n + 3);
+        n += 4;
+      }
+    }
+    const big = n > 65535;
+    if (big && !bigIndex) return null;
+    return { pos3: buffer(new Float32Array(P)), nor: buffer(new Float32Array(N)), col: buffer(new Float32Array(Cc)),
+      idx: buffer(big ? new Uint32Array(I) : new Uint16Array(I), gl.ELEMENT_ARRAY_BUFFER), count: I.length, type: big ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT };
+  }
   function loadImage(src){
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -605,7 +675,7 @@
 
   /* ---------- state and camera ---------- */
   const HOME = { az: -1.1, el: 0.62 };
-  const st = { az: HOME.az, el: HOME.el, dist: 700, tx: 0, tz: 0, lift: 0, exag: 1, year: 1, change: 0, userLift: 1, walls: true, labels: true };
+  const st = { az: HOME.az, el: HOME.el, dist: 700, tx: 0, tz: 0, ty: 14, lift: 0, exag: 1, year: 1, change: 0, userLift: 1, walls: true, labels: true };
   let anim = null, spin = false, queued = false, activeSpot = null, t0 = performance.now();
 
   function homeDistance(){
@@ -628,9 +698,9 @@
   }
   function frameMatrices(){
     const w = canvas.width, h = canvas.height;
-    const ce = Math.cos(st.el), target = [st.tx, 14, st.tz];
+    const ce = Math.cos(st.el), target = [st.tx, st.ty, st.tz];
     const eye = [target[0] + st.dist * ce * Math.sin(st.az), target[1] + st.dist * Math.sin(st.el), target[2] + st.dist * ce * Math.cos(st.az)];
-    const proj = perspective(0.7, w / Math.max(1, h), 2, 6000), view = lookAt(eye, target);
+    const proj = perspective(scene ? 0.9 : 0.7, w / Math.max(1, h), scene ? 0.5 : 2, 6000), view = lookAt(eye, target);
     return { proj, view, pv: mul(proj, view) };
   }
 
@@ -657,6 +727,8 @@
     gl.uniform1f(U.uTime, (performance.now() - t0) / 1000);
     gl.uniform1f(U.uShadowOn, shadowOn ? 1 : 0);
     gl.uniform1f(U.uShadowTexel, 1 / (SHADOW || 1));
+    gl.uniform1f(U.uGhostId, ghostId);
+    gl.uniform1f(U.uGhostPass, 0);
     if (U.uShadowMap){ gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, shadowOn ? shadowTex : null); gl.uniform1i(U.uShadowMap, 2); }
   }
   function setTextures(P, texA, texB, ym){
@@ -674,13 +746,19 @@
     gl.drawElements(gl.TRIANGLES, m.count, m.type, 0);
   }
   function drawWalls(P, w){
-    attr(w.pos, 0, 2); attr(w.y, 1, 2); attr(w.nor, 2, 3); attr(w.wall, 3, 3); attr(w.info, 4, 4); attr(w.life, 5, 2); disableFrom(6);
+    attr(w.pos, 0, 2); attr(w.y, 1, 2); attr(w.nor, 2, 3); attr(w.wall, 3, 3); attr(w.info, 4, 4); attr(w.life, 5, 2); attr(w.bid, 6, 1); disableFrom(7);
     gl.uniform1f(P.U.uYOff, 0);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, w.idx);
     gl.drawElements(gl.TRIANGLES, w.count, w.type, 0);
   }
+  function drawBoxes(P, m){
+    attr(m.pos3, 0, 3); attr(m.nor, 1, 3); attr(m.col, 2, 4); disableFrom(3);
+    gl.uniform1f(P.U.uYOff, 0);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, m.idx);
+    gl.drawElements(gl.TRIANGLES, m.count, m.type, 0);
+  }
   function drawRoofs(P, r){
-    attr(r.pos, 0, 2); attr(r.y, 1, 2); attr(r.life, 2, 2); attr(r.info, 3, 2); disableFrom(4);
+    attr(r.pos, 0, 2); attr(r.y, 1, 2); attr(r.life, 2, 2); attr(r.info, 3, 2); attr(r.bid, 4, 1); disableFrom(5);
     gl.uniform1f(P.U.uYOff, 0);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, r.idx);
     gl.drawElements(gl.TRIANGLES, r.count, r.type, 0);
@@ -722,6 +800,7 @@
       if (showB){
         setCommon(depthW, lightPV, lightPV, lift, ym, false); drawWalls(depthW, walls); if (seawall) drawWalls(depthW, seawall);
         setCommon(depthR, lightPV, lightPV, lift, ym, false); drawRoofs(depthR, roofs);
+        if (sceneMesh && sceneMesh.count && depthB){ setCommon(depthB, lightPV, lightPV, lift, ym, false); drawBoxes(depthB, sceneMesh); }
       }
       gl.colorMask(true, true, true, true);
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -743,6 +822,18 @@
       setCommon(progR, M.pv, lightPV, lift, ym, shadowOn);
       setTextures(progR, texA, texB, ym);
       drawRoofs(progR, roofs);
+      if (sceneMesh){
+        /* the interior: opaque boxes, then the assumed (translucent) ones, then the host building as a ghost shell */
+        setCommon(progB, M.pv, lightPV, lift, ym, shadowOn);
+        if (sceneMesh.count) drawBoxes(progB, sceneMesh);
+        gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
+        if (sceneMeshA && sceneMeshA.count) drawBoxes(progB, sceneMeshA);
+        gl.enable(gl.CULL_FACE);
+        setCommon(progW, M.pv, lightPV, lift, ym, shadowOn); gl.uniform1f(progW.U.uGhostPass, 1); drawWalls(progW, walls);
+        gl.disable(gl.CULL_FACE);
+        setCommon(progR, M.pv, lightPV, lift, ym, shadowOn); setTextures(progR, texA, texB, ym); gl.uniform1f(progR.U.uGhostPass, 1); drawRoofs(progR, roofs);
+        gl.depthMask(true); gl.disable(gl.BLEND);
+      }
     }
     placeSpots(M.pv, lift, ym);
     if (compass) compass.style.transform = 'rotate(' + (st.az * 180 / Math.PI).toFixed(1) + 'deg)';
@@ -900,13 +991,17 @@
       const src = texts.sources[k];
       return '<li><a href="' + esc(src.url) + '" target="_blank" rel="noopener">' + esc(src.label[LANG] || src.label.en) + '</a></li>';
     }).join('') + '</ul>';
+    const scId = id === 'no30' ? 'no30' : id === 'shrine' ? 'shrine' : null;
+    if (scId && interiors && interiors.scenes[scId]) html = '<p><button type="button" class="enter-btn" data-scene="' + scId + '">' + esc(scene === scId ? T.leave : T.enter) + '</button></p>' + html;
     $('spotTitle').textContent = pick(info.name);
     $('spotBody').innerHTML = html;
+    wireEnter();
     panel.hidden = false;
     if (fly){
       stopSpin();
       const xz = spotWorld(id);
-      animate({ tx: xz[0], tz: xz[1], dist: 230, el: clamp(st.el, 0.4, 0.9) }, 1200);
+      if (scene) leaveScene();
+      animate({ tx: xz[0], tz: xz[1], ty: 14, dist: 230, el: clamp(st.el, 0.4, 0.9) }, 1200);
     }
   }
   function openBuilding(b, fly){
@@ -922,17 +1017,58 @@
       + row(T.gone, b.gone ? esc(String(b.gone)) + (b.goneNote ? ' <small>' + esc(b.goneNote) + '</small>' : '') : null)
       + '</table>';
     if (b.notes) html += '<p>' + esc(b.notes) + '</p>';
+    const sc = sceneFor(b.name);
+    if (sc) html += '<p><button type="button" class="enter-btn" data-scene="' + esc(sc) + '">' + esc(scene === sc ? T.leave : T.enter) + '</button></p>';
     for (const ph of (b.name && photos[b.name]) || []) html += photoFigure(ph, ph.file, 'spot-photo');
     if (b.source === 'traced1962') html += '<p><small>' + esc(T.traced) + '</small></p>';
     html += '<p class="credit"><a href="' + esc(model.facts.url) + '" target="_blank" rel="noopener">' + esc(T.factsSource) + '</a></p>';
     $('spotTitle').textContent = b.name || T.unknown;
     $('spotBody').innerHTML = html;
+    wireEnter();
     panel.hidden = false;
     if (fly){
       stopSpin();
       const c = centroid(b.poly), xz = toWorldTrue(c[0], c[1]);
-      animate({ tx: xz[0], tz: xz[1], dist: Math.max(120, b.storeys * b.floorH * 5), el: clamp(st.el, 0.35, 0.8) }, 1100);
+      if (scene && sceneFor(b.name) !== scene) leaveScene();
+      if (!scene) animate({ tx: xz[0], tz: xz[1], ty: 14, dist: Math.max(120, b.storeys * b.floorH * 5), el: clamp(st.el, 0.35, 0.8) }, 1100);
     }
+  }
+  function sceneFor(name){
+    if (!interiors) return null;
+    for (const [k, sc] of Object.entries(interiors.scenes)) if (sc.building === name) return k;
+    return null;
+  }
+  function wireEnter(){
+    for (const b of document.querySelectorAll('.enter-btn')) b.onclick = () => { if (scene === b.dataset.scene) leaveScene(); else enterScene(b.dataset.scene, true); };
+  }
+  function enterScene(id, fly){
+    const sc = interiors && interiors.scenes[id];
+    if (!sc) return;
+    if (scene !== id){
+      scene = id;
+      sceneMesh = buildBoxes(Object.assign({}, sc, { pass: 'solid' }));
+      sceneMeshA = buildBoxes(Object.assign({}, sc, { pass: 'assumed' }));
+      const host = model.buildings.find(b => sc.ghost && sc.ghost.includes(b.name));
+      ghostId = host ? host.bid : 0;
+    }
+    stopSpin();
+    const cam = sc.camera, xz = toWorldTrue(cam.u, cam.v);
+    if (fly) animate({ tx: xz[0], tz: xz[1], ty: cam.y, dist: cam.dist, el: cam.el, az: cam.az, userLift: 1 }, 1500); else Object.assign(st, { tx: xz[0], tz: xz[1], ty: cam.y, dist: cam.dist, el: cam.el, az: cam.az });
+    if ($('sceneNote')){
+      const n = $('sceneNote');
+      n.innerHTML = '<b>' + esc(T.interior) + '</b> ' + esc(pick(sc.text)) + ' <span class="scene-src">' + (sc.sources || []).map(x => '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label[LANG] || x.label.en) + '</a>').join(' · ') + '</span> <button type="button" id="sceneLeave">' + esc(T.leave) + '</button>';
+      n.hidden = false;
+      $('sceneLeave').onclick = leaveScene;
+    }
+    for (const b of document.querySelectorAll('.enter-btn')) b.textContent = b.dataset.scene === scene ? T.leave : T.enter;
+    request();
+  }
+  function leaveScene(){
+    if (!scene) return;
+    scene = null; sceneMesh = null; sceneMeshA = null; ghostId = 0;
+    if ($('sceneNote')) $('sceneNote').hidden = true;
+    for (const b of document.querySelectorAll('.enter-btn')) b.textContent = T.enter;
+    animate({ ty: 14, dist: Math.max(st.dist, 180), el: Math.max(st.el, 0.45) }, 900);
   }
   function closeSpot(){
     if (panel) panel.hidden = true;
@@ -944,6 +1080,7 @@
 
   function view(name, ms){
     stopSpin();
+    if (scene) leaveScene();
     if (name === 'top') animate({ tx: 0, tz: 0, el: 1.35, dist: homeDistance() * 1.25 }, ms || 1400);
     else animate({ tx: 0, tz: 0, az: HOME.az, el: HOME.el, dist: homeDistance() }, ms || 1400);
   }
@@ -1014,7 +1151,7 @@
   if (btnChange) btnChange.onclick = () => { animate({ change: st.change > 0.5 ? 0 : 1 }, 500); };
   if (btnWalls) btnWalls.onclick = () => { st.walls = !st.walls; syncUi(); request(); };
   if (btnLabels) btnLabels.onclick = () => { st.labels = !st.labels; syncUi(); request(); };
-  if (btnReset) btnReset.onclick = () => { view('overview', 900); animate({ userLift: 1 }, 900); };
+  if (btnReset) btnReset.onclick = () => { if (scene) leaveScene(); view('overview', 900); animate({ userLift: 1, ty: 14 }, 900); };
   if (btnPlay) btnPlay.onclick = playYears;
   if (yearRange) yearRange.addEventListener('input', () => {
     stopSpin();
@@ -1027,7 +1164,7 @@
 
   /* ---------- audio cues ---------- */
   function applyCues(lines, t){
-    const target = { year: null, lift: null, change: null, view: null, spot: null };
+    const target = { year: null, lift: null, change: null, view: null, spot: null, interior: null };
     for (const line of lines){
       if (line.start > t + 0.05) break;
       const c = line.cue;
@@ -1035,8 +1172,9 @@
       if (c.year !== undefined) target.year = c.year;
       if (c.lift !== undefined) target.lift = c.lift;
       if (c.change !== undefined) target.change = c.change;
-      if (c.view !== undefined){ target.view = c.view; target.spot = null; }
-      if (c.spot !== undefined){ target.spot = c.spot; target.view = null; }
+      if (c.view !== undefined){ target.view = c.view; target.spot = null; target.interior = null; }
+      if (c.spot !== undefined){ target.spot = c.spot; target.view = null; target.interior = null; }
+      if (c.interior !== undefined){ target.interior = c.interior; }
     }
     return target;
   }
@@ -1051,9 +1189,11 @@
     if (cue.year !== null){ const i = years.findIndex(y => y.id === cue.year); if (i >= 0){ to.year = i; texture(i); } }
     if (cue.lift !== null) to.userLift = cue.lift;
     if (cue.change !== null) to.change = cue.change ? 1 : 0;
+    if (cue.interior && interiors && interiors.scenes[cue.interior]){ enterScene(cue.interior, true); return; }
+    if (scene) leaveScene();
     if (cue.spot && lab.spots[cue.spot]){
       const xz = spotWorld(cue.spot);
-      Object.assign(to, { tx: xz[0], tz: xz[1], dist: 230, el: 0.58 });
+      Object.assign(to, { tx: xz[0], tz: xz[1], ty: 14, dist: 230, el: 0.58 });
       for (const k of Object.keys(pins)) pins[k].classList.toggle('is-on', k === cue.spot);
     } else if (cue.view === 'top') Object.assign(to, { tx: 0, tz: 0, el: 1.35, dist: homeDistance() * 1.25 });
     else if (cue.view === 'overview') Object.assign(to, { tx: 0, tz: 0, az: HOME.az, el: HOME.el, dist: homeDistance() });
@@ -1067,9 +1207,10 @@
     fetch(asset('gunkanjima-lab.json')).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
     fetch(asset('gunkanjima-model.json')).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
     fetch(asset('gunkanjima-spots.json')).then(r => r.ok ? r.json() : null).catch(() => null),
-    fetch(asset('gunkanjima-photos.json')).then(r => r.ok ? r.json() : null).catch(() => null)
-  ]).then(([meta, mdl, words, ph]) => {
-    lab = meta; model = mdl; texts = words; photos = ph && ph.photos ? ph.photos : {};
+    fetch(asset('gunkanjima-photos.json')).then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch(asset('gunkanjima-interiors.json')).then(r => r.ok ? r.json() : null).catch(() => null)
+  ]).then(([meta, mdl, words, ph, ints]) => {
+    lab = meta; model = mdl; texts = words; photos = ph && ph.photos ? ph.photos : {}; interiors = ints && ints.scenes ? ints : null;
     return fetch(asset(model.terrain.file)).then(r => r.arrayBuffer()).then(buf => {
       const t = model.terrain;
       if (buf.byteLength !== t.w * t.h * 2) throw new Error('terrain size');
@@ -1107,6 +1248,6 @@
     fallback(T.failed);
   });
 
-  window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
+  window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, enterScene, leaveScene, scene: () => scene, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
     years: () => years.map(y => y.id), loaded: i => texture(i).promise, shadows: () => !!shadowFb, walls: () => !!walls, model: () => model };
 })();
