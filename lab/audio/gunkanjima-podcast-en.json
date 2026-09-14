@@ -6,53 +6,53 @@
   "B": "Andrew"
  },
  "voices": "Voices: Microsoft neural text-to-speech (Ava and Andrew). The script was written from the sources on this page; the two hosts are not real people.",
- "duration": 472.97,
+ "duration": 468.52,
  "chapters": [
   {
-   "start": 2.6,
+   "start": 0.25,
    "title": "A rock in the sea"
   },
   {
-   "start": 47.27,
+   "start": 44.92,
    "title": "Two photographs, one shape"
   },
   {
-   "start": 115.59,
+   "start": 113.24,
    "title": "An island built outwards"
   },
   {
-   "start": 163.4,
+   "start": 161.05,
    "title": "Building upwards"
   },
   {
-   "start": 206.99,
+   "start": 204.64,
    "title": "Life in 1962"
   },
   {
-   "start": 284.14,
+   "start": 281.79,
    "title": "The mine"
   },
   {
-   "start": 310.09,
+   "start": 307.74,
    "title": "A history to remember"
   },
   {
-   "start": 340.11,
+   "start": 337.76,
    "title": "After the people left"
   },
   {
-   "start": 402.41,
+   "start": 400.06,
    "title": "Visiting today"
   },
   {
-   "start": 444.1,
+   "start": 441.75,
    "title": "Your turn"
   }
  ],
  "lines": [
   {
-   "start": 2.6,
-   "end": 12.9,
+   "start": 0.25,
+   "end": 10.55,
    "s": "A",
    "t": "Four hundred and eighty metres long, a hundred and sixty wide. You could walk round it in fifteen minutes. And at one point, more than five thousand people lived on it.",
    "cue": {
@@ -63,62 +63,62 @@
    }
   },
   {
-   "start": 13.32,
-   "end": 29.86,
+   "start": 10.97,
+   "end": 27.51,
    "s": "B",
    "t": "Five thousand two hundred and sixty-seven, in the 1960 census. That's about eighty-three thousand people per square kilometre. Nine times the density of central Tokyo at the time. People called it the most crowded place on earth, and they were probably right."
   },
   {
-   "start": 30.28,
-   "end": 36.02,
+   "start": 27.93,
+   "end": 33.67,
    "s": "A",
    "t": "This is Hashima, off Nagasaki. Everyone calls it Gunkanjima. Battleship Island."
   },
   {
-   "start": 36.44,
-   "end": 46.27,
+   "start": 34.09,
+   "end": 43.92,
    "s": "B",
    "t": "And today we're going to look at it the way a survey plane saw it on the thirtieth of May, 1962. Then we'll raise it into 3D and walk through what's there."
   },
   {
-   "start": 47.27,
-   "end": 52.9,
+   "start": 44.92,
+   "end": 50.55,
    "s": "A",
    "t": "Okay, first question. How do you get 3D out of a photo from 1962?"
   },
   {
-   "start": 53.32,
-   "end": 59.38,
+   "start": 50.97,
+   "end": 57.03,
    "s": "B",
    "t": "The plane took two photographs of the island, about a kilometre apart. Same island, two viewpoints."
   },
   {
-   "start": 59.8,
-   "end": 60.29,
+   "start": 57.45,
+   "end": 57.94,
    "s": "A",
    "t": "Right."
   },
   {
-   "start": 60.71,
-   "end": 73.92,
+   "start": 58.36,
+   "end": 71.57,
    "s": "B",
    "t": "Tall things shift more between the two frames than low things. Hold up a finger, close one eye, then the other. The finger jumps. Measure that jump for every point on the island, and you've got its height."
   },
   {
-   "start": 74.34,
-   "end": 75.15,
+   "start": 71.99,
+   "end": 72.8,
    "s": "A",
    "t": "And you trust it?"
   },
   {
-   "start": 75.57,
-   "end": 97.99,
+   "start": 73.22,
+   "end": 95.64,
    "s": "B",
    "t": "We checked it two ways. The flying height worked out from the map scale is one thousand nine hundred and fifty metres. The plane's own altimeter is printed on the edge of the photograph, and it says exactly one nine five zero. And a floating pier moored by the island comes out about two and a half metres above the water, which is roughly what a floating pier should be."
   },
   {
-   "start": 98.41,
-   "end": 99.48,
+   "start": 96.06,
+   "end": 97.13,
    "s": "A",
    "t": "Then let's raise it.",
    "cue": {
@@ -127,20 +127,20 @@
    }
   },
   {
-   "start": 99.9,
-   "end": 113.66,
+   "start": 97.55,
+   "end": 111.31,
    "s": "B",
    "t": "One honest note. This version has proper walls. The outlines come from OpenStreetMap, the heights from the photographs. But the rows of windows are drawn from the number of storeys. They're a sketch, not something the camera saw."
   },
   {
-   "start": 114.08,
-   "end": 114.59,
+   "start": 111.73,
+   "end": 112.24,
    "s": "A",
    "t": "Noted."
   },
   {
-   "start": 115.59,
-   "end": 118.02,
+   "start": 113.24,
+   "end": 115.67,
    "s": "A",
    "t": "The first thing I see is the wall, all the way round.",
    "cue": {
@@ -148,44 +148,44 @@
    }
   },
   {
-   "start": 118.44,
-   "end": 131.69,
+   "start": 116.09,
+   "end": 129.34,
    "s": "B",
    "t": "That sea wall is why the island has this shape at all. Hashima started as a much smaller reef. Between the late Meiji years and 1931 it was enlarged six times, and the new land sits behind that wall."
   },
   {
-   "start": 132.11,
-   "end": 134.73,
+   "start": 129.76,
+   "end": 132.38,
    "s": "A",
    "t": "Is that where the name comes from? The battleship?"
   },
   {
-   "start": 135.15,
-   "end": 146.78,
+   "start": 132.8,
+   "end": 144.43,
    "s": "B",
    "t": "Apparently a newspaper in the 1920s wrote that it looked like the battleship Tosa, and it stuck. From the sea, the wall and the tall blocks really do read as a warship."
   },
   {
-   "start": 147.2,
-   "end": 149.2,
+   "start": 144.85,
+   "end": 146.85,
    "s": "A",
    "t": "And the reason to build out here was coal."
   },
   {
-   "start": 149.62,
-   "end": 162.4,
+   "start": 147.27,
+   "end": 160.05,
    "s": "B",
    "t": "Coal under the seabed. The story goes it was found around 1810, and Mitsubishi bought the island in 1890 for a hundred thousand yen. Low ash, low sulphur. It sold well."
   },
   {
-   "start": 163.4,
-   "end": 165.51,
+   "start": 161.05,
+   "end": 163.16,
    "s": "A",
    "t": "So where do you put the miners?"
   },
   {
-   "start": 165.93,
-   "end": 181.49,
+   "start": 163.58,
+   "end": 179.14,
    "s": "B",
    "t": "Up. Find the square block with a hole in the middle, at the foot of the rock in the south-west. That's Building Number Thirty, finished in 1916. It's usually described as Japan's first high-rise apartment block in reinforced concrete.",
    "cue": {
@@ -193,14 +193,14 @@
    }
   },
   {
-   "start": 181.91,
-   "end": 185.62,
+   "start": 179.56,
+   "end": 183.27,
    "s": "A",
    "t": "1916. Tokyo didn't have anything like that yet."
   },
   {
-   "start": 186.04,
-   "end": 199.84,
+   "start": 183.69,
+   "end": 197.49,
    "s": "B",
    "t": "It opened with four storeys and they added three more later. And it didn't stop there. Along the west side, facing the open sea, runs a line of miners' housing, Buildings Sixteen to Twenty, from 1918 onwards.",
    "cue": {
@@ -208,20 +208,20 @@
    }
   },
   {
-   "start": 200.26,
-   "end": 202.37,
+   "start": 197.91,
+   "end": 200.02,
    "s": "A",
    "t": "So the housing is also the breakwater."
   },
   {
-   "start": 202.79,
-   "end": 205.99,
+   "start": 200.44,
+   "end": 203.64,
    "s": "B",
    "t": "In a typhoon, people said the waves came over the roof."
   },
   {
-   "start": 206.99,
-   "end": 210.92,
+   "start": 204.64,
+   "end": 208.57,
    "s": "A",
    "t": "In this 1962 photograph, what's the island like?",
    "cue": {
@@ -229,8 +229,8 @@
    }
   },
   {
-   "start": 211.34,
-   "end": 230.58,
+   "start": 208.99,
+   "end": 228.23,
    "s": "B",
    "t": "At its fullest. Look at the north end, the big U-shaped block. That's Building Sixty-Five. Nine storeys, three hundred and seventeen flats. They started the north wing in 1945 and kept adding until 1958. The courtyard was the playground, and the kindergarten was on the roof.",
    "cue": {
@@ -238,14 +238,14 @@
    }
   },
   {
-   "start": 231.0,
-   "end": 232.56,
+   "start": 228.65,
+   "end": 230.21,
    "s": "A",
    "t": "A kindergarten on the roof."
   },
   {
-   "start": 232.98,
-   "end": 249.6,
+   "start": 230.63,
+   "end": 247.25,
    "s": "B",
    "t": "No ground to spare. Right next to it is the school, seven storeys. Built in 1957 with six, one more added in 1961. Its biggest year ever was 1962: one thousand one hundred and sixty-nine pupils.",
    "cue": {
@@ -253,20 +253,20 @@
    }
   },
   {
-   "start": 250.02,
-   "end": 252.34,
+   "start": 247.67,
+   "end": 249.99,
    "s": "A",
    "t": "The same year as our photograph."
   },
   {
-   "start": 252.76,
-   "end": 256.28,
+   "start": 250.41,
+   "end": 253.93,
    "s": "B",
    "t": "The very same. This photo catches the island at its peak."
   },
   {
-   "start": 256.7,
-   "end": 258.64,
+   "start": 254.35,
+   "end": 256.29,
    "s": "A",
    "t": "There's something on top of the rock in the middle.",
    "cue": {
@@ -274,26 +274,26 @@
    }
   },
   {
-   "start": 259.06,
-   "end": 279.48,
+   "start": 256.71,
+   "end": 277.13,
    "s": "B",
    "t": "Hashima Shrine, built in 1936. Every third of April the whole island turned out for the festival, and the highlight was the portable shrine being run down a staircase so steep that people called it the stairway to hell. The wooden hall has collapsed. What's left up there now is a small stone shrine."
   },
   {
-   "start": 279.9,
-   "end": 283.14,
+   "start": 277.55,
+   "end": 280.79,
    "s": "A",
    "t": "That's the little point on the skyline when you see it from the sea."
   },
   {
-   "start": 284.14,
-   "end": 285.19,
+   "start": 281.79,
+   "end": 282.84,
    "s": "A",
    "t": "And the mine itself?"
   },
   {
-   "start": 285.61,
-   "end": 302.89,
+   "start": 283.26,
+   "end": 300.54,
    "s": "B",
    "t": "South-east side. The number two shaft was the main way down, and the men climbed a flight of stairs to reach the pithead. It's filled with concrete now. Right beside it stand brick walls from a winding-engine house built in 1896, one of the oldest things on the island.",
    "cue": {
@@ -301,14 +301,14 @@
    }
   },
   {
-   "start": 303.31,
-   "end": 309.09,
+   "start": 300.96,
+   "end": 306.74,
    "s": "A",
    "t": "Brick from 1896, concrete from 1916. The island comes in layers."
   },
   {
-   "start": 310.09,
-   "end": 331.1,
+   "start": 307.74,
+   "end": 328.75,
    "s": "B",
    "t": "There's one more layer we should name. When these industrial sites joined the World Heritage List in 2015, Japan's representative told the committee that there were a large number of Koreans and others who were brought against their will and forced to work under harsh conditions in the 1940s at some of the sites. Hashima is one of those sites.",
    "cue": {
@@ -316,32 +316,32 @@
    }
   },
   {
-   "start": 331.52,
-   "end": 336.54,
+   "start": 329.17,
+   "end": 334.19,
    "s": "A",
    "t": "So we hold both. The engineering story, and the people who never chose to be here."
   },
   {
-   "start": 336.96,
-   "end": 339.11,
+   "start": 334.61,
+   "end": 336.76,
    "s": "B",
    "t": "You can't tell this island with only one of them."
   },
   {
-   "start": 340.11,
-   "end": 341.07,
+   "start": 337.76,
+   "end": 338.72,
    "s": "A",
    "t": "What happened next?"
   },
   {
-   "start": 341.49,
-   "end": 352.43,
+   "start": 339.14,
+   "end": 350.08,
    "s": "B",
    "t": "Oil replaced coal. The mine closed on the fifteenth of January 1974, and on the twentieth of April the last residents took the boat. The island was empty."
   },
   {
-   "start": 352.85,
-   "end": 357.59,
+   "start": 350.5,
+   "end": 355.24,
    "s": "A",
    "t": "Let me move the slider. Here's January 1975, in colour.",
    "cue": {
@@ -349,14 +349,14 @@
    }
   },
   {
-   "start": 358.01,
-   "end": 366.59,
+   "start": 355.66,
+   "end": 364.24,
    "s": "B",
    "t": "One year after closing, and from above it still looks lived in. The buildings are all there, so for this year we keep the 1962 shape."
   },
   {
-   "start": 367.01,
-   "end": 368.59,
+   "start": 364.66,
+   "end": 366.24,
    "s": "A",
    "t": "And 2010.",
    "cue": {
@@ -364,8 +364,8 @@
    }
   },
   {
-   "start": 369.01,
-   "end": 382.64,
+   "start": 366.66,
+   "end": 380.29,
    "s": "B",
    "t": "For 2010 we measured the heights again, from a new pair of photographs. Switch on the change colours. Red is where the island is at least five metres lower than in 1962. Blue is where it's higher.",
    "cue": {
@@ -374,20 +374,20 @@
    }
   },
   {
-   "start": 383.06,
-   "end": 387.86,
+   "start": 380.71,
+   "end": 385.51,
    "s": "A",
    "t": "The big concrete blocks are mostly still standing. But a lot has come down."
   },
   {
-   "start": 388.28,
-   "end": 397.0,
+   "start": 385.93,
+   "end": 394.65,
    "s": "B",
    "t": "Altogether about 6,900 square metres read lower. Mostly where the wooden buildings were, and along the sea wall."
   },
   {
-   "start": 397.42,
-   "end": 398.68,
+   "start": 395.07,
+   "end": 396.33,
    "s": "A",
    "t": "And the latest photograph?",
    "cue": {
@@ -396,20 +396,20 @@
    }
   },
   {
-   "start": 399.1,
-   "end": 401.41,
+   "start": 396.75,
+   "end": 399.06,
    "s": "B",
    "t": "Greener. And still standing, just."
   },
   {
-   "start": 402.41,
-   "end": 403.64,
+   "start": 400.06,
+   "end": 401.29,
    "s": "A",
    "t": "Can you actually go?"
   },
   {
-   "start": 404.06,
-   "end": 421.3,
+   "start": 401.71,
+   "end": 418.95,
    "s": "B",
    "t": "Yes, on a landing tour from Nagasaki port. The public has been allowed to land since the twenty-second of April 2009. You stay on the visitor walkway, and if the waves, the wind or the visibility are outside the city's limits, nobody lands that day.",
    "cue": {
@@ -417,14 +417,14 @@
    }
   },
   {
-   "start": 421.72,
-   "end": 422.55,
+   "start": 419.37,
+   "end": 420.2,
    "s": "A",
    "t": "Will it last?"
   },
   {
-   "start": 422.97,
-   "end": 434.77,
+   "start": 420.62,
+   "end": 432.42,
    "s": "B",
    "t": "Nagasaki City has a thirty-year conservation plan. The sea wall comes first, then the mine remains. For the housing, they're starting with Building Number Three, up on the highest ground.",
    "cue": {
@@ -432,20 +432,20 @@
    }
   },
   {
-   "start": 435.19,
-   "end": 436.26,
+   "start": 432.84,
+   "end": 433.91,
    "s": "A",
    "t": "What's Number Three?"
   },
   {
-   "start": 436.68,
-   "end": 443.1,
+   "start": 434.33,
+   "end": 440.75,
    "s": "B",
    "t": "The managers' housing. Best view on the island, and in better shape than most. So that's where they begin."
   },
   {
-   "start": 444.1,
-   "end": 451.86,
+   "start": 441.75,
+   "end": 449.51,
    "s": "A",
    "t": "That's our lab test. Everything you just heard is on this page. Turn the island, slide through the years, tap the icons.",
    "cue": {
@@ -455,14 +455,14 @@
    }
   },
   {
-   "start": 452.28,
-   "end": 468.2,
+   "start": 449.93,
+   "end": 465.85,
    "s": "B",
    "t": "The photographs come from the Geospatial Information Authority of Japan. The model is a first attempt, so it's a few metres out in places. And our voices are Microsoft's synthetic voices. We're not real people. The script was written from the sources on this page."
   },
   {
-   "start": 468.62,
-   "end": 470.07,
+   "start": 466.27,
+   "end": 467.72,
    "s": "A",
    "t": "See you on the next island."
   }

@@ -54,7 +54,7 @@
 .pod-player input[type=range]{flex:1 1 10rem;accent-color:#a35945;min-width:0}
 .pod-player button,.pod-player select{font:inherit;font-size:.9rem;padding:.35rem .7rem;border:1px solid #9aa79f;border-radius:3px;background:#fff;color:#203a37;cursor:pointer}
 #podPlay{background:#234d44;color:#fff;border-color:#234d44;min-width:6.5rem}
-.pod-lang{display:inline-flex;gap:.25rem}
+.pod-lang,.pod-skip{display:inline-flex;gap:.25rem}.pod-skip button{min-width:2.6rem;padding:.35rem .45rem}
 .pod-lang button[aria-pressed="true"]{background:#a35945;color:#fff;border-color:#a35945}
 .pod-follow{font-size:.88rem}
 .pod-columns{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:1rem;margin-top:1rem}
@@ -69,6 +69,9 @@
 .pod-credit,.pod-note{font-size:.82rem;color:#56645d}
 .lab-langs a{white-space:nowrap}
 .lab-credit{font-size:.9rem}
+.bld-label{position:absolute;left:0;top:0;transform:translate(-50%,-100%);margin:0;padding:.1rem .4rem;border:0;border-radius:2px;background:#0f191bcc;color:#f3f1ea;font:500 11px/1.3 system-ui,sans-serif;white-space:nowrap;cursor:pointer;pointer-events:auto}
+.bld-label:hover{background:#a35945}
+.bld-facts{border-collapse:collapse;font-size:.9rem;margin:.25rem 0 .75rem}.bld-facts th{text-align:left;padding:.15rem .6rem .15rem 0;color:#56645d;font-weight:600;white-space:nowrap;vertical-align:top}.bld-facts td{padding:.15rem 0}.bld-facts small{color:#7a857e}
 .photo-strip{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1.25rem 0 .5rem}
 .photo-strip figure{margin:0}.photo-strip img{display:block;width:100%;height:auto;border-radius:4px;aspect-ratio:3/2;object-fit:cover}
 .photo-strip figcaption,.spot-photo figcaption{font-size:.8rem;color:#56645d;margin-top:.3rem}
@@ -86,34 +89,34 @@
 <div data-lang="en" lang="en">
 <p class="lab-badge">Lab · testing</p>
 <h1>Gunkanjima in 3D, from 1947 to today</h1>
-<p class="lead">Hashima was a coal-mining island off Nagasaki. In 1960 about 5,300 people lived on its roughly 6.3 hectares; nobody has lived there since 1974. Slide through five aerial photographs, from 1947 to the latest, on a 3D model whose heights were measured from GSI photographs taken in 1962 and 2010. Every building outline stands as a wall with a sketched façade, and the morning sun casts shadows. Tap an icon to read about a place, or play the audio guide.</p>
+<p class="lead">Hashima was a coal-mining island off Nagasaki. In 1960 about 5,300 people lived on its roughly 6.3 hectares; nobody has lived there since 1974. Slide through five aerial photographs, from 1947 to the latest, over a reconstruction of the island: every building is drawn from its outline, its storey count and its completion year, so it rises in the year it was built and falls when it collapsed. Tap a building name or an icon to read about it, or play the audio guide and let it move the model.</p>
 </div>
 <div data-lang="ja" lang="ja" hidden>
 <p class="lab-badge">テスト中</p>
 <h1>軍艦島を立体で見る　1947年から今まで</h1>
-<p class="lead">端島は長崎沖の炭鉱の島です。1960年には約6.3ヘクタールの島に約5,300人が暮らし、1974年からは誰も住んでいません。1947年から最新まで5枚の空中写真を、立体の上で切り替えられます。高さは国土地理院の1962年と2010年の写真から測り、建物の輪郭ごとに壁を立てて、朝の太陽の影を落としています（壁の窓は階数から描いた模式です）。アイコンを押すと場所の説明が、音声ガイドを再生すると話に合わせて立体が動きます。</p>
+<p class="lead">端島は長崎沖の炭鉱の島です。1960年には約6.3ヘクタールの島に約5,300人が暮らし、1974年からは誰も住んでいません。1947年から最新まで5枚の空中写真を、島の復元模型の上で切り替えられます。建物は一棟ずつ、輪郭・階数・竣工年から描いているので、建った年に立ち上がり、崩れた年に消えます。建物の名前やアイコンを押すと説明が、音声ガイドを再生すると話に合わせて模型が動きます。</p>
 </div>
 <div data-lang="ko" lang="ko" hidden>
 <p class="lab-badge">테스트 중</p>
 <h1>군함도를 3D로, 1947년부터 지금까지</h1>
-<p class="lead">하시마는 나가사키 앞바다의 탄광 섬입니다. 1960년에는 약 6.3헥타르의 섬에 약 5,300명이 살았고, 1974년부터는 아무도 살지 않습니다. 1947년부터 최신까지 항공사진 5장을 3D 모델 위에서 바꿔 볼 수 있습니다. 높이는 일본 국토지리원의 1962년·2010년 사진으로 측정했고, 건물 윤곽마다 벽을 세우고 아침 햇빛의 그림자를 넣었습니다(벽의 창문은 층수로 그린 모식도입니다). 아이콘을 누르면 장소 설명을, 음성 가이드를 재생하면 이야기에 맞춰 모델이 움직입니다.</p>
+<p class="lead">하시마는 나가사키 앞바다의 탄광 섬입니다. 1960년에는 약 6.3헥타르의 섬에 약 5,300명이 살았고, 1974년부터는 아무도 살지 않습니다. 1947년부터 최신까지 항공사진 5장을 섬의 복원 모형 위에서 바꿔 볼 수 있습니다. 건물은 한 동씩 윤곽·층수·준공년으로 그렸기 때문에, 지어진 해에 올라가고 무너진 해에 사라집니다. 건물 이름이나 아이콘을 누르면 설명이, 음성 가이드를 재생하면 이야기에 맞춰 모형이 움직입니다. 아이콘을 누르면 장소 설명을, 음성 가이드를 재생하면 이야기에 맞춰 모델이 움직입니다.</p>
 </div>
 <div data-lang="zh-Hans" lang="zh-Hans" hidden>
 <p class="lab-badge">测试中</p>
 <h1>立体查看军舰岛：从1947年到现在</h1>
-<p class="lead">端岛是长崎外海的煤矿岛。1960年，约6.3公顷的岛上住着约5,300人；1974年以后再无人居住。你可以在立体模型上切换从1947年到最新的5张航拍照片。高度由日本国土地理院1962年和2010年的照片测得，每个建筑轮廓都立起了墙体，并加入了早晨阳光的阴影（墙上的窗户是按层数画的示意图）。点按图标可阅读地点介绍，播放音频导览时模型会跟着讲解移动。</p>
+<p class="lead">端岛是长崎外海的煤矿岛。1960年，约6.3公顷的岛上住着约5,300人；1974年以后再无人居住。你可以在岛的复原模型上切换从1947年到最新的5张航拍照片。每栋建筑按轮廓、层数和竣工年绘制，因此会在建成那年升起、在倒塌那年消失。点按建筑名称或图标可阅读介绍，播放音频导览时模型会跟着讲解移动。点按图标可阅读地点介绍，播放音频导览时模型会跟着讲解移动。</p>
 </div>
 <div data-lang="zh-Hant" lang="zh-Hant" hidden>
 <p class="lab-badge">測試中</p>
 <h1>立體檢視軍艦島：從1947年到現在</h1>
-<p class="lead">端島是長崎外海的煤礦島。1960年，約6.3公頃的島上住著約5,300人；1974年以後再無人居住。你可以在立體模型上切換從1947年到最新的5張航空照片。高度由日本國土地理院1962年和2010年的照片測得，每個建築輪廓都立起了牆體，並加入了早晨陽光的陰影（牆上的窗戶是按層數畫的示意圖）。點按圖示可閱讀地點介紹，播放語音導覽時模型會跟著講解移動。</p>
+<p class="lead">端島是長崎外海的煤礦島。1960年，約6.3公頃的島上住著約5,300人；1974年以後再無人居住。你可以在島的復原模型上切換從1947年到最新的5張航空照片。每棟建築按輪廓、層數和竣工年繪製，因此會在建成那年升起、在倒塌那年消失。點按建築名稱或圖示可閱讀介紹，播放語音導覽時模型會跟著講解移動。點按圖示可閱讀地點介紹，播放語音導覽時模型會跟著講解移動。</p>
 </div>
 
 <div class="viewer">
 <div class="viewer-stage">
 <canvas id="view" tabindex="0" role="img" aria-label="Interactive 3D model of Hashima"></canvas>
 <div id="spotLayer" class="spot-layer"></div>
-<img id="viewFallback" src="/lab/gunkanjima-1962.jpg?v=3" alt="Aerial photograph of Hashima, 30 May 1962" hidden>
+<img id="viewFallback" src="/lab/gunkanjima-1962.jpg?v=4" alt="Aerial photograph of Hashima, 30 May 1962" hidden>
 <div id="viewCompass" class="compass" aria-hidden="true">N</div>
 <div id="changeLegend" class="change-legend" hidden><i class="lo"></i><span data-t="lower"></span><i class="hi"></i><span data-t="higher"></span></div>
 <aside id="spotPanel" class="spot-panel" hidden><button id="spotClose" type="button" aria-label="Close">×</button><h2 id="spotTitle"></h2><div id="spotBody"></div></aside>
@@ -122,7 +125,7 @@
 <div class="years"><button id="btnPlayYears" type="button">▶ Play the years</button><input id="yearRange" type="range" min="0" max="4" step="0.01" value="1" aria-label="Year"><output id="yearLabel" for="yearRange"></output></div>
 <div id="yearTicks" class="year-ticks"></div>
 <p id="yearNote" class="year-note"></p>
-<div class="viewer-buttons"><button id="btnFlat" type="button" aria-pressed="false">Flat photo</button><button id="btnExag" type="button" aria-pressed="false">Heights ×2</button><button id="btnChange" type="button" aria-pressed="false">Show change</button><button id="btnWalls" type="button" aria-pressed="false">Walls: on</button><button id="btnReset" type="button">Reset view</button></div>
+<div class="viewer-buttons"><button id="btnFlat" type="button" aria-pressed="false">Flat photo</button><button id="btnExag" type="button" aria-pressed="false">Heights ×2</button><button id="btnChange" type="button" aria-pressed="false">Show change</button><button id="btnWalls" type="button" aria-pressed="false">Buildings: on</button><button id="btnLabels" type="button" aria-pressed="false">Names: on</button><button id="btnReset" type="button">Reset view</button></div>
 <p id="viewStatus" class="viewer-status" aria-live="polite"></p>
 </div>
 </div>
@@ -245,7 +248,7 @@
 <div data-lang="zh-Hans" lang="zh-Hans" hidden><p>可以用英语（约8分钟）或日语（约9分钟）收听的双人节目，稿子根据本页的出处撰写。形式参考了历史类播客：一人事先做好功课，另一人替听众提问，用平常的口吻交谈。声音为Microsoft神经网络合成语音，两位主持人并非真人。播放时，模型会随着谈到的地点和年代移动；想自己操作时，请取消勾选。暂无中文语音。</p></div>
 <div data-lang="zh-Hant" lang="zh-Hant" hidden><p>可以用英語（約8分鐘）或日語（約9分鐘）收聽的雙人節目，稿子根據本頁的出處撰寫。形式參考了歷史類Podcast：一人事先做好功課，另一人替聽眾提問，用平常的口吻交談。聲音為Microsoft神經網路合成語音，兩位主持人並非真人。播放時，模型會隨著談到的地點和年代移動；想自己操作時，請取消勾選。暫無中文語音。</p></div>
 <div class="pod-player">
-<button id="podPlay" type="button" aria-pressed="false">▶ Play</button>
+<span class="pod-skip" role="group"><button type="button" data-pod-chapter="-1" title="Previous chapter" aria-label="Previous chapter">⏮</button><button type="button" data-pod-skip="-15" aria-label="Back 15 seconds">−15s</button></span><button id="podPlay" type="button" aria-pressed="false">▶ Play</button><span class="pod-skip" role="group"><button type="button" data-pod-skip="15" aria-label="Forward 15 seconds">+15s</button><button type="button" data-pod-chapter="1" title="Next chapter" aria-label="Next chapter">⏭</button></span>
 <input id="podSeek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Position">
 <span id="podTime">0:00</span>
 <span class="pod-lang" role="group" aria-label="Audio language"><button type="button" data-pod-lang="en" lang="en">English</button><button type="button" data-pod-lang="ja" lang="ja">日本語</button></span>
@@ -263,13 +266,13 @@
 <p>Checks: for 1962 the flying height worked out from the map scale is 1,950 m, the same as the altimeter printed on the edge of the photograph, and a floating pier comes out about 2.5 m above the water. For 2010 the map scale gives about 2,020 m, against 2,008 m recorded for the photograph.</p>
 <p>Sea level was set against GSI’s present-day 5 m elevation data on open ground. The other years are laid over the nearest measured shape: 1975 over 1962, and the latest photograph over 2010. The 1947 photograph, a US Army frame at about 1:30,000, is shown flat.</p>
 <p>The change colours compare the two measured years. Red marks places at least 5 m lower in 2010 than in 1962, blue places at least 5 m higher. A place counts only if nothing within a few metres stands as high, which keeps most small misalignments out; thin red strips along the sea wall may still be alignment error rather than real change.</p>
-<p>Walls: every building outline in OpenStreetMap is raised to the roof height measured inside it (the 70th percentile of the grid within the footprint, for 1962 and for 2010 separately), on a ground level read from a ring just outside it. The rows of windows on the walls are drawn from the storey count and are not visible in the photographs; switch the walls off to see the measured surface alone. The morning sun (about 10 a.m. on 30 May) casts shadows through a shadow map so that they agree with the shadows in the 1962 photograph.</p>
+<p>Buildings: each one is a prism drawn from its outline (OpenStreetMap, checked against the 1962 photograph; Building No. 30 and twenty-one unnamed 1962 structures were traced from the photograph itself), its storey count and its completion year from the published building list, on the ground level of GSI’s 5 m elevation model. A building rises in the year it was completed and disappears in the year it collapsed; where a collapse is only visible in the 2010 photographs, the year 2000 stands in and the panel says so. The façades are drawn by type (the 1918 workers’ housing with its open galleries, apartment blocks, the school’s ribbon windows, workshops, wooden houses, the shrine) and are a drawing, not a photograph: at the scale of these aerial photographs one pixel is about 0.8 m and no façade is visible. Roofs and ground carry the photograph of the chosen year. The sea wall is the OpenStreetMap ring with a top height read from the 1962 stereo grid. The morning sun (about 10 a.m. on 30 May) casts shadows through a shadow map so that they agree with the shadows in the 1962 photograph. The stereo height grids of 1962 and 2010 are still used for the sea wall and for the change layer.</p>
 <p>The places marked on the model come from OpenStreetMap, checked against the 1962 photograph. Building No. 30, which OpenStreetMap does not name, was read off the photograph.</p>
 <h2>What to keep in mind</h2>
 <ul>
 <li>This is a test. Heights are a few metres out in places.</li>
-<li>The walls follow today’s building outlines, so a wooden building of 1962 that has since gone has no wall, and the windows on every wall are a sketch, not a photograph. The photographs cannot show façades: at their scale one pixel is about 0.8 m, which is why the roofs stay soft.</li>
-<li>From above you cannot see down into the narrow alleys between the apartment blocks, so they are filled in, and walls come out as slopes rather than sheer drops. Thin towers and chimneys are left out.</li>
+<li>The buildings are a reconstruction: outlines and storey counts are documented, but the façades are drawn by type, and a building whose completion year is unknown is shown from 1950. In 1947 only buildings with a known completion date appear, so that view is incomplete.</li>
+<li>Stair towers, chimneys, the conveyor gantries and the small sheds between the blocks are left out; the terrain is a 5 m grid, so the rock is smoother than in life.</li>
 <li>About one point in six could not be matched for 1962, and about one in seventeen for 2010; those were filled in from their neighbours.</li>
 <li>The 1975 and latest views borrow the shape of another year, so a building that fell in between still stands in the model.</li>
 <li>The colours of the photographs were adjusted to make them easier to compare.</li>
@@ -280,7 +283,7 @@
 <h2>Sources</h2>
 <p class="lab-credit">Photographs: Geospatial Information Authority of Japan (GSI), aerial photographs USA M185-38 (26 March 1947), MKU628 C18-2 and C18-3 (30 May 1962), CKU7420 C45-6 (2 January 1975), CKU20103 C44-12 and C44-13 (3 May 2010) and the GSI seamless aerial photo, processed to make this model (国土地理院の空中写真を加工して作成). Sea level: GSI 5 m elevation data. Scale and north: GSI seamless aerial photo tiles. <a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">GSI map and aerial photo service</a></p>
 <p class="lab-credit">Positions of the places: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>. Photographs in the place panels: Wikimedia Commons, credited in each panel.</p>
-<p class="lab-credit">Facts: <a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">Sites of Japan’s Meiji Industrial Revolution (official site)</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">Nagasaki City</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">at Nagasaki</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">Gunkanjima Concierge</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">Ministry of Foreign Affairs of Japan</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia (Japanese)</a></p>
+<p class="lab-credit">Building list (completion years, storeys, use): <a href="https://ja.wikipedia.org/wiki/端島_(長崎県)" target="_blank" rel="noopener">Japanese Wikipedia, 端島 (長崎県)</a> · Terrain: GSI 5 m elevation (dem5b). Facts: <a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">Sites of Japan’s Meiji Industrial Revolution (official site)</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">Nagasaki City</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">at Nagasaki</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">Gunkanjima Concierge</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">Ministry of Foreign Affairs of Japan</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia (Japanese)</a></p>
 </section>
 
 <section data-lang="ja" lang="ja" hidden>
@@ -289,13 +292,13 @@
 <p>確かめ：1962年は、地図の縮尺から出した飛行高度が1,950メートルで、写真のふちに写る高度計と同じでした。浮き桟橋は海面から約2.5メートルと出ています。2010年は、地図の縮尺から約2,020メートルと出て、写真の記録は2,008メートルです。</p>
 <p>海面の高さは、国土地理院の現在の5メートル標高データに、開けた地面で合わせました。ほかの年は、いちばん近い測った形に写真を重ねています。1975年は1962年の形、最新の写真は2010年の形です。1947年は約3万分の1の米軍撮影の写真なので、平面で表示します。</p>
 <p>変化の色は、高さを測った2つの年を比べたものです。赤は2010年に1962年より5メートル以上低くなったところ、青は5メートル以上高くなったところです。数メートル以内に同じ高さのものがない場合だけ変化として数えるので、わずかな位置ずれの多くは変化として出ません。ただし護岸に沿った細い赤い帯は、実際の変化ではなく位置合わせのずれかもしれません。</p>
-<p>壁：OpenStreetMapにある建物の輪郭ごとに、その内側で測った屋根の高さ（輪郭内の高さの上位30%点。1962年と2010年で別々）まで壁を立て、足もとは輪郭のすぐ外側の高さに置いています。壁の窓の並びは階数から描いた模式で、写真には写っていません。「壁：非表示」にすると測った面だけになります。影は5月30日の午前10時ごろの太陽で落としていて、1962年の写真の影と向きが合うようにしています。</p>
+<p>建物：一棟ずつ、輪郭（OpenStreetMap。1962年の写真と照合。OpenStreetMapに無い30号棟と、名称不明の1962年の建物21棟は写真から輪郭を取りました）と、建物一覧の階数・竣工年から角柱として描き、国土地理院の5mメッシュ標高の地面に置いています。建物は竣工年に立ち上がり、崩壊した年に消えます。崩壊が2010年の写真でしか分からないものは2000年を仮の年にして、説明にそう書いています。壁面は種類ごと（1918年の日給社宅の連続した外廊下、アパートの窓列と階の帯、学校の横連窓、工場、木造、神社）に描いた模式で、写真ではありません。空中写真の1画素は約0.8メートルで、壁面は写らないためです。屋根と地面には選んだ年の写真を貼っています。護岸はOpenStreetMapの線で、天端の高さは1962年のステレオ格子から読みました。影は5月30日午前10時ごろの太陽で、1962年の写真の影と向きが合います。1962年と2010年のステレオ高さは、護岸と変化の表示に引き続き使っています。</p>
 <p>立体に付けた場所の位置はOpenStreetMapによるもので、1962年の写真と照らし合わせています。OpenStreetMapに名前のない30号棟は、写真から読み取りました。</p>
 <h2>見るときの注意</h2>
 <ul>
 <li>テストです。場所によって高さが数メートルずれています。</li>
-<li>壁は今の建物の輪郭に沿っているので、1962年にあって今は無い木造の建物には壁がありません。壁の窓はすべて模式で、写真ではありません。写真の1画素は約0.8メートルで、壁面までは写らないため、屋根の質感は粗いままです。</li>
-<li>上から奥まで見えない、アパートの間の狭い路地は埋まり、壁はまっすぐな崖ではなく斜面になります。細い塔や煙突は省いています。</li>
+<li>建物は復元です。輪郭と階数には出典がありますが、壁面は種類ごとに描いた模式で、竣工年が分からない建物は1950年から表示しています。1947年は竣工年が分かっている建物しか出ないので、その年の眺めは不完全です。</li>
+<li>階段室、煙突、コンベアの桁、建物の間の小屋は省いています。地形は5mメッシュなので、岩山は実際より滑らかです。</li>
 <li>照合できなかった点は、1962年でおよそ6点に1点、2010年でおよそ17点に1点あり、まわりの値で埋めています。</li>
 <li>1975年と最新の表示はほかの年の形を借りているので、その間に崩れた建物も立体では立ったままです。</li>
 <li>見比べやすいように、写真の色を調整しています。</li>
@@ -306,7 +309,7 @@
 <h2>出典</h2>
 <p class="lab-credit">国土地理院の空中写真（USA M185-38〈1947年3月26日〉、MKU628 C18-2・C18-3〈1962年5月30日〉、CKU7420 C45-6〈1975年1月2日〉、CKU20103 C44-12・C44-13〈2010年5月3日〉、シームレス空中写真）を加工して作成。海面の基準：国土地理院 5mメッシュ標高。縮尺と方位：地理院タイル（シームレス空中写真）。<a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">地図・空中写真閲覧サービス</a></p>
 <p class="lab-credit">場所の位置：© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>。場所の説明にある写真：Wikimedia Commons（各説明に撮影者とライセンスを表示）。</p>
-<p class="lab-credit">事実の出典：<a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">明治日本の産業革命遺産 公式サイト</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">長崎市</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">あっと!ながさき</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">軍艦島コンシェルジュ</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">外務省</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia</a></p>
+<p class="lab-credit">建物一覧（竣工年・階数・用途）：<a href="https://ja.wikipedia.org/wiki/端島_(長崎県)" target="_blank" rel="noopener">Wikipedia「端島 (長崎県)」</a> · 地形：国土地理院 5mメッシュ標高（dem5b）。事実の出典：<a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">明治日本の産業革命遺産 公式サイト</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">長崎市</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">あっと!ながさき</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">軍艦島コンシェルジュ</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">外務省</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia</a></p>
 </section>
 
 <section data-lang="ko" lang="ko" hidden>
@@ -315,13 +318,13 @@
 <p>확인: 1962년은 지도 축척에서 계산한 비행 고도가 1,950미터로, 사진 가장자리에 찍힌 고도계와 같았습니다. 부잔교는 해수면에서 약 2.5미터로 나옵니다. 2010년은 지도 축척으로 약 2,020미터가 나왔고, 사진 기록은 2,008미터입니다.</p>
 <p>해수면 높이는 일본 국토지리원의 현재 5미터 표고 자료에 트인 땅에서 맞췄습니다. 다른 해는 가장 가까운 측정 형태에 사진을 겹쳤습니다. 1975년은 1962년 형태, 최신 사진은 2010년 형태입니다. 1947년은 약 3만분의 1 축척의 미군 촬영 사진이라 평면으로 보여 줍니다.</p>
 <p>변화 색은 높이를 측정한 두 해를 비교한 것입니다. 빨강은 2010년에 1962년보다 5미터 이상 낮아진 곳, 파랑은 5미터 이상 높아진 곳입니다. 몇 미터 안에 같은 높이의 것이 없을 때만 변화로 셈하므로, 작은 위치 차이는 대부분 변화로 나오지 않습니다. 다만 방파제를 따라 보이는 가느다란 빨간 띠는 실제 변화가 아니라 위치 맞춤의 오차일 수 있습니다.</p>
-<p>벽: OpenStreetMap의 건물 윤곽마다 그 안에서 측정한 지붕 높이(윤곽 안 높이의 상위 30% 값, 1962년과 2010년 각각)까지 벽을 세우고, 바닥은 윤곽 바로 바깥의 높이에 두었습니다. 벽의 창문 배열은 층수로 그린 모식도이며 사진에 찍힌 것이 아닙니다. 「벽: 숨김」을 누르면 측정한 면만 남습니다. 그림자는 5월 30일 오전 10시경의 태양으로 넣어 1962년 사진의 그림자와 방향이 맞게 했습니다.</p>
+<p>건물: 한 동씩 윤곽(OpenStreetMap, 1962년 사진과 대조. OpenStreetMap에 없는 30호동과 이름 모를 1962년 건물 21동은 사진에서 윤곽을 땄습니다)과 건물 목록의 층수·준공년으로 각기둥을 그려, 일본 국토지리원 5m 표고의 지면에 놓았습니다. 건물은 준공년에 올라가고 무너진 해에 사라집니다. 붕괴가 2010년 사진에서만 확인되는 경우는 2000년을 임시 연도로 두고 설명에 그렇게 적었습니다. 벽면은 종류별(1918년 노동자 주택의 이어진 외부 복도, 아파트의 창 열과 층 띠, 학교의 가로 연속창, 공장, 목조, 신사)로 그린 모식도이며 사진이 아닙니다. 항공사진 1픽셀은 약 0.8m라 벽면은 찍히지 않기 때문입니다. 지붕과 지면에는 선택한 해의 사진을 입혔습니다. 방파제는 OpenStreetMap 선이며 윗면 높이는 1962년 스테레오 격자에서 읽었습니다. 그림자는 5월 30일 오전 10시경의 태양으로, 1962년 사진의 그림자와 방향이 맞습니다.</p>
 <p>모델에 표시한 장소의 위치는 OpenStreetMap에서 가져와 1962년 사진과 대조했습니다. OpenStreetMap에 이름이 없는 30호동은 사진에서 읽어 냈습니다.</p>
 <h2>볼 때 유의할 점</h2>
 <ul>
 <li>테스트입니다. 곳에 따라 높이가 몇 미터씩 어긋납니다.</li>
-<li>벽은 지금의 건물 윤곽을 따르므로, 1962년에 있었지만 지금은 없는 목조 건물에는 벽이 없습니다. 벽의 창문은 모두 모식도이지 사진이 아닙니다. 사진의 1픽셀은 약 0.8미터라 벽면까지는 찍히지 않아, 지붕의 질감은 거친 채입니다.</li>
-<li>위에서 안쪽까지 보이지 않는 아파트 사이의 좁은 골목은 메워지고, 벽은 수직 절벽이 아니라 비탈로 나옵니다. 가느다란 탑이나 굴뚝은 뺐습니다.</li>
+<li>건물은 복원입니다. 윤곽과 층수에는 출처가 있지만 벽면은 종류별로 그린 모식도이며, 준공년을 모르는 건물은 1950년부터 표시합니다. 1947년에는 준공년을 아는 건물만 나오므로 그 해의 모습은 불완전합니다.</li>
+<li>계단탑, 굴뚝, 컨베이어 가대, 건물 사이의 작은 창고는 뺐습니다. 지형은 5m 격자라 바위산은 실제보다 매끈합니다.</li>
 <li>정합하지 못한 점은 1962년에 대략 여섯 점 중 하나, 2010년에 대략 열일곱 점 중 하나였고, 주변 값으로 채웠습니다.</li>
 <li>1975년과 최신 화면은 다른 해의 형태를 빌려 쓰므로, 그 사이에 무너진 건물도 모델에서는 서 있습니다.</li>
 <li>비교하기 쉽도록 사진의 색을 조정했습니다.</li>
@@ -332,7 +335,7 @@
 <h2>출처</h2>
 <p class="lab-credit">일본 국토지리원 항공사진 USA M185-38(1947년 3월 26일), MKU628 C18-2·C18-3(1962년 5월 30일), CKU7420 C45-6(1975년 1월 2일), CKU20103 C44-12·C44-13(2010년 5월 3일), 심리스 항공사진을 가공해 제작(国土地理院の空中写真を加工して作成). 해수면 기준: 국토지리원 5m 표고 자료. 축척과 방위: 지리원 타일(심리스 항공사진). <a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">국토지리원 지도·항공사진 열람 서비스(일본어)</a></p>
 <p class="lab-credit">장소 위치: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>. 장소 설명의 사진: Wikimedia Commons(각 설명에 촬영자와 라이선스 표시).</p>
-<p class="lab-credit">사실 출처: <a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">메이지 일본의 산업혁명 유산 공식 사이트(영어)</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">나가사키시(일본어)</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">at Nagasaki(일본어)</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">군칸지마 컨시어지(일본어)</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">일본 외무성(영어)</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia(일본어)</a></p>
+<p class="lab-credit">건물 목록(준공년·층수·용도): <a href="https://ja.wikipedia.org/wiki/端島_(長崎県)" target="_blank" rel="noopener">일본어 위키백과 端島 (長崎県)</a> · 지형: 국토지리원 5m 표고(dem5b). 사실 출처: <a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">메이지 일본의 산업혁명 유산 공식 사이트(영어)</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">나가사키시(일본어)</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">at Nagasaki(일본어)</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">군칸지마 컨시어지(일본어)</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">일본 외무성(영어)</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia(일본어)</a></p>
 </section>
 
 <section data-lang="zh-Hans" lang="zh-Hans" hidden>
@@ -341,13 +344,13 @@
 <p>检验：1962年由地图比例尺算出的飞行高度为1,950米，与照片边缘拍到的高度计相同，浮码头算出来约高出海面2.5米。2010年由地图比例尺算出约2,020米，照片记录为2,008米。</p>
 <p>海面高度是在空地上按日本国土地理院现今的5米高程数据对齐的。其他年份的照片叠在最接近的测量形状上：1975年用1962年的形状，最新照片用2010年的形状。1947年是约1:30,000的美军照片，以平面显示。</p>
 <p>变化颜色比较的是测量了高度的两个年份。红色表示2010年比1962年低5米以上的地方，蓝色表示高5米以上的地方。只有在几米范围内都没有同样高的东西时才算作变化，因此大部分微小错位不会显示为变化；不过沿着护岸的细长红色带，可能是对位误差而不是实际变化。</p>
-<p>墙体：按OpenStreetMap中的每个建筑轮廓，把墙立到在其内部测得的屋顶高度（轮廓内高度的前30%分位值，1962年和2010年分别计算），底部取轮廓外侧一圈的高度。墙上的窗户排列是按层数画的示意图，照片里并看不到；点“墙体：隐藏”就只剩测量得到的表面。阴影按5月30日上午10点左右的太阳投射，与1962年照片中的阴影方向一致。</p>
+<p>建筑：每栋按轮廓（OpenStreetMap，并与1962年照片核对；OpenStreetMap没有的30号楼和21栋名称不详的1962年建筑，轮廓取自照片本身）、建筑列表中的层数和竣工年画成棱柱，放在日本国土地理院5米高程的地面上。建筑在竣工那年升起，在倒塌那年消失；倒塌只能在2010年照片中看到的，以2000年作为暂定年份，并在说明中注明。墙面按类型（1918年工人住宅的连续外廊、公寓的窗列与层带、学校的横向连窗、工厂、木造、神社）绘制示意图，不是照片：航拍照片一个像素约0.8米，拍不到墙面。屋顶和地面贴上所选年份的照片。护岸取自OpenStreetMap的线，顶部高度读自1962年的立体格网。阴影按5月30日上午10点左右的太阳投射，与1962年照片中的阴影方向一致。</p>
 <p>模型上标记的地点位置来自OpenStreetMap，并与1962年的照片核对过。OpenStreetMap上没有名称的30号楼，是从照片中辨认出来的。</p>
 <h2>注意事项</h2>
 <ul>
 <li>这是测试版，有些地方高度会差几米。</li>
-<li>墙体沿用今天的建筑轮廓，所以1962年存在、如今已消失的木造建筑没有墙；墙上的窗户都是示意图，不是照片。照片的一个像素约0.8米，拍不到墙面，因此屋顶的质感仍然粗糙。</li>
-<li>从上方看不进公寓楼之间的窄巷，所以窄巷被填平，墙面也会变成斜坡，而不是垂直的崖壁。细长的塔和烟囱没有做出来。</li>
+<li>建筑是复原：轮廓和层数有出处，但墙面是按类型画的示意图，竣工年不明的建筑从1950年起显示。1947年只显示竣工年已知的建筑，所以那一年的景象并不完整。</li>
+<li>楼梯间、烟囱、输送机架和楼间的小屋没有做出来；地形是5米网格，所以岩山比实际更平滑。</li>
 <li>无法匹配的点，1962年大约每六个点有一个，2010年大约每十七个点有一个，都用周围的数值补上。</li>
 <li>1975年和最新的画面借用了其他年份的形状，因此在这期间倒塌的建筑在模型中仍然立着。</li>
 <li>为了便于比较，调整过照片的颜色。</li>
@@ -358,7 +361,7 @@
 <h2>出处</h2>
 <p class="lab-credit">使用日本国土地理院航拍照片 USA M185-38（1947年3月26日）、MKU628 C18-2和C18-3（1962年5月30日）、CKU7420 C45-6（1975年1月2日）、CKU20103 C44-12和C44-13（2010年5月3日）及无缝航拍照片加工制作（国土地理院の空中写真を加工して作成）。海面基准：国土地理院5米网格高程。比例尺与方位：地理院瓦片（无缝航拍照片）。<a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">国土地理院地图与航拍照片浏览服务（日语）</a></p>
 <p class="lab-credit">地点位置：© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>。地点介绍中的照片：Wikimedia Commons（各介绍中注明拍摄者与授权）。</p>
-<p class="lab-credit">事实出处：<a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">明治日本产业革命遗产官方网站（英语）</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">长崎市（日语）</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">at Nagasaki（日语）</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">军舰岛Concierge（日语）</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">日本外务省（英语）</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia（日语）</a></p>
+<p class="lab-credit">建筑列表（竣工年、层数、用途）：<a href="https://ja.wikipedia.org/wiki/端島_(長崎県)" target="_blank" rel="noopener">日语维基百科 端島 (長崎県)</a> · 地形：国土地理院5米高程（dem5b）。事实出处：<a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">明治日本产业革命遗产官方网站（英语）</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">长崎市（日语）</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">at Nagasaki（日语）</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">军舰岛Concierge（日语）</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">日本外务省（英语）</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia（日语）</a></p>
 </section>
 
 <section data-lang="zh-Hant" lang="zh-Hant" hidden>
@@ -367,13 +370,13 @@
 <p>檢驗：1962年由地圖比例尺算出的飛行高度為1,950公尺，與照片邊緣拍到的高度計相同，浮動碼頭算出來約高出海面2.5公尺。2010年由地圖比例尺算出約2,020公尺，照片紀錄為2,008公尺。</p>
 <p>海面高度是在空地上依日本國土地理院現今的5公尺高程資料對齊的。其他年份的照片疊在最接近的測量形狀上：1975年用1962年的形狀，最新照片用2010年的形狀。1947年是約1:30,000的美軍照片，以平面顯示。</p>
 <p>變化顏色比較的是測量了高度的兩個年份。紅色表示2010年比1962年低5公尺以上的地方，藍色表示高5公尺以上的地方。只有在幾公尺範圍內都沒有同樣高的東西時才算作變化，因此大部分微小錯位不會顯示為變化；不過沿著護岸的細長紅色帶，可能是對位誤差而不是實際變化。</p>
-<p>牆體：按OpenStreetMap中的每個建築輪廓，把牆立到在其內部測得的屋頂高度（輪廓內高度的前30%分位值，1962年和2010年分別計算），底部取輪廓外側一圈的高度。牆上的窗戶排列是按層數畫的示意圖，照片裡並看不到；點「牆體：隱藏」就只剩測量得到的表面。陰影按5月30日上午10點左右的太陽投射，與1962年照片中的陰影方向一致。</p>
+<p>建築：每棟按輪廓（OpenStreetMap，並與1962年照片核對；OpenStreetMap沒有的30號樓和21棟名稱不詳的1962年建築，輪廓取自照片本身）、建築列表中的層數和竣工年畫成稜柱，放在日本國土地理院5公尺高程的地面上。建築在竣工那年升起，在倒塌那年消失；倒塌只能在2010年照片中看到的，以2000年作為暫定年份，並在說明中註明。牆面按類型（1918年工人住宅的連續外廊、公寓的窗列與層帶、學校的橫向連窗、工廠、木造、神社）繪製示意圖，不是照片：航空照片一個像素約0.8公尺，拍不到牆面。屋頂和地面貼上所選年份的照片。護岸取自OpenStreetMap的線，頂部高度讀自1962年的立體格網。陰影按5月30日上午10點左右的太陽投射，與1962年照片中的陰影方向一致。</p>
 <p>模型上標記的地點位置來自OpenStreetMap，並與1962年的照片核對過。OpenStreetMap上沒有名稱的30號樓，是從照片中辨認出來的。</p>
 <h2>注意事項</h2>
 <ul>
 <li>這是測試版，有些地方高度會差幾公尺。</li>
-<li>牆體沿用今天的建築輪廓，所以1962年存在、如今已消失的木造建築沒有牆；牆上的窗戶都是示意圖，不是照片。照片的一個像素約0.8公尺，拍不到牆面，因此屋頂的質感仍然粗糙。</li>
-<li>從上方看不進公寓大樓之間的窄巷，所以窄巷被填平，牆面也會變成斜坡，而不是垂直的崖壁。細長的塔和煙囪沒有做出來。</li>
+<li>建築是復原：輪廓和層數有出處，但牆面是按類型畫的示意圖，竣工年不明的建築從1950年起顯示。1947年只顯示竣工年已知的建築，所以那一年的景象並不完整。</li>
+<li>樓梯間、煙囪、輸送機架和樓間的小屋沒有做出來；地形是5公尺網格，所以岩山比實際更平滑。</li>
 <li>無法比對的點，1962年大約每六個點有一個，2010年大約每十七個點有一個，都用周圍的數值補上。</li>
 <li>1975年和最新的畫面借用了其他年份的形狀，因此在這期間倒塌的建築在模型中仍然立著。</li>
 <li>為了便於比較，調整過照片的顏色。</li>
@@ -384,7 +387,7 @@
 <h2>出處</h2>
 <p class="lab-credit">使用日本國土地理院航空照片 USA M185-38（1947年3月26日）、MKU628 C18-2和C18-3（1962年5月30日）、CKU7420 C45-6（1975年1月2日）、CKU20103 C44-12和C44-13（2010年5月3日）及無縫航空照片加工製作（国土地理院の空中写真を加工して作成）。海面基準：國土地理院5公尺網格高程。比例尺與方位：地理院圖磚（無縫航空照片）。<a href="https://service.gsi.go.jp/map-photos/app/map" target="_blank" rel="noopener">國土地理院地圖與航空照片瀏覽服務（日語）</a></p>
 <p class="lab-credit">地點位置：© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>。地點介紹中的照片：Wikimedia Commons（各介紹中註明拍攝者與授權）。</p>
-<p class="lab-credit">事實出處：<a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">明治日本產業革命遺產官方網站（英語）</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">長崎市（日語）</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">at Nagasaki（日語）</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">軍艦島Concierge（日語）</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">日本外務省（英語）</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia（日語）</a></p>
+<p class="lab-credit">建築列表（竣工年、層數、用途）：<a href="https://ja.wikipedia.org/wiki/端島_(長崎県)" target="_blank" rel="noopener">日語維基百科 端島 (長崎県)</a> · 地形：國土地理院5公尺高程（dem5b）。事實出處：<a href="https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html" target="_blank" rel="noopener">明治日本產業革命遺產官方網站（英語）</a> · <a href="https://www.city.nagasaki.lg.jp/page/3927.html" target="_blank" rel="noopener">長崎市（日語）</a> · <a href="https://www.at-nagasaki.jp/spot/51797" target="_blank" rel="noopener">at Nagasaki（日語）</a> · <a href="https://www.gunkanjima-concierge.com/about/" target="_blank" rel="noopener">軍艦島Concierge（日語）</a> · <a href="https://www.mofa.go.jp/press/release/press2e_000009.html" target="_blank" rel="noopener">日本外務省（英語）</a> · <a href="https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)" target="_blank" rel="noopener">Wikipedia（日語）</a></p>
 </section>
 </main>
 <footer>
@@ -404,15 +407,15 @@
   }
   var TEXT = {
     en: { title: 'Gunkanjima in 3D, from 1947 to today (test) | Japan Time Atlas', crumb: 'Lab · testing', label: 'Interactive 3D model of Hashima', alt: 'Aerial photograph of Hashima, 30 May 1962', back: 'Back to the map', place: 'Hashima', credit: 'Aerial photographs: Geospatial Information Authority of Japan (GSI).',
-      loading: 'Loading the photographs…', ready: 'Drag to turn. Scroll or pinch to zoom.', failed: 'The 3D data could not be loaded. Please try again later.', noWebgl: 'This browser cannot draw 3D, so the flat photograph is shown instead.', flat: 'Flat photo', raise: 'Raise in 3D', reset: 'Reset view', exag: 'Heights ×2', trueScale: 'True heights', change: 'Show change', changeOff: 'Hide change', walls: 'Walls: on', wallsOff: 'Walls: off', latest: 'Latest', play: '▶ Play the years', pause: '❚❚ Pause', loadingYear: 'Loading the photograph…', yearFlat: 'Flat photograph: no heights measured for this year', yearMeasured: 'Heights measured from this year’s photographs', yearShape1962: 'Photograph laid over the 1962 shape', yearShape2010: 'Photograph laid over the 2010 shape', close: 'Close', sources: 'Sources', aerial1962: '1962 aerial photograph', aerialLatest: 'Latest aerial photograph', photo: 'Photo', podPlay: 'Play', podPause: 'Pause', follow: 'Move the model with the audio', chapters: 'Chapters', transcript: 'Transcript', podTitle: 'Audio guide', lower: '5 m or more lower than 1962', higher: '5 m or more higher', year: 'Year', position: 'Position' },
+      loading: 'Loading the photographs…', ready: 'Drag to turn. Scroll or pinch to zoom.', failed: 'The 3D data could not be loaded. Please try again later.', noWebgl: 'This browser cannot draw 3D, so the flat photograph is shown instead.', flat: 'Flat photo', raise: 'Raise in 3D', reset: 'Reset view', exag: 'Heights ×2', trueScale: 'True heights', change: 'Show change', changeOff: 'Hide change', walls: 'Buildings: on', wallsOff: 'Buildings: off', labels: 'Names: on', labelsOff: 'Names: off', built: 'Completed', storeys: 'Storeys', units: 'Units', use: 'Use', structure: 'Structure', gone: 'Collapsed', unknown: 'unknown', traced: 'Outline traced from the 1962 photograph; the name is not known', factsSource: 'Building list: Japanese Wikipedia, 端島 (長崎県)', schoolShort: 'School', yearFlat: '1947: only buildings with a known completion date up to that year are drawn', yearMeasured: 'Buildings that stood in this year, from the building list; roofs and ground from this photograph', yearShape1962: 'Buildings that stood in this year; roofs and ground from this photograph', yearShape2010: 'Buildings still standing; those that had collapsed are gone', ready: 'Drag to turn. Scroll or pinch to zoom. Shift-drag to move.', latest: 'Latest', play: '▶ Play the years', pause: '❚❚ Pause', loadingYear: 'Loading the photograph…', yearFlat: 'Flat photograph: no heights measured for this year', yearMeasured: 'Heights measured from this year’s photographs', yearShape1962: 'Photograph laid over the 1962 shape', yearShape2010: 'Photograph laid over the 2010 shape', close: 'Close', sources: 'Sources', aerial1962: '1962 aerial photograph', aerialLatest: 'Latest aerial photograph', photo: 'Photo', podPlay: 'Play', podPause: 'Pause', follow: 'Move the model with the audio', chapters: 'Chapters', transcript: 'Transcript', podTitle: 'Audio guide', lower: '5 m or more lower than 1962', higher: '5 m or more higher', year: 'Year', position: 'Position' },
     ja: { title: '軍艦島を立体で見る 1947年から今まで（テスト中）| Japan Time Atlas', crumb: 'テスト中', label: '端島を回して見られる立体モデル', alt: '1962年5月30日に撮影された端島の空中写真', back: '地図に戻る', place: '端島', credit: '空中写真：国土地理院',
-      loading: '写真を読み込んでいます…', ready: 'ドラッグで回転、スクロールかピンチで拡大・縮小', failed: '立体データを読み込めませんでした。時間をおいてお試しください。', noWebgl: 'このブラウザでは立体を表示できないため、平面の写真を表示しています。', flat: '平面の写真', raise: '立体にする', reset: '視点を戻す', exag: '高さ×2', trueScale: '実際の高さ', change: '変化を色で見る', changeOff: '変化の色を消す', walls: '壁：表示', wallsOff: '壁：非表示', latest: '最新', play: '▶ 年代を再生', pause: '❚❚ 一時停止', loadingYear: '写真を読み込んでいます…', yearFlat: '平面の写真（この年の高さは測っていません）', yearMeasured: 'この年の写真から高さを測りました', yearShape1962: '1962年の形に写真を重ねています', yearShape2010: '2010年の形に写真を重ねています', close: '閉じる', sources: '出典', aerial1962: '1962年の空中写真', aerialLatest: '最新の空中写真', photo: '写真', podPlay: '再生', podPause: '一時停止', follow: '音声に合わせて立体を動かす', chapters: 'チャプター', transcript: '書き起こし', podTitle: '音声ガイド', lower: '1962年より5m以上低い', higher: '5m以上高い', year: '年代', position: '再生位置' },
+      loading: '写真を読み込んでいます…', ready: 'ドラッグで回転、スクロールかピンチで拡大・縮小', failed: '立体データを読み込めませんでした。時間をおいてお試しください。', noWebgl: 'このブラウザでは立体を表示できないため、平面の写真を表示しています。', flat: '平面の写真', raise: '立体にする', reset: '視点を戻す', exag: '高さ×2', trueScale: '実際の高さ', change: '変化を色で見る', changeOff: '変化の色を消す', walls: '建物：表示', wallsOff: '建物：非表示', labels: '名前：表示', labelsOff: '名前：非表示', built: '竣工', storeys: '階数', units: '戸数', use: '用途', structure: '構造', gone: '崩壊', unknown: '不明', traced: '輪郭は1962年の写真から取ったもので、名称は不明', factsSource: '建物一覧の出典：Wikipedia「端島 (長崎県)」', schoolShort: '小中学校', yearFlat: '1947年：竣工年が分かっている建物だけをその年まで描いています', yearMeasured: 'この年に建っていた建物（建物一覧から）。屋根と地面はこの年の写真', yearShape1962: 'この年に建っていた建物。屋根と地面はこの年の写真', yearShape2010: 'まだ立っている建物。崩壊した建物は消えています', ready: 'ドラッグで回転、スクロールかピンチで拡大・縮小、Shift＋ドラッグで移動', latest: '最新', play: '▶ 年代を再生', pause: '❚❚ 一時停止', loadingYear: '写真を読み込んでいます…', yearFlat: '平面の写真（この年の高さは測っていません）', yearMeasured: 'この年の写真から高さを測りました', yearShape1962: '1962年の形に写真を重ねています', yearShape2010: '2010年の形に写真を重ねています', close: '閉じる', sources: '出典', aerial1962: '1962年の空中写真', aerialLatest: '最新の空中写真', photo: '写真', podPlay: '再生', podPause: '一時停止', follow: '音声に合わせて立体を動かす', chapters: 'チャプター', transcript: '書き起こし', podTitle: '音声ガイド', lower: '1962年より5m以上低い', higher: '5m以上高い', year: '年代', position: '再生位置' },
     ko: { title: '군함도를 3D로, 1947년부터 지금까지 (테스트 중) | Japan Time Atlas', crumb: '테스트 중', label: '하시마를 돌려 볼 수 있는 3D 모델', alt: '1962년 5월 30일에 촬영한 하시마 항공사진', back: '지도로 돌아가기', place: '하시마', credit: '항공사진: 일본 국토지리원',
-      loading: '사진을 불러오는 중…', ready: '드래그해서 돌리고, 스크롤이나 핀치로 확대·축소하세요.', failed: '3D 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.', noWebgl: '이 브라우저에서는 3D를 그릴 수 없어 평면 사진을 보여 줍니다.', flat: '평면 사진', raise: '입체로 세우기', reset: '시점 초기화', exag: '높이 ×2', trueScale: '실제 높이', change: '변화 색으로 보기', changeOff: '변화 색 끄기', walls: '벽: 표시', wallsOff: '벽: 숨김', latest: '최신', play: '▶ 연도 재생', pause: '❚❚ 일시정지', loadingYear: '사진을 불러오는 중…', yearFlat: '평면 사진(이 해의 높이는 측정하지 않았습니다)', yearMeasured: '이 해의 사진으로 높이를 측정했습니다', yearShape1962: '1962년 형태에 사진을 겹쳤습니다', yearShape2010: '2010년 형태에 사진을 겹쳤습니다', close: '닫기', sources: '출처', aerial1962: '1962년 항공사진', aerialLatest: '최신 항공사진', photo: '사진', podPlay: '재생', podPause: '일시정지', follow: '음성에 맞춰 모델 움직이기', chapters: '챕터', transcript: '대본', podTitle: '음성 가이드', lower: '1962년보다 5m 이상 낮음', higher: '5m 이상 높음', year: '연도', position: '재생 위치' },
+      loading: '사진을 불러오는 중…', ready: '드래그해서 돌리고, 스크롤이나 핀치로 확대·축소하세요.', failed: '3D 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.', noWebgl: '이 브라우저에서는 3D를 그릴 수 없어 평면 사진을 보여 줍니다.', flat: '평면 사진', raise: '입체로 세우기', reset: '시점 초기화', exag: '높이 ×2', trueScale: '실제 높이', change: '변화 색으로 보기', changeOff: '변화 색 끄기', walls: '건물: 표시', wallsOff: '건물: 숨김', labels: '이름: 표시', labelsOff: '이름: 숨김', built: '준공', storeys: '층수', units: '세대수', use: '용도', structure: '구조', gone: '붕괴', unknown: '불명', traced: '윤곽은 1962년 사진에서 딴 것이며 이름은 알 수 없음', factsSource: '건물 목록 출처: 일본어 위키백과 端島 (長崎県)', schoolShort: '학교', yearFlat: '1947년: 준공년을 아는 건물만 그 해까지 그립니다', yearMeasured: '이 해에 서 있던 건물(건물 목록 기준). 지붕과 지면은 이 해의 사진', yearShape1962: '이 해에 서 있던 건물. 지붕과 지면은 이 해의 사진', yearShape2010: '아직 서 있는 건물. 붕괴한 건물은 사라졌습니다', ready: '드래그해서 돌리고, 스크롤이나 핀치로 확대·축소, Shift+드래그로 이동', latest: '최신', play: '▶ 연도 재생', pause: '❚❚ 일시정지', loadingYear: '사진을 불러오는 중…', yearFlat: '평면 사진(이 해의 높이는 측정하지 않았습니다)', yearMeasured: '이 해의 사진으로 높이를 측정했습니다', yearShape1962: '1962년 형태에 사진을 겹쳤습니다', yearShape2010: '2010년 형태에 사진을 겹쳤습니다', close: '닫기', sources: '출처', aerial1962: '1962년 항공사진', aerialLatest: '최신 항공사진', photo: '사진', podPlay: '재생', podPause: '일시정지', follow: '음성에 맞춰 모델 움직이기', chapters: '챕터', transcript: '대본', podTitle: '음성 가이드', lower: '1962년보다 5m 이상 낮음', higher: '5m 이상 높음', year: '연도', position: '재생 위치' },
     'zh-Hans': { title: '立体查看军舰岛：从1947年到现在（测试中）| Japan Time Atlas', crumb: '测试中', label: '可旋转查看的端岛立体模型', alt: '1962年5月30日拍摄的端岛航拍照片', back: '返回地图', place: '端岛', credit: '航拍照片：日本国土地理院',
-      loading: '正在载入照片…', ready: '拖动旋转，滚轮或双指缩放。', failed: '无法载入立体数据，请稍后再试。', noWebgl: '此浏览器无法显示立体，因此改为显示平面照片。', flat: '平面照片', raise: '立起来', reset: '重置视角', exag: '高度×2', trueScale: '实际高度', change: '用颜色看变化', changeOff: '关闭变化颜色', walls: '墙体：显示', wallsOff: '墙体：隐藏', latest: '最新', play: '▶ 播放年代', pause: '❚❚ 暂停', loadingYear: '正在载入照片…', yearFlat: '平面照片（未测量这一年的高度）', yearMeasured: '高度由这一年的照片测得', yearShape1962: '照片叠在1962年的形状上', yearShape2010: '照片叠在2010年的形状上', close: '关闭', sources: '出处', aerial1962: '1962年航拍照片', aerialLatest: '最新航拍照片', photo: '照片', podPlay: '播放', podPause: '暂停', follow: '让模型跟着音频移动', chapters: '章节', transcript: '文字稿', podTitle: '音频导览', lower: '比1962年低5米以上', higher: '高5米以上', year: '年代', position: '播放位置' },
+      loading: '正在载入照片…', ready: '拖动旋转，滚轮或双指缩放。', failed: '无法载入立体数据，请稍后再试。', noWebgl: '此浏览器无法显示立体，因此改为显示平面照片。', flat: '平面照片', raise: '立起来', reset: '重置视角', exag: '高度×2', trueScale: '实际高度', change: '用颜色看变化', changeOff: '关闭变化颜色', walls: '建筑：显示', wallsOff: '建筑：隐藏', labels: '名称：显示', labelsOff: '名称：隐藏', built: '竣工', storeys: '层数', units: '户数', use: '用途', structure: '结构', gone: '倒塌', unknown: '不明', traced: '轮廓取自1962年的照片，名称不详', factsSource: '建筑列表出处：日语维基百科 端島 (長崎県)', schoolShort: '学校', yearFlat: '1947年：只画出竣工年份已知且在该年前建成的建筑', yearMeasured: '这一年存在的建筑（按建筑列表）。屋顶和地面来自这一年的照片', yearShape1962: '这一年存在的建筑。屋顶和地面来自这一年的照片', yearShape2010: '仍然立着的建筑；已倒塌的已消失', ready: '拖动旋转，滚轮或双指缩放，Shift+拖动平移', latest: '最新', play: '▶ 播放年代', pause: '❚❚ 暂停', loadingYear: '正在载入照片…', yearFlat: '平面照片（未测量这一年的高度）', yearMeasured: '高度由这一年的照片测得', yearShape1962: '照片叠在1962年的形状上', yearShape2010: '照片叠在2010年的形状上', close: '关闭', sources: '出处', aerial1962: '1962年航拍照片', aerialLatest: '最新航拍照片', photo: '照片', podPlay: '播放', podPause: '暂停', follow: '让模型跟着音频移动', chapters: '章节', transcript: '文字稿', podTitle: '音频导览', lower: '比1962年低5米以上', higher: '高5米以上', year: '年代', position: '播放位置' },
     'zh-Hant': { title: '立體檢視軍艦島：從1947年到現在（測試中）| Japan Time Atlas', crumb: '測試中', label: '可旋轉檢視的端島立體模型', alt: '1962年5月30日拍攝的端島航空照片', back: '返回地圖', place: '端島', credit: '航空照片：日本國土地理院',
-      loading: '正在載入照片…', ready: '拖曳旋轉，滾輪或雙指縮放。', failed: '無法載入立體資料，請稍後再試。', noWebgl: '此瀏覽器無法顯示立體，因此改為顯示平面照片。', flat: '平面照片', raise: '立起來', reset: '重設視角', exag: '高度×2', trueScale: '實際高度', change: '用顏色看變化', changeOff: '關閉變化顏色', walls: '牆體：顯示', wallsOff: '牆體：隱藏', latest: '最新', play: '▶ 播放年代', pause: '❚❚ 暫停', loadingYear: '正在載入照片…', yearFlat: '平面照片（未測量這一年的高度）', yearMeasured: '高度由這一年的照片測得', yearShape1962: '照片疊在1962年的形狀上', yearShape2010: '照片疊在2010年的形狀上', close: '關閉', sources: '出處', aerial1962: '1962年航空照片', aerialLatest: '最新航空照片', photo: '照片', podPlay: '播放', podPause: '暫停', follow: '讓模型跟著音訊移動', chapters: '章節', transcript: '文字稿', podTitle: '語音導覽', lower: '比1962年低5公尺以上', higher: '高5公尺以上', year: '年代', position: '播放位置' }
+      loading: '正在載入照片…', ready: '拖曳旋轉，滾輪或雙指縮放。', failed: '無法載入立體資料，請稍後再試。', noWebgl: '此瀏覽器無法顯示立體，因此改為顯示平面照片。', flat: '平面照片', raise: '立起來', reset: '重設視角', exag: '高度×2', trueScale: '實際高度', change: '用顏色看變化', changeOff: '關閉變化顏色', walls: '建築：顯示', wallsOff: '建築：隱藏', labels: '名稱：顯示', labelsOff: '名稱：隱藏', built: '竣工', storeys: '層數', units: '戶數', use: '用途', structure: '結構', gone: '倒塌', unknown: '不明', traced: '輪廓取自1962年的照片，名稱不詳', factsSource: '建築列表出處：日語維基百科 端島 (長崎県)', schoolShort: '學校', yearFlat: '1947年：只畫出竣工年份已知且在該年前建成的建築', yearMeasured: '這一年存在的建築（按建築列表）。屋頂和地面來自這一年的照片', yearShape1962: '這一年存在的建築。屋頂和地面來自這一年的照片', yearShape2010: '仍然立著的建築；已倒塌的已消失', ready: '拖曳旋轉，滾輪或雙指縮放，Shift+拖曳平移', latest: '最新', play: '▶ 播放年代', pause: '❚❚ 暫停', loadingYear: '正在載入照片…', yearFlat: '平面照片（未測量這一年的高度）', yearMeasured: '高度由這一年的照片測得', yearShape1962: '照片疊在1962年的形狀上', yearShape2010: '照片疊在2010年的形狀上', close: '關閉', sources: '出處', aerial1962: '1962年航空照片', aerialLatest: '最新航空照片', photo: '照片', podPlay: '播放', podPause: '暫停', follow: '讓模型跟著音訊移動', chapters: '章節', transcript: '文字稿', podTitle: '語音導覽', lower: '比1962年低5公尺以上', higher: '高5公尺以上', year: '年代', position: '播放位置' }
   };
   var t = TEXT[lang];
   document.documentElement.lang = lang;
@@ -434,7 +437,7 @@
   window.LAB_TEXT = t;
 })();
 </script>
-<script src="/lab/gunkanjima-3d.js?v=3"></script>
-<script src="/lab/gunkanjima-podcast.js?v=3"></script>
+<script src="/lab/gunkanjima-3d.js?v=4"></script>
+<script src="/lab/gunkanjima-podcast.js?v=4"></script>
 </body>
 </html>

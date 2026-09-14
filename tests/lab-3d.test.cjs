@@ -32,8 +32,8 @@ test('the lab page is kept out of search, credits its sources and loads nothing 
  assert.ok(!/href="\/[^"]*\.html/.test(s),'links inside the site use clean routes');
  for(const js of ['lab/gunkanjima-3d.js','lab/gunkanjima-podcast.js']){
   assert.ok(!/https?:\/\//.test(read(js)),js+' loads nothing from other sites');
-  assert.equal(read(js).match(/const V = '(\d+)'/)[1],'3',js);
-  assert.ok(s.includes('/'+js+'?v=3'),js+' version on the page');
+  assert.equal(read(js).match(/const V = '(\d+)'/)[1],'4',js);
+  assert.ok(s.includes('/'+js+'?v=4'),js+' version on the page');
  }
  assert.ok(!read('sitemap.xml').includes('/lab/'));
  assert.ok(/const directories=\[[^\]]*'lab'/.test(read('scripts/build.cjs')),'build copies lab/');

@@ -4,7 +4,7 @@
 
 Each spoken line is synthesized on its own (edge: Microsoft neural voices through the edge-tts
 package, which needs the network; winrt: the Windows voices through tts_build.ps1), trimmed, and
-joined with short pauses. A quiet sea-wash bed and a three-note chime open and close the episode.
+joined with short pauses. There is no jingle: the episode starts on the first word.
 ffmpeg normalises loudness and encodes MP3. The transcript keeps the start and end time of every
 line, the chapters and the cues that move the 3D view, so the page can follow the audio.
 """
@@ -129,9 +129,7 @@ def main():
     def pause(sec):
         add(np.zeros(int(SR * sec), np.float32))
 
-    pause(0.3)
-    add(chime(True))
-    pause(0.9)
+    pause(0.25)   # v4: no opening chime or bed; the episode simply starts
     lines, chapters, idx, prev = [], [], 0, None
     gaps = doc.get('gaps', {'same': 0.28, 'other': 0.5, 'chapter': 1.1})
     for item in doc['items']:
@@ -157,23 +155,8 @@ def main():
             row['cue'] = item['cue']
         lines.append(row)
         prev = item['s']
-    pause(0.9)
-    add(chime(False))
-    pause(0.6)
+    pause(0.8)
     audio = np.concatenate(pieces)
-    # sea bed under the opening and closing 14 seconds, faded, well under the voices
-    bed_len = int(SR * 14)
-    fade = np.linspace(0, 1, int(SR * 5), dtype=np.float32)
-    head = sea_bed(14, seed=3)
-    env = np.ones(bed_len, np.float32)
-    env[:len(fade)] = fade
-    env[-len(fade):] = fade[::-1]
-    audio[:bed_len] += 0.045 * head * env
-    tail = sea_bed(14, seed=5)
-    env = np.ones(bed_len, np.float32)
-    env[:len(fade)] = fade
-    env[-int(SR * 2):] = np.linspace(1, 0, int(SR * 2), dtype=np.float32)
-    audio[-bed_len:] += 0.045 * tail * env
     peak = float(np.abs(audio).max())
     if peak > 0.98:
         audio = audio * (0.98 / peak)

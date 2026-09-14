@@ -12,6 +12,7 @@
 | `gunkanjima-1962-height.bin`、`gunkanjima-2010-height.bin` | 高さ（Uint16、0.1m単位、1画素およそ0.8m） |
 | `gunkanjima-change.bin` | 1962→2010の高さの変化（Int8、m。±5m未満は0） |
 | `gunkanjima-spots.json` | スポットの名前と説明（5言語）、出典、写真のクレジット |
+| `gunkanjima-model.json`、`gunkanjima-terrain.bin` | **v4 復元モデル**：建物88棟（輪郭・棟割り・階数・階高・竣工年・崩壊年・様式・用途・出典。OSM 66棟＋30号棟＋1962年写真から輪郭を取った名称不明21棟）、護岸の線（104点・天端高さ）、海岸線、地形（地理院5m DEM を切り出し座標へ、Uint16 0.1m） |
 | `gunkanjima-buildings.json` | 建物の輪郭（OpenStreetMap、1962年の切り出し座標）と、輪郭の内側で測った屋根の高さ（1962・2010）、外側の地面の高さ。30号棟だけは OSM に無いので高さ格子から輪郭を取った |
 | `island-from-sea.jpg`、`island-north-2024.jpg`、`gunkanjima-card.jpg` | 海上から撮った現地写真（Wikimedia Commons、CC BY-SA 3.0 / CC BY 4.0。ページとカードにクレジット） |
 | `spots/` | スポットごとの空中写真の切り抜き（1962年と最新）と写真 |
@@ -44,7 +45,7 @@
 3. `python georef.py --year 1962`、`--year 2010` — 切り出しを地理院タイルに合わせる（1画素の大きさと北の向き）
 4. `python calibrate.py --year 1962`、`--year 2010` — 視差を高さに直す（h = H(1 − P_sea/P)）。海面の視差は、現在の5m標高のうち開けた地面の下包絡に平面で合わせる。外れ値、細い針、小さな塔を除いたあと、写真の輪郭に沿って平滑化（ガイデッドフィルタ）
 5. `python osm_extract.py`、`python osm_overlay.py` — OpenStreetMap の建物の位置を1962年の切り出し座標へ。`out/debug_osm_overlay.jpg` で目で確かめる
-6. `python export_web.py` — `web/` に全部を書き出す。続けて `python buildings.py` で OpenStreetMap の建物輪郭ごとに屋根と地面の高さを付けて `web/gunkanjima-buildings.json` を作る（ビューア v3 の壁。窓の並びは階数からの模式で、写真には写っていない）。1975年は1月の長い影でSIFTが効かないので島の輪郭＋ECC、1947年は向きと縮尺の探索＋ECC（`register_photo.py`）
+6. `python export_web.py` — `web/` に全部を書き出す。**v4**: `python terrain.py`（DEMタイル→`out/dem_crop.npy`）→ `python trace_1962.py`（OSMに無い1962年の建物を高さ格子から矩形で抽出）→ `python model.py`（`buildings_facts.json`＝Wikipedia「端島」の建物一覧と合わせて `web/gunkanjima-model.json`・`web/gunkanjima-terrain.bin`）。続けて `python buildings.py` で OpenStreetMap の建物輪郭ごとに屋根と地面の高さを付けて `web/gunkanjima-buildings.json` を作る（ビューア v3 の壁。窓の並びは階数からの模式で、写真には写っていない）。1975年は1月の長い影でSIFTが効かないので島の輪郭＋ECC、1947年は向きと縮尺の探索＋ECC（`register_photo.py`）
 7. `python podcast/build_podcast.py --lang en`、`--lang ja` — 既定は `--engine edge`（`pip install edge-tts`。Microsoft のニューラル音声をネット経由で1行ずつ合成し `podcast/cache_edge/` に貯める）。`--engine winrt` で以前の Windows 標準音声（`tts_build.ps1`）。ffmpeg でラウドネスをそろえて MP3。台本は `podcast/podcast_{en,ja}.json`（`say` が読み仮名つきの読み上げ用、`t` が表示用）
 8. `python podcast/verify_podcast.py --lang en`、`--lang ja` — 手元の音声認識（faster-whisper、キャッシュ済みモデル）で聞き取り、台本と行ごとに比べる
 9. `web/` を `lab/` に、`podcast/out/` の mp3 と json を `lab/audio/` にコピー
@@ -57,6 +58,13 @@
 - 位置合わせ：2010年は地図経由の連結（直接の照合は15点しか取れず、補正には使っていない）。1975年は輪郭の重なり0.915、ECC相関0.463。1947年は探索でNCC 0.344、ECC相関0.449（回転0°、縮尺0.91）。
 - 音声（v3, 2026-09-14）：英語7分53秒、日本語8分54秒（どちらも59行、10章）。faster-whisper の聞き取り照合は英0.97・日0.90（日本語の差はほぼ同音の漢字違い。「30年」が「10年」に聞こえたので読み仮名を付けて作り直した）。
 - 壁（v3）：OSM の建物66棟＋30号棟。屋根の高さは輪郭内の格子の上位30%点、地面は輪郭のすぐ外側の輪の下位25%点。65号棟 壁17m（実際は9階）、小中学校 壁24m（7階）。影は5月30日10時ごろの太陽で、1962年写真の影と向きを合わせた。
+
+## v4（復元モデル）の考え方
+
+- 写真測量の凸凹（1画素0.8m・壁面は写らない）を見せるのをやめ、建物ごとに「輪郭×階数×竣工年」の角柱にした。年スライダーは建物の竣工年・崩壊年に連動し、1947年も（竣工年が分かる建物だけで）立体になる。
+- 壁面は様式ごとの模式（日給社宅=連続外廊下、アパート=窓列＋階帯、学校=横連窓、工場、木造、神社）。ページに「写真ではない」と明記。
+- 参考写真は `refphotos/catalog.json`（Commons「Category:Hashima (Nagasaki)」配下 298点、ライセンス付き）と `refphotos/sheets/`（建物番号ごとの一覧）。
+- 音声は冒頭のチャイム・波音を廃止。プレーヤーに±15秒・章送りを追加し、シークは loadedmetadata を待つ。ローカル確認サーバは Range 対応（無いと MP3 内をシークできない）。
 
 ## 限界
 
