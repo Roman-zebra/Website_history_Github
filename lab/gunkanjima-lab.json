@@ -1,0 +1,232 @@
+{
+ "frame": {
+  "size": 1024,
+  "metersPerPixel": 0.805
+ },
+ "texture": {
+  "size": 2048
+ },
+ "grid": {
+  "x0": 199,
+  "y0": 320,
+  "w": 639,
+  "h": 418,
+  "step": 1,
+  "unit": 0.1,
+  "h1962": "gunkanjima-1962-height.bin",
+  "h2010": "gunkanjima-2010-height.bin",
+  "change": "gunkanjima-change.bin"
+ },
+ "north": [
+  0.5517,
+  -0.834
+ ],
+ "principalPoint": [
+  273.8,
+  433.3
+ ],
+ "flyingHeightM": 1950,
+ "years": [
+  {
+   "id": "1947",
+   "photo": "USA M185-38",
+   "date": "1947-03-26",
+   "camera": "K-17B",
+   "shape": null,
+   "ortho": false,
+   "texture": "gunkanjima-1947.jpg"
+  },
+  {
+   "id": "1962",
+   "photo": "MKU628 C18-2, C18-3",
+   "date": "1962-05-30",
+   "camera": "RMK",
+   "shape": "1962",
+   "ortho": false,
+   "texture": "gunkanjima-1962.jpg"
+  },
+  {
+   "id": "1975",
+   "photo": "CKU7420 C45-6",
+   "date": "1975-01-02",
+   "camera": "RC8",
+   "shape": "1962",
+   "ortho": false,
+   "texture": "gunkanjima-1975.jpg"
+  },
+  {
+   "id": "2010",
+   "photo": "CKU20103 C44-12, C44-13",
+   "date": "2010-05-03",
+   "camera": "DMC",
+   "shape": "2010",
+   "ortho": false,
+   "texture": "gunkanjima-2010.jpg"
+  },
+  {
+   "id": "latest",
+   "photo": "GSI seamless aerial photo",
+   "date": null,
+   "camera": null,
+   "shape": "2010",
+   "ortho": true,
+   "texture": "gunkanjima-latest.jpg"
+  }
+ ],
+ "heights": {
+  "1962": {
+   "p50": 12.6,
+   "p99": 43.2,
+   "max": 49.7,
+   "filledPct": 16.3
+  },
+  "2010": {
+   "p50": 9.6,
+   "p99": 43.9,
+   "max": 47.5,
+   "filledPct": 5.8
+  }
+ },
+ "check": {
+  "1962": {
+   "altimeterM": 1950,
+   "flyingHeightM": 1950.5,
+   "probes": {
+    "boat (oval)": 2.5,
+    "small boat a": 7.2,
+    "small boat b": 1.4,
+    "pier": 14.1,
+    "NE yard": 5.3,
+    "SW tip": 6.0
+   }
+  },
+  "2010": {
+   "flyingHeightM": 2021.6,
+   "envelopeRmsM": 0.99
+  }
+ },
+ "spots": {
+  "no30": {
+   "u": 361.0,
+   "v": 581.0,
+   "h1962": 25.7,
+   "h2010": 24.9,
+   "images": {
+    "1962": "spots/no30-1962.jpg",
+    "latest": "spots/no30-latest.jpg",
+    "photo": "spots/no30-photo.jpg"
+   }
+  },
+  "nikkyu": {
+   "u": 568.5,
+   "v": 454.6,
+   "h1962": 29.2,
+   "h2010": 28.0,
+   "images": {
+    "1962": "spots/nikkyu-1962.jpg",
+    "latest": "spots/nikkyu-latest.jpg"
+   }
+  },
+  "no65": {
+   "u": 684.0,
+   "v": 433.4,
+   "h1962": 24.7,
+   "h2010": 12.1,
+   "images": {
+    "1962": "spots/no65-1962.jpg",
+    "latest": "spots/no65-latest.jpg",
+    "photo": "spots/no65-photo.jpg"
+   }
+  },
+  "school": {
+   "u": 711.3,
+   "v": 488.6,
+   "h1962": 31.5,
+   "h2010": 30.1,
+   "images": {
+    "1962": "spots/school-1962.jpg",
+    "latest": "spots/school-latest.jpg",
+    "photo": "spots/school-photo.jpg"
+   }
+  },
+  "shrine": {
+   "u": 609.9,
+   "v": 479.4,
+   "h1962": 33.1,
+   "h2010": 36.3,
+   "images": {
+    "1962": "spots/shrine-1962.jpg",
+    "latest": "spots/shrine-latest.jpg"
+   }
+  },
+  "no3": {
+   "u": 535.4,
+   "v": 523.9,
+   "h1962": 49.5,
+   "h2010": 45.8,
+   "images": {
+    "1962": "spots/no3-1962.jpg",
+    "latest": "spots/no3-latest.jpg",
+    "photo": "spots/no3-photo.jpg"
+   }
+  },
+  "mine": {
+   "u": 401.5,
+   "v": 644.0,
+   "h1962": 16.4,
+   "h2010": 14.1,
+   "images": {
+    "1962": "spots/mine-1962.jpg",
+    "latest": "spots/mine-latest.jpg",
+    "photo": "spots/mine-photo.jpg"
+   }
+  },
+  "pier": {
+   "u": 502.2,
+   "v": 679.9,
+   "h1962": 0.0,
+   "h2010": 0.0,
+   "images": {
+    "1962": "spots/pier-1962.jpg",
+    "latest": "spots/pier-latest.jpg"
+   }
+  },
+  "seawall": {
+   "u": 547.7,
+   "v": 410.4,
+   "h1962": 20.0,
+   "h2010": 7.9,
+   "images": {
+    "1962": "spots/seawall-1962.jpg",
+    "latest": "spots/seawall-latest.jpg",
+    "photo": "spots/seawall-photo.jpg"
+   }
+  }
+ },
+ "report": {
+  "register2010": {
+   "refineInliers": 15,
+   "refineMedianPx": 1.29
+  },
+  "register1975": {
+   "method": "outline+ecc",
+   "sift_inliers": 6,
+   "iou_outline": 0.902,
+   "iou": 0.915,
+   "ecc_cc": 0.463
+  },
+  "register1947": {
+   "method": "search",
+   "ncc": 0.344,
+   "rotationDeg": 0.0,
+   "scale": 0.91,
+   "eccCc": 0.449
+  },
+  "change": {
+   "lowerM2": 6941,
+   "higherM2": 503,
+   "islandM2": 72557,
+   "lowerBy10mM2": 912
+  }
+ }
+}

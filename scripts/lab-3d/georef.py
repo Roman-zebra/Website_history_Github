@@ -1,8 +1,11 @@
-"""Register the rotated photo-3 crop (out/rect_L.png) to GSI z17 orthophoto mosaics.
+"""Register a rotated photo crop (rect_L.png) to GSI z17 orthophoto mosaics.
+
+    python georef.py --year 1962|2010
 
 Gives the ground size of one crop pixel and which way north points, and writes
-out/georef.json so later steps can turn crop pixels into lon/lat.
+georef.json next to the crop so later steps can turn crop pixels into lon/lat.
 """
+import argparse
 import json
 import math
 from pathlib import Path
@@ -10,12 +13,13 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+from years import CONFIGS
+
 HERE = Path(__file__).resolve().parent
-OUT = HERE / 'out'
 Z = 17
 LAT0 = 32.6278
 M_PER_PX = 156543.03392 * math.cos(math.radians(LAT0)) / 2 ** Z
-# Window of the mosaic around Hashima (centre was at 582, 1025).
+# Window of the mosaic around Hashima (centre at 582, 1025).
 WX0, WY0, WX1, WY1 = 230, 660, 940, 1390
 
 
@@ -45,6 +49,9 @@ def register(src, dst, name, ratio=0.8):
         print(name, 'too few matches', len(good))
         return None
     M, inl = cv2.estimateAffinePartial2D(ps, pd, method=cv2.RANSAC, ransacReprojThreshold=3.0, maxIters=50000, confidence=0.9999)
+    if M is None:
+        print(name, 'no fit')
+        return None
     inl = inl.ravel().astype(bool)
     scale = math.hypot(M[0, 0], M[1, 0])
     rot = math.degrees(math.atan2(M[1, 0], M[0, 0]))
@@ -55,7 +62,11 @@ def register(src, dst, name, ratio=0.8):
 
 
 def main():
-    L = imread(OUT / 'rect_L.png')
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--year', default='1962', choices=sorted(CONFIGS))
+    year = ap.parse_args().year
+    out = HERE / CONFIGS[year]['out']
+    L = imread(out / 'rect_L.png')
     meta = json.loads((HERE / 'mosaic.json').read_text())
     results = {}
     for layer in ('ort_old10', 'gazo1', 'seamlessphoto'):
@@ -66,19 +77,18 @@ def main():
             continue
         results[layer] = r
         warped = cv2.warpAffine(L, r['M'], (win.shape[1], win.shape[0]))
-        imwrite(OUT / f'debug_georef_{layer}.jpg', np.dstack([warped, warped, win]))
+        imwrite(out / f'debug_georef_{layer}.jpg', np.dstack([warped, warped, win]))
     # A fit with almost no scale is degenerate (gazo1 returned scale 0 with 13 "inliers").
     sane = {k: v for k, v in results.items() if 0.6 < v['scale'] < 1.1 and v['inliers'] >= 7}
     assert sane, 'no usable registration'
-    best = max(sane.items(), key=lambda kv: kv[1]['inliers'])
-    name, r = best
+    name, r = max(sane.items(), key=lambda kv: kv[1]['inliers'])
     M = r['M'].copy()
     M[0, 2] += WX0
     M[1, 2] += WY0
     info = {'layer': name, 'M_crop_to_mosaic': M.tolist(), 'tile_x0': meta[name]['x0'], 'tile_y0': meta[name]['y0'],
             'z': Z, 'm_per_mosaic_px': M_PER_PX, 'gsd_crop_m': r['gsd'], 'rot_deg': r['rot'],
             'all': {k: {kk: vv for kk, vv in v.items() if kk != 'M'} for k, v in results.items()}}
-    (OUT / 'georef.json').write_text(json.dumps(info, indent=1))
+    (out / 'georef.json').write_text(json.dumps(info, indent=1))
     print('chosen', name, json.dumps(info['all']))
 
 

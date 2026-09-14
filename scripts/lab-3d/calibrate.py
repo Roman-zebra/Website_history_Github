@@ -1,11 +1,18 @@
-"""Turn stereo disparity into heights above sea level and export the web assets.
+"""Turn stereo disparity into heights above sea level.
+
+    python calibrate.py --year 1962|2010
 
 Heights use the vertical-photo parallax formula h = H (1 - P_sea / P), where P is
 the absolute parallax of a pixel between the two photos. P_sea, the parallax of
-sea level, is fitted to GSI's 5 m DEM along the lower envelope (in 1962 most of
-the island was under buildings, so only the lowest surface in each block can be
-ground). Boats on the water are the independent check: they must come out near 0.
+sea level, is fitted to GSI's 5 m DEM along the lower envelope (most of the island
+was under buildings, so only the lowest surface in each block can be ground). It is
+fitted as a plane, because the reference plane of the image-to-image homography is
+tilted. Floating objects, where the photos show any, are the independent check.
+
+Writes height.npy, island.npy and calib.json next to the stereo output; export_web.py
+turns them into the files the page loads.
 """
+import argparse
 import json
 import math
 from pathlib import Path
@@ -15,19 +22,11 @@ import numpy as np
 from PIL import Image
 from scipy import ndimage
 
-HERE = Path(__file__).resolve().parent
-OUT = HERE / 'out'
-WEB = OUT / 'web'
-WEB.mkdir(exist_ok=True)
+from years import CONFIGS
 
-F_PX = 152.670 / (25.4 / 400)
-ALTIMETER_M = 1950            # "ALT 1950" on the data strip of C18-3
-PP_FULL = (1912.0, 1853.0)    # fiducial centre of photo 3 (preview estimate)
+HERE = Path(__file__).resolve().parent
 DEM_X0, DEM_Y0 = 28192, 13238
 BLOCK = 24
-# Probes in the 1024 crop (old 1100x900 positions shifted by (-38, +62)).
-PROBES = {'boat (oval)': (502, 677), 'small boat a': (432, 690), 'small boat b': (462, 694),
-          'pier': (614, 610), 'NE yard': (757, 452), 'SW tip': (252, 622)}
 
 
 def imwrite(p, img, params=()):
@@ -80,11 +79,28 @@ def fit_envelope(rows, tilt):
     return coef, keep
 
 
+def guided(I, p, r=3, eps=0.004):
+    """Guided filter (He et al.): smooths p but keeps the edges that the photo I has."""
+    k = (2 * r + 1, 2 * r + 1)
+    box = lambda x: cv2.boxFilter(x, cv2.CV_32F, k)
+    mI, mp = box(I), box(p)
+    a = (box(I * p) - mI * mp) / (box(I * I) - mI * mI + eps)
+    b = mp - a * mI
+    return box(a) * I + box(b)
+
+
 def main():
-    z = np.load(OUT / 'stereo.npz')
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--year', default='1962', choices=sorted(CONFIGS))
+    year = ap.parse_args().year
+    cfg = CONFIGS[year]
+    out = HERE / cfg['out']
+    f_px = cfg['focal_mm'] / cfg['pitch_mm']
+
+    z = np.load(out / 'stereo.npz')
     disp, ok, mask, L = z['dispL'], z['consistent'], z['mask'], z['L']
     A3, A2 = z['A3'], z['A2']
-    geo = json.loads((OUT / 'georef.json').read_text())
+    geo = json.loads((out / 'georef.json').read_text())
     hh, ww = disp.shape
     yy, xx = np.mgrid[0:hh, 0:ww].astype(np.float64)
 
@@ -95,11 +111,11 @@ def main():
     b = np.array([np.median(vx[isl]), np.median(vy[isl])])
     b /= np.linalg.norm(b)
     P = vx * b[0] + vy * b[1]
-    print('base direction', b.round(4), 'P median %.1f px, corr(P, disp) %.3f' % (np.median(P[isl]), np.corrcoef(P[isl], disp[isl])[0, 1]))
+    print('year', year, 'base direction', b.round(4), 'P median %.1f px, corr(P, disp) %.3f' % (np.median(P[isl]), np.corrcoef(P[isl], disp[isl])[0, 1]))
 
     gsd = geo['gsd_crop_m']
-    H = F_PX * gsd + 15.0
-    print('flying height from map scale %.0f m (layer %s, %.4f m/px); altimeter %d m' % (H, geo['layer'], gsd, ALTIMETER_M))
+    H = f_px * gsd + 15.0
+    print('flying height from map scale %.0f m (layer %s, %.4f m/px); altimeter %s' % (H, geo['layer'], gsd, cfg['altimeter_m']))
 
     M = np.array(geo['M_crop_to_mosaic'])
     mx = M[0, 0] * xx + M[0, 1] * yy + M[0, 2]
@@ -128,19 +144,22 @@ def main():
         h = H * (1 - psea / P)
         res_m = (rows[keep, 2] - (coef[0] + coef[1] * (rows[keep, 0] - 512) + coef[2] * (rows[keep, 1] - 512))) * H / Pm
         probes = {}
-        for name, (px_, py_) in PROBES.items():
+        for name, (px_, py_) in cfg['probes'].items():
             s = (slice(py_ - 3, py_ + 4), slice(px_ - 3, px_ + 4))
             vals = h[s][ok[s]]
             probes[name] = round(float(np.median(vals)), 1) if vals.size else None
         tilt_m = math.hypot(coef[1], coef[2]) * 500 * H / Pm
         print(('plane' if tilt else 'offset') + f': blocks kept {keep.sum()}/{len(rows)}, residual rms {np.sqrt((res_m ** 2).mean()):.2f} m, '
               f'tilt over 500 px {tilt_m:.1f} m, probes {probes}')
-        results[tilt] = (coef, h, probes)
+        results[tilt] = (coef, h, probes, float(np.sqrt((res_m ** 2).mean())), int(keep.sum()), float(tilt_m))
 
-    boats = [results[True][2][k] for k in ('boat (oval)', 'small boat a', 'small boat b')]
-    boats0 = [results[False][2][k] for k in ('boat (oval)', 'small boat a', 'small boat b')]
-    use_tilt = np.nanmean(np.abs(np.array(boats, float))) < np.nanmean(np.abs(np.array(boats0, float)))
-    coef, h, probes = results[use_tilt]
+    boats = [k for k in cfg['probes'] if 'boat' in k]
+    if boats:
+        err = {tilt: np.nanmean(np.abs(np.array([results[tilt][2][k] for k in boats], float))) for tilt in (False, True)}
+        use_tilt = err[True] < err[False]
+    else:
+        use_tilt = True  # nothing floating to check against; 1962 showed the tilt is needed
+    coef, h, probes, rms, kept, tilt_m = results[use_tilt]
     print('using', 'plane' if use_tilt else 'offset')
 
     island = mask & ndimage.binary_dilation(land, iterations=6)
@@ -178,59 +197,35 @@ def main():
         towers = ndimage.binary_dilation(np.isin(blobs, 1 + np.nonzero(area < 150)[0]), iterations=3) & island
         filled = np.where(towers, base, filled)
         print('towers left out', int((area < 150).sum()), 'of', nb, 'tall blobs')
-    # Smooth inside the island only, so the sea wall keeps a sharp edge.
-    weight = ndimage.gaussian_filter(island.astype(float), 1.0)
-    filled = np.where(island, ndimage.gaussian_filter(np.where(island, filled, 0.0), 1.0) / np.maximum(weight, 1e-6), 0.0)
-    filled = np.where(island, np.clip(filled, 0, 75), 0.0).astype(np.float32)
+    # Smooth along the photo: walls stay where the photo has an edge, flat roofs lose their noise.
+    smooth = guided(L.astype(np.float32) / 255.0, np.where(island, filled, 0.0).astype(np.float32))
+    filled = np.where(island, np.clip(smooth, 0, 75), 0.0).astype(np.float32)
     print('spikes removed', int(spikes.sum()))
     q = np.percentile(filled[island], [5, 25, 50, 75, 95, 99, 99.9])
-    print('island px', int(island.sum()), 'filled from neighbours %.1f%%' % (100 * (inv & island).sum() / island.sum()),
+    filled_pct = 100 * (inv & island).sum() / island.sum()
+    print('island px', int(island.sum()), 'filled from neighbours %.1f%%' % filled_pct,
           'height percentiles 5/25/50/75/95/99/99.9:', q.round(1))
     ridge = hdem[island & land]
     print('DEM on island p50 %.1f max %.1f; stereo minus DEM p10 %.1f p50 %.1f' % (
         np.nanmedian(ridge), np.nanmax(ridge), np.nanpercentile((filled - hdem)[island & land], 10), np.nanpercentile((filled - hdem)[island & land], 50)))
-    np.save(OUT / 'height.npy', filled)
-    np.save(OUT / 'island.npy', island)
+    np.save(out / 'height.npy', filled)
+    np.save(out / 'island.npy', island)
+    (out / 'calib.json').write_text(json.dumps({
+        'year': year, 'flyingHeightM': round(H, 1), 'gsd': gsd, 'plane': coef.tolist(), 'tilted': bool(use_tilt),
+        'tiltOver500pxM': round(tilt_m, 1), 'envelopeRmsM': round(rms, 2), 'envelopeBlocks': kept, 'probes': probes,
+        'filledPct': round(float(filled_pct), 1), 'percentiles': [round(float(x), 1) for x in q],
+        'max': round(float(filled.max()), 1)}, indent=1))
 
     vis = cv2.applyColorMap((np.clip(filled / 50.0, 0, 1) * 255).astype(np.uint8), cv2.COLORMAP_TURBO)
-    base = np.dstack([L, L, L]).astype(np.float32)
-    blend = np.where(island[..., None], 0.35 * base + 0.65 * vis, 0.6 * base).astype(np.uint8)
-    imwrite(OUT / 'debug_height.jpg', blend)
+    base_img = np.dstack([L, L, L]).astype(np.float32)
+    blend = np.where(island[..., None], 0.35 * base_img + 0.65 * vis, 0.6 * base_img).astype(np.uint8)
+    imwrite(out / 'debug_height.jpg', blend)
     gy, gx = np.gradient(filled.astype(np.float64) / gsd)
     az, alt = math.radians(315), math.radians(40)
     slope = np.arctan(np.hypot(gx, gy))
     aspect = np.arctan2(-gx, gy)
     shade = np.sin(alt) * np.cos(slope) + np.cos(alt) * np.sin(slope) * np.cos(az - aspect)
-    imwrite(OUT / 'debug_hillshade.jpg', (np.clip(shade, 0, 1) * 255).astype(np.uint8))
-
-    ys, xs = np.nonzero(island)
-    x0 = max(0, (xs.min() - 16) // 2 * 2)
-    y0 = max(0, (ys.min() - 16) // 2 * 2)
-    x1 = min(ww - 1, (xs.max() + 16) // 2 * 2)
-    y1 = min(hh - 1, (ys.max() + 16) // 2 * 2)
-    grid = filled[y0:y1 + 1:2, x0:x1 + 1:2]
-    (WEB / 'gunkanjima-1962-height.bin').write_bytes(np.round(grid * 10).astype('<u2').tobytes())
-
-    lo, hi = np.percentile(L, [1, 99.8])
-    tex = np.clip((L.astype(np.float32) - lo) / (hi - lo), 0, 1) ** 0.95 * 255
-    imwrite(WEB / 'gunkanjima-1962.jpg', tex.astype(np.uint8), (cv2.IMWRITE_JPEG_QUALITY, 86, cv2.IMWRITE_JPEG_PROGRESSIVE, 1))
-
-    north = np.linalg.inv(M[:, :2]) @ np.array([0.0, -1.0])
-    north /= np.linalg.norm(north)
-    ppL = proj(np.linalg.inv(A3), np.array(PP_FULL[0]), np.array(PP_FULL[1]))
-    meta = {
-        'photo': {'main': 'MKU628-C18-3', 'pair': 'MKU628-C18-2', 'date': '1962-05-30', 'focalMm': 152.67},
-        'texture': {'file': 'gunkanjima-1962.jpg', 'size': int(ww), 'metersPerPixel': round(gsd, 4)},
-        'grid': {'file': 'gunkanjima-1962-height.bin', 'w': int(grid.shape[1]), 'h': int(grid.shape[0]),
-                 'x0': int(x0), 'y0': int(y0), 'step': 2, 'unit': 0.1},
-        'north': [round(float(north[0]), 4), round(float(north[1]), 4)],
-        'principalPoint': [round(float(ppL[0]), 1), round(float(ppL[1]), 1)],
-        'flyingHeightM': round(H),
-        'heights': {'p50': round(float(q[2]), 1), 'p99': round(float(q[5]), 1), 'max': round(float(filled.max()), 1)},
-        'check': {'boats': probes},
-    }
-    (WEB / 'gunkanjima-1962.json').write_text(json.dumps(meta, indent=1))
-    print(json.dumps(meta))
+    imwrite(out / 'debug_hillshade.jpg', (np.clip(shade, 0, 1) * 255).astype(np.uint8))
 
 
 if __name__ == '__main__':

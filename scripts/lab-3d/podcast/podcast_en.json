@@ -1,0 +1,76 @@
+{
+ "lang": "en",
+ "xmllang": "en-US",
+ "title": "Five thousand people on a rock: Gunkanjima from the air, 1962 to today",
+ "names": {"A": "Zira", "B": "Mark"},
+ "voices": {"A": "Microsoft Zira", "B": "Microsoft Mark"},
+ "rate": {"A": "0%", "B": "-4%"},
+ "voiceCredit": "Synthetic voices: Microsoft Zira and Microsoft Mark (Windows speech synthesis)",
+ "items": [
+  {"chapter": "A rock in the sea"},
+  {"s": "A", "t": "Picture a rock in the sea, about the size of a few city blocks. Now put five thousand people on it.", "cue": {"year": "1962", "lift": 0, "view": "top", "change": false}},
+  {"s": "B", "t": "And a school with more than a thousand pupils. Apartment blocks nine storeys high. A cinema. And all of it inside a wall against the waves."},
+  {"s": "A", "t": "This is Hashima, better known as Gunkanjima, Battleship Island, off Nagasaki. Today we're looking at it the way a survey plane saw it on the thirtieth of May, 1962."},
+
+  {"chapter": "Two photographs, one shape"},
+  {"s": "B", "t": "Here's the trick behind the model on this page. The plane took two photographs of the island, about a kilometre apart."},
+  {"s": "A", "t": "Two photos of the same place. Why does that give you 3D?"},
+  {"s": "B", "t": "Because tall things shift more between the two frames than low things. Hold up a finger and close one eye, then the other. It jumps. Same idea. Measure that shift for every point on the island, and you get its height."},
+  {"s": "A", "t": "And how do we know it's right?"},
+  {"s": "B", "t": "We checked two ways. The flying height worked out from the map scale is 1,950 metres, and the plane's own altimeter, printed on the edge of the photograph, says exactly 1,950. And a floating pier tied up by the island comes out about two and a half metres above the water."},
+  {"s": "A", "t": "Then let's raise it.", "cue": {"lift": 1, "view": "overview"}},
+
+  {"chapter": "An island built outwards"},
+  {"s": "A", "t": "The first thing I notice is the wall, all the way round.", "cue": {"spot": "seawall"}},
+  {"s": "B", "t": "That wall is why the island has this shape at all. Hashima began as a much smaller reef. According to the tour operator Gunkanjima Concierge, it was enlarged in six stages of reclamation, the last in 1931, and the new land sits behind a high sea wall."},
+  {"s": "A", "t": "And the reason to build out here was coal."},
+  {"s": "B", "t": "Coal under the seabed. Mitsubishi took the mine on in 1890, and the official World Heritage site says the coal was low in ash and sulphur, so it sold at a good price."},
+
+  {"chapter": "Building upwards"},
+  {"s": "A", "t": "So where do you put the miners?"},
+  {"s": "B", "t": "Up. Find the square block with a hole in the middle, in the south-west corner. That's Building No. 30, completed in 1916. It's described as Japan's oldest high-rise apartment block in reinforced concrete.", "cue": {"spot": "no30"}},
+  {"s": "A", "t": "1916. That's early."},
+  {"s": "B", "t": "And it didn't stop there. Along the west side, facing the open sea, runs a line of miners' apartments. The official site dates the first of them, Building No. 16, to 1918.", "cue": {"spot": "nikkyu"}},
+
+  {"chapter": "Life in 1962"},
+  {"s": "A", "t": "In this 1962 photograph, what is the island like?"},
+  {"s": "B", "t": "Crowded. In 1960, about 5,300 people lived here, and Nagasaki's official tourism site says that was the highest population density in Japan.", "cue": {"view": "overview"}},
+  {"s": "A", "t": "Where did the children play?"},
+  {"s": "B", "t": "Up again. Building No. 65, the big U shape at the north end, had a children's park in its courtyard and a kindergarten on the roof.", "cue": {"spot": "no65"}},
+  {"s": "B", "t": "Right next to it is the school, seven storeys. Gunkanjima Concierge says it had its highest number of pupils ever in 1962: one thousand, one hundred and sixty-nine.", "cue": {"spot": "school"}},
+  {"s": "A", "t": "The same year as our photograph."},
+  {"s": "B", "t": "The very same year."},
+
+  {"chapter": "The mine"},
+  {"s": "A", "t": "And the mine itself?"},
+  {"s": "B", "t": "On the south-east side. The number two shaft was the main way down. Its pithead is filled with concrete now, and right beside it stand brick walls from a winding-engine house built in 1896.", "cue": {"spot": "mine"}},
+  {"s": "A", "t": "Brick from 1896, concrete from 1916. The island comes in layers."},
+
+  {"chapter": "A history to remember"},
+  {"s": "B", "t": "There's one more layer we should name. When these industrial sites joined the World Heritage List in 2015, Japan's government told the committee it would help people understand that many Koreans and others were brought against their will and forced to work under harsh conditions in the 1940s at some of the sites. Hashima is one of the places where that history is remembered.", "cue": {"view": "overview"}},
+  {"s": "A", "t": "So we hold both: an engineering story, and people who never chose to be here."},
+
+  {"chapter": "After the people left"},
+  {"s": "A", "t": "What happened next?"},
+  {"s": "B", "t": "Oil replaced coal. The mine closed in January 1974, and within a few months everyone had gone."},
+  {"s": "A", "t": "Let's move the slider. Here's January 1975, in colour.", "cue": {"year": "1975"}},
+  {"s": "B", "t": "A year after closing, and from above it still looks lived in. The buildings are all there, so for this year we keep the 1962 shape."},
+  {"s": "A", "t": "And 2010.", "cue": {"year": "2010"}},
+  {"s": "B", "t": "For 2010 we measured the heights again, from a new pair of photographs. Switch on the change colours. Red is where the island is at least five metres lower than in 1962. Blue is where it's higher.", "cue": {"change": true, "view": "overview"}},
+  {"s": "A", "t": "The big concrete blocks are mostly still standing. But a lot has come down."},
+  {"s": "B", "t": "Altogether, about {LOWER_M2} square metres now read lower."},
+  {"s": "A", "t": "And the latest photograph?", "cue": {"year": "latest", "change": false}},
+  {"s": "B", "t": "Greener. And still standing, just."},
+
+  {"chapter": "Visiting today"},
+  {"s": "A", "t": "Can you actually go there?"},
+  {"s": "B", "t": "Yes, on a landing tour from Nagasaki. The public has been able to land since 2009. On the island you stay inside the visitor facilities, and landings are called off when the waves, the wind or the visibility are outside the city's limits.", "cue": {"spot": "pier"}},
+  {"s": "A", "t": "And will it last?"},
+  {"s": "B", "t": "Nagasaki City has a thirty-year plan. The sea wall comes first, then the mine remains. For the housing, they plan to start with Building No. 3, at the island's highest point.", "cue": {"spot": "no3"}},
+
+  {"chapter": "Your turn"},
+  {"s": "A", "t": "That's our lab test. Everything you just heard is on this page. Turn the island, slide through the years, and tap the icons.", "cue": {"year": "1962", "view": "overview", "change": false}},
+  {"s": "B", "t": "The photographs come from the Geospatial Information Authority of Japan. The model is a first test, so it's a few metres out in places. And we are synthetic voices, so forgive the delivery."},
+  {"s": "A", "t": "See you on the next island."}
+ ]
+}

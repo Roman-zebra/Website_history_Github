@@ -1,0 +1,127 @@
+{
+ "sources": {
+  "whs": {"label": {"en": "Sites of Japan’s Meiji Industrial Revolution (official site) · Hashima Coal Mine", "ja": "明治日本の産業革命遺産 公式サイト · 端島炭坑"}, "url": "https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html"},
+  "city": {"label": {"en": "Nagasaki City · Hashima (Gunkanjima) conservation fund", "ja": "長崎市 · 端島（軍艦島）整備基金"}, "url": "https://www.city.nagasaki.lg.jp/page/3927.html"},
+  "concierge": {"label": {"en": "Gunkanjima Concierge (tour operator) · About Gunkanjima", "ja": "軍艦島コンシェルジュ（ツアー事業者）· 軍艦島とは"}, "url": "https://www.gunkanjima-concierge.com/about/"},
+  "wikija": {"label": {"en": "Wikipedia (Japanese) · Hashima", "ja": "Wikipedia · 端島 (長崎県)"}, "url": "https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)"},
+  "atnagasaki": {"label": {"en": "Nagasaki City tourism (at Nagasaki) · Hashima", "ja": "長崎市公式観光サイト あっと!ながさき · 端島（軍艦島）"}, "url": "https://www.at-nagasaki.jp/spot/51797"}
+ },
+ "photos": {
+  "no30": {"title": "Hashima Island 07", "author": "Σ64", "license": "CC BY 3.0", "licenseUrl": "https://creativecommons.org/licenses/by/3.0", "page": "https://commons.wikimedia.org/wiki/File:Hashima_Island_07.jpg", "year": "2011", "caption": {"en": "From the left: Buildings No. 31, No. 25 and No. 30, seen from the south-west viewing area in 2011.", "ja": "左から31号棟、25号棟、30号棟（2011年、南西の見学広場から）。", "ko": "왼쪽부터 31호동, 25호동, 30호동(2011년, 남서쪽 견학 광장에서).", "zh-Hans": "从左起：31号楼、25号楼、30号楼（2011年，从西南侧参观广场拍摄）。", "zh-Hant": "從左起：31號樓、25號樓、30號樓（2011年，從西南側參觀廣場拍攝）。"}},
+  "mine": {"title": "Hashima Island 11", "author": "Σ64", "license": "CC BY 3.0", "licenseUrl": "https://creativecommons.org/licenses/by/3.0", "page": "https://commons.wikimedia.org/wiki/File:Hashima_Island_11.jpg", "year": "2011", "caption": {"en": "The ruined general office in the centre and the No. 2 shaft pier on the right; the lighthouse and water tank behind (2011).", "ja": "中央が総合事務所の跡、右が第二竪坑の坑口桟橋。奥に灯台と貯水槽（2011年）。", "ko": "가운데가 종합사무소 터, 오른쪽이 제2수갱 갱구 잔교. 뒤로 등대와 저수조(2011년).", "zh-Hans": "中间是综合事务所遗址，右边是第二竖井的坑口栈桥，后方是灯塔和蓄水池（2011年）。", "zh-Hant": "中間是綜合事務所遺址，右邊是第二豎井的坑口棧橋，後方是燈塔和蓄水池（2011年）。"}},
+  "no65": {"title": "Block 65 on Hashima Island", "author": "Jordy Meow", "license": "CC BY-SA 3.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0", "page": "https://commons.wikimedia.org/wiki/File:Block_65_on_Hashima_Island.jpg", "year": "2012", "caption": {"en": "Building No. 65 in 2012.", "ja": "2012年の65号棟。", "ko": "2012년의 65호동.", "zh-Hans": "2012年的65号楼。", "zh-Hant": "2012年的65號樓。"}},
+  "school": {"title": "Hashima Island 16", "author": "Σ64", "license": "CC BY 3.0", "licenseUrl": "https://creativecommons.org/licenses/by/3.0", "page": "https://commons.wikimedia.org/wiki/File:Hashima_Island_16.jpg", "year": "2011", "caption": {"en": "Conveyor remains in front; Building No. 65 on the left and the school, No. 70, on the right (2011).", "ja": "手前はベルトコンベアの跡。奥の左が65号棟、右が小中学校（70号棟）（2011年）。", "ko": "앞은 벨트컨베이어 흔적. 뒤 왼쪽이 65호동, 오른쪽이 초중학교(70호동)(2011년).", "zh-Hans": "前方是输送带遗迹，后方左边是65号楼，右边是学校（70号楼）（2011年）。", "zh-Hant": "前方是輸送帶遺跡，後方左邊是65號樓，右邊是學校（70號樓）（2011年）。"}},
+  "no3": {"title": "Hashima Island 15", "author": "Σ64", "license": "CC BY 3.0", "licenseUrl": "https://creativecommons.org/licenses/by/3.0", "page": "https://commons.wikimedia.org/wiki/File:Hashima_Island_15.jpg", "year": "2011", "caption": {"en": "Building No. 3 at the top of the photograph (2011).", "ja": "写真の上のほうに見えるのが3号棟（2011年）。", "ko": "사진 위쪽에 보이는 것이 3호동(2011년).", "zh-Hans": "照片上方的建筑是3号楼（2011年）。", "zh-Hant": "照片上方的建築是3號樓（2011年）。"}},
+  "seawall": {"title": "Nagasaki Hashima 01-1", "author": "Hisagi (氷鷺)", "license": "CC BY-SA 3.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0", "page": "https://commons.wikimedia.org/wiki/File:Nagasaki_Hashima_01-1.png", "year": "2009", "caption": {"en": "The whole island from the sea to the south-west, with the sea wall all round (2009).", "ja": "南西の海から見た島の全景。まわりを護岸が囲んでいます（2009年）。", "ko": "남서쪽 바다에서 본 섬 전경. 둘레를 방파제가 둘러싸고 있습니다(2009년).", "zh-Hans": "从西南方海上看到的全岛，四周由护岸环绕（2009年）。", "zh-Hant": "從西南方海上看到的全島，四周由護岸環繞（2009年）。"}}
+ },
+ "spots": {
+  "no30": {
+   "icon": "30",
+   "name": {"en": "Building No. 30", "ja": "30号棟", "ko": "30호동", "zh-Hans": "30号楼", "zh-Hant": "30號樓"},
+   "text": {
+    "en": "Completed in 1916, Building No. 30 is described as Japan’s oldest reinforced-concrete high-rise apartment block. It housed miners and is built around a central light well, at the foot of the rock on the south-west of the island.",
+    "ja": "1916年に完成した30号棟は、国内最古の高層鉄筋コンクリート造アパートとされています。鉱員の住宅で、中央が吹き抜けになった形をしており、島の南西、岩山のふもとに建っています。",
+    "ko": "1916년에 완성된 30호동은 일본에서 가장 오래된 철근콘크리트 고층 아파트로 알려져 있습니다. 광원들의 주택으로, 가운데가 뚫린 형태이며 섬 남서쪽 암반 기슭에 서 있습니다.",
+    "zh-Hans": "1916年建成的30号楼，被认为是日本现存最古老的钢筋混凝土高层公寓。它是矿工住宅，中央是天井，位于岛西南侧岩山脚下。",
+    "zh-Hant": "1916年建成的30號樓，被認為是日本現存最古老的鋼筋混凝土高層公寓。它是礦工住宅，中央是天井，位於島西南側岩山腳下。"
+   },
+   "sources": ["concierge", "wikija"]
+  },
+  "nikkyu": {
+   "icon": "16",
+   "name": {"en": "Nikkyu apartments (Nos. 16–20)", "ja": "日給社宅（16〜20号棟）", "ko": "닛큐 사택(16~20호동)", "zh-Hans": "日给社宅（16—20号楼）", "zh-Hant": "日給社宅（16—20號樓）"},
+   "text": {
+    "en": "A row of miners’ apartment blocks along the west side of the island, facing the open sea, joined to one another along the sea side. The official World Heritage site dates No. 16 to 1918.",
+    "ja": "外海に面した島の西側に並ぶ鉱員社宅で、海側で互いにつながっています。明治日本の産業革命遺産の公式サイトは、16号棟を1918年の建設としています。",
+    "ko": "먼바다를 향한 섬 서쪽에 늘어선 광원 사택으로, 바다 쪽에서 서로 이어져 있습니다. 메이지 일본의 산업혁명 유산 공식 사이트는 16호동을 1918년 건설로 소개합니다.",
+    "zh-Hans": "位于岛西侧、面向外海的一排矿工宿舍，在靠海一侧彼此相连。明治日本产业革命遗产官方网站记载，16号楼建于1918年。",
+    "zh-Hant": "位於島西側、面向外海的一排礦工宿舍，在靠海一側彼此相連。明治日本產業革命遺產官方網站記載，16號樓建於1918年。"
+   },
+   "sources": ["whs", "wikija"]
+  },
+  "no65": {
+   "icon": "65",
+   "name": {"en": "Building No. 65", "ja": "65号棟", "ko": "65호동", "zh-Hans": "65号楼", "zh-Hant": "65號樓"},
+   "text": {
+    "en": "The island’s largest apartment block: nine storeys, ten in part, in a U shape around a courtyard with a children’s park, and a kindergarten on the roof. Building began in 1945 and it was extended in stages.",
+    "ja": "島でいちばん大きなアパートです。9階建て（一部10階）のコの字形で、中庭に子どもの遊び場、屋上に幼稚園がありました。1945年に建て始め、段階的に増築されました。",
+    "ko": "섬에서 가장 큰 아파트입니다. 9층(일부 10층)의 ㄷ자형으로, 안뜰에는 어린이 놀이터, 옥상에는 유치원이 있었습니다. 1945년에 짓기 시작해 단계적으로 증축되었습니다.",
+    "zh-Hans": "岛上最大的公寓。9层（部分10层）的U字形建筑，中庭有儿童游乐场，屋顶设有幼儿园。1945年开始兴建，之后分阶段扩建。",
+    "zh-Hant": "島上最大的公寓。9層（部分10層）的U字形建築，中庭有兒童遊樂場，屋頂設有幼兒園。1945年開始興建，之後分階段擴建。"
+   },
+   "sources": ["whs", "wikija"]
+  },
+  "school": {
+   "icon": "70",
+   "name": {"en": "Hashima school (No. 70)", "ja": "端島小中学校（70号棟）", "ko": "하시마 초중학교(70호동)", "zh-Hans": "端岛小学和初中（70号楼）", "zh-Hant": "端島小學與國中（70號樓）"},
+   "text": {
+    "en": "The seven-storey elementary and junior high school at the north end of the island. The tour operator Gunkanjima Concierge gives its peak enrolment as 1,169 pupils in 1962, the year the photographs on this page were taken.",
+    "ja": "島の北端に建つ7階建ての小中学校です。ツアー事業者の軍艦島コンシェルジュによると、児童・生徒数は1962年の1,169人がいちばん多く、このページの写真が撮られた年にあたります。",
+    "ko": "섬 북쪽 끝에 있는 7층짜리 초중학교입니다. 투어 업체 군칸지마 컨시어지에 따르면 학생 수는 1962년의 1,169명이 가장 많았고, 이 페이지의 사진이 촬영된 해입니다.",
+    "zh-Hans": "位于岛北端的7层小学和初中。据旅游业者“军舰岛Concierge”介绍，学生人数在1962年达到最多的1,169人，正是本页照片拍摄的那一年。",
+    "zh-Hant": "位於島北端的7層小學與國中。據旅遊業者「軍艦島Concierge」介紹，學生人數在1962年達到最多的1,169人，正是本頁照片拍攝的那一年。"
+   },
+   "sources": ["concierge", "wikija"]
+  },
+  "shrine": {
+   "icon": "⛩",
+   "name": {"en": "Hashima Shrine", "ja": "端島神社", "ko": "하시마 신사", "zh-Hans": "端岛神社", "zh-Hant": "端島神社"},
+   "text": {
+    "en": "The shrine stands on the rock in the middle of the island and is part of the silhouette seen from the sea, according to Nagasaki City. The hall itself has collapsed; a small shrine remains.",
+    "ja": "島の中央の岩山の上にあり、長崎市によると、海から見た島のシルエットの一部になっています。社殿は倒壊し、小さな祠が残っています。",
+    "ko": "섬 가운데 암반 위에 있으며, 나가사키시에 따르면 바다에서 본 섬 실루엣의 일부를 이룹니다. 본전은 무너졌고 작은 사당이 남아 있습니다.",
+    "zh-Hans": "位于岛中央的岩山上，据长崎市介绍，是从海上看到的岛屿轮廓的一部分。社殿已倒塌，只留下一座小祠。",
+    "zh-Hant": "位於島中央的岩山上，據長崎市介紹，是從海上看到的島嶼輪廓的一部分。社殿已倒塌，只留下一座小祠。"
+   },
+   "sources": ["city", "concierge"]
+  },
+  "no3": {
+   "icon": "3",
+   "name": {"en": "Building No. 3", "ja": "3号棟", "ko": "3호동", "zh-Hans": "3号楼", "zh-Hant": "3號樓"},
+   "text": {
+    "en": "Apartments at the highest point of the island. Nagasaki City says the building is in comparatively good condition, and plans to start conserving the island’s housing with it.",
+    "ja": "島でいちばん高い場所にあるアパートです。長崎市によると比較的劣化が進んでおらず、居住施設の保存整備はこの3号棟から始める計画です。",
+    "ko": "섬에서 가장 높은 곳에 있는 아파트입니다. 나가사키시에 따르면 비교적 덜 노후되어, 주거 시설의 보존 정비를 이 3호동부터 시작할 계획입니다.",
+    "zh-Hans": "位于岛上最高处的公寓。据长崎市介绍，这栋楼老化程度相对较轻，居住设施的保护修缮计划从3号楼开始。",
+    "zh-Hant": "位於島上最高處的公寓。據長崎市介紹，這棟樓老化程度相對較輕，居住設施的保存修繕計畫從3號樓開始。"
+   },
+   "sources": ["city"]
+  },
+  "mine": {
+   "icon": "⚒",
+   "name": {"en": "No. 2 shaft and the general office", "ja": "第二竪坑と総合事務所", "ko": "제2수갱과 종합사무소", "zh-Hans": "第二竖井与综合事务所", "zh-Hant": "第二豎井與綜合事務所"},
+   "text": {
+    "en": "The No. 2 shaft was the main way down into the mine; miners climbed the stairs from here to the pithead, which is now filled with concrete. The brick walls beside it belonged to the winding-engine house of the No. 3 shaft, built in 1896, and the building later served as the general office.",
+    "ja": "第二竪坑は炭鉱の主な入り口で、坑員はここの階段を上って坑口へ向かいました。坑口は今はコンクリートで埋められています。隣のレンガの壁は1896年に建てられた第三竪坑の捲座のもので、その建物はのちに総合事務所として使われました。",
+    "ko": "제2수갱은 탄광으로 내려가는 주된 입구로, 광원들은 이곳 계단을 올라 갱구로 향했습니다. 갱구는 지금 콘크리트로 메워져 있습니다. 옆의 벽돌 벽은 1896년에 지은 제3수갱 권양기 건물의 것으로, 이 건물은 나중에 종합사무소로 쓰였습니다.",
+    "zh-Hans": "第二竖井是下到矿井的主要入口，矿工们从这里的阶梯走上坑口。坑口如今已用混凝土填埋。旁边的红砖墙属于1896年建成的第三竖井卷扬机房，这栋建筑后来被用作综合事务所。",
+    "zh-Hant": "第二豎井是下到礦坑的主要入口，礦工們從這裡的階梯走上坑口。坑口如今已用混凝土填埋。旁邊的紅磚牆屬於1896年建成的第三豎井捲揚機房，這棟建築後來被用作綜合事務所。"
+   },
+   "sources": ["whs", "wikija"]
+  },
+  "pier": {
+   "icon": "⚓",
+   "name": {"en": "Dolphin Pier", "ja": "ドルフィン桟橋", "ko": "돌핀 부두", "zh-Hans": "海豚码头", "zh-Hant": "海豚碼頭"},
+   "text": {
+    "en": "Where the tour boats land today. The first pier, of 1954, and the second were both wrecked by the sea; the third, completed in 1962, is the one still in use.",
+    "ja": "いまツアーの船が着く桟橋です。1954年の初代と2代目はどちらも波で壊れ、1962年に完成した3代目がいまも使われています。",
+    "ko": "지금 투어 배가 닿는 부두입니다. 1954년의 첫 부두와 두 번째 부두는 모두 파도에 부서졌고, 1962년에 완성된 세 번째 부두가 지금도 쓰이고 있습니다.",
+    "zh-Hans": "如今观光船靠岸的码头。1954年的第一代和第二代码头都被海浪冲毁，1962年建成的第三代至今仍在使用。",
+    "zh-Hant": "如今觀光船靠岸的碼頭。1954年的第一代和第二代碼頭都被海浪沖毀，1962年建成的第三代至今仍在使用。"
+   },
+   "sources": ["concierge"]
+  },
+  "seawall": {
+   "icon": "▦",
+   "name": {"en": "Sea wall", "ja": "護岸", "ko": "방파제(호안)", "zh-Hans": "护岸", "zh-Hant": "護岸"},
+   "text": {
+    "en": "A high wall runs right round the island and protects the reclaimed land. Nagasaki City has made the sea wall the first priority of its conservation work on the island.",
+    "ja": "島のまわりを高い護岸が囲み、埋め立てた土地を守っています。長崎市は、島の保存整備でこの護岸を最優先にしています。",
+    "ko": "높은 방파제가 섬 전체를 둘러싸 매립지를 지키고 있습니다. 나가사키시는 섬의 보존 정비에서 이 방파제를 가장 먼저 다루고 있습니다.",
+    "zh-Hans": "高高的护岸环绕全岛，保护着填海造出的土地。长崎市把护岸列为岛上保护修缮工作的第一优先。",
+    "zh-Hant": "高高的護岸環繞全島，保護著填海造出的土地。長崎市把護岸列為島上保存修繕工作的第一優先。"
+   },
+   "sources": ["whs", "city"]
+  }
+ }
+}
