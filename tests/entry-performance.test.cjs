@@ -10,7 +10,7 @@ test('background cache installation has four workers and survives a failed asset
 });
 test('every crawlable page has a real square PNG icon and Apple touch icon',()=>{
  for(const [,url] of read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)){
-  const p=new URL(url).pathname,s=read(p==='/'?'index.html':p.slice(1)+'.html');
+  const p=new URL(url).pathname,s=read(p==='/'?'index.html':p.endsWith('/')?p.slice(1)+'index.html':p.slice(1)+'.html');
   assert.equal((s.match(/rel="icon"/g)||[]).length,2,url);
   assert.ok(s.includes('href="/icons/atlas-96.png"'));assert.ok(s.includes('href="/icons/atlas-180.png"'));
  }

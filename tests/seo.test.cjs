@@ -16,7 +16,7 @@ test('canonical remains on the custom domain when the app runs on workers.dev or
 });
 test('sitemap contains unique existing canonical pages and new guides',()=>{
  const urls=[...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);assert.equal(new Set(urls).size,urls.length);
- for(const url of urls){assert.ok(url.startsWith(base+'/'));const route=new URL(url).pathname;assert.ok(!route.endsWith('.html'));assert.ok(fs.existsSync(path.join(root,route==='/'?'index.html':route.slice(1)+'.html')),route);}
+ for(const url of urls){assert.ok(url.startsWith(base+'/'));const route=new URL(url).pathname;assert.ok(!route.endsWith('.html'));assert.ok(fs.existsSync(path.join(root,route==='/'?'index.html':route.endsWith('/')?route.slice(1)+'index.html':route.slice(1)+'.html')),route);}
  assert.ok(urls.includes(base+'/th'));assert.equal(urls.filter(u=>u.includes('/guides/')).length,3);
 });
 test('old hostname remains enabled alongside both custom hostnames',()=>{

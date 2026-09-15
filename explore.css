@@ -820,3 +820,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 .card-emoji,.big span,.sm span,.tiny span,.w-jp{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
 
 #pShare{color:#285d60;font-weight:700}.home .card{content-visibility:auto;contain-intrinsic-size:300px 240px}.p-row{flex-wrap:wrap}.p-mini{min-width:120px}
+
+/* tab 06: the card is a link, but a first-time visitor must see that it opens the model */
+.card-lab .card-img{filter:grayscale(.15) contrast(1.05) brightness(.72)}
+.card-cta{position:absolute;left:50%;top:44%;z-index:1;transform:translate(-50%,-50%);white-space:nowrap;background:var(--gold);color:var(--ink);font-weight:800;font-size:15px;padding:.6rem 1.15rem;border-radius:99px;box-shadow:0 4px 18px rgba(0,0,0,.5);transition:transform .25s ease}
+.card:hover .card-cta,.card:focus-visible .card-cta{transform:translate(-50%,-50%) scale(1.06)}
+.lab-open{margin:.6rem 0 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+.btn-3d{display:inline-block;background:var(--gold);color:var(--ink)!important;font-weight:800;font-size:1rem;padding:.65rem 1.25rem;border-radius:99px;text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,.25)}
+.btn-3d:hover,.btn-3d:focus-visible{filter:brightness(1.08)}
+.lab-open-note{font-size:.85rem;opacity:.75}

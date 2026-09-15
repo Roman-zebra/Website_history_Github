@@ -42,7 +42,7 @@ function ld(l){
    'hasPart':[{'@type':'AudioObject','name':l.code==='ja'?'岩の上の5,000人　空から見る軍艦島':'Five thousand people on a rock: Gunkanjima from the air','contentUrl':SITE+'/3d/audio/gunkanjima-podcast-'+(l.code==='ja'?'ja':'en')+'.mp3','encodingFormat':'audio/mpeg','inLanguage':l.code==='ja'?'ja':'en'}],
    'keywords':['Gunkanjima','Hashima','軍艦島','端島','3D','aerial photograph','Nagasaki','UNESCO World Heritage']},
   ...extras.ld(l),
-  {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Japan Time Atlas','item':SITE+'/'+(l.code==='en'?'':'?lang='+({ja:'ja',ko:'ko','zh-Hans':'zh-CN','zh-Hant':'zh-TW'})[l.code])},{'@type':'ListItem','position':2,'name':l.crumb,'item':url}]}
+  {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Japan Time Atlas','item':SITE+'/'+(l.code==='en'?'':'?lang='+({ja:'ja',ko:'ko','zh-Hans':'zh-CN','zh-Hant':'zh-TW'})[l.code])},{'@type':'ListItem','position':2,'name':l.crumb,'item':SITE+'/3d/'+l.dir},{'@type':'ListItem','position':3,'name':l.code==='ja'?'軍艦島（端島）':'Gunkanjima (Hashima)','item':url}]}
  ]});
 }
 for(const l of LANGS){
@@ -80,3 +80,4 @@ for(const l of LANGS){
  fs.writeFileSync(out,s);
  console.log('wrote',path.relative(root,out),s.length);
 }
+require('./build-3d-index.cjs')(LANGS,SITE);

@@ -14,13 +14,14 @@ test('tab 06 sits after the shopping tab on the home page and the map app',()=>{
  }
  const js=read('explore.js');
  assert.equal((js.match(/modeLab: '/g)||[]).length,5);assert.equal((js.match(/noteLab: '/g)||[]).length,5);
- for(const snippet of ["['mLab','lab']","if (mode === 'lab') return buildLabCards();","if (mode === 'lab') return t('noteLab');","$('mLab').onclick = () => setMode('lab');","href=\"/3d/' + dir3d + 'gunkanjima\""])assert.ok(js.includes(snippet),snippet);
+ for(const snippet of ["['mLab','lab']","if (mode === 'lab') return buildLabCards();","if (mode === 'lab') return t('noteLab');","$('mLab').onclick = () => setMode('lab');","'<a class=\"card card-lab\" href=\"' + labHref(it) + '\">'"])assert.ok(js.includes(snippet),snippet);
  assert.ok(!/Lab · testing|テスト中|testing/.test(js.slice(0,3000)),'no test wording on the tab');
  const intro=vm.runInNewContext(/const MODE_INTRO = \{[\s\S]*?\n\};/.exec(js)[0]+';MODE_INTRO');
- const cards=vm.runInNewContext(/const LAB_CARD = \{[\s\S]*?\n\};/.exec(js)[0]+';LAB_CARD');
- for(const l of LANGS){assert.ok(intro[l].lab&&intro[l].lab.replace(/<[^>]+>/g,'').length>=150,l+' intro');assert.equal(cards[l].length,2,l+' card');}
+ const items=vm.runInNewContext(/const LAB_ITEMS = \[[\s\S]*?\n\}\];/.exec(js)[0]+';LAB_ITEMS');
+ assert.ok(items.length>=1);
+ for(const l of LANGS){assert.ok(intro[l].lab&&intro[l].lab.replace(/<[^>]+>/g,'').length>=150,l+' intro');assert.ok(intro[l].lab.includes('class="btn-3d"'),l+' intro has the open button');for(const it of items){assert.ok(it.name[l]&&it.hook[l],l+' card text for '+it.path);}}
  assert.ok(isJpeg(bytes('3d/gunkanjima-card.jpg')));
- assert.ok(js.includes('src="/3d/gunkanjima-card.jpg?v='),'the card points at the card image');
+ assert.ok(js.includes("img: '/3d/gunkanjima-card.jpg?v="),'the card points at the card image');
 });
 
 test('the five 3D pages are indexable, cross-linked with hreflang, credited, and load nothing from other sites',()=>{
@@ -47,6 +48,24 @@ test('the five 3D pages are indexable, cross-linked with hreflang, credited, and
   assert.ok(sitemap.includes('<loc>'+urls[l]+'</loc>'),l+' in the sitemap');
  }
  assert.ok(read('_redirects').includes('/lab/gunkanjima-3d /3d/gunkanjima 301'),'old lab route redirects');
+ /* the series pages: one per language, indexable, listing the reconstruction and linking to it */
+ const idx={en:'3d/index.html',ja:'3d/ja/index.html',ko:'3d/ko/index.html','zh-Hans':'3d/zh-cn/index.html','zh-Hant':'3d/zh-tw/index.html'};
+ const idxUrl={en:'https://japantimeatlas.com/3d/',ja:'https://japantimeatlas.com/3d/ja/',ko:'https://japantimeatlas.com/3d/ko/','zh-Hans':'https://japantimeatlas.com/3d/zh-cn/','zh-Hant':'https://japantimeatlas.com/3d/zh-tw/'};
+ for(const l of Object.keys(idx)){
+  const s=read(idx[l]);
+  assert.ok(s.startsWith('<!doctype html>\n<html lang="'+({en:'en',ja:'ja',ko:'ko','zh-Hans':'zh-Hans','zh-Hant':'zh-Hant'})[l]+'">'),l+' series page language');
+  assert.ok(!s.includes('noindex'),l+' series page indexable');
+  assert.ok(s.includes('<link rel="canonical" href="'+idxUrl[l]+'">'),l+' series canonical');
+  assert.equal((s.match(/hreflang=/g)||[]).length,6,l+' series hreflang set');
+  assert.ok(s.includes('href="'+urls[l].replace('https://japantimeatlas.com','')+'"'),l+' series links to the reconstruction');
+  assert.ok(s.includes('"@type":"ItemList"'),l+' series ItemList');
+  assert.ok(sitemap.includes('<loc>'+idxUrl[l]+'</loc>'),l+' series page in the sitemap');
+  const page=read(({en:'3d/gunkanjima.html',ja:'3d/ja/gunkanjima.html',ko:'3d/ko/gunkanjima.html','zh-Hans':'3d/zh-cn/gunkanjima.html','zh-Hant':'3d/zh-tw/gunkanjima.html'})[l]);
+  assert.ok(page.includes('href="'+idxUrl[l].replace('https://japantimeatlas.com','')+'"'),l+' reconstruction links back to the series');
+  assert.ok(page.includes('#l-hashima-island"'),l+' reconstruction links to the island on the map');
+ }
+ assert.equal(read('explore.js').match(/const LAB_ITEMS = \[/g).length,1,'the home tab lists reconstructions from one array');
+ assert.ok(read('explore.js').includes("class=\"card-cta\""),'the card says what a tap does');
  for(const [js,v] of [['3d/gunkanjima-3d.js','4'],['3d/gunkanjima-podcast.js','5']]){
   assert.ok(!/https?:\/\//.test(read(js)),js+' loads nothing from other sites');
   assert.equal(read(js).match(/const V = '(\d+)'/)[1],v,js);

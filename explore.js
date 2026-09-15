@@ -97,7 +97,7 @@ const T = {
     lead: 'Compare real aerial photographs on the map.<br>Drag the slider and watch <b>eighty years</b> go by.',
     modePlaces: 'Featured places', modeMap: 'Whole map', modeLiminal: 'Liminal Japan',
     noteLiminal: 'Places that feel like nowhere \u2014 and most are near a city, so you can go.',
-    modeLab: '3D reconstruction', noteLab: 'Gunkanjima rebuilt building by building: slide from 1947 to today, tap a building for its story, or let the audio guide walk you round.',
+    modeLab: '3D reconstruction', noteLab: 'Places rebuilt in 3D from aerial photographs and records. No. 1 is Gunkanjima. Tap the card or the button to open the model.',
     heroSub: 'Historic maps, hidden gems and walks through Japan',
     heroSearch: 'Search a place on the map',
     liminalWhat: 'What makes it liminal',
@@ -221,7 +221,7 @@ const T = {
     lead: '地図で、本物の航空写真を見くらべる。<br>線をドラッグすると、<b>80年</b>が動きます。',
     modePlaces: '名所を見る', modeMap: '日本全体の地図', modeLiminal: 'リミナル',
     noteLiminal: 'どこでもない感じのする場所。その多くは、街から行ける距離にある。',
-    modeLab: '3D復元', noteLab: '軍艦島を建物ごとに復元。1947年から現在まで年代を動かし、建物を押して説明を読み、音声ガイドで一周できます。',
+    modeLab: '3D復元', noteLab: '空中写真と資料から場所を立体に復元するシリーズ。第1回は軍艦島（端島）。カードかボタンを押すと3Dモデルが開きます。',
     heroSub: '昔の地図と写真から、小さな名所を歩く旅へ',
     heroSearch: '地図から場所・駅名を探す',
     liminalWhat: 'どこがリミナルなのか',
@@ -355,7 +355,7 @@ T.ko = {
   lead: '지도에서 실제 항공사진을 비교하세요.<br>슬라이더를 움직이면 <b>80년</b>이 지나갑니다.',
   modePlaces: '주요 장소', modeMap: '전체 지도', modeLiminal: '리미널 재팬',
   noteLiminal: '어디에도 속하지 않은 듯한 곳들. 대개는 도시에서 갈 만한 거리에 있다.',
-  modeLab: '3D 복원', noteLab: '군함도를 건물별로 복원. 1947년부터 지금까지 연도를 움직이고, 건물을 눌러 설명을 읽고, 음성 가이드로 한 바퀴 돌 수 있습니다.',
+  modeLab: '3D 복원', noteLab: '항공사진과 자료로 장소를 입체로 복원하는 시리즈. 첫 번째는 군함도(하시마). 카드나 버튼을 누르면 3D 모델이 열립니다.',
   heroSub: '옛 지도와 사진으로 만나는 일본 골목 여행',
   heroSearch: '지도에서 장소 검색',
   liminalWhat: '어떤 점이 리미널한가',
@@ -407,7 +407,7 @@ T['zh-Hans'] = {
   lead: '在地图上比较真实的航空照片。<br>拖动滑块，<b>八十年</b>就过去了。',
   modePlaces: '精选地点', modeMap: '全图', modeLiminal: '阈限日本',
   noteLiminal: '像是不属于任何地方的地方。多半就在城边，真能去。',
-  modeLab: '3D复原', noteLab: '逐栋复原军舰岛：从1947年到今天拖动年代，点按建筑阅读介绍，或让音频导览带你走一圈。',
+  modeLab: '3D复原', noteLab: '用航拍照片和资料把地点复原成立体的系列。第一期是军舰岛（端岛）。点按卡片或按钮即可打开3D模型。',
   heroSub: '从老地图与照片出发，探索日本小众景点',
   heroSearch: '在地图上搜索地点',
   liminalWhat: '它为何显得阈限',
@@ -459,7 +459,7 @@ T['zh-Hant'] = {
   lead: '在地圖上比較真實的航空照片。<br>拖動滑桿，<b>八十年</b>就過去了。',
   modePlaces: '精選地點', modeMap: '全圖', modeLiminal: '閾限日本',
   noteLiminal: '像是不屬於任何地方的地方。多半就在城邊，真能去。',
-  modeLab: '3D復原', noteLab: '逐棟復原軍艦島：從1947年到今天拖曳年代，點按建築閱讀介紹，或讓語音導覽帶你走一圈。',
+  modeLab: '3D復原', noteLab: '用航空照片和資料把地點復原成立體的系列。第一期是軍艦島（端島）。點按卡片或按鈕即可開啟3D模型。',
   heroSub: '從老地圖與照片出發，探索日本私房景點',
   heroSearch: '在地圖上搜尋地點',
   liminalWhat: '它為何顯得閾限',
@@ -886,27 +886,27 @@ function restoreActivity(){
  setMode(p.category); noPush(showActivity,p); return true;
 }
 
-/* Tab 06 is a test bench: one place in 3D across five aerial photographs, with an audio guide.
-   The card is a plain link to the lab page, which is kept out of search (noindex). */
-const LAB_CARD = {
-  en: ['Gunkanjima (Hashima Island) in 3D, 1947 to today', 'The coal-mining island rebuilt building by building. Slide through the years, tap a building for its facts, or listen to the audio guide.'],
-  ja: ['軍艦島（端島）3D復元　1947年から現在まで', '炭鉱の島を建物ごとに復元。年代を動かし、建物を押して竣工年や用途を読み、音声ガイドも聞けます。'],
-  ko: ['군함도(하시마) 3D 복원, 1947년부터 지금까지', '탄광 섬을 건물별로 복원. 연도를 움직이고, 건물을 눌러 준공년과 용도를 읽고, 음성 가이드도 들을 수 있습니다.'],
-  'zh-Hans': ['军舰岛（端岛）3D复原，1947年至今', '逐栋复原煤矿岛。拖动年代，点按建筑查看竣工年和用途，也能收听音频导览。'],
-  'zh-Hant': ['軍艦島（端島）3D復原，1947年至今', '逐棟復原煤礦島。拖曳年代，點按建築查看竣工年和用途，也能收聽語音導覽。']
-};
+/* Tab 06: the 3D reconstructions. One entry per reconstruction; the next place is added here and
+   gets its card, and scripts/build-3d-pages.cjs lists the same set on the /3d/ series pages. */
+const LAB_ITEMS = [{
+  path: 'gunkanjima', img: '/3d/gunkanjima-card.jpg?v=4', era: '1947 → NOW · 3D', ja: '端島 · Hashima',
+  name: { en: 'Gunkanjima (Hashima Island) in 3D, 1947 to today', ja: '軍艦島（端島）3D復元　1947年から現在まで', ko: '군함도(하시마) 3D 복원, 1947년부터 지금까지', 'zh-Hans': '军舰岛（端岛）3D复原，1947年至今', 'zh-Hant': '軍艦島（端島）3D復原，1947年至今' },
+  hook: { en: 'The coal-mining island rebuilt building by building. Slide through the years, tap a building for its facts, step inside, or listen to the audio guide.', ja: '炭鉱の島を建物ごとに復元。年代を動かし、建物を押して竣工年や用途を読み、中に入り、音声ガイドも聞けます。', ko: '탄광 섬을 건물별로 복원. 연도를 움직이고, 건물을 눌러 준공년과 용도를 읽고, 안에 들어가고, 음성 가이드도 들을 수 있습니다.', 'zh-Hans': '逐栋复原煤矿岛。拖动年代，点按建筑查看竣工年和用途，走进内部，也能收听音频导览。', 'zh-Hant': '逐棟復原煤礦島。拖曳年代，點按建築查看竣工年和用途，走進內部，也能收聽語音導覽。' }
+}];
+const LAB_OPEN = { en: '▶ Open the 3D model', ja: '▶ 3Dモデルを開く', ko: '▶ 3D 모델 열기', 'zh-Hans': '▶ 打开3D模型', 'zh-Hant': '▶ 開啟3D模型' };
+const LAB_DIR = { en: '', ja: 'ja/', ko: 'ko/', 'zh-Hans': 'zh-cn/', 'zh-Hant': 'zh-tw/' };
+function labHref(item){ return '/3d/' + (LAB_DIR[LANG] || '') + item.path; }
 function buildLabCards(){
-  const c = LAB_CARD[LANG] || LAB_CARD.en;
-  const dir3d = { en: '', ja: 'ja/', ko: 'ko/', 'zh-Hans': 'zh-cn/', 'zh-Hant': 'zh-tw/' }[LANG] || '';
-  $('cards').innerHTML = '<a class="card card-lab" href="/3d/' + dir3d + 'gunkanjima">'
-    + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="/3d/gunkanjima-card.jpg?v=4">'
+  $('cards').innerHTML = LAB_ITEMS.map(it => '<a class="card card-lab" href="' + labHref(it) + '">'
+    + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="' + it.img + '">'
     + '<span class="card-emoji">🧪</span>'
-    + '<span class="card-era">1947 → NOW · 3D</span>'
+    + '<span class="card-era">' + esc(it.era) + '</span>'
+    + '<span class="card-cta">' + esc(LAB_OPEN[LANG] || LAB_OPEN.en) + '</span>'
     + '<div class="card-body">'
-    + '<p class="card-ja">端島 · Hashima</p>'
-    + '<p class="card-name">' + esc(c[0]) + '</p>'
-    + '<p class="card-hook">' + esc(c[1]) + '</p>'
-    + '</div></a>';
+    + '<p class="card-ja">' + esc(it.ja) + '</p>'
+    + '<p class="card-name">' + esc(it.name[LANG] || it.name.en) + '</p>'
+    + '<p class="card-hook">' + esc(it.hook[LANG] || it.hook.en) + '</p>'
+    + '</div></a>').join('');
 }
 
 function buildCards(){
@@ -2947,35 +2947,35 @@ const MODE_INTRO = {
   liminal: `<h2>Before you go: what kind of place is it?</h2><p>Liminal describes a feeling, not the state of a place, and some of these places are busy on an ordinary day. Sorted by how you can visit:</p><ul><li><b>Still a working station.</b> Doai in Gunma is an unstaffed JR East station with about five trains each way a day. Its northbound platform is about 70 m underground, 486 steps down.</li><li><b>Still a working building.</b> Nakano Broadway in Tokyo opened in 1966 with shops below and homes above. People live upstairs.</li><li><b>Now a visitor site.</b> At the Ōya History Museum in Utsunomiya you walk into a former underground quarry. It keeps set opening hours and stays around 8°C inside all year.</li><li><b>Tour only.</b> You can land on Hashima (Gunkanjima) only with a landing tour from Nagasaki, and landings do not go ahead when waves or wind are outside the city’s limits.</li><li><b>Do not enter.</b> Closed hotels, ruins, anything fenced off or on private land. Look from public roads. A pin on this map is not permission to go inside.</li></ul><p><a href="/guides/liminal-japan">Read the full guide to visiting liminal places</a></p>`,
   food: `<h2>Markets and food streets, Sapporo to Naha</h2><p>Hakodate’s morning market, Aomori’s build-your-own seafood bowls, Omicho in Kanazawa, Nishiki in Kyoto, Dotonbori, Fukuoka’s yatai and Naha’s public market: eighteen places where the food is the reason to go, listed from north to south.</p><p>Every shop keeps its own hours, and morning markets mean it. Hakodate Morning Market, for example, runs from about 5 a.m. to 2 p.m. Check the official page linked from each spot before you set out.</p><p>Some markets ask you not to eat while walking. Nishiki Market asks you to eat in front of or inside the shop where you bought the food. The pin marks the area rather than a particular stall, and the card picture is today’s aerial photograph of the area, not the food.</p>`,
   shopping: `<h2>Shopping streets, old and new</h2><p>Covered arcades, specialist streets and a few districts everyone has heard of: Tanukikoji in Sapporo, the kitchen shops of Kappabashi, Ameyoko between Ueno and Okachimachi, Nakano Broadway, the canal district of Kurashiki and Kokusai-dori in Naha.</p><p>Several are older than they look. Kyoto’s Teramachi lines the street where Toyotomi Hideyoshi gathered temples in 1590, Tanukikoji has been trading since the early Meiji era, and Ameyoko began as a market just after the Second World War. Streets like these are worth checking with the comparison slider.</p><p>Pedestrian zones change the feel of a street: Ginza’s Chuo-dori at weekends and on public holidays (it can be cancelled for weather), and Akihabara’s on Sunday afternoons.</p><p>From 1 November 2026, tax-free shopping for visitors moves to a refund system: the tax is refunded once customs confirms, as you leave Japan within 90 days of purchase, that you are taking the goods out. Keep your passport with you, and see the <a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">National Tax Agency’s explanation</a>.</p>`,
-  lab: `<h2>Gunkanjima in 3D, from 1947 to today</h2><p>Hashima, the coal-mining island off Nagasaki that everyone calls Gunkanjima, was photographed from the air again and again. Here it is rebuilt building by building: each block stands from the year it was completed until the year it fell, so you can slide from 1947, past the crowded peak of 1962, through the closure of 1974 to the ruin of today. Tap a building for its completion year, storeys and use, or let the audio guide walk you round.</p><p>The outlines and storey counts are documented; the façades are drawn by type, and the aerial photographs of each year lie on the roofs and ground. Heights are a few metres out in places. <a href="/3d/gunkanjima">Open the 3D page</a>.</p><p class="pod-home">🔊 Listen to the audio guide here (about 8 minutes; sound will play), or <a href="/3d/gunkanjima#play">open the 3D page with the player ready</a>.</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-en.mp3?v=4"></audio>`
+  lab: `<h2>3D reconstruction: places rebuilt from photographs and records</h2><p class="lab-open"><a class="btn-3d" href="/3d/gunkanjima">▶ Open the Gunkanjima 3D model</a> <span class="lab-open-note">No. 1 · 1947 to today</span></p><p>A series that rebuilds a place building by building from aerial photographs, survey records and period photographs. Slide the years and each block rises in the year it was completed and falls in the year it collapsed. Tap a building for its year, storeys, use and photographs; the audio guide moves the model as it talks, and where the records allow you can step inside.</p><p>One place so far, Gunkanjima (Hashima), with the next in preparation. Documented parts and assumptions are drawn apart: assumptions are translucent. <a href="/3d/">The series page</a>.</p><p class="pod-home">🔊 Listen to the audio guide here (about 8 minutes; sound will play), or <a href="/3d/gunkanjima#play">open the 3D page with the player ready</a>.</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-en.mp3?v=4"></audio>`
  },
  ja: {
   places: `<h2>昔と今を見くらべる19か所</h2><p>このリストのどの場所にも、昔と今の両方の写真で見つけられる目印があります。城の堀、川の曲がり、山すその寺、港の岸壁。まずそれを両方の写真で見つけてから、まわりで何が変わったかを探してください。</p><p>カードの年代は写真シリーズの期間で、撮影日ではありません。多くは1945〜1950年のシリーズで、長崎・函館・姫路・奈良・金沢は1960年代、首里は1970年代の写真です。姉吉の石のカードには昔の写真がありません。伝えたいことは、石に刻まれています。</p><ul><li>カードを押すと、物語つきで地図が開きます。「1945年と今を見くらべる」などのボタンを押し、線を左右に動かしてください。</li><li>各地点には出典つきの解説ページがあります。このページの下にある「物語のある名所」から開けます。</li></ul>`,
   liminal: `<h2>行く前に：どんな状態の場所か</h2><p>リミナルは雰囲気の名前で、場所の状態を表す言葉ではありません。ふだんは人でにぎわう場所も入っています。訪ね方で分けると、次のとおりです。</p><ul><li><b>いまも駅として使われている。</b>群馬の土合駅はJR東日本の無人駅で、列車は上下とも一日5本ほど。下りホームは地下約70m、486段の階段の先です。</li><li><b>いまも建物として使われている。</b>中野ブロードウェイは1966年開業の、下が店、上が住まいのビルです。上の階では人が暮らしています。</li><li><b>見学施設になっている。</b>宇都宮の大谷資料館では、大谷石の地下採掘場跡の中を歩けます。開館時間が決まっていて、中は一年を通して8℃前後です。</li><li><b>ツアーでしか行けない。</b>端島（軍艦島）に上陸できるのは長崎からの上陸ツアーだけで、波や風が市の基準を超えると上陸しません。</li><li><b>入らない。</b>閉鎖されたホテルや廃墟、柵の中や私有地。見るのは公道からにしてください。地図のピンは立ち入りの許可ではありません。</li></ul><p><a href="/guides/liminal-japan">リミナルな場所の訪ね方を詳しく読む（英語）</a></p>`,
   food: `<h2>札幌から那覇まで、市場と食の通り</h2><p>函館朝市、自分で具を選ぶ青森ののっけ丼、金沢の近江町市場、京都の錦市場、道頓堀、福岡の屋台、那覇の公設市場。食べることが目的になる18か所を、北から南の順に並べています。</p><p>営業時間は店ごとに決まっていて、朝市は本当に朝の市場です。たとえば函館朝市は、おおむね朝5時から14時ごろまで。出かける前に、各スポットから開ける公式案内で確認してください。</p><p>食べ歩きを控えるよう求める市場もあります。錦市場は、買ったお店の前か店内で食べるよう呼びかけています。ピンは個別の店ではなくエリアの目印で、カードの画像は料理ではなく、その一帯の今の航空写真です。</p>`,
   shopping: `<h2>昔からの通りと、今の繁華街</h2><p>アーケード商店街、専門店の通り、誰もが名前を知る繁華街。札幌の狸小路、かっぱ橋道具街、上野と御徒町のあいだのアメ横、中野ブロードウェイ、倉敷の美観地区、那覇の国際通りなど18か所です。</p><p>見た目より歴史の古い通りもあります。京都の寺町は1590年に豊臣秀吉が寺を集めた通り、狸小路は明治のはじめから続く商店街、アメ横は終戦直後の闇市が始まりです。こうした通りは、昔と今の写真で見くらべてみる価値があります。</p><p>歩行者天国の日は通りの雰囲気が変わります。銀座の中央通りは土日祝（天候などで中止あり）、秋葉原の中央通りは日曜の午後が歩行者天国です。</p><p>2026年11月1日から、外国人旅行者の免税制度はリファンド方式に変わります。購入日から90日以内の出国時に税関で確認を受けると、消費税相当額が返金される仕組みです。旅券を持ち歩き、詳しくは<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">国税庁の案内</a>を確認してください。</p>`,
-  lab: `<h2>軍艦島（端島）を3Dで復元　1947年から現在まで</h2><p>長崎沖の炭鉱の島・端島は、何度も空から撮影されてきました。ここではその島を建物ごとに復元しています。建物は竣工年に立ち上がり、崩れた年に消えるので、1947年から、いちばん混み合った1962年、閉山の1974年を経て、いまの廃墟まで年代を動かして見られます。建物を押すと竣工年・階数・用途が出ます。音声ガイドで一周することもできます。</p><p>輪郭と階数には出典があり、壁面は種類ごとに描いた模式です。屋根と地面には各年の空中写真を貼っています。場所によって高さが数メートルずれます。<a href="/3d/ja/gunkanjima">3Dのページを開く</a>。</p><p class="pod-home">🔊 音声ガイドはここでも聞けます（約9分・音が出ます）。<a href="/3d/ja/gunkanjima#play">3Dページを開いてすぐ再生</a>もできます。</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-ja.mp3?v=4"></audio>`
+  lab: `<h2>3D復元　写真と資料から、場所を立体に戻す</h2><p class="lab-open"><a class="btn-3d" href="/3d/ja/gunkanjima">▶ 軍艦島（端島）の3Dモデルを開く</a> <span class="lab-open-note">第1回・1947年から現在まで</span></p><p>空中写真と実測資料、当時の写真から、場所を建物ごとに立体で復元するシリーズです。年代を動かすと建物は竣工年に立ち上がり、崩れた年に消えます。建物を押すと竣工年・階数・用途と写真が出て、音声ガイドに合わせて模型が動き、資料のある建物は中にも入れます。</p><p>いまは軍艦島（端島）の1か所で、次の場所は準備中です。出典のある部分と推定の部分を分けて描き、推定は半透明にしています。<a href="/3d/ja/">シリーズの一覧</a>。</p><p class="pod-home">🔊 軍艦島の音声ガイドはここでも聞けます（約9分・音が出ます）。<a href="/3d/ja/gunkanjima#play">3Dページを開いてすぐ再生</a>もできます。</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-ja.mp3?v=4"></audio>`
  },
  ko: {
   places: `<h2>옛 사진과 오늘을 비교하는 19곳</h2><p>이 목록의 모든 장소에는 옛 사진과 지금 사진 양쪽에서 찾을 수 있는 기준점이 있습니다. 성의 해자, 강의 굽이, 산기슭의 절, 항구의 안벽 같은 것들입니다. 먼저 그것을 양쪽에서 찾은 뒤, 주변에서 무엇이 달라졌는지 살펴보세요.</p><p>카드에 적힌 연도는 사진 시리즈의 기간이며 촬영일이 아닙니다. 대부분은 1945~1950년 시리즈이고, 나가사키·하코다테·히메지·나라·가나자와는 1960년대, 슈리는 1970년대 사진입니다. 아네요시 비석 카드에는 옛 사진이 없습니다. 전하고 싶은 말은 비석에 새겨져 있습니다.</p><ul><li>카드를 누르면 이야기와 함께 지도가 열립니다. ‘1945년과 오늘을 비교’ 같은 버튼을 누르고 선을 좌우로 움직여 보세요.</li><li>각 장소에는 출처가 달린 안내 페이지가 있습니다. 이 페이지 아래쪽 ‘이야기가 있는 명소’에서 열 수 있습니다.</li></ul>`,
   liminal: `<h2>가기 전에: 어떤 상태의 장소인가</h2><p>리미널은 분위기를 가리키는 말이지 장소의 상태가 아닙니다. 평소에는 사람이 많은 곳도 들어 있습니다. 방문 방법으로 나누면 다음과 같습니다.</p><ul><li><b>지금도 역으로 쓰인다.</b> 군마현의 도아이역은 JR 동일본의 무인역으로, 열차는 상하행 모두 하루 5편 정도입니다. 하행 승강장은 지하 약 70m, 486계단 아래에 있습니다.</li><li><b>지금도 건물로 쓰인다.</b> 나카노 브로드웨이는 1966년에 문을 연 상점·주거 복합 건물입니다. 위층에는 사람이 살고 있습니다.</li><li><b>견학 시설이 되었다.</b> 우쓰노미야의 오야 자료관에서는 오야석 지하 채굴장 터 안을 걸을 수 있습니다. 개관 시간이 정해져 있고, 안은 연중 8℃ 안팎입니다.</li><li><b>투어로만 갈 수 있다.</b> 하시마(군함도)는 나가사키에서 출발하는 상륙 투어로만 들어갈 수 있고, 파도나 바람이 시의 기준을 넘으면 상륙하지 않습니다.</li><li><b>들어가지 않는다.</b> 폐쇄된 호텔과 폐허, 울타리 안이나 사유지. 공공도로에서만 보세요. 지도 위의 핀은 출입 허가가 아닙니다.</li></ul><p><a href="/guides/liminal-japan">리미널 장소 방문 안내 전체 읽기(영어)</a></p>`,
   food: `<h2>삿포로에서 나하까지, 시장과 먹거리 거리</h2><p>하코다테 아침시장, 해산물을 골라 올리는 아오모리의 놋케동, 가나자와의 오미초 시장, 교토의 니시키 시장, 도톤보리, 후쿠오카의 포장마차, 나하의 공설시장까지. 먹는 것이 여행의 목적이 되는 18곳을 북쪽부터 남쪽 순서로 소개합니다.</p><p>영업시간은 가게마다 다르고, 아침시장은 정말 아침에 열립니다. 예를 들어 하코다테 아침시장은 대략 오전 5시부터 오후 2시까지입니다. 출발 전에 각 장소에서 열 수 있는 공식 안내를 확인하세요.</p><p>걸으면서 먹지 말아 달라고 요청하는 시장도 있습니다. 니시키 시장은 산 가게 앞이나 가게 안에서 먹어 달라고 안내합니다. 핀은 개별 가게가 아니라 지역을 나타내며, 카드 이미지는 음식이 아닌 그 일대의 현재 항공사진입니다.</p>`,
   shopping: `<h2>오래된 거리와 지금의 번화가</h2><p>아케이드 상점가, 전문점 거리, 누구나 이름을 아는 번화가. 삿포로의 다누키코지, 갓파바시 도구 거리, 우에노와 오카치마치 사이의 아메요코, 나카노 브로드웨이, 구라시키 미관지구, 나하의 국제거리 등 18곳입니다.</p><p>보기보다 역사가 오래된 거리도 있습니다. 교토의 데라마치는 1590년 도요토미 히데요시가 사찰을 모은 거리이고, 다누키코지는 메이지 시대 초기부터 이어진 상점가, 아메요코는 종전 직후의 암시장에서 시작되었습니다. 이런 거리는 옛 사진과 비교해 볼 만합니다.</p><p>보행자 천국인 날에는 거리 분위기가 달라집니다. 긴자 주오도리는 주말과 공휴일(날씨 등으로 중지될 수 있음), 아키하바라 주오도리는 일요일 오후에 보행자 천국이 됩니다.</p><p>2026년 11월 1일부터 외국인 여행자 면세 제도가 환급 방식으로 바뀝니다. 구입일로부터 90일 이내에 출국할 때 세관 확인을 받으면 소비세 상당액을 돌려받는 방식입니다. 여권을 지니고 다니고, 자세한 내용은 <a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">일본 국세청 안내</a>를 확인하세요.</p>`,
-  lab: `<h2>군함도(하시마) 3D 복원, 1947년부터 지금까지</h2><p>나가사키 앞바다의 탄광 섬 하시마는 여러 차례 하늘에서 촬영되었습니다. 여기서는 그 섬을 건물별로 복원했습니다. 건물은 준공년에 올라가고 무너진 해에 사라지므로, 1947년부터 가장 붐볐던 1962년, 폐광한 1974년을 지나 지금의 폐허까지 연도를 움직여 볼 수 있습니다. 건물을 누르면 준공년·층수·용도가 나오고, 음성 가이드로 한 바퀴 돌 수도 있습니다.</p><p>윤곽과 층수에는 출처가 있고 벽면은 종류별로 그린 모식도입니다. 지붕과 지면에는 각 해의 항공사진을 입혔습니다. 곳에 따라 높이가 몇 미터 어긋납니다. <a href="/3d/ko/gunkanjima">3D 페이지 열기</a>.</p><p class="pod-home">🔊 음성 가이드(영어, 약 8분·소리가 납니다)를 여기서 들을 수 있습니다. <a href="/3d/ko/gunkanjima#play">3D 페이지를 열어 바로 재생</a>할 수도 있습니다.</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-en.mp3?v=4"></audio>`
+  lab: `<h2>3D 복원: 사진과 자료로 장소를 입체로 되살리다</h2><p class="lab-open"><a class="btn-3d" href="/3d/ko/gunkanjima">▶ 군함도(하시마) 3D 모델 열기</a> <span class="lab-open-note">1편 · 1947년부터 지금까지</span></p><p>항공사진, 실측 자료, 당시 사진으로 장소를 건물별로 입체 복원하는 시리즈입니다. 연도를 움직이면 건물은 준공년에 올라가고 무너진 해에 사라집니다. 건물을 누르면 준공년·층수·용도와 사진이 나오고, 음성 가이드에 맞춰 모형이 움직이며, 자료가 있는 건물은 안에도 들어갈 수 있습니다.</p><p>지금은 군함도(하시마) 한 곳이며 다음 장소를 준비 중입니다. 출처가 있는 부분과 추정 부분을 나누어 그리고, 추정은 반투명입니다. <a href="/3d/ko/">시리즈 목록</a>.</p><p class="pod-home">🔊 음성 가이드(영어·일본어, 약 8~9분·소리가 납니다)를 여기서 들을 수 있습니다. <a href="/3d/ko/gunkanjima#play">3D 페이지를 열어 바로 재생</a>할 수도 있습니다.</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-en.mp3?v=4"></audio>`
  },
  'zh-Hans': {
   places: `<h2>对照今昔的19个地点</h2><p>列表中的每个地点，都有在新旧两张照片里都能找到的参照物：护城河、河流的弯道、山脚的寺院、港口的岸壁。先在两张照片中找到它，再看看周围发生了什么变化。</p><p>卡片上的年份是照片系列的时期，不是拍摄日期。大多数地点使用1945–1950年系列，长崎、函馆、姬路、奈良和金泽使用1960年代的照片，首里则是1970年代。姉吉石碑的卡片没有旧照片，它要传达的话刻在石头上。</p><ul><li>点按卡片即可打开附带故事的地图。按下“把1945年与今天对照”等按钮，再左右拖动分隔线。</li><li>每个地点都有附出处的介绍页，可从本页下方的“有故事的景点”打开。</li></ul>`,
   liminal: `<h2>出发前：这是什么状态的地方？</h2><p>“阈限”描述的是一种氛围，而不是场所的状态。其中也有平常人来人往的地方。按照能否参观，可分为以下几类：</p><ul><li><b>仍在使用的车站。</b>群马县的土合站是JR东日本的无人车站，上下行每天各约5班列车。下行站台位于地下约70米，要走486级台阶。</li><li><b>仍在使用的建筑。</b>中野百老汇是1966年开业的商住综合楼，楼上仍有人居住。</li><li><b>已成为参观设施。</b>宇都宫的大谷资料馆可以走进大谷石地下采石场遗址，有固定开放时间，馆内全年约8℃。</li><li><b>只能随团前往。</b>端岛（军舰岛）只能参加从长崎出发的登岛团，浪高或风速超过市政府标准时不会登岛。</li><li><b>不要进入。</b>停业的酒店、废墟、围栏内或私人土地。请只在公共道路上观看。地图上的标记不代表可以进入。</li></ul><p><a href="/guides/liminal-japan">阅读完整的参观指南（英文）</a></p>`,
   food: `<h2>从札幌到那霸的市场与美食街</h2><p>函馆朝市、自选配料的青森海鲜盖饭、金泽近江町市场、京都锦市场、道顿堀、福冈屋台和那霸公设市场。按从北到南的顺序，介绍18个值得专程去吃的地方。</p><p>营业时间由各店自定，早市真的只在早上。比如函馆朝市大约从早上5点营业到下午2点。出发前请先查看各地点链接的官方信息。</p><p>有些市场请游客不要边走边吃。锦市场请大家在购买的店门前或店内享用。地图标记代表区域而非某家店，卡片图片是该区域现在的航拍照片，并非食物照片。</p>`,
   shopping: `<h2>老街与今日繁华街</h2><p>拱廊商店街、专门店街，以及人人都听过的繁华区：札幌狸小路、合羽桥道具街、上野与御徒町之间的阿美横、中野百老汇、仓敷美观地区和那霸国际通等18处。</p><p>有些街道的历史比外表更悠久。京都寺町是1590年丰臣秀吉集中寺院的街道，狸小路从明治初期延续至今，阿美横起源于战后初期的黑市。这样的街道值得用今昔对照看一看。</p><p>步行街开放的日子，街道气氛截然不同。银座中央通在周末和节假日（可能因天气取消）、秋叶原中央通在周日下午为步行街。</p><p>2026年11月1日起，日本面向外国游客的免税制度改为退税方式：在购买日起90天内出境时经海关确认后，退还相当于消费税的金额。请随身携带护照，详情请查看<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">日本国税厅的说明</a>。</p>`,
-  lab: `<h2>军舰岛（端岛）3D复原：从1947年到今天</h2><p>长崎外海的煤矿岛端岛曾一次又一次被从空中拍摄。这里把这座岛逐栋复原：每栋建筑从建成那年立起、在倒塌那年消失，因此可以从1947年，经过最拥挤的1962年、1974年关闭煤矿，一直拖到今天的废墟。点按建筑可查看竣工年、层数和用途，也可以让音频导览带你走一圈。</p><p>轮廓和层数有出处，墙面按类型绘制示意图，屋顶和地面贴上各年的航拍照片。有些地方高度会差几米。<a href="/3d/zh-cn/gunkanjima">打开3D页面</a>。</p><p class="pod-home">🔊 也可在此收听音频导览（英语，约8分钟，会发出声音），或<a href="/3d/zh-cn/gunkanjima#play">打开3D页面直接播放</a>。</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-en.mp3?v=4"></audio>`
+  lab: `<h2>3D复原：用照片和资料把地点还原成立体</h2><p class="lab-open"><a class="btn-3d" href="/3d/zh-cn/gunkanjima">▶ 打开军舰岛（端岛）3D模型</a> <span class="lab-open-note">第1期 · 从1947年到今天</span></p><p>这是用航拍照片、实测资料和当年照片逐栋复原地点的系列。拖动年代，建筑在建成那年立起、在倒塌那年消失。点按建筑可查看竣工年、层数、用途和照片；音频导览会带动模型移动，有资料的建筑还能走进内部。</p><p>目前只有军舰岛（端岛）一处，下一处正在准备。有出处的部分与推定部分分开绘制，推定部分为半透明。<a href="/3d/zh-cn/">系列一览</a>。</p><p class="pod-home">🔊 也可在此收听音频导览（英语·日语，约8～9分钟，会发出声音），或<a href="/3d/zh-cn/gunkanjima#play">打开3D页面直接播放</a>。</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-en.mp3?v=4"></audio>`
  },
  'zh-Hant': {
   places: `<h2>對照今昔的19個地點</h2><p>清單中的每個地點，都有在新舊兩張照片裡都能找到的參照物：護城河、河流的彎道、山腳的寺院、港口的岸壁。先在兩張照片中找到它，再看看周圍發生了什麼變化。</p><p>卡片上的年份是照片系列的時期，不是拍攝日期。大多數地點使用1945–1950年系列，長崎、函館、姬路、奈良與金澤使用1960年代的照片，首里則是1970年代。姉吉石碑的卡片沒有舊照片，它要傳達的話刻在石頭上。</p><ul><li>點按卡片即可開啟附帶故事的地圖。按下「把1945年與今天對照」等按鈕，再左右拖曳分隔線。</li><li>每個地點都有附出處的介紹頁，可從本頁下方的「有故事的景點」開啟。</li></ul>`,
   liminal: `<h2>出發前：這是什麼狀態的地方？</h2><p>「閾限」描述的是一種氛圍，而不是場所的狀態。其中也有平常人來人往的地方。依能否參觀，可分為以下幾類：</p><ul><li><b>仍在使用的車站。</b>群馬縣的土合站是JR東日本的無人車站，上下行每天各約5班列車。下行月台位於地下約70公尺，要走486級階梯。</li><li><b>仍在使用的建築。</b>中野百老匯是1966年開業的商住綜合大樓，樓上仍有人居住。</li><li><b>已成為參觀設施。</b>宇都宮的大谷資料館可以走進大谷石地下採石場遺址，有固定開放時間，館內全年約8℃。</li><li><b>只能跟團前往。</b>端島（軍艦島）只能參加從長崎出發的登島行程，浪高或風速超過市政府標準時不會登島。</li><li><b>不要進入。</b>停業的飯店、廢墟、圍欄內或私人土地。請只在公共道路上觀看。地圖上的標記不代表可以進入。</li></ul><p><a href="/guides/liminal-japan">閱讀完整的參觀指南（英文）</a></p>`,
   food: `<h2>從札幌到那霸的市場與美食街</h2><p>函館朝市、自選配料的青森海鮮丼、金澤近江町市場、京都錦市場、道頓堀、福岡屋台與那霸公設市場。依由北到南的順序，介紹18個值得專程去吃的地方。</p><p>營業時間由各店自訂，早市真的只在早上。例如函館朝市大約從早上5點營業到下午2點。出發前請先查看各地點連結的官方資訊。</p><p>有些市場請遊客不要邊走邊吃。錦市場請大家在購買的店門前或店內享用。地圖標記代表區域而非某家店，卡片圖片是該區域現在的航拍照片，並非食物照片。</p>`,
   shopping: `<h2>老街與今日繁華街</h2><p>拱廊商店街、專門店街，以及人人都聽過的繁華區：札幌狸小路、合羽橋道具街、上野與御徒町之間的阿美橫、中野百老匯、倉敷美觀地區與那霸國際通等18處。</p><p>有些街道的歷史比外表更悠久。京都寺町是1590年豐臣秀吉集中寺院的街道，狸小路從明治初期延續至今，阿美橫起源於戰後初期的黑市。這樣的街道值得用今昔對照看一看。</p><p>行人徒步區開放的日子，街道氣氛截然不同。銀座中央通在週末與國定假日（可能因天候取消）、秋葉原中央通在週日下午為行人徒步區。</p><p>2026年11月1日起，日本針對外國旅客的免稅制度改為退稅方式：在購買日起90天內出境時經海關確認後，退還相當於消費稅的金額。請隨身攜帶護照，詳情請參閱<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">日本國稅廳的說明</a>。</p>`,
-  lab: `<h2>軍艦島（端島）3D復原：從1947年到今天</h2><p>長崎外海的煤礦島端島曾一次又一次被從空中拍攝。這裡把這座島逐棟復原：每棟建築從建成那年立起、在倒塌那年消失，因此可以從1947年，經過最擁擠的1962年、1974年關閉煤礦，一直拖到今天的廢墟。點按建築可查看竣工年、層數和用途，也可以讓語音導覽帶你走一圈。</p><p>輪廓和層數有出處，牆面按類型繪製示意圖，屋頂和地面貼上各年的航空照片。有些地方高度會差幾公尺。<a href="/3d/zh-tw/gunkanjima">打開3D頁面</a>。</p><p class="pod-home">🔊 也可在此收聽語音導覽（英語，約8分鐘，會發出聲音），或<a href="/3d/zh-tw/gunkanjima#play">打開3D頁面直接播放</a>。</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-en.mp3?v=4"></audio>`
+  lab: `<h2>3D復原：用照片和資料把地點還原成立體</h2><p class="lab-open"><a class="btn-3d" href="/3d/zh-tw/gunkanjima">▶ 開啟軍艦島（端島）3D模型</a> <span class="lab-open-note">第1期 · 從1947年到今天</span></p><p>這是用航空照片、實測資料和當年照片逐棟復原地點的系列。拖曳年代，建築在建成那年立起、在倒塌那年消失。點按建築可查看竣工年、層數、用途和照片；語音導覽會帶動模型移動，有資料的建築還能走進內部。</p><p>目前只有軍艦島（端島）一處，下一處正在準備。有出處的部分與推定部分分開繪製，推定部分為半透明。<a href="/3d/zh-tw/">系列一覽</a>。</p><p class="pod-home">🔊 也可在此收聽語音導覽（英語·日語，約8～9分鐘，會發出聲音），或<a href="/3d/zh-tw/gunkanjima#play">開啟3D頁面直接播放</a>。</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-en.mp3?v=4"></audio>`
  }
 };
 function paintModeIntro(){
