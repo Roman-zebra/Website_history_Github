@@ -1,0 +1,60 @@
+{
+ "langs": {
+  "en": {
+   "current": "en-3d-1947-today",
+   "since": null,
+   "basis": null,
+   "previous": null,
+   "blocked": {}
+  },
+  "ja": {
+   "current": "ja-30gou-naibu",
+   "since": "2026-09-15",
+   "basis": "suggestions",
+   "previous": "ja-3d-1947-today",
+   "blocked": {}
+  },
+  "ko": {
+   "current": "ko-location-map",
+   "since": "2026-09-15",
+   "basis": "suggestions",
+   "previous": "ko-3d-1947-today",
+   "blocked": {}
+  },
+  "zh-Hans": {
+   "current": "zh-Hans-3d-1947-today",
+   "since": null,
+   "basis": null,
+   "previous": null,
+   "blocked": {}
+  },
+  "zh-Hant": {
+   "current": "zh-Hant-3d-1947-today",
+   "since": null,
+   "basis": null,
+   "previous": null,
+   "blocked": {}
+  }
+ },
+ "periods": [],
+ "log": [
+  {
+   "date": "2026-09-15",
+   "lang": "ja",
+   "action": "switch",
+   "from": "ja-3d-1947-today",
+   "to": "ja-30gou-naibu",
+   "basis": "suggestions",
+   "reason": "better match to search suggestions (24.3 → 34.6)"
+  },
+  {
+   "date": "2026-09-15",
+   "lang": "ko",
+   "action": "switch",
+   "from": "ko-3d-1947-today",
+   "to": "ko-location-map",
+   "basis": "suggestions",
+   "reason": "better match to search suggestions (35.7 → 48.1)"
+  }
+ ]
+}

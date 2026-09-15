@@ -18,6 +18,9 @@ const files=['walking-data.js','walking-time.js','walking-time.css','gyg-product
 assert.equal(path.dirname(dist),root);
 fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist);
 for(const name of [...directories,...files])fs.cpSync(path.join(root,name),path.join(dist,name),{recursive:true});
+/* search engine ownership codes (scripts/seo/verification.json) go on the home page as meta tags */
+const seo=require('./seo/titles.cjs'),home=path.join(dist,'index.html');
+fs.writeFileSync(home,seo.injectVerification(fs.readFileSync(home,'utf8'),seo.loadVerification()));
 fs.writeFileSync(path.join(dist,'release.json'),JSON.stringify({assets:assetVersion,data:dataVersion,commit:process.env.CF_PAGES_COMMIT_SHA||process.env.WORKERS_CI_COMMIT_SHA||'local'}));
 console.log('Validated static site prepared in dist; asset '+assetVersion+', data '+dataVersion);
 

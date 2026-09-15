@@ -1,0 +1,174 @@
+{
+ "about": "Hand-written title and description candidates for the Gunkanjima 3D pages. update-titles.cjs only chooses among these; every candidate must stay true to the page (facts as in build-3d-extras.cjs FAQ). The brand ' | Japan Time Atlas' is added by titles.cjs. 'exclude' lists Search Console countries (ISO 3166-1 alpha-3) that do not count for the page: the English, Korean and Chinese pages are tuned for searchers outside Japan.",
+ "site": "https://japantimeatlas.com",
+ "pages": {
+  "en": "/3d/gunkanjima",
+  "ja": "/3d/ja/gunkanjima",
+  "ko": "/3d/ko/gunkanjima",
+  "zh-Hans": "/3d/zh-cn/gunkanjima",
+  "zh-Hant": "/3d/zh-tw/gunkanjima"
+ },
+ "langs": {
+  "en": {
+   "mustInclude": "Gunkanjima",
+   "maxLead": 60,
+   "exclude": ["jpn"],
+   "candidates": [
+    {
+     "id": "en-3d-1947-today",
+     "lead": "Gunkanjima (Hashima Island) in 3D, 1947 to Today",
+     "description": "A 3D reconstruction of Gunkanjima, the abandoned coal-mining island off Nagasaki. Slide from 1947 to today over five aerial photographs, watch each building rise and fall, tap a building for its facts, and listen to the audio guide.",
+     "evidence": []
+    },
+    {
+     "id": "en-before-abandoned",
+     "lead": "Hashima Island (Gunkanjima) in 3D: Before It Was Abandoned",
+     "description": "See Hashima Island in Japan (Gunkanjima, Battleship Island) as it was before it was abandoned in 1974: a 3D model over aerial photographs from 1947 to today, with twelve rooms and places rebuilt inside.",
+     "evidence": ["hashima island before it was abandoned", "battleship island japan before", "hashima island 3d model", "hashima island japan"]
+    },
+    {
+     "id": "en-3d-model",
+     "lead": "Gunkanjima 3D Model: Hashima Island from 1947 to Today",
+     "description": "An interactive 3D model of Gunkanjima (Hashima Island, Battleship Island) off Nagasaki, Japan, rebuilt building by building over aerial photographs from 1947 to today. Tap any building for its year, storeys and use.",
+     "evidence": ["gunkanjima 3d model", "hashima island 3d model", "gunkanjima nagasaki"]
+    },
+    {
+     "id": "en-1960s",
+     "lead": "Hashima Island in the 1960s: Gunkanjima in 3D, 1947 to Now",
+     "description": "In 1960 some 5,300 people lived on Hashima Island (Gunkanjima) off Nagasaki, Japan. See the island in 3D as it stood then, as it was left in 1974 and as it stands today, over five aerial photographs.",
+     "evidence": ["hashima island 1960s", "hashima island 1959", "what happened to hashima island"]
+    },
+    {
+     "id": "en-battleship-then-now",
+     "lead": "Battleship Island (Gunkanjima) in 3D: Hashima Then and Now",
+     "description": "Japan's Battleship Island, Gunkanjima (Hashima), in 3D: slide from 1947 to today over five aerial photographs, watch each building rise and fall, and step inside twelve rebuilt rooms and places.",
+     "evidence": ["battleship island japan", "abandoned battleship island japan", "japan's battleship island"]
+    }
+   ]
+  },
+  "ja": {
+   "mustInclude": "軍艦島",
+   "maxLead": 34,
+   "exclude": [],
+   "candidates": [
+    {
+     "id": "ja-3d-1947-today",
+     "lead": "軍艦島（端島）3D復元マップ｜1947年から現在まで建物ごとに見る",
+     "description": "長崎・軍艦島（端島）を3Dで復元。1947年から最新まで5枚の空中写真を年代スライダーで切り替え、30号棟・65号棟・小中学校など建物が建った年と崩れた年を確認できます。日本語と英語の音声ガイド付き。",
+     "evidence": []
+    },
+    {
+     "id": "ja-mukashi-no-sugata",
+     "lead": "軍艦島（端島）の昔の姿を3Dで｜最盛期の建物と内部を再現",
+     "description": "長崎・軍艦島（端島）の昔の姿を3Dで再現。1960年に5,267人が暮らした頃から1974年の閉山、現在まで、建物が建った年と崩れた年を空中写真の上で確認できます。30号棟の一室や教室・病院など12か所は内部も復元。",
+     "evidence": ["軍艦島 昔の姿", "軍艦島 昔の写真", "軍艦島 最盛期", "軍艦島 内部 写真"]
+    },
+    {
+     "id": "ja-3d-model-kurashi",
+     "lead": "軍艦島 3Dモデル｜端島の最盛期の姿と昔の生活を建物ごとに見る",
+     "description": "軍艦島（端島）の3Dモデル。1947年から現在まで5枚の空中写真の上で、30号棟・65号棟・小中学校など建物ごとの竣工年・階数・用途を見られ、部屋・教室・病院・共同浴場など12か所では昔の暮らしの様子を復元しています。",
+     "evidence": ["軍艦島 3dモデル", "軍艦島 昔の生活", "軍艦島 最盛期 写真"]
+    },
+    {
+     "id": "ja-30gou-naibu",
+     "lead": "軍艦島（端島）の内部を3Dで｜30号棟の一室から最盛期の昔の姿まで",
+     "description": "日本初の鉄筋コンクリート造高層アパートとされる30号棟の一室、屋上の保育園、教室、病院、共同浴場など12か所の内部を3Dで復元。軍艦島（端島）の昔の姿を1947年から現在まで年代ごとに見られます。",
+     "evidence": ["軍艦島 30号棟 内部", "軍艦島 アパート 内部", "軍艦島 内部 写真", "軍艦島 昔の姿"]
+    }
+   ]
+  },
+  "ko": {
+   "mustInclude": "군함도",
+   "maxLead": 34,
+   "exclude": ["jpn"],
+   "candidates": [
+    {
+     "id": "ko-3d-1947-today",
+     "lead": "군함도(하시마) 3D 복원 지도: 1947년부터 지금까지 건물별로 보기",
+     "description": "나가사키 군함도(하시마)를 3D로 복원. 1947년부터 최신까지 항공사진 5장을 연도 슬라이더로 바꿔 보며 30호동·65호동·초중학교 등 건물이 지어진 해와 무너진 해를 확인할 수 있습니다. 음성 가이드(영어·일본어) 포함.",
+     "evidence": []
+    },
+    {
+     "id": "ko-history",
+     "lead": "군함도(하시마섬) 3D로 보는 역사: 1947년부터 폐광·지금까지",
+     "description": "나가사키 앞바다 군함도(하시마섬)의 역사를 3D로 봅니다. 1960년 5,267명이 살던 탄광 섬이 1974년 폐광 뒤 무인도가 되기까지 건물별로 확인하고, 2015년 세계유산 등재 때 일본 정부 대표가 밝힌 1940년대 강제노역 관련 발언도 소개합니다.",
+     "evidence": ["군함도 역사", "군함도 실제 역사", "하시마섬 역사", "하시마섬 탄광", "하시마섬 유네스코"]
+    },
+    {
+     "id": "ko-location-map",
+     "lead": "하시마섬 군함도 3D 지도: 위치와 건물, 1947년부터 지금까지",
+     "description": "나가사키항에서 약 15km 떨어진 군함도(하시마섬)의 위치와 건물을 3D 지도로 봅니다. 항공사진 5장 위에서 30호동·65호동·초중학교 등 건물이 지어진 해와 무너진 해를 확인하고, 12곳은 내부까지 복원했습니다.",
+     "evidence": ["군함도 위치", "하시마섬 지도", "군함도 위치 지도", "하시마섬 위치"]
+    },
+    {
+     "id": "ko-inside",
+     "lead": "군함도(하시마섬) 3D 복원: 30호동 내부부터 폐광 후 지금까지",
+     "description": "일본 최초의 철근콘크리트 고층 아파트로 알려진 30호동의 한 세대, 옥상 보육원, 교실, 병원, 공동 목욕탕 등 12곳의 내부를 3D로 복원했습니다. 군함도(하시마섬)의 1947년부터 지금까지를 건물별로 봅니다.",
+     "evidence": ["하시마섬", "하시마섬 탄광"]
+    }
+   ]
+  },
+  "zh-Hans": {
+   "mustInclude": "军舰岛",
+   "maxLead": 34,
+   "exclude": ["jpn"],
+   "candidates": [
+    {
+     "id": "zh-Hans-3d-1947-today",
+     "lead": "军舰岛（端岛）3D复原地图：从1947年到今天，逐栋查看",
+     "description": "长崎军舰岛（端岛）的3D复原。用年代滑块切换从1947年到最新的5张航拍照片，查看30号楼、65号楼、中小学校等建筑的建成年份和倒塌年份。附英语和日语音频导览。",
+     "evidence": []
+    },
+    {
+     "id": "zh-Hans-history",
+     "lead": "军舰岛（端岛）3D复原：煤矿岛的历史与旧貌，1947年至今",
+     "description": "长崎外海军舰岛（端岛）的3D复原。在航拍照片上逐栋查看1960年住有5,267人的煤矿岛，到1974年关闭后成为无人岛的变化，并介绍2015年列入世界遗产时日本政府代表关于1940年代被迫劳动的表态。",
+     "evidence": ["军舰岛历史真相", "端岛 历史", "端岛煤矿", "端岛真实历史", "军舰岛的真实历史"]
+    },
+    {
+     "id": "zh-Hans-where",
+     "lead": "军舰岛在哪里？端岛3D地图：位置、建筑与1947年至今的变化",
+     "description": "军舰岛（端岛）位于长崎港外约15公里。用3D地图查看岛的位置，以及从1947年到今天30号楼、65号楼、中小学校等建筑的建成与倒塌年份；12处建筑内部已复原，并附英语和日语音频导览。",
+     "evidence": ["军舰岛在哪里", "端岛在哪里", "端岛地图", "军舰岛位置"]
+    },
+    {
+     "id": "zh-Hans-nagasaki",
+     "lead": "长崎军舰岛（端岛）3D复原：全盛期旧貌与建筑内部，1947年至今",
+     "description": "把长崎军舰岛（端岛）逐栋复原成3D：在从1947年到今天的5张航拍照片上查看全盛期的公寓、学校和医院，并走进30号楼一户、屋顶保育园、教室、医院、公共浴场等12处复原的内部。",
+     "evidence": ["长崎军舰岛", "长崎军舰岛旧照片", "长崎军舰岛介绍"]
+    }
+   ]
+  },
+  "zh-Hant": {
+   "mustInclude": "軍艦島",
+   "maxLead": 34,
+   "exclude": ["jpn"],
+   "candidates": [
+    {
+     "id": "zh-Hant-3d-1947-today",
+     "lead": "軍艦島（端島）3D復原地圖：從1947年到今天，逐棟檢視",
+     "description": "長崎軍艦島（端島）的3D復原。用年代滑桿切換從1947年到最新的5張航空照片，檢視30號樓、65號樓、中小學校等建築的建成年份和倒塌年份。附英語和日語語音導覽。",
+     "evidence": []
+    },
+    {
+     "id": "zh-Hant-history",
+     "lead": "軍艦島（端島）3D復原：煤礦島的歷史與舊貌，1947年至今",
+     "description": "長崎外海軍艦島（端島）的3D復原。在航空照片上逐棟查看1960年住有5,267人的煤礦島，到1974年關閉後成為無人島的變化，並介紹2015年列入世界遺產時日本政府代表關於1940年代被迫勞動的表態。",
+     "evidence": ["軍艦島 歷史", "軍艦島歷史真相", "端島 歷史"]
+    },
+    {
+     "id": "zh-Hant-where",
+     "lead": "軍艦島在哪裡？端島3D地圖：位置、建築與1947年至今的變化",
+     "description": "軍艦島（端島）位於長崎港外約15公里。用3D地圖查看島的位置，以及從1947年到今天30號樓、65號樓、中小學校等建築的建成與倒塌年份；12處建築內部已復原，並附英語和日語語音導覽。",
+     "evidence": ["端島(軍艦島)", "軍艦島怎麼去"]
+    },
+    {
+     "id": "zh-Hant-nagasaki",
+     "lead": "長崎軍艦島（端島）3D復原：全盛期舊貌與建築內部，1947年至今",
+     "description": "把長崎軍艦島（端島）逐棟復原成3D：在從1947年到今天的5張航空照片上檢視全盛期的公寓、學校和醫院，並走進30號樓一戶、屋頂保育園、教室、醫院、公共浴場等12處復原的內部。",
+     "evidence": ["長崎 軍艦島", "長崎 軍艦島 博物館"]
+    }
+   ]
+  }
+ }
+}

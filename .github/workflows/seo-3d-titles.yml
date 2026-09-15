@@ -1,0 +1,60 @@
+# Every Monday: read Search Console for the five Gunkanjima 3D pages, keep or change each page's title among
+# the hand-written candidates in scripts/seo/titles-3d.json, and publish a change (Cloudflare deploys main).
+# Without the GSC_SERVICE_ACCOUNT_JSON secret it reads nothing and changes nothing. Setup: scripts/seo/README.md.
+# The repository and these logs are public: the scripts print counts and candidate names, never search terms.
+name: 3D page titles from Search Console
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: seo-3d-titles
+  cancel-in-progress: false
+jobs:
+  titles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read Search Console
+        id: gsc
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL }}
+        run: node scripts/seo/gsc.cjs --out .seo-cache/gsc-3d.json
+      - name: Choose the titles
+        id: choose
+        if: steps.gsc.outputs.status == 'ok'
+        run: node scripts/seo/update-titles.cjs --gsc .seo-cache/gsc-3d.json
+      - name: Rebuild the 3D pages and run the tests
+        if: steps.choose.outputs.changed == 'true'
+        run: |
+          node scripts/build-3d-pages.cjs
+          node --test tests/*.test.cjs
+      - name: Commit and push to main
+        id: push
+        if: steps.choose.outputs.changed == 'true'
+        env:
+          SUMMARY: ${{ steps.choose.outputs.summary }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/seo/state-3d.json 3d
+          git commit -m "3D page titles from Search Console: $SUMMARY"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Tell IndexNow (and Baidu) once the new pages are live
+        if: steps.choose.outputs.changed == 'true'
+        env:
+          COMMIT: ${{ steps.push.outputs.commit }}
+          URLS: ${{ steps.choose.outputs.urls }}
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+        run: node scripts/seo/after-deploy.cjs "$COMMIT" $URLS

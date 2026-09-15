@@ -28,6 +28,10 @@ const LANGS=[
   description:'長崎軍艦島（端島）的3D復原。用年代滑桿切換從1947年到最新的5張航空照片，檢視30號樓、65號樓、中小學校等建築的建成年份和倒塌年份。附英語和日語語音導覽。',
   crumb:'3D復原',badge:'3D復原 · 1947年 → 今天'},
 ];
+/* The live title and description come from scripts/seo: hand-written candidates, one chosen per language
+   from Search Console each week (update-titles.cjs). The texts above stay as the fallback. */
+const seo=require('./seo/titles.cjs');
+for(const l of LANGS){const live=seo.pick(l.code);if(live){l.title=live.title;l.description=live.description;}}
 const urlOf=l=>SITE+'/3d/'+l.dir+'gunkanjima';
 const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 const hreflangs=LANGS.map(l=>`<link rel="alternate" hreflang="${l.hreflang}" href="${urlOf(l)}">`).join('\n')+`\n<link rel="alternate" hreflang="x-default" href="${urlOf(LANGS[0])}">`;
@@ -66,6 +70,9 @@ for(const l of LANGS){
  const siblings=JSON.stringify(Object.fromEntries(LANGS.map(o=>[o.code,'/3d/'+o.dir+'gunkanjima'])));
  s=s.replace(/  var lang = MAP\[[^\n]*\n  if \(!lang\)\{ try[^\n]*\n  if \(!lang\)\{\n[^\n]*\n[^\n]*\n  \}\n/,
   `  var lang = '${l.code}';\n  var SIBLING = ${siblings};\n  var asked = MAP[(new URLSearchParams(location.search).get('lang') || '').toLowerCase()];\n  if (asked && asked !== lang){ location.replace(SIBLING[asked] + location.hash); return; }\n  try { localStorage.setItem('tn-lang', lang); } catch (e) {}\n`);
+ // the <title> written above is the page's title; the page script must not put the template's back
+ if(!s.includes('  document.title = t.title;\n'))throw new Error('gunkanjima.template.html: the runtime title line moved; update build-3d-pages.cjs');
+ s=s.replace('  document.title = t.title;\n','');
  // language links in the nav
  s=s.replace(/<a href="\?lang=en" lang="en">/,`<a href="/3d/gunkanjima" lang="en"${l.code==='en'?' aria-current="page"':''}>`)
     .replace(/<a href="\?lang=ja" lang="ja">/,`<a href="/3d/ja/gunkanjima" lang="ja"${l.code==='ja'?' aria-current="page"':''}>`)
@@ -73,7 +80,8 @@ for(const l of LANGS){
     .replace(/<a href="\?lang=zh-CN" lang="zh-Hans">/,`<a href="/3d/zh-cn/gunkanjima" lang="zh-Hans"${l.code==='zh-Hans'?' aria-current="page"':''}>`)
     .replace(/<a href="\?lang=zh-TW" lang="zh-Hant">/,`<a href="/3d/zh-tw/gunkanjima" lang="zh-Hant"${l.code==='zh-Hant'?' aria-current="page"':''}>`);
  s=s.replace(/<p class="lab-badge">[^<]*<\/p>/,`<p class="lab-badge">${esc(l.badge)}</p>`);
- s=s.replace('<section class="podcast" id="podcast">',extras.html(l)+'<section class="podcast" id="podcast">');
+ if(!s.includes('<!-- 3d-extras -->\n'))throw new Error('gunkanjima.template.html: the <!-- 3d-extras --> marker is missing');
+ s=s.replace('<!-- 3d-extras -->\n',extras.html(l));
  s=s.replace('</style>',' '+extras.css+' </style>');
  const out=path.join(root,'3d',l.dir,'gunkanjima.html');
  fs.mkdirSync(path.dirname(out),{recursive:true});

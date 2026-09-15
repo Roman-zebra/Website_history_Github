@@ -41,7 +41,7 @@ test('the five 3D pages are indexable, cross-linked with hreflang, credited, and
   const ld=JSON.parse(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/.exec(s)[1]);
   assert.equal(ld['@graph'][0].url,urls[l],l+' ld url');
   for(const need of ['国土地理院','加工して作成','MKU628 C18-2','CKU20103 C44-12','CKU7420 C45-6','USA M185-38','OpenStreetMap contributors','Wikimedia Commons'])assert.ok(s.includes(need),l+' '+need);
-  for(const m of Object.keys(pages))assert.equal((s.match(new RegExp('data-lang="'+m+'"','g'))||[]).length,m===l?6:0,l+' keeps only its own blocks ('+m+')');
+  for(const m of Object.keys(pages))assert.equal((s.match(new RegExp('data-lang="'+m+'"','g'))||[]).length,m===l?5:0,l+' keeps only its own blocks ('+m+')');
   assert.ok(!/(test|テスト中|테스트|测试|測試)[)）]/.test(s),l+' no test wording');
   assert.ok(!/<script[^>]+src="https?:/.test(s),l);
   assert.ok(!/href="\/[^"]*\.html/.test(s),l+' links inside the site use clean routes');
@@ -66,7 +66,7 @@ test('the five 3D pages are indexable, cross-linked with hreflang, credited, and
  }
  assert.equal(read('explore.js').match(/const LAB_ITEMS = \[/g).length,1,'the home tab lists reconstructions from one array');
  assert.ok(read('explore.js').includes("class=\"card-cta\""),'the card says what a tap does');
- for(const [js,v] of [['3d/gunkanjima-3d.js','5'],['3d/gunkanjima-podcast.js','6']]){
+ for(const [js,v] of [['3d/gunkanjima-3d.js','6'],['3d/gunkanjima-podcast.js','6']]){
   assert.ok(!/https?:\/\//.test(read(js)),js+' loads nothing from other sites');
   assert.equal(read(js).match(/const V = '(\d+)'/)[1],v,js);
   assert.ok(read('3d/gunkanjima.html').includes('/'+js+'?v='+v),js+' version on the page');

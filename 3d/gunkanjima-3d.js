@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '5';
+  const V = '6';
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
   const LANG = window.LAB_LANG || 'en';
@@ -42,6 +42,9 @@
   const BG = [0.075, 0.117, 0.13], HORIZON = [0.40, 0.47, 0.50], SKY_TOP = [0.10, 0.16, 0.20];
   const SUN = (() => { const v = [0.492, 0.863, 0.112], l = Math.hypot(v[0], v[1], v[2]); return v.map(x => x / l); })();
   const EL_MIN = 0.06, EL_MAX = 1.5, D_MIN = 40, D_MAX = 1800;
+  /* inside a room the camera may come right up to the furniture and look a little upward; outside it may come close to a building */
+  const D_MIN_SCENE = 0.6, D_MAX_SCENE = 90, EL_MIN_SCENE = -0.35, D_MIN_OUTSIDE = 8;
+  const dMin = () => scene ? D_MIN_SCENE : D_MIN_OUTSIDE, dMax = () => scene ? D_MAX_SCENE : D_MAX, elMin = () => scene ? EL_MIN_SCENE : EL_MIN;
   const STYLE = { apartment: 1, nikkyu: 2, school: 3, industrial: 4, wood: 5, shrine: 6 };
   const controls = [btnFlat, btnReset, btnExag, btnChange, btnWalls, btnLabels, yearRange, btnPlay];
 
@@ -151,11 +154,11 @@
   // building walls
   const WALL_VS = COMMON_VS + `
     attribute vec2 aPos; attribute vec2 aY; attribute vec3 aNor; attribute vec3 aWall; attribute vec4 aInfo; attribute vec2 aLife; attribute float aBid;
-    uniform float uGhostId;
+    uniform float uGhostId; uniform float uGhostId2;
     varying vec3 vNor; varying vec3 vWall; varying vec4 vInfo; varying float vAlive; varying float vTop; varying float vGhost;
     void main(){
       float alive = standing(aLife);
-      vGhost = abs(aBid - uGhostId) < 0.5 ? 1.0 : 0.0;
+      vGhost = (abs(aBid - uGhostId) < 0.5 || abs(aBid - uGhostId2) < 0.5) ? 1.0 : 0.0;
       float y = mix(aY.x, aY.x + (aY.y - aY.x) * alive, uLift);
       vNor = turn(aNor);
       vWall = vec3(aWall.x, (y - aY.x) * uExag, (aY.y - aY.x) * alive * uExag);
@@ -242,11 +245,11 @@
   // roofs: the aerial photograph of the year, drawn where the roof is in that photograph
   const ROOF_VS = COMMON_VS + `
     attribute vec2 aPos; attribute vec2 aY; attribute vec2 aLife; attribute vec2 aInfo; attribute float aBid;
-    uniform float uGhostId;
+    uniform float uGhostId; uniform float uGhostId2;
     varying vec2 vUvP; varying vec2 vUvO; varying float vAlive; varying vec2 vInfo; varying vec2 vPos; varying float vGhost;
     void main(){
       float alive = standing(aLife);
-      vGhost = abs(aBid - uGhostId) < 0.5 ? 1.0 : 0.0;
+      vGhost = (abs(aBid - uGhostId) < 0.5 || abs(aBid - uGhostId2) < 0.5) ? 1.0 : 0.0;
       float y = mix(aY.x, aY.x + (aY.y - aY.x) * alive, uLift);
       vec2 photo = uPP + (aPos - uPP) / (1.0 - y / uHf);      /* where this roof appears in the photograph */
       vUvP = (photo + 0.5) / (2.0 * uC); vUvO = (aPos + 0.5) / (2.0 * uC);
@@ -399,7 +402,7 @@
     for (const n of uniforms) U[n] = gl.getUniformLocation(p, n);
     return { p, U };
   }
-  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uGhostId', 'uGhostPass'];
+  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uGhostId', 'uGhostId2', 'uGhostPass'];
   const TEX_U = ['uTexA', 'uTexB', 'uMix', 'uOrthoA', 'uOrthoB'];
   const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat'];
   let progT, progW, progR, progS, progSky, progB, depthT, depthW, depthR, depthB;
@@ -488,7 +491,7 @@
   function centroid(poly){ let x = 0, y = 0; for (const p of poly){ x += p[0]; y += p[1]; } return [x / poly.length, y / poly.length]; }
 
   /* ---------- data ---------- */
-  let interiors = null, scene = null, sceneMesh = null, sceneMeshA = null, ghostId = 0;
+  let interiors = null, scene = null, sceneMesh = null, sceneMeshA = null, ghostId = 0, ghostId2 = -10;
   let lab = null, model = null, texts = null, photos = {}, terrain = null, sea = null, walls = null, roofs = null, seawall = null;
   let rot = 0, mpp = 0.8, C = 512, PP = [512, 512], HF = 1950;
   const years = [], texCache = new Map();
@@ -549,8 +552,10 @@
       const parts = b.wings || [b.poly];
       const H = b.storeys * b.floorH, base = b.ground - 0.6, top = b.ground + H;
       const style = STYLE[b.style] || 1, seed = (seedN++ % 89) / 89, life = lifeOf(b);
-      for (const poly of parts){
-        if (poly.length < 3) continue;
+      for (const part of parts){
+        if (part.length < 3) continue;
+        /* every outline in one winding: drawn the other way round, a wall quad faces inwards and back-face culling hides it from outside */
+        const poly = signedArea(part) < 0 ? part.slice().reverse() : part;
         const cw = signedArea(poly) > 0;
         for (let i = 0; i < poly.length; i++){
           const p = poly[i], q = poly[(i + 1) % poly.length];
@@ -780,7 +785,8 @@
     const ce = Math.cos(st.el), target = [st.tx, st.ty, st.tz];
     const eye = [target[0] + st.dist * ce * Math.sin(st.az), target[1] + st.dist * Math.sin(st.el), target[2] + st.dist * ce * Math.cos(st.az)];
     const sc = scene && interiors ? interiors.scenes[scene] : null;
-    const proj = perspective(sc && sc.fov ? sc.fov : (scene ? 0.9 : 0.7), w / Math.max(1, h), scene ? 0.35 : 2, 6000), view = lookAt(eye, target);
+    const fov = sc && sc.camera && sc.camera.fov ? sc.camera.fov : (scene ? 0.9 : 0.7);
+    const proj = perspective(fov, w / Math.max(1, h), scene ? 0.2 : Math.max(0.5, Math.min(2, st.dist * 0.2)), scene ? 1500 : 6000), view = lookAt(eye, target);
     return { proj, view, pv: mul(proj, view) };
   }
 
@@ -808,6 +814,7 @@
     gl.uniform1f(U.uShadowOn, shadowOn ? 1 : 0);
     gl.uniform1f(U.uShadowTexel, 1 / (SHADOW || 1));
     gl.uniform1f(U.uGhostId, ghostId);
+    gl.uniform1f(U.uGhostId2, ghostId2);
     gl.uniform1f(U.uGhostPass, 0);
     if (U.uShadowMap){ gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, shadowOn ? shadowTex : null); gl.uniform1i(U.uShadowMap, 2); }
   }
@@ -1005,12 +1012,13 @@
       const s = lab.spots[id], hgt = spotHeight(s) * lift;
       const xz = toWorld(s.u, s.v, hgt), y = hgt * st.exag + 7;
       const q = project(pv, xz[0], y, xz[1]), pin = pins[id];
-      if (!q){ pin.hidden = true; continue; }
+      /* inside a room or place the pins and names of the buildings around it would float across the view */
+      if (!q || scene){ pin.hidden = true; continue; }
       const sx = (q[0] * 0.5 + 0.5) * w, sy = (1 - (q[1] * 0.5 + 0.5)) * h;
       pin.hidden = sx < -20 || sy < -20 || sx > w + 20 || sy > h + 20;
       pin.style.transform = 'translate(' + sx.toFixed(1) + 'px,' + sy.toFixed(1) + 'px)';
     }
-    const showLabels = st.labels && st.walls && lift > 0.5 && st.dist < 420;
+    const showLabels = st.labels && st.walls && lift > 0.5 && st.dist < 420 && !scene;
     for (const L of labels){
       const b = L.b;
       const alive = ym.year >= (b.built || b.seen || 1950) && !(b.gone && ym.year > b.gone);
@@ -1071,8 +1079,9 @@
       const src = texts.sources[k];
       return '<li><a href="' + esc(src.url) + '" target="_blank" rel="noopener">' + esc(src.label[LANG] || src.label.en) + '</a></li>';
     }).join('') + '</ul>';
-    const scId = id === 'no30' ? 'no30' : id === 'shrine' ? 'shrine' : null;
-    if (scIds.length) html = '<p class="enter-row">' + scIds.map(id => '<button type="button" class="enter-btn" data-scene="' + id + '">' + esc(enterLabel(id)) + '</button>').join(' ') + '</p>' + html;
+    /* the rooms and places of this spot: the same id, or the id and a word (no65 -> no65roof, no65flat; but no3 is not no30) */
+    const scIds = interiors ? Object.keys(interiors.scenes).filter(k => k === id || (k.startsWith(id) && !/[0-9]/.test(k.charAt(id.length)))) : [];
+    if (scIds.length) html = '<p class="enter-row">' + scIds.map(k => '<button type="button" class="enter-btn" data-scene="' + esc(k) + '">' + esc(enterLabel(k)) + '</button>').join(' ') + '</p>' + html;
     $('spotTitle').textContent = pick(info.name);
     $('spotBody').innerHTML = html;
     wireEnter();
@@ -1098,7 +1107,7 @@
       + '</table>';
     if (b.notes) html += '<p>' + esc(b.notes) + '</p>';
     const scIds = scenesFor(b.name);
-    if (sc) html += '<p><button type="button" class="enter-btn" data-scene="' + esc(sc) + '">' + esc(scene === sc ? T.leave : T.enter) + '</button></p>';
+    if (scIds.length) html += '<p class="enter-row">' + scIds.map(k => '<button type="button" class="enter-btn" data-scene="' + esc(k) + '">' + esc(enterLabel(k)) + '</button>').join(' ') + '</p>';
     for (const ph of (b.name && photos[b.name]) || []) html += photoFigure(ph, ph.file, 'spot-photo');
     if (b.source === 'traced1962') html += '<p><small>' + esc(T.traced) + '</small></p>';
     html += '<p class="credit"><a href="' + esc(model.facts.url) + '" target="_blank" rel="noopener">' + esc(T.factsSource) + '</a></p>';
@@ -1132,12 +1141,15 @@
       scene = id;
       sceneMesh = buildBoxes(Object.assign({}, sc, { pass: 'solid' }));
       sceneMeshA = buildBoxes(Object.assign({}, sc, { pass: 'assumed' }));
-      const host = model.buildings.find(b => sc.ghost && sc.ghost.includes(b.name));
-      ghostId = host ? host.bid : 0;
+      const hosts = model.buildings.filter(b => sc.ghost && sc.ghost.includes(b.name));
+      ghostId = hosts[0] ? hosts[0].bid : 0;
+      ghostId2 = hosts[1] ? hosts[1].bid : -10;
     }
     stopSpin();
-    const cam = sc.camera, xz = toWorldTrue(cam.u, cam.v);
-    if (fly) animate({ tx: xz[0], tz: xz[1], ty: cam.y, dist: cam.dist, el: cam.el, az: cam.az, userLift: 1 }, 1500); else Object.assign(st, { tx: xz[0], tz: xz[1], ty: cam.y, dist: cam.dist, el: cam.el, az: cam.az });
+    /* a scene may add an approach: the camera arrives at the first view, then walks on (the shrine: through the torii to the worship hall) */
+    const pose = c => { const p = toWorldTrue(c.u, c.v); return { tx: p[0], tz: p[1], ty: c.y, dist: c.dist, el: c.el, az: c.az }; };
+    const walkOn = () => { if (sc.approach && scene === id) animate(pose(sc.approach), 3200); };
+    if (fly) animate(Object.assign(pose(sc.camera), { userLift: 1 }), 1500, walkOn); else { Object.assign(st, pose(sc.camera)); walkOn(); }
     if ($('sceneNote')){
       const n = $('sceneNote');
       n.innerHTML = '<b>' + esc(T.interior) + '</b> ' + esc(pick(sc.text)) + ' <span class="scene-src">' + (sc.sources || []).map(x => '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label[LANG] || x.label.en) + '</a>').join(' · ') + '</span> <button type="button" id="sceneLeave">' + esc(T.leave) + '</button>';
@@ -1149,7 +1161,7 @@
   }
   function leaveScene(){
     if (!scene) return;
-    scene = null; sceneMesh = null; sceneMeshA = null; ghostId = 0;
+    scene = null; sceneMesh = null; sceneMeshA = null; ghostId = 0; ghostId2 = -10;
     if ($('sceneNote')) $('sceneNote').hidden = true;
     for (const b of document.querySelectorAll('.enter-btn')) b.textContent = enterLabel(b.dataset.scene);
     animate({ ty: 14, dist: Math.max(st.dist, 180), el: Math.max(st.el, 0.45) }, 900);
@@ -1194,17 +1206,17 @@
     pointers.set(e.pointerId, [e.clientX, e.clientY]);
     if (pointers.size === 1){
       if (e.shiftKey || e.buttons === 4 || e.buttons === 2){
-        const k = st.dist * 0.0016, c = Math.cos(st.az), s = Math.sin(st.az);
+        const k = Math.max(st.dist, scene ? 6 : 0) * 0.0016, c = Math.cos(st.az), s = Math.sin(st.az);
         const dx = -(e.clientX - prev[0]) * k, dz = -(e.clientY - prev[1]) * k;
         st.tx += dx * c - dz * s; st.tz += -dx * s - dz * c;
         st.tx = clamp(st.tx, -450, 450); st.tz = clamp(st.tz, -450, 450);
       } else {
         st.az -= (e.clientX - prev[0]) * 0.006;
-        st.el = clamp(st.el + (e.clientY - prev[1]) * 0.005, EL_MIN, EL_MAX);
+        st.el = clamp(st.el + (e.clientY - prev[1]) * 0.005, elMin(), EL_MAX);
       }
     } else if (pointers.size === 2 && pinch0){
       const [a, b] = [...pointers.values()];
-      st.dist = clamp(dist0 * pinch0 / Math.max(1, Math.hypot(a[0] - b[0], a[1] - b[1])), D_MIN, D_MAX);
+      st.dist = clamp(dist0 * pinch0 / Math.max(1, Math.hypot(a[0] - b[0], a[1] - b[1])), dMin(), dMax());
     }
     request();
   });
@@ -1215,14 +1227,14 @@
   canvas.addEventListener('wheel', e => {
     e.preventDefault();
     stopSpin();
-    st.dist = clamp(st.dist * Math.exp(e.deltaY * 0.0012), D_MIN, D_MAX);
+    st.dist = clamp(st.dist * Math.exp(e.deltaY * 0.0012), dMin(), dMax());
     request();
   }, { passive: false });
   canvas.addEventListener('keydown', e => {
     const moves = { ArrowLeft: () => { st.az += 0.08; }, ArrowRight: () => { st.az -= 0.08; },
-      ArrowUp: () => { st.el = clamp(st.el + 0.06, EL_MIN, EL_MAX); }, ArrowDown: () => { st.el = clamp(st.el - 0.06, EL_MIN, EL_MAX); },
-      '+': () => { st.dist = clamp(st.dist / 1.15, D_MIN, D_MAX); }, '=': () => { st.dist = clamp(st.dist / 1.15, D_MIN, D_MAX); },
-      '-': () => { st.dist = clamp(st.dist * 1.15, D_MIN, D_MAX); } };
+      ArrowUp: () => { st.el = clamp(st.el + 0.06, elMin(), EL_MAX); }, ArrowDown: () => { st.el = clamp(st.el - 0.06, elMin(), EL_MAX); },
+      '+': () => { st.dist = clamp(st.dist / 1.15, dMin(), dMax()); }, '=': () => { st.dist = clamp(st.dist / 1.15, dMin(), dMax()); },
+      '-': () => { st.dist = clamp(st.dist * 1.15, dMin(), dMax()); } };
     if (!moves[e.key]) return;
     e.preventDefault();
     stopSpin();

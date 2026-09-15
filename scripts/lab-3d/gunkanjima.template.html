@@ -149,6 +149,8 @@
 <label class="pod-follow"><input id="podFollow" type="checkbox" checked> <span data-t="follow">Move the model with the audio</span></label>
 </div>
 <audio id="podAudio" preload="none"></audio>
+<div class="pod-columns"><div><h3 data-t="chapters">Chapters</h3><ol id="podChapters"></ol></div><div><h3 data-t="transcript">Transcript</h3><div id="podTranscript" class="pod-transcript"></div></div></div>
+<p class="pod-credit" id="podCredit"></p>
 </div>
 <div data-lang="en" lang="en">
 <p class="lead">Hashima was a coal-mining island off Nagasaki. In 1960 about 5,300 people lived on its roughly 6.3 hectares; nobody has lived there since 1974. Slide through five aerial photographs, from 1947 to the latest, over a reconstruction of the island: every building is drawn from its outline, its storey count and its completion year, so it rises in the year it was built and falls when it collapsed. Tap a building name or an icon to read about it, or play the audio guide and let it move the model.</p>
@@ -157,13 +159,13 @@
 <p class="lead">端島は長崎沖の炭鉱の島です。1960年には約6.3ヘクタールの島に約5,300人が暮らし、1974年からは誰も住んでいません。1947年から最新まで5枚の空中写真を、島の復元模型の上で切り替えられます。建物は一棟ずつ、輪郭・階数・竣工年から描いているので、建った年に立ち上がり、崩れた年に消えます。建物の名前やアイコンを押すと説明が、音声ガイドを再生すると話に合わせて模型が動きます。</p>
 </div>
 <div data-lang="ko" lang="ko" hidden>
-<p class="lead">하시마는 나가사키 앞바다의 탄광 섬입니다. 1960년에는 약 6.3헥타르의 섬에 약 5,300명이 살았고, 1974년부터는 아무도 살지 않습니다. 1947년부터 최신까지 항공사진 5장을 섬의 복원 모형 위에서 바꿔 볼 수 있습니다. 건물은 한 동씩 윤곽·층수·준공년으로 그렸기 때문에, 지어진 해에 올라가고 무너진 해에 사라집니다. 건물 이름이나 아이콘을 누르면 설명이, 음성 가이드를 재생하면 이야기에 맞춰 모형이 움직입니다. 아이콘을 누르면 장소 설명을, 음성 가이드를 재생하면 이야기에 맞춰 모델이 움직입니다.</p>
+<p class="lead">하시마는 나가사키 앞바다의 탄광 섬입니다. 1960년에는 약 6.3헥타르의 섬에 약 5,300명이 살았고, 1974년부터는 아무도 살지 않습니다. 1947년부터 최신까지 항공사진 5장을 섬의 복원 모형 위에서 바꿔 볼 수 있습니다. 건물은 한 동씩 윤곽·층수·준공년으로 그렸기 때문에, 지어진 해에 올라가고 무너진 해에 사라집니다. 건물 이름이나 아이콘을 누르면 설명이, 음성 가이드를 재생하면 이야기에 맞춰 모형이 움직입니다.</p>
 </div>
 <div data-lang="zh-Hans" lang="zh-Hans" hidden>
-<p class="lead">端岛是长崎外海的煤矿岛。1960年，约6.3公顷的岛上住着约5,300人；1974年以后再无人居住。你可以在岛的复原模型上切换从1947年到最新的5张航拍照片。每栋建筑按轮廓、层数和竣工年绘制，因此会在建成那年升起、在倒塌那年消失。点按建筑名称或图标可阅读介绍，播放音频导览时模型会跟着讲解移动。点按图标可阅读地点介绍，播放音频导览时模型会跟着讲解移动。</p>
+<p class="lead">端岛是长崎外海的煤矿岛。1960年，约6.3公顷的岛上住着约5,300人；1974年以后再无人居住。你可以在岛的复原模型上切换从1947年到最新的5张航拍照片。每栋建筑按轮廓、层数和竣工年绘制，因此会在建成那年升起、在倒塌那年消失。点按建筑名称或图标可阅读介绍，播放音频导览时模型会跟着讲解移动。</p>
 </div>
 <div data-lang="zh-Hant" lang="zh-Hant" hidden>
-<p class="lead">端島是長崎外海的煤礦島。1960年，約6.3公頃的島上住著約5,300人；1974年以後再無人居住。你可以在島的復原模型上切換從1947年到最新的5張航空照片。每棟建築按輪廓、層數和竣工年繪製，因此會在建成那年升起、在倒塌那年消失。點按建築名稱或圖示可閱讀介紹，播放語音導覽時模型會跟著講解移動。點按圖示可閱讀地點介紹，播放語音導覽時模型會跟著講解移動。</p>
+<p class="lead">端島是長崎外海的煤礦島。1960年，約6.3公頃的島上住著約5,300人；1974年以後再無人居住。你可以在島的復原模型上切換從1947年到最新的5張航空照片。每棟建築按輪廓、層數和竣工年繪製，因此會在建成那年升起、在倒塌那年消失。點按建築名稱或圖示可閱讀介紹，播放語音導覽時模型會跟著講解移動。</p>
 </div>
 
 <section data-lang="en" lang="en">
@@ -301,25 +303,9 @@
 </ol>
 </section>
 
-<section class="podcast" id="podcast">
-<h2 data-t="podTitle">Audio guide</h2>
-<div data-lang="en" lang="en"><p>A two-voice episode in English (about 9 minutes) or Japanese (about 9 minutes), written from the sources on this page. Two hosts talk it through the way a history podcast does: one has read up on the island, the other asks what a listener would ask. The voices are Microsoft’s neural text-to-speech and the hosts are not real people. While it plays, the model moves to the places and years being discussed; untick the box to explore on your own.</p></div>
-<div data-lang="ja" lang="ja" hidden><p>日本語（約10分）か英語（約9分）で聞ける、2人の声による1回分です。台本はこのページの出典をもとに書きました。歴史を扱うポッドキャストのように、下調べをしてきた人と、聞き手の疑問を代わりに口にする人が、ふだんの話し言葉で語り合います。声はマイクロソフトのニューラル合成音声で、2人は実在しません。再生中は、話に出てくる場所や年代に合わせて立体が動きます。自分で動かしたいときはチェックを外してください。</p></div>
-<div data-lang="ko" lang="ko" hidden><p>영어(약 8분) 또는 일본어(약 9분)로 들을 수 있는, 두 사람의 목소리로 된 에피소드입니다. 대본은 이 페이지의 출처를 바탕으로 썼습니다. 역사 팟캐스트처럼 한 사람이 자료를 조사해 오고 다른 사람이 청취자 대신 묻는 형식으로, 평소의 말투로 이야기합니다. 목소리는 Microsoft의 뉴럴 합성 음성이며 두 사람은 실존하지 않습니다. 재생 중에는 이야기에 나오는 장소와 연도에 맞춰 모델이 움직입니다. 직접 움직이고 싶다면 체크를 해제하세요. 한국어 음성은 없습니다.</p></div>
-<div data-lang="zh-Hans" lang="zh-Hans" hidden><p>可以用英语（约9分钟）或日语（约9分钟）收听的双人节目，稿子根据本页的出处撰写。形式参考了历史类播客：一人事先做好功课，另一人替听众提问，用平常的口吻交谈。声音为Microsoft神经网络合成语音，两位主持人并非真人。播放时，模型会随着谈到的地点和年代移动；想自己操作时，请取消勾选。暂无中文语音。</p></div>
-<div data-lang="zh-Hant" lang="zh-Hant" hidden><p>可以用英語（約9分鐘）或日語（約10分鐘）收聽的雙人節目，稿子根據本頁的出處撰寫。形式參考了歷史類Podcast：一人事先做好功課，另一人替聽眾提問，用平常的口吻交談。聲音為Microsoft神經網路合成語音，兩位主持人並非真人。播放時，模型會隨著談到的地點和年代移動；想自己操作時，請取消勾選。暫無中文語音。</p></div>
-<div class="pod-columns"><div><h3 data-t="chapters">Chapters</h3><ol id="podChapters"></ol></div><div><h3 data-t="transcript">Transcript</h3><div id="podTranscript" class="pod-transcript"></div></div></div>
-<p class="pod-credit" id="podCredit"></p>
-</section>
+<!-- 3d-extras -->
 
 <section data-lang="en" lang="en">
-<h2>How it was made</h2>
-<p>For 1962 and 2010 the heights come from pairs of photographs taken from points about a kilometre apart (1962) and about half a kilometre apart (2010). Seen from two points, a tall building shifts further between the frames than the sea wall at its foot. That shift was measured for every point with computer stereo matching (OpenCV) and turned into height with the camera’s focal length and the flying height.</p>
-<p>Checks: for 1962 the flying height worked out from the map scale is 1,950 m, the same as the altimeter printed on the edge of the photograph, and a floating pier comes out about 2.5 m above the water. For 2010 the map scale gives about 2,020 m, against 2,008 m recorded for the photograph.</p>
-<p>Sea level was set against GSI’s present-day 5 m elevation data on open ground. The other years are laid over the nearest measured shape: 1975 over 1962, and the latest photograph over 2010. The 1947 photograph, a US Army frame at about 1:30,000, is shown flat.</p>
-<p>The change colours compare the two measured years. Red marks places at least 5 m lower in 2010 than in 1962, blue places at least 5 m higher. A place counts only if nothing within a few metres stands as high, which keeps most small misalignments out; thin red strips along the sea wall may still be alignment error rather than real change.</p>
-<p>Buildings: each one is a prism drawn from its outline (OpenStreetMap, checked against the 1962 photograph; Building No. 30 and twenty-one unnamed 1962 structures were traced from the photograph itself), its storey count and its completion year from the published building list, on the ground level of GSI’s 5 m elevation model. A building rises in the year it was completed and disappears in the year it collapsed; where a collapse is only visible in the 2010 photographs, the year 2000 stands in and the panel says so. The façades are drawn by type (the 1918 workers’ housing with its open galleries, apartment blocks, the school’s ribbon windows, workshops, wooden houses, the shrine) and are a drawing, not a photograph: at the scale of these aerial photographs one pixel is about 0.8 m and no façade is visible. Roofs and ground carry the photograph of the chosen year. The sea wall is the OpenStreetMap ring with a top height read from the 1962 stereo grid. The morning sun (about 10 a.m. on 30 May) casts shadows through a shadow map so that they agree with the shadows in the 1962 photograph. The stereo height grids of 1962 and 2010 are still used for the sea wall and for the change layer.</p>
-<p>The places marked on the model come from OpenStreetMap, checked against the 1962 photograph. Building No. 30, which OpenStreetMap does not name, was read off the photograph.</p>
 <h2>What to keep in mind</h2>
 <ul>
 <li>Heights are a few metres out in places; this is a reconstruction for understanding the island, not a survey.</li>
@@ -339,13 +325,6 @@
 </section>
 
 <section data-lang="ja" lang="ja" hidden>
-<h2>作り方</h2>
-<p>1962年と2010年の高さは、それぞれ約1キロ（1962年）と約500メートル（2010年）離れた2地点から撮った写真の組から出しました。2地点から見ると、高い建物ほど足もとの護岸より大きく位置がずれます。そのずれをすべての点でコンピュータの画像照合（OpenCV）により測り、カメラの焦点距離と飛行高度から高さに直しました。</p>
-<p>確かめ：1962年は、地図の縮尺から出した飛行高度が1,950メートルで、写真のふちに写る高度計と同じでした。浮き桟橋は海面から約2.5メートルと出ています。2010年は、地図の縮尺から約2,020メートルと出て、写真の記録は2,008メートルです。</p>
-<p>海面の高さは、国土地理院の現在の5メートル標高データに、開けた地面で合わせました。ほかの年は、いちばん近い測った形に写真を重ねています。1975年は1962年の形、最新の写真は2010年の形です。1947年は約3万分の1の米軍撮影の写真なので、平面で表示します。</p>
-<p>変化の色は、高さを測った2つの年を比べたものです。赤は2010年に1962年より5メートル以上低くなったところ、青は5メートル以上高くなったところです。数メートル以内に同じ高さのものがない場合だけ変化として数えるので、わずかな位置ずれの多くは変化として出ません。ただし護岸に沿った細い赤い帯は、実際の変化ではなく位置合わせのずれかもしれません。</p>
-<p>建物：一棟ずつ、輪郭（OpenStreetMap。1962年の写真と照合。OpenStreetMapに無い30号棟と、名称不明の1962年の建物21棟は写真から輪郭を取りました）と、建物一覧の階数・竣工年から角柱として描き、国土地理院の5mメッシュ標高の地面に置いています。建物は竣工年に立ち上がり、崩壊した年に消えます。崩壊が2010年の写真でしか分からないものは2000年を仮の年にして、説明にそう書いています。壁面は種類ごと（1918年の日給社宅の連続した外廊下、アパートの窓列と階の帯、学校の横連窓、工場、木造、神社）に描いた模式で、写真ではありません。空中写真の1画素は約0.8メートルで、壁面は写らないためです。屋根と地面には選んだ年の写真を貼っています。護岸はOpenStreetMapの線で、天端の高さは1962年のステレオ格子から読みました。影は5月30日午前10時ごろの太陽で、1962年の写真の影と向きが合います。1962年と2010年のステレオ高さは、護岸と変化の表示に引き続き使っています。</p>
-<p>立体に付けた場所の位置はOpenStreetMapによるもので、1962年の写真と照らし合わせています。OpenStreetMapに名前のない30号棟は、写真から読み取りました。</p>
 <h2>見るときの注意</h2>
 <ul>
 <li>場所によって高さが数メートルずれています。島を理解するための復元で、測量図ではありません。</li>
@@ -365,13 +344,6 @@
 </section>
 
 <section data-lang="ko" lang="ko" hidden>
-<h2>만든 방법</h2>
-<p>1962년과 2010년의 높이는 각각 약 1킬로미터(1962년), 약 500미터(2010년) 떨어진 두 지점에서 찍은 사진 쌍으로 구했습니다. 두 지점에서 보면 높은 건물일수록 발치의 방파제보다 위치가 더 크게 어긋납니다. 그 어긋남을 모든 점에서 컴퓨터 영상 정합(OpenCV)으로 재고, 카메라 초점거리와 비행 고도로 높이를 계산했습니다.</p>
-<p>확인: 1962년은 지도 축척에서 계산한 비행 고도가 1,950미터로, 사진 가장자리에 찍힌 고도계와 같았습니다. 부잔교는 해수면에서 약 2.5미터로 나옵니다. 2010년은 지도 축척으로 약 2,020미터가 나왔고, 사진 기록은 2,008미터입니다.</p>
-<p>해수면 높이는 일본 국토지리원의 현재 5미터 표고 자료에 트인 땅에서 맞췄습니다. 다른 해는 가장 가까운 측정 형태에 사진을 겹쳤습니다. 1975년은 1962년 형태, 최신 사진은 2010년 형태입니다. 1947년은 약 3만분의 1 축척의 미군 촬영 사진이라 평면으로 보여 줍니다.</p>
-<p>변화 색은 높이를 측정한 두 해를 비교한 것입니다. 빨강은 2010년에 1962년보다 5미터 이상 낮아진 곳, 파랑은 5미터 이상 높아진 곳입니다. 몇 미터 안에 같은 높이의 것이 없을 때만 변화로 셈하므로, 작은 위치 차이는 대부분 변화로 나오지 않습니다. 다만 방파제를 따라 보이는 가느다란 빨간 띠는 실제 변화가 아니라 위치 맞춤의 오차일 수 있습니다.</p>
-<p>건물: 한 동씩 윤곽(OpenStreetMap, 1962년 사진과 대조. OpenStreetMap에 없는 30호동과 이름 모를 1962년 건물 21동은 사진에서 윤곽을 땄습니다)과 건물 목록의 층수·준공년으로 각기둥을 그려, 일본 국토지리원 5m 표고의 지면에 놓았습니다. 건물은 준공년에 올라가고 무너진 해에 사라집니다. 붕괴가 2010년 사진에서만 확인되는 경우는 2000년을 임시 연도로 두고 설명에 그렇게 적었습니다. 벽면은 종류별(1918년 노동자 주택의 이어진 외부 복도, 아파트의 창 열과 층 띠, 학교의 가로 연속창, 공장, 목조, 신사)로 그린 모식도이며 사진이 아닙니다. 항공사진 1픽셀은 약 0.8m라 벽면은 찍히지 않기 때문입니다. 지붕과 지면에는 선택한 해의 사진을 입혔습니다. 방파제는 OpenStreetMap 선이며 윗면 높이는 1962년 스테레오 격자에서 읽었습니다. 그림자는 5월 30일 오전 10시경의 태양으로, 1962년 사진의 그림자와 방향이 맞습니다.</p>
-<p>모델에 표시한 장소의 위치는 OpenStreetMap에서 가져와 1962년 사진과 대조했습니다. OpenStreetMap에 이름이 없는 30호동은 사진에서 읽어 냈습니다.</p>
 <h2>볼 때 유의할 점</h2>
 <ul>
 <li>곳에 따라 높이가 몇 미터씩 어긋납니다. 섬을 이해하기 위한 복원이며 측량도가 아닙니다.</li>
@@ -391,13 +363,6 @@
 </section>
 
 <section data-lang="zh-Hans" lang="zh-Hans" hidden>
-<h2>制作方法</h2>
-<p>1962年和2010年的高度，分别由相距约1公里（1962年）和约500米（2010年）的两个位置拍摄的照片组算出。从两个位置看，越高的建筑相对于脚下的护岸偏移得越多。我们用计算机图像匹配（OpenCV）量出每一点的偏移，再根据相机焦距和飞行高度换算成高度。</p>
-<p>检验：1962年由地图比例尺算出的飞行高度为1,950米，与照片边缘拍到的高度计相同，浮码头算出来约高出海面2.5米。2010年由地图比例尺算出约2,020米，照片记录为2,008米。</p>
-<p>海面高度是在空地上按日本国土地理院现今的5米高程数据对齐的。其他年份的照片叠在最接近的测量形状上：1975年用1962年的形状，最新照片用2010年的形状。1947年是约1:30,000的美军照片，以平面显示。</p>
-<p>变化颜色比较的是测量了高度的两个年份。红色表示2010年比1962年低5米以上的地方，蓝色表示高5米以上的地方。只有在几米范围内都没有同样高的东西时才算作变化，因此大部分微小错位不会显示为变化；不过沿着护岸的细长红色带，可能是对位误差而不是实际变化。</p>
-<p>建筑：每栋按轮廓（OpenStreetMap，并与1962年照片核对；OpenStreetMap没有的30号楼和21栋名称不详的1962年建筑，轮廓取自照片本身）、建筑列表中的层数和竣工年画成棱柱，放在日本国土地理院5米高程的地面上。建筑在竣工那年升起，在倒塌那年消失；倒塌只能在2010年照片中看到的，以2000年作为暂定年份，并在说明中注明。墙面按类型（1918年工人住宅的连续外廊、公寓的窗列与层带、学校的横向连窗、工厂、木造、神社）绘制示意图，不是照片：航拍照片一个像素约0.8米，拍不到墙面。屋顶和地面贴上所选年份的照片。护岸取自OpenStreetMap的线，顶部高度读自1962年的立体格网。阴影按5月30日上午10点左右的太阳投射，与1962年照片中的阴影方向一致。</p>
-<p>模型上标记的地点位置来自OpenStreetMap，并与1962年的照片核对过。OpenStreetMap上没有名称的30号楼，是从照片中辨认出来的。</p>
 <h2>注意事项</h2>
 <ul>
 <li>有些地方高度会差几米；这是帮助理解这座岛的复原，不是测量图。</li>
@@ -417,13 +382,6 @@
 </section>
 
 <section data-lang="zh-Hant" lang="zh-Hant" hidden>
-<h2>製作方法</h2>
-<p>1962年和2010年的高度，分別由相距約1公里（1962年）和約500公尺（2010年）的兩個位置拍攝的照片組算出。從兩個位置看，越高的建築相對於腳下的護岸偏移得越多。我們用電腦影像比對（OpenCV）量出每一點的偏移，再根據相機焦距和飛行高度換算成高度。</p>
-<p>檢驗：1962年由地圖比例尺算出的飛行高度為1,950公尺，與照片邊緣拍到的高度計相同，浮動碼頭算出來約高出海面2.5公尺。2010年由地圖比例尺算出約2,020公尺，照片紀錄為2,008公尺。</p>
-<p>海面高度是在空地上依日本國土地理院現今的5公尺高程資料對齊的。其他年份的照片疊在最接近的測量形狀上：1975年用1962年的形狀，最新照片用2010年的形狀。1947年是約1:30,000的美軍照片，以平面顯示。</p>
-<p>變化顏色比較的是測量了高度的兩個年份。紅色表示2010年比1962年低5公尺以上的地方，藍色表示高5公尺以上的地方。只有在幾公尺範圍內都沒有同樣高的東西時才算作變化，因此大部分微小錯位不會顯示為變化；不過沿著護岸的細長紅色帶，可能是對位誤差而不是實際變化。</p>
-<p>建築：每棟按輪廓（OpenStreetMap，並與1962年照片核對；OpenStreetMap沒有的30號樓和21棟名稱不詳的1962年建築，輪廓取自照片本身）、建築列表中的層數和竣工年畫成稜柱，放在日本國土地理院5公尺高程的地面上。建築在竣工那年升起，在倒塌那年消失；倒塌只能在2010年照片中看到的，以2000年作為暫定年份，並在說明中註明。牆面按類型（1918年工人住宅的連續外廊、公寓的窗列與層帶、學校的橫向連窗、工廠、木造、神社）繪製示意圖，不是照片：航空照片一個像素約0.8公尺，拍不到牆面。屋頂和地面貼上所選年份的照片。護岸取自OpenStreetMap的線，頂部高度讀自1962年的立體格網。陰影按5月30日上午10點左右的太陽投射，與1962年照片中的陰影方向一致。</p>
-<p>模型上標記的地點位置來自OpenStreetMap，並與1962年的照片核對過。OpenStreetMap上沒有名稱的30號樓，是從照片中辨認出來的。</p>
 <h2>注意事項</h2>
 <ul>
 <li>有些地方高度會差幾公尺；這是幫助理解這座島的復原，不是測量圖。</li>
@@ -489,7 +447,7 @@
   window.LAB_TEXT = t;
 })();
 </script>
-<script src="/3d/gunkanjima-3d.js?v=5"></script>
+<script src="/3d/gunkanjima-3d.js?v=6"></script>
 <script src="/3d/gunkanjima-podcast.js?v=6"></script>
 </body>
 </html>
