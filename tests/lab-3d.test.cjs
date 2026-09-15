@@ -47,11 +47,12 @@ test('the five 3D pages are indexable, cross-linked with hreflang, credited, and
   assert.ok(sitemap.includes('<loc>'+urls[l]+'</loc>'),l+' in the sitemap');
  }
  assert.ok(read('_redirects').includes('/lab/gunkanjima-3d /3d/gunkanjima 301'),'old lab route redirects');
- for(const js of ['3d/gunkanjima-3d.js','3d/gunkanjima-podcast.js']){
+ for(const [js,v] of [['3d/gunkanjima-3d.js','4'],['3d/gunkanjima-podcast.js','5']]){
   assert.ok(!/https?:\/\//.test(read(js)),js+' loads nothing from other sites');
-  assert.equal(read(js).match(/const V = '(\d+)'/)[1],'4',js);
-  assert.ok(read('3d/gunkanjima.html').includes('/'+js+'?v=4'),js+' version on the page');
+  assert.equal(read(js).match(/const V = '(\d+)'/)[1],v,js);
+  assert.ok(read('3d/gunkanjima.html').includes('/'+js+'?v='+v),js+' version on the page');
  }
+ assert.ok(read('3d/gunkanjima-podcast.js').includes('ensureSeekable'),'player copes with a host that ignores Range');
  assert.ok(/const directories=\[[^\]]*'3d'/.test(read('scripts/build.cjs')),'build copies 3d/');
 });
 

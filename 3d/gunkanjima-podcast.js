@@ -3,7 +3,7 @@
    turns that off. Nothing is loaded until the listener presses play or picks a language. */
 (function(){
   'use strict';
-  const V = '4';
+  const V = '5';
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
   const T = window.LAB_TEXT || {};
@@ -42,7 +42,14 @@
   function seekTo(t, andPlay){
     const go = () => {
       const d = isFinite(audio.duration) && audio.duration > 0 ? audio.duration : (data ? data.duration : 0);
-      audio.currentTime = Math.max(0, Math.min(t, Math.max(0, d - 0.2)));
+      const target = Math.max(0, Math.min(t, Math.max(0, d - 0.2)));
+      if (!canSeekTo(target) && !audio.src.startsWith('blob:')){
+        /* the track is not seekable yet: keep the wish, fetch the file into memory, apply it when that is ready */
+        pendingSeek = target; wantPlay = andPlay || !audio.paused; ensureSeekable();
+        time.textContent = fmt(target) + ' / ' + fmt(d) + ' …';
+        return;
+      }
+      audio.currentTime = target;
       pendingSeek = null;
       if (andPlay && audio.paused) audio.play().catch(() => {});
       paintTime();
@@ -50,6 +57,33 @@
     if (!audio.src){ (loading || load(lang)).then(() => seekTo(t, andPlay)); return; }
     if (audio.readyState >= 1) go(); else { pendingSeek = t; audio.addEventListener('loadedmetadata', go, { once: true }); if (andPlay) audio.play().catch(() => {}); }
   }
+  /* Some hosts answer a Range request with the whole file (200, no 206). The browser then marks the
+     track unseekable and every skip snaps back to 0:00. When that is detected the file is fetched
+     once into memory and played from there, where every position can be reached. */
+  let blobUrl = null, fetchingBlob = null, wantPlay = false;
+  function canSeekTo(t){
+    const s = audio.seekable;
+    for (let i = 0; i < s.length; i++) if (t >= s.start(i) - 0.5 && t <= s.end(i) + 0.5) return true;
+    return false;
+  }
+  function ensureSeekable(){
+    if (fetchingBlob || !audio.src || audio.src.startsWith('blob:')) return;
+    const src = audio.src;
+    fetchingBlob = fetch(src).then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); }).then(b => {
+      if (audio.src !== src) return;   /* the language changed meanwhile */
+      const t = pendingSeek != null ? pendingSeek : audio.currentTime, resume = wantPlay || !audio.paused;
+      if (blobUrl) URL.revokeObjectURL(blobUrl);
+      blobUrl = URL.createObjectURL(b);
+      audio.addEventListener('loadedmetadata', () => { audio.currentTime = t; pendingSeek = null; wantPlay = false; if (resume) audio.play().catch(() => {}); paintTime(); }, { once: true });
+      audio.src = blobUrl;
+      audio.load();
+    }).catch(() => {}).then(() => { fetchingBlob = null; });
+  }
+  audio.addEventListener('loadedmetadata', () => {
+    if (audio.src.startsWith('blob:')) return;
+    /* seekable stays empty for an unseekable stream; give the browser a moment, then fetch the file */
+    setTimeout(() => { if (audio.src && !audio.src.startsWith('blob:') && isFinite(audio.duration) && !canSeekTo(Math.max(0, audio.duration - 1))) ensureSeekable(); }, 1500);
+  });
   function skip(sec){ seekTo((audio.currentTime || 0) + sec, !audio.paused); }
   function chapterStep(dir){
     if (!data) return;
