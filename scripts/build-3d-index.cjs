@@ -6,7 +6,7 @@ const root=path.resolve(__dirname,'..');
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 const ITEMS=[{
  path:'gunkanjima',img:'/3d/gunkanjima-card.jpg?v=4',years:{en:'1947 → now',ja:'1947 → 現在',ko:'1947 → 현재','zh-Hans':'1947 → 今天','zh-Hant':'1947 → 今天'},
- name:{en:'Gunkanjima (Hashima Island), 1947 to today',ja:'軍艦島（端島）　1947年から現在まで',ko:'군함도(하시마), 1947년부터 지금까지','zh-Hans':'军舰岛（端岛），1947年至今','zh-Hant':'軍艦島（端島），1947年至今'},
+ name:{en:'Gunkanjima (Hashima Island), 1947 to today',ja:'よみがえる軍艦島（端島）　1947年から現在まで',ko:'군함도(하시마), 1947년부터 지금까지','zh-Hans':'军舰岛（端岛），1947年至今','zh-Hant':'軍艦島（端島），1947年至今'},
  hook:{en:'The coal-mining island off Nagasaki rebuilt building by building over five aerial photographs. Every block rises in the year it was completed and falls when it collapsed; tap a building for its year, storeys, use and photographs; step inside twelve rooms and places, from a flat in Building 30 to the rooftop nursery, a classroom, the hospital and the baths; or let the audio guide move the model.',
   ja:'長崎沖の炭鉱の島を、5枚の空中写真の上に建物ごとに復元。建物は竣工年に立ち上がり、崩れた年に消えます。建物を押すと竣工年・階数・用途と写真が出て、30号棟の一室から屋上の保育園・教室・病院・共同浴場まで12か所の中に入れ、音声ガイドに合わせて模型が動きます。',
   ko:'나가사키 앞바다의 탄광 섬을 항공사진 5장 위에 건물별로 복원. 건물은 준공년에 올라가고 무너진 해에 사라집니다. 건물을 누르면 준공년·층수·용도와 사진이 나오고, 30호동의 한 세대부터 옥상 보육원·교실·병원·공동 목욕탕까지 12곳 안에 들어갈 수 있으며, 음성 가이드에 맞춰 모형이 움직입니다.',
@@ -23,10 +23,10 @@ const T={
   howH:'How the reconstructions are made',
   how:['Outlines, storey counts and completion years come from surveys, maps and published records; the aerial photographs of each year lie on the roofs and the ground.','Façades are drawn by building type, and heights can be a few metres out where no survey exists.','Interiors are built from published plans, photographs and residents’ accounts. Documented parts are drawn solid; assumptions are drawn translucent and are listed on the page.','Every page credits its photographs and sources.'],
   home:'Japan Time Atlas',back:'Back to the atlas'},
- ja:{title:'日本の3D復元シリーズ｜空中写真と資料から場所を立体に | Japan Time Atlas',description:'空中写真・実測資料・当時の写真から、日本の場所を建物ごとに3Dで復元するシリーズ。第1回は軍艦島（端島）、1947年から現在まで。建物の解説、内部の復元、音声ガイド付き。',
-  crumb:'3D復元',h1:'3D復元',badge:'シリーズ',
-  lead:'空中写真と実測資料、当時の写真から、場所を立体に戻すシリーズです。年代を動かすと建物は竣工年に立ち上がり、崩れた年に消えます。資料のある建物は中にも入れます。',
-  no:'第',open:'▶ 3Dモデルを開く',audio:'🔊 音声ガイド（音が出ます）',map:'🗾 場所を見る（02 日本全体の地図）',
+ ja:{title:'3Dでよみがえる日本｜昔の航空写真と資料で当時の町並みへタイムスリップ | Japan Time Atlas',description:'昔の航空写真・実測資料・当時の写真から、日本の町並みを建物ごとに3Dで再現するシリーズ。第1回は「よみがえる軍艦島（端島）」、1947年から現在まで。建物の解説、室内の再現、音声ガイド付き。',
+  crumb:'3Dでよみがえる',h1:'3Dでよみがえる日本',badge:'シリーズ',
+  lead:'昔の航空写真と実測資料、当時の写真から、あの日の町並みを3Dでよみがえらせるシリーズです。年代を動かすと建物は竣工年に立ち上がり、崩れた年に消えます。資料のある建物は中にも入れます。',
+  no:'第',open:'▶ 3Dモデルを開く',audio:'🔊 音声ガイド（音が出ます）',map:'🗾 場所を見る（02 日本まるごと地図）',
   next:'次の場所',nextText:'次の復元は準備中です。新しい場所はこのページとトップの06タブに追加します。',
   howH:'復元の方法',
   how:['輪郭・階数・竣工年は実測資料、地図、公刊資料から取り、各年の空中写真を屋根と地面に貼っています。','壁面は建物の種類ごとに描いた模式で、実測のない場所では高さが数メートルずれます。','内部は公開された平面図、写真、元住民の証言から組み立てています。出典のある部分は不透明、推定の部分は半透明で描き、ページに列挙します。','各ページに写真の撮影者と出典を記しています。'],

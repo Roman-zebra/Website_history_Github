@@ -8,10 +8,10 @@
    "blocked": {}
   },
   "ja": {
-   "current": "ja-30gou-naibu",
+   "current": "ja-yomigaeru-naibu",
    "since": "2026-09-15",
-   "basis": "suggestions",
-   "previous": "ja-3d-1947-today",
+   "basis": "owner",
+   "previous": "ja-30gou-naibu",
    "blocked": {}
   },
   "ko": {
@@ -55,6 +55,15 @@
    "to": "ko-location-map",
    "basis": "suggestions",
    "reason": "better match to search suggestions (35.7 → 48.1)"
+  },
+  {
+   "date": "2026-09-15",
+   "lang": "ja",
+   "action": "switch",
+   "from": "ja-30gou-naibu",
+   "to": "ja-yomigaeru-naibu",
+   "basis": "owner",
+   "reason": "the site owner chose the TV-style title (suggestions 34.6 → 33.8)"
   }
  ]
 }
