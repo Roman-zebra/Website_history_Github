@@ -12,6 +12,7 @@ are drawn solid; furniture and fittings that are only typical of the period are 
 """
 import json
 import math
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -405,8 +406,10 @@ def scene_no30(model):
     for i in range(3):
         ff.add(2.0, -0.4 + i * 0.7, y + 1.1, 0.02, 0.6, 0.5, [CLOTH_WHITE, CLOTH_INDIGO, CLOTH_CREAM][i], KIND['cloth'], assumed=True, tag='laundry', sd=i)
     cam = {'u': round(cu, 1), 'v': round(cv, 1), 'y': round(ground + 2 * floorH + 1.2, 1), 'dist': 8.5, 'el': 0.18, 'az': 2.4}
+    fu, fv = ff.at(-0.55, 0)   # the narration is about the flat: the camera has to see into it
     return {
         'building': '30号棟', 'ghost': ['30号棟'], 'center': [round(cu, 1), round(cv, 1)], 'floor': round(ground, 1),
+        'focus': {'u': round(fu, 1), 'v': round(fv, 1), 'y': round(y + 1.0, 2)},
         'camera': cam, 'flatCamera': ff.camera(-0.3, 0.1, y + 0.9, 3.2, 4.0, 1.8, fov=0.95),
         'boxes': boxes,
         'text': {
@@ -491,7 +494,7 @@ def scene_shrine(model, at):
         # from the front, at eye level: from the top of the stairway outside the torii toward the worship hall;
         # the viewer then walks on through the torii to 'approach', in front of the hall and the inner shrine
         'camera': f.camera(hx - 0.5, 0, top + 1.7, (tx + 2.3) - (hx - 0.5), 0, 0.5, fov=1.0),
-        'approach': f.camera(sx + 0.5, 0, top + 1.5, (hx + 3.2) - (sx + 0.5), 0, 0.25, fov=1.0),
+        'approach': f.camera(sx + 1.8, 0, top + 1.3, (hx + 3.2) - (sx + 1.8), 0, 0.35, fov=1.0),
         'boxes': boxes,
         'text': {
             'en': 'Hashima Shrine on top of the rock, reached from the Jigokudan stairway: through the torii, past the cenotaph, to the wooden worship hall and the small concrete inner shrine behind it. The inner shrine, the torii and the cenotaph are drawn from the 1992 photographs; the mossy boulders and shrubs follow the same photographs. The worship hall collapsed long ago and its size, and the exact line of the stairway, are assumptions drawn translucent.',
@@ -1094,52 +1097,6 @@ def scene_roofgarden(model):
 LABELS = {'no30': {'en': 'Light well and a flat', 'ja': '中庭の回廊と一室', 'ko': '채광정 복도와 한 세대', 'zh-Hans': '天井外廊与一户', 'zh-Hant': '天井外廊與一戶'}, 'shrine': {'en': 'The shrine precinct', 'ja': '神社の境内', 'ko': '신사 경내', 'zh-Hans': '神社境内', 'zh-Hant': '神社境內'}, 'no65roof': {'en': 'Rooftop nursery', 'ja': '屋上の保育園', 'ko': '옥상 보육원', 'zh-Hans': '屋顶保育园', 'zh-Hant': '屋頂保育園'}, 'no65flat': {'en': 'A flat', 'ja': '住戸（六畳と四畳半）', 'ko': '한 세대', 'zh-Hans': '一户住宅', 'zh-Hant': '一戶住宅'}, 'school': {'en': 'A classroom', 'ja': '3階の教室', 'ko': '3층 교실', 'zh-Hans': '三楼的教室', 'zh-Hant': '三樓的教室'}, 'gym': {'en': 'The gymnasium', 'ja': '体育館', 'ko': '체육관', 'zh-Hans': '体育馆', 'zh-Hant': '體育館'}, 'hospital': {'en': 'A ward', 'ja': '2階の病室', 'ko': '2층 병실', 'zh-Hans': '二楼的病房', 'zh-Hant': '二樓的病房'}, 'ginza': {'en': 'Hashima Ginza shops', 'ja': '1階の商店街（端島銀座）', 'ko': '1층 상점가(하시마 긴자)', 'zh-Hans': '底层商店街（端岛银座）', 'zh-Hant': '底層商店街（端島銀座）'}, 'nikkyu': {'en': 'Corridor and a flat', 'ja': '大廊下と住戸', 'ko': '큰 복도와 한 세대', 'zh-Hans': '大走廊与一户', 'zh-Hant': '大走廊與一戶'}, 'bath': {'en': 'Basement bath', 'ja': '地下の共同浴場', 'ko': '지하 공동 목욕탕', 'zh-Hans': '地下公共浴场', 'zh-Hant': '地下公共浴場'}, 'no3': {'en': 'A managers’ flat', 'ja': '幹部住宅の一室', 'ko': '간부 주택의 한 세대', 'zh-Hans': '干部住宅的一户', 'zh-Hant': '幹部住宅的一戶'}, 'roofgarden': {'en': 'Rooftop farm', 'ja': '屋上菜園', 'ko': '옥상 밭', 'zh-Hans': '屋顶菜园', 'zh-Hant': '屋頂菜園'}}
 
 
-def eye_of(cam):
-    """The camera's eye in the crop frame (u, v px; y m), placed as the viewer places it."""
-    ce = math.cos(cam['el'])
-    dx, dz = cam['dist'] * ce * math.sin(cam['az']), cam['dist'] * ce * math.cos(cam['az'])
-    c, s = math.cos(ROT), math.sin(ROT)
-    du, dv = dx * c + dz * s, -dx * s + dz * c
-    return cam['u'] + du / MPP, cam['v'] + dv / MPP, cam['y'] + cam['dist'] * math.sin(cam['el'])
-
-
-def inside_box(b, u, v, margin=0.0):
-    a = math.radians(b.get('r', 0.0))
-    du, dv = (u - b['u']) * MPP, (v - b['v']) * MPP
-    lx, lz = du * math.cos(a) + dv * math.sin(a), -du * math.sin(a) + dv * math.cos(a)
-    return abs(lx) <= b['s'][0] / 2 - margin and abs(lz) <= b['s'][2] / 2 - margin
-
-
-def keep_eye_inside(sc, eye_above_floor=1.6, margin=0.5):
-    """A camera that looks at its room through the room's own ceiling (eye above the ceiling, target below it)
-    moves inside: same target and heading, the eye at standing height under the ceiling and within its footprint."""
-    cam, floor = sc['camera'], sc['floor']
-    overhead = [b for b in sc['boxes'] if b['s'][1] <= 0.6 and b['s'][0] * b['s'][2] >= 4 and b['y'] >= floor + 1.5
-                and not b.get('a') and b.get('k') not in (KIND['glass'], KIND['water'])]
-    eu, ev, ey = eye_of(cam)
-    blocking = None
-    for b in overhead:
-        if ey > b['y'] > cam['y']:
-            t = (ey - b['y']) / (ey - cam['y'])
-            if inside_box(b, eu + (cam['u'] - eu) * t, ev + (cam['v'] - ev) * t):
-                blocking = b
-                break
-    if not blocking:
-        return False
-    hu, hv = eu - cam['u'], ev - cam['v']
-    hl = math.hypot(hu, hv)
-    if hl == 0:
-        return False
-    h = hl * MPP
-    while h > 0.8 and not inside_box(blocking, cam['u'] + hu / hl * h / MPP, cam['v'] + hv / hl * h / MPP, margin):
-        h -= 0.1
-    rise = min(blocking['y'] - 0.45, floor + eye_above_floor) - cam['y']
-    dist = math.hypot(h, rise)
-    cam['dist'] = round(dist, 2)
-    cam['el'] = round(math.asin(max(-1.0, min(1.0, rise / dist))), 3)
-    return True
-
-
 def main():
     model = json.loads((WEB / 'gunkanjima-model.json').read_text(encoding='utf-8'))
     at = terrain()
@@ -1150,9 +1107,22 @@ def main():
         'ginza': scene_ginza(model), 'nikkyu': scene_nikkyu(model), 'bath': scene_bath(model),
         'no3': scene_no3(model), 'roofgarden': scene_roofgarden(model),
     }
+    # every camera has to see its room: the eye in the open, a clear line to the target, most furnishings in view
+    sys.path.insert(0, str(HERE))
+    import viewcheck
+    world = viewcheck.World(WEB)
     for k, sc in scenes.items():
-        if keep_eye_inside(sc):
-            print(k, 'camera moved under the ceiling', sc['camera'])
+        view = viewcheck.Scene(world, sc)
+        new, before = view.best_camera(sc['camera'])
+        if new:
+            print(k, 'camera moved for a clear view: score', before['score'], '->', view.assess(new)['score'], new)
+            sc['camera'] = new
+        after = view.assess(sc['camera'])
+        if not view.passes(after):
+            raise SystemExit(k + ': no camera found that sees the room ' + str(after))
+        # the shrine's walk in keeps its designed direction; it only has to be unobstructed
+        if 'approach' in sc and not view.passes(view.assess(sc['approach']), need_score=False):
+            raise SystemExit(k + ': the approach view is blocked ' + str(view.assess(sc['approach'])))
     out = {'note': 'Parts in the 1962 crop frame (u, v px; y m above sea level; sizes in m). a=1 marks an assumption drawn translucent; k is the material kind; p the primitive (box, cyl, rock, ball).', 'scenes': scenes}
     (WEB / 'gunkanjima-interiors.json').write_text(json.dumps(out, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     for k, sc in scenes.items():

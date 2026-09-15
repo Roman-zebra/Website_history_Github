@@ -105,15 +105,16 @@ function decide({candidates,state,gsc,suggest,today,opts}){
    }
   }
 
-  /* 2. what people search: Search Console when there is enough, otherwise the suggestions snapshot,
-        which is used only until the first Search Console decision so the two never pull against each other */
+  /* 2. what people search: Search Console when there is enough, otherwise the suggestions snapshot, which is used
+        only until the first Search Console decision (so the two never pull against each other) and never against a
+        title the site owner picked (basis 'owner'); Search Console data can still replace that after the cooldown */
   let phrases=null;
   if(gsc){
    const rows=(gsc.queries||[]).filter(r=>r.page===url&&inMarket(r.country));
    d.impressions=rows.reduce((a,r)=>a+r.impressions,0);
    if(d.impressions>=o.minImpressions){phrases=searchPhrases(rows);d.basis='search-console';}
   }
-  if(!phrases&&st.basis!=='search-console'){
+  if(!phrases&&st.basis!=='search-console'&&st.basis!=='owner'){
    const s=suggestionPhrases(suggest,code);
    if(s.length){phrases=s;d.basis='suggestions';}
   }

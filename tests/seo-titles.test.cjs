@@ -45,6 +45,20 @@ test('before Search Console, the suggestions choose once and the choice then hol
  assert.equal(again.decisions[0].action,'keep');
 });
 
+test('a title the site owner picked is not replaced by the suggestions, only by Search Console after the cooldown',()=>{
+ const suggest={langs:{en:{phrases:{'gunkanjima before it was abandoned':3}}}};
+ const state={langs:{en:{current:'c',since:'2026-09-15',basis:'owner',previous:'a',blocked:{}}},periods:[],log:[]};
+ const quiet=seo.decide({candidates:CANDS,state,suggest,today:'2026-11-01'});
+ assert.equal(quiet.decisions[0].action,'keep');
+ assert.equal(quiet.state.langs.en.current,'c');
+ const gsc={range:range('2026-11-01'),queries:[q('gunkanjima before it was abandoned',400)],daily:[]};
+ const early=seo.decide({candidates:CANDS,state,suggest,gsc,today:'2026-10-01'});
+ assert.equal(early.decisions[0].action,'keep','within 28 days of the owner choosing');
+ const later=seo.decide({candidates:CANDS,state,suggest,gsc,today:'2026-11-01'});
+ assert.equal(later.decisions[0].action,'switch');
+ assert.equal(later.state.langs.en.current,'b');
+});
+
 test('Search Console demand changes a title only after the cooldown, counting only the page markets',()=>{
  const state={langs:{en:{current:'a',since:'2026-09-15',basis:'suggestions',previous:null,blocked:{}}},periods:[],log:[]};
  const data=today=>({range:range(today),queries:[q('gunkanjima before it was abandoned',400),q('gunkanjima 3d',60),q('gunkanjima tour boats',5000,3,'jpn')],daily:[]});
