@@ -66,7 +66,7 @@ test('the five 3D pages are indexable, cross-linked with hreflang, credited, and
  }
  assert.equal(read('explore.js').match(/const LAB_ITEMS = \[/g).length,1,'the home tab lists reconstructions from one array');
  assert.ok(read('explore.js').includes("class=\"card-cta\""),'the card says what a tap does');
- for(const [js,v] of [['3d/gunkanjima-3d.js','4'],['3d/gunkanjima-podcast.js','5']]){
+ for(const [js,v] of [['3d/gunkanjima-3d.js','5'],['3d/gunkanjima-podcast.js','6']]){
   assert.ok(!/https?:\/\//.test(read(js)),js+' loads nothing from other sites');
   assert.equal(read(js).match(/const V = '(\d+)'/)[1],v,js);
   assert.ok(read('3d/gunkanjima.html').includes('/'+js+'?v='+v),js+' version on the page');

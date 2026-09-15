@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Temp\claude\workspace\ab423f81-49d9-45a4-bb74-0c5cb0377103\scratchpad\jta\scripts\lab-3d\podcast\build_podcast.py", line 180, in <module>
+    main()
+  File "C:\Users\user\AppData\Local\Temp\claude\workspace\ab423f81-49d9-45a4-bb74-0c5cb0377103\scratchpad\jta\scripts\lab-3d\podcast\build_podcast.py", line 106, in main
+    lab = json.loads((ROOT / 'web' / 'gunkanjima-lab.json').read_text(encoding='utf-8'))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\user\\AppData\\Local\\Temp\\claude\\workspace\\ab423f81-49d9-45a4-bb74-0c5cb0377103\\scratchpad\\jta\\scripts\\lab-3d\\web\\gunkanjima-lab.json'

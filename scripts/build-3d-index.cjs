@@ -5,13 +5,13 @@ const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 const ITEMS=[{
- path:'gunkanjima',img:'/3d/gunkanjima-card.jpg?v=4',years:'1947 → now',
+ path:'gunkanjima',img:'/3d/gunkanjima-card.jpg?v=4',years:{en:'1947 → now',ja:'1947 → 現在',ko:'1947 → 현재','zh-Hans':'1947 → 今天','zh-Hant':'1947 → 今天'},
  name:{en:'Gunkanjima (Hashima Island), 1947 to today',ja:'軍艦島（端島）　1947年から現在まで',ko:'군함도(하시마), 1947년부터 지금까지','zh-Hans':'军舰岛（端岛），1947年至今','zh-Hant':'軍艦島（端島），1947年至今'},
- hook:{en:'The coal-mining island off Nagasaki rebuilt building by building over five aerial photographs. Every block rises in the year it was completed and falls when it collapsed; tap a building for its year, storeys, use and photographs; step inside Building 30 and Hashima Shrine; or let the audio guide move the model.',
-  ja:'長崎沖の炭鉱の島を、5枚の空中写真の上に建物ごとに復元。建物は竣工年に立ち上がり、崩れた年に消えます。建物を押すと竣工年・階数・用途と写真が出て、30号棟と端島神社の中に入れ、音声ガイドに合わせて模型が動きます。',
-  ko:'나가사키 앞바다의 탄광 섬을 항공사진 5장 위에 건물별로 복원. 건물은 준공년에 올라가고 무너진 해에 사라집니다. 건물을 누르면 준공년·층수·용도와 사진이 나오고, 30호동과 하시마 신사 안에 들어갈 수 있으며, 음성 가이드에 맞춰 모형이 움직입니다.',
-  'zh-Hans':'把长崎外海的煤矿岛逐栋复原在5张航拍照片之上。建筑在建成那年立起、在倒塌那年消失；点按建筑可查看竣工年、层数、用途和照片；可走进30号楼和端岛神社；音频导览会带动模型移动。',
-  'zh-Hant':'把長崎外海的煤礦島逐棟復原在5張航空照片之上。建築在建成那年立起、在倒塌那年消失；點按建築可查看竣工年、層數、用途和照片；可走進30號樓和端島神社；語音導覽會帶動模型移動。'},
+ hook:{en:'The coal-mining island off Nagasaki rebuilt building by building over five aerial photographs. Every block rises in the year it was completed and falls when it collapsed; tap a building for its year, storeys, use and photographs; step inside twelve rooms and places, from a flat in Building 30 to the rooftop nursery, a classroom, the hospital and the baths; or let the audio guide move the model.',
+  ja:'長崎沖の炭鉱の島を、5枚の空中写真の上に建物ごとに復元。建物は竣工年に立ち上がり、崩れた年に消えます。建物を押すと竣工年・階数・用途と写真が出て、30号棟の一室から屋上の保育園・教室・病院・共同浴場まで12か所の中に入れ、音声ガイドに合わせて模型が動きます。',
+  ko:'나가사키 앞바다의 탄광 섬을 항공사진 5장 위에 건물별로 복원. 건물은 준공년에 올라가고 무너진 해에 사라집니다. 건물을 누르면 준공년·층수·용도와 사진이 나오고, 30호동의 한 세대부터 옥상 보육원·교실·병원·공동 목욕탕까지 12곳 안에 들어갈 수 있으며, 음성 가이드에 맞춰 모형이 움직입니다.',
+  'zh-Hans':'把长崎外海的煤矿岛逐栋复原在5张航拍照片之上。建筑在建成那年立起、在倒塌那年消失；点按建筑可查看竣工年、层数、用途和照片；可走进从30号楼的一户到屋顶保育园、教室、医院和公共浴场的12处内部；音频导览会带动模型移动。',
+  'zh-Hant':'把長崎外海的煤礦島逐棟復原在5張航空照片之上。建築在建成那年立起、在倒塌那年消失；點按建築可查看竣工年、層數、用途和照片；可走進從30號樓的一戶到屋頂保育園、教室、醫院和公共浴場的12處內部；語音導覽會帶動模型移動。'},
  map:'#l-hashima-island'
 }];
 const T={
@@ -75,7 +75,7 @@ module.exports=function(LANGS,SITE){
   const t=T[l.code],url=SITE+'/3d/'+l.dir,home='/'+(l.code==='en'?'':'?lang='+({ja:'ja',ko:'ko','zh-Hans':'zh-CN','zh-Hant':'zh-TW'})[l.code]);
   const items=ITEMS.map((it,i)=>{
    const href='/3d/'+l.dir+it.path;
-   return `<li><a href="${href}"><img src="${it.img}" alt="" loading="lazy" decoding="async"></a><div><p class="no">${esc(t.no)} ${i+1} · ${esc(it.years)}</p><h2><a href="${href}">${esc(it.name[l.code]||it.name.en)}</a></h2><p>${esc(it.hook[l.code]||it.hook.en)}</p><p class="acts"><a class="btn-3d" href="${href}">${esc(t.open)}</a> <a href="${href}#play">${esc(t.audio)}</a> <a href="${home}${it.map}">${esc(t.map)}</a></p></div></li>`;
+   return `<li><a href="${href}"><img src="${it.img}" alt="" loading="lazy" decoding="async"></a><div><p class="no">${esc(t.no)} ${i+1} · ${esc(it.years[l.code]||it.years.en)}</p><h2><a href="${href}">${esc(it.name[l.code]||it.name.en)}</a></h2><p>${esc(it.hook[l.code]||it.hook.en)}</p><p class="acts"><a class="btn-3d" href="${href}">${esc(t.open)}</a> <a href="${href}#play">${esc(t.audio)}</a> <a href="${home}${it.map}">${esc(t.map)}</a></p></div></li>`;
   }).join('\n')+`\n<li class="soon"><div></div><div><p class="no">${esc(t.no)} ${ITEMS.length+1}</p><h2>${esc(t.next)}</h2><p>${esc(t.nextText)}</p></div></li>`;
   const ld=JSON.stringify({'@context':'https://schema.org','@graph':[
    {'@type':'CollectionPage','name':t.title,'description':t.description,'inLanguage':l.html,'url':url,'isPartOf':{'@type':'WebSite','name':'Japan Time Atlas','url':SITE+'/'},

@@ -36,7 +36,7 @@
   },
   {
    "s": "B",
-   "t": "Five thousand two hundred and sixty-seven, in the 1960 census. That's about eighty-three thousand people per square kilometre. Nine times the density of central Tokyo at the time. People called it the most crowded place on earth, and they were probably right."
+   "t": "Five thousand two hundred and sixty-seven people in 1960. That's about eighty-three thousand people per square kilometre. Nine times the density of central Tokyo at the time. People called it the most crowded place on earth, and they were probably right."
   },
   {
    "s": "A",
@@ -142,12 +142,31 @@
    "s": "B",
    "t": "It opened with four storeys and they added three more later. And it didn't stop there. Along the west side, facing the open sea, runs a line of miners' housing, Buildings Sixteen to Twenty, from 1918 onwards.",
    "cue": {
-    "spot": "nikkyu"
+    "spot": "nikkyu",
+    "interior": "nikkyu"
    }
   },
   {
    "s": "A",
    "t": "So the housing is also the breakwater."
+  },
+  {
+   "s": "B",
+   "t": "And the ground floor was Hashima Ginza: the greengrocer, the fishmonger, the sake shop, a pawnbroker, and a market every day of traders who came over by boat.",
+   "cue": {
+    "interior": "ginza"
+   }
+  },
+  {
+   "s": "A",
+   "t": "I heard there were vegetable plots on the roofs."
+  },
+  {
+   "s": "B",
+   "t": "On Buildings Eighteen and Nineteen. They carried soil up, the children grew tomatoes and aubergines, and rice in the autumn. There was a harvest festival in 1966.",
+   "cue": {
+    "interior": "roofgarden"
+   }
   },
   {
    "s": "B",
@@ -176,9 +195,17 @@
   },
   {
    "s": "B",
+   "t": "A nursery, built on the roof of the east wing in 1953 for a hundred and fifty children. The garden pond the children helped build and the iron slide are still up there.",
+   "cue": {
+    "interior": "no65roof"
+   }
+  },
+  {
+   "s": "B",
    "t": "No ground to spare. Right next to it is the school, seven storeys. Built in 1957 with six, one more added in 1961. Its biggest year ever was 1962: one thousand one hundred and sixty-nine pupils.",
    "cue": {
-    "spot": "school"
+    "spot": "school",
+    "interior": "school"
    }
   },
   {
@@ -188,6 +215,25 @@
   {
    "s": "B",
    "t": "The very same. This photo catches the island at its peak."
+  },
+  {
+   "s": "B",
+   "t": "There was a hospital too: Building Sixty-Nine, just north of the school. Four storeys, fifty-eight beds, an operating theatre and an X-ray room.",
+   "cue": {
+    "spot": "no65",
+    "interior": "hospital"
+   }
+  },
+  {
+   "s": "A",
+   "t": "And baths?"
+  },
+  {
+   "s": "B",
+   "t": "Communal baths. The lower bath in the basement of Building Sixty-One took twenty people at a time. Free, open from three to eight in the evening. Only the managers in Building Three and the club had baths of their own.",
+   "cue": {
+    "interior": "bath"
+   }
   },
   {
    "s": "A",
@@ -331,7 +377,11 @@
   },
   {
    "s": "B",
-   "t": "The managers' housing. Best view on the island, and in better shape than most. So that's where they begin."
+   "t": "The managers' housing. Best view on the island, and in better shape than most. So that's where they begin.",
+   "cue": {
+    "spot": "no3",
+    "interior": "no3"
+   }
   },
   {
    "chapter": "Your turn"
