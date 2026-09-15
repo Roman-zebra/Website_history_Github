@@ -6,7 +6,7 @@
      B. 地図タイル・碑の写真      … cache-first で溜める（一度見た場所は圏外でも出る、枚数上限あり）
      C. Overpass / Wikipedia      … network-only（結果は app.js 側が localStorage に残す）
 */
-const VERSION = 'v0.88.0';
+const VERSION = 'v0.89.0';
 const SHELL = `shell-${VERSION}`;
 /* タイルと地域JSONの枠は版をまたいで残す。以前は `tiles-${VERSION}` だったので、sw.js を更新するたびに
    activate が端末のタイル（最大700枚）と地域JSON（最大40本）を消し、次の表示で全部取り直していた
@@ -30,21 +30,20 @@ const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。�
      版の数字を直に書いた行が app.js / explore.js に1つでもあれば
      tools/bump_version.py が exit 1 で止める（見張りをコメントでなく道具に置いた）。 */
 const DATA_V = '0.48';
-const ASSET_V = '0.88';
+const ASSET_V = '0.89';
 const DATA_FILES = [
   'facilities-index-v1.json', 'monuments-index.json', 'kid-text.json', 'places-index.json',
   'landmarks.json', 'regional-landmarks-v1.json', 'liminal.json', 'places-world.json', 'affiliate.json',
   'topics.json', 'areas.json',
 ];
-/* search-core / search-worker / affiliate-config は、呼ぶ側（explore.js・search-worker.js・gyg-widget.js）が
-   ?v=0.80 を直に書いているので、ここで ?v=ASSET_V 版を入れても一度も使われず、sw.js を更新するたびに
-   取り直すだけだった（affiliate-config.json だけで150KB）。呼ぶ側を ASSET_V に揃えたらここへ戻す。 */
+/* explore.js・gyg-widget.js・search-worker.js は自分の URL の ?v= から版を取るので、ここの ?v=ASSET_V と一致する
+   （以前は ?v=0.80 の直書きで、この3本の precache は一度も使われなかった）。 */
 const SHELL_FILES = [
   './walking-data.js?v=' + ASSET_V, './walking-time.js?v=' + ASSET_V, './walking-time.css?v=' + ASSET_V,
   './', './index.html',
   './explore.html', './explore.webmanifest',
   './style.css?v=' + ASSET_V, './app.js?v=' + ASSET_V,
-  './place-ui.js?v=' + ASSET_V, './affiliate-router.js?v=' + ASSET_V, './about', './about.js?v=' + ASSET_V,
+  './search-core.js?v=' + ASSET_V, './search-worker.js?v=' + ASSET_V, './place-ui.js?v=' + ASSET_V, './affiliate-router.js?v=' + ASSET_V, './affiliate-config.json?v=' + ASSET_V, './about', './about.js?v=' + ASSET_V,
   './gyg-products-data.js?v=' + ASSET_V, './gyg-products.js?v=' + ASSET_V, './activities-data.js?v=' + ASSET_V, './gyg-frame.html', './gyg-widget.js?v=' + ASSET_V,
   './design.css?v=' + ASSET_V, './atmosphere.js?v=' + ASSET_V,
   './ja.html', './ko.html', './zh-cn.html', './zh-tw.html',
@@ -76,10 +75,10 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
-    // atlas-search-* は全国検索の索引（約21万件）。消すと次の検索で地域JSONなど約37MBを取り直して
-    // 組み直すことになるので残す。古い版の索引は search-worker.js が自分で消す。
+    // 以前の全国検索は21万件の索引を atlas-search-* に丸ごと保存していた（約90MB）。いまは data/search/ の索引で
+    // 要るファイルだけ読むので、端末に残った古い索引もここで消す。
     for (const k of await caches.keys())
-      if (![SHELL, TILES, REGIONS].includes(k) && !k.startsWith('atlas-search-')) await caches.delete(k);
+      if (![SHELL, TILES, REGIONS].includes(k)) await caches.delete(k);
     await self.clients.claim();
   })());
 });
@@ -118,8 +117,8 @@ self.addEventListener('fetch', e => {
   const url = request.url;
 
   if (isLive(url)) return;                                   // C: 通信専用。SWは触らない
-  // 全国検索の一括読み込み（地域JSON 219本など）は SW を通さない。通すと上限40本の REGIONS に
-  // 219回書いて179本消す作業が検索のたびに走る。/data/* は1年 immutable なので HTTP キャッシュで足りる。
+  // 全国検索（search-worker.js）が読む地域JSONと索引は SW を通さない。通すと上限40本の REGIONS に
+  // 書いては消す作業が検索のたびに走る。/data/* は1年 immutable なので HTTP キャッシュで足りる。
   if (request.headers.get('x-atlas-bulk')) return;
 
   // A: 画面遷移。圏外なら「そのページ自身」のキャッシュに落とす。

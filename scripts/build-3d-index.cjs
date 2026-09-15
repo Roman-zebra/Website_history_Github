@@ -3,6 +3,7 @@
    place is added here (and to LAB_ITEMS in explore.js) and appears on the tab and the series page. */
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
+const ASSET_V=/const ASSET_V = '([^']+)'/.exec(fs.readFileSync(path.join(root,'sw.js'),'utf8'))[1];
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 const ITEMS=[{
  path:'gunkanjima',img:'/3d/gunkanjima-card.jpg?v=4',years:{en:'1947 → now',ja:'1947 → 現在',ko:'1947 → 현재','zh-Hans':'1947 → 今天','zh-Hant':'1947 → 今天'},
@@ -97,7 +98,7 @@ ${hreflangs}
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${SITE}/3d/island-from-sea.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/page.css?v=0.80">
+<link rel="stylesheet" href="/page.css?v=${ASSET_V}">
 <link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/icons/atlas.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/atlas-180.png">
 <style>${CSS}</style>
 <script type="application/ld+json">${ld}</script>

@@ -47,6 +47,10 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    onto the URL so a new build is a new resource. Bump with each release. */
 const DATA_V = '0.48';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
+/* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
+   ask for, not a number written here that falls behind (affiliate-config.json and the search worker sat at 0.80). */
+const ASSET_V = ((typeof document !== 'undefined' && document.currentScript && /[?&]v=([^&]+)/.exec(document.currentScript.src)) || [])[1] || '';
+const assetUrl = u => ASSET_V ? u + '?v=' + ASSET_V : u;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
    empty: pull right back and you still see Fuji, Skytree and the places everyone
    has heard of; zoom in and the map fills up in stages.
@@ -2734,7 +2738,7 @@ function showSearchSuggestions(){
  const box=$('qResults');box.replaceChildren();box.hidden=false;
  const heading=document.createElement('p');heading.className='q-help';heading.textContent=searchText('What would you like to find?','何を探しますか？','무엇을 찾으세요?','想找什么？','想找什麼？');box.appendChild(heading);
  const choices=document.createElement('div');choices.className='q-categories';
- for(const row of searchChoices){const label=PlaceUI.pick(row.slice(1),LANG),btn=document.createElement('button');btn.type='button';btn.textContent=row[0]+' '+label;btn.onclick=()=>{clearTimeout(qTimer);clearNationalSearch();$('q').value=label;$('qClear').hidden=false;runSearch(label);};choices.appendChild(btn);}box.appendChild(choices);
+ for(const row of searchChoices){const label=PlaceUI.pick(row.slice(1),LANG),btn=document.createElement('button');btn.type='button';btn.textContent=row[0]+' '+label;btn.onclick=()=>{clearTimeout(qTimer);clearNationalSearch();$('q').value=label;$('qClear').hidden=false;runSearch(label,false,true);};choices.appendChild(btn);}box.appendChild(choices);
  const hint=document.createElement('p');hint.className='q-help';hint.textContent=searchText('Move the map, then choose Search this area to narrow the results.','地図を動かして「この範囲で探す」を選ぶと、地域を絞れます。','지도를 이동한 뒤 이 지역 검색으로 범위를 좁히세요.','移动地图后，选择搜索此区域来缩小范围。','移動地圖後，選擇搜尋此範圍來縮小範圍。');box.appendChild(hint);
 }
 function hitsInBounds(rows,bounds){return rows.filter(r=>bounds.contains([r.lat,r.lon]));}
@@ -2786,6 +2790,16 @@ function frameNationalHits(){
  map.fitBounds(L.latLngBounds(nationalHits.map(r=>[r.lat,r.lon])),{padding:[48,80],maxZoom:14});
  paintNationalHits();
 }
+/* A search typed without Enter that would read many megabytes waits: the worker answers 'broad' and the reader chooses. */
+function showBroadSearch(data){
+ const box=$('qResults'),q=nationalQuery,mb=(data.bytes/1048576).toFixed(data.bytes<10485760?1:0);box.replaceChildren();box.hidden=false;
+ const note=document.createElement('p');note.className='q-help';
+ note.textContent=searchText('“'+q+'” matches places in '+data.files+' of the map’s files (about '+mb+' MB). Add another word, or search all of Japan now.','「'+q+'」の候補は全国の'+data.files+'ファイル（約'+mb+'MB）にあります。語を足すか、今すぐ全国を検索できます。','“'+q+'”의 후보가 전국 '+data.files+'개 파일(약 '+mb+'MB)에 있습니다. 단어를 더하거나 지금 일본 전국을 검색하세요.','“'+q+'”的候选分布在全国'+data.files+'个文件中（约'+mb+' MB）。可以再加一个词，或现在搜索全日本。','「'+q+'」的候選分布在全國'+data.files+'個檔案中（約'+mb+' MB）。可以再加一個詞，或現在搜尋全日本。');
+ const all=document.createElement('button');all.type='button';all.className='q-item q-all';
+ all.textContent=searchText('Search all of Japan','全国を検索する','일본 전국 검색','搜索全日本','搜尋全日本');
+ all.onclick=()=>runSearch(q,false,true);
+ box.append(note,all);
+}
 function searchSummary(){
  let el=document.getElementById('qSummary');
  if(!el){el=document.createElement('button');el.id='qSummary';el.className='q-summary';el.type='button';$('q').closest('.search-wrap')?.appendChild(el);
@@ -2806,21 +2820,21 @@ function paintSearchList(limit=30){
  const link=document.createElement('a');link.className='q-item';link.target='_blank';link.rel='noopener noreferrer';
  link.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(nationalQuery+' Japan');link.textContent=searchText('Search Google Maps ↗','Googleマップでも探す ↗','Google 지도에서 검색 ↗','在Google地图搜索 ↗','在Google地圖搜尋 ↗');box.appendChild(link);
 }
-async function runSearch(v,autoPick){
+async function runSearch(v,autoPick,explicit){
  const mine=++qSeq;nationalSeq=mine;nationalQuery=v;
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
  try{
-  if(!nationalWorker){nationalWorker=new Worker('search-worker.js?v=0.80');
+  if(!nationalWorker){nationalWorker=new Worker(assetUrl('search-worker.js'));
    nationalWorker.onmessage=({data})=>{
-    if(data.seq!==qSeq||data.seq!==nationalSeq)return;
+    if(data.seq!==qSeq||data.seq!==nationalSeq)return;if(data.type==='broad'){showBroadSearch(data);return;}
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
     if(data.type==='error'){box.innerHTML='<div class="q-none" role="status"></div>';box.firstChild.textContent=searchText('Some regions could not load. Please search again.','一部地域を読み込めませんでした。もう一度検索してください。','일부 지역을 불러오지 못했습니다. 다시 검색하세요.','部分地区加载失败，请重试。','部分地區載入失敗，請重試。');return;}
     nationalAllHits=data.rows;nationalScope='all';nationalHits=data.rows;searchSummary();paintSearchList();frameNationalHits();
    };
    nationalWorker.onerror=()=>{if(nationalSeq===qSeq){box.innerHTML='<div class="q-none">'+esc(searchText('Search could not load. Reload to try again.','検索を読み込めませんでした。再読み込みしてください。','검색을 불러오지 못했습니다. 새로고침하세요.','搜索加载失败，请刷新。','搜尋載入失敗，請重新整理。'))+'</div>';}nationalWorker.terminate();nationalWorker=null;};
   }
-  nationalWorker.postMessage({type:'search',seq:mine,query:v,lang:LANG});
+  nationalWorker.postMessage({type:'search',seq:mine,query:v,lang:LANG,dataV:DATA_V,auto:!autoPick&&!explicit});
  }catch{box.innerHTML='<div class="q-none">'+esc(t('noResults'))+'</div>';}
 }
 
@@ -3253,7 +3267,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch('affiliate-config.json?v=0.80').then(r => r.ok ? r.json() : null)
+    fetch(assetUrl('affiliate-config.json')).then(r => r.ok ? r.json() : null)
       .then(setAffiliateConfig).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が

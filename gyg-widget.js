@@ -1,6 +1,7 @@
 /* Each overview gets a fresh document for the official GYG widget lifecycle. */
 (function(){
  'use strict';
+ const assetVersion=((document.currentScript&&/[?&]v=([^&]+)/.exec(document.currentScript.src))||[])[1]||'';
  const p=new URLSearchParams(location.search),lat=Number(p.get('lat')),lon=Number(p.get('lon'));
  const locales=['en-US','ja-JP','ko-KR','zh-CN','zh-TW'],lang=p.get('lang'),campaign=p.get('cmp')||'';
  const send=(phase,height)=>parent.postMessage({type:'jta-gyg',phase,height},location.origin);
@@ -17,7 +18,7 @@
   const h=inner.getBoundingClientRect().height;
   if(h>100){settled=true;clearTimeout(watchdog);status.hidden=true;send('ready',Math.ceil(Math.min(900,Math.max(180,document.body.scrollHeight))));}
  };
- fetch('/affiliate-config.json?v=0.80').then(r=>{if(!r.ok)throw Error('config');return r.json();}).then(c=>{
+ fetch('/affiliate-config.json'+(assetVersion?'?v='+assetVersion:'')).then(r=>{if(!r.ok)throw Error('config');return r.json();}).then(c=>{
   const id=c.getyourguide?.partnerId;if(!c.enabled||!c.getyourguide?.enabled||!/^[A-Z0-9]{5,12}$/.test(id||''))throw Error('disabled');
   const attrs={'data-gyg-href':'https://widget.getyourguide.com/default/activities.frame','data-gyg-locale-code':lang,'data-gyg-widget':'activities','data-gyg-number-of-items':'1','data-gyg-cmp':campaign,'data-gyg-partner-id':id,'data-gyg-lat':String(lat),'data-gyg-lon':String(lon)};
   for(const [key,value] of Object.entries(attrs))node.setAttribute(key,value);

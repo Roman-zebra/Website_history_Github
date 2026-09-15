@@ -1,6 +1,8 @@
 /* Reproducible static, crawlable guides. No browser translation or remote build dependency. */
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),base='https://japantimeatlas.com';
+/* Root stylesheets carry the release's ?v= from sw.js; build.cjs checks every page for it. */
+const ASSET_V=/const ASSET_V = '([^']+)'/.exec(fs.readFileSync(path.join(root,'sw.js'),'utf8'))[1];
 const {langs,rows,labels,thaiNames}=require('./discovery-copy.cjs');
 const markets=require('./market-copy.cjs');
 const {labels:guideLabels,guides,liminalGuides}=require('./place-guides.cjs');
@@ -27,7 +29,7 @@ const mapLang=l=>encodeURIComponent(l==='th'?'en':l);
 const map=(p,l)=>'/?lang='+mapLang(l)+'&amp;place='+p.id;
 const legacyMap=(p,l)=>'/?lang='+mapLang(l)+'#'+p.id;
 function head(lang,title,description,url,alternates=[],type='article',schema){
- return '<!doctype html>\n<html lang="'+lang+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f1ea"><title>'+esc(title)+'</title><meta name="description" content="'+esc(description)+'"><link rel="canonical" href="'+base+url+'">'+alternates.map(([l,u])=>'<link rel="alternate" hreflang="'+l+'" href="'+base+u+'">').join('')+'<meta property="og:type" content="'+type+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(description)+'"><meta property="og:url" content="'+base+url+'"><meta property="og:image" content="'+base+'/og.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+base+'/og.jpg"><link rel="stylesheet" href="/page.css?v=0.80">'+(schema?'<script type="application/ld+json">'+json(schema)+'</script>':'')+'</head><body>';
+ return '<!doctype html>\n<html lang="'+lang+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f1ea"><title>'+esc(title)+'</title><meta name="description" content="'+esc(description)+'"><link rel="canonical" href="'+base+url+'">'+alternates.map(([l,u])=>'<link rel="alternate" hreflang="'+l+'" href="'+base+u+'">').join('')+'<meta property="og:type" content="'+type+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(description)+'"><meta property="og:url" content="'+base+url+'"><meta property="og:image" content="'+base+'/og.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+base+'/og.jpg"><link rel="stylesheet" href="/page.css?v='+ASSET_V+'">'+(schema?'<script type="application/ld+json">'+json(schema)+'</script>':'')+'</head><body>';
 }
 function footer(l){const t=labels[l];return '<footer><p>Japan Time Atlas · <a href="/about#'+(l==='th'?'en':l)+'">'+t.about+'</a></p><p><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · Wikipedia (CC BY-SA)</p></footer></body></html>';}
 function nav(l){const t=labels[l];return '<nav aria-label="'+t.home+'"><a href="/">Japan Time Atlas</a><a href="'+(l==='en'?'/places':'/'+t.route)+'">'+t.home+'</a><a href="/visit">'+t.markets+'</a></nav>';}

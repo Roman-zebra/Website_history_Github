@@ -73,5 +73,27 @@
   }
   return hits.sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name)||a.lat-b.lat);
  }
- const api={record,search,norm};if(typeof module==='object'&&module.exports)module.exports=api;else root.AtlasSearch=api;
+ /* What lets search-worker.js read only the place files that can hold a match: scripts/build-search-index.cjs
+    records, for every piece of record text, the files that contain it. A record can match a text word only if its
+    text holds every piece of the word: the character itself for a one-character word, otherwise every pair of
+    characters, plus every run of three Latin letters or digits (in Latin text the pairs occur almost everywhere).
+    The index cuts record text with query=false and the worker cuts query words with query=true; both must agree. */
+ const latin=c=>(c>=97&&c<=122)||(c>=48&&c<=57);
+ function pieces(s,query){
+  const out=new Set();
+  if(query&&s.length===1){out.add(s);return out;}
+  for(let i=0;i<s.length;i++){
+   if(!query)out.add(s[i]);
+   if(i+1<s.length)out.add(s.slice(i,i+2));
+   if(i+2<s.length&&latin(s.charCodeAt(i))&&latin(s.charCodeAt(i+1))&&latin(s.charCodeAt(i+2)))out.add(s.slice(i,i+3));
+  }
+  return out;
+ }
+ function shardOf(piece,shards){let h=0;for(let i=0;i<piece.length;i++)h=(h*31+piece.charCodeAt(i))>>>0;return h%shards;}
+ /* The words of a query exactly as search() reads them: one category, both religious categories, or text. */
+ function plan(query){
+  return String(query).trim().split(/\s+/).map(norm).filter(Boolean).map(word=>{const category=topicAliases.get(word);
+   return category==='religious'?{word,categories:['temple','shrine']}:category?{word,categories:[category]}:{word,pieces:[...pieces(word,true)]};});
+ }
+ const api={record,search,norm,pieces,shardOf,plan};if(typeof module==='object'&&module.exports)module.exports=api;else root.AtlasSearch=api;
 })(typeof self==='object'?self:globalThis);

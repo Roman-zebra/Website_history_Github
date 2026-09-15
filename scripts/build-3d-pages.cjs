@@ -4,7 +4,8 @@
    hreflang set, Open Graph tags and structured data, and sends a ?lang= visitor to the sibling page. */
 const fs=require('node:fs'),path=require('node:path');
 const extras=require('./build-3d-extras.cjs');
-const root=path.resolve(__dirname,'..'),tpl=fs.readFileSync(path.join(__dirname,'lab-3d','gunkanjima.template.html'),'utf8').split(String.fromCharCode(13,10)).join(String.fromCharCode(10));
+const root=path.resolve(__dirname,'..'),tpl=fs.readFileSync(path.join(__dirname,'lab-3d','gunkanjima.template.html'),'utf8').split(String.fromCharCode(13,10)).join(String.fromCharCode(10))
+ .split('{{ASSET_V}}').join(/const ASSET_V = '([^']+)'/.exec(fs.readFileSync(path.join(__dirname,'..','sw.js'),'utf8'))[1]);
 const SITE='https://japantimeatlas.com';
 const LANGS=[
  {code:'en',dir:'',html:'en',hreflang:'en',

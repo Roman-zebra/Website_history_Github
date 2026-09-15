@@ -86,8 +86,7 @@ a{color:inherit}
 
 .back{position:absolute;z-index:600;top:calc(14px + var(--safe-t));left:50%;transform:translateX(-50%);
   width:44px;height:44px;border-radius:50%;border:2px solid rgba(244,239,230,.28);
-  background:rgba(20,22,28,.8);color:var(--cream);font-size:19px;cursor:pointer;
-  backdrop-filter:blur(6px)}
+  background:rgba(20,22,28,.8);color:var(--cream);font-size:19px;cursor:pointer;}
 .tag+.tag+.drag-hint~.back{}
 
 /* story panel */
@@ -164,7 +163,7 @@ a{color:inherit}
 .spot-label{position:absolute;left:16px;top:-11px;white-space:nowrap;
   background:rgba(20,22,28,.86);color:var(--cream);border:1px solid rgba(244,239,230,.25);
   border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;letter-spacing:.02em;
-  backdrop-filter:blur(4px);pointer-events:none}
+  pointer-events:none}
 .spot-label b{color:var(--gold);font-weight:700}
 .leaflet-marker-icon.spot-pin{cursor:pointer}
 
@@ -172,11 +171,11 @@ a{color:inherit}
 .cover{position:absolute;z-index:520;top:calc(64px + var(--safe-t));left:50%;transform:translateX(-50%);
   background:rgba(20,22,28,.9);border:1px solid var(--ink-3);color:var(--cream-dim);
   border-radius:10px;padding:9px 14px;font-size:12px;font-weight:600;text-align:center;
-  max-width:82vw;backdrop-filter:blur(6px)}
+  max-width:82vw}
 .roam-tip{position:absolute;z-index:520;left:50%;transform:translateX(-50%);
   bottom:calc(24px + var(--safe-b));background:rgba(20,22,28,.9);border:1px solid var(--ink-3);
   color:var(--cream-dim);border-radius:12px;padding:11px 16px;font-size:13px;text-align:center;
-  max-width:88vw;backdrop-filter:blur(6px)}
+  max-width:88vw}
 .roam-tip b{color:var(--red)}
 /* `body.roaming .panel` beat `.panel.open` on specificity, so in map mode the
    panel could never be raised. Only hide it while it is NOT open. */
@@ -274,12 +273,12 @@ body.roaming .panel:not(.open){transform:translateY(100%)}
 .topbar{position:absolute;z-index:610;top:calc(10px + var(--safe-t));left:calc(10px + var(--safe-l));right:calc(10px + var(--safe-r));display:flex;gap:8px;align-items:flex-start}
 .ctl{flex:0 0 auto;width:42px;height:42px;border-radius:12px;border:1px solid var(--ink-3);
   background:rgba(20,22,28,.88);color:var(--cream);font-size:17px;cursor:pointer;
-  backdrop-filter:blur(6px);display:grid;place-items:center}
+  display:grid;place-items:center}
 .ctl-lang{width:auto;padding:0 12px;font-size:12px;font-weight:800;white-space:nowrap}
 .search-wrap{position:relative;flex:1 1 auto;min-width:0}
 .search{width:100%;height:42px;border-radius:12px;border:1px solid var(--ink-3);
   background:rgba(20,22,28,.88);color:var(--cream);padding:0 34px 0 14px;font-size:15px;
-  backdrop-filter:blur(6px);outline:none}
+  outline:none}
 .search::placeholder{color:#7d776c}
 .search:focus{border-color:var(--gold)}
 .q-clear{position:absolute;right:8px;top:9px;width:24px;height:24px;border-radius:50%;
@@ -576,7 +575,7 @@ body.roaming .panel:not(.open){transform:translateY(100%)}
 .p-close{position:absolute;top:8px;left:10px;z-index:4;width:36px;height:36px;
   border-radius:50%;border:1px solid var(--ink-3);background:rgba(20,22,28,.9);
   color:var(--cream);font-size:19px;line-height:1;cursor:pointer;
-  display:grid;place-items:center;backdrop-filter:blur(6px)}
+  display:grid;place-items:center}
 .p-close:hover{border-color:var(--red);color:var(--red)}
 .p-close:active{transform:translateY(1px)}
 
