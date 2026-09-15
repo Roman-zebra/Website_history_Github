@@ -8,9 +8,12 @@
 */
 const VERSION = 'v0.88.0';
 const SHELL = `shell-${VERSION}`;
-const TILES = `tiles-${VERSION}`;
+/* タイルと地域JSONの枠は版をまたいで残す。以前は `tiles-${VERSION}` だったので、sw.js を更新するたびに
+   activate が端末のタイル（最大700枚）と地域JSON（最大40本）を消し、次の表示で全部取り直していた
+   （9/14〜9/15 の2日だけで sw.js は6回更新）。タイルは中身が変わらず、地域JSONは URL に ?v=DATA_V が入るので残してよい。 */
+const TILES = 'tiles-v1';
 const TILE_MAX = 700;                       // 端末を圧迫しない範囲。1タイル20-90KB
-const REGIONS = `regions-${VERSION}`;
+const REGIONS = 'regions-v1';
 const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。溜め続けない
 
 /* precache の鍵は URL 丸ごと。アプリ側が付ける ?v= と1文字でも違うと、
@@ -33,12 +36,15 @@ const DATA_FILES = [
   'landmarks.json', 'regional-landmarks-v1.json', 'liminal.json', 'places-world.json', 'affiliate.json',
   'topics.json', 'areas.json',
 ];
+/* search-core / search-worker / affiliate-config は、呼ぶ側（explore.js・search-worker.js・gyg-widget.js）が
+   ?v=0.80 を直に書いているので、ここで ?v=ASSET_V 版を入れても一度も使われず、sw.js を更新するたびに
+   取り直すだけだった（affiliate-config.json だけで150KB）。呼ぶ側を ASSET_V に揃えたらここへ戻す。 */
 const SHELL_FILES = [
   './walking-data.js?v=' + ASSET_V, './walking-time.js?v=' + ASSET_V, './walking-time.css?v=' + ASSET_V,
   './', './index.html',
   './explore.html', './explore.webmanifest',
   './style.css?v=' + ASSET_V, './app.js?v=' + ASSET_V,
-  './search-core.js?v=' + ASSET_V, './search-worker.js?v=' + ASSET_V, './place-ui.js?v=' + ASSET_V, './affiliate-router.js?v=' + ASSET_V, './affiliate-config.json?v=' + ASSET_V, './about', './about.js?v=' + ASSET_V,
+  './place-ui.js?v=' + ASSET_V, './affiliate-router.js?v=' + ASSET_V, './about', './about.js?v=' + ASSET_V,
   './gyg-products-data.js?v=' + ASSET_V, './gyg-products.js?v=' + ASSET_V, './activities-data.js?v=' + ASSET_V, './gyg-frame.html', './gyg-widget.js?v=' + ASSET_V,
   './design.css?v=' + ASSET_V, './atmosphere.js?v=' + ASSET_V,
   './ja.html', './ko.html', './zh-cn.html', './zh-tw.html',
@@ -70,8 +76,10 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
+    // atlas-search-* は全国検索の索引（約21万件）。消すと次の検索で地域JSONなど約37MBを取り直して
+    // 組み直すことになるので残す。古い版の索引は search-worker.js が自分で消す。
     for (const k of await caches.keys())
-      if (![SHELL, TILES, REGIONS].includes(k)) await caches.delete(k);
+      if (![SHELL, TILES, REGIONS].includes(k) && !k.startsWith('atlas-search-')) await caches.delete(k);
     await self.clients.claim();
   })());
 });
@@ -110,6 +118,9 @@ self.addEventListener('fetch', e => {
   const url = request.url;
 
   if (isLive(url)) return;                                   // C: 通信専用。SWは触らない
+  // 全国検索の一括読み込み（地域JSON 219本など）は SW を通さない。通すと上限40本の REGIONS に
+  // 219回書いて179本消す作業が検索のたびに走る。/data/* は1年 immutable なので HTTP キャッシュで足りる。
+  if (request.headers.get('x-atlas-bulk')) return;
 
   // A: 画面遷移。圏外なら「そのページ自身」のキャッシュに落とす。
   // index.html を一律で返すと、英語版を開いたのに日本語版が出る。
@@ -196,7 +207,15 @@ self.addEventListener('fetch', e => {
   // cache-first にすると、直したはずのコードが端末に届かない（開発中に実際に踏んだ）。
   // 通信があるときは必ず最新を取り、圏外のときだけキャッシュに落とす。
   e.respondWith((async () => {
-    if (new URL(url).origin === location.origin){
+    const u = new URL(url);
+    // 版が URL に入っている本体（?v=ASSET_V・?v=DATA_V・/vendor/）は中身が変わらないので cache-first。
+    // network-first のままだと、キャッシュにあっても毎回サーバの返事を待つ（9/15 の実測で本番は米国の拠点が
+    // 応答し、1往復 140〜350ms）。呼ぶ側が別の版を直書きした URL（?v=0.80 など）は network-first のまま。
+    if (u.origin === location.origin && (u.searchParams.get('v') === ASSET_V || u.searchParams.get('v') === DATA_V || u.pathname.startsWith('/vendor/'))){
+      const hit = await caches.match(request);
+      if (hit) return hit;
+    }
+    if (u.origin === location.origin){
       try{
         const res = await fetch(request);
         if (res.ok) (await caches.open(SHELL)).put(request, res.clone());

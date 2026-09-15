@@ -2,7 +2,8 @@
 importScripts('place-ui.js?v=0.80','search-core.js?v=0.80','gyg-products-data.js?v=0.80','gyg-products.js?v=0.80');
 const VERSION='0.77-0.47',rows=[],loaded=new Set();
 let pending=null,loading=null;
-async function json(url){const r=await fetch(url);if(!r.ok)throw Error(url);return r.json();}
+/* x-atlas-bulk: sw.js はこの印の付いた要求を通さない（219本を上限40本の枠に書いては消す作業を避ける）。 */
+async function json(url){const r=await fetch(url,{headers:{'x-atlas-bulk':'1'}});if(!r.ok)throw Error(url);return r.json();}
 function emit(type,extra={}){if(pending)postMessage({type,seq:pending.seq,...extra});}
 async function readCache(){
  try{const c=await caches.open('atlas-search-'+VERSION),r=await c.match('index');if(r){const data=await r.json();if(!Array.isArray(data)||!data.length)return false;for(const row of data)rows.push(row);return true;}}catch{}
@@ -21,7 +22,7 @@ async function load(){
   emit('progress',{done:loaded.size,total:jobs.length});
  }}));
  if(failures.length)throw Error('Some regions could not be loaded');
- try{const c=await caches.open('atlas-search-'+VERSION);await c.put('index',new Response(JSON.stringify(rows),{headers:{'Content-Type':'application/json'}}));}catch{}
+ try{const c=await caches.open('atlas-search-'+VERSION);await c.put('index',new Response(JSON.stringify(rows),{headers:{'Content-Type':'application/json'}}));if(caches.keys)for(const k of await caches.keys())if(k.startsWith('atlas-search-')&&k!=='atlas-search-'+VERSION)await caches.delete(k);}catch{}
 }
 self.onmessage=e=>{
  if(e.data.type==='cancel'){pending=null;return;}
