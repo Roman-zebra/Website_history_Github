@@ -1,6 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.join(__dirname,'..'),core=require('../search-core.js'),UI=require('../place-ui.js'),index=require('../scripts/build-search-index.cjs');
-const gyg=require('../gyg-products.js'),catalog=require('../gyg-products-data.js');
 test('partial words, kana, categories and combined words match without a result cap',()=>{
  const rows=Array.from({length:80},(_,i)=>core.record({t:'node',i,lat:35+i/100,lon:139,tags:{name:'奥山スキー場 '+i,'name:en':'Okuyama Ski '+i,sport:'ski'}}));
  assert.equal(core.search(rows,'スキー','ja').length,80);assert.equal(core.search(rows,'すきー','ja').length,80);
@@ -15,7 +14,7 @@ test('the search index was rebuilt after the last change to the places or the se
 /* The worker as the page runs it, reading files from the working tree. */
 function worker(){
  const fetched=[],messages=[];let waiting=null;
- const context={self:{},AtlasSearch:core,AtlasGygProducts:gyg,AtlasGygCatalog:catalog,PlaceUI:UI,importScripts(){},atob:s=>Buffer.from(s,'base64').toString('latin1'),
+ const context={self:{},AtlasSearch:core,PlaceUI:UI,importScripts(){},atob:s=>Buffer.from(s,'base64').toString('latin1'),
   fetch:async u=>{fetched.push(u);const file=path.join(root,u.split('?')[0]);return fs.existsSync(file)?{ok:true,json:async()=>JSON.parse(fs.readFileSync(file,'utf8'))}:{ok:false,json:async()=>null};},
   postMessage:m=>{messages.push(m);if(waiting&&m.seq===waiting.seq&&m.type!=='progress'){const w=waiting;waiting=null;w.done(m);}}};
  vm.runInNewContext(fs.readFileSync(path.join(root,'search-worker.js'),'utf8'),context);
@@ -26,7 +25,7 @@ function worker(){
 function everything(){
  const rows=[];
  for(const [file,kind,key] of index.sources()){const data=JSON.parse(fs.readFileSync(path.join(root,file),'utf8')),list=key?(data[key]||data.liminal||[]):data;for(const p of list)if(Number.isFinite(p.lat)&&Number.isFinite(p.lon))rows.push(core.record(p,kind));}
- return [...gyg.searchRecords(gyg.points(catalog),core),...rows];
+ return rows;
 }
 test('a nationwide search reads only the files that can match and answers exactly like a search over everything',async()=>{
  const all=everything(),{fetched,ask}=worker();let seq=0;

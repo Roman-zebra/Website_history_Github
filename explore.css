@@ -370,14 +370,6 @@ body.roaming .panel:not(.open){transform:translateY(100%)}
 .p-compare.is-on span{color:var(--red)}
 
 
-/* Affiliate slot. One line, at the very bottom, under everything that matters.
-   Never on the map, never on the home screen, never on a memorial stone. */
-.p-aff{margin:4px 0 12px;padding-top:12px;border-top:1px solid var(--ink-3)}
-.p-aff a{display:flex;align-items:center;gap:9px;color:#9d968a;text-decoration:none;
-  font-size:13px;line-height:1.5}
-.p-aff a:hover{color:var(--cream)}
-.p-aff .pr{flex:0 0 auto;font-size:10px;font-weight:800;letter-spacing:.08em;
-  border:1px solid var(--ink-3);border-radius:4px;padding:2px 5px;color:#7d776c}
 
 
 /* ================= phone first ================= */

@@ -48,7 +48,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
 const DATA_V = '0.48';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
-   ask for, not a number written here that falls behind (affiliate-config.json and the search worker sat at 0.80). */
+   ask for, not a number written here that falls behind (the search worker sat at 0.80). */
 const ASSET_V = ((typeof document !== 'undefined' && document.currentScript && /[?&]v=([^&]+)/.exec(document.currentScript.src)) || [])[1] || '';
 const assetUrl = u => ASSET_V ? u + '?v=' + ASSET_V : u;
 /* At what zoom each kind of thing appears. The point is that no scale is ever
@@ -592,69 +592,6 @@ function applySEO(){
    1. State
    ========================================================================= */
 const ACTIVITIES = window.AtlasActivities?.places || [];
-const GYG_MIN_ZOOM = 14; // Show sponsored meeting points only at neighborhood scale.
-const GYG_POINTS = window.AtlasGygProducts?.points(window.AtlasGygCatalog) || [];
-let gygPinLayer=null,gygPinsVisible=true,gygControls=null;
-const gygText=(en,ja,ko,cn,tw)=>PlaceUI.pick([en,ja,ko,cn,tw],LANG);
-const gygTitle=p=>p.product.title[LANG]||p.product.title.en;
-const gygLocation=p=>p.label[LANG]||p.label.en;
-function paintGygControl(){
- if(!gygControls)return;
- gygControls.toggle.textContent='🎟 '+gygText('Ad pins','広告ピン','광고 핀','广告标记','廣告標記');
- gygControls.toggle.setAttribute('aria-pressed',String(gygPinsVisible));
- gygControls.all.textContent=gygText('Tour list','体験・ツアー一覧','체험 목록','体验列表','體驗列表');
-}
-function initGygControl(){
- const control=L.control({position:'bottomleft'});
- control.onAdd=()=>{const box=L.DomUtil.create('div','gyg-map-control');L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box);
-  const toggle=document.createElement('button'),all=document.createElement('button');toggle.type=all.type='button';
-  toggle.onclick=()=>{gygPinsVisible=!gygPinsVisible;paintGygControl();drawGygPins();};all.onclick=()=>showGygList();box.append(toggle,all);gygControls={toggle,all};paintGygControl();return box;};control.addTo(map);
-}
-function drawGygPins(){
- if(!map)return;if(gygPinLayer)map.removeLayer(gygPinLayer);gygPinLayer=L.layerGroup().addTo(map);
- if(map.getZoom()<GYG_MIN_ZOOM||!gygPinsVisible||!AFF?.enabled||!AFF.getyourguide?.enabled)return;
- const visible=GYG_POINTS.filter(p=>AtlasGygProducts.validProduct(p.product)&&map.getBounds().pad(.05).contains([p.lat,p.lon]));
- for(const group of AtlasGygProducts.clusters(visible,p=>map.latLngToContainerPoint([p.lat,p.lon]))){
-  const lat=group.reduce((n,p)=>n+p.lat,0)/group.length,lon=group.reduce((n,p)=>n+p.lon,0)/group.length;
-  const count=new Set(group.map(p=>p.product.id)).size,label=group.length===1?gygTitle(group[0]):gygText('Tours and experiences','体験・ツアー','투어 및 체험','旅行与体验','旅行與體驗')+' ('+count+')';
-  const icon=L.divIcon({className:'gyg-pin',iconSize:[36,42],iconAnchor:[18,21],html:'<span>🎟'+(group.length>1?'<b>'+count+'</b>':'')+'</span><small>'+esc(gygText('AD','広告','광고','广告','廣告'))+'</small>'});
-  L.marker([lat,lon],{icon,title:label+' · '+gygText('Advertisement','広告','광고','广告','廣告'),zIndexOffset:900}).on('click',()=>{
-   const bounds=L.latLngBounds(group.map(p=>[p.lat,p.lon]));
-   if(group.length>1&&map.getZoom()<17&&map.distance(bounds.getSouthWest(),bounds.getNorthEast())>90){map.fitBounds(bounds,{padding:[70,90],maxZoom:17});return;}
-   showGygPoints(group);
-  }).addTo(gygPinLayer);
- }
-}
-function showGygPoints(points,keepView=false){
- if(!points?.length)return;const p=points[0];lastPanel=()=>showGygPoints(points,true);
- $('home').hidden=true;$('place').hidden=false;ensureMap();roaming=false;current=null;
- if(!keepView)map.setView([p.lat,p.lon],17);setTimeout(()=>map.invalidateSize(),60);setThenLayer(null,null);
- if(spotLayer){map.removeLayer(spotLayer);spotLayer=null;}
- panelShell({placeId:p.id,adTier:0,kind:'gyg-product',gygPoints:points,at:[p.lat,p.lon],name:points.length===1?gygTitle(p):gygText('Experiences near this point','この地点付近の体験','이 지점 주변 체험','此地点附近的体验','此地點附近的體驗'),
-  kicker:{emoji:'🎟',label:gygText('Advertisement · GetYourGuide','広告 · GetYourGuide','광고 · GetYourGuide','广告 · GetYourGuide','廣告 · GetYourGuide')},
-  bodyHTML:'<p>'+esc(gygLocation(p))+'</p><p>'+esc(gygText('Pins show meeting points published on the product pages. Choose the matching option and check your booking instructions before travelling.','ピンは商品ページに記載された集合場所です。該当するプランを選び、予約後の案内で集合場所をご確認ください。','핀은 상품 페이지의 집합 장소입니다. 해당 옵션과 예약 안내를 확인하세요.','标记表示商品页上的集合地点。请选择对应套餐并确认预订说明。','標記表示商品頁上的集合地點。請選擇對應方案並確認預訂說明。'))+'</p>',
-  src:'GetYourGuide · '+gygText('Location checked','所在地確認','위치 확인','地点核对','地點核對')+' 2026-09-13',share:{url:location.origin+location.pathname+'#'+p.id}});
- drawDetail();if(!keepView)history.pushState({gyg:p.id},'','#'+p.id);
-}
-function renderGygProducts(o){
- const box=$('pAff');clearGygFrame();box.replaceChildren();box.hidden=true;
- for(const p of o.gygPoints){const url=AtlasGygProducts.trackedURL(p,AFF);if(!url)continue;
-  const article=document.createElement('article');article.className='gyg-product-card';
-  const h=document.createElement('h3');h.textContent=gygTitle(p);const location=document.createElement('p');location.textContent=gygLocation(p);
-  const link=document.createElement('a');link.className='aff-link';link.target='_blank';link.rel='sponsored nofollow noopener';link.href=url;link.textContent=gygText('Details & availability on GetYourGuide ↗','GetYourGuideで詳細・空き状況を見る ↗','GetYourGuide 상세·예약 가능 여부 ↗','在GetYourGuide查看详情与可订日期 ↗','在GetYourGuide查看詳情與可訂日期 ↗');
-  const mapLink=document.createElement('a');mapLink.className='gyg-meeting-link';mapLink.target='_blank';mapLink.rel='noopener noreferrer';mapLink.href=p.mapSource;mapLink.textContent=gygText('Meeting point map ↗','このプランの集合場所 ↗','이 옵션의 집합 장소 ↗','此套餐的集合地点 ↗','此方案的集合地點 ↗');
-  article.append(h,location,link,mapLink);box.append(article);box.hidden=false;
- }
- if(!box.hidden){const note=document.createElement('p');note.className='aff-disclosure';note.textContent=gygText('Advertisement. We may earn a commission from eligible bookings. Prices and availability are confirmed on GetYourGuide.','広告です。対象の予約により当サイトに報酬が発生することがあります。価格と空き状況はGetYourGuideでご確認ください。','광고입니다. 해당 예약 시 사이트에 수수료가 지급될 수 있습니다. 가격과 예약 가능 여부는 GetYourGuide에서 확인하세요.','广告。符合条件的预订可能为本站带来佣金。价格与余位请在GetYourGuide确认。','廣告。符合條件的預訂可能為本站帶來佣金。價格與名額請在GetYourGuide確認。');box.append(note);}
-}
-function showGygList(){
- let dialog=$('gygList');if(!dialog){dialog=document.createElement('dialog');dialog.id='gygList';dialog.className='gyg-list';document.body.append(dialog);dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});}
- dialog.replaceChildren();const close=document.createElement('button');close.type='button';close.textContent=gygText('Close','閉じる','닫기','关闭','關閉');close.onclick=()=>dialog.close();
- const heading=document.createElement('h2');heading.textContent=gygText('Tours & experiences · Ad','体験・ツアー · 広告','투어·체험 · 광고','旅行与体验 · 广告','旅行與體驗 · 廣告');
- const note=document.createElement('p');note.textContent=gygText('Products with verified meeting points. This is not the complete Japan catalogue.','集合場所を確認できた商品を掲載しています。日本の全商品を網羅した一覧ではありません。','집합 장소를 확인한 상품입니다. 일본 전체 상품 목록은 아닙니다.','这里收录已核对集合地点的商品，并非日本全部商品。','這裡收錄已核對集合地點的商品，並非日本全部商品。');dialog.append(close,heading,note);
- for(const p of GYG_POINTS.filter(p=>AtlasGygProducts.validProduct(p.product))){const b=document.createElement('button');b.type='button';b.className='gyg-list-item';b.textContent=gygTitle(p)+' — '+gygLocation(p);b.onclick=()=>{dialog.close();gygPinsVisible=true;paintGygControl();showGygPoints([p]);};dialog.append(b);}dialog.showModal();
-}
-function restoreGygPoint(){const p=GYG_POINTS.find(p=>location.hash==='#'+p.id);if(!p)return false;noPush(showGygPoints,[p]);return true;}
 
 
 let PLACES = [], LANDMARKS = [], MONUMENTS = null, LOCALS = [], LIMINAL = [];
@@ -662,7 +599,6 @@ let TOPICS = null, AREAS = null;   // 種類の記事 / まちの記事。無け
 let mode = 'places';
 let MON_INDEX = [], MON_BY_ID = new Map();
 let idxLoading = null;
-let AFF = null;      // approved offers in affiliate-config.json
 let map = null, baseLayer = null, nowLayer = null, thenLayer = null;
 let spotLayer = null, detailLayer = null, meMarker = null;
 let roaming = false, current = null, compareAt = null, sharePayload = null;
@@ -859,7 +795,6 @@ function buildActivityCards(){
   b.onclick=()=>showActivity(ACTIVITIES.find(p=>p.id===b.dataset.activity));
 }
 function showActivity(p,keepView,refresh=false){
- if(!refresh)affiliateVisit++;
  if(!p)return;
  lastPanel=()=>showActivity(p,true,true);
  document.body.classList.remove('roaming');
@@ -1002,7 +937,6 @@ function ensureMap(){
   // layers' minZoom, and the aerial layer (14) would pin the whole map there.
   map = L.map('map', { zoomControl: false, attributionControl: true, minZoom: 4, maxZoom: 18 });
   L.control.zoom({ position: 'bottomright' }).addTo(map);
-  initGygControl();
   map.attributionControl.addAttribution(OSM_ATTR);   // レイヤーに紐づけない＝常時表示
 
   // Esri's street basemap labels Japan in both scripts (東京駅 / Tokyo Sta.),
@@ -1485,14 +1419,15 @@ function loadFacilities(){
 function facilityTags(o){
  if(!o.at)return null;
  const normal=s=>PlaceUI.normalize(s).replace(/駅$|station$/g,'');
+ const km=(a,b)=>{const rad=Math.PI/180,dlat=(b[0]-a[0])*rad,dlon=(b[1]-a[1])*rad;const h=Math.sin(dlat/2)**2+Math.cos(a[0]*rad)*Math.cos(b[0]*rad)*Math.sin(dlon/2)**2;return 6371*2*Math.asin(Math.sqrt(h));};
  const names=[o.name,o.ja,o.searchName].filter(Boolean).map(normal);
  let match=o.travelTags||null,nearest=Infinity;
  for(const p of FACILITIES){if(!p.tags.railway&&!p.tags.aeroway)continue;
   const pn=[p.tags.name,p.tags['name:ja'],p.tags['name:en'],p.tags['full_name'],p.tags['full_name:en']].filter(Boolean).map(normal);
   if(!names.some(n=>pn.includes(n)))continue;
-  const km=AffiliateRouter.distance(o.at,[p.lat,p.lon]);if(km<(p.tags.aeroway?4:0.4)&&km<nearest){match=p.tags;nearest=km;}
+  const d=km(o.at,[p.lat,p.lon]);if(d<(p.tags.aeroway?4:0.4)&&d<nearest){match=p.tags;nearest=d;}
  }
- if(match?.railway==='station'&&FACILITIES.some(p=>p.tags.highspeed==='yes'&&[p.tags.name,p.tags['name:ja'],p.tags['name:en']].filter(Boolean).map(normal).some(n=>names.includes(n))&&AffiliateRouter.distance(o.at,[p.lat,p.lon])<0.4))return {...match,highspeed:'yes'};
+ if(match?.railway==='station'&&FACILITIES.some(p=>p.tags.highspeed==='yes'&&[p.tags.name,p.tags['name:ja'],p.tags['name:en']].filter(Boolean).map(normal).some(n=>names.includes(n))&&km(o.at,[p.lat,p.lon])<0.4))return {...match,highspeed:'yes'};
  return match;
 }
 let detailGeneration=0;
@@ -1501,7 +1436,6 @@ async function drawDetail(){
   // roaming は「スポットが選ばれていない」の意味で、「地図が出ている」ではない。
   // これを条件にしていたため、名所やリミナルから開くと周辺のマーカーが全部消えていた。
   if (!map || $('place').hidden) return;
-  drawGygPins();
   const z = map.getZoom(), b = map.getBounds();
   loadFacilities();
   const group = L.layerGroup();
@@ -2017,16 +1951,6 @@ async function areaArticleOf(lat, lon){
 const localName = tg => PlaceUI.localName(tg, LANG);
 const placeName = p => PlaceUI.name(p, LANG);
 
-/* -------------------------------------------------------------------------
-   Affiliate slot.
-   Rules baked in rather than left to judgement later:
-     - one line, bottom of the panel, below the story and the sources
-     - never on the map itself, never on the home screen
-     - never on a disaster memorial stone (an advert under a memorial to the
-       dead would cost more trust than the click is worth)
-     - always carries a PR label; Japan's disclosure rules require it
-   Nothing renders until affiliate-config.json contains enabled, approved offers.
-   ------------------------------------------------------------------------- */
 /* #pWiki には tags.wikipedia しか入らない。関連記事はこの別の箱にしか入らない。
    「ウィキペディアで読む」という文言がこの箱に出る経路は存在しない。
    見出しの一文とボタンを同じ innerHTML でまとめて書くので、
@@ -2054,64 +1978,6 @@ function renderRelated(o){
         + (r.jaOnly ? '<span class="p-lang">' + esc(t('jaOnly')) + '</span>' : '')
         + '</a>').join('');
   box.hidden = false;
-}
-
-let resolveAffiliate,currentAffiliatePlace=null,affiliateVisit=0,affiliateRotation,activeGygFrame=null;
-function clearGygFrame(){if(activeGygFrame){window.removeEventListener("message",activeGygFrame.listener);activeGygFrame.frame.remove();activeGygFrame=null;}}
-function setAffiliateConfig(config){
- AFF=config;
- drawGygPins();
- if(currentAffiliatePlace&&!$('place').hidden&&!$('panel').classList.contains('closed'))renderAffiliate(currentAffiliatePlace);
-}
-function renderAffiliate(o){
-  currentAffiliatePlace=o;
-  if(typeof AffiliateRouter==='undefined'){ $('pAff').hidden=true;return; }
-  resolveAffiliate ||= AffiliateRouter.createResolver();
-  if(o.gygPoints){resolveAffiliate(null,o,LANG,async()=>null,()=>{});renderGygProducts(o);return;}
-  const box=$('pAff'),lang=LANG;
-  affiliateRotation ||= AffiliateRouter.createRotation();
-  const rotationKey=o.at.join(','),adCycle=affiliateRotation.index(rotationKey,affiliateVisit);
-  resolveAffiliate(AFF,{...o,adCycle,travelTags:facilityTags(o)},lang,async()=>{
-    const geo=await revGeo(o.at[0],o.at[1],lang);return geo?.address;
-  },offer=>{
-    if(offer?.widget&&activeGygFrame?.key===offer.id+':'+lang&&!box.hidden)return;
-    clearGygFrame();box.hidden=true;box.replaceChildren();if(!offer)return;
-    const c=AffiliateRouter.providerCopy(lang,offer.provider);
-    if(offer.widget){
-      const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
-      const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=PlaceUI.pick(['Experiences around this area','この地域のツアー・体験','이 지역의 투어·체험','这一带的游览与体验','這一帶的遊覽與體驗'],lang);
-      const frame=document.createElement('iframe');frame.className='aff-gyg-frame';frame.title=c.ad;frame.setAttribute('scrolling','no');
-      const src=new URL('/gyg-frame.html',location.origin);src.searchParams.set('v','0.77');src.searchParams.set('lat',offer.at[0].toFixed(5));src.searchParams.set('lon',offer.at[1].toFixed(5));src.searchParams.set('lang',offer.locale);src.searchParams.set('cmp',offer.campaign);frame.src=src.href;
-      const note=document.createElement('p');note.className='aff-note';note.textContent=PlaceUI.pick(['Check the activity location, meeting point and language before booking. Airport pickup is not implied.','実施場所・集合場所・対応言語を予約前にご確認ください。空港送迎付きとは限りません。','예약 전 체험 장소, 집합 장소와 언어를 확인하세요. 공항 픽업을 뜻하지 않습니다.','预订前请确认活动地点、集合地点和语言，并不表示包含机场接送。','預訂前請確認活動地點、集合地點和語言，並不表示包含機場接送。'],lang);
-      const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
-      const listener=e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow||e.data?.type!=='jta-gyg')return;
-        if(e.data.phase==='error'){if(activeGygFrame?.frame===frame&&currentAffiliatePlace)renderAffiliate({...currentAffiliatePlace,skipGyg:true});return;}
-        if(e.data.phase==='ready'&&Number.isFinite(e.data.height))frame.style.height=Math.min(900,Math.max(180,e.data.height))+'px';
-      };
-      window.addEventListener('message',listener);activeGygFrame={key:offer.id+':'+lang,frame,listener};
-      box.setAttribute('aria-label',c.ad);box.append(heading,lead,frame,note,disclosure);box.hidden=false;return;
-    }
-    box.setAttribute('aria-label',c.ad);
-    const heading=document.createElement('p');heading.className='aff-heading';heading.textContent=c.ad;
-    const lead=document.createElement('p');lead.className='aff-lead';lead.textContent=offer.activity?(offer.match==='area'?c.near:PlaceUI.pick(['An experience for this stop','このスポットで楽しむ体験・商品','이 장소에서 즐길 체험·상품','这个地点的体验与商品','這個地點的體驗與商品'],lang)):offer.tour?PlaceUI.pick(['Tours for this area','この地域から出かけるツアー','이 지역 출발 투어','从这一带出发的游览','從這一帶出發的遊覽'],lang):offer.travel?PlaceUI.pick(['For your journey','旅の準備に','여행 준비','出行准备','出行準備'],lang):offer.nearest?({en:'Closest listed experience',ja:'最寄りの掲載体験',ko:'가장 가까운 등록 체험','zh-Hans':'距离最近的已收录体验','zh-Hant':'距離最近的已收錄體驗',th:'กิจกรรมที่ลงรายการไว้ใกล้ที่สุด'}[lang]||c.near):c.near;
-    const a=document.createElement('a');a.className='aff-card';a.href=offer.url;a.target='_blank';a.rel='sponsored nofollow noopener';
-    a.dataset.offerId=offer.id;a.dataset.provider=offer.provider;
-    const title=document.createElement('strong');title.className='aff-title';title.textContent=offer.label;
-    const cta=document.createElement('span');cta.className='aff-cta';cta.textContent=c.cta;
-    a.append(title);
-    if(Number.isFinite(offer.km)){
-      const meta=document.createElement('span');meta.className='aff-distance';
-      const pref=AFF.klook?.prefectures?.find(p=>p.code===offer.prefecture),region=lang==='ja'?pref?.ja:pref?.en;
-      const label={en:'Straight-line distance',ja:'直線距離',ko:'직선 거리','zh-Hans':'直线距离','zh-Hant':'直線距離',th:'ระยะทางเส้นตรง'}[lang]||'Straight-line distance';
-      meta.textContent=[region,label+' ≈ '+(offer.km<1?offer.km.toFixed(1):Math.round(offer.km))+' km'].filter(Boolean).join(' · ');a.append(meta);
-    }
-    a.append(cta);
-    const note=document.createElement('p');note.className='aff-note';note.textContent=(offer.travel||offer.tour||offer.activity)?offer.note:offer.regional?c.searchNote:c.note;
-    const disclosure=document.createElement('p');disclosure.className='aff-disclosure';disclosure.textContent=c.disclosure;
-    box.append(heading,lead,a,note,disclosure);
-    if(offer.choiceCount>1){const next=document.createElement('button');next.type='button';next.className='aff-next';next.textContent=PlaceUI.pick(['Another option','ほかの案内を見る','다른 옵션 보기','查看其他选项','查看其他選項'],lang);next.onclick=()=>{affiliateRotation.next(rotationKey);renderAffiliate(currentAffiliatePlace);};box.append(next);}
-    box.hidden=false;
-  });
 }
 
 /* =========================================================================
@@ -2191,7 +2057,6 @@ function panelShell(o){
   } else g.hidden = true;
 
   $('pSrc').textContent = o.src || '';
-  renderAffiliate(o);
   renderRelated(o);
   paintSaveBtn();
   snsLinks();
@@ -2277,7 +2142,6 @@ function extractHTML(p, limit){
                  + esc(e.note) + '</p>' : '');
 }
 function showLandmark(p,refresh=false){
-  if(!refresh)affiliateVisit++;
   if (!map || $('place').hidden) noPush(openMap);
   lastPanel = () => showLandmark(p,true);
   /* current は「物語つきの名所を開いている」という意味。ここで消さないと、
@@ -2311,7 +2175,6 @@ async function localizedWikiTitle(ja,lang){
   }catch(e){return '';}
 }
 async function showWiki(w,refresh=false){
-  if(!refresh)affiliateVisit++;
   lastPanel = () => showWiki(w,true);current=null;
   const lang=LANG;
   panelShell({adTier:3,name:lang==='ja'?w.ja:(w.en||w.ja),ja:lang==='ja'?'':w.ja,
@@ -2350,7 +2213,6 @@ async function openMonument(id){
 }
 
 function showMonument(r,refresh=false){
-  if(!refresh)affiliateVisit++;
   lastPanel = () => showMonument(r,true);
   current = null;
   const en = kindsRaw(r.kind).map(k => KIND_EN[k]);
@@ -2400,7 +2262,6 @@ function airPhoto(lat, lon){
 function localSummary(tg){ return PlaceUI.summary(tg, LANG); }
 
 function showLocal(p,refresh=false){
-  if(!refresh)affiliateVisit++;
   lastPanel = () => showLocal(p,true);
   current = null;
   const tg = p.tags, nm = localName(tg) || t('localSpot');
@@ -2524,7 +2385,6 @@ function snsLinks(){
 }
 
 function showLiminal(p, keepView,refresh=false){
-  if(!refresh)affiliateVisit++;
   lastPanel = () => showLiminal(p, true,true);
   const hook = (p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook);
   const why = LANG === 'ja' ? p.why_ja : LANG === 'en' ? p.why : '';
@@ -2776,7 +2636,6 @@ function openSearchHit(row){
  ++qSeq;nationalSeq=0;$('qResults').hidden=true;$('q').blur();
  if(!map||$('place').hidden)noPush(openMap);
  map.setView([row.lat,row.lon],17);
- if(row.kind==='gyg'){const p=GYG_POINTS.find(p=>p.id===row.id);if(p){showGygPoints([p]);return;}}
  if(row.kind==='monument'){openMonument(row.id);return;}
  if(row.facilityTags){showLocal({lat:row.lat,lon:row.lon,tags:row.facilityTags});return;}
  showSavedSpot(row);
@@ -2893,7 +2752,6 @@ $('pShare').onclick = async () => {
    9. Modes and navigation
    ========================================================================= */
 function openPlace(p, keepView,refresh=false){
-  if(!refresh)affiliateVisit++;
   current = p; roaming = false;
   document.body.classList.remove('roaming');
   $('home').hidden = true; $('place').hidden = false;
@@ -2943,7 +2801,6 @@ function openMap(){
 }
 
 function closePlace(){
-  currentAffiliatePlace=null;clearGygFrame();
   document.body.classList.remove('roaming');
   roaming = false; current = null;
   lastPanel = null;                  // ホームに戻ったら、開き直す対象はもう無い
@@ -3091,7 +2948,6 @@ $('mLab').onclick = () => setMode('lab');
 /* Close for good, not just collapse. Without this the sheet sat over the map
    with no way to dismiss it, so the markers underneath were unreachable. */
 function closePanel(){
-  clearGygFrame();
   const pn = $('panel');
   pn.classList.remove('open');
   pn.classList.add('closed');
@@ -3104,7 +2960,7 @@ function closePanel(){
 $('pClose').onclick   = closePanel;
 $('grab').onclick     = () => {
   const pn = $('panel');
-  if (pn.classList.contains('closed')){ pn.classList.remove('closed'); pn.classList.add('open'); if(currentAffiliatePlace)renderAffiliate(currentAffiliatePlace); }
+  if (pn.classList.contains('closed')){ pn.classList.remove('closed'); pn.classList.add('open'); }
   else pn.classList.toggle('open');
 };
 $('back').onclick     = () => history.back();
@@ -3118,7 +2974,7 @@ function noPush(fn, arg){
   try { fn(arg); } finally { history.pushState = h; }
 }
 window.addEventListener('popstate', () => {
-  if (window.AtlasWalking?.restore() || restoreGygPoint() || restoreActivity() || restoreSharedSpot()) return;
+  if (window.AtlasWalking?.restore() || restoreActivity() || restoreSharedSpot()) return;
   if (location.hash === '#map' && PLACES.length){ noPush(openMap); return; }
   if (location.hash.startsWith('#l-') && LIMINAL.length){
     const q = LIMINAL.find(x => x.id === location.hash.slice(3));
@@ -3148,6 +3004,8 @@ const ATLAS_READING={"en":"<section class=\"atlas-reading\"><h2>Explore Japan on
 function paintDirectory(){
  const aboutLabels={"en":"About this site","ja":"このサイトについて","ko":"이 사이트에 대하여","zh-Hans":"关于本站","zh-Hant":"關於本站","th":"เกี่ยวกับเว็บไซต์นี้"};
  document.querySelectorAll('.site-about-link').forEach(a=>{a.textContent=aboutLabels[LANG]||aboutLabels.en;a.href='/about#'+LANG;});
+ const supportLabels={"en":"☕ Support this site","ja":"☕ このサイトを支える","ko":"☕ 이 사이트 후원","zh-Hans":"☕ 支持本站","zh-Hant":"☕ 支持本站","th":"☕ สนับสนุนเว็บไซต์"};
+ document.querySelectorAll('.site-support-link').forEach(a=>{a.textContent=supportLabels[LANG]||supportLabels.en;});
  const reading=document.getElementById('atlasReading');if(reading)reading.innerHTML=ATLAS_READING[LANG]||ATLAS_READING.en;
  const box=document.querySelector('.seo-list');if(!box||!PLACES.length)return;
  const d=DIRECTORY_TEXT[LANG].slice();d[0]=SEO[LANG].title;d[1]=SEO[LANG].description;
@@ -3164,7 +3022,6 @@ const AUX_UI = {
 };
 const uiText = key => PlaceUI.pick(AUX_UI[key], LANG);
 function paintAuxUI(){
-  paintGygControl();
   paintDirectory();
   $('qClear').setAttribute('aria-label',PlaceUI.pick(['Clear search','検索を消去','검색 지우기','清除搜索','清除搜尋'],LANG));
   $('q').placeholder=uiText('search');$('q').setAttribute('aria-label',uiText('search'));
@@ -3188,7 +3045,6 @@ function showCopyLink(url){
   box.querySelector('input').value=url;box.showModal();box.querySelector('input').select();
 }
 function showSavedSpot(row){
-  const gp=GYG_POINTS.filter(p=>Math.abs(p.lat-row.lat)<0.00002&&Math.abs(p.lon-row.lon)<0.00002);if(gp.length){showGygPoints(gp);return;}
   const all=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal})),...ACTIVITIES.map(p=>({p,open:showActivity}))];
   const known=all.find(x=>Math.abs(x.p.lat-row.lat)<0.00002&&Math.abs(x.p.lon-row.lon)<0.00002);
   if(known){known.open(known.p);return;}
@@ -3267,8 +3123,6 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
       .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
-    fetch(assetUrl('affiliate-config.json')).then(r => r.ok ? r.json() : null)
-      .then(setAffiliateConfig).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
       // 残り続ける（drawDetail は #place が隠れていれば即 return するため）。
@@ -3283,7 +3137,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   ]).then(drawDetail);
   // Detailed monument text is loaded on demand when a memorial is opened.
 
-  if (window.AtlasWalking?.restore() || restoreGygPoint() || restoreActivity() || restoreSharedSpot()) return;
+  if (window.AtlasWalking?.restore() || restoreActivity() || restoreSharedSpot()) return;
   if (location.hash === '#map') noPush(openMap);
   else if (location.hash.startsWith('#l-')){
     const want = location.hash.slice(3);

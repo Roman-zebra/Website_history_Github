@@ -31,7 +31,7 @@ The background cache installer runs at most four requests at a time and reuses b
 - Home cards for featured and liminal places are `<a>` links to the article. A plain click still opens the map as before; Ctrl/⌘ or middle click opens the article.
 - Links that open the map from another page use `/?lang=<lang>&place=<id>` (landmarks: `&spot=lat,lon`). `consumeMapQuery()` turns the query into the in-app hash, and old `#hiroshima` bookmarks keep working. A #fragment never reaches the server, so it cannot be redirected with a 301.
 - `_redirects` (copied by `build.cjs`) answers `.html` and trailing-slash spellings of the entry pages with 301. Keep it to static rules: rules are matched against the requested path before html_handling, and a placeholder rule that lost its `.html` would loop. `/?lang=ja` cannot be matched there (no query matching), and it is the Japanese map itself, so it stays with its canonical pointing at `/`.
-- `tests/canonical-links.test.cjs` fails when a crawlable page or the rendered home directory links to a place by #hash or to a `.html` duplicate, and when an article, guide or language page carries tour or affiliate links.
+- `tests/canonical-links.test.cjs` fails when a crawlable page or the rendered home directory links to a place by #hash or to a `.html` duplicate, and when any crawlable page carries tour or affiliate links.
 
 ## In-depth place guides
 

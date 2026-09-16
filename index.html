@@ -15,10 +15,10 @@
 <link rel="dns-prefetch" href="https://ja.wikipedia.org">
 
 <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="explore.css?v=0.89">
-<link rel="stylesheet" href="design.css?v=0.89">
+<link rel="stylesheet" href="explore.css?v=0.90">
+<link rel="stylesheet" href="design.css?v=0.90">
 <!-- Start-up data explore.js fetches as soon as it runs. On a first visit it is preloaded here, one round trip earlier; under the service worker the files come from its cache and Chrome would download a preload twice instead of reusing it. build.cjs gives these URLs the release's versions in dist. -->
-<script>if(!(navigator.serviceWorker&&navigator.serviceWorker.controller))for(const href of ['data/places-world.json?v=0.48','data/monuments-index.json?v=0.48','data/landmarks.json?v=0.48','data/regional-landmarks-v1.json?v=0.48','data/liminal.json?v=0.48','data/topics.json?v=0.48','data/areas.json?v=0.48','affiliate-config.json?v=0.89']){const link=document.createElement('link');link.rel='preload';link.as='fetch';link.crossOrigin='anonymous';link.href=href;document.head.appendChild(link);}</script>
+<script>if(!(navigator.serviceWorker&&navigator.serviceWorker.controller))for(const href of ['data/places-world.json?v=0.48','data/monuments-index.json?v=0.48','data/landmarks.json?v=0.48','data/regional-landmarks-v1.json?v=0.48','data/liminal.json?v=0.48','data/topics.json?v=0.48','data/areas.json?v=0.48']){const link=document.createElement('link');link.rel='preload';link.as='fetch';link.crossOrigin='anonymous';link.href=href;document.head.appendChild(link);}</script>
 <!--SEO-->
 <title>Japan Time Atlas | Historic Maps, Hidden Gems &amp; Walking Japan</title>
 <meta id="metaDescription" name="description" content="Compare old maps and aerial photos with Japan today. Discover small towns, historic streets, local sights and liminal spaces for your next Japan walking trip.">
@@ -45,7 +45,7 @@
 <link rel="alternate" hreflang="zh-Hant" href="https://japantimeatlas.com/zh-tw">
 <link rel="alternate" hreflang="th" href="https://japantimeatlas.com/th">
 <link rel="alternate" hreflang="x-default" href="https://japantimeatlas.com/">
-<link rel="stylesheet" href="walking-time.css?v=0.89">
+<link rel="stylesheet" href="walking-time.css?v=0.90">
 <link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/icons/atlas.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/atlas-180.png"></head>
 <body>
 
@@ -111,7 +111,7 @@
   <footer class="home-foot">
     <p data-t="credits"></p>
     <p><a id="allPlacesLink" href="/places">All places ↗</a></p>
-  <p><a class="site-about-link" href="/about#en">About this site</a></p></footer>
+  <p><a class="site-about-link" href="/about#en">About this site</a> · <a class="site-support-link" href="https://ko-fi.com/japantimeatlas" target="_blank" rel="noopener">☕ Support this site</a></p></footer>
 </section>
 
 <!-- ============ 2. Map / place ============ -->
@@ -177,7 +177,7 @@
       </div>
       
       <p id="pSrc" class="p-src"></p>
-    <aside id="pAff" class="p-aff" hidden></aside><p class="panel-about"><a class="site-about-link" href="/about#en">About this site</a></p>
+    <p class="panel-about"><a class="site-about-link" href="/about#en">About this site</a> · <a class="site-support-link" href="https://ko-fi.com/japantimeatlas" target="_blank" rel="noopener">☕ Support this site</a></p>
     </div>
   </section>
 </section>
@@ -185,15 +185,12 @@
 <div id="toast" class="toast" hidden></div>
 
 <script src="/vendor/leaflet-1.9.4/leaflet.min.js"></script>
-<script src="affiliate-router.js?v=0.89"></script>
-<script src="place-ui.js?v=0.89"></script>
-<script src="activities-data.js?v=0.89"></script>
-<script src="gyg-products-data.js?v=0.89"></script>
-<script src="gyg-products.js?v=0.89"></script>
-<script src="walking-data.js?v=0.89"></script>
-<script src="walking-time.js?v=0.89"></script>
-<script src="explore.js?v=0.89"></script>
-<script src="atmosphere.js?v=0.89" defer></script>
+<script src="place-ui.js?v=0.90"></script>
+<script src="activities-data.js?v=0.90"></script>
+<script src="walking-data.js?v=0.90"></script>
+<script src="walking-time.js?v=0.90"></script>
+<script src="explore.js?v=0.90"></script>
+<script src="atmosphere.js?v=0.90" defer></script>
 <div id="langMenu" class="lang-menu" hidden></div>
 </body>
 </html>

@@ -23,7 +23,7 @@ const T={
   next:'Next place',nextText:'The next reconstruction is in preparation. New places are added to this page and to tab 06 on the home page.',
   howH:'How the reconstructions are made',
   how:['Outlines, storey counts and completion years come from surveys, maps and published records; the aerial photographs of each year lie on the roofs and the ground.','Façades are drawn by building type, and heights can be a few metres out where no survey exists.','Interiors are built from published plans, photographs and residents’ accounts. Documented parts are drawn solid; assumptions are drawn translucent and are listed on the page.','Every page credits its photographs and sources.'],
-  home:'Japan Time Atlas',back:'Back to the atlas'},
+  home:'Japan Time Atlas',back:'Back to the atlas',support:'☕ Support this site'},
  ja:{title:'3Dでよみがえる日本｜昔の航空写真と資料で当時の町並みへタイムスリップ | Japan Time Atlas',description:'昔の航空写真・実測資料・当時の写真から、日本の町並みを建物ごとに3Dで再現するシリーズ。第1回は「よみがえる軍艦島（端島）」、1947年から現在まで。建物の解説、室内の再現、音声ガイド付き。',
   crumb:'3Dでよみがえる',h1:'3Dでよみがえる日本',badge:'シリーズ',
   lead:'昔の航空写真と実測資料、当時の写真から、あの日の町並みを3Dでよみがえらせるシリーズです。年代を動かすと建物は竣工年に立ち上がり、崩れた年に消えます。資料のある建物は中にも入れます。',
@@ -31,7 +31,7 @@ const T={
   next:'次の場所',nextText:'次の復元は準備中です。新しい場所はこのページとトップの06タブに追加します。',
   howH:'復元の方法',
   how:['輪郭・階数・竣工年は実測資料、地図、公刊資料から取り、各年の空中写真を屋根と地面に貼っています。','壁面は建物の種類ごとに描いた模式で、実測のない場所では高さが数メートルずれます。','内部は公開された平面図、写真、元住民の証言から組み立てています。出典のある部分は不透明、推定の部分は半透明で描き、ページに列挙します。','各ページに写真の撮影者と出典を記しています。'],
-  home:'Japan Time Atlas',back:'地図にもどる'},
+  home:'Japan Time Atlas',back:'地図にもどる',support:'☕ このサイトを支える'},
  ko:{title:'일본 3D 복원 시리즈: 항공사진과 자료로 장소를 입체로 | Japan Time Atlas',description:'항공사진·실측 자료·당시 사진으로 일본의 장소를 건물별로 3D 복원하는 시리즈. 1편은 군함도(하시마), 1947년부터 지금까지. 건물 해설, 내부 복원, 음성 가이드 포함.',
   crumb:'3D 복원',h1:'3D 복원',badge:'시리즈',
   lead:'항공사진, 실측 자료, 당시 사진으로 장소를 입체로 되살리는 시리즈입니다. 연도를 움직이면 건물은 준공년에 올라가고 무너진 해에 사라집니다. 자료가 있는 건물은 안에도 들어갈 수 있습니다.',
@@ -39,7 +39,7 @@ const T={
   next:'다음 장소',nextText:'다음 복원을 준비 중입니다. 새 장소는 이 페이지와 홈의 06 탭에 추가됩니다.',
   howH:'복원 방법',
   how:['윤곽·층수·준공년은 실측 자료, 지도, 공개 자료에서 가져오고, 각 해의 항공사진을 지붕과 지면에 입혔습니다.','벽면은 건물 종류별로 그린 모식이며, 실측이 없는 곳은 높이가 몇 미터 어긋납니다.','내부는 공개된 평면도, 사진, 옛 주민의 증언으로 조립했습니다. 출처가 있는 부분은 불투명, 추정 부분은 반투명으로 그리고 페이지에 나열합니다.','각 페이지에 사진의 촬영자와 출처를 적었습니다.'],
-  home:'Japan Time Atlas',back:'지도로 돌아가기'},
+  home:'Japan Time Atlas',back:'지도로 돌아가기',support:'☕ 이 사이트 후원'},
  'zh-Hans':{title:'日本3D复原系列：用航拍照片和资料把地点还原成立体 | Japan Time Atlas',description:'用航拍照片、实测资料和当年照片，把日本的地点逐栋复原成3D的系列。第1期：军舰岛（端岛），从1947年到今天。附建筑解说、内部复原和音频导览。',
   crumb:'3D复原',h1:'3D复原',badge:'系列',
   lead:'用航拍照片、实测资料和当年照片把地点还原成立体的系列。拖动年代，建筑在建成那年立起、在倒塌那年消失。有资料的建筑还能走进内部。',
@@ -47,7 +47,7 @@ const T={
   next:'下一处',nextText:'下一处复原正在准备。新地点会加到本页和首页的06标签。',
   howH:'复原方法',
   how:['轮廓、层数和竣工年来自实测资料、地图和公开出版物；各年的航拍照片贴在屋顶和地面上。','墙面按建筑类型绘制示意图，没有实测的地方高度可能相差几米。','内部依据公开的平面图、照片和原居民的证言搭建。有出处的部分为不透明，推定部分为半透明，并在页面上列出。','每页都注明照片的拍摄者和出处。'],
-  home:'Japan Time Atlas',back:'返回地图'},
+  home:'Japan Time Atlas',back:'返回地图',support:'☕ 支持本站'},
  'zh-Hant':{title:'日本3D復原系列：用航空照片和資料把地點還原成立體 | Japan Time Atlas',description:'用航空照片、實測資料和當年照片，把日本的地點逐棟復原成3D的系列。第1期：軍艦島（端島），從1947年到今天。附建築解說、內部復原和語音導覽。',
   crumb:'3D復原',h1:'3D復原',badge:'系列',
   lead:'用航空照片、實測資料和當年照片把地點還原成立體的系列。拖曳年代，建築在建成那年立起、在倒塌那年消失。有資料的建築還能走進內部。',
@@ -55,7 +55,7 @@ const T={
   next:'下一處',nextText:'下一處復原正在準備。新地點會加到本頁和首頁的06標籤。',
   howH:'復原方法',
   how:['輪廓、層數和竣工年來自實測資料、地圖和公開出版物；各年的航空照片貼在屋頂和地面上。','牆面按建築類型繪製示意圖，沒有實測的地方高度可能相差幾公尺。','內部依據公開的平面圖、照片和原居民的證言搭建。有出處的部分為不透明，推定部分為半透明，並在頁面上列出。','每頁都註明照片的拍攝者和出處。'],
-  home:'Japan Time Atlas',back:'返回地圖'},
+  home:'Japan Time Atlas',back:'返回地圖',support:'☕ 支持本站'},
 };
 const CSS=`.lab-badge{display:inline-block;margin:0 0 .5rem;padding:.15rem .6rem;border:1px dashed #a35945;border-radius:2px;color:#793e30;font-size:.8rem;letter-spacing:.06em}
 .series{list-style:none;padding:0;margin:1.25rem 0}
@@ -115,7 +115,7 @@ ${items}
 <h2>${esc(t.howH)}</h2>
 <ul class="how">${t.how.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul>
 </main>
-<footer><p><a href="${home}">${esc(t.back)}</a></p></footer>
+<footer><p><a href="${home}">${esc(t.back)}</a> &middot; <a class="site-support-link" href="https://ko-fi.com/japantimeatlas" target="_blank" rel="noopener">${esc(t.support)}</a></p></footer>
 </body>
 </html>
 `;

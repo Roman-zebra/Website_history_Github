@@ -65,7 +65,6 @@ test('duplicate spellings answer with a permanent redirect and the rules ship in
  assert.match(read('scripts/build.cjs'),/'_redirects'/);
 });
 
-test('articles, guides and language pages carry no tour or affiliate links',()=>{
- for(const file of crawlable().filter(f=>!['index.html','explore.html','about.html'].includes(f)))assert.ok(!/getyourguide|klook|affiliate-router|gyg-/i.test(read(file)),file);
- for(const file of ['index.html','explore.html']){const s=read(file);assert.ok(!/<a[^>]+(getyourguide|klook)\./i.test(s.slice(0,s.indexOf('<div id="cards"'))),file+' first view');}
+test('no page carries an advert or an affiliate link',()=>{
+ for(const file of crawlable())assert.ok(!/getyourguide|klook|viator|stay22|booking\.com|affiliate|gyg|adsbygoogle|googlesyndication/i.test(read(file)),file);
 });

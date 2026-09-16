@@ -5,9 +5,9 @@
    A search sent while typing (auto) that would still read more than AUTO_LIMIT answers 'broad' instead, and the
    page offers to search all of Japan. The version comes from this worker's own URL, never a number written here. */
 const V=((self.location&&/[?&]v=([^&]*)/.exec(self.location.search))||[])[1]||'';
-importScripts(...['place-ui.js','search-core.js','gyg-products-data.js','gyg-products.js'].map(f=>V?f+'?v='+V:f));
+importScripts(...['place-ui.js','search-core.js'].map(f=>V?f+'?v='+V:f));
 const AUTO_LIMIT=5*1048576,KEEP_RECORDS=80000,PARALLEL=4;
-let pending=null,meta=null,metaKey='',gyg=null,cleaned=false;
+let pending=null,meta=null,metaKey='',cleaned=false;
 const shards=new Map(),files=new Map(),loading=new Map(),categories=new Map();
 /* x-atlas-bulk: sw.js leaves these to the browser cache (data/* is immutable) instead of its 40-file region cache. */
 async function json(url){const r=await fetch(url,{headers:{'x-atlas-bulk':'1'}});if(!r.ok)throw Error(url);return r.json();}
@@ -70,7 +70,6 @@ function trim(keep){
  for(const [i,r] of [...files]){if(total<=KEEP_RECORDS)break;if(keep.has(i))continue;files.delete(i);total-=r.length;}
 }
 async function run(request){
- if(!gyg)gyg=AtlasGygProducts.searchRecords(AtlasGygProducts.points(AtlasGygCatalog),AtlasSearch);
  const words=AtlasSearch.plan(request.query);
  if(!words.length){emit(request,'results',{rows:[],indexed:0,files:0});return;}
  await prepare(request.dataV);
@@ -95,7 +94,7 @@ async function run(request){
   rows=lists.flat();read=wanted.length;
  }
  if(pending!==request)return;
- emit(request,'results',{rows:AtlasSearch.search([...gyg,...rows],request.query,request.lang),indexed:rows.length,files:read});
+ emit(request,'results',{rows:AtlasSearch.search(rows,request.query,request.lang),indexed:rows.length,files:read});
 }
 self.onmessage=e=>{
  if(e.data.type==='cancel'){pending=null;return;}

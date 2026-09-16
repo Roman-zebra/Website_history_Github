@@ -4,7 +4,7 @@ ctx.PLACES=[{id:'featured'}];ctx.ACTIVITIES=[];ctx.LANDMARKS=[];ctx.LOCALS=[];ct
 test('overview entry is offered to all requested categories and only the largest other marker tier',()=>{
  const eligible=ctx.window.AtlasWalking.eligible,at=[35,139];
  for(const o of [{placeId:'featured',adTier:3},{kind:'food',adTier:3},{kind:'shopping',adTier:3},{adTier:1}])assert.equal(eligible({...o,at}),true);
- for(const o of [{adTier:2},{adTier:3,kind:'liminal'},{adTier:4},{adTier:0,kind:'gyg-product'}])assert.equal(eligible({...o,at}),false);
+ for(const o of [{adTier:2},{adTier:3,kind:'liminal'},{adTier:4}])assert.equal(eligible({...o,at}),false);
  assert.equal(eligible({adTier:1}),false);
 });
 test('nearby suggestions require real names, deduplicate points and skip private or distant destinations',()=>{

@@ -18,11 +18,11 @@ for(const name of ['index.html','explore.html','kids.html','ja.html','ko.html','
 const explore=fs.readFileSync(path.join(root,'explore.js'),'utf8');
 for(const name of ['index.html','explore.html']){
  const boot=[...fs.readFileSync(path.join(root,name),'utf8').matchAll(/'((?:data[/])?[^'?/]+[.]json)[?]v=[^']+'/g)].map(m=>m[1]);
- assert.ok(boot.length>=8,name+' start-up preloads');
+ assert.ok(boot.length>=7,name+' start-up preloads');
  for(const file of boot)assert.ok(explore.includes("'"+file+"'"),name+' preloads '+file+', which explore.js does not fetch');
 }
 const directories=['data','icons','3d','place','search','guides','visit','vendor'];
-const files=['walking-data.js','walking-time.js','walking-time.css','gyg-products-data.js','gyg-products.js','gyg-frame.html','gyg-widget.js','activities-data.js','search-core.js','search-worker.js','visit.html','about.html','about.js','affiliate-router.js','affiliate-config.json','th.html','.nojekyll','LICENSE-DATA.md','_headers','_redirects','app.js','atmosphere.js','design.css','explore.css','explore.html','explore.js','explore.webmanifest','index.html','ja.html','kids.html','ko.html','loop.js','manifest.webmanifest','og.jpg','page.css','place-ui.js','places.html','robots.txt','sitemap.xml','553bf2e0eaae7329e0477ae46475d218.txt','style.css','sw.js','zh-cn.html','zh-tw.html'];
+const files=['walking-data.js','walking-time.js','walking-time.css','activities-data.js','search-core.js','search-worker.js','visit.html','about.html','about.js','th.html','.nojekyll','LICENSE-DATA.md','_headers','_redirects','app.js','atmosphere.js','design.css','explore.css','explore.html','explore.js','explore.webmanifest','index.html','ja.html','kids.html','ko.html','loop.js','manifest.webmanifest','og.jpg','page.css','place-ui.js','places.html','robots.txt','sitemap.xml','553bf2e0eaae7329e0477ae46475d218.txt','style.css','sw.js','zh-cn.html','zh-tw.html'];
 assert.equal(path.dirname(dist),root);
 fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist);
 for(const name of [...directories,...files])fs.cpSync(path.join(root,name),path.join(dist,name),{recursive:true});
@@ -36,7 +36,7 @@ for(const file of htmlIn(dist)){
  let next=html.replace(/((?:src|href)="[/]?[^"?/]+[.](?:js|css)[?]v=)[^"&]+"/g,'$1'+assetVersion+'"');
  // the first-visit preload list in the app shells: data files carry the data version, the rest the asset version
  if(path.dirname(file)===dist&&['index.html','explore.html'].includes(path.basename(file)))
-  next=next.replace(/'(data[/][^'?]+[.]json)[?]v=[^']+'/g,"'$1?v="+dataVersion+"'").replace(/'(affiliate-config[.]json)[?]v=[^']+'/g,"'$1?v="+assetVersion+"'");
+  next=next.replace(/'(data[/][^'?]+[.]json)[?]v=[^']+'/g,"'$1?v="+dataVersion+"'");
  if(next!==html){fs.writeFileSync(file,next);versioned++;}
 }
 /* search engine ownership codes (scripts/seo/verification.json) go on the home page as meta tags */
