@@ -21,3 +21,31 @@ test('every 3D page in the sitemap can be produced from its file',()=>{
  for(const lang of ['','ja/','ko/','zh-cn/','zh-tw/'])
   assert.ok(announce(['3d/'+lang+'gunkanjima.html'],sitemap).length===1,lang+' 3D page is not announceable');
 });
+
+const {waitForRelease}=require('../scripts/seo/after-deploy.cjs');
+const quiet=()=>{},noSleep=async()=>{};
+const reply=(status,body)=>async()=>({ok:status===200,status,json:async()=>body});
+
+test('a runner that cannot read release.json announces after the blind wait instead of timing out',async()=>{
+ let calls=0;
+ const state=await waitForRelease('abc1234def',{fetchImpl:async()=>{calls++;return reply(403,null)();},sleepImpl:noSleep,log:quiet});
+ assert.equal(state,'unreadable');
+ assert.equal(calls,6,'about three minutes of 30-second tries, not the full twenty');
+});
+
+test('a readable release.json that names an older commit keeps the job waiting, then gives up quietly',async()=>{
+ const state=await waitForRelease('new0000',{fetchImpl:reply(200,{commit:'old0000'}),sleepImpl:noSleep,attempts:12,log:quiet});
+ assert.equal(state,'timeout');
+});
+
+test('the new commit going live is seen as soon as release.json names it',async()=>{
+ let n=0;
+ const state=await waitForRelease('new0000',{fetchImpl:async()=>reply(200,{commit:++n<3?'old0000':'new0000'})(),sleepImpl:noSleep,log:quiet});
+ assert.equal(state,'live');
+ assert.equal(n,3);
+});
+
+test('a network error on the first tries does not count as readable',async()=>{
+ const state=await waitForRelease('x',{fetchImpl:async()=>{throw new TypeError('fetch failed');},sleepImpl:noSleep,log:quiet});
+ assert.equal(state,'unreadable');
+});
