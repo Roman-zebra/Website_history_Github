@@ -3006,6 +3006,9 @@ function paintDirectory(){
  document.querySelectorAll('.site-about-link').forEach(a=>{a.textContent=aboutLabels[LANG]||aboutLabels.en;a.href='/about#'+LANG;});
  const supportLabels={"en":"☕ Support this site","ja":"☕ このサイトを支える","ko":"☕ 이 사이트 후원","zh-Hans":"☕ 支持本站","zh-Hant":"☕ 支持本站","th":"☕ สนับสนุนเว็บไซต์"};
  document.querySelectorAll('.site-support-link').forEach(a=>{a.textContent=supportLabels[LANG]||supportLabels.en;});
+ const modelLabels={"en": "Gunkanjima in 3D ↗", "ja": "3Dでよみがえる軍艦島 ↗", "ko": "3D로 보는 군함도 ↗", "zh-Hans": "3D复原 军舰岛 ↗", "zh-Hant": "3D復原 軍艦島 ↗", "th": "Gunkanjima in 3D ↗"};
+ const modelLinks={"en": "/3d/gunkanjima", "ja": "/3d/ja/gunkanjima", "ko": "/3d/ko/gunkanjima", "zh-Hans": "/3d/zh-cn/gunkanjima", "zh-Hant": "/3d/zh-tw/gunkanjima", "th": "/3d/gunkanjima"};
+ document.querySelectorAll('.site-3d-link').forEach(a=>{a.textContent=modelLabels[LANG]||modelLabels.en;a.href=modelLinks[LANG]||modelLinks.en;});
  const reading=document.getElementById('atlasReading');if(reading)reading.innerHTML=ATLAS_READING[LANG]||ATLAS_READING.en;
  const box=document.querySelector('.seo-list');if(!box||!PLACES.length)return;
  const d=DIRECTORY_TEXT[LANG].slice();d[0]=SEO[LANG].title;d[1]=SEO[LANG].description;

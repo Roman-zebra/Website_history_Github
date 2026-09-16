@@ -1,0 +1,41 @@
+# Every push to main: once Cloudflare is serving that commit, tell the IndexNow engines (Bing, Naver,
+# Yandex, Seznam, Yep) which pages changed, and Baidu when BAIDU_PUSH_TOKEN is set. Google takes no
+# pings and rereads on its own. Only pages listed in sitemap.xml are announced, at most 200 per push.
+name: Tell the search engines what changed
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Which pages changed
+        id: pages
+        run: |
+          BEFORE='${{ github.event.before }}'
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            BEFORE="$(git rev-parse HEAD~1 2>/dev/null || echo '')"
+          fi
+          if [ -z "$BEFORE" ]; then FILES=''; else FILES="$(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- '*.html')"; fi
+          URLS="$(node scripts/seo/changed-urls.cjs $FILES)"
+          echo "count=$(echo $URLS | wc -w)" >> "$GITHUB_OUTPUT"
+          echo "urls=$URLS" >> "$GITHUB_OUTPUT"
+      - name: Tell IndexNow once the pages are live
+        if: steps.pages.outputs.count != '0'
+        env:
+          COMMIT: ${{ github.sha }}
+          URLS: ${{ steps.pages.outputs.urls }}
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+        run: node scripts/seo/after-deploy.cjs "$COMMIT" $URLS
