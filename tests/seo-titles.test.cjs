@@ -134,7 +134,12 @@ test('with no service account the weekly job reads nothing and writes nothing',(
 test('ownership codes for Naver, Baidu and others go on the home page only when set, and only as plain codes',()=>{
  const html='<html><head><title>x</title></head><body></body></html>';
  assert.equal(seo.injectVerification(html,{}),html);
- assert.equal(seo.injectVerification(html,seo.loadVerification()),html,'no codes are set in the repository yet');
+ // The repository's codes: every set one becomes exactly one tag, the empty ones add nothing.
+ const codes=seo.loadVerification(),set=Object.entries(codes).filter(([,v])=>v);
+ const home=seo.injectVerification(html,codes);
+ assert.equal((home.match(/<meta name=/g)||[]).length,set.length);
+ for(const [n,v] of set)assert.ok(home.includes('<meta name="'+n+'" content="'+v+'">'),n+' is not on the home page');
+ assert.match(codes['msvalidate.01'],/^[0-9A-F]{32}$/,'Bing ownership code');
  const out=seo.injectVerification(html,{'naver-site-verification':'abc123def456','baidu-site-verification':'codeva-XyZ12345'});
  assert.ok(out.includes('<meta name="naver-site-verification" content="abc123def456">\n<meta name="baidu-site-verification" content="codeva-XyZ12345">\n</head>'));
  assert.throws(()=>seo.injectVerification(html,{'naver-site-verification':'"><script>alert(1)</script>'}));
