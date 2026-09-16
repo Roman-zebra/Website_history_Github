@@ -147,3 +147,6 @@ a.card{text-decoration:none}
 
 /* Share links in page footers: plain links, no third-party script. */
 .share-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:.75rem 0 0}.share-row .share-label{font-size:.875rem;color:#53695f;margin-right:.25rem}.share-row .share-link{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:1px solid #cbbfac;border-radius:6px;background:#fffdf8;color:#234d44;font-weight:700;text-decoration:none}.share-row .share-link:hover{background:#f4f1e8}.share-row .share-link:focus-visible{outline:2px solid #24594b;outline-offset:2px}
+
+/* About / Support in the home header. The text hides on narrow phones (icon + aria-label remain). */
+.home .lang.head-link{display:inline-flex;align-items:center;justify-content:center;gap:.35em;text-decoration:none;font:inherit;line-height:1.2;padding:0 .75rem}.home .lang.head-link span[aria-hidden]{font-size:1.05em}@media(max-width:640px){.home .lang.head-link{padding:0;min-width:40px}.home .lang.head-link .head-text{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}}
