@@ -1,0 +1,743 @@
+{
+ "about": "The building list of the Gunkanjima 3D model (gunkanjima-model.json) is Japanese. This file gives the viewer and the building table under the model the other languages, keyed by the Japanese text; Japanese pages show the list as it is. Source links carry English and Japanese in their own data, so only Korean and Chinese are here, keyed by URL. tests/lab-3d-i18n.test.cjs fails when the model gains a string this file does not cover.",
+ "numbered": {
+  "name": {
+   "en": "Building {n}",
+   "ja": "{n}号棟",
+   "ko": "{n}호동",
+   "zh-Hans": "{n}号楼",
+   "zh-Hant": "{n}號樓"
+  },
+  "label": {
+   "en": "No. {n}",
+   "ja": "{n}号棟",
+   "ko": "{n}호동",
+   "zh-Hans": "{n}号楼",
+   "zh-Hant": "{n}號樓"
+  }
+ },
+ "names": {
+  "端島小中学校": {
+   "en": "Hashima Elementary and Junior High School (Building 70)",
+   "ko": "하시마 초·중학교(70호동)",
+   "zh-Hans": "端岛中小学校（70号楼）",
+   "zh-Hant": "端島中小學校（70號樓）",
+   "short": {
+    "en": "School",
+    "ja": "小中学校",
+    "ko": "학교",
+    "zh-Hans": "学校",
+    "zh-Hant": "學校"
+   }
+  },
+  "端島小中学校体育館": {
+   "en": "School gymnasium (Building 71)",
+   "ko": "학교 체육관(71호동)",
+   "zh-Hans": "学校体育馆（71号楼）",
+   "zh-Hant": "學校體育館（71號樓）",
+   "short": {
+    "en": "School gymnasium",
+    "ja": "小中学校体育館",
+    "ko": "학교 체육관",
+    "zh-Hans": "学校体育馆",
+    "zh-Hant": "學校體育館"
+   }
+  },
+  "ちどり荘": {
+   "en": "Chidori-so (teachers’ housing)",
+   "ko": "치도리소(교원 주택)",
+   "zh-Hans": "千鸟庄（教员住宅）",
+   "zh-Hant": "千鳥莊（教員住宅）"
+  },
+  "総合事務所": {
+   "en": "General office (former winding-engine house)",
+   "ko": "종합사무소(옛 권양기실)",
+   "zh-Hans": "综合事务所（旧卷扬机房）",
+   "zh-Hant": "綜合事務所（舊捲揚機房）"
+  },
+  "第二坑捲": {
+   "en": "No. 2 shaft winding house",
+   "ko": "제2갱 권양기실",
+   "zh-Hans": "第二竖井卷扬机房",
+   "zh-Hant": "第二豎井捲揚機房"
+  },
+  "会社事務所": {
+   "en": "Company office",
+   "ko": "회사 사무소",
+   "zh-Hans": "公司办公楼",
+   "zh-Hant": "公司辦公樓"
+  },
+  "会議室": {
+   "en": "Meeting room",
+   "ko": "회의실",
+   "zh-Hans": "会议室",
+   "zh-Hant": "會議室"
+  },
+  "資材倉庫": {
+   "en": "Materials store",
+   "ko": "자재 창고",
+   "zh-Hans": "材料仓库",
+   "zh-Hant": "材料倉庫"
+  },
+  "貯水槽": {
+   "en": "Water tank",
+   "ko": "저수조",
+   "zh-Hans": "储水槽",
+   "zh-Hant": "儲水槽"
+  },
+  "仕上工場": {
+   "en": "Finishing workshop",
+   "ko": "마무리 공장",
+   "zh-Hans": "精整车间",
+   "zh-Hant": "精整車間"
+  },
+  "変電所": {
+   "en": "Substation",
+   "ko": "변전소",
+   "zh-Hans": "变电所",
+   "zh-Hant": "變電所"
+  },
+  "オリバーフィルター室": {
+   "en": "Oliver filter house",
+   "ko": "올리버 필터실",
+   "zh-Hans": "奥利弗过滤室",
+   "zh-Hant": "奧利弗過濾室"
+  },
+  "ドルシックナー": {
+   "en": "Dorr thickener",
+   "ko": "도르 시크너",
+   "zh-Hans": "多尔浓缩池",
+   "zh-Hant": "多爾濃縮池"
+  },
+  "扇風機圧気機室": {
+   "en": "Fan and compressor house",
+   "ko": "송풍기·압축기실",
+   "zh-Hans": "风机压气机室",
+   "zh-Hant": "風機壓氣機室"
+  },
+  "二坑口桟橋": {
+   "en": "No. 2 pithead gantry",
+   "ko": "제2갱구 잔교",
+   "zh-Hans": "二坑口栈桥",
+   "zh-Hant": "二坑口棧橋"
+  },
+  "消火タンク": {
+   "en": "Fire-fighting tank",
+   "ko": "소화 탱크",
+   "zh-Hans": "消防水箱",
+   "zh-Hant": "消防水箱"
+  },
+  "四坑上家": {
+   "en": "No. 4 shaft headframe house",
+   "ko": "제4갱 상옥",
+   "zh-Hans": "四号井井口房",
+   "zh-Hant": "四號井井口房"
+  },
+  "圧気機室": {
+   "en": "Compressor house",
+   "ko": "압축기실",
+   "zh-Hans": "压气机室",
+   "zh-Hant": "壓氣機室"
+  },
+  "浮選機室": {
+   "en": "Flotation house",
+   "ko": "부유선광실",
+   "zh-Hans": "浮选机室",
+   "zh-Hant": "浮選機室"
+  },
+  "第四竪坑風洞": {
+   "en": "No. 4 shaft air duct",
+   "ko": "제4수갱 풍동",
+   "zh-Hans": "第四竖井风洞",
+   "zh-Hant": "第四豎井風洞"
+  },
+  "起重機": {
+   "en": "Crane",
+   "ko": "기중기",
+   "zh-Hans": "起重机",
+   "zh-Hant": "起重機"
+  },
+  "詰込室": {
+   "en": "Loading room",
+   "ko": "적재실",
+   "zh-Hans": "装载室",
+   "zh-Hant": "裝載室"
+  },
+  "ブロワー室": {
+   "en": "Blower house",
+   "ko": "블로어실",
+   "zh-Hans": "鼓风机室",
+   "zh-Hant": "鼓風機室"
+  },
+  "ベルトコンベアー": {
+   "en": "Belt conveyor",
+   "ko": "벨트 컨베이어",
+   "zh-Hans": "传送带",
+   "zh-Hant": "輸送帶"
+  }
+ },
+ "uses": {
+  "端島神社": {
+   "en": "Hashima Shrine",
+   "ko": "하시마 신사",
+   "zh-Hans": "端岛神社",
+   "zh-Hant": "端島神社"
+  },
+  "職員社宅": {
+   "en": "Staff housing",
+   "ko": "직원 사택",
+   "zh-Hans": "职员宿舍",
+   "zh-Hant": "職員宿舍"
+  },
+  "職員社宅（幹部）": {
+   "en": "Senior staff housing",
+   "ko": "간부 직원 사택",
+   "zh-Hans": "干部职员宿舍",
+   "zh-Hant": "幹部職員宿舍"
+  },
+  "町営住宅（教員）": {
+   "en": "Town housing (teachers)",
+   "ko": "읍영 주택(교원)",
+   "zh-Hans": "町营住宅（教员）",
+   "zh-Hant": "町營住宅（教員）"
+  },
+  "鉱員社宅（日給社宅）": {
+   "en": "Miners’ housing (daily-wage blocks)",
+   "ko": "광부 사택(일급 사택)",
+   "zh-Hans": "矿工宿舍（日薪宿舍）",
+   "zh-Hant": "礦工宿舍（日薪宿舍）"
+  },
+  "鉱員社宅": {
+   "en": "Miners’ housing",
+   "ko": "광부 사택",
+   "zh-Hans": "矿工宿舍",
+   "zh-Hant": "礦工宿舍"
+  },
+  "町営住宅（かもめ荘）・町役場": {
+   "en": "Town housing (Kamome-so) and town office",
+   "ko": "읍영 주택(가모메소)·읍사무소",
+   "zh-Hans": "町营住宅（海鸥庄）、町公所",
+   "zh-Hant": "町營住宅（海鷗莊）、町公所"
+  },
+  "鉱員社宅（のち下請飯場）": {
+   "en": "Miners’ housing, later contractors’ lodging",
+   "ko": "광부 사택(후에 하청 숙소)",
+   "zh-Hans": "矿工宿舍（后为分包工住所）",
+   "zh-Hant": "礦工宿舍（後為分包工住所）"
+  },
+  "町立端島公民館": {
+   "en": "Community hall",
+   "ko": "공민관",
+   "zh-Hans": "公民馆",
+   "zh-Hant": "公民館"
+  },
+  "鉱員社宅（報国寮）": {
+   "en": "Miners’ housing (Hokoku-ryo)",
+   "ko": "광부 사택(호코쿠료)",
+   "zh-Hans": "矿工宿舍（报国寮）",
+   "zh-Hant": "礦工宿舍（報國寮）"
+  },
+  "鉱員合宿（啓明寮）": {
+   "en": "Miners’ dormitory (Keimei-ryo)",
+   "ko": "광부 합숙소(게이메이료)",
+   "zh-Hans": "矿工宿舍（启明寮）",
+   "zh-Hant": "礦工宿舍（啟明寮）"
+  },
+  "鉱員合宿": {
+   "en": "Miners’ dormitory",
+   "ko": "광부 합숙소",
+   "zh-Hans": "矿工合宿",
+   "zh-Hant": "礦工合宿"
+  },
+  "隔離病棟": {
+   "en": "Isolation ward",
+   "ko": "격리 병동",
+   "zh-Hans": "隔离病房",
+   "zh-Hant": "隔離病房"
+  },
+  "高島鉱業所端島病院": {
+   "en": "Hashima Hospital",
+   "ko": "하시마 병원",
+   "zh-Hans": "端岛医院",
+   "zh-Hant": "端島醫院"
+  },
+  "町立端島小中学校": {
+   "en": "Elementary and junior high school",
+   "ko": "초·중학교",
+   "zh-Hans": "中小学校",
+   "zh-Hant": "中小學校"
+  },
+  "体育館（1階は武道場・食堂）": {
+   "en": "Gymnasium (dojo and canteen below)",
+   "ko": "체육관(1층은 무도장·식당)",
+   "zh-Hans": "体育馆（1层为武道场、食堂）",
+   "zh-Hant": "體育館（1樓為武道場、食堂）"
+  },
+  "教員用住宅": {
+   "en": "Teachers’ housing",
+   "ko": "교원 주택",
+   "zh-Hans": "教员住宅",
+   "zh-Hant": "教員住宅"
+  },
+  "総合事務所（旧捲座）": {
+   "en": "General office (former winding-engine house)",
+   "ko": "종합사무소(옛 권양기실)",
+   "zh-Hans": "综合事务所（旧卷扬机房）",
+   "zh-Hant": "綜合事務所（舊捲揚機房）"
+  },
+  "第二竪坑の捲座": {
+   "en": "Winding house of No. 2 shaft",
+   "ko": "제2수갱 권양기실",
+   "zh-Hans": "第二竖井卷扬机房",
+   "zh-Hant": "第二豎井捲揚機房"
+  },
+  "貯水槽": {
+   "en": "Water tank",
+   "ko": "저수조",
+   "zh-Hans": "储水槽",
+   "zh-Hant": "儲水槽"
+  },
+  "資材倉庫": {
+   "en": "Materials store",
+   "ko": "자재 창고",
+   "zh-Hans": "材料仓库",
+   "zh-Hant": "材料倉庫"
+  },
+  "会社事務所": {
+   "en": "Company office",
+   "ko": "회사 사무소",
+   "zh-Hans": "公司办公楼",
+   "zh-Hant": "公司辦公樓"
+  },
+  "会議室": {
+   "en": "Meeting room",
+   "ko": "회의실",
+   "zh-Hans": "会议室",
+   "zh-Hant": "會議室"
+  },
+  "仕上工場": {
+   "en": "Finishing workshop",
+   "ko": "마무리 공장",
+   "zh-Hans": "精整车间",
+   "zh-Hant": "精整車間"
+  },
+  "変電所": {
+   "en": "Substation",
+   "ko": "변전소",
+   "zh-Hans": "变电所",
+   "zh-Hant": "變電所"
+  },
+  "1962年の写真に写る建物（名称不明・輪郭は高さ格子から）": {
+   "en": "A building in the 1962 photograph (name unknown; outline from the height grid)",
+   "ko": "1962년 사진에 찍힌 건물(이름 불명, 윤곽은 높이 격자에서)",
+   "zh-Hans": "1962年照片中的建筑（名称不详，轮廓取自高度网格）",
+   "zh-Hant": "1962年照片中的建築（名稱不詳，輪廓取自高度網格）"
+  }
+ },
+ "structures": {
+  "RC": {
+   "en": "Reinforced concrete",
+   "ja": "鉄筋コンクリート造",
+   "ko": "철근콘크리트조",
+   "zh-Hans": "钢筋混凝土结构",
+   "zh-Hant": "鋼筋混凝土結構"
+  },
+  "brick": {
+   "en": "Brick",
+   "ja": "れんが造",
+   "ko": "벽돌조",
+   "zh-Hans": "砖结构",
+   "zh-Hant": "磚結構"
+  },
+  "steel": {
+   "en": "Steel frame",
+   "ja": "鉄骨造",
+   "ko": "철골조",
+   "zh-Hans": "钢结构",
+   "zh-Hant": "鋼結構"
+  },
+  "RC+wood": {
+   "en": "Reinforced concrete and wood",
+   "ja": "鉄筋コンクリート造と木造",
+   "ko": "철근콘크리트조와 목조",
+   "zh-Hans": "钢筋混凝土结构与木结构",
+   "zh-Hant": "鋼筋混凝土結構與木結構"
+  },
+  "wood+RC": {
+   "en": "Wood and reinforced concrete",
+   "ja": "木造と鉄筋コンクリート造",
+   "ko": "목조와 철근콘크리트조",
+   "zh-Hans": "木结构与钢筋混凝土结构",
+   "zh-Hant": "木結構與鋼筋混凝土結構"
+  }
+ },
+ "notes": {
+  "島最大。屋上に幼稚園、中庭に児童公園": {
+   "en": "The largest building on the island, with a kindergarten on the roof and a children’s playground in the courtyard.",
+   "ko": "섬에서 가장 큰 건물. 옥상에 유치원, 안뜰에 어린이 놀이터가 있었다.",
+   "zh-Hans": "岛上最大的建筑。屋顶有幼儿园，中庭有儿童公园。",
+   "zh-Hant": "島上最大的建築。屋頂有幼稚園，中庭有兒童公園。"
+  },
+  "1962年の児童生徒数1,169人が最多": {
+   "en": "Enrolment peaked at 1,169 pupils in 1962.",
+   "ko": "학생 수는 1962년의 1,169명이 최다.",
+   "zh-Hans": "学生人数以1962年的1,169人为最多。",
+   "zh-Hant": "學生人數以1962年的1,169人為最多。"
+  },
+  "郵便局、地下に共同浴場": {
+   "en": "Post office; a public bath in the basement.",
+   "ko": "우체국, 지하에 공동 목욕탕.",
+   "zh-Hans": "邮局；地下有公共浴场。",
+   "zh-Hant": "郵局；地下有公共浴場。"
+  },
+  "各戸に風呂": {
+   "en": "Every flat had its own bath.",
+   "ko": "세대마다 욕실이 있었다.",
+   "zh-Hans": "每户都有浴室。",
+   "zh-Hant": "每戶都有浴室。"
+  },
+  "屋上に弓道場": {
+   "en": "An archery range on the roof.",
+   "ko": "옥상에 궁도장.",
+   "zh-Hans": "屋顶有弓道场。",
+   "zh-Hant": "屋頂有弓道場。"
+  },
+  "屋上に子ども用遊園": {
+   "en": "A children’s playground on the roof.",
+   "ko": "옥상에 어린이 놀이터.",
+   "zh-Hans": "屋顶有儿童游乐场。",
+   "zh-Hant": "屋頂有兒童遊樂場。"
+  },
+  "屋上に菜園": {
+   "en": "A vegetable garden on the roof.",
+   "ko": "옥상에 채소밭.",
+   "zh-Hans": "屋顶有菜园。",
+   "zh-Hant": "屋頂有菜園。"
+  },
+  "1階に商店": {
+   "en": "Shops on the ground floor.",
+   "ko": "1층에 상점.",
+   "zh-Hans": "1层有商店。",
+   "zh-Hant": "1樓有商店。"
+  },
+  "地下にパチンコ・麻雀": {
+   "en": "Pachinko and mahjong in the basement.",
+   "ko": "지하에 파친코·마작.",
+   "zh-Hans": "地下有柏青哥（弹珠机）和麻将。",
+   "zh-Hant": "地下有柏青哥和麻將。"
+  },
+  "木造の拝殿は倒壊、RCの本殿（祠）が残る": {
+   "en": "The wooden worship hall has collapsed; the reinforced-concrete main sanctuary (a small shrine) still stands.",
+   "ko": "목조 배전은 무너졌고, 철근콘크리트 본전(작은 사당)이 남아 있다.",
+   "zh-Hans": "木造拜殿已倒塌，钢筋混凝土的本殿（小祠）仍在。",
+   "zh-Hant": "木造拜殿已倒塌，鋼筋混凝土的本殿（小祠）仍在。"
+  },
+  "2階に宿泊所": {
+   "en": "Lodgings one floor above the ground floor.",
+   "ko": "2층에 숙박소.",
+   "zh-Hans": "2层有住宿处。",
+   "zh-Hant": "2樓有住宿處。"
+  },
+  "1階に派出所": {
+   "en": "A police box on the ground floor.",
+   "ko": "1층에 파출소.",
+   "zh-Hans": "1层有派出所。",
+   "zh-Hant": "1樓有派出所。"
+  },
+  "片持ちバルコニー、地下に商店街": {
+   "en": "Cantilevered balconies; a row of shops in the basement.",
+   "ko": "캔틸레버 발코니, 지하에 상점가.",
+   "zh-Hans": "悬挑阳台；地下有商店街。",
+   "zh-Hant": "懸挑陽台；地下有商店街。"
+  },
+  "屋上増築、地下に共同浴場": {
+   "en": "Extended on the roof; a public bath in the basement.",
+   "ko": "옥상 증축, 지하에 공동 목욕탕.",
+   "zh-Hans": "屋顶加建；地下有公共浴场。",
+   "zh-Hant": "屋頂加建；地下有公共浴場。"
+  },
+  "屋上増築": {
+   "en": "Extended on the roof.",
+   "ko": "옥상 증축.",
+   "zh-Hans": "屋顶加建。",
+   "zh-Hant": "屋頂加建。"
+  },
+  "1960年代に屋上増築、地下で購買部とつながる": {
+   "en": "Extended on the roof in the 1960s; linked underground to the company store.",
+   "ko": "1960년대에 옥상 증축, 지하에서 구매부(회사 매점)와 연결.",
+   "zh-Hans": "1960年代屋顶加建，地下与购买部（公司商店）相连。",
+   "zh-Hant": "1960年代屋頂加建，地下與購買部（公司商店）相連。"
+  },
+  "1階に共同浴場": {
+   "en": "A public bath on the ground floor.",
+   "ko": "1층에 공동 목욕탕.",
+   "zh-Hans": "1层有公共浴场。",
+   "zh-Hant": "1樓有公共浴場。"
+  },
+  "半壊": {
+   "en": "Partly collapsed.",
+   "ko": "반쯤 무너짐.",
+   "zh-Hans": "部分倒塌。",
+   "zh-Hant": "部分倒塌。"
+  },
+  "日本最古のRC造アパート。当初4階、のち7階に増築。中庭あり": {
+   "en": "Japan’s oldest reinforced-concrete apartment block. Four storeys at first, later raised to seven. It has a courtyard.",
+   "ko": "일본에서 가장 오래된 철근콘크리트 아파트. 처음에는 4층, 나중에 7층으로 증축. 안뜰이 있다.",
+   "zh-Hans": "日本最古老的钢筋混凝土公寓。最初4层，后加建到7层。有中庭。",
+   "zh-Hant": "日本最古老的鋼筋混凝土公寓。最初4層，後加建到7層。有中庭。"
+  },
+  "北棟1945年、1958年まで増築": {
+   "en": "North wing 1945, extended until 1958",
+   "ko": "북쪽 동 1945년, 1958년까지 증축",
+   "zh-Hans": "北栋1945年，扩建至1958年",
+   "zh-Hant": "北棟1945年，擴建至1958年"
+  },
+  "レンガ壁は1896年の第三竪坑捲座": {
+   "en": "The brick walls are the 1896 winding house of No. 3 shaft",
+   "ko": "벽돌 벽은 1896년의 제3수갱 권양기실",
+   "zh-Hans": "砖墙是1896年第三竖井的卷扬机房",
+   "zh-Hant": "磚牆是1896年第三豎井的捲揚機房"
+  },
+  "1957年6階、1961年に7階を増築（鉄骨）": {
+   "en": "Six storeys in 1957; a seventh added in 1961 (steel frame)",
+   "ko": "1957년 6층, 1961년에 7층 증축(철골)",
+   "zh-Hans": "1957年建成6层，1961年加建第7层（钢结构）",
+   "zh-Hant": "1957年建成6層，1961年加建第7層（鋼結構）"
+  },
+  "推定": {
+   "en": "Estimated",
+   "ko": "추정",
+   "zh-Hans": "推定",
+   "zh-Hant": "推定"
+  },
+  "1953年以降": {
+   "en": "1953 or later",
+   "ko": "1953년 이후",
+   "zh-Hans": "1953年以后",
+   "zh-Hant": "1953年以後"
+  },
+  "海底水道の受水槽（推定）": {
+   "en": "Probably the receiving tank of the undersea water pipeline",
+   "ko": "해저 수도의 수수조(추정)",
+   "zh-Hans": "海底水管的受水槽（推定）",
+   "zh-Hant": "海底水管的受水槽（推定）"
+  },
+  "1958年以降": {
+   "en": "1958 or later",
+   "ko": "1958년 이후",
+   "zh-Hans": "1958年以后",
+   "zh-Hant": "1958年以後"
+  },
+  "1925年以前": {
+   "en": "1925 or earlier",
+   "ko": "1925년 이전",
+   "zh-Hans": "1925年以前",
+   "zh-Hant": "1925年以前"
+  },
+  "高さから推定": {
+   "en": "Estimated from the height",
+   "ko": "높이로 추정",
+   "zh-Hans": "根据高度推定",
+   "zh-Hant": "根據高度推定"
+  },
+  "2010年の写真で高さが大きく減っている（崩壊時期は不明、2000年としている）": {
+   "en": "Much lower in the 2010 photograph (when it fell is not known; shown as 2000)",
+   "ko": "2010년 사진에서 높이가 크게 줄었다(붕괴 시기는 불명, 2000년으로 표시)",
+   "zh-Hans": "在2010年的照片中高度明显降低（倒塌时间不明，暂按2000年显示）",
+   "zh-Hant": "在2010年的照片中高度明顯降低（倒塌時間不明，暫按2000年顯示）"
+  },
+  "2010年の写真では低い": {
+   "en": "Lower in the 2010 photograph",
+   "ko": "2010년 사진에서는 낮다",
+   "zh-Hans": "在2010年的照片中较低",
+   "zh-Hant": "在2010年的照片中較低"
+  }
+ },
+ "sources": {
+  "https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html": {
+   "ko": "메이지 일본의 산업혁명 유산 공식 사이트 · 하시마 탄광(영어)",
+   "zh-Hans": "明治日本产业革命遗产官方网站 · 端岛煤矿（英语）",
+   "zh-Hant": "明治日本產業革命遺產官方網站 · 端島煤礦（英語）"
+  },
+  "https://www.city.nagasaki.lg.jp/page/3927.html": {
+   "ko": "나가사키시 · 하시마(군함도) 정비 기금(일본어)",
+   "zh-Hans": "长崎市 · 端岛（军舰岛）整修基金（日语）",
+   "zh-Hant": "長崎市 · 端島（軍艦島）整修基金（日語）"
+  },
+  "https://www.gunkanjima-concierge.com/about/": {
+   "ko": "군함도 컨시어지(투어 업체) · 군함도란(일본어)",
+   "zh-Hans": "军舰岛Concierge（旅游业者）· 什么是军舰岛（日语）",
+   "zh-Hant": "軍艦島Concierge（旅遊業者）· 什麼是軍艦島（日語）"
+  },
+  "https://ja.wikipedia.org/wiki/%E7%AB%AF%E5%B3%B6_(%E9%95%B7%E5%B4%8E%E7%9C%8C)": {
+   "ko": "위키백과(일본어) · 端島 (長崎県)",
+   "zh-Hans": "维基百科（日语）· 端島 (長崎県)",
+   "zh-Hant": "維基百科（日語）· 端島 (長崎県)"
+  },
+  "https://www.at-nagasaki.jp/spot/51797": {
+   "ko": "나가사키시 공식 관광 사이트 at Nagasaki · 하시마(일본어)",
+   "zh-Hans": "长崎市官方旅游网站 at Nagasaki · 端岛（日语）",
+   "zh-Hant": "長崎市官方觀光網站 at Nagasaki · 端島（日語）"
+  },
+  "https://jogakkai.jp/MailMagMedia/2024/387/building30BigSightExhibition20240612.pdf": {
+   "ko": "30호동 전시 패널(2024년, PDF, 일본어)",
+   "zh-Hans": "30号楼展示展板（2024年，PDF，日语）",
+   "zh-Hant": "30號樓展示展板（2024年，PDF，日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/30goutoum.html": {
+   "ko": "상상과 기억: 30호동(일본어)",
+   "zh-Hans": "想象与记忆：30号楼（日语）",
+   "zh-Hant": "想像與記憶：30號樓（日語）"
+  },
+  "https://www.gunkanjima-excursion.com/architecture/30-building.html": {
+   "ko": "군함도 엑스커션: 30호동(일본어)",
+   "zh-Hans": "军舰岛Excursion：30号楼（日语）",
+   "zh-Hant": "軍艦島Excursion：30號樓（日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/bunkakyusisyu.html": {
+   "ko": "상상과 기억: 하시마의 살림살이와 부엌(일본어)",
+   "zh-Hans": "想象与记忆：端岛的家用品与厨房（日语）",
+   "zh-Hant": "想像與記憶：端島的家用品與廚房（日語）"
+  },
+  "https://commons.wikimedia.org/wiki/Category:Hashima-jinja_(Nagasaki)": {
+   "ko": "하시마 신사 1992년 사진(Wikimedia Commons)",
+   "zh-Hans": "端岛神社1992年的照片（Wikimedia Commons）",
+   "zh-Hant": "端島神社1992年的照片（Wikimedia Commons）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/1goutou.html": {
+   "ko": "상상과 기억: 1호동, 하시마 신사(일본어)",
+   "zh-Hans": "想象与记忆：1号楼，端岛神社（日语）",
+   "zh-Hant": "想像與記憶：1號樓，端島神社（日語）"
+  },
+  "https://www.gunkanjima-museum.jp/data/558/detail/": {
+   "ko": "군함도 디지털 뮤지엄: 추천 명소(일본어)",
+   "zh-Hans": "军舰岛数字博物馆：推荐景点（日语）",
+   "zh-Hant": "軍艦島數位博物館：推薦景點（日語）"
+  },
+  "https://commons.wikimedia.org/wiki/File:Hashima_Kindergarten-01.jpg": {
+   "ko": "하시마 유치원·보육원 1992년 사진(Wikimedia Commons)",
+   "zh-Hans": "端岛幼儿园、保育园1992年的照片（Wikimedia Commons）",
+   "zh-Hant": "端島幼稚園、保育園1992年的照片（Wikimedia Commons）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/bunka.html": {
+   "ko": "상상과 기억: 보육원(일본어)",
+   "zh-Hans": "想象与记忆：保育园（日语）",
+   "zh-Hant": "想像與記憶：保育園（日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/65goutou.html": {
+   "ko": "상상과 기억: 65호동(일본어)",
+   "zh-Hans": "想象与记忆：65号楼（日语）",
+   "zh-Hant": "想像與記憶：65號樓（日語）"
+  },
+  "https://www.gunkanjima-excursion.com/architecture/65-building.html": {
+   "ko": "군함도 엑스커션: 65호동(일본어)",
+   "zh-Hans": "军舰岛Excursion：65号楼（日语）",
+   "zh-Hant": "軍艦島Excursion：65號樓（日語）"
+  },
+  "http://www.gunkanjima.ne2.jp/Gunkanjima-107.htm": {
+   "ko": "폐허 찬가: 65호동(일본어)",
+   "zh-Hans": "废墟赞歌：65号楼（日语）",
+   "zh-Hant": "廢墟讚歌：65號樓（日語）"
+  },
+  "https://jbpress.ismedia.jp/articles/-/64267": {
+   "ko": "JBpress: 옛 주민이 말하는 아래 목욕탕(일본어)",
+   "zh-Hans": "JBpress：前岛民谈下层浴场（日语）",
+   "zh-Hant": "JBpress：前島民談下層浴場（日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/70goutou.html": {
+   "ko": "상상과 기억: 70호동, 하시마 초중학교(일본어)",
+   "zh-Hans": "想象与记忆：70号楼，端岛小学和初中（日语）",
+   "zh-Hant": "想像與記憶：70號樓，端島小學與國中（日語）"
+  },
+  "http://www.gunkanjima.ne2.jp/Gunkanjima-108.htm": {
+   "ko": "폐허 찬가: 하시마 초중학교(일본어)",
+   "zh-Hans": "废墟赞歌：端岛小学和初中（日语）",
+   "zh-Hant": "廢墟讚歌：端島小學與國中（日語）"
+  },
+  "https://www.nagasakicitylegacy.info/heritage/1335/": {
+   "ko": "나가사키시 문화유산: 하시마 초중학교 교사(일본어)",
+   "zh-Hans": "长崎市文化遗产：端岛小学和初中校舍（日语）",
+   "zh-Hant": "長崎市文化遺產：端島小學與國中校舍（日語）"
+  },
+  "https://commons.wikimedia.org/wiki/File:Hashima_School_gymnasium-02.jpg": {
+   "ko": "학교 체육관 1992년 사진(Wikimedia Commons)",
+   "zh-Hans": "学校体育馆1992年的照片（Wikimedia Commons）",
+   "zh-Hant": "學校體育館1992年的照片（Wikimedia Commons）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/71goutou.html": {
+   "ko": "상상과 기억: 71호동, 체육관(일본어)",
+   "zh-Hans": "想象与记忆：71号楼，体育馆（日语）",
+   "zh-Hant": "想像與記憶：71號樓，體育館（日語）"
+  },
+  "http://www.gunkanjima.ne2.jp/Gunkanjima-106.htm": {
+   "ko": "폐허 찬가: 하시마 병원(일본어)",
+   "zh-Hans": "废墟赞歌：端岛医院（日语）",
+   "zh-Hant": "廢墟讚歌：端島醫院（日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/byouin.html": {
+   "ko": "상상과 기억: 하시마 병원(일본어)",
+   "zh-Hans": "想象与记忆：端岛医院（日语）",
+   "zh-Hant": "想像與記憶：端島醫院（日語）"
+  },
+  "https://commons.wikimedia.org/wiki/File:Hashima_Hospital-01.jpg": {
+   "ko": "하시마 병원 1992년 사진(Wikimedia Commons)",
+   "zh-Hans": "端岛医院1992年的照片（Wikimedia Commons）",
+   "zh-Hant": "端島醫院1992年的照片（Wikimedia Commons）"
+  },
+  "https://president.jp/articles/-/87741": {
+   "ko": "프레지던트 온라인: 하시마 긴자와 상점(일본어)",
+   "zh-Hans": "President Online：端岛银座与商店（日语）",
+   "zh-Hant": "President Online：端島銀座與商店（日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/nikkyuu.html": {
+   "ko": "상상과 기억: 닛큐 사택(일본어)",
+   "zh-Hans": "想象与记忆：日给社宅（日语）",
+   "zh-Hant": "想像與記憶：日給社宅（日語）"
+  },
+  "https://commons.wikimedia.org/wiki/File:Hashima_Shiofuri_street-01.jpg": {
+   "ko": "시오후리 거리 1992년 사진(Wikimedia Commons)",
+   "zh-Hans": "盐降通道（Shiofuri）1992年的照片（Wikimedia Commons）",
+   "zh-Hant": "鹽降通道（Shiofuri）1992年的照片（Wikimedia Commons）"
+  },
+  "http://www.gunkanjima.ne2.jp/Gunkanjima-102.htm": {
+   "ko": "폐허 찬가: 닛큐 사택(일본어)",
+   "zh-Hans": "废墟赞歌：日给社宅（日语）",
+   "zh-Hant": "廢墟讚歌：日給社宅（日語）"
+  },
+  "https://www.gunkanjima-truth.com/l/en-US/article/Life-on-Hashima-where-population-density-was-highest-in-Japan": {
+   "ko": "Gunkanjima Truth: 하시마의 생활(영어)",
+   "zh-Hans": "Gunkanjima Truth：端岛的生活（英语）",
+   "zh-Hant": "Gunkanjima Truth：端島的生活（英語）"
+  },
+  "https://www.gunkanjima-museum.jp/data/259/detail/": {
+   "ko": "군함도 디지털 뮤지엄: 공동 목욕탕(일본어)",
+   "zh-Hans": "军舰岛数字博物馆：公共浴场（日语）",
+   "zh-Hant": "軍艦島數位博物館：公共浴場（日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/596061.html": {
+   "ko": "상상과 기억: 59·60·61호동(일본어)",
+   "zh-Hans": "想象与记忆：59、60、61号楼（日语）",
+   "zh-Hant": "想像與記憶：59、60、61號樓（日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/3goutou.html": {
+   "ko": "상상과 기억: 3호동(일본어)",
+   "zh-Hans": "想象与记忆：3号楼（日语）",
+   "zh-Hant": "想像與記憶：3號樓（日語）"
+  },
+  "https://www6.cncm.ne.jp/~hashima/nikkyuu2.html": {
+   "ko": "상상과 기억: 닛큐 사택의 옥상 밭(일본어)",
+   "zh-Hans": "想象与记忆：日给社宅的屋顶菜园（日语）",
+   "zh-Hant": "想像與記憶：日給社宅的屋頂菜園（日語）"
+  },
+  "https://www.gunkanjima-museum.jp/data/983/detail/": {
+   "ko": "군함도 디지털 뮤지엄: 옥상 밭(일본어)",
+   "zh-Hans": "军舰岛数字博物馆：屋顶菜园（日语）",
+   "zh-Hant": "軍艦島數位博物館：屋頂菜園（日語）"
+  },
+  "https://commons.wikimedia.org/wiki/File:Hashima_18_and_19_Building_Rooftop-03.jpg": {
+   "ko": "18·19호동 옥상 1992년 사진(Wikimedia Commons)",
+   "zh-Hans": "18、19号楼屋顶1992年的照片（Wikimedia Commons）",
+   "zh-Hant": "18、19號樓屋頂1992年的照片（Wikimedia Commons）"
+  }
+ }
+}

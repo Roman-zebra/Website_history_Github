@@ -996,6 +996,33 @@
     if (st.year >= years.length - 1.01) animate({ year: 0 }, 900, () => setTimeout(next, 600)); else next();
   }
 
+  /* ---------- the building list in the reader's language ----------
+     gunkanjima-model.json lists the buildings in Japanese. gunkanjima-names.json gives the other four
+     languages, keyed by the Japanese text (the building table under the model reads the same file), and
+     Korean and Chinese names for the source links, keyed by URL. Japanese pages show the list as it is.
+     If the file cannot be read the names stay Japanese, as they were before it existed. */
+  let names = null;
+  const inLang = (e, ja) => (e && (e[LANG] || (LANG !== 'ja' && e.en))) || ja;
+  const numbered = ja => /^(\d+)号棟$/.exec(ja || '');
+  function buildingName(ja){
+    const m = numbered(ja);
+    if (m && names) return inLang(names.numbered.name, '{n}').split('{n}').join(m[1]);
+    return inLang(names && names.names[ja], ja);
+  }
+  /* the tag on the model: a number, or the name without its bracket ("General office", not "General office (former winding-engine house)") */
+  function buildingLabel(ja){
+    const m = numbered(ja);
+    if (m && names) return inLang(names.numbered.label, '{n}').split('{n}').join(m[1]);
+    const e = names && names.names[ja];
+    if (e && e.short && e.short[LANG]) return e.short[LANG];
+    if (!names) return ja === '端島小中学校' ? T.schoolShort : ja;
+    return buildingName(ja).replace(/\s*[(（][^()（）]*[)）]$/, '');
+  }
+  const useText = ja => inLang(names && names.uses[ja], ja);
+  const noteText = ja => inLang(names && names.notes[ja], ja);
+  const structureText = code => inLang(names && names.structures[code], code);
+  const sourceLabel = src => inLang(names && names.sources[src.url], '') || src.label[LANG] || src.label.en;
+
   /* ---------- spots, building labels and the panel ---------- */
   const pins = {}, labels = [];
   function spotHeight(s){ return s.h1962; }
@@ -1051,7 +1078,8 @@
       const el = document.createElement('button');
       el.type = 'button';
       el.className = 'bld-label';
-      el.textContent = b.name.replace('端島小中学校', T.schoolShort);
+      el.textContent = buildingLabel(b.name);
+      el.title = buildingName(b.name);
       el.onclick = () => openBuilding(b, true);
       spotLayer.appendChild(el);
       labels.push({ b, el, c: centroid(b.poly) });
@@ -1077,7 +1105,7 @@
       + img(s.images.latest, pick(info.name) + ' ' + T.aerialLatest, esc(T.aerialLatest)) + '</div>';
     html += '<h3>' + esc(T.sources) + '</h3><ul class="spot-sources">' + info.sources.map(k => {
       const src = texts.sources[k];
-      return '<li><a href="' + esc(src.url) + '" target="_blank" rel="noopener">' + esc(src.label[LANG] || src.label.en) + '</a></li>';
+      return '<li><a href="' + esc(src.url) + '" target="_blank" rel="noopener">' + esc(sourceLabel(src)) + '</a></li>';
     }).join('') + '</ul>';
     /* the rooms and places of this spot: the same id, or the id and a word (no65 -> no65roof, no65flat; but no3 is not no30) */
     const scIds = interiors ? Object.keys(interiors.scenes).filter(k => k === id || (k.startsWith(id) && !/[0-9]/.test(k.charAt(id.length)))) : [];
@@ -1098,20 +1126,20 @@
     for (const k of Object.keys(pins)) pins[k].classList.remove('is-on');
     const row = (k, v) => v === undefined || v === null || v === '' ? '' : '<tr><th>' + esc(k) + '</th><td>' + v + '</td></tr>';
     let html = '<table class="bld-facts">'
-      + row(T.built, b.built ? esc(String(b.built)) + (b.builtNote ? ' <small>' + esc(b.builtNote) + '</small>' : '') : (b.seen ? esc(T.unknown) + ' <small>(' + esc(String(b.seen)) + ')</small>' : null))
-      + row(T.storeys, esc(String(b.storeys)) + (b.storeysNote ? ' <small>' + esc(b.storeysNote) + '</small>' : ''))
+      + row(T.built, b.built ? esc(String(b.built)) + (b.builtNote ? ' <small>' + esc(noteText(b.builtNote)) + '</small>' : '') : (b.seen ? esc(T.unknown) + ' <small>(' + esc(String(b.seen)) + ')</small>' : null))
+      + row(T.storeys, esc(String(b.storeys)) + (b.storeysNote ? ' <small>' + esc(noteText(b.storeysNote)) + '</small>' : ''))
       + row(T.units, b.units)
-      + row(T.use, b.use ? esc(b.use) : null)
-      + row(T.structure, b.structure ? esc(b.structure) : null)
-      + row(T.gone, b.gone ? esc(String(b.gone)) + (b.goneNote ? ' <small>' + esc(b.goneNote) + '</small>' : '') : null)
+      + row(T.use, b.use ? esc(useText(b.use)) : null)
+      + row(T.structure, b.structure ? esc(structureText(b.structure)) : null)
+      + row(T.gone, b.gone ? esc(String(b.gone)) + (b.goneNote ? ' <small>' + esc(noteText(b.goneNote)) + '</small>' : '') : null)
       + '</table>';
-    if (b.notes) html += '<p>' + esc(b.notes) + '</p>';
+    if (b.notes) html += '<p>' + esc(noteText(b.notes)) + '</p>';
     const scIds = scenesFor(b.name);
     if (scIds.length) html += '<p class="enter-row">' + scIds.map(k => '<button type="button" class="enter-btn" data-scene="' + esc(k) + '">' + esc(enterLabel(k)) + '</button>').join(' ') + '</p>';
     for (const ph of (b.name && photos[b.name]) || []) html += photoFigure(ph, ph.file, 'spot-photo');
     if (b.source === 'traced1962') html += '<p><small>' + esc(T.traced) + '</small></p>';
     html += '<p class="credit"><a href="' + esc(model.facts.url) + '" target="_blank" rel="noopener">' + esc(T.factsSource) + '</a></p>';
-    $('spotTitle').textContent = b.name || T.unknown;
+    $('spotTitle').textContent = b.name ? buildingName(b.name) : T.unknown;
     $('spotBody').innerHTML = html;
     wireEnter();
     panel.hidden = false;
@@ -1152,7 +1180,7 @@
     if (fly) animate(Object.assign(pose(sc.camera), { userLift: 1 }), 1500, walkOn); else { Object.assign(st, pose(sc.camera)); walkOn(); }
     if ($('sceneNote')){
       const n = $('sceneNote');
-      n.innerHTML = '<b>' + esc(T.interior) + '</b> ' + esc(pick(sc.text)) + ' <span class="scene-src">' + (sc.sources || []).map(x => '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label[LANG] || x.label.en) + '</a>').join(' · ') + '</span> <button type="button" id="sceneLeave">' + esc(T.leave) + '</button>';
+      n.innerHTML = '<b>' + esc(T.interior) + '</b> ' + esc(pick(sc.text)) + ' <span class="scene-src">' + (sc.sources || []).map(x => '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(sourceLabel(x)) + '</a>').join(' · ') + '</span> <button type="button" id="sceneLeave">' + esc(T.leave) + '</button>';
       n.hidden = false;
       $('sceneLeave').onclick = leaveScene;
     }
@@ -1304,9 +1332,11 @@
     fetch(asset('gunkanjima-model.json')).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
     fetch(asset('gunkanjima-spots.json')).then(r => r.ok ? r.json() : null).catch(() => null),
     fetch(asset('gunkanjima-photos.json')).then(r => r.ok ? r.json() : null).catch(() => null),
-    fetch(asset('gunkanjima-interiors.json')).then(r => r.ok ? r.json() : null).catch(() => null)
-  ]).then(([meta, mdl, words, ph, ints]) => {
+    fetch(asset('gunkanjima-interiors.json')).then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch(asset('gunkanjima-names.json')).then(r => r.ok ? r.json() : null).catch(() => null)
+  ]).then(([meta, mdl, words, ph, ints, nm]) => {
     lab = meta; model = mdl; texts = words; photos = ph && ph.photos ? ph.photos : {}; interiors = ints && ints.scenes ? ints : null;
+    names = nm && nm.numbered && nm.names && nm.uses && nm.notes && nm.structures && nm.sources ? nm : null;
     return fetch(asset(model.terrain.file)).then(r => r.arrayBuffer()).then(buf => {
       const t = model.terrain;
       if (buf.byteLength !== t.w * t.h * 2) throw new Error('terrain size');

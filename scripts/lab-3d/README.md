@@ -14,6 +14,7 @@
 | `gunkanjima-spots.json` | スポットの名前と説明（5言語）、出典、写真のクレジット |
 | `gunkanjima-model.json`、`gunkanjima-terrain.bin` | **v4 復元モデル**：建物88棟（輪郭・棟割り・階数・階高・竣工年・崩壊年・様式・用途・出典。OSM 66棟＋30号棟＋1962年写真から輪郭を取った名称不明21棟）、護岸の線（104点・天端高さ）、海岸線、地形（地理院5m DEM を切り出し座標へ、Uint16 0.1m） |
 | `gunkanjima-buildings.json` | 建物の輪郭（OpenStreetMap、1962年の切り出し座標）と、輪郭の内側で測った屋根の高さ（1962・2010）、外側の地面の高さ。30号棟だけは OSM に無いので高さ格子から輪郭を取った |
+| `gunkanjima-names.json` | 建物一覧（`gunkanjima-model.json` は日本語）の英・韓・簡・繁：建物名（号棟は書式、模型に出す短い名前も）・用途・構造・注記と、出典リンクの韓・簡・繁（URLで引く）。ビューアとページ下の建物一覧表（`scripts/build-3d-extras.cjs`）が同じファイルを読む。モデルに訳の無い文字列が入ると `tests/lab-3d-i18n.test.cjs` が落ちる |
 | `island-from-sea.jpg`、`island-north-2024.jpg`、`gunkanjima-card.jpg` | 海上から撮った現地写真（Wikimedia Commons、CC BY-SA 3.0 / CC BY 4.0。ページとカードにクレジット） |
 | `spots/` | スポットごとの空中写真の切り抜き（1962年と最新）と写真 |
 | `audio/gunkanjima-podcast-{en,ja}.mp3` と `.json` | 音声ガイド（v3: Microsoft のニューラル音声を edge-tts で合成。日本語は常体の会話、英語も同じ調子）と、時刻つきの台本・チャプター・立体を動かす合図 |
