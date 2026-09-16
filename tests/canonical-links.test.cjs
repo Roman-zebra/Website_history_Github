@@ -25,7 +25,8 @@ test('no crawlable page reaches a place through a #hash or a .html duplicate',()
   for(const [,href] of s.matchAll(/href=["']([^"']+)["']/g)){
    const [before,hash]=href.split('#');
    assert.ok(!ids.has(hash),file+' -> '+href);
-   assert.ok(!/(^|\/)(index|ja|ko|zh-cn|zh-tw|th|places|about|visit)\.html$/.test(before.split('?')[0]),file+' -> '+href);
+   const internal=!/^[a-z]+:/i.test(before)||before.startsWith('https://japantimeatlas.com');
+   assert.ok(!internal||!/(^|\/)(index|ja|ko|zh-cn|zh-tw|th|places|about|visit)\.html$/.test(before.split('?')[0]),file+' -> '+href);
   }
   assert.ok(!/japantimeatlas\.com\/\?lang=[^"]*#l-/.test(s),file+' structured data');
  }

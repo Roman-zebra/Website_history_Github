@@ -1,6 +1,6 @@
 # Every push to main: once Cloudflare is serving that commit, tell the IndexNow engines (Bing, Naver,
 # Yandex, Seznam, Yep) which pages changed, and Baidu when BAIDU_PUSH_TOKEN is set. Google takes no
-# pings and rereads on its own. Only pages listed in sitemap.xml are announced, at most 200 per push.
+# pings and rereads on its own. Only pages listed in sitemap.xml are announced, at most 1000 per push.
 name: Tell the search engines what changed
 on:
   push:

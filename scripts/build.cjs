@@ -3,6 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_pro
 const root=path.resolve(__dirname,'..'),dist=path.join(root,'dist');
 cp.execFileSync(process.execPath,[path.join(__dirname,'build-icons.cjs')],{stdio:'inherit'});
 cp.execFileSync(process.execPath,[path.join(__dirname,'build-discovery.cjs')],{stdio:'inherit'});
+cp.execFileSync(process.execPath,[path.join(__dirname,'build-spot-pages.cjs')],{stdio:'inherit'});
 cp.execFileSync(process.execPath,[path.join(__dirname,'build-3d-pages.cjs')],{stdio:'inherit'});
 cp.execFileSync(process.execPath,[path.join(__dirname,'build-3d-index.cjs')],{stdio:'inherit'});
 const tests=fs.readdirSync(path.join(root,'tests')).filter(x=>x.endsWith('.test.cjs')).map(x=>path.join(root,'tests',x));

@@ -5,7 +5,7 @@
    when it is in sitemap.xml, so nothing unlisted or redirected is ever sent. */
 const fs = require('node:fs'), path = require('node:path');
 const root = path.resolve(__dirname, '..', '..'), SITE = 'https://japantimeatlas.com';
-const LIMIT = 200;
+const LIMIT = 1000;   // IndexNow takes up to 10,000 per request; a release of new pages can pass 200
 
 function urlFor(file) {
   if (!file.endsWith('.html')) return null;
