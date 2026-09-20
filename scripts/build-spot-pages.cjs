@@ -159,6 +159,14 @@ for(const l of LANGS.slice(1)){
  const block=['landmark','liminal','food','shopping'].map(k=>listHTML(l,k,'h2')).join('');
  html=swap(html,block)??html.replace('<footer class="locale-foot">',()=>'<!--SPOT-LISTS-->'+block+'<!--/SPOT-LISTS--><footer class="locale-foot">');
  if(!html.includes('<!--SPOT-LISTS-->'))throw Error(file+': no place for the spot lists');
+ const hubItems=[
+  ...cities.map(c=>({name:c.names?.[l]||c.name,url:base+cityURL(c,l)})),
+  ...spots.map(s=>({name:s.names[l],url:base+pageURL(s,l)}))
+ ];
+ html=html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,(m,j)=>{let o;try{o=JSON.parse(j);}catch(e){return m;}if(o['@type']!=='CollectionPage')return m;
+  o.mainEntity={'@type':'ItemList',numberOfItems:hubItems.length,itemListElement:hubItems.map((x,i)=>({'@type':'ListItem',position:i+1,...x}))};
+  return '<script type="application/ld+json">'+json(o)+'</script>';
+ });
  write(file,html);
 }
 { // English hub: the liminal and famous lists already exist; add the two new ones
@@ -173,4 +181,3 @@ const canonical=new Set([...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].
 for(const u of written)canonical.add(base+u);
 write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+[...canonical].sort().map(u=>'  <url><loc>'+esc(u)+'</loc></url>').join('\n')+'\n</urlset>\n');
 console.log('Spot pages: '+written.length+' written ('+spots.length+' spots). Sitemap: '+canonical.size+' URLs.');
-

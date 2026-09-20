@@ -28,7 +28,9 @@ test('all sitemap routes resolve locally and article links cannot leave broken r
 });
 test('country guides offer distinct notes, working routes, and honest Thai map fallback',()=>{
  assert.equal(markets.length,11);assert.equal(new Set(markets.map(m=>m.intro)).size,11);
- for(const m of markets){const s=read('visit/'+m.id+'.html');assert.ok(s.includes('<html lang="'+m.lang+'">'));for(const id of m.picks)assert.ok(s.includes(route({id},m.lang)));}
+ for(const m of markets){const s=read('visit/'+m.id+'.html');assert.ok(s.includes('<html lang="'+m.lang+'">'));for(const id of m.picks)assert.ok(s.includes(route({id},m.lang)));
+  const schema=JSON.parse(s.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);assert.equal(schema['@graph'][0].inLanguage,m.lang);assert.equal(schema['@graph'][0].mainEntity.numberOfItems,3);assert.ok(s.includes('property="og:locale"'));
+ }
  assert.ok(read('visit/th.html').includes(labels.th.maplang));assert.ok(read('visit/hk.html').includes('香港'));assert.ok(read('visit/tw.html').includes('台灣'));
 });
 test('historical series dates match the chosen layer and unsupported claims are removed',()=>{
