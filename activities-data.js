@@ -123,26 +123,28 @@ window.AtlasActivities = {
         "zh-Hant": "八戶八食中心"
       },
       "hooks": {
-        "en": "Seafood shopping and charcoal grilling in Hachinohe.",
-        "ja": "八戸の魚介を選び、七輪焼きで楽しむ。",
-        "ko": "하치노헤의 해산물을 골라 숯불에 구워 즐겨요.",
-        "zh-Hans": "挑选八户海鲜，体验炭火烧烤。",
-        "zh-Hant": "挑選八戶海鮮，體驗炭火燒烤。"
+        "en": "Explore Hachinohe seafood stalls, then grill your purchases at the center’s Shichirin-mura charcoal dining area.",
+        "ja": "八戸の魚介を市場で選び、館内の「七厘村」で炭火焼きにして味わう。",
+        "ko": "하치노헤의 해산물을 시장에서 고른 뒤, 건물 안 ‘시치린무라’에서 숯불에 구워 맛보세요.",
+        "zh-Hans": "在市场挑选八户海鲜，再到馆内的“七厘村”用炭火烤着品尝。",
+        "zh-Hant": "在市場挑選八戶海鮮，再到館內的「七厘村」用炭火烤來品嘗。"
       },
       "name": "Hasshoku Center",
       "ja": "八戸・八食センター",
       "emoji": "🍜",
       "notes": {
-        "en": "Buy fish and shellfish inside, then grill them yourself over charcoal at Shichirin-mura, the grilling area in the same building.",
-        "ja": "館内で買った魚介を、同じ建物の「七厘村」で炭火で焼いて食べられます。",
-        "ko": "건물 안에서 산 생선과 조개를 같은 건물의 ‘시치린무라’에서 직접 숯불에 구워 먹을 수 있습니다.",
-        "zh-Hans": "在馆内买好鱼贝，就能到同一栋楼里的“七厘村”用炭火自己烤着吃。",
-        "zh-Hant": "在館內買好魚貝，就能到同一棟樓裡的「七厘村」用炭火自己烤來吃。"
+        "en": "The market building brings together fresh fish, dried seafood, produce, local sake, sweets and prepared foods. Food bought inside can be taken to Shichirin-mura, a 124-seat charcoal grilling area that also serves rice, senbei-jiru soup, apple juice and local sake; outside food is not permitted. Check the official access page and business calendar before visiting, especially around Obon and New Year.",
+        "ja": "市場棟には鮮魚、乾物珍味、青果、地酒、菓子、惣菜の店がまとまっています。館内で買った食材は、124席の炭火焼きスペース「七厘村」へ持ち込め、同店ではご飯、せんべい汁、リンゴジュース、地酒も注文できます。館外からの飲食物は持ち込めません。お盆・年末年始は営業時間が変わるため、訪問前に公式のアクセス情報と営業カレンダーを確認してください。",
+        "ko": "시장동에는 생선, 건어물과 진미, 농산물, 아오모리 지역 술, 과자와 반찬 가게가 모여 있습니다. 건물 안에서 산 식재료는 124석 규모의 숯불구이 공간 ‘시치린무라’로 가져갈 수 있고, 그곳에서 밥, 센베이지루 국, 사과 주스와 지역 술도 주문할 수 있습니다. 외부 음식은 반입할 수 없습니다. 오봉과 연말연시에는 영업시간이 달라질 수 있으니 방문 전에 공식 교통 안내와 영업 달력을 확인하세요.",
+        "zh-Hans": "市场楼内集中了鲜鱼、干货珍味、蔬果、青森地酒、甜点和熟食店。在馆内购买的食材可以带到设有124个座位的炭火烧烤区“七厘村”，那里也供应米饭、仙贝汤、苹果汁和当地清酒；不可携带馆外食品。盂兰盆节及年末年初的营业时间可能调整，出发前请查看官方交通信息和营业日历。",
+        "zh-Hant": "市場棟內集中了鮮魚、乾貨珍味、蔬果、青森地酒、甜點與熟食店。在館內購買的食材可帶到設有124個座位的炭火燒烤區「七厘村」，那裡也供應白飯、仙貝湯、蘋果汁與當地清酒；不可攜帶館外食品。盂蘭盆節及年末年初的營業時間可能調整，出發前請查看官方交通資訊與營業日曆。"
       },
       "noteSources": [
-        "https://www.849net.com/"
+        "https://www.849net.com/map/",
+        "https://www.849net.com/map/shop/shichirin.html",
+        "https://www.849net.com/access/"
       ],
-      "notesChecked": "2026-09-14"
+      "notesChecked": "2026-09-21"
     },
     {
       "id": "sendai-market",
