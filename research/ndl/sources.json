@@ -399,9 +399,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176338",
       "fullText": "https://dl.ndl.go.jp/pid/1176338",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [46, 69, 71, 78, 80, 91, 92, 98, 99, 102, 106, 107, 115, 116, 134, 137, 146, 155, 159, 175, 176, 177, 208],
-      "notes": "46・106～107コマに戦前の浅草寺本堂、雷門から露店の並ぶ参道、繁華な浅草公園。78コマに丸の内の東京駅と施設。91～92コマに明治神宮の南北参道と林苑。99・102コマに上野公園・不忍池・動物園・博物館。134・137コマに鉄道から眺める横浜港の汽船と海外航路。146コマに長谷の高徳院が管理する銅造阿弥陀如来像。155・159コマに箱根の外輪山と芦ノ湖。175～177コマに富士山の宝永山、山頂火口、登山道、208コマに富士五湖。後の戦災、再建、地質学の更新は現行資料で区別して補う。 追加確認：69・115コマに戦前の渋谷の鉄道、71・116コマに押上方面の路線、80コマに芝公園・増上寺、98コマに秋葉原駅前の中央卸売市場神田分場。新しい交差点・塔・電気街の歴史は各公式資料で確認。 80コマに中央卸売市場築地本場と魚市場の日本橋河岸からの移転。1935年の正式開場とは区別する。",
-      "usedFor": ["tokyo", "yokohama", "kamakura", "東京駅", "富士山", "箱根町", "上野恩賜公園", "明治神宮", "秋葉原", "渋谷スクランブル交差点", "東京タワー", "東京スカイツリー", "築地"]
+      "fullTextSearchFrames": [46, 50, 69, 71, 78, 80, 91, 92, 98, 99, 102, 106, 107, 115, 116, 134, 137, 146, 155, 159, 175, 176, 177, 208, 242, 245, 285, 339, 340],
+      "notes": "46・106～107コマに戦前の浅草寺本堂、雷門から露店の並ぶ参道、繁華な浅草公園。78コマに丸の内の東京駅と施設。91～92コマに明治神宮の南北参道と林苑。99・102コマに上野公園・不忍池・動物園・博物館。134・137コマに鉄道から眺める横浜港の汽船と海外航路。146コマに長谷の高徳院が管理する銅造阿弥陀如来像。155・159コマに箱根の外輪山と芦ノ湖。175～177コマに富士山の宝永山、山頂火口、登山道、208コマに富士五湖。後の戦災、再建、地質学の更新は現行資料で区別して補う。 追加確認：69・115コマに戦前の渋谷の鉄道、71・116コマに押上方面の路線、80コマに芝公園・増上寺、98コマに秋葉原駅前の中央卸売市場神田分場。新しい交差点・塔・電気街の歴史は各公式資料で確認。 80コマに中央卸売市場築地本場と魚市場の日本橋河岸からの移転。1935年の正式開場とは区別する。 50・245コマに碓氷峠のアプト式、242コマに富岡の模範製糸工場、285コマに足利学校、339～340コマに弘道館・常磐公園（偕楽園）と好文亭を確認。",
+      "usedFor": ["tokyo", "yokohama", "kamakura", "東京駅", "富士山", "箱根町", "上野恩賜公園", "明治神宮", "秋葉原", "渋谷スクランブル交差点", "東京タワー", "東京スカイツリー", "築地", "偕楽園", "弘道館", "足利学校", "富岡製糸場", "碓氷峠鉄道文化むら"]
     },
     {
       "id": "official-sensoji-hondo",
@@ -1389,6 +1389,96 @@
       "url": "https://www.isejingu.or.jp/qa/",
       "notes": "外宮から内宮への参拝順序はならわしで、必須ではない。",
       "usedFor": ["伊勢神宮"]
+    },
+    {
+      "id": "official-kairakuen-history",
+      "type": "official",
+      "title": "偕楽園の歴史",
+      "publisher": "偕楽園",
+      "url": "https://ibaraki-kairakuen.jp/history/",
+      "notes": "1842年の開園と「偕楽」の理念。",
+      "usedFor": ["偕楽園"]
+    },
+    {
+      "id": "official-kairakuen-kobuntei",
+      "type": "official",
+      "title": "好文亭",
+      "publisher": "偕楽園",
+      "url": "https://ibaraki-kairakuen.jp/kobuntei/",
+      "notes": "好文亭の用途と戦後の復元。",
+      "usedFor": ["偕楽園"]
+    },
+    {
+      "id": "official-kodokan-cultural-property",
+      "type": "official",
+      "title": "旧弘道館",
+      "publisher": "茨城県教育委員会",
+      "url": "https://kyoiku.pref.ibaraki.jp/bunkazai/kuni-10/",
+      "notes": "文館・武館・医学館を含む藩校の構想と現存建物。",
+      "usedFor": ["弘道館"]
+    },
+    {
+      "id": "official-kodokan-ibaraki",
+      "type": "official",
+      "title": "弘道館（水戸市）",
+      "publisher": "茨城県",
+      "url": "https://www.pref.ibaraki.jp/bugai/koho/kenmin/download/koudoukan.html",
+      "notes": "1841年仮開館と重要文化財の建物。",
+      "usedFor": ["弘道館"]
+    },
+    {
+      "id": "official-ashikaga-history",
+      "type": "official",
+      "title": "足利学校の歴史",
+      "publisher": "足利市",
+      "url": "https://www.city.ashikaga.tochigi.jp/education/000031/000180/p001417.html",
+      "notes": "創建の諸説、1439年の記録、1990年の復原。",
+      "usedFor": ["足利学校"]
+    },
+    {
+      "id": "official-ashikaga-site",
+      "type": "official",
+      "title": "足利学校跡",
+      "publisher": "足利市",
+      "url": "https://www.city.ashikaga.tochigi.jp/education/000029/000169/000627/p001274.html",
+      "notes": "土塁・堀に囲まれた敷地。",
+      "usedFor": ["足利学校"]
+    },
+    {
+      "id": "official-tomioka-history",
+      "type": "official",
+      "title": "富岡製糸場の歴史",
+      "publisher": "富岡市",
+      "url": "https://www.tomioka-silk.jp/_tomioka-silk-mill/guide/history.html",
+      "notes": "1872年開業、技術の普及、1987年操業停止。",
+      "usedFor": ["富岡製糸場"]
+    },
+    {
+      "id": "official-tomioka-guide",
+      "type": "official",
+      "title": "世界遺産「富岡製糸場」の完全ガイド",
+      "publisher": "富岡市",
+      "url": "https://www.tomioka-silk.jp/_special/detail/tomioka_silk_mill_sp.html",
+      "notes": "現存する繰糸所・繭倉庫と2014年世界遺産登録。",
+      "usedFor": ["富岡製糸場"]
+    },
+    {
+      "id": "official-usui-annaka",
+      "type": "official",
+      "title": "鉄道文化むら 碓氷峠の歴史を学ぶ",
+      "publisher": "安中市",
+      "url": "https://www.city.annaka.lg.jp/page/21648.html",
+      "notes": "1997年の廃線と1999年の開園。",
+      "usedFor": ["碓氷峠鉄道文化むら"]
+    },
+    {
+      "id": "official-usui-museum",
+      "type": "official",
+      "title": "鉄道文化むらについて",
+      "publisher": "碓氷峠鉄道文化むら",
+      "url": "https://www.usuitouge.com/bunkamura/about/",
+      "notes": "アプト式から専用機関車への変遷と展示。",
+      "usedFor": ["碓氷峠鉄道文化むら"]
     }
   ]
 }
