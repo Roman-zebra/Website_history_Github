@@ -252,6 +252,82 @@
       "usedFor": ["regional-109545"]
     },
     {
+      "id": "ndl-kinki-guide-1933",
+      "type": "book",
+      "title": "日本案内記 近畿篇 下",
+      "author": "鉄道省",
+      "year": 1933,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176380",
+      "fullText": "https://dl.ndl.go.jp/pid/1176380",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [35, 36, 41, 111, 112, 187, 188],
+      "notes": "35～36コマに1931年完成の近代工法による大阪城天守と新しい公園、城の東の大阪陸軍造兵廠。41コマに道頓堀川の1615年完成と川南岸の芝居・娯楽街。111～112コマに神戸港の来歴と荷揚げ場・倉庫・工場・船車連絡。187～188コマに東大寺の造営、鎌倉期の復興、南大門など。1933年の現況は現在の施設・景観とは区別する。",
+      "usedFor": ["osaka", "nara", "東大寺", "kobe", "道頓堀"]
+    },
+    {
+      "id": "official-osaka-castle",
+      "type": "official",
+      "title": "大阪城天守閣",
+      "publisher": "大阪城天守閣",
+      "url": "https://www.osakacastle.net/",
+      "notes": "現天守は1931年に市民寄付で復興した3代目。現存する石垣・堀などは徳川時代以後のものと確認。",
+      "usedFor": ["osaka"]
+    },
+    {
+      "id": "official-todaiji-daibutsuden",
+      "type": "official",
+      "title": "大仏殿",
+      "publisher": "東大寺",
+      "url": "https://www.todaiji.or.jp/information/daibutsuden/",
+      "notes": "戦火後の再建史、現大仏殿1709年完成、東西幅が創建期・鎌倉期の約6割と確認。",
+      "usedFor": ["nara", "東大寺"]
+    },
+    {
+      "id": "official-todaiji-nandaimon",
+      "type": "official",
+      "title": "南大門",
+      "publisher": "東大寺",
+      "url": "https://www.todaiji.or.jp/information/nandaimon/",
+      "notes": "鎌倉時代に重源が再建した現在の南大門と確認。",
+      "usedFor": ["nara", "東大寺"]
+    },
+    {
+      "id": "official-kobe-port-history",
+      "type": "official",
+      "title": "神戸港の歴史",
+      "publisher": "神戸市",
+      "url": "https://www.city.kobe.lg.jp/a74134/kurashi/access/harbor/rekishi.html",
+      "notes": "メリケンパークが1987年に開いたことを確認。",
+      "usedFor": ["kobe"]
+    },
+    {
+      "id": "official-kobe-meriken-history",
+      "type": "official",
+      "title": "メリケン波止場のあゆみ",
+      "publisher": "神戸市",
+      "url": "https://www.city.kobe.lg.jp/documents/76691/20251016141744.pdf",
+      "notes": "メリケン波止場と中突堤の間を埋め立てて1987年に公園が開いたことを確認。",
+      "usedFor": ["kobe"]
+    },
+    {
+      "id": "official-kobe-memorial",
+      "type": "official",
+      "title": "神戸港震災メモリアルパーク",
+      "publisher": "神戸市",
+      "url": "https://www.city.kobe.lg.jp/z/kowankyoku/kanko/leisure/harbor/kankou/memorialpark.html",
+      "notes": "公園北東部、約60メートルの被災岸壁を保存、1997年開設と確認。",
+      "usedFor": ["kobe"]
+    },
+    {
+      "id": "official-dotonbori",
+      "type": "official",
+      "title": "道頓堀川の歴史",
+      "publisher": "大阪市",
+      "url": "https://www.city.osaka.lg.jp/kensetsu/cmsfiles/contents/0000010/10856/01J.pdf",
+      "notes": "道頓堀川が1615年に完成した堀川で、周辺が劇場街として栄えたと確認。",
+      "usedFor": ["道頓堀"]
+    },
+    {
       "id": "official-amanohashidate-geography",
       "type": "official",
       "title": "天橋立の概要",
