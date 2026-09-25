@@ -1220,7 +1220,27 @@
       "wiki_en": "Zuiryū-ji (Toyama)",
       "extract_ja": "瑞龍寺（ずいりゅうじ）は、富山県高岡市にある曹洞宗の仏教寺院。山号は高岡山（こうこうざん）。本尊は釈迦如来。開基は前田藩前田家3代目当主前田利常、開山は広山恕陽。高岡城を築城してこの地で亡くなった前田家2代目当主、前田利長を弔うために建立された。仏殿、法堂、山門の3棟が近世禅宗様建築の代表作として、1997年（平成9年）に国宝に指定されている。また2015年（平成27年）4月24日、「加賀前田家ゆかりの町民文化が花咲くまち高岡－人、技、心－」の構成文化財として日本遺産にも認定されている。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E7%91%9E%E9%BE%8D%E5%AF%BA%20(%E9%AB%98%E5%B2%A1%E5%B8%82)",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "瑞龍寺は、高岡の町を開いた前田利長を弔うため、後を継いだ利常が大きく整えた禅寺です。1934年刊の『高岡開闢由来記・高岡町由緒聞書』には、利長の墓所と寺を結ぶ道を「八丁道」と呼ぶ記述もあります。現在もこの道を歩けば、寺と墓所を一つの計画として見ることができます。境内では総門、山門、仏殿、法堂が一直線に並び、左右の回廊が空間を囲みます。高岡市によると、仏殿と法堂は17世紀半ば、山門は火災後の1818年の再建で、仏殿・法堂・山門は国宝です。入口から奥へ進みながら、時代の異なる建物が整った禅寺の姿をつくっていることを確かめてみてください。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-takaoka-origin-1934",
+          "title": "高岡文化会編『高岡開闢由来記・高岡町由緒聞書』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1212507"
+        },
+        {
+          "id": "official-takaoka-zuiryuji",
+          "title": "高岡山瑞龍寺（高岡市）",
+          "url": "https://www.city.takaoka.toyama.jp/gyosei/kanko_bunka_sports/rekishi_bunkazai/9/3/5928.html"
+        },
+        {
+          "id": "official-takaoka-hatchomichi",
+          "title": "高岡市歴史的風致維持向上計画・第2章（高岡市）",
+          "url": "https://www.city.takaoka.toyama.jp/material/files/group/42/rekimachi_2.pdf"
+        }
+      ]
     },
     {
       "id": "regional-1209245",
@@ -1315,7 +1335,32 @@
       "wiki_en": "Nata-dera",
       "extract_ja": "那谷寺（なたでら）は、石川県小松市にある仏教寺院。高野山真言宗別格本山。\n本尊の千手観世音菩薩像は33年ごとに開扉される秘仏とされ、最近では2017年の開創一千三百年大祭に合わせて公開（4月9日 - 10月31日）された。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E9%82%A3%E8%B0%B7%E5%AF%BA",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "那谷寺は、岩山と森の中に堂宇が点在する小松の寺です。1897年の『那谷寺誌』は、泰澄が養老年間に開いたという伝承に加え、奇岩や怪石の景色、江戸初期に前田利常が荒れた堂塔の跡を見たことを記しています。寺と小松市の資料によると、利常は1640年から本堂や三重塔などを再建しました。目を引く「奇岩遊仙境」は、穴の開いた岩壁と木々、岩に寄り添う本堂を一緒に眺められる場所です。芭蕉もこの寺を訪れ、「石山の石より白し秋の風」と詠みました。建物だけを追うより、岩の形と堂の位置を見比べると、自然を信仰の場としてきた歴史が伝わります。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-natadera-history-1897",
+          "title": "和田文次郎編『那谷寺誌』（1897年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/819693"
+        },
+        {
+          "id": "official-komatsu-natadera",
+          "title": "那谷寺（小松市）",
+          "url": "https://www.city.komatsu.lg.jp/kanko_bunka/kanko/2/6608.html"
+        },
+        {
+          "id": "official-natadera-history",
+          "title": "那谷寺の歴史（那谷寺）",
+          "url": "https://www.natadera.com/shiru_rekishi/"
+        },
+        {
+          "id": "official-ishikawa-natadera-landscape",
+          "title": "おくのほそ道の風景地（石川県）",
+          "url": "https://www.pref.ishikawa.lg.jp/kyoiku/bunkazai/siseki/2-8.html"
+        }
+      ]
     },
     {
       "id": "regional-88535",
@@ -1410,7 +1455,27 @@
       "wiki_en": "Kai Zenkō-ji",
       "extract_ja": "善光寺（ぜんこうじ）は、山梨県甲府市善光寺にある浄土宗の寺院。山号は定額山（じょうがくざん）。正式名称は定額山浄智院善光寺（じょうがくざんじょうちいんぜんこうじ）と称する。\n長野県にある善光寺をはじめとする各地の善光寺と区別するため、甲斐善光寺（かいぜんこうじ）または新善光寺（しんぜんこうじ）と呼ばれることが多く、ほか甲州善光寺（こうしゅうぜんこうじ）、甲府善光寺（こうふぜんこうじ）とも呼ばれている。\n\n",
       "coordSource": "https://www.openstreetmap.org/way/168133506",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "甲斐善光寺は、武田信玄が1558年に開いた甲府の寺です。戦国の争いから信濃の善光寺の仏像や宝物を守ろうと、甲府へ移したことが創建のきっかけと伝わります。1930年の『日本案内記』も、信州の善光寺にならって建てられ、本尊が一時移されたと紹介しています。ただし、目の前の本堂そのものが戦国時代の建物なのではありません。山梨県の文化財資料によると、現在の本堂は1796年の再建で、奥行きの深い大きな木造建築です。本堂と山門を見比べながら、戦国期の由来と江戸時代の建築が重なる場所として歩けます。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kanto-guide-1930",
+          "title": "鉄道省『日本案内記 関東篇』（1930年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176338"
+        },
+        {
+          "id": "official-yamanashi-kai-zenkoji-hondo",
+          "title": "善光寺本堂（山梨県文化財ガイド）",
+          "url": "https://www.pref.yamanashi.jp/bunka/bunkazaihogo/bunkazai_data/yamanashinobunkazai_kb0033.html"
+        },
+        {
+          "id": "official-kofu-kai-zenkoji",
+          "title": "寺社・史跡（甲府市）",
+          "url": "https://www.city.kofu.yamanashi.jp/kids/ima/bunka/jisha.html"
+        }
+      ]
     },
     {
       "id": "regional-2605477",
@@ -3240,7 +3305,27 @@
       "wiki_en": "Glover Garden",
       "extract_ja": "グラバー園（グラバーえん）は、日本の長崎県長崎市南山手町8-1にある観光施設である。1859年（安政6年）の長崎開港後に長崎に来住したスコットランド人商人グラバー、リンガー、オルトの旧邸があった敷地に、長崎市内に残っていた歴史的建造物を移築しており、野外博物館の状態を呈している。\n世界遺産「明治日本の産業革命遺産 製鉄・製鋼、造船、石炭産業」（全23資産）の構成資産である旧グラバー住宅などの洋風建築がある。2004年（平成16年）10月1日 - 2007年（平成19年）9月30日の間、長崎市民は無料で入場できていたが、2007年（平成19年）10月1日より市民も通常料金が必要になった。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%A9%E3%83%90%E3%83%BC%E5%9C%92",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "グラバー園は、長崎港を望む南山手で、開港後の外国人居留地の建物を歩いて見られる場所です。1935年の『日本案内記』は、大浦の南山手に外国人住宅の面影が残ると書いています。当時はまだ「グラバー園」はなく、長崎市が旧グラバー住宅を公開したのは1958年、ほかの洋館を集めて園を開いたのは1974年です。園内の旧グラバー住宅、旧リンガー住宅、旧オルト住宅はこの丘に建ち続けてきた建物で、別の場所から移した洋館もあります。旧グラバー住宅は1863年築の重要文化財で、世界遺産の構成資産でもあります。建物ごとに元の所在地を確かめ、港を見渡す眺めとともに居留地の暮らしを想像してみてください。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kyushu-guide-1935",
+          "title": "鉄道省『日本案内記 九州篇』（1935年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176417"
+        },
+        {
+          "id": "official-glover-garden-about",
+          "title": "グラバー園について（グラバー園）",
+          "url": "https://glover-garden.jp/about/"
+        },
+        {
+          "id": "official-nagasaki-glover-house",
+          "title": "旧グラバー住宅（長崎県文化財データベース）",
+          "url": "https://www.pref.nagasaki.jp/bunkadb/index.php/view/171"
+        }
+      ]
     },
     {
       "id": "regional-32862",
