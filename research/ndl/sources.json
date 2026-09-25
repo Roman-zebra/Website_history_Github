@@ -2797,6 +2797,97 @@
       "publisher": "鶴岡市立加茂水族館",
       "notes": "2026年4月の研究所棟増設、マイクロアクアリウムと顕微鏡・ルーペによる小型クラゲの観察。",
       "usedFor": ["鶴岡市立加茂水族館"]
+    },
+    {
+      "id": "ndl-imperial-hotel-1923",
+      "type": "book",
+      "title": "帝国ホテル",
+      "author": "高梨由太郎 編",
+      "year": 1923,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I970774",
+      "fullText": "https://dl.ndl.go.jp/pid/970774",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [2, 9, 11],
+      "notes": "1923年刊の写真集。2コマの序文には新館工事と旧本館焼失の経緯、9・11コマには当時の建物の写真がある。明治村への移築や現在の保存範囲の根拠には用いない。",
+      "usedFor": ["博物館明治村"]
+    },
+    {
+      "id": "official-meijimura-about",
+      "title": "明治村とは？（博物館明治村）",
+      "url": "https://www.meijimura.com/about/",
+      "type": "official",
+      "publisher": "博物館明治村",
+      "notes": "1965年開村、60超の移築・復原建造物と保存目的。",
+      "usedFor": ["博物館明治村"]
+    },
+    {
+      "id": "official-meijimura-imperial-hotel",
+      "title": "帝国ホテル中央玄関（博物館明治村）",
+      "url": "https://www.meijimura.com/sight/%E5%B8%9D%E5%9B%BD%E3%83%9B%E3%83%86%E3%83%AB%E4%B8%AD%E5%A4%AE%E7%8E%84%E9%96%A2/",
+      "type": "official",
+      "publisher": "博物館明治村",
+      "notes": "ライト設計、1923年竣工、旧所在地、移築範囲、材料と空間の特徴。",
+      "usedFor": ["博物館明治村"]
+    },
+    {
+      "id": "ndl-fukui-third-excavation-2008",
+      "type": "journal-article",
+      "title": "福井県勝山市における第三次恐竜化石発掘調査報告（2007年度）",
+      "author": "柴田正輝・後藤道治",
+      "year": 2008,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I3501310",
+      "fullText": "https://dl.ndl.go.jp/pid/3501310",
+      "access": "インターネット公開・全文PDFを閲覧可能",
+      "notes": "福井県立恐竜博物館紀要7号109–116頁。1988年の肉食恐竜の歯、1989年以降の発掘、2007年に見つかった新しい骨化石含有層と竜脚類・獣脚類、周辺の貝・植物・カメ類化石を本文で確認。図書ではなく論文。",
+      "usedFor": ["福井県立恐竜博物館"]
+    },
+    {
+      "id": "official-fukui-dinosaur-excavation",
+      "title": "福井県の恐竜発掘（福井県立恐竜博物館）",
+      "url": "https://www.dinosaur.pref.fukui.jp/dino/excavation/",
+      "type": "official",
+      "publisher": "福井県立恐竜博物館",
+      "notes": "北谷の継続的な発掘と発見史。",
+      "usedFor": ["福井県立恐竜博物館"]
+    },
+    {
+      "id": "official-fukui-dinosaur-exhibit",
+      "title": "常設展示（福井県立恐竜博物館）",
+      "url": "https://www.dinosaur.pref.fukui.jp/museum/exhibit.html",
+      "type": "official",
+      "publisher": "福井県立恐竜博物館",
+      "notes": "現在の展示ゾーン、全身骨格、福井産化石と化石クリーニング室。",
+      "usedFor": ["福井県立恐竜博物館"]
+    },
+    {
+      "id": "official-yoshinogari-history",
+      "title": "吉野ヶ里の歴史（吉野ヶ里歴史公園）",
+      "url": "https://www.yoshinogari.jp/introduction/history/",
+      "type": "official",
+      "publisher": "吉野ヶ里歴史公園",
+      "notes": "時期ごとの集落の拡大、環壕・墓・北内郭・南内郭、公園での復元方針。ページは佐賀県教育委員会編『弥生時代の吉野ヶ里』の内容を一部転載。",
+      "usedFor": ["吉野ヶ里遺跡"]
+    },
+    {
+      "id": "official-yoshinogari-remains",
+      "title": "吉野ヶ里遺跡とは（吉野ヶ里歴史公園）",
+      "url": "https://www.yoshinogari.jp/introduction/remains/",
+      "type": "official",
+      "publisher": "吉野ヶ里歴史公園",
+      "notes": "発掘史と特別史跡の説明。佐賀県教育委員会の刊行物からの一部転載を含む。",
+      "usedFor": ["吉野ヶ里遺跡"]
+    },
+    {
+      "id": "ndl-yoshinogari-report-2020-catalog",
+      "type": "book-catalog-only",
+      "title": "吉野ヶ里遺跡（佐賀県文化財調査報告書227）",
+      "author": "佐賀県文化課文化財保護室 編",
+      "year": 2020,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R000000025-I011440004546094",
+      "fullText": "https://sitereports.nabunken.go.jp/71578",
+      "access": "インターネット公開と書誌に記載。本文PDFは今回未確認",
+      "notes": "書誌情報のみ確認。本文PDFの内容を説明文の根拠としていない。",
+      "usedFor": ["吉野ヶ里遺跡"]
     }
   ]
 }

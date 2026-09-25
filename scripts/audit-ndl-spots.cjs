@@ -18,7 +18,7 @@ for (const [file, field, group] of sets) {
       group === 'landmark' ? spot.summaries?.ja || '' : spot.summaries?.ja || spot.extract_ja || '';
     rows.push([group, spot.id || spot.wiki_ja || spot.name || String(i), spot.ja || spot.name_ja || spot.name,
       spot.tier ?? (group === 'liminal' ? 3 : ''), text.length, (spot.researchSources || []).map(source => source.id).join(';'),
-      spot.researchSources?.length ? 'researched' : 'pending']);
+      spot.researchStatus || (spot.researchSources?.length ? 'researched' : 'pending')]);
   }
 }
 if (rows.length !== 172) throw new Error(`Expected 171 spots; got ${rows.length - 1}`);
