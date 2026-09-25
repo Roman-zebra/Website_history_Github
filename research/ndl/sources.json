@@ -843,6 +843,119 @@
       "url": "https://www.city.otaru.lg.jp/docs/2020100700011/",
       "notes": "1914年の運河式埋立工事着工、1923年完成、1986年散策路完成を確認。",
       "usedFor": ["regional-316631"]
+    },
+    {
+      "id": "ndl-tohoku-guide-1929",
+      "type": "book",
+      "title": "日本案内記 東北篇",
+      "author": "鉄道省",
+      "publisher": "鉄道省",
+      "year": 1929,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176351",
+      "fullText": "https://dl.ndl.go.jp/pid/1176351",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [32, 35, 45, 89, 97, 98, 106, 107, 161, 162, 226],
+      "notes": "1929年の案内書。97～98コマに仙台駅から瑞鳳殿、仙台城址、芭蕉の辻などを回る順路と1637年の旧瑞鳳殿。35・45コマに松島瑞巌寺。226コマに弘前城址の堀・土塁・公園。161～162コマに立石寺の登路。32・35・106～107コマに中尊寺金色堂と経蔵、平泉の寺院跡。欠ページ119～124があるため、その範囲のスポット記述には使用しない。山寺根本中堂の年代など現行調査と食い違う記述は本文に採用しない。",
+      "usedFor": ["sendai", "regional-712357", "regional-88553", "regional-1549755", "regional-205162", "regional-88539"]
+    },
+    {
+      "id": "official-sendai-castle",
+      "type": "official",
+      "title": "仙台城の紹介",
+      "publisher": "仙台市",
+      "url": "https://www.city.sendai.jp/shisekichosa/kurashi/manabu/kyoiku/inkai/bunkazai/bunkazai/joseki/shokai.html",
+      "notes": "1601年からの築城、広瀬川・青葉山を用いた地形と現在の城跡を確認。",
+      "usedFor": ["sendai"]
+    },
+    {
+      "id": "official-sendai-green",
+      "type": "official",
+      "title": "緑の歴史・今昔",
+      "publisher": "仙台市",
+      "url": "https://www.city.sendai.jp/hyakunen-chose/kurashi/shizen/midori/shinse/kids/konjaku.html",
+      "notes": "1909年の「森の都」の用例、屋敷林・寺社林、1945年の戦災、1950年以降のケヤキ植樹を確認。戦後に初めて「杜の都」と呼ばれたわけではない。",
+      "usedFor": ["sendai"]
+    },
+    {
+      "id": "official-zuihoden",
+      "type": "official",
+      "title": "瑞鳳殿のご案内",
+      "publisher": "瑞鳳殿",
+      "url": "https://www.zuihoden.com/about/",
+      "notes": "1637年完成、1945年の空襲による焼失、1979年再建を確認。",
+      "usedFor": ["regional-712357"]
+    },
+    {
+      "id": "official-zuiganji-history",
+      "type": "official",
+      "title": "縁起",
+      "publisher": "瑞巌寺",
+      "url": "https://www.zuiganji.or.jp/history/",
+      "notes": "伊達政宗による整備、1609年の本堂建築を確認。",
+      "usedFor": ["regional-88553"]
+    },
+    {
+      "id": "official-zuiganji-guide",
+      "type": "official",
+      "title": "境内のご案内",
+      "publisher": "瑞巌寺",
+      "url": "https://zuiganji.or.jp/guide/keidai_01.php",
+      "notes": "現在の本堂と境内の配置を確認。",
+      "usedFor": ["regional-88553"]
+    },
+    {
+      "id": "official-hirosaki-castle",
+      "type": "official",
+      "title": "弘前城と石垣修理の歴史",
+      "publisher": "弘前市",
+      "url": "https://www.city.hirosaki.aomori.jp/ishigaki/rekishi.html",
+      "notes": "1611年完成、現存する天守の1810年造営、堀と石垣、修理時の曳屋を確認。天守の現在位置は工事で変わるため本文には記載しない。",
+      "usedFor": ["regional-1549755"]
+    },
+    {
+      "id": "official-risshakuji",
+      "type": "official",
+      "title": "立石寺について",
+      "publisher": "立石寺",
+      "url": "https://rissyakuji.jp/about/",
+      "notes": "860年開山、山腹に堂が連なる信仰と境内の構成を確認。",
+      "usedFor": ["regional-205162"]
+    },
+    {
+      "id": "official-yamagata-yamadera",
+      "type": "official",
+      "title": "松尾芭蕉と山寺立石寺",
+      "publisher": "山形市",
+      "url": "https://www.city.yamagata-yamagata.lg.jp/shiseijoho/shicho/1006787/1006790/1005497.html",
+      "notes": "山寺の地形と歴史的な参詣地としての位置づけを確認。",
+      "usedFor": ["regional-205162"]
+    },
+    {
+      "id": "official-chusonji-history",
+      "type": "official",
+      "title": "中尊寺の歴史",
+      "publisher": "中尊寺",
+      "url": "https://www.chusonji.or.jp/know/history.html",
+      "notes": "奥州藤原氏と金色堂の継承を確認。",
+      "usedFor": ["regional-88539"]
+    },
+    {
+      "id": "official-chusonji-konjikido",
+      "type": "official",
+      "title": "金色堂について",
+      "publisher": "中尊寺",
+      "url": "https://www.chusonji.or.jp/know/konjikido.html",
+      "notes": "1124年の藤原清衡による建立を確認。",
+      "usedFor": ["regional-88539"]
+    },
+    {
+      "id": "official-hiraizumi-buildings",
+      "type": "official",
+      "title": "建造物",
+      "publisher": "平泉の文化遺産（平泉町）",
+      "url": "https://www.town.hiraizumi.iwate.jp/heritage/property/kenzou.html",
+      "notes": "金色堂だけが創建当時の建物として残り、他の堂には後年の再建があることを確認。",
+      "usedFor": ["regional-88539"]
     }
   ]
 }
