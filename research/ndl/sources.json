@@ -956,6 +956,119 @@
       "url": "https://www.town.hiraizumi.iwate.jp/heritage/property/kenzou.html",
       "notes": "金色堂だけが創建当時の建物として残り、他の堂には後年の再建があることを確認。",
       "usedFor": ["regional-88539"]
+    },
+    {
+      "id": "ndl-kyushu-guide-1935",
+      "type": "book",
+      "title": "日本案内記 九州篇",
+      "author": "鉄道省",
+      "publisher": "鉄道省",
+      "year": 1935,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176417",
+      "fullText": "https://dl.ndl.go.jp/pid/1176417",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [59, 60, 82, 84, 91, 104, 105, 106, 344, 345],
+      "notes": "1935年の鉄道省版。82・84コマに博多駅を含む福岡市と那珂川の東中洲、劇場・映画館。91コマに福岡城址。59～60コマに門司駅と港への遊覧順路。104～106コマに当時『太宰府神社』と呼んだ社、飛梅とクスノキ。344～345コマに首里城址と、旧正殿を沖縄神社拝殿として使っていた状態。植民地期の案内文の価値判断や王国への偏見は採用しない。",
+      "usedFor": ["fukuoka", "shuri", "首里城", "regional-66044", "regional-1467126"]
+    },
+    {
+      "id": "official-fukuoka-two-towns",
+      "type": "official",
+      "title": "博多と福岡",
+      "publisher": "福岡市の文化財",
+      "url": "https://bunkazai.city.fukuoka.lg.jp/fukuoka-histories/detail/1",
+      "notes": "博多の港・商人町と黒田長政が築いた福岡城下町を、那珂川が隔てた歴史を確認。",
+      "usedFor": ["fukuoka"]
+    },
+    {
+      "id": "official-fukuoka-nakagawa",
+      "type": "official",
+      "title": "博多ポートタワー展望室からの景観ガイド（南西）",
+      "publisher": "福岡市",
+      "url": "https://www.city.fukuoka.lg.jp/kowan/hakata-port/hakataporttower-view001_southwest.html",
+      "notes": "那珂川と中洲の位置、博多と福岡の町をつなぐ川としての役割を確認。",
+      "usedFor": ["fukuoka"]
+    },
+    {
+      "id": "official-fukuoka-air-raid",
+      "type": "official",
+      "title": "福岡市のあゆみ（年表）",
+      "publisher": "福岡市",
+      "url": "https://www.city.fukuoka.lg.jp/shisei/profile/04.html",
+      "notes": "1945年6月19日の福岡大空襲を確認。",
+      "usedFor": ["fukuoka"]
+    },
+    {
+      "id": "official-shuri-history",
+      "type": "official",
+      "title": "琉球王国とは",
+      "publisher": "首里城公園",
+      "url": "https://oki-park.jp/shurijo/about/186",
+      "notes": "1429～1879年の琉球王国、1879年の日本政府による王国の廃止、1945年の焼失、1992年の公園開園を確認。",
+      "usedFor": ["shuri", "首里城"]
+    },
+    {
+      "id": "official-shuri-university",
+      "type": "official",
+      "title": "沿革",
+      "publisher": "琉球大学附属図書館",
+      "url": "https://www.lib.u-ryukyu.ac.jp/about/history/",
+      "notes": "1950年に首里城跡で琉球大学が開学し、後年に移転したことを確認。",
+      "usedFor": ["shuri", "首里城"]
+    },
+    {
+      "id": "official-shuri-rebuilding",
+      "type": "official",
+      "title": "復興の軌跡",
+      "publisher": "首里城公園",
+      "url": "https://oki-park.jp/shurijo/fukkou/7024",
+      "notes": "2019年の火災後に進む復元を確認。",
+      "usedFor": ["shuri", "首里城"]
+    },
+    {
+      "id": "official-shuri-current",
+      "type": "official",
+      "title": "現在のみどころ",
+      "publisher": "首里城公園",
+      "url": "https://oki-park.jp/shurijo/highlights/",
+      "notes": "変わりうる見学範囲と復元の段階はこの公式案内で確認する。2026年9月25日時点、正殿の一般公開開始は同年11月23日予定。",
+      "usedFor": ["shuri", "首里城"]
+    },
+    {
+      "id": "official-mojiko-station",
+      "type": "official",
+      "title": "門司港駅（旧門司駅）本屋",
+      "publisher": "北九州市",
+      "url": "https://www.city.kitakyushu.lg.jp/contents/02100281.html",
+      "notes": "1914年に二代目駅舎として建築、1942年の門司港駅への改称を確認。",
+      "usedFor": ["regional-66044"]
+    },
+    {
+      "id": "official-mojiko-restoration",
+      "type": "official",
+      "title": "100年の時を超え大正時代の門司港駅が復活！",
+      "publisher": "北九州市",
+      "url": "https://www.city.kitakyushu.lg.jp/moji/w1100456.html",
+      "notes": "2019年の保存修理完了と大正時代の外観への復原を確認。",
+      "usedFor": ["regional-66044"]
+    },
+    {
+      "id": "official-dazaifu-history",
+      "type": "official",
+      "title": "御由緒",
+      "publisher": "太宰府天満宮",
+      "url": "https://www.dazaifutenmangu.or.jp/about/goyuisho",
+      "notes": "菅原道真の墓所と、1591年造営の現御本殿を確認。",
+      "usedFor": ["regional-1467126"]
+    },
+    {
+      "id": "official-dazaifu-plum",
+      "type": "official",
+      "title": "天神さまと梅",
+      "publisher": "太宰府天満宮",
+      "url": "https://www.dazaifutenmangu.or.jp/about/tenjinsama-ume",
+      "notes": "飛梅は菅原道真にまつわる伝説として語られていることを確認。",
+      "usedFor": ["regional-1467126"]
     }
   ]
 }
