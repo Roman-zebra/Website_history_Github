@@ -36,9 +36,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1172399",
       "fullText": "https://dl.ndl.go.jp/pid/1172399",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [13, 29, 55, 92, 113, 133, 168, 172, 185, 241, 257],
-      "notes": "京都と近郊を扱う巻。92コマに金閣の建物と衣笠山を背景に取り込む庭、133コマに銀閣・東求堂が残ることと義政が銀閣完成前に没したことを確認。113コマに清水寺の舞台を支える長柱と貫、および音羽の滝。13コマの写真目次に稲荷神社の千本鳥居、172コマに稲荷山三峰と社の記述。185コマに平等院のかつての諸堂と鳳凰堂、55・168コマに東福寺の紅葉と東山麓の境内。241コマに彦根城と玄宮園、257コマに天橋立の砂州と傘松からの股のぞき。天橋立の寸法は現行の京都府資料と異なるため原稿には採用しない。1941年刊なので金閣については1950年の焼失・1955年の再建を必ず現行資料で補う。",
-      "usedFor": ["鹿苑寺", "慈照寺", "kyoto", "清水寺", "伏見稲荷大社", "平等院", "regional-83101", "regional-109545", "regional-17954"]
+      "fullTextSearchFrames": [13, 29, 30, 32, 55, 83, 92, 113, 133, 168, 172, 185, 241, 257],
+      "notes": "京都と近郊を扱う巻。92コマに金閣の建物と衣笠山を背景に取り込む庭、133コマに銀閣・東求堂が残ることと義政が銀閣完成前に没したことを確認。113コマに清水寺の舞台を支える長柱と貫、および音羽の滝。13コマの写真目次に稲荷神社の千本鳥居、172コマに稲荷山三峰と社の記述。185コマに平等院のかつての諸堂と鳳凰堂、55・168コマに東福寺の紅葉と東山麓の境内。241コマに彦根城と玄宮園、257コマに天橋立の砂州と傘松からの股のぞき。天橋立の寸法は現行の京都府資料と異なるため原稿には採用しない。1941年刊なので金閣については1950年の焼失・1955年の再建を必ず現行資料で補う。 83コマに二の丸御殿、1939年の京都市への下賜。30・32コマに将軍の上洛と大政奉還。",
+      "usedFor": ["鹿苑寺", "慈照寺", "kyoto", "清水寺", "伏見稲荷大社", "平等院", "regional-83101", "regional-109545", "regional-17954", "二条城"]
     },
     {
       "id": "official-himeji-scale",
@@ -400,8 +400,8 @@
       "fullText": "https://dl.ndl.go.jp/pid/1176338",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
       "fullTextSearchFrames": [46, 69, 71, 78, 80, 91, 92, 98, 99, 102, 106, 107, 115, 116, 134, 137, 146, 155, 159, 175, 176, 177, 208],
-      "notes": "46・106～107コマに戦前の浅草寺本堂、雷門から露店の並ぶ参道、繁華な浅草公園。78コマに丸の内の東京駅と施設。91～92コマに明治神宮の南北参道と林苑。99・102コマに上野公園・不忍池・動物園・博物館。134・137コマに鉄道から眺める横浜港の汽船と海外航路。146コマに長谷の高徳院が管理する銅造阿弥陀如来像。155・159コマに箱根の外輪山と芦ノ湖。175～177コマに富士山の宝永山、山頂火口、登山道、208コマに富士五湖。後の戦災、再建、地質学の更新は現行資料で区別して補う。 追加確認：69・115コマに戦前の渋谷の鉄道、71・116コマに押上方面の路線、80コマに芝公園・増上寺、98コマに秋葉原駅前の中央卸売市場神田分場。新しい交差点・塔・電気街の歴史は各公式資料で確認。",
-      "usedFor": ["tokyo", "yokohama", "kamakura", "東京駅", "富士山", "箱根町", "上野恩賜公園", "明治神宮", "秋葉原", "渋谷スクランブル交差点", "東京タワー", "東京スカイツリー"]
+      "notes": "46・106～107コマに戦前の浅草寺本堂、雷門から露店の並ぶ参道、繁華な浅草公園。78コマに丸の内の東京駅と施設。91～92コマに明治神宮の南北参道と林苑。99・102コマに上野公園・不忍池・動物園・博物館。134・137コマに鉄道から眺める横浜港の汽船と海外航路。146コマに長谷の高徳院が管理する銅造阿弥陀如来像。155・159コマに箱根の外輪山と芦ノ湖。175～177コマに富士山の宝永山、山頂火口、登山道、208コマに富士五湖。後の戦災、再建、地質学の更新は現行資料で区別して補う。 追加確認：69・115コマに戦前の渋谷の鉄道、71・116コマに押上方面の路線、80コマに芝公園・増上寺、98コマに秋葉原駅前の中央卸売市場神田分場。新しい交差点・塔・電気街の歴史は各公式資料で確認。 80コマに中央卸売市場築地本場と魚市場の日本橋河岸からの移転。1935年の正式開場とは区別する。",
+      "usedFor": ["tokyo", "yokohama", "kamakura", "東京駅", "富士山", "箱根町", "上野恩賜公園", "明治神宮", "秋葉原", "渋谷スクランブル交差点", "東京タワー", "東京スカイツリー", "築地"]
     },
     {
       "id": "official-sensoji-hondo",
@@ -1082,7 +1082,7 @@
       "access": "ログインなしで閲覧可能／インターネット公開（裁定）",
       "fullTextSearchFrames": [46, 47, 48, 49],
       "notes": "46～49コマの名古屋城の章を画像で確認。家康による清須からの移転、石垣用の巨石を大名が運んだこと、金鯱を記す。1945年以後の建物は公式資料で補う。",
-      "usedFor": ["nagoya"]
+      "usedFor": ["nagoya", "名古屋城"]
     },
     {
       "id": "official-nagoya-tower",
@@ -1282,6 +1282,113 @@
       "url": "https://www.tokyo-skytree.jp/group/pre-learning/sumida/industry/",
       "notes": "鉄道貨物から北十間川の舟運への積み替え。",
       "usedFor": ["東京スカイツリー"]
+    },
+    {
+      "id": "ndl-matsumoto-guide-1921",
+      "type": "book",
+      "title": "松本案内 : 附・日本アルプスと松本平",
+      "author": "松本案内編輯部",
+      "year": 1921,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I965000",
+      "fullText": "https://dl.ndl.go.jp/pid/965000",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [15, 44, 45],
+      "notes": "15コマに初期の深志城、44～45コマに石川氏の改築と五層天守。修理・指定の後年の経緯は松本市資料で確認。",
+      "usedFor": ["松本城"]
+    },
+    {
+      "id": "ndl-ise-guide-1919",
+      "type": "book",
+      "title": "伊勢参宮案内",
+      "author": "服部英雄",
+      "year": 1919,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I958485",
+      "fullText": "https://dl.ndl.go.jp/pid/958485",
+      "access": "ログインなしで閲覧可能／インターネット公開（裁定）",
+      "fullTextSearchFrames": [10, 11, 12, 13],
+      "notes": "10コマで外宮の鳥居橋と内宮へ向かう道を確認。現行の祭神・遷宮・参拝案内は神宮公式資料で補う。",
+      "usedFor": ["伊勢神宮"]
+    },
+    {
+      "id": "official-matsumoto-history",
+      "type": "official",
+      "title": "松本城の歴史",
+      "publisher": "松本市",
+      "url": "https://www.city.matsumoto.nagano.jp/soshiki/135/4121.html",
+      "notes": "明治の買戻し・修理と昭和の解体修理。",
+      "usedFor": ["松本城"]
+    },
+    {
+      "id": "official-matsumoto-tower",
+      "type": "official",
+      "title": "松本城天守",
+      "publisher": "松本市",
+      "url": "https://www.city.matsumoto.nagano.jp/soshiki/134/3771.html",
+      "notes": "天守と堀・郭の歴史。",
+      "usedFor": ["松本城"]
+    },
+    {
+      "id": "official-nijo-history",
+      "type": "official",
+      "title": "二条城の歴史",
+      "publisher": "京都市",
+      "url": "https://nijo-jocastle.city.kyoto.lg.jp/introduction/highlights/nenpyo/",
+      "notes": "1603年築城、1867年大政奉還、1939年市へ下賜。",
+      "usedFor": ["二条城"]
+    },
+    {
+      "id": "official-nijo-overview",
+      "type": "official",
+      "title": "二条城の概要",
+      "publisher": "京都市",
+      "url": "https://nijo-jocastle.city.kyoto.lg.jp/introduction/highlights/overview/",
+      "notes": "将軍の宿所としての用途と二の丸御殿。",
+      "usedFor": ["二条城"]
+    },
+    {
+      "id": "official-tokyo-tsukiji-history",
+      "type": "official",
+      "title": "築地まちづくり方針",
+      "publisher": "東京都",
+      "url": "https://www.toshiseibi.metro.tokyo.lg.jp/bosai/toshi_saisei/data/saisei0802_62.pdf",
+      "notes": "1935年開場、2018年豊洲へ移転。",
+      "usedFor": ["築地"]
+    },
+    {
+      "id": "official-tsukiji-outer-market",
+      "type": "official",
+      "title": "これからの築地",
+      "publisher": "築地場外市場",
+      "url": "https://www.tsukiji.or.jp/know/future/",
+      "notes": "現在も場外市場に店舗が並ぶ。",
+      "usedFor": ["築地"]
+    },
+    {
+      "id": "official-ise-about",
+      "type": "official",
+      "title": "神宮について",
+      "publisher": "神宮司庁",
+      "url": "https://www.isejingu.or.jp/about/",
+      "notes": "内宮と外宮の祭神と構成。",
+      "usedFor": ["伊勢神宮"]
+    },
+    {
+      "id": "official-ise-sengu",
+      "type": "official",
+      "title": "式年遷宮とは",
+      "publisher": "神宮司庁",
+      "url": "https://www.isejingu.or.jp/sengu/the63rd/about.html",
+      "notes": "約20年ごとの式年遷宮。",
+      "usedFor": ["伊勢神宮"]
+    },
+    {
+      "id": "official-ise-qa",
+      "type": "official",
+      "title": "よくあるご質問",
+      "publisher": "神宮司庁",
+      "url": "https://www.isejingu.or.jp/qa/",
+      "notes": "外宮から内宮への参拝順序はならわしで、必須ではない。",
+      "usedFor": ["伊勢神宮"]
     }
   ]
 }
