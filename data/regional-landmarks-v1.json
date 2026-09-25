@@ -1200,7 +1200,22 @@
       "wiki_en": "Iga Ueno Castle",
       "extract_ja": "上野城（うえのじょう）は、三重県伊賀市上野丸之内（上野公園）にある日本の城（平山城）。白鳳城、伊賀上野城とも呼ばれる。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%B8%8A%E9%87%8E%E5%9F%8E",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1933年の案内書は伊賀上野城を「城址」と呼び、丘の公園に残る石垣と堀を紹介しています。現在見える白い木造の天守は、その2年後の1935年に建てられました。藤堂高虎が築いた高い石垣と、昭和に建てた天守を同じ時代のものと思わず、堀を囲む地形も見てみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kinki-guide-1933",
+          "title": "『日本案内記 近畿篇 下』（1933年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176380"
+        },
+        {
+          "id": "official-iga-castle",
+          "title": "伊賀市都市公園案内（伊賀市）",
+          "url": "https://www.city.iga.lg.jp/0000000237.html"
+        }
+      ]
     },
     {
       "id": "regional-109545",
@@ -1400,7 +1415,27 @@
       "wiki_en": "Sumiyoshi-taisha",
       "extract_ja": "住吉大社（すみよしたいしゃ）は、大阪府大阪市住吉区住吉にある神社。式内社（名神大社）、摂津国一宮、二十二社（中七社）の一つ。旧社格は官幣大社で、現在は神社本庁の別表神社。全国にある住吉神社の総本社である。本殿4棟は国宝に指定されている。\n山口県下関市の住吉神社、福岡県福岡市の住吉神社ともに「三大住吉」の1つに数えられる。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%BD%8F%E5%90%89%E5%A4%A7%E7%A4%BE",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1933年の案内書は、住吉大社の反橋（太鼓橋）を渡ると四棟の本殿へ進む、と記します。現在も反橋は神池に架かり、第一～第三本宮が奥へ一直線に、第四本宮が第三本宮の横に並びます。橋を入口に、四つの屋根の並び方を地図で探してみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kinki-guide-1933",
+          "title": "『日本案内記 近畿篇 下』（1933年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176380"
+        },
+        {
+          "id": "official-sumiyoshi-bridge",
+          "title": "住吉っさんの見所（住吉大社）",
+          "url": "https://www.sumiyoshitaisha.net/grounds/highlights.html"
+        },
+        {
+          "id": "official-sumiyoshi-honden",
+          "title": "本殿（住吉大社）",
+          "url": "https://www.sumiyoshitaisha.net/grounds/honden.html"
+        }
+      ]
     },
     {
       "id": "regional-269961",
@@ -1475,7 +1510,27 @@
       "wiki_en": "Hōryū-ji",
       "extract_ja": "法隆寺（ほうりゅうじ、旧字体: 法隆󠄁寺）は、奈良県生駒郡斑鳩町法隆寺山内にある聖徳宗の総本山の寺院。山号はなし。本尊は釈迦如来。創建当時は斑鳩寺（鵤寺 = いかるがでら）と称し、後に法隆寺となった。法隆学問寺とも呼ばれる。\n法隆寺は7世紀に創建され、古代寺院の姿を現在に伝える仏教施設であり、厩戸皇子（後の聖徳太子）ゆかりの寺院である。創建は金堂薬師如来像光背銘、『上宮聖徳法王帝説』から推古15年（607年）とされる。金堂、五重塔を中心とする西院伽藍と、夢殿を中心とした東院伽藍に分けられる。境内の広さは約18万7千平方メートル。西院伽藍は、現存する世界最古の木造建築物群である。\n法隆寺の建築物群は法起寺と共に、1993年（平成5年）に「法隆寺地域の仏教建造物」としてユネスコの世界遺産（文化遺産）に登録された。建造物以外にも、飛鳥・奈良時代の仏像、仏教工芸品など多数の文化財を有する。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%B3%95%E9%9A%86%E5%AF%BA",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "法隆寺は一つの建物ではありません。1933年の案内書は、金堂と五重塔を中心とする西院伽藍と、夢殿のある東院伽藍を分けて紹介しています。創建時の建物は670年の火災で失われ、現在の西院はその後の再建です。地図で二つの区画と、その間の道をたどってみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kinki-guide-1933",
+          "title": "『日本案内記 近畿篇 下』（1933年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176380"
+        },
+        {
+          "id": "official-horyuji-precinct",
+          "title": "法隆寺伽藍（法隆寺）",
+          "url": "https://www.horyuji.or.jp/garan/"
+        },
+        {
+          "id": "official-horyuji-unesco",
+          "title": "法隆寺地域の仏教建造物（UNESCO）",
+          "url": "https://whc.unesco.org/en/list/660/"
+        }
+      ]
     },
     {
       "id": "regional-1027694",
@@ -1525,7 +1580,27 @@
       "wiki_en": "Wakayama Castle",
       "extract_ja": "和歌山城（わかやまじょう）は、和歌山県和歌山市一番丁にある日本の城（平山城）。徳川御三家の一つ紀州藩紀州徳川家の居城である。城跡は国の史跡に指定されている。\n\n",
       "coordSource": "https://www.openstreetmap.org/node/402167963",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1933年の案内書には、1850年に再建された和歌山城の天守が、城跡の公園から見えると記されています。その天守は1945年の空襲で焼失し、現在の天守は1958年に鉄筋コンクリートで再建されました。時代の違う三つの姿を思い浮かべながら、虎伏山の高まりと堀の形を見比べてみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kinki-guide-1933",
+          "title": "『日本案内記 近畿篇 下』（1933年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176380"
+        },
+        {
+          "id": "official-wakayama-castle",
+          "title": "和歌山城の施設・名所（史跡 和歌山城）",
+          "url": "https://wakayamajo.jp/kouzou/"
+        },
+        {
+          "id": "official-wakayama-guide",
+          "title": "史跡 和歌山城（和歌山市）",
+          "url": "https://www.city.wakayama.wakayama.jp/_res/projects/default_project/_page_/001/027/769/castle_jap-p2023.pdf"
+        }
+      ]
     },
     {
       "id": "regional-42676",

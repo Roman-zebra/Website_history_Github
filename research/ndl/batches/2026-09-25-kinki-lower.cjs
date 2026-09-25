@@ -10,7 +10,7 @@ const edit = (file, field, key, update) => {
   const spot = doc[field].find(item => item.id === key || item.wiki_ja === key);
   if (!spot) throw Error(`${file}: missing ${key}`);
   update(spot);
-  fs.writeFileSync(target, JSON.stringify(doc) + '\n');
+  fs.writeFileSync(target, JSON.stringify(doc, null, file === 'regional-landmarks-v1.json' ? 2 : 0) + '\n');
 };
 const feature = (id, hook, story, summary, sources) => edit('places-world.json', 'places', id, spot => {
   spot.hook_ja = hook;
@@ -70,3 +70,28 @@ feature('kobe',
 landmark('道頓堀',
   '道頓堀は自然の川ではなく、1615年に完成した堀川です。1933年の案内書も、川の南岸を芝居や映画の劇場が集まる娯楽の街として紹介しています。川と橋を目印に、昔から人が集まった岸辺が今どう使われているか見てみましょう。',
   [source('official-dotonbori', '道頓堀川の歴史（大阪市）', 'https://www.city.osaka.lg.jp/kensetsu/cmsfiles/contents/0000010/10856/01J.pdf')]);
+
+const regional = (id, summary, sources) => edit('regional-landmarks-v1.json', 'landmarks', id, spot => {
+  spot.summaries = {...spot.summaries, ja:summary};
+  spot.researchSources = [book, ...sources];
+  spot.reviewedOn = '2026-09-25';
+});
+
+regional('regional-2007615',
+  '法隆寺は一つの建物ではありません。1933年の案内書は、金堂と五重塔を中心とする西院伽藍と、夢殿のある東院伽藍を分けて紹介しています。創建時の建物は670年の火災で失われ、現在の西院はその後の再建です。地図で二つの区画と、その間の道をたどってみましょう。',
+  [source('official-horyuji-precinct', '法隆寺伽藍（法隆寺）', 'https://www.horyuji.or.jp/garan/'),
+   source('official-horyuji-unesco', '法隆寺地域の仏教建造物（UNESCO）', 'https://whc.unesco.org/en/list/660/')]);
+
+regional('regional-40306',
+  '1933年の案内書は、住吉大社の反橋（太鼓橋）を渡ると四棟の本殿へ進む、と記します。現在も反橋は神池に架かり、第一～第三本宮が奥へ一直線に、第四本宮が第三本宮の横に並びます。橋を入口に、四つの屋根の並び方を地図で探してみましょう。',
+  [source('official-sumiyoshi-bridge', '住吉っさんの見所（住吉大社）', 'https://www.sumiyoshitaisha.net/grounds/highlights.html'),
+   source('official-sumiyoshi-honden', '本殿（住吉大社）', 'https://www.sumiyoshitaisha.net/grounds/honden.html')]);
+
+regional('regional-272276',
+  '1933年の案内書は伊賀上野城を「城址」と呼び、丘の公園に残る石垣と堀を紹介しています。現在見える白い木造の天守は、その2年後の1935年に建てられました。藤堂高虎が築いた高い石垣と、昭和に建てた天守を同じ時代のものと思わず、堀を囲む地形も見てみましょう。',
+  [source('official-iga-castle', '伊賀市都市公園案内（伊賀市）', 'https://www.city.iga.lg.jp/0000000237.html')]);
+
+regional('regional-343086',
+  '1933年の案内書には、1850年に再建された和歌山城の天守が、城跡の公園から見えると記されています。その天守は1945年の空襲で焼失し、現在の天守は1958年に鉄筋コンクリートで再建されました。時代の違う三つの姿を思い浮かべながら、虎伏山の高まりと堀の形を見比べてみましょう。',
+  [source('official-wakayama-castle', '和歌山城の施設・名所（史跡 和歌山城）', 'https://wakayamajo.jp/kouzou/'),
+   source('official-wakayama-guide', '史跡 和歌山城（和歌山市）', 'https://www.city.wakayama.wakayama.jp/_res/projects/default_project/_page_/001/027/769/castle_jap-p2023.pdf')]);

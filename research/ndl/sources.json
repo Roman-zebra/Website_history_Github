@@ -260,9 +260,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176380",
       "fullText": "https://dl.ndl.go.jp/pid/1176380",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [35, 36, 41, 111, 112, 187, 188],
-      "notes": "35～36コマに1931年完成の近代工法による大阪城天守と新しい公園、城の東の大阪陸軍造兵廠。41コマに道頓堀川の1615年完成と川南岸の芝居・娯楽街。111～112コマに神戸港の来歴と荷揚げ場・倉庫・工場・船車連絡。187～188コマに東大寺の造営、鎌倉期の復興、南大門など。1933年の現況は現在の施設・景観とは区別する。",
-      "usedFor": ["osaka", "nara", "東大寺", "kobe", "道頓堀"]
+      "fullTextSearchFrames": [35, 36, 41, 58, 59, 111, 112, 187, 188, 216, 217, 240, 319],
+      "notes": "35～36コマに1931年完成の近代工法による大阪城天守と新しい公園、城の東の大阪陸軍造兵廠。41コマに道頓堀川の1615年完成と川南岸の芝居・娯楽街。58～59コマに住吉神社（現在の住吉大社）の反橋と四本殿。111～112コマに神戸港の来歴と荷揚げ場・倉庫・工場・船車連絡。187～188コマに東大寺の造営、鎌倉期の復興、南大門など。216～217コマに法隆寺西院・東院と金堂・五重塔・夢殿の配置。240コマに城址公園となった伊賀上野城の石垣・堀。319コマに1850年再建の和歌山城天守。1933年の現況は現在の施設・景観とは区別する。",
+      "usedFor": ["osaka", "nara", "東大寺", "kobe", "道頓堀", "regional-2007615", "regional-40306", "regional-272276", "regional-343086"]
     },
     {
       "id": "official-osaka-castle",
@@ -326,6 +326,69 @@
       "url": "https://www.city.osaka.lg.jp/kensetsu/cmsfiles/contents/0000010/10856/01J.pdf",
       "notes": "道頓堀川が1615年に完成した堀川で、周辺が劇場街として栄えたと確認。",
       "usedFor": ["道頓堀"]
+    },
+    {
+      "id": "official-horyuji-precinct",
+      "type": "official",
+      "title": "法隆寺伽藍",
+      "publisher": "法隆寺",
+      "url": "https://www.horyuji.or.jp/garan/",
+      "notes": "670年の火災後に西院伽藍が再建されたこと、西院・東院の配置を確認。",
+      "usedFor": ["regional-2007615"]
+    },
+    {
+      "id": "official-horyuji-unesco",
+      "type": "official",
+      "title": "Buddhist Monuments in the Horyu-ji Area",
+      "publisher": "UNESCO World Heritage Centre",
+      "url": "https://whc.unesco.org/en/list/660/",
+      "notes": "創建期の火災と再建、西院と東院の建物の年代を確認。",
+      "usedFor": ["regional-2007615"]
+    },
+    {
+      "id": "official-sumiyoshi-bridge",
+      "type": "official",
+      "title": "住吉っさんの見所",
+      "publisher": "住吉大社",
+      "url": "https://www.sumiyoshitaisha.net/grounds/highlights.html",
+      "notes": "神池に架かる反橋を確認。",
+      "usedFor": ["regional-40306"]
+    },
+    {
+      "id": "official-sumiyoshi-honden",
+      "type": "official",
+      "title": "本殿",
+      "publisher": "住吉大社",
+      "url": "https://www.sumiyoshitaisha.net/grounds/honden.html",
+      "notes": "第一～第三本宮が直列、第四本宮が第三本宮の横に並ぶことを確認。",
+      "usedFor": ["regional-40306"]
+    },
+    {
+      "id": "official-iga-castle",
+      "type": "official",
+      "title": "伊賀市都市公園案内",
+      "publisher": "伊賀市",
+      "url": "https://www.city.iga.lg.jp/0000000237.html",
+      "notes": "1935年木造復興天守と、藤堂高虎の石垣・内堀を確認。",
+      "usedFor": ["regional-272276"]
+    },
+    {
+      "id": "official-wakayama-castle",
+      "type": "official",
+      "title": "和歌山城の施設・名所",
+      "publisher": "史跡 和歌山城",
+      "url": "https://wakayamajo.jp/kouzou/",
+      "notes": "1945年の空襲で天守焼失、1958年に鉄筋コンクリートで外観復元。",
+      "usedFor": ["regional-343086"]
+    },
+    {
+      "id": "official-wakayama-guide",
+      "type": "official",
+      "title": "史跡 和歌山城",
+      "publisher": "和歌山市",
+      "url": "https://www.city.wakayama.wakayama.jp/_res/projects/default_project/_page_/001/027/769/castle_jap-p2023.pdf",
+      "notes": "1850年再建の天守は1945年に焼失、現在の3代目は1958年に復興したと確認。",
+      "usedFor": ["regional-343086"]
     },
     {
       "id": "official-amanohashidate-geography",
