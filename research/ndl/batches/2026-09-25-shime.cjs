@@ -29,4 +29,3 @@ for (const entry of entries) {
 }
 const compact = JSON.stringify(registry, null, 2).replace(/"(fullTextSearchFrames|usedFor)": \[\s*([\s\S]*?)\s*\]/g, (_all, key, content) => '"' + key + '": [' + JSON.parse('[' + content + ']').map(x => JSON.stringify(x)).join(', ') + ']');
 fs.writeFileSync(registryTarget, compact + '\n');
-

@@ -2959,6 +2959,27 @@
       "publisher": "志免町",
       "notes": "現地のシーメイトと広場・公園の状況。",
       "usedFor": ["志免町"]
+    },
+    {
+      "id": "ndl-sarushima-fortress-report-2022",
+      "type": "book",
+      "title": "史跡東京湾要塞跡猿島砲台跡：史跡整備事業に伴う資料収集調査",
+      "author": "横須賀市教育委員会（教育総務部生涯学習課）編",
+      "year": 2022,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000136-I1971993809767868559",
+      "fullText": "https://www.city.yokosuka.kanagawa.jp/8120/bunkazai/documents/sarushimano2-12.pdf",
+      "access": "横須賀市が第1章・第2章を全文PDF公開。NDLサーチに図書として登録。",
+      "notes": "PDF12頁の刊行趣旨、22頁の砲台構造と建設年代、44頁の煉瓦隧道・弾薬庫・排水調査を確認。",
+      "usedFor": ["猿島"]
+    },
+    {
+      "id": "official-yokosuka-sarushima-heritage",
+      "title": "東京湾要塞跡（猿島砲台跡）（横須賀市）",
+      "url": "https://www.city.yokosuka.kanagawa.jp/8120/bunkazai/kuni15.html",
+      "type": "official",
+      "publisher": "横須賀市",
+      "notes": "1881年着工、1884年竣工、砲台の目的、2015年の国史跡指定、現在の公園内位置。",
+      "usedFor": ["猿島"]
     }
   ]
 }
