@@ -872,7 +872,7 @@ function buildCards(){
                        openPlace(PLACES.find(p => p.id === b.dataset.id)); };
 }
 
-const DISCOVERY_ENTRY = {"en":["Choose your next walk","Places and photo stories","Country & region guides","Open a guide in your language. Thai guides open the interactive map in English.","/places",["United States","us"],["United Kingdom","gb"],["Australia","au"],["Canada","ca"],["Singapore","sg"]],"ja":["次の街歩きを見つける","場所の解説を読む","国・地域別の旅行案内","日本国内の散歩や、使いたい言語から探せます。タイ語の案内ページから開く地図は英語です。","/ja",["日本国内","jp"]],"ko":["다음 산책 찾기","장소 이야기 읽기","국가·지역별 여행 안내","원하는 언어로 가이드를 선택하세요. 태국어 가이드의 대화형 지도는 영어로 열립니다.","/ko",["한국에서 일본 여행","kr"]],"zh-Hans":["寻找下一段城市漫步","阅读地点故事","国家与地区旅行指南","按语言选择指南。泰语指南中的互动地图以英语打开。","/zh-cn",["从中国大陆出发","cn"],["从新加坡出发 · English","sg"]],"zh-Hant":["尋找下一段城市散步","閱讀地點故事","國家與地區旅行指南","依語言選擇指南。泰語指南中的互動地圖以英語開啟。","/zh-tw",["從台灣出發","tw"],["從香港出發","hk"]]};
+const DISCOVERY_ENTRY = {"en":["Choose your next walk","Places and photo stories","Country & region guides","Open a guide in your language. Thai guides open the interactive map in English.","/places",["United States","us"],["United Kingdom","gb"],["Australia","au"],["Canada","ca"],["Singapore","sg"],["South Korea · 한국어","kr"],["Taiwan · 繁體中文","tw"],["Hong Kong · 繁體中文","hk"],["Thailand · ไทย","th"]],"ja":["次の街歩きを見つける","場所の解説を読む","国・地域別の旅行案内","日本国内の散歩や、使いたい言語から探せます。タイ語の案内ページから開く地図は英語です。","/ja",["日本国内","jp"]],"ko":["다음 산책 찾기","장소 이야기 읽기","국가·지역별 여행 안내","원하는 언어로 가이드를 선택하세요. 태국어 가이드의 대화형 지도는 영어로 열립니다.","/ko",["한국에서 일본 여행","kr"]],"zh-Hans":["寻找下一段城市漫步","阅读地点故事","国家与地区旅行指南","按语言选择指南。泰语指南中的互动地图以英语打开。","/zh-cn",["从中国大陆出发","cn"],["从新加坡出发 · English","sg"]],"zh-Hant":["尋找下一段城市散步","閱讀地點故事","國家與地區旅行指南","依語言選擇指南。泰語指南中的互動地圖以英語開啟。","/zh-tw",["從台灣出發","tw"],["從香港出發","hk"]]};
 function paintDiscovery(){
  const c=DISCOVERY_ENTRY[LANG]||DISCOVERY_ENTRY.en,box=document.getElementById('discoveryEntry');if(!box)return;
  box.setAttribute('aria-label',c[0]);
@@ -1080,9 +1080,31 @@ function clip(){
 /* =========================================================================
    4. Markers — three sizes on purpose
    ========================================================================= */
+// Size (pop) is independent of the zoom gate (tier). Only reviewed p1/p2 places
+// receive pictorial art; unknown places and smaller pins retain their emoji.
+const LANDMARK_ART = Object.freeze({
+  'himeji': 'himeji-castle-v1.webp',
+  'Himeji Castle': 'himeji-castle-v1.webp',
+  'Mount Fuji': 'mount-fuji-v1.webp',
+  'Tokyo Tower': 'tokyo-tower-v1.webp'
+});
+function landmarkArt(p, size){
+  if (p.pop !== 1 && p.pop !== 2) return '';
+  if (size && !/^p[12](?:\s|$)/.test(size)) return '';
+  const file = LANDMARK_ART[p.id] || LANDMARK_ART[p.wiki_en] || LANDMARK_ART[p.wiki];
+  return file ? '/icons/landmarks/' + file : '';
+}
+// Keep the ordinary marker visible until the image has actually loaded. A
+// failed download therefore leaves a useful, clickable marker without retrying.
+document.addEventListener('load', e => {
+  if (e.target.classList?.contains('landmark-image'))
+    e.target.parentElement.classList.add('landmark-ready');
+}, true);
 function bigIcon(p, ring, withLabel, size){
+  const art = landmarkArt(p, size);
   return L.divIcon({ className: 'big-pin ' + (size || 'p1'), iconSize: [0,0], iconAnchor: [0,0],
-    html: '<div class="big ' + ring + '"><span>' + p.emoji + '</span></div>'
+    html: '<div class="big ' + ring + '"><span>' + p.emoji + '</span>'
+        + (art ? '<img class="landmark-image" src="' + art + '" alt="" width="192" height="192" decoding="async" draggable="false">' : '') + '</div>'
         + (withLabel === false ? '' : '<div class="big-label">' + esc(placeName(p)) + '</div>') });
 }
 const midIcon = (emoji, cls) => L.divIcon({ className: 'sm-pin', iconSize: [0,0], iconAnchor: [0,0],
