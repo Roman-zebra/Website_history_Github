@@ -391,6 +391,109 @@
       "usedFor": ["regional-343086"]
     },
     {
+      "id": "ndl-kanto-guide-1930",
+      "type": "book",
+      "title": "日本案内記 関東篇",
+      "author": "鉄道省",
+      "year": 1930,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176338",
+      "fullText": "https://dl.ndl.go.jp/pid/1176338",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [46, 78, 106, 107, 134, 137, 146],
+      "notes": "46・106～107コマに戦前の浅草寺本堂、雷門から露店の並ぶ参道、繁華な浅草公園。78コマに丸の内の東京駅と施設。134・137コマに鉄道から眺める横浜港の汽船と海外航路。146コマに長谷の高徳院が管理する銅造阿弥陀如来像。後の戦災、施設の再建、みなとみらい開発は現行資料で区別して補う。",
+      "usedFor": ["tokyo", "yokohama", "kamakura", "東京駅"]
+    },
+    {
+      "id": "official-sensoji-hondo",
+      "type": "official",
+      "title": "本堂",
+      "publisher": "浅草寺",
+      "url": "https://www.senso-ji.jp/guide/guide04.html",
+      "notes": "旧本堂は1945年3月10日の空襲で焼失、現本堂は1958年再建と確認。",
+      "usedFor": ["tokyo"]
+    },
+    {
+      "id": "official-sensoji-kaminarimon",
+      "type": "official",
+      "title": "雷門",
+      "publisher": "浅草寺",
+      "url": "https://www.senso-ji.jp/guide/guide01.html",
+      "notes": "現在の雷門は1960年再建と確認。",
+      "usedFor": ["tokyo"]
+    },
+    {
+      "id": "official-yokohama-mm21",
+      "type": "official",
+      "title": "みなとみらい21地区 事業概要",
+      "publisher": "横浜市",
+      "url": "https://www.city.yokohama.lg.jp/kurashi/machizukuri-kankyo/toshiseibi/mm21/gaiyo.html",
+      "notes": "横浜駅側と関内側の都心の統合、新しい公園・緑地の整備、1983年の事業着工を確認。",
+      "usedFor": ["yokohama"]
+    },
+    {
+      "id": "official-yokohama-mm21-guide",
+      "type": "official",
+      "title": "横浜港周辺ガイド",
+      "publisher": "横浜市",
+      "url": "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/minatosyuuhen.files/0002_20241216.pdf",
+      "notes": "みなとみらい21地区が造船所と旧国鉄操車場の跡を含み、海を埋め立てて造成されたことを確認。",
+      "usedFor": ["yokohama"]
+    },
+    {
+      "id": "official-yokohama-dock",
+      "type": "official",
+      "title": "旧横浜船渠第1号ドック",
+      "publisher": "横浜市",
+      "url": "https://www.city.yokohama.lg.jp/nishi/shokai/kanko/spot/tekuteku/tekutekusketch1.html",
+      "notes": "桜木町駅側に旧造船所のドックが残ることを確認。",
+      "usedFor": ["yokohama"]
+    },
+    {
+      "id": "official-kotokuin",
+      "type": "official",
+      "title": "鎌倉大仏と高徳院",
+      "publisher": "高徳院",
+      "url": "https://kotoku-in.jp/about.html",
+      "notes": "銅造阿弥陀如来坐像の造立が1252年頃に始まったことを確認。",
+      "usedFor": ["kamakura"]
+    },
+    {
+      "id": "official-kamakura-daibutsuden",
+      "type": "official",
+      "title": "鎌倉大仏殿の歴史",
+      "publisher": "鎌倉市",
+      "url": "https://www.city.kamakura.kanagawa.jp/rekibun/highlights.html",
+      "notes": "かつて大仏殿があり、風による倒壊・再建後、15世紀後半には露座だったと確認。津波が堂を壊したと単純化しない。",
+      "usedFor": ["kamakura"]
+    },
+    {
+      "id": "official-tokyo-station-history",
+      "type": "official",
+      "title": "東京駅の概要・歴史",
+      "publisher": "Tokyo Station City",
+      "url": "https://www.tokyostationcity.com/learning/",
+      "notes": "1914年開業、1945年戦災、戦後二階建て、2012年復原の年表を確認。",
+      "usedFor": ["東京駅"]
+    },
+    {
+      "id": "official-tokyo-station-restoration",
+      "type": "official",
+      "title": "丸の内駅舎のみどころ",
+      "publisher": "Tokyo Station City",
+      "url": "https://www.tokyostationcity.com/learning/station_building/",
+      "notes": "2012年の復原で3階部分を復原し、2階以下の煉瓦構造を保存したことを確認。",
+      "usedFor": ["東京駅"]
+    },
+    {
+      "id": "official-tokyo-station-airraid",
+      "type": "official",
+      "title": "丸の内駅舎保存・復原工事完成10年",
+      "publisher": "JR東日本",
+      "url": "https://www.jreast.co.jp/press/2022/tokyo/20220922_to01.pdf",
+      "notes": "1945年5月空襲でドームと3階が焼失、1947年に二階建てとなり、2012年に復原完了と確認。",
+      "usedFor": ["東京駅"]
+    },
+    {
       "id": "official-amanohashidate-geography",
       "type": "official",
       "title": "天橋立の概要",
