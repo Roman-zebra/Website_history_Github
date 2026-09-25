@@ -2478,6 +2478,99 @@
       "publisher": "中城城跡公式サイト",
       "notes": "2000年の世界遺産登録。",
       "usedFor": ["中城城"]
+    },
+    {
+      "id": "ndl-okinawa-annai-showa",
+      "type": "book",
+      "title": "沖縄案内",
+      "author": "沖縄県商工課",
+      "year": null,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1122474",
+      "fullText": "https://dl.ndl.go.jp/pid/1122474",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [2],
+      "notes": "2コマの名所案内欄で「今歸仁城址（北山城址）」を今泊の丘上の名所として確認。出版年は書誌どおり昭和期・年不詳。城の政治的役割、調査成果、世界遺産登録は今帰仁村と現行公式サイトで確認。",
+      "usedFor": ["今帰仁城"]
+    },
+    {
+      "id": "official-nakijin-castle-history",
+      "title": "今帰仁城跡・今帰仁城の歴史（今帰仁村）",
+      "url": "https://www.nakijin.jp/pagtop/kakuka/somuka/3/3/5/2/564.html",
+      "type": "official",
+      "publisher": "今帰仁村",
+      "notes": "北山の歴史、監守の役割と発掘成果。",
+      "usedFor": ["今帰仁城"]
+    },
+    {
+      "id": "official-nakijin-castle-site",
+      "title": "世界遺産 今帰仁城跡（公式サイト）",
+      "url": "https://www.nakijinjoseki-osi.jp/",
+      "type": "official",
+      "publisher": "今帰仁城跡公式サイト",
+      "notes": "北山城の別名、監守と2000年の世界遺産登録。",
+      "usedFor": ["今帰仁城"]
+    },
+    {
+      "id": "ndl-resilient-community-7",
+      "type": "book",
+      "title": "レジリエントな地域社会 7 アグロエコロジーからみた長期的持続可能性と里山",
+      "author": "羽生淳子ほか",
+      "year": 2022,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I13125219",
+      "fullText": "https://dl.ndl.go.jp/pid/13125219",
+      "access": "ログインなしで閲覧可能／インターネット公開（許諾）",
+      "fullTextSearchFrames": [72, 73, 74],
+      "notes": "4章「景観研究からみたアグロエコロジーと考古学」のPDF 72～74ページ。石器組成と住居跡の変化から生業・食の変化を論じる。因果関係は著者の仮説であり、説明文では可能性と記載。出版社公開PDF https://www.chikyu.ac.jp/fooddiversity/newsletter/file/Resilient7.pdf でも本文照合。",
+      "usedFor": ["三内丸山遺跡"]
+    },
+    {
+      "id": "official-sannai-about",
+      "title": "三内丸山遺跡とは（三内丸山遺跡センター）",
+      "url": "https://sannaimaruyama.pref.aomori.jp/about/iseki/",
+      "type": "official",
+      "publisher": "青森県三内丸山遺跡センター",
+      "notes": "年代、建物・墓・盛土、出土品、世界遺産登録。",
+      "usedFor": ["三内丸山遺跡"]
+    },
+    {
+      "id": "official-sannai-organic-finds",
+      "title": "有機質出土品（三内丸山遺跡縄文デジタルアーカイブ）",
+      "url": "https://sannaimaruyama.pref.aomori.jp/sanmaru_search/cat_organic/",
+      "type": "official",
+      "publisher": "青森県三内丸山遺跡センター",
+      "notes": "木の実、魚・動物骨、漆器などの出土。",
+      "usedFor": ["三内丸山遺跡"]
+    },
+    {
+      "id": "ndl-bosai-machizukuri-4",
+      "type": "book",
+      "title": "防災まちづくり大賞 第4回",
+      "author": "自治省消防庁",
+      "year": 2000,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I9526438",
+      "fullText": "https://dl.ndl.go.jp/pid/9526438",
+      "access": "ログインなしで閲覧可能／インターネット公開（許諾）",
+      "fullTextSearchFrames": [6],
+      "notes": "6コマの「下郷町大内宿防災会」。国重伝建選定後、各戸の火災報知・消火設備整備、消防団・婦人消防隊・火消組等による防災会、予防査察・訓練・見回りを記載。2000年当時の報告として扱う。",
+      "usedFor": ["大内宿"]
+    },
+    {
+      "id": "official-shimogo-ouchi",
+      "title": "下郷町大内宿伝統的建造物群保存地区（下郷町）",
+      "url": "https://www.town.shimogo.fukushima.jp/organization/kyouiku/4/150.html",
+      "type": "official",
+      "publisher": "福島県下郷町",
+      "notes": "宿場の歴史、明治期の交通変化、屋根葺きの技術継承。",
+      "usedFor": ["大内宿"]
+    },
+    {
+      "id": "official-bunka-ouchi",
+      "title": "下郷町大内宿（国指定文化財等データベース）",
+      "url": "https://kunishitei.bunka.go.jp/heritage/detail/103/4",
+      "type": "official",
+      "publisher": "文化庁",
+      "notes": "全長約450メートルの町並み、家の向き、1981年選定。",
+      "usedFor": ["大内宿"]
     }
   ]
 }
