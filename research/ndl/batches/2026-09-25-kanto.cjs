@@ -66,3 +66,30 @@ edit('landmarks.json', 'landmarks', '東京駅', spot => {
     source('official-tokyo-station-airraid', '丸の内駅舎保存・復原工事完成10年（JR東日本）', 'https://www.jreast.co.jp/press/2022/tokyo/20220922_to01.pdf')];
   spot.reviewedOn = '2026-09-25';
 });
+
+const landmark = (name, summary, sources) => edit('landmarks.json', 'landmarks', name, spot => {
+  spot.summaries.ja = summary;
+  spot.researchSources = [book, ...sources];
+  spot.reviewedOn = '2026-09-25';
+});
+
+landmark('富士山',
+  '1930年の案内書は、山頂の火口だけでなく南東斜面の宝永山や北麓の富士五湖も紹介しています。富士山は一つのきれいな円すいだけでなく、噴火がつくった火口、溶岩、湖が広がる火山です。地図を少し引き、山頂から宝永火口、湖へと視線を動かしてみましょう。',
+  [source('official-fuji-geomorphology', '富士箱根伊豆国立公園の特徴（環境省）', 'https://www.env.go.jp/nature/nationalparks/list/fuji-hakone-izu/feature/'),
+   source('official-fuji-hoei', '富士山に見られる火山活動の痕跡（国土地理院）', 'https://www.gsi.go.jp/common/000084699.pdf')]);
+
+landmark('箱根町',
+  '1930年の案内書は箱根を外輪山に囲まれた火山として説明し、山の中の芦ノ湖も紹介しています。現在の地質案内では、外輪山の内側に複数の火山体や溶岩が重なる複雑な地形とわかっています。一つの山頂を探すより、芦ノ湖と周囲の高い尾根の輪を地図でたどってみましょう。',
+  [source('official-hakone-geopark', '箱根ジオパークとは（箱根ジオパーク）', 'https://www.hakone-geopark.jp/hakonegeopark/about/'),
+   source('official-ashinoko-geology', '芦ノ湖（箱根ジオパーク）', 'https://www.hakone-geopark.jp/area-guide/hakone1/007ashinoko.html')]);
+
+landmark('上野恩賜公園',
+  '1930年の案内書は上野公園に、不忍池の弁天堂、動物園、博物館、寛永寺の五重塔などが集まる様子を記しています。動物園は1882年の開園です。現在の地図では、上野駅側の台地から西の不忍池へ下る地形と、文化施設が並ぶ位置を一緒に見てみましょう。',
+  [source('official-ueno-park', '上野恩賜公園マネジメントプラン（東京都）', 'https://www.kensetsu.metro.tokyo.lg.jp/documents/d/kensetsu/000059532'),
+   source('official-ueno-zoo', '上野動物園について（東京動物園協会）', 'https://www.tokyo-zoo.net/ueno/about/index.html')]);
+
+landmark('明治神宮',
+  '1930年の案内書は原宿側の南参道と代々木側の北参道、木々に包まれた境内を紹介しています。この森は1920年の創建に向けて人々が植えたものです。社殿は1945年の空襲で焼け、現在の社殿は1958年に復興しました。地図では森の縁と参道の伸び方を探してみましょう。',
+  [source('official-meiji-forest', '明治神宮とは（明治神宮）', 'https://www.meijijingu.or.jp/about/'),
+   source('official-meiji-shrine', '境内地図（明治神宮）', 'https://www.meijijingu.or.jp/guide/'),
+   source('official-meiji-airraid', '1945年4月の年表（明治神宮歴史データベース）', 'https://www.rekishidb.meijijingu.or.jp/chronology/era_detail.php?month=4&year=1945')]);
