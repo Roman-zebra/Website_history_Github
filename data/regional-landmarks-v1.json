@@ -720,7 +720,32 @@
       "wiki_en": "Tamozawa Imperial Villa",
       "extract_ja": "日光田母沢御用邸記念公園（にっこうたもざわごようていきねんこうえん）は、栃木県日光市にある栃木県立の都市公園（歴史公園）である。元は皇太子時代の大正天皇の静養所として造営された旧御用邸の建物と庭園を公園として整備し一般公開している。明治期以降に数多く造られた御用邸建築のうち、全体がほぼ完存する唯一の例として貴重であり、建造物群は国の重要文化財に指定されている。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%97%A5%E5%85%89%E7%94%B0%E6%AF%8D%E6%B2%A2%E5%BE%A1%E7%94%A8%E9%82%B8%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "日光田母沢御用邸記念公園は、1899年に皇太子嘉仁親王（のちの大正天皇）の静養のため造られた旧御用邸です。1927年の『明治工業史』は、地元にあった別邸に旧紀州徳川家の江戸屋敷から移した建物を組み合わせ、増改築した経緯を記しています。現在の邸宅には江戸・明治・大正の建築が重なり、106室が廊下でつながっています。部屋の役割や庭への眺めを比べて歩くと、皇室の滞在を支えた空間の広さがわかります。御用邸は1947年に廃止され、修復後の2000年に公園として公開されました。建物は国の重要文化財です。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-meiji-kogyoshi-architecture-1927",
+          "title": "日本工学会編『明治工業史 〔第5〕』（1927年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1836175"
+        },
+        {
+          "id": "official-tochigi-tamozawa-facility",
+          "title": "施設のご案内（日光田母沢御用邸記念公園）",
+          "url": "https://www.park-tochigi.com/tamozawa/facility"
+        },
+        {
+          "id": "official-tochigi-tamozawa-faq",
+          "title": "よくあるご質問（日光田母沢御用邸記念公園）",
+          "url": "https://www.park-tochigi.com/tamozawa/faq"
+        },
+        {
+          "id": "official-tochigi-tamozawa-history",
+          "title": "日光田母沢御用邸記念公園の開園（栃木県）",
+          "url": "https://www.pref.tochigi.lg.jp/c05/kensei/aramashi/rekishi/bakumatsu-kingendai_08.html"
+        }
+      ]
     },
     {
       "id": "regional-236070",
@@ -1195,7 +1220,27 @@
       "wiki_en": "Kiyotsu Gorge",
       "extract_ja": "清津峡（きよつきょう）は、信濃川の支流である清津川が形成した峡谷。新潟県十日町市小出から湯沢町八木沢にかけての全長約12.5キロメートルをいう。1941年に国の名勝および天然記念物に指定されており、日本三大峡谷の一つとして知られる。\n観光のために歩行者用の「清津峡渓谷トンネル」が掘られており、近くには旅館2軒の温泉街（清津峡小出温泉）がある。",
       "coordSource": "https://www.openstreetmap.org/node/1660681215",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "清津峡は、新潟県十日町市で清津川が深く刻んだV字形の峡谷です。1938年の『新潟県史蹟名勝天然記念物』は、川を挟む岩壁に柱のような割れ目が並ぶ「柱状節理」と、岩の間を流れる清津川の景色を写真とともに紹介しています。この岩の形は、熱い岩石が冷えるときに縮んでできた割れ目です。現在は国の名勝・天然記念物。渓谷トンネルの見晴所から岩壁を近くで観察でき、終点の水鏡には峡谷が映ります。トンネルは2018年に「Tunnel of Light」として改修され、自然の景観と現代アートを一緒に楽しめます。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-niigata-historic-sites-1938",
+          "title": "新潟県史蹟名勝天然記念物調査会編『新潟県史蹟名勝天然記念物』（1938年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1263506"
+        },
+        {
+          "id": "official-tokamachi-kiyotsukyo",
+          "title": "清津峡（十日町市）",
+          "url": "https://www.city.tokamachi.lg.jp/soshiki/nakasatoshisho/chiikishinkoka/1/gyomu/1450421453063.html"
+        },
+        {
+          "id": "official-tokamachi-tourism-kiyotsukyo",
+          "title": "清津峡／Tunnel of Light（十日町市観光協会）",
+          "url": "https://www.tokamachishikankou.jp/spot/kiyotsukyo/"
+        }
+      ]
     },
     {
       "id": "regional-397287",
@@ -2210,7 +2255,27 @@
       "wiki_en": "Takeda Castle",
       "extract_ja": "竹田城（たけだじょう）は、現在の兵庫県朝来市和田山町竹田にあった日本の城（山城）。\n縄張りが虎が臥せているように見えることから、別名虎臥城（とらふすじょう、こがじょう）。国の史跡に指定されている。また城下から遥か高く見上げる山の頂に位置し、しばしば円山川の川霧により霞むことから、「天空の城」や「日本のマチュピチュ」とも呼ばれる。雲海に浮かび上がる古城の累々たる石垣群の威容は、名物ともなっている。\n東に立雲峡を望む標高353.7mの古城山（虎臥山）の山頂に築かれ、縄張りは南北約400m、東西約100m。天守台をほぼ中央に配置し、本丸、二の丸、三の丸、南二の丸が連郭式に配され、北千畳部と南千畳を双翼とし、天守台北西部に花屋敷と称する一郭がある。廃城から約400年を経ているが、石垣がほぼそのままの状態で残っており、現存する山城として日本屈指の規模となっている。\n朝来市は2012年4月に竹田城の管理…",
       "coordSource": "https://www.openstreetmap.org/way/674728054",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "竹田城跡は、兵庫県朝来市の山頂に石垣が広がる城跡です。1933年に兵庫県が刊行した『史蹟名勝と天然紀念物』にも「竹田城址」の項があり、山上の城として記されています。始まりは15世紀に山名氏が家臣の太田垣氏に築かせたという伝承ですが、現在見える大きな石垣は、16世紀末の城主・赤松広秀の時代に整えられたと考えられています。1600年に廃城となり、建物は残っていません。石垣の配置を追いながら尾根を歩くと、かつての城の広がりと谷を見渡す位置がわかります。雲海に浮かぶ姿から「天空の城」とも呼ばれます。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-hyogo-historic-sites-1933",
+          "title": "兵庫県編『史蹟名勝と天然紀念物』（1933年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1146026"
+        },
+        {
+          "id": "official-asago-takeda-history",
+          "title": "竹田城の歴史（朝来市）",
+          "url": "https://www.city.asago.hyogo.jp/site/takeda/3092.html"
+        },
+        {
+          "id": "official-hyogo-museum-takeda",
+          "title": "但馬竹田城（兵庫県立歴史博物館）",
+          "url": "https://rekihaku.pref.hyogo.lg.jp/castle/takeda/"
+        }
+      ]
     },
     {
       "id": "regional-247924",
@@ -2475,7 +2540,27 @@
       "wiki_en": "Jinpūkaku",
       "extract_ja": "仁風閣（じんぷうかく）は、鳥取県鳥取市にある西洋館。中国地方屈指の明治洋風建築として名高く、国の重要文化財に指定されている。フランス風ルネサンス様式を基調としている。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%BB%81%E9%A2%A8%E9%96%A3",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "仁風閣は、鳥取城跡の麓に立つ白い木造洋館です。1907年、旧鳥取藩主池田家が皇太子（のちの大正天皇）の鳥取訪問に合わせて建てました。設計は赤坂離宮も手がけた片山東熊。完成から間もない1911年の鳥取市刊『鳥取名所』は、城の跡に建つ壮大な西洋風の建物として仁風閣を紹介しています。左右対称の外観と、背後の久松山や庭園を合わせて見ると、城下町から近代へ変わる景色がよくわかります。国の重要文化財で、2026年9月現在は保存修理のため館内休館中。敷地内の展示館では建物と鳥取城跡の歴史を紹介しています。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-tottori-meisho-1911",
+          "title": "鳥取市『鳥取名所』（1911年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/766250"
+        },
+        {
+          "id": "official-tottori-jinpukaku",
+          "title": "仁風閣（鳥取県）",
+          "url": "https://www.pref.tottori.lg.jp/304420.htm"
+        },
+        {
+          "id": "official-tottori-city-jinpukaku-restoration",
+          "title": "仁風閣保存整備事業「令和の大修理」（鳥取市）",
+          "url": "https://www.city.tottori.lg.jp/page/6226.html"
+        }
+      ]
     },
     {
       "id": "regional-296607",
@@ -3675,7 +3760,27 @@
       "wiki_en": "Nakagusuku Castle",
       "extract_ja": "中城城（なかぐすくじょう）は、沖縄県中頭郡北中城村・中城村に存在した日本の城。15世紀の琉球王国・尚泰久王代、護佐丸のグスク（城）として知られる。ユネスコ世界遺産。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%B8%AD%E5%9F%8E%E5%9F%8E",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "中城城跡は、沖縄本島中部の高台に石垣が連なるグスク（城）です。1925年の『沖縄写真帖 第2輯』は、石垣の写真を添えて、護佐丸ゆかりの城として紹介しています。現在の調査では、城の始まりは護佐丸より前にさかのぼり、護佐丸が15世紀に北の郭と三の郭を増築したと考えられています。郭とは石垣で囲んだ城の区画で、中城城には六つあります。曲線を描く石垣と門をたどると、丘の地形を生かした造りが見えてきます。琉球王国のグスク及び関連遺産群の一つとして、2000年に世界遺産に登録されました。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-okinawa-photo-book-2-1925",
+          "title": "坂口総一郎『沖縄写真帖 第2輯』（1925年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/12899967"
+        },
+        {
+          "id": "official-nakagusuku-castle",
+          "title": "世界遺産 中城城跡（中城村）",
+          "url": "https://www.vill.nakagusuku.okinawa.jp/kanko/nakagusukujoato/"
+        },
+        {
+          "id": "official-nakagusuku-castle-heritage",
+          "title": "沖縄の世界遺産 中城城跡（中城城跡公式サイト）",
+          "url": "https://www.nakagusuku-jo.jp/heritage"
+        }
+      ]
     },
     {
       "id": "regional-143898",

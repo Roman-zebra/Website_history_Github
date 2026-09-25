@@ -2314,6 +2314,170 @@
       "publisher": "高岡市",
       "notes": "瑞龍寺と前田利長墓所を結ぶ八丁道。",
       "usedFor": ["瑞龍寺 (高岡市)"]
+    },
+    {
+      "id": "ndl-tottori-meisho-1911",
+      "type": "book",
+      "title": "鳥取名所",
+      "author": "鳥取市",
+      "year": 1911,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I766250",
+      "fullText": "https://dl.ndl.go.jp/pid/766250",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [3, 4],
+      "notes": "3～4コマの扇邸の項に、旧鳥取城の場所に建つ洋館・皇太子の宿舎・仁風閣の名を確認。現在の休館状況は鳥取市の2026年更新資料による。",
+      "usedFor": ["仁風閣"]
+    },
+    {
+      "id": "official-tottori-jinpukaku",
+      "title": "仁風閣（鳥取県）",
+      "url": "https://www.pref.tottori.lg.jp/304420.htm",
+      "type": "official",
+      "publisher": "鳥取県",
+      "notes": "1907年の建立、片山東熊の設計、国重要文化財、長期休館と展示館。",
+      "usedFor": ["仁風閣"]
+    },
+    {
+      "id": "official-tottori-city-jinpukaku-restoration",
+      "title": "仁風閣保存整備事業「令和の大修理」（鳥取市）",
+      "url": "https://www.city.tottori.lg.jp/page/6226.html",
+      "type": "official",
+      "publisher": "鳥取市",
+      "notes": "2026年9月時点の保存修理・館内休館。",
+      "usedFor": ["仁風閣"]
+    },
+    {
+      "id": "ndl-meiji-kogyoshi-architecture-1927",
+      "type": "book",
+      "title": "明治工業史 〔第5〕",
+      "author": "日本工学会編",
+      "year": 1927,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1836175",
+      "fullText": "https://dl.ndl.go.jp/pid/1836175",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [386],
+      "notes": "386コマの「日光田母沢御用邸」に、地元の別邸と旧紀州徳川家邸宅の一部を移築・増改築した経緯を確認。現存部屋数、文化財指定、公開年は現行の公式資料で確認。",
+      "usedFor": ["日光田母沢御用邸記念公園"]
+    },
+    {
+      "id": "official-tochigi-tamozawa-facility",
+      "title": "施設のご案内（日光田母沢御用邸記念公園）",
+      "url": "https://www.park-tochigi.com/tamozawa/facility",
+      "type": "official",
+      "publisher": "日光田母沢御用邸記念公園",
+      "notes": "1899年完成、建物の由来と江戸・明治・大正の構成。",
+      "usedFor": ["日光田母沢御用邸記念公園"]
+    },
+    {
+      "id": "official-tochigi-tamozawa-faq",
+      "title": "よくあるご質問（日光田母沢御用邸記念公園）",
+      "url": "https://www.park-tochigi.com/tamozawa/faq",
+      "type": "official",
+      "publisher": "日光田母沢御用邸記念公園",
+      "notes": "106室、国重要文化財。",
+      "usedFor": ["日光田母沢御用邸記念公園"]
+    },
+    {
+      "id": "official-tochigi-tamozawa-history",
+      "title": "日光田母沢御用邸記念公園の開園（栃木県）",
+      "url": "https://www.pref.tochigi.lg.jp/c05/kensei/aramashi/rekishi/bakumatsu-kingendai_08.html",
+      "type": "official",
+      "publisher": "栃木県",
+      "notes": "修復後の2000年開園。",
+      "usedFor": ["日光田母沢御用邸記念公園"]
+    },
+    {
+      "id": "ndl-hyogo-historic-sites-1933",
+      "type": "book",
+      "title": "史蹟名勝と天然紀念物",
+      "author": "兵庫県編",
+      "year": 1933,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1146026",
+      "fullText": "https://dl.ndl.go.jp/pid/1146026",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [73],
+      "notes": "73コマの「竹田城址」に山上の城跡、太田垣氏・赤松氏の歴史を確認。築城年代は伝承、現存石垣の年代は現行の朝来市・兵庫県立歴史博物館資料による。",
+      "usedFor": ["竹田城"]
+    },
+    {
+      "id": "official-asago-takeda-history",
+      "title": "竹田城の歴史（朝来市）",
+      "url": "https://www.city.asago.hyogo.jp/site/takeda/3092.html",
+      "type": "official",
+      "publisher": "朝来市",
+      "notes": "築城伝承、赤松広秀期の石垣、1600年廃城。",
+      "usedFor": ["竹田城"]
+    },
+    {
+      "id": "official-hyogo-museum-takeda",
+      "title": "但馬竹田城（兵庫県立歴史博物館）",
+      "url": "https://rekihaku.pref.hyogo.lg.jp/castle/takeda/",
+      "type": "official",
+      "publisher": "兵庫県立歴史博物館",
+      "notes": "太田垣氏の旧城から赤松広秀期の石垣造りの山城への変化。",
+      "usedFor": ["竹田城"]
+    },
+    {
+      "id": "ndl-niigata-historic-sites-1938",
+      "type": "book",
+      "title": "新潟県史蹟名勝天然記念物",
+      "author": "新潟県史蹟名勝天然記念物調査会編",
+      "year": 1938,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1263506",
+      "fullText": "https://dl.ndl.go.jp/pid/1263506",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [35],
+      "notes": "35コマの「清津峽」は写真と本文で清津川、柱状節理の岩壁、V字形の景観を紹介。現在の文化財指定と2018年改修は十日町市・観光協会で確認。",
+      "usedFor": ["清津峡"]
+    },
+    {
+      "id": "official-tokamachi-kiyotsukyo",
+      "title": "清津峡（十日町市）",
+      "url": "https://www.city.tokamachi.lg.jp/soshiki/nakasatoshisho/chiikishinkoka/1/gyomu/1450421453063.html",
+      "type": "official",
+      "publisher": "十日町市",
+      "notes": "国名勝・天然記念物、柱状節理と渓谷トンネル。",
+      "usedFor": ["清津峡"]
+    },
+    {
+      "id": "official-tokamachi-tourism-kiyotsukyo",
+      "title": "清津峡／Tunnel of Light（十日町市観光協会）",
+      "url": "https://www.tokamachishikankou.jp/spot/kiyotsukyo/",
+      "type": "official",
+      "publisher": "十日町市観光協会",
+      "notes": "2018年のTunnel of Light改修、パノラマステーションの水鏡。",
+      "usedFor": ["清津峡"]
+    },
+    {
+      "id": "ndl-okinawa-photo-book-2-1925",
+      "type": "book",
+      "title": "沖縄写真帖 第2輯",
+      "author": "坂口総一郎",
+      "year": 1925,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I12899967",
+      "fullText": "https://dl.ndl.go.jp/pid/12899967",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [23],
+      "notes": "23コマの「中城城址」に石垣の写真と護佐丸ゆかりの説明を確認。築城時期・郭数は中城村の現行解説に基づく。",
+      "usedFor": ["中城城"]
+    },
+    {
+      "id": "official-nakagusuku-castle",
+      "title": "世界遺産 中城城跡（中城村）",
+      "url": "https://www.vill.nakagusuku.okinawa.jp/kanko/nakagusukujoato/",
+      "type": "official",
+      "publisher": "中城村",
+      "notes": "先中城按司による築城、護佐丸の増築、六つの郭。",
+      "usedFor": ["中城城"]
+    },
+    {
+      "id": "official-nakagusuku-castle-heritage",
+      "title": "沖縄の世界遺産 中城城跡（中城城跡公式サイト）",
+      "url": "https://www.nakagusuku-jo.jp/heritage",
+      "type": "official",
+      "publisher": "中城城跡公式サイト",
+      "notes": "2000年の世界遺産登録。",
+      "usedFor": ["中城城"]
     }
   ]
 }
