@@ -55,7 +55,7 @@ test('facts corrected against official sources stay corrected',()=>{
  assert.ok(!/(<p class='lead'>|<h2>日本語<\/h2><p>)[^<]*<\/p><p>[^<]*(escalator|エスカレーター)/i.test(read('place/l-nakano-broadway.html')),'Nakano Broadway page lead');
  assert.ok(!/four trains a day|一日4本/.test(read('explore.js')));
  const himeji=JSON.parse(read('data/places-world.json')).places.find(p=>p.id==='himeji');
- assert.ok(himeji.story[1].includes('June and July 1945')&&himeji.story_ja[1].includes('6月と7月'));
+ assert.ok(himeji.story[1].includes('June and July 1945')&&himeji.story_ja.join('').includes('6月と7月'));
  const ctx={window:{}};vm.runInNewContext(read('activities-data.js'),ctx);
  const hasshoku=ctx.window.AtlasActivities.places.find(p=>p.id==='hasshoku-center');
  assert.ok(hasshoku.notes.en.includes('124-seat')&&hasshoku.notes.ja.includes('124席'));

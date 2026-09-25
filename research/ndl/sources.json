@@ -1,0 +1,129 @@
+{
+  "checkedOn": "2026-09-25",
+  "sources": [
+    {
+      "id": "ndl-himeji-1934",
+      "type": "book",
+      "title": "姫路城案内",
+      "author": "史蹟姫路城管理事務所",
+      "year": 1934,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000625157",
+      "fullText": "https://dl.ndl.go.jp/pid/1094278",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [8, 9, 10],
+      "notes": "大天守と三つの小天守を渡櫓で結ぶ連立式、城門と折れ曲がる通路について公開本文の全文検索で確認。1934年当時の案内書であり、現在の公開順路の資料ではない。",
+      "usedFor": ["himeji", "姫路城"]
+    },
+    {
+      "id": "ndl-hashima-1934",
+      "type": "book",
+      "title": "水蔭行脚全集 第5巻（楽行脚苦行脚）",
+      "author": "江見忠功",
+      "year": 1934,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1107310",
+      "fullText": "https://dl.ndl.go.jp/pid/1107310",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [50, 51, 52, 53, 54],
+      "notes": "『端島の十三夜』の章で、訪問者が海上から軍艦のような輪郭と夜の電灯を見て、島に渡り、急な道とクラブを記す。これは招待客の一回の体験で、炭鉱労働者の日常を代表しない。",
+      "usedFor": ["hashima-island", "gunkanjima-podcast-ja"]
+    },
+    {
+      "id": "ndl-kinki-guide-1941",
+      "type": "book",
+      "title": "日本案内記 近畿篇 上 改版",
+      "author": "鉄道省",
+      "year": 1941,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000702231",
+      "fullText": "https://dl.ndl.go.jp/pid/1172399",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [],
+      "notes": "本文ビューアの公開状態を確認。個別スポットの記述は未確認のため、まだ原稿の根拠には使わない。",
+      "usedFor": []
+    },
+    {
+      "id": "official-himeji-scale",
+      "type": "official",
+      "title": "姫路城の規模",
+      "publisher": "姫路市",
+      "url": "https://www.city.himeji.lg.jp/castle/0000007746.html",
+      "notes": "大天守と三つの小天守の連立式、堀と曲がる縄張りを確認。",
+      "usedFor": ["himeji", "姫路城"]
+    },
+    {
+      "id": "official-himeji-airraid",
+      "type": "official",
+      "title": "太平洋戦争の姫路空襲について、概要を教えてください。",
+      "publisher": "姫路市",
+      "url": "https://www.city.himeji.lg.jp/faq/faq_detail.php?co=cat&frmCd=16-6-0-0-0&frmId=428",
+      "notes": "1945年6月22日と7月3日の空襲を確認。",
+      "usedFor": ["himeji", "姫路城"]
+    },
+    {
+      "id": "official-hashima-heritage",
+      "type": "official",
+      "title": "Hashima Coal Mine",
+      "publisher": "明治日本の産業革命遺産",
+      "url": "https://www.japansmeijiindustrialrevolution.com/en/site/nagasaki/component04.html",
+      "notes": "島の拡張、護岸、海底炭鉱、1974年の閉山を確認。",
+      "usedFor": ["hashima-island", "gunkanjima-podcast-ja"]
+    },
+    {
+      "id": "official-hashima-access",
+      "type": "official",
+      "title": "軍艦島上陸について",
+      "publisher": "長崎市",
+      "url": "https://www.city.nagasaki.lg.jp/teian/31312.html",
+      "notes": "上陸は基準に加え、船長が安全に乗下船できると判断した場合のみ実施。公開状況は変わりうる。",
+      "usedFor": ["hashima-island"]
+    },
+    {
+      "id": "official-hashima-labor",
+      "type": "official",
+      "title": "2015年世界遺産委員会議事要約（日本代表発言）",
+      "publisher": "UNESCO 世界遺産委員会",
+      "url": "https://whc.unesco.org/archive/2015/whc15-39com-INF.19.pdf",
+      "notes": "1940年代の意思に反した移動と厳しい環境下での労働について、日本代表の発言を収録した一次資料。端島に関する適用は他の資料との照合も続ける。",
+      "usedFor": ["hashima-island", "gunkanjima-podcast-ja"]
+    },
+    {
+      "id": "unesco-hashima-mission-2021",
+      "type": "official",
+      "title": "Report on the Industrial Heritage Information Centre",
+      "publisher": "UNESCO/ICOMOS",
+      "url": "https://whc.unesco.org/document/188249",
+      "notes": "2021年の調査団は端島の展示も現地確認し、意思に反した移動と労働を理解するための説明が不足していると評価。",
+      "usedFor": ["hashima-island", "gunkanjima-podcast-ja"]
+    },
+    {
+      "id": "ndl-kumamoto-1909",
+      "type": "book",
+      "title": "熊本城沿革誌",
+      "author": "熊本偕行社",
+      "year": 1909,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I766611",
+      "fullText": "https://dl.ndl.go.jp/pid/766611",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [3, 4, 5, 6],
+      "notes": "慶長期の築城経緯には当時から複数の伝えが載り、西南戦争時の籠城を記す。古い軍人団体の沿革誌なので、年次や評価は現行の城公式サイトと照合。",
+      "usedFor": ["熊本城"]
+    },
+    {
+      "id": "official-kumamoto-history",
+      "type": "official",
+      "title": "歴史",
+      "publisher": "熊本城公式サイト",
+      "url": "https://castle.kumamoto-guide.jp/history/",
+      "notes": "1607年完成、1877年の戦災、1960年の天守再建、2016年の地震と2021年の天守復旧を確認。",
+      "usedFor": ["熊本城"]
+    },
+    {
+      "id": "official-kumamoto-repair",
+      "type": "official",
+      "title": "復旧状況",
+      "publisher": "熊本城公式サイト",
+      "url": "https://castle.kumamoto-guide.jp/map/",
+      "notes": "見学可能範囲は変わりうるため、サイト上では最新の公式案内へ誘導する。",
+      "usedFor": ["熊本城"]
+    }
+  ]
+}

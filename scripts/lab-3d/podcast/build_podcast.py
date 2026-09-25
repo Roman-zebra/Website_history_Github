@@ -103,7 +103,10 @@ def main():
     lang = args.lang
     script = HERE / f'podcast_{lang}.json'
     doc = json.loads(script.read_text(encoding='utf-8'))
-    lab = json.loads((ROOT / 'web' / 'gunkanjima-lab.json').read_text(encoding='utf-8'))
+    lab_file = ROOT / 'web' / 'gunkanjima-lab.json'
+    if not lab_file.exists():
+        lab_file = ROOT.parent.parent / '3d' / 'gunkanjima-lab.json'
+    lab = json.loads(lab_file.read_text(encoding='utf-8'))
     for item in doc['items']:
         for key in ('t', 'say'):
             if key in item:

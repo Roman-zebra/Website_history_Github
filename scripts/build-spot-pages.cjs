@@ -68,12 +68,12 @@ for(const a of activities)spots.push({key:'a-'+a.id,kind:a.category,lat:a.lat,lo
 for(const p of liminal)spots.push({key:'l-'+p.id,id:p.id,kind:'liminal',lat:p.lat,lon:p.lon,emoji:p.emoji,names:p.names,english:true,
  lead:l=>p.hooks?.[l],paras:l=>[p.summaries?.[l],l==='ja'?p.why_ja:null].filter(Boolean),wikiText:l=>l==='ja'?p.extract_ja:null,
  map:l=>'/?lang='+encodeURIComponent(l)+'&amp;place=l-'+p.id,
- sources:l=>[{url:wikiURL('ja',p.wiki_ja),label:UI[l].wiki+' (日本語)'},{url:wikiURL('en',p.wiki_en||p.wiki),label:UI[l].wiki+' (English)'}].filter(s=>s.url)});
+ sources:l=>[{url:wikiURL('ja',p.wiki_ja),label:UI[l].wiki+' (日本語)'},{url:wikiURL('en',p.wiki_en||p.wiki),label:UI[l].wiki+' (English)'},...(p.researchSources||[]).map(s=>({url:s.url,label:s.title}))].filter(s=>s.url)});
 for(const m of landmarks){const id=landmarkId(m);if(!id)throw Error('landmark without an English page: '+m.name);
  spots.push({key:'m-'+id,kind:'landmark',lat:m.lat,lon:m.lon,emoji:m.emoji,names:m.names,english:true,
   lead:l=>m.summaries?.[l],paras:l=>[],wikiText:l=>l==='ja'?m.extract_ja:null,
   map:l=>'/?lang='+encodeURIComponent(l)+'&amp;name='+encodeURIComponent(m.names?.[l]||m.name)+'&amp;spot='+m.lat.toFixed(5)+','+m.lon.toFixed(5),
-  sources:l=>[{url:wikiURL('ja',m.wiki_ja),label:UI[l].wiki+' (日本語)'},{url:wikiURL('en',m.wiki_en||m.wiki),label:UI[l].wiki+' (English)'}].filter(s=>s.url)});}
+  sources:l=>[{url:wikiURL('ja',m.wiki_ja),label:UI[l].wiki+' (日本語)'},{url:wikiURL('en',m.wiki_en||m.wiki),label:UI[l].wiki+' (English)'},...(m.researchSources||[]).map(s=>({url:s.url,label:s.title}))].filter(s=>s.url)});}
 for(const s of spots)for(const l of LANGS)if(!s.names?.[l]||!s.lead(l))throw Error(s.key+' has no '+l+' name or description');
 
 /* ---------------------------------------------------------------- pages */

@@ -3,3 +3,6 @@ dist/
 node_modules/
 .seo-cache/
 __pycache__/
+scripts/lab-3d/podcast/cache_edge/
+scripts/lab-3d/podcast/out/
+work-ndl-voice-test.mp3

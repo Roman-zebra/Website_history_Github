@@ -2141,6 +2141,13 @@ function extractHTML(p, limit){
        + (e.note ? '<p class="p-srcnote' + (e.weak ? ' p-weak' : '') + '">'
                  + esc(e.note) + '</p>' : '');
 }
+function researchRefsHTML(p){
+  if (!Array.isArray(p.researchSources) || !p.researchSources.length) return '';
+  const label = PlaceUI.pick(['References', '出典・参考資料', '참고 자료', '参考资料', '參考資料'], LANG);
+  return '<p class="p-srcnote">' + esc(label) + '：' + p.researchSources.map(source =>
+    '<a href="' + esc(source.url) + '" target="_blank" rel="noopener noreferrer">' + esc(source.title) + '</a>'
+  ).join(' · ') + '</p>';
+}
 function showLandmark(p,refresh=false){
   if (!map || $('place').hidden) noPush(openMap);
   lastPanel = () => showLandmark(p,true);
@@ -2151,7 +2158,7 @@ function showLandmark(p,refresh=false){
   panelShell({
     kicker: { emoji: p.emoji, label: t('localSpot'), note: '  ' + placeName(p) },
     placeId:p.id, adTier:p.pop||3, ja: LANG === 'ja' ? '' : p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
-    bodyHTML: extractHTML(p, 240) || '<p>' + (p.regional ? PlaceUI.pick(['Explore this place with the historical map. Details are available in the linked article.','歴史地図を重ねて周辺をたどれます。詳しい由来はリンク先の記事をご覧ください。','옛 지도와 함께 주변을 살펴보세요. 자세한 내용은 연결된 문서에서 확인할 수 있습니다.','叠加历史地图探索周边，详细介绍请参阅链接文章。','疊加歷史地圖探索周邊，詳細介紹請參閱連結文章。'],LANG) : t('famous')) + '</p>',
+    bodyHTML: (extractHTML(p, 240) || '<p>' + (p.regional ? PlaceUI.pick(['Explore this place with the historical map. Details are available in the linked article.','歴史地図を重ねて周辺をたどれます。詳しい由来はリンク先の記事をご覧ください。','옛 지도와 함께 주변을 살펴보세요. 자세한 내용은 연결된 문서에서 확인할 수 있습니다.','叠加历史地图探索周边，详细介绍请参阅链接文章。','疊加歷史地圖探索周邊，詳細介紹請參閱連結文章。'],LANG) : t('famous')) + '</p>') + researchRefsHTML(p),
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
     img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
@@ -2416,7 +2423,8 @@ function showLiminal(p, keepView,refresh=false){
     bodyHTML: '<p>' + esc(hook) + '</p>'
             + (why ? '<h3 class="p-h3">' + t('liminalWhat') + '</h3><p>' + esc(why) + '</p>' : '')
             + (p.note && LANG==='en' ? '<p class="p-pick">' + esc(p.note) + '</p>' : '')
-            + ((LANG==='en'||LANG==='ja') && (p.extract||p.extract_ja) ? extractHTML({...p,summaries:null},220) : ''),
+            + ((LANG==='en'||LANG==='ja') && (p.extract||p.extract_ja) ? extractHTML({...p,summaries:null},220) : '')
+            + researchRefsHTML(p),
     img: p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 17),
     cap: p.img ? t('photoBy') : '',
     wiki: (articleLink(p) || {}).url || '',
@@ -2771,7 +2779,7 @@ function openPlace(p, keepView,refresh=false){
     kicker: {emoji:p.emoji,label:t('modePlaces'),note:'  '+placeName(p)},
     placeId:p.id, adTier:p.pop||1, ja: LANG==='ja'?'':p.ja, name:placeName(p),
     query: p.name,
-    bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join('') + '<p class="place-guide-link"><a href="/place/' + ({en:'',ja:'ja/',ko:'ko/','zh-Hans':'zh-cn/','zh-Hant':'zh-tw/'}[LANG] || '') + encodeURIComponent(p.id) + '">' + esc(({en:'Read the place guide',ja:'この場所の解説を読む',ko:'장소 안내 읽기','zh-Hans':'阅读地点指南','zh-Hant':'閱讀地點指南'})[LANG] || 'Read the place guide') + '</a></p>',
+    bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join('') + researchRefsHTML(p) + '<p class="place-guide-link"><a href="/place/' + ({en:'',ja:'ja/',ko:'ko/','zh-Hans':'zh-cn/','zh-Hant':'zh-tw/'}[LANG] || '') + encodeURIComponent(p.id) + '">' + esc(({en:'Read the place guide',ja:'この場所の解説を読む',ko:'장소 안내 읽기','zh-Hans':'阅读地点指南','zh-Hant':'閱讀地點指南'})[LANG] || 'Read the place guide') + '</a></p>',
     img: p.monument && p.monument.img, cap: cap,
     at: [p.lat, p.lon], share: { title: p.name, url: location.origin + location.pathname + '#' + p.id },
     searchName: p.name_ja || p.ja,
@@ -2825,7 +2833,7 @@ const MODE_INTRO = {
   liminal: `<h2>異世界スポットへ行く前に：どんな状態の場所か</h2><p>リミナルは雰囲気の名前で、場所の状態を表す言葉ではありません。ふだんは人でにぎわう場所も入っています。訪ね方で分けると、次のとおりです。</p><ul><li><b>いまも駅として使われている。</b>群馬の土合駅はJR東日本の無人駅で、列車は上下とも一日5本ほど。下りホームは地下約70m、486段の階段の先です。</li><li><b>いまも建物として使われている。</b>中野ブロードウェイは1966年開業の、下が店、上が住まいのビルです。上の階では人が暮らしています。</li><li><b>見学施設になっている。</b>宇都宮の大谷資料館では、大谷石の地下採掘場跡の中を歩けます。開館時間が決まっていて、中は一年を通して8℃前後です。</li><li><b>ツアーでしか行けない。</b>端島（軍艦島）に上陸できるのは長崎からの上陸ツアーだけで、波や風が市の基準を超えると上陸しません。</li><li><b>入らない。</b>閉鎖されたホテルや廃墟、柵の中や私有地。見るのは公道からにしてください。地図のピンは立ち入りの許可ではありません。</li></ul><p><a href="/guides/liminal-japan">リミナルな場所の訪ね方を詳しく読む（英語）</a></p>`,
   food: `<h2>ご当地グルメ旅　札幌から那覇まで、朝市・市場と食の通り</h2><p>函館朝市、自分で具を選ぶ青森ののっけ丼、金沢の近江町市場、京都の錦市場、道頓堀、福岡の屋台、那覇の公設市場。食べることが目的になる18か所を、北から南の順に並べています。</p><p>営業時間は店ごとに決まっていて、朝市は本当に朝の市場です。たとえば函館朝市は、おおむね朝5時から14時ごろまで。出かける前に、各スポットから開ける公式案内で確認してください。</p><p>食べ歩きを控えるよう求める市場もあります。錦市場は、買ったお店の前か店内で食べるよう呼びかけています。ピンは個別の店ではなくエリアの目印で、カードの画像は料理ではなく、その一帯の今の航空写真です。</p>`,
   shopping: `<h2>商店街ぶらり散歩　レトロな通りと、今の繁華街</h2><p>アーケード商店街、専門店の通り、誰もが名前を知る繁華街。札幌の狸小路、かっぱ橋道具街、上野と御徒町のあいだのアメ横、中野ブロードウェイ、倉敷の美観地区、那覇の国際通りなど18か所です。</p><p>見た目より歴史の古い通りもあります。京都の寺町は1590年に豊臣秀吉が寺を集めた通り、狸小路は明治のはじめから続く商店街、アメ横は終戦直後の闇市が始まりです。こうした通りは、昔と今の写真で見くらべてみる価値があります。</p><p>歩行者天国の日は通りの雰囲気が変わります。銀座の中央通りは土日祝（天候などで中止あり）、秋葉原の中央通りは日曜の午後が歩行者天国です。</p><p>2026年11月1日から、外国人旅行者の免税制度はリファンド方式に変わります。購入日から90日以内の出国時に税関で確認を受けると、消費税相当額が返金される仕組みです。旅券を持ち歩き、詳しくは<a href="https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/format/002.htm" target="_blank" rel="noopener">国税庁の案内</a>を確認してください。</p>`,
-  lab: `<h2>3Dでよみがえる　昔の写真と資料で、あの日の町並みへタイムスリップ</h2><p class="lab-open"><a class="btn-3d" href="/3d/ja/gunkanjima">▶ よみがえる軍艦島（端島）を3Dで開く</a> <span class="lab-open-note">第1回・1947年から現在まで</span></p><p>昔の空中写真と実測資料、当時の写真から、失われた町並みを建物ごとに3Dでよみがえらせるシリーズです。年代を動かすと建物は竣工年に立ち上がり、崩れた年に消えます。建物を押すと竣工年・階数・用途と写真が出て、音声ガイドに合わせて模型が動き、資料のある建物は中にも入れます。</p><p>いまは軍艦島（端島）の1か所で、次の場所は準備中です。出典のある部分と推定の部分を分けて描き、推定は半透明にしています。<a href="/3d/ja/">シリーズの一覧</a>。</p><p class="pod-home">🔊 軍艦島の音声ガイドはここでも聞けます（約10分・音が出ます）。<a href="/3d/ja/gunkanjima#play">3Dページを開いてすぐ再生</a>もできます。</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-ja.mp3?v=6"></audio>`
+  lab: `<h2>3Dでよみがえる　昔の写真と資料で、あの日の町並みへタイムスリップ</h2><p class="lab-open"><a class="btn-3d" href="/3d/ja/gunkanjima">▶ よみがえる軍艦島（端島）を3Dで開く</a> <span class="lab-open-note">第1回・1947年から現在まで</span></p><p>昔の空中写真と実測資料、当時の写真から、失われた町並みを建物ごとに3Dでよみがえらせるシリーズです。年代を動かすと建物は竣工年に立ち上がり、崩れた年に消えます。建物を押すと竣工年・階数・用途と写真が出て、音声ガイドに合わせて模型が動き、資料のある建物は中にも入れます。</p><p>いまは軍艦島（端島）の1か所で、次の場所は準備中です。出典のある部分と推定の部分を分けて描き、推定は半透明にしています。<a href="/3d/ja/">シリーズの一覧</a>。</p><p class="pod-home">🔊 軍艦島の音声ガイドはここでも聞けます（約11分・音が出ます）。<a href="/3d/ja/gunkanjima#play">3Dページを開いてすぐ再生</a>もできます。</p><audio class="pod-home-audio" controls preload="none" style="display:block;width:100%;max-width:28rem;margin:.4rem 0 0" src="/3d/audio/gunkanjima-podcast-ja.mp3?v=7"></audio>`
  },
  ko: {
   places: `<h2>옛 사진과 오늘을 비교하는 19곳</h2><p>이 목록의 모든 장소에는 옛 사진과 지금 사진 양쪽에서 찾을 수 있는 기준점이 있습니다. 성의 해자, 강의 굽이, 산기슭의 절, 항구의 안벽 같은 것들입니다. 먼저 그것을 양쪽에서 찾은 뒤, 주변에서 무엇이 달라졌는지 살펴보세요.</p><p>카드에 적힌 연도는 사진 시리즈의 기간이며 촬영일이 아닙니다. 대부분은 1945~1950년 시리즈이고, 나가사키·하코다테·히메지·나라·가나자와는 1960년대, 슈리는 1970년대 사진입니다. 아네요시 비석 카드에는 옛 사진이 없습니다. 전하고 싶은 말은 비석에 새겨져 있습니다.</p><ul><li>카드를 누르면 이야기와 함께 지도가 열립니다. ‘1945년과 오늘을 비교’ 같은 버튼을 누르고 선을 좌우로 움직여 보세요.</li><li>각 장소에는 출처가 달린 안내 페이지가 있습니다. 이 페이지 아래쪽 ‘이야기가 있는 명소’에서 열 수 있습니다.</li></ul>`,
