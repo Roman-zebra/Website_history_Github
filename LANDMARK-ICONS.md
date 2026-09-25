@@ -1,14 +1,8 @@
-# Pictorial landmark marker pilot — 2026-09-25
+# Pictorial landmark markers — 2026-09-25
 
-Status: the user approved the three-icon visual direction on 2026-09-25. This release applies the approved Himeji Castle, Mount Fuji and Tokyo Tower artwork; the remaining targets still require photo review and separate illustrations.
+The map now uses 124 distinct illustrations for all 128 records with numeric `pop === 1` or `pop === 2`: 19 featured places, 17 established landmarks and 92 regional landmarks. Four duplicate records share their corresponding art. `tier` controls the first zoom and never determines icon size. All lower-size markers retain the existing appearance. The image fallback, collisions, titles and click behavior are unchanged.
 
-## Scope
-
-Only records with numeric `pop === 1` or `pop === 2` are eligible. `tier` only controls the first zoom at which a place appears. Preserve all four sizes and the existing collision, tap and label behavior.
-
-The current three datasets contain 128 eligible records: 19 featured places, 17 established landmarks and 92 regional landmarks. The pilot covers 4 records for 3 distinct places, because Himeji exists in both the featured and landmark datasets. The remaining 124 records have not yet received the required photo review or artwork.
-
-`LANDMARK_ART` in `explore.js` is an explicit whitelist. Add an identity only after review. Do not map whole categories such as “castle” to a single building's icon. Never infer popularity from `tier`.
+The full selected artwork, exact record mapping, photo review ledger, prompt history and validation results are saved in this task's deliverables under `outputs/landmark-icons`. The site receives only the 192×192 transparent WebP images. The three approved pilot files retain their published bytes. New artwork filenames are unique per landmark and version, including the eight corrected assets. Only the original three pilot images are precached; the other icons load when their markers enter the visible map.
 
 ## Visual references actually inspected
 
@@ -20,8 +14,4 @@ These are multiple viewpoints, not an assertion that every possible angle has be
 
 ## Delivery
 
-`icons/landmarks/*-v1.webp`: 192 × 192, transparent alpha; total 37,348 bytes. Full generation prompts and original PNGs are retained with the task deliverables. Web processing only removes transparent outer margins and resizes/encodes the supplied images.
-
-Until an image loads successfully, the emoji marker remains visible. Images are decorative; the marker keeps its existing localized title. Only the three reviewed assets are precached. New artwork must use a new filename to avoid stale caches.
-
-Check the pilot at national and city zoom levels, on light map tiles and aerial imagery, at phone and desktop widths. Verify click/keyboard behavior, image failure fallback and the p3/p4 exclusion before extending it.
+The WebP assets are in `icons/landmarks/`; the explicit `LANDMARK_ART_BY_ID` and `LANDMARK_ART_BY_WIKI` tables in `explore.js` cover every p1/p2 data row. The image remains decorative and the marker keeps its localized title. Failed image loading retains the clickable emoji marker. Map visuals were checked for Himeji and Dōgo Onsen on desktop, and for Dōgo Onsen at phone width.
