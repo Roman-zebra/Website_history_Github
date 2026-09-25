@@ -94,3 +94,22 @@ edit('landmarks.json', 'landmarks', '伏見稲荷大社', spot => {
   ];
   spot.reviewedOn = '2026-09-25';
 });
+
+edit('landmarks.json', 'landmarks', '平等院', spot => {
+  spot.summaries.ja = '藤原頼通は1052年、父道長の宇治の別荘を寺に改め、翌年に阿弥陀堂を建てました。今の鳳凰堂です。1941年の案内書は、かつて境内に多くの堂があったことと、鳳凰堂が残ることを記します。池の中島に建つ堂と向かいの岸を地図で探すと、建物と水面を一体にした造りが見えてきます。';
+  spot.researchSources = [
+    {id:'ndl-kinki-guide-1941', title:'『日本案内記 近畿篇 上』（1941年・国立国会図書館）', url:'https://dl.ndl.go.jp/pid/1172399'},
+    {id:'official-byodoin-history', title:'古今平等院（平等院）', url:'https://www.byodoin.or.jp/learn/history/'},
+    {id:'official-byodoin-architecture', title:'鳳凰堂の建築（平等院）', url:'https://www.byodoin.or.jp/learn/architecture/'}
+  ];
+  spot.reviewedOn = '2026-09-25';
+});
+
+edit('regional-landmarks-v1.json', 'landmarks', 'regional-83101', spot => {
+  spot.summaries = {...spot.summaries, ja:'東福寺は東山のふもとに広い境内を持つ禅寺です。1941年の案内書も、谷を赤く埋める紅葉を名所として挙げています。境内の通天橋は、本堂側と開山堂側をつなぎ、木々の茂る洗玉澗を渡ります。昔の航空写真では、寺の建物の間を抜ける細い谷と橋の位置を探してみましょう。'};
+  spot.researchSources = [
+    {id:'ndl-kinki-guide-1941', title:'『日本案内記 近畿篇 上』（1941年・国立国会図書館）', url:'https://dl.ndl.go.jp/pid/1172399'},
+    {id:'official-tofukuji-bridge', title:'通天橋（東福寺）', url:'https://tofukuji.jp/guide/tsutenkyo/'}
+  ];
+  spot.reviewedOn = '2026-09-25';
+});

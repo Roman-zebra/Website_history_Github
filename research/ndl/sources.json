@@ -36,9 +36,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1172399",
       "fullText": "https://dl.ndl.go.jp/pid/1172399",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [13, 29, 92, 113, 133, 172],
-      "notes": "京都と近郊を扱う巻。92コマに金閣の建物と衣笠山を背景に取り込む庭、133コマに銀閣・東求堂が残ることと義政が銀閣完成前に没したことを確認。113コマに清水寺の舞台を支える長柱と貫、および音羽の滝。13コマの写真目次に稲荷神社の千本鳥居、172コマに稲荷山三峰と社の記述。1941年刊なので金閣については1950年の焼失・1955年の再建を必ず現行資料で補う。",
-      "usedFor": ["鹿苑寺", "慈照寺", "kyoto", "清水寺", "伏見稲荷大社"]
+      "fullTextSearchFrames": [13, 29, 55, 92, 113, 133, 168, 172, 185],
+      "notes": "京都と近郊を扱う巻。92コマに金閣の建物と衣笠山を背景に取り込む庭、133コマに銀閣・東求堂が残ることと義政が銀閣完成前に没したことを確認。113コマに清水寺の舞台を支える長柱と貫、および音羽の滝。13コマの写真目次に稲荷神社の千本鳥居、172コマに稲荷山三峰と社の記述。185コマに平等院のかつての諸堂と鳳凰堂、55・168コマに東福寺の紅葉と東山麓の境内。1941年刊なので金閣については1950年の焼失・1955年の再建を必ず現行資料で補う。",
+      "usedFor": ["鹿苑寺", "慈照寺", "kyoto", "清水寺", "伏見稲荷大社", "平等院", "regional-83101"]
     },
     {
       "id": "official-himeji-scale",
@@ -205,6 +205,33 @@
       "url": "https://inari.jp/sp/map/spot_07/",
       "notes": "鳥居の奉納は江戸時代に興り、祈りと感謝を表す習慣であることを確認。",
       "usedFor": ["伏見稲荷大社"]
+    },
+    {
+      "id": "official-byodoin-history",
+      "type": "official",
+      "title": "古今平等院",
+      "publisher": "平等院",
+      "url": "https://www.byodoin.or.jp/learn/history/",
+      "notes": "1052年の開創と翌年の鳳凰堂建立を確認。",
+      "usedFor": ["平等院"]
+    },
+    {
+      "id": "official-byodoin-architecture",
+      "type": "official",
+      "title": "建築",
+      "publisher": "平等院",
+      "url": "https://www.byodoin.or.jp/learn/architecture/",
+      "notes": "鳳凰堂が阿字池の中島に建つことを確認。",
+      "usedFor": ["平等院"]
+    },
+    {
+      "id": "official-tofukuji-bridge",
+      "type": "official",
+      "title": "通天橋",
+      "publisher": "臨済宗大本山 東福寺",
+      "url": "https://tofukuji.jp/guide/tsutenkyo/",
+      "notes": "橋が本堂と開山堂を結び、谷の洗玉澗を渡ることを確認。",
+      "usedFor": ["regional-83101"]
     }
   ]
 }
