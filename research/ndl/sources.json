@@ -23,9 +23,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1107310",
       "fullText": "https://dl.ndl.go.jp/pid/1107310",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [50, 51, 52, 53, 54],
-      "notes": "『端島の十三夜』の章で、訪問者が海上から軍艦のような輪郭と夜の電灯を見て、島に渡り、急な道とクラブを記す。これは招待客の一回の体験で、炭鉱労働者の日常を代表しない。",
-      "usedFor": ["hashima-island", "gunkanjima-podcast-ja"]
+      "fullTextSearchFrames": [37, 50, 51, 52, 53, 54],
+      "notes": "『端島の十三夜』の章で、訪問者が海上から軍艦のような輪郭と夜の電灯を見て、島に渡り、急な道とクラブを記す。これは招待客の一回の体験で、炭鉱労働者の日常を代表しない。長崎訪問の章（37コマ）には長崎駅へ向かう車窓から見た浦上天主堂と十字架の墓標、50コマには埋め立てで島の形を失った出島を惜しむ記述がある。",
+      "usedFor": ["hashima-island", "gunkanjima-podcast-ja", "nagasaki", "regional-32862"]
     },
     {
       "id": "ndl-kinki-guide-1941",
@@ -33,12 +33,12 @@
       "title": "日本案内記 近畿篇 上 改版",
       "author": "鉄道省",
       "year": 1941,
-      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000002-I000000702231",
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1172399",
       "fullText": "https://dl.ndl.go.jp/pid/1172399",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [],
-      "notes": "本文ビューアの公開状態を確認。個別スポットの記述は未確認のため、まだ原稿の根拠には使わない。",
-      "usedFor": []
+      "fullTextSearchFrames": [13, 29, 92, 113, 133, 172],
+      "notes": "京都と近郊を扱う巻。92コマに金閣の建物と衣笠山を背景に取り込む庭、133コマに銀閣・東求堂が残ることと義政が銀閣完成前に没したことを確認。113コマに清水寺の舞台を支える長柱と貫、および音羽の滝。13コマの写真目次に稲荷神社の千本鳥居、172コマに稲荷山三峰と社の記述。1941年刊なので金閣については1950年の焼失・1955年の再建を必ず現行資料で補う。",
+      "usedFor": ["鹿苑寺", "慈照寺", "kyoto", "清水寺", "伏見稲荷大社"]
     },
     {
       "id": "official-himeji-scale",
@@ -124,6 +124,87 @@
       "url": "https://castle.kumamoto-guide.jp/map/",
       "notes": "見学可能範囲は変わりうるため、サイト上では最新の公式案内へ誘導する。",
       "usedFor": ["熊本城"]
+    },
+    {
+      "id": "official-nagasaki-park",
+      "type": "official",
+      "title": "平和公園の概要",
+      "publisher": "長崎市",
+      "url": "https://www.city.nagasaki.lg.jp/page/44706.html",
+      "notes": "原爆落下中心地の標柱と北側の祈念像区域の位置関係、1945年8月9日の炸裂を確認。",
+      "usedFor": ["nagasaki"]
+    },
+    {
+      "id": "official-urakami-cathedral",
+      "type": "official",
+      "title": "浦上天主堂の歴史",
+      "publisher": "長崎市",
+      "url": "https://www.city.nagasaki.lg.jp/nagazine/hakken0403/urakami_tensyudou/index.html",
+      "notes": "旧浦上天主堂が1945年の原爆で破壊されたことを確認。",
+      "usedFor": ["nagasaki"]
+    },
+    {
+      "id": "official-dejima-excavation",
+      "type": "official",
+      "title": "出島に関する主な歴史調査",
+      "publisher": "長崎市",
+      "url": "https://www.city.nagasaki.lg.jp/uploaded/life/2960_557823_misc.pdf",
+      "notes": "1888年の中島川変流による北側の削平、1897年以降の南側埋立、1996年からの建造物復元と発掘調査を確認。",
+      "usedFor": ["regional-32862"]
+    },
+    {
+      "id": "official-kinkaku-history",
+      "type": "official",
+      "title": "鹿苑寺（金閣寺）",
+      "publisher": "京都市公式 京都観光Navi",
+      "url": "https://ja.kyoto.travel/tourism/single01.php?category_id=7&tourism_id=490",
+      "notes": "1950年焼失、1955年再建、鏡湖池を中心とする庭園を確認。",
+      "usedFor": ["鹿苑寺"]
+    },
+    {
+      "id": "official-ginkaku-history",
+      "type": "official",
+      "title": "銀閣寺について",
+      "publisher": "臨済宗相国寺派",
+      "url": "https://www.shokoku-ji.jp/ginkakuji/about/",
+      "notes": "義政の造営、銀閣と東求堂の存続、義政が完成前に没した経緯を確認。",
+      "usedFor": ["慈照寺"]
+    },
+    {
+      "id": "official-kiyomizu-history",
+      "type": "official",
+      "title": "歴史",
+      "publisher": "音羽山 清水寺",
+      "url": "https://www.kiyomizudera.or.jp/history.php",
+      "notes": "舞台の貫と柱の構造、釘を使わないことを確認。",
+      "usedFor": ["kyoto", "清水寺"]
+    },
+    {
+      "id": "official-kiyomizu-date",
+      "type": "official",
+      "title": "清水寺",
+      "publisher": "京都市公式 京都観光Navi",
+      "url": "https://ja.kyoto.travel/tourism/single01.php?category_id=7&tourism_id=267",
+      "notes": "現本堂が1633年再建であることを確認。",
+      "usedFor": ["kyoto", "清水寺"]
+    },
+    {
+      "id": "official-inari-history",
+      "type": "official",
+      "title": "沿革",
+      "publisher": "伏見稲荷大社",
+      "url": "https://inari.jp/sp/history/",
+      "notes": "稲荷山三峰と創祀の伝承を確認。伝承の年次は史実と区別する。",
+      "usedFor": ["伏見稲荷大社"]
+    },
+    {
+      "id": "official-inari-torii",
+      "type": "official",
+      "title": "千本鳥居",
+      "publisher": "伏見稲荷大社",
+      "url": "https://inari.jp/sp/map/spot_07/",
+      "notes": "鳥居の奉納は江戸時代に興り、祈りと感謝を表す習慣であることを確認。",
+      "usedFor": ["伏見稲荷大社"]
     }
   ]
 }

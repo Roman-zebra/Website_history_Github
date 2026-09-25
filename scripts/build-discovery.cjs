@@ -23,7 +23,10 @@ const cta3d=(p,l)=>{if(p.id!=='nagasaki')return '';const c=CTA3D[l]||CTA3D.en;re
 const route=(p,l)=>'/place/'+(l==='en'?'':labels[l].route+'/')+p.id;
 const pname=(p,l)=>l==='th'?thaiNames[places.indexOf(p)]:(p.names?.[l]||p.name);
 const period=p=>({ort_USA10:'1945–1950',ort_old10:'1961–1969',gazo1:'1974–1978'}[p.then]||'');
-const article=(p,l)=>rows[p.id][langs.indexOf(l)];
+// Once a Japanese spot has been researched, use its source-backed summary on
+// both the article and discovery cards. Other languages retain their reviewed copy.
+const article=(p,l)=>l==='ja' && p.researchSources?.length && p.summaries?.ja
+ ? p.summaries.ja : rows[p.id][langs.indexOf(l)];
 // Map links carry the place as a query, never a #hash: Google folds "/?lang=en#hiroshima" into
 // the home page. explore.js turns ?place= back into the hash its router uses.
 const mapLang=l=>encodeURIComponent(l==='th'?'en':l);
