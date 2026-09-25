@@ -2056,6 +2056,157 @@
       "url": "https://kawaguchikomusicforest.jp/news/25th-anniversary-event/",
       "notes": "1999年の開館時期。",
       "usedFor": ["河口湖音楽と森の美術館"]
+    },
+    {
+      "id": "ndl-hida-takayama-1912",
+      "type": "book",
+      "title": "飛騨之高山",
+      "author": "奥田正造 編",
+      "year": 1912,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I947777",
+      "fullText": "https://dl.ndl.go.jp/pid/947777",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [13],
+      "notes": "13コマで金森氏の転封後に幕府が高山御役所（高山陣屋）を置いた記述を本文画像と全文検索で確認。現在残る建物の年代は高山市資料で確認。",
+      "usedFor": ["高山陣屋"]
+    },
+    {
+      "id": "ndl-kanazawa-city-guide-1894",
+      "type": "book",
+      "title": "金沢市街独案内",
+      "author": "雲田平太郎",
+      "year": 1894,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I764578",
+      "fullText": "https://dl.ndl.go.jp/pid/764578",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [15, 16, 17, 59, 60],
+      "notes": "15〜17コマに兼六園の池・橋・碑や茶店の案内、59コマに東廓を金沢三遊廓の一つとする説明、60コマに東廓の街並み挿絵を本文画像で確認。1894年当時の呼称・性格であり、現在の業態を示すものではない。",
+      "usedFor": ["ひがし茶屋街", "兼六園"]
+    },
+    {
+      "id": "official-takayama-jinya-history",
+      "type": "official",
+      "title": "高山陣屋跡",
+      "publisher": "高山市",
+      "url": "https://www.city.takayama.lg.jp/kurashi/1000021/1000119/1000847/1000954/1000956.html",
+      "notes": "1692年の直轄地化、1695年の現在地移転、1816年の御役所と明治後の使用。",
+      "usedFor": ["高山陣屋"]
+    },
+    {
+      "id": "official-kanazawa-higashi-plan",
+      "type": "official",
+      "title": "東山ひがし伝統的建造物群保存地区保存計画",
+      "publisher": "金沢市",
+      "url": "https://digilib.city.kanazawa.ishikawa.jp/preview/pdf/DDOtoQAAA",
+      "notes": "1820年に公許された茶屋町、建物と町並みの保全。",
+      "usedFor": ["ひがし茶屋街"]
+    },
+    {
+      "id": "official-kanazawa-higashi-guide",
+      "type": "official",
+      "title": "東山周辺観光案内",
+      "publisher": "金沢市",
+      "url": "https://digilib.city.kanazawa.ishikawa.jp/preview/pdf/Br_-JAAAA",
+      "notes": "木虫籠と茶屋建築の特徴。",
+      "usedFor": ["ひがし茶屋街"]
+    },
+    {
+      "id": "official-kenrokuen-history",
+      "type": "official",
+      "title": "兼六園の歴史",
+      "publisher": "石川県",
+      "url": "https://shiro-niwa.pref.ishikawa.lg.jp/kenrokuen-garden/history.html",
+      "notes": "斉泰による霞ヶ池拡張、1860年の整備、1874年の全面開放。",
+      "usedFor": ["兼六園"]
+    },
+    {
+      "id": "official-kenrokuen-design",
+      "type": "official",
+      "title": "兼六園",
+      "publisher": "石川県",
+      "url": "https://www.pref.ishikawa.lg.jp/kyoiku/bunkazai/siseki/2-1.html",
+      "notes": "回遊式庭園と池、橋、茶亭等の構成。",
+      "usedFor": ["兼六園"]
+    },
+    {
+      "id": "ndl-kiso-meisho-1916",
+      "type": "book",
+      "title": "大日本地誌大系 第12冊（木曽路名所図会所収）",
+      "author": "大日本地誌大系刊行会 編・日本歴史地理学会 校訂（原著・秋里籬島）",
+      "year": 1916,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1879477",
+      "fullText": "https://dl.ndl.go.jp/pid/1879477",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [152, 179, 180],
+      "notes": "152コマに馬籠駅の山中の集落、179〜180コマに鳥居峠と奈良井駅の記述を公開本文画像と全文検索で確認。収録元の『木曽路名所図会』は1805年刊。現存建物・保存状況は自治体資料で補う。",
+      "usedFor": ["奈良井宿", "馬籠宿"]
+    },
+    {
+      "id": "ndl-kawagoe-guide-1908",
+      "type": "book",
+      "title": "川越案内",
+      "author": "伊藤栄一 編",
+      "year": 1908,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I763764",
+      "fullText": "https://dl.ndl.go.jp/pid/763764",
+      "access": "ログインなしで閲覧可能／インターネット公開（裁定）",
+      "fullTextSearchFrames": [62, 63, 64],
+      "notes": "「名所旧蹟」中の「川越城墟」（42〜46頁、62〜64コマ）を公開本文画像で確認。現存本丸御殿の範囲・年代は川越市文化財資料で確認。",
+      "usedFor": ["川越城"]
+    },
+    {
+      "id": "official-narai-preservation",
+      "type": "official",
+      "title": "塩尻市奈良井重要伝統的建造物群保存地区",
+      "publisher": "塩尻市",
+      "url": "https://www.city.shiojiri.lg.jp/soshiki/36/3735.html",
+      "notes": "奈良井川沿いの宿場と町並み保存。",
+      "usedFor": ["奈良井宿"]
+    },
+    {
+      "id": "official-narai-road",
+      "type": "official",
+      "title": "中山道（4）",
+      "publisher": "塩尻市",
+      "url": "https://www.city.shiojiri.lg.jp/soshiki/35/3949.html",
+      "notes": "鳥居峠、建築細部、檜物と塗櫛。",
+      "usedFor": ["奈良井宿"]
+    },
+    {
+      "id": "official-magome-town",
+      "type": "official",
+      "title": "馬籠宿",
+      "publisher": "中津川市",
+      "url": "https://www.city.nakatsugawa.lg.jp/kanko/miru/1/3760.html",
+      "notes": "坂の宿場町、藤村記念館。",
+      "usedFor": ["馬籠宿"]
+    },
+    {
+      "id": "official-magome-history",
+      "type": "official",
+      "title": "神坂地区の観光情報",
+      "publisher": "中津川市",
+      "url": "https://www.city.nakatsugawa.lg.jp/soshikikarasagasu/misaka/kanko/1319.html",
+      "notes": "1895年の大火、本陣と宿場の焼失。",
+      "usedFor": ["馬籠宿"]
+    },
+    {
+      "id": "official-kawagoe-honmaru",
+      "type": "official",
+      "title": "県指定有形文化財 川越城本丸御殿及び家老詰所",
+      "publisher": "川越市",
+      "url": "https://www.city.kawagoe.saitama.jp/kurashi/bunka/1003787/1003798/1003828/1003829/1003836.html",
+      "notes": "1848年築、現存部分、家老詰所の移築復元。",
+      "usedFor": ["川越城"]
+    },
+    {
+      "id": "official-kawagoe-castle-history",
+      "type": "official",
+      "title": "川越城本丸御殿",
+      "publisher": "川越市",
+      "url": "https://www.city.kawagoe.saitama.jp/1014520/c0000/1014698/c2005.html",
+      "notes": "江戸の北の守りと城の位置づけ。",
+      "usedFor": ["川越城"]
     }
   ]
 }
