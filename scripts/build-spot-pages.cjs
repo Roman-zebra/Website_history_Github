@@ -10,6 +10,7 @@ const root=path.resolve(__dirname,'..'),base='https://japantimeatlas.com';
 const ASSET_V=/const ASSET_V = '([^']+)'/.exec(fs.readFileSync(path.join(root,'sw.js'),'utf8'))[1];
 const {labels}=require('./discovery-copy.cjs');
 const {labels:guideLabels,liminalGuides}=require('./place-guides.cjs');
+const share=require('./share.cjs');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const write=(p,s)=>{fs.mkdirSync(path.dirname(path.join(root,p)),{recursive:true});fs.writeFileSync(path.join(root,p),s);};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -101,12 +102,12 @@ function page(s,l){
  const description=clip(s.lead(l));
  const schema={'@context':'https://schema.org','@graph':[
   {'@type':'Article',headline:title,description,inLanguage:l,url:base+url,mainEntityOfPage:base+url,
-   publisher:{'@type':'Organization',name:'Japan Time Atlas',url:base+'/'},
+   image:share.schemaImage(s.key),author:share.author,publisher:{'@type':'Organization',name:'Japan Time Atlas',url:base+'/'},
    about:{'@type':'TouristAttraction',name,alternateName:s.names.ja,geo:{'@type':'GeoCoordinates',latitude:s.lat,longitude:s.lon},address:{'@type':'PostalAddress',addressCountry:'JP'}}},
   {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:t.home,item:base+hubURL(l)},{'@type':'ListItem',position:2,name:u.kind[s.kind],item:base+hubURL(l)+'#'+s.kind},{'@type':'ListItem',position:3,name,item:base+url}]}]};
  const head='<!doctype html>\n<html lang="'+l+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3f1ea"><title>'+esc(title)+'</title><meta name="description" content="'+esc(description)+'"><link rel="canonical" href="'+base+url+'">'
   +alternates(s).map(([k,v])=>'<link rel="alternate" hreflang="'+k+'" href="'+base+v+'">').join('')
-  +'<meta property="og:site_name" content="Japan Time Atlas"><meta property="og:type" content="article"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(description)+'"><meta property="og:url" content="'+base+url+'"><meta property="og:image" content="'+base+'/og.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+base+'/og.jpg"><link rel="stylesheet" href="/page.css?v='+ASSET_V+'"><script type="application/ld+json">'+json(schema)+'</script>'+ICONS+'</head><body>';
+  +'<meta property="og:site_name" content="Japan Time Atlas"><meta property="og:type" content="article"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(description)+'"><meta property="og:url" content="'+base+url+'">'+share.meta(s.key,l,name)+'<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'">'+share.robots+'<link rel="stylesheet" href="/page.css?v='+ASSET_V+'">'+share.script(ASSET_V)+'<script type="application/ld+json">'+json(schema)+'</script>'+ICONS+'</head><body>';
  const nav='<nav aria-label="'+esc(t.home)+'"><a href="/">Japan Time Atlas</a><a href="'+hubURL(l)+'">'+esc(t.home)+'</a><a href="/visit">'+esc(t.markets)+'</a></nav>';
  const langNav='<nav aria-label="Language">'+LANGS.map(k=>'<a lang="'+k+'" href="'+pageURL(s,k)+'"'+(k===l?' aria-current="page"':'')+'>'+labels[k].name+'</a>').join('')+'</nav>';
  const notes=s.notes&&s.notes(l)?'<section><h2>'+esc(u.notes)+'</h2><p>'+esc(s.notes(l))+'</p><p class="srcnote">'+esc(u.checked)+'</p></section>':'';
@@ -118,7 +119,7 @@ function page(s,l){
   +'<p class="lead">'+esc(s.lead(l))+'</p>'+s.paras(l).map(p=>'<p>'+esc(p)+'</p>').join('')
   +(s.kind==='liminal'?'<p class="caution"><b>⚠</b> '+esc(u.caution)+'</p>':'')
   +((s.kind==='food'||s.kind==='shopping')?'<p class="srcnote">'+esc(u.pin)+'</p>':'')
-  +notes+guideBlock(s,l)+tile(s,l)+wiki
+  +notes+guideBlock(s,l)+tile(s,l)+share.section(s.key,l,url,name)+wiki
   +'<section><h2>'+esc(t.source)+'</h2><ul>'+s.sources(l).map(x=>'<li><a href="'+esc(x.url)+'" rel="noopener">'+esc(x.label)+'</a></li>').join('')+'<li><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a></li></ul></section>'
   +'<section><h2>'+esc(t.near)+'</h2><p class="where">'+esc(t.distance)+'</p><ul class="near">'+near.map(o=>'<li><a href="'+o.url+'">'+esc(o.name)+'</a><span>'+(o.d<1?o.d.toFixed(1):Math.round(o.d))+' km</span></li>').join('')+'</ul></section>'
   +'<p class="cta"><a href="'+s.map(l)+'">'+esc(t.open)+'</a></p></main>';
@@ -142,6 +143,16 @@ for(const s of spots.filter(s=>s.english)){
  const brand=t=>/\| Japan Time Atlas\s*$/.test(t)?t:t.replace(/\s+$/,'')+' | Japan Time Atlas';
  html=html.replace(/<title>([^<]*)<\/title>/,(m,t)=>'<title>'+brand(t)+'</title>')
   .replace(/(<meta property="og:title" content=")([^"]*)"/,(m,a,t)=>a+brand(t)+'"');
+ // the place's own share image, large previews, and the share block before the list of other places
+ html=html.replace(/<meta (?:property="og:image(?::[a-z]+)?"|name="twitter:image"|name="robots") content="[^"]*">/g,'')
+  .replace(/<script src="\/share\.js\?v=[^"]*" defer><\/script>/g,'')
+  .replace('</head>',()=>share.meta(s.key,'en',s.names.en)+share.robots+share.script(ASSET_V)+'</head>')
+  .replace(/<!--SHARE-->[\s\S]*?<!--\/SHARE-->/,'');
+ const anchor='<h2>Explore other places</h2>';if(!html.includes(anchor))throw Error(file+': no place for the share block');
+ html=html.replace(anchor,()=>share.section(s.key,'en','/place/'+s.key,s.names.en)+anchor);
+ html=html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,(m,j)=>{let o;try{o=JSON.parse(j);}catch(e){return m;}
+  const node=o['@graph']?o['@graph'][0]:o;node.image=share.schemaImage(s.key);
+  return '<script type="application/ld+json">'+json(o)+'</script>';});
  // the language links in the nav pointed at the language home pages; point them at this place
  for(const l of LANGS.slice(1))html=html.replace(new RegExp('href="/'+labels[l].route+'" lang="'+l+'"','g'),'href="'+pageURL(s,l)+'" lang="'+l+'"');
  write(file,html);

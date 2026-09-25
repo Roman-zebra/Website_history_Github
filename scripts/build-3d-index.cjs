@@ -98,6 +98,7 @@ ${hreflangs}
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${SITE}/3d/island-from-sea.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="max-image-preview:large">
 <link rel="stylesheet" href="/page.css?v=${ASSET_V}">
 <link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/icons/atlas.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/atlas-180.png">
 <style>${CSS}</style>

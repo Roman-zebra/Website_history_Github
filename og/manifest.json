@@ -1,0 +1,577 @@
+{
+ "a-akihabara-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-ameyoko": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-aomori-nokkedon": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "a-dotonbori-food": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-ginza-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-hakodate-market": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "a-harajuku-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-hasshoku-center": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "a-higashi-chaya-shopping": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "a-hirome-market": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "a-kanemori-shopping": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "a-kappabashi": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-karato-market": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "a-kobe-motomachi": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-kokusai-shopping": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 17
+ },
+ "a-kurashiki-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-kuromon-market": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-makishi-market": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 17
+ },
+ "a-miyagawa-market": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 17
+ },
+ "a-nakano-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-nakasu-yatai": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-nijo-market": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-nishiki-market": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-okonomimura": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-omicho-market": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "a-osu-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-pier-bandai": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-sendai-market": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-shibuya-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-shin-yokohama-ramen": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-shinsaibashi-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-tanukikoji": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-tenjin-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-tenjinbashisuji": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-teramachi-shopping": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "a-tsukiji-outer": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "aneyoshi": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 16
+ },
+ "fukuoka": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "hakodate": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "himeji": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "hiroshima": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "kamakura": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "kanazawa": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "kobe": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "kyoto": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "l-aokigahara": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 15
+ },
+ "l-ashio-copper-mine": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 16
+ },
+ "l-chofu-airport": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "l-doai-station": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 17
+ },
+ "l-hashima-island": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "l-ikeshima": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "l-ikoma-sanjo": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "l-inujima": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 16
+ },
+ "l-kinugawa-onsen": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 16
+ },
+ "l-maya-kanko-hotel": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "l-musashino-kyogijomae": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "l-nakano-broadway": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "l-negishi-racecourse": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "l-nokogiriyama": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "l-okunoshima": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 15
+ },
+ "l-outer-underground-discharge": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "l-oya-quarry": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "l-sagamiko-arcade": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 17
+ },
+ "l-sarushima": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "l-shime-fukuoka": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "l-shimonoseki-consulate": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "l-tashirojima": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 15
+ },
+ "l-tomogashima": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 15
+ },
+ "l-yoro-reversible-destiny": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "l-yubari-hokkaido": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 15
+ },
+ "l-zao-onsen": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "m-akihabara": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-arashiyama": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 15
+ },
+ "m-byodo-in": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-dotonbori": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-fushimi-inari-taisha": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-ginkaku-ji": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-hakone": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 15
+ },
+ "m-himeji-castle": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "m-historic-villages-of-shirakawa-go-and-gokayama": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 16
+ },
+ "m-ise-shrine": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "m-kenroku-en": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "m-kinkaku-ji": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-kiyomizu-dera": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-kumamoto-castle": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-matsumoto-castle": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "m-meiji-shrine": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-mount-fuji": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 13
+ },
+ "m-mount-koya": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 15
+ },
+ "m-nagoya-castle": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-naoshima": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 15
+ },
+ "m-nijo-castle": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-nikko-tosho-gu": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 16
+ },
+ "m-osaka-aquarium-kaiyukan": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-sanjusangen-do": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-sapporo-clock-tower": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-shibuya-crossing": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-shinjuku-gyo-en": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "m-shuri-castle": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 16
+ },
+ "m-todai-ji": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "m-tokyo-skytree": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-tokyo-station": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-tokyo-tower": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-tsukiji-fish-market": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 17
+ },
+ "m-ueno-park": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "nagasaki": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 16
+ },
+ "nagoya": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "nara": {
+  "then": "ort_old10",
+  "period": "1961–1969",
+  "zoom": 17
+ },
+ "okayama": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "osaka": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "sapporo": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "sendai": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "shuri": {
+  "then": "gazo1",
+  "period": "1974–1978",
+  "zoom": 17
+ },
+ "tokyo": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ },
+ "yokohama": {
+  "then": "ort_USA10",
+  "period": "1945–1950",
+  "zoom": 16
+ }
+}
