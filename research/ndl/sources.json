@@ -854,9 +854,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176351",
       "fullText": "https://dl.ndl.go.jp/pid/1176351",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [32, 35, 45, 89, 97, 98, 106, 107, 161, 162, 226],
-      "notes": "1929年の案内書。97～98コマに仙台駅から瑞鳳殿、仙台城址、芭蕉の辻などを回る順路と1637年の旧瑞鳳殿。35・45コマに松島瑞巌寺。226コマに弘前城址の堀・土塁・公園。161～162コマに立石寺の登路。32・35・106～107コマに中尊寺金色堂と経蔵、平泉の寺院跡。欠ページ119～124があるため、その範囲のスポット記述には使用しない。山寺根本中堂の年代など現行調査と食い違う記述は本文に採用しない。",
-      "usedFor": ["sendai", "regional-712357", "regional-88553", "regional-1549755", "regional-205162", "regional-88539"]
+      "fullTextSearchFrames": [29, 32, 35, 45, 46, 47, 89, 97, 98, 106, 107, 161, 162, 170, 190, 226],
+      "notes": "1929年の案内書。97～98コマに仙台駅から瑞鳳殿、仙台城址、芭蕉の辻などを回る順路と1637年の旧瑞鳳殿。35・45コマに松島瑞巌寺。226コマに弘前城址の堀・土塁・公園。161～162コマに立石寺の登路。32・35・106～107コマに中尊寺金色堂と経蔵、平泉の寺院跡。欠ページ119～124があるため、その範囲のスポット記述には使用しない。山寺根本中堂の年代など現行調査と食い違う記述は本文に採用しない。 170コマに角館の支藩とシダレザクラ、29コマに樺細工、45～47・190コマに飯盛山の白虎隊墓とさざえ堂を確認。",
+      "usedFor": ["sendai", "regional-712357", "regional-88553", "regional-1549755", "regional-205162", "regional-88539", "角館", "飯盛山 (会津若松市)"]
     },
     {
       "id": "official-sendai-castle",
@@ -1551,6 +1551,42 @@
       "url": "https://www.city.bunkyo.lg.jp/b014/p003823.html?lang=ja",
       "notes": "本殿・楼門・唐門などの重要文化財。",
       "usedFor": ["根津神社"]
+    },
+    {
+      "id": "official-kakunodate-town",
+      "type": "official",
+      "title": "角館の町並み",
+      "publisher": "仙北市",
+      "url": "https://www.city.semboku.akita.jp/sightseeing/spot/07_matinami.html",
+      "notes": "1620年の町割、火除け、武家町と町人町。",
+      "usedFor": ["角館"]
+    },
+    {
+      "id": "official-kakunodate-property",
+      "type": "official",
+      "title": "仙北市角館伝統的建造物群保存地区",
+      "publisher": "仙北市",
+      "url": "https://www.city.semboku.akita.jp/citizens/12_07.html",
+      "notes": "1976年選定、屋敷割と門・塀・樹木。",
+      "usedFor": ["角館"]
+    },
+    {
+      "id": "official-iimoriyama-graves",
+      "type": "official",
+      "title": "会津飯盛山白虎隊士墳墓域",
+      "publisher": "会津若松市",
+      "url": "https://www.city.aizuwakamatsu.fukushima.jp/docs/2014061900030/",
+      "notes": "墓域の登録記念物指定と追悼の石造物。",
+      "usedFor": ["飯盛山 (会津若松市)"]
+    },
+    {
+      "id": "official-iimoriyama-landscape",
+      "type": "official",
+      "title": "飯盛山と白虎隊をはじめとする先人慰霊にみる歴史的風致",
+      "publisher": "会津若松市",
+      "url": "https://www.city.aizuwakamatsu.fukushima.jp/docs/2023042400018/file_contents/08ni4.pdf",
+      "notes": "1868年の白虎隊、1796年建立のさざえ堂、眺望。",
+      "usedFor": ["飯盛山 (会津若松市)"]
     }
   ]
 }

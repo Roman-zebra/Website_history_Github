@@ -340,7 +340,27 @@
       "wiki_en": null,
       "extract_ja": "角館（かくのだて、秋田弁:かぐんだで、かぐだで）は、秋田県仙北市の地名、および国の重要伝統的建造物群保存地区の名称。現在も藩政時代の地割が踏襲され、武家屋敷等の建造物が数多く残されており、「みちのくの小京都」とも呼ばれる。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E8%A7%92%E9%A4%A8",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1929年の『日本案内記』は、角館を秋田藩の支藩が置かれた町として紹介し、シダレザクラや樺細工にも触れています。町の骨格がつくられたのは1620年。武家の住む内町と商人の住む外町は、火除けと呼ぶ土塁で分けられました。今も武家屋敷通りには門、塀、樹木が連なり、1976年に重要伝統的建造物群保存地区に選ばれています。航空写真では一本の通りだけでなく、旧武家町の広い屋敷割と、桧木内川に沿う町の形を見てみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-tohoku-guide-1929",
+          "title": "鉄道省『日本案内記 東北篇』（1929年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176351"
+        },
+        {
+          "id": "official-kakunodate-town",
+          "title": "角館の町並み（仙北市）",
+          "url": "https://www.city.semboku.akita.jp/sightseeing/spot/07_matinami.html"
+        },
+        {
+          "id": "official-kakunodate-property",
+          "title": "仙北市角館伝統的建造物群保存地区（仙北市）",
+          "url": "https://www.city.semboku.akita.jp/citizens/12_07.html"
+        }
+      ]
     },
     {
       "id": "regional-1441156",
@@ -485,7 +505,27 @@
       "wiki_en": "Iimori Mountain",
       "extract_ja": "飯盛山（いいもりやま）は、福島県会津若松市にある標高314mの山。またその周辺地域も指す。白虎隊十九士自刃の地として知られる。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E9%A3%AF%E7%9B%9B%E5%B1%B1%20(%E7%A6%8F%E5%B3%B6%E7%9C%8C)",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1929年の『日本案内記』は、会津若松を巡る人に飯盛山の白虎隊士の墓と、麓の「さざえ堂」を案内しています。1868年の戊辰戦争で、戸ノ口原から退いた白虎隊の少年たちはこの山に至り、城下を望む場所で命を絶ちました。案内書は山を眺望のよい場所とも記しますが、ここは戦争で亡くなった人々を悼む場所です。1796年に建てられたさざえ堂と墓域を歩き、山の斜面から鶴ヶ城の方向を確かめてみましょう。航空写真では、墓域と城が離れていることも分かります。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-tohoku-guide-1929",
+          "title": "鉄道省『日本案内記 東北篇』（1929年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176351"
+        },
+        {
+          "id": "official-iimoriyama-graves",
+          "title": "会津飯盛山白虎隊士墳墓域（会津若松市）",
+          "url": "https://www.city.aizuwakamatsu.fukushima.jp/docs/2014061900030/"
+        },
+        {
+          "id": "official-iimoriyama-landscape",
+          "title": "飯盛山と白虎隊をはじめとする先人慰霊にみる歴史的風致（会津若松市）",
+          "url": "https://www.city.aizuwakamatsu.fukushima.jp/docs/2023042400018/file_contents/08ni4.pdf"
+        }
+      ]
     },
     {
       "id": "regional-41922",
