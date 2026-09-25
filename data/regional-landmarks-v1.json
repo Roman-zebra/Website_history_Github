@@ -2100,7 +2100,27 @@
       "wiki_en": "Iwami Ginzan Silver Mine",
       "extract_ja": "石見銀山（いわみぎんざん）は、島根県大田市大森および周辺にある、戦国時代後期から江戸時代前期にかけて最盛期を迎えた日本最大の銀山（現在は閉山）。上述の最盛期に日本は世界の銀の約3分の1を産出したとも推定されるが、当銀山産出の銀がそのかなりの部分を占めたとされる。地元では大森銀山（おおもりぎんざん）と呼ばれ、江戸時代初期は佐摩銀山（さまぎんざん）とも呼ばれた。明治期以降は枯渇した銀に代わり、銅などが採鉱された。本項では石見銀山の概要と歴史、および2007年に登録された世界遺産としての石見銀山についても言及する。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E7%9F%B3%E8%A6%8B%E9%8A%80%E5%B1%B1",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の『日本案内記』は、大森町に江戸幕府の代官が駐在し、銀山の発展とともに町が栄えたと記します。刊行時には採掘は休止しており、案内書の筆者は町の衰えにも触れました。現在「石見銀山」として守られているのは坑道だけではありません。代官所跡、商家が続く大森の町、銀山川沿いの道、山中の採掘・製錬跡が一つの歴史を伝えています。航空写真では大森の細長い谷筋から山へ続く道をたどり、町と鉱山の距離を見てみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "鉄道省『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-ginzan-map",
+          "title": "石見銀山の散策マップ（大田市）",
+          "url": "https://ginzan.city.oda.lg.jp/highlights/walking_map/"
+        },
+        {
+          "id": "official-ginzan-buildings",
+          "title": "石見銀山の歴史的建造物（大田市）",
+          "url": "https://ginzan.city.oda.lg.jp/highlights/historic_buildings/"
+        }
+      ]
     },
     {
       "id": "regional-1054053",
@@ -2175,7 +2195,27 @@
       "wiki_en": "Bitchū Matsuyama Castle",
       "extract_ja": "備中松山城（びっちゅうまつやまじょう）は、岡山県高梁市内山下にあった日本の城（山城）。別名高梁城（たかはしじょう）。松山城（まつやまじょう）と呼ばれることもあるが、各地にある同名の城との混同を避けるため、国名を冠して備中松山城（びっちゅうまつやまじょう）と呼ぶのが一般的である。\n日本100名城の一つ。現存天守12城の一つでもあり、日本で唯一現存する山城でもある。臥牛山山頂（標高487m）から南稜線にかけて遺構が残っており、そのうち一つである小松山城跡に現存天守（標高430m）がある。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%82%99%E4%B8%AD%E6%9D%BE%E5%B1%B1%E5%9F%8E",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の『日本案内記』は、高梁の町の北にある臥牛山に「松山城址」があると案内しています。現在の備中松山城は、江戸時代の天守が残る山城として知られます。山陰と山陽を結ぶ道を見渡せる場所に築かれ、戦国時代には城主が何度も替わりました。今の天守は1683年の大改修で整えられた姿です。天守だけを見ると小さな城に感じるかもしれませんが、城の範囲は臥牛山の複数の峰に広がっていました。航空写真では城下町から山頂までの高低差と尾根の連なりを追ってみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "鉄道省『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-bitchu-castle",
+          "title": "備中松山城（高梁市）",
+          "url": "https://www.city.takahashi.lg.jp/soshiki/9/shiro4240131.html"
+        },
+        {
+          "id": "official-bitchu-site",
+          "title": "備中松山城跡（高梁市）",
+          "url": "https://www.city.takahashi.lg.jp/site/bichu-matsuyama/shiseki.html"
+        }
+      ]
     },
     {
       "id": "regional-13585",
@@ -2330,7 +2370,27 @@
       "wiki_en": null,
       "extract_ja": "かずら橋（かずらばし）は、サルナシ（しらくちかずら）などの葛類を使って架けられた原始的な吊橋。徳島県三好市の西祖谷山村善徳にあるものが著名である。さらにその奥地、同市東祖谷菅生にも2橋架けられている。また福井県今立郡池田町にも東祖谷の職人の協力によって観光用に造られたものがあり、いずれも人専用の橋である。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E3%81%8B%E3%81%9A%E3%82%89%E6%A9%8B",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の『日本案内記』は、祖谷の渓谷を下った先にある蔓橋を「溪中第一の奇觀」と紹介し、かつて東西祖谷には複数の橋が架かっていたと記します。祖谷川を渡るため、山に自生するシラクチカズラを編んでつくる橋です。今見られる橋は古い一本がそのまま残ったものではなく、材料と技を受け継ぎながら約3年ごとに架け替えられています。重要有形民俗文化財として守られるのは、その造り方も含めた暮らしの知恵です。航空写真では峡谷と橋の位置関係を探してみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "鉄道省『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-iya-bridge",
+          "title": "祖谷のかずら橋（三好市公式観光サイト）",
+          "url": "https://miyoshi-tourism.jp/spot/46/?spot_classification=culture"
+        },
+        {
+          "id": "official-iya-geopark",
+          "title": "祖谷エリア（三好ジオパーク）",
+          "url": "https://miyoshi-geopark.jp/area/iya/"
+        }
+      ]
     },
     {
       "id": "regional-1638739",
@@ -2460,7 +2520,27 @@
       "wiki_en": null,
       "extract_ja": "道後温泉本館（どうごおんせんほんかん）は、愛媛県松山市の道後温泉中心部にある共同浴場。1894年（明治27年）に改築が完成した近代和風建築で、国の重要文化財に指定されており、温泉街の象徴となっている。\n共同浴場番付において、東の湯田中温泉大湯と並び西の横綱に番付けされているほか、2009年3月、ミシュランガイド（観光地）日本編において2つ星に選定された。2009年、経済産業省の「近代化産業遺産」に認定。四国八十八景54番に選定。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E9%81%93%E5%BE%8C%E6%B8%A9%E6%B3%89%E6%9C%AC%E9%A4%A8",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の『日本案内記』は、道後温泉の浴館に「霊の湯」「神の湯」などがあると紹介しています。今の道後温泉本館の核になる建物は1894年に改築され、その後も増改築を重ねてきました。木造の浴場が日常の入浴の場として使われ続け、建物自体が国の重要文化財になっています。2019年からの保存修理を経て、2024年に全館での営業を再開しました。古い写真と比べるときは屋根の重なりに注目し、温泉街の道が本館の周りへ集まる様子も見てみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "鉄道省『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-dogo-history",
+          "title": "道後温泉事務所（松山市）",
+          "url": "https://www.city.matsuyama.ehime.jp/shisei/kakukaichiran/sangyoukeizaibu/top.html"
+        },
+        {
+          "id": "official-dogo-repair",
+          "title": "道後温泉本館保存修理工事完了（松山市）",
+          "url": "https://www.city.matsuyama.ehime.jp/hodo/202412/14492120241212144327.html"
+        }
+      ]
     },
     {
       "id": "regional-1719403",
@@ -2555,7 +2635,27 @@
       "wiki_en": "Cape Muroto",
       "extract_ja": "室戸岬（むろとざき、むろとみさき）は、高知県室戸市に属し、太平洋（フィリピン海）に突き出る室戸半島の先端の岬。国の名勝、室戸阿南海岸国定公園に指定、日本新八景、四国八十八景22番に選定されている。北緯33度14分34秒 東経134度10分35秒。波乗り（サーフィン）の名所でもある。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%AE%A4%E6%88%B8%E5%B2%AC",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の『日本案内記』は、室戸岬を太平洋へ突き出す岬として紹介し、岩の海岸、暖地の植物群落、1899年に設けられた灯台を案内しています。現在は、地震による土地の隆起や海の働きでできた地形を読み取れる場所としても知られます。海岸の地層と、アコウやウバメガシが育つ森は、同じ岬でも違う時間の積み重なりを見せてくれます。航空写真では岬の先端と海岸段丘の輪郭を見てから、灯台と海岸の距離を確かめてみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "鉄道省『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-muroto-city",
+          "title": "室戸市の概要（室戸市）",
+          "url": "https://www.city.muroto.kochi.jp/pages/gaiyo.php"
+        },
+        {
+          "id": "official-muroto-geopark",
+          "title": "自然科学にどっぷり！理科ジオコース（室戸ユネスコ世界ジオパーク）",
+          "url": "https://www.muroto-geo.jp/course/6337/"
+        }
+      ]
     },
     {
       "id": "regional-66044",

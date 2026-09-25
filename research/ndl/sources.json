@@ -583,9 +583,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176396",
       "fullText": "https://dl.ndl.go.jp/pid/1176396",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [78, 89, 110, 120, 122, 132, 148, 218, 253, 269, 289, 354],
-      "notes": "78コマに黒い岡山城と旭川、89コマに倉敷の米倉・紡績工場・大原美術館、110コマに尾道水道と千光寺山、120・132コマに広島の中島本町の銀行・映画館・元安橋、122コマに広島城、148コマに錦帯橋の五連木橋、218コマに松江城、253コマに指月山麓の萩城址、269コマに栗林公園、289コマに金刀比羅宮の門前町、354コマに高知城を確認。1934年の記述は戦災・洪水・戦後の復元より前の姿である。",
-      "usedFor": ["hiroshima", "okayama", "regional-1054053", "regional-296607", "regional-43296", "regional-13585", "regional-203351", "regional-313749", "regional-172545", "regional-110590"]
+      "fullTextSearchFrames": [59, 78, 89, 96, 110, 120, 122, 132, 148, 218, 247, 253, 269, 289, 316, 339, 344, 351, 352, 354],
+      "notes": "78コマに黒い岡山城と旭川、89コマに倉敷の米倉・紡績工場・大原美術館、110コマに尾道水道と千光寺山、120・132コマに広島の中島本町の銀行・映画館・元安橋、122コマに広島城、148コマに錦帯橋の五連木橋、218コマに松江城、253コマに指月山麓の萩城址、269コマに栗林公園、289コマに金刀比羅宮の門前町、354コマに高知城を確認。1934年の記述は戦災・洪水・戦後の復元より前の姿である。 96コマに備中高梁の臥牛山と松山城址、247コマに大森代官と休坑中の銀山、339コマに祖谷の蔓橋、316コマに道後の浴館と神の湯・霊の湯、344・351・352コマに室戸岬の植生・海岸・灯台を確認。",
+      "usedFor": ["hiroshima", "okayama", "regional-1054053", "regional-296607", "regional-43296", "regional-13585", "regional-203351", "regional-313749", "regional-172545", "regional-110590", "備中松山城", "石見銀山", "祖谷のかずら橋", "道後温泉本館", "室戸岬"]
     },
     {
       "id": "official-hiroshima-dome",
@@ -1587,6 +1587,96 @@
       "url": "https://www.city.aizuwakamatsu.fukushima.jp/docs/2023042400018/file_contents/08ni4.pdf",
       "notes": "1868年の白虎隊、1796年建立のさざえ堂、眺望。",
       "usedFor": ["飯盛山 (会津若松市)"]
+    },
+    {
+      "id": "official-bitchu-castle",
+      "type": "official",
+      "title": "備中松山城",
+      "publisher": "高梁市",
+      "url": "https://www.city.takahashi.lg.jp/soshiki/9/shiro4240131.html",
+      "notes": "現存天守、1683年の修築、臥牛山の立地。",
+      "usedFor": ["備中松山城"]
+    },
+    {
+      "id": "official-bitchu-site",
+      "type": "official",
+      "title": "備中松山城跡",
+      "publisher": "高梁市",
+      "url": "https://www.city.takahashi.lg.jp/site/bichu-matsuyama/shiseki.html",
+      "notes": "山の複数の峰に広がる城跡。",
+      "usedFor": ["備中松山城"]
+    },
+    {
+      "id": "official-ginzan-map",
+      "type": "official",
+      "title": "石見銀山の散策マップ",
+      "publisher": "大田市",
+      "url": "https://ginzan.city.oda.lg.jp/highlights/walking_map/",
+      "notes": "代官所跡から坑道・製錬所跡までの広がり。",
+      "usedFor": ["石見銀山"]
+    },
+    {
+      "id": "official-ginzan-buildings",
+      "type": "official",
+      "title": "石見銀山の歴史的建造物",
+      "publisher": "大田市",
+      "url": "https://ginzan.city.oda.lg.jp/highlights/historic_buildings/",
+      "notes": "大森の町並みと代官所の役割。",
+      "usedFor": ["石見銀山"]
+    },
+    {
+      "id": "official-iya-bridge",
+      "type": "official",
+      "title": "祖谷のかずら橋",
+      "publisher": "三好市",
+      "url": "https://miyoshi-tourism.jp/spot/46/?spot_classification=culture",
+      "notes": "シラクチカズラ、約3年ごとの架け替え、文化財指定。",
+      "usedFor": ["祖谷のかずら橋"]
+    },
+    {
+      "id": "official-iya-geopark",
+      "type": "official",
+      "title": "祖谷エリア",
+      "publisher": "三好ジオパーク",
+      "url": "https://miyoshi-geopark.jp/area/iya/",
+      "notes": "峡谷の地形とシラクチカズラの材料。",
+      "usedFor": ["祖谷のかずら橋"]
+    },
+    {
+      "id": "official-dogo-history",
+      "type": "official",
+      "title": "道後温泉事務所",
+      "publisher": "松山市",
+      "url": "https://www.city.matsuyama.ehime.jp/shisei/kakukaichiran/sangyoukeizaibu/top.html",
+      "notes": "1894年の本館改築とその後の増改築。",
+      "usedFor": ["道後温泉本館"]
+    },
+    {
+      "id": "official-dogo-repair",
+      "type": "official",
+      "title": "道後温泉本館保存修理工事完了",
+      "publisher": "松山市",
+      "url": "https://www.city.matsuyama.ehime.jp/hodo/202412/14492120241212144327.html",
+      "notes": "2019～2024年の保存修理と全館営業再開。",
+      "usedFor": ["道後温泉本館"]
+    },
+    {
+      "id": "official-muroto-city",
+      "type": "official",
+      "title": "室戸市の概要",
+      "publisher": "室戸市",
+      "url": "https://www.city.muroto.kochi.jp/pages/gaiyo.php",
+      "notes": "岬の名勝・植物群落と灯台。",
+      "usedFor": ["室戸岬"]
+    },
+    {
+      "id": "official-muroto-geopark",
+      "type": "official",
+      "title": "自然科学にどっぷり！理科ジオコース",
+      "publisher": "室戸ユネスコ世界ジオパーク",
+      "url": "https://www.muroto-geo.jp/course/6337/",
+      "notes": "隆起・地層・植物群落の現地解説。",
+      "usedFor": ["室戸岬"]
     }
   ]
 }
