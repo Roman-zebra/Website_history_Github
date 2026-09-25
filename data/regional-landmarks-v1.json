@@ -1700,7 +1700,27 @@
       "wiki_en": "Matsue Castle",
       "extract_ja": "松江城（まつえじょう）は、島根県松江市殿町にあった江戸時代の日本の城。別名千鳥城(ちどりじょう)。現存天守は国宝、城跡は国の史跡に指定されている。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%9D%BE%E6%B1%9F%E5%9F%8E",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の案内書は、松江城を「千鳥城」とも呼び、天守と堀の残る城跡を紹介しています。この天守は1611年に完成した建物が今も残る、全国でも少ない現存天守です。2015年には国宝に指定されました。ただし周囲の櫓には後年の復元もあります。堀の輪と小高い城山を地図でたどり、古い天守と後から戻った建物を分けて見てみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-matsue-castle-history",
+          "title": "歴史・藩主（松江城）",
+          "url": "https://www.matsue-castle.jp/highlight/history"
+        },
+        {
+          "id": "official-matsue-castle-citadel",
+          "title": "城郭（松江城）",
+          "url": "https://www.matsue-castle.jp/highlight/citadel"
+        }
+      ]
     },
     {
       "id": "regional-233623",
@@ -1750,7 +1770,32 @@
       "wiki_en": null,
       "extract_ja": "倉敷美観地区（くらしきびかんちく、Kurashiki Bikan historical quarter）は、岡山県倉敷市にある町並保存地区・観光地区である。\n当エリアは倉敷市の美観地区景観条例にもとづき定められたもので、同市本町全域、中央1丁目北部（前神町など）、東町・阿知2丁目・鶴形2丁目の各一部が含まれる。広義の美観地区の面積は21.0ヘクタールで、うち伝統的建造物群保存地区（第一種美観地区）が15.0ヘクタール、伝統美観保存地区（第二種美観地区）が6.0ヘクタールとなっている。伝統的建造物群保存地区（倉敷川周辺）は倉敷川畔伝統的建造物群保存地区（くらしきがわはん でんとうてきけんぞうぶつぐん ほぞんちく）の名称で国の重要伝統的建造物群保存地区として選定されている。\n江戸時代初期の寛永19年（1642年）、江戸幕府の天領に定められた際に倉敷代官所が当地区に設けられ、以来備中国南部の物資の集散地として発展した歴史を持つ…",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%80%89%E6%95%B7%E7%BE%8E%E8%A6%B3%E5%9C%B0%E5%8C%BA",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の案内書は、倉敷の名を米を保管した倉に結び付け、紡績工場と開館間もない大原美術館も紹介しています。今の美観地区は、昔から観光のためだけに造られた町ではありません。倉敷川沿いの商家や蔵は1979年に国の保存地区に選ばれました。川と白壁の並びをたどり、物流の町が保存された景観になった道筋を想像してみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-kurashiki-history",
+          "title": "美観地区の沿革（倉敷市）",
+          "url": "https://www.city.kurashiki.okayama.jp/culture/art/1007596/1007818/1007819/1007820.html"
+        },
+        {
+          "id": "official-kurashiki-preservation",
+          "title": "倉敷川畔伝統的建造物群保存地区（倉敷市）",
+          "url": "https://www2.city.kurashiki.okayama.jp/kurashikitrip/bunkazai/bunkazai-01.html"
+        },
+        {
+          "id": "official-ohara-museum",
+          "title": "美術館の歴史（大原美術館）",
+          "url": "https://www.ohara.or.jp/history/"
+        }
+      ]
     },
     {
       "id": "regional-87555",
@@ -1825,7 +1870,22 @@
       "wiki_en": "Kintai Bridge",
       "extract_ja": "錦帯橋（きんたいきょう）は、山口県岩国市の錦川に架橋された、5連の木造アーチ橋である。日本三名橋や日本三大奇橋に数えられており、名勝に指定されている。藩政期史料には「大橋」と表記されることが多く、また「凌雲橋（りょううんばし）」「五竜橋（ごりゅうばし）」「帯雲橋（たいうんばし）」「算盤橋（そろばんばし）」などとも呼ばれていた。「錦帯橋」という美名は、完成後に定着した説が有力とされている。文書による初出は宇都宮遯庵の記述した文書内である。\n5連のアーチからなるこの橋は、全長193.3メートル、幅員5.0メートルで、主要構造部は継手や仕口といった組木の技術が採用され、これらを巻き金（帯鉄）で固定し、踏板や一部の巻き金（帯鉄）は釘で固定される構造である。\n石積の橋脚に5連の太鼓橋がアーチ状に組まれた構造で、世界的に見ても珍しい木造アーチ橋として知られる。美しいアーチ形状は、木だけでなく、鉄（鋼）の有効活用がなされて初めて実現したものである…",
       "coordSource": "https://www.openstreetmap.org/way/34582350",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の案内書は、錦川に架かる五つの連なった木の橋を「算盤橋」とも呼んでいます。現在の橋は当時の木材がそのまま残るわけではありません。1950年の台風で流失し、地元の希望で1953年に木造で再建、2004年にも木造部分を架け替えました。五つの橋の形を受け継ぐために直し続けてきた橋として、川と両岸を見てみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-kintaikyo-history",
+          "title": "錦帯橋の概要（岩国市）",
+          "url": "https://kintaikyo.iwakuni-city.net/summary.html"
+        }
+      ]
     },
     {
       "id": "regional-203351",
