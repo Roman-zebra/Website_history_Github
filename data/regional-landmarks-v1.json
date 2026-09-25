@@ -810,7 +810,27 @@
       "wiki_en": null,
       "extract_ja": "佐原の町並み（さわらのまちなみ）は、千葉県香取市佐原（旧下総国）の市街地にある歴史的建造物が残る町並みである。商家町として栄え、古くから”北総の小江戸”、”水郷の町”と称された。1996年に関東地方で初めて重要伝統的建造物群保存地区として選定されている。2009年には平成百景、2018年には佐倉市（城下町）・成田市（門前町）・銚子市（港町）とともに日本遺産に認定された。\n\n",
       "coordSource": "https://www.openstreetmap.org/node/10875835242",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1930年の『日本案内記』は、佐原を利根川の河港として栄えた町と記し、酒造りや伊能忠敬の旧宅も紹介しています。川で運んだ物資が集まる商業の町だったことが、今の小野川沿いと香取街道の町並みからも読み取れます。土蔵や店を一軒ずつ見るだけでなく、川に向けて町が開いていることに目を向けてください。1996年には関東で初めて重要伝統的建造物群保存地区に選ばれました。航空写真では小野川が利根川へつながる道筋と、忠敬橋周辺の街区を追ってみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kanto-guide-1930",
+          "title": "鉄道省『日本案内記 関東篇』（1930年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176338"
+        },
+        {
+          "id": "official-sawara-town",
+          "title": "佐原の町並み（香取市）",
+          "url": "https://www.city.katori.lg.jp/sightseeing/machinami/index.html"
+        },
+        {
+          "id": "official-sawara-preservation",
+          "title": "佐原の伝統的建造物群保存地区（香取市）",
+          "url": "https://www.city.katori.lg.jp/living/sumai/machinamihozon.html"
+        }
+      ]
     },
     {
       "id": "regional-66837",
@@ -835,7 +855,27 @@
       "wiki_en": "Narita-san",
       "extract_ja": "成田山新勝寺（なりたさんしんしょうじ）は、日本の千葉県成田市成田にある真言宗智山派の仏教寺院であり、同派の大本山の一つである。山号は成田山。本尊は不動明王で、当寺は不動明王信仰の一大中心地である。そのため、成田不動、お不動さまなどといった通称でも広く親しまれてきた。開山は平安時代中期の天慶3年（940年）と伝えられる。寺紋は葉牡丹。\n参詣者数において関東地方屈指の寺である。初詣の参拝者数は、2020年に約305万人であり、社寺としては明治神宮に次ぐ全国第2位（千葉県内第1位）、寺院に限れば全国第1位の参拝者数である。年間参詣者数は1000万人を超える。今も昔も加持祈祷のために訪れる人が多いことでも知られる。成田国際空港に近いことから、外国人観光客にも人気がある。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%88%90%E7%94%B0%E5%B1%B1%E6%96%B0%E5%8B%9D%E5%AF%BA",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1930年の『日本案内記』は、成田山新勝寺を「成田不動」とも呼び、成田駅から参る寺として紹介しています。境内には当時すでに江戸時代の建物があり、初詣や節分会も案内書に載るほど親しまれていました。寺の伝承では940年、寛朝が不動明王に祈り、のちに新勝寺の名を受けたことが始まりです。現在の大本堂と、古い堂塔は造られた時代が違います。航空写真では駅から続く参道の曲がり方と、広い境内に建物が重なる様子を見てみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kanto-guide-1930",
+          "title": "鉄道省『日本案内記 関東篇』（1930年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176338"
+        },
+        {
+          "id": "official-narita-history",
+          "title": "成田山略年表（成田山新勝寺）",
+          "url": "https://www.naritasan.or.jp/about/history/"
+        },
+        {
+          "id": "official-narita-halls",
+          "title": "各御堂のご案内（成田山新勝寺）",
+          "url": "https://www.naritasan.or.jp/tour/hall/"
+        }
+      ]
     },
     {
       "id": "regional-147949",
@@ -885,7 +925,27 @@
       "wiki_en": "Nezu Shrine",
       "extract_ja": "根津神社（ねづじんじゃ）は、東京都文京区根津にある神社。旧社格は府社で、元准勅祭社（東京十社）。つつじの名所として有名。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%A0%B9%E6%B4%A5%E7%A5%9E%E7%A4%BE",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1930年の『日本案内記』は、根津神社を市電で訪ねる東京の名所として挙げています。社殿は1706年、五代将軍徳川綱吉の命で現在地に造られ、本殿や楼門、唐門などが残ります。境内のつつじは、かつてこの場所にあった甲府松平家の屋敷に植えられたことに始まると伝わります。建物を見るときは一つの社殿だけでなく、門から拝殿、本殿へ進む配置に注目してください。航空写真では住宅街の中に残る広い緑地と参道を見つけてみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kanto-guide-1930",
+          "title": "鉄道省『日本案内記 関東篇』（1930年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176338"
+        },
+        {
+          "id": "official-nezu-bunkyo",
+          "title": "根津神社（文京区）",
+          "url": "https://www.city.bunkyo.lg.jp/rekishikan/p004327.html"
+        },
+        {
+          "id": "official-nezu-cultural",
+          "title": "根津神社（文京区文化財）",
+          "url": "https://www.city.bunkyo.lg.jp/b014/p003823.html?lang=ja"
+        }
+      ]
     },
     {
       "id": "regional-67932",
@@ -935,7 +995,27 @@
       "wiki_en": "Odawara Castle",
       "extract_ja": "小田原城（おだわらじょう）は、神奈川県小田原市にあった戦国時代から江戸時代にかけての日本の城（平山城）。北条氏の本拠地として有名である。江戸時代には小田原藩の藩庁があった。城跡は国の史跡に指定されている。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%B0%8F%E7%94%B0%E5%8E%9F%E5%9F%8E",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1930年の『日本案内記』は、小田原城址を後北条氏と大久保氏の城の跡として案内し、松の茂る城址を車窓から見られると記します。後北条氏は戦国時代、城下町まで囲む「総構」を築きました。江戸時代には城の範囲が縮まり、明治の廃城後には建物の多くが失われました。今の天守は1960年に復興されたものです。航空写真では天守の建つ本丸だけでなく、堀と二の丸、さらに市街地に残る総構の地形を探してみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kanto-guide-1930",
+          "title": "鉄道省『日本案内記 関東篇』（1930年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176338"
+        },
+        {
+          "id": "official-odawara-castle",
+          "title": "小田原城（小田原市）",
+          "url": "https://www.city.odawara.kanagawa.jp/kanko/corridor/castle/p09978.html"
+        },
+        {
+          "id": "official-odawara-tower",
+          "title": "天守閣（小田原市）",
+          "url": "https://www.city.odawara.kanagawa.jp/kanko/corridor/castle/p09991.html"
+        }
+      ]
     },
     {
       "id": "regional-433291",
