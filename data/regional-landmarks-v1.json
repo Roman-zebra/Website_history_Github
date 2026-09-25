@@ -2425,7 +2425,27 @@
       "wiki_en": null,
       "extract_ja": "今井町（いまいちょう）は、奈良県橿原市の中部に位置する地区で、1～4丁目からなる。戦国時代の寺内町が原型となり、全建物数約1500棟弱のうち、約500棟の伝統的建造物があり、全国で最も多い地区となっており、国の重要伝統的建造物群保存地区として選定されている。また、国の重要文化財が9件、県指定文化財が3件、市指定文化財が5件あり、2017年（平成29年）4月28日に日本遺産に認定された。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%BB%8A%E4%BA%95%E7%94%BA",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "今井町は、奈良県橿原市に残る寺内町です。戦国時代に称念寺を中心として形づくられ、町の周囲には水路と防御を兼ねた環濠がめぐらされました。江戸時代には商業で栄え、今も瓦屋根の町家が並ぶ道を歩けます。公開されている『橿原市史』を読むと、町家の通り側には商いにも使う「ミセ」、奥には家族の生活の場があり、裏長屋では複数の家が井戸を共有していました。立派な商家だけでなく、働き暮らした人々もいた町です。道が曲がるところや、かつての濠の位置にも目を向けると、自治を守ってきた町の形が見えてきます。1993年に国の重要伝統的建造物群保存地区に選ばれました。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kashihara-history-upper",
+          "title": "改訂橿原市史編纂委員会『橿原市史 本編 上巻』（1987年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/11669939/1/7"
+        },
+        {
+          "id": "official-kashihara-imai-town",
+          "title": "今井町（橿原市）",
+          "url": "https://www.city.kashihara.nara.jp/kanko_bunka_sports/rekishi_bunkazai/1/15367.html"
+        },
+        {
+          "id": "official-kashihara-imai-moat",
+          "title": "今井西環濠広場（橿原市）",
+          "url": "https://www.city.kashihara.nara.jp/kanko_bunka_sports/kanko/1/5/3/11537.html"
+        }
+      ]
     },
     {
       "id": "regional-343086",
@@ -3160,7 +3180,27 @@
       "wiki_en": null,
       "extract_ja": "八日市護国（ようかいちごこく）は、愛媛県喜多郡内子町にある伝統的建造物群保存地区である。地区種別は製蝋町。1982年（昭和57年）に国の重要伝統的建造物群保存地区として選定された。山裾に発達した街道沿いに、南北約600mにわたって町家や豪商の屋敷などの伝統的な建築物群がみられる。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%85%AB%E6%97%A5%E5%B8%82%E8%AD%B7%E5%9B%BD",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "八日市・護国は、愛媛県内子町に残る古い町並みです。江戸時代には街道沿いの町として発展し、江戸後期から明治期にはハゼの実から作る木蝋の生産で栄えました。約600メートルの通りには黄色みを帯びた漆喰壁の町家が続き、家と家の間には「せだわ」と呼ばれる細い路地もあります。木蝋資料館上芳我邸では、住まいと釜場・倉庫が一体になった製蝋業者の屋敷を見られます。国会図書館で公開されている『建設経済レポート』は、1970年代に住民が始めた町並み保存が、1982年の国の保存地区選定や地域全体のまちづくりへ広がった経緯を伝えています。美しい壁だけでなく、産業と住民の取り組みが残した風景です。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-construction-economy-65",
+          "title": "建設経済研究所『建設経済レポート 65』（2015年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/13580405"
+        },
+        {
+          "id": "official-uchiko-youkaichi",
+          "title": "八日市・護国の町並み（内子町）",
+          "url": "https://www.town.uchiko.ehime.jp/soshiki/3/132649.html"
+        },
+        {
+          "id": "official-uchiko-kamihaga",
+          "title": "木蝋資料館上芳我邸（内子町）",
+          "url": "https://www.town.uchiko.ehime.jp/site/hozonsenta/kamihaga.html"
+        }
+      ]
     },
     {
       "id": "regional-110590",

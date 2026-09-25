@@ -2571,6 +2571,68 @@
       "publisher": "文化庁",
       "notes": "全長約450メートルの町並み、家の向き、1981年選定。",
       "usedFor": ["大内宿"]
+    },
+    {
+      "id": "ndl-kashihara-history-upper",
+      "type": "book",
+      "title": "橿原市史 本編 上巻",
+      "author": "改訂橿原市史編纂委員会",
+      "year": 1987,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I11669939",
+      "fullText": "https://dl.ndl.go.jp/pid/11669939",
+      "access": "ログインなしで閲覧可能／インターネット公開（許諾）",
+      "fullTextSearchFrames": [7],
+      "notes": "第7ファイル「各説2」のPDF 80～87ページで町家のミセ・奥の間、裏長屋17軒と共同井戸、町並み保存の住民活動を確認。橿原市公開同版PDF https://www.city.kashihara.nara.jp/material/files/group/7/5c34c21af1a7f00f31b18fb6.pdf で本文照合。",
+      "usedFor": ["今井町"]
+    },
+    {
+      "id": "official-kashihara-imai-town",
+      "title": "今井町（橿原市）",
+      "url": "https://www.city.kashihara.nara.jp/kanko_bunka_sports/rekishi_bunkazai/1/15367.html",
+      "type": "official",
+      "publisher": "橿原市",
+      "notes": "寺内町の成り立ち、江戸期の商業、現存町家と1993年の選定。",
+      "usedFor": ["今井町"]
+    },
+    {
+      "id": "official-kashihara-imai-moat",
+      "title": "今井西環濠広場（橿原市）",
+      "url": "https://www.city.kashihara.nara.jp/kanko_bunka_sports/kanko/1/5/3/11537.html",
+      "type": "official",
+      "publisher": "橿原市",
+      "notes": "環濠の時期と水利・防御の役割。",
+      "usedFor": ["今井町"]
+    },
+    {
+      "id": "ndl-construction-economy-65",
+      "type": "book",
+      "title": "建設経済レポート : 日本経済と公共投資 (65)",
+      "author": "建設経済研究所",
+      "year": 2015,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I13580405",
+      "fullText": "https://dl.ndl.go.jp/pid/13580405",
+      "access": "ログインなしで閲覧可能／インターネット公開（許諾）",
+      "fullTextSearchFrames": [1],
+      "notes": "第1章の内子町事例（印刷148ページ）で1970年代の保存運動、1982年の重伝建選定、上芳我邸資料館等と住民主体のまちづくりを確認。出版者公開同版PDF https://www.rice.or.jp/wp-content/uploads/2021/07/NO65.pdf でも本文照合。",
+      "usedFor": ["八日市護国"]
+    },
+    {
+      "id": "official-uchiko-youkaichi",
+      "title": "八日市・護国の町並み（内子町）",
+      "url": "https://www.town.uchiko.ehime.jp/soshiki/3/132649.html",
+      "type": "official",
+      "publisher": "愛媛県内子町",
+      "notes": "木蝋の歴史、町並み・せだわ、住民保存活動と1982年選定。",
+      "usedFor": ["八日市護国"]
+    },
+    {
+      "id": "official-uchiko-kamihaga",
+      "title": "木蝋資料館上芳我邸（内子町）",
+      "url": "https://www.town.uchiko.ehime.jp/site/hozonsenta/kamihaga.html",
+      "type": "official",
+      "publisher": "愛媛県内子町",
+      "notes": "製蝋業者の住宅・釜場・倉庫と資料館。",
+      "usedFor": ["八日市護国"]
     }
   ]
 }
