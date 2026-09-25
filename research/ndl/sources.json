@@ -583,9 +583,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176396",
       "fullText": "https://dl.ndl.go.jp/pid/1176396",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [59, 78, 89, 96, 110, 120, 122, 132, 148, 218, 247, 253, 269, 289, 316, 339, 344, 351, 352, 354],
-      "notes": "78コマに黒い岡山城と旭川、89コマに倉敷の米倉・紡績工場・大原美術館、110コマに尾道水道と千光寺山、120・132コマに広島の中島本町の銀行・映画館・元安橋、122コマに広島城、148コマに錦帯橋の五連木橋、218コマに松江城、253コマに指月山麓の萩城址、269コマに栗林公園、289コマに金刀比羅宮の門前町、354コマに高知城を確認。1934年の記述は戦災・洪水・戦後の復元より前の姿である。 96コマに備中高梁の臥牛山と松山城址、247コマに大森代官と休坑中の銀山、339コマに祖谷の蔓橋、316コマに道後の浴館と神の湯・霊の湯、344・351・352コマに室戸岬の植生・海岸・灯台を確認。",
-      "usedFor": ["hiroshima", "okayama", "regional-1054053", "regional-296607", "regional-43296", "regional-13585", "regional-203351", "regional-313749", "regional-172545", "regional-110590", "備中松山城", "石見銀山", "祖谷のかずら橋", "道後温泉本館", "室戸岬"]
+      "fullTextSearchFrames": [46, 59, 78, 89, 96, 110, 120, 122, 132, 148, 194, 218, 247, 253, 269, 289, 316, 339, 344, 351, 352, 354],
+      "notes": "78コマに黒い岡山城と旭川、89コマに倉敷の米倉・紡績工場・大原美術館、110コマに尾道水道と千光寺山、120・132コマに広島の中島本町の銀行・映画館・元安橋、122コマに広島城、148コマに錦帯橋の五連木橋、218コマに松江城、253コマに指月山麓の萩城址、269コマに栗林公園、289コマに金刀比羅宮の門前町、354コマに高知城を確認。1934年の記述は戦災・洪水・戦後の復元より前の姿である。 96コマに備中高梁の臥牛山と松山城址、247コマに大森代官と休坑中の銀山、339コマに祖谷の蔓橋、316コマに道後の浴館と神の湯・霊の湯、344・351・352コマに室戸岬の植生・海岸・灯台を確認。 194コマに鳥取県中部の倉吉町と打吹公園、46コマに吉野川沿いの脇町の製糸工場を確認。保存地区の成立や藍商の歴史は自治体資料で補う。",
+      "usedFor": ["hiroshima", "okayama", "regional-1054053", "regional-296607", "regional-43296", "regional-13585", "regional-203351", "regional-313749", "regional-172545", "regional-110590", "備中松山城", "石見銀山", "祖谷のかずら橋", "道後温泉本館", "室戸岬", "倉吉市打吹玉川伝統的建造物群保存地区", "脇町南町"]
     },
     {
       "id": "official-hiroshima-dome",
@@ -1975,6 +1975,51 @@
       "url": "https://www.pref.shizuoka.jp/machizukuri/kowan/1040846/1025743.html",
       "notes": "家康の墓所と駿河湾への眺望。",
       "usedFor": ["久能山東照宮"]
+    },
+    {
+      "id": "official-kurayoshi-district",
+      "type": "official",
+      "title": "倉吉市打吹玉川伝統的建造物群保存地区",
+      "publisher": "倉吉市",
+      "url": "https://www.city.kurayoshi.lg.jp/5172.htm",
+      "notes": "本町通りの商家と玉川沿いの土蔵。",
+      "usedFor": ["倉吉市打吹玉川伝統的建造物群保存地区"]
+    },
+    {
+      "id": "official-kurayoshi-overview",
+      "type": "official",
+      "title": "倉吉市の概要",
+      "publisher": "倉吉市",
+      "url": "https://www.city.kurayoshi.lg.jp/5450.htm",
+      "notes": "打吹山麓の陣屋、商工業都市、白壁土蔵群。",
+      "usedFor": ["倉吉市打吹玉川伝統的建造物群保存地区"]
+    },
+    {
+      "id": "official-wakimachi-streetscape",
+      "type": "official",
+      "title": "うだつの町並み",
+      "publisher": "美馬市",
+      "url": "https://www.city.mima.lg.jp/kanko/map/list/11506.html",
+      "notes": "藍の集散地と通りの商家。",
+      "usedFor": ["脇町南町"]
+    },
+    {
+      "id": "official-wakimachi-indigo",
+      "type": "official",
+      "title": "吉野川、藍、うだつ",
+      "publisher": "美馬市",
+      "url": "https://www.city.mima.lg.jp/kanko/map/list/11486.html",
+      "notes": "吉野川の水運と藍商人。",
+      "usedFor": ["脇町南町"]
+    },
+    {
+      "id": "official-wakimachi-district",
+      "type": "official",
+      "title": "美馬市脇町南町重要伝統的建造物群保存地区",
+      "publisher": "美馬市",
+      "url": "https://www.city.mima.lg.jp/kanko/kana/map/list/4048.html",
+      "notes": "保存地区の指定と範囲。",
+      "usedFor": ["脇町南町"]
     }
   ]
 }

@@ -2230,7 +2230,27 @@
       "wiki_en": null,
       "extract_ja": "打吹玉川（うつぶきたまがわ）は、鳥取県倉吉市にある伝統的建造物群保存地区である。通称は白壁土蔵群（しらかべどぞうぐん）。国の重要伝統的建造物群保存地区として選定されている（選定名：「倉吉市打吹玉川伝統的建造物群保存地区」）。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%89%93%E5%90%B9%E7%8E%89%E5%B7%9D",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の『日本案内記』は、倉吉を鳥取県中部の中心地として紹介し、打吹山の北麓と周辺の町を案内しています。現在の保存地区は、玉川沿いの白壁の土蔵と、本町通りに続く商家が見どころです。江戸時代には打吹山の麓に陣屋が置かれ、商いも盛んになりました。赤い瓦と白い漆喰の景色は、見た目の美しさだけでなく、蔵に品物を納め、川と道を使って町が営まれた歴史を伝えます。地図では打吹山、通り、玉川の位置を重ねてみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "鉄道省『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-kurayoshi-district",
+          "title": "倉吉市打吹玉川伝統的建造物群保存地区（倉吉市）",
+          "url": "https://www.city.kurayoshi.lg.jp/5172.htm"
+        },
+        {
+          "id": "official-kurayoshi-overview",
+          "title": "倉吉市の概要（倉吉市）",
+          "url": "https://www.city.kurayoshi.lg.jp/5450.htm"
+        }
+      ]
     },
     {
       "id": "regional-349258",
@@ -2640,7 +2660,32 @@
       "wiki_en": null,
       "extract_ja": "脇町南町（わきまちみなみまち）は徳島県美馬市脇町大字脇町にある名勝。うだつの町並みともよばれる。\n国の重要伝統的建造物群保存地区に昭和63年（1988年）12月16日選定\n・四国八十八景8番・とくしま88景・にし阿波お勧めビューポイント100選・都市景観100選・日本の道100選・美しい日本の歴史的風土100選に選定。阿波歴史文化道に指定。\n「うだつと白壁の町並」で、昭和61年度手づくり郷土賞（人と風土が育てた家並）受賞。平成17年度同賞大賞。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E8%84%87%E7%94%BA%E5%8D%97%E7%94%BA",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の『日本案内記』は、吉野川沿いの脇町付近に製糸工場があったと記します。町が発展した土台には、それ以前から続く阿波藍の商いもありました。川舟が荷を運ぶ脇町の南町通りには、富を蓄えた商家が並び、二階の壁から張り出す「うだつ」が特徴です。うだつは火が隣家に広がるのを抑える造りでもあり、商家の存在感も示しました。現在は重要伝統的建造物群保存地区として守られています。通りを歩くときは、家の屋根際と吉野川への距離に注目してみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "鉄道省『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-wakimachi-streetscape",
+          "title": "うだつの町並み（美馬市）",
+          "url": "https://www.city.mima.lg.jp/kanko/map/list/11506.html"
+        },
+        {
+          "id": "official-wakimachi-indigo",
+          "title": "吉野川、藍、うだつ（美馬市）",
+          "url": "https://www.city.mima.lg.jp/kanko/map/list/11486.html"
+        },
+        {
+          "id": "official-wakimachi-district",
+          "title": "美馬市脇町南町重要伝統的建造物群保存地区（美馬市）",
+          "url": "https://www.city.mima.lg.jp/kanko/kana/map/list/4048.html"
+        }
+      ]
     },
     {
       "id": "regional-313749",
