@@ -1845,7 +1845,27 @@
       "wiki_en": "Onomichi",
       "extract_ja": "尾道市（おのみちし）は、広島県南東部にある市。1898年（明治31年）市制施行。備後圏域連携中枢都市圏の構成自治体の一つである（福山都市圏も参照）。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%B0%BE%E9%81%93%E5%B8%82",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の案内書は、尾道を背後の三つの山と、向島に面する狭い海峡にはさまれた街として描き、千光寺山の中腹を眺めのよい公園と紹介しています。平地が少ないため、家や寺が斜面に重なり、坂道と路地でつながります。地図では尾道水道の細さ、対岸の向島、千光寺へ上がる斜面を一続きでたどってみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-onomichi-city",
+          "title": "日本遺産のまち尾道（尾道市）",
+          "url": "https://www.city.onomichi.hiroshima.jp/soshiki/7/72155.html"
+        },
+        {
+          "id": "official-senkoji-park",
+          "title": "千光寺公園（尾道市）",
+          "url": "https://www.city.onomichi.hiroshima.jp/site/onomichikanko/1316.html"
+        }
+      ]
     },
     {
       "id": "regional-43296",
@@ -1910,7 +1930,27 @@
       "wiki_en": "Hagi Castle",
       "extract_ja": "萩城（はぎじょう）は、山口県萩市にあった日本の城。別名は、指月城（しづきじょう）。城跡は国の史跡に指定されている他、城跡と城下町が世界文化遺産「明治日本の産業革命遺産 製鉄・製鋼、造船、石炭産業」の構成要素の一つとなっている。\n現在、城跡は指月公園（しづきこうえん）として整備され、本丸天守などは失われたが幕末の藩主毛利敬親が家老や志士と維新を画策した花江茶亭（市有形文化財）が本丸に移築され、二の丸入口近くに旧厚狭毛利家萩屋敷長屋（重要文化財）が現存し、三の丸の現存武家屋敷群が国選定の重要伝統的建造物群保存地区になっており、幕末の志士が生活した松下村塾や木戸孝允旧宅（国史跡）などの侍屋敷などとともに萩市の観光名所となっている。萩市の観光の中でも有名である。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E8%90%A9%E5%9F%8E",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の案内書は、萩城を既に「城址」と呼び、指月山の南東麓に本丸跡のある公園を紹介しています。天守は戦争で失われたのではなく、明治時代の1874年に解体されました。今は石垣と堀の一部が残ります。海へ突き出る指月山、山麓の本丸、城下町の順に地図を広げると、城が山と海を使っていたことが見えてきます。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-hagi-castle",
+          "title": "萩城 本丸・二の丸コース（萩市）",
+          "url": "https://www.city.hagi.lg.jp/site/machihaku/kochizu-hagijohonmaru.html"
+        },
+        {
+          "id": "official-hagi-castle-history",
+          "title": "萩城跡指月公園（萩市）",
+          "url": "https://www.city.hagi.lg.jp/uploaded/attachment/26680.pdf"
+        }
+      ]
     },
     {
       "id": "regional-283745",
@@ -1985,7 +2025,22 @@
       "wiki_en": "Ritsurin Garden",
       "extract_ja": "栗林公園（りつりんこうえん）は、香川県高松市に所在する江戸時代初期に築庭された回遊式大名庭園（日本庭園）。1875年（明治8年）に県立公園として一般公開を開始し、1953年（昭和28年）に国の特別名勝に指定された都市公園法上の歴史公園である。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%A0%97%E6%9E%97%E5%85%AC%E5%9C%92",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の案内書は、栗林公園を池をめぐる庭園として紹介し、背後の紫雲山を景色の大切な一部としています。山は園の外にありますが、庭から見ると奥行きが増して見えます。現在の園には六つの池と十三の築山があり、江戸時代の大名庭園を受け継ぐ南庭と、明治以降に公園として整えた北庭があります。池だけでなく西側の山まで地図で眺めてみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-ritsurin-garden",
+          "title": "特別名勝 栗林公園（香川県観光協会）",
+          "url": "https://www.my-kagawa.jp/ritsuringarden/feature/ritsuringarden/garden"
+        }
+      ]
     },
     {
       "id": "regional-172545",
@@ -2010,7 +2065,22 @@
       "wiki_en": "Kotohira-gū",
       "extract_ja": "金刀比羅宮（ことひらぐう）は、香川県仲多度郡琴平町の象頭山中腹に鎮座する単立神社である。明治初年の神仏分離以前は金毘羅大権現（こんぴらだいごんげん）と称し、通称は「讃岐の金毘羅さん（さぬきのこんぴらさん）」。明治初年以降に神社になってからの当宮の通称は「金比羅さん」。\n御朱印：金刀比羅宮（本宮前神札授与所）・白峰宮・厳魂神社（奥宮）。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E9%87%91%E5%88%80%E6%AF%94%E7%BE%85%E5%AE%AE",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の案内書は、金刀比羅宮の門前町に旅館や土産物店が段々に集まり、山の中腹の社へ参道が延びる様子を記しています。御本宮は町から785段の石段を上った先にあり、現在の社殿は1878年の改築です。地図で駅から参道へ進み、町並みが山道に変わる場所と御本宮の高さを確かめてみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-konpira-guide",
+          "title": "参拝ガイド 御本宮編（金刀比羅宮）",
+          "url": "https://www.konpira.or.jp/articles/20200616_guide/article.htm"
+        }
+      ]
     },
     {
       "id": "regional-153196",
@@ -2085,7 +2155,27 @@
       "wiki_en": "Kōchi Castle",
       "extract_ja": "高知城（こうちじょう）は、高知県高知市にある日本の城。瓦や壁の色が鷹の羽の色に似ているとして、鷹城（たかじょう）とも呼ばれる。\n江戸時代には土佐藩の藩庁が二の丸御殿に置かれた。江戸時代に築かれた天守が残る現存天守十二城の一つであるほか、本丸御殿や追手門等が現存する。城跡は国の史跡に指定されている。日本100名城に選定されている。四国八十八景27番。\n\n",
       "coordSource": "https://www.openstreetmap.org/way/126495756",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1934年の案内書は、高知城を街の中央の高まりにある城跡として紹介し、天守、追手門、本丸の建物が残ると記しています。天守は1727年の火災後に再建された江戸時代の木造建築です。本丸御殿も残り、天守と一緒に見られるのは全国でも珍しいことです。街から追手門を通り、丘の上の本丸へ進む道筋を地図でたどってみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-chugoku-shikoku-guide-1934",
+          "title": "『日本案内記 中国・四国篇』（1934年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176396"
+        },
+        {
+          "id": "official-kochi-castle",
+          "title": "高知城（高知市）",
+          "url": "https://www.city.kochi.kochi.jp/soshiki/90/cas-state-1100500.html"
+        },
+        {
+          "id": "official-kochi-castle-architecture",
+          "title": "天守の構造（高知城）",
+          "url": "https://kochipark.jp/kochijyo/architecture/"
+        }
+      ]
     },
     {
       "id": "regional-248126",

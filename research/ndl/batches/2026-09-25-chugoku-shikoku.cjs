@@ -64,3 +64,26 @@ regional('regional-296607',
 regional('regional-43296',
   '1934年の案内書は、錦川に架かる五つの連なった木の橋を「算盤橋」とも呼んでいます。現在の橋は当時の木材がそのまま残るわけではありません。1950年の台風で流失し、地元の希望で1953年に木造で再建、2004年にも木造部分を架け替えました。五つの橋の形を受け継ぐために直し続けてきた橋として、川と両岸を見てみましょう。',
   [source('official-kintaikyo-history', '錦帯橋の概要（岩国市）', 'https://kintaikyo.iwakuni-city.net/summary.html')]);
+
+regional('regional-13585',
+  '1934年の案内書は、尾道を背後の三つの山と、向島に面する狭い海峡にはさまれた街として描き、千光寺山の中腹を眺めのよい公園と紹介しています。平地が少ないため、家や寺が斜面に重なり、坂道と路地でつながります。地図では尾道水道の細さ、対岸の向島、千光寺へ上がる斜面を一続きでたどってみましょう。',
+  [source('official-onomichi-city', '日本遺産のまち尾道（尾道市）', 'https://www.city.onomichi.hiroshima.jp/soshiki/7/72155.html'),
+   source('official-senkoji-park', '千光寺公園（尾道市）', 'https://www.city.onomichi.hiroshima.jp/site/onomichikanko/1316.html')]);
+
+regional('regional-203351',
+  '1934年の案内書は、萩城を既に「城址」と呼び、指月山の南東麓に本丸跡のある公園を紹介しています。天守は戦争で失われたのではなく、明治時代の1874年に解体されました。今は石垣と堀の一部が残ります。海へ突き出る指月山、山麓の本丸、城下町の順に地図を広げると、城が山と海を使っていたことが見えてきます。',
+  [source('official-hagi-castle', '萩城 本丸・二の丸コース（萩市）', 'https://www.city.hagi.lg.jp/site/machihaku/kochizu-hagijohonmaru.html'),
+   source('official-hagi-castle-history', '萩城跡指月公園（萩市）', 'https://www.city.hagi.lg.jp/uploaded/attachment/26680.pdf')]);
+
+regional('regional-313749',
+  '1934年の案内書は、栗林公園を池をめぐる庭園として紹介し、背後の紫雲山を景色の大切な一部としています。山は園の外にありますが、庭から見ると奥行きが増して見えます。現在の園には六つの池と十三の築山があり、江戸時代の大名庭園を受け継ぐ南庭と、明治以降に公園として整えた北庭があります。池だけでなく西側の山まで地図で眺めてみましょう。',
+  [source('official-ritsurin-garden', '特別名勝 栗林公園（香川県観光協会）', 'https://www.my-kagawa.jp/ritsuringarden/feature/ritsuringarden/garden')]);
+
+regional('regional-172545',
+  '1934年の案内書は、金刀比羅宮の門前町に旅館や土産物店が段々に集まり、山の中腹の社へ参道が延びる様子を記しています。御本宮は町から785段の石段を上った先にあり、現在の社殿は1878年の改築です。地図で駅から参道へ進み、町並みが山道に変わる場所と御本宮の高さを確かめてみましょう。',
+  [source('official-konpira-guide', '参拝ガイド 御本宮編（金刀比羅宮）', 'https://www.konpira.or.jp/articles/20200616_guide/article.htm')]);
+
+regional('regional-110590',
+  '1934年の案内書は、高知城を街の中央の高まりにある城跡として紹介し、天守、追手門、本丸の建物が残ると記しています。天守は1727年の火災後に再建された江戸時代の木造建築です。本丸御殿も残り、天守と一緒に見られるのは全国でも珍しいことです。街から追手門を通り、丘の上の本丸へ進む道筋を地図でたどってみましょう。',
+  [source('official-kochi-castle', '高知城（高知市）', 'https://www.city.kochi.kochi.jp/soshiki/90/cas-state-1100500.html'),
+   source('official-kochi-castle-architecture', '天守の構造（高知城）', 'https://kochipark.jp/kochijyo/architecture/')]);

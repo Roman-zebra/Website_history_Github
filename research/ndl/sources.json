@@ -583,9 +583,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176396",
       "fullText": "https://dl.ndl.go.jp/pid/1176396",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [78, 89, 120, 122, 132, 148, 218],
-      "notes": "78コマに黒い岡山城と旭川、89コマに倉敷の米倉・紡績工場・大原美術館、120・132コマに広島の中島本町の銀行・映画館・元安橋、122コマに広島城、148コマに錦帯橋の五連木橋、218コマに松江城を確認。1934年の記述は戦災・洪水・戦後の復元より前の姿である。",
-      "usedFor": ["hiroshima", "okayama", "regional-1054053", "regional-296607", "regional-43296"]
+      "fullTextSearchFrames": [78, 89, 110, 120, 122, 132, 148, 218, 253, 269, 289, 354],
+      "notes": "78コマに黒い岡山城と旭川、89コマに倉敷の米倉・紡績工場・大原美術館、110コマに尾道水道と千光寺山、120・132コマに広島の中島本町の銀行・映画館・元安橋、122コマに広島城、148コマに錦帯橋の五連木橋、218コマに松江城、253コマに指月山麓の萩城址、269コマに栗林公園、289コマに金刀比羅宮の門前町、354コマに高知城を確認。1934年の記述は戦災・洪水・戦後の復元より前の姿である。",
+      "usedFor": ["hiroshima", "okayama", "regional-1054053", "regional-296607", "regional-43296", "regional-13585", "regional-203351", "regional-313749", "regional-172545", "regional-110590"]
     },
     {
       "id": "official-hiroshima-dome",
@@ -676,6 +676,78 @@
       "url": "https://kintaikyo.iwakuni-city.net/summary.html",
       "notes": "1950年の台風で流失、1953年の木造再建、2004年の木造部分架け替えを確認。",
       "usedFor": ["regional-43296"]
+    },
+    {
+      "id": "official-onomichi-city",
+      "type": "official",
+      "title": "日本遺産のまち尾道",
+      "publisher": "尾道市",
+      "url": "https://www.city.onomichi.hiroshima.jp/soshiki/7/72155.html",
+      "notes": "尾道三山と尾道水道にはさまれた町並みと坂道の地形を確認。",
+      "usedFor": ["regional-13585"]
+    },
+    {
+      "id": "official-senkoji-park",
+      "type": "official",
+      "title": "千光寺公園",
+      "publisher": "尾道市",
+      "url": "https://www.city.onomichi.hiroshima.jp/site/onomichikanko/1316.html",
+      "notes": "千光寺への坂と山頂からの尾道水道・島々の眺めを確認。",
+      "usedFor": ["regional-13585"]
+    },
+    {
+      "id": "official-hagi-castle",
+      "type": "official",
+      "title": "萩城 本丸・二の丸コース",
+      "publisher": "萩市",
+      "url": "https://www.city.hagi.lg.jp/site/machihaku/kochizu-hagijohonmaru.html",
+      "notes": "指月山に築いた城の本丸・二の丸、石垣と堀を確認。",
+      "usedFor": ["regional-203351"]
+    },
+    {
+      "id": "official-hagi-castle-history",
+      "type": "official",
+      "title": "萩城跡指月公園",
+      "publisher": "萩市",
+      "url": "https://www.city.hagi.lg.jp/uploaded/attachment/26680.pdf",
+      "notes": "1874年に天守や櫓が解体され、石垣と堀の一部が残ることを確認。",
+      "usedFor": ["regional-203351"]
+    },
+    {
+      "id": "official-ritsurin-garden",
+      "type": "official",
+      "title": "特別名勝 栗林公園",
+      "publisher": "香川県観光協会",
+      "url": "https://www.my-kagawa.jp/ritsuringarden/feature/ritsuringarden/garden",
+      "notes": "紫雲山の借景、六つの池と十三の築山、南庭と北庭の成り立ちを確認。",
+      "usedFor": ["regional-313749"]
+    },
+    {
+      "id": "official-konpira-guide",
+      "type": "official",
+      "title": "参拝ガイド 御本宮編",
+      "publisher": "金刀比羅宮",
+      "url": "https://www.konpira.or.jp/articles/20200616_guide/article.htm",
+      "notes": "御本宮まで785段、現社殿は1878年改築と確認。",
+      "usedFor": ["regional-172545"]
+    },
+    {
+      "id": "official-kochi-castle",
+      "type": "official",
+      "title": "重要文化財 高知城",
+      "publisher": "高知市",
+      "url": "https://www.city.kochi.kochi.jp/soshiki/90/cas-state-1100500.html",
+      "notes": "天守・本丸御殿・追手門などが残ることを確認。",
+      "usedFor": ["regional-110590"]
+    },
+    {
+      "id": "official-kochi-castle-architecture",
+      "type": "official",
+      "title": "天守の構造",
+      "publisher": "高知城",
+      "url": "https://kochipark.jp/kochijyo/architecture/",
+      "notes": "1727年の大火後に天守が再建され、現存していることを確認。",
+      "usedFor": ["regional-110590"]
     },
     {
       "id": "official-amanohashidate-geography",
