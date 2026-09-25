@@ -399,9 +399,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176338",
       "fullText": "https://dl.ndl.go.jp/pid/1176338",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [46, 78, 91, 92, 99, 102, 106, 107, 134, 137, 146, 155, 159, 175, 176, 177, 208],
-      "notes": "46・106～107コマに戦前の浅草寺本堂、雷門から露店の並ぶ参道、繁華な浅草公園。78コマに丸の内の東京駅と施設。91～92コマに明治神宮の南北参道と林苑。99・102コマに上野公園・不忍池・動物園・博物館。134・137コマに鉄道から眺める横浜港の汽船と海外航路。146コマに長谷の高徳院が管理する銅造阿弥陀如来像。155・159コマに箱根の外輪山と芦ノ湖。175～177コマに富士山の宝永山、山頂火口、登山道、208コマに富士五湖。後の戦災、再建、地質学の更新は現行資料で区別して補う。",
-      "usedFor": ["tokyo", "yokohama", "kamakura", "東京駅", "富士山", "箱根町", "上野恩賜公園", "明治神宮"]
+      "fullTextSearchFrames": [46, 69, 71, 78, 80, 91, 92, 98, 99, 102, 106, 107, 115, 116, 134, 137, 146, 155, 159, 175, 176, 177, 208],
+      "notes": "46・106～107コマに戦前の浅草寺本堂、雷門から露店の並ぶ参道、繁華な浅草公園。78コマに丸の内の東京駅と施設。91～92コマに明治神宮の南北参道と林苑。99・102コマに上野公園・不忍池・動物園・博物館。134・137コマに鉄道から眺める横浜港の汽船と海外航路。146コマに長谷の高徳院が管理する銅造阿弥陀如来像。155・159コマに箱根の外輪山と芦ノ湖。175～177コマに富士山の宝永山、山頂火口、登山道、208コマに富士五湖。後の戦災、再建、地質学の更新は現行資料で区別して補う。 追加確認：69・115コマに戦前の渋谷の鉄道、71・116コマに押上方面の路線、80コマに芝公園・増上寺、98コマに秋葉原駅前の中央卸売市場神田分場。新しい交差点・塔・電気街の歴史は各公式資料で確認。",
+      "usedFor": ["tokyo", "yokohama", "kamakura", "東京駅", "富士山", "箱根町", "上野恩賜公園", "明治神宮", "秋葉原", "渋谷スクランブル交差点", "東京タワー", "東京スカイツリー"]
     },
     {
       "id": "official-sensoji-hondo",
@@ -1192,6 +1192,96 @@
       "url": "https://www.city.miyako.iwate.jp/gyosei/soshiki/kikikanri/1/4/maps/hazard/3194.html",
       "notes": "現在の避難場所・浸水想定の確認先。歴史的な碑や航空写真を避難地図として使わせないため案内する。",
       "usedFor": ["aneyoshi"]
+    },
+    {
+      "id": "official-akihabara-origin",
+      "type": "official",
+      "title": "秋葉原の由来",
+      "publisher": "秋葉原電気街振興会",
+      "url": "https://akiba.or.jp/archives/history00",
+      "notes": "火除地・秋葉神社に由来する地名と戦後の電気街の起点。",
+      "usedFor": ["秋葉原"]
+    },
+    {
+      "id": "official-akihabara-postwar",
+      "type": "official",
+      "title": "焼け野原からの出発",
+      "publisher": "秋葉原電気街振興会",
+      "url": "https://akiba.or.jp/archives/history02",
+      "notes": "戦後のラジオ部品店と高架下の商店街。",
+      "usedFor": ["秋葉原"]
+    },
+    {
+      "id": "official-akihabara-popculture",
+      "type": "official",
+      "title": "変容する街・秋葉原",
+      "publisher": "秋葉原電気街振興会",
+      "url": "https://akiba.or.jp/archives/history08",
+      "notes": "家電・パソコンからアニメ文化への変化。",
+      "usedFor": ["秋葉原"]
+    },
+    {
+      "id": "official-shibuya-crossing-history",
+      "type": "official",
+      "title": "渋谷駅前の基盤整備を語る",
+      "publisher": "渋谷区",
+      "url": "https://www.city.shibuya.tokyo.jp/e-book/kankyo/shuhen-machizukuri/koremade-torikumi/pageindices/index28.html",
+      "notes": "2023年の座談会で交差点のスクランブル化が約50年前と説明。1973年頃に相当する。",
+      "usedFor": ["渋谷スクランブル交差点"]
+    },
+    {
+      "id": "official-tokyo-shibuya-crossing",
+      "type": "official",
+      "title": "渋谷スクランブル交差点",
+      "publisher": "東京観光財団",
+      "url": "https://www.gotokyo.org/jp/spot/78/",
+      "notes": "現在の交差点の位置と駅・センター街の関係。",
+      "usedFor": ["渋谷スクランブル交差点"]
+    },
+    {
+      "id": "official-tokyo-tower-history",
+      "type": "official",
+      "title": "会社概要・年表",
+      "publisher": "株式会社TOKYO TOWER",
+      "url": "https://www.tokyotower.co.jp/company/",
+      "notes": "1958年営業開始と総合電波塔としての事業。",
+      "usedFor": ["東京タワー"]
+    },
+    {
+      "id": "official-tokyo-tower-facts",
+      "type": "official",
+      "title": "Towerpedia",
+      "publisher": "株式会社TOKYO TOWER",
+      "url": "https://www.tokyotower.co.jp/plan/towerpedia/",
+      "notes": "333メートルの高さとテレビ放送のための建設。",
+      "usedFor": ["東京タワー"]
+    },
+    {
+      "id": "official-skytree-site-history",
+      "type": "official",
+      "title": "東京スカイツリーが建つ場所",
+      "publisher": "東武タワースカイツリー株式会社",
+      "url": "https://www.tokyo-skytree.jp/group/pre-learning/skytree/construction/",
+      "notes": "貨物ヤード跡、1993年の貨物列車運行終了と2012年開業。",
+      "usedFor": ["東京スカイツリー"]
+    },
+    {
+      "id": "official-skytree-overview",
+      "type": "official",
+      "title": "東京スカイツリーの概要",
+      "publisher": "東武タワースカイツリー株式会社",
+      "url": "https://www.tokyo-skytree.jp/group/pre-learning/skytree/construction/overview.php",
+      "notes": "高さ634メートルと2012年5月22日開業。",
+      "usedFor": ["東京スカイツリー"]
+    },
+    {
+      "id": "official-skytree-industry",
+      "type": "official",
+      "title": "すみだの産業",
+      "publisher": "東武タワースカイツリー株式会社",
+      "url": "https://www.tokyo-skytree.jp/group/pre-learning/sumida/industry/",
+      "notes": "鉄道貨物から北十間川の舟運への積み替え。",
+      "usedFor": ["東京スカイツリー"]
     }
   ]
 }
