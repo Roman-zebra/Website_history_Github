@@ -1350,7 +1350,27 @@
       "wiki_en": null,
       "extract_ja": "富岩運河環水公園（ふがんうんがかんすいこうえん）は、富山県富山市湊入船町にある富山県立の都市公園（総合公園）である。通称は環水公園。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%B2%A9%E9%81%8B%E6%B2%B3%E7%92%B0%E6%B0%B4%E5%85%AC%E5%9C%92",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "富岩運河環水公園は、富山駅の北側に広がる水辺の公園です。中央を流れる富岩運河は、昭和初期に市街地と東岩瀬の港を結ぶために造られました。1940年刊の富山商工会議所の本は、運河を交通と工業の発展を支える施設として紹介しています。かつて木材や石炭などを運んだ水路の起点が、今は散歩や舟遊びを楽しめる場所になりました。天門橋の展望塔から水辺を眺めたら、遊覧船が通る中島閘門にも注目してください。水位の違う区間を船が進むための、運河の仕組みを今も体験できます。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-toyama-1940-fugan",
+          "title": "富山商工会議所『とやま 昭和15年版』（1940年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1100645/1/9"
+        },
+        {
+          "id": "official-kansui-park-map",
+          "title": "公園案内とマップ（富山県富岩運河環水公園）",
+          "url": "https://www.kansui-park.jp/how-to-enjoy-the-park/map/"
+        },
+        {
+          "id": "official-toyama-fugan-history",
+          "title": "富岩運河の建設と利用の歴史（富山県）",
+          "url": "https://www.pref.toyama.jp/1541/kendodukuri/dourokouwan/toyamakou/kj00016047.html"
+        }
+      ]
     },
     {
       "id": "regional-931958",
@@ -2225,7 +2245,27 @@
       "wiki_en": null,
       "extract_ja": "大阪くらしの今昔館（おおさかくらしのこんじゃくかん））は、大阪府大阪市北区に所在する、大阪市の都市居住に関する歴史と文化をテーマとする市立博物館。正式名称は大阪市立住まいのミュージアム（おおさかしりつすまいのミュージアム）。大阪市立住まい情報センタービル内にある。江戸時代後期から第二次世界大戦後にわたる大阪市の住居の資料や模型などを展示している。\n\n",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E9%98%AA%E3%81%8F%E3%82%89%E3%81%97%E3%81%AE%E4%BB%8A%E6%98%94%E9%A4%A8",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "大阪くらしの今昔館は、建物や暮らしの道具から大阪の歴史をたどる博物館です。9階には、1830年代の大坂を想定した架空の町「大坂町三丁目」が実物大で再現されています。通り沿いの呉服屋や本屋をのぞき、路地へ入ると、共同の井戸を使う裏長屋の暮らしも見えてきます。公開書籍『大阪郷土史読本』が描く、川や運河を使った物資の行き来で栄えた商都の姿を、店先と生活の場の両方から想像できる展示です。8階では模型を通して明治から昭和の住まいの変化を紹介。町並みを歩いた後で、どんな仕事や家族がその家にいたか考えると、歴史が身近になります。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-osaka-local-history-reader",
+          "title": "魚澄惣五郎『大阪郷土史読本 訂正版』（1943年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1055542/1/37"
+        },
+        {
+          "id": "official-osaka-konjyakukan-edo",
+          "title": "なにわ町家の歳時記（大阪くらしの今昔館）",
+          "url": "https://www.osaka-angenet.jp/konjyakukan/exhibition/9f"
+        },
+        {
+          "id": "official-osaka-konjyakukan-modern",
+          "title": "モダン大阪パノラマ遊覧（大阪くらしの今昔館）",
+          "url": "https://www.osaka-angenet.jp/konjyakukan/exhibition/8f"
+        }
+      ]
     },
     {
       "id": "regional-40306",
