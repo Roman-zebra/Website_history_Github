@@ -1285,7 +1285,27 @@
       "wiki_en": "Eihei-ji",
       "extract_ja": "永平寺（えいへいじ）は、福井県吉田郡永平寺町にある、曹洞宗の仏教寺院。總持寺と並んで、日本における曹洞宗の中心的な寺院（大本山）である。山号を吉祥山と称し、開山は道元、本尊は釈迦如来・弥勒仏・阿弥陀如来の三世仏である。寺紋は久我山竜胆紋（久我竜胆紋・久我竜胆車紋）である。専門僧堂、本山僧堂が置かれている。永平寺は福井県にあり越前松平家が帰依していた為越前松平藩の武士の家系の檀家も多い。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E6%B0%B8%E5%B9%B3%E5%AF%BA",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1939年に永平寺自身が編んだ『永平寺真景』は、山門を七堂伽藍の一つとして紹介し、山門から仏殿へ進む境内の構成を伝えています。永平寺は道元が1244年に開いた曹洞宗の修行道場です。山深い谷に多くの建物が連なりますが、その中心には座禅や食事など、日々の修行に使われる七堂伽藍があります。観光地としての景色だけでなく、建物どうしのつながりに目を向けると、ここが今も修行の場であることが分かります。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-eiheiji-shinkei-1939",
+          "title": "永平寺編『永平寺真景 2版』（1939年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1095050"
+        },
+        {
+          "id": "official-eiheiji-town-guide",
+          "title": "大本山永平寺（永平寺町）",
+          "url": "https://www.town.eiheiji.lg.jp/200/300/311/p000773_d/fil/eiheijicho.pdf"
+        },
+        {
+          "id": "official-eiheiji-seven-halls",
+          "title": "永平寺の七堂伽藍（永平寺町広報）",
+          "url": "https://www.town.eiheiji.lg.jp/420/430/p003271_d/fil/2018-03-kouhou.pdf"
+        }
+      ]
     },
     {
       "id": "regional-633864",
@@ -1385,7 +1405,32 @@
       "wiki_en": "Zenkō-ji",
       "extract_ja": "善光寺（ぜんこうじ）は、長野県長野市元善町に存在する無宗派の単立仏教寺院。住職は「大勧進貫主」と「大本願上人」の両名が務め、実際の護持・運営は天台宗と浄土宗が担っている（後述）。\n本尊は日本最古と伝わる一光三尊阿弥陀如来（善光寺如来）で、絶対秘仏である。近年は七年に一度とされている開帳は前立本尊（まえだちほんぞん）で行い、本堂前には触ると御利益（ごりやく）が得られるとされる回向柱（えこうばしら）が建てられる。\nこの善光寺如来は由緒ある仏像として権威の象徴とも見なされ、戦国時代には大名がこぞって自領（本拠地）に善光寺如来を遷座させ、各地を転々とした。\n昔から多くの人々が日本中から善光寺を目指して参詣し、「一生に一度は参れ善光寺」と言われた。長野市の中心市街地は善光寺門前町を含み、長野市ほか北信に広がる長野盆地は「善光寺平」とも呼ばれる。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%96%84%E5%85%89%E5%AF%BA",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1918年の『善光寺案内記』は、山門から本堂へ進みながら境内を紹介しています。善光寺は特定の宗派に属さず、さまざまな人の参拝を受け入れてきた寺です。現在の本堂は1707年の再建で、国宝に指定されています。山門は1750年に建てられました。参道を歩くと、門前の店や院坊の並ぶ町と境内が続いていることが分かります。本堂だけを目的地にせず、町から山門、本堂へと進む道筋をたどってみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-zenkoji-guide-1918",
+          "title": "倉島元弥編『善光寺案内記』（1918年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/910279"
+        },
+        {
+          "id": "official-zenkoji-about",
+          "title": "善光寺の紹介（善光寺）",
+          "url": "https://www.zenkoji.jp/about/"
+        },
+        {
+          "id": "official-zenkoji-hondo",
+          "title": "善光寺本堂（善光寺）",
+          "url": "https://www.zenkoji.jp/about/hondou/"
+        },
+        {
+          "id": "official-zenkoji-buildings",
+          "title": "善光寺の主要施設（善光寺）",
+          "url": "https://www.zenkoji.jp/about/syuyou/"
+        }
+      ]
     },
     {
       "id": "regional-245249",
@@ -1560,7 +1605,27 @@
       "wiki_en": "Inuyama Castle",
       "extract_ja": "犬山城（いぬやまじょう）は、尾張国丹羽郡犬山（現・愛知県犬山市）にあった日本の城。天守のみが現存し、「現存12天守」の中でも最も古いとされる。天守が国宝指定された5城のうちの1つでもある。城跡は「犬山城跡」として、国の史跡に指定されている。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E7%8A%AC%E5%B1%B1%E5%9F%8E",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1925年の『名古屋案内』は、犬山城を名古屋の北にある犬山町の見どころとして紹介し、尾張藩の重臣・成瀬家の旧居城と記しています。城は木曽川沿いの小高い丘にあり、天守から川と濃尾平野を見渡せます。成瀬家は1617年から長く城を守り、現存する天守は国宝です。ただし天守がいつ完成したかには諸説があり、一つの年に決めつけられません。川を望む立地と、戦国から江戸へ城主が変わった歴史を合わせて見てみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-nagoya-guide-1925",
+          "title": "長尾盛之助『名古屋案内』（1925年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/905365"
+        },
+        {
+          "id": "official-inuyama-castle",
+          "title": "犬山城の見学案内（犬山市）",
+          "url": "https://www.city.inuyama.aichi.jp/kurashi/bunka/1001052/1003738/1012507.html"
+        },
+        {
+          "id": "official-inuyama-castle-research",
+          "title": "犬山城天守の文化的価値（犬山市）",
+          "url": "https://www.city.inuyama.aichi.jp/_res/projects/default_project/_page_/001/012/164/hozonkatuyou.pdf"
+        }
+      ]
     },
     {
       "id": "regional-238688",

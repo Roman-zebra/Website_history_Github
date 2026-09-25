@@ -1080,9 +1080,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I905365",
       "fullText": "https://dl.ndl.go.jp/pid/905365",
       "access": "ログインなしで閲覧可能／インターネット公開（裁定）",
-      "fullTextSearchFrames": [46, 47, 48, 49],
-      "notes": "46～49コマの名古屋城の章を画像で確認。家康による清須からの移転、石垣用の巨石を大名が運んだこと、金鯱を記す。1945年以後の建物は公式資料で補う。",
-      "usedFor": ["nagoya", "名古屋城"]
+      "fullTextSearchFrames": [46, 47, 48, 49, 76],
+      "notes": "46～49コマの名古屋城の章を画像で確認。家康による清須からの移転、石垣用の巨石を大名が運んだこと、金鯱を記す。1945年以後の建物は公式資料で補う。 76コマの犬山城の項に名古屋北方の立地と成瀬家の旧居城を確認。",
+      "usedFor": ["nagoya", "名古屋城", "犬山城"]
     },
     {
       "id": "official-nagoya-tower",
@@ -1839,6 +1839,97 @@
       "url": "https://www.pref.wakayama.lg.jp/prefg/081300/d00214505.html",
       "notes": "1889年洪水、大斎原から現社地への移転。",
       "usedFor": ["熊野本宮大社"]
+    },
+    {
+      "id": "ndl-zenkoji-guide-1918",
+      "type": "book",
+      "title": "善光寺案内記",
+      "author": "倉島元弥 編",
+      "publisher": "仏都新報社",
+      "year": 1918,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I910279",
+      "fullText": "https://dl.ndl.go.jp/pid/910279",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [3, 10, 13, 14, 43, 44],
+      "notes": "10コマに山門から本堂へ向かう案内、3コマに山門・仁王門などの境内構成。古い信仰伝承は史実と区別。",
+      "usedFor": ["善光寺"]
+    },
+    {
+      "id": "ndl-eiheiji-shinkei-1939",
+      "type": "book",
+      "title": "永平寺真景 2版",
+      "author": "永平寺 編",
+      "publisher": "永平寺",
+      "year": 1939,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1095050",
+      "fullText": "https://dl.ndl.go.jp/pid/1095050",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [16, 17, 18, 19],
+      "notes": "16～19コマに山門が七堂伽藍の一つで、仏殿へつながる構成を確認。OCRに欠落が多いため、それ以上の具体的な歴史叙述は公式資料で補う。",
+      "usedFor": ["永平寺"]
+    },
+    {
+      "id": "official-zenkoji-about",
+      "type": "official",
+      "title": "善光寺の紹介",
+      "publisher": "善光寺",
+      "url": "https://www.zenkoji.jp/about/",
+      "notes": "無宗派の寺としての運営、1707年の再建。",
+      "usedFor": ["善光寺"]
+    },
+    {
+      "id": "official-zenkoji-hondo",
+      "type": "official",
+      "title": "善光寺本堂",
+      "publisher": "善光寺",
+      "url": "https://www.zenkoji.jp/about/hondou/",
+      "notes": "1707年再建と国宝指定。",
+      "usedFor": ["善光寺"]
+    },
+    {
+      "id": "official-zenkoji-buildings",
+      "type": "official",
+      "title": "善光寺の主要施設",
+      "publisher": "善光寺",
+      "url": "https://www.zenkoji.jp/about/syuyou/",
+      "notes": "1750年の山門と境内の建物。",
+      "usedFor": ["善光寺"]
+    },
+    {
+      "id": "official-eiheiji-town-guide",
+      "type": "official",
+      "title": "大本山永平寺",
+      "publisher": "永平寺町",
+      "url": "https://www.town.eiheiji.lg.jp/200/300/311/p000773_d/fil/eiheijicho.pdf",
+      "notes": "1244年の開山と現役の修行道場。",
+      "usedFor": ["永平寺"]
+    },
+    {
+      "id": "official-eiheiji-seven-halls",
+      "type": "official",
+      "title": "永平寺の七堂伽藍",
+      "publisher": "永平寺町",
+      "url": "https://www.town.eiheiji.lg.jp/420/430/p003271_d/fil/2018-03-kouhou.pdf",
+      "notes": "修行に使う七堂伽藍の構成。",
+      "usedFor": ["永平寺"]
+    },
+    {
+      "id": "official-inuyama-castle",
+      "type": "official",
+      "title": "犬山城の見学案内",
+      "publisher": "犬山市",
+      "url": "https://www.city.inuyama.aichi.jp/kurashi/bunka/1001052/1003738/1012507.html",
+      "notes": "1617年以降の成瀬家、現存天守と眺望。",
+      "usedFor": ["犬山城"]
+    },
+    {
+      "id": "official-inuyama-castle-research",
+      "type": "official",
+      "title": "犬山城天守の文化的価値",
+      "publisher": "犬山市",
+      "url": "https://www.city.inuyama.aichi.jp/_res/projects/default_project/_page_/001/012/164/hozonkatuyou.pdf",
+      "notes": "天守の建立年代が断定できないこと。",
+      "usedFor": ["犬山城"]
     }
   ]
 }
