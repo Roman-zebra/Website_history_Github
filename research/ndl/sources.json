@@ -757,6 +757,92 @@
       "url": "https://www.pref.kyoto.jp/tango/tango-doboku/hashitate_gaiyo.html",
       "notes": "砂州が宮津湾と阿蘇海を隔て、大天橋・小天橋の間に水路があり、傘松が股のぞきの眺望地であることを確認。",
       "usedFor": ["regional-17954"]
+    },
+    {
+      "id": "ndl-hokkaido-guide-1936",
+      "type": "book",
+      "title": "日本案内記 北海道篇",
+      "author": "鉄道省",
+      "publisher": "博文館",
+      "year": 1936,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1877025",
+      "fullText": "https://dl.ndl.go.jp/pid/1877025",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [33, 46, 60, 73, 105, 109, 110, 126, 127, 130],
+      "notes": "1936年の案内書。126～127コマに創成川と札幌の格子状街路、60コマに函館山麓から広がる市街、33コマに元町の教会、46・73コマに五稜郭と箱館奉行所、105・109・110コマに小樽港と北海製罐倉庫会社を確認。小樽運河という名称・成立事情は本文検索では確認できず、小樽市の現行資料を根拠にした。",
+      "usedFor": ["sapporo", "hakodate", "regional-10577", "regional-316631"]
+    },
+    {
+      "id": "official-sapporo-grid",
+      "type": "official",
+      "title": "冬の歴史",
+      "publisher": "札幌市",
+      "url": "https://www.city.sapporo.jp/kensetsu/yuki/library/hist/01.html",
+      "notes": "1871年の街路計画、創成川と大通を基準にした東西南北の住所を確認。",
+      "usedFor": ["sapporo"]
+    },
+    {
+      "id": "official-sapporo-blocks",
+      "type": "official",
+      "title": "中央区のまちの姿",
+      "publisher": "札幌市",
+      "url": "https://www.city.sapporo.jp/chuo/gaiyo/profile.html",
+      "notes": "格子状の区画と街路の大きさを確認。",
+      "usedFor": ["sapporo"]
+    },
+    {
+      "id": "official-hakodate-port-history",
+      "type": "official",
+      "title": "函館市のあゆみ",
+      "publisher": "函館市",
+      "url": "https://www.city.hakodate.hokkaido.jp/docs/2014012000086/",
+      "notes": "1859年の外国貿易港としての開港を確認。",
+      "usedFor": ["hakodate"]
+    },
+    {
+      "id": "official-hakodate-preservation",
+      "type": "official",
+      "title": "函館市元町末広町伝統的建造物群保存地区",
+      "publisher": "函館市",
+      "url": "https://www.city.hakodate.hokkaido.jp/docs/2014022000335/",
+      "notes": "元町・末広町の坂と港に沿う保存地区、明治から戦前にかけての建物を確認。",
+      "usedFor": ["hakodate"]
+    },
+    {
+      "id": "official-goryokaku-history",
+      "type": "official",
+      "title": "函館市の概要",
+      "publisher": "函館市",
+      "url": "https://www.city.hakodate.hokkaido.jp/docs/2014012300506/",
+      "notes": "1864年の五稜郭完成と1869年の旧幕府軍降伏を確認。",
+      "usedFor": ["regional-10577"]
+    },
+    {
+      "id": "official-goryokaku-office",
+      "type": "official",
+      "title": "箱館奉行所の歴史",
+      "publisher": "箱館奉行所",
+      "url": "https://hakodate-bugyosho.jp/history/",
+      "notes": "奉行所解体と2010年の部分復元を確認。",
+      "usedFor": ["regional-10577"]
+    },
+    {
+      "id": "official-otaru-canal",
+      "type": "official",
+      "title": "小樽運河",
+      "publisher": "小樽市",
+      "url": "https://www.city.otaru.lg.jp/docs/2020100900367",
+      "notes": "1923年完成、沖合の埋立てによる湾曲した水路、1986年の一部埋立て・散策路整備を確認。",
+      "usedFor": ["regional-316631"]
+    },
+    {
+      "id": "official-otaru-port-history",
+      "type": "official",
+      "title": "小樽港の沿革と自然状況",
+      "publisher": "小樽市",
+      "url": "https://www.city.otaru.lg.jp/docs/2020100700011/",
+      "notes": "1914年の運河式埋立工事着工、1923年完成、1986年散策路完成を確認。",
+      "usedFor": ["regional-316631"]
     }
   ]
 }
