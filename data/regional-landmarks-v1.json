@@ -1530,7 +1530,27 @@
       "wiki_en": "Nirayama Reverberatory Furnace",
       "extract_ja": "韮山反射炉（にらやまはんしゃろ、英：Nirayama Reverberatory Furnaces）は、静岡県伊豆の国市にある反射炉跡である。築造当時の形で現存する反射炉であり、1922年（大正11年）国の史跡に指定されている。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E9%9F%AE%E5%B1%B1%E5%8F%8D%E5%B0%84%E7%82%89",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1930年の『日本案内記』は、韮山の反射炉跡を幕末の江川英龍に結びつけ、江川邸などと一緒に巡る場所として案内しています。反射炉は高温で鉄を溶かし、西洋式の大砲を鋳造するための施設です。英龍が建設を進めましたが、完成は彼の死後の1857年でした。実際に稼働した反射炉が残る国内唯一の例として、現在は世界遺産の構成資産になっています。煙突のような二つの塔を見るだけでなく、炉と大砲づくりの関係を想像してみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kanto-guide-1930",
+          "title": "鉄道省『日本案内記 関東篇』（1930年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176338"
+        },
+        {
+          "id": "official-nirayama-furnace",
+          "title": "韮山反射炉とは（伊豆の国市）",
+          "url": "https://www.city.izunokuni.shizuoka.jp/bunka_bunkazai/manabi/bunkazai/hansyaro/documents/hansyarotoha.html"
+        },
+        {
+          "id": "official-nirayama-heritage",
+          "title": "韮山反射炉（伊豆の国市）",
+          "url": "https://www.city.izunokuni.shizuoka.jp/bunka_bunkazai/manabi/bunkazai/hansyaro/"
+        }
+      ]
     },
     {
       "id": "regional-51919",
@@ -1555,7 +1575,32 @@
       "wiki_en": "Kunōzan Tōshō-gū",
       "extract_ja": "久能山東照宮（くのうざんとうしょうぐう）は、日本の静岡市駿河区根古屋に所在する神社である。江戸幕府を創始して晩年を駿府（現在の静岡市葵区）で大御所として過ごした徳川家康が元和2年（1616年）に死去、遺命によってこの地に埋葬された。駿河湾に面した久能山の南斜面に設けられた表参道（1159段の曲がりくねった石段）を登った上に神社がある。\n江戸時代には20年に一度、明治時代以降では50年に一度、社殿を始めとした諸建造物の漆塗り替えが行われており、近年では2006年（平成18年）に社殿の塗り替えが完了した。\n2010年（平成22年）12月に、本殿、石の間、拝殿が国宝に指定された。2015年（平成27年）には鎮座400年を迎え、様々な催し物が企画、開催された。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E4%B9%85%E8%83%BD%E5%B1%B1%E6%9D%B1%E7%85%A7%E5%AE%AE",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "1930年の『日本案内記』は、海に向いた山麓から曲がりくねった道を上り、久能山東照宮に参る道筋を記しています。社には徳川家康がまつられ、1616年に亡くなった家康の墓所もあります。色鮮やかな社殿は江戸初期の建築で、国宝に指定されています。建物の装飾だけでなく、駿河湾を見下ろす山の地形にも注目してください。山上の社殿と海へ開けた眺めを合わせて見ると、家康が久能山を墓所に選んだ歴史が身近になります。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kanto-guide-1930",
+          "title": "鉄道省『日本案内記 関東篇』（1930年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1176338"
+        },
+        {
+          "id": "official-kunozan-about",
+          "title": "久能山東照宮について（久能山東照宮）",
+          "url": "https://www.toshogu.or.jp/about/"
+        },
+        {
+          "id": "official-kunozan-ieyasu",
+          "title": "徳川家康公について（久能山東照宮）",
+          "url": "https://www.toshogu.or.jp/about/ieyasu.php"
+        },
+        {
+          "id": "official-shizuoka-bay",
+          "title": "駿河湾の文化（静岡県）",
+          "url": "https://www.pref.shizuoka.jp/machizukuri/kowan/1040846/1025743.html"
+        }
+      ]
     },
     {
       "id": "regional-27176",
