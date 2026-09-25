@@ -2980,6 +2980,36 @@
       "publisher": "横須賀市",
       "notes": "1881年着工、1884年竣工、砲台の目的、2015年の国史跡指定、現在の公園内位置。",
       "usedFor": ["猿島"]
+    },
+    {
+      "id": "ndl-brick-conservation-2017-shimonoseki",
+      "type": "book",
+      "title": "煉瓦造建造物の保存と修復（未来につなぐ人類の技17）",
+      "author": "国立文化財機構東京文化財研究所保存科学研究センター近代文化遺産研究室 編",
+      "year": 2017,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000001-I31111120162175",
+      "fullText": "https://www.tobunken.go.jp/image-gallery/conservation/17/HTML/index71.html",
+      "access": "東京文化財研究所が電子ブックを全文公開。NDLサーチに図書として登録。",
+      "notes": "電子ブック71/130の表示ページ、印刷69頁で旧下関英国領事館の煉瓦壁・帯鉄の腐食と補強方法を確認。2014年の下関市修理報告書からの転載と明記。",
+      "usedFor": ["旧下関英国領事館"]
+    },
+    {
+      "id": "official-shimonoseki-consulate",
+      "title": "重要文化財 旧下関英国領事館（下関市）",
+      "url": "https://www.city.shimonoseki.lg.jp/soshiki/104/5885.html",
+      "type": "official",
+      "publisher": "下関市",
+      "notes": "1906年建築、1999年重文指定、2014年再開館、現在の公開。",
+      "usedFor": ["旧下関英国領事館"]
+    },
+    {
+      "id": "official-shimonoseki-consulate-architecture",
+      "title": "旧下関英国領事館の建築について（下関市）",
+      "url": "https://www.city.shimonoseki.lg.jp/soshiki/104/5887.html",
+      "type": "official",
+      "publisher": "下関市",
+      "notes": "英国政府工務局ウィリアム・コーワンの設計、1階執務室・2階住居、外観の構造。",
+      "usedFor": ["旧下関英国領事館"]
     }
   ]
 }
