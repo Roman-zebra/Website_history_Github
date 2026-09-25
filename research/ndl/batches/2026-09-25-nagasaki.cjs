@@ -113,3 +113,22 @@ edit('regional-landmarks-v1.json', 'landmarks', 'regional-83101', spot => {
   ];
   spot.reviewedOn = '2026-09-25';
 });
+
+edit('regional-landmarks-v1.json', 'landmarks', 'regional-109545', spot => {
+  spot.summaries = {...spot.summaries, ja:'彦根城は琵琶湖に近い小高い丘に築かれ、北東には藩主の庭園・玄宮園が広がります。1941年の案内書は、天守から湖を望めることと、庭園がかつての内湖から水を引いていたことを記しました。城の堀と庭園の池、今は姿を変えた湖岸の位置を昔の航空写真で比べてみましょう。'};
+  spot.researchSources = [
+    {id:'ndl-kinki-guide-1941', title:'『日本案内記 近畿篇 上』（1941年・国立国会図書館）', url:'https://dl.ndl.go.jp/pid/1172399'},
+    {id:'official-hikone-castle', title:'特別史跡彦根城跡（彦根市）', url:'https://www.city.hikone.lg.jp/kakuka/kanko_bunka/8/2_2/4588.html'},
+    {id:'official-hikone-genkyuen', title:'玄宮園（彦根市）', url:'https://www.city.hikone.lg.jp/kakuka/kanko_bunka/5/hikonefilmcomission/roke-syonsyokai/hikonejohikonejosyuhen/22097.html'}
+  ];
+  spot.reviewedOn = '2026-09-25';
+});
+
+edit('regional-landmarks-v1.json', 'landmarks', 'regional-17954', spot => {
+  spot.summaries = {...spot.summaries, ja:'天橋立は松の生える細長い砂州で、宮津湾と内側の阿蘇海を分けています。1941年の案内書にも、松林を歩く楽しみと、北側の傘松から景色を逆さに見る「股のぞき」が登場します。今の地図では大天橋と小天橋を隔てる水路を探し、砂州の両側で海の形がどう違うか見比べてみましょう。'};
+  spot.researchSources = [
+    {id:'ndl-kinki-guide-1941', title:'『日本案内記 近畿篇 上』（1941年・国立国会図書館）', url:'https://dl.ndl.go.jp/pid/1172399'},
+    {id:'official-amanohashidate-geography', title:'天橋立の概要（京都府）', url:'https://www.pref.kyoto.jp/tango/tango-doboku/hashitate_gaiyo.html'}
+  ];
+  spot.reviewedOn = '2026-09-25';
+});

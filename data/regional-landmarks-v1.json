@@ -1225,7 +1225,27 @@
       "wiki_en": "Hikone Castle",
       "extract_ja": "彦根城（ひこねじょう）は、近江国犬上郡彦根（現在の滋賀県彦根市金亀町）にある城。江戸時代には彦根藩の政庁が置かれた。天守、附櫓及び多聞櫓は国宝、城跡は特別史跡かつ琵琶湖国定公園第1種特別地域である。天守が国宝指定された5城のうちのひとつでもある（他は犬山城、松本城、姫路城、松江城）。彦根八景・琵琶湖八景に選定されている。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%BD%A6%E6%A0%B9%E5%9F%8E",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "彦根城は琵琶湖に近い小高い丘に築かれ、北東には藩主の庭園・玄宮園が広がります。1941年の案内書は、天守から湖を望めることと、庭園がかつての内湖から水を引いていたことを記しました。城の堀と庭園の池、今は姿を変えた湖岸の位置を昔の航空写真で比べてみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kinki-guide-1941",
+          "title": "『日本案内記 近畿篇 上』（1941年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1172399"
+        },
+        {
+          "id": "official-hikone-castle",
+          "title": "特別史跡彦根城跡（彦根市）",
+          "url": "https://www.city.hikone.lg.jp/kakuka/kanko_bunka/8/2_2/4588.html"
+        },
+        {
+          "id": "official-hikone-genkyuen",
+          "title": "玄宮園（彦根市）",
+          "url": "https://www.city.hikone.lg.jp/kakuka/kanko_bunka/5/hikonefilmcomission/roke-syonsyokai/hikonejohikonejosyuhen/22097.html"
+        }
+      ]
     },
     {
       "id": "regional-720333",
@@ -1315,7 +1335,22 @@
       "wiki_en": "Amanohashidate",
       "extract_ja": "天橋立（あまのはしだて）は、京都府宮津市にある、宮津湾と阿蘇海を南北に隔てる全長3.6キロメートルの湾口砂州。松島、厳島と並ぶ日本三景の一つであり、日本遺産「300年を紡ぐ絹が織り成す丹後ちりめん回廊」の構成文化財の一つに指定されている。2024年（令和6年）の観光入込客数は300万5700人と、京都府の自治体別では京都市、宇治市、京丹波町、亀岡市に次いで第5位である。",
       "coordSource": "https://ja.wikipedia.org/wiki/%E5%A4%A9%E6%A9%8B%E7%AB%8B",
-      "reviewedOn": "2026-09-12"
+      "reviewedOn": "2026-09-25",
+      "summaries": {
+        "ja": "天橋立は松の生える細長い砂州で、宮津湾と内側の阿蘇海を分けています。1941年の案内書にも、松林を歩く楽しみと、北側の傘松から景色を逆さに見る「股のぞき」が登場します。今の地図では大天橋と小天橋を隔てる水路を探し、砂州の両側で海の形がどう違うか見比べてみましょう。"
+      },
+      "researchSources": [
+        {
+          "id": "ndl-kinki-guide-1941",
+          "title": "『日本案内記 近畿篇 上』（1941年・国立国会図書館）",
+          "url": "https://dl.ndl.go.jp/pid/1172399"
+        },
+        {
+          "id": "official-amanohashidate-geography",
+          "title": "天橋立の概要（京都府）",
+          "url": "https://www.pref.kyoto.jp/tango/tango-doboku/hashitate_gaiyo.html"
+        }
+      ]
     },
     {
       "id": "regional-804212",

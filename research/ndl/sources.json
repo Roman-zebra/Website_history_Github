@@ -36,9 +36,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1172399",
       "fullText": "https://dl.ndl.go.jp/pid/1172399",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [13, 29, 55, 92, 113, 133, 168, 172, 185],
-      "notes": "京都と近郊を扱う巻。92コマに金閣の建物と衣笠山を背景に取り込む庭、133コマに銀閣・東求堂が残ることと義政が銀閣完成前に没したことを確認。113コマに清水寺の舞台を支える長柱と貫、および音羽の滝。13コマの写真目次に稲荷神社の千本鳥居、172コマに稲荷山三峰と社の記述。185コマに平等院のかつての諸堂と鳳凰堂、55・168コマに東福寺の紅葉と東山麓の境内。1941年刊なので金閣については1950年の焼失・1955年の再建を必ず現行資料で補う。",
-      "usedFor": ["鹿苑寺", "慈照寺", "kyoto", "清水寺", "伏見稲荷大社", "平等院", "regional-83101"]
+      "fullTextSearchFrames": [13, 29, 55, 92, 113, 133, 168, 172, 185, 241, 257],
+      "notes": "京都と近郊を扱う巻。92コマに金閣の建物と衣笠山を背景に取り込む庭、133コマに銀閣・東求堂が残ることと義政が銀閣完成前に没したことを確認。113コマに清水寺の舞台を支える長柱と貫、および音羽の滝。13コマの写真目次に稲荷神社の千本鳥居、172コマに稲荷山三峰と社の記述。185コマに平等院のかつての諸堂と鳳凰堂、55・168コマに東福寺の紅葉と東山麓の境内。241コマに彦根城と玄宮園、257コマに天橋立の砂州と傘松からの股のぞき。天橋立の寸法は現行の京都府資料と異なるため原稿には採用しない。1941年刊なので金閣については1950年の焼失・1955年の再建を必ず現行資料で補う。",
+      "usedFor": ["鹿苑寺", "慈照寺", "kyoto", "清水寺", "伏見稲荷大社", "平等院", "regional-83101", "regional-109545", "regional-17954"]
     },
     {
       "id": "official-himeji-scale",
@@ -232,6 +232,33 @@
       "url": "https://tofukuji.jp/guide/tsutenkyo/",
       "notes": "橋が本堂と開山堂を結び、谷の洗玉澗を渡ることを確認。",
       "usedFor": ["regional-83101"]
+    },
+    {
+      "id": "official-hikone-castle",
+      "type": "official",
+      "title": "特別史跡彦根城跡",
+      "publisher": "彦根市",
+      "url": "https://www.city.hikone.lg.jp/kakuka/kanko_bunka/8/2_2/4588.html",
+      "notes": "城と堀、かつての松原内湖と庭園の位置関係を確認。",
+      "usedFor": ["regional-109545"]
+    },
+    {
+      "id": "official-hikone-genkyuen",
+      "type": "official",
+      "title": "玄宮園",
+      "publisher": "彦根市",
+      "url": "https://www.city.hikone.lg.jp/kakuka/kanko_bunka/5/hikonefilmcomission/roke-syonsyokai/hikonejohikonejosyuhen/22097.html",
+      "notes": "庭園が彦根城の北東に位置することを確認。",
+      "usedFor": ["regional-109545"]
+    },
+    {
+      "id": "official-amanohashidate-geography",
+      "type": "official",
+      "title": "天橋立の概要",
+      "publisher": "京都府",
+      "url": "https://www.pref.kyoto.jp/tango/tango-doboku/hashitate_gaiyo.html",
+      "notes": "砂州が宮津湾と阿蘇海を隔て、大天橋・小天橋の間に水路があり、傘松が股のぞきの眺望地であることを確認。",
+      "usedFor": ["regional-17954"]
     }
   ]
 }
