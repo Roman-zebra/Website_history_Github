@@ -2695,6 +2695,108 @@
       "publisher": "大阪くらしの今昔館",
       "notes": "8階の明治・大正・昭和の模型展示。",
       "usedFor": ["大阪くらしの今昔館"]
+    },
+    {
+      "id": "ndl-landlords-tenants-1909",
+      "type": "book",
+      "title": "地主ト小作人（農務彙纂 第5）",
+      "author": "農商務省農務局",
+      "year": 1909,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1172814",
+      "fullText": "https://dl.ndl.go.jp/pid/1172814",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [53, 54],
+      "notes": "「伊藤文吉氏ノ恒産會ト農事改良」83頁以降を画像で確認。小作人の貯蓄奨励、農事改良、肥料共同購入など。地主・小作関係の当時の行政資料であり、屋敷の現況には使用しない。",
+      "usedFor": ["北方文化博物館"]
+    },
+    {
+      "id": "official-hoppo-history",
+      "title": "伊藤家の歴史（北方文化博物館）",
+      "url": "https://hoppou-bunka.com/history/",
+      "type": "official",
+      "publisher": "北方文化博物館",
+      "notes": "伊藤家の歩み、明治期の屋敷建築、戦後の農地改革と博物館設立。",
+      "usedFor": ["北方文化博物館"]
+    },
+    {
+      "id": "official-hoppo-building",
+      "title": "建物のご案内（北方文化博物館）",
+      "url": "https://hoppou-bunka.com/building/",
+      "type": "official",
+      "publisher": "北方文化博物館",
+      "notes": "帳場・茶の間・大広間と庭園の位置づけ。",
+      "usedFor": ["北方文化博物館"]
+    },
+    {
+      "id": "ndl-takahashi-autobiography-1936",
+      "type": "book",
+      "title": "高橋是清自伝",
+      "author": "高橋是清",
+      "year": 1936,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1207485",
+      "fullText": "https://dl.ndl.go.jp/pid/1207485",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [326],
+      "notes": "326コマの「赤坂表町に新築中の新宅」「ほぼ落成」「邸内の旧家から」などの回想を画像で確認。現存する移築建物の範囲や二・二六事件は園の公式資料で確認。",
+      "usedFor": ["江戸東京たてもの園"]
+    },
+    {
+      "id": "official-tatemonoen-center",
+      "title": "センターゾーンの復元建造物（江戸東京たてもの園）",
+      "url": "https://www.tatemonoen.jp/restore/intro/center.php",
+      "type": "official",
+      "publisher": "江戸東京たてもの園",
+      "notes": "高橋是清邸の1902年建築、移築された主屋部分、2階の書斎・寝室と二・二六事件。",
+      "usedFor": ["江戸東京たてもの園"]
+    },
+    {
+      "id": "official-tatemonoen-east",
+      "title": "東ゾーンの復元建造物（江戸東京たてもの園）",
+      "url": "https://www.tatemonoen.jp/restore/intro/east.php",
+      "type": "official",
+      "publisher": "江戸東京たてもの園",
+      "notes": "東ゾーンの醤油店、居酒屋、銭湯など。",
+      "usedFor": ["江戸東京たてもの園"]
+    },
+    {
+      "id": "official-tatemonoen-overview",
+      "title": "概要・沿革（江戸東京たてもの園）",
+      "url": "https://www.tatemonoen.jp/about/overview.php",
+      "type": "official",
+      "publisher": "江戸東京たてもの園",
+      "notes": "建物の移築・保存と生活情景の復元という園の目的。",
+      "usedFor": ["江戸東京たてもの園"]
+    },
+    {
+      "id": "ndl-tsuruoka-local-reader-1941",
+      "type": "book",
+      "title": "郷土読本",
+      "author": "鶴岡市教育会 編",
+      "year": 1941,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1055554",
+      "fullText": "https://dl.ndl.go.jp/pid/1055554",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [63],
+      "notes": "「郷土巡り」113～114頁の加茂の磯、漁船、水族館に言及する韻文を画像で確認。1930年の創立や現在の展示数・設備の根拠には用いない。",
+      "usedFor": ["鶴岡市立加茂水族館"]
+    },
+    {
+      "id": "official-kamo-about",
+      "title": "かもすいとは（鶴岡市立加茂水族館）",
+      "url": "https://kamo-kurage.jp/kamosui/",
+      "type": "official",
+      "publisher": "鶴岡市立加茂水族館",
+      "notes": "1930年の地域出資による開館、1997年の存続危機とクラゲ展示への転換、現在の約100種類展示と研究所。",
+      "usedFor": ["鶴岡市立加茂水族館"]
+    },
+    {
+      "id": "official-kamo-renewal-2026",
+      "title": "2026年のリニューアル（鶴岡市立加茂水族館）",
+      "url": "https://kamo-kurage.jp/?p=21093",
+      "type": "official",
+      "publisher": "鶴岡市立加茂水族館",
+      "notes": "2026年4月の研究所棟増設、マイクロアクアリウムと顕微鏡・ルーペによる小型クラゲの観察。",
+      "usedFor": ["鶴岡市立加茂水族館"]
     }
   ]
 }
