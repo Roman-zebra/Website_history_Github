@@ -2929,6 +2929,36 @@
       "access": "吉野ヶ里歴史公園が全文PDFを公開",
       "notes": "表紙と奥付、PDF2頁の発見と公園化、6頁の高床倉庫と南のムラ、8頁の弥生人骨と北墳丘墓を画像で確認。国立国会図書館サーチの2020年発掘報告書とは別資料。",
       "usedFor": ["吉野ヶ里遺跡"]
+    },
+    {
+      "id": "ndl-shime-preservation-plan-2013-rev2023",
+      "type": "book",
+      "title": "重要文化財旧志免鉱業所竪坑櫓保存活用計画（2013年刊、2023年改訂版）",
+      "author": "志免町教育委員会／志免町",
+      "year": 2013,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000002-I024913616",
+      "fullText": "https://www.town.shime.lg.jp/uploaded/attachment/23873.pdf",
+      "access": "NDLサーチは2013年版を図書として登録。志免町が改訂版の全文PDFを公開。両版は同一ではない。",
+      "notes": "改訂版の表紙と印刷7頁を画像で確認。竪坑櫓の沿革、構造、海軍・国鉄・閉山後の経緯。",
+      "usedFor": ["志免町"]
+    },
+    {
+      "id": "official-shime-shaft-tower",
+      "title": "旧志免鉱業所竪坑櫓（志免町）",
+      "url": "https://www.town.shime.lg.jp/site/bunkazai/tatekou-yagura2.html",
+      "type": "official",
+      "publisher": "志免町",
+      "notes": "1943年竣工、高さ47.6m、竪坑430m、ケージと巻き上げ機、国重要文化財の指定。",
+      "usedFor": ["志免町"]
+    },
+    {
+      "id": "official-shime-shimate-facilities",
+      "title": "シーメイト施設のご案内（志免町）",
+      "url": "https://www.town.shime.lg.jp/site/shimate/shisetsu-annai.html",
+      "type": "official",
+      "publisher": "志免町",
+      "notes": "現地のシーメイトと広場・公園の状況。",
+      "usedFor": ["志免町"]
     }
   ]
 }
