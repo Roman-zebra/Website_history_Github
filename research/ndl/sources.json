@@ -1069,6 +1069,129 @@
       "url": "https://www.dazaifutenmangu.or.jp/about/tenjinsama-ume",
       "notes": "飛梅は菅原道真にまつわる伝説として語られていることを確認。",
       "usedFor": ["regional-1467126"]
+    },
+    {
+      "id": "ndl-nagoya-guide-1925",
+      "type": "book",
+      "title": "名古屋案内",
+      "author": "長尾盛之助",
+      "publisher": "名古屋案内発行所",
+      "year": 1925,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I905365",
+      "fullText": "https://dl.ndl.go.jp/pid/905365",
+      "access": "ログインなしで閲覧可能／インターネット公開（裁定）",
+      "fullTextSearchFrames": [46, 47, 48, 49],
+      "notes": "46～49コマの名古屋城の章を画像で確認。家康による清須からの移転、石垣用の巨石を大名が運んだこと、金鯱を記す。1945年以後の建物は公式資料で補う。",
+      "usedFor": ["nagoya"]
+    },
+    {
+      "id": "official-nagoya-tower",
+      "type": "official",
+      "title": "天守閣",
+      "publisher": "名古屋城",
+      "url": "https://www.nagoyajo.city.nagoya.jp/guide/tenshu/",
+      "notes": "1945年焼失、1959年再建、現天守の閉館を確認。",
+      "usedFor": ["nagoya"]
+    },
+    {
+      "id": "official-nagoya-palace",
+      "type": "official",
+      "title": "本丸御殿",
+      "publisher": "名古屋城",
+      "url": "https://www.nagoyajo.city.nagoya.jp/guide/honmarugoten/",
+      "notes": "1945年焼失、2018年の復元完了と史料に基づく再建を確認。",
+      "usedFor": ["nagoya"]
+    },
+    {
+      "id": "official-nagoya-faq",
+      "type": "official",
+      "title": "よくある質問",
+      "publisher": "名古屋城",
+      "url": "https://www.nagoyajo.city.nagoya.jp/info/faq/",
+      "notes": "天守閉館中でも本丸御殿などを見学できることを確認。",
+      "usedFor": ["nagoya"]
+    },
+    {
+      "id": "ndl-kanazawa-city-history-1925",
+      "type": "book",
+      "title": "稿本金沢市史 市街編 第1",
+      "author": "金沢市",
+      "publisher": "金沢市",
+      "year": 1925,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I951540",
+      "fullText": "https://dl.ndl.go.jp/pid/951540",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [45, 72],
+      "notes": "45コマの地勢総説、72コマの河流の章を画像で確認。犀川・浅野川と間の台地・坂を町の地形として記す。戦後の城跡の用途は金沢市資料で補う。",
+      "usedFor": ["kanazawa"]
+    },
+    {
+      "id": "official-kanazawa-history",
+      "type": "official",
+      "title": "金沢の歴史と文化",
+      "publisher": "金沢市",
+      "url": "https://digilib.city.kanazawa.ishikawa.jp/preview/pdf/Br_-JAAAA",
+      "notes": "1583年の前田利家入城、城下町と工芸文化の発展を確認。",
+      "usedFor": ["kanazawa"]
+    },
+    {
+      "id": "official-kanazawa-castle-park",
+      "type": "official",
+      "title": "金沢の維持及び向上すべき歴史的風致",
+      "publisher": "金沢市",
+      "url": "https://digilib.city.kanazawa.ishikawa.jp/preview/pdf/BFFzQgAAA",
+      "notes": "城跡の金沢大学キャンパス利用、1995年移転後の公園整備、石川門・石垣と兼六園の位置を確認。",
+      "usedFor": ["kanazawa"]
+    },
+    {
+      "id": "official-kanazawa-teahouse",
+      "type": "official",
+      "title": "時を歩くまち 金沢",
+      "publisher": "金沢市観光協会",
+      "url": "https://www.kanazawa-kankoukyoukai.or.jp/modelCourse/detail_136.html",
+      "notes": "浅野川東側のひがし茶屋街が1820年に整えられ、当時の町割りが続くことを確認。",
+      "usedFor": ["kanazawa"]
+    },
+    {
+      "id": "ndl-iwate-1934-tsunami",
+      "type": "book",
+      "title": "岩手県昭和震災誌 : 於昭和八年三月三日",
+      "author": "岩手県",
+      "publisher": "岩手県",
+      "year": 1934,
+      "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1746255",
+      "fullText": "https://dl.ndl.go.jp/pid/1746255",
+      "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
+      "fullTextSearchFrames": [521, 679, 699],
+      "notes": "679コマに1933年の姉吉の家屋・家財の壊滅、521コマに沿岸町村への浸水線石標・記念碑の設置方針。699コマに高地移転と教訓伝承を防災の例として記す。姉吉の碑文と2011年の結果は別の公式資料による。",
+      "usedFor": ["aneyoshi"]
+    },
+    {
+      "id": "official-miyako-tsunami-history",
+      "type": "official",
+      "title": "三陸海岸の景観と津波の伝承",
+      "publisher": "宮古市",
+      "url": "https://www.city.miyako.iwate.jp/gyosei/soshiki/spo_bunka/5/2/0000000/miyakkostory/10044.html",
+      "notes": "1896年と1933年の津波、姉吉の碑文を確認。",
+      "usedFor": ["aneyoshi"]
+    },
+    {
+      "id": "official-gsi-aneyoshi",
+      "type": "official",
+      "title": "自然災害伝承碑・大津浪記念碑",
+      "publisher": "国土地理院",
+      "url": "https://www.gsi.go.jp/bousaichiri/bousaichiri41080.html",
+      "notes": "碑文、1896年・1933年の被災、2011年に家屋被害がなかったことを確認。建立年は同ページで不明（1934年か）とされるため、断定しない。",
+      "usedFor": ["aneyoshi"]
+    },
+    {
+      "id": "official-miyako-hazard",
+      "type": "official",
+      "title": "宮古市総合防災ハザードマップ",
+      "publisher": "宮古市",
+      "url": "https://www.city.miyako.iwate.jp/gyosei/soshiki/kikikanri/1/4/maps/hazard/3194.html",
+      "notes": "現在の避難場所・浸水想定の確認先。歴史的な碑や航空写真を避難地図として使わせないため案内する。",
+      "usedFor": ["aneyoshi"]
     }
   ]
 }
