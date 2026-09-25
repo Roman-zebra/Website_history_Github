@@ -967,9 +967,9 @@
       "ndlSearch": "https://ndlsearch.ndl.go.jp/books/R100000039-I1176417",
       "fullText": "https://dl.ndl.go.jp/pid/1176417",
       "access": "ログインなしで閲覧可能／インターネット公開（保護期間満了）",
-      "fullTextSearchFrames": [59, 60, 82, 84, 91, 104, 105, 106, 344, 345],
-      "notes": "1935年の鉄道省版。82・84コマに博多駅を含む福岡市と那珂川の東中洲、劇場・映画館。91コマに福岡城址。59～60コマに門司駅と港への遊覧順路。104～106コマに当時『太宰府神社』と呼んだ社、飛梅とクスノキ。344～345コマに首里城址と、旧正殿を沖縄神社拝殿として使っていた状態。植民地期の案内文の価値判断や王国への偏見は採用しない。",
-      "usedFor": ["fukuoka", "shuri", "首里城", "regional-66044", "regional-1467126"]
+      "fullTextSearchFrames": [14, 29, 43, 59, 60, 82, 84, 91, 104, 105, 106, 124, 228, 274, 288, 298, 300, 301, 302, 303, 317, 344, 345],
+      "notes": "1935年の鉄道省版。82・84コマに博多駅を含む福岡市と那珂川の東中洲、劇場・映画館。91コマに福岡城址。59～60コマに門司駅と港への遊覧順路。104～106コマに当時『太宰府神社』と呼んだ社、飛梅とクスノキ。344～345コマに首里城址と、旧正殿を沖縄神社拝殿として使っていた状態。植民地期の案内文の価値判断や王国への偏見は採用しない。 14・43・124コマに唐津の舞鶴城址、228コマに﨑津の港と信仰、29コマに阿蘇神社、300～303コマに臼杵の磨崖仏、317コマに杵築、288コマに飫肥、298コマに高千穂神社、274コマに霧島神宮を確認。",
+      "usedFor": ["fukuoka", "shuri", "首里城", "regional-66044", "regional-1467126", "唐津城", "崎津集落", "阿蘇神社", "臼杵石仏", "杵築城", "飫肥城", "高千穂神社", "霧島神宮"]
     },
     {
       "id": "official-fukuoka-two-towns",
@@ -1677,6 +1677,87 @@
       "url": "https://www.muroto-geo.jp/course/6337/",
       "notes": "隆起・地層・植物群落の現地解説。",
       "usedFor": ["室戸岬"]
+    },
+    {
+      "id": "official-karatsu-castle",
+      "type": "official",
+      "title": "唐津城",
+      "publisher": "唐津市",
+      "url": "https://www.city.karatsu.lg.jp/page/1041.html",
+      "notes": "寺沢広高の築城、旧天守の不確実性、1966年の現在の天守。",
+      "usedFor": ["唐津城"]
+    },
+    {
+      "id": "official-sakitsu-history",
+      "type": "official",
+      "title": "﨑津集落の歴史",
+      "publisher": "天草市",
+      "url": "https://www.city.amakusa.kumamoto.jp/sakitsu-sekai/kiji0037/index.html",
+      "notes": "禁教下の信仰、1805年、現在の教会と生活集落。",
+      "usedFor": ["崎津集落"]
+    },
+    {
+      "id": "official-aso-shrine",
+      "type": "official",
+      "title": "阿蘇神社",
+      "publisher": "阿蘇市",
+      "url": "https://www.city.aso.kumamoto.jp/education/cultural-property/list_of_cultural_property/asoshrine/",
+      "notes": "江戸後期の社殿、2016年被災と2023年の楼門復旧。",
+      "usedFor": ["阿蘇神社"]
+    },
+    {
+      "id": "official-usuki-stone-buddhas",
+      "type": "official",
+      "title": "国宝臼杵石仏",
+      "publisher": "臼杵市",
+      "url": "https://www.city.usuki.oita.jp/docs/2014021200019/",
+      "notes": "四つの石仏群、凝灰岩の保存、年代の不確実性。",
+      "usedFor": ["臼杵石仏"]
+    },
+    {
+      "id": "official-kitsuki-castle-history",
+      "type": "official",
+      "title": "城下町の祭事に関わる建造物",
+      "publisher": "杵築市",
+      "url": "https://www.city.kitsuki.lg.jp/material/files/group/38/2syou1.pdf",
+      "notes": "旧城跡と1970年の模擬天守を区別。",
+      "usedFor": ["杵築城"]
+    },
+    {
+      "id": "official-obi-district",
+      "type": "official",
+      "title": "日南市飫肥伝統的建造物群保存地区",
+      "publisher": "日南市",
+      "url": "https://www.city.nichinan.lg.jp/soshikikarasagasu/shogaigakushuka/2/817.html",
+      "notes": "伊東家の城下町、1970年代の復元、保存地区。",
+      "usedFor": ["飫肥城"]
+    },
+    {
+      "id": "official-takachiho-shrines",
+      "type": "official",
+      "title": "高千穂三田井地区の神社",
+      "publisher": "高千穂町",
+      "url": "https://www.town-takachiho.jp/top/soshiki/kikakukanko/2/3/287.html",
+      "notes": "高千穂神社の本殿と鉄製狛犬の文化財指定。",
+      "usedFor": ["高千穂神社"]
+    },
+    {
+      "id": "official-kirishima-shrine",
+      "type": "official",
+      "title": "神社・仏閣",
+      "publisher": "鹿児島県",
+      "url": "https://www.pref.kagoshima.jp/ba08/pr/gaiyou/rekishi/bunka/zinja.html",
+      "notes": "噴火と遷座、1715年の社殿。",
+      "usedFor": ["霧島神宮"]
+    },
+    {
+      "id": "official-kirishima-national-treasure",
+      "type": "official",
+      "title": "国宝及び重要文化財（建造物）の指定について",
+      "publisher": "鹿児島県教育委員会",
+      "url": "https://www.pref.kagoshima.jp/ba08/kirisimajinnguu_kagoshimajinnguu.html",
+      "notes": "本殿・幣殿・拝殿の国宝指定。",
+      "usedFor": ["霧島神宮"]
     }
   ]
 }
