@@ -2887,7 +2887,7 @@
       "fullText": "https://sitereports.nabunken.go.jp/71578",
       "access": "インターネット公開と書誌に記載。本文PDFは今回未確認",
       "notes": "書誌情報のみ確認。本文PDFの内容を説明文の根拠としていない。",
-      "usedFor": ["吉野ヶ里遺跡"]
+      "usedFor": []
     },
     {
       "id": "ndl-ashio-comprehensive-report-2013",
@@ -2918,6 +2918,17 @@
       "publisher": "文化庁",
       "notes": "史跡指定の範囲と現存施設。",
       "usedFor": ["足尾銅山"]
+    },
+    {
+      "id": "official-yoshinogari-guidebook-2020",
+      "type": "booklet",
+      "title": "日本最大の弥生時代環壕集落跡 吉野ヶ里遺跡 見学の手引き",
+      "author": "吉野ヶ里公園管理センター 編",
+      "year": 2020,
+      "fullText": "https://www.yoshinogari.jp/.assets/Yoshinogari-ruins_guidebook.pdf",
+      "access": "吉野ヶ里歴史公園が全文PDFを公開",
+      "notes": "表紙と奥付、PDF2頁の発見と公園化、6頁の高床倉庫と南のムラ、8頁の弥生人骨と北墳丘墓を画像で確認。国立国会図書館サーチの2020年発掘報告書とは別資料。",
+      "usedFor": ["吉野ヶ里遺跡"]
     }
   ]
 }

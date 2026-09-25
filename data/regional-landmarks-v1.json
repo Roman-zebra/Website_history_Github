@@ -3557,6 +3557,11 @@
       },
       "researchSources": [
         {
+          "id": "official-yoshinogari-guidebook-2020",
+          "title": "吉野ヶ里公園管理センター『吉野ヶ里遺跡 見学の手引き』（2020年）",
+          "url": "https://www.yoshinogari.jp/.assets/Yoshinogari-ruins_guidebook.pdf"
+        },
+        {
           "id": "official-yoshinogari-history",
           "title": "吉野ヶ里の歴史（吉野ヶ里歴史公園）",
           "url": "https://www.yoshinogari.jp/introduction/history/"
@@ -3565,14 +3570,8 @@
           "id": "official-yoshinogari-remains",
           "title": "吉野ヶ里遺跡とは（吉野ヶ里歴史公園）",
           "url": "https://www.yoshinogari.jp/introduction/remains/"
-        },
-        {
-          "id": "ndl-yoshinogari-report-2020-catalog",
-          "title": "『吉野ヶ里遺跡』（2020年・国立国会図書館サーチ書誌）",
-          "url": "https://ndlsearch.ndl.go.jp/books/R000000025-I011440004546094"
         }
-      ],
-      "researchStatus": "official-with-book-excerpts; full-public-book-pending"
+      ]
     },
     {
       "id": "regional-353012",

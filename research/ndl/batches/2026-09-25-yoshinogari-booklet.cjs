@@ -1,0 +1,26 @@
+/* 2020 public guidebook inspected in full images: PDF pages 2, 6, 8, 13. NDL Search catalogs a separate 2020 excavation book. */
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.resolve(__dirname, '../../..');
+const booklet = { id: 'official-yoshinogari-guidebook-2020', title: '吉野ヶ里公園管理センター『吉野ヶ里遺跡 見学の手引き』（2020年）', url: 'https://www.yoshinogari.jp/.assets/Yoshinogari-ruins_guidebook.pdf' };
+const target = path.join(root, 'data/regional-landmarks-v1.json');
+const data = JSON.parse(fs.readFileSync(target, 'utf8'));
+const spot = data.landmarks.find(x => x.ja === '吉野ヶ里遺跡');
+if (!spot) throw Error('吉野ヶ里遺跡 not found');
+const history = spot.researchSources.find(x => x.id === 'official-yoshinogari-history');
+const remains = spot.researchSources.find(x => x.id === 'official-yoshinogari-remains');
+if (!history || !remains) throw Error('Prior Yoshinogari research missing');
+spot.researchSources = [booklet, history, remains];
+delete spot.researchStatus;
+spot.reviewedOn = '2026-09-25';
+fs.writeFileSync(target, JSON.stringify(data, null, 2) + '\n');
+const registryTarget = path.join(root, 'research/ndl/sources.json');
+const registry = JSON.parse(fs.readFileSync(registryTarget, 'utf8'));
+const entry = { id: booklet.id, type: 'booklet', title: '日本最大の弥生時代環壕集落跡 吉野ヶ里遺跡 見学の手引き', author: '吉野ヶ里公園管理センター 編', year: 2020, fullText: booklet.url, access: '吉野ヶ里歴史公園が全文PDFを公開', notes: '表紙と奥付、PDF2頁の発見と公園化、6頁の高床倉庫と南のムラ、8頁の弥生人骨と北墳丘墓を画像で確認。国立国会図書館サーチの2020年発掘報告書とは別資料。', usedFor: [spot.ja] };
+const existing = registry.sources.find(x => x.id === entry.id);
+if (existing) Object.assign(existing, entry);
+else registry.sources.push(entry);
+const catalog = registry.sources.find(x => x.id === 'ndl-yoshinogari-report-2020-catalog');
+if (catalog) catalog.usedFor = [];
+const compact = JSON.stringify(registry, null, 2).replace(/"(fullTextSearchFrames|usedFor)": \[\s*([\s\S]*?)\s*\]/g, (_all, key, content) => '"' + key + '": [' + JSON.parse('[' + content + ']').map(x => JSON.stringify(x)).join(', ') + ']');
+fs.writeFileSync(registryTarget, compact + '\n');
