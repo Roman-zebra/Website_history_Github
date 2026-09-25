@@ -29,6 +29,29 @@ test('every guide has matching English and Japanese sections and https sources',
  }
 });
 
+test('the five guides are translated sentence for sentence into Korean and Chinese',()=>{
+ const dirs={ko:'ko','zh-Hans':'zh-cn','zh-Hant':'zh-tw'};
+ for(const [id,g] of [...Object.entries(guides),...Object.entries(liminalGuides)])for(const l of Object.keys(dirs)){
+  for(const k of ['why','look','dates','visit','history'])if(g.en[k])assert.equal((g[l][k]||[]).length,g.en[k].length,id+' '+l+' '+k);
+  assert.equal(g[l].sources.length,g.en.sources.length,id+' '+l+' sources');
+  for(const s of g[l].sources){assert.match(s.url,/^https:\/\//);assert.ok(s.label,id+' '+l+' source label');}
+ }
+ for(const file of ['hiroshima','himeji','aneyoshi','l-doai-station','l-hashima-island'])for(const [l,dir] of Object.entries(dirs)){
+  const s=read('place/'+dir+'/'+file+'.html');
+  for(const k of ['why','look','visit'])assert.ok(s.includes('<h2>'+labels[l][k]+'</h2>'),dir+'/'+file+' '+k);
+  assert.ok(s.includes(labels[l].checked),dir+'/'+file+' check date');assert.ok(!s.includes('undefined'),dir+'/'+file);
+ }
+});
+
+test('every language version of Hashima, including the 3D pages, names the wartime forced labour',()=>{
+ const said=/forced to work|forced labour|働かされた|강제로 일하게|被迫劳动|被迫勞動/;
+ for(const dir of ['','ja/','ko/','zh-cn/','zh-tw/']){
+  assert.match(read('place/'+dir+'l-hashima-island.html'),said,'place/'+dir+'l-hashima-island');
+  assert.match(read('3d/'+dir+'gunkanjima.html'),said,'3d/'+dir+'gunkanjima');
+ }
+ assert.ok(!/일해야 했/.test(read('3d/ko/gunkanjima.html')),'Korean 3D page softens “forced to work”');
+});
+
 test('each home tab explains its list in all five map languages',()=>{
  const code=/const MODE_INTRO = \{[\s\S]*?\n\};/.exec(read('explore.js'))[0];
  const intro=vm.runInNewContext(code+';MODE_INTRO');

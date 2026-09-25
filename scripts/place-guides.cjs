@@ -1,39 +1,44 @@
 /* Long-form guides for the few places written up in depth (English and Japanese).
    Every factual sentence was checked against the source listed with it on 2026-09-14.
    Descriptions of the photographs come from the GSI tiles at zoom 16–17 and can be checked on the map.
-   fieldNotes is for notes from an actual visit. Leave it empty rather than write one nobody made. */
-const GSI_TILES={en:'GSI · Tile list: photo series, years and zoom levels',ja:'国土地理院 · 地理院タイル一覧（写真シリーズ・年代・ズームレベル）',url:'https://maps.gsi.go.jp/development/ichiran.html'};
-const GSI_PHOTOS={en:'GSI · Aerial photographs and the Map and Aerial Photo Viewing Service',ja:'国土地理院 · 空中写真と地図・空中写真閲覧サービス',url:'https://www.gsi.go.jp/gazochosa/gazochosa41006.html'};
+   fieldNotes is for notes from an actual visit. Leave it empty rather than write one nobody made.
+   The Korean and Chinese (ko, zh-Hans, zh-Hant) sections, added on 2026-09-25, translate the English and
+   Japanese text sentence by sentence and add no facts: keep them in step when a sentence changes. */
+const GSI_TILES={en:'GSI · Tile list: photo series, years and zoom levels',ja:'国土地理院 · 地理院タイル一覧（写真シリーズ・年代・ズームレベル）',ko:'일본 국토지리원 · 지리원 타일 목록: 사진 시리즈·연대·확대 수준(일본어)','zh-Hans':'日本国土地理院 · 地理院瓦片一览：照片系列、年代与缩放级别（日语）','zh-Hant':'日本國土地理院 · 地理院圖磚一覽：照片系列、年代與縮放層級（日語）',url:'https://maps.gsi.go.jp/development/ichiran.html'};
+const GSI_PHOTOS={en:'GSI · Aerial photographs and the Map and Aerial Photo Viewing Service',ja:'国土地理院 · 空中写真と地図・空中写真閲覧サービス',ko:'일본 국토지리원 · 항공사진과 지도·항공사진 열람 서비스(일본어)','zh-Hans':'日本国土地理院 · 航拍照片与“地图·航拍照片阅览服务”（日语）','zh-Hant':'日本國土地理院 · 航空照片與「地圖·航空照片閱覽服務」（日語）',url:'https://www.gsi.go.jp/gazochosa/gazochosa41006.html'};
 const src=(s,l)=>({label:s[l],url:s.url});
 
 const labels={
  en:{why:'Why open this place',look:'On the map, step by step',dates:'Reading the photographs',visit:'Visiting',history:'History and responsibility',theme:'Same kind of place',field:'Field notes',sources:'Sources',checked:'Facts on this page were checked against these sources on 14 September 2026.'},
- ja:{why:'この場所を開く理由',look:'地図で順に見る',dates:'写真の読み方',visit:'訪ねるときに',history:'歴史と責任',theme:'同じ型の場所',field:'現地メモ',sources:'出典',checked:'このページの内容は、2026年9月14日にこれらの出典で確認しています。'}
+ ja:{why:'この場所を開く理由',look:'地図で順に見る',dates:'写真の読み方',visit:'訪ねるときに',history:'歴史と責任',theme:'同じ型の場所',field:'現地メモ',sources:'出典',checked:'このページの内容は、2026年9月14日にこれらの出典で確認しています。'},
+ ko:{why:'이 장소를 살펴볼 이유',look:'지도에서 차례대로 보기',dates:'사진 읽는 법',visit:'방문할 때',history:'역사와 책임',theme:'같은 유형의 장소',field:'현지 메모',sources:'출처',checked:'이 페이지의 사실 관계는 2026년 9월 14일에 이 출처들과 대조해 확인했습니다.'},
+ 'zh-Hans':{why:'为什么值得打开这里',look:'在地图上逐步查看',dates:'如何解读照片',visit:'到访须知',history:'历史与责任',theme:'同类地点',field:'实地笔记',sources:'出处',checked:'本页内容已于2026年9月14日根据这些出处核实。'},
+ 'zh-Hant':{why:'為什麼值得打開這裡',look:'在地圖上逐步查看',dates:'如何解讀照片',visit:'到訪須知',history:'歷史與責任',theme:'同類地點',field:'實地筆記',sources:'出處',checked:'本頁內容已於2026年9月14日依據這些出處核實。'}
 };
 
 const HIROSHIMA_SOURCES=[
- {en:'City of Hiroshima · Atomic Bomb Dome and its preservation',ja:'広島市 · 原爆ドームと保存の経緯（英語）',url:'https://www.city.hiroshima.lg.jp/english/peace/1029869/1009931.html'},
- {en:'City of Hiroshima FAQ · Why the Dome stayed standing (distance and height of the explosion)',ja:'広島市FAQ · 原爆ドームはなぜ崩れずに残ったのか',url:'https://www.city.hiroshima.lg.jp/faq/atomicbomb-peace/1001613/1028187/1002370.html'},
- {en:'City of Hiroshima FAQ · Atomic-bombed buildings still standing',ja:'広島市FAQ · 被爆建物は今も残っているのか',url:'https://www.city.hiroshima.lg.jp/faq/atomicbomb-peace/1001613/1028187/1002368.html'},
- {en:'City of Hiroshima · The Nakajima district, lost to the bomb (walking map)',ja:'広島市 · 平和記念公園めぐり 原爆で失われた街・中島地区をたずねて',url:'https://www.city.hiroshima.lg.jp/atomicbomb-peace/1036664/1021115/1003095.html'},
+ {en:'City of Hiroshima · Atomic Bomb Dome and its preservation',ja:'広島市 · 原爆ドームと保存の経緯（英語）',ko:'히로시마시 · 원폭 돔과 보존 경위(영어)','zh-Hans':'广岛市 · 原爆圆顶馆及其保存经过（英语）','zh-Hant':'廣島市 · 原爆圓頂館及其保存經過（英語）',url:'https://www.city.hiroshima.lg.jp/english/peace/1029869/1009931.html'},
+ {en:'City of Hiroshima FAQ · Why the Dome stayed standing (distance and height of the explosion)',ja:'広島市FAQ · 原爆ドームはなぜ崩れずに残ったのか',ko:'히로시마시 FAQ · 원폭 돔은 왜 무너지지 않고 남았나: 폭발 지점의 거리와 높이(일본어)','zh-Hans':'广岛市常见问题 · 原爆圆顶馆为何没有倒塌：爆炸点的距离与高度（日语）','zh-Hant':'廣島市常見問題 · 原爆圓頂館為何沒有倒塌：爆炸點的距離與高度（日語）',url:'https://www.city.hiroshima.lg.jp/faq/atomicbomb-peace/1001613/1028187/1002370.html'},
+ {en:'City of Hiroshima FAQ · Atomic-bombed buildings still standing',ja:'広島市FAQ · 被爆建物は今も残っているのか',ko:'히로시마시 FAQ · 지금도 남아 있는 피폭 건물(일본어)','zh-Hans':'广岛市常见问题 · 至今仍留存的被爆建筑（日语）','zh-Hant':'廣島市常見問題 · 至今仍留存的被爆建築（日語）',url:'https://www.city.hiroshima.lg.jp/faq/atomicbomb-peace/1001613/1028187/1002368.html'},
+ {en:'City of Hiroshima · The Nakajima district, lost to the bomb (walking map)',ja:'広島市 · 平和記念公園めぐり 原爆で失われた街・中島地区をたずねて',ko:'히로시마시 · 원폭으로 사라진 거리, 나카지마 지구를 찾아서: 산책 지도(일본어)','zh-Hans':'广岛市 · 寻访被原子弹夺去的街区中岛地区：漫步地图（日语）','zh-Hant':'廣島市 · 尋訪被原子彈奪去的街區中島地區：散步地圖（日語）',url:'https://www.city.hiroshima.lg.jp/atomicbomb-peace/1036664/1021115/1003095.html'},
  GSI_TILES,GSI_PHOTOS
 ];
 const HIMEJI_SOURCES=[
- {en:'Himeji Castle official site · Photographs of the Showa restoration',ja:'姫路城公式サイト · 姫路城・昭和の大修理写真',url:'https://www.city.himeji.lg.jp/castle/category/10-2-2-0-0-0-0-0-0-0.html'},
- {en:'Himeji Castle official site · Visitor information',ja:'姫路城公式サイト · ご利用案内',url:'https://www.city.himeji.lg.jp/castle/0000007671.html'},
- {en:'Cultural Heritage Online (Agency for Cultural Affairs) · Himeji Castle main keep',ja:'文化遺産オンライン（文化庁） · 姫路城大天守',url:'https://online.bunka.go.jp/heritages/detail/147461'},
- {en:'Peace Memorial Museum (Ministry of Internal Affairs and Communications) · Himeji Castle and recovery from the air raids',ja:'平和祈念展示資料館（総務省委託） · 焼け跡からの復興 姫路城と手柄山慰霊塔',url:'https://www.heiwakinen.go.jp/kikaku/20210820-0900/'},
+ {en:'Himeji Castle official site · Photographs of the Showa restoration',ja:'姫路城公式サイト · 姫路城・昭和の大修理写真',ko:'히메지성 공식 사이트 · 쇼와 대수리 사진(일본어)','zh-Hans':'姬路城官方网站 · 昭和大修理照片（日语）','zh-Hant':'姬路城官方網站 · 昭和大修理照片（日語）',url:'https://www.city.himeji.lg.jp/castle/category/10-2-2-0-0-0-0-0-0-0.html'},
+ {en:'Himeji Castle official site · Visitor information',ja:'姫路城公式サイト · ご利用案内',ko:'히메지성 공식 사이트 · 이용 안내(일본어)','zh-Hans':'姬路城官方网站 · 参观指南（日语）','zh-Hant':'姬路城官方網站 · 參觀指南（日語）',url:'https://www.city.himeji.lg.jp/castle/0000007671.html'},
+ {en:'Cultural Heritage Online (Agency for Cultural Affairs) · Himeji Castle main keep',ja:'文化遺産オンライン（文化庁） · 姫路城大天守',ko:'문화유산 온라인(일본 문화청) · 히메지성 대천수(일본어)','zh-Hans':'文化遗产在线（日本文化厅）· 姬路城大天守（日语）','zh-Hant':'文化遺產線上（日本文化廳）· 姬路城大天守（日語）',url:'https://online.bunka.go.jp/heritages/detail/147461'},
+ {en:'Peace Memorial Museum (Ministry of Internal Affairs and Communications) · Himeji Castle and recovery from the air raids',ja:'平和祈念展示資料館（総務省委託） · 焼け跡からの復興 姫路城と手柄山慰霊塔',ko:'평화기념전시자료관(일본 총무성 위탁) · 불탄 자리에서의 부흥, 히메지성과 데가라야마 위령탑(일본어)','zh-Hans':'和平祈念展示资料馆（日本总务省委托）· 从焦土中复兴：姬路城与手柄山慰灵塔（日语）','zh-Hant':'和平祈念展示資料館（日本總務省委託）· 從焦土中復興：姬路城與手柄山慰靈塔（日語）',url:'https://www.heiwakinen.go.jp/kikaku/20210820-0900/'},
  GSI_TILES,GSI_PHOTOS
 ];
 const ANEYOSHI_SOURCES=[
- {en:'GSI · Natural disaster memorial monuments',ja:'国土地理院 · 自然災害伝承碑',url:'https://www.gsi.go.jp/bousaichiri/denshouhi.html'},
- {en:'Miyako City Disaster Archive · The lesson of Omoe-Aneyoshi',ja:'宮古市災害資料アーカイブ · 重茂姉吉地区の教訓「ここより下に家を建てるな」',url:'https://miyako-archive.irides.tohoku.ac.jp/tatakai/showasanriku/4/'},
+ {en:'GSI · Natural disaster memorial monuments',ja:'国土地理院 · 自然災害伝承碑',ko:'일본 국토지리원 · 자연재해 전승비(일본어)','zh-Hans':'日本国土地理院 · 自然灾害传承碑（日语）','zh-Hant':'日本國土地理院 · 自然災害傳承碑（日語）',url:'https://www.gsi.go.jp/bousaichiri/denshouhi.html'},
+ {en:'Miyako City Disaster Archive · The lesson of Omoe-Aneyoshi',ja:'宮古市災害資料アーカイブ · 重茂姉吉地区の教訓「ここより下に家を建てるな」',ko:'미야코시 재해자료 아카이브 · 오모에 아네요시 지구의 교훈 “여기보다 아래에 집을 짓지 말라”(일본어)','zh-Hans':'宫古市灾害资料档案 · 重茂姉吉地区的教训“此处以下勿建房屋”（日语）','zh-Hant':'宮古市災害資料檔案 · 重茂姉吉地區的教訓「此處以下勿建房屋」（日語）',url:'https://miyako-archive.irides.tohoku.ac.jp/tatakai/showasanriku/4/'},
  GSI_TILES
 ];
 
 const guides={
  hiroshima:{schemaType:'TouristAttraction',
-  theme:{ids:['nagasaki'],en:'Cities rebuilt after an atomic bombing',ja:'原爆のあとに復興した街',notes:{nagasaki:{en:'Its old photograph is from the 1960s, after rebuilding had begun.',ja:'昔の写真は、復興が進んだ1960年代のものです。'}}},
+  theme:{ids:['nagasaki'],en:'Cities rebuilt after an atomic bombing',ja:'原爆のあとに復興した街',ko:'원폭 이후 재건된 도시','zh-Hans':'原子弹爆炸后重建的城市','zh-Hant':'原子彈爆炸後重建的城市',notes:{nagasaki:{en:'Its old photograph is from the 1960s, after rebuilding had begun.',ja:'昔の写真は、復興が進んだ1960年代のものです。',ko:'옛 사진은 재건이 진행된 1960년대의 것입니다.','zh-Hans':'旧照片摄于重建已经展开的1960年代。','zh-Hant':'舊照片攝於重建已經展開的1960年代。'}}},
   en:{
    why:['Most photographs of Hiroshima show the Atomic Bomb Dome on its own. From above you can also see what stood beside it: the Nakajima district, one of the city’s main commercial districts before the bombing, on the island that is now Peace Memorial Park.',
     'The rivers make the comparison work. Their shape has barely changed, so line the two photographs up on the water first, then look at the land.'],
@@ -61,10 +66,52 @@ const guides={
    visit:['原爆ドームと公園は歩いて数分です。ドームの側から相生橋を渡ると、そのまま中州に入れます。',
     'ドームは、残すと決めて残された建物です。広島市議会が保存を決議したのは1966年7月、最初の保存工事は1967年に行われました。',
     'ここは公園であると同時に、慰霊の場所です。静かに歩き、撮影や式典についての案内があれば従ってください。'],
-   sources:HIROSHIMA_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]}
+   sources:HIROSHIMA_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]},
+  ko:{
+   why:['히로시마를 찍은 사진은 대부분 원폭 돔만 보여 줍니다. 위에서 보면 그 옆에 무엇이 있었는지도 알 수 있습니다. 원폭 투하 전 시내에서 손꼽히는 번화가였던 나카지마 지구로, 지금은 평화기념공원이 된 두 강 사이의 섬입니다.',
+    '비교의 열쇠는 강입니다. 물길의 모양은 거의 변하지 않았으니, 먼저 강을 기준으로 두 사진을 맞춘 다음 땅을 보세요.'],
+   look:['강이 갈라지는 곳에 놓인 아이오이교. T자 모양이 옛 사진과 지금 사진 모두에 뚜렷합니다. 긴 쪽이 강을 건너고, 짧은 쪽이 남쪽 섬으로 이어집니다.',
+    '원폭 돔은 아이오이교 남동쪽, 모토야스강 동쪽 기슭에 있습니다. 히로시마시에 따르면 원자폭탄은 돔 남동쪽 약 160m, 높이 약 600m 지점에서 폭발했습니다.',
+    '나카지마 지구는 아이오이교 남쪽, 모토야스강과 혼카와강 사이의 쐐기 모양 땅입니다. 1945–1950년 사진에서는 대부분 빈터이고 작은 건물이 드문드문 있을 뿐입니다. 지금은 평화기념공원의 나무들 아래에 있습니다.',
+    '돔 동쪽의 시가지. 옛 사진에서는 건물 사이가 크게 비어 있지만, 지금은 같은 구역이 거의 빈틈없이 들어차 있습니다.'],
+   dates:['‘1945–1950년’은 국토지리원 사진 시리즈 전체의 기간이며, 이 사진 한 장의 촬영일이 아닙니다. 돔 주변이 대부분 빈터가 되어 있으므로 원폭 투하 이후의 히로시마임을 알 수 있습니다. 개별 사진의 촬영일은 국토지리원의 ‘지도·항공사진 열람 서비스’에서 찾아볼 수 있습니다.',
+    '옛 사진 시리즈는 확대 수준 17까지 공개되어 있습니다. 그 이상 확대하면 이미지가 커질 뿐 선명해지지는 않습니다.',
+    '남은 건물은 원폭 돔만이 아닙니다. 히로시마시에 따르면 폭심지에서 5km 이내에 원폭 돔을 포함해 86곳의 피폭 건물이 남아 있습니다(2022년 3월 1일 기준).'],
+   visit:['원폭 돔과 공원은 걸어서 몇 분 거리입니다. 돔 쪽에서 아이오이교를 건너면 바로 섬으로 들어갑니다.',
+    '이 폐허는 남기기로 정했기 때문에 남아 있습니다. 히로시마 시의회가 보존을 결의한 것은 1966년 7월이고, 첫 보존 공사는 1967년에 이루어졌습니다.',
+    '이곳은 공원이면서 추모의 장소입니다. 조용히 걷고, 촬영이나 추모식에 관한 안내가 있으면 따라 주세요.'],
+   sources:HIROSHIMA_SOURCES.map(s=>src(s,'ko')),fieldNotes:[]},
+  'zh-Hans':{
+   why:['大多数广岛的照片只拍原爆圆顶馆本身。从空中俯瞰，还能看到它旁边曾经有什么：原子弹爆炸前市内数一数二的繁华街区——中岛地区，也就是如今成为和平纪念公园的河中沙洲。',
+    '对比的关键是河流。河道的形状几乎没有变化，所以先用河流把两张照片对齐，再看陆地。'],
+   look:['河流分岔处的相生桥。它的T字形在新旧两张照片里都很清楚：长的一段横跨河面，短的一段向南伸上沙洲。',
+    '原爆圆顶馆位于相生桥东南、元安川东岸。据广岛市介绍，原子弹在圆顶馆东南约160米、高约600米处爆炸。',
+    '中岛地区：相生桥以南、夹在元安川与本川之间的楔形土地。在1945–1950年的照片里，这里大多是空地，只有零星几栋小建筑；如今它位于和平纪念公园的树林之下。',
+    '圆顶馆以东的街区。旧照片中建筑之间留有大片空隙；如今同样的街区几乎盖满了房子。'],
+   dates:['“1945–1950”是国土地理院整个照片系列的年代范围，并不是这一张照片的拍摄日期。圆顶馆周围大多已成空地，由此可知拍的是原子弹爆炸后的广岛。单张照片的拍摄日期，可以在国土地理院的“地图·航拍照片阅览服务”中查询。',
+    '旧照片系列最高公开到缩放级别17。再放大，图像只会变大，不会更清晰。',
+    '留下来的并不只有原爆圆顶馆。据广岛市统计，距爆心5公里以内，包括圆顶馆在内共有86处被爆建筑仍然留存（截至2022年3月1日）。'],
+   visit:['圆顶馆与公园步行只需几分钟：从圆顶馆这边走过相生桥，就到了沙洲上。',
+    '这座废墟之所以还在，是因为这座城市选择了保留它。广岛市议会于1966年7月决议保存，第一次保存工程于1967年进行。',
+    '这里既是公园，也是悼念的场所。请放低声音，并遵从有关拍照或纪念仪式的指示。'],
+   sources:HIROSHIMA_SOURCES.map(s=>src(s,'zh-Hans')),fieldNotes:[]},
+  'zh-Hant':{
+   why:['大多數廣島的照片只拍原爆圓頂館本身。從空中俯瞰，還能看到它旁邊曾經有什麼：原子彈爆炸前市內數一數二的繁華街區——中島地區，也就是如今成為和平紀念公園的河中沙洲。',
+    '比較的關鍵是河流。河道的形狀幾乎沒有改變，所以先用河流把兩張照片對齊，再看陸地。'],
+   look:['河流分岔處的相生橋。它的T字形在新舊兩張照片裡都很清楚：長的一段橫跨河面，短的一段向南伸上沙洲。',
+    '原爆圓頂館位於相生橋東南、元安川東岸。據廣島市說明，原子彈在圓頂館東南約160公尺、高約600公尺處爆炸。',
+    '中島地區：相生橋以南、夾在元安川與本川之間的楔形土地。在1945–1950年的照片裡，這裡大多是空地，只有零星幾棟小建築；如今它位於和平紀念公園的樹林之下。',
+    '圓頂館以東的街區。舊照片中建築之間留有大片空隙；如今同樣的街區幾乎蓋滿了房子。'],
+   dates:['「1945–1950」是國土地理院整個照片系列的年代範圍，並不是這一張照片的拍攝日期。圓頂館周圍大多已成空地，由此可知拍的是原子彈爆炸後的廣島。單張照片的拍攝日期，可以在國土地理院的「地圖·航空照片閱覽服務」中查詢。',
+    '舊照片系列最高公開到縮放層級17。再放大，影像只會變大，不會更清晰。',
+    '留下來的並不只有原爆圓頂館。據廣島市統計，距爆心5公里以內，包括圓頂館在內共有86處被爆建築仍然留存（截至2022年3月1日）。'],
+   visit:['圓頂館與公園步行只需幾分鐘：從圓頂館這邊走過相生橋，就到了沙洲上。',
+    '這座廢墟之所以還在，是因為這座城市選擇了保留它。廣島市議會於1966年7月決議保存，第一次保存工程於1967年進行。',
+    '這裡既是公園，也是悼念的場所。請放低音量，並遵守有關拍照或紀念儀式的指示。'],
+   sources:HIROSHIMA_SOURCES.map(s=>src(s,'zh-Hant')),fieldNotes:[]}
  },
  himeji:{schemaType:'LandmarksOrHistoricalBuildings',
-  theme:{ids:['osaka','okayama','nagoya','kanazawa','shuri'],en:'Castles and their moats',ja:'城と堀'},
+  theme:{ids:['osaka','okayama','nagoya','kanazawa','shuri'],en:'Castles and their moats',ja:'城と堀',ko:'성과 해자','zh-Hans':'城堡与护城河','zh-Hant':'城堡與護城河'},
   en:{
    why:['Himeji Castle is known for coming through the war. Two large air raids in June and July 1945 left the city centre in ashes, and the castle survived.',
     'The castle has changed in other ways. In the Showa restoration of 1956–1964 the main keep was taken down and put back together, and the 1960s photographs come from around the end of that work.'],
@@ -88,7 +135,43 @@ const guides={
    visit:['開城時間は9時〜17時（最終入城は16時）、休城日は12月29日・30日です。変わることもあるので、出かける前に公式サイトで確認してください。',
     '天守や櫓の中は、とても急で狭い階段です。手すりはありますがエレベーターはなく、公式サイトによると車いすの方が単独で見学することはできません。',
     '大天守は、池田輝政によって慶長14年（1609年）末にはおおむね完成したと考えられています。'],
-   sources:HIMEJI_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]}
+   sources:HIMEJI_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]},
+  ko:{
+   why:['히메지성은 전쟁 피해를 피한 성으로 알려져 있습니다. 1945년 6월과 7월 두 차례의 대규모 공습으로 시가지는 잿더미가 되었지만, 성은 불타지 않고 남았습니다.',
+    '성 자체도 달라졌습니다. 1956년부터 1964년까지의 ‘쇼와 대수리’ 때 대천수는 한 번 해체되었다가 다시 조립되었고, 1960년대 사진은 그 공사가 끝날 무렵의 것입니다.'],
+   look:['내부 해자. 천수 북쪽에서 서쪽으로 돌아가는 곡선이 두 사진에서 같은 모양이라, 두 사진을 맞추는 가장 쉬운 기준이 됩니다.',
+    '천수 바로 남쪽의 산노마루 광장 잔디밭. 1960년대 사진에서는 같은 자리에 큰 건물 여러 동이 줄지어 있습니다.',
+    '대천수 자체. 쇼와 대수리 때는 먼저 천수 위에 공사용 가설 덮개 건물을 씌웠고, 천수군의 공사는 1964년 3월 말에 끝났습니다. 촬영 시기에 따라 옛 사진에 수리 중인 모습이 찍혀 있을 수 있으니 확대해서 확인해 보세요.'],
+   dates:['‘1961–1969년’은 국토지리원 사진 시리즈의 기간입니다. 이 사진 한 장의 촬영일은 지도에 나오지 않으므로, 국토지리원의 ‘지도·항공사진 열람 서비스’에서 찾아보세요.',
+    '옛 사진은 확대 수준 17까지입니다.'],
+   visit:['관람 시간은 오전 9시~오후 5시(마지막 입장 오후 4시)이며, 12월 29일과 30일은 휴관합니다. 바뀔 수도 있으니 가기 전에 공식 사이트에서 확인하세요.',
+    '천수와 망루(야구라) 안의 계단은 매우 가파르고 좁습니다. 손잡이는 있지만 엘리베이터는 없으며, 공식 사이트에 따르면 휠체어 이용자는 혼자서 관람할 수 없습니다.',
+    '대천수는 이케다 데루마사에 의해 1609년(게이초 14년) 말에는 대체로 완성된 것으로 여겨집니다.'],
+   sources:HIMEJI_SOURCES.map(s=>src(s,'ko')),fieldNotes:[]},
+  'zh-Hans':{
+   why:['姬路城以躲过战火而闻名。1945年6月和7月的两次大空袭把市区烧成焦土，城堡却幸存了下来。',
+    '城堡本身也有过变化。在1956年至1964年的“昭和大修理”中，大天守曾被整体拆解后重新组装；1960年代的照片正是那项工程接近尾声时拍摄的。'],
+   look:['内护城河。它从天守北侧绕向西侧的弧线在两张照片里形状相同，是对齐照片最容易的参照。',
+    '天守正南方的三之丸广场草坪。在1960年代的照片里，同一片土地上排列着好几栋大型建筑。',
+    '大天守本身。昭和大修理开工时，先在天守外搭起施工用的临时罩棚（素屋根），天守群的工程于1964年3月底完成。根据拍摄时间不同，旧照片上可能是修缮中的样子，请放大确认。'],
+   dates:['“1961–1969”是国土地理院照片系列的年代范围。地图上不显示这一张照片的拍摄日期，可以在国土地理院的“地图·航拍照片阅览服务”中查询。',
+    '旧照片最高只到缩放级别17。'],
+   visit:['开放时间为上午9点至下午5点（最后入场下午4点），12月29日和30日闭馆。安排可能会变动，出发前请在官方网站确认。',
+    '天守和橹（箭楼）内的楼梯非常陡且窄。有扶手但没有电梯；据官方网站说明，轮椅使用者无法独自参观。',
+    '一般认为，大天守在池田辉政主持下，于庆长14年（1609年）年底已大致完工。'],
+   sources:HIMEJI_SOURCES.map(s=>src(s,'zh-Hans')),fieldNotes:[]},
+  'zh-Hant':{
+   why:['姬路城以躲過戰火而聞名。1945年6月和7月的兩次大空襲把市區燒成焦土，城堡卻倖存了下來。',
+    '城堡本身也有過變化。在1956年至1964年的「昭和大修理」中，大天守曾被整體拆解後重新組裝；1960年代的照片正是那項工程接近尾聲時拍攝的。'],
+   look:['內護城河。它從天守北側繞向西側的弧線在兩張照片裡形狀相同，是對齊照片最容易的參照。',
+    '天守正南方的三之丸廣場草坪。在1960年代的照片裡，同一片土地上排列著好幾棟大型建築。',
+    '大天守本身。昭和大修理開工時，先在天守外搭起施工用的臨時罩棚（素屋根），天守群的工程於1964年3月底完成。依拍攝時間不同，舊照片上可能是修繕中的樣子，請放大確認。'],
+   dates:['「1961–1969」是國土地理院照片系列的年代範圍。地圖上不顯示這一張照片的拍攝日期，可以在國土地理院的「地圖·航空照片閱覽服務」中查詢。',
+    '舊照片最高只到縮放層級17。'],
+   visit:['開放時間為上午9點至下午5點（最後入場下午4點），12月29日和30日休館。安排可能會變動，出發前請在官方網站確認。',
+    '天守和櫓（箭樓）內的樓梯非常陡且窄。有扶手但沒有電梯；據官方網站說明，輪椅使用者無法獨自參觀。',
+    '一般認為，大天守在池田輝政主持下，於慶長14年（1609年）年底已大致完工。'],
+   sources:HIMEJI_SOURCES.map(s=>src(s,'zh-Hant')),fieldNotes:[]}
  },
  aneyoshi:{schemaType:'LandmarksOrHistoricalBuildings',
   en:{
@@ -114,23 +197,59 @@ const guides={
     'このページは災害の記憶を伝えるためのもので、避難経路図ではありません。災害や避難の情報は、宮古市の公式情報で確認してください。',
     '碑文（国土地理院の記録より）：「高き住居は児孫の和楽　想へ惨禍の大津浪　此処より下に家を建てるな」',
     '2011年の津波の数値は資料によって異なります。宮古市災害資料アーカイブは、姉吉での遡上高を38.9mとしています。'],
-   sources:ANEYOSHI_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]}
+   sources:ANEYOSHI_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]},
+  ko:{
+   why:['이 마을에는 1940년대나 1960년대의 항공사진이 없고, 이 페이지는 그런 사진에 기대지 않습니다. 여기서 기록을 전하는 것은 돌입니다. 1933년 쓰나미 뒤에 집을 지어서는 안 되는 곳을 새겨 둔 비석입니다.',
+    '국토지리원의 기록에 따르면 아네요시 마을은 쓰나미로 두 번 전멸했고, 생존자는 1896년에 2명, 1933년에 4명이었습니다. 주민들은 비석의 가르침을 지켰고, 2011년 3월 동일본대지진 때 가옥 피해는 없었습니다.'],
+   look:['비석은 집들보다 아래쪽, 도로 옆에 서 있습니다. 미야코시 재해자료 아카이브에 따르면 해발 약 60m, 해안에서 약 800m 떨어진 곳입니다.',
+    '지금 사진에서 골짜기를 따라 난 길을 올라가 보면, 집들은 비석보다 위쪽 비탈에 있고 바다는 한참 아래에 있습니다.'],
+   dates:['지도에서는 이곳을 국토지리원의 1974–1978년 컬러 사진과 비교할 수 있습니다. 2011년보다 30년 이상 앞선 마을의 모습입니다.',
+    '비석이 세워진 해는 확실하지 않습니다. 국토지리원의 기록에는 ‘불명(1934?)’으로 되어 있습니다.'],
+   visit:['아네요시는 사람들이 사는 작은 마을이며 관광지가 아닙니다. 비석을 보러 간다면 도로를 벗어나지 말고, 통행에 방해가 되지 않는 곳에 차를 세우세요. 이곳은 누군가의 삶의 터전입니다.',
+    '이 페이지는 재해의 기억을 전하기 위한 것이며 대피 경로 지도가 아닙니다. 재해와 대피 정보는 미야코시의 공식 안내를 확인하세요.',
+    '비문(국토지리원 기록): 高き住居は児孫の和楽　想へ惨禍の大津浪　此処より下に家を建てるな. 대략 “높은 곳의 집은 자손의 평안과 즐거움. 참화를 낳은 큰 쓰나미를 생각하라. 여기보다 아래에 집을 짓지 말라”라는 뜻입니다.',
+    '2011년의 수치는 자료마다 다릅니다. 미야코시 재해자료 아카이브는 아네요시의 소상고(쓰나미가 거슬러 올라간 높이)를 38.9m로 기록하고 있습니다.'],
+   sources:ANEYOSHI_SOURCES.map(s=>src(s,'ko')),fieldNotes:[]},
+  'zh-Hans':{
+   why:['这个村落没有1940年代或1960年代的航拍照片，本页也不依赖这些照片。在这里传递记录的是一块石碑：它刻于1933年海啸之后，告诫人们哪里不能建房。',
+    '据国土地理院的记录，姉吉村落曾两度被海啸夷为平地，1896年仅2人生还，1933年仅4人生还。村民们遵守了石碑的告诫，在2011年3月的东日本大地震中，房屋没有受损。'],
+   look:['石碑立在房屋下方的道路旁。据宫古市灾害资料档案，那里海拔约60米，距海岸约800米。',
+    '在今天的照片上沿着山谷里的道路往上看：房屋都在石碑上方的山坡上，大海远在下方。'],
+   dates:['在地图上，可以把这里与国土地理院1974–1978年系列的彩色照片对比，那是2011年之前三十多年的村落样貌。',
+    '石碑建立的年份并不确定。国土地理院的记录为“不明（1934？）”。'],
+   visit:['姉吉是有人居住的小村落，不是旅游景点。如果去看石碑，请不要离开道路，把车停在不妨碍他人的地方，并记住这里是别人的家园。',
+    '本页是为了传递灾害记忆，不是疏散路线图。灾害与避难信息请以宫古市的官方信息为准。',
+    '碑文（据国土地理院记录）：高き住居は児孫の和楽　想へ惨禍の大津浪　此処より下に家を建てるな。大意是：住在高处，子孙安乐；勿忘惨祸，大海啸；不要在此处以下建房。',
+    '关于2011年的数据，各资料说法不一。宫古市灾害资料档案记录的姉吉海啸溯上高度为38.9米。'],
+   sources:ANEYOSHI_SOURCES.map(s=>src(s,'zh-Hans')),fieldNotes:[]},
+  'zh-Hant':{
+   why:['這個聚落沒有1940年代或1960年代的航空照片，本頁也不依賴這些照片。在這裡傳遞記錄的是一塊石碑：它刻於1933年海嘯之後，告誡人們哪裡不能建房。',
+    '據國土地理院的記錄，姉吉聚落曾兩度被海嘯夷為平地，1896年僅2人生還，1933年僅4人生還。居民們遵守了石碑的告誡，在2011年3月的東日本大地震中，房屋沒有受損。'],
+   look:['石碑立在房屋下方的道路旁。據宮古市災害資料檔案，那裡海拔約60公尺，距海岸約800公尺。',
+    '在今天的照片上沿著山谷裡的道路往上看：房屋都在石碑上方的山坡上，大海遠在下方。'],
+   dates:['在地圖上，可以把這裡與國土地理院1974–1978年系列的彩色照片比較，那是2011年之前三十多年的聚落樣貌。',
+    '石碑建立的年份並不確定。國土地理院的記錄為「不明（1934？）」。'],
+   visit:['姉吉是有人居住的小聚落，不是觀光景點。如果去看石碑，請不要離開道路，把車停在不妨礙他人的地方，並記住這裡是別人的家園。',
+    '本頁是為了傳遞災害記憶，不是避難路線圖。災害與避難資訊請以宮古市的官方資訊為準。',
+    '碑文（據國土地理院記錄）：高き住居は児孫の和楽　想へ惨禍の大津浪　此処より下に家を建てるな。大意是：住在高處，子孫安樂；勿忘慘禍，大海嘯；不要在此處以下建房。',
+    '關於2011年的數據，各資料說法不一。宮古市災害資料檔案記錄的姉吉海嘯溯上高度為38.9公尺。'],
+   sources:ANEYOSHI_SOURCES.map(s=>src(s,'zh-Hant')),fieldNotes:[]}
  }
 };
 
 const DOAI_SOURCES=[
- {en:'Gunma Prefecture official tourism site · Doai Station (6 March 2026)',ja:'群馬県観光公式サイト · 「日本一のモグラ駅」土合駅を探索（2026年3月6日）',url:'https://gunma-kanko.jp/features/334'},
- {en:'JR East · Doai Station information',ja:'JR東日本 · 駅の情報（土合駅）',url:'https://www.jreast.co.jp/estation/station/info.aspx?StationCd=1035'},
- {en:'JR East · Doai Station timetable',ja:'JR東日本 · 時刻表 土合駅',url:'https://timetables.jreast.co.jp/timetable/list1035.html'},
- {en:'JR East (JRE Media) · DOAI VILLAGE, the outdoor hotel at Doai Station',ja:'JREメディア · 土合駅直結のアウトドアホテル DOAI VILLAGE',url:'https://media.jreast.co.jp/articles/6208'},
+ {en:'Gunma Prefecture official tourism site · Doai Station (6 March 2026)',ja:'群馬県観光公式サイト · 「日本一のモグラ駅」土合駅を探索（2026年3月6日）',ko:'군마현 관광 공식 사이트 · ‘일본 제일의 두더지 역’ 도아이역 탐방(2026년 3월 6일, 일본어)','zh-Hans':'群马县官方旅游网站 · 探访“日本第一鼹鼠车站”土合站（2026年3月6日，日语）','zh-Hant':'群馬縣官方觀光網站 · 探訪「日本第一鼴鼠車站」土合站（2026年3月6日，日語）',url:'https://gunma-kanko.jp/features/334'},
+ {en:'JR East · Doai Station information',ja:'JR東日本 · 駅の情報（土合駅）',ko:'JR 동일본 · 도아이역 정보(일본어)','zh-Hans':'JR东日本 · 土合站车站信息（日语）','zh-Hant':'JR東日本 · 土合站車站資訊（日語）',url:'https://www.jreast.co.jp/estation/station/info.aspx?StationCd=1035'},
+ {en:'JR East · Doai Station timetable',ja:'JR東日本 · 時刻表 土合駅',ko:'JR 동일본 · 도아이역 시간표(일본어)','zh-Hans':'JR东日本 · 土合站时刻表（日语）','zh-Hant':'JR東日本 · 土合站時刻表（日語）',url:'https://timetables.jreast.co.jp/timetable/list1035.html'},
+ {en:'JR East (JRE Media) · DOAI VILLAGE, the outdoor hotel at Doai Station',ja:'JREメディア · 土合駅直結のアウトドアホテル DOAI VILLAGE',ko:'JR 동일본(JRE 미디어) · 도아이역과 바로 연결된 아웃도어 호텔 DOAI VILLAGE(일본어)','zh-Hans':'JR东日本（JRE Media）· 与土合站直接相连的户外酒店DOAI VILLAGE（日语）','zh-Hant':'JR東日本（JRE Media）· 與土合站直接相連的戶外飯店DOAI VILLAGE（日語）',url:'https://media.jreast.co.jp/articles/6208'},
  GSI_TILES
 ];
 const HASHIMA_SOURCES=[
- {en:'Nagasaki City · Landing on Gunkanjima (landing criteria)',ja:'長崎市 · 軍艦島上陸について',url:'https://www.city.nagasaki.lg.jp/teian/31312.html'},
- {en:'Nagasaki City · Hashima (Gunkanjima) conservation fund',ja:'長崎市 · 端島（軍艦島）整備基金への寄附',url:'https://www.city.nagasaki.lg.jp/page/3927.html'},
- {en:'Nagasaki City tourism (at Nagasaki) · Hashima',ja:'長崎市公式観光サイト あっと!ながさき · 端島（軍艦島）',url:'https://www.at-nagasaki.jp/spot/51797'},
- {en:'Gunkanjima Concierge (tour operator) · About Gunkanjima',ja:'軍艦島コンシェルジュ · 軍艦島とは',url:'https://www.gunkanjima-concierge.com/about/'},
- {en:'Ministry of Foreign Affairs of Japan · Inscription of the Sites of Japan’s Meiji Industrial Revolution (2015)',ja:'外務省 · 明治日本の産業革命遺産の世界遺産登録（2015年・英語）',url:'https://www.mofa.go.jp/press/release/press2e_000009.html'},
+ {en:'Nagasaki City · Landing on Gunkanjima (landing criteria)',ja:'長崎市 · 軍艦島上陸について',ko:'나가사키시 · 군함도 상륙 안내: 상륙 기준(일본어)','zh-Hans':'长崎市 · 关于登上军舰岛：登岛标准（日语）','zh-Hant':'長崎市 · 關於登上軍艦島：登島標準（日語）',url:'https://www.city.nagasaki.lg.jp/teian/31312.html'},
+ {en:'Nagasaki City · Hashima (Gunkanjima) conservation fund',ja:'長崎市 · 端島（軍艦島）整備基金への寄附',ko:'나가사키시 · 하시마(군함도) 정비 기금(일본어)','zh-Hans':'长崎市 · 端岛（军舰岛）整修基金（日语）','zh-Hant':'長崎市 · 端島（軍艦島）整修基金（日語）',url:'https://www.city.nagasaki.lg.jp/page/3927.html'},
+ {en:'Nagasaki City tourism (at Nagasaki) · Hashima',ja:'長崎市公式観光サイト あっと!ながさき · 端島（軍艦島）',ko:'나가사키시 공식 관광 사이트 at Nagasaki · 하시마(일본어)','zh-Hans':'长崎市官方旅游网站 at Nagasaki · 端岛（日语）','zh-Hant':'長崎市官方觀光網站 at Nagasaki · 端島（日語）',url:'https://www.at-nagasaki.jp/spot/51797'},
+ {en:'Gunkanjima Concierge (tour operator) · About Gunkanjima',ja:'軍艦島コンシェルジュ · 軍艦島とは',ko:'군함도 컨시어지(투어 업체) · 군함도란(일본어)','zh-Hans':'军舰岛Concierge（旅游业者）· 什么是军舰岛（日语）','zh-Hant':'軍艦島Concierge（旅遊業者）· 什麼是軍艦島（日語）',url:'https://www.gunkanjima-concierge.com/about/'},
+ {en:'Ministry of Foreign Affairs of Japan · Inscription of the Sites of Japan’s Meiji Industrial Revolution (2015)',ja:'外務省 · 明治日本の産業革命遺産の世界遺産登録（2015年・英語）',ko:'일본 외무성 · 메이지 일본의 산업혁명 유산 세계유산 등재(2015년, 영어)','zh-Hans':'日本外务省 · 明治日本产业革命遗产列入世界遗产（2015年，英语）','zh-Hant':'日本外務省 · 明治日本產業革命遺產列入世界遺產（2015年，英語）',url:'https://www.mofa.go.jp/press/release/press2e_000009.html'},
  GSI_TILES
 ];
 
@@ -157,7 +276,37 @@ const liminalGuides={
     '列車は少なく、JR東日本の2026年9月の時刻表で上下とも一日5本ほどです。出かける前に時刻表を確認し、階段を歩く時間も見ておいてください。',
     '無人駅です。旧駅務室を改装した「喫茶モグラ」が2020年に開店し、サウナのあるアウトドアホテル「DOAI VILLAGE」が駅に直結しています。',
     '駅に駐車場はなく、群馬県の観光サイトは列車での来訪を案内しています。'],
-   sources:DOAI_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]}
+   sources:DOAI_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]},
+  ko:{
+   why:['도아이역은 군마현 미나카미정에 있는 JR 동일본 조에쓰선의 현역 역입니다. 에치고유자와·나가오카 방면 하행 승강장은 지하 약 70m에 있고, 걸어서 내려가야 합니다. 승강장까지 계단이 462단, 연결 통로의 24단을 합쳐 모두 486단입니다.',
+    '폐허가 아닙니다. 열차는 시간표대로 옵니다. 이상하게 느껴지는 것은 개찰구에서 열차까지 가는 길의 길이입니다.'],
+   look:['지도에는 도로 옆 역 건물이 보입니다. 하행 승강장은 산속에 있어서 사진에 한 번도 나오지 않습니다.',
+    '이곳에는 1940년대나 1960년대 사진이 없습니다. 지도에서는 지금 사진과 국토지리원의 1974–1978년 컬러 사진을 비교합니다.'],
+   visit:['군마현 관광 공식 사이트에 따르면 역 건물에서 지하 승강장까지 걸어서 약 10분이 걸립니다.',
+    '열차는 적습니다. JR 동일본의 2026년 9월 시간표로 상하행 모두 하루 5편 정도입니다. 출발 전에 시간표를 확인하고, 계단을 오르내릴 시간도 잡아 두세요.',
+    '무인역입니다. 옛 역무실을 고친 카페 ‘깃사 모구라(喫茶モグラ)’가 2020년에 문을 열었고, 사우나가 있는 아웃도어 호텔 ‘DOAI VILLAGE’가 역과 바로 연결되어 있습니다.',
+    '역에는 주차장이 없으며, 군마현 관광 사이트는 열차로 방문하도록 안내하고 있습니다.'],
+   sources:DOAI_SOURCES.map(s=>src(s,'ko')),fieldNotes:[]},
+  'zh-Hans':{
+   why:['土合站是JR东日本上越线上仍在运营的车站，位于群马县水上町。开往越后汤泽、长冈方向的下行站台位于地下约70米，只能步行下去：到站台的台阶有462级，加上连接通道的24级，共486级。',
+    '这里没有什么被废弃，列车照时刻表运行。让人感到奇妙的，是从检票口到列车之间那段路的长度。'],
+   look:['地图上可以看到路边的站房。下行站台在山体里面，所以从来不会出现在照片上。',
+    '这里没有1940年代或1960年代的照片。地图上对比的是今天的影像和国土地理院1974–1978年系列的彩色照片。'],
+   visit:['据群马县官方旅游网站介绍，从站房步行到地下站台约需10分钟。',
+    '列车很少：按JR东日本2026年9月的时刻表，上下行每天各约5班。出发前请查好时刻表，并预留走台阶的时间。',
+    '这是无人车站。由旧站务室改建的咖啡馆“喫茶Mogura（喫茶モグラ）”于2020年开业，带桑拿的户外酒店“DOAI VILLAGE”与车站直接相连。',
+    '车站没有停车场，群马县的旅游网站建议乘火车前往。'],
+   sources:DOAI_SOURCES.map(s=>src(s,'zh-Hans')),fieldNotes:[]},
+  'zh-Hant':{
+   why:['土合站是JR東日本上越線上仍在營運的車站，位於群馬縣水上町。開往越後湯澤、長岡方向的下行月台位於地下約70公尺，只能步行下去：到月台的階梯有462階，加上連接通道的24階，共486階。',
+    '這裡沒有什麼被廢棄，列車照時刻表行駛。讓人感到奇妙的，是從剪票口到列車之間那段路的長度。'],
+   look:['地圖上可以看到路邊的站房。下行月台在山體裡面，所以從來不會出現在照片上。',
+    '這裡沒有1940年代或1960年代的照片。地圖上比較的是今天的影像和國土地理院1974–1978年系列的彩色照片。'],
+   visit:['據群馬縣官方觀光網站介紹，從站房步行到地下月台約需10分鐘。',
+    '列車很少：依JR東日本2026年9月的時刻表，上下行每天各約5班。出發前請查好時刻表，並預留走階梯的時間。',
+    '這是無人車站。由舊站務室改建的咖啡館「喫茶Mogura（喫茶モグラ）」於2020年開幕，附三溫暖的戶外飯店「DOAI VILLAGE」與車站直接相連。',
+    '車站沒有停車場，群馬縣的觀光網站建議搭火車前往。'],
+   sources:DOAI_SOURCES.map(s=>src(s,'zh-Hant')),fieldNotes:[]}
  },
  'hashima-island':{schemaType:'TouristAttraction',
   theme:{ids:['l-ikeshima','l-yubari-hokkaido','l-shime-fukuoka'],en:'Other coal-mining places on the map',ja:'地図にあるほかの炭鉱の場所'},
@@ -185,7 +334,43 @@ const liminalGuides={
     '島では見学施設の範囲から出られません。閉山から50年がたち、建物の劣化は著しく進んでいます。'],
    history:['2014年に国の史跡に指定され、2015年7月に「明治日本の産業革命遺産」の構成資産のひとつとして世界遺産に登録されました。',
     '登録の際、日本政府代表団は世界遺産委員会で、1940年代に一部の施設で多くの朝鮮半島出身者などが本人の意思に反して連れて来られ、厳しい環境の下で働かされたことを理解できるような措置をとると表明しました（外務省）。端島は、その歴史とともに記憶されている場所のひとつです。'],
-   sources:HASHIMA_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]}
+   sources:HASHIMA_SOURCES.map(s=>src(s,'ja')),fieldNotes:[]},
+  ko:{
+   why:['하시마는 군함도라는 이름으로 더 잘 알려진, 나가사키 앞바다의 옛 탄광 섬입니다. 최전성기였던 1960년에는 면적 약 6.3헥타르의 섬에 약 5,300명이 살았습니다. 1974년에 폐광한 뒤로 아무도 살지 않습니다.',
+    '위에서 보면 섬 전체가 한눈에 들어옵니다. 그것이 이 섬의 특징입니다. 땅이 거의 없었기 때문에 사람들은 위로 지어 올렸습니다.'],
+   look:['섬의 윤곽. 투어 업체 군함도 컨시어지에 따르면 섬은 1893년부터 1931년까지 여섯 차례 매립으로 넓어졌습니다.',
+    '1960년대 사진(국토지리원 1961–1969년 시리즈)은 아직 사람들이 살던 시기의 것입니다. 지붕과 콘크리트가 섬의 거의 전체를 덮고 있습니다. 지금 사진에서는 섬의 넓은 부분에 나무와 풀이 무성합니다.',
+    '30호동은 일본에서 가장 오래된 고층 철근콘크리트 건물로 알려져 있습니다.'],
+   visit:['상륙은 투어로만 할 수 있습니다. 일반인의 상륙은 2009년부터 가능해졌으며, 나가사키에서 출발하는 선박 회사의 상륙 투어에 참가해야 합니다. 배로 약 40분 걸립니다.',
+    '파도 높이, 풍속, 시정이 나가사키시가 정한 기준을 벗어나면 상륙하지 않습니다.',
+    '섬에서는 견학 시설 범위를 벗어날 수 없습니다. 폐광 후 50년이 지나 건물의 노후화가 심각하게 진행되고 있습니다.'],
+   history:['하시마는 2014년에 일본의 국가 사적으로 지정되었고, 2015년 7월 ‘메이지 일본의 산업혁명 유산’의 구성 자산 중 하나로 세계유산에 등재되었습니다.',
+    '등재 당시 일본 정부 대표단은 세계유산위원회에서, 1940년대 일부 시설에서 많은 한반도 출신자 등이 “본인의 의사에 반해 끌려와 가혹한 조건에서 강제로 일하게 되었다(brought against their will and forced to work under harsh conditions)”는 사실을 이해할 수 있도록 하는 조치를 취하겠다고 밝혔습니다. 하시마는 그 역사와 함께 기억되는 장소 중 하나입니다.'],
+   sources:HASHIMA_SOURCES.map(s=>src(s,'ko')),fieldNotes:[]},
+  'zh-Hans':{
+   why:['端岛更为人熟知的名字是军舰岛，是长崎外海一座昔日的煤矿岛。在1960年的鼎盛时期，这座面积约6.3公顷的小岛上住着约5,300人。煤矿于1974年关闭，此后再无人居住。',
+    '从空中可以一眼看尽全岛，这正是它的特点：土地极少，所以人们只能向上盖楼。'],
+   look:['岛的轮廓。据旅游业者“军舰岛Concierge”介绍，这座岛在1893年至1931年间经过六次填海扩建。',
+    '1960年代的照片（国土地理院1961–1969年系列）拍摄于岛上还有人居住的年代：屋顶和混凝土几乎覆盖了全岛。在今天的照片上，树木和杂草已经蔓延到岛上的大片地方。',
+    '30号楼被认为是日本最古老的高层钢筋混凝土建筑。'],
+   visit:['只能参加团体行程登岛。一般民众自2009年起可以登岛，需要参加从长崎出发的船公司所办的登岛团，船程约40分钟。',
+    '浪高、风速或能见度超出长崎市规定的标准时，不会登岛。',
+    '在岛上只能在参观设施范围内活动。煤矿关闭已经50年，建筑老化非常严重。'],
+   history:['端岛于2014年被指定为日本国家史迹，2015年7月作为“明治日本的产业革命遗产”的组成部分列入《世界遗产名录》。',
+    '列入时，日本代表团在世界遗产委员会上表示，将采取措施，让人们了解1940年代在部分设施，曾有许多朝鲜半岛出身者等人“违背本人意愿被带来，并在严酷条件下被迫劳动（brought against their will and forced to work under harsh conditions）”。端岛是铭记这段历史的地方之一。'],
+   sources:HASHIMA_SOURCES.map(s=>src(s,'zh-Hans')),fieldNotes:[]},
+  'zh-Hant':{
+   why:['端島更為人熟知的名字是軍艦島，是長崎外海一座昔日的煤礦島。在1960年的鼎盛時期，這座面積約6.3公頃的小島上住著約5,300人。煤礦於1974年關閉，此後再無人居住。',
+    '從空中可以一眼看盡全島，這正是它的特點：土地極少，所以人們只能向上蓋樓。'],
+   look:['島的輪廓。據旅遊業者「軍艦島Concierge」介紹，這座島在1893年至1931年間經過六次填海擴建。',
+    '1960年代的照片（國土地理院1961–1969年系列）拍攝於島上還有人居住的年代：屋頂和混凝土幾乎覆蓋了全島。在今天的照片上，樹木和雜草已經蔓延到島上的大片地方。',
+    '30號樓被認為是日本最古老的高層鋼筋混凝土建築。'],
+   visit:['只能參加團體行程登島。一般民眾自2009年起可以登島，需要參加從長崎出發的船公司所辦的登島行程，船程約40分鐘。',
+    '浪高、風速或能見度超出長崎市規定的標準時，不會登島。',
+    '在島上只能在參觀設施範圍內活動。煤礦關閉已經50年，建築老化非常嚴重。'],
+   history:['端島於2014年被指定為日本國家史蹟，2015年7月作為「明治日本的產業革命遺產」的組成部分列入《世界遺產名錄》。',
+    '列入時，日本代表團在世界遺產委員會上表示，將採取措施，讓人們了解1940年代在部分設施，曾有許多朝鮮半島出身者等人「違反本人意願被帶來，並在嚴酷條件下被迫勞動（brought against their will and forced to work under harsh conditions）」。端島是銘記這段歷史的地方之一。'],
+   sources:HASHIMA_SOURCES.map(s=>src(s,'zh-Hant')),fieldNotes:[]}
  }
 };
 
