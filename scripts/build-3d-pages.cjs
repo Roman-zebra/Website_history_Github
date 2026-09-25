@@ -54,7 +54,7 @@ for(const l of LANGS){
  let s=tpl;
  const url=urlOf(l);
  s=s.replace('<html lang="en">',`<html lang="${l.html}">`);
- s=s.replace(/<meta name="robots" content="noindex">\n?/,'');
+ s=s.replace(/<meta name="robots" content="noindex">\n?/,'<meta name="robots" content="max-image-preview:large">\n');
  s=s.replace(/<title>[^<]*<\/title>/,`<title>${esc(l.title)}</title>`);
  s=s.replace(/<meta name="description" content="[^"]*">/,`<meta name="description" content="${esc(l.description)}">\n<link rel="canonical" href="${url}">\n${hreflangs}\n<meta property="og:type" content="article">\n<meta property="og:title" content="${esc(l.title)}">\n<meta property="og:description" content="${esc(l.description)}">\n<meta property="og:url" content="${url}">\n<meta property="og:image" content="${SITE}/3d/island-from-sea.jpg">\n<meta property="og:locale" content="${({en:'en_US',ja:'ja_JP',ko:'ko_KR','zh-Hans':'zh_CN','zh-Hant':'zh_TW'})[l.code]}">\n<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="${esc(l.title)}">\n<meta name="twitter:description" content="${esc(l.description)}">\n<meta name="twitter:image" content="${SITE}/3d/island-from-sea.jpg">\n<script type="application/ld+json">${ld(l)}</script>`);
  // keep only this language's blocks

@@ -38,6 +38,12 @@
 
 /place-ui.js
   Cache-Control: public, max-age=31536000, immutable
+/share.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Share images of the place pages (scripts/build-og-images.py). Redrawn rarely, under the same names, like og.jpg
+/og/*
+  Cache-Control: public, max-age=604800
 /search/*
   Cache-Control: public, max-age=86400
 /ja.html
