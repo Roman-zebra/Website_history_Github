@@ -182,4 +182,4 @@ For the walking copy only, 25 pale floor-joint cues and 58 tub-cap joint cues no
 
 Validation: 153/153 full-build tests. The new regression preserves all 44 source bath boxes, bounds every added joint to existing geometry and keeps the room traversable. Twenty native GLES2 views compile, link and render without errors. The final bath view differs from the pre-change image by 74,930 pixels while the outdoor control is byte-identical. Real mobile/browser GPU performance remains unverified.
 
-Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors5, navigation3. Verify Cloudflare publication and byte-check the served interiors5 asset before closing this pass.
+Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors5, navigation3. Cloudflare release.json reached c76a6c81707dd107a63291bf8178019cae48e421; the public HTML requests interiors5 and its served bytes match the tested local file.
