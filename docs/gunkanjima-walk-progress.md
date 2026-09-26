@@ -61,3 +61,23 @@ Publication approval received from the user at 2026-09-26 21:44:57 Asia/Tokyo: r
 Verified renderer v11 live: release.json names 5dae01653a586a6b51b11d3653f9fe876e770ca4. Corrected the no65flat walking entry to a supported threshold facing the tatami, table and television, with a downward pitch suitable for the low furnishings. The orbit camera and model geometry are unchanged; this is a curated viewing position, not a historical claim.
 
 143/143 full-build tests passed again, including an explicit entry-position, facing-direction and forward-movement regression under both index paths. Four native GLES scenes rendered with no errors; visually inspected the improved apartment frame. Next work: terrain/environment detail and device interaction verification, plus historical geometry replacements as usable source material arrives.
+
+## Demo checkpoint — renderer v13, 2026-09-26
+
+The user requested immediate repair of transparent/open interior walls, richer interior structures, maximum-stick running, the name デモ版, and a player-centred minimap. The earlier express publication approval remains applicable.
+
+- Walk-only enclosure completion closes cutaway walls and adds ceilings, real window openings, frames, skirting, pilasters, beams and warm lamps in nine source scenes. Outdoor shrine, roof garden and street scenes remain outdoor. The orbital source viewer keeps its cutaways. These additions are explicitly inferred, not measured historical evidence.
+- Generated apartments gain glass, crossbars, sills, wall trim, tea utensils and lamps. Gym gains court markings, benches and stage steps. Four nearby warm light pools shade interiors without new image assets.
+- Full joystick tilt automatically sprints, with a dead zone and proportional response. Indoor walk/run speeds are 2.8/5.6 m/s and outdoor 4.5/9 m/s. Collision substeps prevent sprinting through thin walls on slow frames. Release, cancellation, lost capture, blur and pause clear movement.
+- Minimap keeps the player at its centre at a local scale, pans the coast/buildings, and displays facing direction. Era filtering matches available buildings. Updates at 20 Hz.
+- Demo naming is applied to the page and five-language entry links.
+
+Validation: 145/145 full build tests; all generated stairs and 1362 doorway paths; sampled opaque coverage of nine enclosures excluding window/door openings; actual engine run-speed and high-speed wall collisions; touch input and minimap centring/panning/heading checks. Nine native GLES2 scenes render without shader/link/GL errors; gym, school and apartment images inspected. Native replay is not a real iPhone/iPad browser performance test.
+
+Design references searched and read (no extracted game assets):
+- GDC 2021, miHoYo producer presentation, *Crafting an Anime Style Open World*: https://www.gdcvault.com/play/1027539 and https://www.youtube.com/watch?v=-JFyAdI_rO8 (presentation listing/summary; not a claim of full video playback).
+- Developer interview on composition, framing real-world motifs and edge-based UI: https://apps.apple.com/cn/iphone/story/id1576338984
+- PlayStation gameplay preview and embedded play-video listing: https://blog.ja.playstation.com/?p=152914 (article and captures, not a claim of watching the complete video).
+- User's interior reference: https://gamewith.jp/genshin/article/show/572711
+
+Applied: layered architectural details, warm/cool interior shading, clear window framing, local navigation and directional feedback. Quality remains a schematic demo, below the reference's production art quality. Next visual pass should target room-specific props, entry-view composition and terrain rather than presenting this as completed photorealistic or Genshin-equivalent reconstruction.

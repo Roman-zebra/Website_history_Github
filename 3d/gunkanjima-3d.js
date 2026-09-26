@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '12';
+  const V = '13';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -407,10 +407,12 @@
     precision mediump float;
 #endif
     uniform float uFog, uShade, uChange, uAnime; uniform vec3 uBg, uSun, uHorizon;
+    uniform float uRoomLight; uniform vec4 uLamp0,uLamp1,uLamp2,uLamp3;
     varying vec3 vNor; varying vec4 vCol; varying vec4 vShadow; varying float vDepth; varying vec3 vLoc; varying vec2 vMat;
     ` + SHADOW_FN + `
     /* material kinds: 0 flat 1 tatami 2 wood 3 concrete 4 rock 5 tile 6 metal 7 paper 8 glass 9 cloth 10 foliage 11 painted wall 12 water 13 soil.
        Two noise lookups per fragment, whatever the kind: the scales are chosen first, the noise is read once. */
+    float lampPool(vec4 lamp){vec3 d=vLoc-lamp.xyz;return lamp.w>0.0?1.0/(1.0+dot(d,d)/(lamp.w*lamp.w*.18)):0.0;}
     vec3 material(vec3 c, vec3 p, vec3 n, float k, float seed){
       if (k < 0.5 || (k > 7.5 && k < 8.5)) return c;
       vec2 uv = abs(n.y) > 0.6 ? p.xz : (abs(n.x) > abs(n.z) ? p.zy : p.xy);
@@ -472,6 +474,12 @@
         vec3 ambient=mix(vec3(.43,.48,.59),vec3(.77,.85,.96),n.y*.5+.5);
         col=base*mix(ambient,vec3(1.12,1.07,.92),smoothstep(.22,.45,d*sh));
       }
+      if(uRoomLight>.5){
+        float pool=lampPool(uLamp0)+lampPool(uLamp1)+lampPool(uLamp2)+lampPool(uLamp3);
+        col=base*(vec3(.53,.58,.65)+vec3(.47,.35,.17)*min(pool,1.5));
+        col*=.86+.14*(n.y*.5+.5);
+      }
+      if(vMat.x>13.5)col=vCol.rgb*1.25;
       col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
       gl_FragColor = vec4(col, vCol.a);
     }`;
@@ -505,7 +513,7 @@
     progR = program(ROOF_VS, ROOF_FS, ROOF_A, COMMON_U.concat(TEX_U));
     progS = program(WALL_VS, SEAWALL_FS, WALL_A, COMMON_U);
     progSky = program(SKY_VS, SKY_FS, ['aPos'], ['uTop', 'uHorizon', 'uEl', 'uAnime', 'uTime']);
-    progB = program(BOX_VS, BOX_FS, BOX_A, COMMON_U);
+    progB = program(BOX_VS, BOX_FS, BOX_A, COMMON_U.concat(['uRoomLight','uLamp0','uLamp1','uLamp2','uLamp3']));
     if (SHADOW){ depthT = program(TERRAIN_VS, DEPTH_FS, TERRAIN_A, COMMON_U); depthW = program(WALL_VS, DEPTH_FS_ALIVE, WALL_A, COMMON_U); depthR = program(ROOF_VS, DEPTH_FS_ALIVE, ROOF_A, COMMON_U); depthB = program(BOX_VS, BOX_DEPTH_FS, BOX_A, COMMON_U); }
   } catch (err) { console.error(err); fallback(T.noWebgl); return; }
 
@@ -865,7 +873,7 @@
   let orbitPose = null, walkLast = performance.now();
   const walkKeys = new Set();
   let gameIndoor = false, outsidePose = null, avatarMesh = null, avatarHeading = 0, stride = 0;
-  const gameInput = { x: 0, y: 0, run: false };
+  const gameInput = { x: 0, y: 0, run: false, autoRun: false };
   let thirdPerson = false;
 
   function homeDistance(){
@@ -980,6 +988,11 @@
     gl.uniform1f(U.uGhostId, ghostId);
     gl.uniform1f(U.uGhostId2, ghostId2);
     gl.uniform1f(U.uGhostPass, 0);
+    if(P===progB){
+      const sc=GAME&&gameIndoor&&scene&&interiors.scenes[scene],onRoof=sc&&sc.walkPlan&&st.walkGround>=sc.walkPlan.base+sc.walkPlan.floors*sc.walkPlan.height-.1,uv=fromWorld(st.wx,st.wz),lamps=!onRoof&&sc&&sc.walkLights?sc.walkLights.slice().sort((a,b)=>((a.u-uv[0])**2+(a.v-uv[1])**2+4*(a.y-st.walkGround-1.68)**2)-((b.u-uv[0])**2+(b.v-uv[1])**2+4*(b.y-st.walkGround-1.68)**2)).slice(0,4):[];
+      gl.uniform1f(U.uRoomLight,lamps.length?1:0);
+      for(let i=0;i<4;i++){const l=lamps[i];gl.uniform4fv(U['uLamp'+i],l?[(l.u-C)*mpp,l.y,(l.v-C)*mpp,l.radius]:[0,0,0,0]);}
+    }
     if (U.uShadowMap){ gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, shadowOn ? shadowTex : null); gl.uniform1i(U.uShadowMap, 2); }
   }
   function setTextures(P, texA, texB, ym){
@@ -1109,13 +1122,17 @@
     const forward = gameInput.y + (walkKeys.has('w') || walkKeys.has('arrowup') || walkKeys.has('forward') ? 1 : 0) - (walkKeys.has('s') || walkKeys.has('arrowdown') || walkKeys.has('back') ? 1 : 0);
     const right = gameInput.x + (walkKeys.has('d') || walkKeys.has('right') || walkKeys.has('arrowright') ? 1 : 0) - (walkKeys.has('a') || walkKeys.has('left') || walkKeys.has('arrowleft') ? 1 : 0);
     if (!forward && !right) return;
-    const n = Math.max(1, Math.hypot(forward, right)), speed = gameIndoor ? 2.2 : (walkKeys.has('shift') || gameInput.run ? 7.5 : 4.2);
+    const n = Math.max(1, Math.hypot(forward, right)), running=walkKeys.has('shift')||gameInput.run||gameInput.autoRun, speed=gameIndoor?(running?5.6:2.8):(running?9:4.5);
     const f = forward / n, r = right / n, dx = (Math.sin(st.az) * f - Math.cos(st.az) * r) * speed * dt, dz = (Math.cos(st.az) * f + Math.sin(st.az) * r) * speed * dt;
     avatarHeading = Math.atan2(dx,dz); stride += speed*dt*3;
-    let h = canWalk(st.wx + dx, st.wz);
-    if (h !== null){ st.wx += dx; st.walkGround = h; }
-    h = canWalk(st.wx, st.wz + dz);
-    if (h !== null){ st.wz += dz; st.walkGround = h; }
+    // Small collision steps preserve thin walls and stair rises even when sprinting at low FPS.
+    const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.12));
+    for(let i=0;i<steps;i++){
+      let h=canWalk(st.wx+dx/steps,st.wz);
+      if(h!==null){st.wx+=dx/steps;st.walkGround=h;}
+      h=canWalk(st.wx,st.wz+dz/steps);
+      if(h!==null){st.wz+=dz/steps;st.walkGround=h;}
+    }
   }
   function drawWeather(now){
     if (!weatherCtx || !weatherFx) return;
@@ -1646,6 +1663,7 @@
   function gameEnter(id){
     let sc=interiors && interiors.scenes[id]; if(!sc)return false;
     if(sc.generatedBuilding){const b=sc.generatedBuilding;if(!buildingAlive(b))return false;sc=window.JTAWalkBuildings.build(b,model.coast);if(!sc)return false;sc.buildingId=b.id;interiors.scenes[id]=sc;}
+    if(!sc.inferred && window.JTAWalkInteriors){sc=window.JTAWalkInteriors.complete(sc,id);interiors.scenes[id]=sc;}
     if(sc.buildingId && !buildingAlive(model.buildings.find(b=>b.id===sc.buildingId)))return false;
     const entry=WALK_ENTRY_VIEWS[id];
     const spawn=window.JTAWalkNav.spawn(entry?{...sc,camera:entry}:sc,mpp); if(!spawn)return false;
@@ -1692,6 +1710,6 @@
     window.dispatchEvent(new CustomEvent('jta-walk-ready'));
   }
   window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, enterScene, leaveScene, beginWalk, endWalk, scene: () => scene, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
-    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, camera:()=>{thirdPerson=!thirdPerson;request();return thirdPerson;}, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, floor:()=>{const sc=scene&&interiors.scenes[scene];return sc&&sc.walkPlan?{current:Math.min(sc.walkPlan.floors,Math.floor((st.walkGround-sc.walkPlan.base+.18)/sc.walkPlan.height)),total:sc.walkPlan.floors}:null;}, year:()=>Math.round(yearMix().year), scenes:()=>interiors?interiors.scenes:{}, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
+    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, camera:()=>{thirdPerson=!thirdPerson;request();return thirdPerson;}, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, floor:()=>{const sc=scene&&interiors.scenes[scene];return sc&&sc.walkPlan?{current:Math.min(sc.walkPlan.floors,Math.floor((st.walkGround-sc.walkPlan.base+.18)/sc.walkPlan.height)),total:sc.walkPlan.floors}:null;}, year:()=>Math.round(yearMix().year), scenes:()=>interiors?interiors.scenes:{}, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;gameInput.autoRun=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
     years: () => years.map(y => y.id), loaded: i => texture(i).promise, shadows: () => !!shadowFb, walls: () => !!walls, model: () => model };
 })();

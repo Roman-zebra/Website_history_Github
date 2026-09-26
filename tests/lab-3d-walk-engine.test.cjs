@@ -6,7 +6,7 @@ const loaded=new Promise(r=>ready=r);
 const gl=new Proxy({getExtension:n=>bigIndex&&n==='OES_element_index_uint'?{}:null,getParameter:()=>4096,getShaderParameter:()=>true,getProgramParameter:()=>true,createBuffer:()=>({}),createShader:()=>({}),createProgram:()=>({}),createTexture:()=>({}),getUniformLocation:()=>({}),drawElements:()=>draws++},{get:(o,k)=>k in o?o[k]:/^[A-Z_0-9]+$/.test(k)?1:noop});
 const canvas={getContext:()=>gl,getBoundingClientRect:()=>({width:1280,height:800}),clientWidth:1280,clientHeight:800,classList:{add:noop,remove:noop},focus:noop,addEventListener:(k,f)=>(events[k]??=[]).push(f)};
 const status={textContent:''},document={currentScript:{src:'https://japantimeatlas.com/3d/gunkanjima-3d.js'},getElementById:id=>id==='view'?canvas:id==='viewStatus'?status:null,querySelectorAll:()=>[],addEventListener:noop};
-const win={JTA_WALK_PAGE:true,LAB_LANG:'ja',JTAWalkNav:require(root+'/3d/gunkanjima-walk-nav.js'),JTAWalkBuildings:require(root+'/3d/gunkanjima-walk-buildings.js'),devicePixelRatio:1,matchMedia:()=>({matches:false}),addEventListener:noop,dispatchEvent:e=>{if(e.type==='jta-walk-ready')ready();}};
+const win={JTA_WALK_PAGE:true,LAB_LANG:'ja',JTAWalkNav:require(root+'/3d/gunkanjima-walk-nav.js'),JTAWalkInteriors:require(root+'/3d/gunkanjima-walk-interiors.js'),JTAWalkBuildings:require(root+'/3d/gunkanjima-walk-buildings.js'),devicePixelRatio:1,matchMedia:()=>({matches:false}),addEventListener:noop,dispatchEvent:e=>{if(e.type==='jta-walk-ready')ready();}};
 const ctx={window:win,document,navigator:{},location:{search:'',hash:''},console,URL,CustomEvent:class{constructor(type){this.type=type;}},performance:{now:()=>now},requestAnimationFrame:f=>raf.push(f),setTimeout:()=>0,Image:class{width=1024;set src(v){queueMicrotask(()=>this.onload())}},fetch:async url=>{const file=path.join(root,new URL(url).pathname);const data=fs.readFileSync(file);return{ok:true,json:async()=>JSON.parse(data),arrayBuffer:async()=>data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength)}},matchMedia:win.matchMedia};
 vm.runInNewContext(fs.readFileSync(root+'/3d/gunkanjima-3d.js','utf8'),ctx);
 await loaded;const api=win.jtaLab3d,g=api.game;assert.ok(api.st.walk);assert.notEqual(g.canWalk(api.st.wx,api.st.wz),null,'outdoor spawn supported');
@@ -28,6 +28,18 @@ for(let x=-1000;x<=1000;x+=100)for(let z=-1000;z<=1000;z+=100){const uv=g.fromWo
 // Move east/right relative to the screen when facing positive world Z.
 g.reset();api.st.az=0;const x=api.st.wx;g.input.x=1;for(let i=0;i<3;i++)frame();assert.ok(api.st.wx<x,'right is camera-relative');g.pause();const px=api.st.wx;frame();assert.equal(api.st.wx,px,'pause clears input');
 assert.ok(draws>0);
+// Indoor sprint must actually be faster; full touch input uses the same running path.
+function travel(run,autoRun){g.leave();g.enter('gym');api.st.az=0;g.pause();g.input.run=run;g.input.autoRun=autoRun;g.input.y=1;const x=api.st.wx,z=api.st.wz;for(let i=0;i<5;i++)frame();g.pause();return Math.hypot(api.st.wx-x,api.st.wz-z);}
+const walkDistance=travel(false,false),runDistance=travel(true,false),stickDistance=travel(false,true);
+assert.ok(runDistance>walkDistance*1.9,'indoor run doubles actual travelled distance');assert.ok(Math.abs(stickDistance-runDistance)<.01,'full stick sprints');
+// Run toward a completed gym end wall at the maximum simulated frame duration.
+g.enter('gym');const envelope=g.scenes().gym.walkEnvelope,cc=Math.cos(envelope.angle),ss=Math.sin(envelope.angle);
+const wall=g.toWorldTrue(envelope.u+(envelope.x1*cc)/.805,envelope.v+(envelope.x1*ss)/.805);
+api.st.az=Math.atan2(wall[0]-api.st.wx,wall[1]-api.st.wz);g.input.run=true;g.input.y=1;
+for(let i=0;i<180;i++){now+=20;frame();}
+const endUV=g.fromWorld(api.st.wx,api.st.wz),localX=(endUV[0]-envelope.u)*.805*cc+(endUV[1]-envelope.v)*.805*ss;
+assert.ok(localX<envelope.x1-.10,'sprinting cannot tunnel through the completed wall');g.pause();g.leave();
+
 // Drive the actual axis-separated movement loop up and down a representative 10-storey building.
 assert.ok(g.enter('building-190946508'));
 const sc=g.scenes()[api.scene()],p=sc.walkPlan;

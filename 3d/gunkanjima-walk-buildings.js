@@ -53,6 +53,11 @@ function build(b,coast){
    const y=base+f*height;put((a[0]+q[0])/2,(a[1]+q[1])/2,y,[len,.83,.13],[.87,.84,.71],'wall',11,angle);
    put((a[0]+q[0])/2,(a[1]+q[1])/2,y+height-.55,[len,.55,.13],[.91,.86,.71],'wall',11,angle);
    for(let d=0;d<len;d+=2.4)put(a[0]+dx*d/len,a[1]+dz*d/len,y+.83,[.12,height-1.38,.18],[.38,.56,.57],'window-frame',2,angle);
+   for(let d=0;d<len-.12;d+=2.4){const w=Math.min(2.4,len-d)-.12,mid=d+.06+w/2,u=a[0]+dx*mid/len,v=a[1]+dz*mid/len;
+    put(u,v,y+.83,[w,height-1.38,.035],[.50,.70,.72],'window-glass',8,angle);
+    put(u,v,y+height*.57,[w,.055,.14],[.35,.43,.37],'window-crossbar',2,angle);
+    put(u,v,y+.80,[w+.08,.08,.22],[.54,.49,.35],'window-sill',2,angle);
+   }
   }
   put((a[0]+q[0])/2,(a[1]+q[1])/2,base+floors*height,[len,.95,.15],[.75,.79,.69],'parapet',3,angle);
  }
@@ -74,13 +79,19 @@ function build(b,coast){
     put(x,z,y+.05,[.75,.3,.5],[.52,.28,.12],'table',2);
     put(x+.98,z+.85,y,[.8,1.1,.48],[.38,.25,.14],'cabinet',2);
     put(x-.75,z+.8,y+.06,[.9,.12,.6],[.37,.53,.57],'cushion',9);
+    for(const dx of [-1.48,1.48])put(x+dx,z,y+.05,[.055,.12,2.95],[.37,.27,.16],'wall-trim',2);
+    put(x,z+1.48,y+.05,[2.95,.12,.055],[.37,.27,.16],'wall-trim',2);
+    put(x-.18,z,y+.36,[.15,.16,.15],[.49,.36,.22],'tea-pot',5);
+    put(x+.17,z+.1,y+.36,[.09,.08,.09],[.86,.85,.68],'tea-cup',5);
+    put(x,z,y+height-.38,[.48,.16,.38],[.43,.35,.23],'lamp-shade',6);
+    put(x,z,y+height-.40,[.36,.045,.26],[1,.82,.48],'lamp-glow',14);
    }
    else if(school){put(x,z,y+.65,[.65,.08,.45],[.72,.46,.23],'desk',2);put(x,z,y,[.08,.65,.08],[.30,.37,.43],'desk-leg',6);}
    else{put(x,z,y,[.8,.6,.6],[.52,.40,.24],'crate',2);}
   }
  }
  const spawn=toUV(p.x-lane,p.z-run/2-.55);
- return {building:b.name,ghost:[b.name],floor:base,center:spawn,camera:{u:spawn[0],v:spawn[1],y:base+1.65,az:0,el:0,dist:2},label:{ja:(b.name||'名称未確認')+' · 1階〜屋上（推定）',en:(b.name||'Unnamed building')+' · floors & roof (inferred)'},text:{ja:'建物の輪郭・階数は既存資料モデルを使用。階段の位置・室内配置・家具・色は歩行体験のための推定で、当時の写真による精密復元ではありません。中央の折り返し階段を歩いて各階と屋上へ進めます。',en:'Footprints and storey counts use the source model. Stair positions, interior arrangement, furniture and colours are inferred for exploration, not a precise photographic reconstruction. Walk up the switchback stairs to each floor and the roof.'},sources:[{label:{ja:'実測資料集（NDL書誌・本文未取得）',en:'Measured-survey volume (catalogue; full text not acquired)'},url:'https://ndlsearch.ndl.go.jp/books/R100000002-I000007682767'}],boxes,walkPlan:{...p,base,height,floors,run,lane,routes},inferred:true};
+ return {building:b.name,ghost:[b.name],floor:base,center:spawn,camera:{u:spawn[0],v:spawn[1],y:base+1.65,az:0,el:0,dist:2},label:{ja:(b.name||'名称未確認')+' · 1階〜屋上（推定）',en:(b.name||'Unnamed building')+' · floors & roof (inferred)'},text:{ja:'建物の輪郭・階数は既存資料モデルを使用。階段の位置・室内配置・家具・色は歩行体験のための推定で、当時の写真による精密復元ではありません。中央の折り返し階段を歩いて各階と屋上へ進めます。',en:'Footprints and storey counts use the source model. Stair positions, interior arrangement, furniture and colours are inferred for exploration, not a precise photographic reconstruction. Walk up the switchback stairs to each floor and the roof.'},sources:[{label:{ja:'実測資料集（NDL書誌・本文未取得）',en:'Measured-survey volume (catalogue; full text not acquired)'},url:'https://ndlsearch.ndl.go.jp/books/R100000002-I000007682767'}],boxes,walkLights:boxes.filter(b=>b.k===14).map(b=>({u:b.u,v:b.v,y:b.y,radius:3.5})),walkPlan:{...p,base,height,floors,run,lane,routes},inferred:true};
 }
 const api={plan,build,inPoly};if(typeof module==='object')module.exports=api;else root.JTAWalkBuildings=api;
 })(typeof window==='undefined'?this:window);
