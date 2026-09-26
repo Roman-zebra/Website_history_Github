@@ -114,6 +114,65 @@
         "official site extent",
         "historic description"
       ]
+    },
+    {
+      "id": "youtube-walk-2020",
+      "title": "軍艦島（端島）を歩いてみた【4K】",
+      "url": "https://www.youtube.com/watch?v=bmfos-NpYJY",
+      "year": 2020,
+      "access": "Search metadata reviewed; video playback not verified because YouTube required bot verification in the browser",
+      "plannedUse": [
+        "Modern visitor-route scale and material reference; not evidence for 1962 furnishings"
+      ]
+    },
+    {
+      "id": "ncc-resident-walk-2013",
+      "title": "NCCアーカイブ：元住民と巡る軍艦島内部",
+      "url": "https://www.ncctv.co.jp/bangumi/gunkanjima",
+      "videoUrl": "https://www.youtube.com/watch?v=s2znXG3SoZ4",
+      "year": 2013,
+      "access": "Broadcaster description reviewed; video playback blocked by YouTube bot verification",
+      "plannedUse": [
+        "Room and corridor comparison after lawful video access; no dimensions extracted yet"
+      ]
+    },
+    {
+      "id": "hachiyo-drone-2024",
+      "title": "八洋コンサルタント：端島ドローン撮影",
+      "url": "https://www.hachiyo.co.jp/端島（軍艦島）ドローン撮影動画を公開します。/",
+      "videoUrl": "https://www.youtube.com/watch?v=TLAtbepBfH8",
+      "year": 2024,
+      "access": "Publisher page reviewed; video not watched",
+      "corrections": [
+        "3:18–3:20: 35号棟 should be 65号棟",
+        "4:38–4:42: northwest 4-storey hospital is 69号棟; westernmost 2-storey isolation ward is 68号棟"
+      ],
+      "plannedUse": [
+        "Check building identifiers and modern condition; preserve published errata"
+      ]
+    },
+    {
+      "id": "nbc-concrete-island-1968",
+      "title": "NBC：青空農園〜コンクリートの島の緑化活動",
+      "url": "https://yugaku-tv.jp/nbc/videos/5344/「軍艦島」の青空農園-〜コンクリートの島の緑-2/",
+      "year": 1968,
+      "access": "Public editorial description reviewed; full video is subscriber-only and was not accessed",
+      "documented": [
+        "Island predominantly concrete with very little natural greenery; rooftop gardening documented"
+      ],
+      "applied": [
+        "Ground palette changed from widespread grass-like yellow/green to inferred concrete and exposed-rock materials; exact paving layout and colours remain inferred"
+      ]
+    },
+    {
+      "id": "genshin-gameplay-2023",
+      "title": "原神公式：フォンテーヌ実機プレイ映像 Gamescom 2023",
+      "url": "https://www.youtube.com/watch?v=q8B2xLmfyWM",
+      "year": 2023,
+      "access": "Official video listing found; no full playback verified",
+      "plannedUse": [
+        "Art and navigation reference only; not historical evidence for Hashima"
+      ]
     }
   ],
   "nextAcquisition": [

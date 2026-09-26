@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '15';
+  const V = '16';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -145,7 +145,7 @@
     precision mediump float;
     uniform sampler2D uTexA, uTexB;
     uniform vec3 uEye;
-    uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uTime, uAnime;
+    uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uTime, uAnime, uYear;
     uniform vec3 uBg, uSun, uHorizon;
     varying vec2 vUvP; varying vec2 vUvO; varying vec3 vNor; varying float vSea; varying vec3 vPos;
     varying vec4 vShadow; varying float vDepth;
@@ -165,10 +165,26 @@
       float light = mix(1.0, min(1.0, 0.42 + 0.6 * d * mix(0.35, 1.0, sh)), uShade);
       vec3 col = t * light;
       if(uAnime>0.5){
-        float luminance=dot(t,vec3(.299,.587,.114));
-        vec3 earth=mix(vec3(.38,.49,.43),vec3(.82,.76,.57),smoothstep(.08,.62,luminance));
-        float grain=noise(vPos.xz*.45);
-        col=earth*(.92+.08*grain)*mix(vec3(.63,.72,.89),vec3(1.10,1.07,.91),smoothstep(.26,.46,d*sh));
+        // Inhabited Hashima was predominantly concrete. Surface pattern/colour remain inferred.
+        float fine=noise(vPos.xz*3.2),broad=noise(vPos.xz*.085);
+        float pavement=smoothstep(.60,.92,n.y);
+        vec3 concrete=mix(vec3(.48,.49,.47),vec3(.66,.65,.59),broad);
+        concrete*=.96+.08*fine;
+        vec2 panel=fract(vPos.xz/vec2(2.7,3.4));
+        vec2 edgeDistance=min(panel,1.0-panel)*vec2(2.7,3.4);
+        float nearSurface=1.0-smoothstep(12.0,42.0,vDepth);
+        float joint=(1.0-smoothstep(.012,.033,min(edgeDistance.x,edgeDistance.y)))*nearSurface;
+        concrete*=1.0-joint*.14;
+        float stain=smoothstep(.56,.83,noise(vPos.xz*.24+8.0));
+        concrete=mix(concrete,vec3(.35,.37,.36),stain*.22);
+        vec3 rock=mix(vec3(.36,.38,.38),vec3(.53,.52,.47),noise(vPos.xz*.21+vPos.y*.18));
+        vec3 surface=mix(rock,concrete,pavement);
+        float age=smoothstep(74.0,110.0,uYear);
+        float growth=age*smoothstep(.52,.78,noise(vPos.xz*.13))*mix(.46,.13,pavement);
+        surface=mix(surface,vec3(.27,.34,.26),growth);
+        // Continuous diffuse light avoids the old hard yellow/green bands.
+        vec3 lighting=mix(vec3(.66,.74,.84),vec3(1.06,1.02,.92),smoothstep(.05,.86,d*mix(.45,1.0,sh)));
+        col=surface*lighting;
       }
       float edge = smoothstep(0.5, 0.36, max(abs(vUvP.x - 0.5), abs(vUvP.y - 0.5)));
       if (vSea > 0.5){

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "ready",
-  "updatedAt": "2026-09-26T13:32:27.520660+00:00",
+  "updatedAt": "2026-09-26T13:47:36.673141+00:00",
   "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
@@ -14,10 +14,12 @@
     "Full-stick auto-sprint: 5.6 m/s indoors and 9 m/s outdoors with collision substeps; player-centred minimap with heading arrow; demo naming in all five locales",
     "Renderer v13 confirmed live in release.json on a3cb96cb1e5086d0f066e6b5169ff58e0b347e35",
     "Renderer v14 school study: inferred tabletop notebooks/pencils, shelf books, chalk strokes and rear-aisle entry view; source furniture positions preserved",
-    "Renderer v15: camera-oriented wind-driven layered clouds, weather density/shading, subtler camera-dependent water reflection, compact closed-by-default menu and smaller HUD"
+    "Renderer v15: camera-oriented wind-driven layered clouds, weather density/shading, subtler camera-dependent water reflection, compact closed-by-default menu and smaller HUD",
+    "Renderer v15 verified live at 9a6db7c25fc471b220a26ee4d26a4769d346fe7b",
+    "Renderer v16: inferred concrete/rock terrain materials, near-distance paving detail and collapsed video references; public source descriptions reviewed, YouTube playback blocked"
   ],
   "nextActions": [
-    "Verify renderer v15 publication if preceding run stopped during deploy",
+    "Verify renderer v16 publication if preceding run stopped during deploy",
     "Improve terrain, room-specific furnishings and composition in bounded, visually verified steps using the linked GDC / developer references",
     "Verify PC/mobile browser interaction when a WebGL-capable browser is available",
     "Replace inferred geometry only when usable historical plans/photos are obtained"
@@ -32,6 +34,11 @@
       "task": "Mobile WebGL graphics and performance verification",
       "reason": "Current cloud browser does not expose WebGL",
       "retryWhen": "A WebGL-capable test browser/device is available"
+    },
+    {
+      "task": "YouTube video playback for visual reference",
+      "reason": "YouTube cloud browser requires bot verification; video listings and publisher descriptions only were reviewed",
+      "retryWhen": "Authorized playback access changes or user supplies usable frames; do not try alternate routes around the block"
     }
   ],
   "automation": {
@@ -46,7 +53,7 @@
   "validation": {
     "fullBuildTestsPassed": 146,
     "fullBuildTestsFailed": 0,
-    "nativeGlesScenesRendered": 13,
+    "nativeGlesScenesRendered": 10,
     "inferredDoorwayPathsChecked": 1362,
     "roomWallCornersOutsideFootprint": 0,
     "nativeGlesMediumpScenesRendered": 13,
@@ -55,14 +62,16 @@
     "touchSprintAndMinimap": true,
     "schoolDesktopPropsAndAisle": true,
     "skyTimeViewWeatherImageDifferences": true,
-    "compactMenuInteractions": true
+    "compactMenuInteractions": true,
+    "postCorrectionLabTestsPassed": 38,
+    "terrain1962And2010": true
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
     "scope": "User explicitly approved reflecting this change in Roman-zebra/Website_history_Github and publishing to the existing JTA site, then continuing"
   },
   "publication": {
-    "rendererVersion": 15,
+    "rendererVersion": 16,
     "status": "submitted with this source update; verify Cloudflare and release.json"
   }
 }
