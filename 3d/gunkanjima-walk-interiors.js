@@ -100,8 +100,39 @@ function complete(sc,id){
   // Benches along the side wall, clear of the central court.
   for(const x of [-3.5,1.5,6.5]){put(x,z0+.65,base+.43,[3,.09,.48],trim,'bench-seat',2);for(const dx of [-1.1,1.1])put(x+dx,z0+.65,base,[.10,.43,.38],timber,'bench-leg',2);}
  }
+ let walkEntry=sc.walkEntry;
+ if(id==='school'){
+  // Inferred teaching props sit on existing furniture; aisles and source desk positions are retained.
+  const covers=[[.24,.43,.42],[.45,.26,.22],[.30,.36,.48]];
+  sc.boxes.filter(b=>b.t==='desk').forEach((desk,i)=>{
+   if(i%3===2)return;
+   const q=local(desk.u,desk.v),y=desk.y+desk.s[1],r=(desk.r||0)*Math.PI/180-angle;
+   put(q[0]-.015,q[1]-.06,y+.004,[.25,.018,.18],covers[i%3],'walk-school-notebook',9,r);
+   put(q[0]-.015,q[1]-.06,y+.022,[.23,.009,.16],[.91,.87,.71],'walk-school-pages',0,r);
+   put(q[0]+.12,q[1]+.07,y+.003,[.15,.008,.012],[.65,.39,.15],'walk-school-pencil',2,r);
+  });
+  const board=sc.boxes.find(b=>b.t==='blackboard');
+  if(board){
+   const q=local(board.u,board.v),face=q[0]+board.s[2]/2+.008;
+   // Abstract chalk strokes, not invented historical lesson text.
+   for(let row=0;row<4;row++)for(let col=0;col<3;col++){
+    const length=.22+((row+col)%3)*.07;
+    put(face,q[1]-1.30+col*.61,board.y+.85-row*.19,[.007,.017,length],[.83,.85,.70],'walk-school-chalk',0);
+   }
+   put(q[0]+.07,q[1],board.y-.055,[.18,.045,3.5],trim,'walk-school-chalk-tray',2);
+   put(q[0]+.075,q[1]+1.0,board.y-.01,[.10,.035,.18],[.30,.33,.25],'walk-school-eraser',9);
+  }
+  const cupboard=sc.boxes.find(b=>b.t==='cupboard');
+  if(cupboard){
+   const q=local(cupboard.u,cupboard.v),y=cupboard.y+cupboard.s[1];
+   for(let i=0;i<15;i++)put(q[0]-1.45+i*.17,q[1],y,[.105,.25+(i%4)*.04,.23],covers[i%3],'walk-school-shelf-book',9);
+  }
+  const position=world(5.8,3.5),target=board?world(...local(board.u,board.v)):world(x0,0);
+  walkEntry={u:position[0],v:position[1],target,el:-.10};
+ }
+ const schoolNote=id==='school'?' ノート・教材・黒板の描線も演出上の推定です。':'';
  const note={ja:'歩行用に補った壁・天井・装飾・照明は推定です。',en:'Enclosures, finishes and lighting added for walking are inferred.'};
- return {...sc,boxes,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja,en:(sc.text.en||'')+' '+note.en}};
+ return {...sc,boxes,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')}};
 }
 const api={complete,profiles};if(typeof module==='object')module.exports=api;else root.JTAWalkInteriors=api;
 })(typeof window==='undefined'?this:window);

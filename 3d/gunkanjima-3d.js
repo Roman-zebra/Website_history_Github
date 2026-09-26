@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '13';
+  const V = '14';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -1665,7 +1665,7 @@
     if(sc.generatedBuilding){const b=sc.generatedBuilding;if(!buildingAlive(b))return false;sc=window.JTAWalkBuildings.build(b,model.coast);if(!sc)return false;sc.buildingId=b.id;interiors.scenes[id]=sc;}
     if(!sc.inferred && window.JTAWalkInteriors){sc=window.JTAWalkInteriors.complete(sc,id);interiors.scenes[id]=sc;}
     if(sc.buildingId && !buildingAlive(model.buildings.find(b=>b.id===sc.buildingId)))return false;
-    const entry=WALK_ENTRY_VIEWS[id];
+    const entry=WALK_ENTRY_VIEWS[id]||sc.walkEntry;
     const spawn=window.JTAWalkNav.spawn(entry?{...sc,camera:entry}:sc,mpp); if(!spawn)return false;
     if(!gameIndoor)outsidePose={wx:st.wx,wz:st.wz,walkGround:st.walkGround,az:st.az,el:st.el};
     enterScene(id,false); anim=null; gameIndoor=true;

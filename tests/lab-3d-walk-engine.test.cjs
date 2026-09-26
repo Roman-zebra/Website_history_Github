@@ -24,6 +24,13 @@ assert.ok(api.st.el<-.4&&api.st.el>-.8,'table is in the first-person field of vi
 assert.notEqual(g.canWalk(api.st.wx+Math.sin(api.st.az)*.3,api.st.wz+Math.cos(api.st.az)*.3),null,'can walk into the room');
 g.leave();
 
+// A classroom opens toward the board and supports actual forward input from the rear aisle.
+assert.ok(g.enter('school'));const schoolEntry=g.scenes().school.walkEntry,schoolUV=g.fromWorld(api.st.wx,api.st.wz),schoolLook=g.toWorldTrue(...schoolEntry.target);
+assert.ok(Math.hypot(schoolUV[0]-schoolEntry.u,schoolUV[1]-schoolEntry.v)<.01);
+assert.ok(Math.cos(api.st.az-Math.atan2(schoolLook[0]-api.st.wx,schoolLook[1]-api.st.wz))>.999);
+const schoolStart=[api.st.wx,api.st.wz];g.input.y=1;for(let i=0;i<10;i++)frame();g.pause();
+assert.ok(Math.hypot(api.st.wx-schoolStart[0],api.st.wz-schoolStart[1])>.95,'walk forward into classroom');g.leave();
+
 for(let x=-1000;x<=1000;x+=100)for(let z=-1000;z<=1000;z+=100){const uv=g.fromWorld(x,z);if(!win.JTAWalkBuildings.inPoly(uv,api.model().coast))assert.equal(g.canWalk(x,z),null,'sea is not walkable');}
 // Move east/right relative to the screen when facing positive world Z.
 g.reset();api.st.az=0;const x=api.st.wx;g.input.x=1;for(let i=0;i<3;i++)frame();assert.ok(api.st.wx<x,'right is camera-relative');g.pause();const px=api.st.wx;frame();assert.equal(api.st.wx,px,'pause clears input');

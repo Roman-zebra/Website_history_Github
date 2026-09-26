@@ -22,3 +22,25 @@ test('walking cutaways have complete opaque wall coverage outside framed opening
  assert.equal(interior.complete(scenes.shrine,'shrine'),scenes.shrine,'open shrine precinct stays outdoors');
  assert.equal(interior.complete(scenes.roofgarden,'roofgarden'),scenes.roofgarden,'roof garden stays open');
 });
+
+test('school props stay on desks and the rear-to-front aisle remains walkable',()=>{
+ const original=scenes.school,sc=interior.complete(original,'school'),p=sc.walkEnvelope,c=Math.cos(p.angle),s=Math.sin(p.angle);
+ const uv=(x,z)=>[p.u+(x*c-z*s)/.805,p.v+(x*s+z*c)/.805];
+ assert.ok(!original.walkEntry,'source camera metadata is not overwritten');
+ assert.ok(sc.walkEntry&&sc.text.ja.includes('推定'));
+ const spawn=nav.spawn({...sc,camera:sc.walkEntry},.805);
+ assert.ok(Math.hypot(spawn.u-sc.walkEntry.u,spawn.v-sc.walkEntry.v)<.001,'spawn remains at selected clear aisle');
+ const desks=original.boxes.filter(b=>b.t==='desk');
+ const props=sc.boxes.filter(b=>/^walk-school-(notebook|pages|pencil)$/.test(b.t));assert.ok(props.length>30);
+ for(const prop of props){
+  const a=prop.r*Math.PI/180,ca=Math.cos(a),sa=Math.sin(a);
+  const corners=[-1,1].flatMap(i=>[-1,1].map(j=>[prop.u+(i*prop.s[0]*ca-j*prop.s[2]*sa)/2/.805,prop.v+(i*prop.s[0]*sa+j*prop.s[2]*ca)/2/.805]));
+  assert.ok(desks.some(d=>corners.every(q=>nav.inside(d,...q,.805,0))),'small objects stay within a supporting desktop');
+  assert.equal(prop.a,1,'prop is marked inferred');
+ }
+ const route=[[5.8,3.5],[5.8,-4.5],[-6,-4.5],[-6,1]];let y=p.base;
+ for(let j=1;j<route.length;j++){
+  const a=route[j-1],b=route[j],n=Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/.10);
+  for(let i=0;i<=n;i++){const t=i/n,q=uv(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t),h=nav.ground(sc,...q,.805,y);assert.notEqual(h,null,'school aisle is traversable');y=h;}
+ }
+});

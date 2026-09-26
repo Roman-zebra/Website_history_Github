@@ -81,3 +81,11 @@ Design references searched and read (no extracted game assets):
 - User's interior reference: https://gamewith.jp/genshin/article/show/572711
 
 Applied: layered architectural details, warm/cool interior shading, clear window framing, local navigation and directional feedback. Quality remains a schematic demo, below the reference's production art quality. Next visual pass should target room-specific props, entry-view composition and terrain rather than presenting this as completed photorealistic or Genshin-equivalent reconstruction.
+
+## Classroom visual pass — renderer v14, 2026-09-26
+
+Confirmed v13 production via release.json at a3cb96cb1e5086d0f066e6b5169ff58e0b347e35 before starting. Added inferred notebooks, pencils, shelf books, chalk tray/eraser and abstract chalk strokes on existing school furniture; desk/chair locations and original source scene data are preserved. The walking entry now starts in a supported rear aisle facing the blackboard, showing the full classroom rather than only its windows. The scene explicitly labels these props and strokes as inferred, not historical lesson content.
+
+Validation: 146/146 full-build tests passed. Regression checks keep notebook/page/pencil footprints within supporting desktops, preserve the rear/window/front aisle route, verify entry orientation and actual forward input under both index paths, and retain the all-building stair/doorway tests. All nine native GLES scenes rendered without GL errors; before/after school views visually inspected. No new measured sources were obtained. Browser/device performance remains unverified. This is still a schematic demo, not a Genshin-equivalent finished environment.
+
+Next bounded work: improve one remaining terrain or room-specific visual issue; avoid repeating the school entry/props pass. Check v14 deployment before reporting this checkpoint as live.
