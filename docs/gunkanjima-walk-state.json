@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "status": "in_progress",
-  "updatedAt": "2026-09-26T19:14:00Z",
+  "status": "publishing",
+  "updatedAt": "2026-09-26T19:20:00Z",
   "activeRun": {
     "task": "Improve the documented Building 3 telephone detail without changing inferred room layout",
-    "startedAt": "2026-09-26T19:14:00Z"
+    "startedAt": "2026-09-26T19:14:00Z",
+    "phase": "validated; awaiting publication verification"
   },
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
@@ -35,7 +36,8 @@
     "Building 65 rooftop-nursery walking entry reframed from a clear aisle to show all six existing activity tables; source geometry and orbit camera preserved",
     "Building 65 interiors6 verified live at 9731b78de6265c2f10ea2e36f570204fb0472e75; public HTML and served asset byte-checked",
     "Renderer v19: actual non-YouTube 600-frame gameplay study; continuous environmental lighting, directional aerial perspective, anchored foliage wind, English UI/accessibility coverage and reversible pinch/browser zoom",
-    "Renderer v19 verified live at 8d9d2ce803020e8de43d20538a86fdb288f9edf9; English DOM and desktop controls checked; browser lacked WebGL and synthetic browser zoom keys caused no observable scaling"
+    "Renderer v19 verified live at 8d9d2ce803020e8de43d20538a86fdb288f9edf9; English DOM and desktop controls checked; browser lacked WebGL and synthetic browser zoom keys caused no observable scaling",
+    "Building 3 walking copy: documented telephone gains 13 inferred footprint-bounded handset/dial cues and a clear first-person entry facing it; source scene preserved"
   ],
   "nextActions": [
     "Improve a bounded room-specific furnishing or source-grounded retaining-wall/terrain segment, preserving existing geometry evidence",
@@ -75,7 +77,7 @@
     "onlyThisWorkEnabled": true
   },
   "validation": {
-    "fullBuildTestsPassed": 155,
+    "fullBuildTestsPassed": 156,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 20,
     "inferredDoorwayPathsChecked": 1362,
@@ -133,7 +135,12 @@
     "pinchClampRoundTrip": true,
     "browserZoomShortcutsPreserved": true,
     "englishPublicMenuArchiveHelpVerified": true,
-    "actualBrowserZoomRoundTripVerified": false
+    "actualBrowserZoomRoundTripVerified": false,
+    "building3TelephoneSourcePreserved": true,
+    "building3TelephoneDetailPiecesChecked": 13,
+    "building3TelephoneEntryFallbackDisplacement": 0,
+    "building3TelephoneRenderDifferingPixels": 1023989,
+    "building3TelephoneControlViewsByteIdentical": 11
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
@@ -141,9 +148,9 @@
   },
   "publication": {
     "rendererVersion": 19,
-    "walkInteriorsVersion": 6,
+    "walkInteriorsVersion": 7,
     "walkNavigationVersion": 3,
-    "status": "verified live; release.json, renderer19, walkJS7/CSS6 and MIT notice byte-checked; English menu/archive/help inspected in public browser",
+    "status": "interiors7 validated locally; publication verification pending; renderer19/walkJS7/CSS6 remain verified live",
     "verifiedCommit": "8d9d2ce803020e8de43d20538a86fdb288f9edf9",
     "walkUIVersion": 7,
     "walkCSSVersion": 6

@@ -94,6 +94,27 @@ test('communal bath tile cues stay on the existing floor and tub caps without ch
  assert.ok(sc.text.ja.includes('タイル浴槽')&&sc.text.ja.includes('推定'));
 });
 
+test('Building 3 telephone detail stays inside the existing inferred phone and faces the walking entry',()=>{
+ const original=scenes.no3,source=JSON.stringify(original),sc=interior.complete(original,'no3'),phone=original.boxes.find(b=>b.t==='telephone');
+ assert.equal(JSON.stringify(original),source,'source room and furniture remain untouched');
+ const detail=sc.boxes.filter(b=>/^walk-no3-phone-/.test(b.t));
+ assert.equal(detail.filter(b=>b.t==='walk-no3-phone-handset').length,1);
+ assert.equal(detail.filter(b=>b.t==='walk-no3-phone-earpiece').length,2);
+ assert.equal(detail.filter(b=>b.t==='walk-no3-phone-dial').length,10);
+ for(const part of detail){
+  const a=part.r*Math.PI/180,c=Math.cos(a),s=Math.sin(a);
+  const corners=[-1,1].flatMap(i=>[-1,1].map(j=>[part.u+(i*part.s[0]*c-j*part.s[2]*s)/2/.805,part.v+(i*part.s[0]*s+j*part.s[2]*c)/2/.805]));
+  assert.ok(corners.every(q=>nav.inside(phone,...q,.805,.002)),'telephone cue stays within the existing body footprint');
+  assert.equal(part.a,1,'telephone cue is labelled inferred');
+ }
+ const spawn=nav.spawn({...sc,camera:sc.walkEntry},.805);assert.ok(spawn,'curated telephone view starts on supported floor');
+ assert.ok(Math.hypot(spawn.u-sc.walkEntry.u,spawn.v-sc.walkEntry.v)<.001,'telephone entry needs no fallback displacement');
+ const view=[sc.walkEntry.target[0]-sc.walkEntry.u,sc.walkEntry.target[1]-sc.walkEntry.v],toPhone=[phone.u-sc.walkEntry.u,phone.v-sc.walkEntry.v];
+ assert.ok((view[0]*toPhone[0]+view[1]*toPhone[1])/Math.hypot(...view)/Math.hypot(...toPhone)>.999,'entry looks directly at the documented telephone');
+ assert.ok(sc.text.ja.includes('各戸の電話は記録')&&sc.text.ja.includes('形と色')&&sc.text.ja.includes('推定'));
+ assert.ok(sc.text.en.includes('Records confirm a telephone')&&sc.text.en.includes('inferred'));
+});
+
 test('rooftop nursery walking entry presents the existing activity tables from a clear aisle',()=>{
  const original=scenes.no65roof,sourceCamera=JSON.stringify(original.camera),sc=interior.complete(original,'no65roof'),p=sc.walkEnvelope,c=Math.cos(p.angle),s=Math.sin(p.angle);
  const local=(u,v)=>[(u-p.u)*.805*c+(v-p.v)*.805*s,-(u-p.u)*.805*s+(v-p.v)*.805*c];

@@ -178,6 +178,23 @@ function complete(sc,id){
    put(q[0],q[1],top,longX?[b.s[0],.008,.008]:[.008,.008,b.s[2]],grout,'walk-bath-tub-grout-line',0,r);
   });
  }
+ if(id==='no3'){
+  // Records confirm a telephone in each Building 3 dwelling, while the exact
+  // model and finish are unknown. Keep these cues inside the existing inferred
+  // phone body so they improve legibility without inventing a new placement.
+  const phone=sc.boxes.find(b=>b.t==='telephone');
+  if(phone){
+   const q=local(phone.u,phone.v),r=(phone.r||0)*Math.PI/180-angle,top=phone.y+phone.s[1];
+   put(q[0],q[1]+.052,top+.004,[.19,.035,.038],[.10,.10,.095],'walk-no3-phone-handset',9,r);
+   for(const x of [-.102,.102])put(q[0]+x,q[1]+.052,top,[.045,.052,.066],[.085,.085,.08],'walk-no3-phone-earpiece',9,r);
+   for(let i=0;i<10;i++){
+    const a=i*Math.PI/5,x=q[0]+Math.cos(a)*.052,z=q[1]-.032+Math.sin(a)*.052;
+    put(x,z,top+.003,[.026,.012,.012],[.47,.45,.39],'walk-no3-phone-dial',6,r+a+Math.PI/2);
+   }
+   const position=world(.75,.35),target=world(q[0],q[1]);
+   walkEntry={u:position[0],v:position[1],target,el:-.36};
+  }
+ }
  if(id==='no65roof'){
   // Start from a clear rear aisle looking across the existing activity tables.
   // Source furniture and the orbit-view camera remain untouched.
@@ -187,8 +204,9 @@ function complete(sc,id){
  const schoolNote=id==='school'?' ノート・教材・黒板の描線も演出上の推定です。':'';
  const hospitalNote=id==='hospital'?' スチールサッシの材質区分を歩行版で補正しました。畳縁・畳目の細部と色は、畳敷きベッドを読み取りやすくする演出上の推定です。':'';
  const bathNote=id==='bath'?' 記録にあるタイル浴槽を読み取りやすくする目地を歩行版に補いました。目地の間隔・太さ・色は演出上の推定です。':'';
+ const no3Note=id==='no3'?' 各戸の電話は記録に基づきますが、受話器・回転ダイヤルの形と色は歩行版で読み取りやすくする推定です。':'';
  const note={ja:'歩行用に補った壁・天井・装飾・照明は推定です。',en:'Enclosures, finishes and lighting added for walking are inferred.'};
- return {...sc,boxes,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote+bathNote,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')+(id==='bath'?' Grout cues make the documented tiled bath legible; joint pitch, width and colour are illustrative inferences.':'')}};
+ return {...sc,boxes,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote+bathNote+no3Note,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')+(id==='bath'?' Grout cues make the documented tiled bath legible; joint pitch, width and colour are illustrative inferences.':'')+(id==='no3'?' Records confirm a telephone in each dwelling; the handset, rotary-dial form and colours added for legibility are inferred.':'')}};
 }
 const api={complete,profiles};if(typeof module==='object')module.exports=api;else root.JTAWalkInteriors=api;
 })(typeof window==='undefined'?this:window);

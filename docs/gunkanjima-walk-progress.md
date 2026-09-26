@@ -205,3 +205,13 @@ Validation: 155 full-build tests pass; 20 native GLES scenes in normal and force
 Other automatic work is paused: Google registration task was already disabled; SEO title workflow and IndexNow notifications now have manual triggers only. Preserve this user instruction during continuation.
 
 Publication: renderer19/walkJS7/CSS6 verified live at `8d9d2ce803020e8de43d20538a86fdb288f9edf9`. `release.json` reports that commit; renderer, JS, CSS and Godot notice bytes match tested local files. Public English menu, archive, Help and ARIA are translated; language-selector native names intentionally remain. Desktop touch controls are hidden and contextual strip is at y=68. Browser has no WebGL. Synthetic Ctrl-plus / Ctrl-zero produced no observable browser scale change, so this is **not** a verified browser-zoom round-trip; renderer gesture event tests passed, and iPhone verification remains outstanding. Continuation task updated, unrelated automatic work remains off.
+
+## Building 3 telephone legibility — interiors v7, 2026-09-27
+
+The existing Building 3 source text records a telephone and doorbell in each dwelling. It already places one inferred telephone on a small stand and explicitly labels the room plan and furniture as inferred. The source scene, room layout, orbit camera, phone position and body dimensions remain unchanged.
+
+For the walking copy only, the existing phone gains a compact handset and ten-part rotary-dial cue. All 13 additions remain inside the source phone footprint and are labelled inferred. The first-person entry now starts on clear supported floor and looks directly at the phone; the original entry faced the bath wall and left the phone outside the opening frame. Exact phone model, receiver proportions, dial form and colours are illustrative, not a measured or photographic reconstruction.
+
+Validation: 156/156 full-build tests pass. The regression preserves the complete source scene, bounds all 13 additions to the existing phone, verifies inferred labels and confirms the curated entry needs no collision fallback. Twelve native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The no3 view changes 1,023,989 pixels because the camera is deliberately reframed; all eleven control views are byte-identical. Actual iPhone Safari gestures and mobile GPU performance remain unverified.
+
+Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors7, navigation3. Publication verification is pending.
