@@ -2618,7 +2618,22 @@ $('q').addEventListener('keydown', e => {
 /* 飛んでいる検索の返事を無効にするための世代番号。これが無いと、✕で閉じたあとに
    古い返事が届いて結果が勝手に開き直る（[hidden] が効くようになった今は本当に再表示される）。 */
 let qSeq = 0;
-$('q').addEventListener('focus',()=>{if(!$('q').value.trim())showSearchSuggestions();else if(nationalHits.length){paintSearchList();$('qResults').hidden=false;}});
+function dismissSearchResults(){
+  clearTimeout(qTimer);
+  ++qSeq;                         // Ignore results from a search already in progress.
+  nationalSeq = 0;
+  nationalWorker?.postMessage({type:'cancel'});
+  $('qResults').hidden = true;
+  $('q').blur();
+}
+$('q').addEventListener('focus',()=>{
+  const query = $('q').value.trim();
+  if(!query) showSearchSuggestions();
+  else if(nationalHits.length && nationalQuery===query) paintSearchList();
+  else runSearch(query);
+});
+// Tapping or dragging the map dismisses the list on both touch and desktop.
+$('map').addEventListener('pointerdown', dismissSearchResults);
 $('qClear').onclick = () => { clearNationalSearch(); ++qSeq; $('q').value = ''; $('qClear').hidden = true;
                               $('qResults').hidden = true; };
 
@@ -2931,6 +2946,7 @@ function openPlace(p, keepView,refresh=false){
 }
 
 function openMap(){
+  dismissSearchResults();
   roaming = true; current = null;
   document.body.classList.add('roaming');
   $('home').hidden = true; $('place').hidden = false;
