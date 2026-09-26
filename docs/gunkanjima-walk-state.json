@@ -1,8 +1,11 @@
 {
   "schemaVersion": 1,
-  "status": "ready",
-  "updatedAt": "2026-09-26T13:16:59.048404+00:00",
-  "activeRun": null,
+  "status": "in_progress",
+  "updatedAt": "2026-09-26T13:22:24.948Z",
+  "activeRun": {
+    "task": "Inspect and improve school-room furnishings while preserving walkable paths",
+    "startedAt": "2026-09-26T13:22:24.948Z"
+  },
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
     "Renderer v10 deployed with 68 inferred building studies",
