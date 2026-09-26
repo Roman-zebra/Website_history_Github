@@ -46,6 +46,11 @@ assert.ok(g.enter('nikkyu'));const nikkyu=g.scenes().nikkyu,nikkyuEntry=nikkyu.w
 assert.ok(Math.hypot(nikkyuUV[0]-nikkyuEntry.u,nikkyuUV[1]-nikkyuEntry.v)<.01,'Building 16 entry remains on clear floor');
 assert.ok(Math.cos(api.st.az-Math.atan2(nikkyuLook[0]-api.st.wx,nikkyuLook[1]-api.st.wz))>.999,'Building 16 opens toward its dual taps');g.leave();
 
+// Hashima Ginza opens from the clear arcade end toward the documented shop row.
+assert.ok(g.enter('ginza'));const ginza=g.scenes().ginza,ginzaEntry=ginza.walkEntry,ginzaUV=g.fromWorld(api.st.wx,api.st.wz),ginzaLook=g.toWorldTrue(...ginzaEntry.target);
+assert.ok(Math.hypot(ginzaUV[0]-ginzaEntry.u,ginzaUV[1]-ginzaEntry.v)<.01,'Hashima Ginza entry remains on clear floor');
+assert.ok(Math.cos(api.st.az-Math.atan2(ginzaLook[0]-api.st.wx,ginzaLook[1]-api.st.wz))>.999,'Hashima Ginza opens along the shop row');g.leave();
+
 // A classroom opens toward the board and supports actual forward input from the rear aisle.
 assert.ok(g.enter('school'));const schoolEntry=g.scenes().school.walkEntry,schoolUV=g.fromWorld(api.st.wx,api.st.wz),schoolLook=g.toWorldTrue(...schoolEntry.target);
 assert.ok(Math.hypot(schoolUV[0]-schoolEntry.u,schoolUV[1]-schoolEntry.v)<.01);

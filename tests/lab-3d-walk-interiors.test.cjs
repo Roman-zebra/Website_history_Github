@@ -151,6 +151,22 @@ test('Building 16 walking copy presents the documented fresh-water and seawater 
  assert.ok(sc.text.en.includes('fresh-water and seawater taps')&&sc.text.en.includes('inferred'));
 });
 
+test('Hashima Ginza walking copy opens along the documented column and shop rows without changing source geometry',()=>{
+ const original=scenes.ginza,source=JSON.stringify(original),sc=interior.complete(original,'ginza');
+ assert.equal(JSON.stringify(original),source,'source arcade scene remains untouched');
+ assert.notEqual(sc,original);assert.deepEqual(sc.boxes,original.boxes,'walking copy adds no shop or product geometry');
+ const stalls=original.boxes.filter(b=>b.t==='stall'),columns=original.boxes.filter(b=>b.t==='column');
+ assert.equal(stalls.length,5);assert.equal(columns.length,5);
+ const spawn=nav.spawn({...sc,camera:sc.walkEntry},.805);assert.ok(spawn,'arcade entry has floor support');
+ assert.ok(Math.hypot(spawn.u-sc.walkEntry.u,spawn.v-sc.walkEntry.v)<.001,'arcade entry needs no fallback displacement');
+ const view=[sc.walkEntry.target[0]-sc.walkEntry.u,sc.walkEntry.target[1]-sc.walkEntry.v],vl=Math.hypot(...view);
+ const inCone=(b,degrees)=>{const to=[b.u-sc.walkEntry.u,b.v-sc.walkEntry.v],tl=Math.hypot(...to);return(view[0]*to[0]+view[1]*to[1])/vl/tl>Math.cos(degrees*Math.PI/180);};
+ assert.ok(stalls.every(b=>inCone(b,27)),'all five existing stalls are inside the opening field of view');
+ assert.equal(columns.filter(b=>inCone(b,25)).length,4,'the forward column sequence remains legible');
+ for(const lang of ['ja','en','ko','zh-Hans','zh-Hant'])assert.ok(sc.text[lang].length>original.text[lang].length,lang+' receives the viewpoint caveat');
+ assert.ok(sc.text.ja.includes('歴史的な視点位置')&&sc.text.en.includes('not a historical camera position'));
+});
+
 test('rooftop nursery walking entry presents the existing activity tables from a clear aisle',()=>{
  const original=scenes.no65roof,sourceCamera=JSON.stringify(original.camera),sc=interior.complete(original,'no65roof'),p=sc.walkEnvelope,c=Math.cos(p.angle),s=Math.sin(p.angle);
  const local=(u,v)=>[(u-p.u)*.805*c+(v-p.v)*.805*s,-(u-p.u)*.805*s+(v-p.v)*.805*c];

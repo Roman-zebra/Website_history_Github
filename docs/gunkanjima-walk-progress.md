@@ -277,3 +277,13 @@ Validation: 165/165 full-build tests pass. Regressions preserve the source scene
 Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors9, navigation3.
 
 Publication: main advanced without force to `3edaa683f7946a99c1f1948fc03aabb388cbeeb6`. Cloudflare `release.json` reported that commit; the public walk HTML requests interiors9 while retaining renderer21, walk JS8/CSS7, walk-nature1, buildings5 and navigation3, and the served interiors9 file is byte-identical to the tested local file.
+
+## Hashima Ginza arcade arrival — interiors v10, 2026-09-27
+
+The Building 57 source scene records the arcade's column row and the presence of shops along Shiofuri Street. The five stalls, displayed goods, signs and lanterns are already labelled as illustrative inferences based on a general 1960s market appearance. The inherited first-person arrival showed one foreground column and only the edge of one stall, so the space did not read as a shopping street.
+
+The walking copy now starts on clear supported floor at one end of the arcade and looks along the existing shop row. All five existing stalls fit inside a 27-degree opening-view cone and four forward columns fit inside 25 degrees. No source object, inferred product, sign, lantern or orbit camera was moved or added. The viewpoint caveat is appended in Japanese, English, Korean, Simplified Chinese and Traditional Chinese; this explanatory composition is not presented as a historical camera position.
+
+Validation: 166/166 full-build tests pass. Regressions preserve the complete source scene and exact box array, require a zero-fallback supported entry, check all five stalls and the forward column sequence, exercise the actual engine under both 16- and 32-bit index paths, and cover all five viewpoint translations. Fifteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The Ginza view changes 1,020,081 pixels because the camera is deliberately reframed; all fourteen control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
+
+Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors10, navigation3.

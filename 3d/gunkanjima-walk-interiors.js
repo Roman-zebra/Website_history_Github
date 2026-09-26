@@ -35,6 +35,25 @@ function smoothJigokudan(sc){
 }
 function complete(sc,id){
  if(id==='shrine')return smoothJigokudan(sc);
+ if(id==='ginza'){
+  // The column and shop rows are source-grounded, while the displayed goods,
+  // signs and lanterns are already labelled inferred. Start at the clear end
+  // of the arcade so all five existing stalls read as one street sequence.
+  const floor=sc.boxes.find(b=>b.t==='floor'),stalls=sc.boxes.filter(b=>b.t==='stall');
+  if(!floor||!stalls.length)return sc;
+  const angle=(floor.r||0)*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle);
+  const world=(x,z)=>[floor.u+(x*c-z*s)/MPP,floor.v+(x*s+z*c)/MPP];
+  const position=world(-9.5,1.5),target=stalls[stalls.length-1];
+  const note={
+   ja:'歩行版は柱列と既存の5つの商店を見渡す通路端から始まります。解説用の構図で、歴史的な視点位置を示すものではありません。',
+   en:'The walking view starts at the clear end of the arcade, looking along the column row and the five existing shops. This explanatory composition is not a historical camera position.',
+   ko:'보행판은 기둥열과 기존 다섯 상점을 바라보는 아케이드 끝에서 시작합니다. 설명용 구도이며 역사적 시점 위치를 나타내지 않습니다.',
+   'zh-Hans':'步行版从拱廊通道一端开始，可沿柱列看到现有的五间商铺；这是说明性构图，并非历史视点位置。',
+   'zh-Hant':'步行版從拱廊通道一端開始，可沿柱列看到現有的五間商鋪；這是說明性構圖，並非歷史視點位置。'
+  };
+  const text={...sc.text};for(const lang of Object.keys(note))text[lang]=(text[lang]||text.ja||'')+' '+note[lang];
+  return {...sc,walkEntry:{u:position[0],v:position[1],target:[target.u,target.v],el:-.10},text};
+ }
  const spec=profiles[id];if(!spec||sc.walkEnclosed)return sc;
  const floors=sc.boxes.filter(b=>spec.tags.includes(b.t));if(!floors.length)return sc;
  const anchor=floors[0],angle=(anchor.r||0)*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle);

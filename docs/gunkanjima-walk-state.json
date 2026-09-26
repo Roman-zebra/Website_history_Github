@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "in_progress",
-  "updatedAt": "2026-09-26T22:46:00Z",
+  "updatedAt": "2026-09-26T23:08:00Z",
   "activeRun": {
     "task": "Inspect and improve the first-person arrival along the documented column and shop rows of Building 57 Hashima Ginza",
     "startedAt": "2026-09-26T22:46:00Z"
@@ -45,7 +45,8 @@
     "Renderer v21: sea-wall ring in the walking toon light with algae, joint weeds and a crest fringe; foliage at the eye skipped; island survey QA views",
     "Renderer v21 verified live at 7f9184531adad5d6a12671b9e5c6920140cd7e79; walk and reconstruction pages request renderer21 and the served renderer is byte-identical",
     "Building 16 walking copy: documented fresh-water and seawater tap stems preserved; four neutral inferred handle/spout cues added and opening view reframed toward the pair",
-    "Building 16 interiors9 verified live at 3edaa683f7946a99c1f1948fc03aabb388cbeeb6; public HTML requests interiors9 and the served asset is byte-identical"
+    "Building 16 interiors9 verified live at 3edaa683f7946a99c1f1948fc03aabb388cbeeb6; public HTML requests interiors9 and the served asset is byte-identical",
+    "Hashima Ginza walking copy: source geometry preserved; first-person arrival reframed along all five existing stalls and the forward column sequence with five-language viewpoint caveat"
   ],
   "nextActions": [
     "Improve a bounded room-specific furnishing or source-grounded retaining-wall/terrain segment, preserving existing geometry evidence",
@@ -86,7 +87,7 @@
     "onlyThisWorkEnabled": true
   },
   "validation": {
-    "fullBuildTestsPassed": 165,
+    "fullBuildTestsPassed": 166,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 20,
     "inferredDoorwayPathsChecked": 1362,
@@ -174,7 +175,15 @@
     "building16NativeGlesViewsRendered": 14,
     "building16RenderDifferingPixels": 1024000,
     "building16ControlViewsByteIdentical": 13,
-    "building16ServedAssetByteChecked": true
+    "building16ServedAssetByteChecked": true,
+    "hashimaGinzaSourceScenePreserved": true,
+    "hashimaGinzaStallsInOpeningView": 5,
+    "hashimaGinzaColumnsInOpeningView": 4,
+    "hashimaGinzaEntryFallbackDisplacement": 0,
+    "hashimaGinzaNativeGlesViewsRendered": 15,
+    "hashimaGinzaRenderDifferingPixels": 1020081,
+    "hashimaGinzaControlViewsByteIdentical": 14,
+    "hashimaGinzaViewpointLanguagesChecked": 5
   },
   "publicationApproval": {
     "at": "2026-09-27T06:50:00+09:00",
@@ -182,9 +191,9 @@
   },
   "publication": {
     "rendererVersion": 21,
-    "walkInteriorsVersion": 9,
+    "walkInteriorsVersion": 10,
     "walkNavigationVersion": 3,
-    "status": "verified live; release.json, public HTML versions and served interiors asset byte-checked; renderer21/walkJS8/CSS7/nature1/buildings5/interiors9/navigation3",
+    "status": "publishing Hashima Ginza arrival; renderer21/walkJS8/CSS7/nature1/buildings5/interiors10/navigation3 tested locally",
     "verifiedCommit": "3edaa683f7946a99c1f1948fc03aabb388cbeeb6",
     "walkUIVersion": 8,
     "walkCSSVersion": 7,
