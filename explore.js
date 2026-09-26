@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.48';
+const DATA_V = '0.49';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
    ask for, not a number written here that falls behind (the search worker sat at 0.80). */

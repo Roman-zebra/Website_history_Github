@@ -3,6 +3,17 @@
  'use strict';
  const UI=typeof module==='object'?require('./place-ui.js'):root.PlaceUI;
  const norm=UI.normalize;
+ /* The prefecture extracts occasionally catch two neighbouring overseas island groups.
+    Keep this guard beside the shared search code so source-file and prepared-category
+    searches apply the same rule.  The boxes do not overlap Japanese-administered land. */
+ function inJapan(lat,lon){
+  if(!Number.isFinite(lat)||!Number.isFinite(lon))return false;
+  const geoje=lat>=34.5&&lat<=35&&lon>=128.4&&lon<129;
+  const habomai=lat>=43.395&&lat<43.6&&lon>145.85&&lon<=146.2;
+  const kunashir=lat>=43.65&&lat<=44.5&&lon>=145.35&&lon<=146.2;
+  const russianIslands=habomai||kunashir;
+  return !geoje&&!russianIslands;
+ }
  const topics=[
   ['ski',['スキー','スノーボード','ski','snowboard','スキー場','滑雪','스키'],t=>/ski|snowboard|winter_sports|downhill|nordic/.test([t.sport,t.landuse,t['piste:type']].join(' '))],
   ['onsen',['温泉','おんせん','日帰り温泉','onsen','hot spring','온천','溫泉'],t=>t.natural==='hot_spring'||t.amenity==='public_bath'||t.bath==='onsen'],
@@ -95,5 +106,5 @@
   return String(query).trim().split(/\s+/).map(norm).filter(Boolean).map(word=>{const category=topicAliases.get(word);
    return category==='religious'?{word,categories:['temple','shrine']}:category?{word,categories:[category]}:{word,pieces:[...pieces(word,true)]};});
  }
- const api={record,search,norm,pieces,shardOf,plan};if(typeof module==='object'&&module.exports)module.exports=api;else root.AtlasSearch=api;
+ const api={record,search,norm,pieces,shardOf,plan,inJapan};if(typeof module==='object'&&module.exports)module.exports=api;else root.AtlasSearch=api;
 })(typeof self==='object'?self:globalThis);

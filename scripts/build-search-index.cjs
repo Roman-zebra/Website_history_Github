@@ -1,5 +1,5 @@
 /* Nationwide search without the nationwide download.
-   search-worker.js used to read all 264 place files (about 37 MB) and build 228,623 records before it could answer,
+   search-worker.js used to read all 264 place files (about 37 MB) and build 228,000+ records before it could answer,
    on the first search after every page load. This writes what lets it read only the files that can hold a match.
    The records, their order and AtlasSearch.search stay the same, so the results do too
    (tests/search-national.test.cjs compares them with a search over everything).
@@ -43,7 +43,7 @@ function build(){
   const data=read(file),list=key?(data[key]||data.liminal||[]):data;
   let count=0,s=90,w=180,n=-90,e=-180;
   for(const p of list){
-   if(!Number.isFinite(p.lat)||!Number.isFinite(p.lon))continue;
+   if(!core.inJapan(p.lat,p.lon))continue;
    const r=core.record(p,kind);
    for(const piece of core.pieces(r.text,false)){let set=pieceFiles.get(piece);if(!set)pieceFiles.set(piece,set=new Set());set.add(fi);}
    const labels=r.labels.every(l=>l===r.labels[0])?r.labels[0]:r.labels;

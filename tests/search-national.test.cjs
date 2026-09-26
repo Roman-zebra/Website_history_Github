@@ -11,6 +11,15 @@ test('the search index was rebuilt after the last change to the places or the se
  assert.equal(meta.stamp,index.stamp(index.sources()),'run: node scripts/build-search-index.cjs');
  assert.deepEqual(meta.files.map(f=>f[0]),index.sources().map(s=>s[0]));
 });
+test('neighbouring overseas records cannot leak back into the Japan search',()=>{
+ assert.equal(core.inJapan(34.743957,128.66329),false,'Geoje');
+ assert.equal(core.inJapan(44.019518,145.814758),false,'Russian-administered island');
+ assert.equal(core.inJapan(35.681236,139.767125),true,'Tokyo');
+ for(const [file,,key] of index.sources()){
+  const data=JSON.parse(fs.readFileSync(path.join(root,file),'utf8')),list=key?(data[key]||data.liminal||[]):data;
+  assert.equal(list.filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&!core.inJapan(p.lat,p.lon)).length,0,file);
+ }
+});
 /* The worker as the page runs it, reading files from the working tree. */
 function worker(){
  const fetched=[],messages=[];let waiting=null;

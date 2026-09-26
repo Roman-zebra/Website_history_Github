@@ -1,6 +1,6 @@
 /* Nationwide keyword search in a worker. It reads only the place files that can hold a match
    (see scripts/build-search-index.cjs) and runs the same AtlasSearch.search over their records in the same order,
-   so the answer is what a search over all 228,623 records gives, without first downloading 37 MB and building
+   so the answer is what a search over all 228,000+ records gives, without first downloading 37 MB and building
    every record. A category search (温泉, 神社 …) reads one prepared file.
    A search sent while typing (auto) that would still read more than AUTO_LIMIT answers 'broad' instead, and the
    page offers to search all of Japan. The version comes from this worker's own URL, never a number written here. */
@@ -34,12 +34,12 @@ function place(i,dataV){
  if(files.has(i))return Promise.resolve(files.get(i));
  return cached(loading,i,async()=>{
   const [path,kind,key]=meta.files[i],data=await json(path+'?v='+encodeURIComponent(dataV)),list=key?(data[key]||data.liminal||[]):data,out=[];
-  for(const p of list)if(Number.isFinite(p.lat)&&Number.isFinite(p.lon))out.push(AtlasSearch.record(p,kind));
+  for(const p of list)if(AtlasSearch.inJapan(p.lat,p.lon))out.push(AtlasSearch.record(p,kind));
   loading.delete(i);files.set(i,out);return out;
  });
 }
 function category(id){
- return cached(categories,id,async()=>(await json('data/search/c-'+id+'.json?v='+meta.stamp)).map(([index,rid,kind,lat,lon,labels,names,cats,tags])=>
+ return cached(categories,id,async()=>(await json('data/search/c-'+id+'.json?v='+meta.stamp)).filter(row=>AtlasSearch.inJapan(row[3],row[4])).map(([index,rid,kind,lat,lon,labels,names,cats,tags])=>
   // landmarks have no id; JSON stored it as null, and the answer must match a full search (where it is left out)
   ({index,id:rid===null?undefined:rid,kind,lat,lon,labels:Array.isArray(labels)?labels:PlaceUI.langs.map(()=>labels),names,categories:cats,text:'',...(tags?{facilityTags:tags}:{})})));
 }
@@ -99,7 +99,7 @@ async function run(request){
 self.onmessage=e=>{
  if(e.data.type==='cancel'){pending=null;return;}
  const request=pending=e.data;
- // the old worker kept all 228,623 records in Cache Storage (about 90 MB); nothing reads them now
+ // the old worker kept all 228,000+ records in Cache Storage (about 90 MB); nothing reads them now
  if(!cleaned&&typeof caches!=='undefined'&&caches.keys){cleaned=true;caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('atlas-search-')).map(k=>caches.delete(k)))).catch(()=>{});}
  run(request).catch(()=>emit(request,'error'));
 };
