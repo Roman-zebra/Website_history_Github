@@ -287,3 +287,5 @@ The walking copy now starts on clear supported floor at one end of the arcade an
 Validation: 166/166 full-build tests pass. Regressions preserve the complete source scene and exact box array, require a zero-fallback supported entry, check all five stalls and the forward column sequence, exercise the actual engine under both 16- and 32-bit index paths, and cover all five viewpoint translations. Fifteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The Ginza view changes 1,020,081 pixels because the camera is deliberately reframed; all fourteen control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
 
 Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors10, navigation3.
+
+Publication: main advanced without force to `460b694a397ec95519487dc528991a84b42f8228`. Cloudflare `release.json` reported that commit; the public walk HTML requests interiors10 while retaining renderer21, walk JS8/CSS7, walk-nature1, buildings5 and navigation3, and the served interiors10 file is byte-identical to the tested local file.
