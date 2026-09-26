@@ -1,19 +1,18 @@
 {
   "schemaVersion": 1,
-  "status": "in_progress",
-  "updatedAt": "2026-09-26T12:37:06.639Z",
-  "activeRun": {
-    "id": "cf449726e1d7",
-    "task": "Inspect native GLES scenes and improve inferred interior visual quality",
-    "startedAt": "2026-09-26T12:37:06.639Z"
-  },
+  "status": "ready",
+  "updatedAt": "2026-09-26T12:45:43.577474+00:00",
+  "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
     "Renderer v10 deployed with 68 inferred building studies",
-    "Room-fit clearance corrected; 1362 doorway paths and all room-wall corners checked"
+    "Room-fit clearance corrected; 1362 doorway paths and all room-wall corners checked",
+    "Renderer v11: framed glass panes, stable per-building shading seeds, shaded ceiling and stair undersides; ready for Cloudflare publication"
   ],
   "nextActions": [
-    "Inspect remaining visual issues in actual rendered scenes and improve one bounded aspect",
+    "Verify renderer v11 publication if the preceding run stopped during deploy",
+    "Inspect source-scene entry viewpoints (no65flat opens toward exposed exterior); improve the intended room view without losing exit access",
+    "Improve terrain and environmental detail in bounded, visually verified steps",
     "Verify PC/mobile browser interaction when a WebGL-capable browser is available",
     "Replace inferred geometry only when usable historical plans/photos are obtained"
   ],
@@ -35,13 +34,19 @@
     "frequency": "hourly",
     "firstScheduledLocal": "2026-09-26T22:30:00+09:00",
     "staleRunMinutes": 90,
-    "note": "Scheduled continuation is not immediate transport reconnection."
+    "note": "Scheduled continuation is not immediate transport reconnection.",
+    "id": "6ab7ba457d548191b74af1d0222b0b92"
   },
   "validation": {
-    "fullBuildTestsPassed": 142,
+    "fullBuildTestsPassed": 143,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 4,
     "inferredDoorwayPathsChecked": 1362,
-    "roomWallCornersOutsideFootprint": 0
+    "roomWallCornersOutsideFootprint": 0,
+    "nativeGlesMediumpScenesRendered": 4
+  },
+  "publicationApproval": {
+    "at": "2026-09-26T21:44:57+09:00",
+    "scope": "User explicitly approved reflecting this change in Roman-zebra/Website_history_Github and publishing to the existing JTA site, then continuing"
   }
 }

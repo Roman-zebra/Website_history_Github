@@ -41,3 +41,17 @@ An hourly continuation automation is enabled from 22:30 Asia/Tokyo. It resumes s
 A further navigation audit found 159 wall corners outside their host footprint and 633 blocked doorway paths in the previous inferred layout (counts include every floor). Replaced the insufficient room-fit clearance with sampled 2.1 m clearance, maintained a wider stair aisle, and checked coast containment. The revised layout has 1,362 inferred doorways: every tested doorway path is passable and no tested room-wall corner lies outside its footprint/coast. These room counts describe procedural study geometry, not historical dwelling counts. The all-building stair tests still apply.
 
 Second-pass validation: full build 142/142 tests passed; four native GLES views rendered without GL errors.
+
+## Visual continuation — 2026-09-26, renderer v11
+
+Added procedural window frames, mullions and glass variation to the stylised walking view, distance-fading fine details. Restored hemisphere ambient lighting for interior boxes so ceilings and stair undersides are visibly darker. These are aesthetic inferred details, not new historical evidence. High-precision facade shaders retain a mediump fallback and the year uniform's explicit precision; per-building style, floor height and random seeds are quantised before use to prevent interpolation-induced speckling.
+
+Validation: 143/143 full-build tests passed, including all-building stair round trips, 1,362 doorways and both index paths. Four native GLES scenes rendered successfully at normal precision and with the fragment mediump fallback forced. Visual inspection covered outdoor, apartment, stairs and roof. Real browser/device performance and depth-texture shadows remain unverified. No new geometry or downloaded textures were added.
+
+The existing hourly automation `6ab7ba457d548191b74af1d0222b0b92` is enabled, first scheduled at 2026-09-26 22:30 Asia/Tokyo; no duplicate was created. Check `release.json`, the renderer's `const V = '11'`, and the walk HTML's `?v=11` before describing this pass as published.
+
+Next concrete visual issue: the existing source scene `no65flat` opens toward an exposed exterior rather than giving a convincing room view. Improve and visually verify its entry viewpoint, preserving supported movement. Terrain remains coarse and the landscape is still a stylised study, not a finished game-quality reconstruction.
+
+Publication is BLOCKED by automatic approval review: creating the GitHub tree was rejected twice, including after verifying repository ownership/admin rights and the exact published baseline. No v11 source was uploaded. Ask the user to explicitly approve publishing this scoped update to Roman-zebra/Website_history_Github and its existing Cloudflare site before retrying. Local implementation and the 143-test build remain complete.
+
+Publication approval received from the user at 2026-09-26 21:44:57 Asia/Tokyo: reflect and publish the update, and continue. The preceding approval block is resolved.

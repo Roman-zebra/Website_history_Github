@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '10';
+  const V = '11';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -202,8 +202,12 @@
       finish(place(aPos, y));
     }`;
   const WALL_FS = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
     precision mediump float;
-    uniform float uChange, uFog, uShade, uYear, uAnime;
+#endif
+    uniform float uChange, uFog, uShade, uAnime; uniform mediump float uYear;
     uniform vec3 uBg, uSun, uHorizon;
     varying vec3 vNor; varying vec3 vWall; varying vec4 vInfo; varying float vAlive; varying float vTop; varying float vGhost;
     varying vec4 vShadow; varying float vDepth;
@@ -216,7 +220,7 @@
       vec3 n = normalize(vNor);
       float d = max(dot(n, uSun), 0.0);
       float sh = shadowAt(vShadow, 0.003);
-      float style = vInfo.x, floorH = vInfo.y, seed = vInfo.z, gone = vInfo.w;
+      float style = floor(vInfo.x+.5), floorH = floor(vInfo.y*100.0+.5)/100.0, seed = floor(vInfo.z*89.0+.5), gone = vInfo.w;
       float y = vWall.y, s = vWall.x, H = vWall.z;
       float age = clamp((uYear - 74.0) / 36.0, 0.0, 1.0);
       float fy = fract(y / floorH), storey = floor(y / floorH);
@@ -269,11 +273,35 @@
       col = mix(col, base * 1.04, column * 0.8);
       float open = step(0.6, cell) * age;
       vec3 glass = mix(vec3(0.24, 0.27, 0.30), vec3(0.09, 0.08, 0.07), open) * (0.75 + 0.25 * cell);
-      if(uAnime>0.5){glass=mix(vec3(.14,.32,.46),vec3(.40,.67,.75),.4+.4*fy);}
+      if(uAnime>0.5){
+        /* Stylised inferred panes: variation and a sky reflection, without texture downloads. */
+        glass=mix(vec3(.10,.23,.29),vec3(.42,.67,.70),clamp(.18+.6*fy+.22*cell,0.0,1.0));
+      }
       col = mix(col, glass, win);
       if(uAnime>0.5){
+        float period=2.4, left=.2, right=.72, bottom=.32, top=.78;
+        if(style>1.5&&style<2.5){period=3.2;left=.25;right=.75;bottom=.45;top=.85;}
+        else if(style>2.5&&style<3.5){period=1.8;left=.06;right=1.0;bottom=.34;top=.82;}
+        else if(style>3.5&&style<4.5){period=5.0;left=.3;right=.7;bottom=.35;top=.8;}
+        else if(style>4.5&&style<5.5){period=2.0;left=.3;right=.65;bottom=.4;top=.75;}
+        else if(style>5.5){period=2.0;left=.35;right=.65;bottom=.45;top=.75;}
+        vec2 pane=vec2((fract(s/period)-left)/(right-left),(fy-bottom)/(top-bottom));
+        float paneWidth=(right-left)*period, paneHeight=(top-bottom)*floorH;
+        float nearDetail=1.0-smoothstep(45.0,110.0,vDepth);
+        float edgeX=min(pane.x,1.0-pane.x)*paneWidth;
+        float edgeY=min(pane.y,1.0-pane.y)*paneHeight;
+        float frame=1.0-smoothstep(.025,.055,min(edgeX,edgeY));
+        float mullion=1.0-smoothstep(.014,.035,abs(pane.x-.5)*paneWidth);
+        float crossbar=1.0-smoothstep(.014,.028,abs(pane.y-.5)*paneHeight);
+        vec3 timber=mix(vec3(.30,.35,.31),vec3(.66,.61,.45),cell);
+        col=mix(col,timber,win*max(frame,max(mullion,crossbar*.7))*nearDetail);
+        float reveal=1.0-smoothstep(.04,.18,edgeY);
+        col*=1.0-win*reveal*.22*nearDetail;
+        // Subtle plaster variation and contact shading below projecting floor slabs.
+        col*=.965+.055*noise(vec2(s*.65,y*.9+seed));
+        col*=1.0-.12*(1.0-smoothstep(.03,.16,fy))*(1.0-win);
         float trim=step(.31,fy)*step(fy,.35)+step(.77,fy)*step(fy,.80);
-        col=mix(col,vec3(.43,.56,.53),trim*.45);
+        col=mix(col,vec3(.43,.56,.53),trim*.25*(1.0-win));
       }
       /* weathering after 1974: streaks, stains, moss near the ground */
       float streak = noise(vec2(s * 1.5, y * 0.3 + seed * 5.0));
@@ -335,7 +363,7 @@
   // the sea wall ring
   const SEAWALL_FS = `
     precision mediump float;
-    uniform float uChange, uFog, uShade, uYear, uAnime;
+    uniform float uChange, uFog, uShade, uAnime; uniform mediump float uYear;
     uniform vec3 uBg, uSun, uHorizon;
     varying vec3 vNor; varying vec3 vWall; varying vec4 vInfo; varying float vAlive; varying float vTop;
     varying vec4 vShadow; varying float vDepth;
@@ -439,7 +467,11 @@
       /* hemisphere ambient: faces that look up are lit by the sky, faces that look down by the ground */
       float amb = 0.30 + 0.12 * n.y;
       vec3 col = base * (amb + 0.62 * d * mix(0.4, 1.0, sh));
-      if(uAnime>0.5)col=base*mix(vec3(.68,.76,.94),vec3(1.12,1.07,.92),smoothstep(.22,.45,d*sh));
+      if(uAnime>0.5){
+        // Retain hemisphere light in the stylised pass: ceilings and stair undersides stay shaded.
+        vec3 ambient=mix(vec3(.43,.48,.59),vec3(.77,.85,.96),n.y*.5+.5);
+        col=base*mix(ambient,vec3(1.12,1.07,.92),smoothstep(.22,.45,d*sh));
+      }
       col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
       gl_FragColor = vec4(col, vCol.a);
     }`;
