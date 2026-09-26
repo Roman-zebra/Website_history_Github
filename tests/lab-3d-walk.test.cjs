@@ -43,3 +43,26 @@ test('every generated building supports walking from the ground floor to the roo
 test('equipment is not presented as a residential interior',()=>{
  for(const name of ['起重機','タンク','貯水槽','桟橋'])assert.equal(buildingWalk.plan({name}),null);
 });
+
+test('inferred room walls stay inside footprints and every doorway is traversable',()=>{
+ let doors=0;
+ for(const b of model.buildings){
+  const sc=buildingWalk.build(b,model.coast);if(!sc)continue;
+  for(const wall of sc.boxes.filter(b=>b.t==='room-wall')){
+   const a=wall.r*Math.PI/180,c=Math.cos(a),s=Math.sin(a);
+   for(const x of [-wall.s[0]/2,wall.s[0]/2])for(const z of [-wall.s[2]/2,wall.s[2]/2]){
+    const uv=[wall.u+(x*c-z*s)/.805,wall.v+(x*s+z*c)/.805];
+    assert.ok(buildingWalk.inPoly(uv,b.poly),(b.name||b.id)+' room wall outside footprint');
+    assert.ok(buildingWalk.inPoly(uv,model.coast),'room wall outside coast');
+   }
+  }
+  for(const door of sc.boxes.filter(b=>b.t==='door-header')){
+   doors++;const a=door.r*Math.PI/180,c=Math.cos(a),s=Math.sin(a);let y=door.y-2.05;
+   for(let d=-.2;d<=.8;d+=.1){
+    const u=door.u-d*s/.805,v=door.v+d*c/.805,h=nav.ground(sc,u,v,.805,y);
+    assert.notEqual(h,null,(b.name||b.id)+' doorway blocked');assert.ok(buildingWalk.inPoly([u,v],model.coast),'doorway inside coast');y=h;
+   }
+  }
+ }
+ assert.ok(doors>1000,'all generated floors were checked');
+});

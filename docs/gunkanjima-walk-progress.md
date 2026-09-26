@@ -33,3 +33,11 @@ The 2015 housing study (1952/1970) and 2005 measured-survey volume were located 
 All-building photographic precision, historical colour accuracy and a production-quality Genshin-like environment are not complete. The current study models must not be described as precise reconstructions. Replace each inferred building only after obtaining usable dimensioned plans and photographs, recording the source and confidence of every replacement.
 
 If execution is interrupted, inspect the current GitHub main branch and this checkpoint, preserve concurrent changes, rerun the scoped tests, then publish with a non-forced fast-forward update. Chat transport cannot be restarted from the website or a scheduled job.
+
+## Resume checkpoint — 2026-09-26, second pass
+
+An hourly continuation automation is enabled from 22:30 Asia/Tokyo. It resumes saved work, not the chat transport. It checks for an active run before changing code. Future executions should write `status: in_progress` and an updated UTC timestamp in `docs/gunkanjima-walk-state.json`, refresh it at checkpoints, and clear the active run when done. Treat an unchanged active record older than 90 minutes as a possible interruption; inspect commits before resuming. Never overwrite concurrent map/search work.
+
+A further navigation audit found 159 wall corners outside their host footprint and 633 blocked doorway paths in the previous inferred layout (counts include every floor). Replaced the insufficient room-fit clearance with sampled 2.1 m clearance, maintained a wider stair aisle, and checked coast containment. The revised layout has 1,362 inferred doorways: every tested doorway path is passable and no tested room-wall corner lies outside its footprint/coast. These room counts describe procedural study geometry, not historical dwelling counts. The all-building stair tests still apply.
+
+Second-pass validation: full build 142/142 tests passed; four native GLES views rendered without GL errors.

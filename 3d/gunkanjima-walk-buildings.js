@@ -60,9 +60,9 @@ function build(b,coast){
  const housing=/apartment|nikkyu|wood/.test(b.style),school=b.style==='school';
  for(let f=0;f<floors;f++){
   let count=0;
-  for(let x=p.minX+2;x<p.maxX-2&&count<10;x+=4)for(let z=p.minZ+2;z<p.maxZ-2&&count<10;z+=4){
-   if(Math.abs(x-p.x)<2.7&&Math.abs(z-p.z)<p.length/2+1.3)continue;
-   if(![-1,1].every(i=>[-1,1].every(j=>inPoly([x+i*1.1,z+j*1.1],p.poly))))continue;
+  for(let x=p.minX+2.3;x<p.maxX-2.3&&count<10;x+=4)for(let z=p.minZ+2.3;z<p.maxZ-2.3&&count<10;z+=4){
+   if(Math.abs(x-p.x)<3.2&&Math.abs(z-p.z)<p.length/2+1.8)continue;
+   if(![-1,-.5,0,.5,1].every(i=>[-1,-.5,0,.5,1].every(j=>inPoly([x+i*2.1,z+j*2.1],p.poly)&&(!coast||inPoly(toUV(x+i*2.1,z+j*2.1),coast)))))continue;
    const y=base+f*height;count++;
    if(housing){
     // Open-door study rooms, with a clear aisle around each inferred module.

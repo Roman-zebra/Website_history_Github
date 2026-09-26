@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "status": "ready",
+  "updatedAt": "2026-09-26T12:31:06.975401+00:00",
+  "activeRun": null,
+  "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
+  "lastCompleted": [
+    "Renderer v10 deployed with 68 inferred building studies",
+    "Room-fit clearance corrected; 1362 doorway paths and all room-wall corners checked"
+  ],
+  "nextActions": [
+    "Inspect remaining visual issues in actual rendered scenes and improve one bounded aspect",
+    "Verify PC/mobile browser interaction when a WebGL-capable browser is available",
+    "Replace inferred geometry only when usable historical plans/photos are obtained"
+  ],
+  "blocked": [
+    {
+      "task": "Photographically precise reconstruction of every building",
+      "reason": "Full measured-survey plans and housing-study photographs have not been acquired",
+      "retryWhen": "New usable source, authenticated access or supplied scans become available; do not repeat an unchanged failed lookup"
+    },
+    {
+      "task": "Mobile WebGL graphics and performance verification",
+      "reason": "Current cloud browser does not expose WebGL",
+      "retryWhen": "A WebGL-capable test browser/device is available"
+    }
+  ],
+  "automation": {
+    "title": "軍艦島3Dの作業を再開",
+    "timezone": "Asia/Tokyo",
+    "frequency": "hourly",
+    "firstScheduledLocal": "2026-09-26T22:30:00+09:00",
+    "staleRunMinutes": 90,
+    "note": "Scheduled continuation is not immediate transport reconnection."
+  },
+  "validation": {
+    "fullBuildTestsPassed": 142,
+    "fullBuildTestsFailed": 0,
+    "nativeGlesScenesRendered": 4,
+    "inferredDoorwayPathsChecked": 1362,
+    "roomWallCornersOutsideFootprint": 0
+  }
+}
