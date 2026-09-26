@@ -62,7 +62,7 @@ test('the viewer opens its panels, lets the camera into rooms, ghosts both host 
  assert.ok(js.includes('const poly = signedArea(part) < 0 ? part.slice().reverse() : part;'),'outlines are wound one way');
  assert.equal((js.match(/abs\(aBid - uGhostId2\)/g)||[]).length,2,'walls and roofs ghost a second host building');
  assert.ok(js.includes('sc.approach && scene === id'),'a scene can walk on to its approach view');
- assert.ok(js.includes('st.dist < 420 && !scene')&&js.includes('if (!q || scene){ pin.hidden = true; continue; }'),'names and pins step aside inside a room');
+ assert.ok(js.includes('(st.walk || st.dist < 420) && !scene')&&js.includes('if (!q || scene){ pin.hidden = true; continue; }'),'names and pins step aside inside a room and remain useful while walking');
 });
 
 test('the audio guide keeps chapters and transcript under the player; the method notes and the intro paragraph are gone',()=>{

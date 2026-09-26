@@ -1,0 +1,81 @@
+{
+  "updated": "2026-09-26",
+  "purpose": "Source register for improving spatial accuracy, building interiors and interpretation. Listing a source here does not mean that its contents have already been incorporated into the public model.",
+  "currentModel": {
+    "buildingCount": 88,
+    "interiorSceneCount": 12,
+    "footprints": {
+      "openStreetMap": 66,
+      "tracedFrom1962Aerial": 22
+    }
+  },
+  "evidenceLabels": {
+    "measured": "Dimensions or positions taken from a drawing or survey with a stated scale.",
+    "documented": "Form or use supported by contemporary photographs, reports or plans but not fully dimensioned.",
+    "inferred": "A clearly labelled reconstruction used only where direct evidence is absent."
+  },
+  "sources": [
+    {
+      "id": "ndl-survey-2005",
+      "title": "軍艦島実測調査資料集 : 大正・昭和初期の近代建築群の実証的研究 追補版",
+      "authors": ["阿久井喜孝", "滋賀秀實"],
+      "year": 2005,
+      "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000007682767",
+      "access": "Physical holding; no online full text identified",
+      "priority": "critical",
+      "plannedUse": ["Measured building plans", "sections and elevations", "post-closure condition photographs"]
+    },
+    {
+      "id": "ndl-housing-1952-1970",
+      "title": "軍艦島の生活〈1952/1970〉 : 住宅学者西山夘三の端島住宅調査レポート",
+      "year": 2015,
+      "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I026439399",
+      "access": "Physical holding; no online full text identified",
+      "priority": "critical",
+      "plannedUse": ["1952 and 1970 building-layout maps", "housing plans and room use", "historical photographs and explanations"]
+    },
+    {
+      "id": "ndl-west-coast-plan",
+      "title": "端島西海岸 平面図：縮尺1/600",
+      "publisher": "長崎県",
+      "url": "https://ndlsearch.ndl.go.jp/books/R100000001-I42111000002727749",
+      "access": "Physical holding at Nagasaki Prefectural Library; no online scan identified",
+      "priority": "critical",
+      "plannedUse": ["Georeference the west-coast plan", "correct seawall and building positions", "record map residual error"]
+    },
+    {
+      "id": "ndl-preservation-report-2019",
+      "title": "国指定史跡高島炭鉱跡端島炭坑跡",
+      "publisher": "長崎市",
+      "year": 2019,
+      "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I029670375",
+      "access": "Physical holding; no online full text identified",
+      "priority": "high",
+      "plannedUse": ["Archaeological and conservation findings", "production facilities", "chronology and interpretation"]
+    },
+    {
+      "id": "nagasaki-city-hashima",
+      "title": "国史跡『高島炭鉱跡』端島炭坑跡",
+      "publisher": "長崎市",
+      "url": "https://www.city.nagasaki.lg.jp/page/3592.html",
+      "access": "Online",
+      "priority": "high",
+      "plannedUse": ["Official historic components", "reclamation and seawall phases", "site description"]
+    },
+    {
+      "id": "agency-cultural-affairs",
+      "title": "国指定文化財等データベース 高島炭鉱跡",
+      "publisher": "文化庁",
+      "url": "https://kunishitei.bunka.go.jp/heritage/detail/401/00003864",
+      "access": "Online",
+      "priority": "high",
+      "plannedUse": ["Designation facts", "official site extent", "historic description"]
+    }
+  ],
+  "nextAcquisition": [
+    "Request or consult the 1:600 west-coast plan and the 2005 measured-survey volume.",
+    "Georeference scans against the existing aerial-photo control points without overwriting source geometry.",
+    "Assign measured, documented or inferred status to each revised exterior and interior element.",
+    "Publish residual errors and source links with each model revision."
+  ]
+}

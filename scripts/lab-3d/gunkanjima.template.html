@@ -16,6 +16,9 @@
 .viewer canvas{display:block;width:100%;height:min(68vh,36rem);touch-action:none;cursor:grab;outline:none}
 .viewer canvas:active{cursor:grabbing}
 .viewer canvas:focus-visible{box-shadow:inset 0 0 0 3px #d9b36e}
+.viewer canvas.weather-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;cursor:default}
+.viewer canvas#view.is-walk{cursor:crosshair}
+.walk-pad{position:absolute;right:.75rem;bottom:.75rem;z-index:1;display:grid;grid-template-columns:repeat(3,2.8rem);gap:.3rem}.walk-pad button{width:2.8rem;height:2.8rem;padding:0;border:1px solid #d9b36e;border-radius:50%;background:#0f191bd9;color:#fff;font:700 1rem/1 system-ui,sans-serif;touch-action:none}.walk-forward{grid-column:2}.walk-left{grid-column:1;grid-row:2}.walk-back{grid-column:2;grid-row:2}.walk-right{grid-column:3;grid-row:2}@media (min-width:721px){.walk-pad{display:none}}
 .viewer img{display:block;width:100%;height:auto}
 .viewer [hidden]{display:none!important}
 .spot-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -119,18 +122,20 @@
 <div class="viewer">
 <div class="viewer-stage">
 <canvas id="view" tabindex="0" role="img" aria-label="Interactive 3D model of Hashima"></canvas>
+<canvas id="weatherFx" class="weather-fx" aria-hidden="true"></canvas>
 <div id="spotLayer" class="spot-layer"></div>
 <img id="viewFallback" src="/3d/gunkanjima-1962.jpg?v=5" alt="Aerial photograph of Hashima, 30 May 1962" hidden>
 <div id="viewCompass" class="compass" aria-hidden="true">N</div>
 <div id="sceneNote" class="scene-note" hidden></div>
 <div id="changeLegend" class="change-legend" hidden><i class="lo"></i><span data-t="lower"></span><i class="hi"></i><span data-t="higher"></span></div>
+<div id="walkPad" class="walk-pad" aria-label="Walk controls" hidden><button class="walk-forward" type="button" data-walk="forward" aria-label="Forward">▲</button><button class="walk-left" type="button" data-walk="left" aria-label="Left">◀</button><button class="walk-back" type="button" data-walk="back" aria-label="Back">▼</button><button class="walk-right" type="button" data-walk="right" aria-label="Right">▶</button></div>
 <aside id="spotPanel" class="spot-panel" hidden><button id="spotClose" type="button" aria-label="Close">×</button><h2 id="spotTitle"></h2><div id="spotBody"></div></aside>
 </div>
 <div class="viewer-bar">
 <div class="years"><button id="btnPlayYears" type="button">▶ Play the years</button><input id="yearRange" type="range" min="0" max="4" step="0.01" value="1" aria-label="Year"><output id="yearLabel" for="yearRange"></output></div>
 <div id="yearTicks" class="year-ticks"></div>
 <p id="yearNote" class="year-note"></p>
-<div class="viewer-buttons"><button id="btnFlat" type="button" aria-pressed="false">Flat photo</button><button id="btnExag" type="button" aria-pressed="false">Heights ×2</button><button id="btnChange" type="button" aria-pressed="false">Show change</button><button id="btnWalls" type="button" aria-pressed="false">Buildings: on</button><button id="btnLabels" type="button" aria-pressed="false">Names: on</button><button id="btnReset" type="button">Reset view</button></div>
+<div class="viewer-buttons"><button id="btnFlat" type="button" aria-pressed="false">Flat photo</button><button id="btnExag" type="button" aria-pressed="false">Heights ×2</button><button id="btnChange" type="button" aria-pressed="false">Show change</button><button id="btnWalls" type="button" aria-pressed="false">Buildings: on</button><button id="btnLabels" type="button" aria-pressed="false">Names: on</button><button id="btnWalk" type="button" aria-pressed="false">Walk the island</button><button id="btnWeather" type="button">Weather: clear</button><button id="btnReset" type="button">Reset view</button></div>
 <p id="viewStatus" class="viewer-status" aria-live="polite"></p>
 </div>
 </div>
@@ -447,7 +452,7 @@
   window.LAB_TEXT = t;
 })();
 </script>
-<script src="/3d/gunkanjima-3d.js?v=6"></script>
+<script src="/3d/gunkanjima-3d.js?v=7"></script>
 <script src="/3d/gunkanjima-podcast.js?v=6"></script>
 </body>
 </html>

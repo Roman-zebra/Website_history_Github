@@ -1,5 +1,5 @@
 /* Gunkanjima, 1947 to today: a lab test for Japan Time Atlas. Plain WebGL, no libraries.
-   Version 4 is a reconstruction model rather than a raw height field: the terrain is GSI's 5 m
+   Version 7 is a reconstruction model rather than a raw height field: the terrain is GSI's 5 m
    elevation, the sea wall is the OpenStreetMap ring, and every building is a prism drawn from its
    outline, its storey count and its completion year from the published building list, so the slider
    shows each building rising in the year it was built and falling when it collapsed. Façades are
@@ -8,10 +8,16 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '6';
+  const V = '7';
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
   const LANG = window.LAB_LANG || 'en';
+  const LOCAL = {
+    ja: { walk: '島内を歩く', orbit: '俯瞰に戻る', walkReady: '歩行モード：WASD・矢印キーまたは画面のボタンで移動し、ドラッグで周囲を見回せます。', weatherClear: '天気：晴れ', weatherCloudy: '天気：曇り', weatherRain: '天気：雨', weatherFog: '天気：霧', outline: '建物輪郭', outlineOsm: 'OpenStreetMapの建物輪郭', outlineAerial: '1962年の空中写真からトレース' },
+    ko: { walk: '섬을 걷기', orbit: '조감도로 돌아가기', walkReady: '걷기 모드: WASD·화살표 키 또는 화면 버튼으로 이동하고 드래그해서 둘러보세요.', weatherClear: '날씨: 맑음', weatherCloudy: '날씨: 흐림', weatherRain: '날씨: 비', weatherFog: '날씨: 안개', outline: '건물 윤곽', outlineOsm: 'OpenStreetMap 건물 윤곽', outlineAerial: '1962년 항공사진에서 추적' },
+    'zh-Hans': { walk: '步行探索', orbit: '返回俯瞰', walkReady: '步行模式：用 WASD、方向键或屏幕按钮移动，拖动查看四周。', weatherClear: '天气：晴', weatherCloudy: '天气：阴', weatherRain: '天气：雨', weatherFog: '天气：雾', outline: '建筑轮廓', outlineOsm: 'OpenStreetMap 建筑轮廓', outlineAerial: '根据1962年航拍照片描绘' },
+    'zh-Hant': { walk: '步行探索', orbit: '返回俯瞰', walkReady: '步行模式：用 WASD、方向鍵或螢幕按鈕移動，拖曳查看四周。', weatherClear: '天氣：晴', weatherCloudy: '天氣：陰', weatherRain: '天氣：雨', weatherFog: '天氣：霧', outline: '建築輪廓', outlineOsm: 'OpenStreetMap 建築輪廓', outlineAerial: '依1962年航空照片描繪' }
+  };
   const T = Object.assign({
     loading: 'Loading the photographs…', ready: 'Drag to turn. Scroll or pinch to zoom. Shift-drag to move.',
     failed: 'The 3D data could not be loaded. Please try again later.',
@@ -25,12 +31,17 @@
     aerial1962: '1962', aerialLatest: 'Latest', photo: 'Photo', built: 'Completed', storeys: 'Storeys', units: 'Units', use: 'Use',
     structure: 'Structure', gone: 'Collapsed', unknown: 'unknown', traced: 'Outline traced from the 1962 photograph; name unknown',
     factsSource: 'Building list: Japanese Wikipedia, 端島 (長崎県)', schoolShort: 'School',
-    enter: 'Go inside', leave: 'Leave', interior: 'Inside (reconstruction):'
-  }, window.LAB_TEXT || {});
+    enter: 'Go inside', leave: 'Leave', interior: 'Inside (reconstruction):',
+    walk: 'Walk the island', orbit: 'Orbit view', walkReady: 'Walk mode: use WASD or the arrows to move; drag to look.',
+    weatherClear: 'Weather: clear', weatherCloudy: 'Weather: cloudy', weatherRain: 'Weather: rain', weatherFog: 'Weather: fog',
+    outline: 'Building footprint', outlineOsm: 'OpenStreetMap building footprint', outlineAerial: 'Traced from the 1962 aerial photograph'
+  }, LOCAL[LANG] || {}, window.LAB_TEXT || {});
 
   const $ = id => document.getElementById(id);
   const canvas = $('view'), status = $('viewStatus'), compass = $('viewCompass');
+  const weatherFx = $('weatherFx'), weatherCtx = weatherFx && weatherFx.getContext('2d');
   const btnFlat = $('btnFlat'), btnReset = $('btnReset'), btnExag = $('btnExag'), btnChange = $('btnChange'), btnWalls = $('btnWalls'), btnLabels = $('btnLabels');
+  const btnWalk = $('btnWalk'), btnWeather = $('btnWeather'), walkPad = $('walkPad');
   const yearRange = $('yearRange'), yearLabel = $('yearLabel'), yearNote = $('yearNote'), yearTicks = $('yearTicks'), btnPlay = $('btnPlayYears');
   const spotLayer = $('spotLayer'), panel = $('spotPanel');
   const reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -39,14 +50,20 @@
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const pick = obj => obj ? (obj[LANG] || obj.en || '') : '';
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-  const BG = [0.075, 0.117, 0.13], HORIZON = [0.40, 0.47, 0.50], SKY_TOP = [0.10, 0.16, 0.20];
-  const SUN = (() => { const v = [0.492, 0.863, 0.112], l = Math.hypot(v[0], v[1], v[2]); return v.map(x => x / l); })();
+  const unit = v => { const l = Math.hypot(v[0], v[1], v[2]); return v.map(x => x / l); };
+  const WEATHER = [
+    { key: 'clear', bg: [0.075, 0.117, 0.13], horizon: [0.40, 0.47, 0.50], sky: [0.10, 0.16, 0.20], sun: unit([0.492, 0.863, 0.112]), fog: 0.28, rain: 0 },
+    { key: 'cloudy', bg: [0.12, 0.14, 0.15], horizon: [0.46, 0.49, 0.50], sky: [0.25, 0.29, 0.31], sun: unit([0.35, 0.72, 0.18]), fog: 0.72, rain: 0 },
+    { key: 'rain', bg: [0.07, 0.09, 0.10], horizon: [0.30, 0.34, 0.36], sky: [0.13, 0.16, 0.18], sun: unit([0.30, 0.66, 0.12]), fog: 1.08, rain: 1 },
+    { key: 'fog', bg: [0.31, 0.34, 0.34], horizon: [0.58, 0.60, 0.59], sky: [0.48, 0.51, 0.51], sun: unit([0.24, 0.72, 0.10]), fog: 1.65, rain: 0 }
+  ];
+  const env = () => WEATHER[st.weather] || WEATHER[0];
   const EL_MIN = 0.06, EL_MAX = 1.5, D_MIN = 40, D_MAX = 1800;
   /* inside a room the camera may come right up to the furniture and look a little upward; outside it may come close to a building */
   const D_MIN_SCENE = 0.6, D_MAX_SCENE = 90, EL_MIN_SCENE = -0.35, D_MIN_OUTSIDE = 8;
   const dMin = () => scene ? D_MIN_SCENE : D_MIN_OUTSIDE, dMax = () => scene ? D_MAX_SCENE : D_MAX, elMin = () => scene ? EL_MIN_SCENE : EL_MIN;
   const STYLE = { apartment: 1, nikkyu: 2, school: 3, industrial: 4, wood: 5, shrine: 6 };
-  const controls = [btnFlat, btnReset, btnExag, btnChange, btnWalls, btnLabels, yearRange, btnPlay];
+  const controls = [btnFlat, btnReset, btnExag, btnChange, btnWalls, btnLabels, btnWalk, btnWeather, yearRange, btnPlay];
 
   function fallback(message){
     say(message);
@@ -147,7 +164,7 @@
         col = sea + glint + foam;
         edge = 1.0;
       }
-      col = mix(col, uHorizon, uFog * smoothstep(500.0, 2400.0, vDepth));
+      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
       col = mix(uBg, col, edge);
       gl_FragColor = vec4(col, 1.0);
     }`;
@@ -239,7 +256,7 @@
         vec3 flag = gone > 0.0 && gone <= 110.0 ? vec3(0.88, 0.22, 0.16) : vec3(0.35, 0.55, 0.85);
         col = mix(col, mix(grey, flag, 0.75) * (0.55 + 0.45 * d), uChange);
       }
-      col = mix(col, uHorizon, uFog * smoothstep(500.0, 2400.0, vDepth));
+      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
       gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.22 : 1.0);
     }`;
   // roofs: the aerial photograph of the year, drawn where the roof is in that photograph
@@ -280,7 +297,7 @@
       vec3 col = mix(t, roof * (0.6 + 0.4 * dot(t, vec3(0.33))), vAlive < 0.98 ? 0.8 : 0.25);
       col *= mix(1.0, 0.42 + 0.6 * d * mix(0.35, 1.0, sh), uShade);
       if (uChange > 0.001){ vec3 grey = vec3(dot(col, vec3(0.299, 0.587, 0.114))); col = mix(col, grey * 0.9, 0.5 * uChange); }
-      col = mix(col, uHorizon, uFog * smoothstep(500.0, 2400.0, vDepth));
+      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
       gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.18 : 1.0);
     }`;
   // the sea wall ring
@@ -302,7 +319,7 @@
       col = mix(col, vec3(0.22, 0.24, 0.22), smoothstep(2.2, 0.0, y));                         /* wet band at the waterline */
       col *= 1.0 - age * 0.2 * noise(vec2(s * 0.3, y));
       col *= mix(1.0, 0.32 + 0.62 * d * mix(0.35, 1.0, sh), uShade);
-      col = mix(col, uHorizon, uFog * smoothstep(500.0, 2400.0, vDepth));
+      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
       gl_FragColor = vec4(col, 1.0);
     }`;
   const SKY_VS = `attribute vec2 aPos; varying vec2 vP; void main(){ vP = aPos; gl_Position = vec4(aPos, 0.9999, 1.0); }`;
@@ -379,7 +396,7 @@
       /* hemisphere ambient: faces that look up are lit by the sky, faces that look down by the ground */
       float amb = 0.30 + 0.12 * n.y;
       vec3 col = base * (amb + 0.62 * d * mix(0.4, 1.0, sh));
-      col = mix(col, uHorizon, uFog * smoothstep(500.0, 2400.0, vDepth));
+      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
       gl_FragColor = vec4(col, vCol.a);
     }`;
   const BOX_DEPTH_FS = `precision mediump float; varying vec4 vCol; void main(){ if (vCol.a < 0.9) discard; gl_FragColor = vec4(1.0); }`;
@@ -753,14 +770,17 @@
     if (!ok){ shadowFb = null; shadowTex = null; }
   }
   function lightMatrix(){
-    const R = 430, eye = [SUN[0] * 1500, SUN[1] * 1500, SUN[2] * 1500];
+    const R = 430, sun = env().sun, eye = [sun[0] * 1500, sun[1] * 1500, sun[2] * 1500];
     return mul(ortho(-R, R, -R, R, 600, 2400), lookAt(eye, [0, 0, 0]));
   }
 
   /* ---------- state and camera ---------- */
   const HOME = { az: -1.1, el: 0.62 };
-  const st = { az: HOME.az, el: HOME.el, dist: 700, tx: 0, tz: 0, ty: 14, lift: 0, exag: 1, year: 1, change: 0, userLift: 1, walls: true, labels: true };
+  const st = { az: HOME.az, el: HOME.el, dist: 700, tx: 0, tz: 0, ty: 14, lift: 0, exag: 1, year: 1, change: 0, userLift: 1, walls: true, labels: true,
+    walk: false, wx: 0, wz: 0, walkGround: 4, weather: 0 };
   let anim = null, spin = false, queued = false, activeSpot = null, t0 = performance.now();
+  let orbitPose = null, walkLast = performance.now();
+  const walkKeys = new Set();
 
   function homeDistance(){
     const aspect = canvas.width / Math.max(1, canvas.height);
@@ -780,8 +800,50 @@
     const x = (u - C) * mpp, z = (v - C) * mpp, c = Math.cos(rot), s = Math.sin(rot);
     return [x * c - z * s, z * c + x * s];
   }
+  function fromWorld(x, z){
+    const c = Math.cos(rot), s = Math.sin(rot), gx = x * c + z * s, gz = -x * s + z * c;
+    return [gx / mpp + C, gz / mpp + C];
+  }
+  function pointInPoly(p, poly){
+    let inside = false;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++){
+      const a = poly[i], b = poly[j];
+      if (((a[1] > p[1]) !== (b[1] > p[1])) && p[0] < (b[0] - a[0]) * (p[1] - a[1]) / ((b[1] - a[1]) || 1e-9) + a[0]) inside = !inside;
+    }
+    return inside;
+  }
+  function sampleGround(x, z){
+    if (!terrain || !terrain.hts0) return null;
+    const uv = fromWorld(x, z), fx = (uv[0] - terrain.x0) / terrain.step, fy = (uv[1] - terrain.y0) / terrain.step;
+    if (fx < 0 || fy < 0 || fx > terrain.w - 1 || fy > terrain.h - 1) return null;
+    const x0 = Math.floor(fx), y0 = Math.floor(fy), x1 = Math.min(x0 + 1, terrain.w - 1), y1 = Math.min(y0 + 1, terrain.h - 1), ax = fx - x0, ay = fy - y0;
+    const h = terrain.hts0, a = h[y0 * terrain.w + x0], b = h[y0 * terrain.w + x1], d = h[y1 * terrain.w + x0], e = h[y1 * terrain.w + x1];
+    return (a * (1 - ax) + b * ax) * (1 - ay) + (d * (1 - ax) + e * ax) * ay;
+  }
+  function buildingAlive(b){
+    const y = yearMix().year;
+    return y >= (b.built || b.seen || 1950) && !(b.gone && y > b.gone);
+  }
+  function canWalk(x, z){
+    if (!model || !model.coast) return null;
+    const h = sampleGround(x, z), here = st.walk ? sampleGround(st.wx, st.wz) : h;
+    if (h === null || h < 0.45 || (here !== null && Math.abs(h - here) > 1.4)) return null;
+    const probes = [[0, 0], [0.48, 0], [-0.48, 0], [0, 0.48], [0, -0.48]];
+    for (const q of probes){
+      const uv = fromWorld(x + q[0], z + q[1]);
+      if (!pointInPoly(uv, model.coast)) return null;
+      for (const b of model.buildings) if (buildingAlive(b) && pointInPoly(uv, b.poly)) return null;
+    }
+    return h;
+  }
   function frameMatrices(){
     const w = canvas.width, h = canvas.height;
+    if (st.walk){
+      const cp = Math.cos(st.el), eye = [st.wx, st.walkGround + 1.68, st.wz];
+      const target = [eye[0] + Math.sin(st.az) * cp, eye[1] + Math.sin(st.el), eye[2] + Math.cos(st.az) * cp];
+      const proj = perspective(0.9, w / Math.max(1, h), 0.08, 1800), view = lookAt(eye, target);
+      return { proj, view, pv: mul(proj, view) };
+    }
     const ce = Math.cos(st.el), target = [st.tx, st.ty, st.tz];
     const eye = [target[0] + st.dist * ce * Math.sin(st.az), target[1] + st.dist * Math.sin(st.el), target[2] + st.dist * ce * Math.cos(st.az)];
     const sc = scene && interiors ? interiors.scenes[scene] : null;
@@ -806,10 +868,11 @@
     gl.uniform1f(U.uYear, ym.year - 1900);
     gl.uniform1f(U.uShade, Math.min(1, lift));
     gl.uniform1f(U.uChange, st.change);
-    gl.uniform3fv(U.uBg, BG);
-    gl.uniform3fv(U.uSun, SUN);
-    gl.uniform3fv(U.uHorizon, HORIZON);
-    gl.uniform1f(U.uFog, 1);
+    const e = env();
+    gl.uniform3fv(U.uBg, e.bg);
+    gl.uniform3fv(U.uSun, e.sun);
+    gl.uniform3fv(U.uHorizon, e.horizon);
+    gl.uniform1f(U.uFog, e.fog);
     gl.uniform1f(U.uTime, (performance.now() - t0) / 1000);
     gl.uniform1f(U.uShadowOn, shadowOn ? 1 : 0);
     gl.uniform1f(U.uShadowTexel, 1 / (SHADOW || 1));
@@ -856,15 +919,17 @@
     gl.disable(gl.DEPTH_TEST);
     gl.useProgram(progSky.p);
     attr(skyBuf, 0, 2); disableFrom(1);
-    gl.uniform3fv(progSky.U.uTop, SKY_TOP); gl.uniform3fv(progSky.U.uHorizon, HORIZON); gl.uniform1f(progSky.U.uEl, st.el);
+    const e = env();
+    gl.uniform3fv(progSky.U.uTop, e.sky); gl.uniform3fv(progSky.U.uHorizon, e.horizon); gl.uniform1f(progSky.U.uEl, st.el);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     gl.enable(gl.DEPTH_TEST);
   }
 
   function draw(){
     const w = canvas.width, h = canvas.height;
+    const e = env();
     gl.viewport(0, 0, w, h);
-    gl.clearColor(BG[0], BG[1], BG[2], 1);
+    gl.clearColor(e.bg[0], e.bg[1], e.bg[2], 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     if (!terrain) return;
     const ym = yearMix(), A = texture(ym.i), B = texture(ym.i + 1);
@@ -926,11 +991,47 @@
     if (compass) compass.style.transform = 'rotate(' + (st.az * 180 / Math.PI).toFixed(1) + 'deg)';
   }
 
+  function updateWalk(now){
+    const dt = Math.min(0.06, Math.max(0, (now - walkLast) / 1000));
+    walkLast = now;
+    if (!st.walk || !dt) return;
+    const forward = (walkKeys.has('w') || walkKeys.has('arrowup') || walkKeys.has('forward') ? 1 : 0) - (walkKeys.has('s') || walkKeys.has('arrowdown') || walkKeys.has('back') ? 1 : 0);
+    const right = (walkKeys.has('d') || walkKeys.has('right') ? 1 : 0) - (walkKeys.has('a') || walkKeys.has('left') ? 1 : 0);
+    if (!forward && !right) return;
+    const n = Math.hypot(forward, right) || 1, speed = walkKeys.has('shift') ? 7.5 : 4.2;
+    const f = forward / n, r = right / n, dx = (Math.sin(st.az) * f + Math.cos(st.az) * r) * speed * dt, dz = (Math.cos(st.az) * f - Math.sin(st.az) * r) * speed * dt;
+    let h = canWalk(st.wx + dx, st.wz);
+    if (h !== null){ st.wx += dx; st.walkGround = h; }
+    h = canWalk(st.wx, st.wz + dz);
+    if (h !== null){ st.wz += dz; st.walkGround = h; }
+  }
+  function drawWeather(now){
+    if (!weatherCtx || !weatherFx) return;
+    const w = weatherFx.width, h = weatherFx.height, rain = env().rain;
+    weatherCtx.clearRect(0, 0, w, h);
+    if (!rain || reduce) return;
+    weatherCtx.save();
+    weatherCtx.scale(w / Math.max(1, canvas.clientWidth), h / Math.max(1, canvas.clientHeight));
+    const cw = canvas.clientWidth, ch = canvas.clientHeight, count = lowEnd ? 65 : 145, t = now * 0.001;
+    weatherCtx.lineWidth = lowEnd ? 0.8 : 1;
+    weatherCtx.strokeStyle = 'rgba(205,225,232,.34)';
+    weatherCtx.beginPath();
+    for (let i = 0; i < count; i++){
+      const seed = Math.sin((i + 1) * 91.731) * 43758.5453, a = seed - Math.floor(seed), b = Math.sin((i + 9) * 41.13) * 9283.21, c = b - Math.floor(b);
+      const x = (a * (cw + 100) + t * 34 + i * 0.7) % (cw + 100) - 50, y = (c * (ch + 80) + t * (310 + (i % 7) * 24)) % (ch + 80) - 40;
+      const len = 8 + (i % 6) * 2.2;
+      weatherCtx.moveTo(x, y); weatherCtx.lineTo(x - 3.5, y + len);
+    }
+    weatherCtx.stroke(); weatherCtx.restore();
+  }
+
   function frame(now){
     queued = false;
+    updateWalk(now);
     if (anim) anim(now);
     if (spin) st.az -= 0.0016;
     draw();
+    drawWeather(now);
     if (anim || spin || (!reduce && !document.hidden && sea)) request();   // the water moves, so keep a slow loop while visible
   }
   let lastFrame = 0;
@@ -956,6 +1057,25 @@
     request();
   }
   function stopSpin(){ spin = false; }
+  function beginWalk(){
+    if (!model || !terrain || st.walk) return;
+    if (scene) leaveScene();
+    orbitPose = { az: st.az, el: st.el, dist: st.dist, tx: st.tx, tz: st.tz, ty: st.ty };
+    const spawn = toWorldTrue(490, 650);
+    st.walk = true; st.wx = spawn[0]; st.wz = spawn[1]; st.walkGround = sampleGround(st.wx, st.wz) || 4.3;
+    st.az = -2.96; st.el = 0.04; st.userLift = 1; st.exag = 1; st.walls = true;
+    anim = null; closeSpot(); walkLast = performance.now();
+    canvas.classList.add('is-walk');
+    if (walkPad) walkPad.hidden = false;
+    syncUi(); say(T.walkReady); canvas.focus(); request();
+  }
+  function endWalk(silent){
+    if (!st.walk) return;
+    st.walk = false; walkKeys.clear(); canvas.classList.remove('is-walk');
+    if (walkPad) walkPad.hidden = true;
+    if (orbitPose) Object.assign(st, orbitPose);
+    orbitPose = null; syncUi(); if (!silent) say(T.ready); request();
+  }
 
   /* ---------- years ---------- */
   function yearName(y){ return y.id === 'latest' ? T.latest : y.id; }
@@ -970,6 +1090,8 @@
     if (btnChange){ btnChange.textContent = st.change > 0.5 ? T.changeOff : T.change; btnChange.setAttribute('aria-pressed', String(st.change > 0.5)); }
     if (btnWalls){ btnWalls.textContent = st.walls ? T.walls : T.wallsOff; btnWalls.setAttribute('aria-pressed', String(!st.walls)); }
     if (btnLabels){ btnLabels.textContent = st.labels ? T.labels : T.labelsOff; btnLabels.setAttribute('aria-pressed', String(!st.labels)); }
+    if (btnWalk){ btnWalk.textContent = st.walk ? T.orbit : T.walk; btnWalk.setAttribute('aria-pressed', String(st.walk)); }
+    if (btnWeather){ btnWeather.textContent = [T.weatherClear, T.weatherCloudy, T.weatherRain, T.weatherFog][st.weather] || T.weatherClear; }
     const legend = $('changeLegend');
     if (legend) legend.hidden = st.change < 0.5;
     const ym = yearMix();
@@ -1045,7 +1167,7 @@
       pin.hidden = sx < -20 || sy < -20 || sx > w + 20 || sy > h + 20;
       pin.style.transform = 'translate(' + sx.toFixed(1) + 'px,' + sy.toFixed(1) + 'px)';
     }
-    const showLabels = st.labels && st.walls && lift > 0.5 && st.dist < 420 && !scene;
+    const showLabels = st.labels && st.walls && lift > 0.5 && (st.walk || st.dist < 420) && !scene;
     for (const L of labels){
       const b = L.b;
       const alive = ym.year >= (b.built || b.seen || 1950) && !(b.gone && ym.year > b.gone);
@@ -1114,7 +1236,7 @@
     $('spotBody').innerHTML = html;
     wireEnter();
     panel.hidden = false;
-    if (fly){
+    if (fly && !st.walk){
       stopSpin();
       const xz = spotWorld(id);
       if (scene) leaveScene();
@@ -1131,6 +1253,7 @@
       + row(T.units, b.units)
       + row(T.use, b.use ? esc(useText(b.use)) : null)
       + row(T.structure, b.structure ? esc(structureText(b.structure)) : null)
+      + row(T.outline, esc(b.source === 'osm' ? T.outlineOsm : T.outlineAerial))
       + row(T.gone, b.gone ? esc(String(b.gone)) + (b.goneNote ? ' <small>' + esc(noteText(b.goneNote)) + '</small>' : '') : null)
       + '</table>';
     if (b.notes) html += '<p>' + esc(noteText(b.notes)) + '</p>';
@@ -1143,7 +1266,7 @@
     $('spotBody').innerHTML = html;
     wireEnter();
     panel.hidden = false;
-    if (fly){
+    if (fly && !st.walk){
       stopSpin();
       const c = centroid(b.poly), xz = toWorldTrue(c[0], c[1]);
       if (scene && !scenesFor(b.name).includes(scene)) leaveScene();
@@ -1165,6 +1288,7 @@
   function enterScene(id, fly){
     const sc = interiors && interiors.scenes[id];
     if (!sc) return;
+    if (st.walk) endWalk(true);
     if (scene !== id){
       scene = id;
       sceneMesh = buildBoxes(Object.assign({}, sc, { pass: 'solid' }));
@@ -1200,10 +1324,15 @@
     for (const k of Object.keys(pins)) pins[k].classList.remove('is-on');
   }
   if ($('spotClose')) $('spotClose').onclick = closeSpot;
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && panel && !panel.hidden) closeSpot(); });
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (panel && !panel.hidden) closeSpot();
+    else if (st.walk) endWalk(false);
+  });
 
   function view(name, ms){
     stopSpin();
+    if (st.walk) endWalk(true);
     if (scene) leaveScene();
     if (name === 'top') animate({ tx: 0, tz: 0, el: 1.35, dist: homeDistance() * 1.25 }, ms || 1400);
     else animate({ tx: 0, tz: 0, az: HOME.az, el: HOME.el, dist: homeDistance() }, ms || 1400);
@@ -1214,6 +1343,7 @@
     const dpr = Math.min(window.devicePixelRatio || 1, 2), r = canvas.getBoundingClientRect();
     const w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
     if (canvas.width !== w || canvas.height !== h){ canvas.width = w; canvas.height = h; }
+    if (weatherFx && (weatherFx.width !== w || weatherFx.height !== h)){ weatherFx.width = w; weatherFx.height = h; }
     request();
   }
   if (window.ResizeObserver) new ResizeObserver(resize).observe(canvas); else window.addEventListener('resize', resize);
@@ -1226,14 +1356,17 @@
     stopSpin();
     try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* old browsers */ }
     pointers.set(e.pointerId, [e.clientX, e.clientY]);
-    if (pointers.size === 2){ const [a, b] = [...pointers.values()]; pinch0 = Math.hypot(a[0] - b[0], a[1] - b[1]); dist0 = st.dist; }
+    if (!st.walk && pointers.size === 2){ const [a, b] = [...pointers.values()]; pinch0 = Math.hypot(a[0] - b[0], a[1] - b[1]); dist0 = st.dist; }
   });
   canvas.addEventListener('pointermove', e => {
     const prev = pointers.get(e.pointerId);
     if (!prev) return;
     pointers.set(e.pointerId, [e.clientX, e.clientY]);
     if (pointers.size === 1){
-      if (e.shiftKey || e.buttons === 4 || e.buttons === 2){
+      if (st.walk){
+        st.az -= (e.clientX - prev[0]) * 0.0045;
+        st.el = clamp(st.el - (e.clientY - prev[1]) * 0.0038, -1.05, 1.05);
+      } else if (e.shiftKey || e.buttons === 4 || e.buttons === 2){
         const k = Math.max(st.dist, scene ? 6 : 0) * 0.0016, c = Math.cos(st.az), s = Math.sin(st.az);
         const dx = -(e.clientX - prev[0]) * k, dz = -(e.clientY - prev[1]) * k;
         st.tx += dx * c - dz * s; st.tz += -dx * s - dz * c;
@@ -1255,10 +1388,15 @@
   canvas.addEventListener('wheel', e => {
     e.preventDefault();
     stopSpin();
+    if (st.walk) return;
     st.dist = clamp(st.dist * Math.exp(e.deltaY * 0.0012), dMin(), dMax());
     request();
   }, { passive: false });
   canvas.addEventListener('keydown', e => {
+    const key = e.key.toLowerCase();
+    if (st.walk && ['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','shift'].includes(key)){
+      e.preventDefault(); walkKeys.add(key); request(); return;
+    }
     const moves = { ArrowLeft: () => { st.az += 0.08; }, ArrowRight: () => { st.az -= 0.08; },
       ArrowUp: () => { st.el = clamp(st.el + 0.06, elMin(), EL_MAX); }, ArrowDown: () => { st.el = clamp(st.el - 0.06, elMin(), EL_MAX); },
       '+': () => { st.dist = clamp(st.dist / 1.15, dMin(), dMax()); }, '=': () => { st.dist = clamp(st.dist / 1.15, dMin(), dMax()); },
@@ -1269,13 +1407,23 @@
     moves[e.key]();
     request();
   });
+  canvas.addEventListener('keyup', e => walkKeys.delete(e.key.toLowerCase()));
+  canvas.addEventListener('blur', () => walkKeys.clear());
+  for (const b of document.querySelectorAll('[data-walk]')){
+    const key = b.dataset.walk;
+    const releaseWalk = () => walkKeys.delete(key);
+    b.addEventListener('pointerdown', e => { e.preventDefault(); walkKeys.add(key); canvas.focus(); request(); });
+    b.addEventListener('pointerup', releaseWalk); b.addEventListener('pointercancel', releaseWalk); b.addEventListener('pointerleave', releaseWalk);
+  }
 
   if (btnFlat) btnFlat.onclick = () => { stopSpin(); animate({ userLift: st.userLift > 0.5 ? 0 : 1 }, 1100); };
   if (btnExag) btnExag.onclick = () => { animate({ exag: st.exag > 1.5 ? 1 : 2 }, 600); };
   if (btnChange) btnChange.onclick = () => { animate({ change: st.change > 0.5 ? 0 : 1 }, 500); };
   if (btnWalls) btnWalls.onclick = () => { st.walls = !st.walls; syncUi(); request(); };
   if (btnLabels) btnLabels.onclick = () => { st.labels = !st.labels; syncUi(); request(); };
-  if (btnReset) btnReset.onclick = () => { if (scene) leaveScene(); view('overview', 900); animate({ userLift: 1, ty: 14 }, 900); };
+  if (btnWalk) btnWalk.onclick = () => { if (st.walk) endWalk(false); else beginWalk(); };
+  if (btnWeather) btnWeather.onclick = () => { st.weather = (st.weather + 1) % WEATHER.length; syncUi(); request(); };
+  if (btnReset) btnReset.onclick = () => { if (st.walk) endWalk(true); if (scene) leaveScene(); view('overview', 900); animate({ userLift: 1, ty: 14 }, 900); };
   if (btnPlay) btnPlay.onclick = playYears;
   if (yearRange) yearRange.addEventListener('input', () => {
     stopSpin();
@@ -1305,6 +1453,7 @@
   let lastCueKey = '';
   window.jtaLabFollow = (lines, t) => {
     if (!lab) return;
+    if (st.walk) endWalk(true);
     const cue = applyCues(lines, t), key = JSON.stringify(cue);
     if (key === lastCueKey) return;
     lastCueKey = key;
@@ -1377,6 +1526,6 @@
     fallback(T.failed);
   });
 
-  window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, enterScene, leaveScene, scene: () => scene, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
+  window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, enterScene, leaveScene, beginWalk, endWalk, scene: () => scene, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
     years: () => years.map(y => y.id), loaded: i => texture(i).promise, shadows: () => !!shadowFb, walls: () => !!walls, model: () => model };
 })();

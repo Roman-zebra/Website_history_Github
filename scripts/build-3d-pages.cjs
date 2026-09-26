@@ -40,7 +40,7 @@ function ld(l){
  const url=urlOf(l);
  return JSON.stringify({'@context':'https://schema.org','@graph':[
   {'@type':'Article','headline':l.title,'description':l.description,'inLanguage':l.html,'url':url,'mainEntityOfPage':url,
-   'image':SITE+'/3d/island-from-sea.jpg','datePublished':'2026-09-15','dateModified':'2026-09-15',
+   'image':SITE+'/3d/island-from-sea.jpg','datePublished':'2026-09-15','dateModified':'2026-09-26',
    'author':{'@type':'Organization','name':'Japan Time Atlas','url':SITE+'/'},'publisher':{'@type':'Organization','name':'Japan Time Atlas','url':SITE+'/'},
    'about':{'@type':'LandmarksOrHistoricalBuildings','name':'Hashima (Gunkanjima)','alternateName':['端島','軍艦島','Battleship Island'],
      'geo':{'@type':'GeoCoordinates','latitude':32.6278,'longitude':129.7386},'address':{'@type':'PostalAddress','addressLocality':'Nagasaki','addressCountry':'JP'}},
