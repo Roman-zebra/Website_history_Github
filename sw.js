@@ -6,7 +6,7 @@
      B. 地図タイル・碑の写真      … cache-first で溜める（一度見た場所は圏外でも出る、枚数上限あり）
      C. Overpass / Wikipedia      … network-only（結果は app.js 側が localStorage に残す）
 */
-const VERSION = 'v0.94.0';
+const VERSION = 'v0.95.0';
 const SHELL = `shell-${VERSION}`;
 /* タイルと地域JSONの枠は版をまたいで残す。以前は `tiles-${VERSION}` だったので、sw.js を更新するたびに
    activate が端末のタイル（最大700枚）と地域JSON（最大40本）を消し、次の表示で全部取り直していた
@@ -30,7 +30,7 @@ const REGION_MAX = 40;                      // 地域JSONは219本／30.7MB。�
      版の数字を直に書いた行が app.js / explore.js に1つでもあれば
      tools/bump_version.py が exit 1 で止める（見張りをコメントでなく道具に置いた）。 */
 const DATA_V = '0.48';
-const ASSET_V = '0.94';
+const ASSET_V = '0.95';
 const DATA_FILES = [
   'facilities-index-v1.json', 'monuments-index.json', 'kid-text.json', 'places-index.json',
   'landmarks.json', 'regional-landmarks-v1.json', 'liminal.json', 'places-world.json',

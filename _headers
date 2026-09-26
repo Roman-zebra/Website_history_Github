@@ -63,6 +63,10 @@
 
 /about
   Cache-Control: public, max-age=0, must-revalidate
+/contact
+  Cache-Control: public, max-age=0, must-revalidate
+/privacy
+  Cache-Control: public, max-age=0, must-revalidate
 
 /place/*
   Cache-Control: no-cache

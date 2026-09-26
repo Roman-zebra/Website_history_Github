@@ -945,6 +945,7 @@ function ensureMap(){
     maxZoom: 18, minZoom: 2, crossOrigin: 'anonymous',
     attribution: ESRI_ATTR + ' | ' + GSI_ATTR
   }).addTo(map);
+  watchBaseLayer();
 
   nowLayer = L.tileLayer(GSI + '/' + NOW_LAYER.id + '/{z}/{x}/{y}.' + NOW_LAYER.ext, {
     maxNativeZoom: NOW_LAYER.max, maxZoom: 18, minZoom: NOW_LAYER.min,
@@ -956,6 +957,25 @@ function ensureMap(){
   map.on('zoomend', closeHint);
   let dTimer = null;
   map.on('moveend zoomend', () => { clearTimeout(dTimer); dTimer = setTimeout(drawDetail, 300); });
+}
+
+/* Esri no longer updates the old street-tile service, so it may stop answering one day. If its tiles
+   keep failing while the device is online, put GSI's pale map (Japanese labels) under the photographs
+   instead of an empty page. Any tile that loads resets the count, so a patchy connection does not trip it. */
+function watchBaseLayer(){
+  const LIMIT = 8;
+  let misses = 0;
+  const loaded = () => { misses = 0; };
+  const failed = () => {
+    if (navigator.onLine === false || ++misses < LIMIT) return;
+    baseLayer.off('tileload', loaded).off('tileerror', failed);
+    map.removeLayer(baseLayer);
+    baseLayer = L.tileLayer(GSI + '/pale/{z}/{x}/{y}.png', {
+      maxZoom: 18, minZoom: 2, crossOrigin: 'anonymous', attribution: GSI_ATTR
+    }).addTo(map);
+    baseLayer.bringToBack();
+  };
+  baseLayer.on('tileload', loaded).on('tileerror', failed);
 }
 
 /* Build (or clear) the old-photograph layer and the swipe furniture. */
