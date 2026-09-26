@@ -1,11 +1,8 @@
 {
   "schemaVersion": 1,
   "status": "in_progress",
-  "updatedAt": "2026-09-26T23:42:00Z",
-  "activeRun": {
-    "task": "Inspect and improve the first-person arrival across the documented rooftop farm on Buildings 18 and 19",
-    "startedAt": "2026-09-26T23:19:00Z"
-  },
+  "updatedAt": "2026-09-26T23:43:00Z",
+  "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
     "Renderer v10 deployed with 68 inferred building studies",
@@ -48,7 +45,8 @@
     "Building 16 interiors9 verified live at 3edaa683f7946a99c1f1948fc03aabb388cbeeb6; public HTML requests interiors9 and the served asset is byte-identical",
     "Hashima Ginza walking copy: source geometry preserved; first-person arrival reframed along all five existing stalls and the forward column sequence with five-language viewpoint caveat",
     "Hashima Ginza interiors10 verified live at 460b694a397ec95519487dc528991a84b42f8228; public HTML requests interiors10 and the served asset is byte-identical",
-    "Buildings 18/19 rooftop-farm walking copy: source geometry preserved; first-person arrival reframed to show all four existing crop beds and the rice plot with a five-language inference caveat"
+    "Buildings 18/19 rooftop-farm walking copy: source geometry preserved; first-person arrival reframed to show all four existing crop beds and the rice plot with a five-language inference caveat",
+    "Buildings 18/19 interiors11 verified live at b390b07040de5a9cc19b8d99de0af2c51ec95a81; public HTML requests interiors11 and the served asset is byte-identical"
   ],
   "nextActions": [
     "Improve a bounded room-specific furnishing or source-grounded retaining-wall/terrain segment, preserving existing geometry evidence",
@@ -195,7 +193,7 @@
     "rooftopFarmRenderDifferingPixels": 1020269,
     "rooftopFarmControlViewsByteIdentical": 15,
     "rooftopFarmViewpointLanguagesChecked": 5,
-    "rooftopFarmServedAssetByteChecked": false
+    "rooftopFarmServedAssetByteChecked": true
   },
   "publicationApproval": {
     "at": "2026-09-27T06:50:00+09:00",
@@ -205,8 +203,8 @@
     "rendererVersion": 21,
     "walkInteriorsVersion": 11,
     "walkNavigationVersion": 3,
-    "status": "publishing rooftop-farm arrival; local build and normal/forced-mediump GLES checks passed; renderer21/walkJS8/CSS7/nature1/buildings5/interiors11/navigation3",
-    "verifiedCommit": "460b694a397ec95519487dc528991a84b42f8228",
+    "status": "verified live; release.json, public HTML versions and served interiors asset byte-checked; renderer21/walkJS8/CSS7/nature1/buildings5/interiors11/navigation3",
+    "verifiedCommit": "b390b07040de5a9cc19b8d99de0af2c51ec95a81",
     "walkUIVersion": 8,
     "walkCSSVersion": 7,
     "walkBuildingsVersion": 5,

@@ -299,3 +299,5 @@ The farm's existence is documented, while the bed and path layout, crop arrangem
 Validation: 167/167 full-build tests pass. Regressions preserve the complete source scene and exact box array, require a zero-fallback supported entry, place all four beds and the rice plot inside a 25-degree opening-view cone, exercise the actual engine under both 16- and 32-bit index paths, and cover all five viewpoint translations. Sixteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The rooftop-farm view changes 1,020,269 pixels because the camera is deliberately reframed; all fifteen control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
 
 Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors11, navigation3.
+
+Publication: main advanced without force to `b390b07040de5a9cc19b8d99de0af2c51ec95a81`. Cloudflare `release.json` reported that commit; the public walk HTML requests interiors11 while retaining renderer21, walk JS8/CSS7, walk-nature1, buildings5 and navigation3, and the served interiors11 file is byte-identical to the tested local file.
