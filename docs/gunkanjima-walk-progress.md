@@ -206,6 +206,26 @@ Other automatic work is paused: Google registration task was already disabled; S
 
 Publication: renderer19/walkJS7/CSS6 verified live at `8d9d2ce803020e8de43d20538a86fdb288f9edf9`. `release.json` reports that commit; renderer, JS, CSS and Godot notice bytes match tested local files. Public English menu, archive, Help and ARIA are translated; language-selector native names intentionally remain. Desktop touch controls are hidden and contextual strip is at y=68. Browser has no WebGL. Synthetic Ctrl-plus / Ctrl-zero produced no observable browser scale change, so this is **not** a verified browser-zoom round-trip; renderer gesture event tests passed, and iPhone verification remains outstanding. Continuation task updated, unrelated automatic work remains off.
 
+## Building 3 telephone legibility — interiors v7, 2026-09-27
+
+The existing Building 3 source text records a telephone and doorbell in each dwelling. It already places one inferred telephone on a small stand and explicitly labels the room plan and furniture as inferred. The source scene, room layout, orbit camera, phone position and body dimensions remain unchanged.
+
+For the walking copy only, the existing phone gains a compact handset and ten-part rotary-dial cue. All 13 additions remain inside the source phone footprint and are labelled inferred. The first-person entry now starts on clear supported floor and looks directly at the phone; the original entry faced the bath wall and left the phone outside the opening frame. Exact phone model, receiver proportions, dial form and colours are illustrative, not a measured or photographic reconstruction.
+
+Validation: 156/156 full-build tests pass. The regression preserves the complete source scene, bounds all 13 additions to the existing phone, verifies inferred labels and confirms the curated entry needs no collision fallback. Twelve native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The no3 view changes 1,023,989 pixels because the camera is deliberately reframed; all eleven control views are byte-identical. Actual iPhone Safari gestures and mobile GPU performance remain unverified.
+
+Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors7, navigation3. Cloudflare `release.json` reached `61e4b4465e27e2572882bef8af65c9f6cdc41666`; the public HTML requests interiors7 and the served asset is byte-identical to the tested local file.
+
+## Building 30 third-floor dwelling entry — interiors v8, 2026-09-27
+
+The Building 30 source scene contains the full seven-storey gallery stack and uses a lower-gallery floor as its general navigation reference. The walking completion inherited that value, so entering the scene opened at the exterior gallery level instead of the third-floor dwelling described by the cutaway. The source scene, gallery stack, room geometry, objects and orbit camera remain unchanged.
+
+For the walking copy only, the navigation reference is set to the existing interpreted dwelling surface. A clear supported entry inside the room faces the source-described kamado and water jar. No new furnishing geometry or historical dimensions were added. The entry is an interpretive presentation view, not a historical camera position; the existing caveat that room details are inferred remains.
+
+Validation: 157/157 full-build tests pass. Regressions preserve the complete source scene and its lower-gallery reference, require the walking entry to land on the selected room surface without fallback, keep the kamado and water jar inside a 12-degree opening-view cone, and exercise the actual engine under both 16- and 32-bit index paths. Thirteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The no30 image changes all 1,024,000 pixels because it now shows the room instead of the outdoor level; all twelve control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
+
+Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors8, navigation3. Cloudflare `release.json` reached `f3d7882e7e9bcb4073233611612d0c36a0090de5`; the public HTML requests interiors8 and the served asset is byte-identical to the tested local file.
+
 ## Stylised-nature video study — renderer v20, 2026-09-26 (branch, not published)
 
 The user asked for 「Claude CodeとUnity MCPでアニメ調のオープンワールドは作れるのか？」 to be transcribed in full, sampled every second and applied to the walk, with placeholder vegetation and textures allowed. YouTube's bot check blocked the cloud browser and was not bypassed; the user supplied the file through Google Drive. The full 64.7-minute soundtrack was transcribed locally (1,455 segments) and 3,883 one-second frames were inspected on contact sheets. `docs/gunkanjima-video-study-v20.md` has the timeline, the technique-to-code mapping, adaptations and omissions. The video, audio, transcript and frames are not committed.
@@ -227,6 +247,6 @@ Walking view only, labelled as illustrative placeholders in the help text and th
 - Performance: compared with v19 in Chromium's software renderer, v20 costs about 1.6–1.8× per frame at the default settings; "light" on a 2× phone matches v19 by rendering at 1× density. Quality tiers now cap the render scale, and auto uses 1.5× on low-end devices. Profiling-led savings: no aerial-photo fetches in the walking view, no land shading on the sea, branched wall and paving details, four-tap walking shadows and sine-free grain. Details in the study note.
 - Nature blocks walking where it should: trunks, large rocks, ruins, fence rails, and the pond except under the bridge, whose real deck height carries the walker.
 
-Validation: 162/162 full-build tests; 32 native GLES2 renders without GL errors (including `--streets`: paved alleys, a yard in clear weather and rain, and the coast); Chromium/SwiftShader desktop (Japanese) and phone (English) checks of the scene and the panel with no page errors. Real phone GPU frame rate and appearance remain unverified. The build regenerated unrelated tracked HTML (page.css version, support link); those diffs were reverted and not committed.
+Validation: 164/164 full-build tests after merging the Building 3 and 30 interior work; 34 native GLES2 renders without GL errors (including `--streets`: paved alleys, a yard in clear weather and rain, and the coast); Chromium/SwiftShader desktop (Japanese) and phone (English) checks of the scene and the panel with no page errors. Real phone GPU frame rate and appearance remain unverified. The build regenerated unrelated tracked HTML (page.css version, support link); those diffs were reverted and not committed.
 
-Cache versions: renderer20, walk JS8/CSS7, walk-nature1 (new), buildings5, interiors6, navigation3. The work is on branch `claude/jta-3d-video-implementation-p4sql1`; main and the live site still serve renderer19.
+Cache versions: renderer20, walk JS8/CSS7, walk-nature1 (new), buildings5, interiors8, navigation3. The work is on branch `claude/jta-3d-video-implementation-p4sql1`; main and the live site still serve renderer19.
