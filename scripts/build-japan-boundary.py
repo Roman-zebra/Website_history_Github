@@ -19,6 +19,10 @@ for feature in source['features']:
         # excluded from this visitor map, including its search index.
         if polygon.centroid.x > 145.6 and polygon.centroid.y > 43.35:
             continue
+        # The same prefecture dataset includes Liancourt Rocks (Dokdo),
+        # administered by South Korea. Keep them off this visitor map.
+        if 131.7 < polygon.centroid.x < 132.1 and 37.1 < polygon.centroid.y < 37.4:
+            continue
         parts.append(polygon)
 
 # Small Japanese islands and offshore facilities missing from the source's

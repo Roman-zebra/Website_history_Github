@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.50';
+const DATA_V = '0.51';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
    ask for, not a number written here that falls behind (the search worker sat at 0.80). */
@@ -931,6 +931,26 @@ function setLang(l){
 /* =========================================================================
    3. Map
    ========================================================================= */
+// A rectangular Leaflet maxBounds includes mainland China and Korea because
+// Japan stretches from Yonaguni to Hokkaido. Keep the view centred on Japanese
+// land or the immediate coast instead of letting a drag stop over another city.
+function nearestJapanCenter(lat, lon){
+  if (JapanBoundary.contains(lat, lon)) return null;
+  const lonScale = Math.cos(lat * Math.PI / 180);
+  let best = Infinity, nearest = null;
+  for (const [, ring] of JapanBoundary.visible){
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++){
+      const a = ring[j], b = ring[i];
+      const dx = (b[1] - a[1]) * lonScale, dy = b[0] - a[0];
+      const t = Math.max(0, Math.min(1, ((lon - a[1]) * lonScale * dx + (lat - a[0]) * dy) / (dx * dx + dy * dy || 1)));
+      const candidate = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+      const d = ((candidate[1] - lon) * lonScale) ** 2 + (candidate[0] - lat) ** 2;
+      if (d < best){ best = d; nearest = candidate; }
+    }
+  }
+  // Approximately 12 km of sea around the shoreline remains navigable.
+  return best <= (12 / 111) ** 2 ? null : nearest;
+}
 function ensureMap(){
   if (map) return;
   // minZoom on the map itself: Leaflet otherwise takes the MAXIMUM of the
@@ -985,6 +1005,16 @@ function ensureMap(){
     onRemove(m){m.off('move zoomend resize',this.redraw);this.canvas.remove();}
   });
   new JapanMask().addTo(map);
+
+  let returningToJapan = false;
+  map.on('moveend', () => {
+    if (returningToJapan) return;
+    const c = map.getCenter(), nearest = nearestJapanCenter(c.lat, c.lng);
+    if (!nearest) return;
+    returningToJapan = true;
+    try { map.panTo(nearest, { animate: false }); }
+    finally { returningToJapan = false; }
+  });
 
   nowLayer = L.tileLayer(GSI + '/' + NOW_LAYER.id + '/{z}/{x}/{y}.' + NOW_LAYER.ext, {
     maxNativeZoom: NOW_LAYER.max, maxZoom: 18, minZoom: NOW_LAYER.min,
@@ -3389,3 +3419,23 @@ if ('serviceWorker' in navigator)
   window.addEventListener('load', () =>
     navigator.serviceWorker.register('sw.js')
       .catch(e => console.warn('SW registration failed', e)));
+
+// Returning to an old tab must not leave yesterday's map code running. The
+// release manifest is fetched without the shell cache and changes on deploy.
+let lastReleaseCheck = 0, releaseReloading = false;
+async function checkMapRelease(){
+  if (document.hidden || releaseReloading || Date.now() - lastReleaseCheck < 30000) return;
+  lastReleaseCheck = Date.now();
+  try {
+    const response = await fetch('/release.json?check=' + lastReleaseCheck, { cache: 'no-store' });
+    if (!response.ok) return;
+    const release = await response.json();
+    if (release.assets && release.assets !== ASSET_V){
+      releaseReloading = true;
+      location.reload();
+    }
+  } catch(e){ /* Offline visitors can keep using the cached map. */ }
+}
+window.addEventListener('focus', checkMapRelease);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) checkMapRelease(); });
+setInterval(checkMapRelease, 60000);

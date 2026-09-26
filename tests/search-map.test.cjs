@@ -1,4 +1,18 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+test('map centre returns from foreign cities to Japan without rejecting Japanese islands',()=>{
+ const boundary=require('../japan-boundary.js');
+ const source=fs.readFileSync(require.resolve('../explore.js'),'utf8');
+ const fn=source.match(/function nearestJapanCenter\(lat, lon\)\{[\s\S]*?\n\}/)[0];
+ const nearest=new Function('JapanBoundary',fn+';return nearestJapanCenter')(boundary);
+ for(const [lat,lon] of [[41.8,123.4],[37.5665,126.978],[35.18,129.075],[43.1155,131.8855],[25.03,121.565]]){
+  const destination=nearest(lat,lon);
+  assert.ok(destination,`foreign map centre ${lat},${lon} should be returned`);
+  assert.equal(nearest(...destination),null);
+ }
+ for(const [lat,lon] of [[35.681,139.767],[34.2,129.29],[24.46,122.98],[26.212,127.68]])
+  assert.equal(nearest(lat,lon),null);
+ assert.equal(boundary.contains(37.24,131.86),false,'South Korean-administered islets');
+});
 function runtime(){
  const state={arcs:0,closed:0,opened:[],bounds:null,view:null,removed:0},els=new Map();
  const canvas={setAttribute(){},style:{},remove(){state.removed++;},getContext(){return {scale(){},beginPath(){},arc(){state.arcs++;},fill(){},stroke(){}};}};
