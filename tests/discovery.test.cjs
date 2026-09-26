@@ -16,7 +16,7 @@ test('all 114 place variants retain the same location and language through every
 });
 test('all sitemap routes resolve locally and article links cannot leave broken relative paths',()=>{
  const urls=[...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
- assert.equal(new Set(urls).size,urls.length);assert.equal(urls.length,207+420,'207 earlier pages and 420 spot pages');
+ assert.equal(new Set(urls).size,urls.length);assert.equal(urls.length,208+420,'208 earlier pages and 420 spot pages');
  for(const url of urls){const route=new URL(url).pathname,p=route==='/'?'index.html':route.endsWith('/')?route.slice(1)+'index.html':route.slice(1)+'.html',html=read(p);
   assert.ok(html.includes('href="'+url+'"'),p+' canonical');
   for(const match of html.matchAll(/(?:href|src)=["']([^"']+)["']/g)){

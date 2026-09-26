@@ -3,7 +3,7 @@ const test=require('node:test'),assert=require('node:assert/strict'),fs=require(
 const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const places=JSON.parse(read('data/places-world.json')).places,liminal=JSON.parse(read('data/liminal.json')).places;
 const htmlIn=d=>fs.readdirSync(path.join(root,d),{withFileTypes:true}).flatMap(e=>e.isDirectory()?htmlIn(path.join(d,e.name)):e.name.endsWith('.html')?[path.join(d,e.name)]:[]);
-const crawlable=()=>['index.html','explore.html','ja.html','ko.html','zh-cn.html','zh-tw.html','th.html','places.html','visit.html','about.html',...htmlIn('place'),...htmlIn('guides'),...htmlIn('visit')];
+const crawlable=()=>['index.html','explore.html','ja.html','ko.html','zh-cn.html','zh-tw.html','th.html','places.html','visit.html','about.html','support.html',...htmlIn('place'),...htmlIn('guides'),...htmlIn('visit')];
 
 function app(){
  const elements=new Map(),replaced=[];
@@ -26,7 +26,7 @@ test('no crawlable page reaches a place through a #hash or a .html duplicate',()
    const [before,hash]=href.split('#');
    assert.ok(!ids.has(hash),file+' -> '+href);
    const internal=!/^[a-z]+:/i.test(before)||before.startsWith('https://japantimeatlas.com');
-   assert.ok(!internal||!/(^|\/)(index|ja|ko|zh-cn|zh-tw|th|places|about|visit)\.html$/.test(before.split('?')[0]),file+' -> '+href);
+   assert.ok(!internal||!/(^|\/)(index|ja|ko|zh-cn|zh-tw|th|places|about|support|visit)\.html$/.test(before.split('?')[0]),file+' -> '+href);
   }
   assert.ok(!/japantimeatlas\.com\/\?lang=[^"]*#l-/.test(s),file+' structured data');
  }

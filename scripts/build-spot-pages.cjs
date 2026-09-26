@@ -122,7 +122,7 @@ function page(s,l){
   +'<section><h2>'+esc(t.source)+'</h2><ul>'+s.sources(l).map(x=>'<li><a href="'+esc(x.url)+'" rel="noopener">'+esc(x.label)+'</a></li>').join('')+'<li><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a></li></ul></section>'
   +'<section><h2>'+esc(t.near)+'</h2><p class="where">'+esc(t.distance)+'</p><ul class="near">'+near.map(o=>'<li><a href="'+o.url+'">'+esc(o.name)+'</a><span>'+(o.d<1?o.d.toFixed(1):Math.round(o.d))+' km</span></li>').join('')+'</ul></section>'
   +'<p class="cta"><a href="'+s.map(l)+'">'+esc(t.open)+'</a></p></main>';
- const footer='<footer><p>Japan Time Atlas · <a href="/about#'+l+'">'+t.about+'</a> · <a class="site-support-link" href="https://ko-fi.com/japantimeatlas" target="_blank" rel="noopener">'+t.support+'</a></p><p><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · Wikipedia (CC BY-SA)</p></footer></body></html>';
+ const footer='<footer><p>Japan Time Atlas · <a href="/about#'+l+'">'+t.about+'</a> · <a class="site-support-link" href="/support#'+l+'">'+t.support+'</a></p><p><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · Wikipedia (CC BY-SA)</p></footer></body></html>';
  return head+nav+langNav+body+footer;
 }
 

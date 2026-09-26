@@ -1,6 +1,7 @@
 'use strict';
+/* The about and support pages each hold one section per language; the #hash picks which one shows. */
 function showAboutLanguage(){
- const sections=[...document.querySelectorAll('.founder-note')];
+ const sections=[...document.querySelectorAll('main>section[lang]')];
  const lang=sections.some(s=>s.id===location.hash.slice(1))?location.hash.slice(1):'ja';
  for(const section of sections)section.hidden=section.id!==lang;
  document.documentElement.lang=lang;
