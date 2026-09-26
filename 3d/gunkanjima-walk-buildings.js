@@ -90,6 +90,28 @@ function build(b,coast){
    else{put(x,z,y,[.8,.6,.6],[.52,.40,.24],'crate',2);}
   }
  }
+ // Placeholder rooftop vegetable beds on housing blocks (Hashima's roofs were known for gardens; the beds, crops and
+ // layout here are inferred set dressing). Beds stand clear of the stair core and are tall enough to walk around.
+ if(housing){
+  const y=base+floors*height,rnd=(a,c)=>{let h=Math.imul(a|0,0x27d4eb2d)^Math.imul(c|0,0x165667b1)^Math.imul((b.id|0)+0x3c6ef372,0x85ebca6b);h=Math.imul(h^(h>>>15),0x2c1b3c6d);return ((h^(h>>>13))>>>0)/4294967296;};
+  const greens=[[.30,.55,.22],[.38,.62,.25],[.25,.48,.20],[.45,.66,.28]],fruit=[[.85,.26,.20],[.47,.27,.52],[.95,.80,.26]];
+  let beds=0;
+  for(let x=p.minX+2.0;x<p.maxX-2.0&&beds<6;x+=4.2)for(let z=p.minZ+1.6;z<p.maxZ-1.6&&beds<6;z+=3.1){
+   if(Math.abs(x-p.x)<3.4&&Math.abs(z-p.z)<p.length/2+2.2)continue;
+   if(![-1,0,1].every(i=>[-1,0,1].every(j=>inPoly([x+i*1.55,z+j*.8],p.poly)&&(!coast||inPoly(toUV(x+i*1.55,z+j*.8),coast)))))continue;
+   beds++;
+   put(x,z,y,[2.4,.45,.9],[.50,.35,.20],'planter',2);
+   put(x,z,y+.40,[2.25,.06,.75],[.36,.25,.16],'planter-soil',13);
+   for(let i=0;i<4;i++){
+    const px=x-.84+i*.56,r=rnd(Math.round(px*10),Math.round(z*10)+beds),g=greens[Math.floor(r*4)],hgt=.3+.35*rnd(i+beds*7,Math.round(x*10));
+    // Three boxes turned 30 degrees apart read as one rounded leafy plant rather than a cube.
+    put(px,z,y+.46,[.42,hgt*.8,.42],g,'plant',10);
+    put(px,z,y+.46,[.38,hgt*.9,.38],g.map(c=>c*1.1),'plant',10,p.a+Math.PI/6);
+    put(px,z,y+.46,[.28,hgt*1.1,.28],g.map(c=>c*1.2),'plant',10,p.a+Math.PI/3);
+    if(r>.62)put(px+.08,z-.1,y+.46+hgt*.55,[.12,.12,.12],fruit[Math.floor(rnd(i,beds)*3)],'plant-fruit',10);
+   }
+  }
+ }
  const spawn=toUV(p.x-lane,p.z-run/2-.55);
  return {building:b.name,ghost:[b.name],floor:base,center:spawn,camera:{u:spawn[0],v:spawn[1],y:base+1.65,az:0,el:0,dist:2},label:{ja:(b.name||'名称未確認')+' · 1階〜屋上（推定）',en:(b.name||'Unnamed building')+' · floors & roof (inferred)'},text:{ja:'建物の輪郭・階数は既存資料モデルを使用。階段の位置・室内配置・家具・色は歩行体験のための推定で、当時の写真による精密復元ではありません。中央の折り返し階段を歩いて各階と屋上へ進めます。',en:'Footprints and storey counts use the source model. Stair positions, interior arrangement, furniture and colours are inferred for exploration, not a precise photographic reconstruction. Walk up the switchback stairs to each floor and the roof.'},sources:[{label:{ja:'実測資料集（NDL書誌・本文未取得）',en:'Measured-survey volume (catalogue; full text not acquired)'},url:'https://ndlsearch.ndl.go.jp/books/R100000002-I000007682767'}],boxes,walkLights:boxes.filter(b=>b.k===14).map(b=>({u:b.u,v:b.v,y:b.y,radius:3.5})),walkPlan:{...p,base,height,floors,run,lane,routes},inferred:true};
 }

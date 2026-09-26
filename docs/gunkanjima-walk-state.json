@@ -75,7 +75,7 @@
     "onlyThisWorkEnabled": true
   },
   "validation": {
-    "fullBuildTestsPassed": 161,
+    "fullBuildTestsPassed": 162,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 20,
     "inferredDoorwayPathsChecked": 1362,
@@ -136,9 +136,10 @@
     "actualBrowserZoomRoundTripVerified": false,
     "v20VideoFramesExtracted": 3883,
     "v20TranscriptSegments": 1455,
-    "v20NativeGlesRenders": 30,
+    "v20NativeGlesRenders": 32,
     "v20BrowserPanelChecks": 2,
-    "v20VideoAssetsCommitted": false
+    "v20VideoAssetsCommitted": false,
+    "v20RooftopBeds": 229
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
@@ -152,6 +153,6 @@
     "verifiedCommit": "8d9d2ce803020e8de43d20538a86fdb288f9edf9",
     "walkUIVersion": 7,
     "walkCSSVersion": 6,
-    "pending": "renderer20, walkJS8/CSS7 and walk-nature1 on branch claude/jta-3d-video-implementation-p4sql1; live site still serves renderer19"
+    "pending": "renderer20, walkJS8/CSS7, walk-nature1 and buildings5 on branch claude/jta-3d-video-implementation-p4sql1; live site still serves renderer19"
   }
 }

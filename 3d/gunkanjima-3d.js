@@ -356,8 +356,10 @@
           // Anime water: turquoise shallows near the island, drifting Voronoi cells, star glints and banded foam.
           float coast=(1.0-vMaskB.z)*40.0,shallow=vMaskB.z>0.0?1.0-smoothstep(1.5,20.0,coast):0.0,near=1.0-smoothstep(25.0,90.0,vDepth);
           water=mix(water,vec3(.16,.62,.66),shallow*.8);
-          vec2 cells=worley(vPos.xz/(3.4*uWater.x)+vec2(uTime*.1,uTime*.06));
-          water+=vec3(.55,.85,.90)*(1.0-smoothstep(.02,.14,cells.y-cells.x))*.1*near*(.4+.6*shallow);
+          // Warped, broken cell lines read as drifting caustics rather than a tiled honeycomb.
+          vec2 wp=vPos.xz/(3.4*uWater.x);wp+=vec2(noise(wp*.7+uTime*.05),noise(wp*.7-uTime*.04+5.0))*.7;
+          vec2 cells=worley(wp+vec2(uTime*.1,uTime*.06));
+          water+=vec3(.55,.85,.90)*(1.0-smoothstep(.02,.1,cells.y-cells.x))*smoothstep(.35,.7,noise(wp*.35+uTime*.03+9.0))*.09*near*(.4+.6*shallow);
           col=mix(water,uHorizon*.82,fresnel)+vec3(1.0,.91,.72)*glint*.65;
           col+=vec3(.52,.74,.73)*smoothstep(1.83,1.98,wave)*.07;
           vec2 cell=floor(vPos.xz/.9),q=fract(vPos.xz/.9)-.5;

@@ -66,3 +66,23 @@ test('inferred room walls stay inside footprints and every doorway is traversabl
  }
  assert.ok(doors>1000,'all generated floors were checked');
 });
+test('inferred rooftop beds stand on the roof inside the footprint, are walked around and leave the stair exit open',()=>{
+ let beds=0,plants=0;
+ for(const b of model.buildings){
+  const sc=buildingWalk.build(b,model.coast);if(!sc)continue;
+  const p=sc.walkPlan,roof=p.base+p.floors*p.height,toUV=q=>[(q[0]*p.c-q[1]*p.s)/.805,(q[0]*p.s+q[1]*p.c)/.805];
+  for(const bed of sc.boxes.filter(x=>x.t==='planter')){
+   beds++;assert.ok(Math.abs(bed.y-roof)<.01,'bed on the roof');
+   const a=bed.r*Math.PI/180,c=Math.cos(a),s=Math.sin(a);
+   for(const x of [-bed.s[0]/2,bed.s[0]/2])for(const z of [-bed.s[2]/2,bed.s[2]/2]){
+    const uv=[bed.u+(x*c-z*s)/.805,bed.v+(x*s+z*c)/.805];
+    assert.ok(buildingWalk.inPoly(uv,b.poly)&&buildingWalk.inPoly(uv,model.coast),(b.name||b.id)+' bed outside the roof');
+   }
+   assert.equal(nav.ground(sc,bed.u,bed.v,.805,roof),null,'beds are walked around, not through');
+  }
+  plants+=sc.boxes.filter(x=>x.t==='plant'&&x.k===10).length;
+  const exit=p.routes[p.routes.length-1].points.slice(-1)[0];
+  assert.notEqual(nav.ground(sc,...toUV(exit),.805,roof),null,(b.name||b.id)+' stair exit stays open');
+ }
+ assert.ok(beds>100&&plants>beds*4,'housing roofs carry beds with plants ('+beds+')');
+});
