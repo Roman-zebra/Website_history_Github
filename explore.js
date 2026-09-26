@@ -103,7 +103,7 @@ const T = {
     noteLiminal: 'Places that feel like nowhere \u2014 and most are near a city, so you can go.',
     modeLab: '3D reconstruction', noteLab: 'Places rebuilt in 3D from aerial photographs and records. No. 1 is Gunkanjima. Tap the card or the button to open the model.',
     heroSub: 'Historic maps, hidden gems and walks through Japan',
-    heroSearch: 'Search a place on the map',
+    heroSearch: 'Open the Japan map',
     liminalWhat: 'What makes it liminal',
     limIntroHTML: `<h2>What is a liminal space?</h2>
       <p>You have probably stood in one. A shopping centre ten minutes after it closes.
@@ -227,7 +227,7 @@ const T = {
     noteLiminal: 'どこでもない感じのする、異世界みたいな場所（リミナルスペース）。その多くは、街から行ける距離にある。',
     modeLab: '3Dでよみがえる', noteLab: '昔の空中写真と資料から、あの日の町並みを3Dでよみがえらせるシリーズ。第1回は「よみがえる軍艦島（端島）」。カードかボタンを押すと3Dモデルが開きます。',
     heroSub: '昔の地図と写真から、小さな名所を歩く旅へ',
-    heroSearch: '地図から場所・駅名を探す',
+    heroSearch: '日本地図を開く',
     liminalWhat: 'どこがリミナルなのか',
     limIntroHTML: `<h2>リミナルスペースって、なに？</h2>
       <p>たぶん、立ったことがあります。閉店10分後のショッピングモール。夏休みの学校。
@@ -361,7 +361,7 @@ T.ko = {
   noteLiminal: '어디에도 속하지 않은 듯한 곳들. 대개는 도시에서 갈 만한 거리에 있다.',
   modeLab: '3D 복원', noteLab: '항공사진과 자료로 장소를 입체로 복원하는 시리즈. 첫 번째는 군함도(하시마). 카드나 버튼을 누르면 3D 모델이 열립니다.',
   heroSub: '옛 지도와 사진으로 만나는 일본 골목 여행',
-  heroSearch: '지도에서 장소 검색',
+  heroSearch: '일본 지도 열기',
   liminalWhat: '어떤 점이 리미널한가',
   photoBy: '사진: Wikimedia Commons',
   notePlaces: '짧은 이야기가 있는 엄선된 장소들.',
@@ -413,7 +413,7 @@ T['zh-Hans'] = {
   noteLiminal: '像是不属于任何地方的地方。多半就在城边，真能去。',
   modeLab: '3D复原', noteLab: '用航拍照片和资料把地点复原成立体的系列。第一期是军舰岛（端岛）。点按卡片或按钮即可打开3D模型。',
   heroSub: '从老地图与照片出发，探索日本小众景点',
-  heroSearch: '在地图上搜索地点',
+  heroSearch: '打开日本地图',
   liminalWhat: '它为何显得阈限',
   photoBy: '照片：Wikimedia Commons',
   notePlaces: '精选地点，每处都有一段短故事。',
@@ -465,7 +465,7 @@ T['zh-Hant'] = {
   noteLiminal: '像是不屬於任何地方的地方。多半就在城邊，真能去。',
   modeLab: '3D復原', noteLab: '用航空照片和資料把地點復原成立體的系列。第一期是軍艦島（端島）。點按卡片或按鈕即可開啟3D模型。',
   heroSub: '從老地圖與照片出發，探索日本私房景點',
-  heroSearch: '在地圖上搜尋地點',
+  heroSearch: '開啟日本地圖',
   liminalWhat: '它為何顯得閾限',
   photoBy: '照片：Wikimedia Commons',
   notePlaces: '精選地點，每處都有一段短故事。',
@@ -2626,12 +2626,15 @@ function dismissSearchResults(){
   $('qResults').hidden = true;
   $('q').blur();
 }
-$('q').addEventListener('focus',()=>{
+function openSearchResults(){
   const query = $('q').value.trim();
   if(!query) showSearchSuggestions();
   else if(nationalHits.length && nationalQuery===query) paintSearchList();
   else runSearch(query);
-});
+}
+// Mobile browsers can focus the first input when the map becomes visible.
+// A focus alone is not a request to open the search list.
+$('q').addEventListener('pointerdown',openSearchResults);
 // Tapping or dragging the map dismisses the list on both touch and desktop.
 $('map').addEventListener('pointerdown', dismissSearchResults);
 $('qClear').onclick = () => { clearNationalSearch(); ++qSeq; $('q').value = ''; $('qClear').hidden = true;
@@ -3103,7 +3106,6 @@ $('mPlaces').onclick  = () => setMode('places');
 $('mMap').onclick     = () => setMode('map');
 $('heroSearch').onclick = () => {
   setMode('map');
-  requestAnimationFrame(() => $('q').focus());
 };
 $('mLiminal').onclick = () => setMode('liminal');
 $('mFood').onclick = () => setMode('food');

@@ -15,8 +15,8 @@
 <link rel="dns-prefetch" href="https://ja.wikipedia.org">
 
 <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="explore.css?v=0.97">
-<link rel="stylesheet" href="design.css?v=0.97">
+<link rel="stylesheet" href="explore.css?v=0.98">
+<link rel="stylesheet" href="design.css?v=0.98">
 <!-- Start-up data explore.js fetches as soon as it runs. On a first visit it is preloaded here, one round trip earlier; under the service worker the files come from its cache and Chrome would download a preload twice instead of reusing it. build.cjs gives these URLs the release's versions in dist. -->
 <script>if(!(navigator.serviceWorker&&navigator.serviceWorker.controller))for(const href of ['data/places-world.json?v=0.49','data/monuments-index.json?v=0.49','data/landmarks.json?v=0.49','data/regional-landmarks-v1.json?v=0.49','data/liminal.json?v=0.49','data/topics.json?v=0.49','data/areas.json?v=0.49']){const link=document.createElement('link');link.rel='preload';link.as='fetch';link.crossOrigin='anonymous';link.href=href;document.head.appendChild(link);}</script>
 <!--SEO-->
@@ -45,7 +45,7 @@
 <link rel="alternate" hreflang="zh-Hant" href="https://japantimeatlas.com/zh-tw">
 <link rel="alternate" hreflang="th" href="https://japantimeatlas.com/th">
 <link rel="alternate" hreflang="x-default" href="https://japantimeatlas.com/">
-<link rel="stylesheet" href="walking-time.css?v=0.97">
+<link rel="stylesheet" href="walking-time.css?v=0.98">
 <link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/icons/atlas.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/atlas-180.png"></head>
 <body>
 
@@ -67,7 +67,7 @@
     <p class="hero-sub" data-t="heroSub">Historic maps, hidden gems and walks through Japan</p>
     <p class="hero-lead" data-t="lead">Japan Time Atlas is a free map for curious walks through Japan. Compare historical aerial photographs with the present-day map, then explore castles, neighbourhood streets, small local sights and places with a liminal atmosphere.</p>
     <button id="heroSearch" class="hero-search" type="button">
-      <span aria-hidden="true">⌕</span> <span data-t="heroSearch">Find a place</span>
+      <span aria-hidden="true">⌕</span> <span data-t="heroSearch">Open the Japan map</span>
     </button>
     <div class="hero-meta"><span id="heroCaption">Japan · Four photographic chapters</span><a id="heroCredit" href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院 / GSI</a><a id="heroLicense" href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener" hidden></a><span class="hero-treatment">Crop / overlay</span><button id="heroMotion" class="hero-motion" type="button" aria-pressed="false" hidden>Ⅱ Pause background</button></div>
   </header>
@@ -188,12 +188,12 @@
 <div id="toast" class="toast" hidden></div>
 
 <script src="/vendor/leaflet-1.9.4/leaflet.min.js"></script>
-<script src="place-ui.js?v=0.97"></script>
-<script src="activities-data.js?v=0.97"></script>
-<script src="walking-data.js?v=0.97"></script>
-<script src="walking-time.js?v=0.97"></script>
-<script src="explore.js?v=0.97"></script>
-<script src="atmosphere.js?v=0.97" defer></script>
+<script src="place-ui.js?v=0.98"></script>
+<script src="activities-data.js?v=0.98"></script>
+<script src="walking-data.js?v=0.98"></script>
+<script src="walking-time.js?v=0.98"></script>
+<script src="explore.js?v=0.98"></script>
+<script src="atmosphere.js?v=0.98" defer></script>
 <div id="langMenu" class="lang-menu" hidden></div>
 </body>
 </html>
