@@ -17,7 +17,7 @@
 
 Use Node.js 22 or newer and run `node scripts/build.cjs`. The build generates static pages, runs the tests, and prepares `dist/` for the existing Cloudflare Workers deployment. No network request is required during the build.
 
-Content editing: [DISCOVERY-MAINTENANCE.md](DISCOVERY-MAINTENANCE.md). Pictorial map-marker pilot: [LANDMARK-ICONS.md](LANDMARK-ICONS.md).
+Content editing: [DISCOVERY-MAINTENANCE.md](DISCOVERY-MAINTENANCE.md). Pictorial map-marker pilot: [LANDMARK-ICONS.md](LANDMARK-ICONS.md). Supporters page and the Ko-fi webhook: [SUPPORTERS.md](SUPPORTERS.md).
 
 ## Data and attribution
 

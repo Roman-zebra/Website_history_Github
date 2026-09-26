@@ -63,6 +63,9 @@
 
 /about
   Cache-Control: public, max-age=0, must-revalidate
+# 支援者の名前は worker が差し込む（supporters.mjs）。新しい名前がすぐ見えるように
+/supporters
+  Cache-Control: no-cache
 
 /place/*
   Cache-Control: no-cache

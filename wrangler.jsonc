@@ -9,10 +9,24 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/3d/audio/*"],
+    "run_worker_first": ["/3d/audio/*", "/supporters", "/api/*"],
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"
   },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SUPPORTERS",
+        "class_name": "SupporterBook"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["SupporterBook"]
+    }
+  ],
   "workers_dev": true,
   "routes": [
     {

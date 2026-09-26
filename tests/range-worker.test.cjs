@@ -10,11 +10,11 @@ const env={ASSETS:{fetch:async req=>{const u=new URL(req.url);if(u.pathname==='/
 const load=()=>import(pathToFileURL(path.join(root,'worker.mjs')).href);
 const get=(headers={},method='GET')=>load().then(w=>w.default.fetch(new Request('https://japantimeatlas.com/3d/audio/x.mp3?v=5',{method,headers}),env));
 
-test('wrangler runs the worker first only for the audio files and binds the assets',()=>{
+test('wrangler runs the worker first only for the audio files and the supporters routes, and binds the assets',()=>{
  const c=JSON.parse(read('wrangler.jsonc'));
  assert.equal(c.main,'worker.mjs');
  assert.equal(c.assets.binding,'ASSETS');
- assert.deepEqual(c.assets.run_worker_first,['/3d/audio/*']);
+ assert.deepEqual(c.assets.run_worker_first,['/3d/audio/*','/supporters','/api/*']);
  assert.ok(read('scripts/build.cjs').includes("'worker.mjs'")===false,'the worker is deployed by wrangler, not copied into dist');
 });
 

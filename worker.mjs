@@ -1,11 +1,20 @@
-/* Byte ranges for the audio guide.
+/* Runs before the static files for the paths listed in wrangler.jsonc (assets.run_worker_first).
+
+   The supporters page and the Ko-fi webhook (/supporters, /api/*) are answered by supporters.mjs.
+
+   Byte ranges for the audio guide.
    Workers static assets answer a Range request with the whole file and status 200, and a browser
-   that never sees a 206 marks the track as unseekable: every skip snaps back to 0:00. This script
-   runs first for the paths listed in wrangler.jsonc (assets.run_worker_first), reads the asset
-   through the ASSETS binding and answers the range itself. Everything else is passed through
-   untouched, with Accept-Ranges added so the browser knows it may ask. */
+   that never sees a 206 marks the track as unseekable: every skip snaps back to 0:00. For the audio
+   files this script reads the asset through the ASSETS binding and answers the range itself.
+   Everything else is passed through untouched, with Accept-Ranges added so the browser knows it may ask. */
+import { route, SupporterBook } from './supporters.mjs';
+
+export { SupporterBook };
+
 export default {
   async fetch(request, env) {
+    const own = route(request, env);
+    if (own) return own;
     const upstream = await env.ASSETS.fetch(request);
     if (request.method !== 'GET' || upstream.status !== 200) return withAcceptRanges(upstream);
     const range = parseRange(request.headers.get('Range'));
