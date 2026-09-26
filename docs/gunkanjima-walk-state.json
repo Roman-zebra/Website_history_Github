@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "in_progress",
-  "updatedAt": "2026-09-26T17:43:30Z",
+  "updatedAt": "2026-09-26T17:55:30Z",
   "activeRun": {
     "task": "Improve the Building 65 rooftop-nursery arrival composition without changing source geometry",
     "startedAt": "2026-09-26T17:43:30Z"
@@ -31,7 +31,8 @@
     "Hospital ward walking copy: documented steel sashes use metal materials and six documented tatami-topped beds gain inferred, footprint-bounded edge/weave detail",
     "Hospital interiors4 verified live at 42b045d284345d5b41b2f23f066401c01402129c; public HTML and served asset byte-checked",
     "Building 61 communal-bath walking copy: inferred floor and tub-cap grout cues added within existing geometry; source layout preserved",
-    "Building 61 interiors5 verified live at c76a6c81707dd107a63291bf8178019cae48e421; public HTML and served asset byte-checked"
+    "Building 61 interiors5 verified live at c76a6c81707dd107a63291bf8178019cae48e421; public HTML and served asset byte-checked",
+    "Building 65 rooftop-nursery walking entry reframed from a clear aisle to show all six existing activity tables; source geometry and orbit camera preserved"
   ],
   "nextActions": [
     "Improve terrain, room-specific furnishings and composition in bounded, visually verified steps using the linked GDC / developer references",
@@ -71,7 +72,7 @@
     "id": "6ab7ba457d548191b74af1d0222b0b92"
   },
   "validation": {
-    "fullBuildTestsPassed": 153,
+    "fullBuildTestsPassed": 154,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 18,
     "inferredDoorwayPathsChecked": 1362,
@@ -113,7 +114,14 @@
     "bathNativeGlesViewsRendered": 20,
     "bathRenderDifferingPixels": 74930,
     "bathOutdoorControlByteIdentical": true,
-    "bathServedAssetByteChecked": true
+    "bathServedAssetByteChecked": true,
+    "nurserySourceTablesPreserved": 6,
+    "nurserySourceChairComponentsPreserved": 216,
+    "nurseryOpeningViewTablesChecked": 6,
+    "nurseryEntryFallbackDisplacement": 0,
+    "nurseryNativeGlesViewsRendered": 11,
+    "nurseryRenderDifferingPixels": 1021790,
+    "nurseryControlViewsByteIdentical": 10
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
@@ -121,9 +129,9 @@
   },
   "publication": {
     "rendererVersion": 18,
-    "walkInteriorsVersion": 5,
+    "walkInteriorsVersion": 6,
     "walkNavigationVersion": 3,
-    "status": "verified live; release.json, public HTML and interiors5 asset byte-checked",
+    "status": "Building 65 rooftop-nursery interiors6 tested and awaiting publication",
     "verifiedCommit": "c76a6c81707dd107a63291bf8178019cae48e421"
   }
 }

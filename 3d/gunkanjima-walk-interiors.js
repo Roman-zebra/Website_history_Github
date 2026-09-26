@@ -178,6 +178,12 @@ function complete(sc,id){
    put(q[0],q[1],top,longX?[b.s[0],.008,.008]:[.008,.008,b.s[2]],grout,'walk-bath-tub-grout-line',0,r);
   });
  }
+ if(id==='no65roof'){
+  // Start from a clear rear aisle looking across the existing activity tables.
+  // Source furniture and the orbit-view camera remain untouched.
+  const position=world(-2,4.5),target=world(3,-1.5);
+  walkEntry={u:position[0],v:position[1],target,el:-.08};
+ }
  const schoolNote=id==='school'?' ノート・教材・黒板の描線も演出上の推定です。':'';
  const hospitalNote=id==='hospital'?' スチールサッシの材質区分を歩行版で補正しました。畳縁・畳目の細部と色は、畳敷きベッドを読み取りやすくする演出上の推定です。':'';
  const bathNote=id==='bath'?' 記録にあるタイル浴槽を読み取りやすくする目地を歩行版に補いました。目地の間隔・太さ・色は演出上の推定です。':'';

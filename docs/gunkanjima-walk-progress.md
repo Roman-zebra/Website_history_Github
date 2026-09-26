@@ -183,3 +183,13 @@ For the walking copy only, 25 pale floor-joint cues and 58 tub-cap joint cues no
 Validation: 153/153 full-build tests. The new regression preserves all 44 source bath boxes, bounds every added joint to existing geometry and keeps the room traversable. Twenty native GLES2 views compile, link and render without errors. The final bath view differs from the pre-change image by 74,930 pixels while the outdoor control is byte-identical. Real mobile/browser GPU performance remains unverified.
 
 Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors5, navigation3. Cloudflare release.json reached c76a6c81707dd107a63291bf8178019cae48e421; the public HTML requests interiors5 and its served bytes match the tested local file.
+
+## Building 65 rooftop-nursery arrival composition — interiors v6, 2026-09-27
+
+The existing rooftop-nursery source scene already contains the documented indoor garden/pond, six activity tables, small chairs, instruments and shoe rack, plus the separately inferred room layout and pool. Its default first-person arrival looked toward the pond and a broad empty floor, leaving the table-and-chair activity area outside the opening frame. No source object, historical description or orbit-view camera was changed.
+
+For the walking copy only, arrival moves to a clear rear aisle and looks across the six existing activity tables. The first trial exposed the tables but left the small chairs visually compressed, so the final position was moved two metres closer while retaining a clear spawn. All six tables fall within 22 degrees of the centre direction. This is a presentation/composition choice, not a claimed historical viewpoint.
+
+Validation: 154/154 full-build tests. The regression preserves the source camera, six tables and 216 chair components; the selected entry is supported without fallback displacement and keeps every table inside a 25-degree opening-view cone. Eleven native GLES2 views compile, link and render without errors. The nursery view changes 1,021,790 pixels because the camera is deliberately reframed; all ten control views are byte-identical. Real mobile/browser GPU performance remains unverified.
+
+Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors6, navigation3. Verify Cloudflare publication and byte-check the served interiors6 asset before closing this pass.

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-26",
+  "updated": "2026-09-27",
   "purpose": "Source register for improving spatial accuracy, building interiors and interpretation. Listing a source here does not mean that its contents have already been incorporated into the public model.",
   "currentModel": {
     "buildingCount": 88,
@@ -266,6 +266,7 @@
     "jigokudanWalk": "The documented Jigokudan stair exists in the source scene. The walking copy keeps its 46 authored horizontal positions and dimensions but evenly interpolates tread heights so it can be traversed; position, count and gradient remain explicitly inferred rather than measured.",
     "hospitalWardWalk": "The source scene documents steel sashes and tatami-topped beds. The walking copy corrects the sash material classification and adds illustrative tatami edging/weave while preserving the six source bed positions and sizes; exact edge pattern, weave pitch and colours are inferred.",
     "communalBathWalk": "The source scene documents the Building 61 communal bath and its tiled tub. The walking copy adds floor and tub-cap grout cues while preserving the source floor, tub, water and equipment geometry; joint pitch, width and colour are inferred.",
+    "rooftopNurseryWalk": "The Building 65 rooftop-nursery source scene is unchanged. Its walking copy now starts from a clear rear aisle with all six existing activity tables inside the opening view cone; this is a presentation choice, not a claimed historical viewpoint.",
     "camera": "First-person only; third-person code and UI removed."
   }
 }

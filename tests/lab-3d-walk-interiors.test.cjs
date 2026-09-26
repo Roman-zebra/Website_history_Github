@@ -93,3 +93,15 @@ test('communal bath tile cues stay on the existing floor and tub caps without ch
  }
  assert.ok(sc.text.ja.includes('タイル浴槽')&&sc.text.ja.includes('推定'));
 });
+
+test('rooftop nursery walking entry presents the existing activity tables from a clear aisle',()=>{
+ const original=scenes.no65roof,sourceCamera=JSON.stringify(original.camera),sc=interior.complete(original,'no65roof'),p=sc.walkEnvelope,c=Math.cos(p.angle),s=Math.sin(p.angle);
+ const local=(u,v)=>[(u-p.u)*.805*c+(v-p.v)*.805*s,-(u-p.u)*.805*s+(v-p.v)*.805*c];
+ assert.equal(JSON.stringify(original.camera),sourceCamera,'source orbit camera stays untouched');
+ assert.ok(sc.walkEntry&&sc.walkEntry.target,'walking copy has a curated first-person entry');
+ const spawn=nav.spawn({...sc,camera:sc.walkEntry},.805);assert.ok(spawn,'entry is supported and obstacle-free');
+ assert.ok(Math.hypot(spawn.u-sc.walkEntry.u,spawn.v-sc.walkEntry.v)<.001,'entry does not need fallback displacement');
+ const pos=local(sc.walkEntry.u,sc.walkEntry.v),target=local(...sc.walkEntry.target),dir=[target[0]-pos[0],target[1]-pos[1]],dl=Math.hypot(...dir);
+ const tables=original.boxes.filter(b=>b.t==='low-table'),chairs=original.boxes.filter(b=>b.t==='small-chair');assert.equal(tables.length,6);assert.equal(chairs.length,216);
+ for(const table of tables){const q=local(table.u,table.v),v=[q[0]-pos[0],q[1]-pos[1]],vl=Math.hypot(...v),cos=(dir[0]*v[0]+dir[1]*v[1])/dl/vl;assert.ok(cos>Math.cos(25*Math.PI/180),'every existing activity table is inside the opening view cone');}
+});
