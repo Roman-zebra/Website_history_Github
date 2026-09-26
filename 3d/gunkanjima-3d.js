@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '11';
+  const V = '12';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -1641,16 +1641,22 @@
     fallback(T.failed);
   });
 
+  // Curated walking views for cutaway source scenes; independent of their orbit cameras.
+  const WALK_ENTRY_VIEWS = { no65flat: { u:655.15, v:437.21, target:[656.33,435.26], el:-.60 } };
   function gameEnter(id){
     let sc=interiors && interiors.scenes[id]; if(!sc)return false;
     if(sc.generatedBuilding){const b=sc.generatedBuilding;if(!buildingAlive(b))return false;sc=window.JTAWalkBuildings.build(b,model.coast);if(!sc)return false;sc.buildingId=b.id;interiors.scenes[id]=sc;}
     if(sc.buildingId && !buildingAlive(model.buildings.find(b=>b.id===sc.buildingId)))return false;
-    const spawn=window.JTAWalkNav.spawn(sc,mpp); if(!spawn)return false;
+    const entry=WALK_ENTRY_VIEWS[id];
+    const spawn=window.JTAWalkNav.spawn(entry?{...sc,camera:entry}:sc,mpp); if(!spawn)return false;
     if(!gameIndoor)outsidePose={wx:st.wx,wz:st.wz,walkGround:st.walkGround,az:st.az,el:st.el};
     enterScene(id,false); anim=null; gameIndoor=true;
     const w=toWorldTrue(spawn.u,spawn.v);
     st.walk=true; st.wx=w[0];st.wz=w[1];st.walkGround=spawn.y;st.el=0;st.az=sc.inferred?-(sc.walkPlan.a+rot):sc.camera.az+Math.PI;
-    if(!sc.inferred){
+    if(entry){
+      const target=toWorldTrue(...entry.target);
+      st.az=Math.atan2(target[0]-w[0],target[1]-w[1]);st.el=entry.el;
+    }else if(!sc.inferred){
       let best=-1;
       for(let i=0;i<24;i++){const a=i*Math.PI/12;let score=0,y=spawn.y;
         for(let d=.35;d<=4;d+=.35){const uv=fromWorld(w[0]+Math.sin(a)*d,w[1]+Math.cos(a)*d);const h=window.JTAWalkNav.ground(sc,uv[0],uv[1],mpp,y);if(h===null)break;y=h;score=d;}

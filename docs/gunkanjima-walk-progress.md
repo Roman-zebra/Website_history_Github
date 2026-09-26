@@ -55,3 +55,9 @@ Next concrete visual issue: the existing source scene `no65flat` opens toward an
 Publication is BLOCKED by automatic approval review: creating the GitHub tree was rejected twice, including after verifying repository ownership/admin rights and the exact published baseline. No v11 source was uploaded. Ask the user to explicitly approve publishing this scoped update to Roman-zebra/Website_history_Github and its existing Cloudflare site before retrying. Local implementation and the 143-test build remain complete.
 
 Publication approval received from the user at 2026-09-26 21:44:57 Asia/Tokyo: reflect and publish the update, and continue. The preceding approval block is resolved.
+
+## Room entry continuation — renderer v12
+
+Verified renderer v11 live: release.json names 5dae01653a586a6b51b11d3653f9fe876e770ca4. Corrected the no65flat walking entry to a supported threshold facing the tatami, table and television, with a downward pitch suitable for the low furnishings. The orbit camera and model geometry are unchanged; this is a curated viewing position, not a historical claim.
+
+143/143 full-build tests passed again, including an explicit entry-position, facing-direction and forward-movement regression under both index paths. Four native GLES scenes rendered with no errors; visually inspected the improved apartment frame. Next work: terrain/environment detail and device interaction verification, plus historical geometry replacements as usable source material arrives.

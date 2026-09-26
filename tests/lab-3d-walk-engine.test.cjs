@@ -14,6 +14,16 @@ function frame(){now+=40;const f=raf.shift();if(f)f(now);}
 frame();const start={...api.st};g.input.y=1;for(let i=0;i<20;i++)frame();assert.ok(Math.hypot(api.st.wx-start.wx,api.st.wz-start.wz)>.1,'outdoor moves');g.pause();
 let entered=0;for(const id of Object.keys(g.scenes())){const info=g.scenes()[id],b=info.generatedBuilding;if(b&&(1962<(b.built||b.seen||1950)||(b.gone&&1962>b.gone)))continue;entered++;const outside={x:api.st.wx,z:api.st.wz};assert.ok(g.enter(id),id+' enters');assert.ok(api.st.walk);assert.ok(g.indoor());assert.notEqual(g.canWalk(api.st.wx,api.st.wz),null);frame();g.leave();assert.equal(g.indoor(),false);assert.equal(api.st.wx,outside.x);assert.equal(api.st.wz,outside.z);}
 assert.ok(entered>60,'source scenes plus inferred buildings are available');
+// The flat must open on its furnished room, not the open edge of the cutaway.
+assert.ok(g.enter('no65flat'));
+const entryUV=g.fromWorld(api.st.wx,api.st.wz),look=g.toWorldTrue(656.33,435.26);
+assert.ok(Math.hypot(entryUV[0]-655.15,entryUV[1]-437.21)<.05,'entry remains at the supported room threshold');
+const angle=Math.atan2(look[0]-api.st.wx,look[1]-api.st.wz);
+assert.ok(Math.cos(api.st.az-angle)>.999,'view faces the table and room');
+assert.ok(api.st.el<-.4&&api.st.el>-.8,'table is in the first-person field of view');
+assert.notEqual(g.canWalk(api.st.wx+Math.sin(api.st.az)*.3,api.st.wz+Math.cos(api.st.az)*.3),null,'can walk into the room');
+g.leave();
+
 for(let x=-1000;x<=1000;x+=100)for(let z=-1000;z<=1000;z+=100){const uv=g.fromWorld(x,z);if(!win.JTAWalkBuildings.inPoly(uv,api.model().coast))assert.equal(g.canWalk(x,z),null,'sea is not walkable');}
 // Move east/right relative to the screen when facing positive world Z.
 g.reset();api.st.az=0;const x=api.st.wx;g.input.x=1;for(let i=0;i<3;i++)frame();assert.ok(api.st.wx<x,'right is camera-relative');g.pause();const px=api.st.wx;frame();assert.equal(api.st.wx,px,'pause clears input');
