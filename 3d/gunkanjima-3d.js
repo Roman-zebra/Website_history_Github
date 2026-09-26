@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '14';
+  const V = '15';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -144,6 +144,7 @@
   const TERRAIN_FS = `
     precision mediump float;
     uniform sampler2D uTexA, uTexB;
+    uniform vec3 uEye;
     uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uTime, uAnime;
     uniform vec3 uBg, uSun, uHorizon;
     varying vec2 vUvP; varying vec2 vUvO; varying vec3 vNor; varying float vSea; varying vec3 vPos;
@@ -172,14 +173,16 @@
       float edge = smoothstep(0.5, 0.36, max(abs(vUvP.x - 0.5), abs(vUvP.y - 0.5)));
       if (vSea > 0.5){
         vec3 sea = mix(vec3(0.06, 0.13, 0.17), vec3(0.12, 0.25, 0.31), d);
-        vec3 eye = normalize(-vPos + vec3(0.0, 300.0, 0.0));
+        vec3 eye = normalize(-vPos + (uAnime>.5?uEye:vec3(0.0, 300.0, 0.0)));
         float glint = pow(max(dot(reflect(-uSun, n), eye), 0.0), 60.0) * 0.3;
         float foam = smoothstep(0.86, 0.98, noise(vPos.xz * 0.12 + vec2(uTime * 0.02, 0.0))) * 0.08;
         col = sea + glint + foam;
         if(uAnime>0.5){
           float wave=sin(vPos.x*.16+uTime*.65)+sin(vPos.z*.21-uTime*.4);
-          col=mix(vec3(.06,.37,.57),vec3(.14,.73,.77),.45+.17*wave);
-          col+=vec3(.69,.97,.95)*smoothstep(1.65,1.95,wave)*.36;
+          float fresnel=.05+.65*pow(1.0-max(dot(n,eye),0.0),5.0);
+          vec3 water=mix(vec3(.045,.24,.34),vec3(.08,.40,.47),.48+.09*wave);
+          col=mix(water,uHorizon*.82,fresnel)+vec3(1.0,.91,.72)*glint*.65;
+          col+=vec3(.52,.74,.73)*smoothstep(1.83,1.98,wave)*.07;
         }
         edge = 1.0;
       }
@@ -383,14 +386,46 @@
       gl_FragColor = vec4(col, 1.0);
     }`;
   const SKY_VS = `attribute vec2 aPos; varying vec2 vP; void main(){ vP = aPos; gl_Position = vec4(aPos, 0.9999, 1.0); }`;
-  const SKY_FS = `precision mediump float; uniform vec3 uTop, uHorizon; uniform float uEl, uAnime, uTime; varying vec2 vP;
-    void main(){ float k = smoothstep(-0.2, 1.0, vP.y + uEl * 0.6); vec3 col=mix(uHorizon,uTop,k);
-      if(uAnime>0.5){vec2 q=vec2(vP.x*2.0+uTime*.004,vP.y+uEl*.6);float clouds=0.0;
-        for(int i=0;i<5;i++){float fi=float(i);vec2 c=vec2(mod(fi*.81+2.0,4.0)-2.0,.38+.13*sin(fi*7.1));vec2 d=(q-c)/vec2(.26+.05*sin(fi),.075);
-          float shape=dot(d,d);vec2 l=(q-c-vec2(-.11,.035))/vec2(.12,.07);vec2 r=(q-c-vec2(.07,.045))/vec2(.11,.09);
-          shape=min(shape,min(dot(l,l),dot(r,r)));clouds=max(clouds,1.0-smoothstep(.7,1.15,shape));}
-        col=mix(col,vec3(1.0,.98,.90),clouds*.88);}
-      gl_FragColor=vec4(col,1.0); }`;
+  // Original lightweight approximation inspired by public atmosphere talks; no game assets/code.
+  const SKY_FS = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+    uniform vec3 uTop, uHorizon, uSun;
+    uniform float uEl, uAz, uAspect, uAnime, uTime, uCloudCover, uStorm;
+    varying vec2 vP;
+    float skyHash(vec2 p){p=mod(p,113.0);return fract(sin(dot(p,vec2(7.13,3.71)))*157.91);}
+    float skyNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(skyHash(i),skyHash(i+vec2(1,0)),f.x),mix(skyHash(i+vec2(0,1)),skyHash(i+vec2(1,1)),f.x),f.y);}
+    float cloudNoise(vec2 p){return .57*skyNoise(p)+.28*skyNoise(p*2.03+17.1)+.15*skyNoise(p*4.07-9.2);}
+    float density(vec2 p){return smoothstep(.57-uCloudCover*.23,.78-uCloudCover*.19,cloudNoise(p));}
+    void main(){
+      if(uAnime<.5){gl_FragColor=vec4(mix(uHorizon,uTop,smoothstep(-.2,1.0,vP.y+uEl*.6)),1);return;}
+      float ce=cos(uEl),se=sin(uEl),ca=cos(uAz),sa=sin(uAz);
+      vec3 forward=vec3(sa*ce,se,ca*ce),right=vec3(-ca,0,sa),up=vec3(-sa*se,ce,-ca*se);
+      vec3 ray=normalize(forward+.483055*(right*vP.x*uAspect+up*vP.y));
+      float altitude=max(ray.y,0.0),sunAmount=max(dot(ray,uSun),0.0);
+      vec3 col=mix(uHorizon,uTop,smoothstep(0.0,.75,altitude));
+      col+=vec3(1.0,.76,.42)*pow(sunAmount,18.0)*.18*(1.0-uStorm);
+      col+=vec3(1.0,.90,.68)*smoothstep(.9993,.9998,sunAmount)*(1.0-uStorm)*.8;
+      if(ray.y>0.0){
+        vec2 wind=vec2(uTime*.014,uTime*.005);
+        vec2 plane=ray.xz/(ray.y+.13);
+        float veil=smoothstep(.48,.76,cloudNoise(plane*vec2(1.1,3.7)-wind*.43+31.0));
+        col=mix(col,mix(vec3(.91,.95,.99),uHorizon,.35),veil*.27*smoothstep(0.0,.22,altitude));
+        vec2 q=plane*2.2-wind;
+        float d=density(q),litDensity=density(q+uSun.xz*.28);
+        float rim=clamp((d-litDensity)*3.0,0.0,1.0);
+        vec3 bottom=mix(vec3(.60,.70,.82),vec3(.31,.39,.48),uStorm);
+        vec3 cloud=mix(vec3(1.0,.98,.91),bottom,clamp(d*.70+uStorm*.30,0.0,1.0));
+        cloud+=vec3(1.0,.85,.56)*rim*.22*(1.0-uStorm);
+        float fade=smoothstep(0.0,.11,altitude);
+        cloud=mix(uHorizon,cloud,smoothstep(0.0,.32,altitude));
+        col=mix(col,cloud,d*fade*.96);
+      }
+      gl_FragColor=vec4(col,1.0);
+    }`;
   const DEPTH_FS = `precision mediump float; void main(){ gl_FragColor = vec4(1.0); }`;
   const DEPTH_FS_ALIVE = `precision mediump float; varying float vAlive; varying float vGhost; void main(){ if (vAlive < 0.02 || vGhost > 0.5) discard; gl_FragColor = vec4(1.0); }`;
   // interior scenes: plain coloured boxes, lit and shadowed; assumed parts are translucent
@@ -503,7 +538,7 @@
     for (const n of uniforms) U[n] = gl.getUniformLocation(p, n);
     return { p, U };
   }
-  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uAnime', 'uGhostId', 'uGhostId2', 'uGhostPass'];
+  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass'];
   const TEX_U = ['uTexA', 'uTexB', 'uMix', 'uOrthoA', 'uOrthoB'];
   const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat'];
   let progT, progW, progR, progS, progSky, progB, depthT, depthW, depthR, depthB;
@@ -512,7 +547,7 @@
     progW = program(WALL_VS, WALL_FS, WALL_A, COMMON_U);
     progR = program(ROOF_VS, ROOF_FS, ROOF_A, COMMON_U.concat(TEX_U));
     progS = program(WALL_VS, SEAWALL_FS, WALL_A, COMMON_U);
-    progSky = program(SKY_VS, SKY_FS, ['aPos'], ['uTop', 'uHorizon', 'uEl', 'uAnime', 'uTime']);
+    progSky = program(SKY_VS, SKY_FS, ['aPos'], ['uTop', 'uHorizon', 'uEl', 'uAz', 'uAspect', 'uAnime', 'uTime', 'uSun', 'uCloudCover', 'uStorm']);
     progB = program(BOX_VS, BOX_FS, BOX_A, COMMON_U.concat(['uRoomLight','uLamp0','uLamp1','uLamp2','uLamp3']));
     if (SHADOW){ depthT = program(TERRAIN_VS, DEPTH_FS, TERRAIN_A, COMMON_U); depthW = program(WALL_VS, DEPTH_FS_ALIVE, WALL_A, COMMON_U); depthR = program(ROOF_VS, DEPTH_FS_ALIVE, ROOF_A, COMMON_U); depthB = program(BOX_VS, BOX_DEPTH_FS, BOX_A, COMMON_U); }
   } catch (err) { console.error(err); fallback(T.noWebgl); return; }
@@ -982,7 +1017,8 @@
     gl.uniform3fv(U.uSun, e.sun);
     gl.uniform3fv(U.uHorizon, e.horizon);
     gl.uniform1f(U.uFog, e.fog);
-    gl.uniform1f(U.uTime, (performance.now() - t0) / 1000);
+    gl.uniform1f(U.uTime, reduce?0:(performance.now() - t0) / 1000);
+    if(U.uEye)gl.uniform3fv(U.uEye,[st.wx,st.walkGround+1.68,st.wz]);
     gl.uniform1f(U.uShadowOn, shadowOn ? 1 : 0);
     gl.uniform1f(U.uShadowTexel, 1 / (SHADOW || 1));
     gl.uniform1f(U.uGhostId, ghostId);
@@ -1035,7 +1071,9 @@
     gl.useProgram(progSky.p);
     attr(skyBuf, 0, 2); disableFrom(1);
     const e = env();
-    gl.uniform1f(progSky.U.uAnime,GAME?1:0); gl.uniform1f(progSky.U.uTime,(performance.now()-t0)/1000);
+    gl.uniform1f(progSky.U.uAnime,GAME?1:0); gl.uniform1f(progSky.U.uTime,reduce?0:(performance.now()-t0)/1000);
+    gl.uniform1f(progSky.U.uAz,st.az);gl.uniform1f(progSky.U.uAspect,canvas.width/Math.max(1,canvas.height));
+    gl.uniform3fv(progSky.U.uSun,e.sun);gl.uniform1f(progSky.U.uCloudCover,[0,.85,1,.65][st.weather]);gl.uniform1f(progSky.U.uStorm,[0,.45,.9,.35][st.weather]);
     gl.uniform3fv(progSky.U.uTop, e.sky); gl.uniform3fv(progSky.U.uHorizon, e.horizon); gl.uniform1f(progSky.U.uEl, st.el);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     gl.enable(gl.DEPTH_TEST);

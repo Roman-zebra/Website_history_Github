@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "ready",
-  "updatedAt": "2026-09-26T13:28:00.857Z",
+  "updatedAt": "2026-09-26T13:32:27.520660+00:00",
   "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
@@ -13,10 +13,11 @@
     "Renderer v13: opaque enclosures for nine source interiors, window openings/frames, ceilings, trim, lamps and gym details; inferred rooms gain glazing and furnishings",
     "Full-stick auto-sprint: 5.6 m/s indoors and 9 m/s outdoors with collision substeps; player-centred minimap with heading arrow; demo naming in all five locales",
     "Renderer v13 confirmed live in release.json on a3cb96cb1e5086d0f066e6b5169ff58e0b347e35",
-    "Renderer v14 school study: inferred tabletop notebooks/pencils, shelf books, chalk strokes and rear-aisle entry view; source furniture positions preserved"
+    "Renderer v14 school study: inferred tabletop notebooks/pencils, shelf books, chalk strokes and rear-aisle entry view; source furniture positions preserved",
+    "Renderer v15: camera-oriented wind-driven layered clouds, weather density/shading, subtler camera-dependent water reflection, compact closed-by-default menu and smaller HUD"
   ],
   "nextActions": [
-    "Verify renderer v14 publication if preceding run stopped during deploy",
+    "Verify renderer v15 publication if preceding run stopped during deploy",
     "Improve terrain, room-specific furnishings and composition in bounded, visually verified steps using the linked GDC / developer references",
     "Verify PC/mobile browser interaction when a WebGL-capable browser is available",
     "Replace inferred geometry only when usable historical plans/photos are obtained"
@@ -45,21 +46,23 @@
   "validation": {
     "fullBuildTestsPassed": 146,
     "fullBuildTestsFailed": 0,
-    "nativeGlesScenesRendered": 9,
+    "nativeGlesScenesRendered": 13,
     "inferredDoorwayPathsChecked": 1362,
     "roomWallCornersOutsideFootprint": 0,
-    "nativeGlesMediumpScenesRendered": 4,
+    "nativeGlesMediumpScenesRendered": 13,
     "roomEntryCameraVerified": true,
     "interiorEnvelopeCoverage": true,
     "touchSprintAndMinimap": true,
-    "schoolDesktopPropsAndAisle": true
+    "schoolDesktopPropsAndAisle": true,
+    "skyTimeViewWeatherImageDifferences": true,
+    "compactMenuInteractions": true
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
     "scope": "User explicitly approved reflecting this change in Roman-zebra/Website_history_Github and publishing to the existing JTA site, then continuing"
   },
   "publication": {
-    "rendererVersion": 14,
+    "rendererVersion": 15,
     "status": "submitted with this source update; verify Cloudflare and release.json"
   }
 }
