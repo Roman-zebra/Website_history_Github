@@ -27,7 +27,7 @@ function sources(){
 /* Line endings are ignored so a Windows checkout and the Linux build agree. */
 function stamp(jobs){
  const h=crypto.createHash('sha1');h.update('format '+FORMAT+'\n');
- for(const f of ['search-core.js','place-ui.js',...jobs.map(j=>j[0])])h.update(f+'\n').update(fs.readFileSync(path.join(root,f),'utf8').replace(/\r\n/g,'\n'));
+ for(const f of ['search-core.js','place-ui.js','japan-boundary.js',...jobs.map(j=>j[0])])h.update(f+'\n').update(fs.readFileSync(path.join(root,f),'utf8').replace(/\r\n/g,'\n'));
  return h.digest('hex').slice(0,12);
 }
 function encode(set,fileCount){

@@ -5,7 +5,7 @@
    A search sent while typing (auto) that would still read more than AUTO_LIMIT answers 'broad' instead, and the
    page offers to search all of Japan. The version comes from this worker's own URL, never a number written here. */
 const V=((self.location&&/[?&]v=([^&]*)/.exec(self.location.search))||[])[1]||'';
-importScripts(...['place-ui.js','search-core.js'].map(f=>V?f+'?v='+V:f));
+importScripts(...['place-ui.js','japan-boundary.js','search-core.js'].map(f=>V?f+'?v='+V:f));
 const AUTO_LIMIT=5*1048576,KEEP_RECORDS=80000,PARALLEL=4;
 let pending=null,meta=null,metaKey='',cleaned=false;
 const shards=new Map(),files=new Map(),loading=new Map(),categories=new Map();

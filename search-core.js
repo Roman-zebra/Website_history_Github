@@ -2,17 +2,10 @@
 (function(root){
  'use strict';
  const UI=typeof module==='object'?require('./place-ui.js'):root.PlaceUI;
+ const boundary=typeof module==='object'?require('./japan-boundary.js'):root.JapanBoundary;
  const norm=UI.normalize;
- /* The prefecture extracts occasionally catch two neighbouring overseas island groups.
-    Keep this guard beside the shared search code so source-file and prepared-category
-    searches apply the same rule.  The boxes do not overlap Japanese-administered land. */
  function inJapan(lat,lon){
-  if(!Number.isFinite(lat)||!Number.isFinite(lon))return false;
-  const geoje=lat>=34.5&&lat<=35&&lon>=128.4&&lon<129;
-  const habomai=lat>=43.395&&lat<43.6&&lon>145.85&&lon<=146.2;
-  const kunashir=lat>=43.65&&lat<=44.5&&lon>=145.35&&lon<=146.2;
-  const russianIslands=habomai||kunashir;
-  return !geoje&&!russianIslands;
+  return boundary.contains(lat,lon);
  }
  const topics=[
   ['ski',['スキー','スノーボード','ski','snowboard','スキー場','滑雪','스키'],t=>/ski|snowboard|winter_sports|downhill|nordic/.test([t.sport,t.landuse,t['piste:type']].join(' '))],

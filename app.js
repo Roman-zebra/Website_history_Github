@@ -209,7 +209,7 @@ const POIS = new Map();          // key -> poi
 /* データの版。?v= を手で書かないこと。7箇所そろっていないと Service Worker の
    precache が一生ヒットせず、しかも黙って通信に落ちるだけで気づけない。
    ここは tools/bump_version.py が書き換える（app.js 側は必ずこの定数を使う）。 */
-const DATA_V = '0.49';
+const DATA_V = '0.50';
 /* tools/kidify.py で事前生成した子ども向け文章。あれば辞書置換より優先する。
    無くてもアプリは動く（その場合はその場の辞書置換にフォールバック）。 */
 const KID = new Map();
@@ -249,6 +249,7 @@ function loadLore(){
     .then(r => { if (!r.ok) throw new Error('monuments ' + r.status); return r.json(); })
     .then(rows => {
       for (const m of rows){
+        if (!JapanBoundary.contains(m.lat,m.lon)) continue;
         POIS.set('lore:' + m.id, {
           cat:'lore', lat:m.lat, lon:m.lon, name:m.name || '災害の碑',
           raw:{ ID:m.id, LoreName:m.name, LoreYear:m.year, Address:m.addr,
@@ -291,7 +292,7 @@ function loadPlaces(){
       .map(e => fetch('data/places-' + e.n + '.json?v=' + DATA_V)
         .then(r => r.ok ? r.json() : [])
         .then(all => {
-          const rows = all.filter(p => keepForKids(p.tags));
+          const rows = all.filter(p => keepForKids(p.tags) && JapanBoundary.contains(p.lat,p.lon));
           for (const p of rows)
             POIS.set(`osm:${p.t}:${p.i}`, {
               cat: osmCat(p.tags), lat: p.lat, lon: p.lon,
@@ -386,7 +387,7 @@ async function loadOSM(){
     for (const e of (j.elements || [])){
       const t = e.tags || {};
       const lat = e.lat ?? e.center?.lat, lon = e.lon ?? e.center?.lon;
-      if (lat == null || lon == null) continue;
+      if (!JapanBoundary.contains(lat,lon)) continue;
       if (!t.name && !t.inscription && !t.description) continue;   // 名無しは出さない
       POIS.set(`osm:${e.type}:${e.id}`, {
         cat: osmCat(t), lat, lon, name: t.name || t.inscription?.slice(0, 18) || '石のしるし', raw: t,
@@ -402,6 +403,7 @@ async function loadOSM(){
 async function loadWiki(){
   if (map.getZoom() < 14) return;
   const c = map.getCenter();
+  if (!JapanBoundary.contains(c.lat,c.lng)) return;
   const radius = Math.min(10000, Math.max(500,
     Math.round(map.distance(map.getBounds().getNorthWest(), map.getBounds().getSouthEast()) / 2)));
   const key = `w:${c.lat.toFixed(3)},${c.lng.toFixed(3)},${radius}`;
@@ -412,7 +414,7 @@ async function loadWiki(){
   try{
     const gs = await fetch('https://ja.wikipedia.org/w/api.php?origin=*&format=json&action=query&list=geosearch'
       + `&gscoord=${c.lat}%7C${c.lng}&gsradius=${radius}&gslimit=40`).then(r => r.json());
-    const hits = gs?.query?.geosearch || [];
+    const hits = (gs?.query?.geosearch || []).filter(h => JapanBoundary.contains(h.lat,h.lon));
     if (!hits.length) return;
 
     const ids = hits.map(h => h.pageid).join('|');
@@ -465,7 +467,7 @@ function render(){
   const cells = new Map();
 
   for (const [key, p] of POIS){
-    if (!b.contains([p.lat, p.lon])) continue;   // 件数も「いま画面に見えている数」で数える
+    if (!JapanBoundary.contains(p.lat,p.lon) || !b.contains([p.lat, p.lon])) continue;
     counts[p.cat] = (counts[p.cat] || 0) + 1;
     if (!activeCats.has(p.cat)) continue;
 
@@ -744,7 +746,7 @@ const CACHE_KEY = 'rekishi-poi-cache', CACHE_MAX = 900;
 function restoreCache(){
   try{
     for (const [k, p] of JSON.parse(localStorage.getItem(CACHE_KEY) || '[]'))
-      if (!POIS.has(k)) POIS.set(k, p);
+      if (!POIS.has(k) && JapanBoundary.contains(p.lat,p.lon)) POIS.set(k, p);
   } catch(e){ /* 壊れていたら黙って捨てる */ }
 }
 let saveTimer = null;

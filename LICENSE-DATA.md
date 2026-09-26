@@ -1,5 +1,11 @@
 # データのライセンスと、商用公開するときの義務
 
+日本の陸域判定・地図の表示マスク（`japan-boundary.js`）は、
+[JapanPrefGeoJson](https://github.com/amay077/JapanPrefGeoJson) が
+[Data of Japan](https://github.com/dataofjapan/land) の都道府県データから作成した
+Public Domain の GeoJSON を簡略化したものです。周辺海域と、小さな島・海上施設の
+補完範囲を加え、ロシアが管理する千島列島の島々は表示対象から除外しています。
+
 > 一次情報を確認した日：2026-09-04。規約は変わるので、公開前に各リンク先を再確認すること。
 
 ## 1. 国土地理院（地図・空中写真・自然災害伝承碑・治水地形分類図）

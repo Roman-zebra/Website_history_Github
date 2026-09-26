@@ -14,11 +14,15 @@ test('the search index was rebuilt after the last change to the places or the se
 test('neighbouring overseas records cannot leak back into the Japan search',()=>{
  assert.equal(core.inJapan(34.743957,128.66329),false,'Geoje');
  assert.equal(core.inJapan(44.019518,145.814758),false,'Russian-administered island');
+ assert.equal(core.inJapan(37.5665,126.978),false,'Seoul');
+ assert.equal(core.inJapan(39.9042,116.4074),false,'Beijing');
+ assert.equal(core.inJapan(43.1155,131.8855),false,'Vladivostok');
+ assert.equal(core.inJapan(24.1485,120.6736),false,'Taiwan');
  assert.equal(core.inJapan(35.681236,139.767125),true,'Tokyo');
- for(const [file,,key] of index.sources()){
-  const data=JSON.parse(fs.readFileSync(path.join(root,file),'utf8')),list=key?(data[key]||data.liminal||[]):data;
-  assert.equal(list.filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&!core.inJapan(p.lat,p.lon)).length,0,file);
- }
+ assert.equal(core.inJapan(34.2,129.29),true,'Tsushima');
+ assert.equal(core.inJapan(24.46,122.98),true,'Yonaguni');
+ assert.equal(core.inJapan(26.212,127.68),true,'Okinawa');
+ assert.equal(core.inJapan(35.286111,139.694167),true,'Sarushima');
 });
 /* The worker as the page runs it, reading files from the working tree. */
 function worker(){
@@ -33,12 +37,12 @@ function worker(){
 /* Every record, in the order the old worker read them. */
 function everything(){
  const rows=[];
- for(const [file,kind,key] of index.sources()){const data=JSON.parse(fs.readFileSync(path.join(root,file),'utf8')),list=key?(data[key]||data.liminal||[]):data;for(const p of list)if(Number.isFinite(p.lat)&&Number.isFinite(p.lon))rows.push(core.record(p,kind));}
+ for(const [file,kind,key] of index.sources()){const data=JSON.parse(fs.readFileSync(path.join(root,file),'utf8')),list=key?(data[key]||data.liminal||[]):data;for(const p of list)if(core.inJapan(p.lat,p.lon))rows.push(core.record(p,kind));}
  return rows;
 }
 test('a nationwide search reads only the files that can match and answers exactly like a search over everything',async()=>{
  const all=everything(),{fetched,ask}=worker();let seq=0;
- assert.ok(all.length>228000);
+ assert.ok(all.length>227000);
  for(const [query,most] of [['軍艦島',8],['函館 温泉',4],['川越 蔵',30],['hakodate',60],['スキー',0],['神社',0],['神社仏閣',0],['温泉 スキー',0],['東京タワー',8]]){
   const before=fetched.length,answer=await ask({type:'search',seq:++seq,query,lang:'ja',dataV:'test',auto:false});
   assert.equal(answer.type,'results',query);

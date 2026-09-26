@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.49';
+const DATA_V = '0.50';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
    ask for, not a number written here that falls behind (the search worker sat at 0.80). */
@@ -935,7 +935,8 @@ function ensureMap(){
   if (map) return;
   // minZoom on the map itself: Leaflet otherwise takes the MAXIMUM of the
   // layers' minZoom, and the aerial layer (14) would pin the whole map there.
-  map = L.map('map', { zoomControl: false, attributionControl: true, minZoom: 4, maxZoom: 18 });
+  map = L.map('map', { zoomControl: false, attributionControl: true, minZoom: 4, maxZoom: 18,
+    maxBounds: [[19.8, 122.2], [46.1, 154.7]], maxBoundsViscosity: 1 });
   L.control.zoom({ position: 'bottomright' }).addTo(map);
   map.attributionControl.addAttribution(OSM_ATTR);   // レイヤーに紐づけない＝常時表示
 
@@ -945,6 +946,45 @@ function ensureMap(){
     maxZoom: 18, minZoom: 2, crossOrigin: 'anonymous',
     attribution: ESRI_ATTR + ' | ' + GSI_ATTR
   }).addTo(map);
+
+  // The global basemap itself paints Korea, China and Russia even when there
+  // are no pins there. Cover it outside Japanese land and its immediate coast.
+  const pane = map.createPane('japanMask');
+  pane.style.zIndex = 300;
+  pane.style.pointerEvents = 'none';
+  const JapanMask = L.Layer.extend({
+    onAdd(m){
+      this.canvas = L.DomUtil.create('canvas', 'japan-map-mask', pane);
+      this.canvas.style.pointerEvents = 'none';
+      this.redraw = () => {
+        if (!m._loaded) return;
+        const size = m.getSize(), ratio = Math.min(devicePixelRatio || 1, 2);
+        L.DomUtil.setPosition(this.canvas, m.containerPointToLayerPoint([0, 0]));
+        this.canvas.width = Math.ceil(size.x * ratio);
+        this.canvas.height = Math.ceil(size.y * ratio);
+        this.canvas.style.width = size.x + 'px';
+        this.canvas.style.height = size.y + 'px';
+        const ctx = this.canvas.getContext('2d');
+        ctx.scale(ratio, ratio);
+        ctx.fillStyle = '#b9dfe9';
+        ctx.fillRect(0, 0, size.x, size.y);
+        ctx.globalCompositeOperation = 'destination-out';
+        for (const [bounds, ring] of JapanBoundary.visible){
+          if (!m.getBounds().intersects([[bounds[1],bounds[0]],[bounds[3],bounds[2]]])) continue;
+          ctx.beginPath();
+          ring.forEach(([lat,lon], i) => {
+            const p = m.latLngToContainerPoint([lat,lon]);
+            if (i) ctx.lineTo(p.x,p.y); else ctx.moveTo(p.x,p.y);
+          });
+          ctx.closePath(); ctx.fill();
+        }
+      };
+      m.on('move zoomend resize', this.redraw);
+      this.redraw();
+    },
+    onRemove(m){m.off('move zoomend resize',this.redraw);this.canvas.remove();}
+  });
+  new JapanMask().addTo(map);
 
   nowLayer = L.tileLayer(GSI + '/' + NOW_LAYER.id + '/{z}/{x}/{y}.' + NOW_LAYER.ext, {
     maxNativeZoom: NOW_LAYER.max, maxZoom: 18, minZoom: NOW_LAYER.min,
@@ -1245,6 +1285,7 @@ function drawSpots(list, withLabel, onTap){
     const icon = withLabel ? bigIcon(p, 'ring-red')
       : L.divIcon({ className:'spot-pin', iconSize:[0,0], iconAnchor:[0,0],
                     html:'<div class="spot"><div class="spot-dot"></div></div>' });
+    if (!JapanBoundary.contains(p.lat,p.lon)) continue;
     const m = L.marker([p.lat, p.lon], { title: placeName(p), riseOnHover: true, icon: icon,
                                          zIndexOffset: 500 });
     if (onTap) m.on('click', () => onTap(p));
@@ -1261,7 +1302,8 @@ function drawSpots(list, withLabel, onTap){
 function loadMonumentIndex(){
   if (idxLoading) return idxLoading;
   idxLoading = fetch(dj('data/monuments-index.json')).then(r => r.ok ? r.json() : [])
-    .then(rows => { MON_INDEX = rows.map(r => ({ id: r.i, lat: r.a, lon: r.o, kind: r.k, year: r.y })); })
+    .then(rows => { MON_INDEX = rows.filter(r => JapanBoundary.contains(r.a,r.o))
+      .map(r => ({ id: r.i, lat: r.a, lon: r.o, kind: r.k, year: r.y })); })
     .catch(() => { MON_INDEX = []; });
   return idxLoading;
 }
@@ -1269,8 +1311,8 @@ function loadMonuments(){
   if (monLoading) return monLoading;
   monLoading = fetch(dj('data/monuments.json')).then(r => r.ok ? r.json() : [])
     .then(rows => {
-      MONUMENTS = rows;
-      MON_BY_ID = new Map(rows.map(r => [r.id, r]));
+      MONUMENTS = rows.filter(r => JapanBoundary.contains(r.lat,r.lon));
+      MON_BY_ID = new Map(MONUMENTS.map(r => [r.id, r]));
     }).catch(() => { MONUMENTS = []; MON_BY_ID = new Map(); });
   return monLoading;
 }
@@ -1328,7 +1370,7 @@ function loadLocals(){
        失敗したら覚えずに手を引く。次に同じ範囲を見たときに取り直す。 */
     regionPending.set(r.n, fetch(dj('data/places-' + r.n + '.json'))
       .then(x => { if (!x.ok) throw new Error('HTTP ' + x.status); return x.json(); })
-      .then(rows => { regionRows.set(r.n, rows || []);
+      .then(rows => { regionRows.set(r.n, (rows || []).filter(p => JapanBoundary.contains(p.lat,p.lon)));
                       console.info('local spots +' + (rows || []).length + ' (' + r.n + ')');
                       drawDetail(); })
       .catch(err => { regionPending.delete(r.n);
@@ -1344,6 +1386,7 @@ function loadLocals(){
    Where it does not, the article still opens in English through the proxy. */
 function loadWikiSpots(){
   const c = map.getCenter();
+  if (!JapanBoundary.contains(c.lat,c.lng)) return;
   const key = c.lat.toFixed(2) + ',' + c.lng.toFixed(2);
   if (wikiAsked.has(key)) return;
   wikiAsked.add(key);
@@ -1369,7 +1412,7 @@ function loadWikiSpots(){
       for (const k of [...wikiSeen.keys()].slice(0, wikiSeen.size - WIKI_KEEP))
         wikiSeen.delete(k);
 
-    const fresh = hits.filter(h => !wikiSeen.has(h.pageid));
+    const fresh = hits.filter(h => JapanBoundary.contains(h.lat,h.lon) && !wikiSeen.has(h.pageid));
     for (const h of fresh)
       wikiSeen.set(h.pageid, { pageid: h.pageid, ja: h.title, name: h.title,
                                lat: h.lat, lon: h.lon, en: null });
@@ -1560,7 +1603,7 @@ function loadFacilities(){
   const r=await fetch(dj('data/facilities-index-v1.json'));if(!r.ok)throw Error('facilities');const index=await r.json();
   let next=0;const results=[];
   await Promise.all(Array.from({length:4},async()=>{while(next<index.files.length){const file=index.files[next++];const r=await fetch(dj('data/'+file));if(!r.ok)throw Error(file);results.push(...await r.json());}}));
-  FACILITIES=results;drawDetail();if(lastPanel&&!$('panel').classList.contains('closed'))lastPanel();
+  FACILITIES=results.filter(p => JapanBoundary.contains(p.lat,p.lon));drawDetail();if(lastPanel&&!$('panel').classList.contains('closed'))lastPanel();
  })().catch(()=>{facilityPromise=null;facilityRetryAt=Date.now()+60000;});
  return facilityPromise;
 }
@@ -1626,7 +1669,7 @@ async function drawDetail(){
   // thing in the app; they go down first and keep their space.
   for (const p of PLACES){
     const k = (p.pop || 1) - 1;
-    if (!b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
+    if (!JapanBoundary.contains(p.lat,p.lon) || !b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
     L.marker([p.lat, p.lon], { icon: bigIcon(p, 'ring-red', z >= 9 && freeLabel(p.lat, p.lon, 'lab'), CLS[k]), title: placeName(p) })
      .on('click', () => openPlace(p)).addTo(group);
   }
@@ -1636,14 +1679,14 @@ async function drawDetail(){
   for (const p of LANDMARKS){
     if (z < (TIER_ZOOM[p.tier || 3] || 8)) continue;
     const k = (p.pop || 3) - 1;
-    if (!b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
+    if (!JapanBoundary.contains(p.lat,p.lon) || !b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
     L.marker([p.lat, p.lon], { icon: bigIcon(p, 'ring-gold', z >= 10 && freeLabel(p.lat, p.lon, 'lab'), CLS[k]), title: placeName(p) })
      .on('click', () => showLandmark(p)).addTo(group);
   }
 
   // Activity selections use equal-size pins; they are not measured popularity ranks.
   if(z>=8)for(const p of ACTIVITIES){
-    if(!b.contains([p.lat,p.lon])||!free(p.lat,p.lon,POP_CLS[2]))continue;
+    if(!JapanBoundary.contains(p.lat,p.lon)||!b.contains([p.lat,p.lon])||!free(p.lat,p.lon,POP_CLS[2]))continue;
     L.marker([p.lat,p.lon],{icon:bigIcon(p,'ring-gold',z>=10&&freeLabel(p.lat,p.lon,'lab'),CLS[2]),title:placeName(p)})
       .on('click',()=>showActivity(p)).addTo(group);
   }
@@ -1653,7 +1696,7 @@ async function drawDetail(){
   if (z >= LIM_ZOOM)
     for (const p of LIMINAL){
       const k = POP_LIM - 1;
-      if (!b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
+      if (!JapanBoundary.contains(p.lat,p.lon) || !b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
       const nm = placeName(p);
       L.marker([p.lat, p.lon], { icon: bigIcon({ emoji: p.emoji, name: nm }, 'ring-lim',
                                                z >= 10 && freeLabel(p.lat, p.lon, 'lab'),
@@ -1663,7 +1706,7 @@ async function drawDetail(){
 
   if(z>=9){
    let count=0;for(const p of FACILITIES){if(count>=CAP)break;
-    if(!b.contains([p.lat,p.lon])||!free(p.lat,p.lon,'tiny'))continue;count++;
+    if(!JapanBoundary.contains(p.lat,p.lon)||!b.contains([p.lat,p.lon])||!free(p.lat,p.lon,'tiny'))continue;count++;
     L.marker([p.lat,p.lon],{icon:tinyIcon(p.tags.landuse==='winter_sports'?'⛷️':localEmoji(p.tags),'tiny-local'),title:localName(p.tags)}).on('click',()=>showLocal(p)).addTo(group);
    }
   }
@@ -1672,7 +1715,7 @@ async function drawDetail(){
     let m = 0;                                   // stones before articles: rarer
     for (const r of MON_INDEX){
       if (m >= CAP) break;
-      if (!b.contains([r.lat, r.lon]) || !free(r.lat, r.lon, 'mid')) continue;
+      if (!JapanBoundary.contains(r.lat,r.lon) || !b.contains([r.lat, r.lon]) || !free(r.lat, r.lon, 'mid')) continue;
       m++;
       const en = kindsRaw(r.kind).map(k => KIND_EN[k]);
       L.marker([r.lat, r.lon], { icon: midIcon(KIND_EMOJI[en[0]] || '🪧', 'sm-lore'),
@@ -1686,7 +1729,7 @@ async function drawDetail(){
     let n = 0;
     for (const w of wikiSeen.values()){
       if (n >= CAP) break;
-      if (!b.contains([w.lat, w.lon]) || !free(w.lat, w.lon, 'mid')) continue;
+      if (!JapanBoundary.contains(w.lat,w.lon) || !b.contains([w.lat, w.lon]) || !free(w.lat, w.lon, 'mid')) continue;
       n++;
       L.marker([w.lat, w.lon], { icon: midIcon(spotEmoji(w.ja), w.en ? 'sm-wiki' : 'sm-ja'), title: w.name })
        .on('click', () => showWiki(w)).addTo(group);
@@ -1700,7 +1743,7 @@ async function drawDetail(){
     const kcap = close ? (phone ? 90 : 250) : (phone ? 30 : 120);
     for (const p of LOCALS){
       if (k >= kcap) break;
-      if (!b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, 'tiny')) continue;
+      if (!JapanBoundary.contains(p.lat,p.lon) || !b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, 'tiny')) continue;
       k++;
       L.marker([p.lat, p.lon], { icon: tinyIcon(localEmoji(p.tags), 'tiny-local'),
                                  title: localName(p.tags) })
@@ -2448,7 +2491,7 @@ function showLocal(p,refresh=false){
    ------------------------------------------------------------------------- */
 const SAVE_KEY = 'tn-saved';
 function readSaved(){
-  try { return PlaceUI.savedRows(JSON.parse(localStorage.getItem(SAVE_KEY) || '[]')); } catch(e){ return []; }
+  try { return PlaceUI.savedRows(JSON.parse(localStorage.getItem(SAVE_KEY) || '[]')).filter(p => JapanBoundary.contains(p.lat,p.lon)); } catch(e){ return []; }
 }
 function writeSaved(v){
   try { localStorage.setItem(SAVE_KEY, JSON.stringify(PlaceUI.savedRows(v))); } catch(e){ toast(uiText('saveFailed')); return false; }
@@ -2650,7 +2693,8 @@ function spotRows(){
   if (searchIndex && searchIndex.key === key) return searchIndex.rows;
   const rows = [];
   for (const [kind, list] of [['place',PLACES],['liminal',LIMINAL],['landmark',LANDMARKS],['activity',ACTIVITIES]])
-    for (const p of list) rows.push({kind,p,names:PlaceUI.names(p).map(qnorm)});
+    for (const p of list) if (JapanBoundary.contains(p.lat,p.lon))
+      rows.push({kind,p,names:PlaceUI.names(p).map(qnorm)});
   searchIndex = {key,rows};
   return rows;
 }
@@ -2717,9 +2761,10 @@ async function natRows(q){
   try{
     const name = ('0' + b).slice(-2) + '.json';
     const rows = await fetch(dj('search/' + name)).then(r => r.ok ? r.json() : []);
-    natCache.set(b, rows);
+    const japanRows = rows.filter(r => JapanBoundary.contains(r[1],r[2]));
+    natCache.set(b, japanRows);
     if (natCache.size > 8) natCache.delete(natCache.keys().next().value);
-    return rows;
+    return japanRows;
   } catch(e){ return []; }
 }
 /* 手で選んだ79スポットと重なるものは出さない（同じ場所が二度並ぶと迷う）。 */
@@ -2743,6 +2788,7 @@ function natSearch(rows, q, skip){
 /* 押されたら、その場所へ寄ってから、地域データが届くのを待って
    その地点のパネルを開く（＝右に概要が出る）。 */
 function openNational(row){
+  if (!JapanBoundary.contains(row[1],row[2])) return;
   if(!map||$('place').hidden||!roaming)noPush(openMap);
   map.setView([row[1],row[2]],17);
   showSavedSpot({name:row[0],lat:row[1],lon:row[2]});
@@ -2799,6 +2845,7 @@ function paintNationalHits(){
  nationalLayer=new SearchLayer().addTo(map);
 }
 function openSearchHit(row){
+ if (!JapanBoundary.contains(row.lat,row.lon)) return;
  ++qSeq;nationalSeq=0;$('qResults').hidden=true;$('q').blur();
  if(!map||$('place').hidden)noPush(openMap);
  map.setView([row.lat,row.lon],17);
@@ -2855,7 +2902,8 @@ async function runSearch(v,autoPick,explicit){
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;if(data.type==='broad'){showBroadSearch(data);return;}
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
     if(data.type==='error'){box.innerHTML='<div class="q-none" role="status"></div>';box.firstChild.textContent=searchText('Some regions could not load. Please search again.','一部地域を読み込めませんでした。もう一度検索してください。','일부 지역을 불러오지 못했습니다. 다시 검색하세요.','部分地区加载失败，请重试。','部分地區載入失敗，請重試。');return;}
-    nationalAllHits=data.rows;nationalScope='all';nationalHits=data.rows;searchSummary();paintSearchList();frameNationalHits();
+    nationalAllHits=data.rows.filter(row => JapanBoundary.contains(row.lat,row.lon));
+    nationalScope='all';nationalHits=nationalAllHits;searchSummary();paintSearchList();frameNationalHits();
    };
    nationalWorker.onerror=()=>{if(nationalSeq===qSeq){box.innerHTML='<div class="q-none">'+esc(searchText('Search could not load. Reload to try again.','検索を読み込めませんでした。再読み込みしてください。','검색을 불러오지 못했습니다. 새로고침하세요.','搜索加载失败，请刷新。','搜尋載入失敗，請重新整理。'))+'</div>';}nationalWorker.terminate();nationalWorker=null;};
   }
@@ -2871,6 +2919,7 @@ $('locBtn').onclick = () => {
        roaming は「スポットが選ばれていない」の意味で、「地図が出ている」ではない。 */
     if ($('place').hidden) return;
     const la = pos.coords.latitude, lo = pos.coords.longitude;
+    if (!JapanBoundary.contains(la,lo)){toast(t('noGeo'));return;}
     map.setView([la, lo], 16);
     if (meMarker) map.removeLayer(meMarker);
     meMarker = L.circleMarker([la, lo], { radius: 9, color: '#fff', weight: 3,
@@ -3208,7 +3257,7 @@ const localAliases = new Map();
 function loadLocalAliases(q){
   const b=(qnorm(q).charCodeAt(0)||0)%64;
   if(!localAliases.has(b)){
-    const promise=fetch(dj('search/aliases/'+String(b).padStart(2,'0')+'.json')).then(r=>{if(!r.ok)throw Error('aliases');return r.json();}).catch(()=>{localAliases.delete(b);return [];});
+    const promise=fetch(dj('search/aliases/'+String(b).padStart(2,'0')+'.json')).then(r=>{if(!r.ok)throw Error('aliases');return r.json();}).then(rows=>rows.filter(r=>JapanBoundary.contains(r[1],r[2]))).catch(()=>{localAliases.delete(b);return [];});
     localAliases.set(b,promise);if(localAliases.size>8)localAliases.delete(localAliases.keys().next().value);
   }
   return localAliases.get(b);
@@ -3220,6 +3269,7 @@ function showCopyLink(url){
   box.querySelector('input').value=url;box.showModal();box.querySelector('input').select();
 }
 function showSavedSpot(row){
+  if (!JapanBoundary.contains(row.lat,row.lon)) return;
   const all=[...PLACES.map(p=>({p,open:openPlace})),...LANDMARKS.map(p=>({p,open:showLandmark})),...LIMINAL.map(p=>({p,open:showLiminal})),...ACTIVITIES.map(p=>({p,open:showActivity}))];
   const known=all.find(x=>Math.abs(x.p.lat-row.lat)<0.00002&&Math.abs(x.p.lon-row.lon)<0.00002);
   if(known){known.open(known.p);return;}
@@ -3239,7 +3289,7 @@ function showSavedSpot(row){
 function restoreSharedSpot(){
   const m=/^#spot=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)$/.exec(location.hash);
   if(!m)return false;
-  const lat=+m[1],lon=+m[2];if(Math.abs(lat)>90||Math.abs(lon)>180)return false;
+  const lat=+m[1],lon=+m[2];if(!JapanBoundary.contains(lat,lon))return false;
   const name=new URLSearchParams(location.search).get('name')||'';
   const hash=location.hash;noPush(openMap);map.setView([lat,lon],17);
   showSavedSpot({lat,lon,name:name.slice(0,200)});return true;
@@ -3279,7 +3329,7 @@ LANG = detectLang();
 consumeMapQuery();
 applyLang();
 fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
-  PLACES = j.places;
+  PLACES = j.places.filter(p => JapanBoundary.contains(p.lat,p.lon));
   paintDirectory();
   buildCards();
   /* 件数は起動時（applyLang → modeNote）に PLACES がまだ空のまま書かれる。
@@ -3295,14 +3345,15 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
     loadMonumentIndex(),
     Promise.all(['data/landmarks.json','data/regional-landmarks-v1.json'].map(file =>
       fetch(dj(file)).then(r => r.ok ? r.json() : null).catch(() => null)))
-      .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || []).sort(
+      .then(lists => { LANDMARKS = lists.flatMap(l => l?.landmarks || [])
+        .filter(p => JapanBoundary.contains(p.lat,p.lon)).sort(
                     (a, c) => (a.pop || 3) - (c.pop || 3)
                            || (a.tier || 3) - (c.tier || 3)); }).catch(() => {}),
     fetch(dj('data/liminal.json')).then(r => r.ok ? r.json() : null)
       // 読み込み中にリミナルタブを押されていると、代入だけでは白紙の「0か所」が
       // 残り続ける（drawDetail は #place が隠れていれば即 return するため）。
       .then(l => { if (!l) return;
-                   LIMINAL = l.places;
+                   LIMINAL = l.places.filter(p => JapanBoundary.contains(p.lat,p.lon));
                    if (mode === 'liminal'){ buildCards(); $('modeNote').textContent = modeNote(); } })
       .catch(() => {}),
     fetch(dj('data/topics.json')).then(r => r.ok ? r.json() : null)
@@ -3317,7 +3368,7 @@ fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   else if (location.hash.startsWith('#l-')){
     const want = location.hash.slice(3);
     fetch(dj('data/liminal.json')).then(r => r.json()).then(l => {
-      LIMINAL = l.places;
+      LIMINAL = l.places.filter(p => JapanBoundary.contains(p.lat,p.lon));
       const q = LIMINAL.find(x => x.id === want);
       if (q) noPush(showLiminal, q);
     }).catch(() => {});
