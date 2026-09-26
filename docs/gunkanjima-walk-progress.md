@@ -192,4 +192,4 @@ For the walking copy only, arrival moves to a clear rear aisle and looks across 
 
 Validation: 154/154 full-build tests. The regression preserves the source camera, six tables and 216 chair components; the selected entry is supported without fallback displacement and keeps every table inside a 25-degree opening-view cone. Eleven native GLES2 views compile, link and render without errors. The nursery view changes 1,021,790 pixels because the camera is deliberately reframed; all ten control views are byte-identical. Real mobile/browser GPU performance remains unverified.
 
-Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors6, navigation3. Verify Cloudflare publication and byte-check the served interiors6 asset before closing this pass.
+Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors6, navigation3. Cloudflare release.json reached 9731b78de6265c2f10ea2e36f570204fb0472e75; the public HTML requests interiors6 and its served bytes match the tested local file.
