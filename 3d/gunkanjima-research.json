@@ -173,6 +173,49 @@
       "plannedUse": [
         "Art and navigation reference only; not historical evidence for Hashima"
       ]
+    },
+    {
+      "id": "godot-tps-materials",
+      "title": "Godot official TPS demo: material implementation",
+      "url": "https://github.com/godotengine/tps-demo",
+      "materialUrl": "https://github.com/godotengine/tps-demo/blob/master/level/geometry/models/tile_painted_gun_metal.tres",
+      "access": "Repository tree, licence and painted-metal material source read. Code MIT; assets CC-BY 3.0. No code or assets copied.",
+      "documented": [
+        "Separate albedo, normal and ORM textures; roughness and metallic channels; ambient occlusion enabled."
+      ],
+      "applied": [
+        "Preserve material-specific detail instead of blending it away; independently tune mottling, surface joints and diffuse light. This pass does not implement the entire PBR pipeline."
+      ]
+    },
+    {
+      "id": "godot-material-detail",
+      "title": "Godot material detail and world-space mapping documentation",
+      "url": "https://docs.godotengine.org/en/stable/tutorials/3d/standard_material_3d.html",
+      "access": "Public documentation read",
+      "applied": [
+        "World-scale surface detail and distance fading; original procedural shaders, no external game textures."
+      ]
+    },
+    {
+      "id": "apex-broken-moon-design",
+      "title": "Respawn / EA: Welcome to Broken Moon",
+      "url": "https://www.ea.com/en-gb/inside-ea/news/broken-moon",
+      "access": "Primary level-designer article reviewed; no full video playback.",
+      "plannedUse": [
+        "Clear traversable routes and connected vertical spaces; industrial material contrast. Not historical evidence for Hashima."
+      ]
+    },
+    {
+      "id": "apex-vimeo-play",
+      "title": "Apex Legends PS4 gameplay highlights on Vimeo",
+      "url": "https://vimeo.com/414573704",
+      "access": "Listing found; browser blocked by human verification, reported. No video watched."
+    },
+    {
+      "id": "genshin-fontaine-psblog",
+      "title": "HoYoverse technical director: Fontaine introduction",
+      "url": "https://blog.playstation.com/2023/08/04/genshin-impact-version-4-0-launches-august-16-first-details/",
+      "access": "Public article read via search; browser navigation timed out. No embedded video playback verified."
     }
   ],
   "nextAcquisition": [
@@ -192,6 +235,8 @@
       "All-building measured interior reconstruction",
       "Verified historical colour reconstruction",
       "Genshin-level authored environment assets and visual fidelity"
-    ]
+    ],
+    "terrainCorrection": "Walk-only inferred DEM cut beneath existing building footprints, with cell-diagonal clearance and a short outer blend; not a newly surveyed landform.",
+    "camera": "First-person only; third-person code and UI removed."
   }
 }

@@ -93,5 +93,34 @@ function build(b,coast){
  const spawn=toUV(p.x-lane,p.z-run/2-.55);
  return {building:b.name,ghost:[b.name],floor:base,center:spawn,camera:{u:spawn[0],v:spawn[1],y:base+1.65,az:0,el:0,dist:2},label:{ja:(b.name||'名称未確認')+' · 1階〜屋上（推定）',en:(b.name||'Unnamed building')+' · floors & roof (inferred)'},text:{ja:'建物の輪郭・階数は既存資料モデルを使用。階段の位置・室内配置・家具・色は歩行体験のための推定で、当時の写真による精密復元ではありません。中央の折り返し階段を歩いて各階と屋上へ進めます。',en:'Footprints and storey counts use the source model. Stair positions, interior arrangement, furniture and colours are inferred for exploration, not a precise photographic reconstruction. Walk up the switchback stairs to each floor and the roof.'},sources:[{label:{ja:'実測資料集（NDL書誌・本文未取得）',en:'Measured-survey volume (catalogue; full text not acquired)'},url:'https://ndlsearch.ndl.go.jp/books/R100000002-I000007682767'}],boxes,walkLights:boxes.filter(b=>b.k===14).map(b=>({u:b.u,v:b.v,y:b.y,radius:3.5})),walkPlan:{...p,base,height,floors,run,lane,routes},inferred:true};
 }
-const api={plan,build,inPoly};if(typeof module==='object')module.exports=api;else root.JTAWalkBuildings=api;
+// Inferred cut into the coarse DEM. Lower all vertices of cells touching a footprint,
+// including the coarser 16-bit grid, so interpolated triangles cannot cross its floor.
+// The same height array feeds rendering, normals and outdoor collision sampling.
+function fitTerrain(heights,grid,buildings){
+ const {w,h,step,x0,y0}=grid,clearance=Math.SQRT2*step+.05,blend=2/MPP;
+ for(const b of buildings){
+  if(!Number.isFinite(b.ground))continue;
+  for(const poly of b.wings||[b.poly]){
+   if(!poly||poly.length<3)continue;
+   const pad=clearance+blend,loX=Math.max(0,Math.floor((Math.min(...poly.map(p=>p[0]))-pad-x0)/step)),hiX=Math.min(w-1,Math.ceil((Math.max(...poly.map(p=>p[0]))+pad-x0)/step)),loZ=Math.max(0,Math.floor((Math.min(...poly.map(p=>p[1]))-pad-y0)/step)),hiZ=Math.min(h-1,Math.ceil((Math.max(...poly.map(p=>p[1]))+pad-y0)/step));
+   for(let z=loZ;z<=hiZ;z++)for(let x=loX;x<=hiX;x++){
+    const p=[x0+x*step,y0+z*step],index=z*w+x,target=b.ground-.10;
+    if(heights[index]<=target)continue;
+    let distance=0;
+    if(!inPoly(p,poly)){
+     distance=Infinity;
+     for(let i=0;i<poly.length;i++){
+      const a=poly[i],q=poly[(i+1)%poly.length],dx=q[0]-a[0],dz=q[1]-a[1],t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dz)/(dx*dx+dz*dz||1)));
+      distance=Math.min(distance,Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dz));
+     }
+    }
+    if(distance>=pad)continue;
+    const a=Math.max(0,Math.min(1,(distance-clearance)/blend)),smooth=a*a*(3-2*a);
+    heights[index]=Math.min(heights[index],target+(heights[index]-target)*smooth);
+   }
+  }
+ }
+ return heights;
+}
+const api={plan,build,inPoly,fitTerrain};if(typeof module==='object')module.exports=api;else root.JTAWalkBuildings=api;
 })(typeof window==='undefined'?this:window);

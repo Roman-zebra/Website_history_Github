@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '16';
+  const V = '17';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -125,7 +125,7 @@
       }
       return lit / 9.0;
     }
-    float hash(vec2 p){ p=mod(p,128.0); return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float hash(vec2 p){ p=mod(p,113.0); return fract(sin(dot(p, vec2(7.13, 3.71))) * 157.91); }
     float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
       return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }`;
   // ground and sea: the aerial photograph draped on the terrain
@@ -317,7 +317,9 @@
         float reveal=1.0-smoothstep(.04,.18,edgeY);
         col*=1.0-win*reveal*.22*nearDetail;
         // Subtle plaster variation and contact shading below projecting floor slabs.
-        col*=.965+.055*noise(vec2(s*.65,y*.9+seed));
+        col*=.88+.20*noise(vec2(s*.65,y*.9+seed));
+        float plaster=noise(vec2(s*3.1,y*3.1));
+        col*=1.0-(1.0-win)*.10*smoothstep(.58,.85,plaster);
         col*=1.0-.12*(1.0-smoothstep(.03,.16,fy))*(1.0-win);
         float trim=step(.31,fy)*step(fy,.35)+step(.77,fy)*step(fy,.80);
         col=mix(col,vec3(.43,.56,.53),trim*.25*(1.0-win));
@@ -488,7 +490,12 @@
         return c * weave * (1.0 - 0.28 * clamp(edge, 0.0, 1.0)) * (0.94 + 0.12 * na);
       }
       if (k < 2.5) return c * (0.78 + 0.32 * nb) * (0.9 + 0.2 * na);   /* wood grain */
-      if (k < 3.5) return c * (0.86 + 0.2 * na) * (0.85 + 0.15 * nb) * (1.0 - 0.18 * smoothstep(0.9, 0.0, p.y - floor(p.y / 2.85) * 2.85) * (1.0 - abs(n.y)));   /* concrete */
+      if (k < 3.5){
+        float broad=noise(uv*.38),nearDetail=1.0-smoothstep(9.0,34.0,vDepth);
+        vec2 panel=fract(uv/vec2(1.2,2.85));
+        float joint=(1.0-smoothstep(.004,.016,min(min(panel.x,1.0-panel.x),min(panel.y,1.0-panel.y))))*nearDetail;
+        return c*(.79+.28*broad)*(.88+.19*na)*(.94+.08*nb)*(1.0-joint*.13);
+      }   /* concrete */
       if (k < 4.5){   /* rock: mottled grey-brown; moss on the faces that look up */
         vec3 r = c * (0.7 + 0.5 * na) * (0.9 + 0.2 * nb);
         float moss = smoothstep(0.45, 0.72, na * 0.6 + nb * 0.4) * clamp(n.y * 1.4 + 0.25, 0.0, 1.0);
@@ -507,7 +514,7 @@
       }
       if (k < 9.5) return c * (0.9 + 0.2 * na) * (0.92 + 0.1 * sin(uv.x * 25.0));   /* cloth */
       if (k < 10.5) return mix(c * 0.6, c * 1.25, na * 0.7 + nb * 0.3);   /* foliage */
-      if (k < 11.5) return c * (0.9 + 0.12 * na) * (1.0 - 0.12 * smoothstep(0.5, 0.0, fract(p.y / 2.85) * 2.85));   /* painted wall */
+      if (k < 11.5) return c * (.82+.24*noise(uv*.42))*(.94+.12*na) * (1.0 - .13*(1.0-smoothstep(0.0,.65,mod(p.y,2.85))));   /* painted wall */
       if (k < 12.5) return c * (0.85 + 0.3 * na);   /* water */
       return c * (0.75 + 0.5 * na);   /* soil */
     }
@@ -516,19 +523,19 @@
       float d = max(dot(n, uSun), 0.0);
       float sh = shadowAt(vShadow, 0.003);
       vec3 base = material(vCol.rgb, vLoc, n, vMat.x, vMat.y);
-      if(uAnime>0.5)base=mix(vCol.rgb,base,.35);
+      // Keep material detail in the walk view instead of washing it into a flat fill.
       /* hemisphere ambient: faces that look up are lit by the sky, faces that look down by the ground */
       float amb = 0.30 + 0.12 * n.y;
       vec3 col = base * (amb + 0.62 * d * mix(0.4, 1.0, sh));
       if(uAnime>0.5){
         // Retain hemisphere light in the stylised pass: ceilings and stair undersides stay shaded.
         vec3 ambient=mix(vec3(.43,.48,.59),vec3(.77,.85,.96),n.y*.5+.5);
-        col=base*mix(ambient,vec3(1.12,1.07,.92),smoothstep(.22,.45,d*sh));
+        col=base*mix(ambient,vec3(1.12,1.07,.92),smoothstep(.04,.88,d*sh));
       }
       if(uRoomLight>.5){
         float pool=lampPool(uLamp0)+lampPool(uLamp1)+lampPool(uLamp2)+lampPool(uLamp3);
         col=base*(vec3(.53,.58,.65)+vec3(.47,.35,.17)*min(pool,1.5));
-        col*=.86+.14*(n.y*.5+.5);
+        col*=.80+.20*(n.y*.5+.5);
       }
       if(vMat.x>13.5)col=vCol.rgb*1.25;
       col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
@@ -672,6 +679,7 @@
       const hv = v.getUint16(src * 2, true) * t.unit;
       hts[k] = hv; seaF[k] = hv < 0.05 ? 1 : 0;
     }
+    if(GAME)window.JTAWalkBuildings.fitTerrain(hts,{w,h,step,x0:t.x0,y0:t.y0},model.buildings);
     const tris = (w - 1) * (h - 1) * 2, useBig = count > 65535;
     if (useBig && !bigIndex) return buildTerrain(t, buf, step * 2);
     const idx = useBig ? new Uint32Array(tris * 3) : new Uint16Array(tris * 3);
@@ -923,9 +931,8 @@
   let anim = null, spin = false, queued = false, activeSpot = null, t0 = performance.now();
   let orbitPose = null, walkLast = performance.now();
   const walkKeys = new Set();
-  let gameIndoor = false, outsidePose = null, avatarMesh = null, avatarHeading = 0, stride = 0;
+  let gameIndoor = false, outsidePose = null;
   const gameInput = { x: 0, y: 0, run: false, autoRun: false };
-  let thirdPerson = false;
 
   function homeDistance(){
     const aspect = canvas.width / Math.max(1, canvas.height);
@@ -988,18 +995,6 @@
     if (st.walk){
       const cp = Math.cos(st.el), eye = [st.wx, st.walkGround + 1.68, st.wz];
       const target = [eye[0] + Math.sin(st.az) * cp, eye[1] + Math.sin(st.el), eye[2] + Math.cos(st.az) * cp];
-      if (GAME && thirdPerson && !gameIndoor){
-        target[0]=eye[0]; target[1]=eye[1]-0.3; target[2]=eye[2];
-        // Pull the chase camera forward before it can cross a wall or terrain.
-        let distance=0.3;
-        for(let d=0.4;d<=5.5;d+=0.2){
-          const x=st.wx-Math.sin(st.az)*cp*d,z=st.wz-Math.cos(st.az)*cp*d,y=target[1]+(0.32-Math.sin(st.el))*d;
-          const uv=fromWorld(x,z),ground=sampleGround(x,z);
-          if((ground!==null&&y<ground+0.35)||model.buildings.some(b=>buildingAlive(b)&&y<b.ground+b.storeys*b.floorH+0.3&&(b.wings||[b.poly]).some(p=>pointInPoly(uv,p))))break;
-          distance=d;
-        }
-        eye[0]=st.wx-Math.sin(st.az)*cp*distance; eye[2]=st.wz-Math.cos(st.az)*cp*distance; eye[1]=target[1]+(0.32-Math.sin(st.el))*distance;
-      }
       const proj = perspective(0.9, w / Math.max(1, h), 0.08, 1800), view = lookAt(eye, target);
       return { proj, view, pv: mul(proj, view) };
     }
@@ -1159,12 +1154,6 @@
         gl.depthMask(true); gl.disable(gl.BLEND);
       }
     }
-    if (GAME && st.walk && thirdPerson && !gameIndoor && avatarMesh){
-      const a=avatarHeading-rot,c=Math.cos(a),sn=Math.sin(a);
-      const transform=new Float32Array([c,0,-sn,0, 0,1,0,0, sn,0,c,0, st.wx,st.walkGround+Math.sin(stride)*0.035,st.wz,1]);
-      setCommon(progB,mul(M.pv,transform),lightPV,lift,ym,0);
-      drawBoxes(progB,avatarMesh);
-    }
     placeSpots(M.pv, lift, ym);
     if (compass) compass.style.transform = 'rotate(' + (st.az * 180 / Math.PI).toFixed(1) + 'deg)';
   }
@@ -1178,7 +1167,6 @@
     if (!forward && !right) return;
     const n = Math.max(1, Math.hypot(forward, right)), running=walkKeys.has('shift')||gameInput.run||gameInput.autoRun, speed=gameIndoor?(running?5.6:2.8):(running?9:4.5);
     const f = forward / n, r = right / n, dx = (Math.sin(st.az) * f - Math.cos(st.az) * r) * speed * dt, dz = (Math.cos(st.az) * f + Math.sin(st.az) * r) * speed * dt;
-    avatarHeading = Math.atan2(dx,dz); stride += speed*dt*3;
     // Small collision steps preserve thin walls and stair rises even when sprinting at low FPS.
     const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.12));
     for(let i=0;i<steps;i++){
@@ -1751,19 +1739,10 @@
       const x=p.x,z=p.z;const u=(x*p.c-z*p.s)/mpp,v=(x*p.s+z*p.c)/mpp;
       interiors.scenes['building-'+b.id]={building:b.name,camera:{u,v},label:{ja:(b.name||'名称未確認')+' · 各階・屋上（推定）',en:(b.name||'Unnamed building')+' · floors & roof (inferred)'},generatedBuilding:b,inferred:true,buildingId:b.id};
     }
-    const part=(x,y,z,size,color,p)=>({u:C+x/mpp,v:C+z/mpp,y,s:size,c:color,p,k:0});
-    avatarMesh=buildBoxes({pass:'solid',boxes:[
-      part(0,0.65,0,[0.55,0.62,0.32],[0.17,0.48,0.51],'cyl'),
-      part(0,1.30,0,[0.35,0.37,0.35],[0.86,0.70,0.54],'ball'),
-      part(0,1.58,0,[0.47,0.09,0.45],[0.84,0.73,0.48],'cyl'),
-      part(-0.16,0.08,0,[0.18,0.59,0.22],[0.17,0.22,0.28]),part(0.16,0.08,0,[0.18,0.59,0.22],[0.17,0.22,0.28]),
-      part(-0.34,0.70,0,[0.14,0.51,0.16],[0.24,0.55,0.57]),part(0.34,0.70,0,[0.14,0.51,0.16],[0.24,0.55,0.57]),
-      part(0,0.8,-0.25,[0.37,0.45,0.20],[0.65,0.39,0.19])
-    ]});
     beginWalk();
     window.dispatchEvent(new CustomEvent('jta-walk-ready'));
   }
   window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, enterScene, leaveScene, beginWalk, endWalk, scene: () => scene, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
-    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, camera:()=>{thirdPerson=!thirdPerson;request();return thirdPerson;}, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, floor:()=>{const sc=scene&&interiors.scenes[scene];return sc&&sc.walkPlan?{current:Math.min(sc.walkPlan.floors,Math.floor((st.walkGround-sc.walkPlan.base+.18)/sc.walkPlan.height)),total:sc.walkPlan.floors}:null;}, year:()=>Math.round(yearMix().year), scenes:()=>interiors?interiors.scenes:{}, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;gameInput.autoRun=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
+    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, floor:()=>{const sc=scene&&interiors.scenes[scene];return sc&&sc.walkPlan?{current:Math.min(sc.walkPlan.floors,Math.floor((st.walkGround-sc.walkPlan.base+.18)/sc.walkPlan.height)),total:sc.walkPlan.floors}:null;}, year:()=>Math.round(yearMix().year), scenes:()=>interiors?interiors.scenes:{}, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;gameInput.autoRun=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
     years: () => years.map(y => y.id), loaded: i => texture(i).promise, shadows: () => !!shadowFb, walls: () => !!walls, model: () => model };
 })();

@@ -113,3 +113,19 @@ Replaced the walking terrain's grass-like aerial-luminance palette with inferred
 Validation: full build passed 146/146 tests; after final year-offset/caveat corrections, all 38 lab-3d tests passed again. Native GLES2 replay compiled, linked and rendered 10 states (nine existing scenes plus 2010 outdoors) without errors. Visually reviewed ground and rooftop views. This is not verification of mobile WebGL performance or precise historic reconstruction.
 
 Next: verify v16 on Cloudflare if publication was interrupted; improve terrain retaining structures/circulation only with usable plans/photos; continue bounded room-specific detail. Do not repeat blocked YouTube playback unless access changes. Preserve concurrent map/search work.
+
+## Terrain penetration, materials and first-person UI — renderer v17, 2026-09-26
+
+User supplied a 14号棟 screenshot and requested a fix for buildings buried in terrain, richer materials, desktop WASD with no stick, removal of third person and Pause, and moving central contextual controls to the top.
+
+The coarse DEM was drawn through building floors. Added a walk-only cut beneath each existing footprint, covering the diagonal of every touching grid cell and blending over a short exterior margin. Render buffers, normals and outdoor collision use the same corrected heights. Original DEM bytes, building footprints/heights and the orbital source viewer remain untouched. This is an inferred clearance correction, not surveyed terrain or a complete reconstruction of retaining walls; tall slopes outside windows can still exist.
+
+Removed third-person chase-camera/avatar code and its API/control. Removed the pause button/dialog; Escape still releases movement and closes controls, and blur/visibility still clears held input. Touch controls follow coarse pointers; fine-pointer desktop layouts hide the stick even in narrow windows. Existing WASD events now have actual movement/release regressions in both index paths. Context buttons, evidence and status occupy a top strip beside the minimap.
+
+Materials: restored procedural detail that the walk shader previously blended down to 35%; improved concrete joints/mottling, plaster variation and continuous diffuse lighting. Replaced a noise hash whose large multiplier lost fractional precision on mediump with bounded arithmetic, restoring variation on that path. These are original inferred materials, not copied game art.
+
+References: Godot official TPS repository tree, licence and tile_painted_gun_metal.tres source read (separate albedo/normal/ORM, roughness/metallic channels and AO); official material-detail/world-space documentation read. No Godot code/assets imported and no claim of implementing the full PBR renderer. Respawn's Broken Moon level-designer article and HoYoverse's Fontaine PlayStation Blog article reviewed. Vimeo Apex gameplay listing found, but human verification blocked playback and was reported; PlayStation browser navigation timed out. No full new gameplay-video viewing claimed. Genshin/Apex full official source release was not confirmed.
+
+Validation: 150/150 full-build tests. For grid strides 1/2/4, 116,918 interior footprint samples each assert that all four interpolation vertices lie below the corresponding floor; far terrain remains unchanged and no heights are raised. WASD moves and stops in the actual engine. Native GLES renders 14 states including all four 14号棟 entry directions and its third floor, plus existing world/interior scenes, with no GL errors in both normal and forced-mediump fragment paths. Visually reviewed 14号棟, stairs and outdoors. Real mobile GPU performance remains unverified.
+
+Cache versions: renderer17, walk JS6/CSS5, buildings4, interiors2. Verify production after deployment, then continue source-grounded retaining walls/terrain and room-specific art. Preserve the requested first-person-only controls in future passes.

@@ -35,6 +35,17 @@ for(let x=-1000;x<=1000;x+=100)for(let z=-1000;z<=1000;z+=100){const uv=g.fromWo
 // Move east/right relative to the screen when facing positive world Z.
 g.reset();api.st.az=0;const x=api.st.wx;g.input.x=1;for(let i=0;i<3;i++)frame();assert.ok(api.st.wx<x,'right is camera-relative');g.pause();const px=api.st.wx;frame();assert.equal(api.st.wx,px,'pause clears input');
 assert.ok(draws>0);
+assert.equal(g.camera,undefined,'walk has only a first-person camera');
+// Exercise the keyboard event path, not only synthetic joystick input.
+for(const [key,axis,sign] of [['w','wz',1],['s','wz',-1],['a','wx',1],['d','wx',-1]]){
+ g.enter('gym');api.st.az=0;const start=api.st[axis];
+ for(const fn of events.keydown||[])fn({key,preventDefault:noop});
+ for(let i=0;i<3;i++)frame();
+ for(const fn of events.keyup||[])fn({key});
+ assert.ok((api.st[axis]-start)*sign>.1,key+' moves in its camera-relative direction');
+ const end=api.st[axis];frame();assert.equal(api.st[axis],end,key+' release stops movement');g.leave();
+}
+
 // Indoor sprint must actually be faster; full touch input uses the same running path.
 function travel(run,autoRun){g.leave();g.enter('gym');api.st.az=0;g.pause();g.input.run=run;g.input.autoRun=autoRun;g.input.y=1;const x=api.st.wx,z=api.st.wz;for(let i=0;i<5;i++)frame();g.pause();return Math.hypot(api.st.wx-x,api.st.wz-z);}
 const walkDistance=travel(false,false),runDistance=travel(true,false),stickDistance=travel(false,true);
