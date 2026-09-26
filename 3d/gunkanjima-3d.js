@@ -8,7 +8,8 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '8';
+  const V = '9';
+  const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
   const LANG = window.LAB_LANG || 'en';
@@ -783,6 +784,9 @@
   let anim = null, spin = false, queued = false, activeSpot = null, t0 = performance.now();
   let orbitPose = null, walkLast = performance.now();
   const walkKeys = new Set();
+  let gameIndoor = false, outsidePose = null, avatarMesh = null, avatarHeading = 0, stride = 0;
+  const gameInput = { x: 0, y: 0, run: false };
+  let thirdPerson = true;
 
   function homeDistance(){
     const aspect = canvas.width / Math.max(1, canvas.height);
@@ -827,6 +831,7 @@
     return y >= (b.built || b.seen || 1950) && !(b.gone && y > b.gone);
   }
   function canWalk(x, z){
+    if (gameIndoor && scene) { const uv=fromWorld(x,z); return window.JTAWalkNav.ground(interiors.scenes[scene],uv[0],uv[1],mpp,st.walkGround); }
     if (!model || !model.coast) return null;
     const h = sampleGround(x, z), here = st.walk ? sampleGround(st.wx, st.wz) : h;
     if (h === null || h < 0.45 || (here !== null && Math.abs(h - here) > 1.4)) return null;
@@ -834,7 +839,7 @@
     for (const q of probes){
       const uv = fromWorld(x + q[0], z + q[1]);
       if (!pointInPoly(uv, model.coast)) return null;
-      for (const b of model.buildings) if (buildingAlive(b) && pointInPoly(uv, b.poly)) return null;
+      for (const b of model.buildings) if (buildingAlive(b) && (b.wings || [b.poly]).some(poly => pointInPoly(uv, poly))) return null;
     }
     return h;
   }
@@ -843,6 +848,18 @@
     if (st.walk){
       const cp = Math.cos(st.el), eye = [st.wx, st.walkGround + 1.68, st.wz];
       const target = [eye[0] + Math.sin(st.az) * cp, eye[1] + Math.sin(st.el), eye[2] + Math.cos(st.az) * cp];
+      if (GAME && thirdPerson && !gameIndoor){
+        target[0]=eye[0]; target[1]=eye[1]-0.3; target[2]=eye[2];
+        // Pull the chase camera forward before it can cross a wall or terrain.
+        let distance=0.3;
+        for(let d=0.4;d<=5.5;d+=0.2){
+          const x=st.wx-Math.sin(st.az)*cp*d,z=st.wz-Math.cos(st.az)*cp*d,y=target[1]+(0.32-Math.sin(st.el))*d;
+          const uv=fromWorld(x,z),ground=sampleGround(x,z);
+          if((ground!==null&&y<ground+0.35)||model.buildings.some(b=>buildingAlive(b)&&y<b.ground+b.storeys*b.floorH+0.3&&(b.wings||[b.poly]).some(p=>pointInPoly(uv,p))))break;
+          distance=d;
+        }
+        eye[0]=st.wx-Math.sin(st.az)*cp*distance; eye[2]=st.wz-Math.cos(st.az)*cp*distance; eye[1]=target[1]+(0.32-Math.sin(st.el))*distance;
+      }
       const proj = perspective(0.9, w / Math.max(1, h), 0.08, 1800), view = lookAt(eye, target);
       return { proj, view, pv: mul(proj, view) };
     }
@@ -965,7 +982,7 @@
     setCommon(progT, M.pv, lightPV, lift, ym, shadowOn);
     setTextures(progT, texA, texB, ym);
     drawTerrain(progT, sea, -0.6);
-    drawTerrain(progT, terrain, 0);
+    if (!gameIndoor) drawTerrain(progT, terrain, 0);
     if (showB){
       gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
       setCommon(progS, M.pv, lightPV, lift, ym, shadowOn);
@@ -989,6 +1006,12 @@
         gl.depthMask(true); gl.disable(gl.BLEND);
       }
     }
+    if (GAME && st.walk && thirdPerson && !gameIndoor && avatarMesh){
+      const a=avatarHeading-rot,c=Math.cos(a),sn=Math.sin(a);
+      const transform=new Float32Array([c,0,-sn,0, 0,1,0,0, sn,0,c,0, st.wx,st.walkGround+Math.sin(stride)*0.035,st.wz,1]);
+      setCommon(progB,mul(M.pv,transform),lightPV,lift,ym,0);
+      drawBoxes(progB,avatarMesh);
+    }
     placeSpots(M.pv, lift, ym);
     if (compass) compass.style.transform = 'rotate(' + (st.az * 180 / Math.PI).toFixed(1) + 'deg)';
   }
@@ -997,11 +1020,12 @@
     const dt = Math.min(0.06, Math.max(0, (now - walkLast) / 1000));
     walkLast = now;
     if (!st.walk || !dt) return;
-    const forward = (walkKeys.has('w') || walkKeys.has('arrowup') || walkKeys.has('forward') ? 1 : 0) - (walkKeys.has('s') || walkKeys.has('arrowdown') || walkKeys.has('back') ? 1 : 0);
-    const right = (walkKeys.has('d') || walkKeys.has('right') ? 1 : 0) - (walkKeys.has('a') || walkKeys.has('left') ? 1 : 0);
+    const forward = gameInput.y + (walkKeys.has('w') || walkKeys.has('arrowup') || walkKeys.has('forward') ? 1 : 0) - (walkKeys.has('s') || walkKeys.has('arrowdown') || walkKeys.has('back') ? 1 : 0);
+    const right = gameInput.x + (walkKeys.has('d') || walkKeys.has('right') || walkKeys.has('arrowright') ? 1 : 0) - (walkKeys.has('a') || walkKeys.has('left') || walkKeys.has('arrowleft') ? 1 : 0);
     if (!forward && !right) return;
-    const n = Math.hypot(forward, right) || 1, speed = walkKeys.has('shift') ? 7.5 : 4.2;
-    const f = forward / n, r = right / n, dx = (Math.sin(st.az) * f + Math.cos(st.az) * r) * speed * dt, dz = (Math.cos(st.az) * f - Math.sin(st.az) * r) * speed * dt;
+    const n = Math.max(1, Math.hypot(forward, right)), speed = gameIndoor ? 2.2 : (walkKeys.has('shift') || gameInput.run ? 7.5 : 4.2);
+    const f = forward / n, r = right / n, dx = (Math.sin(st.az) * f - Math.cos(st.az) * r) * speed * dt, dz = (Math.cos(st.az) * f + Math.sin(st.az) * r) * speed * dt;
+    avatarHeading = Math.atan2(dx,dz); stride += speed*dt*3;
     let h = canWalk(st.wx + dx, st.wz);
     if (h !== null){ st.wx += dx; st.walkGround = h; }
     h = canWalk(st.wx, st.wz + dz);
@@ -1034,10 +1058,10 @@
     if (spin) st.az -= 0.0016;
     draw();
     drawWeather(now);
-    if (anim || spin || (!reduce && !document.hidden && sea)) request();   // the water moves, so keep a slow loop while visible
+    if ((st.walk && (walkKeys.size || gameInput.x || gameInput.y)) || anim || spin || (!reduce && !document.hidden && sea)) request();   // the water moves, so keep a slow loop while visible
   }
   let lastFrame = 0;
-  function request(){ if (!queued){ queued = true; requestAnimationFrame(now => { if (now - lastFrame < 40 && !anim && !spin){ queued = false; setTimeout(request, 40); return; } lastFrame = now; frame(now); }); } }
+  function request(){ if (!queued){ queued = true; requestAnimationFrame(now => { if (now - lastFrame < (st.walk ? (lowEnd ? 32 : 16) : 40) && !anim && !spin){ queued = false; setTimeout(request, 40); return; } lastFrame = now; frame(now); }); } }
 
   function animate(to, ms, done){
     if (reduce || ms <= 0){ Object.assign(st, to); anim = null; syncUi(); request(); if (done) done(); return; }
@@ -1066,7 +1090,7 @@
     const spawn = toWorldTrue(490, 650);
     st.walk = true; st.wx = spawn[0]; st.wz = spawn[1]; st.walkGround = sampleGround(st.wx, st.wz) || 4.3;
     st.az = -2.96; st.el = 0.04; st.userLift = 1; st.exag = 1; st.walls = true;
-    anim = null; closeSpot(); walkLast = performance.now();
+    stopSpin(); anim = null; closeSpot(); walkLast = performance.now();
     canvas.classList.add('is-walk');
     if (walkPad) walkPad.hidden = false;
     syncUi(); say(T.walkReady); canvas.focus(); request();
@@ -1292,7 +1316,7 @@
     if (!sc) return;
     if (st.walk) endWalk(true);
     if (scene !== id){
-      scene = id;
+      disposeScene(); scene = id;
       sceneMesh = buildBoxes(Object.assign({}, sc, { pass: 'solid' }));
       sceneMeshA = buildBoxes(Object.assign({}, sc, { pass: 'assumed' }));
       const hosts = model.buildings.filter(b => sc.ghost && sc.ghost.includes(b.name));
@@ -1313,9 +1337,10 @@
     for (const b of document.querySelectorAll('.enter-btn')) b.textContent = enterLabel(b.dataset.scene);
     request();
   }
+  function disposeScene(){ for(const mesh of [sceneMesh,sceneMeshA]) if(mesh) for(const key of ['pos3','nor','col','mat','idx']) if(mesh[key]) gl.deleteBuffer(mesh[key]); }
   function leaveScene(){
     if (!scene) return;
-    scene = null; sceneMesh = null; sceneMeshA = null; ghostId = 0; ghostId2 = -10;
+    disposeScene(); scene = null; sceneMesh = null; sceneMeshA = null; ghostId = 0; ghostId2 = -10;
     if ($('sceneNote')) $('sceneNote').hidden = true;
     for (const b of document.querySelectorAll('.enter-btn')) b.textContent = enterLabel(b.dataset.scene);
     animate({ ty: 14, dist: Math.max(st.dist, 180), el: Math.max(st.el, 0.45) }, 900);
@@ -1329,7 +1354,7 @@
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     if (panel && !panel.hidden) closeSpot();
-    else if (st.walk) endWalk(false);
+    else if (st.walk && !GAME) endWalk(false);
   });
 
   function view(name, ms){
@@ -1361,6 +1386,7 @@
     if (!st.walk && pointers.size === 2){ const [a, b] = [...pointers.values()]; pinch0 = Math.hypot(a[0] - b[0], a[1] - b[1]); dist0 = st.dist; }
   });
   canvas.addEventListener('pointermove', e => {
+    if (GAME && document.pointerLockElement === canvas) return;
     const prev = pointers.get(e.pointerId);
     if (!prev) return;
     pointers.set(e.pointerId, [e.clientX, e.clientY]);
@@ -1519,6 +1545,7 @@
     /* /3d/…?scene=no65roof or #scene=…: open the page already inside a room (shared links, checks) */
     const wantScene = (/[?&#]scene=([a-z0-9]+)/i.exec(location.search + ' ' + location.hash) || [])[1];
     if (wantScene && interiors && interiors.scenes[wantScene]){ st.lift = 1; st.userLift = 1; enterScene(wantScene, false); request(); return; }
+    if (GAME){ st.lift=1; initGame(); return; }
     if (reduce){ st.lift = 1; request(); return; }
     st.el = 1.2;
     animate({ lift: 1, el: HOME.el }, 2200, () => { spin = true; request(); });
@@ -1528,6 +1555,37 @@
     fallback(T.failed);
   });
 
+  function gameEnter(id){
+    const sc=interiors && interiors.scenes[id]; if(!sc)return false;
+    const spawn=window.JTAWalkNav.spawn(sc,mpp); if(!spawn)return false;
+    if(!gameIndoor)outsidePose={wx:st.wx,wz:st.wz,walkGround:st.walkGround,az:st.az,el:st.el};
+    enterScene(id,false); anim=null; gameIndoor=true;
+    const w=toWorldTrue(spawn.u,spawn.v);
+    st.walk=true; st.wx=w[0];st.wz=w[1];st.walkGround=spawn.y;st.el=0;st.az=sc.camera.az+Math.PI;
+    canvas.classList.add('is-walk'); walkKeys.clear();gameInput.x=gameInput.y=0;
+    if($('sceneNote'))$('sceneNote').hidden=true;
+    closeSpot(); canvas.focus();request(); return true;
+  }
+  function gameLeave(){
+    if(!gameIndoor)return;
+    gameIndoor=false; leaveScene(); anim=null;st.walk=true;
+    if(outsidePose)Object.assign(st,outsidePose);outsidePose=null;
+    walkKeys.clear();gameInput.x=gameInput.y=0;canvas.focus();request();
+  }
+  function initGame(){
+    const part=(x,y,z,size,color,p)=>({u:C+x/mpp,v:C+z/mpp,y,s:size,c:color,p,k:0});
+    avatarMesh=buildBoxes({pass:'solid',boxes:[
+      part(0,0.65,0,[0.55,0.62,0.32],[0.17,0.48,0.51],'cyl'),
+      part(0,1.30,0,[0.35,0.37,0.35],[0.86,0.70,0.54],'ball'),
+      part(0,1.58,0,[0.47,0.09,0.45],[0.84,0.73,0.48],'cyl'),
+      part(-0.16,0.08,0,[0.18,0.59,0.22],[0.17,0.22,0.28]),part(0.16,0.08,0,[0.18,0.59,0.22],[0.17,0.22,0.28]),
+      part(-0.34,0.70,0,[0.14,0.51,0.16],[0.24,0.55,0.57]),part(0.34,0.70,0,[0.14,0.51,0.16],[0.24,0.55,0.57]),
+      part(0,0.8,-0.25,[0.37,0.45,0.20],[0.65,0.39,0.19])
+    ]});
+    beginWalk();
+    window.dispatchEvent(new CustomEvent('jta-walk-ready'));
+  }
   window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, enterScene, leaveScene, beginWalk, endWalk, scene: () => scene, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
+    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, camera:()=>{thirdPerson=!thirdPerson;request();return thirdPerson;}, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, scenes:()=>interiors?interiors.scenes:{}, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
     years: () => years.map(y => y.id), loaded: i => texture(i).promise, shadows: () => !!shadowFb, walls: () => !!walls, model: () => model };
 })();

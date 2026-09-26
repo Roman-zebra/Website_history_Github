@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/page.css?v={{ASSET_V}}">
 <link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/icons/atlas.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/atlas-180.png">
 <style>
+.walk-entry{display:block;margin:1.2rem 0;padding:1rem 1.25rem;background:#173b45;color:#fff;border-left:4px solid #cfac6a;border-radius:6px;text-decoration:none}.walk-entry strong{display:block;font-size:1.1rem}.walk-entry span{display:block;margin-top:.35rem;font-size:1rem;color:#d9e6e7}.walk-entry:hover{background:#24525e}
 .page-links{margin:.1rem 0 0;font-size:.9rem;color:#5b6b69;display:flex;flex-wrap:wrap;gap:.3rem 1.1rem}.page-links a{color:#793e30}
 .lab-badge{display:inline-block;margin:0 0 .5rem;padding:.15rem .6rem;border:1px dashed #a35945;border-radius:2px;color:#793e30;font-size:.8rem;letter-spacing:.06em}
 .viewer{margin:1.25rem 0 1.75rem;background:#0f191b;border-radius:6px;overflow:hidden}
@@ -98,26 +99,31 @@
 <p class="lab-badge">Lab · testing</p>
 <h1>Gunkanjima in 3D, from 1947 to today</h1>
 <p class="page-links"><a href="/3d/">← 3D reconstructions</a> <a href="/#l-hashima-island">🗾 See where the island is on the map of Japan (tab 02)</a></p>
+<a class="walk-entry" href="/3d/gunkanjima-walk?lang=en"><strong>Explore on foot in 3D →</strong><span>A separate exploration page · PC & mobile · Enter reconstructed rooms</span></a>
 </div>
 <div data-lang="ja" lang="ja" hidden>
 <p class="lab-badge">テスト中</p>
 <h1>よみがえる軍艦島（端島）　3Dでたどる1947年から現在まで</h1>
 <p class="page-links"><a href="/3d/ja/">← シリーズ「3Dでよみがえる」の一覧</a> <a href="/?lang=ja#l-hashima-island">🗾 02 日本まるごと地図でこの島の場所を見る</a></p>
+<a class="walk-entry" href="/3d/gunkanjima-walk?lang=ja"><strong>3D街歩きで島内を探索する →</strong><span>専用ページで自由に歩く · PC・スマホ対応 · 建物内部の再現シーンへ</span></a>
 </div>
 <div data-lang="ko" lang="ko" hidden>
 <p class="lab-badge">테스트 중</p>
 <h1>군함도(하시마) 3D 복원, 1947년부터 지금까지</h1>
 <p class="page-links"><a href="/3d/ko/">← 3D 복원 목록</a> <a href="/?lang=ko#l-hashima-island">🗾 02 일본 전체 지도에서 이 섬의 위치 보기</a></p>
+<a class="walk-entry" href="/3d/gunkanjima-walk?lang=ko"><strong>3D 산책으로 섬 탐험 →</strong><span>별도 탐험 페이지 · PC·모바일 · 복원된 실내로</span></a>
 </div>
 <div data-lang="zh-Hans" lang="zh-Hans" hidden>
 <p class="lab-badge">测试中</p>
 <h1>军舰岛（端岛）3D复原：从1947年到今天</h1>
 <p class="page-links"><a href="/3d/zh-cn/">← 3D复原一览</a> <a href="/?lang=zh-CN#l-hashima-island">🗾 在 02 日本全图上查看这座岛的位置</a></p>
+<a class="walk-entry" href="/3d/gunkanjima-walk?lang=zh-Hans"><strong>3D漫步：自由探索岛屿 →</strong><span>独立探索页面 · 电脑与手机 · 进入复原室内</span></a>
 </div>
 <div data-lang="zh-Hant" lang="zh-Hant" hidden>
 <p class="lab-badge">測試中</p>
 <h1>軍艦島（端島）3D復原：從1947年到今天</h1>
 <p class="page-links"><a href="/3d/zh-tw/">← 3D復原一覽</a> <a href="/?lang=zh-TW#l-hashima-island">🗾 在 02 日本全圖上查看這座島的位置</a></p>
+<a class="walk-entry" href="/3d/gunkanjima-walk?lang=zh-Hant"><strong>3D漫步：自由探索島嶼 →</strong><span>獨立探索頁面 · 電腦與手機 · 進入復原室內</span></a>
 </div>
 <div class="viewer">
 <div class="viewer-stage">
@@ -452,7 +458,7 @@
   window.LAB_TEXT = t;
 })();
 </script>
-<script src="/3d/gunkanjima-3d.js?v=8"></script>
+<script src="/3d/gunkanjima-3d.js?v=9"></script>
 <script src="/3d/gunkanjima-podcast.js?v=6"></script>
 </body>
 </html>
