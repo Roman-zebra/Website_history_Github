@@ -61,9 +61,28 @@
   const env = () => {
     const e = WEATHER[st.weather] || WEATHER[0];
     if (!GAME) return e;
-    const palettes=[{bg:[.23,.62,.77],horizon:[.73,.89,.92],sky:[.16,.48,.83],fog:.22},{bg:[.42,.61,.70],horizon:[.78,.83,.85],sky:[.40,.58,.74],fog:.50},{bg:[.25,.40,.51],horizon:[.56,.67,.74],sky:[.25,.39,.56],fog:.78},{bg:[.60,.75,.77],horizon:[.78,.88,.87],sky:[.55,.73,.80],fog:1.10}];
-    return Object.assign({},e,palettes[st.weather]);
+    // Clear sky stops between the video's reference image (#36C9F9 to #C1F2F8) and its final scene (#6BC8F8 to #BCE8F7); cyan haze.
+    const palettes=[{bg:[.23,.62,.77],horizon:[.72,.91,.94],skyHorizon:[.74,.91,.97],mid:[.45,.85,.98],sky:[.30,.78,.97],fog:.3},{bg:[.42,.61,.70],horizon:[.78,.83,.85],sky:[.40,.58,.74],fog:.50},{bg:[.25,.40,.51],horizon:[.56,.67,.74],sky:[.25,.39,.56],fog:.78},{bg:[.60,.75,.77],horizon:[.78,.88,.87],sky:[.55,.73,.80],fog:1.10}];
+    const p=Object.assign({},e,palettes[st.weather]);
+    p.skyHorizon=p.skyHorizon||p.horizon;p.mid=p.mid||p.sky.map((c,i)=>c*.55+p.horizon[i]*.45);p.fog*=look.haze;
+    return p;
   };
+  /* Walking-view look, adjustable in the page menu (the video's lesson: expose parameters and tune by eye). */
+  /* Palette presets, bright to dark, for the ground, grass and foliage together. Summer follows the
+     reference image in the video; the others follow its season presets (highlight/shadow pairs). */
+  const PRESETS = {
+    spring: ['#d6ff9a', '#bdf07e', '#9fdc70', '#6eb863', '#3f8a55'],
+    summer: ['#bdf57a', '#a0e65e', '#82d052', '#52a04a', '#2c7439'],
+    autumn: ['#edc75a', '#e0a347', '#c67a35', '#8e4a1d', '#4d1d07'],
+    winter: ['#ebf2ff', '#d2deef', '#aebfd6', '#7d91ab', '#475b73'],
+    magic: ['#c9a2ee', '#ab78dd', '#8455c0', '#52308f', '#200951']
+  };
+  const LOOK_DEFAULT = { preset: 'summer', exposure: 1.04, saturation: 1.06, contrast: .2, warmth: .4, grass: 1, flowers: 1, land: 1, haze: 1,
+    clouds: .55, cloudScale: 66, cloudSpeed: 3.5, mottle: .32, sheen: .13, streaks: .25, grain: .03, spots: 1, wind: 1, sparkle: 1, ambient: 1, bloom: lowEnd ? 0 : .4 };
+  const look = Object.assign({}, LOOK_DEFAULT);
+  const gradeOf = () => GAME ? [look.exposure, look.saturation, look.contrast, look.warmth] : [1, 1, 0, 0];
+  const rampOf = () => (PRESETS[look.preset] || PRESETS.summer).map(h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255));
+  const lookTime = () => reduce ? 0 : (performance.now() - t0) / 1000;
   const EL_MIN = 0.06, EL_MAX = 1.5, D_MIN = 40, D_MAX = 1800;
   /* inside a room the camera may come right up to the furniture and look a little upward; outside it may come close to a building */
   const D_MIN_SCENE = 0.6, D_MAX_SCENE = 90, EL_MIN_SCENE = -0.35, D_MIN_OUTSIDE = 8;
@@ -113,7 +132,44 @@
       return up * down;
     }`;
   const SHADOW_FN = `
-    varying vec3 vWorld; uniform vec3 uEye;
+    varying vec3 vWorld; uniform vec3 uEye; uniform vec4 uGrade;
+    /* Walking-view look (tunable in the page menu): a five-tint palette shared by the ground and everything
+       growing on it, overlay amounts (mottling, sheen, wind streaks, time) and clouds (shadow amount,
+       scale in metres, drift m/s, film grain). */
+    uniform vec3 uRamp0, uRamp1, uRamp2, uRamp3, uRamp4; uniform vec4 uOverlay, uCloud;
+    float hash(vec2 p){ p=mod(p,113.0); return fract(sin(dot(p, vec2(7.13, 3.71))) * 157.91); }
+    float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }
+    // Worley F1/F2 (cells, cracks, water caustics).
+    vec2 worley(vec2 p){
+      vec2 i=floor(p),f=fract(p);float d1=8.0,d2=8.0;
+      for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){vec2 g=vec2(float(x),float(y)),o=vec2(hash(i+g),hash(i+g+19.7));float d=length(g+o-f);if(d<d1){d2=d1;d1=d;}else if(d<d2)d2=d;}
+      return vec2(d1,d2);
+    }
+    vec3 rampAt(float t){
+      t=clamp(t,0.0,1.0)*4.0;
+      if(t<1.0)return mix(uRamp0,uRamp1,t);if(t<2.0)return mix(uRamp1,uRamp2,t-1.0);if(t<3.0)return mix(uRamp2,uRamp3,t-2.0);return mix(uRamp3,uRamp4,t-3.0);
+    }
+    // One world-space colour field for the ground and every blade on it: large soft colour areas,
+    // teal mottling (multiply) and a pale-yellow sheen (add), after the reference video's grass manager.
+    vec3 meadowColor(vec2 p){
+      float n=.55*noise(p*.024)+.3*noise(p*.09+5.0)+.15*noise(p*.31-3.0);
+      vec3 c=rampAt(mix(.6,.04,smoothstep(.25,.75,n)));
+      c*=mix(vec3(1.0),vec3(.04,.47,.41),uOverlay.x*smoothstep(.52,.8,noise(p*.043+11.0)));
+      return c+vec3(.94,.99,.55)*uOverlay.y*smoothstep(.58,.86,noise(vec2(p.x*.03+p.y*.017,(p.y*.03-p.x*.017)*.57)+2.0));
+    }
+    // Drifting cloud shadows projected along the sun, so the same blotches sweep over ground, walls and roofs.
+    float cloudShadow(vec3 wp,vec3 sun){
+      vec2 p=wp.xz-sun.xz/max(sun.y,.3)*wp.y-vec2(.83,.55)*uOverlay.w*uCloud.z;
+      return smoothstep(.5,.64,.62*noise(p/uCloud.y)+.38*noise(p/(uCloud.y*.36)+7.0))*uCloud.x;
+    }
+    // Colour pass: exposure (high key), saturation, S-curve contrast, warm balance and a faint film grain.
+    vec3 grade(vec3 c){
+      c*=uGrade.x;float l=dot(c,vec3(.299,.587,.114));c=max(mix(vec3(l),c,uGrade.y),0.0);
+      c=mix(c,c*c*(3.0-2.0*c),clamp(uGrade.z,0.0,1.0));
+      c=c*vec3(1.0+uGrade.w*.05,1.0+uGrade.w*.015,1.0-uGrade.w*.05);
+      return clamp(c+(hash(gl_FragCoord.xy+floor(uOverlay.w*24.0)*vec2(17.0,31.0))-.5)*uCloud.w,0.0,1.0);
+    }
     // Sky-coloured directional fog, informed by Godot sky.glsl (MIT).
     vec3 aerial(vec3 col,vec3 horizon,vec3 sun,float density,float depth,float enabled){
       float amount=clamp(density*smoothstep(80.0,900.0,depth),0.0,1.0);
@@ -123,6 +179,9 @@
         float forward=pow(max(dot(ray/max(distanceToEye,.001),sun),0.0),8.0);
         haze=mix(horizon,vec3(.94,.86,.70),forward*.18);
         amount=clamp(1.0-exp(-density*max(distanceToEye-24.0,0.0)*.0035),0.0,.92);
+        // Cloud shadows are teal-green, never grey.
+        col*=mix(vec3(1.0),vec3(.30,.60,.62),cloudShadow(vWorld,sun));
+        return grade(mix(col,haze,amount));
       }
       return mix(col,haze,amount);
     }
@@ -149,19 +208,20 @@
       vec3 indirect=mix(vec3(.32,.35,.41),vec3(.69,.75,.83),normal.y*.5+.5);
       indirect*=mix(1.0,occlusion,.5);
       return albedo*max(indirect,mainLight);
-    }
-    float hash(vec2 p){ p=mod(p,113.0); return fract(sin(dot(p, vec2(7.13, 3.71))) * 157.91); }
-    float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
-      return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }`;
+    }`;
   // ground and sea: the aerial photograph draped on the terrain
   const TERRAIN_VS = COMMON_VS + `
     attribute vec2 aGrid; attribute float aH; attribute vec3 aNor; attribute float aSea;
+    /* walking view only: (grass, path, cliff) and (flower, weed, coast proximity); zero elsewhere */
+    attribute vec3 aMaskA; attribute vec3 aMaskB;
     varying vec2 vUvP; varying vec2 vUvO; varying vec3 vNor; varying float vSea; varying vec3 vPos;
+    varying vec3 vMaskA; varying vec3 vMaskB;
     void main(){
       float h = aH * uLift;
       vec2 g = uPP + (aGrid - uPP) * (1.0 - h / uHf);
       float e = uLift * uExag;
       vNor = turn(normalize(vec3(aNor.x * e, aNor.y, aNor.z * e)));
+      vMaskA = aMaskA; vMaskB = aMaskB;
       vUvP = (aGrid + 0.5) / (2.0 * uC); vUvO = (g + 0.5) / (2.0 * uC); vSea = aSea;
       vec3 p = place(g, h); vPos = p;
       finish(p);
@@ -170,8 +230,9 @@
     precision mediump float;
     uniform sampler2D uTexA, uTexB;
         uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uTime, uAnime, uYear;
-    uniform vec3 uBg, uSun, uHorizon;
+    uniform vec3 uBg, uSun, uHorizon; uniform vec4 uWater;
     varying vec2 vUvP; varying vec2 vUvO; varying vec3 vNor; varying float vSea; varying vec3 vPos;
+    varying vec3 vMaskA; varying vec3 vMaskB;
     varying vec4 vShadow; varying float vDepth;
     ` + SHADOW_FN + `
     void main(){
@@ -199,6 +260,9 @@
         float nearSurface=1.0-smoothstep(12.0,42.0,vDepth);
         float joint=(1.0-smoothstep(.012,.033,min(edgeDistance.x,edgeDistance.y)))*nearSurface;
         concrete*=1.0-joint*.14;
+        // Worley F2-F1 hairline cracks break up the slick paving (near the walker only).
+        vec2 cracks=worley(vPos.xz*.55);
+        concrete*=1.0-.1*(1.0-smoothstep(.01,.04,cracks.y-cracks.x))*nearSurface*step(.6,noise(vPos.xz*.2+4.0));
         float stain=smoothstep(.56,.83,noise(vPos.xz*.24+8.0));
         concrete=mix(concrete,vec3(.35,.37,.36),stain*.22);
         vec3 rock=mix(vec3(.36,.38,.38),vec3(.53,.52,.47),noise(vPos.xz*.21+vPos.y*.18));
@@ -206,8 +270,34 @@
         float age=smoothstep(74.0,110.0,uYear);
         float growth=age*smoothstep(.52,.78,noise(vPos.xz*.13))*mix(.46,.13,pavement);
         surface=mix(surface,vec3(.27,.34,.26),growth);
-        // Continuous diffuse light avoids the old hard yellow/green bands.
-        col=toonLight(surface,n,uSun,sh,1.0);
+        // Placeholder anime cover (illustrative, not historical vegetation). The ground uses the same world-space
+        // colour field as every grass blade, so sparse blades read as dense grass (the video's key rule).
+        float cover=smoothstep(.10,.50,vMaskA.x+age*.22*(1.0-vMaskA.z));
+        vec3 meadow=meadowColor(vPos.xz);
+        // Slope auto-paint (about 23-33 degrees): steep banks turn pale olive-yellow soil, as in the video's tool.
+        meadow=mix(meadow,mix(vec3(.76,.82,.37),vec3(.81,.84,.42),noise(vPos.xz*.6))*mix(rampAt(.2)/max(rampAt(.2).g,.01),vec3(1.0),.7),(1.0-smoothstep(.84,.92,n.y))*.85);
+        // Flower speckles keep colour at mid distance, where the flower sprites have faded out.
+        vec2 speck=floor(vPos.xz*3.0);float petals=step(.9,hash(speck))*smoothstep(.15,.55,vMaskB.x)*smoothstep(8.0,20.0,vDepth);
+        meadow=mix(meadow,mix(vec3(1.0,.86,.92),vec3(1.0,.98,.90),hash(speck+7.0)),petals*.8);
+        // Wind streaks: long thin white dashes travelling with the wind.
+        float along=dot(vPos.xz,vec2(.83,.55)),across=dot(vPos.xz,vec2(-.55,.83));
+        meadow+=vec3(1.0)*uOverlay.z*smoothstep(.78,.92,noise(vec2(along*.11-uOverlay.w*.8,across*1.7)))*smoothstep(.45,.75,noise(vec2(along*.02,across*.05)+3.0));
+        // Pale butter-cream dirt paths, slightly darker along their feathered banks.
+        vec3 dirt=mix(vec3(.84,.85,.60),vec3(.90,.90,.65),noise(vPos.xz*.45+1.0));
+        dirt=mix(dirt,vec3(.95,.94,.72),smoothstep(.6,.9,noise(vPos.xz*1.3))*.6);
+        dirt*=mix(.86,1.0,smoothstep(.3,.75,vMaskA.y));
+        vec3 ground=mix(surface,meadow,cover);
+        float pm=smoothstep(.22,.6,vMaskA.y)*smoothstep(.8,.95,n.y);
+        ground=mix(ground,dirt,pm);
+        // Tufts in paving joints and along wall bases, in the meadow colours; more on the abandoned island.
+        float jointLine=1.0-smoothstep(.02,.10,min(edgeDistance.x,edgeDistance.y));
+        float tufts=max(jointLine*step(.5,noise(vPos.xz*1.7)),smoothstep(.55,.8,noise(vPos.xz*2.6))*vMaskB.y);
+        ground=mix(ground,meadowColor(vPos.xz)*.88,tufts*clamp(vMaskB.y*.9+age*.5,0.0,1.0)*(1.0-cover)*pavement);
+        // Wet, darker stone just above the waterline.
+        ground*=1.0-.32*smoothstep(.955,.995,vMaskB.z)*(1.0-cover);
+        col=toonLight(ground,n,uSun,sh,1.0);
+        // Shade on grass stays a deep saturated green, never grey.
+        col=mix(col,col*vec3(.78,1.08,.72),(1.0-sh)*cover*(1.0-pm));
       }
       float edge = smoothstep(0.5, 0.36, max(abs(vUvP.x - 0.5), abs(vUvP.y - 0.5)));
       if (vSea > 0.5){
@@ -220,8 +310,20 @@
           float wave=sin(vPos.x*.16+uTime*.65)+sin(vPos.z*.21-uTime*.4);
           float fresnel=.05+.65*pow(1.0-max(dot(n,eye),0.0),5.0);
           vec3 water=mix(vec3(.045,.24,.34),vec3(.08,.40,.47),.48+.09*wave);
+          // Anime water: turquoise shallows near the island, drifting Voronoi cells, star glints and banded foam.
+          float coast=(1.0-vMaskB.z)*40.0,shallow=vMaskB.z>0.0?1.0-smoothstep(1.5,20.0,coast):0.0,near=1.0-smoothstep(25.0,90.0,vDepth);
+          water=mix(water,vec3(.16,.62,.66),shallow*.8);
+          vec2 cells=worley(vPos.xz/(3.4*uWater.x)+vec2(uTime*.1,uTime*.06));
+          water+=vec3(.55,.85,.90)*(1.0-smoothstep(.02,.14,cells.y-cells.x))*.1*near*(.4+.6*shallow);
           col=mix(water,uHorizon*.82,fresnel)+vec3(1.0,.91,.72)*glint*.65;
           col+=vec3(.52,.74,.73)*smoothstep(1.83,1.98,wave)*.07;
+          vec2 cell=floor(vPos.xz/.9),q=fract(vPos.xz/.9)-.5;
+          float star=clamp(max(1.0-abs(q.x)*12.0-abs(q.y)*2.6,1.0-abs(q.y)*12.0-abs(q.x)*2.6),0.0,1.0);
+          col+=vec3(1.0,.98,.90)*star*step(.79,hash(cell))*pow(max(sin(uTime*3.0+hash(cell+3.0)*6.28),0.0),6.0)*near*uWater.y*.9;
+          float wob=(noise(vPos.xz*.7+uTime*.3)-.5)*.6,phase=fract(coast-uTime*.36+wob);
+          float bands=(1.0-smoothstep(0.0,4.0,coast))*smoothstep(.42,.5,phase)*(1.0-smoothstep(.5,.58,phase));
+          float line=1.0-smoothstep(.25,.9,coast+wob*.5);
+          col=mix(col,vec3(.95,.99,1.0),max(line,bands*.7)*step(.001,vMaskB.z)*uWater.z);
         }
         edge = 1.0;
       }
@@ -348,6 +450,37 @@
         col*=1.0-.12*(1.0-smoothstep(.03,.16,fy))*(1.0-win);
         float trim=step(.31,fy)*step(fy,.35)+step(.77,fy)*step(fy,.80);
         col=mix(col,vec3(.43,.56,.53),trim*.25*(1.0-win));
+        // Placeholder facade life, not documented detail: rain streaks, balcony laundry and pots, climbing ivy.
+        float bay=fract(s/period),bayId=floor(s/period);
+        float underSill=step(left+.06,bay)*step(bay,right-.06)*step(fy,bottom)*(1.0-smoothstep(0.0,.3,bottom-fy));
+        col*=1.0-(1.0-win)*underSill*.2*smoothstep(.3,.75,noise(vec2(s*7.0,y*.5+seed)));
+        float lively=hash(vec2(bayId+seed*3.0,storey*1.7+7.0))*(1.0-age*.8);
+        if(style<2.5&&storey>=1.0){
+          float cloth=step(.62,lively)*step(.42,pane.y)*step(pane.y,.9)*step(.06,pane.x)*step(pane.x,.94),piece=fract(pane.x*3.0+lively*7.0);
+          cloth*=step(.08,piece)*step(piece,.9)*step(.4,pane.y+.4*fract(pane.x*3.0+lively));
+          vec3 fabric=hash(vec2(bayId,storey+floor(pane.x*3.0)))>.5?vec3(.96,.95,.91):mix(vec3(.56,.72,.93),vec3(.98,.70,.72),hash(vec2(storey,bayId+3.0)));
+          col=mix(col,fabric*mix(.9,1.0,step(.5,fract(pane.y*9.0))),cloth*nearDetail);
+          col=mix(col,vec3(.35,.29,.22),(1.0-smoothstep(.006,.016,abs(pane.y-.93)*paneHeight))*step(.62,lively)*step(0.0,pane.x)*step(pane.x,1.0)*nearDetail);
+          float pot=step(.78,hash(vec2(bayId*1.3,storey+seed)))*step(abs(pane.y+.07)*paneHeight,.12)*step(.18,pane.x)*step(pane.x,.46);
+          col=mix(col,mix(vec3(.25,.52,.20),vec3(.66,.37,.24),step(pane.y,-.09)),pot*nearDetail);
+        }
+        // Ground cover creeps up the wall base in the shared meadow colours, with a jagged top edge.
+        float creep=(1.0-smoothstep(.12,.5+.9*noise(vec2(s*1.7,seed)),y))*smoothstep(.35,.6,noise(vec2(s*.23,seed*2.1)))*nearDetail;
+        col=mix(col,meadowColor(vWorld.xz)*mix(.7,1.0,smoothstep(0.0,.6,y)),creep);
+        // Painted brush strokes and hairline cracks keep plain concrete from looking slick.
+        col*=.95+.08*noise(vec2(s*.8,y*3.2+seed));
+        vec2 wc=worley(vec2(s,y)*1.9+seed);
+        col*=1.0-.09*(1.0-smoothstep(.006,.03,wc.y-wc.x))*(1.0-win)*nearDetail*step(.68,noise(vec2(s*.15,y*.2+seed*3.0)));
+        float sill=step(bottom-.06,fy)*step(fy,bottom)*step(left,bay)*step(bay,right);
+        col=mix(col,mix(vec3(.51,.60,.25),vec3(.32,.33,.13),noise(vec2(s*6.0,y*6.0))),sill*smoothstep(.45,.65,noise(vec2(s*1.3,storey+seed)))*.8);
+        // Ivy on some wall stretches: a dense mass at the base thinning into an irregular leafy fringe.
+        float ivySeed=hash(vec2(seed*11.0,5.0)),stretch=smoothstep(.42,.62,noise(vec2(s*.11,seed*5.3)))*step(.25,ivySeed);
+        float reach=(mix(1.0,4.5,ivySeed)+age*8.0)*(.4+.6*noise(vec2(s*.45,seed*2.7)));
+        float leafA=noise(vec2(s,y)*4.2+seed),leafB=noise(vec2(s,y)*9.0-seed)*nearDetail+.5*(1.0-nearDetail);
+        float edge=reach-y+.9*(noise(vec2(s,y)*2.2)-.5);
+        float ivy=stretch*smoothstep(.34,.46,leafA*.7+leafB*.3+clamp(edge*.35,-.6,.5))*step(0.0,edge+.6)*(1.0-win*(1.0-age)*.85);
+        vec3 ivyCol=mix(vec3(.16,.34,.14),vec3(.38,.62,.21),smoothstep(.48,.66,leafA))*mix(.86,1.1,leafB);
+        col=mix(col,ivyCol,ivy);
       }
       /* weathering after 1974: streaks, stains, moss near the ground */
       float streak = noise(vec2(s * 1.5, y * 0.3 + seed * 5.0));
@@ -403,6 +536,11 @@
       col *= mix(1.0, 0.42 + 0.6 * d * mix(0.35, 1.0, sh), uShade);
       if(uAnime>0.5){
         vec3 roofBase=mix(vec3(.54,.56,.55),vec3(.73,.72,.66),.55+.16*noise(vPos*.12));
+        // Placeholder rooftop vegetable beds on some concrete roofs (illustrative, not per-building evidence).
+        vec2 m=vPos*.805,bedCell=fract(m/vec2(2.4,5.2));
+        float bed=step(.55,fract(seed*37.3+style*.13))*(1.0-step(4.5,style)*step(style,5.5))*step(.18,bedCell.x)*step(bedCell.x,.78)*step(.1,bedCell.y)*step(bedCell.y,.9);
+        vec3 plot=mix(vec3(.40,.29,.19),mix(vec3(.26,.50,.19),vec3(.46,.68,.24),noise(m*4.0)),smoothstep(.42,.6,noise(m*2.2+seed*9.0)));
+        roofBase=mix(roofBase,plot,bed);
         col=toonLight(roofBase,vec3(0.0,1.0,0.0),uSun,sh,1.0);
       }
       if (uChange > 0.001){ vec3 grey = vec3(dot(col, vec3(0.299, 0.587, 0.114))); col = mix(col, grey * 0.9, 0.5 * uChange); }
@@ -439,38 +577,81 @@
 #else
     precision mediump float;
 #endif
-    uniform vec3 uTop, uHorizon, uSun;
-    uniform float uEl, uAz, uAspect, uAnime, uTime, uCloudCover, uStorm;
+    uniform vec3 uTop, uHorizon, uSun, uMid;
+    uniform float uEl, uAz, uAspect, uAnime, uTime, uCloudCover, uStorm, uLand;
+    uniform vec4 uGrade;
     varying vec2 vP;
     float skyHash(vec2 p){p=mod(p,113.0);return fract(sin(dot(p,vec2(7.13,3.71)))*157.91);}
     float skyNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(skyHash(i),skyHash(i+vec2(1,0)),f.x),mix(skyHash(i+vec2(0,1)),skyHash(i+vec2(1,1)),f.x),f.y);}
     float cloudNoise(vec2 p){return .57*skyNoise(p)+.28*skyNoise(p*2.03+17.1)+.15*skyNoise(p*4.07-9.2);}
     float density(vec2 p){return smoothstep(.57-uCloudCover*.23,.78-uCloudCover*.19,cloudNoise(p));}
+    float wrapAngle(float a){return a-6.28318*floor((a+3.14159)/6.28318);}
+    // Periodic rounded ridge over azimuth, 0..1.
+    float ridge(float az,float k){return .55+.22*sin(3.0*az+k)+.14*sin(7.0*az+k*2.3)+.09*sin(13.0*az+k*.7);}
+    vec3 grade(vec3 c){
+      c*=uGrade.x;float l=dot(c,vec3(.299,.587,.114));c=max(mix(vec3(l),c,uGrade.y),0.0);
+      c=mix(c,c*c*(3.0-2.0*c),clamp(uGrade.z,0.0,1.0));
+      return clamp(c*vec3(1.0+uGrade.w*.05,1.0+uGrade.w*.015,1.0-uGrade.w*.05),0.0,1.0);
+    }
     void main(){
       if(uAnime<.5){gl_FragColor=vec4(mix(uHorizon,uTop,smoothstep(-.2,1.0,vP.y+uEl*.6)),1);return;}
       float ce=cos(uEl),se=sin(uEl),ca=cos(uAz),sa=sin(uAz);
       vec3 forward=vec3(sa*ce,se,ca*ce),right=vec3(-ca,0,sa),up=vec3(-sa*se,ce,-ca*se);
       vec3 ray=normalize(forward+.483055*(right*vP.x*uAspect+up*vP.y));
       float altitude=max(ray.y,0.0),sunAmount=max(dot(ray,uSun),0.0);
-      vec3 col=mix(uHorizon,uTop,smoothstep(0.0,.75,altitude));
+      // Four-stop anime gradient: horizon, mid and top (top exponent 1.4, horizon sharpness 3).
+      vec3 col=mix(uMid,uTop,pow(altitude,1.0/1.4));
+      col=mix(col,uHorizon,pow(1.0-altitude,3.0));
       col+=vec3(1.0,.76,.42)*pow(sunAmount,18.0)*.18*(1.0-uStorm);
       col+=vec3(1.0,.90,.68)*smoothstep(.9993,.9998,sunAmount)*(1.0-uStorm)*.8;
+      float az=atan(ray.x,ray.z),el=asin(clamp(ray.y,-1.0,1.0));
       if(ray.y>0.0){
         vec2 wind=vec2(uTime*.014,uTime*.005);
         vec2 plane=ray.xz/(ray.y+.13);
         float veil=smoothstep(.48,.76,cloudNoise(plane*vec2(1.1,3.7)-wind*.43+31.0));
         col=mix(col,mix(vec3(.91,.95,.99),uHorizon,.35),veil*.27*smoothstep(0.0,.22,altitude));
         vec2 q=plane*2.2-wind;
-        float d=density(q),litDensity=density(q+uSun.xz*.28);
+        float d=density(q)*mix(.45,1.0,uCloudCover),litDensity=density(q+uSun.xz*.28);
         float rim=clamp((d-litDensity)*3.0,0.0,1.0);
         vec3 bottom=mix(vec3(.60,.70,.82),vec3(.31,.39,.48),uStorm);
         vec3 cloud=mix(vec3(1.0,.98,.91),bottom,clamp(d*.70+uStorm*.30,0.0,1.0));
         cloud+=vec3(1.0,.85,.56)*rim*.22*(1.0-uStorm);
-        float fade=smoothstep(0.0,.11,altitude);
         cloud=mix(uHorizon,cloud,smoothstep(0.0,.32,altitude));
-        col=mix(col,cloud,d*fade*.96);
+        col=mix(col,cloud,d*smoothstep(0.0,.11,altitude)*.96);
+        // Flat cartoon cumulus: a few lobed puffs with flat bottoms, white tops and blue-grey undersides.
+        for(int i=0;i<12;i++){
+          float fi=float(i),h1=skyHash(vec2(fi,3.1)),h2=skyHash(vec2(fi,7.7)),h3=skyHash(vec2(fi,11.3));
+          float size=.085+.07*h2,base=.20+.30*h1;
+          float dx=wrapAngle(az-(fi*.5236+h3*.35+uTime*.0012))*cos(el)/size,dy=(el-base)/size;
+          if(abs(dx)>1.6||dy<-.2||dy>1.4)continue;
+          float lobes=max(max(.44-length(vec2(dx+.55,dy-.18)),.56-length(vec2(dx+.08,dy-.42))),max(.48-length(vec2(dx-.45,dy-.30)),.36-length(vec2(dx-.95,dy-.12))));
+          lobes=min(lobes,dy+.02);
+          float a=smoothstep(0.0,.03,lobes)*(1.0-uStorm*.7);
+          float band=smoothstep(.1,.16,dy)+smoothstep(.42,.48,dy);
+          vec3 puff=mix(vec3(.78,.86,.91),mix(vec3(.88,.93,.96),vec3(.99,.99,.98),step(1.5,band)),step(.5,band));
+          puff+=vec3(1.0,.93,.78)*.08*smoothstep(.0,.08,lobes)*max(dot(normalize(vec3(dx,dy,.6)),normalize(vec3(uSun.x,uSun.y,.3))),0.0);
+          col=mix(col,puff,a);
+        }
       }
-      gl_FragColor=vec4(col,1.0);
+      // A continuous bank of cumulus sitting on the horizon (flat base, lobed tops), cel-toned, drifting slowly.
+      if(ray.y>-.01){
+        float drift=az+uTime*.0009,lobe=.5*sin(drift*9.0+1.7)+.3*sin(drift*23.0+.4)+.2*sin(drift*41.0+2.9);
+        float top=(.075+.035*lobe+.03*skyNoise(vec2(drift*6.0,1.3)))*mix(.7,1.3,uCloudCover);
+        float bank=smoothstep(0.0,.012,top-el)*smoothstep(-.01,.004,el);
+        float tone=el/max(top,.001);
+        vec3 puff=mix(vec3(.80,.89,.93),vec3(.99,.99,.94),smoothstep(.15,.55,tone+.12*skyNoise(vec2(drift*30.0,el*60.0))));
+        puff=mix(puff,uHorizon,.25);
+        col=mix(col,puff,bank*(1.0-uStorm*.5));
+      }
+      // Distant land painted into the sky, only where land lies: north through east to south-east
+      // (Takashima and the Nagasaki peninsula). Illustrative silhouettes, not survey data.
+      float window=smoothstep(1.35,.95,abs(wrapAngle(az-1.95)));
+      float farTop=uLand*.052*ridge(az,1.3)*window,nearTop=uLand*.03*ridge(az*1.7,4.1)*smoothstep(.42,.18,abs(wrapAngle(az-2.72)));
+      if(el<farTop&&el>-.004){col=mix(vec3(.66,.86,.90),vec3(.78,.94,.96),smoothstep(farTop,0.0,el)*.7);}
+      if(el<nearTop&&el>-.004){col=mix(vec3(.56,.76,.83),vec3(.66,.84,.88),smoothstep(nearTop,0.0,el)*.7);}
+      // Below the horizon beyond the modelled sea: distant water fading into haze.
+      if(el<-.004)col=mix(uHorizon*.92,vec3(.20,.47,.62),smoothstep(-.004,-.08,el));
+      gl_FragColor=vec4(grade(col),1.0);
     }`;
   const DEPTH_FS = `precision mediump float; void main(){ gl_FragColor = vec4(1.0); }`;
   const DEPTH_FS_ALIVE = `precision mediump float; varying float vAlive; varying float vGhost; void main(){ if (vAlive < 0.02 || vGhost > 0.5) discard; gl_FragColor = vec4(1.0); }`;
@@ -582,6 +763,228 @@
       gl_FragColor = vec4(col, vCol.a);
     }`;
   const BOX_DEPTH_FS = `precision mediump float; varying vec4 vCol; void main(){ if (vCol.a < 0.9) discard; gl_FragColor = vec4(1.0); }`;
+  /* Walking view placeholder nature (see gunkanjima-walk-nature.js): illustrative set dressing only.
+     Grass and flowers are a fixed pool of blades wrapped around the camera, so they stay put in the world
+     while the pool follows the walker; height and cover are read from a ground texture in the vertex shader. */
+  const GRASS_VS = COMMON_VS + `
+    attribute vec4 aBlade; attribute float aSide;
+    uniform sampler2D uGround; uniform vec3 uGroundInfo; uniform vec2 uGroundSize;
+    uniform vec2 uCamUV; uniform float uPatch, uWindTime, uWindStrength; uniform vec4 uPool; uniform mediump float uFlowerPass; uniform vec3 uWalker;
+    varying float vTip; varying vec3 vTint; varying vec2 vCorner; varying float vGust; varying vec2 vRoot; varying float vKindF;
+    float lift(vec4 t){ return (t.r*65280.0+t.g*255.0)*.01; }
+    void main(){
+      vec2 base=uCamUV-vec2(uPatch*.5),uv=base+mod(aBlade.xy-base,uPatch);
+      vec2 g=(uv-uGroundInfo.xy)/uGroundInfo.z,cell=floor(g),f=g-cell,texel=1.0/uGroundSize;
+      vec4 a=texture2D(uGround,(cell+vec2(.5,.5))*texel),b=texture2D(uGround,(cell+vec2(1.5,.5))*texel);
+      vec4 c=texture2D(uGround,(cell+vec2(.5,1.5))*texel),d=texture2D(uGround,(cell+vec2(1.5,1.5))*texel);
+      float h=mix(mix(lift(a),lift(b),f.x),mix(lift(c),lift(d),f.x),f.y);
+      vec2 cover=mix(mix(a.ba,b.ba,f.x),mix(c.ba,d.ba,f.x),f.y);
+      float s=aBlade.z,r1=fract(s*13.37),r2=fract(s*71.93),r3=fract(s*197.3),r4=fract(s*411.9);
+      float inside=step(0.0,g.x)*step(g.x,uGroundSize.x-1.01)*step(0.0,g.y)*step(g.y,uGroundSize.y-1.01);
+      // uPool: fade distance, near hide distance (far pool), size, density.
+      float dist=length((uv-uCamUV)*uMpp),fade=(1.0-smoothstep(uPool.x*.72,uPool.x,dist))*smoothstep(uPool.y,uPool.y*1.35,dist);
+      float amount=uFlowerPass>.5?cover.y:cover.x;
+      float alive=step(r1,amount*1.12*uPool.w)*fade*inside;
+      vec3 root=place(uv,h-.03);
+      float tip=aBlade.w;
+      vec2 wind=vec2(.83,.55);
+      float wave=sin(dot(root.xz,wind)*.22-uWindTime*1.8)*.5+.5;
+      float sway=uWindStrength*(4.0+8.0*wave)*(.8+.2*sin(uWindTime*3.1+s*50.0));
+      vec2 lean=vec2(cos(r4*6.2832),sin(r4*6.2832))*.22+wind*sway;
+      // Player touch response: blades part around the walker.
+      vec2 away=root.xz-uWalker.xz;float near=length(away);
+      lean+=away/max(near,.001)*(1.0-smoothstep(.25,1.35,near))*1.2;
+      vGust=wave;vRoot=root.xz;vCorner=vec2(0.0);vTint=vec3(1.0);
+      vec3 p;
+      if(uFlowerPass>.5){
+        // Cosmos-like heads on thin stems, facing up and tilted towards the walker.
+        float height=mix(.24,.5,r2)*alive,size=mix(.06,.1,r4)*alive;
+        vec3 head=root+vec3(lean.x*height*.35,height,lean.y*height*.35);
+        if(tip>1.5){
+          vKindF=3.0;vTip=tip-2.0;
+          p=mix(root,head,tip-2.0)+vec3(aSide*.009*(3.0-tip),0.0,0.0);
+        } else {
+          vec3 toEye=normalize(vec3(uWalker.x-head.x,0.0,uWalker.z-head.z)+vec3(.0001,0.0,0.0));
+          vec3 nrm=normalize(vec3(0.0,.75,0.0)+toEye*.66),right=normalize(cross(nrm,toEye)),fwd=cross(right,nrm);
+          vKindF=2.0;vTip=tip;vCorner=vec2(aSide,tip*2.0-1.0);
+          p=head+(right*aSide+fwd*(tip*2.0-1.0))*size;
+          vTint=r3<.45?vec3(1.0,.97,.93):r3<.72?vec3(1.0,.84,.90):r3<.9?vec3(.78,.93,.97):vec3(1.0,.9,.45);
+        }
+      } else {
+        // Clumped blades with random scale (x0.64-1.9); rare dark fern accents where cover thins out.
+        float fern=step(.86,fract(s*531.1))*(1.0-smoothstep(.35,.8,amount));
+        float height=mix(.2,.62,r2*r2)*mix(.64,1.9,fract(s*887.3)*fract(s*887.3))*mix(1.0,.7,fern)*uPool.z*alive;
+        float width=mix(.028,.05,r4)*mix(1.0,3.4,fern)*(1.0-tip)*uPool.z*step(.001,alive);
+        float ang=r3*6.2832;vec3 across=vec3(cos(ang),0.0,sin(ang));
+        p=root+across*aSide*width+vec3(lean.x*tip*tip*height,height*tip*(1.0-.16*dot(lean,lean)),lean.y*tip*tip*height);
+        vKindF=fern;vTip=tip;
+      }
+      finish(p);
+    }`;
+  const GRASS_FS = `
+    precision mediump float;
+    uniform float uFog, uAnime, uFlowerPass; uniform vec3 uBg, uSun, uHorizon;
+    varying float vTip; varying vec3 vTint; varying vec2 vCorner; varying float vGust; varying vec2 vRoot; varying float vKindF;
+    varying vec4 vShadow; varying float vDepth;
+    ` + SHADOW_FN + `
+    void main(){
+      float sh=shadowAt(vShadow,.004);
+      vec3 col,up=vec3(0.0,1.0,0.0);
+      if(vKindF>1.5&&vKindF<2.5){
+        float r=length(vCorner),petal=.6+.4*abs(cos(atan(vCorner.y,vCorner.x)*4.0));
+        if(r>petal)discard;
+        col=mix(vec3(1.0,.96,.64),vTint,smoothstep(.15,.25,r));
+        col=mix(col,vTint*.6,smoothstep(petal-.16,petal-.05,r)*.55);
+        col=toonLight(col,up,uSun,sh,1.0);
+      } else if(vKindF>2.5){
+        col=toonLight(meadowColor(vRoot)*.78,up,uSun,sh,1.0);
+      } else {
+        // Blades take the ground colour at their root and share its lighting (up normal): the video's fix
+        // for grass that looked darker than the ground. Root-to-tip gradient; travelling gust highlights.
+        vec3 tint=meadowColor(vRoot);
+        tint=mix(tint,mix(vec3(.11,.50,.08),vec3(.15,.55,.13),vTip),step(.5,vKindF));
+        col=mix(tint*.85,mix(tint*1.15,vec3(.94,.99,.55),.22),smoothstep(0.0,1.0,vTip));
+        col=toonLight(col,up,uSun,sh,1.0)+vec3(.14,.15,.05)*vGust*vTip*vTip*sh;
+        col=mix(col,col*vec3(.78,1.08,.72),1.0-sh);
+      }
+      gl_FragColor=vec4(aerial(col,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
+    }`;
+  /* Ambient life around the walker (placeholder): drifting petals, twinkling sparkles and butterflies in a
+     wrapping box, plus a V formation of five seabirds crossing west to east (adapted from the airship
+     formation in the reference video). Drawn as point sprites. */
+  const PART_VS = COMMON_VS + `
+    attribute vec4 aPart;
+    uniform vec2 uCamUV; uniform float uPatch, uGroundY, uPointScale, uWindTime, uBirds; uniform vec3 uWalker;
+    varying float vType; varying float vPhase; varying vec3 vColor; varying float vFade;
+    void main(){
+      float s=aPart.w;
+      vec3 p;float size;
+      if(uBirds>.5){
+        // aPart: rank, side, phase. 20 s crossing every 34 s; each rank 14 m back and 16 m out.
+        float cycle=mod(uWindTime,34.0),prog=cycle/20.0;
+        p=vec3(mix(-430.0,430.0,prog)-aPart.x*14.0,58.0+2.6*sin(uWindTime*2.64+aPart.z*6.28),-30.0+aPart.y*aPart.x*16.0);
+        vType=3.0;vPhase=uWindTime*6.5+aPart.z*6.28;vColor=vec3(.24,.23,.23);vFade=step(prog,1.0);size=1.7;
+      } else {
+        vType=s<.62?0.0:s<.9?1.0:2.0;
+        float t=uWindTime,r1=fract(s*97.1),r2=fract(s*31.7);
+        vec2 drift=vec2(.83,.55)*t*(vType<.5?.9:vType<1.5?.15:.25)/uMpp;
+        if(vType>1.5)drift+=vec2(sin(t*.4+s*30.0),cos(t*.33+s*17.0))*2.5/uMpp;
+        vec2 base=uCamUV-vec2(uPatch*.5),uv=base+mod(aPart.xy+drift-base,uPatch);
+        float h=vType<.5?6.0-mod(t*(.45+.3*r1)+aPart.z*6.0,6.0):vType<1.5?.4+aPart.z*2.6+.3*sin(t*.7+s*20.0):.45+aPart.z*1.1+.35*sin(t*1.7+s*9.0);
+        p=place(uv,uGroundY+h);
+        if(vType<.5)p.xz+=vec2(sin(t*1.3+s*40.0),cos(t*1.1+s*23.0))*.35;
+        vPhase=vType<.5?t*(1.5+r2)+s*20.0:vType<1.5?pow(max(sin(t*2.2+s*50.0),0.0),4.0):t*14.0+s*30.0;
+        vColor=vType<.5?mix(vec3(1.0,.80,.87),vec3(1.0,.96,.96),step(.5,r2)):vType<1.5?vec3(1.0,.97,.84):(r2<.4?vec3(1.0,.97,.9):r2<.75?vec3(1.0,.93,.5):vec3(.72,.86,1.0));
+        float d=length(p-uWalker);
+        vFade=(1.0-smoothstep(uPatch*uMpp*.32,uPatch*uMpp*.48,d))*smoothstep(.5,1.2,d);
+        size=vType<.5?.075:vType<1.5?.06:.16;
+      }
+      finish(p);
+      gl_PointSize=clamp(size*uPointScale/max(gl_Position.w,.1),1.0,64.0);
+    }`;
+  const PART_FS = `
+    precision mediump float;
+    uniform float uFog, uAnime, uAmount; uniform vec3 uBg, uSun, uHorizon;
+    varying float vType; varying float vPhase; varying vec3 vColor; varying float vFade;
+    varying vec4 vShadow; varying float vDepth;
+    ` + SHADOW_FN + `
+    void main(){
+      vec2 c=gl_PointCoord*2.0-1.0;float a;
+      if(vType<.5){vec2 r=vec2(c.x*cos(vPhase)-c.y*sin(vPhase),c.x*sin(vPhase)+c.y*cos(vPhase));a=1.0-smoothstep(.7,.95,length(r*vec2(1.0,1.9)));}
+      else if(vType<1.5)a=clamp(max(1.0-abs(c.x)*6.0-abs(c.y)*1.2,1.0-abs(c.y)*6.0-abs(c.x)*1.2),0.0,1.0)*vPhase;
+      else if(vType<2.5){float flap=max(abs(sin(vPhase)),.18);vec2 q=vec2(abs(c.x)/flap,c.y);a=max(1.0-smoothstep(.75,.95,length((q-vec2(.5,-.12))*vec2(1.0,1.25))),1.0-smoothstep(.55,.75,length((q-vec2(.45,.45))*vec2(1.3,1.6))));}
+      else{float wing=c.y-.55*abs(c.x)+.25*sin(vPhase)*abs(c.x);a=(1.0-smoothstep(.07,.15,abs(wing+.1*(1.0-abs(c.x)))))*step(abs(c.x),.95);}
+      a*=vFade*uAmount;
+      if(a<.04)discard;
+      gl_FragColor=vec4(aerial(vColor,uHorizon,uSun,uFog,vDepth,uAnime),clamp(a,0.0,1.0));
+    }`;
+  /* Walking-view post-process: soft bloom (bright pass, separable blur at quarter size) and an edge-aware
+     anti-alias in the composite, because rendering to a texture loses the canvas multisampling. */
+  const POST_VS = `attribute vec2 aPos; varying vec2 vUv; void main(){ vUv = aPos * .5 + .5; gl_Position = vec4(aPos, 0.0, 1.0); }`;
+  const BRIGHT_FS = `precision mediump float; uniform sampler2D uTex; uniform vec2 uTexel; uniform float uThreshold; varying vec2 vUv;
+    void main(){
+      vec3 c=(texture2D(uTex,vUv+uTexel*vec2(-1.0,-1.0)).rgb+texture2D(uTex,vUv+uTexel*vec2(1.0,-1.0)).rgb+texture2D(uTex,vUv+uTexel*vec2(-1.0,1.0)).rgb+texture2D(uTex,vUv+uTexel).rgb)*.25;
+      gl_FragColor=vec4(c*smoothstep(uThreshold,uThreshold+.12,dot(c,vec3(.299,.587,.114))),1.0);
+    }`;
+  const BLUR_FS = `precision mediump float; uniform sampler2D uTex; uniform vec2 uDir; varying vec2 vUv;
+    void main(){
+      vec3 c=texture2D(uTex,vUv).rgb*.227+(texture2D(uTex,vUv+uDir*1.385).rgb+texture2D(uTex,vUv-uDir*1.385).rgb)*.316+(texture2D(uTex,vUv+uDir*3.231).rgb+texture2D(uTex,vUv-uDir*3.231).rgb)*.07;
+      gl_FragColor=vec4(c,1.0);
+    }`;
+  const COMPOSITE_FS = `precision mediump float; uniform sampler2D uTex, uBloom; uniform vec2 uTexel; uniform float uBloomAmount; varying vec2 vUv;
+    vec3 at(vec2 o){ return texture2D(uTex,vUv+o*uTexel).rgb; }
+    void main(){
+      // Blend along the local edge direction where luminance changes sharply; flat areas pass through.
+      vec3 L=vec3(.299,.587,.114),m=at(vec2(0.0));
+      float nw=dot(at(vec2(-1.0,-1.0)),L),ne=dot(at(vec2(1.0,-1.0)),L),sw=dot(at(vec2(-1.0,1.0)),L),se=dot(at(vec2(1.0,1.0)),L),lm=dot(m,L);
+      float lo=min(lm,min(min(nw,ne),min(sw,se))),hi=max(lm,max(max(nw,ne),max(sw,se)));
+      vec2 dir=vec2(-((nw+ne)-(sw+se)),(nw+sw)-(ne+se));
+      dir=clamp(dir/(min(abs(dir.x),abs(dir.y))+max((nw+ne+sw+se)*.03,.008)),-6.0,6.0);
+      vec3 a=.5*(at(dir*(-1.0/6.0))+at(dir*(1.0/6.0))),b=.5*a+.25*(at(dir*-.5)+at(dir*.5));
+      float lb=dot(b,L);
+      vec3 c=hi-lo<.05?m:(lb<lo||lb>hi?a:b);
+      gl_FragColor=vec4(c+texture2D(uBloom,vUv).rgb*uBloomAmount,1.0);
+    }`;
+  const PLANT_VS = COMMON_VS + `
+    attribute vec3 aPos3; attribute vec3 aNor; attribute vec3 aCol; attribute vec3 aInfo;
+    uniform float uWindTime, uWindStrength;
+    varying vec3 vNor; varying vec3 vCol; varying vec3 vLoc; varying vec2 vKind;
+    void main(){
+      vec3 p=place(aPos3.xz,aPos3.y);
+      float phase=uWindTime*1.15+aInfo.z*6.2832+p.x*.04,bend=aInfo.x*aInfo.x*uWindStrength*(aInfo.y>2.5&&aInfo.y<7.5?0.0:4.0);
+      p.x+=sin(phase)*bend;p.z+=sin(phase*.77+1.3)*bend*.6;
+      vNor=turn(aNor);vCol=aCol;vKind=aInfo.yz;vLoc=p;
+      finish(p);
+    }`;
+  const PLANT_FS = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+    uniform float uFog, uAnime, uTime; uniform vec3 uBg, uSun, uHorizon;
+    varying vec3 vNor; varying vec3 vCol; varying vec3 vLoc; varying vec2 vKind;
+    varying vec4 vShadow; varying float vDepth;
+    ` + SHADOW_FN + `
+    void main(){
+      vec3 n=normalize(vNor),base=vCol;float kind=vKind.x;
+      float sh=shadowAt(vShadow,.004);
+      if(kind>5.5&&kind<6.5){
+        // Pond: mint gradient, soft drifting mottling and twinkling sparkles.
+        vec3 water=base*(.95+.1*noise(vLoc.xz*.7+vec2(uTime*.08,-uTime*.05)));
+        float twinkle=step(.975,hash(floor(vLoc.xz*5.0)+floor(uTime*2.5)*vec2(3.1,1.7)));
+        water+=vec3(.95,1.0,.97)*twinkle*.55*mix(.4,1.0,sh);
+        gl_FragColor=vec4(aerial(water*mix(.86,1.0,sh),uHorizon,uSun,uFog,vDepth,uAnime),1.0);
+        return;
+      }
+      if((kind>.5&&kind<2.5)||kind>7.5){
+        // Foliage follows the shared palette (season presets) in a calmer, slightly cooler band than the
+        // meadow, so no single tree reads as an out-of-palette lime outlier.
+        vec3 c=rampAt(clamp(mix(.1,.95,vCol.r)+(vCol.g-.5)*.18+(kind>7.5?.12:0.0),0.0,1.0));
+        c=mix(vec3(dot(c,vec3(.3,.59,.11))),c,.8)*vec3(.93,.98,1.03);
+        base=kind>7.5?c*vec3(.8,.95,1.0):c;
+      }
+      if(kind<.5)base*=.8+.32*noise(vec2((vLoc.x+vLoc.z)*5.0,vLoc.y*1.1));
+      else if(kind>2.5&&kind<3.5){base*=.93+.12*noise(vLoc.xz*2.2+vLoc.y*2.0);base*=1.0+.14*smoothstep(.55,.9,n.y);base=mix(base,vec3(.47,.60,.25),smoothstep(.62,.95,n.y)*smoothstep(.5,.72,noise(vLoc.xz*1.2))*.7);}
+      else if(kind>4.5&&kind<5.5)base*=.9+.18*noise(vec2((vLoc.x-vLoc.z)*9.0,vLoc.y*2.0));
+      else if(kind>6.5){
+        // Overgrown ruin: khaki concrete/iron patched with olive moss on top faces and in crevices.
+        float m=smoothstep(.35,.62,noise(vLoc.xz*1.1+vLoc.y*.9)+.35*n.y);
+        base*=.9+.18*noise(vLoc.xz*3.0+vLoc.y*3.0);
+        base=mix(base,mix(vec3(.32,.33,.13),vec3(.51,.60,.25),noise(vLoc.xz*4.0+vLoc.y*4.0)),m*.85);
+      }
+      // Two-tone cel shading with material-specific tinted shadows (never black) and a soft rim. On foliage
+      // the terminator is broken by noise so light and shade meet in leafy clumps.
+      float clump=(kind>.5&&kind<2.5)||kind>7.5?(noise(vLoc.xz*1.5+vLoc.y*1.35+vKind.y*9.0)-.5)*(kind>7.5?.3:1.0):0.0;
+      float lit=smoothstep(-.05,.07,dot(n,uSun)+clump*.55)*mix(1.0,sh,.85);
+      vec3 tint=kind<.5?vec3(.55,.50,.52):kind<2.5||kind>7.5?vec3(.50,.62,.72):kind<3.5?vec3(.62,.72,.68):kind<4.5?vec3(.8):kind<5.5?vec3(.56,.46,.36):vec3(.60,.66,.64);
+      vec3 col=mix(base*tint,base*vec3(1.08,1.04,.92),lit);
+      if((kind>.5&&kind<2.5)||kind>7.5)col+=base*.14*smoothstep(.5,.85,n.y+clump*.3)*lit;
+      float rim=pow(1.0-max(dot(n,normalize(uEye-vWorld)),0.0),3.0);
+      col+=vec3(1.0,.95,.75)*rim*((kind>.5&&kind<2.5)||kind>7.5?.16:.07)*(.35+.65*lit);
+      if(kind>3.5&&kind<4.5)col=base*mix(.82,1.08,lit);
+      gl_FragColor=vec4(aerial(col,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
+    }`;
 
   function compile(type, src){
     const s = gl.createShader(type);
@@ -601,19 +1004,34 @@
     for (const n of uniforms) U[n] = gl.getUniformLocation(p, n);
     return { p, U };
   }
-  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uWindTime', 'uWindStrength', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass'];
+  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uWindTime', 'uWindStrength', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass', 'uGrade', 'uRamp0', 'uRamp1', 'uRamp2', 'uRamp3', 'uRamp4', 'uOverlay', 'uCloud', 'uWater'];
   const TEX_U = ['uTexA', 'uTexB', 'uMix', 'uOrthoA', 'uOrthoB'];
-  const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat', 'aWind'];
+  const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea', 'aMaskA', 'aMaskB'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat', 'aWind'];
   let progT, progW, progR, progS, progSky, progB, depthT, depthW, depthR, depthB;
   try {
     progT = program(TERRAIN_VS, TERRAIN_FS, TERRAIN_A, COMMON_U.concat(TEX_U));
     progW = program(WALL_VS, WALL_FS, WALL_A, COMMON_U);
     progR = program(ROOF_VS, ROOF_FS, ROOF_A, COMMON_U.concat(TEX_U));
     progS = program(WALL_VS, SEAWALL_FS, WALL_A, COMMON_U);
-    progSky = program(SKY_VS, SKY_FS, ['aPos'], ['uTop', 'uHorizon', 'uEl', 'uAz', 'uAspect', 'uAnime', 'uTime', 'uSun', 'uCloudCover', 'uStorm']);
+    progSky = program(SKY_VS, SKY_FS, ['aPos'], ['uTop', 'uHorizon', 'uEl', 'uAz', 'uAspect', 'uAnime', 'uTime', 'uSun', 'uCloudCover', 'uStorm', 'uMid', 'uLand', 'uGrade']);
     progB = program(BOX_VS, BOX_FS, BOX_A, COMMON_U.concat(['uRoomLight','uLamp0','uLamp1','uLamp2','uLamp3','uContact0','uContact1','uContact2','uContact3']));
     if (SHADOW){ depthT = program(TERRAIN_VS, DEPTH_FS, TERRAIN_A, COMMON_U); depthW = program(WALL_VS, DEPTH_FS_ALIVE, WALL_A, COMMON_U); depthR = program(ROOF_VS, DEPTH_FS_ALIVE, ROOF_A, COMMON_U); depthB = program(BOX_VS, BOX_DEPTH_FS, BOX_A, COMMON_U); }
   } catch (err) { console.error(err); fallback(T.noWebgl); return; }
+  /* The walking view's placeholder nature is optional: without vertex texture fetch, or if a program
+     fails, the island is drawn exactly as before. */
+  let progG = null, progP = null, depthP = null, progA = null, progBright = null, progBlur = null, progComposite = null;
+  const PLANT_A = ['aPos3', 'aNor', 'aCol', 'aInfo'];
+  if (GAME && window.JTAWalkNature && gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS) > 0){
+    try {
+      progG = program(GRASS_VS, GRASS_FS, ['aBlade', 'aSide'], COMMON_U.concat(['uGround', 'uGroundInfo', 'uGroundSize', 'uCamUV', 'uPatch', 'uPool', 'uFlowerPass', 'uWalker']));
+      progP = program(PLANT_VS, PLANT_FS, PLANT_A, COMMON_U);
+      if (SHADOW) depthP = program(PLANT_VS, DEPTH_FS, PLANT_A, COMMON_U);
+      progA = program(PART_VS, PART_FS, ['aPart'], COMMON_U.concat(['uCamUV', 'uPatch', 'uGroundY', 'uPointScale', 'uBirds', 'uWalker', 'uAmount']));
+      progBright = program(POST_VS, BRIGHT_FS, ['aPos'], ['uTex', 'uTexel', 'uThreshold']);
+      progBlur = program(POST_VS, BLUR_FS, ['aPos'], ['uTex', 'uDir']);
+      progComposite = program(POST_VS, COMPOSITE_FS, ['aPos'], ['uTex', 'uBloom', 'uTexel', 'uBloomAmount']);
+    } catch (err) { console.error(err); progG = progP = depthP = progA = progBright = progBlur = progComposite = null; }
+  }
 
   function buffer(data, target){
     const b = gl.createBuffer();
@@ -722,6 +1140,19 @@
     if(GAME)window.JTAWalkBuildings.fitTerrain(hts,{w,h,step,x0:t.x0,y0:t.y0},model.buildings);
     const tris = (w - 1) * (h - 1) * 2, useBig = count > 65535;
     if (useBig && !bigIndex) return buildTerrain(t, buf, step * 2);
+    /* Walking view: placeholder cover classes per vertex. Every footprint of every era is excluded, so the
+       field does not depend on the selected year; overgrowth by era is applied in the shaders. */
+    let nature = null, maskA = null, maskB = null;
+    if (GAME && progG){
+      nature = window.JTAWalkNature.field({ w, h, step, x0: t.x0, y0: t.y0 }, hts, model.buildings, model.coast, { year: 1962 });
+      nature.features = window.JTAWalkNature.features(nature, hts, { spawn: [490, 650], lowEnd, coast: model.coast, avoid: model.buildings.flatMap(b => b.wings || [b.poly]) });
+      const A = new Uint8Array(count * 3), B = new Uint8Array(count * 3), byte = x => Math.round(clamp(x, 0, 1) * 255);
+      for (let k = 0; k < count; k++){
+        A[k * 3] = byte(nature.grass[k]); A[k * 3 + 1] = byte(nature.path[k]); A[k * 3 + 2] = byte(nature.rock[k]);
+        B[k * 3] = byte(nature.flower[k]); B[k * 3 + 1] = byte(nature.weed[k]); B[k * 3 + 2] = byte(1 - Math.abs(nature.shore[k]) / 40);
+      }
+      maskA = buffer(A); maskB = buffer(B);
+    }
     const idx = useBig ? new Uint32Array(tris * 3) : new Uint16Array(tris * 3);
     let p = 0;
     for (let j = 0; j < h - 1; j++) for (let i = 0; i < w - 1; i++){
@@ -729,7 +1160,8 @@
       idx[p++] = a; idx[p++] = d; idx[p++] = b; idx[p++] = b; idx[p++] = d; idx[p++] = e;
     }
     return { grid: buffer(grid), hts: buffer(hts), nor: buffer(normals(hts, w, h, step)), sea: buffer(seaF),
-      idx: buffer(idx, gl.ELEMENT_ARRAY_BUFFER), count: idx.length, type: useBig ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT, w, h, step, hts0: hts, x0: t.x0, y0: t.y0 };
+      idx: buffer(idx, gl.ELEMENT_ARRAY_BUFFER), count: idx.length, type: useBig ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT, w, h, step, hts0: hts, x0: t.x0, y0: t.y0,
+      nature, maskA, maskB };
   }
   function buildSea(){
     const s = C * 2 - 1;
@@ -1021,8 +1453,9 @@
     if(model&&model.coast&&!pointInPoly(fromWorld(x,z),model.coast))return null;
     if (gameIndoor && scene) { const uv=fromWorld(x,z); return window.JTAWalkNav.ground(interiors.scenes[scene],uv[0],uv[1],mpp,st.walkGround); }
     if (!model || !model.coast) return null;
-    const h = sampleGround(x, z), here = st.walk ? sampleGround(st.wx, st.wz) : h;
+    const deck = natureDeck(x, z), h = deck !== null ? deck : sampleGround(x, z), here = st.walk ? (natureDeck(st.wx, st.wz) !== null ? st.walkGround : sampleGround(st.wx, st.wz)) : h;
     if (h === null || h < 0.45 || (here !== null && Math.abs(h - here) > 1.4)) return null;
+    if (natureBlocks(x, z)) return null;
     const probes = [[0, 0], [0.48, 0], [-0.48, 0], [0, 0.48], [0, -0.48]];
     for (const q of probes){
       const uv = fromWorld(x + q[0], z + q[1]);
@@ -1069,6 +1502,14 @@
     gl.uniform3fv(U.uSun, e.sun);
     gl.uniform3fv(U.uHorizon, e.horizon);
     gl.uniform1f(U.uFog, e.fog);
+    if (U.uGrade) gl.uniform4fv(U.uGrade, gradeOf());
+    if (U.uRamp0){
+      const r = rampOf();
+      for (let i = 0; i < 5; i++) gl.uniform3fv(U['uRamp' + i], r[i]);
+      gl.uniform4fv(U.uOverlay, [look.mottle, look.sheen, look.streaks, lookTime()]);
+      gl.uniform4fv(U.uCloud, [P === progB ? 0 : look.clouds, look.cloudScale, look.cloudSpeed, look.grain]);
+      if (U.uWater) gl.uniform4fv(U.uWater, [look.spots, look.sparkle, 1, 0]);
+    }
     gl.uniform1f(U.uWindTime,reduce?0:(performance.now()-t0)/1000);
     gl.uniform1f(U.uWindStrength,GAME&&!reduce?(st.weather===2?.075:.035):0);
     gl.uniform1f(U.uTime, reduce?0:(performance.now() - t0) / 1000);
@@ -1095,8 +1536,14 @@
     gl.uniform1f(P.U.uOrthoA, years[ym.i].ortho ? 1 : 0);
     gl.uniform1f(P.U.uOrthoB, years[ym.i + 1].ortho ? 1 : 0);
   }
+  function attrBytes(buf, loc, size){
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, size, gl.UNSIGNED_BYTE, true, 0, 0);
+  }
   function drawTerrain(P, m, yOff){
-    attr(m.grid, 0, 2); attr(m.hts, 1, 1); attr(m.nor, 2, 3); attr(m.sea, 3, 1); disableFrom(4);
+    attr(m.grid, 0, 2); attr(m.hts, 1, 1); attr(m.nor, 2, 3); attr(m.sea, 3, 1);
+    if (m.maskA){ attrBytes(m.maskA, 4, 3); attrBytes(m.maskB, 5, 3); disableFrom(6); } else disableFrom(4);
     gl.uniform1f(P.U.uYOff, yOff);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, m.idx);
     gl.drawElements(gl.TRIANGLES, m.count, m.type, 0);
@@ -1130,14 +1577,163 @@
     gl.uniform1f(progSky.U.uAnime,GAME?1:0); gl.uniform1f(progSky.U.uTime,reduce?0:(performance.now()-t0)/1000);
     gl.uniform1f(progSky.U.uAz,st.az);gl.uniform1f(progSky.U.uAspect,canvas.width/Math.max(1,canvas.height));
     gl.uniform3fv(progSky.U.uSun,e.sun);gl.uniform1f(progSky.U.uCloudCover,[0,.85,1,.65][st.weather]);gl.uniform1f(progSky.U.uStorm,[0,.45,.9,.35][st.weather]);
-    gl.uniform3fv(progSky.U.uTop, e.sky); gl.uniform3fv(progSky.U.uHorizon, e.horizon); gl.uniform1f(progSky.U.uEl, st.el);
+    gl.uniform3fv(progSky.U.uTop, e.sky); gl.uniform3fv(progSky.U.uHorizon, GAME ? e.skyHorizon : e.horizon); gl.uniform1f(progSky.U.uEl, st.el);
+    gl.uniform3fv(progSky.U.uMid, e.mid || e.sky); gl.uniform1f(progSky.U.uLand, look.land); gl.uniform4fv(progSky.U.uGrade, gradeOf());
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     gl.enable(gl.DEPTH_TEST);
   }
 
+  /* ---------- walking view post-process ---------- */
+  let post = null, postSize = '';
+  function target(w, h, depth){
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
+    const fb = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    if (depth){ const rb = gl.createRenderbuffer(); gl.bindRenderbuffer(gl.RENDERBUFFER, rb); gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, w, h); gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, rb); }
+    const ok = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    return ok ? { tex, fb, w, h } : null;
+  }
+  // (Re)creates the scene and bloom targets when the canvas size changes; null means draw straight to the canvas.
+  function postTargets(){
+    if (!GAME || !progComposite || !(look.bloom > 0)) return null;
+    const w = canvas.width, h = canvas.height, key = w + 'x' + h;
+    if (postSize === key) return post;
+    postSize = key;
+    const scene = target(w, h, true), bw = Math.max(1, w >> 2), bh = Math.max(1, h >> 2);
+    const a = scene && target(bw, bh, false), b = a && target(bw, bh, false);
+    post = scene && a && b ? { scene, a, b } : null;
+    return post;
+  }
+  let quadBuf = null;
+  function quad(P, uniforms){
+    if (!quadBuf) quadBuf = buffer(new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]));
+    gl.useProgram(P.p); uniforms();
+    attr(quadBuf, 0, 2); disableFrom(1);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  function runPost(p){
+    gl.disable(gl.DEPTH_TEST); gl.disable(gl.BLEND); gl.disable(gl.CULL_FACE);
+    const bind = (t, unit) => { gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t); };
+    gl.bindFramebuffer(gl.FRAMEBUFFER, p.a.fb); gl.viewport(0, 0, p.a.w, p.a.h);
+    quad(progBright, () => { bind(p.scene.tex, 0); gl.uniform1i(progBright.U.uTex, 0); gl.uniform2fv(progBright.U.uTexel, [1 / p.scene.w, 1 / p.scene.h]); gl.uniform1f(progBright.U.uThreshold, .86); });
+    gl.bindFramebuffer(gl.FRAMEBUFFER, p.b.fb);
+    quad(progBlur, () => { bind(p.a.tex, 0); gl.uniform1i(progBlur.U.uTex, 0); gl.uniform2fv(progBlur.U.uDir, [1 / p.a.w, 0]); });
+    gl.bindFramebuffer(gl.FRAMEBUFFER, p.a.fb);
+    quad(progBlur, () => { bind(p.b.tex, 0); gl.uniform1i(progBlur.U.uTex, 0); gl.uniform2fv(progBlur.U.uDir, [0, 1 / p.a.h]); });
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, p.scene.w, p.scene.h);
+    quad(progComposite, () => { bind(p.scene.tex, 0); bind(p.a.tex, 1); gl.uniform1i(progComposite.U.uTex, 0); gl.uniform1i(progComposite.U.uBloom, 1); gl.uniform2fv(progComposite.U.uTexel, [1 / p.scene.w, 1 / p.scene.h]); gl.uniform1f(progComposite.U.uBloomAmount, look.bloom); });
+    gl.activeTexture(gl.TEXTURE0); gl.enable(gl.DEPTH_TEST);
+  }
+
+  /* ---------- walking view placeholder nature ---------- */
+  let nature = null;
+  function buildNature(){
+    const N = window.JTAWalkNature, f = terrain && terrain.nature;
+    if (!progG || !progP || !f) return;
+    const pool = (count, metres, data) => ({ buf: buffer(data), count: data.length / 5, patch: metres / mpp, fade: metres * .5 });
+    const F = f.features, scattered = N.scatter(f, terrain.hts0, { lowEnd, avoid: model.buildings.flatMap(b => b.wings || [b.poly]), spawn: [490, 650], keepOut: F.keepOut });
+    const set = Object.assign({}, scattered, { trees: scattered.trees.concat(F.trees), rocks: scattered.rocks.concat(F.rocks), fences: F.fences, bridges: F.bridges, ponds: F.ponds, ruins: F.ruins });
+    const stamps = set.rocks.map(r => ({ u: r.u, v: r.v, r: r.size * .55 })).concat(set.trees.map(t => ({ u: t.u, v: t.v, r: .5 })), set.ponds.map(p => ({ u: p.u, v: p.v, r: p.r + .2 })), set.ruins.flatMap(r => r.pillars.map(p => ({ u: p.u, v: p.v, r: p.size * .8 })).concat([{ u: r.gear.u, v: r.gear.v, r: r.gear.r * .6 }])));
+    const tex = gl.createTexture();
+    gl.activeTexture(gl.TEXTURE3);
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, f.w, f.h, 0, gl.RGBA, gl.UNSIGNED_BYTE, N.stampCover(N.groundTexture(f, terrain.hts0), f, stamps));
+    for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.NEAREST], [gl.TEXTURE_MAG_FILTER, gl.NEAREST], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
+    gl.activeTexture(gl.TEXTURE0);
+    const plants = N.meshes(set).map(b => ({ pos3: buffer(b.pos), nor: buffer(b.nor), col: buffer(b.col), info: buffer(b.info), idx: buffer(b.idx, gl.ELEMENT_ARRAY_BUFFER), count: b.idx.length }));
+    // Trunks and large rocks block walking; bins keep the check local.
+    const bins = new Map(), add = (u, v, r) => { const key = Math.floor(u / 8) + ',' + Math.floor(v / 8); if (!bins.has(key)) bins.set(key, []); bins.get(key).push([u, v, r]); };
+    for (const t of set.trees) add(t.u, t.v, .38 + t.radius * .07);
+    for (const r of set.rocks) if (r.size > .8) add(r.u, r.v, r.size * .42);
+    for (const ru of set.ruins){ for (const pl of ru.pillars) add(pl.u, pl.v, pl.size * .72); add(ru.gear.u, ru.gear.v, ru.gear.r * .8); }
+    // Fence rails are segments; bins hold them by every cell they cross.
+    const segments = new Map(), addSeg = (a, b) => { const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 4)); for (let i = 0; i <= n; i++){ const u = a[0] + (b[0] - a[0]) * i / n, v = a[1] + (b[1] - a[1]) * i / n, key = Math.floor(u / 8) + ',' + Math.floor(v / 8); if (!segments.has(key)) segments.set(key, new Set()); segments.get(key).add([a, b]); } };
+    for (const run of set.fences) for (let i = 1; i < run.length; i++) addSeg(run[i - 1], run[i]);
+    // Near pool (dense), far pool (sparser, larger clumps out to about 40 m; the video faded grass 16-39 m) and flowers.
+    const pools = [Object.assign(pool(0, lowEnd ? 30 : 38, N.blades(lowEnd ? 22000 : 66000, (lowEnd ? 30 : 38) / mpp)), { near: 0, size: 1, flower: 0 })];
+    if (!lowEnd) pools.push(Object.assign(pool(0, 84, N.blades(34000, 84 / mpp)), { fade: 40, near: 13, size: 1.45, flower: 0 }));
+    pools.push(Object.assign(pool(0, lowEnd ? 34 : 46, N.flowers(lowEnd ? 1400 : 4200, (lowEnd ? 34 : 46) / mpp)), { near: 0, size: 1, flower: 1 }));
+    const parts = new Float32Array((lowEnd ? 110 : 280) * 4), patch = 44 / mpp;
+    for (let i = 0; i < parts.length / 4; i++){ parts[i * 4] = N.hash(i, 1, 61) * patch; parts[i * 4 + 1] = N.hash(i, 2, 61) * patch; parts[i * 4 + 2] = N.hash(i, 3, 61); parts[i * 4 + 3] = N.hash(i, 4, 61); }
+    const birds = new Float32Array([0, 0, .1, 0, 1, -1, .4, 0, 1, 1, .7, 0, 2, -1, .2, 0, 2, 1, .9, 0]);
+    nature = { tex, f, plants, bins, segments, set, pools, parts: { buf: buffer(parts), count: parts.length / 4, patch }, birds: { buf: buffer(birds), count: 5 } };
+  }
+  // Deck height when (x, z) is on a bridge, else null. Ends are flush with the banks.
+  function natureDeck(x, z){
+    if (!nature) return null;
+    const uv = fromWorld(x, z);
+    for (const br of nature.set.bridges){
+      const du = (uv[0] - br.u) * mpp, dv = (uv[1] - br.v) * mpp, t = du * br.axis[0] + dv * br.axis[1], s = -du * br.axis[1] + dv * br.axis[0];
+      if (Math.abs(t) <= br.span / 2 + .2 && Math.abs(s) <= br.width / 2 - .12){ const k = clamp(t / br.span + .5, 0, 1); return br.y0 + (br.y1 - br.y0) * k + br.arch * Math.sin(Math.PI * k); }
+    }
+    return null;
+  }
+  function natureBlocks(x, z){
+    if (!nature) return false;
+    const uv = fromWorld(x, z), bu = Math.floor(uv[0] / 8), bv = Math.floor(uv[1] / 8);
+    for (let i = -1; i <= 1; i++) for (let j = -1; j <= 1; j++){
+      for (const o of nature.bins.get((bu + i) + ',' + (bv + j)) || []) if (Math.hypot(uv[0] - o[0], uv[1] - o[1]) * mpp < o[2] + .22) return true;
+      for (const [a, b] of nature.segments.get((bu + i) + ',' + (bv + j)) || []){
+        const ex = b[0] - a[0], ev = b[1] - a[1], t = clamp(((uv[0] - a[0]) * ex + (uv[1] - a[1]) * ev) / (ex * ex + ev * ev || 1), 0, 1);
+        if (Math.hypot(uv[0] - a[0] - t * ex, uv[1] - a[1] - t * ev) * mpp < .3) return true;
+      }
+    }
+    for (const pd of nature.set.ponds) if (Math.hypot(uv[0] - pd.u, uv[1] - pd.v) * mpp < pd.r + .15 && natureDeck(x, z) === null) return true;
+    return false;
+  }
+  function drawPlants(P, m){
+    attr(m.pos3, 0, 3); attr(m.nor, 1, 3); attr(m.col, 2, 3); attr(m.info, 3, 3); disableFrom(4);
+    gl.uniform1f(P.U.uYOff, 0);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, m.idx);
+    gl.drawElements(gl.TRIANGLES, m.count, gl.UNSIGNED_SHORT, 0);
+  }
+  function drawAmbient(M, lightPV, lift, ym){
+    if (!nature || !progA || !look.ambient) return;
+    setCommon(progA, M.pv, lightPV, lift, ym, false);
+    gl.uniform1f(progA.U.uYOff, 0);
+    gl.uniform2fv(progA.U.uCamUV, fromWorld(st.wx, st.wz)); gl.uniform1f(progA.U.uPatch, nature.parts.patch);
+    gl.uniform1f(progA.U.uGroundY, st.walkGround); gl.uniform3fv(progA.U.uWalker, [st.wx, st.walkGround + 1.68, st.wz]);
+    gl.uniform1f(progA.U.uPointScale, canvas.height * .5 * M.proj[5]); gl.uniform1f(progA.U.uAmount, look.ambient);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
+    const weatherOk = st.weather === 0 || st.weather === 1;
+    for (const [p, birds] of [[nature.parts, 0], [nature.birds, 1]]){
+      if (!birds && (gameIndoor || !weatherOk)) continue;
+      gl.uniform1f(progA.U.uBirds, birds);
+      gl.bindBuffer(gl.ARRAY_BUFFER, p.buf); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 4, gl.FLOAT, false, 0, 0); disableFrom(1);
+      gl.drawArrays(gl.POINTS, 0, p.count);
+    }
+    gl.depthMask(true); gl.disable(gl.BLEND);
+  }
+  function drawNature(M, lightPV, lift, ym, shadowOn){
+    if (!nature) return;
+    setCommon(progP, M.pv, lightPV, lift, ym, shadowOn);
+    for (const m of nature.plants) drawPlants(progP, m);
+    setCommon(progG, M.pv, lightPV, lift, ym, shadowOn);
+    gl.uniform1f(progG.U.uYOff, 0);
+    gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, nature.tex); gl.uniform1i(progG.U.uGround, 3); gl.activeTexture(gl.TEXTURE0);
+    gl.uniform3fv(progG.U.uGroundInfo, [nature.f.x0, nature.f.y0, nature.f.step]);
+    gl.uniform2fv(progG.U.uGroundSize, [nature.f.w, nature.f.h]);
+    gl.uniform2fv(progG.U.uCamUV, fromWorld(st.wx, st.wz));
+    gl.uniform3fv(progG.U.uWalker, [st.wx, st.walkGround + 1.68, st.wz]);
+    for (const p of nature.pools){
+      gl.uniform1f(progG.U.uPatch, p.patch); gl.uniform4fv(progG.U.uPool, [p.fade, p.near, p.size, p.flower ? look.flowers : look.grass]); gl.uniform1f(progG.U.uFlowerPass, p.flower);
+      gl.bindBuffer(gl.ARRAY_BUFFER, p.buf);
+      gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 4, gl.FLOAT, false, 20, 0);
+      gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 1, gl.FLOAT, false, 20, 16);
+      disableFrom(2);
+      gl.drawArrays(gl.TRIANGLES, 0, p.count);
+    }
+  }
+
   function draw(){
     const w = canvas.width, h = canvas.height;
-    const e = env();
+    const e = env(), pp = terrain && st.walk ? postTargets() : null, screenFb = pp ? pp.scene.fb : null;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, screenFb);
     gl.viewport(0, 0, w, h);
     gl.clearColor(e.bg[0], e.bg[1], e.bg[2], 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -1164,8 +1760,9 @@
         setCommon(depthR, lightPV, lightPV, lift, ym, false); drawRoofs(depthR, roofs);
         if (sceneMesh && sceneMesh.count && depthB){ setCommon(depthB, lightPV, lightPV, lift, ym, false); drawBoxes(depthB, sceneMesh); }
       }
+      if (nature && depthP){ setCommon(depthP, lightPV, lightPV, lift, ym, false); for (const m of nature.plants) drawPlants(depthP, m); }
       gl.colorMask(true, true, true, true);
-      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, screenFb);
       gl.viewport(0, 0, w, h);
     }
     drawSky();
@@ -1184,6 +1781,8 @@
       setCommon(progR, M.pv, lightPV, lift, ym, shadowOn);
       setTextures(progR, texA, texB, ym);
       drawRoofs(progR, roofs);
+      drawNature(M, lightPV, lift, ym, shadowOn);
+      drawAmbient(M, lightPV, lift, ym);
       if (sceneMesh){
         /* the interior: opaque boxes, then the assumed (translucent) ones, then the host building as a ghost shell */
         setCommon(progB, M.pv, lightPV, lift, ym, shadowOn);
@@ -1199,6 +1798,7 @@
         gl.depthMask(true); gl.disable(gl.BLEND);
       }
     }
+    if (pp) runPost(pp);
     placeSpots(M.pv, lift, ym);
     if (compass) compass.style.transform = 'rotate(' + (st.az * 180 / Math.PI).toFixed(1) + 'deg)';
   }
@@ -1221,10 +1821,45 @@
       if(h!==null){st.wz+=dz/steps;st.walkGround=h;}
     }
   }
+  /* Screen-space anime touches (walking view, fair weather): slanted god-ray beams when facing the sun and an
+     occasional white wind swirl, as in the reference video's play mode. Purely decorative. */
+  function drawLight(now){
+    const cw = canvas.clientWidth, ch = canvas.clientHeight, t = now * .001, e = env(), ctx = weatherCtx;
+    ctx.save(); ctx.scale(weatherFx.width / Math.max(1, cw), weatherFx.height / Math.max(1, ch)); ctx.globalCompositeOperation = 'lighter';
+    let rel = Math.atan2(e.sun[0], e.sun[2]) - st.az; rel -= Math.PI * 2 * Math.round(rel / (Math.PI * 2));
+    const facing = clamp(1.25 - Math.abs(rel), 0, 1) * clamp(1 - st.el * 1.2, 0, 1) * (st.weather ? .45 : 1) * Math.min(1, look.ambient);
+    if (facing > .01){
+      const sx = cw * (.5 + rel / 1.9);
+      for (let i = 0; i < 5; i++){
+        const x = sx + (i - 2) * cw * .09 + Math.sin(t * .15 + i) * 12, spread = cw * (.06 + .03 * (i % 2)), lean = cw * .22;
+        const alpha = (.07 + .04 * Math.sin(t * .6 + i * 1.7)) * facing;
+        const g = ctx.createLinearGradient(0, 0, 0, ch * .85);
+        g.addColorStop(0, 'rgba(255,248,220,' + alpha.toFixed(3) + ')'); g.addColorStop(1, 'rgba(255,248,220,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x - spread * .3, -10); ctx.lineTo(x + spread * .3, -10); ctx.lineTo(x + lean + spread, ch * .85); ctx.lineTo(x + lean - spread, ch * .85); ctx.closePath(); ctx.fill();
+      }
+    }
+    // A wind swirl every 7 s: a curling white stroke drawn in over about 1.4 s, then fading.
+    const k = Math.floor(t / 7), phase = t / 7 - k;
+    if (phase < .24){
+      const hr = x => { const v = Math.sin(k * 12.9898 + x * 78.233) * 43758.5453; return v - Math.floor(v); };
+      const cx = cw * (.25 + .5 * hr(1)), cy = ch * (.45 + .3 * hr(2)), r = Math.min(cw, ch) * (.05 + .04 * hr(3)), prog = phase / .2;
+      ctx.globalCompositeOperation = 'source-over'; ctx.lineCap = 'round'; ctx.lineWidth = 2.2;
+      ctx.strokeStyle = 'rgba(255,255,255,' + (.75 * Math.min(1, (.24 - phase) / .06) * Math.min(1, look.ambient)).toFixed(3) + ')';
+      ctx.beginPath();
+      for (let j = 0, n = 40; j <= n; j++){
+        const u = Math.max(0, prog - .45) + j / n * Math.min(prog, .45);
+        const a = u * 9, rr = r * (1.2 - u * .9), x = cx + u * cw * .18 + Math.cos(a) * rr, y = cy - u * ch * .04 + Math.sin(a) * rr * .45;
+        if (j) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+      }
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
   function drawWeather(now){
     if (!weatherCtx || !weatherFx) return;
     const w = weatherFx.width, h = weatherFx.height, rain = env().rain;
     weatherCtx.clearRect(0, 0, w, h);
+    if (!rain && !reduce && GAME && st.walk && !gameIndoor && st.weather < 2 && look.ambient > 0) drawLight(now);
     if (!rain || reduce) return;
     weatherCtx.save();
     weatherCtx.scale(w / Math.max(1, canvas.clientWidth), h / Math.max(1, canvas.clientHeight));
@@ -1729,6 +2364,7 @@
       if (!walls || !roofs){ st.walls = false; if (btnWalls) btnWalls.hidden = true; }
       seawall = model.seawall && model.seawall.length > 3 ? buildSeawall(model.seawall) : null;
       makeShadow();
+      if (GAME) buildNature();
       st.year = Math.max(0, years.findIndex(y => y.id === '1962'));
       buildPins();
       return texture(st.year).promise;
@@ -1794,6 +2430,6 @@
     window.dispatchEvent(new CustomEvent('jta-walk-ready'));
   }
   window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, enterScene, leaveScene, beginWalk, endWalk, scene: () => scene, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
-    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, floor:()=>{const sc=scene&&interiors.scenes[scene];return sc&&sc.walkPlan?{current:Math.min(sc.walkPlan.floors,Math.floor((st.walkGround-sc.walkPlan.base+.18)/sc.walkPlan.height)),total:sc.walkPlan.floors}:null;}, year:()=>Math.round(yearMix().year), scenes:()=>interiors?interiors.scenes:{}, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;gameInput.autoRun=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
+    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, floor:()=>{const sc=scene&&interiors.scenes[scene];return sc&&sc.walkPlan?{current:Math.min(sc.walkPlan.floors,Math.floor((st.walkGround-sc.walkPlan.base+.18)/sc.walkPlan.height)),total:sc.walkPlan.floors}:null;}, year:()=>Math.round(yearMix().year), scenes:()=>interiors?interiors.scenes:{}, nature:()=>nature?nature.set:null, look:()=>look, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;gameInput.autoRun=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
     years: () => years.map(y => y.id), loaded: i => texture(i).promise, shadows: () => !!shadowFb, walls: () => !!walls, model: () => model };
 })();

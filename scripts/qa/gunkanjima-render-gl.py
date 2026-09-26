@@ -26,8 +26,8 @@ for name,args,result in json.load(open(output/'gl-calls.json')):
  v=[value(x) for x in args];out=None
  if name=='capture':
   gl('glFinish',None,[]);data=(B*(1280*800*4))();gl('glReadPixels',None,[I,I,I,I,U,U,P],0,0,1280,800,6408,5121,data);Image.frombytes('RGBA',(1280,800),bytes(data)).transpose(Image.Transpose.FLIP_TOP_BOTTOM).save(output/(v[0]+'.png'));print('Saved',v[0]);continue
- if name in ['createBuffer','createTexture','createFramebuffer']:
-  o=U();gl({'createBuffer':'glGenBuffers','createTexture':'glGenTextures','createFramebuffer':'glGenFramebuffers'}[name],None,[I,C.POINTER(U)],1,C.byref(o));out=o.value
+ if name in ['createBuffer','createTexture','createFramebuffer','createRenderbuffer']:
+  o=U();gl({'createBuffer':'glGenBuffers','createTexture':'glGenTextures','createFramebuffer':'glGenFramebuffers','createRenderbuffer':'glGenRenderbuffers'}[name],None,[I,C.POINTER(U)],1,C.byref(o));out=o.value
  elif name=='createShader':out=gl('glCreateShader',U,[U],v[0])
  elif name=='createProgram':out=gl('glCreateProgram',U,[])
  elif name=='shaderSource':
@@ -43,6 +43,7 @@ for name,args,result in json.load(open(output/'gl-calls.json')):
  elif name=='getUniformLocation':out=gl('glGetUniformLocation',I,[U,S],v[0],v[1].encode())
  elif name=='bindAttribLocation':gl('glBindAttribLocation',None,[U,U,S],v[0],v[1],v[2].encode())
  elif name=='bufferData':gl('glBufferData',None,[U,C.c_ssize_t,P,U],v[0],len(base64.b64decode(args[1]['data'])),v[1],v[2])
+ elif name=='texImage2D' and len(v)==9:gl('glTexImage2D',None,[U,I,I,I,I,I,U,U,P],*v)
  elif name=='texImage2D':
   im=Image.open(v[5]['image']).convert('RGB');im=im.transpose(Image.Transpose.FLIP_TOP_BOTTOM) if flip else im;buf=C.create_string_buffer(im.tobytes());gl('glTexImage2D',None,[U,I,I,I,I,I,U,U,P],v[0],v[1],6407,im.width,im.height,0,6407,5121,buf)
  elif name=='pixelStorei':
@@ -53,7 +54,7 @@ for name,args,result in json.load(open(output/'gl-calls.json')):
  elif name=='deleteBuffer':
   o=U(v[0]);gl('glDeleteBuffers',None,[I,C.POINTER(U)],1,C.byref(o))
  else:
-  signatures={'attachShader':[U,U],'bindBuffer':[U,U],'useProgram':[U],'enableVertexAttribArray':[U],'disableVertexAttribArray':[U],'vertexAttribPointer':[U,I,U,B,I,P],'bindTexture':[U,U],'activeTexture':[U],'generateMipmap':[U],'texParameteri':[U,U,I],'uniform1i':[I,I],'uniform1f':[I,F],'uniform2f':[I,F,F],'viewport':[I,I,I,I],'clearColor':[F,F,F,F],'clear':[U],'enable':[U],'disable':[U],'cullFace':[U],'blendFunc':[U,U],'depthMask':[B],'drawElements':[U,I,U,P],'drawArrays':[U,I,I],'bindFramebuffer':[U,U]}
+  signatures={'attachShader':[U,U],'bindBuffer':[U,U],'useProgram':[U],'enableVertexAttribArray':[U],'disableVertexAttribArray':[U],'vertexAttribPointer':[U,I,U,B,I,P],'bindTexture':[U,U],'activeTexture':[U],'generateMipmap':[U],'texParameteri':[U,U,I],'uniform1i':[I,I],'uniform1f':[I,F],'uniform2f':[I,F,F],'viewport':[I,I,I,I],'clearColor':[F,F,F,F],'clear':[U],'enable':[U],'disable':[U],'cullFace':[U],'blendFunc':[U,U],'depthMask':[B],'drawElements':[U,I,U,P],'drawArrays':[U,I,I],'bindFramebuffer':[U,U],'bindRenderbuffer':[U,U],'renderbufferStorage':[U,U,I,I],'framebufferRenderbuffer':[U,U,U,U],'framebufferTexture2D':[U,U,U,U,I],'checkFramebufferStatus':[U],'colorMask':[B,B,B,B]}
   if name not in signatures:raise RuntimeError('Unknown '+name)
   sig=signatures[name];v=[0 if x is None and t in (U,I) else x for x,t in zip(v,sig)];gl('gl'+name[0].upper()+name[1:],None,sig,*v)
  if result is not None:refs[result['ref']]=out
