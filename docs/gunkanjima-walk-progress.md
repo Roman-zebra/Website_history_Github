@@ -226,7 +226,7 @@ Validation: 157/157 full-build tests pass. Regressions preserve the complete sou
 
 Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors8, navigation3. Cloudflare `release.json` reached `f3d7882e7e9bcb4073233611612d0c36a0090de5`; the public HTML requests interiors8 and the served asset is byte-identical to the tested local file.
 
-## Stylised-nature video study — renderer v20, 2026-09-26 (branch, not published)
+## Stylised-nature video study — renderer v20, 2026-09-26
 
 The user asked for 「Claude CodeとUnity MCPでアニメ調のオープンワールドは作れるのか？」 to be transcribed in full, sampled every second and applied to the walk, with placeholder vegetation and textures allowed. YouTube's bot check blocked the cloud browser and was not bypassed; the user supplied the file through Google Drive. The full 64.7-minute soundtrack was transcribed locally (1,455 segments) and 3,883 one-second frames were inspected on contact sheets. `docs/gunkanjima-video-study-v20.md` has the timeline, the technique-to-code mapping, adaptations and omissions. The video, audio, transcript and frames are not committed.
 
@@ -249,4 +249,6 @@ Walking view only, labelled as illustrative placeholders in the help text and th
 
 Validation: 164/164 full-build tests after merging the Building 3 and 30 interior work; 34 native GLES2 renders without GL errors (including `--streets`: paved alleys, a yard in clear weather and rain, and the coast); Chromium/SwiftShader desktop (Japanese) and phone (English) checks of the scene and the panel with no page errors. Real phone GPU frame rate and appearance remain unverified. The build regenerated unrelated tracked HTML (page.css version, support link); those diffs were reverted and not committed.
 
-Cache versions: renderer20, walk JS8/CSS7, walk-nature1 (new), buildings5, interiors8, navigation3. The work is on branch `claude/jta-3d-video-implementation-p4sql1`; main and the live site still serve renderer19.
+Cache versions: renderer20, walk JS8/CSS7, walk-nature1 (new), buildings5, interiors8, navigation3.
+
+Publication (user approved publishing and continuing): the branch was merged with main's Building 3 and 30 releases and main was fast-forwarded to `1118dc9b800daa043740edf65512add744a92f80`. Cloudflare `release.json` reported that commit within about two minutes; the public walk HTML requests renderer20, walk JS8/CSS7, walk-nature1, buildings5, interiors8 and navigation3, and the six served walk scripts and stylesheet are byte-identical to the commit. The session's headless Chromium could not open the public site because it does not trust the egress proxy's CA (TLS verification was not disabled), so the public WebGL view itself was not browser-checked; the same files were browser-checked locally.
