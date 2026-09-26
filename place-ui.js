@@ -3,7 +3,9 @@
   'use strict';
   const langs = ['en','ja','ko','zh-Hans','zh-Hant'];
   const pick = (values, lang) => values[Math.max(0, langs.indexOf(lang))];
-  const fields = {en:['name:en','int_name'],ja:['name:ja'],ko:['name:ko'],
+  // In Japan the plain OSM name is the Japanese one, so a Japanese reader gets it before any English fallback
+  // (33,695 local places carried name:en but no name:ja and were shown in English on the Japanese map).
+  const fields = {en:['name:en','int_name'],ja:['name:ja','name'],ko:['name:ko'],
     'zh-Hans':['name:zh-Hans','name:zh-CN','name:zh'], 'zh-Hant':['name:zh-Hant','name:zh-TW','name:zh']};
   function name(p, lang){
     const localized = p.names && p.names[lang];

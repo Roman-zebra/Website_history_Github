@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.48';
+const DATA_V = '0.49';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
    ask for, not a number written here that falls behind (the search worker sat at 0.80). */
@@ -815,7 +815,7 @@ function showActivity(p,keepView,refresh=false){
     +'<p class="place-guide-link"><a href="'+esc(p.official)+'" target="_blank" rel="noopener noreferrer">'+esc(activityText(4))+' ↗</a></p>',
   img:tileURL(NOW_LAYER.id,NOW_LAYER.ext,p.lat,p.lon,16),cap:activityText(5),
   share:{title:placeName(p),url:location.origin+location.pathname+'?lang='+(LANG_PARAM[LANG]||'en')+'#a-'+p.id},
-  searchName:p.ja,src:'GSI Tiles · '+activityText(11)
+  searchName:p.ja,src:(LANG==='ja'?'地理院タイル · ':'GSI Tiles · ')+activityText(11)
  });
  if(!keepView)history.pushState({activity:p.id},'','#a-'+p.id);
 }
@@ -2273,6 +2273,9 @@ function trimSummary(text, limit){
 function extractOf(p){
   const text = (p.summaries && p.summaries[LANG]) || (LANG === 'ja' ? p.extract_ja : LANG === 'en' ? p.extract : p['extract_' + LANG]) || '';
   if (!text) return null;
+  /* summarySources: the pages beyond the linked article that a summary was checked against (2026-09-26). */
+  const sources = (p.summaries && p.summaries[LANG] && p.summarySources && p.summarySources[LANG]) || [];
+  if(sources.length) return {text,sources,note:PlaceUI.pick(['Overview based on Wikipedia and:','ウィキペディアと次の資料に基づく概要です：','위키백과와 다음 자료를 바탕으로 한 개요입니다:','根据维基百科及以下资料整理的概要：','根據維基百科及以下資料整理的概要：'],LANG),weak:false};
   if(p.summaries && p.summaries[LANG]) return {text,note:PlaceUI.pick(['Short overview based on the linked source.','リンク先の資料に基づく短い概要です。','연결된 자료를 바탕으로 한 짧은 개요입니다.','根据链接资料整理的简短概要。','根據連結資料整理的簡短概要。'],LANG),weak:false};
   const src = p.extractSrc || '';
   const note = src === 'web (aggregated)'    ? t('srcAggregated')
@@ -2287,7 +2290,15 @@ function extractHTML(p, limit){
   if (!e) return '';
   return '<p class="place-summary">' + esc(p.summaries && p.summaries[LANG] ? e.text : trimSummary(e.text, limit || 220)) + '</p>'
        + (e.note ? '<p class="p-srcnote' + (e.weak ? ' p-weak' : '') + '">'
-                 + esc(e.note) + '</p>' : '');
+                 + esc(e.note) + (e.sources || []).map((s, i) => PlaceUI.pick(i ? [', ','、',', ','、','、'] : [' ','',' ','',''],LANG)
+                   + '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + '</a>').join('') + '</p>' : '');
+}
+/* Where a landmark's coordinates came from, in the reader's language. The Japanese map used to end every
+   regional panel with the English sentence "Coordinates from Wikipedia." */
+function coordNote(p){
+  return PlaceUI.pick(p.regional && String(p.coordSource || '').includes('openstreetmap')
+    ? ['Coordinates © OpenStreetMap contributors.','座標：© OpenStreetMap contributors','좌표: © OpenStreetMap contributors','坐标：© OpenStreetMap contributors','座標：© OpenStreetMap contributors']
+    : ['Coordinates from Wikipedia.','座標の出典：ウィキペディア','좌표 출처: 위키백과','坐标来源：维基百科','座標來源：維基百科'], LANG);
 }
 function showLandmark(p,refresh=false){
   if (!map || $('place').hidden) noPush(openMap);
@@ -2305,7 +2316,7 @@ function showLandmark(p,refresh=false){
     img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
     share: { title: p.name, url: location.origin + location.pathname },
     searchName: p.ja,
-    src: p.regional ? ((articleLink(p)||{}).src||'Wikipedia (CC BY-SA 4.0)') + ' · ' + (p.coordSource.includes('openstreetmap')?'Coordinates © OpenStreetMap contributors.':'Coordinates from Wikipedia.') : (LANG === 'ja' ? '座標の出典：ウィキペディア' : 'Coordinates from Wikipedia.')
+    src: p.regional ? ((articleLink(p)||{}).src||'Wikipedia (CC BY-SA 4.0)') + ' · ' + coordNote(p) : coordNote(p)
   });
   map.panTo([p.lat, p.lon]);
 }
@@ -2925,7 +2936,7 @@ function openPlace(p, keepView,refresh=false){
     searchName: p.name_ja || p.ja,
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
-    src: p.source || ''
+    src: (LANG === 'ja' && p.source_ja) || p.source || ''
   });
   if (!keepView) history.pushState({ place: p.id }, '', '#' + p.id);
 }

@@ -40,6 +40,13 @@ The background cache installer runs at most four requests at a time and reuses b
 - Corrected against official sources in the same release: Hashima (about 5,300 people in 1960 on about 6.3 ha; "nine hectares" and "sixteen storeys" removed), Doai (about five trains each way a day, not four), Himeji (air raids in June and July 1945) and Nakano Broadway (an escalator sentence that the English and Japanese texts disagreed on, and that could not be confirmed, removed).
 - Home tabs: `MODE_INTRO` in `explore.js` explains each list in five languages. The static English copy of the first tab in `index.html` and `explore.html` is what crawlers see before scripts run. `tests/content-depth.test.cjs` checks the guides, the tab copy, the spot notes and the corrections.
 
+## Japanese text on the Japanese map (September 2026)
+
+- Local OpenStreetMap places: `PlaceUI.localName()` gives a Japanese reader `name:ja`, then the plain `name` (which is Japanese in Japan), and only then `name:en`. Before this, 33,695 of 225,983 local places that had `name:en` but no `name:ja` showed their English name on the Japanese map and in Japanese search results. After changing `place-ui.js`, `search-core.js` or `data/`, run `node scripts/build-search-index.cjs`.
+- Landmark summaries: the 77 landmarks with pin sizes p1–p3 whose Japanese panel text was under 100 characters (about three lines) now have a longer `summaries.ja` (99–198 characters, `summaryChecked: 2026-09-26`). The text comes from the stored Japanese Wikipedia intro (`extract_ja`), the stored English intro (`extract`) and the pages in `summarySources.ja`, which the Japanese panel links after 「ウィキペディアと次の資料に基づく概要です」 and the Japanese `/place/ja/m-*` pages list under 出典. A summary without `summarySources` rests on the linked article alone. The extra pages were checked through web search results, not opened directly. They are the first candidates for a check against the National Diet Library.
+- Do not start a Japanese summary with 「名前（よみ）は、」: the panel heading already shows the name. Where the everyday name differs from the formal one (金閣寺/鹿苑寺), say so in the text. Do not keep 「英: …」 aliases.
+- Source lines under a panel follow the page language (`coordNote()` in `explore.js`, `source_ja` in `places-world.json`). `tests/japanese-text.test.cjs` checks all of the above.
+
 ## Imagery and accuracy
 
 GSI's `ort_USA10` and `ort_old10` use PNG, while `gazo1` and `seamlessphoto` use JPEG. Guide previews use the same tile coordinates for old and recent imagery. Both photographs are lazy loaded, with dimensions reserved. Keep visible GSI attribution and the series period; never describe all photographs as taken in 1945, and never imply recent imagery is live.

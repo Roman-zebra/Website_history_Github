@@ -19,7 +19,13 @@ const ICONS='<link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes=
 const dir=l=>l==='en'?'':labels[l].route+'/';
 const pageURL=(s,l)=>'/place/'+dir(l)+s.key;
 const hubURL=l=>l==='en'?'/places':'/'+labels[l].route;
-const clip=(t,n=150)=>{t=String(t||'').replace(/\s+/g,' ').trim();return t.length>n?t.slice(0,n-1).replace(/[\s、，,。.]+\S*$/,'')+'…':t;};
+/* Japanese has no spaces, so the word-boundary rule would cut a long Japanese lead back to its first comma
+   ("兵庫県姫路市にある城で…"). It ends at the last full stop instead, or the last comma. */
+const clip=(t,n=150)=>{t=String(t||'').replace(/\s+/g,' ').trim();if(t.length<=n)return t;
+ const cut=t.slice(0,n-1),stop=Math.max(cut.lastIndexOf('。'),cut.lastIndexOf('！'),cut.lastIndexOf('？'));
+ if(stop>=n/2)return cut.slice(0,stop+1);
+ if(!/\s/.test(cut))return cut.slice(0,Math.max(cut.lastIndexOf('、'),Math.floor(n/2)))+'…';
+ return cut.replace(/[\s、，,。.]+\S*$/,'')+'…';};
 
 const UI={
  en:{kind:{food:'Markets and food streets',shopping:'Shopping streets',liminal:'Liminal places',landmark:'Famous places'},
@@ -59,6 +65,8 @@ const slug=t=>String(t||'').normalize('NFKD').replace(/[̀-ͯ]/g,'').toLowerCase
 const mPages=new Set(fs.readdirSync(path.join(root,'place')).filter(f=>/^m-.+\.html$/.test(f)).map(f=>f.slice(2,-5)));
 const landmarkId=m=>[m.name,m.wiki_en,m.wiki].map(slug).find(s=>mPages.has(s));
 const wikiURL=(lang,title)=>title?'https://'+lang+'.wikipedia.org/wiki/'+encodeURIComponent(String(title).replace(/ /g,'_')):null;
+/* A summary checked against more than its two articles lists those pages too (summarySources), each once. */
+const once=list=>list.filter((s,i)=>list.findIndex(o=>decodeURI(o.url)===decodeURI(s.url))===i);
 
 const spots=[];
 for(const a of activities)spots.push({key:'a-'+a.id,kind:a.category,lat:a.lat,lon:a.lon,emoji:a.emoji,names:a.names,
@@ -73,7 +81,7 @@ for(const m of landmarks){const id=landmarkId(m);if(!id)throw Error('landmark wi
  spots.push({key:'m-'+id,kind:'landmark',lat:m.lat,lon:m.lon,emoji:m.emoji,names:m.names,english:true,
   lead:l=>m.summaries?.[l],paras:l=>[],wikiText:l=>l==='ja'?m.extract_ja:null,
   map:l=>'/?lang='+encodeURIComponent(l)+'&amp;name='+encodeURIComponent(m.names?.[l]||m.name)+'&amp;spot='+m.lat.toFixed(5)+','+m.lon.toFixed(5),
-  sources:l=>[{url:wikiURL('ja',m.wiki_ja),label:UI[l].wiki+' (日本語)'},{url:wikiURL('en',m.wiki_en||m.wiki),label:UI[l].wiki+' (English)'}].filter(s=>s.url)});}
+  sources:l=>once([{url:wikiURL('ja',m.wiki_ja),label:UI[l].wiki+' (日本語)'},{url:wikiURL('en',m.wiki_en||m.wiki),label:UI[l].wiki+' (English)'},...(m.summarySources?.[l]||[])].filter(s=>s.url))});}
 for(const s of spots)for(const l of LANGS)if(!s.names?.[l]||!s.lead(l))throw Error(s.key+' has no '+l+' name or description');
 
 /* ---------------------------------------------------------------- pages */
