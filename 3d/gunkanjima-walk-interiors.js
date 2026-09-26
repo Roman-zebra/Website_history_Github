@@ -165,10 +165,24 @@ function complete(sc,id){
    for(let i=0;i<8;i++)for(const z of [-hz+.075+i*.014,hz-.075-i*.014])put(q[0],q[1]+z,top+.002,[b.s[0]-.16,.006,.008],i%2?reedA:reedB,'walk-hospital-tatami-weave',1,r);
   });
  }
+ if(id==='bath'){
+  // The source identifies a tiled communal bath. Add a restrained tile scale
+  // cue to the walking copy without changing the source tub or floor geometry.
+  // Joint pitch, width and colour remain illustrative rather than measured.
+  const grout=[.56,.63,.61],floorInset=.08,floorPitch=.8;
+  for(let x=x0+floorPitch/2;x<x1-floorPitch/4;x+=floorPitch)put(x,(z0+z1)/2,base+.004,[.008,.006,z1-z0-floorInset*2],grout,'walk-bath-floor-grout-line',0);
+  for(let z=z0+floorPitch/2;z<z1-floorPitch/4;z+=floorPitch)put((x0+x1)/2,z,base+.004,[x1-x0-floorInset*2,.006,.008],grout,'walk-bath-floor-grout-line',0);
+  sc.boxes.filter(b=>b.t==='tub').forEach(b=>{
+   const q=local(b.u,b.v),r=(b.r||0)*Math.PI/180-angle,top=b.y+b.s[1]+.004,longX=b.s[0]>=b.s[2],length=longX?b.s[0]:b.s[2];
+   for(let p=-length/2+.2;p<length/2;p+=.4)put(q[0]+(longX?p:0),q[1]+(longX?0:p),top,longX?[.008,.008,b.s[2]+.025]:[b.s[0]+.025,.008,.008],grout,'walk-bath-tub-grout-line',0,r);
+   put(q[0],q[1],top,longX?[b.s[0],.008,.008]:[.008,.008,b.s[2]],grout,'walk-bath-tub-grout-line',0,r);
+  });
+ }
  const schoolNote=id==='school'?' ノート・教材・黒板の描線も演出上の推定です。':'';
  const hospitalNote=id==='hospital'?' スチールサッシの材質区分を歩行版で補正しました。畳縁・畳目の細部と色は、畳敷きベッドを読み取りやすくする演出上の推定です。':'';
+ const bathNote=id==='bath'?' 記録にあるタイル浴槽を読み取りやすくする目地を歩行版に補いました。目地の間隔・太さ・色は演出上の推定です。':'';
  const note={ja:'歩行用に補った壁・天井・装飾・照明は推定です。',en:'Enclosures, finishes and lighting added for walking are inferred.'};
- return {...sc,boxes,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')}};
+ return {...sc,boxes,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote+bathNote,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')+(id==='bath'?' Grout cues make the documented tiled bath legible; joint pitch, width and colour are illustrative inferences.':'')}};
 }
 const api={complete,profiles};if(typeof module==='object')module.exports=api;else root.JTAWalkInteriors=api;
 })(typeof window==='undefined'?this:window);

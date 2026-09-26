@@ -173,3 +173,13 @@ The source scene remains unchanged. In the walking copy only, the existing windo
 Validation: 152/152 full-build tests. New checks preserve the source material labels, require metal classification in the walking copy, keep 24 edge pieces and 96 weave marks inside the six existing bed footprints and require every addition to remain inferred. Eleven native GLES2 views compile/link/render without errors. The inspected hospital image changes 79,296 pixels while the outdoor control image is byte-identical. Real mobile/browser GPU performance remains unverified.
 
 Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors4, navigation3. Cloudflare release.json reached 42b045d284345d5b41b2f23f066401c01402129c; the public HTML requests interiors4 and its served bytes match the tested local file.
+
+## Building 61 communal-bath tile legibility — interiors v5, 2026-09-27
+
+The existing Building 61 lower-bath scene identifies the communal bath, tiled tub, fresh-water rinse basin, steam supply, wash stations and changing-room baskets. The tub size and equipment layout are already labelled inferred. No room, fixture, water-surface or source-object geometry was moved or replaced.
+
+For the walking copy only, 25 pale floor-joint cues and 58 tub-cap joint cues now provide a restrained tile scale. Every addition is labelled inferred and remains within the existing floor or one of the four existing tub-wall footprints. Exact joint pitch, width and colour are illustrative; this is not a measured tile survey. The first render used darker joints, which made the submerged floor grid too strong; the final pass reduced the contrast and line width after visual comparison.
+
+Validation: 153/153 full-build tests. The new regression preserves all 44 source bath boxes, bounds every added joint to existing geometry and keeps the room traversable. Twenty native GLES2 views compile, link and render without errors. The final bath view differs from the pre-change image by 74,930 pixels while the outdoor control is byte-identical. Real mobile/browser GPU performance remains unverified.
+
+Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors5, navigation3. Verify Cloudflare publication and byte-check the served interiors5 asset before closing this pass.

@@ -73,3 +73,23 @@ test('hospital walking copy shows documented steel sashes and tatami-topped beds
  }
  assert.ok(sc.text.ja.includes('畳縁・畳目')&&sc.text.ja.includes('推定'));
 });
+
+test('communal bath tile cues stay on the existing floor and tub caps without changing source geometry',()=>{
+ const original=scenes.bath,source=JSON.stringify(original),sc=interior.complete(original,'bath'),p=sc.walkEnvelope;
+ assert.equal(JSON.stringify(original),source,'source bath remains untouched');
+ const floorLines=sc.boxes.filter(b=>b.t==='walk-bath-floor-grout-line'),tubLines=sc.boxes.filter(b=>b.t==='walk-bath-tub-grout-line'),tubs=original.boxes.filter(b=>b.t==='tub');
+ assert.ok(floorLines.length>=20,'floor receives a readable bounded grid');
+ assert.ok(tubLines.length>=50,'four existing tub walls receive cap joints');
+ for(const line of floorLines){
+  const a=(line.r||0)*Math.PI/180-p.angle,c=Math.cos(a),s=Math.sin(a),q=[(line.u-p.u)*.805*Math.cos(p.angle)+(line.v-p.v)*.805*Math.sin(p.angle),-(line.u-p.u)*.805*Math.sin(p.angle)+(line.v-p.v)*.805*Math.cos(p.angle)];
+  const hx=(Math.abs(c)*line.s[0]+Math.abs(s)*line.s[2])/2,hz=(Math.abs(s)*line.s[0]+Math.abs(c)*line.s[2])/2;
+  assert.ok(q[0]-hx>=p.x0-.001&&q[0]+hx<=p.x1+.001&&q[1]-hz>=p.z0-.001&&q[1]+hz<=p.z1+.001,'floor joint stays inside existing floor');
+  assert.equal(line.a,1);
+ }
+ for(const line of tubLines){
+  const corners=[-1,1].flatMap(i=>[-1,1].map(j=>{const a=line.r*Math.PI/180,c=Math.cos(a),s=Math.sin(a);return[line.u+(i*line.s[0]*c-j*line.s[2]*s)/2/.805,line.v+(i*line.s[0]*s+j*line.s[2]*c)/2/.805];}));
+  assert.ok(tubs.some(b=>corners.every(q=>nav.inside(b,...q,.805,.02))),'tub joint stays on an existing tub cap');
+  assert.equal(line.a,1);
+ }
+ assert.ok(sc.text.ja.includes('タイル浴槽')&&sc.text.ja.includes('推定'));
+});

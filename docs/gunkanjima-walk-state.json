@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "in_progress",
-  "updatedAt": "2026-09-26T16:48:30Z",
+  "updatedAt": "2026-09-26T17:03:00Z",
   "activeRun": {
     "task": "Improve the source-labelled Building 61 communal-bath tile finish without changing documented layout",
     "startedAt": "2026-09-26T16:48:30Z"
@@ -29,7 +29,8 @@
     "Jigokudan walking pass: 46 existing inferred treads made traversable in both directions without changing source-scene horizontal positions, count or dimensions",
     "Jigokudan walk assets verified live at 655ab4f58decd932877648acd372884c70978966; HTML requests interiors3/navigation3 and served files are byte-identical",
     "Hospital ward walking copy: documented steel sashes use metal materials and six documented tatami-topped beds gain inferred, footprint-bounded edge/weave detail",
-    "Hospital interiors4 verified live at 42b045d284345d5b41b2f23f066401c01402129c; public HTML and served asset byte-checked"
+    "Hospital interiors4 verified live at 42b045d284345d5b41b2f23f066401c01402129c; public HTML and served asset byte-checked",
+    "Building 61 communal-bath walking copy: inferred floor and tub-cap grout cues added within existing geometry; source layout preserved"
   ],
   "nextActions": [
     "Improve terrain, room-specific furnishings and composition in bounded, visually verified steps using the linked GDC / developer references",
@@ -69,7 +70,7 @@
     "id": "6ab7ba457d548191b74af1d0222b0b92"
   },
   "validation": {
-    "fullBuildTestsPassed": 152,
+    "fullBuildTestsPassed": 153,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 18,
     "inferredDoorwayPathsChecked": 1362,
@@ -104,7 +105,13 @@
     "hospitalTatamiWeaveMarksChecked": 96,
     "hospitalRenderDifferingPixels": 79296,
     "hospitalOutdoorControlByteIdentical": true,
-    "hospitalServedAssetByteChecked": true
+    "hospitalServedAssetByteChecked": true,
+    "bathSourceBoxesPreserved": 44,
+    "bathFloorGroutLinesChecked": 25,
+    "bathTubCapGroutLinesChecked": 58,
+    "bathNativeGlesViewsRendered": 20,
+    "bathRenderDifferingPixels": 74930,
+    "bathOutdoorControlByteIdentical": true
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
@@ -112,9 +119,9 @@
   },
   "publication": {
     "rendererVersion": 18,
-    "walkInteriorsVersion": 4,
+    "walkInteriorsVersion": 5,
     "walkNavigationVersion": 3,
-    "status": "verified live; release.json, public HTML and interiors4 asset byte-checked",
+    "status": "Building 61 communal-bath interiors5 tested and awaiting publication",
     "verifiedCommit": "42b045d284345d5b41b2f23f066401c01402129c"
   }
 }
