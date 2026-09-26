@@ -9,11 +9,25 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/3d/audio/*"],
+    "run_worker_first": ["/api/*", "/3d/audio/*"],
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"
   },
   "workers_dev": true,
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SUPPORTERS",
+        "class_name": "SupporterStore"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "supporters-v1",
+      "new_sqlite_classes": ["SupporterStore"]
+    }
+  ],
   "routes": [
     {
       "pattern": "japantimeatlas.com",

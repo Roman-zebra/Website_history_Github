@@ -23,7 +23,7 @@ for(const name of ['index.html','explore.html']){
  for(const file of boot)assert.ok(explore.includes("'"+file+"'"),name+' preloads '+file+', which explore.js does not fetch');
 }
 const directories=['data','icons','3d','place','search','guides','visit','vendor'];
-const files=['walking-data.js','walking-time.js','walking-time.css','activities-data.js','search-core.js','search-worker.js','visit.html','about.html','about.js','th.html','.nojekyll','LICENSE-DATA.md','_headers','_redirects','app.js','atmosphere.js','design.css','explore.css','explore.html','explore.js','explore.webmanifest','index.html','ja.html','kids.html','ko.html','loop.js','manifest.webmanifest','og.jpg','page.css','place-ui.js','places.html','robots.txt','sitemap.xml','553bf2e0eaae7329e0477ae46475d218.txt','style.css','sw.js','zh-cn.html','zh-tw.html'];
+const files=['walking-data.js','walking-time.js','walking-time.css','activities-data.js','search-core.js','search-worker.js','visit.html','about.html','about.js','support.html','support.js','th.html','.nojekyll','LICENSE-DATA.md','_headers','_redirects','app.js','atmosphere.js','design.css','explore.css','explore.html','explore.js','explore.webmanifest','index.html','ja.html','kids.html','ko.html','loop.js','manifest.webmanifest','og.jpg','page.css','place-ui.js','places.html','robots.txt','sitemap.xml','553bf2e0eaae7329e0477ae46475d218.txt','style.css','sw.js','zh-cn.html','zh-tw.html'];
 assert.equal(path.dirname(dist),root);
 fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist);
 for(const name of [...directories,...files])fs.cpSync(path.join(root,name),path.join(dist,name),{recursive:true});
@@ -45,4 +45,3 @@ const seo=require('./seo/titles.cjs'),home=path.join(dist,'index.html');
 fs.writeFileSync(home,seo.injectVerification(fs.readFileSync(home,'utf8'),seo.loadVerification()));
 fs.writeFileSync(path.join(dist,'release.json'),JSON.stringify({assets:assetVersion,data:dataVersion,commit:process.env.CF_PAGES_COMMIT_SHA||process.env.WORKERS_CI_COMMIT_SHA||'local'}));
 console.log('Validated static site prepared in dist; asset '+assetVersion+', data '+dataVersion+'; '+versioned+' pages given the asset version');
-
