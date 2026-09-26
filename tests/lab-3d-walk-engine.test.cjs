@@ -9,7 +9,18 @@ const status={textContent:''},document={currentScript:{src:'https://japantimeatl
 const win={JTA_WALK_PAGE:true,LAB_LANG:'ja',JTAWalkNav:require(root+'/3d/gunkanjima-walk-nav.js'),JTAWalkInteriors:require(root+'/3d/gunkanjima-walk-interiors.js'),JTAWalkBuildings:require(root+'/3d/gunkanjima-walk-buildings.js'),devicePixelRatio:1,matchMedia:()=>({matches:false}),addEventListener:noop,dispatchEvent:e=>{if(e.type==='jta-walk-ready')ready();}};
 const ctx={window:win,document,navigator:{},location:{search:'',hash:''},console,URL,CustomEvent:class{constructor(type){this.type=type;}},performance:{now:()=>now},requestAnimationFrame:f=>raf.push(f),setTimeout:()=>0,Image:class{width=1024;set src(v){queueMicrotask(()=>this.onload())}},fetch:async url=>{const file=path.join(root,new URL(url).pathname);const data=fs.readFileSync(file);return{ok:true,json:async()=>JSON.parse(data),arrayBuffer:async()=>data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength)}},matchMedia:win.matchMedia};
 vm.runInNewContext(fs.readFileSync(root+'/3d/gunkanjima-3d.js','utf8'),ctx);
-await loaded;const api=win.jtaLab3d,g=api.game;assert.ok(api.st.walk);assert.notEqual(g.canWalk(api.st.wx,api.st.wz),null,'outdoor spawn supported');
+await loaded;const api=win.jtaLab3d,g=api.game;
+// Browser zoom shortcuts are not captured by the 3D camera.
+for(const type of ['wheel','keydown'])for(const mod of ['ctrlKey','metaKey'])for(const fn of events[type]||[])fn({key:'-',deltaY:120,[mod]:true,preventDefault(){assert.fail('browser zoom intercepted');}});
+// Reversing at either pinch limit must respond immediately, without a stale baseline.
+api.st.walk=false;api.st.dist=100;
+const emit=(type,id,x)=>{for(const fn of events[type]||[])fn({pointerId:id,clientX:x,clientY:0,buttons:1});};
+emit('pointerdown',1,0);emit('pointerdown',2,100);
+emit('pointermove',2,1);const far=api.st.dist;emit('pointermove',2,2);assert.ok(api.st.dist<far,'reverse from far clamp');
+emit('pointermove',2,100000);const nearZoom=api.st.dist;emit('pointermove',2,50000);assert.ok(api.st.dist>nearZoom,'reverse from near clamp');
+emit('lostpointercapture',1,0);emit('lostpointercapture',2,50000);const az=api.st.az;emit('pointermove',2,2);assert.equal(api.st.az,az,'lost capture clears drag');
+api.st.walk=true;
+assert.ok(api.st.walk);assert.notEqual(g.canWalk(api.st.wx,api.st.wz),null,'outdoor spawn supported');
 function frame(){now+=40;const f=raf.shift();if(f)f(now);}
 frame();const start={...api.st};g.input.y=1;for(let i=0;i<20;i++)frame();assert.ok(Math.hypot(api.st.wx-start.wx,api.st.wz-start.wz)>.1,'outdoor moves');g.pause();
 let entered=0;for(const id of Object.keys(g.scenes())){const info=g.scenes()[id],b=info.generatedBuilding;if(b&&(1962<(b.built||b.seen||1950)||(b.gone&&1962>b.gone)))continue;entered++;const outside={x:api.st.wx,z:api.st.wz};assert.ok(g.enter(id),id+' enters');assert.ok(api.st.walk);assert.ok(g.indoor());assert.notEqual(g.canWalk(api.st.wx,api.st.wz),null);frame();g.leave();assert.equal(g.indoor(),false);assert.equal(api.st.wx,outside.x);assert.equal(api.st.wz,outside.z);}

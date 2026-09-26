@@ -25,8 +25,8 @@ function main() {
   const source = fs.realpathSync(path.resolve(input));
   if (!fs.statSync(source).isFile()) throw new Error('Input must be a regular file.');
   const start = Number(startArg), interval = Number(intervalArg), count = Number(countArg);
-  if (!Number.isFinite(start) || start < 0 || !Number.isFinite(interval) || interval < 0.1 || interval > 600 || !Number.isInteger(count) || count < 1 || count > 60) {
-    throw new Error('Use START >= 0, INTERVAL 0.1–600 seconds, and integer COUNT 1–60.');
+  if (!Number.isFinite(start) || start < 0 || !Number.isFinite(interval) || interval < 0.1 || interval > 600 || !Number.isInteger(count) || count < 1 || count > 900) {
+    throw new Error('Use START >= 0, INTERVAL 0.1–600 seconds, and integer COUNT 1–900.');
   }
   const metadata = JSON.parse(run('ffprobe', ['-v', 'error', '-protocol_whitelist', 'file,pipe', '-show_format', '-show_streams', '-of', 'json', source]));
   const video = metadata.streams.find(s => s.codec_type === 'video' && !s.disposition?.attached_pic);

@@ -193,3 +193,13 @@ For the walking copy only, arrival moves to a clear rear aisle and looks across 
 Validation: 154/154 full-build tests. The regression preserves the source camera, six tables and 216 chair components; the selected entry is supported without fallback displacement and keeps every table inside a 25-degree opening-view cone. Eleven native GLES2 views compile, link and render without errors. The nursery view changes 1,021,790 pixels because the camera is deliberately reframed; all ten control views are byte-identical. Real mobile/browser GPU performance remains unverified.
 
 Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors6, navigation3. Cloudflare release.json reached 9731b78de6265c2f10ea2e36f570204fb0472e75; the public HTML requests interiors6 and its served bytes match the tested local file.
+
+## Gameplay-driven environment, English UI and zoom — renderer v19
+
+Gamersyde's actual public Genshin gameplay stream was obtained. Extracted 600 frames at one-second intervals over ten minutes; all ten contact sheets inspected. Acquisition metadata, limitations, timestamped observations and public technical sources are in `docs/gunkanjima-video-study-v19.md`. No private game source or game assets were imported.
+
+Applied continuous environmental shading, island-scale directional haze and canopy-height anchored wind. Retained existing NiloCat MIT notice and added Godot MIT attribution. Fixed English static/archive/help/ARIA omissions, initial era text, zoom clamp hysteresis, lost capture, Ctrl/Cmd browser zoom interception and Safari-prone small select text. Walking canvas now permits browser pinch zoom.
+
+Validation: 155 full-build tests pass; 20 native GLES scenes in normal and forced-mediump shader paths compile/link/render without errors. Wind-only 2-second image comparison changes 61,945 pixels; reduced-motion comparison changes zero. English translation coverage and real renderer pinch round-trip/shortcut event paths are exercised. Actual iPhone gestures remain untested; cloud browser has no WebGL. Versions: renderer19, walkJS7/CSS6; interiors6/navigation3/buildings4 retained.
+
+Other automatic work is paused: Google registration task was already disabled; SEO title workflow and IndexNow notifications now have manual triggers only. Preserve this user instruction during continuation.

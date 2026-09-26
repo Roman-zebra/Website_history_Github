@@ -147,9 +147,10 @@ test('ownership codes for Naver, Baidu and others go on the home page only when 
  assert.ok(read('scripts/build.cjs').includes('seo.injectVerification('),'the build applies them');
 });
 
-test('the weekly workflow runs on a schedule, can push, keeps secrets from forks and logs no search terms',()=>{
+test('the title workflow stays manual, keeps secrets from forks and logs no search terms',()=>{
  const y=read('.github/workflows/seo-3d-titles.yml');
- assert.match(y,/schedule:\s*\n\s*- cron: '[^']+'/);
+ assert.doesNotMatch(y,/^\s*(schedule|push):/m);
+ assert.doesNotMatch(read('.github/workflows/indexnow.yml'),/^\s*(schedule|push):/m);
  assert.ok(y.includes('workflow_dispatch'));
  assert.ok(!y.includes('pull_request'),'no pull request trigger');
  assert.match(y,/contents: write/);

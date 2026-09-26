@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '18';
+  const V = '19';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -98,14 +98,14 @@
     uniform float uRot, uLift, uExag, uMpp, uC, uHf, uYOff;
     uniform mediump float uMorph, uYear;   /* years are sent as (year - 1900) so mediump is exact enough */
     uniform vec2 uPP;
-    varying vec4 vShadow; varying float vDepth;
+    varying vec4 vShadow; varying float vDepth; varying vec3 vWorld;
     vec3 place(vec2 g, float h){
       vec2 xz = (g - vec2(uC)) * uMpp;
       float c = cos(uRot), s = sin(uRot);
       return vec3(xz.x * c - xz.y * s, h * uExag + uYOff, xz.x * s + xz.y * c);
     }
     vec3 turn(vec3 n){ float c = cos(uRot), s = sin(uRot); return vec3(n.x * c - n.z * s, n.y, n.x * s + n.z * c); }
-    void finish(vec3 p){ vShadow = uLightPV * vec4(p, 1.0); vec4 q = uPV * vec4(p, 1.0); vDepth = q.w; gl_Position = q; }
+    void finish(vec3 p){ vWorld=p; vShadow = uLightPV * vec4(p, 1.0); vec4 q = uPV * vec4(p, 1.0); vDepth = q.w; gl_Position = q; }
     /* a building stands from its completion year to its collapse; it rises over about a year */
     float standing(vec2 life){
       float up = smoothstep(life.x - 1.2, life.x, uYear);
@@ -113,6 +113,19 @@
       return up * down;
     }`;
   const SHADOW_FN = `
+    varying vec3 vWorld; uniform vec3 uEye;
+    // Sky-coloured directional fog, informed by Godot sky.glsl (MIT).
+    vec3 aerial(vec3 col,vec3 horizon,vec3 sun,float density,float depth,float enabled){
+      float amount=clamp(density*smoothstep(80.0,900.0,depth),0.0,1.0);
+      vec3 haze=horizon;
+      if(enabled>.5){
+        vec3 ray=vWorld-uEye; float distanceToEye=length(ray*.01)*100.0;
+        float forward=pow(max(dot(ray/max(distanceToEye,.001),sun),0.0),8.0);
+        haze=mix(horizon,vec3(.94,.86,.70),forward*.18);
+        amount=clamp(1.0-exp(-density*max(distanceToEye-24.0,0.0)*.0035),0.0,.92);
+      }
+      return mix(col,haze,amount);
+    }
     uniform sampler2D uShadowMap; uniform float uShadowOn, uShadowTexel;
     float shadowAt(vec4 sc, float bias){
       if (uShadowOn < 0.5) return 1.0;
@@ -129,7 +142,7 @@
     // Copyright (c) 2020 ColinLeung-NiloCat; full notice: /3d/licenses/nilocat-toon-MIT.txt
     // Environment-specific colours and hemisphere fill are original JTA additions.
     vec3 toonLight(vec3 albedo,vec3 normal,vec3 sun,float shadow,float occlusion){
-      float litOrShadowArea=smoothstep(.08,.42,dot(normal,sun));
+      float litOrShadowArea=smoothstep(-.18,1.0,dot(normal,sun));
       litOrShadowArea*=clamp(occlusion,0.0,1.0);
       litOrShadowArea*=mix(1.0,shadow,.75);
       vec3 mainLight=mix(vec3(.58,.63,.73),vec3(1.08,1.02,.88),litOrShadowArea);
@@ -156,8 +169,7 @@
   const TERRAIN_FS = `
     precision mediump float;
     uniform sampler2D uTexA, uTexB;
-    uniform vec3 uEye;
-    uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uTime, uAnime, uYear;
+        uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uTime, uAnime, uYear;
     uniform vec3 uBg, uSun, uHorizon;
     varying vec2 vUvP; varying vec2 vUvO; varying vec3 vNor; varying float vSea; varying vec3 vPos;
     varying vec4 vShadow; varying float vDepth;
@@ -213,7 +225,7 @@
         }
         edge = 1.0;
       }
-      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
+      col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       col = mix(uBg, col, edge);
       gl_FragColor = vec4(col, 1.0);
     }`;
@@ -349,7 +361,7 @@
         vec3 flag = gone > 0.0 && gone <= 110.0 ? vec3(0.88, 0.22, 0.16) : vec3(0.35, 0.55, 0.85);
         col = mix(col, mix(grey, flag, 0.75) * (0.55 + 0.45 * d), uChange);
       }
-      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
+      col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.22 : 1.0);
     }`;
   // roofs: the aerial photograph of the year, drawn where the roof is in that photograph
@@ -394,7 +406,7 @@
         col=toonLight(roofBase,vec3(0.0,1.0,0.0),uSun,sh,1.0);
       }
       if (uChange > 0.001){ vec3 grey = vec3(dot(col, vec3(0.299, 0.587, 0.114))); col = mix(col, grey * 0.9, 0.5 * uChange); }
-      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
+      col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.18 : 1.0);
     }`;
   // the sea wall ring
@@ -416,7 +428,7 @@
       col = mix(col, vec3(0.22, 0.24, 0.22), smoothstep(2.2, 0.0, y));                         /* wet band at the waterline */
       col *= 1.0 - age * 0.2 * noise(vec2(s * 0.3, y));
       col *= mix(1.0, 0.32 + 0.62 * d * mix(0.35, 1.0, sh), uShade);
-      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
+      col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, 1.0);
     }`;
   const SKY_VS = `attribute vec2 aPos; varying vec2 vP; void main(){ vP = aPos; gl_Position = vec4(aPos, 0.9999, 1.0); }`;
@@ -466,9 +478,9 @@
   /* aMat = (material kind, seed). The surface detail is procedural, in metres of the model, so a
      tatami mat shows its weave and border, wood its grain, concrete its stains, rock its moss. */
   const BOX_VS = COMMON_VS + `
-    attribute vec3 aPos3; attribute vec3 aNor; attribute vec4 aCol; attribute vec2 aMat;
+    attribute vec3 aPos3; attribute vec3 aNor; attribute vec4 aCol; attribute vec2 aMat; attribute float aWind; uniform float uWindTime, uWindStrength;
     varying vec3 vNor; varying vec4 vCol; varying vec3 vLoc; varying vec2 vMat;
-    void main(){ vNor = turn(aNor); vCol = aCol; vMat = aMat; vLoc = vec3((aPos3.x - uC) * uMpp, aPos3.y, (aPos3.z - uC) * uMpp); finish(place(aPos3.xz, aPos3.y)); }`;
+    void main(){ vNor = turn(aNor); vCol = aCol; vMat = aMat; vLoc = vec3((aPos3.x - uC) * uMpp, aPos3.y, (aPos3.z - uC) * uMpp); vec3 p=place(aPos3.xz,aPos3.y); float phase=uWindTime*1.3+aMat.y*6.28; float bend=aWind*aWind*uWindStrength; p.x+=sin(phase)*bend; p.z+=sin(phase*.73+1.2)*bend*.55; finish(p); }`;
   const BOX_FS = `
 #ifdef GL_FRAGMENT_PRECISION_HIGH
     precision highp float;
@@ -566,7 +578,7 @@
         col*=1.0-.22*contact;
       }
       if(vMat.x>13.5)col=vCol.rgb*1.25;
-      col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
+      col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, vCol.a);
     }`;
   const BOX_DEPTH_FS = `precision mediump float; varying vec4 vCol; void main(){ if (vCol.a < 0.9) discard; gl_FragColor = vec4(1.0); }`;
@@ -589,9 +601,9 @@
     for (const n of uniforms) U[n] = gl.getUniformLocation(p, n);
     return { p, U };
   }
-  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass'];
+  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uWindTime', 'uWindStrength', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass'];
   const TEX_U = ['uTexA', 'uTexB', 'uMix', 'uOrthoA', 'uOrthoB'];
-  const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat'];
+  const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat', 'aWind'];
   let progT, progW, progR, progS, progSky, progB, depthT, depthW, depthR, depthB;
   try {
     progT = program(TERRAIN_VS, TERRAIN_FS, TERRAIN_A, COMMON_U.concat(TEX_U));
@@ -813,11 +825,12 @@
       }
       if(batches.length){batches.push(batch);const parts=batches.map(boxes=>buildBoxes({...scene,boxes}));return {parts,count:parts.reduce((n,p)=>n+p.count,0)};}
     }
-    const P = [], N = [], Cc = [], Mm = [], I = [];
+    const P = [], N = [], Cc = [], Mm = [], W = [], I = []; let windBase=0,windHeight=1,windOn=false;
     let n = 0;
-    const push = (pos, nor, col, mat) => { P.push(pos[0], pos[1], pos[2]); N.push(nor[0], nor[1], nor[2]); Cc.push(col[0], col[1], col[2], col[3]); Mm.push(mat[0], mat[1]); return n++; };
+    const push = (pos, nor, col, mat) => { P.push(pos[0], pos[1], pos[2]); N.push(nor[0], nor[1], nor[2]); Cc.push(col[0], col[1], col[2], col[3]); Mm.push(mat[0], mat[1]); W.push(windOn?clamp((pos[1]-windBase)/windHeight,0,1):0); return n++; };
     for (const b of scene.boxes){
       if ((scene.pass === 'assumed') !== translucent(b)) continue;
+      windBase=b.y;windHeight=Math.max(.01,b.s[1]);windOn=GAME&&b.k===10;
       const [sx, sy, sz] = b.s, a = (b.r || 0) * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
       const alpha = b.k === 8 ? 0.38 : b.k === 12 ? 0.55 : b.a && !GAME ? 0.45 : 1;
       const col = [b.c[0], b.c[1], b.c[2], alpha], mat = [b.k || 0, b.sd || 0];
@@ -865,7 +878,7 @@
     }
     const big = n > 65535;
     if (big && !bigIndex) return null;
-    return { pos3: buffer(new Float32Array(P)), nor: buffer(new Float32Array(N)), col: buffer(new Float32Array(Cc)), mat: buffer(new Float32Array(Mm)),
+    return { pos3: buffer(new Float32Array(P)), nor: buffer(new Float32Array(N)), col: buffer(new Float32Array(Cc)), mat: buffer(new Float32Array(Mm)), wind: buffer(new Float32Array(W)),
       idx: buffer(big ? new Uint32Array(I) : new Uint16Array(I), gl.ELEMENT_ARRAY_BUFFER), count: I.length, type: big ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT };
   }
   function loadImage(src){
@@ -1056,6 +1069,8 @@
     gl.uniform3fv(U.uSun, e.sun);
     gl.uniform3fv(U.uHorizon, e.horizon);
     gl.uniform1f(U.uFog, e.fog);
+    gl.uniform1f(U.uWindTime,reduce?0:(performance.now()-t0)/1000);
+    gl.uniform1f(U.uWindStrength,GAME&&!reduce?(st.weather===2?.075:.035):0);
     gl.uniform1f(U.uTime, reduce?0:(performance.now() - t0) / 1000);
     if(U.uEye)gl.uniform3fv(U.uEye,[st.wx,st.walkGround+1.68,st.wz]);
     gl.uniform1f(U.uShadowOn, shadowOn ? 1 : 0);
@@ -1094,7 +1109,7 @@
   }
   function drawBoxes(P, m){
     if(m.parts){for(const part of m.parts)drawBoxes(P,part);return;}
-    attr(m.pos3, 0, 3); attr(m.nor, 1, 3); attr(m.col, 2, 4); attr(m.mat, 3, 2); disableFrom(4);
+    attr(m.pos3, 0, 3); attr(m.nor, 1, 3); attr(m.col, 2, 4); attr(m.mat, 3, 2); attr(m.wind, 4, 1); disableFrom(5);
     gl.uniform1f(P.U.uYOff, 0);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, m.idx);
     gl.drawElements(gl.TRIANGLES, m.count, m.type, 0);
@@ -1512,7 +1527,7 @@
     for (const b of document.querySelectorAll('.enter-btn')) b.textContent = enterLabel(b.dataset.scene);
     request();
   }
-  function disposeScene(){ const free=mesh=>{if(!mesh)return;if(mesh.parts){mesh.parts.forEach(free);return;}for(const key of ['pos3','nor','col','mat','idx'])if(mesh[key])gl.deleteBuffer(mesh[key]);};free(sceneMesh);free(sceneMeshA); }
+  function disposeScene(){ const free=mesh=>{if(!mesh)return;if(mesh.parts){mesh.parts.forEach(free);return;}for(const key of ['pos3','nor','col','mat','wind','idx'])if(mesh[key])gl.deleteBuffer(mesh[key]);};free(sceneMesh);free(sceneMeshA); }
   function leaveScene(){
     if (!scene) return;
     disposeScene(); scene = null; sceneMesh = null; sceneMeshA = null; ghostId = 0; ghostId2 = -10;
@@ -1553,12 +1568,12 @@
   document.addEventListener('visibilitychange', () => { if (!document.hidden) request(); });
 
   const pointers = new Map();
-  let pinch0 = 0, dist0 = 0;
+  let pinch0 = 0;
   canvas.addEventListener('pointerdown', e => {
     stopSpin();
     try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* old browsers */ }
     pointers.set(e.pointerId, [e.clientX, e.clientY]);
-    if (!st.walk && pointers.size === 2){ const [a, b] = [...pointers.values()]; pinch0 = Math.hypot(a[0] - b[0], a[1] - b[1]); dist0 = st.dist; }
+    if (!st.walk && pointers.size === 2){ const [a, b] = [...pointers.values()]; pinch0 = Math.hypot(a[0] - b[0], a[1] - b[1]); }
   });
   canvas.addEventListener('pointermove', e => {
     if (GAME && document.pointerLockElement === canvas) return;
@@ -1580,15 +1595,20 @@
       }
     } else if (pointers.size === 2 && pinch0){
       const [a, b] = [...pointers.values()];
-      st.dist = clamp(dist0 * pinch0 / Math.max(1, Math.hypot(a[0] - b[0], a[1] - b[1])), dMin(), dMax());
+      const distance = Math.max(1, Math.hypot(a[0] - b[0], a[1] - b[1]));
+      st.dist = clamp(st.dist * pinch0 / distance, dMin(), dMax());
+      pinch0 = distance;
     }
     request();
   });
   const release = e => { pointers.delete(e.pointerId); if (pointers.size < 2) pinch0 = 0; };
   canvas.addEventListener('pointerup', release);
   canvas.addEventListener('pointercancel', release);
+  canvas.addEventListener('lostpointercapture', release);
+  window.addEventListener('blur',()=>{pointers.clear();pinch0=0;});
   canvas.addEventListener('contextmenu', e => e.preventDefault());
   canvas.addEventListener('wheel', e => {
+    if(e.ctrlKey||e.metaKey)return;
     e.preventDefault();
     stopSpin();
     if (st.walk) return;
@@ -1596,6 +1616,7 @@
     request();
   }, { passive: false });
   canvas.addEventListener('keydown', e => {
+    if(e.ctrlKey||e.metaKey)return;
     const key = e.key.toLowerCase();
     if (st.walk && ['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','shift'].includes(key)){
       e.preventDefault(); walkKeys.add(key); request(); return;
