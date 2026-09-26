@@ -1,11 +1,8 @@
 {
   "schemaVersion": 1,
-  "status": "in_progress",
-  "updatedAt": "2026-09-26T14:29:25.372Z",
-  "activeRun": {
-    "startedAt": "2026-09-26T14:29:25.372Z",
-    "task": "v18 lighting/material pass for user playlist 9xooh3ciIis; public MIT shader review; main chat active"
-  },
+  "status": "ready",
+  "updatedAt": "2026-09-26T14:39:15Z",
+  "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
     "Renderer v10 deployed with 68 inferred building studies",
@@ -21,10 +18,12 @@
     "Renderer v15 verified live at 9a6db7c25fc471b220a26ee4d26a4769d346fe7b",
     "Renderer v16: inferred concrete/rock terrain materials, near-distance paving detail and collapsed video references; public source descriptions reviewed, YouTube playback blocked",
     "Renderer v16 verified live at a65f32d9fed9b92444348ae028336d2110da3618",
-    "Renderer v17: footprint terrain clearance, richer precision-safe materials, first-person-only controls, desktop WASD with no stick, top contextual UI, no Pause button"
+    "Renderer v17: footprint terrain clearance, richer precision-safe materials, first-person-only controls, desktop WASD with no stick, top contextual UI, no Pause button",
+    "Renderer v17 verified live at 8f9c104499e84b6b92f6ed8d9a90e6d505dbb589; served files byte-checked and public desktop DOM checked",
+    "Renderer v18: MIT-attributed NiloCat lighting adaptation, neutral concrete palette, warm room lamps and original nearby furniture contact shade; user playlist identified but not watched"
   ],
   "nextActions": [
-    "Verify renderer v17 publication if interrupted during deploy",
+    "Verify renderer v18 publication and served MIT notice if interrupted during deploy",
     "Improve terrain, room-specific furnishings and composition in bounded, visually verified steps using the linked GDC / developer references",
     "Verify PC/mobile browser interaction when a WebGL-capable browser is available",
     "Replace inferred geometry only when usable historical plans/photos are obtained"
@@ -63,17 +62,17 @@
   "validation": {
     "fullBuildTestsPassed": 150,
     "fullBuildTestsFailed": 0,
-    "nativeGlesScenesRendered": 14,
+    "nativeGlesScenesRendered": 18,
     "inferredDoorwayPathsChecked": 1362,
     "roomWallCornersOutsideFootprint": 0,
-    "nativeGlesMediumpScenesRendered": 14,
+    "nativeGlesMediumpScenesRendered": 18,
     "roomEntryCameraVerified": true,
     "interiorEnvelopeCoverage": true,
     "touchSprintAndMinimap": true,
     "schoolDesktopPropsAndAisle": true,
     "skyTimeViewWeatherImageDifferences": true,
     "compactMenuInteractions": true,
-    "postCorrectionLabTestsPassed": 38,
+    "postCorrectionLabTestsPassed": 41,
     "terrain1962And2010": true,
     "terrainFootprintSamplesPerGrid": 116918,
     "terrainGridStrides": [
@@ -81,14 +80,16 @@
       2,
       4
     ],
-    "keyboardWASDVerified": true
+    "keyboardWASDVerified": true,
+    "contactShadeGpuComparison": true,
+    "mitLicenceShippedInBuild": true
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
     "scope": "User explicitly approved reflecting this change in Roman-zebra/Website_history_Github and publishing to the existing JTA site, then continuing"
   },
   "publication": {
-    "rendererVersion": 17,
+    "rendererVersion": 18,
     "status": "submitted with this source update; verify Cloudflare and release.json"
   }
 }

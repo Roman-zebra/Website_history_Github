@@ -216,6 +216,31 @@
       "title": "HoYoverse technical director: Fontaine introduction",
       "url": "https://blog.playstation.com/2023/08/04/genshin-impact-version-4-0-launches-august-16-first-details/",
       "access": "Public article read via search; browser navigation timed out. No embedded video playback verified."
+    },
+    {
+      "id": "user-genshin-playlist-20260926",
+      "title": "原神～メインストーリー空Ver / ねみゅさん",
+      "url": "https://www.youtube.com/playlist?list=PLSm8CRLt6aPX_iBhVHL7e1YyLLJGERO2U",
+      "videoUrl": "https://www.youtube.com/watch?v=9xooh3ciIis",
+      "access": "Search identified episode 2, 序章 第一幕 風を捕まえる異邦人 Part2. Existing YouTube bot-verification block remains; no playback or frame extraction performed.",
+      "plannedUse": [
+        "World-design reference after authorized playback or supplied frames; not historical evidence for Hashima."
+      ]
+    },
+    {
+      "id": "nilocat-toon-lighting",
+      "title": "ColinLeung-NiloCat: Unity URP Toon Lit Shader Example",
+      "url": "https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample",
+      "codeUrl": "https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample/blob/master/SimpleURPToonLitOutlineExample_LightingEquation.hlsl",
+      "licenseUrl": "https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample/blob/master/LICENSE",
+      "retrievedAt": "2026-09-26",
+      "sourceSha256": "45412660ee157bfe5415e9c4a74a80eb8d95bf47af73ef3c572fef24cc02cf5f",
+      "access": "All 74 lines of the public HLSL lighting file and full MIT licence read. Independent tutorial, not Genshin or Apex source code.",
+      "applied": [
+        "GLSL adaptation of ShadeSingleLight's smooth light transition and CompositeAllLightResults' indirect/direct maximum composition in toonLight; JTA-specific warm/cool colours and hemisphere fill.",
+        "Full copyright and MIT permission notice shipped at /3d/licenses/nilocat-toon-MIT.txt and linked from the help dialog. No Unity runtime, game models, textures or proprietary code imported.",
+        "Separate original JTA contact-shade approximation for four nearby furnishings; not the source's SSAO implementation and not a full screen-space AO pass."
+      ]
     }
   ],
   "nextAcquisition": [

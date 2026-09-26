@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '17';
+  const V = '18';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -125,6 +125,18 @@
       }
       return lit / 9.0;
     }
+    // GLSL adaptation of NiloCat's MIT-licensed ShadeSingleLight/CompositeAllLightResults.
+    // Copyright (c) 2020 ColinLeung-NiloCat; full notice: /3d/licenses/nilocat-toon-MIT.txt
+    // Environment-specific colours and hemisphere fill are original JTA additions.
+    vec3 toonLight(vec3 albedo,vec3 normal,vec3 sun,float shadow,float occlusion){
+      float litOrShadowArea=smoothstep(.08,.42,dot(normal,sun));
+      litOrShadowArea*=clamp(occlusion,0.0,1.0);
+      litOrShadowArea*=mix(1.0,shadow,.75);
+      vec3 mainLight=mix(vec3(.58,.63,.73),vec3(1.08,1.02,.88),litOrShadowArea);
+      vec3 indirect=mix(vec3(.32,.35,.41),vec3(.69,.75,.83),normal.y*.5+.5);
+      indirect*=mix(1.0,occlusion,.5);
+      return albedo*max(indirect,mainLight);
+    }
     float hash(vec2 p){ p=mod(p,113.0); return fract(sin(dot(p, vec2(7.13, 3.71))) * 157.91); }
     float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
       return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }`;
@@ -183,8 +195,7 @@
         float growth=age*smoothstep(.52,.78,noise(vPos.xz*.13))*mix(.46,.13,pavement);
         surface=mix(surface,vec3(.27,.34,.26),growth);
         // Continuous diffuse light avoids the old hard yellow/green bands.
-        vec3 lighting=mix(vec3(.66,.74,.84),vec3(1.06,1.02,.92),smoothstep(.05,.86,d*mix(.45,1.0,sh)));
-        col=surface*lighting;
+        col=toonLight(surface,n,uSun,sh,1.0);
       }
       float edge = smoothstep(0.5, 0.36, max(abs(vUvP.x - 0.5), abs(vUvP.y - 0.5)));
       if (vSea > 0.5){
@@ -278,10 +289,12 @@
         win = step(0.45, fy) * step(fy, 0.75) * step(0.35, fract(s / 2.0)) * step(fract(s / 2.0), 0.65) * 0.6;
       }
       if(uAnime>0.5){
-        base=mix(base,vec3(.92,.83,.65),.52);
+        // Restrained concrete/wood palette: material colour is independent of light colour.
+        base=mix(base,vec3(.84,.81,.73),.22);
+        base*=.96+.08*hash(vec2(seed,17.0));
         if(style>4.5&&style<5.5)base=vec3(.56,.34,.19);
-        if(style>2.5&&style<3.5)base=vec3(.86,.89,.78);
-        if(style>3.5&&style<4.5)base=vec3(.53,.64,.66);
+        if(style>2.5&&style<3.5)base=vec3(.83,.84,.78);
+        if(style>3.5&&style<4.5)base=vec3(.55,.58,.59);
       }
       float slab = (1.0 - smoothstep(0.0, 0.05, fy)) * 0.5;                 /* floor slab line */
       float parapet = smoothstep(H - 0.9, H - 0.6, y);                        /* top band */
@@ -317,9 +330,9 @@
         float reveal=1.0-smoothstep(.04,.18,edgeY);
         col*=1.0-win*reveal*.22*nearDetail;
         // Subtle plaster variation and contact shading below projecting floor slabs.
-        col*=.88+.20*noise(vec2(s*.65,y*.9+seed));
+        col*=.94+.09*noise(vec2(s*.65,y*.9+seed));
         float plaster=noise(vec2(s*3.1,y*3.1));
-        col*=1.0-(1.0-win)*.10*smoothstep(.58,.85,plaster);
+        col*=1.0-(1.0-win)*.06*smoothstep(.58,.85,plaster);
         col*=1.0-.12*(1.0-smoothstep(.03,.16,fy))*(1.0-win);
         float trim=step(.31,fy)*step(fy,.35)+step(.77,fy)*step(fy,.80);
         col=mix(col,vec3(.43,.56,.53),trim*.25*(1.0-win));
@@ -330,7 +343,7 @@
       col = mix(col, vec3(0.30, 0.36, 0.22), age * 0.35 * smoothstep(2.5, 0.0, y) * noise(vec2(s * 0.7, seed * 3.0)));
       float light = 0.32 + 0.62 * d * mix(0.35, 1.0, sh);
       col *= mix(1.0, light, uShade);
-      if(uAnime>0.5) col=col/max(.32,light)*mix(vec3(.61,.70,.89),vec3(1.09,1.06,.92),smoothstep(.24,.42,d*sh));
+      if(uAnime>0.5) col=toonLight(col/max(.32,light),n,uSun,sh,1.0-recess*.25);
       if (uChange > 0.001){
         vec3 grey = vec3(dot(col, vec3(0.299, 0.587, 0.114)));
         vec3 flag = gone > 0.0 && gone <= 110.0 ? vec3(0.88, 0.22, 0.16) : vec3(0.35, 0.55, 0.85);
@@ -376,7 +389,10 @@
       vec3 roof = style > 4.5 && style < 5.5 ? vec3(0.30, 0.27, 0.24) : vec3(0.62, 0.60, 0.57);
       vec3 col = mix(t, roof * (0.6 + 0.4 * dot(t, vec3(0.33))), vAlive < 0.98 ? 0.8 : 0.25);
       col *= mix(1.0, 0.42 + 0.6 * d * mix(0.35, 1.0, sh), uShade);
-      if(uAnime>0.5){col=mix(vec3(.47,.57,.58),vec3(.79,.81,.70),.65+.1*noise(vPos*.12))*mix(vec3(.68,.78,.94),vec3(1.10,1.07,.91),smoothstep(.28,.46,d*sh));}
+      if(uAnime>0.5){
+        vec3 roofBase=mix(vec3(.54,.56,.55),vec3(.73,.72,.66),.55+.16*noise(vPos*.12));
+        col=toonLight(roofBase,vec3(0.0,1.0,0.0),uSun,sh,1.0);
+      }
       if (uChange > 0.001){ vec3 grey = vec3(dot(col, vec3(0.299, 0.587, 0.114))); col = mix(col, grey * 0.9, 0.5 * uChange); }
       col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
       gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.18 : 1.0);
@@ -461,11 +477,18 @@
 #endif
     uniform float uFog, uShade, uChange, uAnime; uniform vec3 uBg, uSun, uHorizon;
     uniform float uRoomLight; uniform vec4 uLamp0,uLamp1,uLamp2,uLamp3;
+    uniform vec4 uContact0,uContact1,uContact2,uContact3;
     varying vec3 vNor; varying vec4 vCol; varying vec4 vShadow; varying float vDepth; varying vec3 vLoc; varying vec2 vMat;
     ` + SHADOW_FN + `
     /* material kinds: 0 flat 1 tatami 2 wood 3 concrete 4 rock 5 tile 6 metal 7 paper 8 glass 9 cloth 10 foliage 11 painted wall 12 water 13 soil.
        Two noise lookups per fragment, whatever the kind: the scales are chosen first, the noise is read once. */
     float lampPool(vec4 lamp){vec3 d=vLoc-lamp.xyz;return lamp.w>0.0?1.0/(1.0+dot(d,d)/(lamp.w*lamp.w*.18)):0.0;}
+    // Bounded analytic furniture contact shade, not a screen-space AO pass.
+    float contactShade(vec4 contact){
+      if(contact.w<=0.0)return 0.0;
+      float gap=contact.y-vLoc.y,radial=length(vLoc.xz-contact.xz);
+      return (1.0-smoothstep(contact.w*.2,contact.w*1.2,radial))*smoothstep(.02,.10,gap)*(1.0-smoothstep(.9,1.8,gap));
+    }
     vec3 material(vec3 c, vec3 p, vec3 n, float k, float seed){
       if (k < 0.5 || (k > 7.5 && k < 8.5)) return c;
       vec2 uv = abs(n.y) > 0.6 ? p.xz : (abs(n.x) > abs(n.z) ? p.zy : p.xy);
@@ -529,13 +552,18 @@
       vec3 col = base * (amb + 0.62 * d * mix(0.4, 1.0, sh));
       if(uAnime>0.5){
         // Retain hemisphere light in the stylised pass: ceilings and stair undersides stay shaded.
-        vec3 ambient=mix(vec3(.43,.48,.59),vec3(.77,.85,.96),n.y*.5+.5);
-        col=base*mix(ambient,vec3(1.12,1.07,.92),smoothstep(.04,.88,d*sh));
+        col=toonLight(base,n,uSun,sh,1.0);
       }
       if(uRoomLight>.5){
         float pool=lampPool(uLamp0)+lampPool(uLamp1)+lampPool(uLamp2)+lampPool(uLamp3);
-        col=base*(vec3(.53,.58,.65)+vec3(.47,.35,.17)*min(pool,1.5));
-        col*=.80+.20*(n.y*.5+.5);
+        // Keep a cool ambient floor while the lamps create local warm light pools.
+        vec3 fill=mix(vec3(.38,.43,.51),vec3(.60,.65,.70),n.y*.5+.5);
+        vec3 warm=vec3(.68,.50,.27)*min(pool*.70,1.0);
+        col=base*(fill+warm);
+      }
+      if(uAnime>.5&&n.y>.6){
+        float contact=max(max(contactShade(uContact0),contactShade(uContact1)),max(contactShade(uContact2),contactShade(uContact3)));
+        col*=1.0-.22*contact;
       }
       if(vMat.x>13.5)col=vCol.rgb*1.25;
       col = mix(col, uHorizon, clamp(uFog * smoothstep(80.0, 900.0, vDepth), 0.0, 1.0));
@@ -571,7 +599,7 @@
     progR = program(ROOF_VS, ROOF_FS, ROOF_A, COMMON_U.concat(TEX_U));
     progS = program(WALL_VS, SEAWALL_FS, WALL_A, COMMON_U);
     progSky = program(SKY_VS, SKY_FS, ['aPos'], ['uTop', 'uHorizon', 'uEl', 'uAz', 'uAspect', 'uAnime', 'uTime', 'uSun', 'uCloudCover', 'uStorm']);
-    progB = program(BOX_VS, BOX_FS, BOX_A, COMMON_U.concat(['uRoomLight','uLamp0','uLamp1','uLamp2','uLamp3']));
+    progB = program(BOX_VS, BOX_FS, BOX_A, COMMON_U.concat(['uRoomLight','uLamp0','uLamp1','uLamp2','uLamp3','uContact0','uContact1','uContact2','uContact3']));
     if (SHADOW){ depthT = program(TERRAIN_VS, DEPTH_FS, TERRAIN_A, COMMON_U); depthW = program(WALL_VS, DEPTH_FS_ALIVE, WALL_A, COMMON_U); depthR = program(ROOF_VS, DEPTH_FS_ALIVE, ROOF_A, COMMON_U); depthB = program(BOX_VS, BOX_DEPTH_FS, BOX_A, COMMON_U); }
   } catch (err) { console.error(err); fallback(T.noWebgl); return; }
 
@@ -1039,6 +1067,8 @@
       const sc=GAME&&gameIndoor&&scene&&interiors.scenes[scene],onRoof=sc&&sc.walkPlan&&st.walkGround>=sc.walkPlan.base+sc.walkPlan.floors*sc.walkPlan.height-.1,uv=fromWorld(st.wx,st.wz),lamps=!onRoof&&sc&&sc.walkLights?sc.walkLights.slice().sort((a,b)=>((a.u-uv[0])**2+(a.v-uv[1])**2+4*(a.y-st.walkGround-1.68)**2)-((b.u-uv[0])**2+(b.v-uv[1])**2+4*(b.y-st.walkGround-1.68)**2)).slice(0,4):[];
       gl.uniform1f(U.uRoomLight,lamps.length?1:0);
       for(let i=0;i<4;i++){const l=lamps[i];gl.uniform4fv(U['uLamp'+i],l?[(l.u-C)*mpp,l.y,(l.v-C)*mpp,l.radius]:[0,0,0,0]);}
+      const contacts=sc&&!onRoof?(sc.boxes||[]).filter(b=>/^(chabudai|table|desk|teacher-desk|tansu|futon|bed|bench|cupboard|crate|vaulting-box)$/.test(b.t||'')&&b.y>=st.walkGround-.12&&b.y<st.walkGround+1.5).sort((a,b)=>((a.u-uv[0])**2+(a.v-uv[1])**2)-((b.u-uv[0])**2+(b.v-uv[1])**2)).slice(0,4):[];
+      for(let i=0;i<4;i++){const b=contacts[i];gl.uniform4fv(U['uContact'+i],b?[(b.u-C)*mpp,b.y+.12,(b.v-C)*mpp,Math.max(.25,Math.sqrt(b.s[0]*b.s[2])*.55)]:[0,0,0,0]);}
     }
     if (U.uShadowMap){ gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, shadowOn ? shadowTex : null); gl.uniform1i(U.uShadowMap, 2); }
   }
