@@ -35,7 +35,7 @@ Everything below is **illustrative placeholder dressing** for the walk page. It 
 | One colour field for ground and grass; five-tint ramp; season presets | `meadowColor()` is shared by the terrain, every blade, wall-base creep and tufts. Five presets (spring, summer, autumn, winter, magic) recolour the ground, grass, trees, bushes, ivy and fern accents together. Vegetation shade takes the palette's darkest hue. |
 | Four overlays | Teal mottling (multiply), pale-yellow sheen (add), white wind streaks (ground; kept off steep banks), and drifting cloud shadows projected along the sun. The shadows are teal, never grey, and sweep over the ground, walls and roofs alike. |
 | Grass lit like the ground | Blades are lit with the up normal through the same toon light. They have a root-to-tip gradient, travelling gust highlights, touch response around the walker, and clumps of three with ×0.64–1.9 scale and dark fern accents. |
-| Distance thinning, quality tiers | A dense camera-centred patch (38 m; 30 m on low-end devices) plus a sparser far ring to 84 m on desktop. Quality tiers: auto; light (half density, no far ring, no bloom); standard (0.8); high. |
+| Distance thinning, quality tiers | A dense camera-centred patch (38 m; 30 m on low-end devices) plus a sparser far ring to 84 m on desktop. Quality tiers also cap the render scale, which dominates the cost of the full-screen shading: light (half grass density, no far ring, no bloom, 1× pixel density); standard (0.8 density, 1.5×); high (2×); auto (2×, or 1.5× on low-end devices). |
 | Flowers facing up | Cosmos-like heads on stems, facing up and tilted toward the walker, with outlines. Round flower speckles on gentle ground at mid distance. |
 | Sunken paths, soft edges, slope soil | Worn butter-cream paths are lowered 0.22 m relative to the existing surface, with darker feathered banks. Slopes steeper than 28° (10° blend) turn olive-yellow soil; the angle is adjustable. |
 | Anime water | Sea: turquoise shallows, drifting cell lines warped and broken into caustics, star glints, a foam line and four travelling bands. Pond: mint gradient, four-point star twinkles, a pale band, an inner ring and a white foam line at the rim. Puddles on flat paving (the video's suggestion for courtyards): pale sky-tinted water with a bright rim and star twinkles, larger and more frequent in rain. |
@@ -67,6 +67,29 @@ Everything below is **illustrative placeholder dressing** for the walk page. It 
 
 - While walking, the shadow box follows the walker (150 m, or 110 m on low-end devices), reaches further ahead than behind and is snapped to whole texels. Near shadows are about three times sharper, and they fade out at the box edge.
 - The ground, roof, sea-wall and grass fragment shaders use high precision where available. World-space patterns a few hundred metres from the origin no longer turn blocky at mediump on phones.
+
+## Performance
+
+The walking view does more shading per pixel than v19. The only renderer available here is Chromium's software rasteriser (SwiftShader), which is roughly two orders of magnitude slower than a phone GPU and weights costs differently, so these numbers compare versions and settings only. They are not frame rates.
+
+| Frame, spawn view | v19 | v20 |
+|---|---|---|
+| Desktop 1100 × 680, default | 661 ms | 1,026–1,121 ms |
+| Phone 390 × 780 at 2× density, default | 547 ms (780 × 1560 px) | 961–1,009 ms (585 × 1170 px) |
+| Same phone, "light" | — | 520 ms (390 × 780 px) |
+| Same phone, "standard" / "high" | — | 965 ms / 1,505 ms |
+
+Most of the cost is full-screen shading, so the render-scale cap is the effective lever. Cheaper paths added after profiling:
+
+- The walking view skips the two aerial-photograph fetches on the ground and roofs, which it never shows.
+- Sea fragments skip the land shading.
+- Distant or absent wall details (cracks, pipes, flower boxes, creep, foliage) and absent paving details (dirt, tufts, puddles, cracks) are skipped in branches.
+- Walking-view shadows use four taps instead of nine.
+- Film grain uses a sine-free pattern.
+
+Renders before and after these changes differ by fewer than 200 pixels.
+
+Software-rendered "light" on desktop was slower than the default. With bloom off, drawing goes to the multisampled canvas, which SwiftShader handles slowly; phone GPUs usually resolve multisampling cheaply. Real-device frame rates remain unmeasured.
 
 ## Validation
 

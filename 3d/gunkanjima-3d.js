@@ -81,15 +81,17 @@
     clouds: .55, cloudScale: 66, cloudSpeed: 3.5, mottle: .32, sheen: .13, streaks: .25, grain: .03, spots: 1, wind: 1, sparkle: 1, ambient: 1, bloom: lowEnd ? 0 : .4, slope: 28 };
   const LOOK_RANGE = { slope: [10, 60], exposure: [.6, 1.6], saturation: [0, 2], contrast: [0, 1], warmth: [-1, 1], grass: [0, 1.5], flowers: [0, 2], land: [0, 1.5], haze: [0, 2],
     clouds: [0, 1], cloudScale: [20, 200], cloudSpeed: [0, 12], mottle: [0, 1], sheen: [0, .6], streaks: [0, 1], grain: [0, .12], spots: [.4, 3], wind: [0, 2], sparkle: [0, 2], ambient: [0, 2], bloom: [0, 1.5] };
-  /* Quality tiers after the video's mobile/mid/PC split: grass density, the far grass ring and the bloom pass. */
+  /* Quality tiers after the video's mobile/mid/PC split: grass density, the far grass ring, the bloom pass and the
+     render scale (pixel density cap), which dominates the cost of the full-screen shading. */
   const QUALITY = { auto: 1, low: .5, mid: .8, high: 1 };
+  const dprCap = () => GAME ? ({ low: 1, mid: 1.5, auto: lowEnd ? 1.5 : 2 }[look.quality] || 2) : 2;
   const look = Object.assign({}, LOOK_DEFAULT);
   const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   function setLook(patch){
     for (const k of Object.keys(patch || {})){
       const v = patch[k];
       if (k === 'preset'){ if (own(PRESETS, v)) look.preset = v; }
-      else if (k === 'quality'){ if (own(QUALITY, v)) look.quality = v; }
+      else if (k === 'quality'){ if (own(QUALITY, v) && look.quality !== v){ look.quality = v; resize(); } }
       else if (own(LOOK_RANGE, k) && typeof v === 'number' && isFinite(v)) look[k] = Math.min(LOOK_RANGE[k][1], Math.max(LOOK_RANGE[k][0], v));
     }
     return Object.assign({}, look);
@@ -193,7 +195,9 @@
       c*=uGrade.x;float l=dot(c,vec3(.299,.587,.114));c=max(mix(vec3(l),c,uGrade.y),0.0);
       c=mix(c,c*c*(3.0-2.0*c),clamp(uGrade.z,0.0,1.0));
       c=c*vec3(1.0+uGrade.w*.05,1.0+uGrade.w*.015,1.0-uGrade.w*.05);
-      return clamp(c+(hash(gl_FragCoord.xy+floor(uOverlay.w*24.0)*vec2(17.0,31.0))-.5)*uCloud.w,0.0,1.0);
+      // The per-frame offset stays small so mediump shaders never overflow in long sessions.
+      vec2 g=gl_FragCoord.xy+floor(fract(uOverlay.w*.37)*64.0)*vec2(17.0,31.0);
+      return clamp(c+(fract(52.9829189*fract(dot(g,vec2(.06711056,.00583715))))-.5)*uCloud.w,0.0,1.0);
     }
     // Sky-coloured directional fog, informed by Godot sky.glsl (MIT).
     vec3 aerial(vec3 col,vec3 horizon,vec3 sun,float density,float depth,float enabled){
@@ -218,9 +222,15 @@
       if (p.x < 0.0 || p.x > 1.0 || p.y < 0.0 || p.y > 1.0 || p.z > 1.0) return 1.0;
       bias *= uShadowK.x;
       float lit = 0.0;
-      for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++){
-        float d = texture2D(uShadowMap, p.xy + vec2(float(i), float(j)) * uShadowTexel).r;
-        lit += (p.z - bias > d) ? 0.0 : 1.0;
+      if (uShadowK.y > 0.5){
+        vec2 o = vec2(.5, -.5) * uShadowTexel;
+        lit = (step(p.z - bias, texture2D(uShadowMap, p.xy - o.xx).r) + step(p.z - bias, texture2D(uShadowMap, p.xy + o.xx).r)
+          + step(p.z - bias, texture2D(uShadowMap, p.xy + o).r) + step(p.z - bias, texture2D(uShadowMap, p.xy - o).r)) * 2.25;
+      } else {
+        for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++){
+          float d = texture2D(uShadowMap, p.xy + vec2(float(i), float(j)) * uShadowTexel).r;
+          lit += (p.z - bias > d) ? 0.0 : 1.0;
+        }
       }
       return mix(lit / 9.0, 1.0, uShadowK.y * smoothstep(.8, .97, max(abs(p.x - .5), abs(p.y - .5)) * 2.0));
     }
@@ -267,9 +277,8 @@
     varying vec4 vShadow; varying float vDepth;
     ` + SHADOW_FN + `
     void main(){
-      vec3 a = texture2D(uTexA, mix(vUvP, vUvO, uOrthoA)).rgb;
-      vec3 b = texture2D(uTexB, mix(vUvP, vUvO, uOrthoB)).rgb;
-      vec3 t = mix(a, b, uMix);
+      /* the walking view paints its own ground and roofs, so it skips the two photograph fetches */
+      vec3 t = uAnime > 0.5 ? vec3(0.5) : mix(texture2D(uTexA, mix(vUvP, vUvO, uOrthoA)).rgb, texture2D(uTexB, mix(vUvP, vUvO, uOrthoB)).rgb, uMix);
       vec3 n = normalize(vNor);
       if (vSea > 0.5){
         /* water: small moving ripples tilt the normal, a soft sun glint, deeper tone away from the shore */
@@ -280,7 +289,8 @@
       float sh = shadowAt(vShadow, 0.0022);
       float light = mix(1.0, min(1.0, 0.42 + 0.6 * d * mix(0.35, 1.0, sh)), uShade);
       vec3 col = t * light;
-      if(uAnime>0.5){
+      // Land only: sea fragments are coloured in the sea branch below, so they skip all of this.
+      if(uAnime>0.5&&vSea<0.5){
         // Inhabited Hashima was predominantly concrete. Surface pattern/colour remain inferred.
         float fine=noise(vPos.xz*3.2),broad=noise(vPos.xz*.085);
         float pavement=smoothstep(.60,.92,n.y);
@@ -292,19 +302,20 @@
         float joint=(1.0-smoothstep(.012,.033,min(edgeDistance.x,edgeDistance.y)))*nearSurface;
         concrete*=1.0-joint*.14;
         // Worley F2-F1 hairline cracks break up the slick paving (near the walker only).
-        vec2 cracks=worley(vPos.xz*.55);
-        concrete*=1.0-.1*(1.0-smoothstep(.01,.04,cracks.y-cracks.x))*nearSurface*step(.6,noise(vPos.xz*.2+4.0));
+        if(nearSurface>.001){
+          vec2 cracks=worley(vPos.xz*.55);
+          concrete*=1.0-.1*(1.0-smoothstep(.01,.04,cracks.y-cracks.x))*nearSurface*step(.6,noise(vPos.xz*.2+4.0));
+        }
         float stain=smoothstep(.56,.83,noise(vPos.xz*.24+8.0));
         concrete=mix(concrete,vec3(.35,.37,.36),stain*.22);
         vec3 rock=mix(vec3(.36,.38,.38),vec3(.53,.52,.47),noise(vPos.xz*.21+vPos.y*.18));
         vec3 surface=mix(rock,concrete,pavement);
         float age=smoothstep(74.0,110.0,uYear);
-        float growth=age*smoothstep(.52,.78,noise(vPos.xz*.13))*mix(.46,.13,pavement);
-        surface=mix(surface,vec3(.27,.34,.26),growth);
+        if(age>0.0)surface=mix(surface,vec3(.27,.34,.26),age*smoothstep(.52,.78,noise(vPos.xz*.13))*mix(.46,.13,pavement));
         // Placeholder anime cover (illustrative, not historical vegetation). The ground uses the same world-space
         // colour field as every grass blade, so sparse blades read as dense grass (the video's key rule).
         float cover=smoothstep(.10,.50,vMaskA.x+age*.22*(1.0-vMaskA.z));
-        vec3 meadow=meadowColor(vPos.xz);
+        vec3 field=meadowColor(vPos.xz),meadow=field;
         // Slope auto-paint (28 degrees with a 10 degree blend by default, adjustable): steep banks turn pale olive-yellow
         // soil, as in the video's tool.
         meadow=mix(meadow,mix(vec3(.76,.82,.37),vec3(.81,.84,.42),noise(vPos.xz*.6))*mix(rampAt(.2)/max(rampAt(.2).g,.01),vec3(1.0),.7),(1.0-smoothstep(uSlope.x,uSlope.y,n.y))*.85);
@@ -316,25 +327,30 @@
         // Wind streaks: long thin white dashes travelling with the wind.
         float along=dot(vPos.xz,vec2(.83,.55)),across=dot(vPos.xz,vec2(-.55,.83));
         meadow+=vec3(1.0)*uOverlay.z*smoothstep(.78,.92,noise(vec2(along*.11-uOverlay.w*.8,across*1.7)))*smoothstep(.45,.75,noise(vec2(along*.02,across*.05)+3.0))*gentle;
-        // Pale butter-cream dirt paths, slightly darker along their feathered banks.
-        vec3 dirt=mix(vec3(.84,.85,.60),vec3(.90,.90,.65),noise(vPos.xz*.45+1.0));
-        dirt=mix(dirt,vec3(.95,.94,.72),smoothstep(.6,.9,noise(vPos.xz*1.3))*.6);
-        dirt*=mix(.86,1.0,smoothstep(.3,.75,vMaskA.y));
         vec3 ground=mix(surface,meadow,cover);
         float pm=smoothstep(.22,.6,vMaskA.y)*smoothstep(.8,.95,n.y);
-        ground=mix(ground,dirt,pm);
+        if(pm>.001){
+          // Pale butter-cream dirt paths, slightly darker along their feathered banks.
+          vec3 dirt=mix(vec3(.84,.85,.60),vec3(.90,.90,.65),noise(vPos.xz*.45+1.0));
+          dirt=mix(dirt,vec3(.95,.94,.72),smoothstep(.6,.9,noise(vPos.xz*1.3))*.6);
+          ground=mix(ground,dirt*mix(.86,1.0,smoothstep(.3,.75,vMaskA.y)),pm);
+        }
         // Tufts in paving joints and along wall bases, in the meadow colours; more on the abandoned island.
-        float jointLine=1.0-smoothstep(.02,.10,min(edgeDistance.x,edgeDistance.y));
-        float tufts=max(jointLine*step(.5,noise(vPos.xz*1.7)),smoothstep(.55,.8,noise(vPos.xz*2.6))*vMaskB.y);
-        ground=mix(ground,meadowColor(vPos.xz)*.88,tufts*clamp(vMaskB.y*.9+age*.5,0.0,1.0)*(1.0-cover)*pavement);
+        float bare=(1.0-cover)*pavement;
+        if(bare>.001){
+          float jointLine=1.0-smoothstep(.02,.10,min(edgeDistance.x,edgeDistance.y));
+          float tufts=max(jointLine*step(.5,noise(vPos.xz*1.7)),smoothstep(.55,.8,noise(vPos.xz*2.6))*vMaskB.y);
+          ground=mix(ground,field*.88,tufts*clamp(vMaskB.y*.9+age*.5,0.0,1.0)*bare);
+        }
         // Wet, darker stone just above the waterline.
         ground*=1.0-.32*smoothstep(.955,.995,vMaskB.z)*(1.0-cover);
         col=toonLight(ground,n,uSun,sh,1.0);
         // Shade on grass stays a deep saturated green, never grey.
         col=mix(col,col*shadeTint(),(1.0-sh)*cover*(1.0-pm));
         // Placeholder puddles on flat paving: pale sky-tinted water with a bright rim and twinkles, more in rain (uWater.w).
-        float pn=.65*noise(vPos.xz*.21+17.0)+.35*noise(vPos.xz*.63-4.0),th=mix(.77,.68,uWater.w);
-        float puddle=smoothstep(th,th+.012,pn)*pavement*(1.0-smoothstep(.02,.15,cover))*(1.0-pm)*smoothstep(.97,.995,n.y)*(1.0-smoothstep(.9,.99,vMaskB.z));
+        float level=pavement*(1.0-smoothstep(.02,.15,cover))*(1.0-pm)*smoothstep(.97,.995,n.y)*(1.0-smoothstep(.9,.99,vMaskB.z));
+        float pn=level>.001?.65*noise(vPos.xz*.21+17.0)+.35*noise(vPos.xz*.63-4.0):0.0,th=mix(.77,.68,uWater.w);
+        float puddle=smoothstep(th,th+.012,pn)*level;
         if(puddle>.001){
           vec3 water=mix(uHorizon*1.04,vec3(.62,.86,.88),.45+.1*noise(vPos.xz*1.3+uTime*.2))*mix(.8,1.0,sh);
           water+=vec3(1.0,.99,.94)*twinkle(vPos.xz,.5,.12,uTime)*.8*mix(.3,1.0,sh)*uWater.y;
@@ -533,15 +549,19 @@
           col=mix(col,mix(vec3(.25,.52,.20),vec3(.66,.37,.24),step(pane.y,-.09)),pot*nearDetail);
         }
         // Ground cover creeps up the wall base in the shared meadow colours, with a jagged top edge.
-        float creep=(1.0-smoothstep(.12,.5+.9*noise(vec2(s*1.7,seed)),y))*smoothstep(.35,.6,noise(vec2(s*.23,seed*2.1)))*nearDetail;
-        col=mix(col,meadowColor(vWorld.xz)*mix(.7,1.0,smoothstep(0.0,.6,y)),creep);
+        if(y<1.45&&nearDetail>.001){
+          float creep=(1.0-smoothstep(.12,.5+.9*noise(vec2(s*1.7,seed)),y))*smoothstep(.35,.6,noise(vec2(s*.23,seed*2.1)))*nearDetail;
+          col=mix(col,meadowColor(vWorld.xz)*mix(.7,1.0,smoothstep(0.0,.6,y)),creep);
+        }
         // Painted brush strokes and hairline cracks keep plain concrete from looking slick.
         col*=.95+.08*noise(vec2(s*.8,y*3.2+seed));
-        vec2 wc=worley(vec2(s,y)*1.9+seed);
-        col*=1.0-.09*(1.0-smoothstep(.006,.03,wc.y-wc.x))*(1.0-win)*nearDetail*step(.68,noise(vec2(s*.15,y*.2+seed*3.0)))*step(.58,noise(vec2(s,y)*2.3+seed*7.0));
+        if(nearDetail>.001&&win<.5){
+          vec2 wc=worley(vec2(s,y)*1.9+seed);
+          col*=1.0-.09*(1.0-smoothstep(.006,.03,wc.y-wc.x))*nearDetail*step(.68,noise(vec2(s*.15,y*.2+seed*3.0)))*step(.58,noise(vec2(s,y)*2.3+seed*7.0));
+        }
         float sill=step(bottom-.06,fy)*step(fy,bottom)*step(left,bay)*step(bay,right);
         col=mix(col,mix(vec3(.51,.60,.25),vec3(.32,.33,.13),noise(vec2(s*6.0,y*6.0))),sill*smoothstep(.45,.65,noise(vec2(s*1.3,storey+seed)))*.8);
-        if(style<1.5||(style>2.5&&style<3.5)){
+        if(nearDetail>.001&&(style<1.5||(style>2.5&&style<3.5))){
           // Painted downpipes on some piers between window bays, with a bracket at every floor.
           if(style<1.5){
             float pc=(right+1.0+left)*.5,dp=abs(fract(s/period-pc+.5)-.5)*period,pipe=step(.78,hash(vec2(floor(s/period-pc+.5),seed*2.3)))*(1.0-smoothstep(.05,.065,dp));
@@ -561,15 +581,17 @@
         // Ivy climbing from the ground on some stretches and greenery draping from the roof edge on others, drawn as
         // overlapping round leaves: a covered body with a leafy fringe (placeholders, not documented planting).
         float ivySeed=hash(vec2(seed*11.0,5.0)),stretch=smoothstep(.42,.62,noise(vec2(s*.11,seed*5.3)))*step(.25,ivySeed);
-        float reach=(mix(1.0,4.5,ivySeed)+age*8.0)*(.4+.6*noise(vec2(s*.45,seed*2.7)));
-        float edge=reach-y+.9*(noise(vec2(s,y)*2.2)-.5);
         float dropSeed=hash(vec2(seed*5.0,23.0)),drop=smoothstep(.5,.66,noise(vec2(s*.13,seed*3.1)))*step(.55,dropSeed)*step(6.0,H);
-        float hang=(mix(.6,2.4,dropSeed)+age*4.0)*(.2+.8*noise(vec2(s*2.2,seed*4.3)))*(.5+.5*noise(vec2(s*.5,seed)))-(H-y)+.4*(noise(vec2(s,y)*2.6+7.0)-.5);
-        float grow=max(stretch*smoothstep(-.35,.1,edge),drop*smoothstep(-.35,.1,hang));
-        if(grow>.001){
-          vec4 lf=leaves(vec2(s,y)*5.5+seed,1.0-nearDetail);
-          float body=max(stretch*smoothstep(.25,.6,edge),drop*smoothstep(.25,.6,hang));
-          col=mix(col,lf.rgb,max(body,grow*lf.w)*(1.0-win*(1.0-age)*.85));
+        if(stretch+drop>.001){
+          float reach=(mix(1.0,4.5,ivySeed)+age*8.0)*(.4+.6*noise(vec2(s*.45,seed*2.7)));
+          float edge=reach-y+.9*(noise(vec2(s,y)*2.2)-.5);
+          float hang=(mix(.6,2.4,dropSeed)+age*4.0)*(.2+.8*noise(vec2(s*2.2,seed*4.3)))*(.5+.5*noise(vec2(s*.5,seed)))-(H-y)+.4*(noise(vec2(s,y)*2.6+7.0)-.5);
+          float grow=max(stretch*smoothstep(-.35,.1,edge),drop*smoothstep(-.35,.1,hang));
+          if(grow>.001){
+            vec4 lf=leaves(vec2(s,y)*5.5+seed,1.0-nearDetail);
+            float body=max(stretch*smoothstep(.25,.6,edge),drop*smoothstep(.25,.6,hang));
+            col=mix(col,lf.rgb,max(body,grow*lf.w)*(1.0-win*(1.0-age)*.85));
+          }
         }
       }
       /* weathering after 1974: streaks, stains, moss near the ground */
@@ -618,9 +640,8 @@
       if (vAlive < 0.02) discard;
       if (uGhostPass < 0.5 && vGhost > 0.5) discard;
       if (uGhostPass > 0.5 && vGhost < 0.5) discard;
-      vec3 a = texture2D(uTexA, mix(vUvP, vUvO, uOrthoA)).rgb;
-      vec3 b = texture2D(uTexB, mix(vUvP, vUvO, uOrthoB)).rgb;
-      vec3 t = mix(a, b, uMix);
+      /* the walking view paints its own ground and roofs, so it skips the two photograph fetches */
+      vec3 t = uAnime > 0.5 ? vec3(0.5) : mix(texture2D(uTexA, mix(vUvP, vUvO, uOrthoA)).rgb, texture2D(uTexB, mix(vUvP, vUvO, uOrthoB)).rgb, uMix);
       float style = vInfo.x, seed = vInfo.y;
       float sh = shadowAt(vShadow, 0.0022);
       float d = max(dot(vec3(0.0, 1.0, 0.0), uSun), 0.0);
@@ -2323,7 +2344,7 @@
 
   /* ---------- input ---------- */
   function resize(){
-    const dpr = Math.min(window.devicePixelRatio || 1, 2), r = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, dprCap()), r = canvas.getBoundingClientRect();
     const w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
     if (canvas.width !== w || canvas.height !== h){ canvas.width = w; canvas.height = h; }
     if (weatherFx && (weatherFx.width !== w || weatherFx.height !== h)){ weatherFx.width = w; weatherFx.height = h; }
@@ -2561,6 +2582,6 @@
     window.dispatchEvent(new CustomEvent('jta-walk-ready'));
   }
   window.jtaLab3d = { st, draw: () => draw(), view, setYear, openSpot, closeSpot, enterScene, leaveScene, beginWalk, endWalk, scene: () => scene, openBuilding: name => { const b = model.buildings.find(x => x.name === name); if (b) openBuilding(b, true); },
-    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, floor:()=>{const sc=scene&&interiors.scenes[scene];return sc&&sc.walkPlan?{current:Math.min(sc.walkPlan.floors,Math.floor((st.walkGround-sc.walkPlan.base+.18)/sc.walkPlan.height)),total:sc.walkPlan.floors}:null;}, year:()=>Math.round(yearMix().year), scenes:()=>interiors?interiors.scenes:{}, nature:()=>nature?nature.set:null, appearance:{ get:()=>Object.assign({}, look), set:patch=>{const v=setLook(patch);request();return v;}, reset:()=>{Object.assign(look, LOOK_DEFAULT);request();return Object.assign({}, look);}, ranges:()=>JSON.parse(JSON.stringify(LOOK_RANGE)), presets:()=>Object.keys(PRESETS), qualities:()=>Object.keys(QUALITY) }, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;gameInput.autoRun=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
+    game: { input: gameInput, enter: gameEnter, leave: gameLeave, indoor:()=>gameIndoor, reset:()=>{gameLeave();endWalk(true);beginWalk();}, fromWorld, toWorldTrue, canWalk, floor:()=>{const sc=scene&&interiors.scenes[scene];return sc&&sc.walkPlan?{current:Math.min(sc.walkPlan.floors,Math.floor((st.walkGround-sc.walkPlan.base+.18)/sc.walkPlan.height)),total:sc.walkPlan.floors}:null;}, year:()=>Math.round(yearMix().year), scenes:()=>interiors?interiors.scenes:{}, nature:()=>nature?nature.set:null, appearance:{ get:()=>Object.assign({}, look), set:patch=>{const v=setLook(patch);request();return v;}, reset:()=>{Object.assign(look, LOOK_DEFAULT);resize();return Object.assign({}, look);}, ranges:()=>JSON.parse(JSON.stringify(LOOK_RANGE)), presets:()=>Object.keys(PRESETS), qualities:()=>Object.keys(QUALITY) }, pause:()=>{walkKeys.clear();gameInput.x=gameInput.y=0;gameInput.run=false;gameInput.autoRun=false;}, look:(x,y)=>{st.az-=x*0.0045;st.el=clamp(st.el-y*0.0038,-0.9,0.9);request();}, request },
     years: () => years.map(y => y.id), loaded: i => texture(i).promise, shadows: () => !!shadowFb, walls: () => !!walls, model: () => model };
 })();

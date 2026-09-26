@@ -139,7 +139,9 @@
     "v20NativeGlesRenders": 32,
     "v20BrowserPanelChecks": 2,
     "v20VideoAssetsCommitted": false,
-    "v20RooftopBeds": 229
+    "v20RooftopBeds": 229,
+    "v20SoftwareFrameVsV19Desktop": "1026-1121 ms vs 661 ms (SwiftShader, not a frame rate)",
+    "v20SoftwareFrameLightPhone": "520 ms at 390x780 vs v19 547 ms at 780x1560 (SwiftShader)"
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
