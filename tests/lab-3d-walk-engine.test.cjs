@@ -41,6 +41,11 @@ assert.ok(Math.hypot(no30UV[0]-no30Entry.u,no30UV[1]-no30Entry.v)<.01,'Building 
 assert.ok(api.st.walkGround>no30.walkEnvelope.base&&api.st.walkGround<no30.walkEnvelope.base+.1,'Building 30 avoids the lower-gallery floor');
 assert.ok(Math.cos(api.st.az-Math.atan2(no30Look[0]-api.st.wx,no30Look[1]-api.st.wz))>.999,'Building 30 opens toward the kamado and water jar');g.leave();
 
+// Building 16 opens toward the documented pair of fresh-water and seawater taps.
+assert.ok(g.enter('nikkyu'));const nikkyu=g.scenes().nikkyu,nikkyuEntry=nikkyu.walkEntry,nikkyuUV=g.fromWorld(api.st.wx,api.st.wz),nikkyuLook=g.toWorldTrue(...nikkyuEntry.target);
+assert.ok(Math.hypot(nikkyuUV[0]-nikkyuEntry.u,nikkyuUV[1]-nikkyuEntry.v)<.01,'Building 16 entry remains on clear floor');
+assert.ok(Math.cos(api.st.az-Math.atan2(nikkyuLook[0]-api.st.wx,nikkyuLook[1]-api.st.wz))>.999,'Building 16 opens toward its dual taps');g.leave();
+
 // A classroom opens toward the board and supports actual forward input from the rear aisle.
 assert.ok(g.enter('school'));const schoolEntry=g.scenes().school.walkEntry,schoolUV=g.fromWorld(api.st.wx,api.st.wz),schoolLook=g.toWorldTrue(...schoolEntry.target);
 assert.ok(Math.hypot(schoolUV[0]-schoolEntry.u,schoolUV[1]-schoolEntry.v)<.01);

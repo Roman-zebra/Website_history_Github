@@ -132,6 +132,25 @@ test('Building 30 walking copy starts in the depicted third-floor dwelling facin
  assert.ok(sc.text.en.includes('third-floor dwelling')&&sc.text.en.includes('not a historical camera position'));
 });
 
+test('Building 16 walking copy presents the documented fresh-water and seawater taps with bounded inferred fittings',()=>{
+ const original=scenes.nikkyu,source=JSON.stringify(original),sc=interior.complete(original,'nikkyu'),taps=original.boxes.filter(b=>b.t==='two-taps');
+ assert.equal(JSON.stringify(original),source,'source daily-wage housing scene remains untouched');
+ assert.equal(taps.length,2,'source retains the documented pair of tap stems');
+ const handles=sc.boxes.filter(b=>b.t==='walk-nikkyu-tap-handle'),spouts=sc.boxes.filter(b=>b.t==='walk-nikkyu-tap-spout'),parts=[...handles,...spouts];
+ assert.equal(handles.length,2);assert.equal(spouts.length,2);
+ for(const part of parts){
+  const nearest=Math.min(...taps.map(t=>Math.hypot(part.u-t.u,part.v-t.v)*.805));
+  assert.ok(nearest<.22,'added fitting stays immediately beside an existing tap stem');
+  assert.equal(part.a,1,'added fitting is labelled inferred');
+ }
+ const spawn=nav.spawn({...sc,camera:sc.walkEntry},.805);assert.ok(spawn,'dual-tap entry has floor support');
+ assert.ok(Math.hypot(spawn.u-sc.walkEntry.u,spawn.v-sc.walkEntry.v)<.001,'dual-tap entry needs no fallback displacement');
+ const view=[sc.walkEntry.target[0]-sc.walkEntry.u,sc.walkEntry.target[1]-sc.walkEntry.v],vl=Math.hypot(...view);
+ for(const tap of taps){const to=[tap.u-sc.walkEntry.u,tap.v-sc.walkEntry.v],tl=Math.hypot(...to);assert.ok((view[0]*to[0]+view[1]*to[1])/vl/tl>Math.cos(8*Math.PI/180),'both taps remain in the opening view cone');}
+ assert.ok(sc.text.ja.includes('真水・海水の二連蛇口')&&sc.text.ja.includes('形と色')&&sc.text.ja.includes('推定'));
+ assert.ok(sc.text.en.includes('fresh-water and seawater taps')&&sc.text.en.includes('inferred'));
+});
+
 test('rooftop nursery walking entry presents the existing activity tables from a clear aisle',()=>{
  const original=scenes.no65roof,sourceCamera=JSON.stringify(original.camera),sc=interior.complete(original,'no65roof'),p=sc.walkEnvelope,c=Math.cos(p.angle),s=Math.sin(p.angle);
  const local=(u,v)=>[(u-p.u)*.805*c+(v-p.v)*.805*s,-(u-p.u)*.805*s+(v-p.v)*.805*c];

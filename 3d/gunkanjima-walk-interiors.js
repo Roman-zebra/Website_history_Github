@@ -203,6 +203,21 @@ function complete(sc,id){
   const position=world(.4,.55),focus=kamado&&jar?[(kamado.u+jar.u)/2,(kamado.v+jar.v)/2]:world(2.55,-.65);
   walkFloor=base;walkEntry={u:position[0],v:position[1],target:focus,el:-.32};
  }
+ if(id==='nikkyu'){
+  // The two documented taps supplied fresh water and seawater. Their exact
+  // hardware is unknown, so add neutral inferred handle/spout cues immediately
+  // around the existing stems without assigning invented identifying colours.
+  const taps=sc.boxes.filter(b=>b.t==='two-taps');
+  for(const tap of taps){
+   const q=local(tap.u,tap.v),r=(tap.r||0)*Math.PI/180-angle,top=tap.y+tap.s[1];
+   put(q[0],q[1],top-.018,[.13,.025,.025],[.51,.53,.52],'walk-nikkyu-tap-handle',6,r);
+   put(q[0],q[1]-.14,top-.105,[.025,.025,.28],[.55,.57,.56],'walk-nikkyu-tap-spout',6,r);
+  }
+  if(taps.length){
+   const focus=[taps.reduce((n,b)=>n+b.u,0)/taps.length,taps.reduce((n,b)=>n+b.v,0)/taps.length];
+   const position=world(0,1.8);walkEntry={u:position[0],v:position[1],target:focus,el:-.28};
+  }
+ }
  if(id==='no65roof'){
   // Start from a clear rear aisle looking across the existing activity tables.
   // Source furniture and the orbit-view camera remain untouched.
@@ -214,8 +229,9 @@ function complete(sc,id){
  const bathNote=id==='bath'?' 記録にあるタイル浴槽を読み取りやすくする目地を歩行版に補いました。目地の間隔・太さ・色は演出上の推定です。':'';
  const no3Note=id==='no3'?' 各戸の電話は記録に基づきますが、受話器・回転ダイヤルの形と色は歩行版で読み取りやすくする推定です。':'';
  const no30Note=id==='no30'?' 歩行版は切り開き対象の3階住戸から開始し、記録にある竈と水がめを向く解説用視点です。歴史的な視線位置を示すものではありません。':'';
+ const nikkyuNote=id==='nikkyu'?' 真水・海水の二連蛇口は記録に基づきますが、ハンドル・吐水口の形と色は歩行版で読み取りやすくする推定です。':'';
  const note={ja:'歩行用に補った壁・天井・装飾・照明は推定です。',en:'Enclosures, finishes and lighting added for walking are inferred.'};
- return {...sc,boxes,floor:walkFloor,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote+bathNote+no3Note+no30Note,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')+(id==='bath'?' Grout cues make the documented tiled bath legible; joint pitch, width and colour are illustrative inferences.':'')+(id==='no3'?' Records confirm a telephone in each dwelling; the handset, rotary-dial form and colours added for legibility are inferred.':'')+(id==='no30'?' The walking copy starts in the depicted third-floor dwelling and faces the documented kamado and water jar; this interpretive viewpoint is not a historical camera position.':'')}};
+ return {...sc,boxes,floor:walkFloor,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote+bathNote+no3Note+no30Note+nikkyuNote,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')+(id==='bath'?' Grout cues make the documented tiled bath legible; joint pitch, width and colour are illustrative inferences.':'')+(id==='no3'?' Records confirm a telephone in each dwelling; the handset, rotary-dial form and colours added for legibility are inferred.':'')+(id==='no30'?' The walking copy starts in the depicted third-floor dwelling and faces the documented kamado and water jar; this interpretive viewpoint is not a historical camera position.':'')+(id==='nikkyu'?' Records support separate fresh-water and seawater taps; the handle and spout shapes and colours added for legibility are inferred.':'')}};
 }
 const api={complete,profiles};if(typeof module==='object')module.exports=api;else root.JTAWalkInteriors=api;
 })(typeof window==='undefined'?this:window);

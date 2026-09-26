@@ -265,3 +265,13 @@ Validation: 164/164 full-build tests; 47 native GLES2 renders (`--nature`, `--st
 Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors8, navigation3.
 
 Publication: main fast-forwarded to `7f9184531adad5d6a12671b9e5c6920140cd7e79`; Cloudflare `release.json` reported it within about two minutes. The public walk page and the reconstruction pages request renderer21, and the served renderer is byte-identical to the commit.
+
+## Building 16 dual-tap legibility — interiors v9, 2026-09-27
+
+The Building 16 daily-wage-housing source scene and text record a pair of separate fresh-water and seawater taps. Its inherited first-person entry faced a bright window/wall, leaving the pair outside the opening frame. The complete source scene, both source tap stems, room objects and orbit camera remain unchanged.
+
+For the walking copy only, each source stem gains one compact neutral-metal handle cue and one short spout cue. All four additions are labelled inferred and remain immediately beside the documented pair. No fresh/sea colour coding was invented because the available source does not establish one. The opening position is clear supported floor and now faces both taps. Exact hardware form, dimensions and colours are illustrative, not a measured or photographic reconstruction.
+
+Validation: 165/165 full-build tests pass. Regressions preserve the source scene and two tap stems, bound the four inferred additions to the stems, keep both taps inside an 8-degree opening-view cone, require a zero-fallback supported entry, and exercise the actual engine under both 16- and 32-bit index paths. Fourteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The Building 16 image changes all 1,024,000 pixels because the camera is deliberately reframed; all thirteen control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
+
+Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors9, navigation3.
