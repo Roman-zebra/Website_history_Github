@@ -1,11 +1,8 @@
 {
   "schemaVersion": 1,
-  "status": "in_progress",
-  "updatedAt": "2026-09-26T22:40:00Z",
-  "activeRun": {
-    "task": "Inspect and improve the documented dual fresh-water and seawater taps in the Building 16 daily-wage housing scene",
-    "startedAt": "2026-09-26T22:26:00Z"
-  },
+  "status": "ready",
+  "updatedAt": "2026-09-26T22:45:00Z",
+  "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
     "Renderer v10 deployed with 68 inferred building studies",
@@ -44,7 +41,8 @@
     "Renderer v20 verified live at 1118dc9b800daa043740edf65512add744a92f80 (merged with Building 3/30 releases); public HTML versions and six served walk assets byte-checked; public WebGL view not browser-checked because headless Chromium does not trust the proxy CA",
     "Renderer v21: sea-wall ring in the walking toon light with algae, joint weeds and a crest fringe; foliage at the eye skipped; island survey QA views",
     "Renderer v21 verified live at 7f9184531adad5d6a12671b9e5c6920140cd7e79; walk and reconstruction pages request renderer21 and the served renderer is byte-identical",
-    "Building 16 walking copy: documented fresh-water and seawater tap stems preserved; four neutral inferred handle/spout cues added and opening view reframed toward the pair"
+    "Building 16 walking copy: documented fresh-water and seawater tap stems preserved; four neutral inferred handle/spout cues added and opening view reframed toward the pair",
+    "Building 16 interiors9 verified live at 3edaa683f7946a99c1f1948fc03aabb388cbeeb6; public HTML requests interiors9 and the served asset is byte-identical"
   ],
   "nextActions": [
     "Improve a bounded room-specific furnishing or source-grounded retaining-wall/terrain segment, preserving existing geometry evidence",
@@ -172,7 +170,8 @@
     "building16EntryFallbackDisplacement": 0,
     "building16NativeGlesViewsRendered": 14,
     "building16RenderDifferingPixels": 1024000,
-    "building16ControlViewsByteIdentical": 13
+    "building16ControlViewsByteIdentical": 13,
+    "building16ServedAssetByteChecked": true
   },
   "publicationApproval": {
     "at": "2026-09-27T06:50:00+09:00",
@@ -182,8 +181,8 @@
     "rendererVersion": 21,
     "walkInteriorsVersion": 9,
     "walkNavigationVersion": 3,
-    "status": "publishing Building 16 dual-tap presentation; renderer21/walkJS8/CSS7/nature1/buildings5/interiors9/navigation3 tested locally",
-    "verifiedCommit": "7f9184531adad5d6a12671b9e5c6920140cd7e79",
+    "status": "verified live; release.json, public HTML versions and served interiors asset byte-checked; renderer21/walkJS8/CSS7/nature1/buildings5/interiors9/navigation3",
+    "verifiedCommit": "3edaa683f7946a99c1f1948fc03aabb388cbeeb6",
     "walkUIVersion": 8,
     "walkCSSVersion": 7,
     "walkBuildingsVersion": 5,

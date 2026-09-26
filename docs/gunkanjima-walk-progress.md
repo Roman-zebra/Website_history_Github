@@ -275,3 +275,5 @@ For the walking copy only, each source stem gains one compact neutral-metal hand
 Validation: 165/165 full-build tests pass. Regressions preserve the source scene and two tap stems, bound the four inferred additions to the stems, keep both taps inside an 8-degree opening-view cone, require a zero-fallback supported entry, and exercise the actual engine under both 16- and 32-bit index paths. Fourteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The Building 16 image changes all 1,024,000 pixels because the camera is deliberately reframed; all thirteen control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
 
 Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors9, navigation3.
+
+Publication: main advanced without force to `3edaa683f7946a99c1f1948fc03aabb388cbeeb6`. Cloudflare `release.json` reported that commit; the public walk HTML requests interiors9 while retaining renderer21, walk JS8/CSS7, walk-nature1, buildings5 and navigation3, and the served interiors9 file is byte-identical to the tested local file.
