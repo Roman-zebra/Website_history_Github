@@ -263,3 +263,5 @@ A new QA option, `--survey`, renders twelve walkable points spread over the isla
 Validation: 164/164 full-build tests; 47 native GLES2 renders (`--nature`, `--streets`, `--sky`, `--survey`) without GL errors.
 
 Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors8, navigation3.
+
+Publication: main fast-forwarded to `7f9184531adad5d6a12671b9e5c6920140cd7e79`; Cloudflare `release.json` reported it within about two minutes. The public walk page and the reconstruction pages request renderer21, and the served renderer is byte-identical to the commit.

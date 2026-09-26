@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "ready",
-  "updatedAt": "2026-09-26T22:15:00+00:00",
+  "updatedAt": "2026-09-26T22:25:00+00:00",
   "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
@@ -39,7 +39,8 @@
     "Building 30 interiors8 verified live at f3d7882e7e9bcb4073233611612d0c36a0090de5; public HTML and served asset byte-checked",
     "Renderer v20: user-supplied stylised-nature video transcribed in full and sampled every second; labelled placeholder meadow, water, sky, trees, fences, bridge, ambient life and a translated look-tuning panel in the walking view; walker-centred shadows and full-precision ground shaders",
     "Renderer v20 verified live at 1118dc9b800daa043740edf65512add744a92f80 (merged with Building 3/30 releases); public HTML versions and six served walk assets byte-checked; public WebGL view not browser-checked because headless Chromium does not trust the proxy CA",
-    "Renderer v21: sea-wall ring in the walking toon light with algae, joint weeds and a crest fringe; foliage at the eye skipped; island survey QA views"
+    "Renderer v21: sea-wall ring in the walking toon light with algae, joint weeds and a crest fringe; foliage at the eye skipped; island survey QA views",
+    "Renderer v21 verified live at 7f9184531adad5d6a12671b9e5c6920140cd7e79; walk and reconstruction pages request renderer21 and the served renderer is byte-identical"
   ],
   "nextActions": [
     "Improve a bounded room-specific furnishing or source-grounded retaining-wall/terrain segment, preserving existing geometry evidence",
@@ -167,11 +168,11 @@
     "scope": "User approved publishing the renderer v20 walk work (stylised-nature video study) to the JTA site and continuing the work"
   },
   "publication": {
-    "rendererVersion": 20,
+    "rendererVersion": 21,
     "walkInteriorsVersion": 8,
     "walkNavigationVersion": 3,
-    "status": "verified live; release.json, public HTML versions and six served walk assets byte-checked; renderer20/walkJS8/CSS7/nature1/buildings5/interiors8",
-    "verifiedCommit": "1118dc9b800daa043740edf65512add744a92f80",
+    "status": "verified live; release.json, public HTML versions and served renderer byte-checked; renderer21/walkJS8/CSS7/nature1/buildings5/interiors8",
+    "verifiedCommit": "7f9184531adad5d6a12671b9e5c6920140cd7e79",
     "walkUIVersion": 8,
     "walkCSSVersion": 7,
     "walkBuildingsVersion": 5,
