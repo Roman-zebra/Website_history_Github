@@ -38,14 +38,14 @@ Everything below is **illustrative placeholder dressing** for the walk page. It 
 | Distance thinning, quality tiers | A dense camera-centred patch (38 m; 30 m on low-end devices) plus a sparser far ring to 84 m on desktop. Quality tiers: auto; light (half density, no far ring, no bloom); standard (0.8); high. |
 | Flowers facing up | Cosmos-like heads on stems, facing up and tilted toward the walker, with outlines. Round flower speckles on gentle ground at mid distance. |
 | Sunken paths, soft edges, slope soil | Worn butter-cream paths are lowered 0.22 m relative to the existing surface, with darker feathered banks. Slopes steeper than 28° (10° blend) turn olive-yellow soil; the angle is adjustable. |
-| Anime water | Sea: turquoise shallows, drifting Voronoi cells, star glints, a foam line and four travelling bands. Pond: mint gradient, twinkles, a pale band, an inner ring and a white foam line at the rim. |
+| Anime water | Sea: turquoise shallows, drifting Voronoi cells, star glints, a foam line and four travelling bands. Pond: mint gradient, four-point star twinkles, a pale band, an inner ring and a white foam line at the rim. Puddles on flat paving (the video's suggestion for courtyards): pale sky-tinted water with a bright rim and star twinkles, larger and more frequent in rain. |
 | Sky, distance, clouds | A four-stop gradient (exponent 1.4, horizon sharpness 3), cel cumulus puffs, a warm-white horizon cumulus bank, pale distant ridges and sea drawn in the sky shader, and cyan aerial haze. |
 | Trees, rocks, props in one toon material | Round clustered canopies and five-tier zig-zag conifers, flat-shaded from dark green at the bottom to yellow-green at the tip. Bushes, some flowering. Light warm-grey faceted rocks with moss and crack strokes. Mossy concrete pillars and a fallen gear as an overgrown ruin. |
 | Scale, overlap culling, exclusions | Trees ×0.82–1.18 with occasional ×1.45 hero trees, and canopy overlap culling at 0.65. Nothing is placed inside any building footprint of any era, in the sea, at the arrival point, or on paths; tree canopies keep at least 3 m from worn paths. |
 | Fences, bridge, colliders | Post-and-two-rail fences with rope lashings and taller end posts, along coastal drop-offs and beside worn paths. An arched plank bridge with posts only at its ends and a deck flush with the banks. The walker stands on the real deck height; trunks, large rocks, ruins, fence rails and the pond (except under the deck) block walking. |
 | Ambient life, light | Drifting petals, twinkling motes, butterflies (white, yellow, lilac, blue), god rays when facing the sun, an occasional wind swirl, a light bloom pass, a warm high-key grade and faint film grain. |
 | Tuning panel (the main lesson) | Menu → 見た目の調整: season presets, quality, 19 sliders (brightness, saturation, contrast, warmth, grass, flowers, cloud shadows, distant hills, haze, wind, meadow mottling/sheen, wind streaks, slope angle, water pattern size, sparkle, particles, bloom, grain), reset, and copy/paste as JSON. The renderer accepts only known keys and clamps every value. Settings are kept only in the viewer's browser. |
-| Barren walls | Rain streaks under sills, balcony laundry and pots, meadow-coloured creep at wall bases, painted brush strokes, hairline cracks, mossy sills, and ivy drawn as overlapping leaves. Roofs get rooftop vegetable beds. |
+| Barren walls | Rain streaks under sills, balcony laundry and pots, flower boxes under some upper-floor windows, painted downpipes with floor brackets, meadow-coloured creep at wall bases, painted brush strokes, broken hairline cracks and mossy sills. Ivy climbs some stretches and greenery drapes from some roof edges, both drawn as two layers of overlapping round leaves lit from the upper left. Wooden walls show overlapping clapboards, and concrete buildings vary slightly in tint (cream, sage, pale blue, blush). Roofs get rooftop vegetable beds. |
 
 ### Adapted
 
@@ -63,12 +63,14 @@ Everything below is **illustrative placeholder dressing** for the walk page. It 
 
 ## Rendering fixes made along the way
 
+- Walking labels for the inferred multi-floor studies now use the names table in every page language (for example "Blower house · floors & roof (inferred)" instead of the Japanese name on the English page).
+
 - While walking, the shadow box follows the walker (150 m, or 110 m on low-end devices), reaches further ahead than behind and is snapped to whole texels. Near shadows are about three times sharper, and they fade out at the box edge.
 - The ground, roof, sea-wall and grass fragment shaders use high precision where available. World-space patterns a few hundred metres from the origin no longer turn blocky at mediump on phones.
 
 ## Validation
 
 - `node scripts/build.cjs`: 161/161 tests pass. The new checks cover the tuning panel's restore, save, preset, paste and reset paths; renderer-side key filtering and clamping; the bridge deck height and the pond and fence blocking; fences off paths and beside them; and tree canopies clear of paths.
-- Native GLES2 replay (`scripts/qa/gunkanjima-capture-gl.cjs` with `--nature` and `--sky`, then `gunkanjima-render-gl.py`): 21 renders compile, link and draw without GL errors. They cover the bridge, a conifer, a path fence, the ruins, the arrival point, the sky while turning and in rain, and the interiors.
+- Native GLES2 replay (`scripts/qa/gunkanjima-capture-gl.cjs` with `--nature`, `--sky` and `--streets`, then `gunkanjima-render-gl.py`; `--streets` picks five paved alleys and the widest paved yard from the vegetation field, in clear weather and rain): 30 renders compile, link and draw without GL errors. They cover the bridge, a conifer, a path fence, the ruins, the arrival point, paved alleys and a yard in clear weather and rain, the sky while turning and in rain, and the interiors.
 - Chromium with SwiftShader, at desktop 1100 × 680 in Japanese and phone 390 × 780 in English: the scene loads, the panel builds 19 sliders from the renderer's ranges, the autumn preset recolours the scene, the setting is stored, and no page errors are logged.
 - Not verified: frame rate and appearance on a real phone GPU.

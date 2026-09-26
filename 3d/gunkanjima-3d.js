@@ -167,6 +167,12 @@
       t=clamp(t,0.0,1.0)*4.0;
       if(t<1.0)return mix(uRamp0,uRamp1,t);if(t<2.0)return mix(uRamp1,uRamp2,t-1.0);if(t<3.0)return mix(uRamp2,uRamp3,t-2.0);return mix(uRamp3,uRamp4,t-3.0);
     }
+    // A twinkling four-point star in a jittered cell grid (size in metres): the sparkle of small anime waters.
+    float twinkle(vec2 p,float size,float rate,float t){
+      vec2 c=floor(p/size),q=fract(p/size)-.5;
+      float star=clamp(max(1.0-abs(q.x)*9.0-abs(q.y)*2.2,1.0-abs(q.y)*9.0-abs(q.x)*2.2),0.0,1.0);
+      return star*step(1.0-rate,hash(c))*pow(max(sin(t*2.6+hash(c+3.0)*6.28),0.0),6.0);
+    }
     // Shade on vegetation takes the hue of the palette's darkest tint (deep saturated green in summer), never grey.
     vec3 shadeTint(){ return mix(vec3(1.0),uRamp4/max(max(uRamp4.r,uRamp4.g),max(uRamp4.b,.01)),.4)*1.05; }
     // One world-space colour field for the ground and every blade on it: large soft colour areas,
@@ -326,6 +332,15 @@
         col=toonLight(ground,n,uSun,sh,1.0);
         // Shade on grass stays a deep saturated green, never grey.
         col=mix(col,col*shadeTint(),(1.0-sh)*cover*(1.0-pm));
+        // Placeholder puddles on flat paving: pale sky-tinted water with a bright rim and twinkles, more in rain (uWater.w).
+        float pn=.65*noise(vPos.xz*.21+17.0)+.35*noise(vPos.xz*.63-4.0),th=mix(.77,.68,uWater.w);
+        float puddle=smoothstep(th,th+.012,pn)*pavement*(1.0-smoothstep(.02,.15,cover))*(1.0-pm)*smoothstep(.97,.995,n.y)*(1.0-smoothstep(.9,.99,vMaskB.z));
+        if(puddle>.001){
+          vec3 water=mix(uHorizon*1.04,vec3(.62,.86,.88),.45+.1*noise(vPos.xz*1.3+uTime*.2))*mix(.8,1.0,sh);
+          water+=vec3(1.0,.99,.94)*twinkle(vPos.xz,.5,.12,uTime)*.8*mix(.3,1.0,sh)*uWater.y;
+          float rim=smoothstep(th,th+.012,pn)-smoothstep(th+.018,th+.03,pn);
+          col=mix(col,mix(water,vec3(.95,.99,.97),rim*.65),puddle);
+        }
       }
       float edge = smoothstep(0.5, 0.36, max(abs(vUvP.x - 0.5), abs(vUvP.y - 0.5)));
       if (vSea > 0.5){
@@ -385,6 +400,23 @@
     varying vec4 vShadow; varying float vDepth;
     uniform float uGhostPass;
     ` + SHADOW_FN + `
+    // Nearest leaf on a jittered lattice, for walking-view foliage on walls: (distance, offset to its centre, id).
+    vec4 leafCell(vec2 p){
+      vec2 i=floor(p),f=fract(p);vec4 best=vec4(8.0,0.0,0.0,0.0);
+      for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){vec2 g=vec2(float(x),float(y)),d=g+.15+.7*vec2(hash(i+g),hash(i+g+19.7))-f;float l=length(d);if(l<best.x)best=vec4(l,d,hash(i+g+5.3));}
+      return best;
+    }
+    // Two layers of overlapping round leaves in the season palette, each lit from the upper left, over a deep-shade
+    // backing. Returns the colour and the leaf cover (0 in the gaps); far away it fades to one flat tone.
+    vec4 leaves(vec2 p,float far){
+      vec4 a=leafCell(p),b=leafCell(p*1.31+vec2(3.1,7.7));
+      float la=1.0-smoothstep(.38,.46,a.x),lb=1.0-smoothstep(.36,.44,b.x);
+      float ka=.5+.6*dot(-a.yz/max(a.x,.001),vec2(-.55,.83))*smoothstep(.05,.4,a.x),kb=.5+.6*dot(-b.yz/max(b.x,.001),vec2(-.55,.83))*smoothstep(.05,.4,b.x);
+      vec3 ca=rampAt(mix(.15,.75,a.w))*mix(.82,1.12,clamp(ka,0.0,1.0))*mix(1.0,.75,smoothstep(.3,.45,a.x));
+      vec3 cb=rampAt(mix(.45,.95,b.w))*mix(.7,.95,clamp(kb,0.0,1.0));
+      vec3 c=mix(mix(rampAt(1.0)*.42,cb,lb),ca,la);
+      return vec4(mix(c,rampAt(.62)*.82,far),mix(max(la,lb),1.0,far));
+    }
     void main(){
       if (vAlive < 0.02) discard;
       if (uGhostPass < 0.5 && vGhost > 0.5) discard;   /* the host building is drawn later, translucent */
@@ -434,9 +466,15 @@
         // Restrained concrete/wood palette: material colour is independent of light colour.
         base=mix(base,vec3(.84,.81,.73),.22);
         base*=.96+.08*hash(vec2(seed,17.0));
-        if(style>4.5&&style<5.5)base=vec3(.56,.34,.19);
+        if(style>4.5&&style<5.5){
+          base=mix(vec3(.50,.30,.16),vec3(.60,.37,.21),plank)*(.93+.12*hash(vec2(floor(y*4.0),floor(s/1.8)+seed)));
+          base*=1.0-.26*(1.0-smoothstep(0.0,.12,fract(y*4.0)));
+        }
         if(style>2.5&&style<3.5)base=vec3(.83,.84,.78);
         if(style>3.5&&style<4.5)base=vec3(.55,.58,.59);
+        // Placeholder colour variety between concrete buildings (cream, sage, pale blue, blush), kept subtle.
+        float tintId=hash(vec2(seed,41.0));
+        if(style<3.5)base*=tintId<.3?vec3(1.03,1.0,.92):tintId<.5?vec3(.97,1.02,.96):tintId<.7?vec3(.95,.99,1.04):tintId<.8?vec3(1.03,.97,.96):vec3(1.0);
       }
       float slab = (1.0 - smoothstep(0.0, 0.05, fy)) * 0.5;                 /* floor slab line */
       float parapet = smoothstep(H - 0.9, H - 0.6, y);                        /* top band */
@@ -498,20 +536,39 @@
         // Painted brush strokes and hairline cracks keep plain concrete from looking slick.
         col*=.95+.08*noise(vec2(s*.8,y*3.2+seed));
         vec2 wc=worley(vec2(s,y)*1.9+seed);
-        col*=1.0-.09*(1.0-smoothstep(.006,.03,wc.y-wc.x))*(1.0-win)*nearDetail*step(.68,noise(vec2(s*.15,y*.2+seed*3.0)));
+        col*=1.0-.09*(1.0-smoothstep(.006,.03,wc.y-wc.x))*(1.0-win)*nearDetail*step(.68,noise(vec2(s*.15,y*.2+seed*3.0)))*step(.58,noise(vec2(s,y)*2.3+seed*7.0));
         float sill=step(bottom-.06,fy)*step(fy,bottom)*step(left,bay)*step(bay,right);
         col=mix(col,mix(vec3(.51,.60,.25),vec3(.32,.33,.13),noise(vec2(s*6.0,y*6.0))),sill*smoothstep(.45,.65,noise(vec2(s*1.3,storey+seed)))*.8);
-        // Ivy on some wall stretches: a dense mass at the base thinning into an irregular leafy fringe.
+        if(style<1.5||(style>2.5&&style<3.5)){
+          // Painted downpipes on some piers between window bays, with a bracket at every floor.
+          if(style<1.5){
+            float pc=(right+1.0+left)*.5,dp=abs(fract(s/period-pc+.5)-.5)*period,pipe=step(.78,hash(vec2(floor(s/period-pc+.5),seed*2.3)))*(1.0-smoothstep(.05,.065,dp));
+            float bracket=pipe*step(abs(fy-.12)*floorH,.035)*(1.0-smoothstep(.07,.085,dp));
+            vec3 metal=vec3(.46,.53,.50)*(1.0-.4*pow(dp/.065,2.0))+vec3(.12)*(1.0-smoothstep(0.0,.02,abs(dp-.02)));
+            col=mix(col,metal,max(pipe,bracket*.9)*step(.2,y)*nearDetail);
+            col*=1.0-bracket*.25*nearDetail;
+          }
+          // Flower boxes under some upper-floor windows: a wooden box with blooms rising above the sill.
+          float fb=step(.8,hash(vec2(bayId*2.1,storey+seed*1.3)))*step(1.0,storey)*step(.05,pane.x)*step(pane.x,.95)*(1.0-age);
+          float sy=pane.y*paneHeight;vec2 fl=vec2(pane.x*paneWidth,sy)*14.0,fc=floor(fl);
+          float bloom=fb*step(-.03,sy)*step(sy,.12)*step(length(fract(fl)-.5),.42)*step(.35,hash(fc+seed));
+          vec3 petal=hash(fc+3.0)<.4?vec3(.95,.35,.42):hash(fc+3.0)<.7?vec3(1.0,.93,.95):vec3(.98,.78,.30);
+          col=mix(col,vec3(.42,.28,.18)*(.85+.15*step(.5,fract(sy*20.0))),fb*step(-.2,sy)*step(sy,-.03)*nearDetail);
+          col=mix(col,mix(rampAt(.5),petal,step(.55,hash(fc+9.0))),bloom*nearDetail);
+        }
+        // Ivy climbing from the ground on some stretches and greenery draping from the roof edge on others, drawn as
+        // overlapping round leaves: a covered body with a leafy fringe (placeholders, not documented planting).
         float ivySeed=hash(vec2(seed*11.0,5.0)),stretch=smoothstep(.42,.62,noise(vec2(s*.11,seed*5.3)))*step(.25,ivySeed);
         float reach=(mix(1.0,4.5,ivySeed)+age*8.0)*(.4+.6*noise(vec2(s*.45,seed*2.7)));
-        // Each Worley cell is one leaf: lighter at its centre, dark gaps between leaves, palette colours by area.
-        vec2 leaves=worley(vec2(s,y)*6.5+seed);
-        float leafA=noise(vec2(s,y)*1.7+seed*3.0),rim=mix(.5,leaves.x,nearDetail);
         float edge=reach-y+.9*(noise(vec2(s,y)*2.2)-.5);
-        float ivy=stretch*smoothstep(.34,.46,leafA*.55+(1.0-rim)*.3+clamp(edge*.35,-.6,.5))*step(0.0,edge+.6)*(1.0-win*(1.0-age)*.85);
-        vec3 ivyCol=rampAt(mix(.3,.95,leafA))*vec3(.92,.98,.9)*mix(1.12,.8,smoothstep(0.0,.75,rim));
-        ivyCol=mix(ivyCol,rampAt(1.0)*.5,(1.0-smoothstep(.03,.12,leaves.y-leaves.x))*.75*nearDetail);
-        col=mix(col,ivyCol,ivy);
+        float dropSeed=hash(vec2(seed*5.0,23.0)),drop=smoothstep(.5,.66,noise(vec2(s*.13,seed*3.1)))*step(.55,dropSeed)*step(6.0,H);
+        float hang=(mix(.6,2.4,dropSeed)+age*4.0)*(.2+.8*noise(vec2(s*2.2,seed*4.3)))*(.5+.5*noise(vec2(s*.5,seed)))-(H-y)+.4*(noise(vec2(s,y)*2.6+7.0)-.5);
+        float grow=max(stretch*smoothstep(-.35,.1,edge),drop*smoothstep(-.35,.1,hang));
+        if(grow>.001){
+          vec4 lf=leaves(vec2(s,y)*5.5+seed,1.0-nearDetail);
+          float body=max(stretch*smoothstep(.25,.6,edge),drop*smoothstep(.25,.6,hang));
+          col=mix(col,lf.rgb,max(body,grow*lf.w)*(1.0-win*(1.0-age)*.85));
+        }
       }
       /* weathering after 1974: streaks, stains, moss near the ground */
       float streak = noise(vec2(s * 1.5, y * 0.3 + seed * 5.0));
@@ -999,8 +1056,7 @@
         float rr=vKind.y/96.0+(noise(vLoc.xz*1.8+vec2(uTime*.3,0.0))-.5)*.035;
         water=mix(water,vec3(.80,.96,.93),smoothstep(.7,.9,rr)*.4);
         water=mix(water,vec3(.97,1.0,.98),max(smoothstep(.935,.96,rr),(smoothstep(.845,.86,rr)-smoothstep(.87,.885,rr))*.6));
-        float twinkle=step(.975,hash(floor(vLoc.xz*5.0)+floor(uTime*2.5)*vec2(3.1,1.7)));
-        water+=vec3(.95,1.0,.97)*twinkle*.55*mix(.4,1.0,sh);
+        water+=vec3(.95,1.0,.97)*twinkle(vLoc.xz,.45,.16,uTime)*.8*mix(.4,1.0,sh);
         gl_FragColor=vec4(aerial(water*mix(.86,1.0,sh),uHorizon,uSun,uFog,vDepth,uAnime),1.0);
         return;
       }
@@ -1565,7 +1621,7 @@
       for (let i = 0; i < 5; i++) gl.uniform3fv(U['uRamp' + i], r[i]);
       gl.uniform4fv(U.uOverlay, [look.mottle, look.sheen, look.streaks, lookTime()]);
       gl.uniform4fv(U.uCloud, [P === progB ? 0 : look.clouds, look.cloudScale, look.cloudSpeed, look.grain]);
-      if (U.uWater) gl.uniform4fv(U.uWater, [look.spots, look.sparkle, 1, 0]);
+      if (U.uWater) gl.uniform4fv(U.uWater, [look.spots, look.sparkle, 1, st.weather === 2 ? 1 : st.weather === 1 ? .35 : 0]);
       if (U.uSlope) gl.uniform2fv(U.uSlope, slopeBand());
     }
     gl.uniform1f(U.uWindTime,reduce?0:(performance.now()-t0)/1000);
@@ -2052,6 +2108,18 @@
     if (!names) return ja === '端島小中学校' ? T.schoolShort : ja;
     return buildingName(ja).replace(/\s*[(（][^()（）]*[)）]$/, '');
   }
+  /* Walking labels for the inferred multi-floor studies, in every page language: the building's own name from
+     gunkanjima-names.json (numbered blocks by pattern), falling back to the Japanese name. */
+  const INFERRED = { ja: [' · 各階・屋上（推定）', '名称未確認'], en: [' · floors & roof (inferred)', 'Unnamed building'], ko: [' · 각 층·옥상(추정)', '이름 미확인 건물'],
+    'zh-Hans': [' · 各层与屋顶（推定）', '名称未确认的建筑'], 'zh-Hant': [' · 各層與屋頂（推定）', '名稱未確認的建築'] };
+  function inferredLabel(ja){
+    const out = {}, m = numbered(ja), e = names && names.names[ja];
+    for (const l of Object.keys(INFERRED)){
+      const name = !ja ? INFERRED[l][1] : l === 'ja' ? ja : m && names ? (names.numbered.name[l] || names.numbered.name.en).split('{n}').join(m[1]) : (e && (e[l] || e.en)) || ja;
+      out[l] = name + INFERRED[l][0];
+    }
+    return out;
+  }
   const useText = ja => inLang(names && names.uses[ja], ja);
   const noteText = ja => inLang(names && names.notes[ja], ja);
   const structureText = code => inLang(names && names.structures[code], code);
@@ -2452,7 +2520,7 @@
   const WALK_ENTRY_VIEWS = { no65flat: { u:655.15, v:437.21, target:[656.33,435.26], el:-.60 } };
   function gameEnter(id){
     let sc=interiors && interiors.scenes[id]; if(!sc)return false;
-    if(sc.generatedBuilding){const b=sc.generatedBuilding;if(!buildingAlive(b))return false;sc=window.JTAWalkBuildings.build(b,model.coast);if(!sc)return false;sc.buildingId=b.id;interiors.scenes[id]=sc;}
+    if(sc.generatedBuilding){const b=sc.generatedBuilding;if(!buildingAlive(b))return false;sc=window.JTAWalkBuildings.build(b,model.coast);if(!sc)return false;sc.buildingId=b.id;sc.label=Object.assign(inferredLabel(b.name),{ja:sc.label.ja});interiors.scenes[id]=sc;}
     if(!sc.inferred && window.JTAWalkInteriors){sc=window.JTAWalkInteriors.complete(sc,id);interiors.scenes[id]=sc;}
     if(sc.buildingId && !buildingAlive(model.buildings.find(b=>b.id===sc.buildingId)))return false;
     const entry=WALK_ENTRY_VIEWS[id]||sc.walkEntry;
@@ -2485,7 +2553,7 @@
     for(const b of model.buildings){
       const p=window.JTAWalkBuildings.plan(b,model.coast);if(!p)continue;
       const x=p.x,z=p.z;const u=(x*p.c-z*p.s)/mpp,v=(x*p.s+z*p.c)/mpp;
-      interiors.scenes['building-'+b.id]={building:b.name,camera:{u,v},label:{ja:(b.name||'名称未確認')+' · 各階・屋上（推定）',en:(b.name||'Unnamed building')+' · floors & roof (inferred)'},generatedBuilding:b,inferred:true,buildingId:b.id};
+      interiors.scenes['building-'+b.id]={building:b.name,camera:{u,v},label:inferredLabel(b.name),generatedBuilding:b,inferred:true,buildingId:b.id};
     }
     beginWalk();
     window.dispatchEvent(new CustomEvent('jta-walk-ready'));

@@ -136,7 +136,7 @@
     "actualBrowserZoomRoundTripVerified": false,
     "v20VideoFramesExtracted": 3883,
     "v20TranscriptSegments": 1455,
-    "v20NativeGlesRenders": 21,
+    "v20NativeGlesRenders": 30,
     "v20BrowserPanelChecks": 2,
     "v20VideoAssetsCommitted": false
   },

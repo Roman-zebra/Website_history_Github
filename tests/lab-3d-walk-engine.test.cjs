@@ -78,6 +78,10 @@ function drive(points){for(const q of points){const uv=[(q[0]*p.c-q[1]*p.s)/.805
 }}
 const points=p.routes.flatMap(r=>r.points);drive(points);assert.equal(g.floor().current,p.floors,'roof reached through movement');drive(points.slice().reverse());assert.equal(g.floor().current,0,'returned to ground floor');
 g.leave();api.setYear(0,0);assert.equal(g.year(),1947);g.reset();assert.ok(api.st.walk);
+// Inferred studies are labelled in every page language from the names table, not in Japanese only.
+const all=Object.values(g.scenes()),blower=all.find(x=>x.building==='ブロワー室'),block=all.find(x=>x.generatedBuilding&&/^\d+号棟$/.test(x.building||''));
+assert.equal(blower.label.en,'Blower house · floors & roof (inferred)');assert.equal(blower.label['zh-Hans'],'鼓风机室 · 各层与屋顶（推定）');
+assert.match(block.label.en,/^Building \d+ · floors & roof \(inferred\)$/);assert.match(block.label.ko,/^\d+호동 · 각 층·옥상\(추정\)$/);
 // Look tuning accepts only known keys, clamps numbers to their ranges and resets to the defaults.
 const tune=g.appearance,defaults=tune.get(),ranges=tune.ranges();
 assert.equal(defaults.preset,'summer');assert.equal(defaults.quality,'auto');

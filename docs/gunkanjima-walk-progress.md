@@ -222,8 +222,9 @@ Walking view only, labelled as illustrative placeholders in the help text and th
   - wall and roof life: streaks, laundry, pots, creep, cracks, mossy sills, leafy ivy and roof beds.
 - Menu → 見た目の調整: presets, quality tiers, 19 validated sliders, reset and copy/paste. Settings are stored only in the viewer's browser.
 - While walking, the shadow box follows the walker and is snapped to texels, so near shadows are about three times sharper. The ground, roof, sea-wall and grass shaders use high precision where available, so world-space patterns no longer turn blocky at mediump.
+- Walls between the buildings (checked from paved alleys): ivy and roof-edge drapes as overlapping round leaves, flower boxes, downpipes, clapboards on wooden walls, slight tints per concrete building and broken rather than networked cracks. Flat paving gets puddles, more in rain. Inferred-study labels are translated from the names table.
 - Nature blocks walking where it should: trunks, large rocks, ruins, fence rails, and the pond except under the bridge, whose real deck height carries the walker.
 
-Validation: 161/161 full-build tests; 21 native GLES2 renders without GL errors; Chromium/SwiftShader desktop (Japanese) and phone (English) checks of the scene and the panel with no page errors. Real phone GPU frame rate and appearance remain unverified. The build regenerated unrelated tracked HTML (page.css version, support link); those diffs were reverted and not committed.
+Validation: 161/161 full-build tests; 30 native GLES2 renders without GL errors (including `--streets`: paved alleys and a yard, clear and rain); Chromium/SwiftShader desktop (Japanese) and phone (English) checks of the scene and the panel with no page errors. Real phone GPU frame rate and appearance remain unverified. The build regenerated unrelated tracked HTML (page.css version, support link); those diffs were reverted and not committed.
 
 Cache versions: renderer20, walk JS8/CSS7, walk-nature1 (new), buildings4, interiors6, navigation3. The work is on branch `claude/jta-3d-video-implementation-p4sql1`; main and the live site still serve renderer19.
