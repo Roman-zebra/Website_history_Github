@@ -172,4 +172,4 @@ The source scene remains unchanged. In the walking copy only, the existing windo
 
 Validation: 152/152 full-build tests. New checks preserve the source material labels, require metal classification in the walking copy, keep 24 edge pieces and 96 weave marks inside the six existing bed footprints and require every addition to remain inferred. Eleven native GLES2 views compile/link/render without errors. The inspected hospital image changes 79,296 pixels while the outdoor control image is byte-identical. Real mobile/browser GPU performance remains unverified.
 
-Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors4, navigation3. Verify Cloudflare publication and byte-check the served interiors4 asset before closing this pass.
+Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors4, navigation3. Cloudflare release.json reached 42b045d284345d5b41b2f23f066401c01402129c; the public HTML requests interiors4 and its served bytes match the tested local file.
