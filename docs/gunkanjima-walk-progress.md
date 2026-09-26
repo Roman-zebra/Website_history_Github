@@ -214,4 +214,4 @@ For the walking copy only, the existing phone gains a compact handset and ten-pa
 
 Validation: 156/156 full-build tests pass. The regression preserves the complete source scene, bounds all 13 additions to the existing phone, verifies inferred labels and confirms the curated entry needs no collision fallback. Twelve native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The no3 view changes 1,023,989 pixels because the camera is deliberately reframed; all eleven control views are byte-identical. Actual iPhone Safari gestures and mobile GPU performance remain unverified.
 
-Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors7, navigation3. Publication verification is pending.
+Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors7, navigation3. Cloudflare `release.json` reached `61e4b4465e27e2572882bef8af65c9f6cdc41666`; the public HTML requests interiors7 and the served asset is byte-identical to the tested local file.
