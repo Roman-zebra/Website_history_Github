@@ -48,14 +48,18 @@ function complete(sc,id){
  }
  const base=Math.min(...floors.map(b=>b.y+b.s[1])),height=spec.height,added=[],windows=[];
  // Replace only perimeter masonry, retaining all internal partitions and furniture.
- const boxes=sc.boxes.filter(b=>{
+ let boxes=sc.boxes.filter(b=>{
   if(!/wall$/.test(b.t||''))return true;
   const q=local(b.u,b.v),a=(b.r||0)*Math.PI/180-angle;
   const hx=(Math.abs(Math.cos(a))*b.s[0]+Math.abs(Math.sin(a))*b.s[2])/2,hz=(Math.abs(Math.sin(a))*b.s[0]+Math.abs(Math.cos(a))*b.s[2])/2;
   return !((hz<.25&&(Math.abs(q[1]-z0)<.3||Math.abs(q[1]-z1)<.3))||(hx<.25&&(Math.abs(q[0]-x0)<.3||Math.abs(q[0]-x1)<.3)));
  });
+ // The source identifies the hospital windows as steel sashes; keep the source
+ // geometry and correct only the walking-copy material classification.
+ if(id==='hospital')boxes=boxes.map(b=>b.t==='window-frame'?{...b,k:6,c:[.34,.41,.41]}:b);
  const put=(x,z,y,size,color,t,k=11,r=0)=>{const q=world(x,z);const b={u:q[0],v:q[1],y,s:size,c:color,t,k,r:(angle+r)*180/Math.PI,a:1};boxes.push(b);added.push(b);return b;};
  const plaster=spec.tile?[.77,.83,.79]:[.83,.79,.65],timber=[.29,.22,.15],trim=[.49,.39,.24],panel=spec.public?[.36,.47,.46]:[.48,.36,.23];
+ const frameKind=id==='hospital'?6:2,frameColor=id==='hospital'?[.34,.41,.41]:timber,frameTrim=id==='hospital'?[.43,.49,.48]:trim;
  const sides=[{axis:0,at:z0,lo:x0,hi:x1,sign:-1},{axis:0,at:z1,lo:x0,hi:x1,sign:1},{axis:1,at:x0,lo:z0,hi:z1,sign:-1},{axis:1,at:x1,lo:z0,hi:z1,sign:1}];
  for(const side of sides){
   const horizontal=side.axis===0,span=side.hi-side.lo,openings=[];
@@ -80,9 +84,9 @@ function complete(sc,id){
   // Framed openings and low wall panelling; these details stay behind the walkable floor edge.
   for(const o of openings){
    const mid=(o.lo+o.hi)/2,w=o.hi-o.lo,h=o.top-o.bottom;
-   for(const u of [o.lo,o.hi])alongPut(u,base+o.bottom,.065,h,.24,timber,'walk-window-jamb',2);
-   alongPut(mid,base+o.top,w+.08,.08,.25,trim,'walk-window-lintel',2);
-   if(!o.door){alongPut(mid,base+o.bottom,w+.14,.075,.30,trim,'walk-window-sill',2);alongPut(mid,base+o.bottom,.045,h,.12,timber,'walk-window-mullion',2);windows.push({side:side.axis,at:side.at,...o});}
+   for(const u of [o.lo,o.hi])alongPut(u,base+o.bottom,.065,h,.24,frameColor,'walk-window-jamb',frameKind);
+   alongPut(mid,base+o.top,w+.08,.08,.25,frameTrim,'walk-window-lintel',frameKind);
+   if(!o.door){alongPut(mid,base+o.bottom,w+.14,.075,.30,frameTrim,'walk-window-sill',frameKind);alongPut(mid,base+o.bottom,.045,h,.12,frameColor,'walk-window-mullion',frameKind);windows.push({side:side.axis,at:side.at,...o});}
   }
   const count=Math.max(1,Math.ceil(span/2.6));
   for(let i=0;i<count;i++){
@@ -150,9 +154,21 @@ function complete(sc,id){
   const position=world(5.8,3.5),target=board?world(...local(board.u,board.v)):world(x0,0);
   walkEntry={u:position[0],v:position[1],target,el:-.10};
  }
+ if(id==='hospital'){
+  // Make the documented tatami-topped beds legible. Exact edging, weave pitch
+  // and colour are illustrative additions on the existing bed geometry.
+  const edge=[.24,.29,.23],reedA=[.72,.68,.43],reedB=[.62,.59,.37];
+  sc.boxes.filter(b=>b.t==='tatami-bed').forEach(b=>{
+   const q=local(b.u,b.v),r=(b.r||0)*Math.PI/180-angle,top=b.y+b.s[1]+.006,h=.012,hx=b.s[0]/2,hz=b.s[2]/2;
+   for(const x of [-hx+.03,hx-.03])put(q[0]+x,q[1],top,[.06,h,b.s[2]],edge,'walk-hospital-tatami-edge',2,r);
+   for(const z of [-hz+.03,hz-.03])put(q[0],q[1]+z,top,[b.s[0]-.12,h,.045],edge,'walk-hospital-tatami-edge',2,r);
+   for(let i=0;i<8;i++)for(const z of [-hz+.075+i*.014,hz-.075-i*.014])put(q[0],q[1]+z,top+.002,[b.s[0]-.16,.006,.008],i%2?reedA:reedB,'walk-hospital-tatami-weave',1,r);
+  });
+ }
  const schoolNote=id==='school'?' ノート・教材・黒板の描線も演出上の推定です。':'';
+ const hospitalNote=id==='hospital'?' スチールサッシの材質区分を歩行版で補正しました。畳縁・畳目の細部と色は、畳敷きベッドを読み取りやすくする演出上の推定です。':'';
  const note={ja:'歩行用に補った壁・天井・装飾・照明は推定です。',en:'Enclosures, finishes and lighting added for walking are inferred.'};
- return {...sc,boxes,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')}};
+ return {...sc,boxes,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')}};
 }
 const api={complete,profiles};if(typeof module==='object')module.exports=api;else root.JTAWalkInteriors=api;
 })(typeof window==='undefined'?this:window);

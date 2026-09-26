@@ -163,3 +163,13 @@ The existing shrine scene already contains 46 translucent steps for the document
 Validation: 151/151 full-build tests. A new regression walks all 46 tread centres downward and back upward, verifies sub-0.4 m transitions, preserves the source object and checks walking adjustment idempotence. The existing 68-building stair round trips, 1,362 doorway paths, sea boundary, first-person input and both index paths still pass. Native GLES2 compiled, linked and rendered 11 views including the shrine and an oblique stair inspection without GL errors; the rejected translucent-rock experiment was reverted after it obscured the frame. Real mobile/browser GPU performance remains unverified.
 
 Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors3, navigation3. Cloudflare release.json reached 655ab4f58decd932877648acd372884c70978966; the public HTML requests both v3 assets and their served bytes match the tested local files. A dimensioned shrine stair survey is still required before replacing the inferred route with a measured reconstruction.
+
+## Hospital ward material legibility — interiors v4, 2026-09-27
+
+The existing Building 69 ward scene documents pale green walls, P-tile floors, steel sashes and tatami-topped beds; it already labels the bedside cabinets, nurse desk, medicine cabinet, drip stand and bedding arrangement as assumptions. The linked Hashima hospital history also records the 1958 four-storey hospital and 58 beds in 1969. No new medical equipment or room layout was invented.
+
+The source scene remains unchanged. In the walking copy only, the existing window-frame geometry now uses the metal material class instead of wood, and the walk-completion frames use matching muted steel colours. The six existing tatami bed tops gain bounded edge strips and a small exposed weave treatment so the documented material remains visible around the inferred white bedding. Exact edging, weave pitch and colours are explicitly labelled as illustrative inferences.
+
+Validation: 152/152 full-build tests. New checks preserve the source material labels, require metal classification in the walking copy, keep 24 edge pieces and 96 weave marks inside the six existing bed footprints and require every addition to remain inferred. Eleven native GLES2 views compile/link/render without errors. The inspected hospital image changes 79,296 pixels while the outdoor control image is byte-identical. Real mobile/browser GPU performance remains unverified.
+
+Cache versions: renderer18, walk JS6/CSS5, buildings4, interiors4, navigation3. Verify Cloudflare publication and byte-check the served interiors4 asset before closing this pass.

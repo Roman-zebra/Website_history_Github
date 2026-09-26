@@ -264,6 +264,7 @@
     ],
     "terrainCorrection": "Walk-only inferred DEM cut beneath existing building footprints, with cell-diagonal clearance and a short outer blend; not a newly surveyed landform.",
     "jigokudanWalk": "The documented Jigokudan stair exists in the source scene. The walking copy keeps its 46 authored horizontal positions and dimensions but evenly interpolates tread heights so it can be traversed; position, count and gradient remain explicitly inferred rather than measured.",
+    "hospitalWardWalk": "The source scene documents steel sashes and tatami-topped beds. The walking copy corrects the sash material classification and adds illustrative tatami edging/weave while preserving the six source bed positions and sizes; exact edge pattern, weave pitch and colours are inferred.",
     "camera": "First-person only; third-person code and UI removed."
   }
 }

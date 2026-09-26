@@ -58,3 +58,18 @@ test('school props stay on desks and the rear-to-front aisle remains walkable',(
   for(let i=0;i<=n;i++){const t=i/n,q=uv(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t),h=nav.ground(sc,...q,.805,y);assert.notEqual(h,null,'school aisle is traversable');y=h;}
  }
 });
+
+test('hospital walking copy shows documented steel sashes and tatami-topped beds without changing source geometry',()=>{
+ const original=scenes.hospital,sc=interior.complete(original,'hospital');
+ assert.ok(original.boxes.filter(b=>b.t==='window-frame').every(b=>b.k===2),'source material labels remain untouched');
+ assert.ok(sc.boxes.filter(b=>b.t==='window-frame').every(b=>b.k===6),'walking copy uses steel sash material');
+ const beds=original.boxes.filter(b=>b.t==='tatami-bed'),edges=sc.boxes.filter(b=>b.t==='walk-hospital-tatami-edge'),weave=sc.boxes.filter(b=>b.t==='walk-hospital-tatami-weave');
+ assert.equal(beds.length,6);assert.equal(edges.length,beds.length*4);assert.equal(weave.length,beds.length*16);
+ for(const prop of [...edges,...weave]){
+  const a=prop.r*Math.PI/180,c=Math.cos(a),s=Math.sin(a);
+  const corners=[-1,1].flatMap(i=>[-1,1].map(j=>[prop.u+(i*prop.s[0]*c-j*prop.s[2]*s)/2/.805,prop.v+(i*prop.s[0]*s+j*prop.s[2]*c)/2/.805]));
+  assert.ok(beds.some(b=>corners.every(q=>nav.inside(b,...q,.805,.001))),'tatami detail stays on an existing bed');
+  assert.equal(prop.a,1,'new finish detail is labelled inferred');
+ }
+ assert.ok(sc.text.ja.includes('畳縁・畳目')&&sc.text.ja.includes('推定'));
+});

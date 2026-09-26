@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "in_progress",
-  "updatedAt": "2026-09-26T15:22:32Z",
+  "updatedAt": "2026-09-26T15:26:30Z",
   "activeRun": {
     "task": "Add source-labelled hospital ward details without changing documented layout",
     "startedAt": "2026-09-26T15:22:32Z"
@@ -27,7 +27,8 @@
     "Renderer v18 verified live at 4cdf210ed7a6a8c13248ff39f0fdb76f958f881f with byte-identical renderer/MIT notice and public DOM checks",
     "FFmpeg/ffprobe already installed; local video-frame utility added and tested with a generated H.264 clip, six extracted frames and invalid-input checks",
     "Jigokudan walking pass: 46 existing inferred treads made traversable in both directions without changing source-scene horizontal positions, count or dimensions",
-    "Jigokudan walk assets verified live at 655ab4f58decd932877648acd372884c70978966; HTML requests interiors3/navigation3 and served files are byte-identical"
+    "Jigokudan walk assets verified live at 655ab4f58decd932877648acd372884c70978966; HTML requests interiors3/navigation3 and served files are byte-identical",
+    "Hospital ward walking copy: documented steel sashes use metal materials and six documented tatami-topped beds gain inferred, footprint-bounded edge/weave detail"
   ],
   "nextActions": [
     "Improve terrain, room-specific furnishings and composition in bounded, visually verified steps using the linked GDC / developer references",
@@ -67,7 +68,7 @@
     "id": "6ab7ba457d548191b74af1d0222b0b92"
   },
   "validation": {
-    "fullBuildTestsPassed": 151,
+    "fullBuildTestsPassed": 152,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 18,
     "inferredDoorwayPathsChecked": 1362,
@@ -96,7 +97,12 @@
     "jigokudanRoundTripVerified": true,
     "sourceScenePreserved": true,
     "jigokudanNativeGlesViewsRendered": 2,
-    "servedWalkAssetsByteChecked": true
+    "servedWalkAssetsByteChecked": true,
+    "hospitalSourceBedsPreserved": 6,
+    "hospitalTatamiEdgePiecesChecked": 24,
+    "hospitalTatamiWeaveMarksChecked": 96,
+    "hospitalRenderDifferingPixels": 79296,
+    "hospitalOutdoorControlByteIdentical": true
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
@@ -104,9 +110,9 @@
   },
   "publication": {
     "rendererVersion": 18,
-    "walkInteriorsVersion": 3,
+    "walkInteriorsVersion": 4,
     "walkNavigationVersion": 3,
-    "status": "verified live; release.json and v3 walking assets byte-checked",
+    "status": "Jigokudan v3 verified live; hospital interiors4 tested and awaiting publication",
     "verifiedCommit": "655ab4f58decd932877648acd372884c70978966"
   }
 }
