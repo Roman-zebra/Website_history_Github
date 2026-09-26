@@ -224,4 +224,4 @@ For the walking copy only, the navigation reference is set to the existing inter
 
 Validation: 157/157 full-build tests pass. Regressions preserve the complete source scene and its lower-gallery reference, require the walking entry to land on the selected room surface without fallback, keep the kamado and water jar inside a 12-degree opening-view cone, and exercise the actual engine under both 16- and 32-bit index paths. Thirteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The no30 image changes all 1,024,000 pixels because it now shows the room instead of the outdoor level; all twelve control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
 
-Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors8, navigation3. Publication verification is pending.
+Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors8, navigation3. Cloudflare `release.json` reached `f3d7882e7e9bcb4073233611612d0c36a0090de5`; the public HTML requests interiors8 and the served asset is byte-identical to the tested local file.
