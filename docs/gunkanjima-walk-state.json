@@ -1,8 +1,11 @@
 {
   "schemaVersion": 1,
-  "status": "ready",
-  "updatedAt": "2026-09-26T17:56:00Z",
-  "activeRun": null,
+  "status": "in_progress",
+  "updatedAt": "2026-09-26T18:01:00Z",
+  "activeRun": {
+    "startedAt": "2026-09-26T18:01:00Z",
+    "task": "Main chat: non-YouTube gameplay acquisition, one-second frame analysis and v19 environment rendering; other automatic updates paused by user"
+  },
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
     "Renderer v10 deployed with 68 inferred building studies",
