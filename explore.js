@@ -3153,9 +3153,9 @@ function paintDirectory(){
  const aboutLabels={"en":"About this site","ja":"このサイトについて","ko":"이 사이트에 대하여","zh-Hans":"关于本站","zh-Hant":"關於本站","th":"เกี่ยวกับเว็บไซต์นี้"};
  document.querySelectorAll('.site-about-link').forEach(a=>{a.textContent=aboutLabels[LANG]||aboutLabels.en;a.href='/about#'+LANG;});
  const supportLabels={"en":"☕ Support this site","ja":"☕ このサイトを支える","ko":"☕ 이 사이트 후원","zh-Hans":"☕ 支持本站","zh-Hant":"☕ 支持本站","th":"☕ สนับสนุนเว็บไซต์"};
- document.querySelectorAll('.site-support-link').forEach(a=>{a.textContent=supportLabels[LANG]||supportLabels.en;a.href='/support#'+LANG;});
+ document.querySelectorAll('.site-support-link').forEach(a=>{a.textContent=supportLabels[LANG]||supportLabels.en;});
  document.querySelectorAll('.head-about').forEach(a=>{a.href='/about#'+LANG;const t=a.querySelector('.head-text');if(t)t.textContent=aboutLabels[LANG]||aboutLabels.en;a.setAttribute('aria-label',aboutLabels[LANG]||aboutLabels.en);});
- document.querySelectorAll('.head-support').forEach(a=>{a.href='/support#'+LANG;const l=(supportLabels[LANG]||supportLabels.en).replace(/^\u2615\s*/,'');const t=a.querySelector('.head-text');if(t)t.textContent=l;a.setAttribute('aria-label',l);});
+ document.querySelectorAll('.head-support').forEach(a=>{const l=(supportLabels[LANG]||supportLabels.en).replace(/^\u2615\s*/,'');const t=a.querySelector('.head-text');if(t)t.textContent=l;a.setAttribute('aria-label',l);});
  const modelLabels={"en": "Gunkanjima in 3D ↗", "ja": "3Dでよみがえる軍艦島 ↗", "ko": "3D로 보는 군함도 ↗", "zh-Hans": "3D复原 军舰岛 ↗", "zh-Hant": "3D復原 軍艦島 ↗", "th": "Gunkanjima in 3D ↗"};
  const modelLinks={"en": "/3d/gunkanjima", "ja": "/3d/ja/gunkanjima", "ko": "/3d/ko/gunkanjima", "zh-Hans": "/3d/zh-cn/gunkanjima", "zh-Hant": "/3d/zh-tw/gunkanjima", "th": "/3d/gunkanjima"};
  document.querySelectorAll('.site-3d-link').forEach(a=>{a.textContent=modelLabels[LANG]||modelLabels.en;a.href=modelLinks[LANG]||modelLinks.en;});

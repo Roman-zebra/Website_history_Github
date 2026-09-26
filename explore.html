@@ -15,8 +15,8 @@
 <link rel="dns-prefetch" href="https://ja.wikipedia.org">
 
 <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="explore.css?v=0.95">
-<link rel="stylesheet" href="design.css?v=0.95">
+<link rel="stylesheet" href="explore.css?v=0.94">
+<link rel="stylesheet" href="design.css?v=0.94">
 <!-- Start-up data explore.js fetches as soon as it runs. On a first visit it is preloaded here, one round trip earlier; under the service worker the files come from its cache and Chrome would download a preload twice instead of reusing it. build.cjs gives these URLs the release's versions in dist. -->
 <script>if(!(navigator.serviceWorker&&navigator.serviceWorker.controller))for(const href of ['data/places-world.json?v=0.48','data/monuments-index.json?v=0.48','data/landmarks.json?v=0.48','data/regional-landmarks-v1.json?v=0.48','data/liminal.json?v=0.48','data/topics.json?v=0.48','data/areas.json?v=0.48']){const link=document.createElement('link');link.rel='preload';link.as='fetch';link.crossOrigin='anonymous';link.href=href;document.head.appendChild(link);}</script>
 <!--SEO-->
@@ -45,7 +45,7 @@
 <link rel="alternate" hreflang="zh-Hant" href="https://japantimeatlas.com/zh-tw">
 <link rel="alternate" hreflang="th" href="https://japantimeatlas.com/th">
 <link rel="alternate" hreflang="x-default" href="https://japantimeatlas.com/">
-<link rel="stylesheet" href="walking-time.css?v=0.95">
+<link rel="stylesheet" href="walking-time.css?v=0.94">
 <link rel="icon" href="/icons/atlas-96.png" type="image/png" sizes="96x96"><link rel="icon" href="/icons/atlas.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/atlas-180.png"></head>
 <body>
 
@@ -54,7 +54,7 @@
   <div class="lang-row">
     <a class="atlas-brand" href="./"><img class="atlas-mark" src="/icons/atlas.svg" alt="" width="36" height="36">日本の今昔マップ<small>JAPAN TIME ATLAS</small></a>
     <a class="lang head-link head-about" href="/about#en"><span aria-hidden="true">ⓘ</span><span class="head-text">About this site</span></a>
-    <a class="lang head-link head-support" href="/support#en"><span aria-hidden="true">☕</span><span class="head-text">Support this site</span></a>
+    <a class="lang head-link head-support" href="https://ko-fi.com/japantimeatlas" target="_blank" rel="noopener"><span aria-hidden="true">☕</span><span class="head-text">Support this site</span></a>
     <button id="guideBtn" class="lang" type="button" data-t="guideBtn"></button>
     <button id="myBtn" class="lang" type="button"><span id="myCount">☆ 0</span></button>
     <button id="langBtn" class="lang" type="button"><span id="langLabel">English</span></button>
@@ -114,7 +114,7 @@
     <p data-t="credits"></p>
     <p><a id="allPlacesLink" href="/places">All places ↗</a></p>
   <p><a class="site-3d-link" href="/3d/gunkanjima">Gunkanjima in 3D ↗</a></p>
-  <p><a class="site-about-link" href="/about#en">About this site</a> · <a class="site-support-link" href="/support#en">☕ Support this site</a></p><p class="share-row"><span class="share-label">Share this site</span><a class="share-link share-x" href="https://x.com/intent/post?url=https%3A%2F%2Fjapantimeatlas.com%2F&amp;text=Japan%20Time%20Atlas%20%E2%80%94%20old%20aerial%20photographs%20laid%20over%20the%20map%20of%20Japan%20today.&amp;hashtags=JapanTimeAtlas" target="_blank" rel="noopener" title="X">X</a><a class="share-link share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fjapantimeatlas.com%2F" target="_blank" rel="noopener" title="Facebook">f</a><a class="share-link share-line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fjapantimeatlas.com%2F" target="_blank" rel="noopener" title="LINE">L</a></p></footer>
+  <p><a class="site-about-link" href="/about#en">About this site</a> · <a class="site-support-link" href="https://ko-fi.com/japantimeatlas" target="_blank" rel="noopener">☕ Support this site</a></p><p class="share-row"><span class="share-label">Share this site</span><a class="share-link share-x" href="https://x.com/intent/post?url=https%3A%2F%2Fjapantimeatlas.com%2F&amp;text=Japan%20Time%20Atlas%20%E2%80%94%20old%20aerial%20photographs%20laid%20over%20the%20map%20of%20Japan%20today.&amp;hashtags=JapanTimeAtlas" target="_blank" rel="noopener" title="X">X</a><a class="share-link share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fjapantimeatlas.com%2F" target="_blank" rel="noopener" title="Facebook">f</a><a class="share-link share-line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fjapantimeatlas.com%2F" target="_blank" rel="noopener" title="LINE">L</a></p></footer>
 </section>
 
 <!-- ============ 2. Map / place ============ -->
@@ -180,7 +180,7 @@
       </div>
       
       <p id="pSrc" class="p-src"></p>
-    <p class="panel-about"><a class="site-about-link" href="/about#en">About this site</a> · <a class="site-support-link" href="/support#en">☕ Support this site</a></p>
+    <p class="panel-about"><a class="site-about-link" href="/about#en">About this site</a> · <a class="site-support-link" href="https://ko-fi.com/japantimeatlas" target="_blank" rel="noopener">☕ Support this site</a></p>
     </div>
   </section>
 </section>
@@ -188,12 +188,12 @@
 <div id="toast" class="toast" hidden></div>
 
 <script src="/vendor/leaflet-1.9.4/leaflet.min.js"></script>
-<script src="place-ui.js?v=0.95"></script>
-<script src="activities-data.js?v=0.95"></script>
-<script src="walking-data.js?v=0.95"></script>
-<script src="walking-time.js?v=0.95"></script>
-<script src="explore.js?v=0.95"></script>
-<script src="atmosphere.js?v=0.95" defer></script>
+<script src="place-ui.js?v=0.94"></script>
+<script src="activities-data.js?v=0.94"></script>
+<script src="walking-data.js?v=0.94"></script>
+<script src="walking-time.js?v=0.94"></script>
+<script src="explore.js?v=0.94"></script>
+<script src="atmosphere.js?v=0.94" defer></script>
 <div id="langMenu" class="lang-menu" hidden></div>
 </body>
 </html>

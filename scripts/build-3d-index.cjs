@@ -115,7 +115,7 @@ ${items}
 <h2>${esc(t.howH)}</h2>
 <ul class="how">${t.how.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul>
 </main>
-<footer><p><a href="${home}">${esc(t.back)}</a> &middot; <a class="site-support-link" href="/support#${l.code}">${esc(t.support)}</a></p></footer>
+<footer><p><a href="${home}">${esc(t.back)}</a> &middot; <a class="site-support-link" href="https://ko-fi.com/japantimeatlas" target="_blank" rel="noopener">${esc(t.support)}</a></p></footer>
 </body>
 </html>
 `;

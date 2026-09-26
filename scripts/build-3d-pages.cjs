@@ -81,9 +81,6 @@ for(const l of LANGS){
     .replace(/<a href="\?lang=zh-CN" lang="zh-Hans">/,`<a href="/3d/zh-cn/gunkanjima" lang="zh-Hans"${l.code==='zh-Hans'?' aria-current="page"':''}>`)
     .replace(/<a href="\?lang=zh-TW" lang="zh-Hant">/,`<a href="/3d/zh-tw/gunkanjima" lang="zh-Hant"${l.code==='zh-Hant'?' aria-current="page"':''}>`);
  s=s.replace(/<p class="lab-badge">[^<]*<\/p>/,`<p class="lab-badge">${esc(l.badge)}</p>`);
- // the footer's support link opens the support page in this page's language
- if(!s.includes('data-t="support" href="/support#en"'))throw new Error('gunkanjima.template.html: the support link moved; update build-3d-pages.cjs');
- s=s.replace('data-t="support" href="/support#en"',`data-t="support" href="/support#${l.code}"`);
  if(!s.includes('<!-- 3d-extras -->\n'))throw new Error('gunkanjima.template.html: the <!-- 3d-extras --> marker is missing');
  s=s.replace('<!-- 3d-extras -->\n',extras.html(l));
  s=s.replace('</style>',' '+extras.css+' </style>');

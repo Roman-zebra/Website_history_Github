@@ -19,8 +19,6 @@ Use Node.js 22 or newer and run `node scripts/build.cjs`. The build generates st
 
 Content editing: [DISCOVERY-MAINTENANCE.md](DISCOVERY-MAINTENANCE.md). Pictorial map-marker pilot: [LANDMARK-ICONS.md](LANDMARK-ICONS.md).
 
-Support: every ☕ link opens [/support](https://japantimeatlas.com/support) (`support.html`) in the reader's language. Before the Ko-fi button, it says in six languages what reaches the site owner (email, name, message, card or PayPal details) and what never does. If the payment service changes, rewrite those lists in all six sections. `tests/support-link.test.cjs` checks that no other page links to Ko-fi directly.
-
 ## Data and attribution
 
 Historical and recent aerial imagery: [Geospatial Information Authority of Japan](https://maps.gsi.go.jp/development/ichiran.html). Map data: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). Other sources and attribution are shown on individual pages. See [LICENSE-DATA.md](LICENSE-DATA.md).
