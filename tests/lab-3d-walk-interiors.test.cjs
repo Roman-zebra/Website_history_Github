@@ -20,7 +20,7 @@ test('walking cutaways have complete opaque wall coverage outside framed opening
   assert.ok(sc.walkLights.length>0);assert.ok(sc.text.ja.includes('推定'));
  }
  assert.ok(interior.complete(scenes.shrine,'shrine').walkStairsAdjusted,'open shrine precinct keeps its walk-only stair adjustment');
- assert.equal(interior.complete(scenes.roofgarden,'roofgarden'),scenes.roofgarden,'roof garden stays open');
+ assert.ok(!interior.complete(scenes.roofgarden,'roofgarden').walkEnclosed,'roof garden stays open');
 });
 
 test('the source-labelled Jigokudan study is climbable in both directions without altering source data',()=>{
@@ -165,6 +165,22 @@ test('Hashima Ginza walking copy opens along the documented column and shop rows
  assert.equal(columns.filter(b=>inCone(b,25)).length,4,'the forward column sequence remains legible');
  for(const lang of ['ja','en','ko','zh-Hans','zh-Hant'])assert.ok(sc.text[lang].length>original.text[lang].length,lang+' receives the viewpoint caveat');
  assert.ok(sc.text.ja.includes('歴史的な視点位置')&&sc.text.en.includes('not a historical camera position'));
+});
+
+test('rooftop farm walking copy presents all existing crop beds and the rice plot without changing source geometry',()=>{
+ const original=scenes.roofgarden,source=JSON.stringify(original),sc=interior.complete(original,'roofgarden');
+ assert.equal(JSON.stringify(original),source,'source rooftop-farm scene remains untouched');
+ assert.notEqual(sc,original);assert.deepEqual(sc.boxes,original.boxes,'walking copy adds no crop or roof geometry');
+ const beds=original.boxes.filter(b=>b.t==='bed-frame'),rice=original.boxes.filter(b=>b.t==='rice-plot');
+ assert.equal(beds.length,4);assert.equal(rice.length,1);
+ const spawn=nav.spawn({...sc,camera:sc.walkEntry},.805);assert.ok(spawn,'rooftop-farm entry has floor support');
+ assert.ok(Math.hypot(spawn.u-sc.walkEntry.u,spawn.v-sc.walkEntry.v)<.001,'rooftop-farm entry needs no fallback displacement');
+ const view=[sc.walkEntry.target[0]-sc.walkEntry.u,sc.walkEntry.target[1]-sc.walkEntry.v],vl=Math.hypot(...view);
+ for(const b of [...beds,...rice]){const to=[b.u-sc.walkEntry.u,b.v-sc.walkEntry.v],tl=Math.hypot(...to);assert.ok((view[0]*to[0]+view[1]*to[1])/vl/tl>Math.cos(25*Math.PI/180),'every crop bed and rice plot stays inside the opening view cone');}
+ assert.ok(sc.walkEntry.el<-.2&&sc.walkEntry.el>-.35,'opening pitch favours the crop beds without hiding the horizon');
+ for(const lang of ['ja','en','ko','zh-Hans','zh-Hant'])assert.ok(sc.text[lang].length>original.text[lang].length,lang+' receives the evidence caveat');
+ assert.ok(sc.text.ja.includes('菜園の存在は記録')&&sc.text.ja.includes('開始視点は推定'));
+ assert.ok(sc.text.en.includes('rooftop farm is documented')&&sc.text.en.includes('starting viewpoint are inferred'));
 });
 
 test('rooftop nursery walking entry presents the existing activity tables from a clear aisle',()=>{

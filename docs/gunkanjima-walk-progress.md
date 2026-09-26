@@ -289,3 +289,13 @@ Validation: 166/166 full-build tests pass. Regressions preserve the complete sou
 Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors10, navigation3.
 
 Publication: main advanced without force to `460b694a397ec95519487dc528991a84b42f8228`. Cloudflare `release.json` reported that commit; the public walk HTML requests interiors10 while retaining renderer21, walk JS8/CSS7, walk-nature1, buildings5 and navigation3, and the served interiors10 file is byte-identical to the tested local file.
+
+## Buildings 18/19 rooftop-farm arrival — interiors v11, 2026-09-27
+
+The source scene documents a rooftop farm on Buildings 18 and 19, but its inherited first-person arrival was largely blocked by the archery-hall wall and parapet: almost none of the crop beds read in the opening frame. The walking copy now starts on clear supported roof floor and looks across all four existing crop beds toward the existing rice plot. Every source object, box, crop, archery-hall element and orbit camera remains unchanged; no garden geometry was added or moved.
+
+The farm's existence is documented, while the bed and path layout, crop arrangement and this explanatory viewpoint remain inferred rather than measured. That distinction is appended to the viewpoint text in Japanese, English, Korean, Simplified Chinese and Traditional Chinese. In the first rendered revision the composition left too much sky above the beds, so the entry elevation was lowered from -0.18 to -0.25 radians while retaining the horizon and all five garden elements.
+
+Validation: 167/167 full-build tests pass. Regressions preserve the complete source scene and exact box array, require a zero-fallback supported entry, place all four beds and the rice plot inside a 25-degree opening-view cone, exercise the actual engine under both 16- and 32-bit index paths, and cover all five viewpoint translations. Sixteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The rooftop-farm view changes 1,020,269 pixels because the camera is deliberately reframed; all fifteen control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
+
+Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors11, navigation3.

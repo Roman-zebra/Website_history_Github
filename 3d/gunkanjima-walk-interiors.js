@@ -54,6 +54,24 @@ function complete(sc,id){
   const text={...sc.text};for(const lang of Object.keys(note))text[lang]=(text[lang]||text.ja||'')+' '+note[lang];
   return {...sc,walkEntry:{u:position[0],v:position[1],target:[target.u,target.v],el:-.10},text};
  }
+ if(id==='roofgarden'){
+  // The rooftop farm is documented, while the bed layout, crops and paths are
+  // already labelled inferred. Use the clear roof edge to present all four
+  // existing beds and the rice plot without adding or moving any geometry.
+  const roof=sc.boxes.find(b=>b.t==='roof');if(!roof)return sc;
+  const angle=(roof.r||0)*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle);
+  const world=(x,z)=>[roof.u+(x*c-z*s)/MPP,roof.v+(x*s+z*c)/MPP];
+  const position=world(-16.2,-4.6),target=world(0,6);
+  const note={
+   ja:'歩行版は既存の4つの栽培床と稲作区画を見渡す屋上端から始まります。菜園の存在は記録に基づきますが、畝・通路・作物配置と開始視点は推定です。',
+   en:'The walking view starts at the roof edge, looking across the four existing crop beds and rice plot. The rooftop farm is documented, but the beds, paths, crop arrangement and starting viewpoint are inferred.',
+   ko:'보행판은 기존 네 개의 재배상과 벼 재배 구역을 바라보는 옥상 가장자리에서 시작합니다. 옥상 채소밭의 존재는 기록에 근거하지만 이랑·통로·작물 배치와 시작 시점은 추정입니다.',
+   'zh-Hans':'步行版从屋顶边缘开始，可看到现有四个种植床和稻作区。屋顶菜园的存在有记录依据，但畦垄、通道、作物配置及起始视点均为推定。',
+   'zh-Hant':'步行版從屋頂邊緣開始，可看到現有四個種植床和稻作區。屋頂菜園的存在有記錄依據，但畦壟、通道、作物配置及起始視點均為推定。'
+  };
+  const text={...sc.text};for(const lang of Object.keys(note))text[lang]=(text[lang]||text.ja||'')+' '+note[lang];
+  return {...sc,walkEntry:{u:position[0],v:position[1],target,el:-.25},text};
+ }
  const spec=profiles[id];if(!spec||sc.walkEnclosed)return sc;
  const floors=sc.boxes.filter(b=>spec.tags.includes(b.t));if(!floors.length)return sc;
  const anchor=floors[0],angle=(anchor.r||0)*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle);

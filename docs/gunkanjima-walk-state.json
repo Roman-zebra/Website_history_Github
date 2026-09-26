@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "in_progress",
-  "updatedAt": "2026-09-26T23:19:00Z",
+  "updatedAt": "2026-09-26T23:42:00Z",
   "activeRun": {
     "task": "Inspect and improve the first-person arrival across the documented rooftop farm on Buildings 18 and 19",
     "startedAt": "2026-09-26T23:19:00Z"
@@ -47,7 +47,8 @@
     "Building 16 walking copy: documented fresh-water and seawater tap stems preserved; four neutral inferred handle/spout cues added and opening view reframed toward the pair",
     "Building 16 interiors9 verified live at 3edaa683f7946a99c1f1948fc03aabb388cbeeb6; public HTML requests interiors9 and the served asset is byte-identical",
     "Hashima Ginza walking copy: source geometry preserved; first-person arrival reframed along all five existing stalls and the forward column sequence with five-language viewpoint caveat",
-    "Hashima Ginza interiors10 verified live at 460b694a397ec95519487dc528991a84b42f8228; public HTML requests interiors10 and the served asset is byte-identical"
+    "Hashima Ginza interiors10 verified live at 460b694a397ec95519487dc528991a84b42f8228; public HTML requests interiors10 and the served asset is byte-identical",
+    "Buildings 18/19 rooftop-farm walking copy: source geometry preserved; first-person arrival reframed to show all four existing crop beds and the rice plot with a five-language inference caveat"
   ],
   "nextActions": [
     "Improve a bounded room-specific furnishing or source-grounded retaining-wall/terrain segment, preserving existing geometry evidence",
@@ -88,7 +89,7 @@
     "onlyThisWorkEnabled": true
   },
   "validation": {
-    "fullBuildTestsPassed": 166,
+    "fullBuildTestsPassed": 167,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 20,
     "inferredDoorwayPathsChecked": 1362,
@@ -185,7 +186,16 @@
     "hashimaGinzaRenderDifferingPixels": 1020081,
     "hashimaGinzaControlViewsByteIdentical": 14,
     "hashimaGinzaViewpointLanguagesChecked": 5,
-    "hashimaGinzaServedAssetByteChecked": true
+    "hashimaGinzaServedAssetByteChecked": true,
+    "rooftopFarmSourceScenePreserved": true,
+    "rooftopFarmBedsInOpeningView": 4,
+    "rooftopFarmRicePlotsInOpeningView": 1,
+    "rooftopFarmEntryFallbackDisplacement": 0,
+    "rooftopFarmNativeGlesViewsRendered": 16,
+    "rooftopFarmRenderDifferingPixels": 1020269,
+    "rooftopFarmControlViewsByteIdentical": 15,
+    "rooftopFarmViewpointLanguagesChecked": 5,
+    "rooftopFarmServedAssetByteChecked": false
   },
   "publicationApproval": {
     "at": "2026-09-27T06:50:00+09:00",
@@ -193,9 +203,9 @@
   },
   "publication": {
     "rendererVersion": 21,
-    "walkInteriorsVersion": 10,
+    "walkInteriorsVersion": 11,
     "walkNavigationVersion": 3,
-    "status": "verified live; release.json, public HTML versions and served interiors asset byte-checked; renderer21/walkJS8/CSS7/nature1/buildings5/interiors10/navigation3",
+    "status": "publishing rooftop-farm arrival; local build and normal/forced-mediump GLES checks passed; renderer21/walkJS8/CSS7/nature1/buildings5/interiors11/navigation3",
     "verifiedCommit": "460b694a397ec95519487dc528991a84b42f8228",
     "walkUIVersion": 8,
     "walkCSSVersion": 7,

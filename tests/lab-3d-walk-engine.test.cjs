@@ -51,6 +51,11 @@ assert.ok(g.enter('ginza'));const ginza=g.scenes().ginza,ginzaEntry=ginza.walkEn
 assert.ok(Math.hypot(ginzaUV[0]-ginzaEntry.u,ginzaUV[1]-ginzaEntry.v)<.01,'Hashima Ginza entry remains on clear floor');
 assert.ok(Math.cos(api.st.az-Math.atan2(ginzaLook[0]-api.st.wx,ginzaLook[1]-api.st.wz))>.999,'Hashima Ginza opens along the shop row');g.leave();
 
+// The rooftop farm opens across the existing crop beds and rice plot.
+assert.ok(g.enter('roofgarden'));const rooftopFarm=g.scenes().roofgarden,rooftopEntry=rooftopFarm.walkEntry,rooftopUV=g.fromWorld(api.st.wx,api.st.wz),rooftopLook=g.toWorldTrue(...rooftopEntry.target);
+assert.ok(Math.hypot(rooftopUV[0]-rooftopEntry.u,rooftopUV[1]-rooftopEntry.v)<.01,'rooftop-farm entry remains on clear roof');
+assert.ok(Math.cos(api.st.az-Math.atan2(rooftopLook[0]-api.st.wx,rooftopLook[1]-api.st.wz))>.999,'rooftop farm opens across the crop plots');g.leave();
+
 // A classroom opens toward the board and supports actual forward input from the rear aisle.
 assert.ok(g.enter('school'));const schoolEntry=g.scenes().school.walkEntry,schoolUV=g.fromWorld(api.st.wx,api.st.wz),schoolLook=g.toWorldTrue(...schoolEntry.target);
 assert.ok(Math.hypot(schoolUV[0]-schoolEntry.u,schoolUV[1]-schoolEntry.v)<.01);
