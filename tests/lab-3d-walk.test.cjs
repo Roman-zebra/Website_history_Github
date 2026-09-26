@@ -12,3 +12,34 @@ test('rotated walls block, floors support, door openings remain traversable',()=
  assert.equal(nav.ground({boxes:[floor,{...wall,t:'door'}]},0,0,1,.1),.1);
  assert.equal(nav.ground({boxes:[{...floor,y:3}]},0,0,1,.1),null,'no teleport to a different storey');
 });
+
+const buildingWalk=require('../3d/gunkanjima-walk-buildings.js'),model=require('../3d/gunkanjima-model.json');
+test('every generated building supports walking from the ground floor to the roof and back',()=>{
+ let count=0;
+ for(const b of model.buildings){
+  const sc=buildingWalk.build(b,model.coast);if(!sc)continue;count++;
+  const p=sc.walkPlan,toUV=q=>[(q[0]*p.c-q[1]*p.s)/.805,(q[0]*p.s+q[1]*p.c)/.805];
+  assert.ok(nav.spawn(sc,.805),b.name+' has a usable entrance');
+  let current=p.base;
+  function traverse(points){
+   for(let j=1;j<points.length;j++){
+    const a=points[j-1],z=points[j],n=Math.ceil(Math.hypot(z[0]-a[0],z[1]-a[1])/.10);
+    for(let i=0;i<=n;i++){
+     const k=i/(n||1),uv=toUV([a[0]+(z[0]-a[0])*k,a[1]+(z[1]-a[1])*k]);
+     assert.ok(buildingWalk.inPoly(uv,model.coast),'stairs stay within the coast');
+     const y=nav.ground(sc,...uv,.805,current);
+     assert.notEqual(y,null,(b.name||b.id)+' blocked at floor '+((current-p.base)/p.height).toFixed(2));
+     assert.ok(Math.abs(y-current)<=.4,'single step, no storey teleport');current=y;
+    }
+   }
+  }
+  const points=p.routes.flatMap(r=>r.points);traverse(points);
+  assert.ok(Math.abs(current-(p.base+p.floors*p.height))<.2,b.name+' reaches the roof');
+  traverse(points.slice().reverse());assert.ok(Math.abs(current-p.base)<.2,b.name+' returns to ground level');
+  assert.equal(nav.ground(sc,-1000,-1000,.805,current),null,'no floor outside building');
+ }
+ assert.equal(count,68,'68 feasible building studies; equipment and narrow structures excluded');
+});
+test('equipment is not presented as a residential interior',()=>{
+ for(const name of ['起重機','タンク','貯水槽','桟橋'])assert.equal(buildingWalk.plan({name}),null);
+});

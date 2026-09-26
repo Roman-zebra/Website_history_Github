@@ -1,17 +1,34 @@
 /* Collision support for the existing reconstructed rooms, in crop-frame metres. */
 (function(root){
   'use strict';
-  const support = b => /floor|slab|tatami|corridor|gallery|terrace|walkway|doma|genkan|duckboard|roof\d*$/i.test(b.t || '');
+  const support = b => /stair-step|stair-landing|floor|slab|tatami|corridor|gallery|terrace|walkway|doma|genkan|duckboard|roof\d*$/i.test(b.t || '');
   const opening = b => /door|handle|curtain|line|water|shade|bulb/i.test(b.t || '') || b.k === 12;
   function inside(b,u,v,mpp,pad){
     const a=(b.r||0)*Math.PI/180,c=Math.cos(a),s=Math.sin(a),x=(u-b.u)*mpp,z=(v-b.v)*mpp;
     return Math.abs(x*c+z*s)<=b.s[0]/2+pad && Math.abs(-x*s+z*c)<=b.s[2]/2+pad;
   }
+  const indexes=new WeakMap(),cell=4;
+  function nearby(sc,u,v,mpp){
+    let index=indexes.get(sc);
+    if(!index||index.mpp!==mpp){
+      const bins=new Map();
+      for(const b of sc.boxes){
+        const a=(b.r||0)*Math.PI/180,c=Math.abs(Math.cos(a)),s=Math.abs(Math.sin(a)),hx=(c*b.s[0]+s*b.s[2])/2+.25,hz=(s*b.s[0]+c*b.s[2])/2+.25;
+        const item={b,support:support(b),obstacle:!opening(b)&&!/stair-step/.test(b.t||'')};
+        for(let x=Math.floor((b.u*mpp-hx)/cell);x<=Math.floor((b.u*mpp+hx)/cell);x++)for(let z=Math.floor((b.v*mpp-hz)/cell);z<=Math.floor((b.v*mpp+hz)/cell);z++){
+          const key=x+','+z;if(!bins.has(key))bins.set(key,[]);bins.get(key).push(item);
+        }
+      }
+      index={mpp,bins};indexes.set(sc,index);
+    }
+    return index.bins.get(Math.floor(u*mpp/cell)+','+Math.floor(v*mpp/cell))||[];
+  }
   function ground(sc,u,v,mpp,current){
-    const floors=sc.boxes.filter(b=>support(b)&&inside(b,u,v,mpp,-0.2)).map(b=>b.y+b.s[1]).filter(y=>y<=current+0.4&&y>=current-0.6);
+    const items=nearby(sc,u,v,mpp);
+    const floors=items.filter(x=>x.support).map(x=>x.b).filter(b=>b.y+b.s[1]<=current+0.4&&b.y+b.s[1]>=current-0.6&&inside(b,u,v,mpp,0.025)).map(b=>b.y+b.s[1]);
     if(!floors.length)return null;
     const y=Math.max(...floors);
-    if(sc.boxes.some(b=>!opening(b)&&b.y+b.s[1]>y+0.4&&b.y<y+1.7&&inside(b,u,v,mpp,0.22)))return null;
+    if(items.some(x=>x.obstacle&&x.b.y+x.b.s[1]>y+0.4&&x.b.y<y+1.7&&inside(x.b,u,v,mpp,0.22)))return null;
     return y;
   }
   function spawn(sc,mpp){

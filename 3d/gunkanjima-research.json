@@ -7,7 +7,9 @@
     "footprints": {
       "openStreetMap": 66,
       "tracedFrom1962Aerial": 22
-    }
+    },
+    "walkableInferredBuildingCount": 68,
+    "walkableInferredBuildingCaveat": "Study interiors based on source-model footprints and storeys. Stair positions, partitions, furniture and colours are inferred, not measured or photographically verified. Count spans all model eras, not simultaneous existence."
   },
   "evidenceLabels": {
     "measured": "Dimensions or positions taken from a drawing or survey with a stated scale.",
@@ -18,12 +20,19 @@
     {
       "id": "ndl-survey-2005",
       "title": "軍艦島実測調査資料集 : 大正・昭和初期の近代建築群の実証的研究 追補版",
-      "authors": ["阿久井喜孝", "滋賀秀實"],
+      "authors": [
+        "阿久井喜孝",
+        "滋賀秀實"
+      ],
       "year": 2005,
       "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000007682767",
       "access": "Physical holding; no online full text identified",
       "priority": "critical",
-      "plannedUse": ["Measured building plans", "sections and elevations", "post-closure condition photographs"]
+      "plannedUse": [
+        "Measured building plans",
+        "sections and elevations",
+        "post-closure condition photographs"
+      ]
     },
     {
       "id": "ndl-housing-1952-1970",
@@ -32,7 +41,11 @@
       "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I026439399",
       "access": "Physical holding; no online full text identified",
       "priority": "critical",
-      "plannedUse": ["1952 and 1970 building-layout maps", "housing plans and room use", "historical photographs and explanations"]
+      "plannedUse": [
+        "1952 and 1970 building-layout maps",
+        "housing plans and room use",
+        "historical photographs and explanations"
+      ]
     },
     {
       "id": "ndl-west-coast-plan",
@@ -41,7 +54,11 @@
       "url": "https://ndlsearch.ndl.go.jp/books/R100000001-I42111000002727749",
       "access": "Physical holding at Nagasaki Prefectural Library; no online scan identified",
       "priority": "critical",
-      "plannedUse": ["Georeference the west-coast plan", "correct seawall and building positions", "record map residual error"]
+      "plannedUse": [
+        "Georeference the west-coast plan",
+        "correct seawall and building positions",
+        "record map residual error"
+      ]
     },
     {
       "id": "ndl-preservation-report-2019",
@@ -51,7 +68,11 @@
       "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I029670375",
       "access": "Physical holding; no online full text identified",
       "priority": "high",
-      "plannedUse": ["Archaeological and conservation findings", "production facilities", "chronology and interpretation"]
+      "plannedUse": [
+        "Archaeological and conservation findings",
+        "production facilities",
+        "chronology and interpretation"
+      ]
     },
     {
       "id": "nagasaki-restoration-plan-2017",
@@ -61,7 +82,11 @@
       "url": "https://www.city.nagasaki.lg.jp/uploaded/attachment/12630.pdf",
       "access": "Online",
       "priority": "high",
-      "plannedUse": ["Official classification of housing, production, community and seawall zones", "Conservation phases and visitor routes", "Descriptions of surviving heritage components"],
+      "plannedUse": [
+        "Official classification of housing, production, community and seawall zones",
+        "Conservation phases and visitor routes",
+        "Descriptions of surviving heritage components"
+      ],
       "metricLimitation": "The published plan diagrams are not used to correct coordinates because they are not dimensioned survey drawings."
     },
     {
@@ -71,7 +96,11 @@
       "url": "https://www.city.nagasaki.lg.jp/page/3592.html",
       "access": "Online",
       "priority": "high",
-      "plannedUse": ["Official historic components", "reclamation and seawall phases", "site description"]
+      "plannedUse": [
+        "Official historic components",
+        "reclamation and seawall phases",
+        "site description"
+      ]
     },
     {
       "id": "agency-cultural-affairs",
@@ -80,7 +109,11 @@
       "url": "https://kunishitei.bunka.go.jp/heritage/detail/401/00003864",
       "access": "Online",
       "priority": "high",
-      "plannedUse": ["Designation facts", "official site extent", "historic description"]
+      "plannedUse": [
+        "Designation facts",
+        "official site extent",
+        "historic description"
+      ]
     }
   ],
   "nextAcquisition": [
@@ -88,5 +121,18 @@
     "Georeference scans against the existing aerial-photo control points without overwriting source geometry.",
     "Assign measured, documented or inferred status to each revised exterior and interior element.",
     "Publish residual errors and source links with each model revision."
-  ]
+  ],
+  "walkUpdate": {
+    "date": "2026-09-26",
+    "defaultCamera": "first person",
+    "photoArchive": "Existing processed GSI aerial photographs from 1947, 1962, 1975 and 2010; no new library book scans acquired.",
+    "libraryAccess": "2015 housing study and 2005 measured survey: catalogue checked, full text/plans not acquired. 1986 Saiga photobook: NDL individual transmission, not an open reuse source.",
+    "showakan": "https://search.showakan.go.jp/search/photo/detail.php?id=90101235",
+    "museumGallery": "https://www.gunkanjima-museum.jp/data/gallery/",
+    "notCompleted": [
+      "All-building measured interior reconstruction",
+      "Verified historical colour reconstruction",
+      "Genshin-level authored environment assets and visual fidelity"
+    ]
+  }
 }
