@@ -215,3 +215,13 @@ For the walking copy only, the existing phone gains a compact handset and ten-pa
 Validation: 156/156 full-build tests pass. The regression preserves the complete source scene, bounds all 13 additions to the existing phone, verifies inferred labels and confirms the curated entry needs no collision fallback. Twelve native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The no3 view changes 1,023,989 pixels because the camera is deliberately reframed; all eleven control views are byte-identical. Actual iPhone Safari gestures and mobile GPU performance remain unverified.
 
 Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors7, navigation3. Cloudflare `release.json` reached `61e4b4465e27e2572882bef8af65c9f6cdc41666`; the public HTML requests interiors7 and the served asset is byte-identical to the tested local file.
+
+## Building 30 third-floor dwelling entry — interiors v8, 2026-09-27
+
+The Building 30 source scene contains the full seven-storey gallery stack and uses a lower-gallery floor as its general navigation reference. The walking completion inherited that value, so entering the scene opened at the exterior gallery level instead of the third-floor dwelling described by the cutaway. The source scene, gallery stack, room geometry, objects and orbit camera remain unchanged.
+
+For the walking copy only, the navigation reference is set to the existing interpreted dwelling surface. A clear supported entry inside the room faces the source-described kamado and water jar. No new furnishing geometry or historical dimensions were added. The entry is an interpretive presentation view, not a historical camera position; the existing caveat that room details are inferred remains.
+
+Validation: 157/157 full-build tests pass. Regressions preserve the complete source scene and its lower-gallery reference, require the walking entry to land on the selected room surface without fallback, keep the kamado and water jar inside a 12-degree opening-view cone, and exercise the actual engine under both 16- and 32-bit index paths. Thirteen native GLES2 views compile, link and render without errors in normal and forced-mediump paths. The no30 image changes all 1,024,000 pixels because it now shows the room instead of the outdoor level; all twelve control views are byte-identical. Actual iPhone Safari and mobile GPU performance remain unverified.
+
+Cache versions: renderer19, walk JS7/CSS6, buildings4, interiors8, navigation3. Publication verification is pending.

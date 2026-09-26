@@ -268,6 +268,7 @@
     "communalBathWalk": "The source scene documents the Building 61 communal bath and its tiled tub. The walking copy adds floor and tub-cap grout cues while preserving the source floor, tub, water and equipment geometry; joint pitch, width and colour are inferred.",
     "rooftopNurseryWalk": "The Building 65 rooftop-nursery source scene is unchanged. Its walking copy now starts from a clear rear aisle with all six existing activity tables inside the opening view cone; this is a presentation choice, not a claimed historical viewpoint.",
     "building3TelephoneWalk": "The source description records a telephone in every Building 3 dwelling. The walking copy preserves the inferred phone and room placement, adds footprint-bounded handset and rotary-dial cues, and starts from a clear floor position facing it; the exact telephone model, detail dimensions and colours are inferred.",
+    "building30DwellingWalk": "The Building 30 source scene models the multi-storey gallery stack and uses a lower-gallery navigation floor, while its interpreted room is a third-floor dwelling. The walking copy preserves all source geometry but selects that room surface for its entry and faces the existing kamado and water jar; the viewpoint is interpretive and not a historical camera position.",
     "camera": "First-person only; third-person code and UI removed."
   }
 }

@@ -124,7 +124,7 @@ function complete(sc,id){
   // Benches along the side wall, clear of the central court.
   for(const x of [-3.5,1.5,6.5]){put(x,z0+.65,base+.43,[3,.09,.48],trim,'bench-seat',2);for(const dx of [-1.1,1.1])put(x+dx,z0+.65,base,[.10,.43,.38],timber,'bench-leg',2);}
  }
- let walkEntry=sc.walkEntry;
+ let walkEntry=sc.walkEntry,walkFloor=sc.floor;
  if(id==='school'){
   // Inferred teaching props sit on existing furniture; aisles and source desk positions are retained.
   const covers=[[.24,.43,.42],[.45,.26,.22],[.30,.36,.48]];
@@ -195,6 +195,14 @@ function complete(sc,id){
    walkEntry={u:position[0],v:position[1],target,el:-.36};
   }
  }
+ if(id==='no30'){
+  // The source scene contains the full gallery stack and uses a lower-gallery
+  // navigation floor. Walking should open on the documented third-floor room
+  // that this cutaway depicts, without changing the source scene or geometry.
+  const kamado=sc.boxes.find(b=>b.t==='kamado'),jar=sc.boxes.find(b=>b.t==='water-jar');
+  const position=world(.4,.55),focus=kamado&&jar?[(kamado.u+jar.u)/2,(kamado.v+jar.v)/2]:world(2.55,-.65);
+  walkFloor=base;walkEntry={u:position[0],v:position[1],target:focus,el:-.32};
+ }
  if(id==='no65roof'){
   // Start from a clear rear aisle looking across the existing activity tables.
   // Source furniture and the orbit-view camera remain untouched.
@@ -205,8 +213,9 @@ function complete(sc,id){
  const hospitalNote=id==='hospital'?' スチールサッシの材質区分を歩行版で補正しました。畳縁・畳目の細部と色は、畳敷きベッドを読み取りやすくする演出上の推定です。':'';
  const bathNote=id==='bath'?' 記録にあるタイル浴槽を読み取りやすくする目地を歩行版に補いました。目地の間隔・太さ・色は演出上の推定です。':'';
  const no3Note=id==='no3'?' 各戸の電話は記録に基づきますが、受話器・回転ダイヤルの形と色は歩行版で読み取りやすくする推定です。':'';
+ const no30Note=id==='no30'?' 歩行版は切り開き対象の3階住戸から開始し、記録にある竈と水がめを向く解説用視点です。歴史的な視線位置を示すものではありません。':'';
  const note={ja:'歩行用に補った壁・天井・装飾・照明は推定です。',en:'Enclosures, finishes and lighting added for walking are inferred.'};
- return {...sc,boxes,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote+bathNote+no3Note,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')+(id==='bath'?' Grout cues make the documented tiled bath legible; joint pitch, width and colour are illustrative inferences.':'')+(id==='no3'?' Records confirm a telephone in each dwelling; the handset, rotary-dial form and colours added for legibility are inferred.':'')}};
+ return {...sc,boxes,floor:walkFloor,walkEntry,walkEnclosed:true,walkEnvelope:{x0,x1,z0,z1,base,height,angle,u:anchor.u,v:anchor.v,windows},walkLights:lights,text:{...sc.text,ja:(sc.text.ja||'')+' '+note.ja+schoolNote+hospitalNote+bathNote+no3Note+no30Note,en:(sc.text.en||'')+' '+note.en+(id==='school'?' Notebooks, teaching props and chalk strokes are also inferred.':'')+(id==='hospital'?' Steel-sash material classification is corrected in the walking copy. Tatami edging, weave pitch and colours are illustrative inferences that make the documented tatami-topped beds legible.':'')+(id==='bath'?' Grout cues make the documented tiled bath legible; joint pitch, width and colour are illustrative inferences.':'')+(id==='no3'?' Records confirm a telephone in each dwelling; the handset, rotary-dial form and colours added for legibility are inferred.':'')+(id==='no30'?' The walking copy starts in the depicted third-floor dwelling and faces the documented kamado and water jar; this interpretive viewpoint is not a historical camera position.':'')}};
 }
 const api={complete,profiles};if(typeof module==='object')module.exports=api;else root.JTAWalkInteriors=api;
 })(typeof window==='undefined'?this:window);

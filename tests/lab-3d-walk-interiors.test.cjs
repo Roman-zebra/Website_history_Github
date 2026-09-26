@@ -115,6 +115,23 @@ test('Building 3 telephone detail stays inside the existing inferred phone and f
  assert.ok(sc.text.en.includes('Records confirm a telephone')&&sc.text.en.includes('inferred'));
 });
 
+test('Building 30 walking copy starts in the depicted third-floor dwelling facing the documented kamado and water jar',()=>{
+ const original=scenes.no30,source=JSON.stringify(original),sc=interior.complete(original,'no30'),p=sc.walkEnvelope;
+ assert.equal(JSON.stringify(original),source,'source multi-storey gallery scene remains untouched');
+ assert.ok(original.floor<p.base-5,'source navigation floor belongs to a lower gallery');
+ assert.equal(sc.floor,p.base,'walking copy selects the depicted dwelling floor');
+ const spawn=nav.spawn({...sc,camera:sc.walkEntry},.805);assert.ok(spawn,'third-floor entry has support');
+ assert.ok(Math.hypot(spawn.u-sc.walkEntry.u,spawn.v-sc.walkEntry.v)<.001,'third-floor entry needs no fallback displacement');
+ assert.ok(spawn.y>p.base&&spawn.y<p.base+.1,'entry stands on the depicted room surface, not a lower gallery');
+ const view=[sc.walkEntry.target[0]-sc.walkEntry.u,sc.walkEntry.target[1]-sc.walkEntry.v],vl=Math.hypot(...view);
+ for(const type of ['kamado','water-jar']){
+  const b=original.boxes.find(x=>x.t===type),to=[b.u-sc.walkEntry.u,b.v-sc.walkEntry.v],tl=Math.hypot(...to);
+  assert.ok((view[0]*to[0]+view[1]*to[1])/vl/tl>Math.cos(12*Math.PI/180),type+' is inside the opening view cone');
+ }
+ assert.ok(sc.text.ja.includes('3階住戸')&&sc.text.ja.includes('竈と水がめ')&&sc.text.ja.includes('歴史的な視線位置'));
+ assert.ok(sc.text.en.includes('third-floor dwelling')&&sc.text.en.includes('not a historical camera position'));
+});
+
 test('rooftop nursery walking entry presents the existing activity tables from a clear aisle',()=>{
  const original=scenes.no65roof,sourceCamera=JSON.stringify(original.camera),sc=interior.complete(original,'no65roof'),p=sc.walkEnvelope,c=Math.cos(p.angle),s=Math.sin(p.angle);
  const local=(u,v)=>[(u-p.u)*.805*c+(v-p.v)*.805*s,-(u-p.u)*.805*s+(v-p.v)*.805*c];

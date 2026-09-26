@@ -35,6 +35,12 @@ assert.ok(api.st.el<-.4&&api.st.el>-.8,'table is in the first-person field of vi
 assert.notEqual(g.canWalk(api.st.wx+Math.sin(api.st.az)*.3,api.st.wz+Math.cos(api.st.az)*.3),null,'can walk into the room');
 g.leave();
 
+// Building 30 must open on the depicted third-floor dwelling, not the lower gallery used by the source overview.
+assert.ok(g.enter('no30'));const no30=g.scenes().no30,no30Entry=no30.walkEntry,no30UV=g.fromWorld(api.st.wx,api.st.wz),no30Look=g.toWorldTrue(...no30Entry.target);
+assert.ok(Math.hypot(no30UV[0]-no30Entry.u,no30UV[1]-no30Entry.v)<.01,'Building 30 entry remains on its selected room floor');
+assert.ok(api.st.walkGround>no30.walkEnvelope.base&&api.st.walkGround<no30.walkEnvelope.base+.1,'Building 30 avoids the lower-gallery floor');
+assert.ok(Math.cos(api.st.az-Math.atan2(no30Look[0]-api.st.wx,no30Look[1]-api.st.wz))>.999,'Building 30 opens toward the kamado and water jar');g.leave();
+
 // A classroom opens toward the board and supports actual forward input from the rear aisle.
 assert.ok(g.enter('school'));const schoolEntry=g.scenes().school.walkEntry,schoolUV=g.fromWorld(api.st.wx,api.st.wz),schoolLook=g.toWorldTrue(...schoolEntry.target);
 assert.ok(Math.hypot(schoolUV[0]-schoolEntry.u,schoolUV[1]-schoolEntry.v)<.01);
