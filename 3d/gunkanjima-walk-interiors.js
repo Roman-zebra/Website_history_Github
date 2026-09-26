@@ -14,7 +14,27 @@ const profiles={
  no30:{tags:['tatami','doma'],height:2.65,door:true},
  no65roof:{tags:['nursery-floor'],height:2.9,door:true,public:true}
 };
+function smoothJigokudan(sc){
+ if(sc.walkStairsAdjusted)return sc;
+ const source=sc.boxes.filter(b=>b.t==='jigokudan');if(source.length<2)return sc;
+ const first=source[0].y+source[0].s[1],last=source[source.length-1].y+source[source.length-1].s[1];let i=0;
+ const boxes=sc.boxes.map(b=>{
+  if(b.t!=='jigokudan')return b;
+  const top=first+(last-first)*(i++/(source.length-1));
+  return {...b,y:top-b.s[1],a:1};
+ });
+ const note={
+  ja:'歩行版では、資料で存在が確認できる地獄段を昇降できるよう、推定済みの段列の高さだけを等間隔に補間しています。位置・段数・勾配は実測復元ではありません。',
+  en:'For walking, only the heights of the already inferred Jigokudan step sequence are evenly interpolated so it can be climbed. Its position, step count and gradient are not a measured reconstruction.',
+  ko:'보행판에서는 자료로 존재가 확인되는 지고쿠단을 오르내릴 수 있도록 이미 추정된 계단열의 높이만 등간격으로 보간했습니다. 위치·단수·경사는 실측 복원이 아닙니다.',
+  'zh-Hans':'步行版仅对已推定的地狱段台阶序列高度作等距插值，使其可以上下通行；位置、级数和坡度并非实测复原。',
+  'zh-Hant':'步行版僅對已推定的地獄段階梯序列高度作等距插值，使其可以上下通行；位置、級數和坡度並非實測復原。'
+ };
+ const text={...sc.text};for(const lang of Object.keys(note))text[lang]=(text[lang]||text.ja||'')+' '+note[lang];
+ return {...sc,boxes,text,walkStairsAdjusted:true};
+}
 function complete(sc,id){
+ if(id==='shrine')return smoothJigokudan(sc);
  const spec=profiles[id];if(!spec||sc.walkEnclosed)return sc;
  const floors=sc.boxes.filter(b=>spec.tags.includes(b.t));if(!floors.length)return sc;
  const anchor=floors[0],angle=(anchor.r||0)*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle);

@@ -80,6 +80,7 @@
       "publisher": "長崎市",
       "year": 2017,
       "url": "https://www.city.nagasaki.lg.jp/uploaded/attachment/12630.pdf",
+      "summaryUrl": "https://www.city.nagasaki.lg.jp/uploaded/attachment/13761.pdf",
       "access": "Online",
       "priority": "high",
       "plannedUse": [
@@ -87,7 +88,7 @@
         "Conservation phases and visitor routes",
         "Descriptions of surviving heritage components"
       ],
-      "metricLimitation": "The published plan diagrams are not used to correct coordinates because they are not dimensioned survey drawings."
+      "metricLimitation": "The published plan diagrams are not used to correct coordinates because they are not dimensioned survey drawings. The summary confirms island-wide 3D laser recording and separately classifies seawalls and retaining walls, but it does not expose reusable metric stair or retaining-wall geometry."
     },
     {
       "id": "nagasaki-city-hashima",
@@ -262,6 +263,7 @@
       "Genshin-level authored environment assets and visual fidelity"
     ],
     "terrainCorrection": "Walk-only inferred DEM cut beneath existing building footprints, with cell-diagonal clearance and a short outer blend; not a newly surveyed landform.",
+    "jigokudanWalk": "The documented Jigokudan stair exists in the source scene. The walking copy keeps its 46 authored horizontal positions and dimensions but evenly interpolates tread heights so it can be traversed; position, count and gradient remain explicitly inferred rather than measured.",
     "camera": "First-person only; third-person code and UI removed."
   }
 }

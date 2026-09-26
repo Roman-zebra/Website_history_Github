@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "in_progress",
-  "updatedAt": "2026-09-26T14:45:20.308Z",
+  "updatedAt": "2026-09-26T14:56:58Z",
   "activeRun": {
     "task": "Add source-labelled outdoor circulation cues without changing measured geometry",
     "startedAt": "2026-09-26T14:45:20.308Z"
@@ -25,7 +25,8 @@
     "Renderer v17 verified live at 8f9c104499e84b6b92f6ed8d9a90e6d505dbb589; served files byte-checked and public desktop DOM checked",
     "Renderer v18: MIT-attributed NiloCat lighting adaptation, neutral concrete palette, warm room lamps and original nearby furniture contact shade; user playlist identified but not watched",
     "Renderer v18 verified live at 4cdf210ed7a6a8c13248ff39f0fdb76f958f881f with byte-identical renderer/MIT notice and public DOM checks",
-    "FFmpeg/ffprobe already installed; local video-frame utility added and tested with a generated H.264 clip, six extracted frames and invalid-input checks"
+    "FFmpeg/ffprobe already installed; local video-frame utility added and tested with a generated H.264 clip, six extracted frames and invalid-input checks",
+    "Jigokudan walking pass: 46 existing inferred treads made traversable in both directions without changing source-scene horizontal positions, count or dimensions"
   ],
   "nextActions": [
     "Improve terrain, room-specific furnishings and composition in bounded, visually verified steps using the linked GDC / developer references",
@@ -65,7 +66,7 @@
     "id": "6ab7ba457d548191b74af1d0222b0b92"
   },
   "validation": {
-    "fullBuildTestsPassed": 150,
+    "fullBuildTestsPassed": 151,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 18,
     "inferredDoorwayPathsChecked": 1362,
@@ -89,7 +90,10 @@
     "contactShadeGpuComparison": true,
     "mitLicenceShippedInBuild": true,
     "localVideoFramesExtracted": 6,
-    "localVideoToolRejectsWebsiteUrls": true
+    "localVideoToolRejectsWebsiteUrls": true,
+    "jigokudanTreadsChecked": 46,
+    "jigokudanRoundTripVerified": true,
+    "sourceScenePreserved": true
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
@@ -97,7 +101,9 @@
   },
   "publication": {
     "rendererVersion": 18,
-    "status": "verified live; renderer and MIT notice byte-checked, public desktop DOM verified",
+    "walkInteriorsVersion": 3,
+    "walkNavigationVersion": 3,
+    "status": "v18 verified live; Jigokudan walk assets tested and awaiting publication",
     "verifiedCommit": "4cdf210ed7a6a8c13248ff39f0fdb76f958f881f"
   }
 }

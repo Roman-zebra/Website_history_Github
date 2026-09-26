@@ -19,8 +19,22 @@ test('walking cutaways have complete opaque wall coverage outside framed opening
   assert.ok(sc.boxes.some(b=>b.t==='walk-ceiling'&&b.k!==8));
   assert.ok(sc.walkLights.length>0);assert.ok(sc.text.ja.includes('推定'));
  }
- assert.equal(interior.complete(scenes.shrine,'shrine'),scenes.shrine,'open shrine precinct stays outdoors');
+ assert.ok(interior.complete(scenes.shrine,'shrine').walkStairsAdjusted,'open shrine precinct keeps its walk-only stair adjustment');
  assert.equal(interior.complete(scenes.roofgarden,'roofgarden'),scenes.roofgarden,'roof garden stays open');
+});
+
+test('the source-labelled Jigokudan study is climbable in both directions without altering source data',()=>{
+ const original=scenes.shrine,sc=interior.complete(original,'shrine');
+ assert.notEqual(sc,original);assert.ok(!original.walkStairsAdjusted,'source scene remains unchanged');
+ assert.equal(interior.complete(sc,'shrine'),sc,'walking adjustment is idempotent');
+ assert.ok(sc.text.ja.includes('実測復元ではありません'));
+ const source=original.boxes.filter(b=>b.t==='jigokudan'),steps=sc.boxes.filter(b=>b.t==='jigokudan');
+ assert.equal(steps.length,46);assert.deepEqual(steps.map(b=>[b.u,b.v,b.s]),source.map(b=>[b.u,b.v,b.s]),'positions, count and dimensions stay source-authored');
+ const tops=steps.map(b=>b.y+b.s[1]);
+ for(let i=1;i<tops.length;i++){assert.ok(tops[i]<tops[i-1]);assert.ok(tops[i-1]-tops[i]<.4,'each walking rise fits the collision step limit');}
+ function traverse(route,current){for(const b of route){const y=nav.ground(sc,b.u,b.v,.805,current);assert.notEqual(y,null,'each Jigokudan tread is supported');assert.ok(Math.abs(y-current)<.4);current=y;}return current;}
+ let y=traverse(steps,tops[0]);assert.ok(Math.abs(y-tops.at(-1))<.001,'descends to the bottom');
+ y=traverse(steps.slice().reverse(),y);assert.ok(Math.abs(y-tops[0])<.001,'climbs back to the shrine terrace');
 });
 
 test('school props stay on desks and the rear-to-front aisle remains walkable',()=>{

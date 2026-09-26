@@ -1,7 +1,7 @@
 /* Collision support for the existing reconstructed rooms, in crop-frame metres. */
 (function(root){
   'use strict';
-  const support = b => /stair-step|stair-landing|floor|slab|tatami|corridor|gallery|terrace|walkway|doma|genkan|duckboard|roof\d*$/i.test(b.t || '');
+  const support = b => /jigokudan|stair-step|stair-landing|floor|slab|tatami|corridor|gallery|terrace|walkway|doma|genkan|duckboard|roof\d*$/i.test(b.t || '');
   const opening = b => /door|handle|curtain|line|water|shade|bulb/i.test(b.t || '') || b.k === 12;
   function inside(b,u,v,mpp,pad){
     const a=(b.r||0)*Math.PI/180,c=Math.cos(a),s=Math.sin(a),x=(u-b.u)*mpp,z=(v-b.v)*mpp;
@@ -14,7 +14,7 @@
       const bins=new Map();
       for(const b of sc.boxes){
         const a=(b.r||0)*Math.PI/180,c=Math.abs(Math.cos(a)),s=Math.abs(Math.sin(a)),hx=(c*b.s[0]+s*b.s[2])/2+.25,hz=(s*b.s[0]+c*b.s[2])/2+.25;
-        const item={b,support:support(b),obstacle:!opening(b)&&!/stair-step/.test(b.t||'')};
+        const item={b,support:support(b),obstacle:!opening(b)&&!support(b)};
         for(let x=Math.floor((b.u*mpp-hx)/cell);x<=Math.floor((b.u*mpp+hx)/cell);x++)for(let z=Math.floor((b.v*mpp-hz)/cell);z<=Math.floor((b.v*mpp+hz)/cell);z++){
           const key=x+','+z;if(!bins.has(key))bins.set(key,[]);bins.get(key).push(item);
         }
@@ -25,10 +25,14 @@
   }
   function ground(sc,u,v,mpp,current){
     const items=nearby(sc,u,v,mpp);
-    const floors=items.filter(x=>x.support).map(x=>x.b).filter(b=>b.y+b.s[1]<=current+0.4&&b.y+b.s[1]>=current-0.6&&inside(b,u,v,mpp,0.025)).map(b=>b.y+b.s[1]);
+    const under=items.filter(x=>x.support&&inside(x.b,u,v,mpp,0.025)).map(x=>x.b);
+    const jigokudan=under.filter(b=>b.t==='jigokudan').sort((a,b)=>(a.u-u)**2+(a.v-v)**2-(b.u-u)**2-(b.v-v)**2);
+    const floors=(jigokudan.length?jigokudan.slice(0,1):under).map(b=>b.y+b.s[1]).filter(y=>y<=current+0.4&&y>=current-0.6);
     if(!floors.length)return null;
     const y=Math.max(...floors);
-    if(items.some(x=>x.obstacle&&x.b.y+x.b.s[1]>y+0.4&&x.b.y<y+1.7&&inside(x.b,u,v,mpp,0.22)))return null;
+    // The source scene's decorative rock volumes overlap two inferred treads.
+    // Let the labelled stair surface win there, while structural props still collide.
+    if(items.some(x=>x.obstacle&&!(jigokudan.length&&/^(rock|bush|trunk)$/.test(x.b.t||''))&&x.b.y+x.b.s[1]>y+0.4&&x.b.y<y+1.7&&inside(x.b,u,v,mpp,0.22)))return null;
     return y;
   }
   function spawn(sc,mpp){
