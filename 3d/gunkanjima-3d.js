@@ -271,7 +271,7 @@
 #endif
     uniform sampler2D uTexA, uTexB;
     uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uTime, uAnime; uniform mediump float uYear;
-    uniform vec3 uBg, uSun, uHorizon; uniform vec4 uWater; uniform vec2 uSlope;
+    uniform vec3 uBg, uSun, uHorizon; uniform vec4 uWater; uniform vec2 uSlope; uniform vec4 uPond;
     varying vec2 vUvP; varying vec2 vUvO; varying vec3 vNor; varying float vSea; varying vec3 vPos;
     varying vec3 vMaskA; varying vec3 vMaskB;
     varying vec4 vShadow; varying float vDepth;
@@ -342,6 +342,9 @@
           float tufts=max(jointLine*step(.5,noise(vPos.xz*1.7)),smoothstep(.55,.8,noise(vPos.xz*2.6))*vMaskB.y);
           ground=mix(ground,field*.88,tufts*clamp(vMaskB.y*.9+age*.5,0.0,1.0)*bare);
         }
+        // A bright yellow-green halo on the ground around the pond, as in the video's final scene (uPond: x, z, radius, on).
+        float pd=length(vPos.xz-uPond.xy)-uPond.z,halo=uPond.w*step(-.4,pd)*(1.0-smoothstep(.3,3.0,pd));
+        ground=mix(ground,mix(vec3(.81,.96,.47),vec3(.69,.86,.37),smoothstep(.3,3.0,pd)),halo*.75);
         // Wet, darker stone just above the waterline.
         ground*=1.0-.32*smoothstep(.955,.995,vMaskB.z)*(1.0-cover);
         col=toonLight(ground,n,uSun,sh,1.0);
@@ -1132,7 +1135,7 @@
     for (const n of uniforms) U[n] = gl.getUniformLocation(p, n);
     return { p, U };
   }
-  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uShadowK', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uWindTime', 'uWindStrength', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass', 'uGrade', 'uRamp0', 'uRamp1', 'uRamp2', 'uRamp3', 'uRamp4', 'uOverlay', 'uCloud', 'uWater', 'uSlope'];
+  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uShadowK', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uWindTime', 'uWindStrength', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass', 'uGrade', 'uRamp0', 'uRamp1', 'uRamp2', 'uRamp3', 'uRamp4', 'uOverlay', 'uCloud', 'uWater', 'uSlope', 'uPond'];
   const TEX_U = ['uTexA', 'uTexB', 'uMix', 'uOrthoA', 'uOrthoB'];
   const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea', 'aMaskA', 'aMaskB'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat', 'aWind'];
   let progT, progW, progR, progS, progSky, progB, depthT, depthW, depthR, depthB;
@@ -1646,6 +1649,7 @@
       gl.uniform4fv(U.uCloud, [P === progB ? 0 : look.clouds, look.cloudScale, look.cloudSpeed, look.grain]);
       if (U.uWater) gl.uniform4fv(U.uWater, [look.spots, look.sparkle, 1, st.weather === 2 ? 1 : st.weather === 1 ? .35 : 0]);
       if (U.uSlope) gl.uniform2fv(U.uSlope, slopeBand());
+      if (U.uPond) gl.uniform4fv(U.uPond, nature && nature.pond ? nature.pond : [0, 0, 0, 0]);
     }
     gl.uniform1f(U.uWindTime,reduce?0:(performance.now()-t0)/1000);
     gl.uniform1f(U.uWindStrength,GAME&&!reduce?(st.weather===2?.075:.035)*look.wind:0);
@@ -1799,7 +1803,8 @@
     const parts = new Float32Array((lowEnd ? 110 : 280) * 4), patch = 44 / mpp;
     for (let i = 0; i < parts.length / 4; i++){ parts[i * 4] = N.hash(i, 1, 61) * patch; parts[i * 4 + 1] = N.hash(i, 2, 61) * patch; parts[i * 4 + 2] = N.hash(i, 3, 61); parts[i * 4 + 3] = N.hash(i, 4, 61); }
     const birds = new Float32Array([0, 0, .1, 0, 1, -1, .4, 0, 1, 1, .7, 0, 2, -1, .2, 0, 2, 1, .9, 0]);
-    nature = { tex, f, plants, bins, segments, set, pools, parts: { buf: buffer(parts), count: parts.length / 4, patch }, birds: { buf: buffer(birds), count: 5 } };
+    const pd = set.ponds[0], pw = pd ? toWorldTrue(pd.u, pd.v) : null;
+    nature = { pond: pw ? [pw[0], pw[1], pd.r + .15, 1] : null, tex, f, plants, bins, segments, set, pools, parts: { buf: buffer(parts), count: parts.length / 4, patch }, birds: { buf: buffer(birds), count: 5 } };
   }
   // Deck height when (x, z) is on a bridge, else null. Ends are flush with the banks.
   function natureDeck(x, z){
