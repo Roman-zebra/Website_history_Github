@@ -54,6 +54,17 @@
       "plannedUse": ["Archaeological and conservation findings", "production facilities", "chronology and interpretation"]
     },
     {
+      "id": "nagasaki-restoration-plan-2017",
+      "title": "世界文化遺産『明治日本の産業革命遺産』構成資産の修復・公開活用計画（端島炭坑抄録）",
+      "publisher": "長崎市",
+      "year": 2017,
+      "url": "https://www.city.nagasaki.lg.jp/uploaded/attachment/12630.pdf",
+      "access": "Online",
+      "priority": "high",
+      "plannedUse": ["Official classification of housing, production, community and seawall zones", "Conservation phases and visitor routes", "Descriptions of surviving heritage components"],
+      "metricLimitation": "The published plan diagrams are not used to correct coordinates because they are not dimensioned survey drawings."
+    },
+    {
       "id": "nagasaki-city-hashima",
       "title": "国史跡『高島炭鉱跡』端島炭坑跡",
       "publisher": "長崎市",

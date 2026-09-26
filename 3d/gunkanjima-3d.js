@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '7';
+  const V = '8';
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
   const LANG = window.LAB_LANG || 'en';
@@ -67,6 +67,8 @@
 
   function fallback(message){
     say(message);
+    if (btnWalk) btnWalk.textContent = T.walk;
+    if (btnWeather) btnWeather.textContent = T.weatherClear;
     const img = $('viewFallback');
     if (img) img.hidden = false;
     canvas.hidden = true;
