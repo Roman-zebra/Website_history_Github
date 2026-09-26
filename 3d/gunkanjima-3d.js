@@ -8,7 +8,7 @@
    photograph of the chosen year; the sun of 30 May casts shadows through a shadow map. */
 (function(){
   'use strict';
-  const V = '20';
+  const V = '21';
   const GAME = !!window.JTA_WALK_PAGE;
   const here = document.currentScript ? document.currentScript.src : location.href;
   const asset = name => new URL(name + '?v=' + V, here).href;
@@ -688,6 +688,20 @@
       col = mix(col, vec3(0.22, 0.24, 0.22), smoothstep(2.2, 0.0, y));                         /* wet band at the waterline */
       col *= 1.0 - age * 0.2 * noise(vec2(s * 0.3, y));
       col *= mix(1.0, 0.32 + 0.62 * d * mix(0.35, 1.0, sh), uShade);
+      if (uAnime > 0.5){
+        /* Walking view: the sea wall in the buildings' toon light instead of the dark photographic shading, with an
+           algae band at the waterline, weeds in some joints and grass spilling over the top (placeholders). */
+        float H = vTop + 1.5;   /* the ring's crest above its foot at -1.5 m (vWall.z is interpolated along the face here) */
+        vec3 stone = mix(vec3(.66, .66, .61), vec3(.75, .74, .68), noise(vec2(s * .35, y * .5))) * (1.0 - course * .55) * (.93 + .1 * noise(vec2(s * 1.3, y * 1.7)));
+        stone = mix(stone, vec3(.30, .42, .33), smoothstep(1.9, .3, y) * .8);
+        float seam = step(0.92, fract(y / 1.5)) * smoothstep(.62, .8, noise(vec2(s * 1.9, floor(y / 1.5) * 3.7)));
+        // Grass spills over the top in a jagged fringe 0.2-0.6 m deep on some stretches only.
+        float fringe = .18 + .3 * noise(vec2(s * .9, 5.0)) + .12 * noise(vec2(s * 4.3, 2.0));
+        float lip = step(H - fringe, y) * smoothstep(.45, .62, noise(vec2(s * .35, 9.0)));
+        stone = mix(stone, meadowColor(vWorld.xz) * .82, seam * step(2.2, y) * .85);
+        stone = mix(stone, meadowColor(vWorld.xz) * mix(.68, .92, smoothstep(H - fringe, H, y)), lip * .9);
+        col = toonLight(stone, n, uSun, sh, 1.0);
+      }
       col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, 1.0);
     }`;
@@ -1074,6 +1088,9 @@
     ` + SHADOW_FN + `
     void main(){
       vec3 n=normalize(vNor),base=vCol;float kind=vKind.x;
+      // Bushes and canopies can be walked into; leaves right in front of the eye are not drawn, so the view never
+      // fills with one flat green.
+      if(((kind>.5&&kind<2.5)||kind>7.5)&&length(vWorld-uEye)<.6)discard;
       float sh=shadowAt(vShadow,kind>5.5&&kind<6.5?.0015:.004);
       if(kind>5.5&&kind<6.5){
         // Pond: mint gradient, soft drifting mottling, a pale band and a wobbling white foam line at the rim, and

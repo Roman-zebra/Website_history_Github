@@ -63,6 +63,8 @@ Everything below is **illustrative placeholder dressing** for the walk page. It 
 
 ## Rendering fixes made along the way
 
+- Renderer v21: the sea-wall ring now uses the same toon light as the buildings (it kept the old photographic shading and looked nearly black from the walkway), with an algae band, weeds in joints and a grass fringe at the crest. Leaves within 0.6 m of the eye are skipped, so walking into a bush no longer fills the view with flat green. Found with the new `--survey` QA option.
+
 - Walking labels for the inferred multi-floor studies now use the names table in every page language (for example "Blower house · floors & roof (inferred)" instead of the Japanese name on the English page).
 
 - While walking, the shadow box follows the walker (150 m, or 110 m on low-end devices), reaches further ahead than behind and is snapped to whole texels. Near shadows are about three times sharper, and they fade out at the box edge.

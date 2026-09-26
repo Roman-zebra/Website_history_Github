@@ -252,3 +252,14 @@ Validation: 164/164 full-build tests after merging the Building 3 and 30 interio
 Cache versions: renderer20, walk JS8/CSS7, walk-nature1 (new), buildings5, interiors8, navigation3.
 
 Publication (user approved publishing and continuing): the branch was merged with main's Building 3 and 30 releases and main was fast-forwarded to `1118dc9b800daa043740edf65512add744a92f80`. Cloudflare `release.json` reported that commit within about two minutes; the public walk HTML requests renderer20, walk JS8/CSS7, walk-nature1, buildings5, interiors8 and navigation3, and the six served walk scripts and stylesheet are byte-identical to the commit. The session's headless Chromium could not open the public site because it does not trust the egress proxy's CA (TLS verification was not disabled), so the public WebGL view itself was not browser-checked; the same files were browser-checked locally.
+
+## Sea wall and island survey — renderer v21, 2026-09-27
+
+A new QA option, `--survey`, renders twelve walkable points spread over the island at eye level, each looking along its longest clear line of sight. It found two problems:
+
+- The sea-wall ring was still drawn with the old photographic shading, so its walkway side looked nearly black in the walking view. It now uses the buildings' toon light: pale stone courses, an algae band at the waterline, weeds in some joints, and grass spilling over the crest in a jagged fringe on some stretches. The crest height comes from the ring's own top, because the wall height varying is interpolated along this mesh.
+- Bushes and canopies can be walked into. Leaves within 0.6 m of the eye are no longer drawn, so the view never fills with one flat green.
+
+Validation: 164/164 full-build tests; 47 native GLES2 renders (`--nature`, `--streets`, `--sky`, `--survey`) without GL errors.
+
+Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors8, navigation3.
