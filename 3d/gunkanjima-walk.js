@@ -9,6 +9,14 @@ Object.assign(en,{"extra0": "Year", "extra1": "Latest", "extra2": "Photo archive
 const ja={menu:'メニュー',island:'島内を探索',near:'建物の近くで中へ',details:'この場所について',title:'3D街歩き',enter:'中へ',leave:'屋外に戻る',ready:'自由に歩けます。ドラッグで周囲を見回せます。',error:'この再現シーンには入れませんでした。',first:'視点：一人称',third:'視点：三人称'};
 const more={ko:{menu:'메뉴',back:'← 군함도',title:'섬 산책',era:'1962년 중심 복원',help:'조작・자료',pause:'일시 정지',resume:'탐험 계속',island:'섬 탐험',destination:'장소 탐험',choose:'장소로 이동…',camera:'시점 전환',reset:'출발점으로',fullscreen:'전체 화면',near:'건물 가까이에서 입장',details:'장소 설명',move:'이동',run:'달리기',enter:'입장',leave:'야외로',ready:'자유롭게 걸어보세요. 드래그하여 둘러봅니다.'},'zh-Hans':{menu:'菜单',back:'← 军舰岛',title:'3D漫步',era:'以1962年为中心的复原',help:'操作・资料',pause:'暂停',resume:'继续探索',island:'探索岛屿',destination:'探索地点',choose:'前往地点…',camera:'切换视角',reset:'返回起点',fullscreen:'全屏',near:'靠近建筑进入',details:'地点介绍',move:'移动',run:'奔跑',enter:'进入',leave:'返回室外',ready:'自由探索，拖动查看四周。'},'zh-Hant':{menu:'選單',back:'← 軍艦島',title:'3D漫步',era:'以1962年為中心的復原',help:'操作・資料',pause:'暫停',resume:'繼續探索',island:'探索島嶼',destination:'探索地點',choose:'前往地點…',camera:'切換視角',reset:'返回起點',fullscreen:'全螢幕',near:'靠近建築進入',details:'地點介紹',move:'移動',run:'奔跑',enter:'進入',leave:'返回室外',ready:'自由探索，拖動查看四周。'}};
 const L=window.LAB_LANG,t=L==='ja'?{...en,...ja}:{...en,...(more[L]||{})};
+// Look tuning panel (vegetation, water, clouds and light effects are illustrative placeholders, not history).
+const lookText={
+ja:{look:'見た目の調整',lookTitle:'見た目の調整',natureNote:'草木・花・池・雲・光の粒などは雰囲気づくりのための仮の表現で、当時の植生や景観を再現したものではありません。',lookSeason:'季節の色',spring:'春',summer:'夏',autumn:'秋',winter:'冬',magic:'魔法',quality:'画質',qAuto:'自動',qLow:'軽量',qMid:'標準',qHigh:'高品質',lookReset:'初期値に戻す',lookCopy:'設定をコピー',lookCopied:'コピーしました',look_exposure:'明るさ',look_saturation:'鮮やかさ',look_contrast:'コントラスト',look_warmth:'暖かみ',look_grass:'草の量',look_flowers:'花の量',look_clouds:'雲の影',look_land:'遠くの山並み',look_haze:'かすみ',look_wind:'風',look_mottle:'草原のまだら',look_sheen:'草原のつや',look_streaks:'風の筋',look_spots:'水面の模様',look_sparkle:'水のきらめき',look_ambient:'花びら・鳥・光の粒',look_bloom:'光のにじみ',look_grain:'フィルムの粒子'},
+en:{look:'Adjust look',lookTitle:'Adjust the look',natureNote:'Grass, flowers, trees, the pond, clouds and light effects are illustrative placeholders for atmosphere, not a reconstruction of the island\'s historical vegetation or scenery.',lookSeason:'Season colours',spring:'Spring',summer:'Summer',autumn:'Autumn',winter:'Winter',magic:'Magic',quality:'Quality',qAuto:'Auto',qLow:'Light',qMid:'Standard',qHigh:'High',lookReset:'Reset',lookCopy:'Copy settings',lookCopied:'Copied',look_exposure:'Brightness',look_saturation:'Saturation',look_contrast:'Contrast',look_warmth:'Warmth',look_grass:'Grass',look_flowers:'Flowers',look_clouds:'Cloud shadows',look_land:'Distant hills',look_haze:'Haze',look_wind:'Wind',look_mottle:'Meadow mottling',look_sheen:'Meadow sheen',look_streaks:'Wind streaks',look_spots:'Water pattern size',look_sparkle:'Water sparkle',look_ambient:'Petals, birds, sparkles',look_bloom:'Bloom',look_grain:'Film grain'},
+ko:{look:'화면 조정',lookTitle:'화면 분위기 조정',natureNote:'풀·꽃·나무·연못·구름·빛 효과는 분위기를 위한 임시 표현이며, 당시의 식생이나 경관을 복원한 것이 아닙니다.',lookSeason:'계절 색상',spring:'봄',summer:'여름',autumn:'가을',winter:'겨울',magic:'마법',quality:'화질',qAuto:'자동',qLow:'가볍게',qMid:'표준',qHigh:'고품질',lookReset:'초기화',lookCopy:'설정 복사',lookCopied:'복사했습니다',look_exposure:'밝기',look_saturation:'채도',look_contrast:'대비',look_warmth:'따뜻함',look_grass:'풀의 양',look_flowers:'꽃의 양',look_clouds:'구름 그림자',look_land:'먼 산줄기',look_haze:'연무',look_wind:'바람',look_mottle:'초원 얼룩',look_sheen:'초원 광택',look_streaks:'바람 줄기',look_spots:'수면 무늬 크기',look_sparkle:'물의 반짝임',look_ambient:'꽃잎·새·빛 입자',look_bloom:'빛 번짐',look_grain:'필름 그레인'},
+'zh-Hans':{look:'画面调整',lookTitle:'调整画面风格',natureNote:'草木、花、池塘、云和光效是营造氛围的临时表现，并非对当时植被或景观的复原。',lookSeason:'季节配色',spring:'春',summer:'夏',autumn:'秋',winter:'冬',magic:'魔法',quality:'画质',qAuto:'自动',qLow:'流畅',qMid:'标准',qHigh:'高画质',lookReset:'恢复默认',lookCopy:'复制设置',lookCopied:'已复制',look_exposure:'亮度',look_saturation:'饱和度',look_contrast:'对比度',look_warmth:'暖色调',look_grass:'草量',look_flowers:'花量',look_clouds:'云影',look_land:'远山',look_haze:'雾气',look_wind:'风',look_mottle:'草地斑驳',look_sheen:'草地光泽',look_streaks:'风痕',look_spots:'水面纹理大小',look_sparkle:'水面闪光',look_ambient:'花瓣、鸟、光点',look_bloom:'光晕',look_grain:'胶片颗粒'},
+'zh-Hant':{look:'畫面調整',lookTitle:'調整畫面風格',natureNote:'草木、花、池塘、雲和光效是營造氛圍的暫定表現，並非對當時植被或景觀的復原。',lookSeason:'季節配色',spring:'春',summer:'夏',autumn:'秋',winter:'冬',magic:'魔法',quality:'畫質',qAuto:'自動',qLow:'流暢',qMid:'標準',qHigh:'高畫質',lookReset:'恢復預設',lookCopy:'複製設定',lookCopied:'已複製',look_exposure:'亮度',look_saturation:'飽和度',look_contrast:'對比度',look_warmth:'暖色調',look_grass:'草量',look_flowers:'花量',look_clouds:'雲影',look_land:'遠山',look_haze:'霧氣',look_wind:'風',look_mottle:'草地斑駁',look_sheen:'草地光澤',look_streaks:'風痕',look_spots:'水面紋理大小',look_sparkle:'水面閃光',look_ambient:'花瓣、鳥、光點',look_bloom:'光暈',look_grain:'膠片顆粒'}};
+Object.assign(t,lookText.en,lookText[L]||{});
 const demo={ja:'デモ版',en:'Demo',ko:'데모','zh-Hans':'演示版','zh-Hant':'示範版'}[L];t.title+=' · '+demo;
 document.querySelector('[data-t=title]').textContent=t.title;
 if(L!=='ja')for(const el of document.querySelectorAll('[data-t]'))el.textContent=t[el.dataset.t]||el.textContent;
@@ -50,6 +58,27 @@ for(const event of ['pointerup','pointercancel','lostpointercapture'])stick.addE
 window.addEventListener('jta-walk-ready',()=>{
  api=window.jtaLab3d;g=api.game;scenes=g.scenes();
  for(const id of ['destination','reset','run','mouse','walkYear'])$(id).disabled=false;
+ // Look tuning: the reference video's lesson was to expose the parameters and tune them by eye. Kept in this browser only.
+ const look=g.appearance;
+ if(look&&$('lookButton')){
+  const KEY='jta-walk-look-v1',box=$('lookSliders'),inputs={},ranges=look.ranges(),presets=[...document.querySelectorAll('[data-preset]')];
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(look.get()));}catch{}};
+  try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&typeof saved==='object')look.set(saved);}catch{}
+  const sync=()=>{const v=look.get();for(const k in inputs){inputs[k][0].value=v[k];inputs[k][1].textContent=(+v[k]).toFixed(2);}$('lookQuality').value=v.quality;for(const b of presets)b.setAttribute('aria-pressed',String(b.dataset.preset===v.preset));};
+  for(const key of ['exposure','saturation','contrast','warmth','grass','flowers','clouds','land','haze','wind','mottle','sheen','streaks','spots','sparkle','ambient','bloom','grain']){
+   if(!ranges[key])continue;
+   const row=document.createElement('label'),name=document.createElement('span'),input=document.createElement('input'),out=document.createElement('output');
+   name.textContent=t['look_'+key]||key;input.type='range';input.min=ranges[key][0];input.max=ranges[key][1];input.step=key==='grain'?.005:.01;
+   input.oninput=()=>{look.set({[key]:+input.value});out.textContent=(+input.value).toFixed(2);save();};
+   row.append(name,input,out);box.append(row);inputs[key]=[input,out];
+  }
+  for(const b of presets)b.onclick=()=>{look.set({preset:b.dataset.preset});sync();save();};
+  $('lookQuality').onchange=()=>{look.set({quality:$('lookQuality').value});sync();save();};
+  $('lookReset').onclick=()=>{look.reset();sync();try{localStorage.removeItem(KEY);}catch{}};
+  $('lookCopy').onclick=async()=>{const text=JSON.stringify(look.get());try{await navigator.clipboard.writeText(text);$('lookCopy').textContent=t.lookCopied;setTimeout(()=>{$('lookCopy').textContent=t.lookCopy;},1600);}catch{window.prompt(t.lookCopy,text);}};
+  $('lookButton').onclick=()=>{sync();dialog('lookDialog');};
+  $('lookButton').disabled=false;
+ }
  $('viewStatus').textContent=t.ready;
  function destinations(){
    const select=$('destination');while(select.options.length>1)select.remove(1);

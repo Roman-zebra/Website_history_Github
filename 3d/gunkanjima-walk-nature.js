@@ -142,7 +142,7 @@ function features(f,heights,opts){
  // 4. Post-and-rail fences along grassy coastal drop-offs, open where paths reach the coast.
  const coast=opts.coast;
  if(coast){
-  let run=[];const flush=()=>{if(run.length>=3)out.fences.push(run);run=[];};
+  let run=[];const flush=()=>{if(run.length>=3){out.fences.push(run);for(const q of run)out.keepOut.push({u:q[0],v:q[1],r:.6});}run=[];};
   for(let e=0;e<coast.length;e++){
    const a=coast[e],b=coast[(e+1)%coast.length],len=metres(a,b),steps=Math.max(1,Math.floor(len/2.3));
    let nx=-(b[1]-a[1]),nz=b[0]-a[0];const nl=Math.hypot(nx,nz)||1;nx/=nl;nz/=nl;
@@ -155,6 +155,33 @@ function features(f,heights,opts){
    }
   }
   flush();
+ }
+ // 5. Short post-and-rail runs beside worn paths (in the video the AI fenced its path without being asked). Each
+ //    run follows one edge of a path along a level line of the noise that draws the paths, and stops at walls,
+ //    slopes, other set pieces or where the path turns away.
+ const lane=(u,v)=>fbm(u*.017+4.1,v*.017-2.7,7),slope=(u,v)=>{const e=.6;return [(lane(u+e,v)-lane(u-e,v))/(2*e),(lane(u,v+e)-lane(u,v-e))/(2*e)];};
+ const fenceOk=(u,v)=>(!coast||inPoly([u,v],coast))&&get(f.path,u,v)<.2&&get(f.grass,u,v)>.3&&get(f.toBuilding,u,v)>2.5&&get(f.toSea,u,v)>3&&get(f.upright,u,v)>.93&&(!spawn||metres([u,v],spawn)>6)&&!avoid.some(p=>inPoly([u,v],p))&&!out.keepOut.some(o=>metres([u,v],[o.u,o.v])<o.r+.8);
+ const fenced=[];
+ for(const c of cands){
+  if(fenced.length>=(opts.lowEnd?2:4))break;
+  if(c.path<.9||fenced.some(q=>metres(q,[c.u,c.v])<26))continue;
+  const target=.5+(hash(Math.round(c.u),Math.round(c.v),131)<.5?-.058:.058);
+  const snap=(u,v)=>{for(let it=0;it<5;it++){const g=slope(u,v),g2=g[0]*g[0]+g[1]*g[1]||1e-9,d=(target-lane(u,v))/g2;u+=d*g[0];v+=d*g[1];}return [u,v];};
+  const s0=snap(c.u,c.v);
+  if(metres(s0,[c.u,c.v])>6||!fenceOk(s0[0],s0[1]))continue;
+  const pts=[s0];
+  for(const dir of [1,-1]){
+   let p=s0;
+   for(let n=0;n<4;n++){
+    const g=slope(p[0],p[1]),gl=Math.hypot(g[0],g[1])||1,q=snap(p[0]-g[1]/gl*dir*2.3/MPP,p[1]+g[0]/gl*dir*2.3/MPP);
+    if(!fenceOk(q[0],q[1])||Math.abs(metres(q,p)-2.3)>.9)break;
+    if(dir>0)pts.push(q);else pts.unshift(q);p=q;
+   }
+  }
+  if(pts.length<4)continue;
+  const run=pts.map(q=>[q[0],q[1],get(heights,q[0],q[1])-.04]);
+  out.fences.push(run);fenced.push([c.u,c.v]);
+  for(const q of run)out.keepOut.push({u:q[0],v:q[1],r:.6});
  }
  return out;
 }
@@ -248,19 +275,22 @@ function meshes(set){
     vert([uv[0],o.y+t*height,uv[1]],[nx,0,nz],c,t*.35,0,seed%97/97);}}
   for(let r=0;r<2;r++)for(let j=0;j<seg;j++){const a=base+r*(seg+1)+j,b=a+seg+1;cur.idx.push(a,b,a+1,a+1,b,b+1);}
  }
- // A stacked conifer tier: side normals lean outwards and up, blended towards the crown centre.
- function cone(o,cy,radius,height,c,seed,center,wind0,wind1){
-  const seg=9;begin(seg*2+2);const base=cur.count;
+ // A stacked conifer tier with a zig-zag skirt, flat-shaded so every facet is either lit or in shade (the video's
+ // low-poly pine). The palette coordinate (colour r) runs from the tier's rim to its lighter tip; undersides are dark.
+ function tier(o,cy,radius,height,tone,vary,seed,wind0,wind1){
+  const seg=14,rim=[],apex=[0,cy+height,0],under=[0,cy+height*.08,0];
   for(let j=0;j<seg;j++){
-   const th=j/seg*Math.PI*2+seed*.21,r=radius*(.9+.2*hash(j,seed,23)),uv=toUV(o.u,o.v,Math.cos(th)*r,Math.sin(th)*r);
-   let n=[Math.cos(th)*height,radius*.9,Math.sin(th)*height];const d=[Math.cos(th)*r-center[0],cy-center[1],Math.sin(th)*r-center[2]],dl=Math.hypot(...d)||1,nl=Math.hypot(...n);
-   n=[n[0]/nl*.5+d[0]/dl*.5,n[1]/nl*.5+d[1]/dl*.5,n[2]/nl*.5+d[2]/dl*.5];const l=Math.hypot(...n);
-   vert([uv[0],o.y+cy,uv[1]],[n[0]/l,n[1]/l,n[2]/l],[c[0],c[1],0],wind0,8,seed%97/97);
+   const th=j/seg*Math.PI*2+seed*.21,point=j%2===0,r=radius*(point?1:.74)*(.93+.14*hash(j,seed,23));
+   rim.push([Math.cos(th)*r,cy-(point?height*.16:0),Math.sin(th)*r]);
   }
-  const apex=vert([o.u,o.y+cy+height,o.v],[0,1,0],[Math.max(0,c[0]-.34),c[1],0],wind1,8,seed%97/97);
-  for(let j=0;j<seg;j++)cur.idx.push(base+j,apex,base+(j+1)%seg);
-  const under=vert([o.u,o.y+cy+height*.12,o.v],[0,-1,0],[1,c[1],0],wind0,8,seed%97/97);
-  for(let j=0;j<seg;j++)cur.idx.push(base+(j+1)%seg,under,base+j);
+  begin(seg*6);
+  const face=(pts,tones,winds,up)=>{
+   const [a,b,d]=pts,e1=[b[0]-a[0],b[1]-a[1],b[2]-a[2]],e2=[d[0]-a[0],d[1]-a[1],d[2]-a[2]];
+   let n=[e1[1]*e2[2]-e1[2]*e2[1],e1[2]*e2[0]-e1[0]*e2[2],e1[0]*e2[1]-e1[1]*e2[0]];const l=Math.hypot(...n);if(l<1e-9)return;
+   n=n.map(x=>x/l);if((n[1]<0)===up)n=n.map(x=>-x);
+   pts.forEach((p,i)=>{const uv=toUV(o.u,o.v,p[0],p[2]);cur.idx.push(vert([uv[0],o.y+p[1],uv[1]],n,[tones[i],vary,0],winds[i],8,seed%97/97));});
+  };
+  for(let j=0;j<seg;j++){const a=rim[j],b=rim[(j+1)%seg];face([a,apex,b],[tone,Math.max(0,tone-.3),tone],[wind0,wind1,wind0],true);face([b,under,a],[1,1,1],[wind0,wind0,wind0],false);}
  }
  // Faceted low-poly rock: every triangle has its own face normal (flat shading).
  function rock(o,size,c,seed){
@@ -276,14 +306,13 @@ function meshes(set){
    for(const p of [a,b,d]){const uv=toUV(o.u,o.v,p[0],p[2]);cur.idx.push(vert([uv[0],o.y+p[1],uv[1]],n,[c[0]*shade,c[1]*shade,c[2]*shade],0,3,seed%97/97));}};
   for(let i=0;i<rings;i++)for(let j=0;j<seg;j++){tri(at(i,j),at(i+1,j),at(i,j+1));tri(at(i,j+1),at(i+1,j),at(i+1,j+1));}
  }
- const leafPalette=[[.27,.58,.24],[.33,.64,.22],[.22,.52,.30],[.38,.62,.20]],pinePalette=[[.16,.40,.26],[.19,.44,.24],[.14,.37,.29]];
+ const leafPalette=[[.27,.58,.24],[.33,.64,.22],[.22,.52,.30],[.38,.62,.20]];
  for(const t of set.trees){
   if(t.kind){
-   // Conifer: a short trunk under three stacked tiers.
-   const h=t.height*1.15,trunkH=h*.22,c=pinePalette[t.seed%3],center=[0,trunkH+h*.35,0];
-   trunk(t,trunkH+.5,.14+t.radius*.05,[.40,.27,.17],t.seed);
-   // Tiers step from dark at the bottom to light at the top (palette coordinate in the colour's r).
-   for(let i=0;i<3;i++){const k=1-i*.27;cone(t,trunkH+i*h*.2,t.radius*k*.95,h*.42*k,[.95-i*.2,hash(t.seed,3,13)],t.seed+i,center,.25+i*.2,.55+i*.2);}
+   // Conifer: a short tapered trunk under five stacked zig-zag tiers, dark green at the bottom, yellow-green at the tip.
+   const H=t.height*1.15,trunkH=H*.14,foliage=H-trunkH,R=t.radius*1.1,vary=hash(t.seed,3,13);
+   trunk(t,trunkH+foliage*.3,.12+t.radius*.05,[.36,.24,.15],t.seed);
+   for(let i=0;i<5;i++){const k=i/4;tier(t,trunkH+foliage*.15*i,R*(1-.72*k)+.25,foliage*(.36-.1*k),.92-.62*k,vary,t.seed+i*7,.2+.16*i,.36+.16*i);}
    continue;
   }
   const trunkH=t.height*.5;
@@ -347,7 +376,7 @@ function meshes(set){
    beam([pl.u,pl.y+pl.h-.35,pl.v],[pl.u+.3*e[0]/MPP,pl.y+pl.h+.25,pl.v+.3*e[1]/MPP],pl.size*.55,pl.size*.6,[.52,.50,.36],7,pl.seed+1);
   }
   const g=ru.gear,teeth=14,ax=[Math.cos(g.yaw),Math.sin(g.yaw)];
-  for(let i=0;i<teeth;i++){const a=i/teeth*Math.PI*2,b=(i+.5)/teeth*Math.PI*2,rim=(t,r)=>[g.u+ax[0]*Math.cos(t)*r/MPP,g.y+g.r+Math.sin(t)*r,g.v+ax[1]*Math.cos(t)*r/MPP];
+  for(let i=0;i<teeth;i++){const a=i/teeth*Math.PI*2,b=(i+1)/teeth*Math.PI*2,rim=(t,r)=>[g.u+ax[0]*Math.cos(t)*r/MPP,g.y+g.r+Math.sin(t)*r,g.v+ax[1]*Math.cos(t)*r/MPP];
    beam(rim(a,g.r*.72),rim(b,g.r*.72),.34,.3,[.50,.40,.26],7,i);beam(rim(a+.08,g.r*.78),rim(a+.08,g.r*1.02),.36,.24,[.48,.38,.24],7,i+20);}
   beam([g.u-ax[0]*.1/MPP,g.y+g.r-.2,g.v-ax[1]*.1/MPP],[g.u+ax[0]*.1/MPP,g.y+g.r+.2,g.v+ax[1]*.1/MPP],.4,.5,[.46,.36,.24],7,31);
  }

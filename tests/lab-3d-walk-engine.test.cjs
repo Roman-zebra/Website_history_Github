@@ -78,4 +78,13 @@ function drive(points){for(const q of points){const uv=[(q[0]*p.c-q[1]*p.s)/.805
 }}
 const points=p.routes.flatMap(r=>r.points);drive(points);assert.equal(g.floor().current,p.floors,'roof reached through movement');drive(points.slice().reverse());assert.equal(g.floor().current,0,'returned to ground floor');
 g.leave();api.setYear(0,0);assert.equal(g.year(),1947);g.reset();assert.ok(api.st.walk);
+// Look tuning accepts only known keys, clamps numbers to their ranges and resets to the defaults.
+const tune=g.appearance,defaults=tune.get(),ranges=tune.ranges();
+assert.equal(defaults.preset,'summer');assert.equal(defaults.quality,'auto');
+const tuned=tune.set(JSON.parse('{"exposure":99,"grass":-3,"preset":"nope","quality":"low","__proto__":{"polluted":1},"unknown":5,"haze":"2"}'));
+assert.equal(tuned.exposure,ranges.exposure[1]);assert.equal(tuned.grass,ranges.grass[0]);assert.equal(tuned.preset,'summer');assert.equal(tuned.quality,'low');
+assert.equal(tuned.haze,defaults.haze);assert.ok(!('unknown' in tuned)&&!({}).polluted);
+tune.set({preset:'winter'});assert.equal(tune.get().preset,'winter');tune.get().preset='magic';assert.equal(tune.get().preset,'winter','get returns a copy');
+for(const q of tune.qualities()){tune.set({quality:q});frame();}
+assert.deepEqual(tune.reset(),defaults);
 });
