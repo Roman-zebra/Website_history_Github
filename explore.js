@@ -924,7 +924,7 @@ function setLang(l){
     history.replaceState(null, '', url.pathname + '?' + url.searchParams.toString() + url.hash);
   } catch(e){}
   wikiSeen.clear(); wikiAsked.clear();     // titles differ per language
-  ++qSeq; $('qResults').hidden = true;
+  closeSearchList();
   applyLang();
 }
 
@@ -2604,7 +2604,7 @@ $('q').addEventListener('input', () => {
    記事名や地名を自分で組み立てることはしない。返ってきたものだけを使う。 */
 $('q').addEventListener('keydown', e => {
   if (e.isComposing || qComposing) return;
-  if (e.key === 'Escape'){ ++qSeq; $('qResults').hidden = true; return; }
+  if (e.key === 'Escape'){ closeSearchList(); return; }
   if (e.key === 'ArrowDown'){ const first = $('qResults').querySelector('button'); if (first && !$('qResults').hidden){e.preventDefault();first.focus();} return; }
   if (e.key !== 'Enter') return;
   e.preventDefault();                       // フォーム送信やページ再読込を止める
@@ -2619,8 +2619,38 @@ $('q').addEventListener('keydown', e => {
    古い返事が届いて結果が勝手に開き直る（[hidden] が効くようになった今は本当に再表示される）。 */
 let qSeq = 0;
 $('q').addEventListener('focus',()=>{if(!$('q').value.trim())showSearchSuggestions();else if(nationalHits.length){paintSearchList();$('qResults').hidden=false;}});
-$('qClear').onclick = () => { clearNationalSearch(); ++qSeq; $('q').value = ''; $('qClear').hidden = true;
-                              $('qResults').hidden = true; };
+$('qClear').onclick = () => { clearNationalSearch(); $('q').value = ''; $('qClear').hidden = true; closeSearchList(); };
+
+/* 候補・結果の一覧を閉じるときは必ずここを通す。2026-09-26。
+   hidden を立てるだけだと、450ms 待ちの検索（qTimer）が後から走って一覧が開き直る。
+   打ってすぐ × を押すと、消した語の検索が一覧を開き直していたのはこれ（実測）。 */
+function closeSearchList(){
+  clearTimeout(qTimer); ++qSeq; nationalWorker?.postMessage({type:'cancel'});
+  $('qResults').hidden = true;
+}
+/* 検索欄の外を押したら一覧を閉じ、欄からも抜ける。2026-09-26。
+   それまで閉じる手段は Escape・×・候補を選ぶ の3つだけだった。スマホには Escape が無く、
+   空欄のときは × も出ない。欄に触れて候補が一度出ると、地図を押しても細い列になって残り、
+   ホームへ戻って地図を開き直しても出たままだった（実測）。
+   一覧が隠れていても欄にいる間は受ける。打って 450ms 以内に地図を押すと、待っていた検索が
+   あとから一覧を開いていたため。
+   地図をずらす・つまむのは押したうちに数えない。結果を出したまま地図を動かして
+   「この範囲で探す」を押す使い方があるため。捕捉段階で受けるのは、Leaflet の部品が
+   伝播を止めても取りこぼさないように。 */
+let qTapAt = null;
+document.addEventListener('pointerdown', e => {
+  const inUse = !$('qResults').hidden || document.activeElement === $('q');
+  qTapAt = e.isPrimary && inUse && !e.target.closest?.('.search-wrap') ? [e.clientX, e.clientY] : null;
+}, true);
+document.addEventListener('pointercancel', () => { qTapAt = null; }, true);
+document.addEventListener('pointerup', e => {
+  const at = qTapAt; qTapAt = null;
+  if (!at || !e.isPrimary || Math.hypot(e.clientX - at[0], e.clientY - at[1]) > 10) return;
+  /* 先に欄から抜く。キーボードが下り、広がった検索欄が戻って ← などが出る。変換中なら
+     抜いたときの compositionend が検索を仕掛け直すので、閉じるのはそのあと。 */
+  if (document.activeElement === $('q')) $('q').blur();
+  closeSearchList();
+}, true);
 
 /* --- 自前スポットの検索（2026-09-09） --------------------------------
    照合用に文字を均す。ō→o、全角/半角、中黒や括弧の違いで外さないため。 */
@@ -2952,6 +2982,9 @@ function closePlace(){
   document.body.classList.remove('roaming');
   roaming = false; current = null;
   lastPanel = null;                  // ホームに戻ったら、開き直す対象はもう無い
+  /* 検索の一覧も閉じる。開いたままだと地図を開き直したとき出ていて、検索中なら
+     返事が届いた時点で frameNationalHits が地図へ引き戻していた（実測）。 */
+  closeSearchList();
   $('cover').hidden = true; $('roamTip').hidden = true;
   $('place').hidden = true; window.AtlasWalking?.clear(); window.AtlasTime?.close(true);
   $('home').hidden = false;
@@ -3228,7 +3261,9 @@ function restoreSharedSpot(){
 }
 window.addEventListener('storage',e=>{if(e.key===SAVE_KEY||e.key===null){renderSaved();paintSaveBtn();}});
 $('qResults').addEventListener('keydown',e=>{
-  if(e.key==='Escape'){++qSeq;$('qResults').hidden=true;$('q').focus();return;}
+  /* 欄へ戻してから閉じる。逆順だと focus の処理が一覧を開き直していた。止めないと
+     ページの Escape 処理まで届いてパネルを閉じ、パネルが閉じていれば地図から戻ってしまう（どれも実測）。 */
+  if(e.key==='Escape'){e.stopPropagation();$('q').focus();closeSearchList();return;}
   if(!['ArrowDown','ArrowUp'].includes(e.key))return;
   const buttons=[...$('qResults').querySelectorAll('button')],i=buttons.indexOf(document.activeElement);
   if(i<0)return;e.preventDefault();const next=i+(e.key==='ArrowDown'?1:-1);

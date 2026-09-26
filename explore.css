@@ -812,6 +812,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
   .panel-inner{padding-left:18px;padding-right:18px}.p-name{font-size:25px}.p-story p,.p-story p:first-child{font-size:15px}
   .topbar{gap:6px}.ctl-lang{padding:0 8px}.ctl{min-width:40px}.search-wrap{min-width:90px}
   .search-wrap:focus-within{position:absolute;left:0;right:0;z-index:5}.q-results{max-height:48dvh}
+  /* 一覧が出ている間は、focus が外れても広げたままにする。候補を押すとその候補が消えて focus が外れ、
+     結果が幅200px足らずの列に押し込まれていた（実測）。:has() を読めないブラウザが上の行まで捨てないよう別の規則にする。 */
+  .search-wrap:has(>.q-results:not([hidden])){position:absolute;left:0;right:0;z-index:5}
   .p-sns .sns:first-child{flex-basis:100%}.p-fig img{max-height:210px;object-fit:cover}
 }
 @media(max-width:360px){.home .cards{grid-template-columns:1fr}.home .card{aspect-ratio:1.25}}
