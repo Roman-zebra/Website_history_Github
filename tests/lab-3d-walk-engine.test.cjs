@@ -87,4 +87,13 @@ assert.equal(tuned.haze,defaults.haze);assert.ok(!('unknown' in tuned)&&!({}).po
 tune.set({preset:'winter'});assert.equal(tune.get().preset,'winter');tune.get().preset='magic';assert.equal(tune.get().preset,'winter','get returns a copy');
 for(const q of tune.qualities()){tune.set({quality:q});frame();}
 assert.deepEqual(tune.reset(),defaults);
+// Placeholder nature (walking view): the arched deck carries the walker over the pond; the pond beside it and fence rails block.
+api.setYear(1,0);g.reset();
+const set=g.nature(),br=set.bridges[0],pd=set.ponds[0],at=(k,s)=>g.toWorldTrue(br.u+(br.axis[0]*k*br.span-br.axis[1]*s)/.805,br.v+(br.axis[1]*k*br.span+br.axis[0]*s)/.805);
+const end=at(-.5,0);api.st.wx=end[0];api.st.wz=end[1];api.st.walkGround=br.y0;
+const mid=at(0,0);assert.ok(Math.abs(g.canWalk(mid[0],mid[1])-((br.y0+br.y1)/2+br.arch))<.05,'arched deck height at mid-span');
+const side=at(0,pd.r*.7);assert.equal(g.canWalk(side[0],side[1]),null,'the pond blocks beside the deck');
+const run=set.fences[set.fences.length-1],rail=g.toWorldTrue((run[1][0]+run[2][0])/2,(run[1][1]+run[2][1])/2);
+api.st.wx=rail[0]+1;api.st.wz=rail[1];api.st.walkGround=run[1][2];
+assert.equal(g.canWalk(rail[0],rail[1]),null,'fence rails block');
 });

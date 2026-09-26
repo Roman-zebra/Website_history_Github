@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "ready",
-  "updatedAt": "2026-09-26T18:21:02.258143+00:00",
+  "updatedAt": "2026-09-26T20:48:00+00:00",
   "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
@@ -32,12 +32,15 @@
     "Building 65 rooftop-nursery walking entry reframed from a clear aisle to show all six existing activity tables; source geometry and orbit camera preserved",
     "Building 65 interiors6 verified live at 9731b78de6265c2f10ea2e36f570204fb0472e75; public HTML and served asset byte-checked",
     "Renderer v19: actual non-YouTube 600-frame gameplay study; continuous environmental lighting, directional aerial perspective, anchored foliage wind, English UI/accessibility coverage and reversible pinch/browser zoom",
-    "Renderer v19 verified live at 8d9d2ce803020e8de43d20538a86fdb288f9edf9; English DOM and desktop controls checked; browser lacked WebGL and synthetic browser zoom keys caused no observable scaling"
+    "Renderer v19 verified live at 8d9d2ce803020e8de43d20538a86fdb288f9edf9; English DOM and desktop controls checked; browser lacked WebGL and synthetic browser zoom keys caused no observable scaling",
+    "Renderer v20 on branch claude/jta-3d-video-implementation-p4sql1 (not published): user-supplied stylised-nature video transcribed in full and sampled every second; labelled placeholder meadow, water, sky, trees, fences, bridge, ambient life and a translated look-tuning panel in the walking view; walker-centred shadows and full-precision ground shaders"
   ],
   "nextActions": [
+    "Let the user review renderer v20 on its branch; publish only with the user's explicit approval",
     "Improve a bounded room-specific furnishing or source-grounded retaining-wall/terrain segment, preserving existing geometry evidence",
     "Verify iPhone Safari pinch round-trip and mobile WebGL on an available actual device",
-    "Keep all other automatic work paused; do not restore SEO title schedule or IndexNow push trigger"
+    "Keep all other automatic work paused; do not restore SEO title schedule or IndexNow push trigger",
+    "Measure v20 frame rate on a real phone and adjust the quality tiers if needed"
   ],
   "blocked": [
     {
@@ -52,7 +55,7 @@
     },
     {
       "task": "YouTube video playback for visual reference",
-      "reason": "YouTube cloud browser requires bot verification; video listings and publisher descriptions only were reviewed",
+      "reason": "YouTube in the cloud browser requires bot verification (not bypassed); for the v20 study the user supplied the video file through a Google Drive share link",
       "retryWhen": "Authorized playback access changes or user supplies usable frames; do not try alternate routes around the block"
     },
     {
@@ -72,7 +75,7 @@
     "onlyThisWorkEnabled": true
   },
   "validation": {
-    "fullBuildTestsPassed": 155,
+    "fullBuildTestsPassed": 161,
     "fullBuildTestsFailed": 0,
     "nativeGlesScenesRendered": 20,
     "inferredDoorwayPathsChecked": 1362,
@@ -130,7 +133,12 @@
     "pinchClampRoundTrip": true,
     "browserZoomShortcutsPreserved": true,
     "englishPublicMenuArchiveHelpVerified": true,
-    "actualBrowserZoomRoundTripVerified": false
+    "actualBrowserZoomRoundTripVerified": false,
+    "v20VideoFramesExtracted": 3883,
+    "v20TranscriptSegments": 1455,
+    "v20NativeGlesRenders": 21,
+    "v20BrowserPanelChecks": 2,
+    "v20VideoAssetsCommitted": false
   },
   "publicationApproval": {
     "at": "2026-09-26T21:44:57+09:00",
@@ -143,6 +151,7 @@
     "status": "verified live; release.json, renderer19, walkJS7/CSS6 and MIT notice byte-checked; English menu/archive/help inspected in public browser",
     "verifiedCommit": "8d9d2ce803020e8de43d20538a86fdb288f9edf9",
     "walkUIVersion": 7,
-    "walkCSSVersion": 6
+    "walkCSSVersion": 6,
+    "pending": "renderer20, walkJS8/CSS7 and walk-nature1 on branch claude/jta-3d-video-implementation-p4sql1; live site still serves renderer19"
   }
 }

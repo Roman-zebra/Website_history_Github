@@ -205,3 +205,25 @@ Validation: 155 full-build tests pass; 20 native GLES scenes in normal and force
 Other automatic work is paused: Google registration task was already disabled; SEO title workflow and IndexNow notifications now have manual triggers only. Preserve this user instruction during continuation.
 
 Publication: renderer19/walkJS7/CSS6 verified live at `8d9d2ce803020e8de43d20538a86fdb288f9edf9`. `release.json` reports that commit; renderer, JS, CSS and Godot notice bytes match tested local files. Public English menu, archive, Help and ARIA are translated; language-selector native names intentionally remain. Desktop touch controls are hidden and contextual strip is at y=68. Browser has no WebGL. Synthetic Ctrl-plus / Ctrl-zero produced no observable browser scale change, so this is **not** a verified browser-zoom round-trip; renderer gesture event tests passed, and iPhone verification remains outstanding. Continuation task updated, unrelated automatic work remains off.
+
+## Stylised-nature video study — renderer v20, 2026-09-26 (branch, not published)
+
+The user asked for 「Claude CodeとUnity MCPでアニメ調のオープンワールドは作れるのか？」 to be transcribed in full, sampled every second and applied to the walk, with placeholder vegetation and textures allowed. YouTube's bot check blocked the cloud browser and was not bypassed; the user supplied the file through Google Drive. The full 64.7-minute soundtrack was transcribed locally (1,455 segments) and 3,883 one-second frames were inspected on contact sheets. `docs/gunkanjima-video-study-v20.md` has the timeline, the technique-to-code mapping, adaptations and omissions. The video, audio, transcript and frames are not committed.
+
+Walking view only, labelled as illustrative placeholders in the help text and the new panel in five languages:
+
+- `gunkanjima-walk-nature.js` (new) generates everything deterministically from the terrain, the footprints of every era and the coast: vegetation field, sunken worn paths, a pond with an arched plank bridge, grassy mounds ringed with rocks, a mossy ruin, fences beside paths and coastal drop-offs, trees, bushes, rocks, grass and flower patches, and the ground texture.
+- The renderer adds:
+  - one colour field for the ground and grass, with five season presets and four overlays (mottling, sheen, wind streaks, teal cloud shadows);
+  - camera-centred instanced grass and flowers;
+  - anime sea and pond water, a four-stop sky with cel clouds, a horizon bank and distant ridges;
+  - toon props with tinted shadows;
+  - petals, motes, butterflies, seabirds, god rays and a light bloom;
+  - wall and roof life: streaks, laundry, pots, creep, cracks, mossy sills, leafy ivy and roof beds.
+- Menu → 見た目の調整: presets, quality tiers, 19 validated sliders, reset and copy/paste. Settings are stored only in the viewer's browser.
+- While walking, the shadow box follows the walker and is snapped to texels, so near shadows are about three times sharper. The ground, roof, sea-wall and grass shaders use high precision where available, so world-space patterns no longer turn blocky at mediump.
+- Nature blocks walking where it should: trunks, large rocks, ruins, fence rails, and the pond except under the bridge, whose real deck height carries the walker.
+
+Validation: 161/161 full-build tests; 21 native GLES2 renders without GL errors; Chromium/SwiftShader desktop (Japanese) and phone (English) checks of the scene and the panel with no page errors. Real phone GPU frame rate and appearance remain unverified. The build regenerated unrelated tracked HTML (page.css version, support link); those diffs were reverted and not committed.
+
+Cache versions: renderer20, walk JS8/CSS7, walk-nature1 (new), buildings4, interiors6, navigation3. The work is on branch `claude/jta-3d-video-implementation-p4sql1`; main and the live site still serve renderer19.

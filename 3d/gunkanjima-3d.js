@@ -78,8 +78,8 @@
     magic: ['#c9a2ee', '#ab78dd', '#8455c0', '#52308f', '#200951']
   };
   const LOOK_DEFAULT = { preset: 'summer', quality: 'auto', exposure: 1.04, saturation: 1.06, contrast: .2, warmth: .4, grass: 1, flowers: 1, land: 1, haze: 1,
-    clouds: .55, cloudScale: 66, cloudSpeed: 3.5, mottle: .32, sheen: .13, streaks: .25, grain: .03, spots: 1, wind: 1, sparkle: 1, ambient: 1, bloom: lowEnd ? 0 : .4 };
-  const LOOK_RANGE = { exposure: [.6, 1.6], saturation: [0, 2], contrast: [0, 1], warmth: [-1, 1], grass: [0, 1.5], flowers: [0, 2], land: [0, 1.5], haze: [0, 2],
+    clouds: .55, cloudScale: 66, cloudSpeed: 3.5, mottle: .32, sheen: .13, streaks: .25, grain: .03, spots: 1, wind: 1, sparkle: 1, ambient: 1, bloom: lowEnd ? 0 : .4, slope: 28 };
+  const LOOK_RANGE = { slope: [10, 60], exposure: [.6, 1.6], saturation: [0, 2], contrast: [0, 1], warmth: [-1, 1], grass: [0, 1.5], flowers: [0, 2], land: [0, 1.5], haze: [0, 2],
     clouds: [0, 1], cloudScale: [20, 200], cloudSpeed: [0, 12], mottle: [0, 1], sheen: [0, .6], streaks: [0, 1], grain: [0, .12], spots: [.4, 3], wind: [0, 2], sparkle: [0, 2], ambient: [0, 2], bloom: [0, 1.5] };
   /* Quality tiers after the video's mobile/mid/PC split: grass density, the far grass ring and the bloom pass. */
   const QUALITY = { auto: 1, low: .5, mid: .8, high: 1 };
@@ -95,6 +95,8 @@
     return Object.assign({}, look);
   }
   const bloomAmount = () => look.quality === 'low' ? 0 : look.bloom;
+  /* Bare-soil slope band for the ground shader: the video's auto-paint angle with a 10 degree blend, as n.y limits. */
+  const slopeBand = () => [Math.cos((look.slope + 5) * Math.PI / 180), Math.cos((look.slope - 5) * Math.PI / 180)];
   const gradeOf = () => GAME ? [look.exposure, look.saturation, look.contrast, look.warmth] : [1, 1, 0, 0];
   const rampOf = () => (PRESETS[look.preset] || PRESETS.summer).map(h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255));
   const lookTime = () => reduce ? 0 : (performance.now() - t0) / 1000;
@@ -253,7 +255,7 @@
 #endif
     uniform sampler2D uTexA, uTexB;
     uniform float uMix, uOrthoA, uOrthoB, uShade, uChange, uFog, uTime, uAnime; uniform mediump float uYear;
-    uniform vec3 uBg, uSun, uHorizon; uniform vec4 uWater;
+    uniform vec3 uBg, uSun, uHorizon; uniform vec4 uWater; uniform vec2 uSlope;
     varying vec2 vUvP; varying vec2 vUvO; varying vec3 vNor; varying float vSea; varying vec3 vPos;
     varying vec3 vMaskA; varying vec3 vMaskB;
     varying vec4 vShadow; varying float vDepth;
@@ -297,8 +299,9 @@
         // colour field as every grass blade, so sparse blades read as dense grass (the video's key rule).
         float cover=smoothstep(.10,.50,vMaskA.x+age*.22*(1.0-vMaskA.z));
         vec3 meadow=meadowColor(vPos.xz);
-        // Slope auto-paint (about 23-33 degrees): steep banks turn pale olive-yellow soil, as in the video's tool.
-        meadow=mix(meadow,mix(vec3(.76,.82,.37),vec3(.81,.84,.42),noise(vPos.xz*.6))*mix(rampAt(.2)/max(rampAt(.2).g,.01),vec3(1.0),.7),(1.0-smoothstep(.84,.92,n.y))*.85);
+        // Slope auto-paint (28 degrees with a 10 degree blend by default, adjustable): steep banks turn pale olive-yellow
+        // soil, as in the video's tool.
+        meadow=mix(meadow,mix(vec3(.76,.82,.37),vec3(.81,.84,.42),noise(vPos.xz*.6))*mix(rampAt(.2)/max(rampAt(.2).g,.01),vec3(1.0),.7),(1.0-smoothstep(uSlope.x,uSlope.y,n.y))*.85);
         // Flower speckles keep colour at mid distance, where the flower sprites have faded out. Round dots, and only on
         // gentle ground: projected from above, dots and streaks would smear into long flakes on steep banks.
         float gentle=smoothstep(.86,.95,n.y);
@@ -914,7 +917,7 @@
         p=place(uv,uGroundY+h);
         if(vType<.5)p.xz+=vec2(sin(t*1.3+s*40.0),cos(t*1.1+s*23.0))*.35;
         vPhase=vType<.5?t*(1.5+r2)+s*20.0:vType<1.5?pow(max(sin(t*2.2+s*50.0),0.0),4.0):t*14.0+s*30.0;
-        vColor=vType<.5?mix(vec3(1.0,.80,.87),vec3(1.0,.96,.96),step(.5,r2)):vType<1.5?vec3(1.0,.97,.84):(r2<.4?vec3(1.0,.97,.9):r2<.75?vec3(1.0,.93,.5):vec3(.72,.86,1.0));
+        vColor=vType<.5?mix(vec3(1.0,.80,.87),vec3(1.0,.96,.96),step(.5,r2)):vType<1.5?vec3(1.0,.97,.84):(r2<.35?vec3(1.0,.97,.9):r2<.6?vec3(1.0,.93,.5):r2<.8?vec3(.77,.65,.87):vec3(.72,.86,1.0));
         float d=length(p-uWalker);
         vFade=(1.0-smoothstep(uPatch*uMpp*.32,uPatch*uMpp*.48,d))*smoothstep(.5,1.2,d);
         size=vType<.5?.075:vType<1.5?.06:.16;
@@ -1010,7 +1013,7 @@
         base=kind>7.5?c*vec3(.94,.97,.9):c;
       }
       if(kind<.5)base*=.8+.32*noise(vec2((vLoc.x+vLoc.z)*5.0,vLoc.y*1.1));
-      else if(kind>2.5&&kind<3.5){base*=.93+.12*noise(vLoc.xz*2.2+vLoc.y*2.0);base*=1.0+.14*smoothstep(.55,.9,n.y);base=mix(base,vec3(.47,.60,.25),smoothstep(.62,.95,n.y)*smoothstep(.5,.72,noise(vLoc.xz*1.2))*.7);}
+      else if(kind>2.5&&kind<3.5){base*=.93+.12*noise(vLoc.xz*2.2+vLoc.y*2.0);vec2 cr=worley(vLoc.xz*1.6+vLoc.y*1.9);base*=1.0-.32*(1.0-smoothstep(.02,.07,cr.y-cr.x))*step(.45,noise(vLoc.xz*.9+vLoc.y));base*=1.0+.14*smoothstep(.55,.9,n.y);base=mix(base,vec3(.47,.60,.25),smoothstep(.62,.95,n.y)*smoothstep(.5,.72,noise(vLoc.xz*1.2))*.7);}
       else if(kind>4.5&&kind<5.5)base*=.9+.18*noise(vec2((vLoc.x-vLoc.z)*9.0,vLoc.y*2.0));
       else if(kind>6.5&&kind<7.5){
         // Overgrown ruin: khaki concrete/iron patched with olive moss on top faces and in crevices.
@@ -1050,7 +1053,7 @@
     for (const n of uniforms) U[n] = gl.getUniformLocation(p, n);
     return { p, U };
   }
-  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uShadowK', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uWindTime', 'uWindStrength', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass', 'uGrade', 'uRamp0', 'uRamp1', 'uRamp2', 'uRamp3', 'uRamp4', 'uOverlay', 'uCloud', 'uWater'];
+  const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uShadowK', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uWindTime', 'uWindStrength', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass', 'uGrade', 'uRamp0', 'uRamp1', 'uRamp2', 'uRamp3', 'uRamp4', 'uOverlay', 'uCloud', 'uWater', 'uSlope'];
   const TEX_U = ['uTexA', 'uTexB', 'uMix', 'uOrthoA', 'uOrthoB'];
   const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea', 'aMaskA', 'aMaskB'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat', 'aWind'];
   let progT, progW, progR, progS, progSky, progB, depthT, depthW, depthR, depthB;
@@ -1563,6 +1566,7 @@
       gl.uniform4fv(U.uOverlay, [look.mottle, look.sheen, look.streaks, lookTime()]);
       gl.uniform4fv(U.uCloud, [P === progB ? 0 : look.clouds, look.cloudScale, look.cloudSpeed, look.grain]);
       if (U.uWater) gl.uniform4fv(U.uWater, [look.spots, look.sparkle, 1, 0]);
+      if (U.uSlope) gl.uniform2fv(U.uSlope, slopeBand());
     }
     gl.uniform1f(U.uWindTime,reduce?0:(performance.now()-t0)/1000);
     gl.uniform1f(U.uWindStrength,GAME&&!reduce?(st.weather===2?.075:.035)*look.wind:0);

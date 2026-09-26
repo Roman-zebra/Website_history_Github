@@ -202,6 +202,9 @@ function scatter(f,heights,opts){
   return sample(f,f.toBuilding,u,v)>r+.6;
  };
  const ground=(u,v)=>sample(f,heights,u,v);
+ // Distance (m) to the worn paths: trees keep their canopies off them (the video cleared trees within 5 m of a path's centre).
+ const onPath=new Uint8Array(f.w*f.h);for(let k=0;k<onPath.length;k++)onPath[k]=f.path[k]>.5?1:0;
+ const toPath=distance(onPath,f.w,f.h,f.cell);
  const grid=(spacing,seed,fn)=>{
   const s=spacing/MPP;
   for(let gv=f.y0;gv<f.y0+(f.h-1)*f.step;gv+=s)for(let gu=f.x0;gu<f.x0+(f.w-1)*f.step;gu+=s){
@@ -217,7 +220,7 @@ function scatter(f,heights,opts){
   // Random scale x0.82-1.18 plus a few big "hero" trees, as the video enlarged trees for impact.
   const hero=hash(Math.round(u),Math.round(v),103)>.9?1.45:1,k=(.82+.36*hash(Math.round(u),Math.round(v),107))*hero;
   const height=(4.2+q*4.8)*k,radius=(1.5+q*1.6)*k;
-  if(!clearOf(u,v,radius*.8))return;
+  if(!clearOf(u,v,radius*.8)||sample(f,toPath,u,v)<Math.max(3,radius*.9))return;
   trees.push({u,v,y:ground(u,v)-.08,height,radius,seed:Math.floor(q*997),kind:q>.72?1:0});
  });
  // Canopy-overlap culling: keep the larger of two trees whose canopies overlap beyond 0.65 of their radii.

@@ -25,7 +25,11 @@ for(const step of [1,2])test('placeholder nature stays outside every footprint a
   assert.ok(Math.hypot(o.u-spawn[0],o.v-spawn[1])*N.MPP>3,'arrival point stays clear');
   assert.ok(Number.isFinite(o.y)&&o.y>-1&&o.y<45);
  }
- for(const t of set.trees)assert.ok(N.sample(f,f.toBuilding,t.u,t.v)>t.radius*.8+.6,'canopy trunk clears walls');
+ const toPath=N.distance(Uint8Array.from(f.path,p=>p>.5?1:0),f.w,f.h,f.cell);
+ for(const t of set.trees){
+  assert.ok(N.sample(f,f.toBuilding,t.u,t.v)>t.radius*.8+.6,'canopy trunk clears walls');
+  assert.ok(N.sample(f,toPath,t.u,t.v)>=Math.max(3,t.radius*.9)-1e-6,'canopy stays off the worn paths');
+ }
  const again=N.scatter(N.field(grid,heights,model.buildings,model.coast,{year:1962}),heights,{lowEnd:step>1,avoid:footprints,spawn});
  assert.deepEqual(again,set,'deterministic placement');
 });
@@ -44,4 +48,26 @@ test('ground texture stores heights to the centimetre',()=>{
  const {heights,field:f}=terrain(2),tex=N.groundTexture(f,heights);
  assert.equal(tex.length,f.w*f.h*4);
  for(let k=0;k<f.w*f.h;k+=97)assert.ok(Math.abs((tex[k*4]*256+tex[k*4+1])/100-Math.max(0,heights[k]))<=.006);
+});
+test('set pieces: pond with a bridge on its path, and fences with end posts beside paths and coasts',()=>{
+ for(const step of [1,2]){
+  const {heights,field:f}=terrain(step),F=N.features(f,heights,{spawn,avoid:footprints,coast:model.coast,lowEnd:step>1});
+  assert.equal(F.ponds.length,1);assert.equal(F.bridges.length,1);
+  const br=F.bridges[0];assert.ok(br.span>2*F.ponds[0].r,'the bridge spans the pond');
+  let beside=0;
+  for(const run of F.fences){
+   assert.ok(run.length>=3,'every run has two end posts and a middle post');
+   for(let i=0;i<run.length;i++){
+    const [u,v]=run[i];
+    assert.ok(N.inPoly([u,v],model.coast)&&!footprints.some(p=>N.inPoly([u,v],p)),'posts stand on land outside buildings');
+    assert.ok(N.sample(f,f.path,u,v)<.25,'posts stay off the path');
+    assert.ok(Math.hypot(u-spawn[0],v-spawn[1])*N.MPP>5,'arrival point stays open');
+    if(i)assert.ok(Math.hypot(u-run[i-1][0],v-run[i-1][1])*N.MPP<3.5,'rails are short spans');
+   }
+   const mid=run[Math.floor(run.length/2)];let near=1e9;
+   for(let dv=-8;dv<=8;dv+=.5)for(let du=-8;du<=8;du+=.5)if(N.sample(f,f.path,mid[0]+du,mid[1]+dv)>.6)near=Math.min(near,Math.hypot(du,dv)*N.MPP);
+   if(near<4.5)beside++;
+  }
+  assert.ok(beside>=2,'some fences follow worn paths ('+beside+')');
+ }
 });
