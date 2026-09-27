@@ -42,8 +42,8 @@ test('sengoku meshes fit 16-bit indices with unit normals; the anime look is unc
  assert.ok(animeKinds.has(4),'anime blossoms remain');
 });
 test('the walk opens in the sengoku look with six skies; the anime look keeps four; props block walking only in the sengoku look',async()=>{
- const noop=()=>{},raf=[];let now=0,ready;const loaded=new Promise(r=>ready=r);
- const gl=new Proxy({getExtension:n=>n==='OES_element_index_uint'?{}:null,getParameter:()=>4096,getShaderParameter:()=>true,getProgramParameter:()=>true,createBuffer:()=>({}),createShader:()=>({}),createProgram:()=>({}),createTexture:()=>({}),getUniformLocation:()=>({})},{get:(o,k)=>k in o?o[k]:/^[A-Z_0-9]+$/.test(k)?1:noop});
+ const noop=()=>{},raf=[],sources=[];let now=0,ready;const loaded=new Promise(r=>ready=r);
+ const gl=new Proxy({shaderSource:(s,src)=>sources.push(src),getExtension:n=>n==='OES_element_index_uint'?{}:null,getParameter:()=>4096,getShaderParameter:()=>true,getProgramParameter:()=>true,createBuffer:()=>({}),createShader:()=>({}),createProgram:()=>({}),createTexture:()=>({}),getUniformLocation:()=>({})},{get:(o,k)=>k in o?o[k]:/^[A-Z_0-9]+$/.test(k)?1:noop});
  const canvas={getContext:()=>gl,getBoundingClientRect:()=>({width:1280,height:800}),clientWidth:1280,clientHeight:800,classList:{add:noop,remove:noop},focus:noop,addEventListener:noop};
  const document={currentScript:{src:'https://japantimeatlas.com/3d/gunkanjima-3d.js'},getElementById:id=>id==='view'?canvas:null,querySelectorAll:()=>[],addEventListener:noop};
  const win={JTA_WALK_PAGE:true,LAB_LANG:'ja',JTAWalkNav:require(root+'/3d/gunkanjima-walk-nav.js'),JTAWalkInteriors:require(root+'/3d/gunkanjima-walk-interiors.js'),JTAWalkBuildings:require(root+'/3d/gunkanjima-walk-buildings.js'),JTAWalkNature:N,devicePixelRatio:1,matchMedia:()=>({matches:false}),addEventListener:noop,dispatchEvent:e=>{if(e.type==='jta-walk-ready')ready();}};
@@ -51,6 +51,8 @@ test('the walk opens in the sengoku look with six skies; the anime look keeps fo
  vm.runInNewContext(fs.readFileSync(root+'/3d/gunkanjima-3d.js','utf8'),ctx);
  await loaded;const api=win.jtaLab3d,g=api.game,look=g.appearance;
  assert.equal(look.get().style,'sengoku','sengoku is the default look');
+ assert.ok(sources.some(s=>s.startsWith('#define SENGOKU 1\n')),'the sengoku look compiles its own shader variant');
+ assert.ok(!fs.readFileSync(root+'/3d/gunkanjima-3d.js','utf8').includes('uEnv.x'),'no runtime branch between the looks is left in the shaders');
  const same=(a,b,m)=>assert.equal(JSON.stringify(a),JSON.stringify(b),m);
  same(look.styles(),['sengoku','anime']);
  same(g.skies(),['dusk','overcast','rain','mist','snow','night'],'six sengoku skies');
@@ -62,7 +64,10 @@ test('the walk opens in the sengoku look with six skies; the anime look keeps fo
  same(g.skies(),['clear','cloudy','rain','fog'],'four anime skies');
  assert.equal(look.get().preset,'summer','the anime look restores its own defaults');
  assert.notEqual(g.canWalk(at[0],at[1]),null,'props do not block walking in the anime look');
- api.draw();look.set({style:'sengoku'});api.draw();
+ const n0=sources.length;api.draw();const anime=sources.slice(n0);
+ assert.ok(anime.length>0&&anime.every(s=>!s.includes('SENGOKU 1')),'the anime look rebuilds its programs without the sengoku variant');
+ const n1=sources.length;look.set({style:'sengoku'});api.draw();const back=sources.slice(n1);
+ assert.ok(back.length===anime.length&&back.every(s=>s.startsWith('#define SENGOKU 1\n')),'switching back rebuilds the sengoku variant');
  assert.equal(look.get().preset,'autumn');assert.equal(look.get().saturation,.8);
  look.reset();assert.equal(look.get().style,'sengoku');
 });

@@ -266,9 +266,11 @@
     vec3 fireLight(vec3 p,vec3 n){ return fireAt(uFire0,p,n)+fireAt(uFire1,p,n)+fireAt(uFire2,p,n)+fireAt(uFire3,p,n); }
     // Key light with its shadow and drifting cloud shadows, a sky/ground hemisphere ambient, a little warm bounce on faces
     // turned away from a low sun, and firelight. ao darkens only the ambient.
+    float gCloud=-1.0;   // the cloud shadow is evaluated once per fragment, however often sLight is called
     vec3 sLight(vec3 alb,vec3 n,vec3 sun,float shadow,float ao){
       float ndl=dot(n,sun);
-      float direct=clamp(ndl,0.0,1.0)*shadow*(1.0-cloudShadow(vWorld,sun));
+      if(gCloud<0.0)gCloud=cloudShadow(vWorld,sun);
+      float direct=clamp(ndl,0.0,1.0)*shadow*(1.0-gCloud);
       vec3 amb=mix(uAmbG,uAmbS,n.y*.5+.5)*ao+uKey*.05*clamp(.4-ndl,0.0,1.0)*ao;
       return alb*(uKey*direct+amb+fireLight(vWorld,n));
     }
@@ -302,7 +304,9 @@
     }
     // Sky-coloured directional fog, informed by Godot sky.glsl (MIT).
     vec3 aerial(vec3 col,vec3 horizon,vec3 sun,float density,float depth,float enabled){
-      if(enabled>.5&&uEnv.x>.5)return sGrade(sFog(col,vWorld));   // sengoku: col is linear light
+#ifdef SENGOKU
+      return sGrade(sFog(col,vWorld));   // sengoku: col is linear light
+#else
       float amount=clamp(density*smoothstep(80.0,900.0,depth),0.0,1.0);
       vec3 haze=horizon;
       if(enabled>.5){
@@ -315,6 +319,7 @@
         return grade(mix(col,haze,amount));
       }
       return mix(col,haze,amount);
+#endif
     }
     /* uShadowK: bias scale, and 1 where the shadow box follows the walker (shadows fade out at its border) */
     uniform sampler2D uShadowMap; uniform float uShadowOn, uShadowTexel; uniform vec2 uShadowK;
@@ -392,7 +397,8 @@
       float light = mix(1.0, min(1.0, 0.42 + 0.6 * d * mix(0.35, 1.0, sh)), uShade);
       vec3 col = t * light;
       // Land only: sea fragments are coloured in the sea branch below, so they skip all of this.
-      if(uAnime>0.5&&uEnv.x>0.5&&vSea<0.5){
+      #ifdef SENGOKU
+      if(vSea<0.5){
         // Sengoku ground: worn stone slabs with mossy joints, dark rock, packed earth, straw grass, leaf drifts, snow and wet sheen.
         float pavement=smoothstep(.60,.92,n.y),nearSurface=1.0-smoothstep(14.0,60.0,vDepth);
         float age=smoothstep(74.0,110.0,uYear);
@@ -401,39 +407,49 @@
         vec2 edgeD=min(panel,1.0-panel)*vec2(2.7,3.4);
         float chip=.06*noise(vPos.xz*2.7);
         float joint=(1.0-smoothstep(.015+chip*.5,.05+chip*.6,min(edgeD.x,edgeD.y)))*nearSurface;
-        vec3 slab=mix(vec3(.40,.38,.35),vec3(.52,.50,.46),hash(cellId+3.1))*(.84+.26*fbm3(vPos.xz*.9))*(.93+.1*noise(vPos.xz*6.0));
-        if(nearSurface>.001){
-          vec2 cr=worley(vPos.xz*.55);
-          slab*=1.0-.3*(1.0-smoothstep(.01,.05,cr.y-cr.x))*nearSurface*step(.55,noise(vPos.xz*.2+4.0));
-        }
-        slab=mix(slab,vec3(.23,.24,.22),smoothstep(.55,.85,noise(vPos.xz*.21+8.0))*.4);
         vec3 moss=mix(vec3(.12,.14,.08),vec3(.23,.25,.13),noise(vPos.xz*1.7));
-        slab=mix(slab,moss*.8,joint*.7);
-        vec3 rock=mix(vec3(.24,.25,.26),vec3(.38,.37,.35),fbm3(vPos.xz*.25+vPos.y*.2))*(.85+.3*noise(vec2(vPos.x+vPos.z,vPos.y*4.0)*.9));
-        rock=mix(rock,moss*.9,smoothstep(.55,.9,n.y)*smoothstep(.4,.7,noise(vPos.xz*.6))*.8);
+        vec3 slab=vec3(.45),rock=vec3(.3);
+        if(pavement>.01){
+          slab=mix(vec3(.40,.38,.35),vec3(.52,.50,.46),hash(cellId+3.1))*(.84+.26*fbm3(vPos.xz*.9))*(.93+.1*noise(vPos.xz*6.0));
+          if(nearSurface>.001){
+            vec2 cr=worley(vPos.xz*.55);
+            slab*=1.0-.3*(1.0-smoothstep(.01,.05,cr.y-cr.x))*nearSurface*step(.55,noise(vPos.xz*.2+4.0));
+          }
+          slab=mix(slab,vec3(.23,.24,.22),smoothstep(.55,.85,noise(vPos.xz*.21+8.0))*.4);
+          slab=mix(slab,moss*.8,joint*.7);
+        }
+        if(pavement<.99){
+          rock=mix(vec3(.24,.25,.26),vec3(.38,.37,.35),fbm3(vPos.xz*.25+vPos.y*.2))*(.85+.3*noise(vec2(vPos.x+vPos.z,vPos.y*4.0)*.9));
+          rock=mix(rock,moss*.9,smoothstep(.55,.9,n.y)*smoothstep(.4,.7,noise(vPos.xz*.6))*.8);
+        }
         vec3 surface=mix(rock,slab,pavement);
         // Earth and straw grass where the placeholder cover lies (preset tints uRamp0: tip, uRamp1: base).
         float cover=smoothstep(.10,.50,vMaskA.x+age*.22*(1.0-vMaskA.z));
         float straw=fbm3(vPos.xz*.35);
-        vec3 earth=mix(vec3(.19,.15,.11),vec3(.29,.24,.18),noise(vPos.xz*.8));
         vec3 grassC=mix(uRamp1,uRamp0,smoothstep(.25,.8,straw))*(.8+.35*noise(vPos.xz*3.3));
-        vec3 field=mix(earth,grassC*.55,smoothstep(.3,.62,straw+.25*noise(vPos.xz*1.3)));
-        field=mix(field,moss*.9,smoothstep(.6,.85,noise(vPos.xz*.5+6.0))*.6);
-        // Drifts of fallen leaves (foliage tints) where the old flower mask lies and along wall bases.
-        vec2 lc=floor(vPos.xz*6.0);
-        float leafy=smoothstep(.2,.7,vMaskB.x+.5*vMaskB.y)*step(.5,noise(vPos.xz*3.1))*smoothstep(.35,.65,noise(vPos.xz*.4+2.0))*step(.35,hash(lc+5.0))*smoothstep(.86,.95,n.y);
-        field=mix(field,mix(uRamp2,mix(uRamp3,uRamp4,hash(lc+1.7)),hash(lc)),leafy*.9);
-        vec3 ground=mix(surface,field,cover);
+        vec3 ground=surface;
+        if(cover>.01){
+          vec3 earth=mix(vec3(.19,.15,.11),vec3(.29,.24,.18),noise(vPos.xz*.8));
+          vec3 field=mix(earth,grassC*.55,smoothstep(.3,.62,straw+.25*noise(vPos.xz*1.3)));
+          field=mix(field,moss*.9,smoothstep(.6,.85,noise(vPos.xz*.5+6.0))*.6);
+          // Drifts of fallen leaves (foliage tints) where the old flower mask lies and along wall bases.
+          vec2 lc=floor(vPos.xz*6.0);
+          float leafy=smoothstep(.2,.7,vMaskB.x+.5*vMaskB.y)*step(.5,noise(vPos.xz*3.1))*smoothstep(.35,.65,noise(vPos.xz*.4+2.0))*step(.35,hash(lc+5.0))*smoothstep(.86,.95,n.y);
+          field=mix(field,mix(uRamp2,mix(uRamp3,uRamp4,hash(lc+1.7)),hash(lc)),leafy*.9);
+          ground=mix(surface,field,cover);
+        }
         // Trampled paths: dark packed earth and mud.
         float pm=smoothstep(.22,.6,vMaskA.y)*smoothstep(.8,.95,n.y);
-        ground=mix(ground,mix(vec3(.16,.13,.10),vec3(.25,.21,.16),noise(vPos.xz*.9)),pm);
+        if(pm>.001)ground=mix(ground,mix(vec3(.16,.13,.10),vec3(.25,.21,.16),noise(vPos.xz*.9)),pm);
         // Dry tufts in joints and along wall bases.
         float bare=(1.0-cover)*pavement;
-        float tufts=max(joint*step(.5,noise(vPos.xz*1.7)),smoothstep(.55,.8,noise(vPos.xz*2.6))*vMaskB.y)*bare*clamp(vMaskB.y*.9+.35+age*.4,0.0,1.0);
-        ground=mix(ground,grassC*.85,tufts);
+        if(bare>.001&&(joint>.001||vMaskB.y>.001)){
+          float tufts=max(joint*step(.5,noise(vPos.xz*1.7)),smoothstep(.55,.8,noise(vPos.xz*2.6))*vMaskB.y)*bare*clamp(vMaskB.y*.9+.35+age*.4,0.0,1.0);
+          ground=mix(ground,grassC*.85,tufts);
+        }
         ground*=1.0-.4*smoothstep(.955,.995,vMaskB.z)*(1.0-cover);
         // Snow on what faces up, thinning on slopes and in drifts; rain darkens the ground.
-        float snow=uEnv.y*smoothstep(.62,.9,n.y)*smoothstep(.25,.55,fbm3(vPos.xz*.22)+uEnv.y*.35-pm*.3);
+        float snow=uEnv.y>0.0?uEnv.y*smoothstep(.62,.9,n.y)*smoothstep(.25,.55,fbm3(vPos.xz*.22)+uEnv.y*.35-pm*.3):0.0;
         vec3 albedo=mix(ground*(1.0-.38*uEnv.z),vec3(.74,.76,.80),snow);
         col=sLight(toLin(albedo),n,uSun,sh,1.0-.35*vMaskB.y*(1.0-snow));
         // Wet sheen, and puddles on flat paving that mirror the sky (more and rippling in rain).
@@ -447,7 +463,9 @@
           vec3 sky=mix(uFogC,uAmbS*.6,smoothstep(0.0,.5,rdir.y))+uSunC*pow(max(dot(rdir,uSun),0.0),30.0)*1.5;
           col=mix(col,sky*(.42+uEnv.z*.3*(noise(vPos.xz*9.0+uTime*3.0)-.5))*mix(.7,1.0,sh),puddle*(.3+.55*fres));
         }
-      } else if(uAnime>0.5&&vSea<0.5){
+      }
+#else
+      if(uAnime>0.5&&vSea<0.5){
         // Inhabited Hashima was predominantly concrete. Surface pattern/colour remain inferred.
         float fine=noise(vPos.xz*3.2),broad=noise(vPos.xz*.085);
         float pavement=smoothstep(.60,.92,n.y);
@@ -518,6 +536,7 @@
           col=mix(col,mix(water,vec3(.95,.99,.97),rim*.65),puddle);
         }
       }
+#endif
       float edge = smoothstep(0.5, 0.36, max(abs(vUvP.x - 0.5), abs(vUvP.y - 0.5)));
       if (vSea > 0.5){
         vec3 sea = mix(vec3(0.06, 0.13, 0.17), vec3(0.12, 0.25, 0.31), d);
@@ -525,7 +544,8 @@
         float glint = pow(max(dot(reflect(-uSun, n), eye), 0.0), 60.0) * 0.3;
         float foam = smoothstep(0.86, 0.98, noise(vPos.xz * 0.12 + vec2(uTime * 0.02, 0.0))) * 0.08;
         col = sea + glint + foam;
-        if(uAnime>0.5&&uEnv.x>0.5){
+        #ifdef SENGOKU
+        {
           // Sengoku sea: dark slate water, the sky by Fresnel, a glitter path under a low sun and broken foam at the sea wall.
           vec2 q=vPos.xz;
           vec2 w1=vec2(noise(q*.045+vec2(uTime*.02,uTime*.013)),noise(q*.045+vec2(7.1-uTime*.017,3.3)))-.5;
@@ -546,7 +566,9 @@
           float foamN=noise(q*.6+vec2(uTime*.2,-uTime*.15))*noise(q*2.3-uTime*.3);
           float foam=near*(1.0-smoothstep(.2,3.5+2.0*noise(q*.3+uTime*.1),coast))*smoothstep(.12,.35,foamN);
           col=mix(col,(uKey*.35+uAmbS)*toLin(vec3(.78,.80,.80)),foam*.8);
-        } else if(uAnime>0.5){
+        }
+#else
+        if(uAnime>0.5){
           float wave=sin(vPos.x*.16+uTime*.65)+sin(vPos.z*.21-uTime*.4);
           float fresnel=.05+.65*pow(1.0-max(dot(n,eye),0.0),5.0);
           vec3 water=mix(vec3(.045,.24,.34),vec3(.08,.40,.47),.48+.09*wave);
@@ -567,6 +589,7 @@
           float line=1.0-smoothstep(.25,.9,coast+wob*.5);
           col=mix(col,vec3(.95,.99,1.0),max(line,bands*.7)*step(.001,vMaskB.z)*uWater.z);
         }
+#endif
         edge = 1.0;
       }
       col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
@@ -661,7 +684,8 @@
         base = vec3(0.82, 0.80, 0.74);
         win = step(0.45, fy) * step(fy, 0.75) * step(0.35, fract(s / 2.0)) * step(fract(s / 2.0), 0.65) * 0.6;
       }
-      if(uAnime>0.5&&uEnv.x>0.5){
+      #ifdef SENGOKU
+      {
         /* Sengoku facades: the same storeys and bays as old stained concrete, dark timber and plaster in hard weather.
            Streaks, leaching, rust, spalling, moss, soot, broken or boarded openings and lamplit rooms are illustrative. */
         float period=2.4, left=.2, right=.72, bottom=.32, top=.78;
@@ -706,9 +730,11 @@
         float rustLine=step(.93,hash(vec2(floor(s*2.5),seed+storey)))*(1.0-smoothstep(.015,.04,abs(fract(s*2.5)-.5)/2.5))*smoothstep(.1,.9,1.0-fy);
         alb=mix(alb,vec3(.36,.20,.11),rustLine*.6*nearDetail*(1.0-win));
         // Spalled patches expose darker aggregate; hairline cracks near the walker.
-        vec2 sp=worley(vec2(s,y)*.7+seed);
-        float spall=(1.0-smoothstep(.12,.22,sp.x+.18*noise(vec2(s,y)*4.0)))*step(.72,noise(vec2(s*.3,y*.3)+seed*2.0))*(1.0-win)*(1.0-timber)*step(style,3.5);
-        alb=mix(alb,vec3(.30,.28,.25)*(.75+.5*noise(vec2(s,y)*11.0)),spall*.85);
+        if(nearDetail>.001&&win<.5&&style<3.5&&noise(vec2(s*.3,y*.3)+seed*2.0)>.72){
+          vec2 sp=worley(vec2(s,y)*.7+seed);
+          float spall=(1.0-smoothstep(.12,.22,sp.x+.18*noise(vec2(s,y)*4.0)))*(1.0-timber);
+          alb=mix(alb,vec3(.30,.28,.25)*(.75+.5*noise(vec2(s,y)*11.0)),spall*.85);
+        }
         if(nearDetail>.001&&win<.5){
           vec2 wc=worley(vec2(s,y)*1.9+seed);
           alb*=1.0-.22*(1.0-smoothstep(.006,.03,wc.y-wc.x))*nearDetail*step(.6,noise(vec2(s*.15,y*.2+seed*3.0)));
@@ -766,6 +792,7 @@
         gl_FragColor = vec4(aerial(lit,uHorizon,uSun,uFog,vDepth,uAnime), uGhostPass > 0.5 ? 0.22 : 1.0);
         return;
       }
+#else
       if(uAnime>0.5){
         // Restrained concrete/wood palette: material colour is independent of light colour.
         base=mix(base,vec3(.84,.81,.73),.22);
@@ -894,6 +921,7 @@
       }
       col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.22 : 1.0);
+#endif
     }`;
   // roofs: the aerial photograph of the year, drawn where the roof is in that photograph
   const ROOF_VS = COMMON_VS + `
@@ -935,7 +963,8 @@
       vec3 roof = style > 4.5 && style < 5.5 ? vec3(0.30, 0.27, 0.24) : vec3(0.62, 0.60, 0.57);
       vec3 col = mix(t, roof * (0.6 + 0.4 * dot(t, vec3(0.33))), vAlive < 0.98 ? 0.8 : 0.25);
       col *= mix(1.0, 0.42 + 0.6 * d * mix(0.35, 1.0, sh), uShade);
-      if(uAnime>0.5&&uEnv.x>0.5){
+      #ifdef SENGOKU
+      {
         // Sengoku roofs: weathered slabs with moss and ponding, dark round-tile roofs on the wooden houses, overgrown beds.
         vec2 m=vPos*.805;
         vec3 alb=mix(vec3(.33,.32,.30),vec3(.43,.42,.39),fbm3(m*.12+seed*9.0))*(.85+.25*noise(m*2.3));
@@ -952,7 +981,9 @@
         float pool=smoothstep(.66,.7,noise(m*.18+seed*3.0))*(1.0-bed)*(1.0-snow)*(.3+.7*uEnv.z);
         vec3 eyeDir=normalize(uEye-vWorld);
         col=mix(col,(mix(uFogC,uAmbS*.6,.5)+uSunC*pow(max(dot(reflect(-eyeDir,vec3(0.0,1.0,0.0)),uSun),0.0),30.0))*.7,pool*(.4+.6*pow(1.0-max(eyeDir.y,0.0),3.0)));
-      } else if(uAnime>0.5){
+      }
+#else
+      if(uAnime>0.5){
         vec3 roofBase=mix(vec3(.54,.56,.55),vec3(.73,.72,.66),.55+.16*noise(vPos*.12));
         // Placeholder rooftop vegetable beds on some concrete roofs (illustrative, not per-building evidence).
         vec2 m=vPos*.805,bedCell=fract(m/vec2(2.4,5.2));
@@ -961,6 +992,7 @@
         roofBase=mix(roofBase,plot,bed);
         col=toonLight(roofBase,vec3(0.0,1.0,0.0),uSun,sh,1.0);
       }
+#endif
       if (uChange > 0.001){ vec3 grey = vec3(dot(col, vec3(0.299, 0.587, 0.114))); col = mix(col, grey * 0.9, 0.5 * uChange); }
       col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, uGhostPass > 0.5 ? 0.18 : 1.0);
@@ -988,7 +1020,8 @@
       col = mix(col, vec3(0.22, 0.24, 0.22), smoothstep(2.2, 0.0, y));                         /* wet band at the waterline */
       col *= 1.0 - age * 0.2 * noise(vec2(s * 0.3, y));
       col *= mix(1.0, 0.32 + 0.62 * d * mix(0.35, 1.0, sh), uShade);
-      if (uAnime > 0.5 && uEnv.x > 0.5){
+      #ifdef SENGOKU
+      {
         /* Sengoku sea wall: staggered dark stone blocks, a black-green tide band, streaks from the crest, dry grass on top. */
         float H = vTop + 1.5, course = floor(y / 1.2), along = (s + course * 1.7) / 2.1;
         float cy = fract(y / 1.2), cx = fract(along);
@@ -1004,7 +1037,9 @@
         col = sLight(toLin(stone), n, uSun, sh, 1.0 - .3 * tide);
         vec3 eyeDir = normalize(uEye - vWorld);
         col += uFogC * pow(1.0 - max(dot(n, eyeDir), 0.0), 4.0) * .25 * max(tide, uEnv.z);
-      } else if (uAnime > 0.5){
+      }
+#else
+      if(uAnime>0.5){
         /* Walking view: the sea wall in the buildings' toon light instead of the dark photographic shading, with an
            algae band at the waterline, weeds in some joints and grass spilling over the top (placeholders). */
         float H = vTop + 1.5;   /* the ring's crest above its foot at -1.5 m (vWall.z is interpolated along the face here) */
@@ -1018,6 +1053,7 @@
         stone = mix(stone, meadowColor(vWorld.xz) * mix(.68, .92, smoothstep(H - fringe, H, y)), lip * .9);
         col = toonLight(stone, n, uSun, sh, 1.0);
       }
+#endif
       col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, 1.0);
     }`;
@@ -1036,7 +1072,8 @@
     varying vec2 vP;
     float skyHash(vec2 p){p=mod(p,113.0);return fract(sin(dot(p,vec2(7.13,3.71)))*157.91);}
     float skyNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(skyHash(i),skyHash(i+vec2(1,0)),f.x),mix(skyHash(i+vec2(0,1)),skyHash(i+vec2(1,1)),f.x),f.y);}
-    float fbm5(vec2 p){float a=.5,s=0.0;for(int i=0;i<5;i++){s+=a*skyNoise(p);p=p*2.03+vec2(17.1,-9.2);a*=.5;}return s;}
+    float fbm5(vec2 p){float a=.5,s=0.0;for(int i=0;i<4;i++){s+=a*skyNoise(p);p=p*2.03+vec2(17.1,-9.2);a*=.5;}return s+.03;}
+    float fbm2(vec2 p){return .67*skyNoise(p)+.33*skyNoise(p*2.03+vec2(17.1,-9.2));}
     // The sengoku grade of the scene shaders, repeated here for the sky (linear light in, display out).
     vec3 sGradeSky(vec3 c){
       c*=uGrade.x;
@@ -1063,7 +1100,8 @@
       vec3 forward=vec3(sa*ce,se,ca*ce),right=vec3(-ca,0,sa),up=vec3(-sa*se,ce,-ca*se);
       vec3 ray=normalize(forward+.483055*(right*vP.x*uAspect+up*vP.y));
       float altitude=max(ray.y,0.0),sunAmount=max(dot(ray,uSun),0.0);
-      if(uEnv.x>.5){
+      #ifdef SENGOKU
+      {
         /* Sengoku sky (linear light): a warm horizon towards the sun cooling away from it, a broad Mie glow, the sun or the
            moon, stars at night, a slow deck of lit clouds, and distant ranges in aerial perspective to the north-east
            through south-east (the Nagasaki peninsula, Unzen beyond): illustrative silhouettes, not survey data. */
@@ -1078,14 +1116,14 @@
         }
         if(ray.y>0.0){
           vec2 plane=ray.xz/(ray.y+.07),wind=vec2(uTime*.004,uTime*.0015),q=plane*.55+wind;
-          float d=fbm5(q),dl=fbm5(q+uSun.xz*.06);
+          float d=fbm5(q),dl=fbm2(q+uSun.xz*.06)*.95+.02;
           float dens=smoothstep(.62-uCloudCover*.42,.95-uCloudCover*.42,d);
           float lit=clamp(.55+(d-dl)*5.0,0.0,1.0);
           vec3 cc=mix(mix(uTop*.9,uMid*.55,.5)*(1.0-uStorm*.4),uSunC*1.25+uTop*.35,lit*(1.0-uStorm*.6));
           cc+=uSunC*pow(max(mu,0.0),6.0)*(1.0-dens)*1.2;
           float fade=smoothstep(0.0,.12,altitude);
           col=mix(col,mix(hor,cc,fade*.85+.15),dens*fade*.97);
-          col=mix(col,uSunC*.6+uTop*.6,smoothstep(.55,.8,fbm5(plane*vec2(.25,1.2)+wind*2.0+31.0))*.18*fade*(1.0-uCloudCover*.5));
+          col=mix(col,uSunC*.6+uTop*.6,smoothstep(.55,.8,fbm2(plane*vec2(.25,1.2)+wind*2.0+31.0))*.18*fade*(1.0-uCloudCover*.5));
         }
         float window=smoothstep(1.6,1.1,abs(wrapAngle(az-1.95)));
         for(int i=0;i<3;i++){
@@ -1104,6 +1142,7 @@
         gl_FragColor=vec4(sGradeSky(col),1.0);
         return;
       }
+#else
       // Four-stop anime gradient: horizon, mid and top (top exponent 1.4, horizon sharpness 3).
       vec3 col=mix(uMid,uTop,pow(altitude,1.0/1.4));
       col=mix(col,uHorizon,pow(1.0-altitude,3.0));
@@ -1157,6 +1196,7 @@
       // Below the horizon beyond the modelled sea: distant water fading into haze.
       if(el<-.004)col=mix(uHorizon*.92,vec3(.20,.47,.62),smoothstep(-.004,-.08,el));
       gl_FragColor=vec4(grade(col),1.0);
+#endif
     }`;
   const DEPTH_FS = `precision mediump float; void main(){ gl_FragColor = vec4(1.0); }`;
   const DEPTH_FS_ALIVE = `precision mediump float; varying float vAlive; varying float vGhost; void main(){ if (vAlive < 0.02 || vGhost > 0.5) discard; gl_FragColor = vec4(1.0); }`;
@@ -1249,7 +1289,8 @@
       /* hemisphere ambient: faces that look up are lit by the sky, faces that look down by the ground */
       float amb = 0.30 + 0.12 * n.y;
       vec3 col = base * (amb + 0.62 * d * mix(0.4, 1.0, sh));
-      if(uAnime>0.5&&uEnv.x>0.5){
+      #ifdef SENGOKU
+      {
         // Sengoku rooms: slightly darker, dustier and less saturated materials, a dim cool fill and warm lamp pools.
         float l=dot(base,vec3(.3,.59,.11)),indoor=uTone.z;
         vec3 alb=toLin(mix(vec3(l),base,.72)*.92);
@@ -1270,6 +1311,7 @@
         gl_FragColor=vec4(aerial(col,uHorizon,uSun,uFog,vDepth,uAnime),vCol.a);
         return;
       }
+#else
       if(uAnime>0.5){
         // Retain hemisphere light in the stylised pass: ceilings and stair undersides stay shaded.
         col=toonLight(base,n,uSun,sh,1.0);
@@ -1288,6 +1330,7 @@
       if(vMat.x>13.5)col=vCol.rgb*1.25;
       col = aerial(col,uHorizon,uSun,uFog,vDepth,uAnime);
       gl_FragColor = vec4(col, vCol.a);
+#endif
     }`;
   const BOX_DEPTH_FS = `precision mediump float; varying vec4 vCol; void main(){ if (vCol.a < 0.9) discard; gl_FragColor = vec4(1.0); }`;
   /* Walking view placeholder nature (see gunkanjima-walk-nature.js): illustrative set dressing only.
@@ -1298,6 +1341,11 @@
     uniform sampler2D uGround; uniform vec3 uGroundInfo; uniform vec2 uGroundSize;
     uniform vec2 uCamUV; uniform float uPatch, uWindTime, uWindStrength; uniform vec4 uPool; uniform mediump float uFlowerPass; uniform vec3 uWalker;
     uniform mediump vec4 uEnv;
+#ifdef SENGOKU
+    const float GRASS_H=.8,GRASS_W=.5,GRASS_FERN=0.0;
+#else
+    const float GRASS_H=1.0,GRASS_W=1.0,GRASS_FERN=1.0;
+#endif
     varying float vTip; varying vec3 vTint; varying vec2 vCorner; varying float vGust; varying vec2 vRoot; varying float vKindF;
     float lift(vec4 t){ return (t.r*65280.0+t.g*255.0)*.01; }
     void main(){
@@ -1312,7 +1360,11 @@
       // uPool: fade distance, near hide distance (far pool), size, density.
       float dist=length((uv-uCamUV)*uMpp),fade=(1.0-smoothstep(uPool.x*.72,uPool.x,dist))*smoothstep(uPool.y,uPool.y*1.35,dist);
       // In the sengoku look the flower pool becomes pampas grass over the grassy cover rather than flower patches.
-      float amount=uFlowerPass>.5?(uEnv.x>.5?cover.x*.45:cover.y):cover.x*(uEnv.x>.5?.75:1.0);
+#ifdef SENGOKU
+      float amount=uFlowerPass>.5?cover.x*.45:cover.x*.75;
+#else
+      float amount=uFlowerPass>.5?cover.y:cover.x;
+#endif
       float alive=step(r1,amount*1.12*uPool.w)*fade*inside;
       vec3 root=place(uv,h-.03);
       float tip=aBlade.w;
@@ -1325,7 +1377,8 @@
       lean+=away/max(near,.001)*(1.0-smoothstep(.25,1.35,near))*1.2;
       vGust=wave;vRoot=root.xz;vCorner=vec2(0.0);vTint=vec3(1.0);
       vec3 p;
-      if(uFlowerPass>.5&&uEnv.x>.5){
+      #ifdef SENGOKU
+      if(uFlowerPass>.5){
         // Pampas (susuki): a tall stem bowing with the wind and a long feathery plume hanging from its tip, facing the walker.
         alive*=smoothstep(1.3,2.6,dist);
         float height=mix(.7,1.3,r2)*alive,plume=mix(.30,.46,r4)*alive;
@@ -1340,7 +1393,9 @@
           vKindF=2.0;vTip=tip;vCorner=vec2(aSide,tip*2.0-1.0);
           p=top+hang*plume*tip+side*aSide*mix(.055,.02,tip)*step(.001,alive);
         }
-      } else if(uFlowerPass>.5){
+      } else
+#else
+      if(uFlowerPass>.5){
         // Cosmos-like heads on thin stems, facing up and tilted towards the walker.
         float height=mix(.24,.5,r2)*alive,size=mix(.06,.1,r4)*alive;
         vec3 head=root+vec3(lean.x*height*.35,height,lean.y*height*.35);
@@ -1354,11 +1409,13 @@
           p=head+(right*aSide+fwd*(tip*2.0-1.0))*size;
           vTint=r3<.45?vec3(1.0,.97,.93):r3<.72?vec3(1.0,.84,.90):r3<.9?vec3(.78,.93,.97):vec3(1.0,.9,.45);
         }
-      } else {
+      } else
+#endif
+      {
         // Clumped blades with random scale (x0.64-1.9); rare dark fern accents where cover thins out.
-        float fern=step(.86,fract(s*531.1))*(1.0-smoothstep(.35,.8,amount))*step(uEnv.x,.5);
-        float height=mix(.2,.62,r2*r2)*mix(.64,1.9,fract(s*887.3)*fract(s*887.3))*mix(1.0,.7,fern)*uPool.z*alive*(uEnv.x>.5?.8:1.0);
-        float width=mix(.028,.05,r4)*mix(1.0,3.4,fern)*(1.0-tip)*uPool.z*step(.001,alive)*(uEnv.x>.5?.5:1.0);
+        float fern=step(.86,fract(s*531.1))*(1.0-smoothstep(.35,.8,amount))*GRASS_FERN;
+        float height=mix(.2,.62,r2*r2)*mix(.64,1.9,fract(s*887.3)*fract(s*887.3))*mix(1.0,.7,fern)*uPool.z*alive*GRASS_H;
+        float width=mix(.028,.05,r4)*mix(1.0,3.4,fern)*(1.0-tip)*uPool.z*step(.001,alive)*GRASS_W;
         float ang=r3*6.2832;vec3 across=vec3(cos(ang),0.0,sin(ang));
         p=root+across*aSide*width+vec3(lean.x*tip*tip*height,height*tip*(1.0-.16*dot(lean,lean)),lean.y*tip*tip*height);
         vKindF=fern;vTip=tip;
@@ -1378,7 +1435,8 @@
     void main(){
       float sh=shadowAt(vShadow,.004);
       vec3 col,up=vec3(0.0,1.0,0.0);
-      if(uEnv.x>.5){
+      #ifdef SENGOKU
+      {
         // Sengoku grass: dry straw blades and pampas with feathery silver plumes that glow when the low sun is behind them.
         vec3 alb;float gloss=.3;
         if(vKindF>1.5&&vKindF<2.5){
@@ -1399,6 +1457,7 @@
         gl_FragColor=vec4(aerial(lit,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
         return;
       }
+#else
       if(vKindF>1.5&&vKindF<2.5){
         float r=length(vCorner),petal=.6+.4*abs(cos(atan(vCorner.y,vCorner.x)*4.0));
         if(r>petal)discard;
@@ -1417,6 +1476,7 @@
         col=mix(col,col*shadeTint(),1.0-sh);
       }
       gl_FragColor=vec4(aerial(col,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
+#endif
     }`;
   /* Ambient life around the walker (placeholder): drifting petals, twinkling sparkles and butterflies in a
      wrapping box, plus a V formation of five seabirds crossing west to east (adapted from the airship
@@ -1429,7 +1489,8 @@
     void main(){
       float s=aPart.w;
       vec3 p;float size;
-      if(uEnv.x>.5&&uBirds<.5){
+      #ifdef SENGOKU
+      if(uBirds<.5){
         // Sengoku: tumbling leaves (types 0 and 2) and drifting ash (type 1) instead of petals, sparkles and butterflies.
         vType=s<.55?0.0:s<.8?1.0:2.0;
         float t=uWindTime,r1=fract(s*97.1),r2=fract(s*31.7);
@@ -1448,6 +1509,7 @@
         gl_PointSize=clamp(size*uPointScale/max(gl_Position.w,.1),1.0,64.0);
         return;
       }
+#endif
       if(uBirds>.5){
         // aPart: rank, side, phase. 20 s crossing every 34 s; each rank 14 m back and 16 m out.
         float cycle=mod(uWindTime,34.0),prog=cycle/20.0;
@@ -1479,7 +1541,8 @@
     ` + SHADOW_FN + `
     void main(){
       vec2 c=gl_PointCoord*2.0-1.0;float a;
-      if(uEnv.x>.5){
+      #ifdef SENGOKU
+      {
         vec3 alb;
         if(vType>2.5){
           // Crows instead of seabirds.
@@ -1499,6 +1562,7 @@
         gl_FragColor=vec4(aerial(toLin(alb)*(uAmbS+uKey*.45),uHorizon,uSun,uFog,vDepth,uAnime),clamp(a,0.0,1.0));
         return;
       }
+#else
       if(vType<.5){vec2 r=vec2(c.x*cos(vPhase)-c.y*sin(vPhase),c.x*sin(vPhase)+c.y*cos(vPhase));a=1.0-smoothstep(.7,.95,length(r*vec2(1.0,1.9)));}
       else if(vType<1.5)a=clamp(max(1.0-abs(c.x)*6.0-abs(c.y)*1.2,1.0-abs(c.y)*6.0-abs(c.x)*1.2),0.0,1.0)*vPhase;
       else if(vType<2.5){float flap=max(abs(sin(vPhase)),.18);vec2 q=vec2(abs(c.x)/flap,c.y);a=max(1.0-smoothstep(.75,.95,length((q-vec2(.5,-.12))*vec2(1.0,1.25))),1.0-smoothstep(.55,.75,length((q-vec2(.45,.45))*vec2(1.3,1.6))));}
@@ -1506,6 +1570,7 @@
       a*=vFade*uAmount;
       if(a<.04)discard;
       gl_FragColor=vec4(aerial(vColor,uHorizon,uSun,uFog,vDepth,uAnime),clamp(a,0.0,1.0));
+#endif
     }`;
   /* Walking-view post-process: soft bloom (bright pass, separable blur at quarter size) and an edge-aware
      anti-alias in the composite, because rendering to a texture loses the canvas multisampling. */
@@ -1561,7 +1626,8 @@
       // fills with one flat green.
       if(((kind>.5&&kind<2.5)||kind>7.5)&&length(vWorld-uEye)<.6)discard;
       float sh=shadowAt(vShadow,kind>5.5&&kind<6.5?.0015:.004);
-      if(uEnv.x>.5){
+      #ifdef SENGOKU
+      {
         /* Sengoku trees and props: maples in the foliage tints (a few evergreen oaks), dark pines, black-green shrubs,
            lichened bark, grey stone with moss, weathered timber and straw rope, a still dark pond with floating leaves. */
         vec3 view=normalize(vWorld-uEye);
@@ -1652,6 +1718,7 @@
         gl_FragColor=vec4(aerial(lit,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
         return;
       }
+#else
       if(kind>5.5&&kind<6.5){
         // Pond: mint gradient, soft drifting mottling, a pale band and a wobbling white foam line at the rim, and
         // twinkling sparkles. vKind.y runs from 0 at the centre to 96 at the rim.
@@ -1692,6 +1759,7 @@
       col+=vec3(1.0,.95,.75)*rim*((kind>.5&&kind<2.5)||kind>7.5?.16:.07)*(.35+.65*lit);
       if(kind>3.5&&kind<4.5)col=base*mix(.82,1.08,lit);
       gl_FragColor=vec4(aerial(col,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
+#endif
     }`;
 
   /* Sengoku fires: flames, embers and smoke as point sprites anchored to each bonfire or brazier. aFire: world x, ground y,
@@ -1761,23 +1829,52 @@
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s) || 'shader');
     return s;
   }
-  function program(vs, fs, attrs, uniforms){
+  /* Each look compiles its own shader variant (#define SENGOKU): a uniform branch between the looks would leave
+     both paths running on GPUs that flatten branches. Programs are rebuilt in place when the look changes. */
+  const built = [];
+  let builtStyle = sengoku() ? 'sengoku' : 'anime';
+  function link(P, style){
+    const defs = P.styled && style === 'sengoku' ? '#define SENGOKU 1\n' : '';
+    const v = compile(gl.VERTEX_SHADER, defs + P.vs);
+    let f;
+    try { f = compile(gl.FRAGMENT_SHADER, defs + P.fs); } catch (err){ gl.deleteShader(v); throw err; }
     const p = gl.createProgram();
-    gl.attachShader(p, compile(gl.VERTEX_SHADER, vs));
-    gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs));
-    attrs.forEach((n, i) => gl.bindAttribLocation(p, i, n));
+    gl.attachShader(p, v);
+    gl.attachShader(p, f);
+    P.attrs.forEach((n, i) => gl.bindAttribLocation(p, i, n));
     gl.linkProgram(p);
-    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p) || 'link');
+    gl.deleteShader(v); gl.deleteShader(f);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)){ const log = gl.getProgramInfoLog(p); gl.deleteProgram(p); throw new Error(log || 'link'); }
     const U = {};
-    for (const n of uniforms) U[n] = gl.getUniformLocation(p, n);
+    for (const n of P.uniforms) U[n] = gl.getUniformLocation(p, n);
     return { p, U };
+  }
+  function program(vs, fs, attrs, uniforms){
+    const P = { vs, fs, attrs, uniforms, styled: /SENGOKU/.test(vs + fs) };
+    Object.assign(P, link(P, builtStyle));
+    built.push(P);
+    return P;
+  }
+  function restyle(){
+    const style = sengoku() ? 'sengoku' : 'anime';
+    if (style === builtStyle) return;
+    const next = [];
+    try { for (const P of built) if (P.styled) next.push([P, link(P, style)]); }
+    catch (err){
+      console.error(err);
+      for (const [, n] of next) gl.deleteProgram(n.p);
+      setLook({ style: builtStyle });
+      return;
+    }
+    for (const [P, n] of next){ gl.deleteProgram(P.p); Object.assign(P, n); }
+    builtStyle = style;
   }
   const COMMON_U = ['uPV', 'uLightPV', 'uRot', 'uLift', 'uExag', 'uMorph', 'uMpp', 'uC', 'uHf', 'uYOff', 'uPP', 'uYear', 'uShadowMap', 'uShadowOn', 'uShadowTexel', 'uShadowK', 'uFog', 'uShade', 'uChange', 'uBg', 'uSun', 'uHorizon', 'uTime', 'uWindTime', 'uWindStrength', 'uAnime', 'uEye', 'uGhostId', 'uGhostId2', 'uGhostPass', 'uGrade', 'uRamp0', 'uRamp1', 'uRamp2', 'uRamp3', 'uRamp4', 'uOverlay', 'uCloud', 'uWater', 'uSlope', 'uPond',
     'uEnv', 'uKey', 'uAmbS', 'uAmbG', 'uFogC', 'uSunC', 'uFogK', 'uTone', 'uFire0', 'uFire1', 'uFire2', 'uFire3', 'uGLift', 'uGGamma', 'uGGain'];
   const TEX_U = ['uTexA', 'uTexB', 'uMix', 'uOrthoA', 'uOrthoB'];
   const TERRAIN_A = ['aGrid', 'aH', 'aNor', 'aSea', 'aMaskA', 'aMaskB'], WALL_A = ['aPos', 'aY', 'aNor', 'aWall', 'aInfo', 'aLife', 'aBid'], ROOF_A = ['aPos', 'aY', 'aLife', 'aInfo', 'aBid'], BOX_A = ['aPos3', 'aNor', 'aCol', 'aMat', 'aWind'];
   let progT, progW, progR, progS, progSky, progB, depthT, depthW, depthR, depthB;
-  try {
+  function corePrograms(){
     progT = program(TERRAIN_VS, TERRAIN_FS, TERRAIN_A, COMMON_U.concat(TEX_U));
     progW = program(WALL_VS, WALL_FS, WALL_A, COMMON_U);
     progR = program(ROOF_VS, ROOF_FS, ROOF_A, COMMON_U.concat(TEX_U));
@@ -1785,12 +1882,22 @@
     progSky = program(SKY_VS, SKY_FS, ['aPos'], ['uTop', 'uHorizon', 'uEl', 'uAz', 'uAspect', 'uAnime', 'uTime', 'uSun', 'uCloudCover', 'uStorm', 'uMid', 'uLand', 'uGrade', 'uEnv', 'uSunC', 'uFogC', 'uTone', 'uGLift', 'uGGamma', 'uGGain']);
     progB = program(BOX_VS, BOX_FS, BOX_A, COMMON_U.concat(['uRoomLight','uLamp0','uLamp1','uLamp2','uLamp3','uContact0','uContact1','uContact2','uContact3']));
     if (SHADOW){ depthT = program(TERRAIN_VS, DEPTH_FS, TERRAIN_A, COMMON_U); depthW = program(WALL_VS, DEPTH_FS_ALIVE, WALL_A, COMMON_U); depthR = program(ROOF_VS, DEPTH_FS_ALIVE, ROOF_A, COMMON_U); depthB = program(BOX_VS, BOX_DEPTH_FS, BOX_A, COMMON_U); }
-  } catch (err) { console.error(err); fallback(T.noWebgl); return; }
+  }
+  try { corePrograms(); }
+  catch (err) {
+    console.error(err);
+    for (const P of built.splice(0)) gl.deleteProgram(P.p);
+    // A GPU that cannot build the sengoku variant still gets the island in the lighter look.
+    if (builtStyle !== 'sengoku') { fallback(T.noWebgl); return; }
+    Object.assign(look, LOOK_STYLES.anime); builtStyle = 'anime';
+    try { corePrograms(); } catch (err2) { console.error(err2); fallback(T.noWebgl); return; }
+  }
   /* The walking view's placeholder nature is optional: without vertex texture fetch, or if a program
      fails, the island is drawn exactly as before. */
   let progG = null, progP = null, depthP = null, progA = null, progBright = null, progBlur = null, progComposite = null, progF = null;
   const PLANT_A = ['aPos3', 'aNor', 'aCol', 'aInfo'];
   if (GAME && window.JTAWalkNature && gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS) > 0){
+    const mark = built.length;
     try {
       progG = program(GRASS_VS, GRASS_FS, ['aBlade', 'aSide'], COMMON_U.concat(['uGround', 'uGroundInfo', 'uGroundSize', 'uCamUV', 'uPatch', 'uPool', 'uFlowerPass', 'uWalker']));
       progP = program(PLANT_VS, PLANT_FS, PLANT_A, COMMON_U);
@@ -1800,7 +1907,7 @@
       progBlur = program(POST_VS, BLUR_FS, ['aPos'], ['uTex', 'uDir']);
       progComposite = program(POST_VS, COMPOSITE_FS, ['aPos'], ['uTex', 'uBloom', 'uTexel', 'uBloomAmount']);
       progF = program(FIRE_VS, FIRE_FS, ['aFire', 'aSlot'], COMMON_U.concat(['uPointScale', 'uSmoke']));
-    } catch (err) { console.error(err); progG = progP = depthP = progA = progBright = progBlur = progComposite = progF = null; }
+    } catch (err) { console.error(err); for (const P of built.splice(mark)) gl.deleteProgram(P.p); progG = progP = depthP = progA = progBright = progBlur = progComposite = progF = null; }
   }
 
   function buffer(data, target){
@@ -2573,6 +2680,7 @@
   }
 
   function draw(){
+    if (GAME) restyle();
     const w = canvas.width, h = canvas.height;
     const e = env(), pp = terrain && st.walk ? postTargets() : null, screenFb = pp ? pp.scene.fb : null;
     fireCache = null;
