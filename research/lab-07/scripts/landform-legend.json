@@ -1,0 +1,1281 @@
+{
+ "source": "GSI Landform Classification vector tiles (experimental_landformclassification1/2), https://github.com/gsi-cyberjapan/experimental_landformclassification; class names and descriptions translated and condensed into English for Japan Time Atlas.",
+ "codes": {
+  "999999": {
+   "class": "note",
+   "ja": "地図を拡大すると表示されます。"
+  },
+  "100": {
+   "class": "note",
+   "ja": "数値地図25000(土地条件)"
+  },
+  "101": {
+   "class": "note",
+   "ja": "数値地図25000(土地条件)"
+  },
+  "102": {
+   "class": "note",
+   "ja": "治水地形分類図(更新版)"
+  },
+  "103": {
+   "class": "note",
+   "ja": "脆弱地形調査"
+  },
+  "104": {
+   "class": "note",
+   "ja": "土地条件図"
+  },
+  "105": {
+   "class": "note",
+   "ja": "沿岸海域土地条件図"
+  },
+  "106": {
+   "class": "note",
+   "ja": "地形分類データ整備による"
+  },
+  "10101": {
+   "class": "slope",
+   "en": "Mountain and hill slopes",
+   "origin": "Ridges, valleys and fairly steep ground, including terrace-scarp slopes and volcanic ground.",
+   "risk": "Heavy rain or earthquakes can trigger slope failures, debris flows and landslides.",
+   "ja": "山地斜面等",
+   "origin_ja": "尾根や谷からなる土地や、比較的傾斜が急な土地。段丘崖の斜面や火山地を含む。",
+   "risk_ja": "大雨や地震により、崖崩れや土石流、地すべりなどの土砂災害のリスクがある。",
+   "color": "#d9cbae"
+  },
+  "11201": {
+   "class": "slope",
+   "en": "Mountain and hill slopes",
+   "origin": "Ridges, valleys and fairly steep ground, including terrace-scarp slopes and volcanic ground.",
+   "risk": "Heavy rain or earthquakes can trigger slope failures, debris flows and landslides.",
+   "ja": "山地斜面等",
+   "origin_ja": "尾根や谷からなる土地や、比較的傾斜が急な土地。段丘崖の斜面や火山地を含む。",
+   "risk_ja": "大雨や地震により、崖崩れや土石流、地すべりなどの土砂災害のリスクがある。",
+   "color": "#d9cbae"
+  },
+  "11202": {
+   "class": "slope",
+   "en": "Mountain and hill slopes",
+   "origin": "Ridges, valleys and fairly steep ground, including terrace-scarp slopes and volcanic ground.",
+   "risk": "Heavy rain or earthquakes can trigger slope failures, debris flows and landslides.",
+   "ja": "山地斜面等",
+   "origin_ja": "尾根や谷からなる土地や、比較的傾斜が急な土地。段丘崖の斜面や火山地を含む。",
+   "risk_ja": "大雨や地震により、崖崩れや土石流、地すべりなどの土砂災害のリスクがある。",
+   "color": "#d9cbae"
+  },
+  "11203": {
+   "class": "slope",
+   "en": "Mountain and hill slopes",
+   "origin": "Ridges, valleys and fairly steep ground, including terrace-scarp slopes and volcanic ground.",
+   "risk": "Heavy rain or earthquakes can trigger slope failures, debris flows and landslides.",
+   "ja": "山地斜面等",
+   "origin_ja": "尾根や谷からなる土地や、比較的傾斜が急な土地。段丘崖の斜面や火山地を含む。",
+   "risk_ja": "大雨や地震により、崖崩れや土石流、地すべりなどの土砂災害のリスクがある。",
+   "color": "#d9cbae"
+  },
+  "11204": {
+   "class": "slope",
+   "en": "Mountain and hill slopes",
+   "origin": "Ridges, valleys and fairly steep ground, including terrace-scarp slopes and volcanic ground.",
+   "risk": "Heavy rain or earthquakes can trigger slope failures, debris flows and landslides.",
+   "ja": "山地斜面等",
+   "origin_ja": "尾根や谷からなる土地や、比較的傾斜が急な土地。段丘崖の斜面や火山地を含む。",
+   "risk_ja": "大雨や地震により、崖崩れや土石流、地すべりなどの土砂災害のリスクがある。",
+   "color": "#d9cbae"
+  },
+  "1010101": {
+   "class": "slope",
+   "en": "Mountain and hill slopes",
+   "origin": "Ridges, valleys and fairly steep ground, including terrace-scarp slopes and volcanic ground.",
+   "risk": "Heavy rain or earthquakes can trigger slope failures, debris flows and landslides.",
+   "ja": "山地斜面等",
+   "origin_ja": "尾根や谷からなる土地や、比較的傾斜が急な土地。段丘崖の斜面や火山地を含む。",
+   "risk_ja": "大雨や地震により、崖崩れや土石流、地すべりなどの土砂災害のリスクがある。",
+   "color": "#d9cbae"
+  },
+  "10202": {
+   "class": "scarp",
+   "en": "Cliffs and terrace scarps",
+   "origin": "Very steep slopes at the edges of mountains and terraces, or along the coast.",
+   "risk": "Heavy rain or earthquake shaking can bring down slopes nearby.",
+   "ja": "崖･段丘崖",
+   "origin_ja": "山地や台地の縁、海岸沿いにある極めて急な斜面。",
+   "risk_ja": "周辺では大雨や地震の揺れによる崖崩れなどの土砂災害のリスクがある。",
+   "color": "#9466ab"
+  },
+  "10204": {
+   "class": "scarp",
+   "en": "Cliffs and terrace scarps",
+   "origin": "Very steep slopes at the edges of mountains and terraces, or along the coast.",
+   "risk": "Heavy rain or earthquake shaking can bring down slopes nearby.",
+   "ja": "崖･段丘崖",
+   "origin_ja": "山地や台地の縁、海岸沿いにある極めて急な斜面。",
+   "risk_ja": "周辺では大雨や地震の揺れによる崖崩れなどの土砂災害のリスクがある。",
+   "color": "#9466ab"
+  },
+  "2010201": {
+   "class": "scarp",
+   "en": "Cliffs and terrace scarps",
+   "origin": "Very steep slopes at the edges of mountains and terraces, or along the coast.",
+   "risk": "Heavy rain or earthquake shaking can bring down slopes nearby.",
+   "ja": "崖･段丘崖",
+   "origin_ja": "山地や台地の縁、海岸沿いにある極めて急な斜面。",
+   "risk_ja": "周辺では大雨や地震の揺れによる崖崩れなどの土砂災害のリスクがある。",
+   "color": "#9466ab"
+  },
+  "10205": {
+   "class": "landslide",
+   "en": "Landslide topography",
+   "origin": "Ground where part of a slope has slid downhill, leaving a scarp above and an irregular, hummocky mass below.",
+   "risk": "Saturation by heavy rain or snowmelt, or earthquake shaking, can set the ground moving again.",
+   "ja": "地すべり地形",
+   "origin_ja": "斜面が下方に移動し、斜面上部の崖と不規則な凹凸のある移動部分からなる土地。山体の一部が重力により滑ってできる。",
+   "risk_ja": "大雨・雪解けにより多量の水分が土中に含まれたり、地震で揺れたりすることで、土地が滑って土砂災害を引き起こすことがある。",
+   "color": "#cc99ff"
+  },
+  "10206": {
+   "class": "landslide",
+   "en": "Landslide topography",
+   "origin": "Ground where part of a slope has slid downhill, leaving a scarp above and an irregular, hummocky mass below.",
+   "risk": "Saturation by heavy rain or snowmelt, or earthquake shaking, can set the ground moving again.",
+   "ja": "地すべり地形",
+   "origin_ja": "斜面が下方に移動し、斜面上部の崖と不規則な凹凸のある移動部分からなる土地。山体の一部が重力により滑ってできる。",
+   "risk_ja": "大雨・雪解けにより多量の水分が土中に含まれたり、地震で揺れたりすることで、土地が滑って土砂災害を引き起こすことがある。",
+   "color": "#cc99ff"
+  },
+  "10301": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10302": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10303": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10304": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10308": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10314": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10305": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10508": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "2010101": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10306": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10307": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10310": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10312": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "origin_ja": "周囲より階段状に高くなった平坦な土地。周囲が侵食により削られて取り残されてできる。",
+   "risk_ja": "河川氾濫のリスクはほとんどないが、河川との高さの差が小さい場合には注意。縁辺部の斜面近くでは崖崩れに注意。地盤は良く、地震の揺れは小さい。液状化の発生傾向が弱い。",
+   "color": "#ffaa00"
+  },
+  "10401": {
+   "class": "foothill",
+   "en": "Foothill deposits",
+   "origin": "Gentler ground below mountains and scarps, built from debris brought down by slope failures and debris flows.",
+   "risk": "Debris flows are possible in heavy rain; the ground is unstable and slopes may fail in earthquakes.",
+   "ja": "山麓堆積地形",
+   "origin_ja": "山地や崖･段丘崖の下方にあり、山地より傾斜の緩やかな土地。崖崩れや土石流などによって運ばれた土砂が堆積してできる。",
+   "risk_ja": "大雨により土石流が発生するリスクがある。地盤は不安定で、地震による崖崩れにも注意。",
+   "color": "#99804d"
+  },
+  "10402": {
+   "class": "foothill",
+   "en": "Foothill deposits",
+   "origin": "Gentler ground below mountains and scarps, built from debris brought down by slope failures and debris flows.",
+   "risk": "Debris flows are possible in heavy rain; the ground is unstable and slopes may fail in earthquakes.",
+   "ja": "山麓堆積地形",
+   "origin_ja": "山地や崖･段丘崖の下方にあり、山地より傾斜の緩やかな土地。崖崩れや土石流などによって運ばれた土砂が堆積してできる。",
+   "risk_ja": "大雨により土石流が発生するリスクがある。地盤は不安定で、地震による崖崩れにも注意。",
+   "color": "#99804d"
+  },
+  "10403": {
+   "class": "foothill",
+   "en": "Foothill deposits",
+   "origin": "Gentler ground below mountains and scarps, built from debris brought down by slope failures and debris flows.",
+   "risk": "Debris flows are possible in heavy rain; the ground is unstable and slopes may fail in earthquakes.",
+   "ja": "山麓堆積地形",
+   "origin_ja": "山地や崖･段丘崖の下方にあり、山地より傾斜の緩やかな土地。崖崩れや土石流などによって運ばれた土砂が堆積してできる。",
+   "risk_ja": "大雨により土石流が発生するリスクがある。地盤は不安定で、地震による崖崩れにも注意。",
+   "color": "#99804d"
+  },
+  "10404": {
+   "class": "foothill",
+   "en": "Foothill deposits",
+   "origin": "Gentler ground below mountains and scarps, built from debris brought down by slope failures and debris flows.",
+   "risk": "Debris flows are possible in heavy rain; the ground is unstable and slopes may fail in earthquakes.",
+   "ja": "山麓堆積地形",
+   "origin_ja": "山地や崖･段丘崖の下方にあり、山地より傾斜の緩やかな土地。崖崩れや土石流などによって運ばれた土砂が堆積してできる。",
+   "risk_ja": "大雨により土石流が発生するリスクがある。地盤は不安定で、地震による崖崩れにも注意。",
+   "color": "#99804d"
+  },
+  "10406": {
+   "class": "foothill",
+   "en": "Foothill deposits",
+   "origin": "Gentler ground below mountains and scarps, built from debris brought down by slope failures and debris flows.",
+   "risk": "Debris flows are possible in heavy rain; the ground is unstable and slopes may fail in earthquakes.",
+   "ja": "山麓堆積地形",
+   "origin_ja": "山地や崖･段丘崖の下方にあり、山地より傾斜の緩やかな土地。崖崩れや土石流などによって運ばれた土砂が堆積してできる。",
+   "risk_ja": "大雨により土石流が発生するリスクがある。地盤は不安定で、地震による崖崩れにも注意。",
+   "color": "#99804d"
+  },
+  "10407": {
+   "class": "foothill",
+   "en": "Foothill deposits",
+   "origin": "Gentler ground below mountains and scarps, built from debris brought down by slope failures and debris flows.",
+   "risk": "Debris flows are possible in heavy rain; the ground is unstable and slopes may fail in earthquakes.",
+   "ja": "山麓堆積地形",
+   "origin_ja": "山地や崖･段丘崖の下方にあり、山地より傾斜の緩やかな土地。崖崩れや土石流などによって運ばれた土砂が堆積してできる。",
+   "risk_ja": "大雨により土石流が発生するリスクがある。地盤は不安定で、地震による崖崩れにも注意。",
+   "color": "#99804d"
+  },
+  "3010101": {
+   "class": "foothill",
+   "en": "Foothill deposits",
+   "origin": "Gentler ground below mountains and scarps, built from debris brought down by slope failures and debris flows.",
+   "risk": "Debris flows are possible in heavy rain; the ground is unstable and slopes may fail in earthquakes.",
+   "ja": "山麓堆積地形",
+   "origin_ja": "山地や崖･段丘崖の下方にあり、山地より傾斜の緩やかな土地。崖崩れや土石流などによって運ばれた土砂が堆積してできる。",
+   "risk_ja": "大雨により土石流が発生するリスクがある。地盤は不安定で、地震による崖崩れにも注意。",
+   "color": "#99804d"
+  },
+  "10501": {
+   "class": "fan",
+   "en": "Alluvial fan",
+   "origin": "Gently sloping ground spreading fan-like from a valley mouth, built from sediment dropped by floods.",
+   "risk": "Floodwater from the mountains, and debris flows near the valley mouth. Relatively firm ground; a slight liquefaction tendency on the lower fan.",
+   "ja": "扇状地",
+   "origin_ja": "山地の谷の出口から扇状に広がる傾斜の緩やかな土地。谷口からの氾濫によって運ばれた土砂が堆積してできる。",
+   "risk_ja": "山地からの出水による浸水や、谷口に近い場所では土石流のリスクがある。比較的地盤は良いため、地震の際には揺れにくい。下流部ではやや弱い液状化の発生傾向がある。",
+   "color": "#cacc60"
+  },
+  "10502": {
+   "class": "fan",
+   "en": "Alluvial fan",
+   "origin": "Gently sloping ground spreading fan-like from a valley mouth, built from sediment dropped by floods.",
+   "risk": "Floodwater from the mountains, and debris flows near the valley mouth. Relatively firm ground; a slight liquefaction tendency on the lower fan.",
+   "ja": "扇状地",
+   "origin_ja": "山地の谷の出口から扇状に広がる傾斜の緩やかな土地。谷口からの氾濫によって運ばれた土砂が堆積してできる。",
+   "risk_ja": "山地からの出水による浸水や、谷口に近い場所では土石流のリスクがある。比較的地盤は良いため、地震の際には揺れにくい。下流部ではやや弱い液状化の発生傾向がある。",
+   "color": "#cacc60"
+  },
+  "3020101": {
+   "class": "fan",
+   "en": "Alluvial fan",
+   "origin": "Gently sloping ground spreading fan-like from a valley mouth, built from sediment dropped by floods.",
+   "risk": "Floodwater from the mountains, and debris flows near the valley mouth. Relatively firm ground; a slight liquefaction tendency on the lower fan.",
+   "ja": "扇状地",
+   "origin_ja": "山地の谷の出口から扇状に広がる傾斜の緩やかな土地。谷口からの氾濫によって運ばれた土砂が堆積してできる。",
+   "risk_ja": "山地からの出水による浸水や、谷口に近い場所では土石流のリスクがある。比較的地盤は良いため、地震の際には揺れにくい。下流部ではやや弱い液状化の発生傾向がある。",
+   "color": "#cacc60"
+  },
+  "10503": {
+   "class": "levee",
+   "en": "Natural levee",
+   "origin": "Long, low ridges 0.5 m to a few metres above their surroundings along present or former rivers, built from sediment dropped by floods.",
+   "risk": "Usually above ordinary floods but can be covered in major ones; strong liquefaction tendency at the edges.",
+   "ja": "自然堤防",
+   "origin_ja": "現在や昔の河川に沿って細長く分布し、周囲より0.5～数メートル高い土地。河川が氾濫した場所に土砂が堆積してできる。",
+   "risk_ja": "洪水に対しては比較的安全だが、大規模な洪水では浸水することがある。縁辺部では液状化の発生傾向が強い。",
+   "color": "#ffff33"
+  },
+  "3040101": {
+   "class": "levee",
+   "en": "Natural levee",
+   "origin": "Long, low ridges 0.5 m to a few metres above their surroundings along present or former rivers, built from sediment dropped by floods.",
+   "risk": "Usually above ordinary floods but can be covered in major ones; strong liquefaction tendency at the edges.",
+   "ja": "自然堤防",
+   "origin_ja": "現在や昔の河川に沿って細長く分布し、周囲より0.5～数メートル高い土地。河川が氾濫した場所に土砂が堆積してできる。",
+   "risk_ja": "洪水に対しては比較的安全だが、大規模な洪水では浸水することがある。縁辺部では液状化の発生傾向が強い。",
+   "color": "#ffff33"
+  },
+  "10506": {
+   "class": "perched",
+   "en": "Raised (perched) river",
+   "origin": "Stretches where a river runs higher than the land around it, and the slightly raised ground along them.",
+   "risk": "If a perched river breaks its embankment, floodwater spreads over the surroundings very quickly.",
+   "ja": "天井川等",
+   "origin_ja": "河川が周辺の土地よりも高い河川の部分と、それに沿って形成された微高地。",
+   "risk_ja": "ひとたび天井川の堤防が決壊すれば、氾濫流が周辺に一気に拡がるため注意が必要。",
+   "color": "#fbe09d"
+  },
+  "10507": {
+   "class": "perched",
+   "en": "Raised (perched) river",
+   "origin": "Stretches where a river runs higher than the land around it, and the slightly raised ground along them.",
+   "risk": "If a perched river breaks its embankment, floodwater spreads over the surroundings very quickly.",
+   "ja": "天井川等",
+   "origin_ja": "河川が周辺の土地よりも高い河川の部分と、それに沿って形成された微高地。",
+   "risk_ja": "ひとたび天井川の堤防が決壊すれば、氾濫流が周辺に一気に拡がるため注意が必要。",
+   "color": "#fbe09d"
+  },
+  "10801": {
+   "class": "perched",
+   "en": "Raised (perched) river",
+   "origin": "Stretches where a river runs higher than the land around it, and the slightly raised ground along them.",
+   "risk": "If a perched river breaks its embankment, floodwater spreads over the surroundings very quickly.",
+   "ja": "天井川等",
+   "origin_ja": "河川が周辺の土地よりも高い河川の部分と、それに沿って形成された微高地。",
+   "risk_ja": "ひとたび天井川の堤防が決壊すれば、氾濫流が周辺に一気に拡がるため注意が必要。",
+   "color": "#fbe09d"
+  },
+  "10504": {
+   "class": "sandbar",
+   "en": "Sandbars and dunes",
+   "origin": "Sandy or gravelly ground higher than its surroundings along present or former coasts, lakeshores and riverbanks, built by waves or wind.",
+   "risk": "Usually escapes ordinary floods. Liquefaction tendency is somewhat strong on sandbars, somewhat weak on dunes and very strong at dune margins.",
+   "ja": "砂州・砂丘",
+   "origin_ja": "主に現在や昔の海岸･湖岸･河岸沿いにあり、周囲より高い砂礫質な土地。波によって打ち上げられた砂や礫、風によって運ばれた砂が堆積することでできる。",
+   "risk_ja": "通常の洪水では浸水を免れることが多い。強い地震による液状化の発生傾向は砂州ではやや強く、砂丘ではやや弱いが、砂丘縁辺部では非常に強い。",
+   "color": "#ffff99"
+  },
+  "10505": {
+   "class": "sandbar",
+   "en": "Sandbars and dunes",
+   "origin": "Sandy or gravelly ground higher than its surroundings along present or former coasts, lakeshores and riverbanks, built by waves or wind.",
+   "risk": "Usually escapes ordinary floods. Liquefaction tendency is somewhat strong on sandbars, somewhat weak on dunes and very strong at dune margins.",
+   "ja": "砂州・砂丘",
+   "origin_ja": "主に現在や昔の海岸･湖岸･河岸沿いにあり、周囲より高い砂礫質な土地。波によって打ち上げられた砂や礫、風によって運ばれた砂が堆積することでできる。",
+   "risk_ja": "通常の洪水では浸水を免れることが多い。強い地震による液状化の発生傾向は砂州ではやや強く、砂丘ではやや弱いが、砂丘縁辺部では非常に強い。",
+   "color": "#ffff99"
+  },
+  "10512": {
+   "class": "sandbar",
+   "en": "Sandbars and dunes",
+   "origin": "Sandy or gravelly ground higher than its surroundings along present or former coasts, lakeshores and riverbanks, built by waves or wind.",
+   "risk": "Usually escapes ordinary floods. Liquefaction tendency is somewhat strong on sandbars, somewhat weak on dunes and very strong at dune margins.",
+   "ja": "砂州・砂丘",
+   "origin_ja": "主に現在や昔の海岸･湖岸･河岸沿いにあり、周囲より高い砂礫質な土地。波によって打ち上げられた砂や礫、風によって運ばれた砂が堆積することでできる。",
+   "risk_ja": "通常の洪水では浸水を免れることが多い。強い地震による液状化の発生傾向は砂州ではやや強く、砂丘ではやや弱いが、砂丘縁辺部では非常に強い。",
+   "color": "#ffff99"
+  },
+  "3050101": {
+   "class": "sandbar",
+   "en": "Sandbars and dunes",
+   "origin": "Sandy or gravelly ground higher than its surroundings along present or former coasts, lakeshores and riverbanks, built by waves or wind.",
+   "risk": "Usually escapes ordinary floods. Liquefaction tendency is somewhat strong on sandbars, somewhat weak on dunes and very strong at dune margins.",
+   "ja": "砂州・砂丘",
+   "origin_ja": "主に現在や昔の海岸･湖岸･河岸沿いにあり、周囲より高い砂礫質な土地。波によって打ち上げられた砂や礫、風によって運ばれた砂が堆積することでできる。",
+   "risk_ja": "通常の洪水では浸水を免れることが多い。強い地震による液状化の発生傾向は砂州ではやや強く、砂丘ではやや弱いが、砂丘縁辺部では非常に強い。",
+   "color": "#ffff99"
+  },
+  "10601": {
+   "class": "hollow",
+   "en": "Hollows and shallow valleys",
+   "origin": "Slightly lower ground within terraces, fans or dunes, shaped by small streams or by sediment building up around it.",
+   "risk": "Rainwater gathers here in downpours; the ground can be softer than its surroundings, with a strong liquefaction tendency among sandbars and dunes.",
+   "ja": "凹地・浅い谷",
+   "origin_ja": "台地や扇状地、砂丘などの中にあり、周辺と比べてわずかに低い土地。小規模な流水の働きや、周辺部に砂礫が堆積して相対的に低くなる等でできる。",
+   "risk_ja": "大雨の際に一時的に雨水が集まりやすく、浸水のおそれがある。地盤は周囲（台地･段丘など）より軟弱な場合があり、特に周辺が砂州・砂丘の場所では液状化の発生傾向が強い。",
+   "color": "#a3cc7e"
+  },
+  "2010301": {
+   "class": "hollow",
+   "en": "Hollows and shallow valleys",
+   "origin": "Slightly lower ground within terraces, fans or dunes, shaped by small streams or by sediment building up around it.",
+   "risk": "Rainwater gathers here in downpours; the ground can be softer than its surroundings, with a strong liquefaction tendency among sandbars and dunes.",
+   "ja": "凹地・浅い谷",
+   "origin_ja": "台地や扇状地、砂丘などの中にあり、周辺と比べてわずかに低い土地。小規模な流水の働きや、周辺部に砂礫が堆積して相対的に低くなる等でできる。",
+   "risk_ja": "大雨の際に一時的に雨水が集まりやすく、浸水のおそれがある。地盤は周囲（台地･段丘など）より軟弱な場合があり、特に周辺が砂州・砂丘の場所では液状化の発生傾向が強い。",
+   "color": "#a3cc7e"
+  },
+  "3030101": {
+   "class": "floodplain",
+   "en": "Floodplain and coastal plain",
+   "origin": "Low, flat ground of little relief, built from sand and mud left by floods, or former seabed that emerged.",
+   "risk": "River flooding. Ground is softer nearer the coast and shakes somewhat more; liquefaction tendency is strong on coastal plains and somewhat strong on floodplains. Storm surge near the coast.",
+   "ja": "氾濫平野・海岸平野",
+   "origin_ja": "起伏が小さく、低くて平坦な土地。洪水で運ばれた砂や泥などが河川周辺に堆積したり、過去の海底が干上がったりしてできる。",
+   "risk_ja": "河川の氾濫に注意。地盤は海岸に近いほど軟弱で、地震の際にやや揺れやすい。強い地震による液状化発生傾向は海岸平野で強く、氾濫平野ではやや強い。沿岸部では高潮に注意。",
+   "color": "#bbff99"
+  },
+  "10701": {
+   "class": "floodplain",
+   "en": "Floodplain and coastal plain",
+   "origin": "Low, flat ground of little relief, built from sand and mud left by floods, or former seabed that emerged.",
+   "risk": "River flooding. Ground is softer nearer the coast and shakes somewhat more; liquefaction tendency is strong on coastal plains and somewhat strong on floodplains. Storm surge near the coast.",
+   "ja": "氾濫平野・海岸平野",
+   "origin_ja": "起伏が小さく、低くて平坦な土地。洪水で運ばれた砂や泥などが河川周辺に堆積したり、過去の海底が干上がったりしてできる。",
+   "risk_ja": "河川の氾濫に注意。地盤は海岸に近いほど軟弱で、地震の際にやや揺れやすい。強い地震による液状化発生傾向は海岸平野で強く、氾濫平野ではやや強い。沿岸部では高潮に注意。",
+   "color": "#bbff99"
+  },
+  "10702": {
+   "class": "floodplain",
+   "en": "Floodplain and coastal plain",
+   "origin": "Low, flat ground of little relief, built from sand and mud left by floods, or former seabed that emerged.",
+   "risk": "River flooding. Ground is softer nearer the coast and shakes somewhat more; liquefaction tendency is strong on coastal plains and somewhat strong on floodplains. Storm surge near the coast.",
+   "ja": "氾濫平野・海岸平野",
+   "origin_ja": "起伏が小さく、低くて平坦な土地。洪水で運ばれた砂や泥などが河川周辺に堆積したり、過去の海底が干上がったりしてできる。",
+   "risk_ja": "河川の氾濫に注意。地盤は海岸に近いほど軟弱で、地震の際にやや揺れやすい。強い地震による液状化発生傾向は海岸平野で強く、氾濫平野ではやや強い。沿岸部では高潮に注意。",
+   "color": "#bbff99"
+  },
+  "10705": {
+   "class": "floodplain",
+   "en": "Floodplain and coastal plain",
+   "origin": "Low, flat ground of little relief, built from sand and mud left by floods, or former seabed that emerged.",
+   "risk": "River flooding. Ground is softer nearer the coast and shakes somewhat more; liquefaction tendency is strong on coastal plains and somewhat strong on floodplains. Storm surge near the coast.",
+   "ja": "氾濫平野・海岸平野",
+   "origin_ja": "起伏が小さく、低くて平坦な土地。洪水で運ばれた砂や泥などが河川周辺に堆積したり、過去の海底が干上がったりしてできる。",
+   "risk_ja": "河川の氾濫に注意。地盤は海岸に近いほど軟弱で、地震の際にやや揺れやすい。強い地震による液状化発生傾向は海岸平野で強く、氾濫平野ではやや強い。沿岸部では高潮に注意。",
+   "color": "#bbff99"
+  },
+  "10703": {
+   "class": "backswamp",
+   "en": "Backswamp and wetland",
+   "origin": "Slightly lower ground inside the floodplain where mud from floodwater settled rather than sand or gravel.",
+   "risk": "Floodwater stays longer and drains poorly; very soft ground amplifies shaking; somewhat strong liquefaction tendency. Storm surge near the coast.",
+   "ja": "後背低地･湿地",
+   "origin_ja": "主に氾濫平野の中にあり、周囲よりわずかに低い土地。洪水による砂や礫の堆積がほとんどなく、氾濫水に含まれる泥が堆積してできる。",
+   "risk_ja": "河川の氾濫によって周囲よりも長期間浸水し、水はけが悪い。地盤が極めて軟弱で、地震の際は揺れが大きくなりやすい。液状化の発生傾向がやや強い。沿岸部では高潮に注意。",
+   "color": "#00d1a4"
+  },
+  "10804": {
+   "class": "backswamp",
+   "en": "Backswamp and wetland",
+   "origin": "Slightly lower ground inside the floodplain where mud from floodwater settled rather than sand or gravel.",
+   "risk": "Floodwater stays longer and drains poorly; very soft ground amplifies shaking; somewhat strong liquefaction tendency. Storm surge near the coast.",
+   "ja": "後背低地･湿地",
+   "origin_ja": "主に氾濫平野の中にあり、周囲よりわずかに低い土地。洪水による砂や礫の堆積がほとんどなく、氾濫水に含まれる泥が堆積してできる。",
+   "risk_ja": "河川の氾濫によって周囲よりも長期間浸水し、水はけが悪い。地盤が極めて軟弱で、地震の際は揺れが大きくなりやすい。液状化の発生傾向がやや強い。沿岸部では高潮に注意。",
+   "color": "#00d1a4"
+  },
+  "3030201": {
+   "class": "backswamp",
+   "en": "Backswamp and wetland",
+   "origin": "Slightly lower ground inside the floodplain where mud from floodwater settled rather than sand or gravel.",
+   "risk": "Floodwater stays longer and drains poorly; very soft ground amplifies shaking; somewhat strong liquefaction tendency. Storm surge near the coast.",
+   "ja": "後背低地･湿地",
+   "origin_ja": "主に氾濫平野の中にあり、周囲よりわずかに低い土地。洪水による砂や礫の堆積がほとんどなく、氾濫水に含まれる泥が堆積してできる。",
+   "risk_ja": "河川の氾濫によって周囲よりも長期間浸水し、水はけが悪い。地盤が極めて軟弱で、地震の際は揺れが大きくなりやすい。液状化の発生傾向がやや強い。沿岸部では高潮に注意。",
+   "color": "#00d1a4"
+  },
+  "10704": {
+   "class": "oldchannel",
+   "en": "Former river channel",
+   "origin": "A former course of a river, slightly lower than its surroundings, cut off when the river moved and later filled with sand and mud.",
+   "risk": "Floodwater stays longer and drains poorly; soft ground amplifies shaking; where filled or raised, the liquefaction tendency is very strong.",
+   "ja": "旧河道",
+   "origin_ja": "かつて河川の流路だった場所で、周囲よりもわずかに低い土地。流路の移動によって河川から切り離されて、その後に砂や泥などで埋められてできる。",
+   "risk_ja": "河川の氾濫によって周囲よりも長期間浸水し、水はけが悪い。地盤が軟弱で、地震の際の揺れが大きくなりやすい。特に埋立（盛土）した地域では液状化の発生傾向が非常に強い。",
+   "color": "#6699ff"
+  },
+  "3040201": {
+   "class": "oldchannel",
+   "en": "Former river channel",
+   "origin": "A former course of a river, slightly lower than its surroundings, cut off when the river moved and later filled with sand and mud.",
+   "risk": "Floodwater stays longer and drains poorly; soft ground amplifies shaking; where filled or raised, the liquefaction tendency is very strong.",
+   "ja": "旧河道",
+   "origin_ja": "かつて河川の流路だった場所で、周囲よりもわずかに低い土地。流路の移動によって河川から切り離されて、その後に砂や泥などで埋められてできる。",
+   "risk_ja": "河川の氾濫によって周囲よりも長期間浸水し、水はけが悪い。地盤が軟弱で、地震の際の揺れが大きくなりやすい。特に埋立（盛土）した地域では液状化の発生傾向が非常に強い。",
+   "color": "#6699ff"
+  },
+  "3040202": {
+   "class": "oldchannel",
+   "en": "Former river channel",
+   "origin": "A former course of a river, slightly lower than its surroundings, cut off when the river moved and later filled with sand and mud.",
+   "risk": "Floodwater stays longer and drains poorly; soft ground amplifies shaking; where filled or raised, the liquefaction tendency is very strong.",
+   "ja": "旧河道",
+   "origin_ja": "かつて河川の流路だった場所で、周囲よりもわずかに低い土地。流路の移動によって河川から切り離されて、その後に砂や泥などで埋められてできる。",
+   "risk_ja": "河川の氾濫によって周囲よりも長期間浸水し、水はけが悪い。地盤が軟弱で、地震の際の揺れが大きくなりやすい。特に埋立（盛土）した地域では液状化の発生傾向が非常に強い。",
+   "color": "#6699ff"
+  },
+  "3040301": {
+   "class": "scour",
+   "en": "Flood scour hollow",
+   "origin": "A hollow beside a river, gouged out by water pouring over an embankment in a flood.",
+   "risk": "River flooding and overtopping; usually softer ground, with a very strong liquefaction tendency where filled.",
+   "ja": "落堀",
+   "origin_ja": "河川沿いにある凹地状の土地。洪水のときに、堤防を越えた水によって地面が侵食されてできる。",
+   "risk_ja": "河川の氾濫や堤防からの越水に注意。周囲の地盤に比べて軟弱なことが多く、特に埋立（盛土）した地域では液状化の発生傾向が非常に強い。",
+   "color": "#1f9999"
+  },
+  "10802": {
+   "class": "riverbed",
+   "en": "Riverbed and beach",
+   "origin": "River berms, beaches and rocky shores at the time of mapping, including some former beaches.",
+   "risk": "Covered by high rivers or high waves; riverbeds have a very strong liquefaction tendency.",
+   "ja": "河川敷･浜",
+   "origin_ja": "データ整備時に河川敷や浜辺、岩礁である土地。一部、過去の浜辺を含む。",
+   "risk_ja": "河川の増水や高波で冠水する。河川敷は液状化の発生傾向が非常に強い。",
+   "color": "#9f9fc4"
+  },
+  "10803": {
+   "class": "riverbed",
+   "en": "Riverbed and beach",
+   "origin": "River berms, beaches and rocky shores at the time of mapping, including some former beaches.",
+   "risk": "Covered by high rivers or high waves; riverbeds have a very strong liquefaction tendency.",
+   "ja": "河川敷･浜",
+   "origin_ja": "データ整備時に河川敷や浜辺、岩礁である土地。一部、過去の浜辺を含む。",
+   "risk_ja": "河川の増水や高波で冠水する。河川敷は液状化の発生傾向が非常に強い。",
+   "color": "#9f9fc4"
+  },
+  "10807": {
+   "class": "riverbed",
+   "en": "Riverbed and beach",
+   "origin": "River berms, beaches and rocky shores at the time of mapping, including some former beaches.",
+   "risk": "Covered by high rivers or high waves; riverbeds have a very strong liquefaction tendency.",
+   "ja": "河川敷･浜",
+   "origin_ja": "データ整備時に河川敷や浜辺、岩礁である土地。一部、過去の浜辺を含む。",
+   "risk_ja": "河川の増水や高波で冠水する。河川敷は液状化の発生傾向が非常に強い。",
+   "color": "#9f9fc4"
+  },
+  "10808": {
+   "class": "riverbed",
+   "en": "Riverbed and beach",
+   "origin": "River berms, beaches and rocky shores at the time of mapping, including some former beaches.",
+   "risk": "Covered by high rivers or high waves; riverbeds have a very strong liquefaction tendency.",
+   "ja": "河川敷･浜",
+   "origin_ja": "データ整備時に河川敷や浜辺、岩礁である土地。一部、過去の浜辺を含む。",
+   "risk_ja": "河川の増水や高波で冠水する。河川敷は液状化の発生傾向が非常に強い。",
+   "color": "#9f9fc4"
+  },
+  "10805": {
+   "class": "water",
+   "en": "Water",
+   "origin": "Sea, lakes and rivers at the time of mapping.",
+   "risk": "",
+   "ja": "水部",
+   "origin_ja": "データ整備時において、海や湖沼、河川などの水面である場所。",
+   "risk_ja": "",
+   "color": "#e5ffff"
+  },
+  "10806": {
+   "class": "water",
+   "en": "Water",
+   "origin": "Sea, lakes and rivers at the time of mapping.",
+   "risk": "",
+   "ja": "水部",
+   "origin_ja": "データ整備時において、海や湖沼、河川などの水面である場所。",
+   "risk_ja": "",
+   "color": "#e5ffff"
+  },
+  "10901": {
+   "class": "water",
+   "en": "Water",
+   "origin": "Sea, lakes and rivers at the time of mapping.",
+   "risk": "",
+   "ja": "水部",
+   "origin_ja": "データ整備時において、海や湖沼、河川などの水面である場所。",
+   "risk_ja": "",
+   "color": "#e5ffff"
+  },
+  "10903": {
+   "class": "water",
+   "en": "Water",
+   "origin": "Sea, lakes and rivers at the time of mapping.",
+   "risk": "",
+   "ja": "水部",
+   "origin_ja": "データ整備時において、海や湖沼、河川などの水面である場所。",
+   "risk_ja": "",
+   "color": "#e5ffff"
+  },
+  "5010201": {
+   "class": "water",
+   "en": "Water",
+   "origin": "Sea, lakes and rivers at the time of mapping.",
+   "risk": "",
+   "ja": "水部",
+   "origin_ja": "データ整備時において、海や湖沼、河川などの水面である場所。",
+   "risk_ja": "",
+   "color": "#e5ffff"
+  },
+  "10904": {
+   "class": "formerwater",
+   "en": "Former water area",
+   "origin": "Land shown by old maps and aerial photographs to have been sea, lake, pond, reservoir or river, later turned into land.",
+   "risk": "Soft ground: very strong liquefaction tendency where filled, strong where drained. Storm surge near the coast.",
+   "ja": "旧水部",
+   "origin_ja": "旧版地形図や古い空中写真等の資料から、かつて海や湖、池･貯水池、河川・河川敷などの水部であったと確認できた土地。その後人工的に陸地にされたところ。",
+   "risk_ja": "地盤が軟弱で、埋立（盛土）した地域では液状化の発生傾向が非常に強い。また、干拓により人工的に陸化した地域では液状化の発生傾向が強い。沿岸部では高潮に注意。",
+   "color": "#779999"
+  },
+  "5010301": {
+   "class": "formerwater",
+   "en": "Former water area",
+   "origin": "Land shown by old maps and aerial photographs to have been sea, lake, pond, reservoir or river, later turned into land.",
+   "risk": "Soft ground: very strong liquefaction tendency where filled, strong where drained. Storm surge near the coast.",
+   "ja": "旧水部",
+   "origin_ja": "旧版地形図や古い空中写真等の資料から、かつて海や湖、池･貯水池、河川・河川敷などの水部であったと確認できた土地。その後人工的に陸地にされたところ。",
+   "risk_ja": "地盤が軟弱で、埋立（盛土）した地域では液状化の発生傾向が非常に強い。また、干拓により人工的に陸化した地域では液状化の発生傾向が強い。沿岸部では高潮に注意。",
+   "color": "#779999"
+  },
+  "11001": {
+   "class": "cut",
+   "en": "Cut ground",
+   "origin": "Ground made by cutting into slopes of mountains or terrace edges.",
+   "risk": "Depending on the cut slope, heavy rain or earthquakes may bring it down; the ground itself is generally firm.",
+   "ja": "切土地",
+   "origin_ja": "山地、台地の縁などの斜面を切取りにより造成した土地。",
+   "risk_ja": "切取り斜面によっては、大雨や地震により斜面崩壊のリスクがある。地盤は一般的に良好。",
+   "color": "#85c4d1"
+  },
+  "11003": {
+   "class": "cut",
+   "en": "Cut ground",
+   "origin": "Ground made by cutting into slopes of mountains or terrace edges.",
+   "risk": "Depending on the cut slope, heavy rain or earthquakes may bring it down; the ground itself is generally firm.",
+   "ja": "切土地",
+   "origin_ja": "山地、台地の縁などの斜面を切取りにより造成した土地。",
+   "risk_ja": "切取り斜面によっては、大雨や地震により斜面崩壊のリスクがある。地盤は一般的に良好。",
+   "color": "#85c4d1"
+  },
+  "11009": {
+   "class": "cut",
+   "en": "Cut ground",
+   "origin": "Ground made by cutting into slopes of mountains or terrace edges.",
+   "risk": "Depending on the cut slope, heavy rain or earthquakes may bring it down; the ground itself is generally firm.",
+   "ja": "切土地",
+   "origin_ja": "山地、台地の縁などの斜面を切取りにより造成した土地。",
+   "risk_ja": "切取り斜面によっては、大雨や地震により斜面崩壊のリスクがある。地盤は一般的に良好。",
+   "color": "#85c4d1"
+  },
+  "11011": {
+   "class": "cut",
+   "en": "Cut ground",
+   "origin": "Ground made by cutting into slopes of mountains or terrace edges.",
+   "risk": "Depending on the cut slope, heavy rain or earthquakes may bring it down; the ground itself is generally firm.",
+   "ja": "切土地",
+   "origin_ja": "山地、台地の縁などの斜面を切取りにより造成した土地。",
+   "risk_ja": "切取り斜面によっては、大雨や地震により斜面崩壊のリスクがある。地盤は一般的に良好。",
+   "color": "#85c4d1"
+  },
+  "4010301": {
+   "class": "cut",
+   "en": "Cut ground",
+   "origin": "Ground made by cutting into slopes of mountains or terrace edges.",
+   "risk": "Depending on the cut slope, heavy rain or earthquakes may bring it down; the ground itself is generally firm.",
+   "ja": "切土地",
+   "origin_ja": "山地、台地の縁などの斜面を切取りにより造成した土地。",
+   "risk_ja": "切取り斜面によっては、大雨や地震により斜面崩壊のリスクがある。地盤は一般的に良好。",
+   "color": "#85c4d1"
+  },
+  "11002": {
+   "class": "levelledfarm",
+   "en": "Levelled farmland",
+   "origin": "Farmland made by clearing and levelling hill or mountain ground.",
+   "risk": "May collapse in heavy rain or earthquakes.",
+   "ja": "農耕平坦化地",
+   "origin_ja": "山地などを切り開いて整地した農耕地。",
+   "risk_ja": "大雨や地震により崩壊するリスクがある。",
+   "color": "#8ad8b6"
+  },
+  "11008": {
+   "class": "polder",
+   "en": "Polder (drained reclamation)",
+   "origin": "Land made by enclosing water or marsh with embankments and draining it, confirmed from old maps and records.",
+   "risk": "Usually below sea or lake level, so floodwater lingers; storm surge is a particular concern on the coast; soft ground shakes strongly and tends to liquefy.",
+   "ja": "干拓地",
+   "origin_ja": "水面や低湿地を堤防で締め切って排水して、新たな陸地とした土地。過去の地形図や資料から、干拓されたことが確認できる場所。",
+   "risk_ja": "一般に海･湖水面より低いため、洪水時に氾濫水が留まりやすい。沿岸部では特に高潮に対して注意が必要。地盤は軟弱で、地震による揺れも大きくなりやすい。液状化の発生傾向が強い。",
+   "color": "#c37aff"
+  },
+  "4010101": {
+   "class": "polder",
+   "en": "Polder (drained reclamation)",
+   "origin": "Land made by enclosing water or marsh with embankments and draining it, confirmed from old maps and records.",
+   "risk": "Usually below sea or lake level, so floodwater lingers; storm surge is a particular concern on the coast; soft ground shakes strongly and tends to liquefy.",
+   "ja": "干拓地",
+   "origin_ja": "水面や低湿地を堤防で締め切って排水して、新たな陸地とした土地。過去の地形図や資料から、干拓されたことが確認できる場所。",
+   "risk_ja": "一般に海･湖水面より低いため、洪水時に氾濫水が留まりやすい。沿岸部では特に高潮に対して注意が必要。地盤は軟弱で、地震による揺れも大きくなりやすい。液状化の発生傾向が強い。",
+   "color": "#c37aff"
+  },
+  "11004": {
+   "class": "fill",
+   "en": "Filled and reclaimed land",
+   "origin": "Ground raised with fill, land made by dumping soil into the sea, rivers or ponds, or valleys filled in.",
+   "risk": "May flood if not raised enough; on hills, rain or earthquakes can make the fill fail; in lowlands the liquefaction tendency is very strong, especially on filled sea, lake or river beds.",
+   "ja": "盛土地･埋立地",
+   "origin_ja": "周囲の地表より高く盛土した土地や、海水面などの水部に土砂を投入して陸地にしたり、谷のような凹地を埋め立てて造成したりした土地。",
+   "risk_ja": "高さが十分でない場合には浸水のリスクがある。山地や台地では降雨･地震により地盤崩壊のリスクがある。低地では液状化の発生傾向が非常に強く、海や湖沼･河川を埋め立てた場所では特に注意。",
+   "color": "#ef8888"
+  },
+  "11005": {
+   "class": "fill",
+   "en": "Filled and reclaimed land",
+   "origin": "Ground raised with fill, land made by dumping soil into the sea, rivers or ponds, or valleys filled in.",
+   "risk": "May flood if not raised enough; on hills, rain or earthquakes can make the fill fail; in lowlands the liquefaction tendency is very strong, especially on filled sea, lake or river beds.",
+   "ja": "盛土地･埋立地",
+   "origin_ja": "周囲の地表より高く盛土した土地や、海水面などの水部に土砂を投入して陸地にしたり、谷のような凹地を埋め立てて造成したりした土地。",
+   "risk_ja": "高さが十分でない場合には浸水のリスクがある。山地や台地では降雨･地震により地盤崩壊のリスクがある。低地では液状化の発生傾向が非常に強く、海や湖沼･河川を埋め立てた場所では特に注意。",
+   "color": "#ef8888"
+  },
+  "11006": {
+   "class": "fill",
+   "en": "Filled and reclaimed land",
+   "origin": "Ground raised with fill, land made by dumping soil into the sea, rivers or ponds, or valleys filled in.",
+   "risk": "May flood if not raised enough; on hills, rain or earthquakes can make the fill fail; in lowlands the liquefaction tendency is very strong, especially on filled sea, lake or river beds.",
+   "ja": "盛土地･埋立地",
+   "origin_ja": "周囲の地表より高く盛土した土地や、海水面などの水部に土砂を投入して陸地にしたり、谷のような凹地を埋め立てて造成したりした土地。",
+   "risk_ja": "高さが十分でない場合には浸水のリスクがある。山地や台地では降雨･地震により地盤崩壊のリスクがある。低地では液状化の発生傾向が非常に強く、海や湖沼･河川を埋め立てた場所では特に注意。",
+   "color": "#ef8888"
+  },
+  "11007": {
+   "class": "fill",
+   "en": "Filled and reclaimed land",
+   "origin": "Ground raised with fill, land made by dumping soil into the sea, rivers or ponds, or valleys filled in.",
+   "risk": "May flood if not raised enough; on hills, rain or earthquakes can make the fill fail; in lowlands the liquefaction tendency is very strong, especially on filled sea, lake or river beds.",
+   "ja": "盛土地･埋立地",
+   "origin_ja": "周囲の地表より高く盛土した土地や、海水面などの水部に土砂を投入して陸地にしたり、谷のような凹地を埋め立てて造成したりした土地。",
+   "risk_ja": "高さが十分でない場合には浸水のリスクがある。山地や台地では降雨･地震により地盤崩壊のリスクがある。低地では液状化の発生傾向が非常に強く、海や湖沼･河川を埋め立てた場所では特に注意。",
+   "color": "#ef8888"
+  },
+  "11014": {
+   "class": "fill",
+   "en": "Filled and reclaimed land",
+   "origin": "Ground raised with fill, land made by dumping soil into the sea, rivers or ponds, or valleys filled in.",
+   "risk": "May flood if not raised enough; on hills, rain or earthquakes can make the fill fail; in lowlands the liquefaction tendency is very strong, especially on filled sea, lake or river beds.",
+   "ja": "盛土地･埋立地",
+   "origin_ja": "周囲の地表より高く盛土した土地や、海水面などの水部に土砂を投入して陸地にしたり、谷のような凹地を埋め立てて造成したりした土地。",
+   "risk_ja": "高さが十分でない場合には浸水のリスクがある。山地や台地では降雨･地震により地盤崩壊のリスクがある。低地では液状化の発生傾向が非常に強く、海や湖沼･河川を埋め立てた場所では特に注意。",
+   "color": "#ef8888"
+  },
+  "4010201": {
+   "class": "fill",
+   "en": "Filled and reclaimed land",
+   "origin": "Ground raised with fill, land made by dumping soil into the sea, rivers or ponds, or valleys filled in.",
+   "risk": "May flood if not raised enough; on hills, rain or earthquakes can make the fill fail; in lowlands the liquefaction tendency is very strong, especially on filled sea, lake or river beds.",
+   "ja": "盛土地･埋立地",
+   "origin_ja": "周囲の地表より高く盛土した土地や、海水面などの水部に土砂を投入して陸地にしたり、谷のような凹地を埋め立てて造成したりした土地。",
+   "risk_ja": "高さが十分でない場合には浸水のリスクがある。山地や台地では降雨･地震により地盤崩壊のリスクがある。低地では液状化の発生傾向が非常に強く、海や湖沼･河川を埋め立てた場所では特に注意。",
+   "color": "#ef8888"
+  },
+  "11010": {
+   "class": "works",
+   "en": "Under construction when mapped",
+   "origin": "Ground being reshaped when the data were compiled.",
+   "risk": "",
+   "ja": "改変工事中",
+   "origin_ja": "データ整備時に改変工事が行われていた土地。",
+   "risk_ja": "",
+   "color": "#ffe8e8"
+  },
+  "9999": {
+   "class": "note",
+   "ja": "拡大すると地形分類が表示されます。"
+  },
+  "11": {
+   "class": "mountain",
+   "en": "Mountains",
+   "origin": "Terrain of high ridges and valleys.",
+   "risk": "Watch for slope disasters.",
+   "ja": "山地",
+   "origin_ja": "起伏が大きな尾根と谷からなる地形。",
+   "risk_ja": "土砂災害に注意。",
+   "color": "#998b79"
+  },
+  "12": {
+   "class": "butte",
+   "en": "Residual hills (buttes)",
+   "origin": "Isolated rocky peaks or table-like hills of old volcanic rock.",
+   "risk": "Rockfall and slope failures on the surrounding cliffs.",
+   "ja": "残丘状地形",
+   "origin_ja": "周囲から孤立して突出した岩峰または台地状の地形（約260万年前よりも古い時代の火山岩からなるものに限る）。",
+   "risk_ja": "土砂災害に注意。とくに周縁部の崖では、落石や斜面崩壊に注意。",
+   "color": "#664d55"
+  },
+  "13": {
+   "class": "karst",
+   "en": "Karst",
+   "origin": "Limestone terrain dissolved by rainwater, with few ridges and valleys and frequent sinkholes.",
+   "risk": "Ground collapse; rockfall on the edges.",
+   "ja": "カルスト地形",
+   "origin_ja": "石灰岩が雨水で溶けてできた地形。尾根や谷が少なく、しばしば陥没地形がみられる。",
+   "risk_ja": "地盤の陥没に注意。周縁部の崖では、落石や斜面崩壊に注意。",
+   "color": "#7580D2"
+  },
+  "21": {
+   "class": "hills",
+   "en": "Hills and low-relief uplands",
+   "origin": "Terrain of low ridges and valleys.",
+   "risk": "Watch for slope disasters.",
+   "ja": "丘陵・小起伏地",
+   "origin_ja": "起伏が小さな尾根と谷からなる地形。",
+   "risk_ja": "土砂災害に注意。",
+   "color": "#C9FF05"
+  },
+  "31": {
+   "class": "volcanic-young",
+   "en": "Volcanic terrain (distinct)",
+   "origin": "Steep volcanic slopes of relatively recent age, where lava flows and other forms are still clear.",
+   "risk": "Eruptions and slope disasters.",
+   "ja": "火山地形（明瞭）",
+   "origin_ja": "火山噴火によってできた急斜面のうち、比較的新しい時代にできた地形。溶岩流などの詳細な地形が多く残されている部分。地すべり地形を除く。",
+   "risk_ja": "火山噴火、土砂災害に注意。",
+   "color": "#FF0116"
+  },
+  "32": {
+   "class": "volcanic-old",
+   "en": "Volcanic terrain (eroded)",
+   "origin": "Older volcanic slopes worn down so that only the broad form remains.",
+   "risk": "Watch for slope disasters.",
+   "ja": "火山地形（やや不明瞭）",
+   "origin_ja": "火山噴火によってできた急斜面のうち、比較的古い時代にできた地形。侵食作用によって削られて、火山の大まかな地形のみを残している部分。地すべり地形を除く。",
+   "risk_ja": "土砂災害に注意。",
+   "color": "#FF5101"
+  },
+  "33": {
+   "class": "volcanic-hills",
+   "en": "Volcanic hills",
+   "origin": "Gentle volcanic slopes later cut into low ridges and valleys by erosion.",
+   "risk": "Watch for slope disasters.",
+   "ja": "火山性丘陵",
+   "origin_ja": "火山噴出物や、火山から運ばれた土砂によってできた緩やかな斜面が、その後の侵食作用によって削られてできた地形。起伏が小さな尾根と谷からなる。",
+   "risk_ja": "土砂災害に注意。",
+   "color": "#C975B0"
+  },
+  "34": {
+   "class": "volcanic-foot",
+   "en": "Volcanic foot slopes",
+   "origin": "Gentle slopes built from volcanic ejecta and sediment carried down from a volcano.",
+   "risk": "Eruptions and slope disasters.",
+   "ja": "火山麓地形",
+   "origin_ja": "火山噴出物や、火山から運ばれた土砂によってできた緩やかな斜面。比較的新しい時代の火砕流や火山斜面の侵食によって生じた土砂が堆積してできた地形。",
+   "risk_ja": "火山噴火、土砂災害に注意。",
+   "color": "#FFBBFC"
+  },
+  "41": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Raised flat land, usually bounded by eroded scarps.",
+   "risk": "Rockfall and slope failures near the scarps.",
+   "ja": "台地・段丘",
+   "origin_ja": "低地が隆起してできた台地状の地形。低地との境界などには侵食による崖（段丘崖）がみられることが多い。",
+   "risk_ja": "段丘崖の周辺では、落石や崖崩れに注意。",
+   "color": "#ffb31a"
+  },
+  "51": {
+   "class": "lowland",
+   "en": "Lowland",
+   "origin": "Flat land built from sand, gravel and mud laid down by rivers or the sea.",
+   "risk": "River flooding, storm surge and liquefaction; shakes easily in earthquakes.",
+   "ja": "低地",
+   "origin_ja": "河川や海の流れによって運ばれた砂礫や泥が堆積してできた平坦地。または、その流れの侵食によってできた平坦地。",
+   "risk_ja": "河川氾濫、高潮、液状化に注意。地震時に揺れやすい。",
+   "color": "#C7FFF7"
+  },
+  "61": {
+   "class": "dune",
+   "en": "Dunes",
+   "origin": "Low hills of wind-blown sand.",
+   "risk": "Liquefaction at the margins and in hollows; shakes easily.",
+   "ja": "砂丘",
+   "origin_ja": "風によって運ばれた砂が小高く堆積してできた地形。",
+   "risk_ja": "周縁部や、周囲よりも低い場所では、液状化に注意。地震時に揺れやすい。",
+   "color": "#FFEA01"
+  },
+  "71": {
+   "class": "lake",
+   "en": "Lakes",
+   "origin": "Natural lakes.",
+   "risk": "",
+   "ja": "湖",
+   "origin_ja": "自然にできた湖。下流部が土砂や火山噴出物などで塞がれたり、土地が沈降したりしてできる。",
+   "risk_ja": "",
+   "color": "#1201FF"
+  },
+  "1": {
+   "class": "mountain",
+   "en": "Mountains and hills",
+   "origin": "Terrain of ridges and valleys.",
+   "risk": "Watch for slope disasters.",
+   "ja": "山地・丘陵",
+   "origin_ja": "尾根と谷からなる地形。",
+   "risk_ja": "土砂災害に注意。",
+   "color": "#998c7a"
+  },
+  "3": {
+   "class": "volcanic",
+   "en": "Volcanic terrain",
+   "origin": "Terrain built from volcanic ejecta and sediment carried from volcanoes.",
+   "risk": "Eruptions and slope disasters.",
+   "ja": "火山地形",
+   "origin_ja": "火山噴出物や、火山から運ばれた土砂によってできた地形。",
+   "risk_ja": "火山噴火、土砂災害に注意。",
+   "color": "#FF0116"
+  },
+  "4": {
+   "class": "terrace",
+   "en": "Plateaus and terraces",
+   "origin": "Raised flat land, usually bounded by eroded scarps.",
+   "risk": "Rockfall and slope failures near the scarps.",
+   "ja": "台地・段丘",
+   "origin_ja": "低地が隆起してできた台地状の地形。低地との境界などには侵食による崖（段丘崖）がみられることが多い。",
+   "risk_ja": "段丘崖の周辺では、落石や崖崩れに注意。",
+   "color": "#ffb31a"
+  },
+  "5": {
+   "class": "lowland",
+   "en": "Lowland",
+   "origin": "Flat land built from sand, gravel and mud laid down by rivers or the sea.",
+   "risk": "River flooding, storm surge and liquefaction; shakes easily in earthquakes.",
+   "ja": "低地",
+   "origin_ja": "河川や海の流れによって運ばれた砂礫や泥が堆積してできた平坦地。または、その流れの侵食によってできた平坦地。",
+   "risk_ja": "河川氾濫、高潮、液状化に注意。地震時に揺れやすい。",
+   "color": "#C7FFF7"
+  },
+  "6": {
+   "class": "dune",
+   "en": "Dunes",
+   "origin": "Low hills of wind-blown sand.",
+   "risk": "Liquefaction at the margins and in hollows; shakes easily.",
+   "ja": "砂丘",
+   "origin_ja": "風によって運ばれた砂が小高く堆積してできた地形。",
+   "risk_ja": "周縁部や、周囲よりも低い場所では、液状化に注意。地震時に揺れやすい。",
+   "color": "#FFEA01"
+  },
+  "7": {
+   "class": "lake",
+   "en": "Lakes",
+   "origin": "Natural lakes.",
+   "risk": "",
+   "ja": "湖",
+   "origin_ja": "自然にできた湖。下流部が土砂や火山噴出物などで塞がれたり、土地が沈降したりしてできる。",
+   "risk_ja": "",
+   "color": "#1201FF"
+  }
+ },
+ "classes": {
+  "slope": {
+   "en": "Mountain and hill slopes",
+   "origin": "Ridges, valleys and fairly steep ground, including terrace-scarp slopes and volcanic ground.",
+   "risk": "Heavy rain or earthquakes can trigger slope failures, debris flows and landslides.",
+   "ja": "山地斜面等",
+   "color": "#d9cbae"
+  },
+  "scarp": {
+   "en": "Cliffs and terrace scarps",
+   "origin": "Very steep slopes at the edges of mountains and terraces, or along the coast.",
+   "risk": "Heavy rain or earthquake shaking can bring down slopes nearby.",
+   "ja": "崖･段丘崖",
+   "color": "#9466ab"
+  },
+  "landslide": {
+   "en": "Landslide topography",
+   "origin": "Ground where part of a slope has slid downhill, leaving a scarp above and an irregular, hummocky mass below.",
+   "risk": "Saturation by heavy rain or snowmelt, or earthquake shaking, can set the ground moving again.",
+   "ja": "地すべり地形",
+   "color": "#cc99ff"
+  },
+  "terrace": {
+   "en": "Plateaus and terraces",
+   "origin": "Flat ground standing in steps above its surroundings, left behind as the land around it was eroded.",
+   "risk": "River flooding is rarely a threat unless the terrace is only slightly above the river; watch the slopes at its edges. Firm ground: shaking is relatively weak and liquefaction is unlikely.",
+   "ja": "台地･段丘",
+   "color": "#ffaa00"
+  },
+  "foothill": {
+   "en": "Foothill deposits",
+   "origin": "Gentler ground below mountains and scarps, built from debris brought down by slope failures and debris flows.",
+   "risk": "Debris flows are possible in heavy rain; the ground is unstable and slopes may fail in earthquakes.",
+   "ja": "山麓堆積地形",
+   "color": "#99804d"
+  },
+  "fan": {
+   "en": "Alluvial fan",
+   "origin": "Gently sloping ground spreading fan-like from a valley mouth, built from sediment dropped by floods.",
+   "risk": "Floodwater from the mountains, and debris flows near the valley mouth. Relatively firm ground; a slight liquefaction tendency on the lower fan.",
+   "ja": "扇状地",
+   "color": "#cacc60"
+  },
+  "levee": {
+   "en": "Natural levee",
+   "origin": "Long, low ridges 0.5 m to a few metres above their surroundings along present or former rivers, built from sediment dropped by floods.",
+   "risk": "Usually above ordinary floods but can be covered in major ones; strong liquefaction tendency at the edges.",
+   "ja": "自然堤防",
+   "color": "#ffff33"
+  },
+  "perched": {
+   "en": "Raised (perched) river",
+   "origin": "Stretches where a river runs higher than the land around it, and the slightly raised ground along them.",
+   "risk": "If a perched river breaks its embankment, floodwater spreads over the surroundings very quickly.",
+   "ja": "天井川等",
+   "color": "#fbe09d"
+  },
+  "sandbar": {
+   "en": "Sandbars and dunes",
+   "origin": "Sandy or gravelly ground higher than its surroundings along present or former coasts, lakeshores and riverbanks, built by waves or wind.",
+   "risk": "Usually escapes ordinary floods. Liquefaction tendency is somewhat strong on sandbars, somewhat weak on dunes and very strong at dune margins.",
+   "ja": "砂州・砂丘",
+   "color": "#ffff99"
+  },
+  "hollow": {
+   "en": "Hollows and shallow valleys",
+   "origin": "Slightly lower ground within terraces, fans or dunes, shaped by small streams or by sediment building up around it.",
+   "risk": "Rainwater gathers here in downpours; the ground can be softer than its surroundings, with a strong liquefaction tendency among sandbars and dunes.",
+   "ja": "凹地・浅い谷",
+   "color": "#a3cc7e"
+  },
+  "floodplain": {
+   "en": "Floodplain and coastal plain",
+   "origin": "Low, flat ground of little relief, built from sand and mud left by floods, or former seabed that emerged.",
+   "risk": "River flooding. Ground is softer nearer the coast and shakes somewhat more; liquefaction tendency is strong on coastal plains and somewhat strong on floodplains. Storm surge near the coast.",
+   "ja": "氾濫平野・海岸平野",
+   "color": "#bbff99"
+  },
+  "backswamp": {
+   "en": "Backswamp and wetland",
+   "origin": "Slightly lower ground inside the floodplain where mud from floodwater settled rather than sand or gravel.",
+   "risk": "Floodwater stays longer and drains poorly; very soft ground amplifies shaking; somewhat strong liquefaction tendency. Storm surge near the coast.",
+   "ja": "後背低地･湿地",
+   "color": "#00d1a4"
+  },
+  "oldchannel": {
+   "en": "Former river channel",
+   "origin": "A former course of a river, slightly lower than its surroundings, cut off when the river moved and later filled with sand and mud.",
+   "risk": "Floodwater stays longer and drains poorly; soft ground amplifies shaking; where filled or raised, the liquefaction tendency is very strong.",
+   "ja": "旧河道",
+   "color": "#6699ff"
+  },
+  "scour": {
+   "en": "Flood scour hollow",
+   "origin": "A hollow beside a river, gouged out by water pouring over an embankment in a flood.",
+   "risk": "River flooding and overtopping; usually softer ground, with a very strong liquefaction tendency where filled.",
+   "ja": "落堀",
+   "color": "#1f9999"
+  },
+  "riverbed": {
+   "en": "Riverbed and beach",
+   "origin": "River berms, beaches and rocky shores at the time of mapping, including some former beaches.",
+   "risk": "Covered by high rivers or high waves; riverbeds have a very strong liquefaction tendency.",
+   "ja": "河川敷･浜",
+   "color": "#9f9fc4"
+  },
+  "water": {
+   "en": "Water",
+   "origin": "Sea, lakes and rivers at the time of mapping.",
+   "risk": "",
+   "ja": "水部",
+   "color": "#e5ffff"
+  },
+  "formerwater": {
+   "en": "Former water area",
+   "origin": "Land shown by old maps and aerial photographs to have been sea, lake, pond, reservoir or river, later turned into land.",
+   "risk": "Soft ground: very strong liquefaction tendency where filled, strong where drained. Storm surge near the coast.",
+   "ja": "旧水部",
+   "color": "#779999"
+  },
+  "cut": {
+   "en": "Cut ground",
+   "origin": "Ground made by cutting into slopes of mountains or terrace edges.",
+   "risk": "Depending on the cut slope, heavy rain or earthquakes may bring it down; the ground itself is generally firm.",
+   "ja": "切土地",
+   "color": "#85c4d1"
+  },
+  "levelledfarm": {
+   "en": "Levelled farmland",
+   "origin": "Farmland made by clearing and levelling hill or mountain ground.",
+   "risk": "May collapse in heavy rain or earthquakes.",
+   "ja": "農耕平坦化地",
+   "color": "#8ad8b6"
+  },
+  "polder": {
+   "en": "Polder (drained reclamation)",
+   "origin": "Land made by enclosing water or marsh with embankments and draining it, confirmed from old maps and records.",
+   "risk": "Usually below sea or lake level, so floodwater lingers; storm surge is a particular concern on the coast; soft ground shakes strongly and tends to liquefy.",
+   "ja": "干拓地",
+   "color": "#c37aff"
+  },
+  "fill": {
+   "en": "Filled and reclaimed land",
+   "origin": "Ground raised with fill, land made by dumping soil into the sea, rivers or ponds, or valleys filled in.",
+   "risk": "May flood if not raised enough; on hills, rain or earthquakes can make the fill fail; in lowlands the liquefaction tendency is very strong, especially on filled sea, lake or river beds.",
+   "ja": "盛土地･埋立地",
+   "color": "#ef8888"
+  },
+  "works": {
+   "en": "Under construction when mapped",
+   "origin": "Ground being reshaped when the data were compiled.",
+   "risk": "",
+   "ja": "改変工事中",
+   "color": "#ffe8e8"
+  },
+  "mountain": {
+   "en": "Mountains",
+   "origin": "Terrain of high ridges and valleys.",
+   "risk": "Watch for slope disasters.",
+   "ja": "山地",
+   "color": "#998b79"
+  },
+  "butte": {
+   "en": "Residual hills (buttes)",
+   "origin": "Isolated rocky peaks or table-like hills of old volcanic rock.",
+   "risk": "Rockfall and slope failures on the surrounding cliffs.",
+   "ja": "残丘状地形",
+   "color": "#664d55"
+  },
+  "karst": {
+   "en": "Karst",
+   "origin": "Limestone terrain dissolved by rainwater, with few ridges and valleys and frequent sinkholes.",
+   "risk": "Ground collapse; rockfall on the edges.",
+   "ja": "カルスト地形",
+   "color": "#7580D2"
+  },
+  "hills": {
+   "en": "Hills and low-relief uplands",
+   "origin": "Terrain of low ridges and valleys.",
+   "risk": "Watch for slope disasters.",
+   "ja": "丘陵・小起伏地",
+   "color": "#C9FF05"
+  },
+  "volcanic-young": {
+   "en": "Volcanic terrain (distinct)",
+   "origin": "Steep volcanic slopes of relatively recent age, where lava flows and other forms are still clear.",
+   "risk": "Eruptions and slope disasters.",
+   "ja": "火山地形（明瞭）",
+   "color": "#FF0116"
+  },
+  "volcanic-old": {
+   "en": "Volcanic terrain (eroded)",
+   "origin": "Older volcanic slopes worn down so that only the broad form remains.",
+   "risk": "Watch for slope disasters.",
+   "ja": "火山地形（やや不明瞭）",
+   "color": "#FF5101"
+  },
+  "volcanic-hills": {
+   "en": "Volcanic hills",
+   "origin": "Gentle volcanic slopes later cut into low ridges and valleys by erosion.",
+   "risk": "Watch for slope disasters.",
+   "ja": "火山性丘陵",
+   "color": "#C975B0"
+  },
+  "volcanic-foot": {
+   "en": "Volcanic foot slopes",
+   "origin": "Gentle slopes built from volcanic ejecta and sediment carried down from a volcano.",
+   "risk": "Eruptions and slope disasters.",
+   "ja": "火山麓地形",
+   "color": "#FFBBFC"
+  },
+  "lowland": {
+   "en": "Lowland",
+   "origin": "Flat land built from sand, gravel and mud laid down by rivers or the sea.",
+   "risk": "River flooding, storm surge and liquefaction; shakes easily in earthquakes.",
+   "ja": "低地",
+   "color": "#C7FFF7"
+  },
+  "dune": {
+   "en": "Dunes",
+   "origin": "Low hills of wind-blown sand.",
+   "risk": "Liquefaction at the margins and in hollows; shakes easily.",
+   "ja": "砂丘",
+   "color": "#FFEA01"
+  },
+  "lake": {
+   "en": "Lakes",
+   "origin": "Natural lakes.",
+   "risk": "",
+   "ja": "湖",
+   "color": "#1201FF"
+  },
+  "volcanic": {
+   "en": "Volcanic terrain",
+   "origin": "Terrain built from volcanic ejecta and sediment carried from volcanoes.",
+   "risk": "Eruptions and slope disasters.",
+   "ja": "火山地形",
+   "color": "#FF0116"
+  }
+ }
+}

@@ -1,0 +1,1179 @@
+{
+ "tokyo-asakusa": {
+  "id": "tokyo-asakusa",
+  "then": "ort_riku10",
+  "series": [
+   "ort_riku10",
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo2",
+   "gazo3",
+   "gazo4"
+  ],
+  "now": [
+   "nendophoto2019",
+   "2019"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 1.0,
+   "ort_USA10": 0.999,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 1.0
+  },
+  "landform": {
+   "natural": {
+    "formerwater": 0.3824,
+    "sandbar": 0.2753,
+    "floodplain": 0.2716,
+    "water": 0.0644
+   },
+   "artificial": {
+    "fill": 0.9073
+   }
+  },
+  "meiji": {
+   "water": 0.1133,
+   "paddy": 0.0389,
+   "thatch": 0.0068,
+   "salt": 0.0001
+  },
+  "monuments": [
+   "13107-001",
+   "13107-004",
+   "13107-005",
+   "13107-006",
+   "13107-007",
+   "13107-008",
+   "13107-009",
+   "13107-011",
+   "13107-010",
+   "13107-002",
+   "13101-003",
+   "13102-001"
+  ],
+  "monumentRadiusKm": 3.0,
+  "monuments3km": 15,
+  "studyKm": [
+   2.6,
+   1.68
+  ],
+  "bbox": [
+   35.697415,
+   139.783119,
+   35.712585,
+   139.811881
+  ],
+  "generated": "2026-09-27"
+ },
+ "kin": {
+  "id": "kin",
+  "then": "gazo1",
+  "series": [
+   "gazo1"
+  ],
+  "now": [
+   "nendophoto2023",
+   "2023"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.3606,
+    "terrace": 0.2735,
+    "floodplain": 0.0477,
+    "hollow": 0.0329,
+    "water": 0.0201,
+    "riverbed": 0.0012
+   },
+   "artificial": {
+    "cut": 0.3164,
+    "fill": 0.0751,
+    "works": 0.0169
+   }
+  },
+  "meiji": {},
+  "monuments": [
+   "47209-001",
+   "47209-002",
+   "47209-003"
+  ],
+  "monumentRadiusKm": 30.0,
+  "monuments3km": 0,
+  "studyKm": [
+   2.8,
+   1.81
+  ],
+  "bbox": [
+   26.455831,
+   127.905952,
+   26.472169,
+   127.934048
+  ],
+  "generated": "2026-09-27"
+ },
+ "chatan": {
+  "id": "chatan",
+  "then": "gazo1",
+  "series": [
+   "gazo1"
+  ],
+  "now": [
+   "nendophoto2023",
+   "2023"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.3519,
+    "floodplain": 0.1896,
+    "formerwater": 0.1705,
+    "terrace": 0.1383,
+    "sandbar": 0.0295,
+    "foothill": 0.0084,
+    "water": 0.0054,
+    "riverbed": 0.0029,
+    "hollow": 0.0022
+   },
+   "artificial": {
+    "cut": 0.2526,
+    "fill": 0.2517
+   }
+  },
+  "meiji": {},
+  "monuments": [
+   "47215-001"
+  ],
+  "monumentRadiusKm": 30.0,
+  "monuments3km": 0,
+  "studyKm": [
+   3.0,
+   1.94
+  ],
+  "bbox": [
+   26.316248,
+   127.744966,
+   26.333752,
+   127.775034
+  ],
+  "generated": "2026-09-27"
+ },
+ "niseko": {
+  "id": "niseko",
+  "then": "gazo1",
+  "series": [
+   "gazo1"
+  ],
+  "now": [
+   "nendophoto2025",
+   "2025"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "volcanic-old": 0.7449,
+    "volcanic-foot": 0.2551
+   },
+   "artificial": {}
+  },
+  "meiji": {},
+  "monuments": [],
+  "monumentRadiusKm": 8.0,
+  "monuments3km": 0,
+  "studyKm": [
+   3.0,
+   1.94
+  ],
+  "bbox": [
+   42.856648,
+   140.682416,
+   42.874152,
+   140.719184
+  ],
+  "generated": "2026-09-27"
+ },
+ "fujiyoshida": {
+  "id": "fujiyoshida",
+  "then": "gazo1",
+  "series": [
+   "gazo1"
+  ],
+  "now": [
+   "nendophoto2020",
+   "2020"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.4807,
+    "terrace": 0.3798,
+    "floodplain": 0.0971,
+    "slope": 0.0156,
+    "water": 0.0129,
+    "foothill": 0.0082,
+    "scarp": 0.0057
+   },
+   "artificial": {
+    "cut": 0.017,
+    "fill": 0.0146
+   }
+  },
+  "meiji": {
+   "paddy": 0.2046,
+   "water": 0.0069,
+   "salt": 0.0001
+  },
+  "monuments": [
+   "19430-006",
+   "19424-001"
+  ],
+  "monumentRadiusKm": 8.0,
+  "monuments3km": 1,
+  "studyKm": [
+   2.6,
+   1.68
+  ],
+  "bbox": [
+   35.484415,
+   138.785657,
+   35.499585,
+   138.814343
+  ],
+  "generated": "2026-09-27"
+ },
+ "kure": {
+  "id": "kure",
+  "then": "ort_old10",
+  "series": [
+   "ort_old10",
+   "gazo1",
+   "gazo2",
+   "gazo4"
+  ],
+  "now": [
+   "nendophoto2023",
+   "2023"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0
+  },
+  "landform": {
+   "natural": {
+    "floodplain": 0.3378,
+    "formerwater": 0.2002,
+    "slope": 0.1204,
+    "fan": 0.0742,
+    "terrace": 0.0504,
+    "water": 0.0361,
+    "riverbed": 0.0082
+   },
+   "artificial": {
+    "fill": 0.2002,
+    "cut": 0.1118
+   }
+  },
+  "meiji": {
+   "water": 0.1627,
+   "paddy": 0.1186,
+   "tidal": 0.0687,
+   "waste": 0.034,
+   "marsh": 0.0273,
+   "sand": 0.0142,
+   "salt": 0.0001
+  },
+  "monuments": [
+   "34202-009",
+   "34202-002",
+   "34202-023"
+  ],
+  "monumentRadiusKm": 3.0,
+  "monuments3km": 3,
+  "studyKm": [
+   2.4,
+   1.55
+  ],
+  "bbox": [
+   34.236998,
+   132.54496,
+   34.251002,
+   132.57104
+  ],
+  "generated": "2026-09-27"
+ },
+ "tokyo-harajuku": {
+  "id": "tokyo-harajuku",
+  "then": "ort_riku10",
+  "series": [
+   "ort_riku10",
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo2",
+   "gazo3",
+   "gazo4"
+  ],
+  "now": [
+   "nendophoto2019",
+   "2019"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.999,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.4131,
+    "terrace": 0.4071,
+    "floodplain": 0.1595,
+    "hollow": 0.0152,
+    "water": 0.0051
+   },
+   "artificial": {
+    "cut": 0.2742,
+    "fill": 0.2027
+   }
+  },
+  "meiji": {
+   "paddy": 0.1319,
+   "water": 0.0123,
+   "salt": 0.0002
+  },
+  "monuments": [
+   "13104-001",
+   "13101-001",
+   "13104-002",
+   "13103-002",
+   "13101-004",
+   "13102-003"
+  ],
+  "monumentRadiusKm": 8.0,
+  "monuments3km": 1,
+  "studyKm": [
+   2.2,
+   1.42
+  ],
+  "bbox": [
+   35.663582,
+   139.687837,
+   35.676418,
+   139.712163
+  ],
+  "generated": "2026-09-27"
+ },
+ "yokohama-kannai": {
+  "id": "yokohama-kannai",
+  "then": "ort_USA10",
+  "series": [
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo4"
+  ],
+  "now": [
+   "nendophoto2019",
+   "2019"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.974,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0
+  },
+  "landform": {
+   "natural": {
+    "formerwater": 0.5691,
+    "sandbar": 0.1511,
+    "water": 0.1431,
+    "slope": 0.0476,
+    "foothill": 0.0401,
+    "floodplain": 0.0226,
+    "terrace": 0.02,
+    "scarp": 0.0065
+   },
+   "artificial": {
+    "fill": 0.5386,
+    "cut": 0.0211
+   }
+  },
+  "meiji": {
+   "water": 0.283,
+   "reed": 0.003,
+   "tidal": 0.0001
+  },
+  "monuments": [
+   "14100-001"
+  ],
+  "monumentRadiusKm": 8.0,
+  "monuments3km": 1,
+  "studyKm": [
+   2.2,
+   1.42
+  ],
+  "bbox": [
+   35.437582,
+   139.631871,
+   35.450418,
+   139.656129
+  ],
+  "generated": "2026-09-27"
+ },
+ "yokosuka": {
+  "id": "yokosuka",
+  "then": "ort_USA10",
+  "series": [
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo2",
+   "gazo4"
+  ],
+  "now": [
+   "nendophoto2021",
+   "2021"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.999,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.946,
+   "gazo3": 0.0,
+   "gazo4": 1.0
+  },
+  "landform": {
+   "natural": {
+    "formerwater": 0.3138,
+    "slope": 0.2891,
+    "water": 0.239,
+    "floodplain": 0.0831,
+    "foothill": 0.0711,
+    "sandbar": 0.004,
+    "landslide": 0.0
+   },
+   "artificial": {
+    "fill": 0.4495,
+    "cut": 0.0606
+   }
+  },
+  "meiji": {
+   "water": 0.463,
+   "tidal": 0.0291,
+   "paddy": 0.0049
+  },
+  "monuments": [
+   "14201-003",
+   "14201-002",
+   "14201-004",
+   "14201-001"
+  ],
+  "monumentRadiusKm": 8.0,
+  "monuments3km": 2,
+  "studyKm": [
+   2.6,
+   1.68
+  ],
+  "bbox": [
+   35.275415,
+   139.653694,
+   35.290585,
+   139.682306
+  ],
+  "generated": "2026-09-27"
+ },
+ "kyoto-higashiyama": {
+  "id": "kyoto-higashiyama",
+  "then": "ort_USA10",
+  "series": [
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo2"
+  ],
+  "now": [
+   "nendophoto2020",
+   "2020"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.999,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.4239,
+    "slope": 0.4217,
+    "terrace": 0.1284,
+    "water": 0.0244,
+    "scarp": 0.0013,
+    "floodplain": 0.0002
+   },
+   "artificial": {}
+  },
+  "meiji": {
+   "sand": 0.0201,
+   "water": 0.0159,
+   "paddy": 0.0013,
+   "marsh": 0.0002,
+   "salt": 0.0
+  },
+  "monuments": [
+   "26100-001",
+   "26100-010",
+   "26100-006",
+   "26100-002",
+   "26100-007",
+   "26100-004"
+  ],
+  "monumentRadiusKm": 8.0,
+  "monuments3km": 1,
+  "studyKm": [
+   2.2,
+   1.42
+  ],
+  "bbox": [
+   34.992582,
+   135.766937,
+   35.005418,
+   135.791063
+  ],
+  "generated": "2026-09-27"
+ },
+ "osaka-namba": {
+  "id": "osaka-namba",
+  "then": "ort_1928",
+  "series": [
+   "ort_1928",
+   "ort_riku10",
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo2",
+   "gazo3"
+  ],
+  "now": [
+   "nendophoto2017",
+   "2017"
+  ],
+  "coverage": {
+   "ort_1928": 0.923,
+   "ort_riku10": 1.0,
+   "ort_USA10": 0.997,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "sandbar": 0.6065,
+    "floodplain": 0.3739,
+    "water": 0.0196
+   },
+   "artificial": {}
+  },
+  "meiji": {
+   "water": 0.0584
+  },
+  "monuments": [
+   "27100-007",
+   "27100-001",
+   "27100-008",
+   "27100-002"
+  ],
+  "monumentRadiusKm": 3.0,
+  "monuments3km": 4,
+  "studyKm": [
+   2.4,
+   1.55
+  ],
+  "bbox": [
+   34.661498,
+   135.482893,
+   34.675502,
+   135.509107
+  ],
+  "generated": "2026-09-27"
+ },
+ "kobe-meriken": {
+  "id": "kobe-meriken",
+  "then": "ort_USA10",
+  "series": [
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo2",
+   "gazo3"
+  ],
+  "now": [
+   "nendophoto2021",
+   "2021"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.265,
+    "terrace": 0.2484,
+    "floodplain": 0.2095,
+    "water": 0.1121,
+    "hollow": 0.0736,
+    "perched": 0.0726,
+    "slope": 0.0188,
+    "foothill": 0.0001
+   },
+   "artificial": {
+    "fill": 0.2934,
+    "cut": 0.1275
+   }
+  },
+  "meiji": {
+   "water": 0.0703,
+   "paddy": 0.0288,
+   "sand": 0.0028,
+   "marsh": 0.0,
+   "salt": 0.0
+  },
+  "monuments": [
+   "28100-001",
+   "28100-002",
+   "28100-024",
+   "28100-003",
+   "28100-025",
+   "28100-026",
+   "28100-027",
+   "28100-008",
+   "28100-010",
+   "28100-009"
+  ],
+  "monumentRadiusKm": 3.0,
+  "monuments3km": 10,
+  "studyKm": [
+   2.2,
+   1.42
+  ],
+  "bbox": [
+   34.683582,
+   135.177982,
+   34.696418,
+   135.202018
+  ],
+  "generated": "2026-09-27"
+ },
+ "hiroshima-peace": {
+  "id": "hiroshima-peace",
+  "then": "ort_USA10",
+  "series": [
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo2",
+   "gazo4"
+  ],
+  "now": [
+   "nendophoto2023",
+   "2023"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.962,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0
+  },
+  "landform": {
+   "natural": {
+    "floodplain": 0.6839,
+    "water": 0.2112,
+    "levee": 0.1034,
+    "formerwater": 0.0935,
+    "oldchannel": 0.0011
+   },
+   "artificial": {
+    "polder": 0.0646,
+    "fill": 0.029
+   }
+  },
+  "meiji": {
+   "water": 0.1095,
+   "sand": 0.016,
+   "tidal": 0.0107,
+   "paddy": 0.0026,
+   "salt": 0.0001
+  },
+  "monuments": [
+   "34100-012",
+   "34100-007",
+   "34302-001",
+   "34100-014",
+   "34100-003"
+  ],
+  "monumentRadiusKm": 8.0,
+  "monuments3km": 1,
+  "studyKm": [
+   2.0,
+   1.29
+  ],
+  "bbox": [
+   34.387665,
+   132.442114,
+   34.399335,
+   132.463886
+  ],
+  "generated": "2026-09-27"
+ },
+ "nagasaki-dejima": {
+  "id": "nagasaki-dejima",
+  "then": "ort_old10",
+  "series": [
+   "ort_old10",
+   "gazo1"
+  ],
+  "now": [
+   "nendophoto2024",
+   "2024"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.3459,
+    "floodplain": 0.1905,
+    "formerwater": 0.1051,
+    "water": 0.0253,
+    "landslide": 0.0137,
+    "terrace": 0.0081,
+    "foothill": 0.0027
+   },
+   "artificial": {
+    "fill": 0.16,
+    "cut": 0.0482
+   }
+  },
+  "meiji": {
+   "water": 0.3994
+  },
+  "monuments": [
+   "42201-007",
+   "42201-005",
+   "42201-002"
+  ],
+  "monumentRadiusKm": 3.0,
+  "monuments3km": 3,
+  "studyKm": [
+   2.0,
+   1.29
+  ],
+  "bbox": [
+   32.733665,
+   129.86182,
+   32.745335,
+   129.88318
+  ],
+  "generated": "2026-09-27"
+ },
+ "suo-oshima": {
+  "id": "suo-oshima",
+  "then": "ort_old10",
+  "series": [
+   "ort_old10",
+   "gazo1",
+   "gazo2"
+  ],
+  "now": [
+   "nendophoto2008",
+   "2008"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "meiji": {
+   "paddy": 0.0459,
+   "water": 0.0011
+  },
+  "monuments": [
+   "35305-004",
+   "35305-003",
+   "35305-001"
+  ],
+  "monumentRadiusKm": 3.0,
+  "monuments3km": 3,
+  "studyKm": [
+   3.2,
+   2.06
+  ],
+  "bbox": [
+   33.917665,
+   132.197678,
+   33.936335,
+   132.232322
+  ],
+  "generated": "2026-09-27"
+ },
+ "mio": {
+  "id": "mio",
+  "then": "ort_old10",
+  "series": [
+   "ort_old10",
+   "gazo1"
+  ],
+  "now": [
+   "nendophoto2019",
+   "2019"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 0.979,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "meiji": {},
+  "monuments": [
+   "30205-004",
+   "30381-001",
+   "30205-006",
+   "30205-001",
+   "30205-007"
+  ],
+  "monumentRadiusKm": 8.0,
+  "monuments3km": 0,
+  "studyKm": [
+   2.4,
+   1.55
+  ],
+  "bbox": [
+   33.884398,
+   135.076414,
+   33.898402,
+   135.102386
+  ],
+  "generated": "2026-09-27"
+ },
+ "sapporo": {
+  "id": "sapporo",
+  "then": "ort_USA10",
+  "series": [
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo3"
+  ],
+  "now": [
+   "nendophoto2020",
+   "2020"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.999,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 1.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.9328,
+    "oldchannel": 0.0315,
+    "water": 0.0142,
+    "floodplain": 0.0058
+   },
+   "artificial": {}
+  },
+  "meiji": {},
+  "monuments": [
+   "01423-001"
+  ],
+  "monumentRadiusKm": 30.0,
+  "monuments3km": 0,
+  "studyKm": [
+   2.2,
+   1.42
+  ],
+  "bbox": [
+   43.055082,
+   141.340475,
+   43.067918,
+   141.367525
+  ],
+  "generated": "2026-09-27"
+ },
+ "hakodate": {
+  "id": "hakodate",
+  "then": "ort_old10",
+  "series": [
+   "ort_old10",
+   "gazo1"
+  ],
+  "now": [
+   "nendophoto2024",
+   "2024"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "sandbar": 0.344,
+    "foothill": 0.263,
+    "terrace": 0.1059,
+    "formerwater": 0.0985,
+    "water": 0.0957,
+    "slope": 0.0929,
+    "scarp": 0.0
+   },
+   "artificial": {
+    "fill": 0.1017,
+    "cut": 0.0126
+   }
+  },
+  "meiji": {},
+  "monuments": [
+   "01202-001"
+  ],
+  "monumentRadiusKm": 30.0,
+  "monuments3km": 0,
+  "studyKm": [
+   2.2,
+   1.42
+  ],
+  "bbox": [
+   41.758582,
+   140.701752,
+   41.771418,
+   140.728248
+  ],
+  "generated": "2026-09-27"
+ },
+ "fukuoka-hakata": {
+  "id": "fukuoka-hakata",
+  "then": "ort_USA10",
+  "series": [
+   "ort_USA10",
+   "ort_old10",
+   "gazo1",
+   "gazo4"
+  ],
+  "now": [
+   "nendophoto2020",
+   "2020"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0
+  },
+  "landform": {
+   "natural": {
+    "sandbar": 0.7175,
+    "floodplain": 0.1607,
+    "water": 0.076,
+    "levee": 0.0455,
+    "formerwater": 0.0002
+   },
+   "artificial": {
+    "fill": 0.1609
+   }
+  },
+  "meiji": {
+   "paddy": 0.2496,
+   "water": 0.0505,
+   "sand": 0.0158,
+   "tidal": 0.0144,
+   "salt": 0.0005,
+   "marsh": 0.0
+  },
+  "monuments": [
+   "40344-001",
+   "40130-001",
+   "40130-002"
+  ],
+  "monumentRadiusKm": 30.0,
+  "monuments3km": 0,
+  "studyKm": [
+   2.2,
+   1.42
+  ],
+  "bbox": [
+   33.586582,
+   130.399137,
+   33.599418,
+   130.422863
+  ],
+  "generated": "2026-09-27"
+ },
+ "kanazawa": {
+  "id": "kanazawa",
+  "then": "ort_old10",
+  "series": [
+   "ort_old10",
+   "gazo1"
+  ],
+  "now": [
+   "nendophoto2024",
+   "2024"
+  ],
+  "coverage": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0
+  },
+  "landform": {
+   "natural": {
+    "terrace": 0.4989,
+    "fan": 0.4112,
+    "slope": 0.0625,
+    "water": 0.0203,
+    "scarp": 0.0053,
+    "riverbed": 0.0019
+   },
+   "artificial": {
+    "cut": 0.009
+   }
+  },
+  "meiji": {
+   "paddy": 0.0574,
+   "water": 0.0159,
+   "waste": 0.0095,
+   "sand": 0.0071,
+   "salt": 0.0003
+  },
+  "monuments": [
+   "17361-002",
+   "17211-002",
+   "17211-003"
+  ],
+  "monumentRadiusKm": 30.0,
+  "monuments3km": 0,
+  "studyKm": [
+   2.2,
+   1.42
+  ],
+  "bbox": [
+   36.558582,
+   136.647697,
+   36.571418,
+   136.672303
+  ],
+  "generated": "2026-09-27"
+ }
+}

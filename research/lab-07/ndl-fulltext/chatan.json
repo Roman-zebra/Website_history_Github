@@ -1,0 +1,1587 @@
+{
+ "id": "chatan",
+ "checkedOn": "2026-09-27",
+ "source": "https://dl.ndl.go.jp (full-text search of digitised items)",
+ "queries": [
+  {
+   "query": "北谷村 嘉手納",
+   "total": 4119,
+   "byAccess": {
+    "inlibrary": 1115,
+    "internet": 706,
+    "transmission": 2298
+   },
+   "items": [
+    {
+     "pid": "13254820",
+     "title": "嘉手納町史",
+     "volume": "資料編 1",
+     "by": "",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": 111,
+     "frames": [
+      5,
+      6,
+      10,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13254820/1/5"
+    },
+    {
+     "pid": "13325285",
+     "title": "30年のあゆみ : 創立30周年記念誌",
+     "volume": "",
+     "by": "若夏社 編",
+     "year": "1994",
+     "access": "transmission",
+     "pageHits": 233,
+     "frames": [
+      11,
+      13,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      23,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13325285/1/11"
+    },
+    {
+     "pid": "14165078",
+     "title": "創立四十周年記念誌",
+     "volume": "",
+     "by": "嘉手納地区防犯協会創立四十周年記念事業記念誌部委員会 編",
+     "year": "1997",
+     "access": "inlibrary",
+     "pageHits": 111,
+     "frames": [
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      15,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14165078/1/2"
+    },
+    {
+     "pid": "13254819",
+     "title": "嘉手納町史",
+     "volume": "資料編 4",
+     "by": "",
+     "year": "1998",
+     "access": "transmission",
+     "pageHits": 61,
+     "frames": [
+      4,
+      10,
+      11,
+      12,
+      13,
+      15,
+      18,
+      19,
+      22,
+      23
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13254819/1/4"
+    },
+    {
+     "pid": "13272324",
+     "title": "嘉手納町史",
+     "volume": "資料編 5 (戦時資料 上)",
+     "by": "",
+     "year": "2000",
+     "access": "transmission",
+     "pageHits": 87,
+     "frames": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      21,
+      24,
+      25,
+      26,
+      33
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13272324/1/10"
+    },
+    {
+     "pid": "13257521",
+     "title": "嘉手納町屋良誌",
+     "volume": "",
+     "by": "屋良誌編纂委員会 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 57,
+     "frames": [
+      9,
+      10,
+      11,
+      16,
+      19,
+      21,
+      22,
+      26,
+      27,
+      28
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13257521/1/9"
+    },
+    {
+     "pid": "3449643",
+     "title": "北谷村誌",
+     "volume": "",
+     "by": "真栄城兼良 編",
+     "year": "1961",
+     "access": "transmission",
+     "pageHits": 33,
+     "frames": [
+      1,
+      2,
+      5,
+      9,
+      27,
+      28,
+      45,
+      52,
+      53,
+      60
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3449643/1/1"
+    },
+    {
+     "pid": "14493547",
+     "title": "嘉手納町都市計画マスタープラン : みんなで描いた嘉手納の未来",
+     "volume": "",
+     "by": "嘉手納町都市建設課",
+     "year": "2024-06",
+     "access": "internet",
+     "pageHits": 180,
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14493547/1/0"
+    },
+    {
+     "pid": "12653521",
+     "title": "沖縄県における騒音公害の現況",
+     "volume": "昭和50年10月",
+     "by": "",
+     "year": "1975",
+     "access": "transmission",
+     "pageHits": 29,
+     "frames": [
+      3,
+      4,
+      27,
+      28,
+      31,
+      37,
+      39,
+      41,
+      53
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12653521/1/3"
+    },
+    {
+     "pid": "14493550",
+     "title": "嘉手納町町勢要覧",
+     "volume": "2021",
+     "by": "嘉手納町企画財政課",
+     "year": "2021-03",
+     "access": "internet",
+     "pageHits": 371,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14493550/1/0"
+    },
+    {
+     "pid": "12111738",
+     "title": "嘉手納農林昭六会誌",
+     "volume": "",
+     "by": "",
+     "year": "1981",
+     "access": "transmission",
+     "pageHits": 47,
+     "frames": [
+      1,
+      26,
+      27,
+      42,
+      43,
+      68,
+      84,
+      94,
+      96,
+      108
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12111738/1/1"
+    },
+    {
+     "pid": "13887197",
+     "title": "商店街空き店舗対策モデル事業報告書",
+     "volume": "平成8年度",
+     "by": "",
+     "year": "1997",
+     "access": "inlibrary",
+     "pageHits": 66,
+     "frames": [
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      14,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13887197/1/3"
+    },
+    {
+     "pid": "12679246",
+     "title": "沖縄県における騒音公害の現況",
+     "volume": "",
+     "by": "",
+     "year": "1977",
+     "access": "transmission",
+     "pageHits": 23,
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      27,
+      40,
+      42
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12679246/1/0"
+    },
+    {
+     "pid": "9769483",
+     "title": "新郷土地図 : 沖縄",
+     "volume": "第3巻",
+     "by": "",
+     "year": "1957",
+     "access": "transmission",
+     "pageHits": 44,
+     "frames": [
+      2,
+      4,
+      18,
+      21,
+      22,
+      23,
+      24,
+      25,
+      27,
+      36
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9769483/1/2"
+    },
+    {
+     "pid": "13315835",
+     "title": "野国 : 野国貝塚群B地点発掘調査報告",
+     "volume": "",
+     "by": "沖縄県教育庁文化課 編",
+     "year": "1984",
+     "access": "transmission",
+     "pageHits": 26,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      13,
+      14,
+      30,
+      79,
+      97
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13315835/1/2"
+    },
+    {
+     "pid": "13269083",
+     "title": "東恩納寛惇全集",
+     "volume": "7",
+     "by": "琉球新報社 編",
+     "year": "1993",
+     "access": "inlibrary",
+     "pageHits": 39,
+     "frames": [
+      2,
+      55,
+      61,
+      74,
+      305,
+      315,
+      317,
+      318,
+      400,
+      402
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13269083/1/2"
+    },
+    {
+     "pid": "9769835",
+     "title": "基地沖縄の全貌",
+     "volume": "",
+     "by": "",
+     "year": "1969",
+     "access": "transmission",
+     "pageHits": 51,
+     "frames": [
+      8,
+      13,
+      23,
+      24,
+      26,
+      29,
+      30,
+      45,
+      59,
+      63
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9769835/1/8"
+    },
+    {
+     "pid": "2803288",
+     "title": "平和運動",
+     "volume": "(46)(362)",
+     "by": "",
+     "year": "1972-08",
+     "access": "transmission",
+     "pageHits": 122,
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      14
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2803288/1/0"
+    },
+    {
+     "pid": "9639845",
+     "title": "北谷町史",
+     "volume": "第5巻 (資料編 4 北谷の戦時体験記録) 下",
+     "by": "北谷町史編集委員会 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 73,
+     "frames": [
+      4,
+      6,
+      7,
+      8,
+      97,
+      98,
+      135,
+      145,
+      146,
+      148
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9639845/1/4"
+    },
+    {
+     "pid": "9768925",
+     "title": "沖縄市町村要覧",
+     "volume": "1968年版",
+     "by": "",
+     "year": "1969",
+     "access": "transmission",
+     "pageHits": 54,
+     "frames": [
+      3,
+      103,
+      107,
+      119,
+      126,
+      131,
+      134,
+      135,
+      136,
+      181
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9768925/1/3"
+    },
+    {
+     "pid": "2673336",
+     "title": "月刊自治研",
+     "volume": "14(4/5)(153)",
+     "by": "自治研中央推進委員会 編",
+     "year": "1972-04",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2673336"
+    },
+    {
+     "pid": "9770471",
+     "title": "沖縄県の遺跡分布",
+     "volume": "",
+     "by": "沖縄県教育委員会文化課 編",
+     "year": "1977",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9770471"
+    },
+    {
+     "pid": "9773820",
+     "title": "郷土資料事典沖縄県・観光と旅",
+     "volume": "",
+     "by": "人文社観光と旅編集部 編",
+     "year": "1979",
+     "access": "ooc_no_snippet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9773820"
+    },
+    {
+     "pid": "3451271",
+     "title": "那覇市史",
+     "volume": "資料篇 第1巻の1",
+     "by": "那覇市総務部市史編集室, 那覇市史編集委員会 編",
+     "year": "1968",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/3451271"
+    },
+    {
+     "pid": "12094410",
+     "title": "1975年農業センサス農家調査農業集落別結果表",
+     "volume": "中頭郡",
+     "by": "",
+     "year": "1976",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12094410"
+    },
+    {
+     "pid": "11318852",
+     "title": "Final Determination Files: CC 209-9, 11, 12",
+     "volume": "",
+     "by": "",
+     "year": "1959",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/11318852"
+    },
+    {
+     "pid": "9769003",
+     "title": "沖縄年鑑",
+     "volume": "1975年版",
+     "by": "",
+     "year": "1975",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9769003"
+    },
+    {
+     "pid": "11318333",
+     "title": "Final Determination Files, 1962: DA 92-320-FEC-224, Mod. 1, 2 Original file no.: 285",
+     "volume": "",
+     "by": "",
+     "year": "1962",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/11318333"
+    },
+    {
+     "pid": "11326277",
+     "title": "Final Determination Files, 1962: DA 92-320-FEC-224, Mod. 1, 2 (1950-1952 Rental Claims) Original file no.: 285",
+     "volume": "",
+     "by": "",
+     "year": "1962",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/11326277"
+    },
+    {
+     "pid": "11326294",
+     "title": "Final Determination Files, 1963: DA 92-320-FEC-224 Original file no.: 285",
+     "volume": "",
+     "by": "",
+     "year": "1963",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/11326294"
+    }
+   ]
+  },
+  {
+   "query": "ハンビー 北谷",
+   "total": 595,
+   "byAccess": {
+    "inlibrary": 291,
+    "internet": 38,
+    "transmission": 266
+   },
+   "items": [
+    {
+     "pid": "9639844",
+     "title": "北谷町史",
+     "volume": "第5巻 (資料編 4 北谷の戦時体験記録) 上",
+     "by": "北谷町史編集委員会 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 72,
+     "frames": [
+      1,
+      2,
+      9,
+      11,
+      12,
+      13,
+      14,
+      18,
+      19,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9639844/1/1"
+    },
+    {
+     "pid": "9639845",
+     "title": "北谷町史",
+     "volume": "第5巻 (資料編 4 北谷の戦時体験記録) 下",
+     "by": "北谷町史編集委員会 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 67,
+     "frames": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      11,
+      12,
+      13,
+      14
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9639845/1/2"
+    },
+    {
+     "pid": "9776195",
+     "title": "北谷町史",
+     "volume": "第6巻 (資料編 5 北谷の戦後 1945～72)",
+     "by": "北谷町史編集委員会 編",
+     "year": "1988",
+     "access": "transmission",
+     "pageHits": 129,
+     "frames": [
+      1,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9776195/1/1"
+    },
+    {
+     "pid": "14022860",
+     "title": "北谷町海岸・海域地名",
+     "volume": "",
+     "by": "北谷町史編集事務局 編",
+     "year": "1985",
+     "access": "inlibrary",
+     "pageHits": 70,
+     "frames": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14022860/1/1"
+    },
+    {
+     "pid": "9639843",
+     "title": "北谷町史",
+     "volume": "第3巻 [1] (資料編 2 民俗 上)",
+     "by": "北谷町史編集委員会 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 110,
+     "frames": [
+      3,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      14,
+      17,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9639843/1/3"
+    },
+    {
+     "pid": "13916833",
+     "title": "戦時体験記録",
+     "volume": "",
+     "by": "[北谷町]企画課町史編集室 編",
+     "year": "1995",
+     "access": "inlibrary",
+     "pageHits": 96,
+     "frames": [
+      1,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      14,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13916833/1/1"
+    },
+    {
+     "pid": "12228656",
+     "title": "北谷町民の戦時体験記録集",
+     "volume": "第1集",
+     "by": "北谷町史編集事務局 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 40,
+     "frames": [
+      0,
+      5,
+      6,
+      7,
+      8,
+      11,
+      13,
+      14,
+      18,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12228656/1/0"
+    },
+    {
+     "pid": "13253771",
+     "title": "上勢頭誌",
+     "volume": "中巻 通史編 2",
+     "by": "上勢頭誌編集委員会 編",
+     "year": "1993",
+     "access": "transmission",
+     "pageHits": 54,
+     "frames": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      12,
+      13,
+      15,
+      21,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13253771/1/5"
+    },
+    {
+     "pid": "14491099",
+     "title": "沖縄県北谷町町勢要覧 : ニライの都市北谷",
+     "volume": "2023年",
+     "by": "北谷町総務部町長室",
+     "year": "2023-03",
+     "access": "internet",
+     "pageHits": 570,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14491099/1/0"
+    },
+    {
+     "pid": "14491102",
+     "title": "第六次北谷町総合計画 : 基本構想・前期基本計画",
+     "volume": "",
+     "by": "北谷町総務部企画財政課",
+     "year": "2022-03",
+     "access": "internet",
+     "pageHits": 458,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14491102/1/0"
+    },
+    {
+     "pid": "13895257",
+     "title": "沖縄軍事関係事典",
+     "volume": "1",
+     "by": "北谷町史編集事務局 編",
+     "year": "1986",
+     "access": "ndl_only_no_snippet",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13895257"
+    },
+    {
+     "pid": "13895196",
+     "title": "沖縄軍事関係事典",
+     "volume": "2",
+     "by": "北谷町史編集事務局 編",
+     "year": "1987",
+     "access": "ndl_only_no_snippet",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13895196"
+    },
+    {
+     "pid": "14491100",
+     "title": "北谷町都市計画マスタープラン",
+     "volume": "2023-2042",
+     "by": "北谷町建設経済部都市計画課",
+     "year": "2023-03",
+     "access": "internet",
+     "pageHits": 190,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14491100/1/0"
+    },
+    {
+     "pid": "13256069",
+     "title": "上勢頭誌",
+     "volume": "上巻 通史編 1",
+     "by": "上勢頭誌編集委員会 編",
+     "year": "1997",
+     "access": "transmission",
+     "pageHits": 66,
+     "frames": [
+      13,
+      14,
+      17,
+      34,
+      39,
+      47,
+      51,
+      52,
+      53,
+      54
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13256069/1/13"
+    },
+    {
+     "pid": "14491108",
+     "title": "美浜タウンリゾート・アメリカンビレッジ完成報告書",
+     "volume": "",
+     "by": "北谷町総務部企画課",
+     "year": "2004-11",
+     "access": "internet",
+     "pageHits": 63,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14491108/1/0"
+    },
+    {
+     "pid": "3202121",
+     "title": "海岸",
+     "volume": "35(1)",
+     "by": "",
+     "year": "1995-05",
+     "access": "transmission",
+     "pageHits": 20,
+     "frames": [
+      4,
+      41,
+      42
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3202121/1/4"
+    },
+    {
+     "pid": "7930507",
+     "title": "まつり",
+     "volume": "(31)",
+     "by": "",
+     "year": "1978-06",
+     "access": "transmission",
+     "pageHits": 64,
+     "frames": [
+      2,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      59
+     ],
+     "url": "https://dl.ndl.go.jp/pid/7930507/1/2"
+    },
+    {
+     "pid": "2871274",
+     "title": "地方自治研究 : 日本地方自治研究学会誌",
+     "volume": "14(1)(24)",
+     "by": "日本地方自治研究学会 [編]",
+     "year": "1999-04",
+     "access": "inlibrary",
+     "pageHits": 64,
+     "frames": [
+      1,
+      25,
+      26,
+      27,
+      28,
+      29
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2871274/1/1"
+    },
+    {
+     "pid": "12017098",
+     "title": "沖縄米軍基地の実態調査 : 米軍基地の総点検",
+     "volume": "",
+     "by": "",
+     "year": "1969",
+     "access": "transmission",
+     "pageHits": 13,
+     "frames": [
+      8,
+      9,
+      24,
+      29,
+      30,
+      69,
+      71
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12017098/1/8"
+    },
+    {
+     "pid": "13432154",
+     "title": "沖縄の海と釣り : 航空写真で見る",
+     "volume": "",
+     "by": "新垣柴太郎, 城一人 執筆",
+     "year": "1986",
+     "access": "inlibrary",
+     "pageHits": 11,
+     "frames": [
+      2,
+      43,
+      49
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13432154/1/2"
+    },
+    {
+     "pid": "7945234",
+     "title": "琉大史学 = Ryudai review of history",
+     "volume": "(13)",
+     "by": "琉球大学史学会 編",
+     "year": "1983-03",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/7945234"
+    },
+    {
+     "pid": "2803288",
+     "title": "平和運動",
+     "volume": "(46)(362)",
+     "by": "",
+     "year": "1972-08",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2803288"
+    },
+    {
+     "pid": "9773820",
+     "title": "郷土資料事典沖縄県・観光と旅",
+     "volume": "",
+     "by": "人文社観光と旅編集部 編",
+     "year": "1979",
+     "access": "ooc_no_snippet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9773820"
+    },
+    {
+     "pid": "13325285",
+     "title": "30年のあゆみ : 創立30周年記念誌",
+     "volume": "",
+     "by": "若夏社 編",
+     "year": "1994",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13325285"
+    },
+    {
+     "pid": "9774939",
+     "title": "郷土資料事典沖縄県・観光と旅",
+     "volume": "",
+     "by": "人文社観光と旅編集部 編",
+     "year": "1983",
+     "access": "ooc_no_snippet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9774939"
+    },
+    {
+     "pid": "9769003",
+     "title": "沖縄年鑑",
+     "volume": "1975年版",
+     "by": "",
+     "year": "1975",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9769003"
+    },
+    {
+     "pid": "13224797",
+     "title": "日本下水道協会沖縄県支部誌 : 下水道の整備と会員の親睦を目指して",
+     "volume": "",
+     "by": "日本下水道協会沖縄県支部 編",
+     "year": "1988",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13224797"
+    },
+    {
+     "pid": "13407970",
+     "title": "絆 : 結成10周年記念写真集",
+     "volume": "",
+     "by": "",
+     "year": "1992",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13407970"
+    },
+    {
+     "pid": "2874142",
+     "title": "財界人 : 政・官情報に強い総合経済誌",
+     "volume": "13(6)(369)",
+     "by": "",
+     "year": "2000-04",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2874142"
+    },
+    {
+     "pid": "13894422",
+     "title": "沖縄経済の課題と展望",
+     "volume": "",
+     "by": "",
+     "year": "1998",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13894422"
+    }
+   ]
+  },
+  {
+   "query": "北谷 米軍",
+   "total": 21117,
+   "byAccess": {
+    "inlibrary": 8672,
+    "internet": 1059,
+    "transmission": 11386
+   },
+   "items": [
+    {
+     "pid": "9639845",
+     "title": "北谷町史",
+     "volume": "第5巻 (資料編 4 北谷の戦時体験記録) 下",
+     "by": "北谷町史編集委員会 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 73,
+     "frames": [
+      2,
+      3,
+      6,
+      7,
+      8,
+      11,
+      12,
+      13,
+      14,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9639845/1/2"
+    },
+    {
+     "pid": "9775953",
+     "title": "北谷町史",
+     "volume": "第2巻 (資料編 1 前近代・近代文献資料)",
+     "by": "北谷町史編集委員会 編",
+     "year": "1986",
+     "access": "transmission",
+     "pageHits": 193,
+     "frames": [
+      2,
+      4,
+      7,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9775953/1/2"
+    },
+    {
+     "pid": "9639844",
+     "title": "北谷町史",
+     "volume": "第5巻 (資料編 4 北谷の戦時体験記録) 上",
+     "by": "北谷町史編集委員会 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 78,
+     "frames": [
+      1,
+      2,
+      4,
+      10,
+      11,
+      12,
+      13,
+      14,
+      19,
+      27
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9639844/1/1"
+    },
+    {
+     "pid": "9776195",
+     "title": "北谷町史",
+     "volume": "第6巻 (資料編 5 北谷の戦後 1945～72)",
+     "by": "北谷町史編集委員会 編",
+     "year": "1988",
+     "access": "transmission",
+     "pageHits": 146,
+     "frames": [
+      1,
+      2,
+      4,
+      5,
+      8,
+      10,
+      11,
+      13,
+      19,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9776195/1/1"
+    },
+    {
+     "pid": "3449643",
+     "title": "北谷村誌",
+     "volume": "",
+     "by": "真栄城兼良 編",
+     "year": "1961",
+     "access": "transmission",
+     "pageHits": 39,
+     "frames": [
+      1,
+      2,
+      9,
+      11,
+      12,
+      13,
+      17,
+      18,
+      19,
+      27
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3449643/1/1"
+    },
+    {
+     "pid": "9775364",
+     "title": "北谷町史",
+     "volume": "第4巻 (資料編 3 新聞集成)",
+     "by": "北谷町史編集委員会 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 141,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9775364/1/2"
+    },
+    {
+     "pid": "9776137",
+     "title": "北谷町史",
+     "volume": "別巻 (近代統計資料)",
+     "by": "北谷町史編集委員会 編",
+     "year": "1987",
+     "access": "transmission",
+     "pageHits": 246,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      17,
+      19,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9776137/1/2"
+    },
+    {
+     "pid": "9639843",
+     "title": "北谷町史",
+     "volume": "第3巻 [1] (資料編 2 民俗 上)",
+     "by": "北谷町史編集委員会 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 115,
+     "frames": [
+      3,
+      6,
+      7,
+      8,
+      9,
+      11,
+      17,
+      23,
+      25,
+      26
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9639843/1/3"
+    },
+    {
+     "pid": "13592225",
+     "title": "沖縄の米軍基地",
+     "volume": "",
+     "by": "沖縄県知事公室基地対策課",
+     "year": "2008-03",
+     "access": "ndl_only_no_simview",
+     "pageHits": 218,
+     "frames": [
+      0,
+      1,
+      2,
+      7,
+      8,
+      10,
+      11,
+      12,
+      20,
+      35
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13592225/1/0"
+    },
+    {
+     "pid": "12228656",
+     "title": "北谷町民の戦時体験記録集",
+     "volume": "第1集",
+     "by": "北谷町史編集事務局 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 57,
+     "frames": [
+      6,
+      11,
+      13,
+      18,
+      19,
+      20,
+      21,
+      22,
+      24,
+      26
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12228656/1/6"
+    },
+    {
+     "pid": "13916833",
+     "title": "戦時体験記録",
+     "volume": "",
+     "by": "[北谷町]企画課町史編集室 編",
+     "year": "1995",
+     "access": "inlibrary",
+     "pageHits": 115,
+     "frames": [
+      5,
+      7,
+      8,
+      9,
+      11,
+      12,
+      15,
+      19,
+      22,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13916833/1/5"
+    },
+    {
+     "pid": "14022860",
+     "title": "北谷町海岸・海域地名",
+     "volume": "",
+     "by": "北谷町史編集事務局 編",
+     "year": "1985",
+     "access": "inlibrary",
+     "pageHits": 83,
+     "frames": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14022860/1/1"
+    },
+    {
+     "pid": "13592237",
+     "title": "沖縄の米軍及び自衛隊基地 : 統計資料集",
+     "volume": "令和2年3月",
+     "by": "沖縄県知事公室基地対策課",
+     "year": "2020-03",
+     "access": "ndl_only_no_simview",
+     "pageHits": 277,
+     "frames": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      8,
+      9,
+      10,
+      11,
+      15
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13592237/1/1"
+    },
+    {
+     "pid": "13116001",
+     "title": "宜野座村と米軍基地",
+     "volume": "",
+     "by": "宜野座村企画課",
+     "year": "2021-03",
+     "access": "internet",
+     "pageHits": 350,
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13116001/1/0"
+    },
+    {
+     "pid": "12056048",
+     "title": "創立百周年記念誌 : 北谷町立北谷小学校",
+     "volume": "",
+     "by": "",
+     "year": "1984",
+     "access": "transmission",
+     "pageHits": 113,
+     "frames": [
+      2,
+      6,
+      7,
+      9,
+      10,
+      14,
+      17,
+      33,
+      53,
+      54
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12056048/1/2"
+    },
+    {
+     "pid": "13272380",
+     "title": "北谷町の針突 : 調査報告書",
+     "volume": "",
+     "by": "北谷町史編集事務局 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 76,
+     "frames": [
+      0,
+      1,
+      2,
+      5,
+      6,
+      17,
+      20,
+      40,
+      42,
+      45
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13272380/1/0"
+    },
+    {
+     "pid": "14022862",
+     "title": "北谷町史 : 講評-編集する立場から",
+     "volume": "",
+     "by": "北谷町史編集事務局 編",
+     "year": "1986",
+     "access": "inlibrary",
+     "pageHits": 107,
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      8,
+      9,
+      11,
+      12,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14022862/1/0"
+    },
+    {
+     "pid": "11972116",
+     "title": "あすの北谷町を考える : 図画・作文・論文集 昭和56年",
+     "volume": "",
+     "by": "",
+     "year": "1982",
+     "access": "transmission",
+     "pageHits": 298,
+     "frames": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      19
+     ],
+     "url": "https://dl.ndl.go.jp/pid/11972116/1/0"
+    },
+    {
+     "pid": "12017098",
+     "title": "沖縄米軍基地の実態調査 : 米軍基地の総点検",
+     "volume": "",
+     "by": "",
+     "year": "1969",
+     "access": "transmission",
+     "pageHits": 52,
+     "frames": [
+      0,
+      7,
+      9,
+      11,
+      12,
+      13,
+      16,
+      17,
+      20,
+      29
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12017098/1/0"
+    },
+    {
+     "pid": "13592226",
+     "title": "沖縄の米軍基地",
+     "volume": "",
+     "by": "沖縄県知事公室基地対策課",
+     "year": "2018-12",
+     "access": "ndl_only_no_simview",
+     "pageHits": 14,
+     "frames": [
+      0,
+      1,
+      27
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13592226/1/0"
+    },
+    {
+     "pid": "14022861",
+     "title": "「北谷町の歴史」 : 文献をもとにその変遷を探る : シンポジウム : 第1回町史セミナー",
+     "volume": "",
+     "by": "北谷町史編集事務局 編",
+     "year": "1985",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14022861"
+    },
+    {
+     "pid": "13898341",
+     "title": "北谷道場創立12周年記念誌",
+     "volume": "",
+     "by": "高宮城繁, 比嘉敏雄, 比嘉勝芳 著",
+     "year": "1996",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13898341"
+    },
+    {
+     "pid": "14001062",
+     "title": "北谷関係新聞記事目録",
+     "volume": "第1集 戦前編",
+     "by": "北谷町史編集事務局 編",
+     "year": "1996",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14001062"
+    },
+    {
+     "pid": "13253771",
+     "title": "上勢頭誌",
+     "volume": "中巻 通史編 2",
+     "by": "上勢頭誌編集委員会 編",
+     "year": "1993",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13253771"
+    },
+    {
+     "pid": "9769174",
+     "title": "米軍と農民 : 沖縄県伊江島",
+     "volume": "",
+     "by": "阿波根昌鴻 著",
+     "year": "1973",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9769174"
+    },
+    {
+     "pid": "13895196",
+     "title": "沖縄軍事関係事典",
+     "volume": "2",
+     "by": "北谷町史編集事務局 編",
+     "year": "1987",
+     "access": "ndl_only_no_snippet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13895196"
+    },
+    {
+     "pid": "13895228",
+     "title": "「安保」が人をひき殺す : 日米地位協定=沖縄からの告発",
+     "volume": "",
+     "by": "森口豁, 米軍人・軍属による事件被害者の会 著",
+     "year": "1996",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13895228"
+    },
+    {
+     "pid": "13307176",
+     "title": "北谷城",
+     "volume": "1",
+     "by": "熊本大学文学部考古学研究室 編",
+     "year": "1991",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13307176"
+    },
+    {
+     "pid": "13895223",
+     "title": "日出づる国の米軍 : 米軍の秘密から基地の遊び方まで「米軍基地の歩き方」",
+     "volume": "",
+     "by": "",
+     "year": "1998",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13895223"
+    },
+    {
+     "pid": "13248839",
+     "title": "我が一代記",
+     "volume": "",
+     "by": "北谷多一 著",
+     "year": "1984",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13248839"
+    }
+   ]
+  }
+ ]
+}

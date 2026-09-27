@@ -1,0 +1,1574 @@
+{
+ "id": "nagasaki-dejima",
+ "checkedOn": "2026-09-27",
+ "source": "https://dl.ndl.go.jp (full-text search of digitised items)",
+ "queries": [
+  {
+   "query": "出島 埋立",
+   "total": 39009,
+   "byAccess": {
+    "inlibrary": 11454,
+    "internet": 5644,
+    "transmission": 21911
+   },
+   "items": [
+    {
+     "pid": "9640108",
+     "title": "出島村史",
+     "volume": "",
+     "by": "出島村史編さん委員会 編",
+     "year": "1971",
+     "access": "transmission",
+     "pageHits": 70,
+     "frames": [
+      1,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      15,
+      16,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9640108/1/1"
+    },
+    {
+     "pid": "9641435",
+     "title": "出島村史",
+     "volume": "続編",
+     "by": "出島村史編纂委員会 編",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": 66,
+     "frames": [
+      3,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      18,
+      19
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9641435/1/3"
+    },
+    {
+     "pid": "3948525",
+     "title": "環境影響評価のためのテクノロジーアセスメント調査研究 港湾・埋立開発事業編 報告書（昭和６０年度）",
+     "volume": "",
+     "by": "",
+     "year": "1986",
+     "access": "internet",
+     "pageHits": 176,
+     "frames": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      20,
+      21,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3948525/1/3"
+    },
+    {
+     "pid": "1041861",
+     "title": "出島 : 日本とオランダの関係",
+     "volume": "",
+     "by": "沼田次郎 著",
+     "year": "1947",
+     "access": "transmission",
+     "pageHits": 70,
+     "frames": [
+      3,
+      6,
+      7,
+      8,
+      9,
+      13,
+      14,
+      15,
+      16,
+      17
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1041861/1/3"
+    },
+    {
+     "pid": "12595781",
+     "title": "新体系土木工学",
+     "volume": "78-2",
+     "by": "土木学会 編",
+     "year": "1981",
+     "access": "transmission",
+     "pageHits": 240,
+     "frames": [
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12595781/1/3"
+    },
+    {
+     "pid": "13088217",
+     "title": "公有水面埋立実務ハンドブック",
+     "volume": "環境編",
+     "by": "建設省埋立行政研究会 編著",
+     "year": "1997",
+     "access": "transmission",
+     "pageHits": 85,
+     "frames": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13088217/1/0"
+    },
+    {
+     "pid": "2992110",
+     "title": "出島 : 日本とオランダの関係",
+     "volume": "",
+     "by": "沼田次郎 著",
+     "year": "1947",
+     "access": "transmission",
+     "pageHits": 74,
+     "frames": [
+      2,
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      13,
+      14,
+      15
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2992110/1/2"
+    },
+    {
+     "pid": "13110175",
+     "title": "横浜の埋立",
+     "volume": "",
+     "by": "横浜市港湾局臨海開発部 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": 164,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13110175/1/2"
+    },
+    {
+     "pid": "12420395",
+     "title": "史跡出島和蘭商館跡復元整備構想 : 答申書",
+     "volume": "",
+     "by": "",
+     "year": "1982",
+     "access": "transmission",
+     "pageHits": 189,
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12420395/1/0"
+    },
+    {
+     "pid": "12750784",
+     "title": "志布志湾埋立訴訟と\"海の入会\"",
+     "volume": "",
+     "by": "牧洋一郎 著",
+     "year": "1988",
+     "access": "transmission",
+     "pageHits": 61,
+     "frames": [
+      4,
+      9,
+      10,
+      11,
+      13,
+      17,
+      18,
+      19,
+      26,
+      32
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12750784/1/4"
+    },
+    {
+     "pid": "13093931",
+     "title": "東京湾埋立物語",
+     "volume": "",
+     "by": "",
+     "year": "1989",
+     "access": "transmission",
+     "pageHits": 64,
+     "frames": [
+      2,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13093931/1/2"
+    },
+    {
+     "pid": "12669113",
+     "title": "海面埋立てと環境変化",
+     "volume": "",
+     "by": "川崎健, 平野敏行, 嶋津靖彦 編",
+     "year": "1977",
+     "access": "transmission",
+     "pageHits": 142,
+     "frames": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12669113/1/1"
+    },
+    {
+     "pid": "14073828",
+     "title": "出島 : 異文化交流の舞台",
+     "volume": "",
+     "by": "片桐一男 著",
+     "year": "2000",
+     "access": "inlibrary",
+     "pageHits": 82,
+     "frames": [
+      4,
+      6,
+      7,
+      8,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14073828/1/4"
+    },
+    {
+     "pid": "14326960",
+     "title": "Landfill島構想 : 廃棄物等の大規模埋立による新しい空間創造をめざして 「Landfillフォーラム」テキスト",
+     "volume": "",
+     "by": "土木学会土構造物および基礎委員会landfillによる新しい水辺空間創造研究小委員会 編",
+     "year": "1995",
+     "access": "inlibrary",
+     "pageHits": 88,
+     "frames": [
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      15,
+      26,
+      27,
+      28
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14326960/1/6"
+    },
+    {
+     "pid": "13254324",
+     "title": "長崎出島の食文化",
+     "volume": "",
+     "by": "",
+     "year": "1993",
+     "access": "ndl_only_snippet_ndl_only",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13254324"
+    },
+    {
+     "pid": "1256511",
+     "title": "出島蘭館日誌",
+     "volume": "上巻",
+     "by": "村上直次郎 訳",
+     "year": "1938",
+     "access": "internet",
+     "pageHits": 30,
+     "frames": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      16,
+      35,
+      37,
+      38,
+      54
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1256511/1/1"
+    },
+    {
+     "pid": "10436049",
+     "title": "2100出島の築造と長崎港の埋立",
+     "volume": "",
+     "by": "岡林,隆敏",
+     "year": "1991-01-25",
+     "access": "internet",
+     "pageHits": 115,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/10436049/1/0"
+    },
+    {
+     "pid": "12135842",
+     "title": "\"海田湾\"は生きている : 広島・海田湾埋たて反対闘争の記録",
+     "volume": "",
+     "by": "海田湾を囲む住民運動連絡協議会 [ほか]編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 177,
+     "frames": [
+      5,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12135842/1/5"
+    },
+    {
+     "pid": "13952311",
+     "title": "出島村史誌 : 写真と記事にみる42年の歩み",
+     "volume": "",
+     "by": "出島村史誌編纂委員会 編",
+     "year": "1998",
+     "access": "inlibrary",
+     "pageHits": 104,
+     "frames": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      16,
+      17,
+      18,
+      19,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13952311/1/3"
+    },
+    {
+     "pid": "13265692",
+     "title": "長崎外国人居留地の研究",
+     "volume": "",
+     "by": "菱谷武平 著",
+     "year": "1988",
+     "access": "inlibrary",
+     "pageHits": 80,
+     "frames": [
+      6,
+      7,
+      8,
+      12,
+      14,
+      15,
+      18,
+      23,
+      27,
+      30
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13265692/1/6"
+    },
+    {
+     "pid": "12240773",
+     "title": "国指定史跡出島和蘭商館跡範囲確認調査報告書",
+     "volume": "",
+     "by": "",
+     "year": "1986",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12240773"
+    },
+    {
+     "pid": "11942881",
+     "title": "埋立問題の焦点 : 志布志国家石油備蓄基地と漁業権",
+     "volume": "",
+     "by": "熊本一規 著",
+     "year": "1986",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/11942881"
+    },
+    {
+     "pid": "14023025",
+     "title": "海外情報と九州 : 出島・西南雄藩",
+     "volume": "",
+     "by": "姫野順一 編",
+     "year": "1996",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14023025"
+    },
+    {
+     "pid": "3228686",
+     "title": "都市清掃",
+     "volume": "45(186)",
+     "by": "",
+     "year": "1992-02",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/3228686"
+    },
+    {
+     "pid": "13954792",
+     "title": "国指定史跡出島和蘭商館跡",
+     "volume": "",
+     "by": "",
+     "year": "2000",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13954792"
+    },
+    {
+     "pid": "12137770",
+     "title": "入浜権の思想と行動 : 海はみんなのもの,渚をかえせ!",
+     "volume": "",
+     "by": "本間義人 著",
+     "year": "1977",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12137770"
+    },
+    {
+     "pid": "1148899",
+     "title": "早稲田建築学報",
+     "volume": "第5号",
+     "by": "早苗会 編",
+     "year": "1927",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1148899"
+    },
+    {
+     "pid": "10436036",
+     "title": "我が国の埋立史",
+     "volume": "",
+     "by": "長尾,義三",
+     "year": "1991-01-25",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/10436036"
+    },
+    {
+     "pid": "10433616",
+     "title": "臨港道路・出島海田線「海田大橋」海上下部工事",
+     "volume": "",
+     "by": "二井岡,均",
+     "year": "1986-04-25",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/10433616"
+    },
+    {
+     "pid": "14004521",
+     "title": "新・ながさき風土記 : 地図と数字でみる長崎いまむかし",
+     "volume": "",
+     "by": "永田信孝 著",
+     "year": "1999",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14004521"
+    }
+   ]
+  },
+  {
+   "query": "唐人屋敷",
+   "total": 7727,
+   "byAccess": {
+    "inlibrary": 3091,
+    "internet": 792,
+    "transmission": 3844
+   },
+   "items": [
+    {
+     "pid": "3135802",
+     "title": "長崎唐人屋敷に関する建築的研究",
+     "volume": "",
+     "by": "李陽浩 [著]",
+     "year": "1997",
+     "access": "internet",
+     "pageHits": 240,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3135802/1/2"
+    },
+    {
+     "pid": "1647243",
+     "title": "謎の唐人屋敷",
+     "volume": "",
+     "by": "高木彬光 著",
+     "year": "1958",
+     "access": "transmission",
+     "pageHits": 44,
+     "frames": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11,
+      13,
+      14,
+      19
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1647243/1/3"
+    },
+    {
+     "pid": "14296862",
+     "title": "唐人屋敷",
+     "volume": "",
+     "by": "波津彬子 著",
+     "year": "2000",
+     "access": "inlibrary",
+     "pageHits": 11,
+     "frames": [
+      3,
+      8,
+      57,
+      66,
+      67,
+      113
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14296862/1/3"
+    },
+    {
+     "pid": "12280251",
+     "title": "長崎唐人屋敷",
+     "volume": "",
+     "by": "山本紀綱 著",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": 47,
+     "frames": [
+      6,
+      7,
+      8,
+      11,
+      67,
+      70,
+      74,
+      98,
+      100,
+      101
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12280251/1/6"
+    },
+    {
+     "pid": "8225210",
+     "title": "長崎誌上さるく : （その5）「唐人屋敷」界隈",
+     "volume": "",
+     "by": "石橋隆幸",
+     "year": "2005-10-25",
+     "access": "internet",
+     "pageHits": 14,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/8225210/1/0"
+    },
+    {
+     "pid": "2974867",
+     "title": "外国人の見た日本",
+     "volume": "第1",
+     "by": "",
+     "year": "1962",
+     "access": "transmission",
+     "pageHits": 20,
+     "frames": [
+      4,
+      83,
+      85,
+      86,
+      87,
+      89,
+      90,
+      180
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2974867/1/4"
+    },
+    {
+     "pid": "10944002",
+     "title": "東アジアにおける越境経営の先例 : 新羅坊・倭館・唐人屋敷を拠点とした国際活動と貿易(第3分科会:自然・観光・地域,第11回研究大会報告要旨)",
+     "volume": "",
+     "by": "金,光林",
+     "year": "2006-10-01",
+     "access": "internet",
+     "pageHits": 12,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/10944002/1/0"
+    },
+    {
+     "pid": "10944003",
+     "title": "COMMENT(東アジアにおける越境経営の先例 : 新羅坊・倭館・唐人屋敷を拠点とした国際活動と貿易,第3分科会:自然・観光・地域,第11回研究大会報告要旨)",
+     "volume": "",
+     "by": "渡部,育子",
+     "year": "2006-10-01",
+     "access": "internet",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/10944003"
+    },
+    {
+     "pid": "1143715",
+     "title": "長崎県史蹟名勝天然記念物",
+     "volume": "第7輯",
+     "by": "長崎県 [編]",
+     "year": "1931",
+     "access": "internet",
+     "pageHits": 23,
+     "frames": [
+      5,
+      7,
+      76,
+      77,
+      79,
+      82,
+      83,
+      84,
+      87,
+      91
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1143715/1/5"
+    },
+    {
+     "pid": "1646363",
+     "title": "無想剣進上",
+     "volume": "",
+     "by": "高木彬光 著",
+     "year": "1957",
+     "access": "transmission",
+     "pageHits": 30,
+     "frames": [
+      4,
+      117,
+      118,
+      119,
+      122,
+      124,
+      126,
+      128,
+      130,
+      135
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1646363/1/4"
+    },
+    {
+     "pid": "9770361",
+     "title": "長崎異人街誌",
+     "volume": "",
+     "by": "浜崎国男 著",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": 20,
+     "frames": [
+      5,
+      30,
+      35,
+      37,
+      38,
+      39,
+      124
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9770361/1/5"
+    },
+    {
+     "pid": "3005305",
+     "title": "東洋の歴史",
+     "volume": "第9巻",
+     "by": "",
+     "year": "1967",
+     "access": "transmission",
+     "pageHits": 8,
+     "frames": [
+      5,
+      119,
+      121,
+      125,
+      127,
+      190
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3005305/1/5"
+    },
+    {
+     "pid": "3566448",
+     "title": "歴史地理",
+     "volume": "27(4)(199)",
+     "by": "日本歴史地理学会 編",
+     "year": "1916-04",
+     "access": "inlibrary",
+     "pageHits": 44,
+     "frames": [
+      0,
+      2,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3566448/1/0"
+    },
+    {
+     "pid": "1068950",
+     "title": "浮世絵美讃",
+     "volume": "",
+     "by": "吉田暎二 著",
+     "year": "1943",
+     "access": "transmission",
+     "pageHits": 16,
+     "frames": [
+      5,
+      7,
+      8,
+      43,
+      44,
+      45,
+      46,
+      51
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1068950/1/5"
+    },
+    {
+     "pid": "13007136",
+     "title": "日本史研究",
+     "volume": "(467);2001・7",
+     "by": "日本史研究会 編",
+     "year": "2001-07",
+     "access": "transmission",
+     "pageHits": 8,
+     "frames": [
+      46,
+      47
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13007136/1/46"
+    },
+    {
+     "pid": "2993903",
+     "title": "長崎 : 歴史の旅への招待",
+     "volume": "",
+     "by": "原田伴彦 著",
+     "year": "1964",
+     "access": "transmission",
+     "pageHits": 18,
+     "frames": [
+      4,
+      8,
+      42,
+      45,
+      46,
+      48,
+      49,
+      53,
+      55,
+      59
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2993903/1/4"
+    },
+    {
+     "pid": "6051885",
+     "title": "月刊考古学ジャーナル",
+     "volume": "(455)",
+     "by": "考古学ジャーナル編集委員会 編",
+     "year": "2000-02",
+     "access": "inlibrary",
+     "pageHits": 53,
+     "frames": [
+      0,
+      1,
+      2,
+      5,
+      6,
+      7,
+      9,
+      11
+     ],
+     "url": "https://dl.ndl.go.jp/pid/6051885/1/0"
+    },
+    {
+     "pid": "2246782",
+     "title": "歴史手帖",
+     "volume": "11(12)(122)",
+     "by": "名著出版 [編]",
+     "year": "1983-12",
+     "access": "inlibrary",
+     "pageHits": 19,
+     "frames": [
+      1,
+      11,
+      16,
+      17,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2246782/1/1"
+    },
+    {
+     "pid": "1907243",
+     "title": "長崎丸山噺",
+     "volume": "",
+     "by": "本山桂川 著",
+     "year": "1926",
+     "access": "internet",
+     "pageHits": 34,
+     "frames": [
+      11,
+      43,
+      44,
+      45,
+      47,
+      50,
+      51,
+      56,
+      63,
+      68
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1907243/1/11"
+    },
+    {
+     "pid": "7916512",
+     "title": "長崎談叢",
+     "volume": "(72)",
+     "by": "「長崎談叢 」編集委員会 編",
+     "year": "1987-04",
+     "access": "transmission",
+     "pageHits": 18,
+     "frames": [
+      2,
+      11,
+      12,
+      13,
+      14,
+      16,
+      27,
+      78
+     ],
+     "url": "https://dl.ndl.go.jp/pid/7916512/1/2"
+    },
+    {
+     "pid": "2876177",
+     "title": "ながさき経済",
+     "volume": "(91)(451)",
+     "by": "",
+     "year": "1997-04",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2876177"
+    },
+    {
+     "pid": "1644937",
+     "title": "紅天まぼろし城",
+     "volume": "",
+     "by": "村松駿吉 著",
+     "year": "1955",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1644937"
+    },
+    {
+     "pid": "1466193",
+     "title": "長崎花街篇",
+     "volume": "",
+     "by": "本山桂川 著",
+     "year": "1928",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1466193"
+    },
+    {
+     "pid": "960905",
+     "title": "長崎の匂と彩り",
+     "volume": "",
+     "by": "本山桂川 著",
+     "year": "1919",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/960905"
+    },
+    {
+     "pid": "1209406",
+     "title": "崎陽秘史集覧",
+     "volume": "",
+     "by": "宮崎清成 著",
+     "year": "1930",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1209406"
+    },
+    {
+     "pid": "1087710",
+     "title": "長崎税関沿革史",
+     "volume": "",
+     "by": "",
+     "year": "1902",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1087710"
+    },
+    {
+     "pid": "9774977",
+     "title": "わが町の歴史長崎",
+     "volume": "",
+     "by": "加藤章, 外山幹夫 編著",
+     "year": "1984",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9774977"
+    },
+    {
+     "pid": "9769427",
+     "title": "長崎県の歴史散歩",
+     "volume": "",
+     "by": "長崎県高等学校教育研究会社会科部会 編",
+     "year": "1974",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9769427"
+    },
+    {
+     "pid": "1168219",
+     "title": "中国と日本",
+     "volume": "",
+     "by": "伊瀬仙太郎 著",
+     "year": "1949",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1168219"
+    },
+    {
+     "pid": "1193868",
+     "title": "建築資料叢書",
+     "volume": "第7",
+     "by": "",
+     "year": "1930",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1193868"
+    }
+   ]
+  },
+  {
+   "query": "南山手 グラバー",
+   "total": 2451,
+   "byAccess": {
+    "inlibrary": 1094,
+    "internet": 239,
+    "transmission": 1118
+   },
+   "items": [
+    {
+     "pid": "2518143",
+     "title": "重要文化財旧グラバー住宅修理工事報告書",
+     "volume": "",
+     "by": "",
+     "year": "1968",
+     "access": "transmission",
+     "pageHits": 43,
+     "frames": [
+      0,
+      4,
+      6,
+      7,
+      8,
+      9,
+      12,
+      15,
+      16,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2518143/1/0"
+    },
+    {
+     "pid": "12262257",
+     "title": "グラバー邸物語",
+     "volume": "",
+     "by": "",
+     "year": "1969",
+     "access": "transmission",
+     "pageHits": 95,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      15,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12262257/1/2"
+    },
+    {
+     "pid": "13154887",
+     "title": "グラバー園物語",
+     "volume": "",
+     "by": "かむらくにお 著",
+     "year": "1988",
+     "access": "transmission",
+     "pageHits": 86,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13154887/1/2"
+    },
+    {
+     "pid": "13308251",
+     "title": "グラバー家の最期 : 日英のはざまで",
+     "volume": "",
+     "by": "多田茂治 著",
+     "year": "1991",
+     "access": "transmission",
+     "pageHits": 93,
+     "frames": [
+      6,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      17
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13308251/1/6"
+    },
+    {
+     "pid": "12221191",
+     "title": "グラバー夫人",
+     "volume": "",
+     "by": "野田平之助 著",
+     "year": "1972",
+     "access": "transmission",
+     "pageHits": 82,
+     "frames": [
+      1,
+      2,
+      3,
+      4,
+      10,
+      12,
+      14,
+      21,
+      22,
+      26
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12221191/1/1"
+    },
+    {
+     "pid": "13154838",
+     "title": "グラバー夫人 : 歴史のヒダに光る真実",
+     "volume": "",
+     "by": "野田平之助 著",
+     "year": "1994",
+     "access": "transmission",
+     "pageHits": 58,
+     "frames": [
+      3,
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      22,
+      23,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13154838/1/3"
+    },
+    {
+     "pid": "14038491",
+     "title": "グラバー夫人 : 歴史のヒダに光る真実",
+     "volume": "",
+     "by": "野田平之助 著",
+     "year": "1996",
+     "access": "inlibrary",
+     "pageHits": 62,
+     "frames": [
+      3,
+      13,
+      14,
+      15,
+      16,
+      17,
+      22,
+      23,
+      24,
+      27
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14038491/1/3"
+    },
+    {
+     "pid": "14038493",
+     "title": "トーマス・グラバー伝",
+     "volume": "",
+     "by": "アレキサンダー・マッケイ 著",
+     "year": "1997",
+     "access": "inlibrary",
+     "pageHits": 83,
+     "frames": [
+      2,
+      3,
+      4,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14038493/1/2"
+    },
+    {
+     "pid": "14020249",
+     "title": "もうひとりの蝶々夫人 : 長崎グラバー邸の女主人ツル",
+     "volume": "",
+     "by": "楠戸義昭 著",
+     "year": "1997",
+     "access": "inlibrary",
+     "pageHits": 126,
+     "frames": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      21
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14020249/1/5"
+    },
+    {
+     "pid": "13657998",
+     "title": "隠れ間のあるじ : トーマス・ブレイク・グラバー",
+     "volume": "",
+     "by": "山崎識子 著",
+     "year": "1994",
+     "access": "inlibrary",
+     "pageHits": 28,
+     "frames": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      38,
+      40,
+      41,
+      53,
+      54
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13657998/1/1"
+    },
+    {
+     "pid": "12873052",
+     "title": "南山手の洋館 : 伝統的建造物群保存地区保存対策事業報告書",
+     "volume": "",
+     "by": "長崎市教育委員会管理部文化課 [編]",
+     "year": "1977",
+     "access": "transmission",
+     "pageHits": 74,
+     "frames": [
+      3,
+      4,
+      6,
+      7,
+      10,
+      12,
+      16,
+      17,
+      18,
+      38
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12873052/1/3"
+    },
+    {
+     "pid": "13107976",
+     "title": "グラバー図譜",
+     "volume": "第1巻 (日本西部及び南部魚類図譜 第1集-第7集)",
+     "by": "倉場富三郎 著",
+     "year": "1973",
+     "access": "transmission",
+     "pageHits": 29,
+     "frames": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      11,
+      12,
+      339,
+      387
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13107976/1/1"
+    },
+    {
+     "pid": "8225080",
+     "title": "グラバー親子と長崎経済",
+     "volume": "",
+     "by": "ブライアン・バークガフニ",
+     "year": "2004-04-26",
+     "access": "internet",
+     "pageHits": 39,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/8225080/1/0"
+    },
+    {
+     "pid": "11452525",
+     "title": "空き家の現状と利活用の取組み : 長崎市南山手町『つくる邸』",
+     "volume": "",
+     "by": "泉猛",
+     "year": "2017-04-27",
+     "access": "internet",
+     "pageHits": 8,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/11452525/1/0"
+    },
+    {
+     "pid": "10428851",
+     "title": "中国孔子廟とグラバー邸",
+     "volume": "",
+     "by": "菱谷,武平",
+     "year": "1975-10-25",
+     "access": "internet",
+     "pageHits": 43,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/10428851/1/0"
+    },
+    {
+     "pid": "13154894",
+     "title": "花と霜 : グラバー家の人々",
+     "volume": "",
+     "by": "ブライアン・バークガフニ 著",
+     "year": "1989",
+     "access": "inlibrary",
+     "pageHits": 142,
+     "frames": [
+      3,
+      4,
+      6,
+      7,
+      8,
+      11,
+      12,
+      13,
+      16,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13154894/1/3"
+    },
+    {
+     "pid": "12421866",
+     "title": "日本住宅史の旅 : 登呂からグラバー邸まで",
+     "volume": "",
+     "by": "中田清兵衛 著",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": 27,
+     "frames": [
+      0,
+      3,
+      4,
+      6,
+      9,
+      83,
+      84,
+      85,
+      86,
+      97
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12421866/1/0"
+    },
+    {
+     "pid": "13154850",
+     "title": "明治維新とイギリス商人 : トマス・グラバーの生涯",
+     "volume": "",
+     "by": "杉山伸也 著",
+     "year": "1993",
+     "access": "transmission",
+     "pageHits": 126,
+     "frames": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      13,
+      18,
+      20,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13154850/1/3"
+    },
+    {
+     "pid": "12361844",
+     "title": "ながさきにこり",
+     "volume": "",
+     "by": "長崎県広報課",
+     "year": "2018-12",
+     "access": "internet",
+     "pageHits": 39,
+     "frames": [
+      1,
+      8,
+      9,
+      12
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12361844/1/1"
+    },
+    {
+     "pid": "3170949",
+     "title": "Study on the rented house at Higashi-Yamate in the Nagasaki foreign settlement",
+     "volume": "",
+     "by": "謝少明 [著]",
+     "year": "2000",
+     "access": "transmission",
+     "pageHits": 59,
+     "frames": [
+      3,
+      4,
+      5,
+      8,
+      31,
+      34,
+      41,
+      48,
+      49,
+      50
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3170949/1/3"
+    },
+    {
+     "pid": "2316435",
+     "title": "九州文学",
+     "volume": "37(11)(357)",
+     "by": "九州文学編集部 編",
+     "year": "1974-11",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2316435"
+    },
+    {
+     "pid": "12755505",
+     "title": "長崎県立美術博物館収蔵資料目録",
+     "volume": "2 (版画 山口重春・円山応挙・田川憲)",
+     "by": "",
+     "year": "1977",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12755505"
+    },
+    {
+     "pid": "11996741",
+     "title": "日本の郷土産業",
+     "volume": "6",
+     "by": "日本地域社会研究所 編",
+     "year": "1974",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/11996741"
+    },
+    {
+     "pid": "13266271",
+     "title": "長崎居留地 : 伝統的建造物群保存対策調査報告書",
+     "volume": "",
+     "by": "",
+     "year": "1989",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13266271"
+    },
+    {
+     "pid": "2299621",
+     "title": "建築",
+     "volume": "(177)",
+     "by": "中外出版株式会社 [編]",
+     "year": "1975-08",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2299621"
+    },
+    {
+     "pid": "9775688",
+     "title": "ザ・長崎 : 異国文化の新発見",
+     "volume": "",
+     "by": "",
+     "year": "1986",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9775688"
+    },
+    {
+     "pid": "2984529",
+     "title": "雲仙長崎",
+     "volume": "",
+     "by": "武田幸一, 中村秀男 共著",
+     "year": "1964",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2984529"
+    },
+    {
+     "pid": "7916497",
+     "title": "長崎談叢",
+     "volume": "(57)",
+     "by": "「長崎談叢 」編集委員会 編",
+     "year": "1975-01",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/7916497"
+    },
+    {
+     "pid": "2767878",
+     "title": "地方公務員月報",
+     "volume": "(9)(74)",
+     "by": "総務省自治行政局公務員課 編",
+     "year": "1969",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2767878"
+    },
+    {
+     "pid": "7939826",
+     "title": "歴史と神戸 : 神戸を中心とした兵庫県郷土研究誌",
+     "volume": "9(2)(41)",
+     "by": "神戸史学会 編",
+     "year": "1970-04",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/7939826"
+    }
+   ]
+  }
+ ]
+}

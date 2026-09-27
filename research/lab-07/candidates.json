@@ -1,0 +1,1053 @@
+{
+ "note": "Long list for page 07. center = [lat, lon] (GSI address search, adjusted to the district core); half = half-width of the study square in km. markets = ISO codes of visitor markets the district is aimed at; segment = product segment. Selection happens in select.cjs, not here.",
+ "candidates": [
+  {
+   "id": "tokyo-asakusa",
+   "en": "Asakusa & Ryogoku, Tokyo",
+   "ja": "浅草・両国（東京都台東区・墨田区）",
+   "pref": "東京都",
+   "center": [
+    35.705,
+    139.7975
+   ],
+   "half": 1.3,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "CA",
+    "SG",
+    "TW",
+    "HK",
+    "CN",
+    "TH",
+    "KR"
+   ],
+   "site": "tokyo",
+   "queries": [
+    "浅草",
+    "本所",
+    "両国",
+    "隅田川",
+    "横網"
+   ]
+  },
+  {
+   "id": "tokyo-harajuku",
+   "en": "Harajuku & Yoyogi (Washington Heights), Tokyo",
+   "ja": "原宿・代々木（東京都渋谷区）",
+   "pref": "東京都",
+   "center": [
+    35.67,
+    139.7
+   ],
+   "half": 1.1,
+   "segment": [
+    "occupation",
+    "city"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "CA",
+    "SG",
+    "KR",
+    "TW"
+   ],
+   "site": null,
+   "queries": [
+    "原宿",
+    "代々木",
+    "ワシントンハイツ",
+    "穏田",
+    "千駄ヶ谷"
+   ]
+  },
+  {
+   "id": "yokohama-kannai",
+   "en": "Kannai & Yamashita, Yokohama",
+   "ja": "関内・山下町（横浜市中区）",
+   "pref": "神奈川県",
+   "center": [
+    35.444,
+    139.644
+   ],
+   "half": 1.1,
+   "segment": [
+    "settlement",
+    "city"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "CN",
+    "TW",
+    "HK",
+    "AU"
+   ],
+   "site": "yokohama",
+   "queries": [
+    "関内",
+    "山下町",
+    "横浜居留地",
+    "山下公園",
+    "横浜中華街"
+   ]
+  },
+  {
+   "id": "yokosuka",
+   "en": "Yokosuka (naval port)",
+   "ja": "横須賀（神奈川県横須賀市）",
+   "pref": "神奈川県",
+   "center": [
+    35.283,
+    139.668
+   ],
+   "half": 1.3,
+   "segment": [
+    "base",
+    "occupation"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "横須賀",
+    "横須賀製鉄所",
+    "横須賀鎮守府",
+    "汐入",
+    "米海軍横須賀"
+   ]
+  },
+  {
+   "id": "kamakura",
+   "en": "Kamakura (Hase & Yuigahama)",
+   "ja": "鎌倉（長谷・由比ガ浜）",
+   "pref": "神奈川県",
+   "center": [
+    35.318,
+    139.545
+   ],
+   "half": 1.3,
+   "segment": [
+    "city",
+    "disaster"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "TH",
+    "SG"
+   ],
+   "site": "kamakura",
+   "queries": [
+    "鎌倉",
+    "長谷",
+    "由比ヶ浜",
+    "鎌倉大仏",
+    "若宮大路"
+   ]
+  },
+  {
+   "id": "kyoto-higashiyama",
+   "en": "Higashiyama & Kamo River, Kyoto",
+   "ja": "東山・鴨川（京都市東山区）",
+   "pref": "京都府",
+   "center": [
+    34.999,
+    135.779
+   ],
+   "half": 1.1,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "CA",
+    "SG",
+    "TW",
+    "HK",
+    "CN",
+    "TH",
+    "KR"
+   ],
+   "site": "kyoto",
+   "queries": [
+    "東山",
+    "祇園",
+    "清水寺",
+    "鴨川",
+    "五条"
+   ]
+  },
+  {
+   "id": "osaka-namba",
+   "en": "Namba & Dotonbori canals, Osaka",
+   "ja": "難波・道頓堀（大阪市中央区・浪速区）",
+   "pref": "大阪府",
+   "center": [
+    34.6685,
+    135.496
+   ],
+   "half": 1.2,
+   "segment": [
+    "city",
+    "disaster"
+   ],
+   "markets": [
+    "KR",
+    "TW",
+    "HK",
+    "CN",
+    "TH",
+    "SG",
+    "US"
+   ],
+   "site": "osaka",
+   "queries": [
+    "道頓堀",
+    "難波",
+    "木津川",
+    "大正橋",
+    "大阪 堀川"
+   ]
+  },
+  {
+   "id": "kobe-meriken",
+   "en": "Meriken Park & Kitano, Kobe",
+   "ja": "メリケンパーク・北野（神戸市中央区）",
+   "pref": "兵庫県",
+   "center": [
+    34.69,
+    135.19
+   ],
+   "half": 1.1,
+   "segment": [
+    "settlement",
+    "disaster",
+    "city"
+   ],
+   "markets": [
+    "HK",
+    "TW",
+    "GB",
+    "US",
+    "CN"
+   ],
+   "site": "kobe",
+   "queries": [
+    "神戸居留地",
+    "北野",
+    "メリケン波止場",
+    "生田川",
+    "神戸港"
+   ]
+  },
+  {
+   "id": "hiroshima-peace",
+   "en": "Peace Park (Nakajima), Hiroshima",
+   "ja": "平和記念公園・旧中島地区（広島市中区）",
+   "pref": "広島県",
+   "center": [
+    34.3935,
+    132.453
+   ],
+   "half": 1.0,
+   "segment": [
+    "city",
+    "war"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "CA",
+    "SG",
+    "KR"
+   ],
+   "site": "hiroshima",
+   "queries": [
+    "中島本町",
+    "材木町",
+    "広島市 中島",
+    "元安川",
+    "猿楽町"
+   ]
+  },
+  {
+   "id": "nagasaki-dejima",
+   "en": "Dejima, Chinatown & Minamiyamate, Nagasaki",
+   "ja": "出島・新地・南山手（長崎市）",
+   "pref": "長崎県",
+   "center": [
+    32.7395,
+    129.8725
+   ],
+   "half": 1.0,
+   "segment": [
+    "settlement",
+    "city",
+    "war"
+   ],
+   "markets": [
+    "GB",
+    "US",
+    "CN",
+    "TW",
+    "KR",
+    "HK"
+   ],
+   "site": "nagasaki",
+   "queries": [
+    "出島",
+    "長崎居留地",
+    "南山手",
+    "唐人屋敷",
+    "新地"
+   ]
+  },
+  {
+   "id": "suo-oshima",
+   "en": "Suo-Oshima (Hawaii emigrant villages)",
+   "ja": "周防大島（山口県周防大島町）",
+   "pref": "山口県",
+   "center": [
+    33.927,
+    132.215
+   ],
+   "half": 1.6,
+   "segment": [
+    "roots"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "周防大島",
+    "屋代村",
+    "久賀",
+    "大島郡",
+    "布哇 移民 山口"
+   ]
+  },
+  {
+   "id": "mio",
+   "en": "Mio, the 'America Village' (Canada emigrants)",
+   "ja": "三尾・アメリカ村（和歌山県美浜町）",
+   "pref": "和歌山県",
+   "center": [
+    33.8914,
+    135.0894
+   ],
+   "half": 1.2,
+   "segment": [
+    "roots"
+   ],
+   "markets": [
+    "CA",
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "三尾村",
+    "アメリカ村",
+    "美浜町",
+    "日高郡",
+    "加奈陀 移民"
+   ]
+  },
+  {
+   "id": "kin",
+   "en": "Kin, Okinawa (emigration pioneer town & Camp Hansen)",
+   "ja": "金武町（沖縄県）",
+   "pref": "沖縄県",
+   "center": [
+    26.464,
+    127.92
+   ],
+   "half": 1.4,
+   "segment": [
+    "roots",
+    "base"
+   ],
+   "markets": [
+    "US",
+    "BR",
+    "PE"
+   ],
+   "site": null,
+   "queries": [
+    "金武",
+    "當山久三",
+    "沖縄 移民",
+    "金武村",
+    "キャンプ・ハンセン"
+   ]
+  },
+  {
+   "id": "chatan",
+   "en": "Chatan & Kadena (Mihama / Hamby Airfield), Okinawa",
+   "ja": "北谷・嘉手納（沖縄県）",
+   "pref": "沖縄県",
+   "center": [
+    26.325,
+    127.76
+   ],
+   "half": 1.5,
+   "segment": [
+    "base",
+    "occupation"
+   ],
+   "markets": [
+    "US",
+    "TW",
+    "HK",
+    "KR"
+   ],
+   "site": null,
+   "queries": [
+    "北谷",
+    "嘉手納",
+    "ハンビー",
+    "美浜",
+    "北谷村"
+   ]
+  },
+  {
+   "id": "naha-shuri",
+   "en": "Shuri, Naha",
+   "ja": "首里（那覇市）",
+   "pref": "沖縄県",
+   "center": [
+    26.2185,
+    127.718
+   ],
+   "half": 1.1,
+   "segment": [
+    "city",
+    "war"
+   ],
+   "markets": [
+    "US",
+    "TW",
+    "HK",
+    "CN",
+    "KR"
+   ],
+   "site": "shuri",
+   "queries": [
+    "首里",
+    "首里城",
+    "那覇",
+    "琉球",
+    "首里市"
+   ]
+  },
+  {
+   "id": "sapporo",
+   "en": "Central Sapporo (Clock Tower & Sosei River)",
+   "ja": "札幌都心（時計台・創成川）",
+   "pref": "北海道",
+   "center": [
+    43.0615,
+    141.354
+   ],
+   "half": 1.1,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "TH",
+    "SG",
+    "TW",
+    "HK",
+    "CN",
+    "KR",
+    "US",
+    "AU"
+   ],
+   "site": "sapporo",
+   "queries": [
+    "札幌",
+    "創成川",
+    "大通",
+    "札幌農学校",
+    "開拓使"
+   ]
+  },
+  {
+   "id": "otaru",
+   "en": "Otaru Canal",
+   "ja": "小樽運河（北海道小樽市）",
+   "pref": "北海道",
+   "center": [
+    43.1985,
+    141.002
+   ],
+   "half": 1.0,
+   "segment": [
+    "city",
+    "reclaimed"
+   ],
+   "markets": [
+    "TH",
+    "TW",
+    "HK",
+    "CN",
+    "SG",
+    "KR"
+   ],
+   "site": null,
+   "queries": [
+    "小樽",
+    "小樽運河",
+    "色内",
+    "手宮",
+    "小樽港"
+   ]
+  },
+  {
+   "id": "hakodate",
+   "en": "Motomachi & the Bay, Hakodate",
+   "ja": "元町・ベイエリア（函館市）",
+   "pref": "北海道",
+   "center": [
+    41.765,
+    140.715
+   ],
+   "half": 1.1,
+   "segment": [
+    "settlement",
+    "city",
+    "disaster"
+   ],
+   "markets": [
+    "TW",
+    "HK",
+    "CN",
+    "KR",
+    "GB",
+    "US"
+   ],
+   "site": "hakodate",
+   "queries": [
+    "函館",
+    "元町",
+    "函館大火",
+    "弁天",
+    "函館港"
+   ]
+  },
+  {
+   "id": "fukuoka-hakata",
+   "en": "Hakata old town, Fukuoka",
+   "ja": "博多（福岡市博多区）",
+   "pref": "福岡県",
+   "center": [
+    33.593,
+    130.411
+   ],
+   "half": 1.1,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "KR",
+    "TW",
+    "HK",
+    "CN"
+   ],
+   "site": "fukuoka",
+   "queries": [
+    "博多",
+    "那珂川",
+    "櫛田神社",
+    "冷泉",
+    "博多津"
+   ]
+  },
+  {
+   "id": "kanazawa",
+   "en": "Kanazawa castle town",
+   "ja": "金沢城下（金沢市）",
+   "pref": "石川県",
+   "center": [
+    36.565,
+    136.66
+   ],
+   "half": 1.1,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "TW",
+    "GB",
+    "US",
+    "AU",
+    "HK"
+   ],
+   "site": "kanazawa",
+   "queries": [
+    "金沢",
+    "兼六園",
+    "ひがし茶屋",
+    "長町",
+    "犀川"
+   ]
+  },
+  {
+   "id": "fujiyoshida",
+   "en": "Fujiyoshida (Chureito Pagoda & pilgrim town)",
+   "ja": "富士吉田（新倉山・上吉田）",
+   "pref": "山梨県",
+   "center": [
+    35.492,
+    138.8
+   ],
+   "half": 1.3,
+   "segment": [
+    "city",
+    "volcano"
+   ],
+   "markets": [
+    "TH",
+    "SG",
+    "TW",
+    "HK",
+    "CN",
+    "KR",
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "富士吉田",
+    "上吉田",
+    "御師",
+    "新倉",
+    "北口本宮冨士浅間神社"
+   ]
+  },
+  {
+   "id": "niseko",
+   "en": "Niseko Hirafu & Kutchan",
+   "ja": "ニセコひらふ・倶知安",
+   "pref": "北海道",
+   "center": [
+    42.8654,
+    140.7008
+   ],
+   "half": 1.5,
+   "segment": [
+    "property",
+    "volcano"
+   ],
+   "markets": [
+    "AU",
+    "HK",
+    "SG",
+    "CN"
+   ],
+   "site": null,
+   "queries": [
+    "倶知安",
+    "比羅夫",
+    "ニセコ",
+    "羊蹄山",
+    "狩太"
+   ]
+  },
+  {
+   "id": "tsushima",
+   "en": "Izuhara, Tsushima",
+   "ja": "厳原（長崎県対馬市）",
+   "pref": "長崎県",
+   "center": [
+    34.2029,
+    129.2894
+   ],
+   "half": 1.0,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "KR"
+   ],
+   "site": null,
+   "queries": [
+    "厳原",
+    "対馬",
+    "府中",
+    "朝鮮通信使 対馬",
+    "対馬藩"
+   ]
+  },
+  {
+   "id": "sendai-arahama",
+   "en": "Arahama coast, Sendai",
+   "ja": "荒浜（仙台市若林区）",
+   "pref": "宮城県",
+   "center": [
+    38.2221,
+    140.9701
+   ],
+   "half": 1.5,
+   "segment": [
+    "disaster"
+   ],
+   "markets": [
+    "CN",
+    "TW",
+    "US",
+    "KR"
+   ],
+   "site": "sendai",
+   "queries": [
+    "荒浜",
+    "仙台 若林",
+    "七郷",
+    "貞山堀",
+    "東日本大震災 荒浜"
+   ]
+  },
+  {
+   "id": "shirakawago",
+   "en": "Ogimachi, Shirakawa-go",
+   "ja": "白川郷荻町",
+   "pref": "岐阜県",
+   "center": [
+    36.256,
+    136.907
+   ],
+   "half": 1.0,
+   "segment": [
+    "village"
+   ],
+   "markets": [
+    "TW",
+    "HK",
+    "TH",
+    "CN",
+    "SG",
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "白川村",
+    "荻町",
+    "合掌造",
+    "白川郷",
+    "大野郡白川村"
+   ]
+  },
+  {
+   "id": "karuizawa",
+   "en": "Old Karuizawa",
+   "ja": "旧軽井沢",
+   "pref": "長野県",
+   "center": [
+    36.355,
+    138.635
+   ],
+   "half": 1.2,
+   "segment": [
+    "resort"
+   ],
+   "markets": [
+    "CA",
+    "GB",
+    "CN",
+    "TW",
+    "HK"
+   ],
+   "site": null,
+   "queries": [
+    "軽井沢",
+    "旧軽井沢",
+    "ショー",
+    "避暑地 軽井沢",
+    "軽井沢宿"
+   ]
+  },
+  {
+   "id": "nikko",
+   "en": "Nikko shrine town",
+   "ja": "日光山内・門前",
+   "pref": "栃木県",
+   "center": [
+    36.756,
+    139.603
+   ],
+   "half": 1.1,
+   "segment": [
+    "city",
+    "resort"
+   ],
+   "markets": [
+    "GB",
+    "US",
+    "TW",
+    "TH"
+   ],
+   "site": null,
+   "queries": [
+    "日光",
+    "山内",
+    "日光東照宮",
+    "大谷川",
+    "鉢石"
+   ]
+  },
+  {
+   "id": "misawa",
+   "en": "Misawa (air base town)",
+   "ja": "三沢（青森県三沢市）",
+   "pref": "青森県",
+   "center": [
+    40.685,
+    141.37
+   ],
+   "half": 1.5,
+   "segment": [
+    "base",
+    "occupation"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "三沢",
+    "三沢基地",
+    "淋代",
+    "三沢村",
+    "ミス・ビードル"
+   ]
+  },
+  {
+   "id": "sasebo",
+   "en": "Sasebo (naval port)",
+   "ja": "佐世保（長崎県佐世保市）",
+   "pref": "長崎県",
+   "center": [
+    33.17,
+    129.72
+   ],
+   "half": 1.2,
+   "segment": [
+    "base",
+    "occupation"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "佐世保",
+    "佐世保鎮守府",
+    "佐世保軍港",
+    "島瀬",
+    "佐世保 米軍"
+   ]
+  },
+  {
+   "id": "iwakuni",
+   "en": "Iwakuni (Kawashimo & the air station)",
+   "ja": "岩国（川下・基地周辺）",
+   "pref": "山口県",
+   "center": [
+    34.16,
+    132.217
+   ],
+   "half": 1.4,
+   "segment": [
+    "base"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "岩国",
+    "川下",
+    "岩国基地",
+    "岩国飛行場",
+    "錦川"
+   ]
+  },
+  {
+   "id": "fussa",
+   "en": "Fussa & Yokota (base-side town)",
+   "ja": "福生・横田基地周辺",
+   "pref": "東京都",
+   "center": [
+    35.743,
+    139.33
+   ],
+   "half": 1.3,
+   "segment": [
+    "base",
+    "occupation"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "福生",
+    "横田基地",
+    "多摩飛行場",
+    "拝島",
+    "福生町"
+   ]
+  },
+  {
+   "id": "tachikawa",
+   "en": "Tachikawa (air base to park)",
+   "ja": "立川（旧立川飛行場・昭和記念公園）",
+   "pref": "東京都",
+   "center": [
+    35.705,
+    139.405
+   ],
+   "half": 1.4,
+   "segment": [
+    "base",
+    "occupation"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "立川",
+    "立川飛行場",
+    "立川基地",
+    "昭和記念公園",
+    "砂川"
+   ]
+  },
+  {
+   "id": "kure",
+   "en": "Kure (naval arsenal & BCOF headquarters)",
+   "ja": "呉（呉市中央）",
+   "pref": "広島県",
+   "center": [
+    34.244,
+    132.558
+   ],
+   "half": 1.2,
+   "segment": [
+    "occupation",
+    "base",
+    "war"
+   ],
+   "markets": [
+    "AU",
+    "GB",
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "呉",
+    "呉海軍工廠",
+    "呉鎮守府",
+    "英連邦軍 呉",
+    "呉港"
+   ]
+  },
+  {
+   "id": "shimoda",
+   "en": "Shimoda (Perry Road & 1854 tsunami)",
+   "ja": "下田（静岡県下田市）",
+   "pref": "静岡県",
+   "center": [
+    34.672,
+    138.943
+   ],
+   "half": 1.0,
+   "segment": [
+    "settlement",
+    "disaster"
+   ],
+   "markets": [
+    "US",
+    "RU",
+    "GB"
+   ],
+   "site": null,
+   "queries": [
+    "下田",
+    "下田港",
+    "ペリー 下田",
+    "安政 津波 下田",
+    "了仙寺"
+   ]
+  },
+  {
+   "id": "kumamoto",
+   "en": "Kumamoto castle town",
+   "ja": "熊本城下（熊本市中央区）",
+   "pref": "熊本県",
+   "center": [
+    32.805,
+    130.706
+   ],
+   "half": 1.1,
+   "segment": [
+    "city",
+    "disaster"
+   ],
+   "markets": [
+    "TW",
+    "HK",
+    "KR",
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "熊本",
+    "熊本城",
+    "白川 熊本",
+    "新町 熊本",
+    "坪井川"
+   ]
+  },
+  {
+   "id": "beppu",
+   "en": "Beppu hot-spring town",
+   "ja": "別府（大分県別府市）",
+   "pref": "大分県",
+   "center": [
+    33.279,
+    131.499
+   ],
+   "half": 1.2,
+   "segment": [
+    "city",
+    "volcano"
+   ],
+   "markets": [
+    "KR",
+    "TW",
+    "HK"
+   ],
+   "site": null,
+   "queries": [
+    "別府",
+    "別府温泉",
+    "別府港",
+    "浜脇",
+    "鶴見岳"
+   ]
+  }
+ ]
+}

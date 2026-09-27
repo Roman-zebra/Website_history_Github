@@ -1,0 +1,1475 @@
+{
+ "id": "osaka-namba",
+ "checkedOn": "2026-09-27",
+ "source": "https://dl.ndl.go.jp (full-text search of digitised items)",
+ "queries": [
+  {
+   "query": "道頓堀 堀川",
+   "total": 45480,
+   "byAccess": {
+    "inlibrary": 18161,
+    "internet": 6220,
+    "transmission": 21099
+   },
+   "items": [
+    {
+     "pid": "12539203",
+     "title": "泥の河・蛍川・道頓堀川 : 川三部作",
+     "volume": "",
+     "by": "宮本輝 著",
+     "year": "1986",
+     "access": "inlibrary",
+     "pageHits": 41,
+     "frames": [
+      1,
+      2,
+      5,
+      86,
+      87,
+      88,
+      92,
+      102,
+      105,
+      110
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12539203/1/1"
+    },
+    {
+     "pid": "1179282",
+     "title": "道頓堀通",
+     "volume": "",
+     "by": "日比繁治郎 著",
+     "year": "1930",
+     "access": "transmission",
+     "pageHits": 92,
+     "frames": [
+      4,
+      6,
+      12,
+      13,
+      15,
+      22,
+      23,
+      24,
+      26,
+      27
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1179282/1/4"
+    },
+    {
+     "pid": "13231170",
+     "title": "宮本輝全集",
+     "volume": "第1巻",
+     "by": "",
+     "year": "1992",
+     "access": "inlibrary",
+     "pageHits": 44,
+     "frames": [
+      3,
+      4,
+      6,
+      37,
+      75,
+      76,
+      80,
+      89,
+      92,
+      96
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13231170/1/3"
+    },
+    {
+     "pid": "11933401",
+     "title": "道頓堀裁判",
+     "volume": "",
+     "by": "牧英正 著",
+     "year": "1981",
+     "access": "transmission",
+     "pageHits": 132,
+     "frames": [
+      3,
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      17,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/11933401/1/3"
+    },
+    {
+     "pid": "12438173",
+     "title": "道頓堀 : 川・橋・芝居",
+     "volume": "",
+     "by": "三田純市 著",
+     "year": "1975",
+     "access": "transmission",
+     "pageHits": 120,
+     "frames": [
+      11,
+      12,
+      13,
+      14,
+      16,
+      18,
+      20,
+      21,
+      24,
+      25
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12438173/1/11"
+    },
+    {
+     "pid": "2503356",
+     "title": "道頓堀の三百年",
+     "volume": "",
+     "by": "木谷蓬吟 著",
+     "year": "1947",
+     "access": "transmission",
+     "pageHits": 87,
+     "frames": [
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2503356/1/4"
+    },
+    {
+     "pid": "12676001",
+     "title": "道頓堀裁判",
+     "volume": "",
+     "by": "牧英正 著",
+     "year": "1993",
+     "access": "transmission",
+     "pageHits": 150,
+     "frames": [
+      2,
+      5,
+      6,
+      7,
+      8,
+      10,
+      11,
+      12,
+      13,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12676001/1/2"
+    },
+    {
+     "pid": "13239254",
+     "title": "道頓堀川",
+     "volume": "",
+     "by": "宮本輝 著",
+     "year": "1994",
+     "access": "inlibrary",
+     "pageHits": 44,
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      8,
+      19,
+      22,
+      27,
+      45,
+      47
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13239254/1/0"
+    },
+    {
+     "pid": "12538847",
+     "title": "道頓堀川",
+     "volume": "",
+     "by": "宮本輝 著",
+     "year": "1981",
+     "access": "inlibrary",
+     "pageHits": 42,
+     "frames": [
+      1,
+      2,
+      3,
+      4,
+      8,
+      20,
+      23,
+      28,
+      30,
+      50
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12538847/1/1"
+    },
+    {
+     "pid": "12539015",
+     "title": "道頓堀川",
+     "volume": "",
+     "by": "宮本輝 [著]",
+     "year": "1983",
+     "access": "inlibrary",
+     "pageHits": 42,
+     "frames": [
+      0,
+      2,
+      3,
+      7,
+      18,
+      21,
+      26,
+      45,
+      47,
+      56
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12539015/1/0"
+    },
+    {
+     "pid": "13748687",
+     "title": "官民連携による水辺空間の賑わい創出 : 大阪・道頓堀川の事例より",
+     "volume": "",
+     "by": "中井敬明",
+     "year": "2017-12-15",
+     "access": "internet",
+     "pageHits": 35,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13748687/1/0"
+    },
+    {
+     "pid": "13909364",
+     "title": "「ホームレス」襲撃事件 : 大阪・道頓堀川 : \"弱者いじめ\"の連鎖を断つ",
+     "volume": "",
+     "by": "北村年子 著",
+     "year": "1997",
+     "access": "inlibrary",
+     "pageHits": 48,
+     "frames": [
+      7,
+      8,
+      18,
+      56,
+      60,
+      100,
+      112,
+      113,
+      119,
+      122
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13909364/1/7"
+    },
+    {
+     "pid": "1188316",
+     "title": "大阪叢書",
+     "volume": "第1輯",
+     "by": "",
+     "year": "1927",
+     "access": "transmission",
+     "pageHits": 57,
+     "frames": [
+      3,
+      6,
+      7,
+      9,
+      15,
+      18,
+      25,
+      26,
+      27,
+      37
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1188316/1/3"
+    },
+    {
+     "pid": "10537597",
+     "title": "277 東横堀川・道頓堀川水質の日間変動のシミュレーション",
+     "volume": "",
+     "by": "福永,勲",
+     "year": "1971-11-17",
+     "access": "internet",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/10537597"
+    },
+    {
+     "pid": "10995530",
+     "title": "近世道頓堀関係史料-遠藤亮平・安井洋一氏所蔵文書-の紹介",
+     "volume": "",
+     "by": "八木滋",
+     "year": "2015-02",
+     "access": "ndl_only_no_print_no_simview",
+     "pageHits": 163,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/10995530/1/0"
+    },
+    {
+     "pid": "11704786",
+     "title": "健康・環境・サイエンス",
+     "volume": "",
+     "by": "大阪市立環境科学研究所",
+     "year": "2015-03",
+     "access": "ndl_only_no_print_no_simview",
+     "pageHits": 48,
+     "frames": [
+      0,
+      1
+     ],
+     "url": "https://dl.ndl.go.jp/pid/11704786/1/0"
+    },
+    {
+     "pid": "12489743",
+     "title": "道頓堀川",
+     "volume": "",
+     "by": "深作欣二 監督",
+     "year": "1982",
+     "access": "ndl_only_no_print_no_simview",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12489743"
+    },
+    {
+     "pid": "14212735",
+     "title": "道頓堀の雨に別れて以来なり : 川柳作家・岸本水府とその時代",
+     "volume": "下",
+     "by": "田辺聖子 著",
+     "year": "1998",
+     "access": "inlibrary",
+     "pageHits": 24,
+     "frames": [
+      1,
+      4,
+      6,
+      25,
+      33,
+      41,
+      48,
+      55,
+      64,
+      345
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14212735/1/1"
+    },
+    {
+     "pid": "14232509",
+     "title": "道頓堀の雨に別れて以来なり : 川柳作家・岸本水府とその時代",
+     "volume": "上",
+     "by": "田辺聖子 著",
+     "year": "1998",
+     "access": "inlibrary",
+     "pageHits": 42,
+     "frames": [
+      7,
+      9,
+      23,
+      24,
+      28,
+      39,
+      40,
+      51,
+      71,
+      118
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14232509/1/7"
+    },
+    {
+     "pid": "14222845",
+     "title": "道頓堀の雨に別れて以来なり : 川柳作家・岸本水府とその時代",
+     "volume": "上巻",
+     "by": "田辺聖子 著",
+     "year": "2000",
+     "access": "inlibrary",
+     "pageHits": 34,
+     "frames": [
+      0,
+      9,
+      26,
+      27,
+      32,
+      47,
+      62,
+      87,
+      119,
+      120
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14222845/1/0"
+    },
+    {
+     "pid": "14222849",
+     "title": "道頓堀の雨に別れて以来なり : 川柳作家・岸本水府とその時代",
+     "volume": "中巻",
+     "by": "田辺聖子 著",
+     "year": "2000",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14222849"
+    },
+    {
+     "pid": "12435377",
+     "title": "遥かなり道頓堀",
+     "volume": "",
+     "by": "三田純市 著",
+     "year": "1978",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12435377"
+    },
+    {
+     "pid": "14141225",
+     "title": "悪人狩り : 道頓堀捕物帳",
+     "volume": "",
+     "by": "春日彦二 著",
+     "year": "1999",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14141225"
+    },
+    {
+     "pid": "11185215",
+     "title": "上方",
+     "volume": "(22)",
+     "by": "",
+     "year": "1932-10",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/11185215"
+    },
+    {
+     "pid": "12280260",
+     "title": "道頓堀非人関係文書",
+     "volume": "上巻",
+     "by": "岡本良一, 内田九州男 編",
+     "year": "1974",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12280260"
+    },
+    {
+     "pid": "12279652",
+     "title": "道頓堀非人関係文書",
+     "volume": "下巻",
+     "by": "岡本良一, 内田九州男 編",
+     "year": "1976",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12279652"
+    },
+    {
+     "pid": "10995504",
+     "title": "近世前期道頓堀の開発過程 : 新出文書の検討から",
+     "volume": "",
+     "by": "八木滋",
+     "year": "2014-02",
+     "access": "ndl_only_no_print_no_simview",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/10995504"
+    },
+    {
+     "pid": "1015794",
+     "title": "大阪の河岸 : 織田一磨自画石版画集",
+     "volume": "第1輯 明治大正時代",
+     "by": "織田一磨 著",
+     "year": "1934",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1015794"
+    },
+    {
+     "pid": "10297065",
+     "title": "道頓堀の三百年",
+     "volume": "",
+     "by": "木谷蓬吟",
+     "year": "1947",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/10297065"
+    },
+    {
+     "pid": "12516451",
+     "title": "演歌の花道 テレビ東京「演歌の花道」より : 都はるみ",
+     "volume": "",
+     "by": "",
+     "year": "1992",
+     "access": "ndl_only_no_print_no_simview",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12516451"
+    }
+   ]
+  },
+  {
+   "query": "大正橋 津浪",
+   "total": 928,
+   "byAccess": {
+    "inlibrary": 159,
+    "internet": 239,
+    "transmission": 530
+   },
+   "items": [
+    {
+     "pid": "1147575",
+     "title": "東京帝国大学地震研究所彙報",
+     "volume": "別冊 第2号",
+     "by": "東京帝国大学地震研究所 編",
+     "year": "1935",
+     "access": "transmission",
+     "pageHits": 209,
+     "frames": [
+      4,
+      5,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1147575/1/4"
+    },
+    {
+     "pid": "9991005",
+     "title": "安政南海地震・津波の犠牲者五十回忌法要 : 大阪市・大地震両川口津浪記石碑にて : 報告",
+     "volume": "",
+     "by": "長尾武",
+     "year": "2015",
+     "access": "ndl_only_no_simview",
+     "pageHits": 37,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9991005/1/0"
+    },
+    {
+     "pid": "1886360",
+     "title": "室戸颱風調査報告概要 : 昭和九年九月二十一日",
+     "volume": "",
+     "by": "藤原咲平 述",
+     "year": "1935",
+     "access": "transmission",
+     "pageHits": 21,
+     "frames": [
+      2,
+      11,
+      18,
+      20,
+      23,
+      25,
+      26,
+      27,
+      28,
+      29
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1886360/1/2"
+    },
+    {
+     "pid": "13116438",
+     "title": "東京帝国大学地震研究所彙報",
+     "volume": "別冊 第2号",
+     "by": "東京帝国大学地震研究所 編",
+     "year": "1935",
+     "access": "transmission",
+     "pageHits": 185,
+     "frames": [
+      5,
+      6,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13116438/1/5"
+    },
+    {
+     "pid": "1025729",
+     "title": "わかり易い気象読本",
+     "volume": "",
+     "by": "石井常一 著",
+     "year": "1934",
+     "access": "transmission",
+     "pageHits": 28,
+     "frames": [
+      7,
+      47,
+      48,
+      49
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1025729/1/7"
+    },
+    {
+     "pid": "1118667",
+     "title": "紀州の地震と安政大地震洪浪之記",
+     "volume": "",
+     "by": "山下竹三郎 編",
+     "year": "1931",
+     "access": "transmission",
+     "pageHits": 110,
+     "frames": [
+      2,
+      5,
+      6,
+      7,
+      9,
+      10,
+      14,
+      15,
+      16,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1118667/1/2"
+    },
+    {
+     "pid": "1063911",
+     "title": "海",
+     "volume": "",
+     "by": "野満隆治 著",
+     "year": "1942",
+     "access": "internet",
+     "pageHits": 82,
+     "frames": [
+      40,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1063911/1/40"
+    },
+    {
+     "pid": "1630021",
+     "title": "地震と火山",
+     "volume": "",
+     "by": "村内必典 著",
+     "year": "1955",
+     "access": "transmission",
+     "pageHits": 87,
+     "frames": [
+      4,
+      52,
+      53,
+      54,
+      55,
+      71,
+      80,
+      81,
+      126,
+      127
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1630021/1/4"
+    },
+    {
+     "pid": "14068389",
+     "title": "船のある風景 : おおさか歴史散歩",
+     "volume": "",
+     "by": "三浦行雄 著",
+     "year": "1996",
+     "access": "inlibrary",
+     "pageHits": 25,
+     "frames": [
+      3,
+      71,
+      72,
+      73,
+      74,
+      76
+     ],
+     "url": "https://dl.ndl.go.jp/pid/14068389/1/3"
+    },
+    {
+     "pid": "13417925",
+     "title": "なにわ橋づくし",
+     "volume": "",
+     "by": "露の五郎 著",
+     "year": "1988",
+     "access": "inlibrary",
+     "pageHits": 14,
+     "frames": [
+      5,
+      6,
+      75,
+      76,
+      126
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13417925/1/5"
+    },
+    {
+     "pid": "9574566",
+     "title": "大阪百景 : 丸山石根/牧村史陽作品集",
+     "volume": "",
+     "by": "丸山石根 画",
+     "year": "1980",
+     "access": "transmission",
+     "pageHits": 5,
+     "frames": [
+      7,
+      76
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9574566/1/7"
+    },
+    {
+     "pid": "1213043",
+     "title": "南北堀江誌 : 附・幸町",
+     "volume": "",
+     "by": "南北堀江誌刊行会 編",
+     "year": "1929",
+     "access": "transmission",
+     "pageHits": 64,
+     "frames": [
+      23,
+      301,
+      302,
+      303,
+      304,
+      307,
+      308,
+      309,
+      310,
+      311
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1213043/1/23"
+    },
+    {
+     "pid": "11185276",
+     "title": "上方",
+     "volume": "(83)",
+     "by": "",
+     "year": "1937-11",
+     "access": "inlibrary",
+     "pageHits": 8,
+     "frames": [
+      2,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/11185276/1/2"
+    },
+    {
+     "pid": "1097004",
+     "title": "大阪市を中心としたる日本史",
+     "volume": "後篇",
+     "by": "松本宗司 著",
+     "year": "1932",
+     "access": "transmission",
+     "pageHits": 10,
+     "frames": [
+      5,
+      11,
+      30
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1097004/1/5"
+    },
+    {
+     "pid": "9585772",
+     "title": "大阪と淀川夜話",
+     "volume": "",
+     "by": "三浦行雄 著",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 15,
+     "frames": [
+      3,
+      16,
+      23,
+      47,
+      64,
+      107
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9585772/1/3"
+    },
+    {
+     "pid": "11185199",
+     "title": "上方",
+     "volume": "(6)",
+     "by": "",
+     "year": "1931-06",
+     "access": "inlibrary",
+     "pageHits": 9,
+     "frames": [
+      3,
+      6,
+      13,
+      16,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/11185199/1/3"
+    },
+    {
+     "pid": "13246651",
+     "title": "日本金石文学",
+     "volume": "",
+     "by": "加藤諄 著",
+     "year": "1988",
+     "access": "transmission",
+     "pageHits": 49,
+     "frames": [
+      3,
+      163,
+      164,
+      165,
+      166,
+      167,
+      244
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13246651/1/3"
+    },
+    {
+     "pid": "12650632",
+     "title": "大阪の橋",
+     "volume": "",
+     "by": "松村博 著",
+     "year": "1987",
+     "access": "inlibrary",
+     "pageHits": 24,
+     "frames": [
+      4,
+      19,
+      71,
+      76,
+      81,
+      135,
+      184,
+      185,
+      211,
+      229
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12650632/1/4"
+    },
+    {
+     "pid": "13934902",
+     "title": "大阪築港100年 : 海からのまちづくり",
+     "volume": "中巻",
+     "by": "",
+     "year": "1999",
+     "access": "inlibrary",
+     "pageHits": 8,
+     "frames": [
+      9,
+      98,
+      99
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13934902/1/9"
+    },
+    {
+     "pid": "11948338",
+     "title": "東北振興計画集覧 : 編集復刻版",
+     "volume": "上巻",
+     "by": "",
+     "year": "1985",
+     "access": "inlibrary",
+     "pageHits": 39,
+     "frames": [
+      37,
+      51,
+      76,
+      77,
+      78,
+      97,
+      111,
+      233,
+      247,
+      248
+     ],
+     "url": "https://dl.ndl.go.jp/pid/11948338/1/37"
+    },
+    {
+     "pid": "13336364",
+     "title": "1854安政東海地震・安政南海地震報告書",
+     "volume": "",
+     "by": "中央防災会議災害教訓の継承に関する専門調査会",
+     "year": "2005-03",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13336364"
+    },
+    {
+     "pid": "11185239",
+     "title": "上方",
+     "volume": "(46)",
+     "by": "",
+     "year": "1934-10",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/11185239"
+    },
+    {
+     "pid": "1544396",
+     "title": "水利と土木",
+     "volume": "13(7)",
+     "by": "",
+     "year": "1940-07",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1544396"
+    },
+    {
+     "pid": "1042179",
+     "title": "泉尾史",
+     "volume": "",
+     "by": "",
+     "year": "1941",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1042179"
+    },
+    {
+     "pid": "3307567",
+     "title": "海と空 = Sea and sky",
+     "volume": "18(1)",
+     "by": "",
+     "year": "1938-01",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/3307567"
+    },
+    {
+     "pid": "9990645",
+     "title": "1854年安政南海地震津波，大阪への伝播時間と津波溯上高",
+     "volume": "",
+     "by": "長尾武",
+     "year": "2008",
+     "access": "ndl_only_no_simview",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9990645"
+    },
+    {
+     "pid": "2251091",
+     "title": "Chamber",
+     "volume": "(459)",
+     "by": "",
+     "year": "1993-04",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2251091"
+    },
+    {
+     "pid": "10121294",
+     "title": "沖積平野における自然災害，特に水害のメカニズムを学校教育で取り扱う意義とその課題",
+     "volume": "",
+     "by": "戸倉, 則正",
+     "year": "2014-06-19",
+     "access": "ndl_only_no_simview",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/10121294"
+    },
+    {
+     "pid": "14330503",
+     "title": "近畿の地震環境 : 断層研究資料センター第9回エクスカーション",
+     "volume": "",
+     "by": "",
+     "year": "1999",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14330503"
+    },
+    {
+     "pid": "9990685",
+     "title": "堺市・『擁護璽』，神から賜った璽",
+     "volume": "",
+     "by": "長尾武",
+     "year": "2009",
+     "access": "ndl_only_no_simview",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9990685"
+    }
+   ]
+  },
+  {
+   "query": "難波新地",
+   "total": 23350,
+   "byAccess": {
+    "inlibrary": 6772,
+    "internet": 5142,
+    "transmission": 11436
+   },
+   "items": [
+    {
+     "pid": "13875400",
+     "title": "難波新地一丁目より : 不況を知らない華僑経営",
+     "volume": "",
+     "by": "段少昌 著",
+     "year": "1994",
+     "access": "inlibrary",
+     "pageHits": 10,
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      74,
+      111,
+      113
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13875400/1/0"
+    },
+    {
+     "pid": "9367560",
+     "title": "浪華松墅尾茶店之図",
+     "volume": "",
+     "by": "",
+     "year": "",
+     "access": "internet",
+     "pageHits": 1,
+     "frames": [
+      1
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9367560/1/1"
+    },
+    {
+     "pid": "876895",
+     "title": "怪談朧月春夜話",
+     "volume": "上,中の巻",
+     "by": "勝歌女助 著",
+     "year": "1894",
+     "access": "internet",
+     "pageHits": 1,
+     "frames": [
+      1
+     ],
+     "url": "https://dl.ndl.go.jp/pid/876895/1/1"
+    },
+    {
+     "pid": "765454",
+     "title": "方今大阪繁昌記",
+     "volume": "初編",
+     "by": "石田魚門 著",
+     "year": "1877",
+     "access": "internet",
+     "pageHits": 3,
+     "frames": [
+      5,
+      15,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/765454/1/5"
+    },
+    {
+     "pid": "898214",
+     "title": "大阪演説叢談",
+     "volume": "",
+     "by": "岡軌光 編",
+     "year": "1879",
+     "access": "internet",
+     "pageHits": 1,
+     "frames": [
+      1
+     ],
+     "url": "https://dl.ndl.go.jp/pid/898214/1/1"
+    },
+    {
+     "pid": "877081",
+     "title": "怠惰勉強心組織・妻乞鹿浮佐野讐・短夜夢朝日手枕・春色梅開暦",
+     "volume": "",
+     "by": "竹柴諺蔵 著",
+     "year": "1889",
+     "access": "internet",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/877081"
+    },
+    {
+     "pid": "1533134",
+     "title": "医事新聞",
+     "volume": "(5)",
+     "by": "",
+     "year": "1878-09",
+     "access": "transmission",
+     "pageHits": 3,
+     "frames": [
+      1,
+      9,
+      10
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1533134/1/1"
+    },
+    {
+     "pid": "898083",
+     "title": "[番付]",
+     "volume": "",
+     "by": "",
+     "year": "1878",
+     "access": "transmission",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/898083"
+    },
+    {
+     "pid": "7953368",
+     "title": "大阪の歴史",
+     "volume": "(36)",
+     "by": "大阪市史編纂所 編",
+     "year": "1992-08",
+     "access": "transmission",
+     "pageHits": 125,
+     "frames": [
+      2,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      39
+     ],
+     "url": "https://dl.ndl.go.jp/pid/7953368/1/2"
+    },
+    {
+     "pid": "13177072",
+     "title": "年代記・明和の春 : 明和-享和大坂世相見聞集",
+     "volume": "",
+     "by": "大阪市史編纂所 編",
+     "year": "1991",
+     "access": "transmission",
+     "pageHits": 55,
+     "frames": [
+      3,
+      8,
+      9,
+      10,
+      29,
+      32,
+      33,
+      34,
+      36,
+      38
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13177072/1/3"
+    },
+    {
+     "pid": "2507950",
+     "title": "辻愛造ガラス絵",
+     "volume": "",
+     "by": "辻愛造 著",
+     "year": "1965",
+     "access": "transmission",
+     "pageHits": 2,
+     "frames": [
+      7,
+      35
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2507950/1/7"
+    },
+    {
+     "pid": "13213536",
+     "title": "明治大正昭和大阪人名録",
+     "volume": "上巻",
+     "by": "",
+     "year": "1989-10",
+     "access": "inlibrary",
+     "pageHits": 52,
+     "frames": [
+      6,
+      10,
+      11,
+      12,
+      14,
+      15,
+      20,
+      24,
+      27,
+      28
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13213536/1/6"
+    },
+    {
+     "pid": "12406007",
+     "title": "浪速叢書",
+     "volume": "第6",
+     "by": "船越政一郎 編",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": 52,
+     "frames": [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22,
+      23,
+      39
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12406007/1/14"
+    },
+    {
+     "pid": "888907",
+     "title": "羇旅漫録 : 壬戌",
+     "volume": "下",
+     "by": "滝沢馬琴 著",
+     "year": "1885",
+     "access": "internet",
+     "pageHits": 3,
+     "frames": [
+      10,
+      11
+     ],
+     "url": "https://dl.ndl.go.jp/pid/888907/1/10"
+    },
+    {
+     "pid": "12106248",
+     "title": "続大阪の味",
+     "volume": "",
+     "by": "水野佑三 著",
+     "year": "1975",
+     "access": "transmission",
+     "pageHits": 11,
+     "frames": [
+      3,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      55,
+      59,
+      70
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12106248/1/3"
+    },
+    {
+     "pid": "13205538",
+     "title": "花の下影 : 幕末浪花のくいだおれ",
+     "volume": "",
+     "by": "朝日新聞阪神支局 執筆",
+     "year": "1994",
+     "access": "inlibrary",
+     "pageHits": 19,
+     "frames": [
+      4,
+      5,
+      7,
+      8,
+      32,
+      46,
+      47,
+      69,
+      77,
+      78
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13205538/1/4"
+    },
+    {
+     "pid": "12279638",
+     "title": "花の下影 : 幕末浪花のくいだおれ",
+     "volume": "",
+     "by": "朝日新聞阪神支局 執筆",
+     "year": "1986",
+     "access": "inlibrary",
+     "pageHits": 18,
+     "frames": [
+      4,
+      5,
+      7,
+      8,
+      32,
+      46,
+      47,
+      69,
+      77,
+      78
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12279638/1/4"
+    },
+    {
+     "pid": "2503186",
+     "title": "大阪商業史資料",
+     "volume": "第8巻",
+     "by": "",
+     "year": "1964",
+     "access": "transmission",
+     "pageHits": 4,
+     "frames": [
+      3,
+      45,
+      78
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2503186/1/3"
+    },
+    {
+     "pid": "924140",
+     "title": "大阪薪炭商名鑑",
+     "volume": "",
+     "by": "",
+     "year": "1921",
+     "access": "internet",
+     "pageHits": 9,
+     "frames": [
+      6,
+      11,
+      73,
+      74,
+      124
+     ],
+     "url": "https://dl.ndl.go.jp/pid/924140/1/6"
+    },
+    {
+     "pid": "905407",
+     "title": "怪談百物語不思議揃",
+     "volume": "",
+     "by": "駸々堂編輯部 編",
+     "year": "1913",
+     "access": "internet",
+     "pageHits": 2,
+     "frames": [
+      4,
+      100
+     ],
+     "url": "https://dl.ndl.go.jp/pid/905407/1/4"
+    },
+    {
+     "pid": "2957265",
+     "title": "官報",
+     "volume": "1929年08月27日",
+     "by": "大蔵省印刷局 [編]",
+     "year": "1929-08-27",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2957265"
+    },
+    {
+     "pid": "2961808",
+     "title": "官報",
+     "volume": "1944年09月19日",
+     "by": "大蔵省印刷局 [編]",
+     "year": "1944-09-19",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2961808"
+    },
+    {
+     "pid": "1466407",
+     "title": "日本廃娼運動史",
+     "volume": "",
+     "by": "伊藤秀吉 著",
+     "year": "1931",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1466407"
+    },
+    {
+     "pid": "14073587",
+     "title": "近世の都市社会史 : 大坂を中心に",
+     "volume": "",
+     "by": "塚田孝 著",
+     "year": "1996",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14073587"
+    },
+    {
+     "pid": "12100362",
+     "title": "売娼の社会史",
+     "volume": "",
+     "by": "吉見周子 著",
+     "year": "1984",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12100362"
+    },
+    {
+     "pid": "13167289",
+     "title": "売娼の社会史",
+     "volume": "",
+     "by": "吉見周子 著",
+     "year": "1992",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13167289"
+    },
+    {
+     "pid": "12166770",
+     "title": "聞き書き明治の子ども遊びと暮らし",
+     "volume": "",
+     "by": "藤本浩之輔 著",
+     "year": "1986",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12166770"
+    },
+    {
+     "pid": "12100506",
+     "title": "日本廃娼運動史",
+     "volume": "",
+     "by": "伊藤秀吉 著",
+     "year": "1982",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12100506"
+    },
+    {
+     "pid": "1018560",
+     "title": "娯楽の江戸",
+     "volume": "",
+     "by": "三田村鳶魚 著",
+     "year": "1925",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1018560"
+    },
+    {
+     "pid": "12438248",
+     "title": "絵本・落語風土記",
+     "volume": "",
+     "by": "江国滋 著",
+     "year": "1970",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12438248"
+    }
+   ]
+  }
+ ]
+}

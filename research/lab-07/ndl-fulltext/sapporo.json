@@ -1,0 +1,1586 @@
+{
+ "id": "sapporo",
+ "checkedOn": "2026-09-27",
+ "source": "https://dl.ndl.go.jp (full-text search of digitised items)",
+ "queries": [
+  {
+   "query": "創成川",
+   "total": 5829,
+   "byAccess": {
+    "inlibrary": 1947,
+    "internet": 541,
+    "transmission": 3341
+   },
+   "items": [
+    {
+     "pid": "12480039",
+     "title": "創成川での小さな自然再生 : 都心における生き物の生息環境の創出",
+     "volume": "",
+     "by": "工藤裕子",
+     "year": "2021-09",
+     "access": "internet",
+     "pageHits": 24,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12480039/1/0"
+    },
+    {
+     "pid": "779660",
+     "title": "最近札幌全区地主名簿",
+     "volume": "明治45年4月現在",
+     "by": "難波賢太郎 編",
+     "year": "1912",
+     "access": "internet",
+     "pageHits": 28,
+     "frames": [
+      1,
+      6,
+      9,
+      11,
+      12,
+      14,
+      15,
+      17,
+      44,
+      47
+     ],
+     "url": "https://dl.ndl.go.jp/pid/779660/1/1"
+    },
+    {
+     "pid": "10992063",
+     "title": "札幌市内の創成川本支流・安春川・屯田川・東屯田川におけるアメリカザリガニProcambarus clarkiiの生息域調査と下水処理水の影響",
+     "volume": "",
+     "by": "前田有里",
+     "year": "2012-03",
+     "access": "internet",
+     "pageHits": 53,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/10992063/1/0"
+    },
+    {
+     "pid": "1382846",
+     "title": "虱の浣腸",
+     "volume": "",
+     "by": "高山坦三 著",
+     "year": "1968",
+     "access": "transmission",
+     "pageHits": 3,
+     "frames": [
+      2,
+      5,
+      88
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1382846/1/2"
+    },
+    {
+     "pid": "2264752",
+     "title": "アトリエ",
+     "volume": "(494)",
+     "by": "アトリエ出版社 編",
+     "year": "1968-04",
+     "access": "inlibrary",
+     "pageHits": 8,
+     "frames": [
+      3,
+      21,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2264752/1/3"
+    },
+    {
+     "pid": "3309227",
+     "title": "道路 : road engineering & management review",
+     "volume": "(549)",
+     "by": "",
+     "year": "1986-11",
+     "access": "transmission",
+     "pageHits": 50,
+     "frames": [
+      1,
+      24,
+      25,
+      26,
+      27,
+      28
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3309227/1/1"
+    },
+    {
+     "pid": "3310036",
+     "title": "下水道協会誌",
+     "volume": "5(12)(55)",
+     "by": "",
+     "year": "1968-12",
+     "access": "transmission",
+     "pageHits": 38,
+     "frames": [
+      0,
+      3,
+      5,
+      6,
+      14,
+      15,
+      23,
+      24
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3310036/1/0"
+    },
+    {
+     "pid": "9569906",
+     "title": "さっぽろの昔話",
+     "volume": "明治編 下",
+     "by": "河野常吉 編",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": 8,
+     "frames": [
+      3,
+      4,
+      5,
+      12,
+      16,
+      18,
+      59,
+      65
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9569906/1/3"
+    },
+    {
+     "pid": "2765226",
+     "title": "地方行政",
+     "volume": "7月15日(6705)",
+     "by": "",
+     "year": "1974-07",
+     "access": "inlibrary",
+     "pageHits": 7,
+     "frames": [
+      0
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2765226/1/0"
+    },
+    {
+     "pid": "3310039",
+     "title": "下水道協会誌",
+     "volume": "6(2)(57)",
+     "by": "",
+     "year": "1969-02",
+     "access": "transmission",
+     "pageHits": 40,
+     "frames": [
+      0,
+      3,
+      5,
+      6,
+      33,
+      34,
+      35,
+      36,
+      39
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3310039/1/0"
+    },
+    {
+     "pid": "2642973",
+     "title": "開発こうほう",
+     "volume": "(9)(242)",
+     "by": "",
+     "year": "1983-09",
+     "access": "transmission",
+     "pageHits": 25,
+     "frames": [
+      1,
+      24,
+      25,
+      26,
+      29
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2642973/1/1"
+    },
+    {
+     "pid": "9490607",
+     "title": "さっぽろ大路小路 : 札幌いまとむかし",
+     "volume": "",
+     "by": "読売新聞社 編",
+     "year": "1972",
+     "access": "transmission",
+     "pageHits": 37,
+     "frames": [
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      25,
+      29
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9490607/1/5"
+    },
+    {
+     "pid": "9537522",
+     "title": "札幌の街並",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1977",
+     "access": "transmission",
+     "pageHits": 23,
+     "frames": [
+      4,
+      28,
+      29,
+      30,
+      57,
+      61,
+      70,
+      73,
+      74,
+      78
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9537522/1/4"
+    },
+    {
+     "pid": "2306667",
+     "title": "炭鉱技術",
+     "volume": "S46(6)",
+     "by": "北海道炭鉱技術会, 北海道炭鉱技術振興会 編",
+     "year": "1971-06",
+     "access": "transmission",
+     "pageHits": 8,
+     "frames": [
+      1,
+      14
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2306667/1/1"
+    },
+    {
+     "pid": "9569905",
+     "title": "さっぽろの昔話",
+     "volume": "明治編 上",
+     "by": "河野常吉 編",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": 40,
+     "frames": [
+      3,
+      8,
+      9,
+      12,
+      17,
+      22,
+      23,
+      24,
+      48,
+      49
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9569905/1/3"
+    },
+    {
+     "pid": "6054859",
+     "title": "原始林 : 短歌雑誌",
+     "volume": "20(7)(225)",
+     "by": "",
+     "year": "1965-07",
+     "access": "ooc_no_snippet",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/6054859"
+    },
+    {
+     "pid": "2642989",
+     "title": "開発こうほう",
+     "volume": "(1)(258)",
+     "by": "",
+     "year": "1985-01",
+     "access": "transmission",
+     "pageHits": 6,
+     "frames": [
+      1,
+      18,
+      45,
+      48,
+      57
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2642989/1/1"
+    },
+    {
+     "pid": "1480715",
+     "title": "新創作",
+     "volume": "4(10月號)",
+     "by": "新創作編輯所 編",
+     "year": "1942-10",
+     "access": "transmission",
+     "pageHits": 2,
+     "frames": [
+      7
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1480715/1/7"
+    },
+    {
+     "pid": "6054861",
+     "title": "原始林 : 短歌雑誌",
+     "volume": "20(9)(227)",
+     "by": "",
+     "year": "1965-09",
+     "access": "ooc_no_snippet",
+     "pageHits": 0,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/6054861"
+    },
+    {
+     "pid": "3308489",
+     "title": "土木施工 : 構想・計画調査設計・施工・維持補修・管理の総合土木技術誌",
+     "volume": "27(6)",
+     "by": "",
+     "year": "1986-05",
+     "access": "transmission",
+     "pageHits": 13,
+     "frames": [
+      0,
+      25,
+      28,
+      32,
+      101
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3308489/1/0"
+    },
+    {
+     "pid": "1654338",
+     "title": "桐の花 : わが少年の日",
+     "volume": "",
+     "by": "石森延男 著",
+     "year": "1968",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1654338"
+    },
+    {
+     "pid": "13493409",
+     "title": "開発こうほう",
+     "volume": "2020",
+     "by": "",
+     "year": "2020-01-27",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13493409"
+    },
+    {
+     "pid": "13092969",
+     "title": "札幌新道20年史 : 北の拠点への道づくり",
+     "volume": "",
+     "by": "札幌新道建設事務所 編",
+     "year": "1990",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13092969"
+    },
+    {
+     "pid": "9537553",
+     "title": "札幌風物誌",
+     "volume": "",
+     "by": "札幌市教育委員会 編",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9537553"
+    },
+    {
+     "pid": "9570694",
+     "title": "東区今昔「大友堀」",
+     "volume": "",
+     "by": "札幌村歴史研究会, 札幌市東区総務部総務課 編",
+     "year": "1982",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9570694"
+    },
+    {
+     "pid": "12469249",
+     "title": "新さっぽろ物語",
+     "volume": "",
+     "by": "相神達夫 著",
+     "year": "1976",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12469249"
+    },
+    {
+     "pid": "1692400",
+     "title": "石狩川水系農業水利実態調査書",
+     "volume": "昭和31-32年度 第2分冊",
+     "by": "",
+     "year": "1958",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/1692400"
+    },
+    {
+     "pid": "14267197",
+     "title": "私の随想集",
+     "volume": "",
+     "by": "熊本恵見 著",
+     "year": "1998",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/14267197"
+    },
+    {
+     "pid": "12592254",
+     "title": "札幌の自然",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1982",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12592254"
+    },
+    {
+     "pid": "12592288",
+     "title": "札幌の自然",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1982",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12592288"
+    }
+   ]
+  },
+  {
+   "query": "札幌 大通 火防",
+   "total": 20833,
+   "byAccess": {
+    "inlibrary": 7359,
+    "internet": 2504,
+    "transmission": 10970
+   },
+   "items": [
+    {
+     "pid": "9570657",
+     "title": "さっぽろ・大通",
+     "volume": "",
+     "by": "札幌の歴史を楽しむ会 著",
+     "year": "1981",
+     "access": "transmission",
+     "pageHits": 172,
+     "frames": [
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9570657/1/4"
+    },
+    {
+     "pid": "12422837",
+     "title": "大通公園",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 237,
+     "frames": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12422837/1/11"
+    },
+    {
+     "pid": "12422836",
+     "title": "大通公園",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 220,
+     "frames": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/12422836/1/11"
+    },
+    {
+     "pid": "9490607",
+     "title": "さっぽろ大路小路 : 札幌いまとむかし",
+     "volume": "",
+     "by": "読売新聞社 編",
+     "year": "1972",
+     "access": "transmission",
+     "pageHits": 156,
+     "frames": [
+      1,
+      4,
+      5,
+      8,
+      9,
+      11,
+      12,
+      13,
+      18,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9490607/1/1"
+    },
+    {
+     "pid": "1266879",
+     "title": "札幌市第四十三火災予防組合沿革誌",
+     "volume": "",
+     "by": "",
+     "year": "1941",
+     "access": "internet",
+     "pageHits": 70,
+     "frames": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      12,
+      13,
+      14,
+      16,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1266879/1/4"
+    },
+    {
+     "pid": "9571383",
+     "title": "新聞と人名録にみる明治の札幌",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 178,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9571383/1/2"
+    },
+    {
+     "pid": "9571417",
+     "title": "明治の札幌 : 新聞と人名録にみる",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 181,
+     "frames": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9571417/1/1"
+    },
+    {
+     "pid": "9569392",
+     "title": "明治の札幌 : 復刻",
+     "volume": "最近之札幌",
+     "by": "",
+     "year": "1975",
+     "access": "transmission",
+     "pageHits": 79,
+     "frames": [
+      1,
+      2,
+      4,
+      7,
+      8,
+      11,
+      19,
+      20,
+      21,
+      25
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9569392/1/1"
+    },
+    {
+     "pid": "1056668",
+     "title": "観光の札幌",
+     "volume": "",
+     "by": "",
+     "year": "1937",
+     "access": "transmission",
+     "pageHits": 216,
+     "frames": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      22,
+      23
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1056668/1/3"
+    },
+    {
+     "pid": "9490582",
+     "title": "札幌百年のあゆみ",
+     "volume": "本編",
+     "by": "札幌市史編さん委員会 編",
+     "year": "1970",
+     "access": "transmission",
+     "pageHits": 54,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      13
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9490582/1/2"
+    },
+    {
+     "pid": "9570860",
+     "title": "札幌歴史写真集",
+     "volume": "大正編",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": 115,
+     "frames": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      8,
+      11,
+      12,
+      13,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9570860/1/0"
+    },
+    {
+     "pid": "1900558",
+     "title": "現代札幌人物史",
+     "volume": "",
+     "by": "鈴木源十郎, 杉山指粹 編",
+     "year": "1931",
+     "access": "transmission",
+     "pageHits": 144,
+     "frames": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      11,
+      12,
+      13,
+      14,
+      23
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1900558/1/1"
+    },
+    {
+     "pid": "9570709",
+     "title": "札幌歴史写真集",
+     "volume": "明治編",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1982",
+     "access": "transmission",
+     "pageHits": 165,
+     "frames": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      9,
+      13,
+      17,
+      19,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9570709/1/0"
+    },
+    {
+     "pid": "9538736",
+     "title": "札幌歴史写真集",
+     "volume": "明治編",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1982",
+     "access": "transmission",
+     "pageHits": 167,
+     "frames": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      9,
+      13,
+      17,
+      19,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9538736/1/0"
+    },
+    {
+     "pid": "1279473",
+     "title": "札幌市一般会計特別会計決算書",
+     "volume": "昭和4年度",
+     "by": "札幌市 編",
+     "year": "1931",
+     "access": "internet",
+     "pageHits": 52,
+     "frames": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      17
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1279473/1/0"
+    },
+    {
+     "pid": "9582935",
+     "title": "札幌消防百年の歩み",
+     "volume": "",
+     "by": "札幌市消防沿革誌編纂委員会 編",
+     "year": "1971",
+     "access": "transmission",
+     "pageHits": 105,
+     "frames": [
+      2,
+      4,
+      6,
+      9,
+      10,
+      11,
+      12,
+      16,
+      17,
+      25
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9582935/1/2"
+    },
+    {
+     "pid": "9572135",
+     "title": "新札幌市史",
+     "volume": "第2巻(通史 2)",
+     "by": "札幌市教育委員会 編",
+     "year": "1991",
+     "access": "transmission",
+     "pageHits": 204,
+     "frames": [
+      2,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9572135/1/2"
+    },
+    {
+     "pid": "9501874",
+     "title": "新札幌市史",
+     "volume": "第3巻(通史 3)",
+     "by": "札幌市教育委員会 編",
+     "year": "1994",
+     "access": "transmission",
+     "pageHits": 181,
+     "frames": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9501874/1/1"
+    },
+    {
+     "pid": "9569905",
+     "title": "さっぽろの昔話",
+     "volume": "明治編 上",
+     "by": "河野常吉 編",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": 100,
+     "frames": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      14,
+      17,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9569905/1/3"
+    },
+    {
+     "pid": "9539071",
+     "title": "札幌歴史写真集",
+     "volume": "大正編",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": 112,
+     "frames": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      8,
+      11,
+      12,
+      13,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9539071/1/0"
+    },
+    {
+     "pid": "3443113",
+     "title": "札幌狸小路発展史",
+     "volume": "",
+     "by": "札幌狸小路発展史編纂委員会 編",
+     "year": "1955",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/3443113"
+    },
+    {
+     "pid": "9570110",
+     "title": "札幌沿革史",
+     "volume": "",
+     "by": "札幌史学会 著",
+     "year": "1979",
+     "access": "inlibrary",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9570110"
+    },
+    {
+     "pid": "994466",
+     "title": "札幌沿革史",
+     "volume": "",
+     "by": "",
+     "year": "1897",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/994466"
+    },
+    {
+     "pid": "763031",
+     "title": "温故写真帖",
+     "volume": "第1集(札幌)",
+     "by": "東北帝国大学農科大学 編",
+     "year": "1909",
+     "access": "internet",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/763031"
+    },
+    {
+     "pid": "9571595",
+     "title": "新札幌市史",
+     "volume": "第7巻(史料編 2)",
+     "by": "札幌市教育委員会 編",
+     "year": "1986",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9571595"
+    },
+    {
+     "pid": "9571784",
+     "title": "ウォッチング札幌 : 地図に映る150万都市",
+     "volume": "",
+     "by": "札幌地理サークル 編",
+     "year": "1987",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9571784"
+    },
+    {
+     "pid": "9572131",
+     "title": "新札幌市史",
+     "volume": "第2巻(通史 2)",
+     "by": "札幌市教育委員会 編",
+     "year": "1991",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9572131"
+    },
+    {
+     "pid": "9572231",
+     "title": "新札幌市史",
+     "volume": "第3巻(通史 3)",
+     "by": "札幌市教育委員会 編",
+     "year": "1994",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9572231"
+    },
+    {
+     "pid": "9571310",
+     "title": "さっぽろ雑学ノート",
+     "volume": "",
+     "by": "武井時紀 著",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9571310"
+    },
+    {
+     "pid": "9501866",
+     "title": "新札幌市史",
+     "volume": "第7巻(史料編 2)",
+     "by": "札幌市教育委員会 編",
+     "year": "1986",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9501866"
+    }
+   ]
+  },
+  {
+   "query": "開拓使 札幌 区画",
+   "total": 25861,
+   "byAccess": {
+    "inlibrary": 6903,
+    "internet": 4044,
+    "transmission": 14914
+   },
+   "items": [
+    {
+     "pid": "995338",
+     "title": "開拓使布令録",
+     "volume": "明治9年［中］",
+     "by": "開拓使布令録編輯課 [編纂]",
+     "year": "1880",
+     "access": "internet",
+     "pageHits": 31,
+     "frames": [
+      0,
+      2,
+      3,
+      8,
+      11,
+      21,
+      23,
+      27,
+      48,
+      60
+     ],
+     "url": "https://dl.ndl.go.jp/pid/995338/1/0"
+    },
+    {
+     "pid": "995337",
+     "title": "開拓使布令録",
+     "volume": "明治9年［上］",
+     "by": "開拓使布令録編輯課 [編纂]",
+     "year": "1880",
+     "access": "internet",
+     "pageHits": 35,
+     "frames": [
+      4,
+      5,
+      9,
+      10,
+      11,
+      12,
+      22,
+      32,
+      41,
+      42
+     ],
+     "url": "https://dl.ndl.go.jp/pid/995337/1/4"
+    },
+    {
+     "pid": "1042055",
+     "title": "小樽市史",
+     "volume": "第2巻",
+     "by": "",
+     "year": "1943",
+     "access": "internet",
+     "pageHits": 178,
+     "frames": [
+      4,
+      5,
+      8,
+      9,
+      10,
+      11,
+      12,
+      16,
+      17,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/1042055/1/4"
+    },
+    {
+     "pid": "2987344",
+     "title": "北海道百年",
+     "volume": "上 (開拓使・三県時代編)",
+     "by": "",
+     "year": "1967",
+     "access": "transmission",
+     "pageHits": 131,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      15,
+      17,
+      18,
+      19,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/2987344/1/2"
+    },
+    {
+     "pid": "3041119",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その11 (開拓使公文録・東京出張所原本の部 明治8年(完)・明治9年(未完))",
+     "by": "北海道総務部行政資料課 編",
+     "year": "1981",
+     "access": "transmission",
+     "pageHits": 299,
+     "frames": [
+      5,
+      7,
+      8,
+      10,
+      12,
+      13,
+      14,
+      15,
+      19,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041119/1/5"
+    },
+    {
+     "pid": "3041118",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その10 (開拓使公文録・東京出張所原本の部 明治8年(未完))",
+     "by": "北海道総務部行政資料課 編",
+     "year": "1980",
+     "access": "transmission",
+     "pageHits": 211,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      13,
+      14,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041118/1/2"
+    },
+    {
+     "pid": "3041106",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その6",
+     "by": "",
+     "year": "1976",
+     "access": "transmission",
+     "pageHits": 233,
+     "frames": [
+      2,
+      3,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      16,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041106/1/2"
+    },
+    {
+     "pid": "9490771",
+     "title": "開拓使前後",
+     "volume": "",
+     "by": "越崎宗一 著",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": 85,
+     "frames": [
+      4,
+      6,
+      12,
+      35,
+      40,
+      42,
+      43,
+      57,
+      60,
+      61
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9490771/1/4"
+    },
+    {
+     "pid": "3041116",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その8 (開拓使公文録・東京出張所原本の部 その8 明治7年(完)・明治8年(未完))",
+     "by": "北海道総務部行政資料課 編",
+     "year": "1978",
+     "access": "transmission",
+     "pageHits": 268,
+     "frames": [
+      3,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041116/1/3"
+    },
+    {
+     "pid": "9775956",
+     "title": "開拓使事業報告",
+     "volume": "第2編 (勧農・土木)",
+     "by": "大蔵省 [編]",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": 65,
+     "frames": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      11,
+      13,
+      15
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9775956/1/2"
+    },
+    {
+     "pid": "9775302",
+     "title": "開拓使事業報告",
+     "volume": "第5編 (兵備・外事・恩典・警察・裁判・監獄・租税・会計)",
+     "by": "大蔵省 [編]",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 41,
+     "frames": [
+      2,
+      3,
+      5,
+      6,
+      8,
+      9,
+      16,
+      24,
+      25,
+      34
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9775302/1/2"
+    },
+    {
+     "pid": "9774340",
+     "title": "開拓使事業報告",
+     "volume": "第1編 (沿革・地理・戸籍)",
+     "by": "大蔵省 [編]",
+     "year": "1981",
+     "access": "transmission",
+     "pageHits": 69,
+     "frames": [
+      4,
+      5,
+      7,
+      10,
+      14,
+      16,
+      17,
+      18,
+      21,
+      22
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9774340/1/4"
+    },
+    {
+     "pid": "3041117",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その9 (開拓使公文録・東京出張所原本の部 その9 明治8年(続))",
+     "by": "北海道総務部行政資料課 編",
+     "year": "1979",
+     "access": "transmission",
+     "pageHits": 183,
+     "frames": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      17,
+      18
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041117/1/8"
+    },
+    {
+     "pid": "3041122",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その14 (開拓使公文録・東京出張所原本の部 明治10年(完)・明治11年(完))",
+     "by": "北海道総務部行政資料課 編",
+     "year": "1984",
+     "access": "transmission",
+     "pageHits": 150,
+     "frames": [
+      2,
+      5,
+      8,
+      9,
+      11,
+      14,
+      15,
+      17,
+      18,
+      19
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041122/1/2"
+    },
+    {
+     "pid": "9775957",
+     "title": "開拓使事業報告",
+     "volume": "第3編 (物産)",
+     "by": "大蔵省 [編]",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": 85,
+     "frames": [
+      2,
+      3,
+      6,
+      9,
+      10,
+      11,
+      12,
+      13,
+      18,
+      19
+     ],
+     "url": "https://dl.ndl.go.jp/pid/9775957/1/2"
+    },
+    {
+     "pid": "3041121",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その13 (開拓使公文録・東京出張所原本の部 明治10年(未完))",
+     "by": "北海道総務部行政資料課 編",
+     "year": "1983",
+     "access": "transmission",
+     "pageHits": 289,
+     "frames": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      16
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041121/1/5"
+    },
+    {
+     "pid": "3041115",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その7 (開拓使公文録・東京出張所原本の部 その7 明治7年(未完))",
+     "by": "北海道総務部行政資料課 編",
+     "year": "1977",
+     "access": "transmission",
+     "pageHits": 136,
+     "frames": [
+      7,
+      8,
+      10,
+      11,
+      12,
+      13,
+      14,
+      17,
+      18,
+      19
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041115/1/7"
+    },
+    {
+     "pid": "3041120",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その12 (開拓使公文録・東京出張所原本の部 明治9年(完)・明治10年(未完))",
+     "by": "北海道総務部行政資料課 編",
+     "year": "1982",
+     "access": "transmission",
+     "pageHits": 352,
+     "frames": [
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      13,
+      14,
+      18,
+      19
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041120/1/5"
+    },
+    {
+     "pid": "3041123",
+     "title": "北海道所蔵簿書件名目録",
+     "volume": "第2部 その15 (開拓使公文録・東京出張所原本の部 明治12年(完)～明治14年(完))",
+     "by": "北海道総務部文書館設立準備室 編",
+     "year": "1985",
+     "access": "transmission",
+     "pageHits": 396,
+     "frames": [
+      5,
+      6,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      20
+     ],
+     "url": "https://dl.ndl.go.jp/pid/3041123/1/5"
+    },
+    {
+     "pid": "13211626",
+     "title": "開拓使時代",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1989",
+     "access": "transmission",
+     "pageHits": 197,
+     "frames": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      10,
+      13,
+      14,
+      15,
+      19
+     ],
+     "url": "https://dl.ndl.go.jp/pid/13211626/1/3"
+    },
+    {
+     "pid": "12156122",
+     "title": "北海道立文書館所蔵公文書件名目録",
+     "volume": "2 (開拓使公文録-札幌本庁 2 明治7年 2・8年 1)",
+     "by": "",
+     "year": "1987",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12156122"
+    },
+    {
+     "pid": "2518699",
+     "title": "明治前期産業発達史資料",
+     "volume": "別冊 第24 第5",
+     "by": "",
+     "year": "1967",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2518699"
+    },
+    {
+     "pid": "12160216",
+     "title": "北海道立文書館所蔵公文書件名目録",
+     "volume": "7 (開拓使公文録-札幌本庁 7 明治9年 3)",
+     "by": "北海道立文書館 編",
+     "year": "1992",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12160216"
+    },
+    {
+     "pid": "2518695",
+     "title": "明治前期産業発達史資料",
+     "volume": "別冊 第24 第1",
+     "by": "",
+     "year": "1967",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/2518695"
+    },
+    {
+     "pid": "13211802",
+     "title": "開拓使時代",
+     "volume": "",
+     "by": "札幌市教育委員会文化資料室 編",
+     "year": "1989",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13211802"
+    },
+    {
+     "pid": "13318849",
+     "title": "北の大地に移り住む : 北海道で生活するための完全マニュアル",
+     "volume": "札幌・小樽編",
+     "by": "私設北海道開拓使の会 編",
+     "year": "1994",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/13318849"
+    },
+    {
+     "pid": "12160550",
+     "title": "北海道立文書館所蔵公文書件名目録",
+     "volume": "3 (開拓使公文録-札幌本庁 3 明治8年 2)",
+     "by": "北海道立文書館 編",
+     "year": "1988",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12160550"
+    },
+    {
+     "pid": "12160444",
+     "title": "北海道立文書館所蔵公文書件名目録",
+     "volume": "8 (開拓使公文録-札幌本庁 8 明治9年 4～11年・14年)",
+     "by": "北海道立文書館 編",
+     "year": "1993",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12160444"
+    },
+    {
+     "pid": "9775049",
+     "title": "開拓使事業報告",
+     "volume": "第6編 (附録 布令類聚 上編)",
+     "by": "大蔵省 [編]",
+     "year": "1984",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/9775049"
+    },
+    {
+     "pid": "12160221",
+     "title": "北海道立文書館所蔵公文書件名目録",
+     "volume": "4 (開拓使公文録-札幌本庁 4 明治8年 3)",
+     "by": "北海道立文書館 編",
+     "year": "1989",
+     "access": "transmission",
+     "pageHits": null,
+     "frames": [],
+     "url": "https://dl.ndl.go.jp/pid/12160221"
+    }
+   ]
+  }
+ ]
+}

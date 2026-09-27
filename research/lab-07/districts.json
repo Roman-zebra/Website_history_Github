@@ -1,0 +1,1791 @@
+{
+ "method": "Chooses the 20 districts of page 07 from the 36 candidates.\n\nscore = 0.45 * market demand + 0.30 * data readiness + 0.25 * product potential   (each 0..1)\n\nmarket demand  = sum over markets of arrivals(2025, JNTO) x relevance of an English paid PDF x interest(0-3)/3,\n                 normalised to the best candidate. Interest is an editorial judgement per market, backed by the\n                 evidence in audience.json (prefecture visit rates by nationality, place-specific hooks).\n                 If research/lab-07/cf-audience.json exists (Cloudflare), its per-candidate country page views\n                 replace the editorial interest for candidates the site already covers.\ndata readiness = photo depth 35%, landform story 25% (former channels + former water + fill), memorials 15%,\n                 open NDL books 25% (readiness.json).\nproduct potential = segment value for Area Dossier / Deep Research sales (roots, bases, occupation, ...).\nConstraints: every market keeps at least its best candidate; US, GB, AU, CA at least two; roots >= 3; bases >= 3.\nWrites research/lab-07/districts.json.",
+ "relevance": {
+  "KR": 0.0183,
+  "CN": 0.0323,
+  "TW": 0.0622,
+  "US": 0.682,
+  "HK": 0.1085,
+  "TH": 0.0708,
+  "AU": 0.65,
+  "SG": 0.3762,
+  "CA": 0.666,
+  "GB": 0.747
+ },
+ "ranking": [
+  {
+   "id": "tokyo-asakusa",
+   "demand": 5.2646264104,
+   "readiness": 1.0,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 1.0,
+    "memorials": 1.0,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "US": 3,
+    "GB": 3,
+    "AU": 3,
+    "CA": 3,
+    "SG": 3,
+    "HK": 3,
+    "TW": 3,
+    "KR": 2,
+    "CN": 3,
+    "TH": 3
+   },
+   "demandNorm": 1.0,
+   "score": 0.887
+  },
+  {
+   "id": "hiroshima-peace",
+   "demand": 4.399233612566667,
+   "readiness": 0.85,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.55,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.8,
+   "interest": {
+    "US": 3,
+    "GB": 3,
+    "AU": 3,
+    "CA": 3,
+    "SG": 2,
+    "HK": 1,
+    "TW": 1,
+    "KR": 1,
+    "CN": 1,
+    "TH": 1
+   },
+   "demandNorm": 0.836,
+   "score": 0.831
+  },
+  {
+   "id": "tokyo-harajuku",
+   "demand": 4.299970844999999,
+   "readiness": 0.788,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.3,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.85,
+   "interest": {
+    "US": 3,
+    "GB": 2,
+    "AU": 2,
+    "CA": 2,
+    "SG": 2,
+    "HK": 2,
+    "TW": 2,
+    "KR": 2,
+    "CN": 2,
+    "TH": 2
+   },
+   "demandNorm": 0.817,
+   "score": 0.817
+  },
+  {
+   "id": "kyoto-higashiyama",
+   "demand": 5.0042509248333324,
+   "readiness": 0.714,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.0,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "US": 3,
+    "GB": 3,
+    "AU": 3,
+    "CA": 3,
+    "SG": 3,
+    "HK": 2,
+    "TW": 2,
+    "KR": 2,
+    "CN": 3,
+    "TH": 2
+   },
+   "demandNorm": 0.951,
+   "score": 0.78
+  },
+  {
+   "id": "osaka-namba",
+   "demand": 4.4373642381666665,
+   "readiness": 0.72,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.03,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.65,
+   "interest": {
+    "US": 2,
+    "GB": 2,
+    "AU": 3,
+    "CA": 3,
+    "SG": 3,
+    "HK": 3,
+    "TW": 3,
+    "KR": 3,
+    "CN": 3,
+    "TH": 3
+   },
+   "demandNorm": 0.843,
+   "score": 0.758
+  },
+  {
+   "id": "yokohama-kannai",
+   "demand": 3.2722848295999993,
+   "readiness": 0.962,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 1.0,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.7,
+   "interest": {
+    "US": 2,
+    "GB": 3,
+    "AU": 2,
+    "CA": 2,
+    "SG": 1,
+    "HK": 1,
+    "TW": 1,
+    "KR": 1,
+    "CN": 2,
+    "TH": 1
+   },
+   "demandNorm": 0.622,
+   "score": 0.744
+  },
+  {
+   "id": "yokosuka",
+   "demand": 2.25525124,
+   "readiness": 0.962,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 1.0,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 3
+   },
+   "demandNorm": 0.428,
+   "score": 0.706
+  },
+  {
+   "id": "kamakura",
+   "demand": 3.0411359764999997,
+   "readiness": 0.839,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.51,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.65,
+   "interest": {
+    "US": 2,
+    "GB": 2,
+    "AU": 2,
+    "CA": 2,
+    "SG": 1,
+    "HK": 1,
+    "TW": 1,
+    "KR": 1,
+    "CN": 1,
+    "TH": 1
+   },
+   "demandNorm": 0.578,
+   "score": 0.674
+  },
+  {
+   "id": "suo-oshima",
+   "demand": 2.25525124,
+   "readiness": 0.682,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.3,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 1.0,
+   "interest": {
+    "US": 3
+   },
+   "demandNorm": 0.428,
+   "score": 0.647
+  },
+  {
+   "id": "iwakuni",
+   "demand": 1.5035008266666667,
+   "readiness": 0.82,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 1.0,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 2
+   },
+   "demandNorm": 0.286,
+   "score": 0.6
+  },
+  {
+   "id": "kobe-meriken",
+   "demand": 2.0963049994333334,
+   "readiness": 0.81,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.44,
+    "memorials": 1.0,
+    "ndl": 0.8
+   },
+   "potential": 0.7,
+   "interest": {
+    "US": 1,
+    "GB": 2,
+    "AU": 1,
+    "CA": 1,
+    "SG": 1,
+    "HK": 2,
+    "TW": 1,
+    "KR": 1,
+    "CN": 2,
+    "TH": 1
+   },
+   "demandNorm": 0.398,
+   "score": 0.597
+  },
+  {
+   "id": "nagasaki-dejima",
+   "demand": 1.9650304489333335,
+   "readiness": 0.715,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.43,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.8,
+   "interest": {
+    "US": 1,
+    "GB": 2,
+    "AU": 1,
+    "CA": 1,
+    "SG": 1,
+    "HK": 1,
+    "TW": 1,
+    "KR": 2,
+    "CN": 1,
+    "TH": 1
+   },
+   "demandNorm": 0.373,
+   "score": 0.582
+  },
+  {
+   "id": "fujiyoshida",
+   "demand": 3.4619131882666663,
+   "readiness": 0.493,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.03,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "TH": 3,
+    "SG": 2,
+    "CN": 2,
+    "AU": 2,
+    "GB": 2,
+    "CA": 2,
+    "US": 2,
+    "TW": 2,
+    "HK": 2
+   },
+   "demandNorm": 0.658,
+   "score": 0.582
+  },
+  {
+   "id": "niseko",
+   "demand": 2.793855019833333,
+   "readiness": 0.477,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.3,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.8,
+   "interest": {
+    "AU": 3,
+    "HK": 2,
+    "SG": 2,
+    "US": 2,
+    "CN": 1,
+    "TW": 1
+   },
+   "demandNorm": 0.531,
+   "score": 0.582
+  },
+  {
+   "id": "chatan",
+   "demand": 2.2216861346666668,
+   "readiness": 0.543,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.56,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 2,
+    "TW": 3,
+    "HK": 2,
+    "KR": 2
+   },
+   "demandNorm": 0.422,
+   "score": 0.578
+  },
+  {
+   "id": "sasebo",
+   "demand": 1.5035008266666667,
+   "readiness": 0.726,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.63,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 2
+   },
+   "demandNorm": 0.286,
+   "score": 0.572
+  },
+  {
+   "id": "kin",
+   "demand": 2.25525124,
+   "readiness": 0.426,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.1,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 1.0,
+   "interest": {
+    "US": 3
+   },
+   "demandNorm": 0.428,
+   "score": 0.57
+  },
+  {
+   "id": "kure",
+   "demand": 1.8588800233333331,
+   "readiness": 0.578,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.48,
+    "memorials": 0.75,
+    "ndl": 0.4
+   },
+   "potential": 0.9,
+   "interest": {
+    "AU": 3,
+    "GB": 2,
+    "US": 1,
+    "CA": 1
+   },
+   "demandNorm": 0.353,
+   "score": 0.557
+  },
+  {
+   "id": "mio",
+   "demand": 1.2099710673333335,
+   "readiness": 0.645,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.3,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 1.0,
+   "interest": {
+    "CA": 3,
+    "US": 1
+   },
+   "demandNorm": 0.23,
+   "score": 0.547
+  },
+  {
+   "id": "fussa",
+   "demand": 1.5035008266666667,
+   "readiness": 0.613,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.17,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 2
+   },
+   "demandNorm": 0.286,
+   "score": 0.538
+  },
+  {
+   "id": "sapporo",
+   "demand": 2.4125809472333333,
+   "readiness": 0.644,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.05,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "US": 1,
+    "GB": 1,
+    "AU": 2,
+    "CA": 1,
+    "SG": 2,
+    "HK": 2,
+    "TW": 2,
+    "KR": 2,
+    "CN": 1,
+    "TH": 2
+   },
+   "demandNorm": 0.458,
+   "score": 0.537
+  },
+  {
+   "id": "misawa",
+   "demand": 1.5035008266666667,
+   "readiness": 0.586,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.07,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 2
+   },
+   "demandNorm": 0.286,
+   "score": 0.529
+  },
+  {
+   "id": "naha-shuri",
+   "demand": 2.3196189917666667,
+   "readiness": 0.418,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.06,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.8,
+   "interest": {
+    "US": 2,
+    "TW": 3,
+    "HK": 2,
+    "KR": 2,
+    "CN": 1
+   },
+   "demandNorm": 0.441,
+   "score": 0.524
+  },
+  {
+   "id": "hakodate",
+   "demand": 1.6233251192666667,
+   "readiness": 0.623,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.39,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.7,
+   "interest": {
+    "TW": 2,
+    "HK": 2,
+    "CN": 1,
+    "KR": 1,
+    "SG": 1,
+    "TH": 1,
+    "US": 1,
+    "GB": 1
+   },
+   "demandNorm": 0.308,
+   "score": 0.5
+  },
+  {
+   "id": "fukuoka-hakata",
+   "demand": 1.6965635279666667,
+   "readiness": 0.716,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.34,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "KR": 3,
+    "HK": 3,
+    "TW": 2,
+    "CN": 1,
+    "TH": 1,
+    "SG": 1,
+    "US": 1
+   },
+   "demandNorm": 0.322,
+   "score": 0.497
+  },
+  {
+   "id": "shimoda",
+   "demand": 1.5035008266666667,
+   "readiness": 0.621,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.06,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.7,
+   "interest": {
+    "US": 2
+   },
+   "demandNorm": 0.286,
+   "score": 0.49
+  },
+  {
+   "id": "kumamoto",
+   "demand": 1.3630750353666667,
+   "readiness": 0.692,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.07,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 0.65,
+   "interest": {
+    "HK": 2,
+    "TW": 2,
+    "KR": 1,
+    "SG": 1,
+    "US": 1
+   },
+   "demandNorm": 0.259,
+   "score": 0.487
+  },
+  {
+   "id": "kanazawa",
+   "demand": 2.2323636686999997,
+   "readiness": 0.525,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.0,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "TW": 3,
+    "GB": 2,
+    "AU": 2,
+    "CA": 1,
+    "US": 1,
+    "SG": 1,
+    "HK": 1
+   },
+   "demandNorm": 0.424,
+   "score": 0.486
+  },
+  {
+   "id": "shirakawago",
+   "demand": 2.1865763756333334,
+   "readiness": 0.522,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.3,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 0.5,
+   "interest": {
+    "TH": 2,
+    "TW": 2,
+    "HK": 2,
+    "SG": 1,
+    "GB": 2,
+    "AU": 2,
+    "US": 1,
+    "CN": 1
+   },
+   "demandNorm": 0.415,
+   "score": 0.468
+  },
+  {
+   "id": "sendai-arahama",
+   "demand": 0.9899115947,
+   "readiness": 0.73,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.07,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.65,
+   "interest": {
+    "TW": 1,
+    "CN": 1,
+    "US": 1
+   },
+   "demandNorm": 0.188,
+   "score": 0.466
+  },
+  {
+   "id": "tachikawa",
+   "demand": 0.7517504133333334,
+   "readiness": 0.57,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.18,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 1
+   },
+   "demandNorm": 0.143,
+   "score": 0.46
+  },
+  {
+   "id": "otaru",
+   "demand": 0.8251641778333332,
+   "readiness": 0.731,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.82,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "SG": 1,
+    "HK": 2,
+    "TW": 2,
+    "KR": 2,
+    "CN": 1,
+    "TH": 2
+   },
+   "demandNorm": 0.157,
+   "score": 0.427
+  },
+  {
+   "id": "nikko",
+   "demand": 1.1875119604000002,
+   "readiness": 0.56,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.3,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "GB": 2,
+    "US": 1,
+    "TW": 1,
+    "TH": 1
+   },
+   "demandNorm": 0.226,
+   "score": 0.407
+  },
+  {
+   "id": "beppu",
+   "demand": 0.49543289656666667,
+   "readiness": 0.67,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.25,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "KR": 3,
+    "HK": 2,
+    "TW": 1
+   },
+   "demandNorm": 0.094,
+   "score": 0.381
+  },
+  {
+   "id": "tsushima",
+   "demand": 0.17311271130000003,
+   "readiness": 0.6,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.3,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "KR": 3
+   },
+   "demandNorm": 0.033,
+   "score": 0.332
+  },
+  {
+   "id": "karuizawa",
+   "demand": 0.5297683074,
+   "readiness": 0.522,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.3,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 0.5,
+   "interest": {
+    "CA": 2,
+    "SG": 1,
+    "GB": 1
+   },
+   "demandNorm": 0.101,
+   "score": 0.327
+  }
+ ],
+ "districts": [
+  {
+   "id": "tokyo-asakusa",
+   "en": "Asakusa & Ryogoku, Tokyo",
+   "ja": "浅草・両国（東京都台東区・墨田区）",
+   "pref": "東京都",
+   "center": [
+    35.705,
+    139.7975
+   ],
+   "half": 1.3,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "CA",
+    "SG",
+    "TW",
+    "HK",
+    "CN",
+    "TH",
+    "KR"
+   ],
+   "site": "tokyo",
+   "queries": [
+    "浅草",
+    "本所",
+    "両国",
+    "隅田川",
+    "横網"
+   ],
+   "score": 0.887,
+   "demandNorm": 1.0,
+   "readiness": 1.0,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 1.0,
+    "memorials": 1.0,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "US": 3,
+    "GB": 3,
+    "AU": 3,
+    "CA": 3,
+    "SG": 3,
+    "HK": 3,
+    "TW": 3,
+    "KR": 2,
+    "CN": 3,
+    "TH": 3
+   },
+   "picked": "Basic showcase: 15 memorials within 3 km"
+  },
+  {
+   "id": "hiroshima-peace",
+   "en": "Peace Park (Nakajima), Hiroshima",
+   "ja": "平和記念公園・旧中島地区（広島市中区）",
+   "pref": "広島県",
+   "center": [
+    34.3935,
+    132.453
+   ],
+   "half": 1.0,
+   "segment": [
+    "city",
+    "war"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "CA",
+    "SG",
+    "KR"
+   ],
+   "site": "hiroshima",
+   "queries": [
+    "中島本町",
+    "材木町",
+    "広島市 中島",
+    "元安川",
+    "猿楽町"
+   ],
+   "score": 0.831,
+   "demandNorm": 0.836,
+   "readiness": 0.85,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.55,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.8,
+   "interest": {
+    "US": 3,
+    "GB": 3,
+    "AU": 3,
+    "CA": 3,
+    "SG": 2,
+    "HK": 1,
+    "TW": 1,
+    "KR": 1,
+    "CN": 1,
+    "TH": 1
+   },
+   "picked": "score"
+  },
+  {
+   "id": "tokyo-harajuku",
+   "en": "Harajuku & Yoyogi (Washington Heights), Tokyo",
+   "ja": "原宿・代々木（東京都渋谷区）",
+   "pref": "東京都",
+   "center": [
+    35.67,
+    139.7
+   ],
+   "half": 1.1,
+   "segment": [
+    "occupation",
+    "city"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "CA",
+    "SG",
+    "KR",
+    "TW"
+   ],
+   "site": null,
+   "queries": [
+    "原宿",
+    "代々木",
+    "ワシントンハイツ",
+    "穏田",
+    "千駄ヶ谷"
+   ],
+   "score": 0.817,
+   "demandNorm": 0.817,
+   "readiness": 0.788,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.3,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.85,
+   "interest": {
+    "US": 3,
+    "GB": 2,
+    "AU": 2,
+    "CA": 2,
+    "SG": 2,
+    "HK": 2,
+    "TW": 2,
+    "KR": 2,
+    "CN": 2,
+    "TH": 2
+   },
+   "picked": "score"
+  },
+  {
+   "id": "kyoto-higashiyama",
+   "en": "Higashiyama & Kamo River, Kyoto",
+   "ja": "東山・鴨川（京都市東山区）",
+   "pref": "京都府",
+   "center": [
+    34.999,
+    135.779
+   ],
+   "half": 1.1,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "AU",
+    "CA",
+    "SG",
+    "TW",
+    "HK",
+    "CN",
+    "TH",
+    "KR"
+   ],
+   "site": "kyoto",
+   "queries": [
+    "東山",
+    "祇園",
+    "清水寺",
+    "鴨川",
+    "五条"
+   ],
+   "score": 0.78,
+   "demandNorm": 0.951,
+   "readiness": 0.714,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.0,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "US": 3,
+    "GB": 3,
+    "AU": 3,
+    "CA": 3,
+    "SG": 3,
+    "HK": 2,
+    "TW": 2,
+    "KR": 2,
+    "CN": 3,
+    "TH": 2
+   },
+   "picked": "score"
+  },
+  {
+   "id": "osaka-namba",
+   "en": "Namba & Dotonbori canals, Osaka",
+   "ja": "難波・道頓堀（大阪市中央区・浪速区）",
+   "pref": "大阪府",
+   "center": [
+    34.6685,
+    135.496
+   ],
+   "half": 1.2,
+   "segment": [
+    "city",
+    "disaster"
+   ],
+   "markets": [
+    "KR",
+    "TW",
+    "HK",
+    "CN",
+    "TH",
+    "SG",
+    "US"
+   ],
+   "site": "osaka",
+   "queries": [
+    "道頓堀",
+    "難波",
+    "木津川",
+    "大正橋",
+    "大阪 堀川"
+   ],
+   "score": 0.758,
+   "demandNorm": 0.843,
+   "readiness": 0.72,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.03,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.65,
+   "interest": {
+    "US": 2,
+    "GB": 2,
+    "AU": 3,
+    "CA": 3,
+    "SG": 3,
+    "HK": 3,
+    "TW": 3,
+    "KR": 3,
+    "CN": 3,
+    "TH": 3
+   },
+   "picked": "signature KR: 28.8% of Korean visitors go to Osaka"
+  },
+  {
+   "id": "yokohama-kannai",
+   "en": "Kannai & Yamashita, Yokohama",
+   "ja": "関内・山下町（横浜市中区）",
+   "pref": "神奈川県",
+   "center": [
+    35.444,
+    139.644
+   ],
+   "half": 1.1,
+   "segment": [
+    "settlement",
+    "city"
+   ],
+   "markets": [
+    "US",
+    "GB",
+    "CN",
+    "TW",
+    "HK",
+    "AU"
+   ],
+   "site": "yokohama",
+   "queries": [
+    "関内",
+    "山下町",
+    "横浜居留地",
+    "山下公園",
+    "横浜中華街"
+   ],
+   "score": 0.744,
+   "demandNorm": 0.622,
+   "readiness": 0.962,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 1.0,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.7,
+   "interest": {
+    "US": 2,
+    "GB": 3,
+    "AU": 2,
+    "CA": 2,
+    "SG": 1,
+    "HK": 1,
+    "TW": 1,
+    "KR": 1,
+    "CN": 2,
+    "TH": 1
+   },
+   "picked": "signature GB: 19.6% of British visitors go to Kanagawa; the foreign settlement and cemetery"
+  },
+  {
+   "id": "yokosuka",
+   "en": "Yokosuka (naval port)",
+   "ja": "横須賀（神奈川県横須賀市）",
+   "pref": "神奈川県",
+   "center": [
+    35.283,
+    139.668
+   ],
+   "half": 1.3,
+   "segment": [
+    "base",
+    "occupation"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "横須賀",
+    "横須賀製鉄所",
+    "横須賀鎮守府",
+    "汐入",
+    "米海軍横須賀"
+   ],
+   "score": 0.706,
+   "demandNorm": 0.428,
+   "readiness": 0.962,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 1.0,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 3
+   },
+   "picked": "signature US: Fleet Activities Yokosuka serves about 26,000 people; Perry landed at Kurihama"
+  },
+  {
+   "id": "suo-oshima",
+   "en": "Suo-Oshima (Hawaii emigrant villages)",
+   "ja": "周防大島（山口県周防大島町）",
+   "pref": "山口県",
+   "center": [
+    33.927,
+    132.215
+   ],
+   "half": 1.6,
+   "segment": [
+    "roots"
+   ],
+   "markets": [
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "周防大島",
+    "屋代村",
+    "久賀",
+    "大島郡",
+    "布哇 移民 山口"
+   ],
+   "score": 0.647,
+   "demandNorm": 0.428,
+   "readiness": 0.682,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.3,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 1.0,
+   "interest": {
+    "US": 3
+   },
+   "picked": "signature US: about 30% of the first 944 government-contract emigrants to Hawaii (1885) came from Oshima District"
+  },
+  {
+   "id": "kobe-meriken",
+   "en": "Meriken Park & Kitano, Kobe",
+   "ja": "メリケンパーク・北野（神戸市中央区）",
+   "pref": "兵庫県",
+   "center": [
+    34.69,
+    135.19
+   ],
+   "half": 1.1,
+   "segment": [
+    "settlement",
+    "disaster",
+    "city"
+   ],
+   "markets": [
+    "HK",
+    "TW",
+    "GB",
+    "US",
+    "CN"
+   ],
+   "site": "kobe",
+   "queries": [
+    "神戸居留地",
+    "北野",
+    "メリケン波止場",
+    "生田川",
+    "神戸港"
+   ],
+   "score": 0.597,
+   "demandNorm": 0.398,
+   "readiness": 0.81,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.44,
+    "memorials": 1.0,
+    "ndl": 0.8
+   },
+   "potential": 0.7,
+   "interest": {
+    "US": 1,
+    "GB": 2,
+    "AU": 1,
+    "CA": 1,
+    "SG": 1,
+    "HK": 2,
+    "TW": 1,
+    "KR": 1,
+    "CN": 2,
+    "TH": 1
+   },
+   "picked": "Basic showcase: 10 memorials within 3 km"
+  },
+  {
+   "id": "nagasaki-dejima",
+   "en": "Dejima, Chinatown & Minamiyamate, Nagasaki",
+   "ja": "出島・新地・南山手（長崎市）",
+   "pref": "長崎県",
+   "center": [
+    32.7395,
+    129.8725
+   ],
+   "half": 1.0,
+   "segment": [
+    "settlement",
+    "city",
+    "war"
+   ],
+   "markets": [
+    "GB",
+    "US",
+    "CN",
+    "TW",
+    "KR",
+    "HK"
+   ],
+   "site": "nagasaki",
+   "queries": [
+    "出島",
+    "長崎居留地",
+    "南山手",
+    "唐人屋敷",
+    "新地"
+   ],
+   "score": 0.582,
+   "demandNorm": 0.373,
+   "readiness": 0.715,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.43,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.8,
+   "interest": {
+    "US": 1,
+    "GB": 2,
+    "AU": 1,
+    "CA": 1,
+    "SG": 1,
+    "HK": 1,
+    "TW": 1,
+    "KR": 2,
+    "CN": 1,
+    "TH": 1
+   },
+   "picked": "signature GB: Thomas Glover and the oldest Western-style house; Dejima"
+  },
+  {
+   "id": "niseko",
+   "en": "Niseko Hirafu & Kutchan",
+   "ja": "ニセコひらふ・倶知安",
+   "pref": "北海道",
+   "center": [
+    42.8654,
+    140.7008
+   ],
+   "half": 1.5,
+   "segment": [
+    "property",
+    "volcano"
+   ],
+   "markets": [
+    "AU",
+    "HK",
+    "SG",
+    "CN"
+   ],
+   "site": null,
+   "queries": [
+    "倶知安",
+    "比羅夫",
+    "ニセコ",
+    "羊蹄山",
+    "狩太"
+   ],
+   "score": 0.582,
+   "demandNorm": 0.531,
+   "readiness": 0.477,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.3,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.8,
+   "interest": {
+    "AU": 3,
+    "HK": 2,
+    "SG": 2,
+    "US": 2,
+    "CN": 1,
+    "TW": 1
+   },
+   "picked": "signature AU: Australia is the top foreign market of Kutchan: 166,822 guest-nights in FY2025"
+  },
+  {
+   "id": "fujiyoshida",
+   "en": "Fujiyoshida (Chureito Pagoda & pilgrim town)",
+   "ja": "富士吉田（新倉山・上吉田）",
+   "pref": "山梨県",
+   "center": [
+    35.492,
+    138.8
+   ],
+   "half": 1.3,
+   "segment": [
+    "city",
+    "volcano"
+   ],
+   "markets": [
+    "TH",
+    "SG",
+    "TW",
+    "HK",
+    "CN",
+    "KR",
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "富士吉田",
+    "上吉田",
+    "御師",
+    "新倉",
+    "北口本宮冨士浅間神社"
+   ],
+   "score": 0.582,
+   "demandNorm": 0.658,
+   "readiness": 0.493,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.03,
+    "memorials": 0.75,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "TH": 3,
+    "SG": 2,
+    "CN": 2,
+    "AU": 2,
+    "GB": 2,
+    "CA": 2,
+    "US": 2,
+    "TW": 2,
+    "HK": 2
+   },
+   "picked": "signature SG: 11.4% of Singaporean visitors go to Yamanashi"
+  },
+  {
+   "id": "chatan",
+   "en": "Chatan & Kadena (Mihama / Hamby Airfield), Okinawa",
+   "ja": "北谷・嘉手納（沖縄県）",
+   "pref": "沖縄県",
+   "center": [
+    26.325,
+    127.76
+   ],
+   "half": 1.5,
+   "segment": [
+    "base",
+    "occupation"
+   ],
+   "markets": [
+    "US",
+    "TW",
+    "HK",
+    "KR"
+   ],
+   "site": null,
+   "queries": [
+    "北谷",
+    "嘉手納",
+    "ハンビー",
+    "美浜",
+    "北谷村"
+   ],
+   "score": 0.578,
+   "demandNorm": 0.422,
+   "readiness": 0.543,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.56,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.9,
+   "interest": {
+    "US": 2,
+    "TW": 3,
+    "HK": 2,
+    "KR": 2
+   },
+   "picked": "signature TW: 14.5% of Taiwanese visitors go to Okinawa"
+  },
+  {
+   "id": "kin",
+   "en": "Kin, Okinawa (emigration pioneer town & Camp Hansen)",
+   "ja": "金武町（沖縄県）",
+   "pref": "沖縄県",
+   "center": [
+    26.464,
+    127.92
+   ],
+   "half": 1.4,
+   "segment": [
+    "roots",
+    "base"
+   ],
+   "markets": [
+    "US",
+    "BR",
+    "PE"
+   ],
+   "site": null,
+   "queries": [
+    "金武",
+    "當山久三",
+    "沖縄 移民",
+    "金武村",
+    "キャンプ・ハンセン"
+   ],
+   "score": 0.57,
+   "demandNorm": 0.428,
+   "readiness": 0.426,
+   "readinessParts": {
+    "photo": 0.35,
+    "land": 0.1,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 1.0,
+   "interest": {
+    "US": 3
+   },
+   "picked": "roots quota"
+  },
+  {
+   "id": "kure",
+   "en": "Kure (naval arsenal & BCOF headquarters)",
+   "ja": "呉（呉市中央）",
+   "pref": "広島県",
+   "center": [
+    34.244,
+    132.558
+   ],
+   "half": 1.2,
+   "segment": [
+    "occupation",
+    "base",
+    "war"
+   ],
+   "markets": [
+    "AU",
+    "GB",
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "呉",
+    "呉海軍工廠",
+    "呉鎮守府",
+    "英連邦軍 呉",
+    "呉港"
+   ],
+   "score": 0.557,
+   "demandNorm": 0.353,
+   "readiness": 0.578,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.48,
+    "memorials": 0.75,
+    "ndl": 0.4
+   },
+   "potential": 0.9,
+   "interest": {
+    "AU": 3,
+    "GB": 2,
+    "US": 1,
+    "CA": 1
+   },
+   "picked": "signature AU: the British Commonwealth Occupation Force, led by Australia, had its headquarters in Kure"
+  },
+  {
+   "id": "mio",
+   "en": "Mio, the 'America Village' (Canada emigrants)",
+   "ja": "三尾・アメリカ村（和歌山県美浜町）",
+   "pref": "和歌山県",
+   "center": [
+    33.8914,
+    135.0894
+   ],
+   "half": 1.2,
+   "segment": [
+    "roots"
+   ],
+   "markets": [
+    "CA",
+    "US"
+   ],
+   "site": null,
+   "queries": [
+    "三尾村",
+    "アメリカ村",
+    "美浜町",
+    "日高郡",
+    "加奈陀 移民"
+   ],
+   "score": 0.547,
+   "demandNorm": 0.23,
+   "readiness": 0.645,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.3,
+    "memorials": 0.5,
+    "ndl": 1.0
+   },
+   "potential": 1.0,
+   "interest": {
+    "CA": 3,
+    "US": 1
+   },
+   "picked": "signature CA: Kuno Gihei went to Canada in 1888; Mio emigrants dominated the Steveston salmon fishery"
+  },
+  {
+   "id": "sapporo",
+   "en": "Central Sapporo (Clock Tower & Sosei River)",
+   "ja": "札幌都心（時計台・創成川）",
+   "pref": "北海道",
+   "center": [
+    43.0615,
+    141.354
+   ],
+   "half": 1.1,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "TH",
+    "SG",
+    "TW",
+    "HK",
+    "CN",
+    "KR",
+    "US",
+    "AU"
+   ],
+   "site": "sapporo",
+   "queries": [
+    "札幌",
+    "創成川",
+    "大通",
+    "札幌農学校",
+    "開拓使"
+   ],
+   "score": 0.537,
+   "demandNorm": 0.458,
+   "readiness": 0.644,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.05,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "US": 1,
+    "GB": 1,
+    "AU": 2,
+    "CA": 1,
+    "SG": 2,
+    "HK": 2,
+    "TW": 2,
+    "KR": 2,
+    "CN": 1,
+    "TH": 2
+   },
+   "picked": "signature TH: 10.6% of Thai visitors go to Hokkaido"
+  },
+  {
+   "id": "hakodate",
+   "en": "Motomachi & the Bay, Hakodate",
+   "ja": "元町・ベイエリア（函館市）",
+   "pref": "北海道",
+   "center": [
+    41.765,
+    140.715
+   ],
+   "half": 1.1,
+   "segment": [
+    "settlement",
+    "city",
+    "disaster"
+   ],
+   "markets": [
+    "TW",
+    "HK",
+    "CN",
+    "KR",
+    "GB",
+    "US"
+   ],
+   "site": "hakodate",
+   "queries": [
+    "函館",
+    "元町",
+    "函館大火",
+    "弁天",
+    "函館港"
+   ],
+   "score": 0.5,
+   "demandNorm": 0.308,
+   "readiness": 0.623,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.39,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.7,
+   "interest": {
+    "TW": 2,
+    "HK": 2,
+    "CN": 1,
+    "KR": 1,
+    "SG": 1,
+    "TH": 1,
+    "US": 1,
+    "GB": 1
+   },
+   "picked": "signature HK: 10.4% of Hong Kong guest-nights are in Hokkaido"
+  },
+  {
+   "id": "fukuoka-hakata",
+   "en": "Hakata old town, Fukuoka",
+   "ja": "博多（福岡市博多区）",
+   "pref": "福岡県",
+   "center": [
+    33.593,
+    130.411
+   ],
+   "half": 1.1,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "KR",
+    "TW",
+    "HK",
+    "CN"
+   ],
+   "site": "fukuoka",
+   "queries": [
+    "博多",
+    "那珂川",
+    "櫛田神社",
+    "冷泉",
+    "博多津"
+   ],
+   "score": 0.497,
+   "demandNorm": 0.322,
+   "readiness": 0.716,
+   "readinessParts": {
+    "photo": 1.0,
+    "land": 0.34,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "KR": 3,
+    "HK": 3,
+    "TW": 2,
+    "CN": 1,
+    "TH": 1,
+    "SG": 1,
+    "US": 1
+   },
+   "picked": "signature HK: 15.5% of Hong Kong visitors go to Fukuoka; 16.4% of their guest-nights are in Kyushu"
+  },
+  {
+   "id": "kanazawa",
+   "en": "Kanazawa castle town",
+   "ja": "金沢城下（金沢市）",
+   "pref": "石川県",
+   "center": [
+    36.565,
+    136.66
+   ],
+   "half": 1.1,
+   "segment": [
+    "city"
+   ],
+   "markets": [
+    "TW",
+    "GB",
+    "US",
+    "AU",
+    "HK"
+   ],
+   "site": "kanazawa",
+   "queries": [
+    "金沢",
+    "兼六園",
+    "ひがし茶屋",
+    "長町",
+    "犀川"
+   ],
+   "score": 0.486,
+   "demandNorm": 0.424,
+   "readiness": 0.525,
+   "readinessParts": {
+    "photo": 0.7,
+    "land": 0.0,
+    "memorials": 0.2,
+    "ndl": 1.0
+   },
+   "potential": 0.55,
+   "interest": {
+    "TW": 3,
+    "GB": 2,
+    "AU": 2,
+    "CA": 1,
+    "US": 1,
+    "SG": 1,
+    "HK": 1
+   },
+   "picked": "signature TW: Taiwan is Ishikawa's top foreign market; Hatta Yoichi was born in Kanazawa"
+  }
+ ]
+}

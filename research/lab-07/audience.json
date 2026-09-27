@@ -1,0 +1,877 @@
+{
+ "checkedOn": "2026-09-27",
+ "note": "Proxy evidence for who visits: official market statistics (JNTO arrivals, Japan Tourism Agency surveys). Not the site's own analytics (Cloudflare was not accessible).",
+ "markets": [
+  {
+   "code": "KR",
+   "ja": "韓国",
+   "arrivals2025": 9459711,
+   "arrivals2025_yoy_pct": 7.3,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 12.2,
+   "museums_pct": 16.2,
+   "nature_pct": 50.1,
+   "daily_life_pct": 15.2,
+   "next_history_culture_pct": 13.4,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 16.3,
+   "repeat_pct": 83.7,
+   "yen_per_person_all_purposes": 105058,
+   "yen_per_person_leisure": 101990,
+   "janAug2026": 7420300,
+   "janAug2026_yoy_pct": 21.2,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "CN",
+   "ja": "中国",
+   "arrivals2025": 9095931,
+   "arrivals2025_yoy_pct": 30.3,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 21.5,
+   "museums_pct": 31.0,
+   "nature_pct": 76.6,
+   "daily_life_pct": 18.7,
+   "next_history_culture_pct": 21.7,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 44.0,
+   "repeat_pct": 56.0,
+   "yen_per_person_all_purposes": 246550,
+   "yen_per_person_leisure": 237152,
+   "janAug2026": 2904600,
+   "janAug2026_yoy_pct": -56.7,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "TW",
+   "ja": "台湾",
+   "arrivals2025": 6763424,
+   "arrivals2025_yoy_pct": 11.9,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 24.9,
+   "museums_pct": 35.4,
+   "nature_pct": 73.6,
+   "daily_life_pct": 24.4,
+   "next_history_culture_pct": 25.5,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 12.1,
+   "repeat_pct": 87.9,
+   "yen_per_person_all_purposes": 184413,
+   "yen_per_person_leisure": 181769,
+   "janAug2026": 5402000,
+   "janAug2026_yoy_pct": 19.8,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "US",
+   "ja": "米国",
+   "arrivals2025": 3306820,
+   "arrivals2025_yoy_pct": 21.4,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 68.2,
+   "museums_pct": 56.7,
+   "nature_pct": 71.0,
+   "daily_life_pct": 52.3,
+   "next_history_culture_pct": 56.6,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 63.2,
+   "repeat_pct": 36.8,
+   "yen_per_person_all_purposes": 339708,
+   "yen_per_person_leisure": 350133,
+   "janAug2026": 2305300,
+   "janAug2026_yoy_pct": 6.1,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "HK",
+   "ja": "香港",
+   "arrivals2025": 2517399,
+   "arrivals2025_yoy_pct": -6.2,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 21.7,
+   "museums_pct": 32.0,
+   "nature_pct": 69.7,
+   "daily_life_pct": 18.3,
+   "next_history_culture_pct": 19.9,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 9.4,
+   "repeat_pct": 90.6,
+   "yen_per_person_all_purposes": 226011,
+   "yen_per_person_leisure": 227222,
+   "janAug2026": 1818300,
+   "janAug2026_yoy_pct": 8.7,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "TH",
+   "ja": "タイ",
+   "arrivals2025": 1233103,
+   "arrivals2025_yoy_pct": 7.3,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 28.3,
+   "museums_pct": 31.5,
+   "nature_pct": 65.8,
+   "daily_life_pct": 23.2,
+   "next_history_culture_pct": 24.1,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 28.8,
+   "repeat_pct": 71.2,
+   "yen_per_person_all_purposes": 205246,
+   "yen_per_person_leisure": 204618,
+   "janAug2026": 790500,
+   "janAug2026_yoy_pct": 3.4,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "AU",
+   "ja": "豪州",
+   "arrivals2025": 1058396,
+   "arrivals2025_yoy_pct": 15.0,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 65.0,
+   "museums_pct": 64.3,
+   "nature_pct": 79.6,
+   "daily_life_pct": 49.5,
+   "next_history_culture_pct": 50.3,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 54.2,
+   "repeat_pct": 45.8,
+   "yen_per_person_all_purposes": 386512,
+   "yen_per_person_leisure": 403966,
+   "janAug2026": 681200,
+   "janAug2026_yoy_pct": 3.4,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "SG",
+   "ja": "シンガポール",
+   "arrivals2025": 726251,
+   "arrivals2025_yoy_pct": 5.1,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 41.8,
+   "museums_pct": 39.4,
+   "nature_pct": 75.7,
+   "daily_life_pct": 34.6,
+   "next_history_culture_pct": 29.5,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 24.7,
+   "repeat_pct": 75.3,
+   "yen_per_person_all_purposes": 319901,
+   "yen_per_person_leisure": 325886,
+   "janAug2026": 429000,
+   "janAug2026_yoy_pct": 10.0,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "CA",
+   "ja": "カナダ",
+   "arrivals2025": 688019,
+   "arrivals2025_yoy_pct": 18.7,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 66.6,
+   "museums_pct": 58.4,
+   "nature_pct": 78.1,
+   "daily_life_pct": 56.7,
+   "next_history_culture_pct": 53.3,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 62.2,
+   "repeat_pct": 37.8,
+   "yen_per_person_all_purposes": 322489,
+   "yen_per_person_leisure": 329617,
+   "janAug2026": 469600,
+   "janAug2026_yoy_pct": 7.0,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  },
+  {
+   "code": "GB",
+   "ja": "英国",
+   "arrivals2025": 535004,
+   "arrivals2025_yoy_pct": 22.4,
+   "arrivalsSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", column 累計; 2025 values are 確定値) ; tourists: https://www.jnto.go.jp/statistics/data/_files/20260819_1615-6.pdf p.1 (2025年 国籍別/目的別 確定値, 観光客 incl. VFR)",
+   "history_culture_pct": 74.7,
+   "museums_pct": 59.9,
+   "nature_pct": 69.2,
+   "daily_life_pct": 43.5,
+   "next_history_culture_pct": 66.3,
+   "activitiesSource": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 参考3 訪日旅行に関する意識: rows 今回したこと / 次回したいこと / 日本再訪意向「必ず来たい」; weighted 選択率, all purposes, 2025暦年 確報)",
+   "first_time_pct": 62.1,
+   "repeat_pct": 37.9,
+   "yen_per_person_all_purposes": 391320,
+   "yen_per_person_leisure": 411337,
+   "janAug2026": 364800,
+   "janAug2026_yoy_pct": 5.8,
+   "ytdSource": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2026\"; JNTO release of 2026-09-16)"
+  }
+ ],
+ "prefectureVisitRates": {
+  "source": "https://www.mlit.go.jp/kankocho/content/001992581.xls (sheet 表6-1 国籍･地域別 都道府県別訪問率, weighted 訪問率 %, multiple answer, 2025 確報)",
+  "unit": "% of visitors from the market who visited the prefecture (2025, all purposes)",
+  "rates": {
+   "ALL": {
+    "Hokkaido": 7.316,
+    "Aomori": 0.7581,
+    "Miyagi": 1.3334,
+    "Tochigi": 1.1131,
+    "Tokyo": 50.7888,
+    "Kanagawa": 9.263,
+    "Ishikawa": 2.1535,
+    "Yamanashi": 8.1123,
+    "Nagano": 2.9861,
+    "Gifu": 3.2563,
+    "Shizuoka": 3.3954,
+    "Kyoto": 29.7255,
+    "Osaka": 41.3169,
+    "Hyogo": 5.2119,
+    "Wakayama": 1.2056,
+    "Hiroshima": 4.1009,
+    "Yamaguchi": 0.529,
+    "Fukuoka": 10.9719,
+    "Nagasaki": 1.0258,
+    "Kumamoto": 1.9866,
+    "Oita": 3.3603,
+    "Okinawa": 5.5993
+   },
+   "KR": {
+    "Hokkaido": 9.9375,
+    "Aomori": 0.2177,
+    "Miyagi": 0.2046,
+    "Tochigi": 0.1583,
+    "Tokyo": 22.4622,
+    "Kanagawa": 2.5142,
+    "Ishikawa": 0.1557,
+    "Yamanashi": 0.6243,
+    "Nagano": 0.3862,
+    "Gifu": 1.184,
+    "Shizuoka": 1.1926,
+    "Kyoto": 12.4416,
+    "Osaka": 28.8416,
+    "Hyogo": 1.7911,
+    "Wakayama": 0.0917,
+    "Hiroshima": 0.7916,
+    "Yamaguchi": 1.3064,
+    "Fukuoka": 25.2156,
+    "Nagasaki": 1.1579,
+    "Kumamoto": 1.8778,
+    "Oita": 7.9855,
+    "Okinawa": 5.9642
+   },
+   "TW": {
+    "Hokkaido": 9.9616,
+    "Aomori": 1.9372,
+    "Miyagi": 4.1349,
+    "Tochigi": 0.959,
+    "Tokyo": 31.0391,
+    "Kanagawa": 5.6889,
+    "Ishikawa": 2.6393,
+    "Yamanashi": 4.9,
+    "Nagano": 3.7727,
+    "Gifu": 4.771,
+    "Shizuoka": 2.0344,
+    "Kyoto": 15.3951,
+    "Osaka": 23.6667,
+    "Hyogo": 4.0696,
+    "Wakayama": 0.8539,
+    "Hiroshima": 1.3849,
+    "Yamaguchi": 0.3655,
+    "Fukuoka": 9.6843,
+    "Nagasaki": 0.9919,
+    "Kumamoto": 3.488,
+    "Oita": 3.7449,
+    "Okinawa": 14.4549
+   },
+   "HK": {
+    "Hokkaido": 6.8832,
+    "Aomori": 1.0881,
+    "Miyagi": 2.6199,
+    "Tochigi": 0.351,
+    "Tokyo": 35.7892,
+    "Kanagawa": 5.393,
+    "Ishikawa": 1.5574,
+    "Yamanashi": 4.4783,
+    "Nagano": 2.9866,
+    "Gifu": 3.5188,
+    "Shizuoka": 3.0872,
+    "Kyoto": 15.6269,
+    "Osaka": 28.5094,
+    "Hyogo": 4.8639,
+    "Wakayama": 1.7856,
+    "Hiroshima": 1.6296,
+    "Yamaguchi": 0.4328,
+    "Fukuoka": 15.5433,
+    "Nagasaki": 1.3088,
+    "Kumamoto": 4.0803,
+    "Oita": 4.8512,
+    "Okinawa": 7.1341
+   },
+   "CN": {
+    "Hokkaido": 5.4863,
+    "Aomori": 0.3846,
+    "Miyagi": 0.5783,
+    "Tochigi": 0.523,
+    "Tokyo": 50.276,
+    "Kanagawa": 11.1998,
+    "Ishikawa": 0.7787,
+    "Yamanashi": 11.9318,
+    "Nagano": 1.1427,
+    "Gifu": 1.5378,
+    "Shizuoka": 6.1209,
+    "Kyoto": 38.9194,
+    "Osaka": 57.3301,
+    "Hyogo": 9.1814,
+    "Wakayama": 1.9579,
+    "Hiroshima": 0.5941,
+    "Yamaguchi": 0.1643,
+    "Fukuoka": 4.9657,
+    "Nagasaki": 0.302,
+    "Kumamoto": 1.3771,
+    "Oita": 0.9061,
+    "Okinawa": 2.6507
+   },
+   "TH": {
+    "Hokkaido": 10.5588,
+    "Aomori": 0.434,
+    "Miyagi": 0.8239,
+    "Tochigi": 2.5007,
+    "Tokyo": 49.6458,
+    "Kanagawa": 7.6523,
+    "Ishikawa": 0.5218,
+    "Yamanashi": 17.0995,
+    "Nagano": 6.8865,
+    "Gifu": 6.0151,
+    "Shizuoka": 4.1006,
+    "Kyoto": 20.4421,
+    "Osaka": 30.8456,
+    "Hyogo": 2.647,
+    "Wakayama": 0.5773,
+    "Hiroshima": 0.5161,
+    "Yamaguchi": 0.1916,
+    "Fukuoka": 7.8994,
+    "Nagasaki": 0.8091,
+    "Kumamoto": 2.3539,
+    "Oita": 2.8225,
+    "Okinawa": 1.7415
+   },
+   "SG": {
+    "Hokkaido": 7.9494,
+    "Aomori": 1.125,
+    "Miyagi": 1.0455,
+    "Tochigi": 1.2972,
+    "Tokyo": 61.8269,
+    "Kanagawa": 9.8597,
+    "Ishikawa": 1.9713,
+    "Yamanashi": 11.3702,
+    "Nagano": 6.3183,
+    "Gifu": 3.7276,
+    "Shizuoka": 3.6273,
+    "Kyoto": 26.0733,
+    "Osaka": 38.7187,
+    "Hyogo": 4.3451,
+    "Wakayama": 0.7523,
+    "Hiroshima": 1.8612,
+    "Yamaguchi": 0.2429,
+    "Fukuoka": 8.3328,
+    "Nagasaki": 1.7755,
+    "Kumamoto": 3.9699,
+    "Oita": 2.8504,
+    "Okinawa": 2.807
+   },
+   "GB": {
+    "Hokkaido": 5.6488,
+    "Aomori": 1.0201,
+    "Miyagi": 1.3449,
+    "Tochigi": 2.13,
+    "Tokyo": 90.4055,
+    "Kanagawa": 19.5777,
+    "Ishikawa": 6.7958,
+    "Yamanashi": 12.6789,
+    "Nagano": 6.5511,
+    "Gifu": 5.7539,
+    "Shizuoka": 4.6977,
+    "Kyoto": 53.278,
+    "Osaka": 52.5398,
+    "Hyogo": 6.4281,
+    "Wakayama": 1.6558,
+    "Hiroshima": 19.5559,
+    "Yamaguchi": 0.2758,
+    "Fukuoka": 5.3649,
+    "Nagasaki": 1.7953,
+    "Kumamoto": 1.3385,
+    "Oita": 1.1668,
+    "Okinawa": 2.9207
+   },
+   "US": {
+    "Hokkaido": 3.9673,
+    "Aomori": 0.9966,
+    "Miyagi": 0.8667,
+    "Tochigi": 1.5342,
+    "Tokyo": 90.6884,
+    "Kanagawa": 17.0166,
+    "Ishikawa": 2.3954,
+    "Yamanashi": 8.0696,
+    "Nagano": 2.7905,
+    "Gifu": 2.0585,
+    "Shizuoka": 3.0603,
+    "Kyoto": 44.8514,
+    "Osaka": 44.6877,
+    "Hyogo": 4.595,
+    "Wakayama": 1.1368,
+    "Hiroshima": 8.3179,
+    "Yamaguchi": 0.5987,
+    "Fukuoka": 3.4476,
+    "Nagasaki": 1.3016,
+    "Kumamoto": 0.7433,
+    "Oita": 0.754,
+    "Okinawa": 4.4912
+   },
+   "CA": {
+    "Hokkaido": 6.6229,
+    "Aomori": 1.0197,
+    "Miyagi": 0.9471,
+    "Tochigi": 1.7127,
+    "Tokyo": 87.1111,
+    "Kanagawa": 18.9426,
+    "Ishikawa": 3.6959,
+    "Yamanashi": 11.1479,
+    "Nagano": 5.229,
+    "Gifu": 3.1045,
+    "Shizuoka": 3.3189,
+    "Kyoto": 48.7389,
+    "Osaka": 51.378,
+    "Hyogo": 7.2173,
+    "Wakayama": 2.0294,
+    "Hiroshima": 11.3616,
+    "Yamaguchi": 0.1125,
+    "Fukuoka": 6.2848,
+    "Nagasaki": 1.7269,
+    "Kumamoto": 1.2454,
+    "Oita": 1.0591,
+    "Okinawa": 2.9208
+   },
+   "AU": {
+    "Hokkaido": 9.8658,
+    "Aomori": 1.4087,
+    "Miyagi": 1.0283,
+    "Tochigi": 1.7396,
+    "Tokyo": 88.0501,
+    "Kanagawa": 14.346,
+    "Ishikawa": 5.521,
+    "Yamanashi": 13.6018,
+    "Nagano": 15.9406,
+    "Gifu": 5.6336,
+    "Shizuoka": 6.0085,
+    "Kyoto": 49.9432,
+    "Osaka": 61.0462,
+    "Hyogo": 6.1133,
+    "Wakayama": 1.4451,
+    "Hiroshima": 17.0316,
+    "Yamaguchi": 0.2112,
+    "Fukuoka": 5.12,
+    "Nagasaki": 2.4224,
+    "Kumamoto": 1.6547,
+    "Oita": 1.6756,
+    "Okinawa": 2.0225
+   }
+  }
+ },
+ "segments": {
+  "nikkei": [
+   {
+    "country": "USA (total)",
+    "figure": 1586652,
+    "definition": "Japanese alone or in any combination (2020 Census, Detailed DHC-A)",
+    "year": 2020,
+    "source": "https://www.census.gov/library/stories/2023/09/2020-census-dhc-a-asian-population.html",
+    "note": "Japanese alone = 741,544 (down 3.2% since 2010). Includes post-war and recent immigrants, not only pre-war Nikkei descendants."
+   },
+   {
+    "country": "USA - Hawaii",
+    "figure": 312668,
+    "definition": "Japanese alone or in combination (21.5% of Hawaii population); Japanese alone = 167,362 (11.5%)",
+    "year": 2020,
+    "source": "https://files.hawaii.gov/dbedt/census/census_2020/data/reports/Japanese_Population_in_Hawaii_in_2020.pdf (printed p.4 = PDF p.3, Table 1 Top 25 Races in Hawaii: 2020)",
+    "note": "Honolulu County alone: 244,700 Japanese alone or in any combination (Census Bureau story above). 41.1% of Japanese-alone Hawaii residents are 65+."
+   },
+   {
+    "country": "Canada",
+    "figure": 129430,
+    "definition": "Japanese ethnic or cultural origin, total responses (2021 Census, 25% sample, private households)",
+    "year": 2021,
+    "source": "https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/sip/details/page.cfm?Dguid=2021A000011124&Lang=E&PoiId=2&TId=12",
+    "note": "Visible minority \"Japanese\" = 98,895. MOFA estimate (Oct 2023) ~120,000 could not be verified directly (MOFA site returns HTTP 403 to our fetcher)."
+   },
+   {
+    "country": "Brazil",
+    "figure": 2700000,
+    "definition": "About 2.7 million (約270万人), MOFA estimate as of 2023-10-01",
+    "year": 2023,
+    "source": "https://www.jica.go.jp/overseas/brazil/__icsFiles/afieldfile/2025/10/02/jcap_br_202503.pdf (section 1.2.14 日系社会, printed p.17 + footnote 79, citing MOFA 海外日系人数推計 https://www.mofa.go.jp/mofaj/files/100646175.pdf)",
+    "note": "Approximate estimate, not a census count (Brazilian census has no Nikkei category). JOMM counts ~189,000 pre-war + ~68,000 post-war emigrants to Brazil (https://www.jica.go.jp/jomm/outline/ku57pq00000lx4th-att/list_01.pdf)."
+   },
+   {
+    "country": "Peru",
+    "figure": 200000,
+    "definition": "About 200,000 (約20万人), third-largest Nikkei community after Brazil and USA",
+    "year": 2023,
+    "source": "https://www.jica.go.jp/information/blog/1517455_21942.html",
+    "note": "JICA blog (2023, 150th anniversary of Japan-Peru relations); approximate. Peru's 2017 census has a self-identification option \"Nikkei\" but the count is not broken out in the INEI/Culture Ministry publications we could open."
+   },
+   {
+    "country": "World total",
+    "figure": 5000000,
+    "definition": "About 5 million overseas Nikkei (MOFA 海外日系人数推計, 2023-10-01); regional: North America ~1,620,000, South America ~3,000,000, Central America ~80,000, Oceania ~140,000, Europe ~120,000, Asia ~64,000",
+    "year": 2023,
+    "source": "https://jadesas.or.jp/jp/about/about04/ (map image citing MOFA estimate https://www.mofa.go.jp/mofaj/files/100646175.pdf)",
+    "note": "Country-level MOFA table itself could not be downloaded (HTTP 403)."
+   }
+  ],
+  "emigrationOrigins": {
+   "national_ranking_1885_1972": {
+    "unit": "emigrants (JICA Yokohama Japanese Overseas Migration Museum official figures; 1885-1894 and 1899-1972)",
+    "top10": [
+     {
+      "prefecture": "Hiroshima",
+      "emigrants": 109893
+     },
+     {
+      "prefecture": "Okinawa",
+      "emigrants": 89424
+     },
+     {
+      "prefecture": "Kumamoto",
+      "emigrants": 76802
+     },
+     {
+      "prefecture": "Yamaguchi",
+      "emigrants": 57837
+     },
+     {
+      "prefecture": "Fukuoka",
+      "emigrants": 57684
+     },
+     {
+      "prefecture": "Wakayama",
+      "emigrants": 32853
+     },
+     {
+      "prefecture": "Fukushima",
+      "emigrants": 28479
+     },
+     {
+      "prefecture": "Hokkaido",
+      "emigrants": 26874
+     },
+     {
+      "prefecture": "Nagasaki",
+      "emigrants": 23129
+     },
+     {
+      "prefecture": "Okayama",
+      "emigrants": 21760
+     }
+    ],
+    "national_total": 758468,
+    "source": "https://www.pref.hiroshima.lg.jp/uploaded/attachment/649748.pdf (PDF p.1 [printed p.51] table (1) 出身都道府県別・期間別移住者数, column 「（参考）JICA横浜海外移住資料館による移住者数」)"
+   },
+   "hawaii": [
+    {
+     "fact": "Government-contract emigration (官約移民, 1885-1894, 26 sailings, ~29,000 people) was recruited mainly in Hiroshima, Yamaguchi, Kumamoto and Fukuoka; Hiroshima supplied more than one-third of the national total.",
+     "source": "https://www.pref.hiroshima.lg.jp/soshiki_file/monjokan/zuroku/iju-zuroku2015.pdf (p.1)"
+    },
+    {
+     "fact": "About 30% of the 944 emigrants on the first 官約移民 sailing (1885) came from Ōshima District (Suō-Ōshima, Yamaguchi).",
+     "source": "https://www.town.suo-oshima.lg.jp/soshiki/27/1740.html"
+    },
+    {
+     "fact": "Wakayama: 22 of the first sailing; in 1924, 38% of all fishermen on Oahu were Wakayama-born (Kushimoto/Tanami).",
+     "source": "https://www.pref.wakayama.lg.jp/prefg/022300/d00201985.html"
+    },
+    {
+     "fact": "Okinawa: first group left Naha 1899-12-05, arrived Honolulu 1900-01-08; 26 contract labourers, 10 of them from Kin. Kin village sent 3,225 emigrants (Hawaii, Philippines, N. America, Brazil, Peru etc.) up to 1941.",
+     "source": "https://www.archives.pref.okinawa.jp/event_information/past_exhibitions/8558"
+    },
+    {
+     "fact": "A 1905 essay reproduced by the National Diet Library ranks Hawaii emigrants: Hiroshima most, then Kumamoto, Nagasaki, Fukuoka, Yamaguchi, Okayama, Wakayama.",
+     "source": "https://www.ndl.go.jp/brasil/text/t013.html"
+    }
+   ],
+   "us_mainland": [
+    {
+     "fact": "From the 1890s emigration shifted to California (higher wages); Wakayama emigrants from Naga district (via the 共修学舎 study group) and southern Kii; ~3,000 Nikkei lived on Terminal Island (Port of Los Angeles), mostly Wakayama-born and their Nisei.",
+     "source": "https://www.pref.wakayama.lg.jp/prefg/022300/d00201985.html"
+    },
+    {
+     "fact": "Hiroshima prefectural associations still active in Seattle (1901), San Francisco (1898), Sacramento (1906), Los Angeles (1910), Stockton, Berkeley, Fresno, Chicago, Salt Lake City, Colorado.",
+     "source": "https://www.pref.hiroshima.lg.jp/uploaded/attachment/649748.pdf (PDF p.2 [printed p.52] (2) 在外広島県人会の状況)"
+    },
+    {
+     "fact": "Prefecture-level counts for US-mainland emigrants specifically: null (not found in an official source during this research).",
+     "source": null
+    }
+   ],
+   "canada": [
+    {
+     "fact": "Around half of pre-war Japanese immigrants to British Columbia came from four prefectures: Hiroshima, Shiga, Wakayama and Kagoshima.",
+     "source": "https://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/our-history/historic-places/documents/heritage/jchp_context_study-final.pdf (printed p.5, Theme 1 Arriving from Japan)"
+    },
+    {
+     "fact": "Mio village (now Mihama, Wakayama): Kuno Gihei went to Canada in 1888; the 加奈陀三尾村人会 in Steveston had 150 members in 1900 and 763 in 1936; Wakayama people ran 60-70% of BC fisheries at the time; Mio became \"America-mura\"; Canada Museum opened 2018.",
+     "source": "https://www.jica.go.jp/domestic/jomm/education/n_files/Plan11_Shiryo3.pdf"
+    },
+    {
+     "fact": "JICA's 1994 statistics have no prefecture breakdown for Canada emigrants before FY1975 (counted under \"other\").",
+     "source": "https://www.pref.hiroshima.lg.jp/uploaded/attachment/649748.pdf (PDF p.1 [printed p.51] note 1)"
+    }
+   ],
+   "brazil": [
+    {
+     "fact": "Kasato Maru (1908): 781 emigrants; Okinawa-born = 325 of them.",
+     "source": "https://www.jica.go.jp/jomm/outline/ku57pq00000lx4th-att/list_01.pdf ; https://www.library.pref.okinawa.jp/about-okinawa/docs/646734ad8aba8524078d13cdb7630f24.pdf (p.3, citing 赤嶺園子『笠戸丸移民 未来へ継ぐ裔孫』2014)"
+    },
+    {
+     "fact": "Kumamoto sent 23,575 emigrants to Brazil, the most of any prefecture.",
+     "source": "https://www.jica.go.jp/jomm/outline/ku57pq00000lx6dz-att/dayori53.pdf (JOMM newsletter No.53, p.2)"
+    },
+    {
+     "fact": "Okinawa to Brazil: ~15,000 pre-war and ~9,500 post-war (largest destination for Okinawans); Okinawa total emigrants ~72,000 pre-war + ~18,000 post-war.",
+     "source": "https://www.library.pref.okinawa.jp/about-okinawa/docs/646734ad8aba8524078d13cdb7630f24.pdf (p.1-2)"
+    },
+    {
+     "fact": "Total to Brazil: ~189,000 pre-war, ~68,000 post-war.",
+     "source": "https://www.jica.go.jp/jomm/outline/ku57pq00000lx4th-att/list_01.pdf (p.1)"
+    }
+   ],
+   "peru": [
+    {
+     "fact": "Sakura Maru arrived at Callao 1899-04-03 with 790 emigrants.",
+     "source": "https://www.jica.go.jp/information/blog/1517455_21942.html"
+    },
+    {
+     "fact": "JOMM \"Pioneros\" database covers all 18,727 contract emigrants to Peru 1899-1923 plus 2,348 later free emigrants, searchable by pre-departure municipality.",
+     "source": "https://www.library.pref.okinawa.jp/about-okinawa/docs/646734ad8aba8524078d13cdb7630f24.pdf (p.4)"
+    }
+   ],
+   "research_databases_useful_for_deep_research": [
+    {
+     "name": "沖縄県系移民 渡航記録データベース 1899-1941 (~60,000 passport records, searchable by 本籍地)",
+     "url": "https://opl.okinawan-migration.com/",
+     "source": "https://www.library.pref.okinawa.jp/about-okinawa/docs/646734ad8aba8524078d13cdb7630f24.pdf"
+    },
+    {
+     "name": "Brazil passenger-list database 1908-1973 (~230,000 emigrants, with prefecture of origin)",
+     "url": "http://imigrantes.ubik.com.br/",
+     "source": "https://www.library.pref.okinawa.jp/about-okinawa/docs/646734ad8aba8524078d13cdb7630f24.pdf"
+    },
+    {
+     "name": "JOMM Peru emigrant database (Pioneros)",
+     "url": "https://jommdms.jica.go.jp/",
+     "source": "https://www.library.pref.okinawa.jp/about-okinawa/docs/646734ad8aba8524078d13cdb7630f24.pdf"
+    }
+   ]
+  },
+  "usfj": {
+   "japan_total_dmdc_2026_03_31": {
+    "army": 2529,
+    "navy": 21399,
+    "marine_corps": 18254,
+    "air_force": 12557,
+    "space_force": 129,
+    "coast_guard": 23,
+    "active_duty_total": 54891,
+    "reserve_total": 579,
+    "apf_dod_civilians": 6957,
+    "grand_total": 62427,
+    "source": "https://dwp.dmdc.osd.mil/dwp/api/download?fileName=DMDC_Website_Location_Report_2603.xlsx&groupName=milRegionCountry (DMDC Location Country Report, \"As of March 31, 2026\", row JAPAN)",
+    "note": "Assigned duty location. Excludes family members, contractors and Japanese employees. Dec 31, 2025 active duty = 54,288 (DMDC report 2512)."
+   },
+   "okinawa_2011_last_official": {
+    "military": 25843,
+    "civilian_employees": 1994,
+    "family_members": 19463,
+    "total": 47300,
+    "by_service_military": {
+     "marine_corps": 15365,
+     "air_force": 6772,
+     "navy": 2159,
+     "army": 1547
+    },
+    "by_service_total_incl_civ_family": {
+     "marine_corps": 23583,
+     "air_force": 14605,
+     "navy": 5384,
+     "army": 3728
+    },
+    "as_of": "2011-06-30",
+    "source": "https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/034/658/r7shiryoushu1r.pdf (統計資料集 令和7年7月: PDF p.7 [printed p.2] (サ) 在沖米軍人・軍属・家族数; PDF p.16 [printed p.11] note 3)",
+    "note": "US forces have not provided Okinawa-specific counts since 2012 (per Okinawa Prefecture). Navy excludes personnel deployed at sea."
+   },
+   "japan_2024_06_per_okinawa_pref": {
+    "total": 52833,
+    "army": 2319,
+    "navy": 22060,
+    "air_force_space_force": 12445,
+    "marine_corps": 16009,
+    "source": "https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/034/658/r7shiryoushu1r.pdf (PDF p.8 [printed p.3] (セ) 在日米軍兵力の現況, as of end-June 2024, citing DMDC)"
+   },
+   "installations": [
+    {
+     "installation": "Commander Fleet Activities Yokosuka (Kanagawa)",
+     "figure": 26000,
+     "definition": "approx. population assigned to or served (active duty + family, retirees + family, civilian employees, Japanese and other employees)",
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/commander-fleet-activities-yokosuka"
+    },
+    {
+     "installation": "Commander Fleet Activities Sasebo (Nagasaki)",
+     "figure": null,
+     "definition": null,
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/commander-fleet-activities-sasebo",
+     "note": "No population figure on Military OneSource; Navy CNRJ site and Nagasaki Prefecture base page give no personnel count (CNRJ returns HTTP 403 to our fetcher). MOJ 2025: 5,242 US nationals entered Japan via Sasebo seaport (https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040476157&fileKind=4)."
+    },
+    {
+     "installation": "Kadena Air Base (Okinawa)",
+     "figure": 18000,
+     "definition": "nearly 18,000 Americans, plus more than 4,000 Japanese employees and contractors (\"Team Kadena\")",
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/kadena-ab"
+    },
+    {
+     "installation": "Camp Hansen / MCB Camp Butler (Okinawa)",
+     "figure": null,
+     "definition": null,
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/camp-s-d-butler-camp-foster-kinser-courtney-hansen-schwab-and-mcas-futenma",
+     "note": "Military OneSource page has no population figure; marines.mil returns HTTP 403. Proxy: 18,254 Marine Corps active duty in Japan (DMDC 2026-03), most in Okinawa (15,365 Marines in Okinawa in 2011)."
+    },
+    {
+     "installation": "Torii Station / USAG Okinawa",
+     "figure": 5000,
+     "definition": "approx. population incl. soldiers, family members, civilians, contractors (dispersed across Okinawa)",
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/torii-station"
+    },
+    {
+     "installation": "Misawa Air Base (Aomori)",
+     "figure": 9200,
+     "definition": "Team Misawa total: 35th FW active duty ~2,600; Navy/Army/Space Force ~700; JASDF ~3,000; MLC/IHA ~900; command-sponsored dependents/retirees ~1,700; US civilians ~300",
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/misawa-ab"
+    },
+    {
+     "installation": "MCAS Iwakuni (Yamaguchi)",
+     "figure": 13000,
+     "definition": "about 13,000 personnel including Japanese national employees",
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/marine-corps-air-station-iwakuni"
+    },
+    {
+     "installation": "Yokota Air Base (Tokyo)",
+     "figure": 12500,
+     "definition": "base populace approx. 12,500; 374th Airlift Wing has >4,000 military members",
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/yokota-ab"
+    },
+    {
+     "installation": "Camp Zama / USAG Japan (Kanagawa)",
+     "figure": 7000,
+     "definition": "roughly 7,000 soldiers, civilians, contractors and family members assigned to Army sites across Honshu",
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/camp-zama"
+    },
+    {
+     "installation": "NAF Atsugi (Kanagawa)",
+     "figure": 5000,
+     "definition": "home to 5,000 personnel",
+     "source": "https://installations.militaryonesource.mil/in-depth-overview/naval-air-facility-atsugi"
+    }
+   ],
+   "note": "Military OneSource (DoD) figures are rounded and undated page statements (accessed 2026-09-27); definitions differ by installation (some include families/Japanese staff). Do not sum them."
+  }
+ },
+ "placeHooks": [
+  {
+   "market": "Taiwan",
+   "place": "Kanazawa (Ishikawa) - Hatta Yoichi",
+   "hook": "Hatta Yoichi (born Kanazawa 1886) joined the Taiwan Government-General in 1910 and built the Wushantou dam / Chianan irrigation; the Kanazawa Furusato Ijinkan presents him as \"the man who watered Taiwan's land\".",
+   "evidence": "Taiwan is the No.1 foreign market in Ishikawa by guest nights 2025: 323,600 nights = 17.6% (LQ 1.36); Taiwan visit rate to Ishikawa 2.6% vs all-market 2.2%. Note: Europeans over-index far more (Italy LQ 4.46, Spain 3.68).",
+   "source": "https://www.kanazawa-museum.jp/ijin/exhibit/05hatta_history.html ; https://www.mlit.go.jp/kankocho/content/002010340.xlsx ; https://www.mlit.go.jp/kankocho/content/001992581.xls (表6-1)"
+  },
+  {
+   "market": "Taiwan",
+   "place": "Tohoku (Miyagi, Iwate, Fukushima, Aomori)",
+   "hook": "Strongest regional over-index of any market (Taiwanese visitors dominate Tohoku foreign stays).",
+   "evidence": "Taiwan = 45.3% of Miyagi, 51.1% of Iwate, 56.9% of Fukushima, 33.9% of Aomori foreign guest nights (2025); Taiwan visit rate Miyagi 4.1% vs all 1.3%.",
+   "source": "https://www.mlit.go.jp/kankocho/content/002010340.xlsx ; https://www.mlit.go.jp/kankocho/content/001992581.xls (表6-1)"
+  },
+  {
+   "market": "Thailand",
+   "place": "Fujiyoshida (Yamanashi) - Chureito Pagoda / Arakurayama Sengen Park",
+   "hook": "Mt Fuji + five-storey pagoda + cherry blossoms view; city says ~200,000 visit the spring festival each year and >10,000 foreign visitors/day at peak; festival cancelled for 2026 over overtourism. No official nationality split for the park itself.",
+   "evidence": "Thai visit rate to Yamanashi 17.1% vs all-market 8.1% (2025); Thailand LQ 3.08 in Yamanashi guest nights; neighbouring Fujikawaguchiko town: Thailand 70,972 foreign guest nights = 9.8% (2024) vs Thailand's 2.7% share nationally (2025).",
+   "source": "https://www.city.fujiyoshida.yamanashi.jp/uploaded/attachment/7151.pdf ; https://www.town.fujikawaguchiko.lg.jp/upload/file/kanko/R6nenpou.pdf (printed p.4, (3) 国籍別国外宿泊客数) ; https://www.mlit.go.jp/kankocho/content/001992581.xls ; https://www.mlit.go.jp/kankocho/content/002010340.xlsx"
+  },
+  {
+   "market": "Korea",
+   "place": "Fukuoka / Kyushu, Tsushima, Shimonoseki",
+   "hook": "Closest foreign market: ferries Busan-Hitakatsu/Izuhara (Tsushima) and Busan-Shimonoseki; historical Korea-Tsushima links (Joseon missions).",
+   "evidence": "Korean visit rate Fukuoka 25.2% vs all 11.0%, Oita 8.0% vs 3.4%; Korea = 36.8% of Fukuoka and 31.3% of Nagasaki foreign guest nights; MOJ 2025 Korean entrants: Hitakatsu 226,102 (of 227,887), Izuhara 40,233, Kanmon/Shimonoseki 66,719, Fukuoka Airport 1,999,703.",
+   "source": "https://www.mlit.go.jp/kankocho/content/001992581.xls ; https://www.mlit.go.jp/kankocho/content/002010340.xlsx ; https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040476157&fileKind=4 (25-00-02 国籍・地域別 港別 入国外国人, 2025)"
+  },
+  {
+   "market": "China",
+   "place": "Sendai (Miyagi) - Lu Xun lecture hall; Nagasaki - Tojin yashiki / Shinchi Chinatown",
+   "hook": "Lu Xun (Zhou Shuren) enrolled at Sendai Medical School in September 1904 (first foreign student at a Sendai government school); Tohoku Univ. keeps the lecture hall and a Lu Xun memorial exhibition and notes many visitors from China (e.g., Jiang Zemin, 1998). Nagasaki: Tojin yashiki (1689, ~9,400 tsubo, ~2,000 Chinese residents at a time), Shinchi Chinatown.",
+   "evidence": "Hooks are real but current mass Chinese travel under-indexes there: China visit rate Miyagi 0.6% (all 1.3%), Nagasaki 0.3% (all 1.0%); China LQ Miyagi 0.69, Nagasaki 0.41. China over-indexes instead in Shizuoka (LQ 2.02), Wakayama (1.79), Hyogo (1.71), Yamanashi (1.33).",
+   "source": "https://www.tohoku.ac.jp/japanese/profile/establishment/01/establishment0108/ ; https://www.archives.tohoku.ac.jp/luxun/story/ ; https://www.city.nagasaki.lg.jp/nagazine/shutter/171001/index.html ; https://www.mlit.go.jp/kankocho/content/001992581.xls ; https://www.mlit.go.jp/kankocho/content/002010340.xlsx"
+  },
+  {
+   "market": "Australia",
+   "place": "Niseko / Kutchan (Hokkaido); Hakuba (Nagano)",
+   "hook": "Ski resort towns with long-staying Australians.",
+   "evidence": "Kutchan FY2025 (Apr 2025-Mar 2026) foreign guest nights 899k (record); Australia No.1 with 166,822 nights (USA 121,503; Singapore 102,981; Hong Kong 102,842). Australian visit rate Hokkaido 9.9% vs all 7.3%, Nagano 15.9% vs 3.0%; Australia LQ Nagano 2.42. National hotel statistics under-capture Niseko condos (Australia LQ Hokkaido only 0.74).",
+   "source": "https://www.town.kutchan.hokkaido.jp/file/contents/2515/78705/kankouirikomi2025.pdf (p.8-9) ; https://www.mlit.go.jp/kankocho/content/001992581.xls ; https://www.mlit.go.jp/kankocho/content/002010340.xlsx"
+  },
+  {
+   "market": "Hong Kong",
+   "place": "Kyushu (Fukuoka, Oita, Kumamoto, Saga) and Hokkaido",
+   "hook": "Heavy repeaters (90.6% repeat) who go regional.",
+   "evidence": "16.4% of Hong Kong guest nights are in Kyushu (7 prefectures) vs 7.8% for all markets; 10.4% in Hokkaido vs 7.3%. HK visit rates: Fukuoka 15.5%, Kumamoto 4.1%, Oita 4.9%, Hokkaido 6.9%. Hokkaido FY2024: 175,500 HK visitors (6.2% of foreign visitors to Hokkaido).",
+   "source": "https://www.mlit.go.jp/kankocho/content/002010340.xlsx ; https://www.mlit.go.jp/kankocho/content/001992581.xls ; https://www.pref.hokkaido.lg.jp/fs/1/2/9/8/6/7/2/7/_/%E5%8C%97%E6%B5%B7%E9%81%93%E8%A6%B3%E5%85%89%E5%85%A5%E8%BE%BC%E8%AA%BF%E6%9F%BB%E5%A0%B1%E5%91%8A%E6%9B%B8(R6_%E6%9C%AC%E7%B7%A8).pdf (PDF p.4, ５．訪日外国人来道者数, table 令和６（2024）年度外国人来道者数)"
+  },
+  {
+   "market": "UK",
+   "place": "Nagasaki (Glover House), Yokohama & Kobe foreign settlements, Hiroshima",
+   "hook": "Thomas Blake Glover (Scottish) arrived in Nagasaki 1859; Glover House (1863) is Japan's oldest surviving Western-style wooden building and a World Heritage component (2015), requisitioned by US occupation forces after the war. Yokohama Foreign General Cemetery: ~5,000 people from 40+ countries, begun with a burial from Perry's squadron. Kobe settlement sewer (c.1872) designed by British engineer J.W. Hart.",
+   "evidence": "UK visit rate Nagasaki 1.8% vs all 1.0%; Kanagawa 19.6% vs 9.3%; Hiroshima 19.6% vs 4.1% (UK LQ Hiroshima 3.3, Ishikawa 2.12). UK history/traditional-culture experience rate 74.7% (all markets 32.7%).",
+   "source": "https://glover-garden.jp/secret-stories/story-020/ ; https://glover-garden.jp/about/glover-house/ ; https://www.welcome.city.yokohama.jp/spot/details.php?bbid=78 ; https://www.city.kobe.lg.jp/a83166/kanko/bunka/bunkazai/history/isan/kyoryuuti.html ; https://www.mlit.go.jp/kankocho/content/001992581.xls ; https://www.mlit.go.jp/kankocho/content/002010340.xlsx"
+  },
+  {
+   "market": "Canada",
+   "place": "Karuizawa (Nagano); Mio \"America-mura\" (Mihama, Wakayama)",
+   "hook": "Karuizawa was put on the map in 1886 by Canadian missionary Alexander Croft Shaw (first villa 1888; Shaw Memorial Chapel). Mio sent fishermen to Steveston BC from 1888 (Kuno Gihei).",
+   "evidence": "Canada visit rate Nagano 5.2% vs all 3.0%; Wakayama 2.0% vs 1.2%; Canada LQ Hiroshima 1.52. Canadian Nikkei (129,430 ethnic-origin responses, 2021) have roots concentrated in Hiroshima, Shiga, Wakayama, Kagoshima.",
+   "source": "https://www.town.karuizawa.lg.jp/site/kanko/ ; https://www.jica.go.jp/domestic/jomm/education/n_files/Plan11_Shiryo3.pdf ; https://www.mlit.go.jp/kankocho/content/001992581.xls ; https://www.mlit.go.jp/kankocho/content/002010340.xlsx ; https://www2.gov.bc.ca/assets/gov/british-columbians-our-governments/our-history/historic-places/documents/heritage/jchp_context_study-final.pdf"
+  },
+  {
+   "market": "USA",
+   "place": "Yoyogi Park (Washington Heights), Kurihama & Shimoda (Perry/Harris), US base towns",
+   "hook": "Yoyogi Park: former army parade ground -> US military housing \"Washington Heights\" -> 1964 Olympic village -> park. Perry landed at Kurihama on 1853-07-14 (Kurihama tourism association); Perry Park monument erected 1901 with inscription by Ito Hirobumi, Perry Memorial Hall built for the city's 80th anniversary (Yokosuka City). Shimoda: first treaty port (1854); Townsend Harris opened the first US consulate at Gyokusenji in 1856. Perry's 1853 expedition also sketched Kin, Okinawa.",
+   "evidence": "US visit rate Kanagawa 17.0% vs all 9.3% (USA LQ 1.64); Hiroshima 8.3% vs 4.1%; US share of foreign guest nights: Yamaguchi (Iwakuni) 14.8%, Okinawa 11.7%, Aomori (Misawa) 7.9%. US VFR share of visits 7.9% (all 4.0%). 54,891 US active-duty personnel in Japan (DMDC, 2026-03-31).",
+   "source": "https://www.tokyo-park.or.jp/park/yoyogi/ ; https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000435.html ; https://kurihama.info/kankou/perrypark/ ; https://www.city.shimoda.shizuoka.jp/category/100400shimodanorekishi/110776.html ; https://www.archives.pref.okinawa.jp/event_information/past_exhibitions/8558 ; https://www.mlit.go.jp/kankocho/content/001992581.xls ; https://www.mlit.go.jp/kankocho/content/002010340.xlsx ; https://dwp.dmdc.osd.mil/dwp/api/download?fileName=DMDC_Website_Location_Report_2603.xlsx&groupName=milRegionCountry"
+  },
+  {
+   "market": "Singapore",
+   "place": "Hokkaido, Nagano, Niigata",
+   "hook": "Snow/ski and nature; high spenders (JPY 319,901 per person).",
+   "evidence": "Singapore LQ Nagano 2.2, Niigata 1.78, Hokkaido 1.73; history/culture experience 41.8% (above all-market 32.7%).",
+   "source": "https://www.mlit.go.jp/kankocho/content/002010340.xlsx ; https://www.mlit.go.jp/kankocho/content/001992581.xls"
+  }
+ ],
+ "gaps": [
+  "Site-specific audience (Cloudflare) not available: all figures are market-level proxies.",
+  "MOFA 海外日系人数推計 PDF (country table) returns HTTP 403 to our fetchers; Brazil/Peru figures are taken from JICA publications that cite it; Canada/USA use national censuses instead.",
+  "US installation-level personnel: no official figure found for CFA Sasebo or Camp Hansen (Military OneSource has no number; navy.mil/marines.mil/usfj.mil return HTTP 403). Okinawa-specific counts are officially unavailable after June 2011.",
+  "Prefecture-of-origin counts by destination (e.g., US mainland only, Canada pre-1975) are not in the official JICA statistics; qualitative official statements used instead.",
+  "Peru Nikkei: only an approximate ~200,000 (JICA); the INEI 2017 census self-identification count for \"Nikkei\" was not found in an INEI table we could open.",
+  "JTA prefecture visit rates are from the B1 regional survey (airport/seaport departure sample); small markets (Russia n=192 base, Spain/Italy/India <1,000) have wide error margins.",
+  "宿泊旅行統計 nationality table covers only facilities with 10+ employees and marks cells with standard error >=30% (flag se_over_30pct_flag); it under-captures condos/vacation rentals (Niseko, Hakuba).",
+  "No official data on the number of former US service members / dependents who lived in Japan, or on Nikkei heritage travel volumes; these must be estimated from DMDC time series or surveyed directly.",
+  "Thailand-Chureito link: no official nationality split for Arakurayama Sengen Park; evidence is indirect (Yamanashi/Fujikawaguchiko over-index)."
+ ],
+ "arrivals2025_total": {
+  "arrivals": 42683301,
+  "yoy_pct": 15.8,
+  "source": "https://www.jnto.go.jp/statistics/data/_files/20260916_1615-5.xlsx (sheet \"2025\", 総数/累計)"
+ }
+}

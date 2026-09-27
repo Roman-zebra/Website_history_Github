@@ -1,0 +1,1868 @@
+{
+ "tokyo-asakusa": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 1.0,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "formerwater": 0.383,
+    "floodplain": 0.284,
+    "sandbar": 0.257,
+    "water": 0.068
+   },
+   "artificial": {
+    "fill": 0.91
+   }
+  },
+  "monuments3km": 15,
+  "monuments10km": 39,
+  "nearest": [
+   {
+    "id": "13107-001",
+    "name": "大正大震火災石原町遭難者碑",
+    "year": "1925",
+    "kind": "地震",
+    "dist_km": 0.6
+   },
+   {
+    "id": "13107-004",
+    "name": "大震火災遭難者追悼之碑",
+    "year": "1931",
+    "kind": "地震",
+    "dist_km": 0.91
+   },
+   {
+    "id": "13107-005",
+    "name": "大震火災竪川岸遭難者追善石造地蔵菩薩立像",
+    "year": "1924",
+    "kind": "地震",
+    "dist_km": 1.35
+   },
+   {
+    "id": "13107-006",
+    "name": "大震災横死者之墓(関東大地震横死者供養碑)",
+    "year": "不明",
+    "kind": "地震",
+    "dist_km": 1.35
+   },
+   {
+    "id": "13107-007",
+    "name": "安政江戸地震圧死者供養塔",
+    "year": "1856",
+    "kind": "地震",
+    "dist_km": 1.37
+   }
+  ],
+  "ndl": {
+   "anywhere": 24842,
+   "title": 9236,
+   "labBooks": 10000
+  }
+ },
+ "tokyo-harajuku": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.999,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "terrace": 0.429,
+    "slope": 0.401,
+    "floodplain": 0.153,
+    "hollow": 0.012,
+    "water": 0.005
+   },
+   "artificial": {
+    "cut": 0.28,
+    "fill": 0.19
+   }
+  },
+  "monuments3km": 1,
+  "monuments10km": 34,
+  "nearest": [
+   {
+    "id": "13104-001",
+    "name": "大震災紀念碑",
+    "year": "1929",
+    "kind": "地震",
+    "dist_km": 2.34
+   },
+   {
+    "id": "13101-001",
+    "name": "工部大学校阯碑",
+    "year": "1939",
+    "kind": "地震",
+    "dist_km": 4.37
+   },
+   {
+    "id": "13104-002",
+    "name": "水掛け地蔵と大震火災死亡群霊塔",
+    "year": "1924",
+    "kind": "地震",
+    "dist_km": 4.37
+   },
+   {
+    "id": "13103-002",
+    "name": "震災記念聖観世音菩薩像",
+    "year": "1926",
+    "kind": "地震",
+    "dist_km": 4.5
+   },
+   {
+    "id": "13101-004",
+    "name": "昭和天皇御野立所の碑",
+    "year": "不明",
+    "kind": "地震",
+    "dist_km": 5.25
+   }
+  ],
+  "ndl": {
+   "anywhere": 4724,
+   "title": 1783,
+   "labBooks": 10000
+  }
+ },
+ "yokohama-kannai": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.974,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "formerwater": 0.453,
+    "water": 0.199,
+    "slope": 0.104,
+    "sandbar": 0.097,
+    "foothill": 0.075,
+    "terrace": 0.039,
+    "floodplain": 0.024,
+    "scarp": 0.004,
+    "backswamp": 0.003
+   },
+   "artificial": {
+    "fill": 0.445,
+    "cut": 0.075
+   }
+  },
+  "monuments3km": 1,
+  "monuments10km": 1,
+  "nearest": [
+   {
+    "id": "14100-001",
+    "name": "復興記念碑",
+    "year": "1929",
+    "kind": "地震",
+    "dist_km": 0.27
+   }
+  ],
+  "ndl": {
+   "anywhere": 2270,
+   "title": 794,
+   "labBooks": 10000
+  }
+ },
+ "yokosuka": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.999,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.965,
+   "gazo3": 0.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.296,
+    "formerwater": 0.295,
+    "water": 0.236,
+    "foothill": 0.086,
+    "floodplain": 0.075,
+    "landslide": 0.008,
+    "sandbar": 0.005
+   },
+   "artificial": {
+    "fill": 0.441,
+    "cut": 0.082
+   }
+  },
+  "monuments3km": 2,
+  "monuments10km": 6,
+  "nearest": [
+   {
+    "id": "14201-003",
+    "name": "大震災避難記念碑",
+    "year": "1925",
+    "kind": "地震",
+    "dist_km": 0.35
+   },
+   {
+    "id": "14201-002",
+    "name": "大震災遭難者供養塔",
+    "year": "1929",
+    "kind": "土砂災害・地震",
+    "dist_km": 0.76
+   },
+   {
+    "id": "14201-004",
+    "name": "大震災殃死者之霊",
+    "year": "1930",
+    "kind": "地震・その他",
+    "dist_km": 4.96
+   },
+   {
+    "id": "14201-001",
+    "name": "関東大震災慰霊塔",
+    "year": "1972",
+    "kind": "土砂災害・地震",
+    "dist_km": 6.57
+   },
+   {
+    "id": "14208-001",
+    "name": "関東大震災伝承碑",
+    "year": "1923",
+    "kind": "地震",
+    "dist_km": 8.59
+   }
+  ],
+  "ndl": {
+   "anywhere": 56730,
+   "title": 17215,
+   "labBooks": 10000
+  }
+ },
+ "kamakura": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.942,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.373,
+    "floodplain": 0.167,
+    "foothill": 0.145,
+    "terrace": 0.114,
+    "sandbar": 0.092,
+    "water": 0.054,
+    "riverbed": 0.019,
+    "hollow": 0.017,
+    "backswamp": 0.016,
+    "formerwater": 0.004,
+    "fan": 0.0
+   },
+   "artificial": {
+    "fill": 0.312,
+    "cut": 0.076
+   }
+  },
+  "monuments3km": 1,
+  "monuments10km": 6,
+  "nearest": [
+   {
+    "id": "14204-001",
+    "name": "哀悼碑",
+    "year": "1903",
+    "kind": "土砂災害",
+    "dist_km": 1.73
+   },
+   {
+    "id": "14208-001",
+    "name": "関東大震災伝承碑",
+    "year": "1923",
+    "kind": "地震",
+    "dist_km": 3.33
+   },
+   {
+    "id": "14301-001",
+    "name": "舩溜竣功記念",
+    "year": "1935",
+    "kind": "地震",
+    "dist_km": 4.3
+   },
+   {
+    "id": "14205-007",
+    "name": "震災記念碑",
+    "year": "1924",
+    "kind": "地震・津波・その他",
+    "dist_km": 5.11
+   },
+   {
+    "id": "14205-006",
+    "name": "嗚呼九月一日",
+    "year": "1929",
+    "kind": "地震",
+    "dist_km": 6.11
+   }
+  ],
+  "ndl": {
+   "anywhere": 97426,
+   "title": 29876,
+   "labBooks": 10000
+  }
+ },
+ "kyoto-higashiyama": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.999,
+   "ort_old10": 1.0,
+   "gazo1": 0.999,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.433,
+    "slope": 0.374,
+    "terrace": 0.159,
+    "water": 0.028,
+    "scarp": 0.004,
+    "floodplain": 0.002
+   },
+   "artificial": {
+    "cut": 0.007,
+    "fill": 0.003
+   }
+  },
+  "monuments3km": 1,
+  "monuments10km": 11,
+  "nearest": [
+   {
+    "id": "26100-001",
+    "name": "師弟愛の像",
+    "year": "1960",
+    "kind": "その他",
+    "dist_km": 0.63
+   },
+   {
+    "id": "26100-010",
+    "name": "記念誌",
+    "year": "1941",
+    "kind": "その他",
+    "dist_km": 3.67
+   },
+   {
+    "id": "26100-006",
+    "name": "風災慰霊塔",
+    "year": "1935",
+    "kind": "その他",
+    "dist_km": 4.28
+   },
+   {
+    "id": "26100-002",
+    "name": "昭和十年水害浸水被害記念碑",
+    "year": "不明",
+    "kind": "洪水",
+    "dist_km": 4.34
+   },
+   {
+    "id": "26100-007",
+    "name": "風災記念碑",
+    "year": "不明",
+    "kind": "その他",
+    "dist_km": 4.56
+   }
+  ],
+  "ndl": {
+   "anywhere": 60018,
+   "title": 18564,
+   "labBooks": 10000
+  }
+ },
+ "osaka-namba": {
+  "photos": {
+   "ort_1928": 0.9,
+   "ort_riku10": 1.0,
+   "ort_USA10": 0.999,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "sandbar": 0.599,
+    "floodplain": 0.376,
+    "water": 0.013,
+    "formerwater": 0.009,
+    "oldchannel": 0.002
+   },
+   "artificial": {
+    "fill": 0.009
+   }
+  },
+  "monuments3km": 4,
+  "monuments10km": 16,
+  "nearest": [
+   {
+    "id": "27100-007",
+    "name": "水防碑",
+    "year": "1978",
+    "kind": "高潮・その他",
+    "dist_km": 1.17
+   },
+   {
+    "id": "27100-001",
+    "name": "大地震両川口津浪記",
+    "year": "1855",
+    "kind": "地震・津波",
+    "dist_km": 1.35
+   },
+   {
+    "id": "27100-008",
+    "name": "暴風水害記念誌",
+    "year": "1938",
+    "kind": "高潮・その他",
+    "dist_km": 2.24
+   },
+   {
+    "id": "27100-002",
+    "name": "安政地震津波碑",
+    "year": "1855",
+    "kind": "地震・津波",
+    "dist_km": 2.29
+   },
+   {
+    "id": "27100-006",
+    "name": "鎮魂",
+    "year": "2018",
+    "kind": "洪水・その他",
+    "dist_km": 5.36
+   }
+  ],
+  "ndl": {
+   "anywhere": 2957,
+   "title": 1283,
+   "labBooks": 6765
+  }
+ },
+ "kobe-meriken": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.226,
+    "water": 0.21,
+    "terrace": 0.207,
+    "floodplain": 0.169,
+    "hollow": 0.069,
+    "perched": 0.059,
+    "slope": 0.058,
+    "foothill": 0.001,
+    "riverbed": 0.0
+   },
+   "artificial": {
+    "fill": 0.275,
+    "cut": 0.096
+   }
+  },
+  "monuments3km": 10,
+  "monuments10km": 37,
+  "nearest": [
+   {
+    "id": "28100-001",
+    "name": "慰霊と復興のモニュメント・1.17希望の灯り",
+    "year": "2000",
+    "kind": "地震",
+    "dist_km": 0.68
+   },
+   {
+    "id": "28100-002",
+    "name": "神戸港震災メモリアルパーク ",
+    "year": "1997",
+    "kind": "地震",
+    "dist_km": 0.69
+   },
+   {
+    "id": "28100-024",
+    "name": "水害復興記念碑",
+    "year": "1940頃",
+    "kind": "洪水・土砂災害",
+    "dist_km": 0.92
+   },
+   {
+    "id": "28100-003",
+    "name": "神戸震災復興記念公園(みなとのもり公園)",
+    "year": "2010",
+    "kind": "地震",
+    "dist_km": 1.03
+   },
+   {
+    "id": "28100-025",
+    "name": "流石之碑",
+    "year": "1939",
+    "kind": "洪水・土砂災害",
+    "dist_km": 1.43
+   }
+  ],
+  "ndl": {
+   "anywhere": 121,
+   "title": 38,
+   "labBooks": 294
+  }
+ },
+ "hiroshima-peace": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.976,
+   "ort_old10": 0.999,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "floodplain": 0.606,
+    "water": 0.193,
+    "formerwater": 0.16,
+    "levee": 0.099,
+    "oldchannel": 0.011
+   },
+   "artificial": {
+    "polder": 0.135,
+    "fill": 0.037
+   }
+  },
+  "monuments3km": 1,
+  "monuments10km": 16,
+  "nearest": [
+   {
+    "id": "34100-012",
+    "name": "慰霊碑",
+    "year": "1966",
+    "kind": "土砂災害",
+    "dist_km": 2.35
+   },
+   {
+    "id": "34100-007",
+    "name": "瀬川卯一翁彰徳碑",
+    "year": "1943",
+    "kind": "洪水・土砂災害",
+    "dist_km": 5.09
+   },
+   {
+    "id": "34302-001",
+    "name": "水害記念碑",
+    "year": "1944",
+    "kind": "洪水・土砂災害",
+    "dist_km": 5.18
+   },
+   {
+    "id": "34100-014",
+    "name": "広島土砂災害",
+    "year": "2014",
+    "kind": "土砂災害",
+    "dist_km": 5.55
+   },
+   {
+    "id": "34100-003",
+    "name": "水害碑",
+    "year": "1930",
+    "kind": "洪水・土砂災害",
+    "dist_km": 5.78
+   }
+  ],
+  "ndl": {
+   "anywhere": 38,
+   "title": 12,
+   "labBooks": 1338
+  }
+ },
+ "nagasaki-dejima": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.359,
+    "floodplain": 0.187,
+    "formerwater": 0.112,
+    "terrace": 0.03,
+    "water": 0.02,
+    "foothill": 0.016,
+    "landslide": 0.01
+   },
+   "artificial": {
+    "fill": 0.157,
+    "cut": 0.051
+   }
+  },
+  "monuments3km": 3,
+  "monuments10km": 6,
+  "nearest": [
+   {
+    "id": "42201-007",
+    "name": "長崎大水害記念塔",
+    "year": "1984",
+    "kind": "洪水・土砂災害",
+    "dist_km": 0.8
+   },
+   {
+    "id": "42201-005",
+    "name": "水害復興と友好の記念碑",
+    "year": "1989",
+    "kind": "洪水・土砂災害",
+    "dist_km": 1.15
+   },
+   {
+    "id": "42201-002",
+    "name": "長崎大水害慰霊碑",
+    "year": "2017",
+    "kind": "洪水・土砂災害",
+    "dist_km": 2.87
+   },
+   {
+    "id": "42201-001",
+    "name": "大水害慰霊塔",
+    "year": "1984",
+    "kind": "洪水・土砂災害",
+    "dist_km": 6.48
+   },
+   {
+    "id": "42201-004",
+    "name": "七・二三　長崎大水害碑",
+    "year": "1983",
+    "kind": "洪水・土砂災害",
+    "dist_km": 6.94
+   }
+  ],
+  "ndl": {
+   "anywhere": 5310,
+   "title": 1849,
+   "labBooks": 10000
+  }
+ },
+ "suo-oshima": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "monuments3km": 3,
+  "monuments10km": 3,
+  "nearest": [
+   {
+    "id": "35305-004",
+    "name": "水災之碑",
+    "year": "不明",
+    "kind": "洪水・土砂災害",
+    "dist_km": 1.21
+   },
+   {
+    "id": "35305-003",
+    "name": "弔百十名之霊",
+    "year": "1887",
+    "kind": "洪水・土砂災害",
+    "dist_km": 1.57
+   },
+   {
+    "id": "35305-001",
+    "name": "罹災之碑",
+    "year": "1889",
+    "kind": "洪水・土砂災害",
+    "dist_km": 1.67
+   }
+  ],
+  "ndl": {
+   "anywhere": 1567,
+   "title": 442,
+   "labBooks": 360
+  }
+ },
+ "mio": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 0.968,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "monuments3km": 0,
+  "monuments10km": 9,
+  "nearest": [
+   {
+    "id": "30205-004",
+    "name": "水位標",
+    "year": "1958",
+    "kind": "洪水",
+    "dist_km": 5.77
+   },
+   {
+    "id": "30381-001",
+    "name": "津浪之紀事",
+    "year": "1862",
+    "kind": "地震・津波",
+    "dist_km": 5.88
+   },
+   {
+    "id": "30205-006",
+    "name": "村田美成の碑",
+    "year": "1894",
+    "kind": "洪水",
+    "dist_km": 6.06
+   },
+   {
+    "id": "30205-001",
+    "name": "水害之碑",
+    "year": "1954",
+    "kind": "洪水",
+    "dist_km": 6.37
+   },
+   {
+    "id": "30205-007",
+    "name": "藤井の耕地復旧記念碑",
+    "year": "1962",
+    "kind": "洪水",
+    "dist_km": 7.74
+   }
+  ],
+  "ndl": {
+   "anywhere": 192,
+   "title": 143,
+   "labBooks": 710
+  }
+ },
+ "kin": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.334,
+    "terrace": 0.247,
+    "floodplain": 0.042,
+    "hollow": 0.024,
+    "water": 0.013,
+    "riverbed": 0.001
+   },
+   "artificial": {
+    "cut": 0.232,
+    "fill": 0.06,
+    "works": 0.011
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 4059,
+   "title": 826,
+   "labBooks": 7770
+  }
+ },
+ "chatan": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 0.973,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.32,
+    "terrace": 0.188,
+    "floodplain": 0.173,
+    "formerwater": 0.141,
+    "sandbar": 0.029,
+    "foothill": 0.011,
+    "water": 0.006,
+    "hollow": 0.005,
+    "riverbed": 0.003
+   },
+   "artificial": {
+    "fill": 0.21,
+    "cut": 0.194,
+    "works": 0.002
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 5964,
+   "title": 1539,
+   "labBooks": 10000
+  }
+ },
+ "naha-shuri": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.514,
+    "terrace": 0.259,
+    "floodplain": 0.104,
+    "foothill": 0.084,
+    "hollow": 0.025,
+    "water": 0.013,
+    "riverbed": 0.001
+   },
+   "artificial": {
+    "cut": 0.097,
+    "fill": 0.039
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 5296,
+   "title": 2466,
+   "labBooks": 6827
+  }
+ },
+ "sapporo": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 1.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.893,
+    "oldchannel": 0.034,
+    "floodplain": 0.027,
+    "water": 0.014,
+    "terrace": 0.005
+   },
+   "artificial": {}
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 320391,
+   "title": 94235,
+   "labBooks": 10000
+  }
+ },
+ "otaru": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "formerwater": 0.239,
+    "terrace": 0.229,
+    "slope": 0.169,
+    "floodplain": 0.085,
+    "foothill": 0.033,
+    "water": 0.015
+   },
+   "artificial": {
+    "fill": 0.275,
+    "cut": 0.085
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 37969,
+   "title": 17217,
+   "labBooks": 10000
+  }
+ },
+ "hakodate": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "sandbar": 0.266,
+    "foothill": 0.211,
+    "water": 0.178,
+    "formerwater": 0.122,
+    "slope": 0.116,
+    "terrace": 0.107,
+    "scarp": 0.0
+   },
+   "artificial": {
+    "fill": 0.124,
+    "cut": 0.01
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 67927,
+   "title": 34177,
+   "labBooks": 10000
+  }
+ },
+ "fukuoka-hakata": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "sandbar": 0.692,
+    "floodplain": 0.174,
+    "water": 0.064,
+    "levee": 0.049,
+    "formerwater": 0.02
+   },
+   "artificial": {
+    "fill": 0.194
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 21825,
+   "title": 10743,
+   "labBooks": 10000
+  }
+ },
+ "kanazawa": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "terrace": 0.455,
+    "fan": 0.452,
+    "slope": 0.064,
+    "water": 0.022,
+    "riverbed": 0.004,
+    "scarp": 0.003
+   },
+   "artificial": {
+    "cut": 0.006
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 262886,
+   "title": 90894,
+   "labBooks": 10000
+  }
+ },
+ "fujiyoshida": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.474,
+    "terrace": 0.298,
+    "slope": 0.099,
+    "floodplain": 0.087,
+    "foothill": 0.019,
+    "water": 0.01,
+    "landslide": 0.009,
+    "scarp": 0.005
+   },
+   "artificial": {
+    "cut": 0.023,
+    "fill": 0.019
+   }
+  },
+  "monuments3km": 1,
+  "monuments10km": 4,
+  "nearest": [
+   {
+    "id": "19430-006",
+    "name": "河口湖治水組合記念碑",
+    "year": "2002",
+    "kind": "その他",
+    "dist_km": 2.93
+   },
+   {
+    "id": "19424-001",
+    "name": "大震水災記念碑",
+    "year": "1924",
+    "kind": "洪水・土砂災害・地震",
+    "dist_km": 6.48
+   },
+   {
+    "id": "19430-005",
+    "name": "慰霊",
+    "year": "1966",
+    "kind": "土砂災害",
+    "dist_km": 8.29
+   },
+   {
+    "id": "19430-004",
+    "name": "慰霊碑",
+    "year": "1967",
+    "kind": "土砂災害",
+    "dist_km": 9.24
+   }
+  ],
+  "ndl": {
+   "anywhere": 2945,
+   "title": 1710,
+   "labBooks": 531
+  }
+ },
+ "niseko": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 1863,
+   "title": 802,
+   "labBooks": 3934
+  }
+ },
+ "tsushima": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 1877,
+   "title": 822,
+   "labBooks": 9021
+  }
+ },
+ "sendai-arahama": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.998,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 1.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "floodplain": 0.336,
+    "backswamp": 0.332,
+    "sandbar": 0.237,
+    "water": 0.019,
+    "formerwater": 0.017,
+    "oldchannel": 0.005
+   },
+   "artificial": {
+    "fill": 0.021
+   }
+  },
+  "monuments3km": 3,
+  "monuments10km": 10,
+  "nearest": [
+   {
+    "id": "04100-005",
+    "name": "荒浜の歴史(荒浜地区地域モニュメント)",
+    "year": "2016",
+    "kind": "地震・津波",
+    "dist_km": 1.11
+   },
+   {
+    "id": "04100-006",
+    "name": "荒浜記憶の鐘(荒浜地区地域モニュメント)",
+    "year": "2017",
+    "kind": "地震・津波",
+    "dist_km": 1.35
+   },
+   {
+    "id": "04100-001",
+    "name": "ここより新たに(新浜地区地域モニュメント)",
+    "year": "2015",
+    "kind": "地震・津波",
+    "dist_km": 2.84
+   },
+   {
+    "id": "04100-007",
+    "name": "絆(六郷東部地区地域モニュメント)",
+    "year": "2019",
+    "kind": "地震・津波",
+    "dist_km": 3.22
+   },
+   {
+    "id": "04100-004",
+    "name": "東日本大震災伝承碑(藤塚地区地域モニュメント)",
+    "year": "2017",
+    "kind": "地震・津波",
+    "dist_km": 4.47
+   }
+  ],
+  "ndl": {
+   "anywhere": 644,
+   "title": 254,
+   "labBooks": 3700
+  }
+ },
+ "shirakawago": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 0.997,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "monuments3km": 0,
+  "monuments10km": 1,
+  "nearest": [
+   {
+    "id": "21604-001",
+    "name": "帰雲城趾(説明碑)",
+    "year": "1999",
+    "kind": "土砂災害・地震",
+    "dist_km": 5.26
+   }
+  ],
+  "ndl": {
+   "anywhere": 1907,
+   "title": 621,
+   "labBooks": 4457
+  }
+ },
+ "karuizawa": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "monuments3km": 0,
+  "monuments10km": 2,
+  "nearest": [
+   {
+    "id": "10211-002",
+    "name": "熊の平殉難碑",
+    "year": "1969",
+    "kind": "土砂災害",
+    "dist_km": 4.59
+   },
+   {
+    "id": "10211-001",
+    "name": "遭難碑",
+    "year": "1921",
+    "kind": "洪水・土砂災害",
+    "dist_km": 7.22
+   }
+  ],
+  "ndl": {
+   "anywhere": 12723,
+   "title": 6175,
+   "labBooks": 9146
+  }
+ },
+ "nikko": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {},
+   "artificial": {}
+  },
+  "monuments3km": 2,
+  "monuments10km": 6,
+  "nearest": [
+   {
+    "id": "09206-002",
+    "name": "稲荷川水難供養塔",
+    "year": "1663",
+    "kind": "洪水・土砂災害",
+    "dist_km": 1.42
+   },
+   {
+    "id": "09206-001",
+    "name": "砂防塔",
+    "year": "1970",
+    "kind": "洪水・土砂災害",
+    "dist_km": 2.69
+   },
+   {
+    "id": "09206-010",
+    "name": "震災記念碑",
+    "year": "1950",
+    "kind": "地震",
+    "dist_km": 6.01
+   },
+   {
+    "id": "09206-011",
+    "name": "震災復興記念",
+    "year": "1953",
+    "kind": "地震",
+    "dist_km": 6.52
+   },
+   {
+    "id": "09206-006",
+    "name": "震災記念碑",
+    "year": "1950",
+    "kind": "地震",
+    "dist_km": 7.77
+   }
+  ],
+  "ndl": {
+   "anywhere": 33185,
+   "title": 14041,
+   "labBooks": 10000
+  }
+ },
+ "misawa": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "terrace": 0.748,
+    "slope": 0.191,
+    "floodplain": 0.046,
+    "hollow": 0.015,
+    "water": 0.001
+   },
+   "artificial": {
+    "fill": 0.041,
+    "cut": 0.031
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 4,
+  "nearest": [
+   {
+    "id": "02207-002",
+    "name": "震嘯災記念碑",
+    "year": "1933",
+    "kind": "地震・津波",
+    "dist_km": 4.81
+   },
+   {
+    "id": "02207-001",
+    "name": "津波の碑",
+    "year": "2014",
+    "kind": "地震・津波",
+    "dist_km": 4.96
+   },
+   {
+    "id": "02207-003",
+    "name": "津波の証",
+    "year": "2014",
+    "kind": "地震・津波",
+    "dist_km": 5.66
+   },
+   {
+    "id": "02408-001",
+    "name": "小川原湖既往最高水位",
+    "year": "2018",
+    "kind": "洪水",
+    "dist_km": 9.59
+   }
+  ],
+  "ndl": {
+   "anywhere": 31608,
+   "title": 3027,
+   "labBooks": 10000
+  }
+ },
+ "sasebo": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.293,
+    "floodplain": 0.231,
+    "formerwater": 0.145,
+    "landslide": 0.085,
+    "foothill": 0.067,
+    "water": 0.022,
+    "backswamp": 0.012,
+    "terrace": 0.007
+   },
+   "artificial": {
+    "fill": 0.246,
+    "cut": 0.094
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 1,
+  "nearest": [
+   {
+    "id": "42202-001",
+    "name": "大水害復興之碑",
+    "year": "1971",
+    "kind": "洪水・土砂災害",
+    "dist_km": 3.92
+   }
+  ],
+  "ndl": {
+   "anywhere": 22894,
+   "title": 11422,
+   "labBooks": 10000
+  }
+ },
+ "iwakuni": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "formerwater": 0.423,
+    "levee": 0.214,
+    "slope": 0.148,
+    "water": 0.091,
+    "floodplain": 0.071,
+    "riverbed": 0.039,
+    "oldchannel": 0.012,
+    "scarp": 0.001
+   },
+   "artificial": {
+    "fill": 0.426,
+    "cut": 0.084,
+    "polder": 0.036
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 2,
+  "nearest": [
+   {
+    "id": "35208-003",
+    "name": "風水害記念碑",
+    "year": "1974",
+    "kind": "高潮",
+    "dist_km": 3.56
+   },
+   {
+    "id": "34211-001",
+    "name": "(枕崎台風)供養地蔵",
+    "year": "不明",
+    "kind": "土砂災害",
+    "dist_km": 6.36
+   }
+  ],
+  "ndl": {
+   "anywhere": 9726,
+   "title": 3893,
+   "labBooks": 10000
+  }
+ },
+ "fussa": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "terrace": 0.808,
+    "floodplain": 0.056,
+    "scarp": 0.032,
+    "hollow": 0.024,
+    "water": 0.015,
+    "oldchannel": 0.013
+   },
+   "artificial": {
+    "fill": 0.094,
+    "cut": 0.001
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 2,
+  "nearest": [
+   {
+    "id": "13205-001",
+    "name": "降雹記念塔(こうひょうきねんとう)",
+    "year": "1928",
+    "kind": "その他",
+    "dist_km": 5.93
+   },
+   {
+    "id": "13205-003",
+    "name": "水窪排水 記念碑",
+    "year": "1929",
+    "kind": "洪水",
+    "dist_km": 6.56
+   }
+  ],
+  "ndl": {
+   "anywhere": 4370,
+   "title": 1467,
+   "labBooks": 9178
+  }
+ },
+ "tachikawa": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 1.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "terrace": 0.916,
+    "floodplain": 0.031,
+    "hollow": 0.019,
+    "oldchannel": 0.018,
+    "water": 0.012,
+    "scarp": 0.003
+   },
+   "artificial": {
+    "fill": 0.094,
+    "cut": 0.008
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 0,
+  "nearest": [],
+  "ndl": {
+   "anywhere": 53795,
+   "title": 12391,
+   "labBooks": 10000
+  }
+ },
+ "kure": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 1.0,
+   "gazo3": 0.0,
+   "gazo4": 1.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "floodplain": 0.272,
+    "slope": 0.178,
+    "formerwater": 0.151,
+    "fan": 0.106,
+    "terrace": 0.064,
+    "water": 0.024,
+    "riverbed": 0.008,
+    "scarp": 0.001
+   },
+   "artificial": {
+    "fill": 0.151,
+    "cut": 0.106
+   }
+  },
+  "monuments3km": 3,
+  "monuments10km": 19,
+  "nearest": [
+   {
+    "id": "34202-009",
+    "name": "芸予地震伝承碑",
+    "year": "不明",
+    "kind": "地震",
+    "dist_km": 0.86
+   },
+   {
+    "id": "34202-002",
+    "name": "慰霊碑",
+    "year": "1995",
+    "kind": "土砂災害",
+    "dist_km": 1.36
+   },
+   {
+    "id": "34202-023",
+    "name": "平成30年7月　豪雨災害の記録<br>吉浦1",
+    "year": "2024",
+    "kind": "洪水・土砂災害",
+    "dist_km": 2.73
+   },
+   {
+    "id": "34202-007",
+    "name": "芸予地震御修営記念碑",
+    "year": "2002",
+    "kind": "地震",
+    "dist_km": 3.5
+   },
+   {
+    "id": "34202-004",
+    "name": "水害碑",
+    "year": "2019",
+    "kind": "洪水・土砂災害",
+    "dist_km": 4.43
+   }
+  ],
+  "ndl": {
+   "anywhere": 160139,
+   "title": 33277,
+   "labBooks": 0
+  }
+ },
+ "shimoda": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 1.0,
+   "gazo1": 0.999,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "slope": 0.399,
+    "floodplain": 0.199,
+    "water": 0.027,
+    "landslide": 0.022,
+    "formerwater": 0.01,
+    "riverbed": 0.005,
+    "foothill": 0.004
+   },
+   "artificial": {
+    "cut": 0.037,
+    "fill": 0.025
+   }
+  },
+  "monuments3km": 1,
+  "monuments10km": 1,
+  "nearest": [
+   {
+    "id": "22219-001",
+    "name": "津なみ塚",
+    "year": "1855",
+    "kind": "地震・津波",
+    "dist_km": 0.63
+   }
+  ],
+  "ndl": {
+   "anywhere": 52950,
+   "title": 5478,
+   "labBooks": 10000
+  }
+ },
+ "kumamoto": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 1.0,
+   "ort_old10": 1.0,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.617,
+    "terrace": 0.21,
+    "floodplain": 0.091,
+    "water": 0.045,
+    "scarp": 0.012,
+    "formerwater": 0.007,
+    "oldchannel": 0.007,
+    "foothill": 0.007,
+    "hollow": 0.002
+   },
+   "artificial": {
+    "cut": 0.043,
+    "fill": 0.028
+   }
+  },
+  "monuments3km": 0,
+  "monuments10km": 3,
+  "nearest": [
+   {
+    "id": "43100-004",
+    "name": "島原大津波供養塔",
+    "year": "不明",
+    "kind": "津波",
+    "dist_km": 7.22
+   },
+   {
+    "id": "43442-002",
+    "name": "高田堰災害復旧記念碑",
+    "year": "1982",
+    "kind": "洪水",
+    "dist_km": 8.56
+   },
+   {
+    "id": "43442-001",
+    "name": "堤防復舊記念之碑",
+    "year": "不明",
+    "kind": "洪水",
+    "dist_km": 8.71
+   }
+  ],
+  "ndl": {
+   "anywhere": 293699,
+   "title": 134485,
+   "labBooks": 10000
+  }
+ },
+ "beppu": {
+  "photos": {
+   "ort_1928": 0.0,
+   "ort_riku10": 0.0,
+   "ort_USA10": 0.0,
+   "ort_old10": 0.944,
+   "gazo1": 1.0,
+   "gazo2": 0.0,
+   "gazo3": 0.0,
+   "gazo4": 0.0,
+   "seamlessphoto": 1.0
+  },
+  "landform": {
+   "natural": {
+    "fan": 0.425,
+    "water": 0.157,
+    "terrace": 0.138,
+    "slope": 0.053,
+    "landslide": 0.049,
+    "sandbar": 0.044,
+    "perched": 0.041,
+    "riverbed": 0.04,
+    "formerwater": 0.038,
+    "foothill": 0.015
+   },
+   "artificial": {
+    "fill": 0.119,
+    "cut": 0.013
+   }
+  },
+  "monuments3km": 1,
+  "monuments10km": 1,
+  "nearest": [
+   {
+    "id": "44202-001",
+    "name": "水害碑",
+    "year": "不明",
+    "kind": "洪水",
+    "dist_km": 1.6
+   }
+  ],
+  "ndl": {
+   "anywhere": 42999,
+   "title": 12973,
+   "labBooks": 10000
+  }
+ }
+}
