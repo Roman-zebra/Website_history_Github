@@ -250,8 +250,10 @@ function scatter(f,heights,opts){
    Positions are (u, y, v) in crop pixels/metres like interior boxes; normals are in the crop frame.
    `wind` is 0 at the ground and 1 at the top of each plant; `kind`: 0 trunk, 1 canopy, 2 bush, 3 rock, 4 blossom,
    5 wood (fences, bridge), 6 pond water, 7 mossy concrete/iron ruin, 8 conifer tier. Foliage colours are palette
-   coordinates (r: 0 bright .. 1 dark, g: variation) so season presets recolour trees with the meadow. */
-function meshes(set){
+   coordinates (r: 0 bright .. 1 dark, g: variation) so season presets recolour trees with the meadow.
+   style 'sengoku' (the walking view's default look) grows the same trees as Japanese maples, black pines and a few
+   bare dead trees, and leaves the bushes without blossom; any other style keeps the anime shapes. */
+function meshes(set,style){
  const batches=[];let cur=null;
  const begin=need=>{if(!cur||cur.count+need>65000){cur={pos:[],nor:[],col:[],info:[],idx:[],count:0};batches.push(cur);}};
  const vert=(p,nrm,c,wind,kind,seed)=>{cur.pos.push(p[0],p[1],p[2]);cur.nor.push(nrm[0],nrm[1],nrm[2]);cur.col.push(c[0],c[1],c[2]);cur.info.push(wind,kind,seed);return cur.count++;};
@@ -266,7 +268,7 @@ function meshes(set){
    let n=[nx/rx,ny/ry,nz/rz];
    if(center){const d=[cx+lx-center[0],cy+ly-center[1],cz+lz-center[2]],l=Math.hypot(...d)||1;n=[n[0]*.35+d[0]/l*.65,n[1]*.35+d[1]/l*.65,n[2]*.35+d[2]/l*.65];}
    const nl=Math.hypot(...n)||1,shade=.86+.28*(ny*.5+.5);
-   const col=kind===1||kind===2?[.08+.84*(1-(ny*.5+.5)),hash(seed,7,11),0]:[c[0]*shade,c[1]*shade,c[2]*shade];
+   const col=kind===1||kind===2||c[0]<0?[.08+.84*(1-(ny*.5+.5)),c[0]<0?c[1]:hash(seed,7,11),0]:[c[0]*shade,c[1]*shade,c[2]*shade];
    vert([uv[0],o.y+cy+ly,uv[1]],[n[0]/nl,n[1]/nl,n[2]/nl],col,wind0+(wind1-wind0)*(ny*.5+.5),kind,seed%97/97);
   }
   for(let i=0;i<rings;i++)for(let j=0;j<seg;j++){const a=base+i*(seg+1)+j,b=a+seg+1;cur.idx.push(a,b,a+1,a+1,b,b+1);}
@@ -310,7 +312,51 @@ function meshes(set){
   for(let i=0;i<rings;i++)for(let j=0;j<seg;j++){tri(at(i,j),at(i+1,j),at(i,j+1));tri(at(i,j+1),at(i+1,j),at(i+1,j+1));}
  }
  const leafPalette=[[.27,.58,.24],[.33,.64,.22],[.22,.52,.30],[.38,.62,.20]];
- for(const t of set.trees){
+ const sengoku=style==='sengoku';
+ // A straight limb between two points given in metres relative to the plant (x, y, z), as a thin bark box.
+ const limb=(o,a,b,r,c,seed)=>beam([o.u+a[0]/MPP,o.y+a[1],o.v+a[2]/MPP],[o.u+b[0]/MPP,o.y+b[1],o.v+b[2]/MPP],r,r,c,0,seed);
+ if(sengoku)for(const t of set.trees){
+  const s=t.seed,bark=[.30,.25,.21];
+  if(t.kind){
+   // Black pine: a leaning, kinked trunk; flat cloud pads on short branches, darker underneath.
+   const H=t.height*1.2,lean=[(hash(s,11,5)-.5)*1.6,(hash(s,12,5)-.5)*1.6];
+   const P=k=>[lean[0]*k*k*H*.25+Math.sin(k*3+s)*.25,k*H,lean[1]*k*k*H*.25+Math.cos(k*2.3+s)*.25];
+   let prev=P(0);
+   for(let i=1;i<=4;i++){const q=P(i/4);limb(t,prev,q,(.14+t.radius*.05)*(1.15-.2*i),bark,s+i);prev=q;}
+   const pads=4+Math.floor(hash(s,13,5)*3);
+   for(let i=0;i<pads;i++){
+    const k=.45+.55*i/(pads-1),c=P(Math.min(k,.98)),a=s*.7+i*2.4,reach=(1-k*.55)*t.radius*1.05;
+    const tip=[c[0]+Math.cos(a)*reach,c[1]+.15+.25*hash(i,s,7),c[2]+Math.sin(a)*reach];
+    limb(t,c,tip,.07,bark,s+20+i);
+    const R=(.85+.5*(1-k))*t.radius*.62,Y=.28+.12*hash(i,s,9);
+    blob(t,tip[0],tip[1],tip[2],R,Y,R*.85,[-1,hash(s,14,5),0],.3+.5*k,.6+.4*k,8,s+i*3,true,[tip[0],tip[1]-Y*1.5,tip[2]]);
+   }
+   continue;
+  }
+  const pick=hash(s,21,5),trunkH=t.height*.42,spread=t.radius;
+  if(pick<.14){
+   // A bare dead tree: forking grey limbs and twigs.
+   const grey=[.36,.34,.31],top=[0,t.height*.62,0];limb(t,[0,0,0],top,.13+t.radius*.04,grey,s);
+   for(let i=0;i<5;i++){
+    const a=s+i*1.26,e=[Math.cos(a)*spread*.8,top[1]+.6+hash(i,s,3)*1.6,Math.sin(a)*spread*.8];
+    limb(t,[0,top[1]-.12*i,0],e,.06,grey,s+i);
+    limb(t,e,[e[0]*1.35+Math.cos(a+.8)*.5,e[1]+.7,e[2]*1.35+Math.sin(a+.8)*.5],.035,grey,s+9+i);
+   }
+   continue;
+  }
+  // Maple (a few evergreen oaks): the trunk forks under a layered, umbrella-like crown of flattened leaf clumps.
+  limb(t,[0,0,0],[0,trunkH,0],.13+t.radius*.05,bark,s);
+  const forks=2+Math.floor(hash(s,22,5)*2),variation=pick>.86?.1:.3+.7*hash(s,23,5);
+  for(let i=0;i<forks;i++){const a=s*.9+i*6.2832/forks;limb(t,[0,trunkH*.92,0],[Math.cos(a)*spread*.45,trunkH+spread*.55,Math.sin(a)*spread*.45],.08,bark,s+i);}
+  for(let L=0;L<3;L++){
+   const y=trunkH+spread*(.35+.42*L),R=spread*(1.05-.28*L),n=L===2?3:6;
+   for(let i=0;i<n;i++){
+    const a=s*.37+i*6.2832/n+L*.5,r=(L===2?.25:.62)*R*(.85+.3*hash(i,L,s)),cx=Math.cos(a)*r,cz=Math.sin(a)*r,rr=R*(L===2?.55:.48)*(.8+.4*hash(L,i,s+3));
+    blob(t,cx,y+.15*hash(i,s,L+4),cz,rr,rr*.5,rr*.9,[-1,variation,0],.3+.25*L,.8+.2*L,1,s+L*7+i,true,[cx*.4,y-rr*.8,cz*.4]);
+   }
+  }
+ }
+ for(const t of sengoku?[]:set.trees){
   if(t.kind){
    // Conifer: a short tapered trunk under five stacked zig-zag tiers, dark green at the bottom, yellow-green at the tip.
    const H=t.height*1.15,trunkH=H*.14,foliage=H-trunkH,R=t.radius*1.1,vary=hash(t.seed,3,13);
@@ -334,7 +380,7 @@ function meshes(set){
   const c=bushPalette[b.seed%3],center=[0,b.height*.45,0];
   for(let i=0;i<3;i++){const a=i*2.09+b.seed*.7,off=i?b.radius*.42:0,r=b.radius*(i?.72:.86);
    blob(b,Math.cos(a)*off,b.height*(i?.36:.5),Math.sin(a)*off,r,b.height*(i?.4:.5),r*.92,c,0,.55,2,b.seed+i,false,center);}
-  if(b.flowering)for(let i=0;i<5;i++){const a=i*1.26+b.seed,rr=b.radius*.16;blob(b,Math.cos(a)*b.radius*.62,b.height*(.55+.3*hash(i,b.seed,3)),Math.sin(a)*b.radius*.62,rr,rr*.8,rr,blossom[(b.seed+i)%4],.3,.55,4,b.seed,false,null);}
+  if(b.flowering&&!sengoku)for(let i=0;i<5;i++){const a=i*1.26+b.seed,rr=b.radius*.16;blob(b,Math.cos(a)*b.radius*.62,b.height*(.55+.3*hash(i,b.seed,3)),Math.sin(a)*b.radius*.62,rr,rr*.8,rr,blossom[(b.seed+i)%4],.3,.55,4,b.seed,false,null);}
  }
  // Light warm-grey faceted boulders; the cel shader tints their shade green-grey.
  for(const r of set.rocks){const tone=.78+.08*hash(r.seed,4,9);rock(r,r.size,[tone,tone*.99,tone*.9],r.seed);}
