@@ -90,9 +90,9 @@ assert.equal(blower.label.en,'Blower house · floors & roof (inferred)');assert.
 assert.match(block.label.en,/^Building \d+ · floors & roof \(inferred\)$/);assert.match(block.label.ko,/^\d+호동 · 각 층·옥상\(추정\)$/);
 // Look tuning accepts only known keys, clamps numbers to their ranges and resets to the defaults.
 const tune=g.appearance,defaults=tune.get(),ranges=tune.ranges();
-assert.equal(defaults.preset,'autumn');assert.equal(defaults.style,'sengoku');assert.equal(defaults.quality,'auto');
+assert.equal(defaults.preset,'summer');assert.equal(defaults.style,'sengoku');assert.equal(defaults.quality,'auto');
 const tuned=tune.set(JSON.parse('{"exposure":99,"grass":-3,"preset":"nope","quality":"low","__proto__":{"polluted":1},"unknown":5,"haze":"2"}'));
-assert.equal(tuned.exposure,ranges.exposure[1]);assert.equal(tuned.grass,ranges.grass[0]);assert.equal(tuned.preset,'autumn');assert.equal(tuned.quality,'low');
+assert.equal(tuned.exposure,ranges.exposure[1]);assert.equal(tuned.grass,ranges.grass[0]);assert.equal(tuned.preset,'summer');assert.equal(tuned.quality,'low');
 assert.equal(tuned.haze,defaults.haze);assert.ok(!('unknown' in tuned)&&!({}).polluted);
 tune.set({preset:'winter'});assert.equal(tune.get().preset,'winter');tune.get().preset='magic';assert.equal(tune.get().preset,'winter','get returns a copy');
 for(const q of tune.qualities()){tune.set({quality:q});frame();}

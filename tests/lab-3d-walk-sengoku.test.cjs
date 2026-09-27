@@ -13,11 +13,11 @@ function world(step){
  set.props=N.sengokuProps(f,heights,{lowEnd:step>1,avoid:footprints,spawn,keepOut});
  return {f,heights,set,keepOut};
 }
-for(const step of [1,2])test('sengoku props stand on land, outside every footprint, clear of the arrival point and each other (terrain step '+step+')',()=>{
+for(const step of [1,2])test('realistic-look props stand on land, outside every footprint, clear of the arrival point and each other (terrain step '+step+')',()=>{
  const {f,heights,set,keepOut}=world(step),P=set.props;
- assert.ok(P.fires.length>=4&&P.fires.length<=14,'fires '+P.fires.length);
- assert.ok(P.fires.some(x=>x.kind===0)&&P.fires.some(x=>x.kind===1),'bonfires and braziers');
- assert.ok(P.lanterns.length>=(step>1?2:4)&&P.jizo.length>=4&&P.banners.length>=6,'lanterns '+P.lanterns.length+', jizo '+P.jizo.length+', banners '+P.banners.length);
+ assert.ok(P.fires.length>=3&&P.fires.length<=8,'fires '+P.fires.length);
+ assert.ok(P.fires.some(x=>x.kind===0)&&P.fires.some(x=>x.kind===1),'open fires and drum-can fires');
+ assert.ok(P.lanterns.length>=(step>1?2:4)&&P.lanterns.length<=12&&P.jizo.length>=3&&P.jizo.length<=6&&P.banners.length===0,'street lamps '+P.lanterns.length+', jizo '+P.jizo.length+', banners '+P.banners.length);
  const all=[...P.fires,...P.lanterns,...P.jizo,...P.banners];
  for(const o of all){
   assert.ok(N.inPoly([o.u,o.v],model.coast),'inside the coast');
@@ -27,7 +27,7 @@ for(const step of [1,2])test('sengoku props stand on land, outside every footpri
   assert.ok(!keepOut.some(k=>Math.hypot(o.u-k.u,o.v-k.v)*N.MPP<k.r),'clear of trees, rocks, ponds and set pieces');
  }
  for(const fi of P.fires)assert.ok(N.sample(f,f.path,fi.u,fi.v)<=.3,'fires keep off the worn paths');
- for(let i=0;i<P.fires.length;i++)for(let j=i+1;j<P.fires.length;j++)assert.ok(Math.hypot(P.fires[i].u-P.fires[j].u,P.fires[i].v-P.fires[j].v)*N.MPP>=20,'fires are spread out');
+ for(let i=0;i<P.fires.length;i++)for(let j=i+1;j<P.fires.length;j++)assert.ok(Math.hypot(P.fires[i].u-P.fires[j].u,P.fires[i].v-P.fires[j].v)*N.MPP>=28,'fires are spread out');
  assert.deepEqual(world(step).set.props,P,'deterministic placement');
 });
 test('sengoku meshes fit 16-bit indices with unit normals; the anime look is unchanged',()=>{
@@ -41,7 +41,7 @@ test('sengoku meshes fit 16-bit indices with unit normals; the anime look is unc
  assert.ok(![9,10,11,12].some(k=>animeKinds.has(k)),'no sengoku props in the anime look');
  assert.ok(animeKinds.has(4),'anime blossoms remain');
 });
-test('the walk opens in the sengoku look with six skies; the anime look keeps four; props block walking only in the sengoku look',async()=>{
+test('the walk opens in the realistic look with six skies; the anime look keeps four; props block walking only in the sengoku look',async()=>{
  const noop=()=>{},raf=[],sources=[];let now=0,ready;const loaded=new Promise(r=>ready=r);
  const gl=new Proxy({shaderSource:(s,src)=>sources.push(src),getExtension:n=>n==='OES_element_index_uint'?{}:null,getParameter:()=>4096,getShaderParameter:()=>true,getProgramParameter:()=>true,createBuffer:()=>({}),createShader:()=>({}),createProgram:()=>({}),createTexture:()=>({}),getUniformLocation:()=>({})},{get:(o,k)=>k in o?o[k]:/^[A-Z_0-9]+$/.test(k)?1:noop});
  const canvas={getContext:()=>gl,getBoundingClientRect:()=>({width:1280,height:800}),clientWidth:1280,clientHeight:800,classList:{add:noop,remove:noop},focus:noop,addEventListener:noop};
@@ -62,12 +62,12 @@ test('the walk opens in the sengoku look with six skies; the anime look keeps fo
  api.st.weather=5;look.set({style:'anime'});
  assert.equal(api.st.weather,0,'an out-of-range sky falls back to the first');
  same(g.skies(),['clear','cloudy','rain','fog'],'four anime skies');
- assert.equal(look.get().preset,'summer','the anime look restores its own defaults');
+ assert.equal(look.get().saturation,1.06,'the anime look restores its own defaults');
  assert.notEqual(g.canWalk(at[0],at[1]),null,'props do not block walking in the anime look');
  const n0=sources.length;api.draw();const anime=sources.slice(n0);
  assert.ok(anime.length>0&&anime.every(s=>!s.includes('SENGOKU 1')),'the anime look rebuilds its programs without the sengoku variant');
  const n1=sources.length;look.set({style:'sengoku'});api.draw();const back=sources.slice(n1);
  assert.ok(back.length===anime.length&&back.every(s=>s.startsWith('#define SENGOKU 1\n')),'switching back rebuilds the sengoku variant');
- assert.equal(look.get().preset,'autumn');assert.equal(look.get().saturation,.8);
+ assert.equal(look.get().preset,'summer');assert.equal(look.get().saturation,.8);
  look.reset();assert.equal(look.get().style,'sengoku');
 });

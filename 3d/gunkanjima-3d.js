@@ -112,14 +112,15 @@
   const SENGOKU_PRESETS = {
     autumn: ['#9c8a68', '#4a4230', '#b44a5b', '#8a3f4a', '#4f2630'],
     winter: ['#a59d8a', '#4a4538', '#7a6a5a', '#4e4238', '#25201c'],
-    summer: ['#7d8a55', '#2f3a22', '#5d7a3a', '#2f4a26', '#16241a'],
+    // Late summer, the default: grass between green and straw, trees in muted greens (no autumn reds).
+    summer: ['#8c8a5e', '#353a24', '#657a40', '#3a4e2c', '#1c2818'],
     spring: ['#93a066', '#3f4a2c', '#efc3cf', '#d892a8', '#7d4a5a'],
     magic: ['#a99bb0', '#4a3f55', '#c9a0d8', '#8a5aa8', '#3a2248']
   };
   /* Each look has its own defaults; choosing a look restores them so the sliders suit it. */
   const LOOK_BASE = { quality: 'auto', grass: 1, flowers: 1, land: 1, haze: 1, cloudScale: 66, cloudSpeed: 3.5, spots: 1, wind: 1, sparkle: 1, ambient: 1, slope: 28 };
   const LOOK_STYLES = {
-    sengoku: { style: 'sengoku', preset: 'autumn', exposure: .9, saturation: .8, contrast: .32, warmth: 0, clouds: .3, mottle: .3, sheen: .05, streaks: 0, grain: .012, bloom: lowEnd ? 0 : .55 },
+    sengoku: { style: 'sengoku', preset: 'summer', exposure: .9, saturation: .8, contrast: .32, warmth: 0, clouds: .3, mottle: .3, sheen: .05, streaks: 0, grain: .012, bloom: lowEnd ? 0 : .55 },
     anime: { style: 'anime', preset: 'summer', exposure: 1.04, saturation: 1.06, contrast: .2, warmth: .4, clouds: .55, mottle: .32, sheen: .13, streaks: .25, grain: .03, bloom: lowEnd ? 0 : .4 }
   };
   const LOOK_DEFAULT = Object.assign({}, LOOK_BASE, LOOK_STYLES.sengoku);
@@ -435,8 +436,21 @@
           rock=mix(rock,moss*.9,smoothstep(.55,.9,n.y)*smoothstep(.4,.7,noise(vPos.xz*.6))*.8);
         }
         vec3 surface=mix(rock,slab,pavement);
+        // Steep faces (the hill cut for the buildings) are masonry retaining walls, as on the island: coursed stone with
+        // mortar joints, water stains below the weep holes and moss in the joints.
+        float retain=1.0-smoothstep(.34,.6,n.y);
+        if(retain>.01){
+          vec2 st=normalize(vec2(-n.z,n.x)+vec2(1e-4,0.0));
+          float u=dot(vPos.xz,st),row=floor(vPos.y/.36),rf=fract(vPos.y/.36);
+          float sx=(u+hash(vec2(row,3.0))*.8)/mix(.55,.9,hash(vec2(row,7.0))),sf=fract(sx);
+          float joint2=max(1.0-smoothstep(.0,.022,min(rf,1.0-rf)*.36),1.0-smoothstep(.0,.025,min(sf,1.0-sf)*.7));
+          vec3 stone=mix(vec3(.36,.35,.33),vec3(.47,.45,.42),hash(vec2(floor(sx),row)))*(.85+.3*fbm3(vec2(u,vPos.y)*1.3));
+          stone*=1.0-.3*smoothstep(.55,.85,noise(vec2(u*.9,vPos.y*.12)))*(1.0-rf*.5);
+          stone=mix(stone,mix(vec3(.25,.24,.22),moss*.8,smoothstep(.45,.7,noise(vec2(u,vPos.y)*2.0))),joint2*.85);
+          surface=mix(surface,stone,retain);
+        }
         // Earth and straw grass where the placeholder cover lies (preset tints uRamp0: tip, uRamp1: base).
-        float cover=smoothstep(.10,.50,vMaskA.x+age*.22*(1.0-vMaskA.z));
+        float cover=smoothstep(.10,.50,vMaskA.x+age*.22*(1.0-vMaskA.z))*(1.0-.85*retain);
         float straw=fbm3(vPos.xz*.35);
         vec3 grassC=mix(uRamp1,uRamp0,smoothstep(.25,.8,straw))*(.8+.35*noise(vPos.xz*3.3));
         vec3 ground=surface;
@@ -482,7 +496,16 @@
         // Snow on what faces up, thinning on slopes and in drifts; rain darkens the ground.
         float snow=uEnv.y>0.0?uEnv.y*smoothstep(.62,.9,n.y)*smoothstep(.25,.55,fbm3(vPos.xz*.22)+uEnv.y*.35-pm*.3):0.0;
         vec3 albedo=mix(ground*(1.0-.38*uEnv.z),vec3(.74,.76,.80),snow);
-        col=sLight(toLin(albedo),n,uSun,sh,1.0-.35*vMaskB.y*(1.0-snow));
+        // Micro-relief near the walker: two octaves of noise bend the lighting normal, so low sun shows the ground's
+        // bumps instead of a flat painted sheet (the puddle and wetness tests keep the true normal).
+        vec3 nl=n;
+        float nearG=1.0-smoothstep(10.0,35.0,vDepth);
+        if(nearG>.001){
+          vec2 bq=vPos.xz*2.8;float e=.06;
+          float b0=noise(bq)+.45*noise(bq*2.9+3.1),bx=noise(bq+vec2(e,0.0))+.45*noise((bq+vec2(e,0.0))*2.9+3.1),bz=noise(bq+vec2(0.0,e))+.45*noise((bq+vec2(0.0,e))*2.9+3.1);
+          nl=normalize(n+vec3(b0-bx,0.0,b0-bz)/e*2.8*.07*nearG*(1.0-.5*snow)*(1.0-.6*retain)*(1.0-.5*pm));
+        }
+        col=sLight(toLin(albedo),nl,uSun,sh,1.0-.35*vMaskB.y*(1.0-snow));
         // Wet sheen, and puddles on flat paving that mirror the sky (more and rippling in rain).
         vec3 eyeDir=normalize(uEye-vPos);float fres=pow(1.0-max(dot(n,eyeDir),0.0),4.0);
         col+=uFogC*fres*uEnv.z*.35*(1.0-snow);
@@ -686,7 +709,7 @@
       vec3 n = normalize(vNor);
       float d = max(dot(n, uSun), 0.0);
       float sh = shadowAt(vShadow, 0.003);
-      float style = floor(vInfo.x+.5), floorH = floor(vInfo.y*100.0+.5)/100.0, seed = floor(vInfo.z*89.0+.5), gone = vInfo.w;
+      float style = floor(vInfo.x+.5), floorH = floor(vInfo.y*100.0+.5)/100.0, seed = floor(vInfo.z*89.0+.5), gone = mod(vInfo.w, 1000.0);
       float y = vWall.y, s = vWall.x, H = vWall.z;
       float age = clamp((uYear - 74.0) / 36.0, 0.0, 1.0);
       float fy = fract(y / floorH), storey = floor(y / floorH);
@@ -724,10 +747,12 @@
         base = vec3(0.82, 0.80, 0.74);
         win = step(0.45, fy) * step(fy, 0.75) * step(0.35, fract(s / 2.0)) * step(fract(s / 2.0), 0.65) * 0.6;
       }
+      // Foundations reaching down slopes (walking view) have no openings.
+      if (y < 0.0){ win = 0.0; recess = 0.0; rail = 0.0; column = 0.0; }
       #ifdef SENGOKU
       {
-        /* Sengoku facades: the same storeys and bays as old stained concrete, dark timber and plaster in hard weather.
-           Streaks, leaching, rust, spalling, moss, soot, broken or boarded openings and lamplit rooms are illustrative. */
+        /* Realistic facades: the same storeys and bays, in the materials and wear of the island's own years. */
+        if(y<.62){win=0.0;recess=0.0;rail=0.0;column=0.0;}
         float period=2.4, left=.2, right=.72, bottom=.32, top=.78;
         if(style>1.5&&style<2.5){period=3.2;left=.25;right=.75;bottom=.45;top=.85;}
         else if(style>2.5&&style<3.5){period=1.8;left=.06;right=1.0;bottom=.34;top=.82;}
@@ -740,148 +765,127 @@
         float bay=fract(s/period),bayId=floor(s/period);
         // vWall.z rises with the face like y; the wall's real top is its storeys plus the 0.6 m sunk below ground.
         H=(vTop+.6)*vAlive;
-        vec3 alb=mix(vec3(.40,.39,.37),vec3(.49,.47,.43),hash(vec2(seed,41.0)));
-        float timber=0.0,tiles=0.0,castle=step(style,3.5),boards=0.0,calm=max(castle,step(4.5,style));
-        vec3 timberC=mix(vec3(.11,.09,.08),vec3(.19,.16,.13),noise(vec2(s*.5,y*3.0)+seed));
-        if(castle>.5){
-          // Castle quarter: the apartments, the 1918 housing and the school as old white plaster between dark timber posts
-          // and beams, black clapboard on the ground storey over a stone base, a tiled pent roof along every floor line and a
-          // tiled coping along the top (depth without geometry, like the recessed openings below).
-          alb=mix(vec3(.56,.55,.52),vec3(.64,.63,.59),hash(vec2(seed,41.0)));
-          float post=1.0-smoothstep(.075,.09,min(bay,1.0-bay)*period);
-          float head=1.0-smoothstep(.06,.075,abs(fy-top)*floorH-.03);
-          float sillBeam=1.0-smoothstep(.04,.055,abs(fy-bottom)*floorH-.02);
-          timber=max(post,max(head,sillBeam));
-          if(storey<.5&&fy<top){
-            float bd=fract(y/.21);boards=1.0;
-            alb=mix(vec3(.09,.08,.07),vec3(.16,.14,.12),hash(vec2(floor(y/.21),floor(s/1.8)+seed)))*(1.0-.5*(1.0-smoothstep(0.0,.12,bd)));
-          }
-          if(y<.62){
-            vec2 wq=vec2(s*1.6,y*2.4)+seed,wj=worley(wq);
-            vec3 base0=mix(vec3(.27,.26,.24),vec3(.42,.40,.37),cellNear(wq).y)*(1.0-.6*(1.0-smoothstep(.03,.1,wj.y-wj.x)));
-            alb=mix(alb,base0,step(y,.45+.12*noise(vec2(s*.8,seed))));
-          }
-          float ey=fy*floorH,row=fract(s/.26);
-          if(storey>.5&&ey<.32&&y<H-.45){
-            if(ey<.085){
-              vec2 cd=vec2((row-.5)*.26,ey-.045);
-              float cap=1.0-smoothstep(.034,.042,length(cd));
-              alb=mix(vec3(.07,.07,.08),vec3(.22,.23,.25)*(1.0-.3*smoothstep(.0,.04,-cd.y)),cap);
-            } else {
-              float r=row*2.0-1.0;
-              alb=mix(vec3(.12,.13,.14),vec3(.31,.32,.34),sqrt(max(0.0,1.0-r*r)))*(.85+.25*noise(vec2(s*1.5,ey*20.0)));
-            }
-            tiles=1.0;timber=0.0;
-          }
-          if(y>H-.4){
-            float r=row*2.0-1.0,cy=y-(H-.4);
-            alb=cy<.08?mix(vec3(.07,.07,.08),vec3(.22,.23,.25),1.0-smoothstep(.034,.042,length(vec2((row-.5)*.26,cy-.04)))):
-              mix(vec3(.12,.13,.14),vec3(.31,.32,.34),sqrt(max(0.0,1.0-r*r)))*(.85+.25*noise(vec2(s*1.5,y*20.0)));
-            tiles=1.0;timber=0.0;
-          }
-          alb=mix(alb,timberC,timber*(1.0-tiles));
-          // The underside of the pent roof above shows as a dark strip at the top of each storey.
-          alb*=1.0-.8*step((1.0-fy)*floorH,.06)*step(y+(1.0-fy)*floorH,H-.45)*(1.0-tiles);
-        }
+        /* Period materials in the island's own palette: weathered grey-beige reinforced concrete for the housing blocks
+           and the school, brick, concrete and corrugated iron for the mine, dark boards under mortar for the wooden
+           houses, plaster and timber for the shrine. Below ground level, and on the foundations that reach down slopes,
+           board-marked concrete. Streaks, leaching, rust, spalling, moss, laundry and lamplit rooms are illustrative. */
+        float timber=0.0,brickM=0.0,sheet=0.0,boards=0.0,rc=step(style,3.5),material=floor(vInfo.w/1000.0+.001);
+        vec3 alb=mix(vec3(.47,.46,.43),vec3(.56,.54,.50),hash(vec2(seed,41.0)))*mix(vec3(1.0),vec3(1.03,1.0,.94),step(.6,hash(vec2(seed,7.0))));
+        if(style>1.5&&style<2.5)alb*=.93;
+        if(style>2.5&&style<3.5)alb=mix(vec3(.60,.59,.55),vec3(.65,.63,.58),hash(vec2(seed,3.0)));
         if(style>3.5&&style<4.5){
-          // Board-and-batten storehouse walls: weathered vertical boards (some bleached silver), battens every 0.96 m,
-          // a rail at mid storey and a rubble-stone plinth.
-          float bi=floor(s/.24),bf=fract(s/.24);
-          vec3 wood=mix(vec3(.19,.16,.13),vec3(.31,.27,.22),hash(vec2(bi,seed)));
-          wood=mix(wood,vec3(.43,.42,.40),smoothstep(.55,.85,noise(vec2(s*.35,y*.2+seed*3.0)))*.7);
-          wood*=(.86+.28*noise(vec2(bf*3.0+bi*7.0,y*6.0)))*(1.0-.5*(1.0-smoothstep(.004,.014,min(bf,1.0-bf)*.24)));
-          float batten=1.0-smoothstep(.026,.034,abs(fract(s/.96+.5)-.5)*.96);
-          float railY=abs(fy-.5)*floorH,rail=1.0-smoothstep(.06,.075,railY);
-          wood=mix(wood,mix(vec3(.24,.20,.16),vec3(.34,.30,.25),hash(vec2(floor(s/.96),seed+3.0))),max(batten,rail));
-          wood*=1.0-.35*max(batten,rail)*(1.0-smoothstep(.0,.02,abs(railY-.075)));
-          alb=wood;
-          if(y<.7){
-            vec2 wq=vec2(s*1.6,y*2.4)+seed,wj=worley(wq);
-            vec3 plinth=mix(vec3(.28,.27,.25),vec3(.44,.42,.39),cellNear(wq).y)*(1.0-.6*(1.0-smoothstep(.03,.1,wj.y-wj.x)));
-            alb=mix(alb,plinth,step(y,.5+.15*noise(vec2(s*.8,seed))));
+          float pick=hash(vec2(seed,13.0));
+          if(material>.5&&material<1.5||material<.5&&pick<.12){
+            // Brick with dark mortar, as in the winding house of 1896.
+            float row=floor(y/.075),bx=(s+mod(row,2.0)*.11)/.22,bf=fract(bx),rf=fract(y/.075);
+            float mortar=max(1.0-smoothstep(.0,.012,min(rf,1.0-rf)*.075),1.0-smoothstep(.0,.012,min(bf,1.0-bf)*.22));
+            alb=mix(vec3(.40,.21,.15),vec3(.50,.28,.20),hash(vec2(floor(bx),row)))*(.85+.3*noise(vec2(s,y)*3.0));
+            alb=mix(alb,vec3(.30,.28,.25),mortar*.8);
+            brickM=1.0;
+          } else if(material>1.5&&material<2.5||material<.5&&pick<.62){
+            // Corrugated iron on a steel frame: faded paint, rust bleeding from the laps and fixings.
+            float corr=.5+.5*sin(s*6.2832/.076),lap=fract(y/1.8);
+            vec3 paint=mix(vec3(.42,.44,.43),vec3(.35,.39,.42),hash(vec2(seed,5.0)));
+            float rust=clamp(smoothstep(.5,.85,noise(vec2(s*.9,y*.4+seed)))+(1.0-smoothstep(.0,.3,lap))*.6*noise(vec2(s*3.0,floor(y/1.8)+seed)),0.0,1.0);
+            alb=mix(paint,vec3(.36,.23,.15),rust*(.45+.4*age))*(.84+.26*corr);
+            sheet=1.0;
+          } else {
+            alb=mix(vec3(.44,.43,.40),vec3(.52,.50,.46),pick);
           }
         }
         if(style>4.5&&style<5.5){
-          // Dark clapboard below, old white plaster above, framed by posts and beams.
-          float board=fract(y*4.2);
+          // Wooden houses: most clad in dark weatherboards, some rendered in grey mortar with timber corners.
+          float board=fract(y*4.2),mortarHouse=step(.62,hash(vec2(seed,23.0)));
           vec3 wood=mix(vec3(.17,.14,.11),vec3(.26,.21,.17),hash(vec2(floor(y*4.2),floor(s/1.8)+seed)))*(1.0-.35*(1.0-smoothstep(0.0,.14,board)));
-          float plasterBand=step(floorH*.62,fy*floorH);
-          timber=clamp(step(.94,fract(s/1.8))+1.0-step(.06,fy),0.0,1.0)*plasterBand;
-          alb=mix(mix(wood,vec3(.60,.59,.55),plasterBand),vec3(.13,.11,.09),timber);
+          timber=clamp(step(.96,fract(s/3.6))+1.0-step(.04,fy),0.0,1.0)*mortarHouse;
+          alb=mix(mix(wood,vec3(.54,.53,.49),mortarHouse),vec3(.13,.11,.09),timber);
+          boards=1.0-mortarHouse;
         }
         if(style>5.5){
           timber=clamp(step(.92,fract(s/2.0))+1.0-step(.08,fy),0.0,1.0);
-          alb=mix(vec3(.70,.68,.62),vec3(.12,.10,.08),timber);
+          alb=mix(vec3(.66,.64,.59),vec3(.12,.10,.08),timber);
         }
-        // Broad mottling, then rain streaks running down from the parapet, the sills and every beam.
-        alb*=mix(.86+.22*fbm3(vec2(s*.23,y*.19+seed*3.0)),.93+.1*fbm3(vec2(s*.23,y*.19+seed*3.0)),calm);
+        // Floor slabs of the concrete blocks: a lighter edge at each floor line and a thin shadow under it.
+        if(rc>.5){
+          alb=mix(alb,alb*1.08,(1.0-smoothstep(.10,.13,fy*floorH))*(1.0-win));
+          alb*=1.0-.3*(1.0-smoothstep(.0,.04,(1.0-fy)*floorH))*(1.0-win);
+        }
+        // Below ground level and down the slopes: board-marked concrete in 0.3 m lifts.
+        float found=1.0-step(.62,y);
+        if(found>.5){
+          float lf=fract(y/.3);
+          alb=mix(vec3(.37,.36,.34),vec3(.45,.44,.41),hash(vec2(floor(s/1.8),floor(y/.9)+seed)))*(1.0-.25*(1.0-smoothstep(.0,.035,min(lf,1.0-lf)*.3)));
+          timber=0.0;brickM=0.0;sheet=0.0;boards=0.0;
+        }
+        // Broad mottling, then rain streaks running down from the parapet and the sills.
+        alb*=.9+.16*fbm3(vec2(s*.23,y*.19+seed*3.0));
         float closeDetail=1.0-smoothstep(6.0,26.0,vDepth);
-        if(closeDetail>.001)alb*=1.0-closeDetail*mix(1.0,.5,calm)*(.08*fbm3(vec2(s,y)*2.7+seed)+.08*smoothstep(.55,.8,noise(vec2(s*9.0,y*.9+seed)))-.05);
+        if(closeDetail>.001)alb*=1.0-closeDetail*(.06*fbm3(vec2(s,y)*2.7+seed)+.06*smoothstep(.55,.8,noise(vec2(s*9.0,y*.9+seed)))-.04);
         vec2 gq=vec2(s,y);
-        if(style>3.5&&style<4.5||timber>.5)gq.y*=.2; else if(style>4.5&&style<5.5&&fy<.62)gq.x*=.2;
-        alb*=1.0+mix(.3,.18,castle*(1.0-timber))*grit(gq+seed,vDepth);
-        float streak=smoothstep(.45,.75,noise(vec2(s*2.4,y*mix(.11,.06,castle)+seed*5.0)))*(.4+.6*noise(vec2(s*.7+seed,y*.04)));
-        alb*=1.0-(.55-.3*castle)*streak*(.55+.45*smoothstep(H-4.0,H,y))*(1.0-tiles);
-        float underSill=step(left+.04,bay)*step(bay,right-.04)*step(fy,bottom)*(1.0-smoothstep(0.0,.45,bottom-fy));
-        alb*=1.0-(1.0-win)*underSill*.35*smoothstep(.25,.7,noise(vec2(s*7.0,y*.5+seed)))*(1.0-tiles);
+        if(sheet>.5||timber>.5)gq.y*=.2; else if(boards>.5)gq.x*=.2;
+        alb*=1.0+.26*grit(gq+seed,vDepth);
+        float streak=smoothstep(.45,.75,noise(vec2(s*2.4,y*.11+seed*5.0)))*(.4+.6*noise(vec2(s*.7+seed,y*.04)));
+        alb*=1.0-.42*streak*(.55+.45*smoothstep(H-4.0,H,y))*(1.0-.5*brickM);
+        // Water stains run down from each sill in soft streaks, fading below it (no hard rectangles).
+        float underSill=smoothstep(left,left+.1,bay)*(1.0-smoothstep(right-.1,right,bay))*step(fy,bottom)*(1.0-smoothstep(0.0,.5+.4*noise(vec2(s*3.0,storey+seed)),bottom-fy));
+        alb*=1.0-(1.0-win)*underSill*.3*smoothstep(.3,.75,noise(vec2(s*7.0,y*.5+seed)));
         float underSlab=1.0-smoothstep(0.0,.22,fy);
-        alb*=1.0-.22*underSlab*(1.0-win)*(1.0-castle);
-        // Concrete: pale leaching below some slab joints and rust bleeding from rebar in thin lines.
-        alb=mix(alb,vec3(.70,.69,.64),(1.0-smoothstep(0.0,.35,fy))*smoothstep(.72,.9,noise(vec2(s*3.3,storey+seed)))*nearDetail*.45*(1.0-castle));
+        alb*=1.0-.12*underSlab*(1.0-win)*rc;
+        // Concrete in salt air: pale leaching below some slab joints, rust bleeding from rebar in thin lines, spalled
+        // patches that show aggregate and a rusted bar, and a few long hairline cracks near the walker.
+        alb=mix(alb,vec3(.70,.69,.64),(1.0-smoothstep(0.0,.35,fy))*smoothstep(.72,.9,noise(vec2(s*3.3,storey+seed)))*nearDetail*.4*rc);
         float rustLine=step(.93,hash(vec2(floor(s*2.5),seed+storey)))*(1.0-smoothstep(.015,.04,abs(fract(s*2.5)-.5)/2.5))*smoothstep(.1,.9,1.0-fy);
-        alb=mix(alb,vec3(.36,.20,.11),rustLine*.6*nearDetail*(1.0-win)*(1.0-castle));
-        // Fallen plaster shows the clay and lath behind it; hairline cracks near the walker.
-        if(nearDetail>.001&&win<.5&&castle>.5&&tiles<.5&&timber<.5&&boards<.5&&y>.62){
-          // Irregular sharp-edged patches with a dirty rim; the lath shows as faint horizontal lines.
-          float pf=fbm3(vec2(s*1.7,y*1.3)+seed*3.0)+.16*noise(vec2(s,y)*9.0)+.08*noise(vec2(s,y)*23.0)-.12;
-          float spall=smoothstep(.64,.65,pf)*nearDetail,rim=smoothstep(.6,.64,pf)*(1.0-spall);
-          vec3 clay=mix(vec3(.28,.25,.21),vec3(.36,.32,.27),noise(vec2(s,y)*7.0))*(1.0+.5*grit(vec2(s,y)*1.3,vDepth));
-          clay*=1.0-.3*(1.0-smoothstep(.0,.25,abs(fract(y*7.0+.4*noise(vec2(s*2.0,y)))-.5)*2.0))*step(.5,noise(vec2(s*.9,y*.4)+seed));
-          alb=mix(alb*(1.0-.2*rim*nearDetail),clay,spall*.9);
+        alb=mix(alb,vec3(.36,.20,.11),rustLine*(.35+.35*age)*nearDetail*(1.0-win)*rc);
+        if(nearDetail>.001&&win<.5&&rc>.5&&found<.5){
+          float pf=fbm3(vec2(s*1.7,y*1.3)+seed*3.0)+.16*noise(vec2(s,y)*9.0)+.08*noise(vec2(s,y)*23.0)-.2-.1*(1.0-age);
+          float spall=smoothstep(.64,.65,pf)*nearDetail;
+          vec3 agg=vec3(.33,.31,.28)*(.8+.4*noise(vec2(s,y)*14.0));
+          agg=mix(agg,vec3(.34,.19,.11),(1.0-smoothstep(.01,.025,abs(fract(y*2.2)-.5)/2.2))*.8);
+          alb=mix(alb*(1.0-.18*smoothstep(.6,.64,pf)*nearDetail),agg,spall*.9);
         }
-        if(nearDetail>.001&&win<.5&&tiles<.5){
-          // A few long hairline cracks: isolines of a warped noise field where a broad mask allows them.
+        if(nearDetail>.001&&win<.5&&brickM<.5&&sheet<.5){
           vec2 cq=vec2(s,y)*.55+seed;
           float cn=noise(cq+.6*vec2(noise(cq*2.3),noise(cq*2.3+5.2)));
-          alb*=1.0-.4*(1.0-smoothstep(.004,.012,abs(cn-.5)))*smoothstep(.6,.78,noise(vec2(s*.12,y*.15)+seed*4.0))*nearDetail*(1.0-timber);
+          alb*=1.0-.28*(1.0-smoothstep(.003,.009,abs(cn-.5)))*smoothstep(.68,.8,noise(vec2(s*.3,y*.35)+seed*4.0))*nearDetail*(1.0-timber);
         }
-        // Moss and algae rising from the ground and along ledges; soot above a few openings.
-        float moss=smoothstep(2.4,0.0,y+.8*noise(vec2(s*.8,seed)))*smoothstep(.3,.65,noise(vec2(s*.6,y*.9+seed)));
-        moss=max(moss,underSlab*smoothstep(.62,.85,noise(vec2(s*.9,storey*1.7+seed)))*.7*(1.0-castle));
-        moss=max(moss,tiles*smoothstep(.55,.8,noise(vec2(s*.7,y*2.0+seed)))*.6);
-        alb=mix(alb,mix(vec3(.12,.15,.08),vec3(.22,.24,.13),noise(vec2(s,y)*3.0)),clamp(moss,0.0,1.0)*.8*(1.0-win));
-        alb*=1.0-.55*step(.82,hash(vec2(bayId+seed*3.0,storey*1.7)))*step(top,fy)*(1.0-smoothstep(top,1.0,fy))*step(left,bay)*step(bay,right)*(1.0-castle*.5);
-        // Galleries and recesses sit in deep shade; railings and columns catch the light (timber in the castle quarter).
-        alb=mix(alb,mix(alb*1.12,timberC,castle),max(rail,column*.8));
-        float ao=1.0-recess*.7-underSlab*.2*(1.0-castle);
-        // Depth without geometry: projecting slabs and pent roofs shade a band under them and open galleries shade their
-        // depth, all from the real sun direction (t runs along the wall; sN, sT, sY are the sun's normal, lateral and
-        // vertical components).
+        // Moss and algae rising from the ground and along ledges (more after 1974); soot above a few openings.
+        float moss=smoothstep(2.4+1.5*age,0.0,y+.8*noise(vec2(s*.8,seed)))*smoothstep(.3,.65,noise(vec2(s*.6,y*.9+seed)));
+        moss=max(moss,underSlab*smoothstep(.62-.12*age,.85,noise(vec2(s*.9,storey*1.7+seed)))*.6*rc);
+        alb=mix(alb,mix(vec3(.12,.15,.08),vec3(.22,.24,.13),noise(vec2(s,y)*3.0)),clamp(moss,0.0,1.0)*.75*(1.0-win));
+        alb*=1.0-.45*step(.84,hash(vec2(bayId+seed*3.0,storey*1.7)))*smoothstep(top,top+.03,fy)*(1.0-smoothstep(top,1.0,fy))*smoothstep(left-.06,left+.12,bay)*(1.0-smoothstep(right-.12,right+.06,bay))*(.55+.45*noise(vec2(s*3.0,y*2.0)))*(1.0-sheet);
+        // Galleries and recesses sit in deep shade; railings and columns catch the light.
+        alb=mix(alb,alb*1.1,max(rail,column*.8));
+        float ao=1.0-recess*.7-underSlab*.12*rc;
+        // Depth without geometry: projecting slabs shade a band under them and open galleries shade their depth, both from
+        // the real sun direction (t runs along the wall; sN, sT, sY are the sun's normal, lateral and vertical components).
         vec3 t=normalize(vec3(n.z,0.0,-n.x));
         float sN=max(dot(uSun,n),.03),sT=dot(uSun,t),sY=uSun.y;
-        float below=(1.0-fy)*floorH;
-        float ledge=1.0-(1.0-win)*(1.0-step(.12*sY/sN,below))*(1.0-castle);
-        if(castle>.5){
-          float eave=step(y+below,H-.45)*(1.0-tiles);
-          ledge=1.0-eave*step(below,.6*sY/sN);
-          ledge*=1.0-step(y,H-.4)*step(H-.4-y,.5*sY/sN)*(1.0-tiles);
-          ao*=1.0-.45*eave*(1.0-smoothstep(0.0,.6,below));
-          ao*=1.0-.4*(1.0-smoothstep(0.0,.3,y-(H-.4)+.35))*step(y,H-.4);
-        }
+        float ledge=1.0-(1.0-win)*rc*(1.0-step(.12*sY/sN,(1.0-fy)*floorH))*(1.0-found);
         float gallery=1.0-recess*(1.0-step(1.6*sY/sN,(1.0-fy)*floorH*.62));
         vec3 lit=sLight(toLin(alb),n,uSun,sh*ledge*gallery,ao);
         if(win>.5){
-          // Openings: wooden lattice (renji) over a dark room, paper screens (shoji) with torn holes, boarded bays and, at
-          // dusk and night in the inhabited years, a few screens glowing with lamplight. No glass in this world.
+          // Openings: sash windows of the period (painted wooden frames on the housing, a finer steel grid on the school and
+          // the mine) whose glass mirrors the sky; curtains or paper screens behind them in the inhabited years; dark rooms
+          // with broken or boarded panes after 1974; and at dusk and night a few rooms glowing with lamplight.
           float kind=hash(vec2(bayId*1.7+seed,storey*3.1+1.0));
           float edgeX=min(pane.x,1.0-pane.x)*paneWidth,edgeY=min(pane.y,1.0-pane.y)*paneHeight;
-          float frame=1.0-smoothstep(.035,.065,min(edgeX,edgeY));
+          float frame=1.0-smoothstep(.035,.06,min(edgeX,edgeY));
+          float fine=step(2.5,style)*step(style,4.5),gx=mix(paneWidth/2.0,.45,fine),gy=mix(paneHeight/2.0,.5,fine);
+          float bars=max(1.0-smoothstep(.012,.024,abs(fract(pane.x*paneWidth/gx+.5)-.5)*gx),1.0-smoothstep(.012,.024,abs(fract(pane.y*paneHeight/gy+.5)-.5)*gy));
           vec3 inside=(uAmbS*.5+uKey*.06)*toLin(vec3(.10,.09,.08))*(.4+pane.y);
-          float shoji=step(kind,.38),lamp=step(kind,.13)*(1.0-age)*uTone.w;
-          vec2 kg=vec2(pane.x*paneWidth/.32,pane.y*paneHeight/.42);
-          float kumiko=1.0-smoothstep(.012,.02,min(min(fract(kg.x),1.0-fract(kg.x))*.32,min(fract(kg.y),1.0-fract(kg.y))*.42));
-          float torn=step(.74-.22*age,noise(vec2(pane.x*paneWidth,pane.y*paneHeight)*5.3+bayId*7.0+storey)+.12*noise(vec2(pane.x,pane.y)*40.0))*(1.0-lamp);
-          float lattice=mix(.38,1.0-smoothstep(.012,.024,abs(fract(pane.x*paneWidth/.11)-.5)*.11),nearDetail)*(1.0-shoji);
+          float broken=step(1.0-.6*age,hash(vec2(floor(pane.x*paneWidth/gx)+bayId*3.0,floor(pane.y*paneHeight/gy)+storey+seed)));
+          float open=step(.7,kind)*step(kind,.84)*(1.0-age);
+          float lamp=step(.88,kind)*(1.0-age)*uTone.w;
+          // Curtains (muted cottons) or paper screens, dimly lit through the glass; none after the island emptied.
+          float cover=step(.35,hash(vec2(bayId+seed*2.0,storey*5.0)))*(1.0-age)*(1.0-open);
+          float ch=hash(vec2(bayId,storey+9.0));
+          vec3 curtC=ch<.3?vec3(.72,.69,.60):ch<.55?vec3(.56,.54,.47):ch<.75?vec3(.40,.45,.52):vec3(.58,.46,.43);
+          if(ch<.3)curtC*=1.0-.35*max(1.0-smoothstep(.01,.02,abs(fract(pane.x*paneWidth/.3)-.5)*.3),1.0-smoothstep(.01,.02,abs(fract(pane.y*paneHeight/.4)-.5)*.4))*nearDetail;
+          vec3 room=mix(inside,toLin(curtC)*(uAmbS*.55+uKey*.1*sh+toLin(vec3(1.0,.64,.34))*lamp*.9),cover);
+          vec3 view=normalize(vWorld-uEye),refl=reflect(view,n);
+          vec3 skyR=mix(uFogC,uAmbS*.9,smoothstep(0.0,.4,refl.y))*.4+uSunC*pow(max(dot(refl,uSun),0.0),64.0)*.6;
+          float fres=(.1+.55*pow(1.0-max(dot(-view,n),0.0),4.0))*(1.0-open)*(1.0-broken);
+          vec3 glass=mix(room,skyR*(.85+.3*noise(vec2(s*3.0,y*3.0)+seed)),fres)+toLin(vec3(1.0,.64,.34))*lamp*(.35+.65*pane.y)*(1.0-cover);
           // The opening is recessed 0.22 m: its head and one jamb shade it from the sun, and seen at an angle the inner jamb,
           // soffit or sill shows as a strip of wall.
           float D=.22,distTop=(1.0-pane.y)*paneHeight,distL=pane.x*paneWidth,distR=(1.0-pane.x)*paneWidth;
@@ -889,20 +893,32 @@
           float shIn=sh*(1.0-reveal);
           vec3 toEye=normalize(uEye-vWorld);float vN=max(dot(toEye,n),.05),vT=dot(toEye,t);
           float jamb=step(vT>0.0?distL:distR,D*abs(vT)/vN),soffit=step(distTop,D*max(-toEye.y,0.0)/vN),sill=step(pane.y*paneHeight,D*max(toEye.y,0.0)/vN);
-          vec3 paper=toLin(vec3(.74,.70,.60)*(.9+.2*noise(kg*1.3+seed)))*(uAmbS*.8+uKey*.3*shIn)+toLin(vec3(1.0,.64,.32))*lamp*(.6+.4*pane.y);
-          paper=mix(paper,inside,torn*(1.0-kumiko));
-          paper=mix(paper,sLight(toLin(vec3(.16,.13,.10)),n,uSun,shIn,.7),kumiko*mix(.5,1.0,nearDetail));
-          vec3 wcol=mix(inside,paper,shoji);
-          wcol=mix(wcol,sLight(toLin(vec3(.29,.26,.22)),n,uSun,shIn,.8),lattice);
-          float boarded=step(.88,kind)*step(.5,age+hash(vec2(seed,storey)));
+          vec3 wcol=glass*(.6+.4*(1.0-reveal));
+          float boarded=step(.9,kind)*step(.3,age)*step(.5,age+hash(vec2(seed,storey)));
           vec3 plank=mix(vec3(.19,.16,.12),vec3(.30,.25,.19),hash(vec2(floor(pane.y*paneHeight/.19),bayId+seed)))*(1.0-.4*(1.0-smoothstep(0.0,.1,fract(pane.y*paneHeight/.19))));
           wcol=mix(wcol,sLight(toLin(plank),n,uSun,shIn,.8),boarded);
-          wcol=mix(wcol,sLight(toLin(vec3(.14,.12,.10)),n,uSun,shIn,.8),frame*nearDetail);
+          vec3 frameC=mix(mix(vec3(.47,.51,.46),vec3(.40,.44,.48),hash(vec2(seed,11.0))),vec3(.22,.23,.23),fine)*(1.0-.25*age);
+          wcol=mix(wcol,sLight(toLin(frameC),n,uSun,shIn,.8),max(frame,bars*(1.0-open)*(1.0-broken*.7))*nearDetail*(1.0-boarded));
           vec3 jambN=vT>0.0?t:-t;
           wcol=mix(wcol,sLight(toLin(alb*.9),jambN,uSun,sh,.8),jamb*(1.0-boarded)*nearDetail);
           wcol=mix(wcol,sLight(toLin(alb*.8),vec3(0.0,-1.0,0.0),uSun,sh,.6),soffit*(1.0-jamb)*nearDetail);
           wcol=mix(wcol,sLight(toLin(alb*1.05),vec3(0.0,1.0,0.0),uSun,sh,.9),sill*(1.0-jamb)*nearDetail);
           lit=mix(lit,wcol,win);
+        }
+        // Laundry on poles at the window heads of some flats in the inhabited years.
+        if(rc>.5&&style<2.5&&age<.5&&found<.5){
+          float lb=hash(vec2(bayId*3.1+seed,storey*1.3+7.0)),lx=(bay-left)/(right-left),hang=(top+.05-fy)*floorH;
+          if(lb>.74&&lx>0.0&&lx<1.0&&hang>0.0&&hang<.85){
+            float piece=floor(lx*5.0),pf=fract(lx*5.0),ph=hash(vec2(piece+bayId*5.0,storey+seed));
+            float len=mix(.35,.8,ph)*(1.0-.12*sin(pf*3.1416)),on=step(.06,pf)*step(pf,.94)*step(hang,len)*step(.25,ph)*(1.0-2.0*age);
+            vec3 cloth=ph<.45?vec3(.78,.77,.72):ph<.62?vec3(.30,.36,.48):ph<.8?vec3(.62,.55,.40):vec3(.70,.54,.52);
+            // Folds run down each piece; the hem is darker; a soft shadow falls on the wall just below and beside it.
+            float fold=.78+.22*sin(pf*25.0+ph*9.0)*sin(pf*9.0+hang*3.0);
+            float shade=(1.0-on)*step(.06,pf-.05*sign(sT))*step(pf-.05*sign(sT),.94)*step(hang,len+.12)*step(.25,ph)*(1.0-2.0*age);
+            lit*=1.0-.35*shade*sh;
+            lit=mix(lit,sLight(toLin(cloth*fold*(1.0-.25*smoothstep(len-.06,len,hang))),n,uSun,sh,.9),on);
+            lit=mix(lit,sLight(toLin(vec3(.35,.33,.30)),n,uSun,sh,.8),(1.0-smoothstep(.008,.016,abs(hang-.012)))*(1.0-2.0*age)*nearDetail);
+          }
         }
         float snowCap=uEnv.y*(1.0-smoothstep(.0,.06,H-y))*(1.0-win);
         lit=mix(lit,sLight(toLin(vec3(.74,.76,.80)),vec3(0.0,1.0,0.0),uSun,sh,1.0),snowCap);
@@ -1465,7 +1481,7 @@
 #else
     const float GRASS_H=1.0,GRASS_W=1.0,GRASS_FERN=1.0;
 #endif
-    varying float vTip; varying vec3 vTint; varying vec2 vCorner; varying float vGust; varying vec2 vRoot; varying float vKindF;
+    varying float vTip; varying vec3 vTint; varying vec2 vCorner; varying float vGust; varying vec2 vRoot; varying float vKindF; varying vec3 vBN;
     float lift(vec4 t){ return (t.r*65280.0+t.g*255.0)*.01; }
 #ifdef SENGOKU
     float chash(vec2 p){ return fract(sin(dot(mod(p,251.0),vec2(12.9898,78.233)))*43758.5453); }
@@ -1509,7 +1525,7 @@
       // Player touch response: blades part around the walker.
       vec2 away=root.xz-uWalker.xz;float near=length(away);
       lean+=away/max(near,.001)*(1.0-smoothstep(.25,1.35,near))*1.2;
-      vGust=wave;vRoot=root.xz;vCorner=vec2(0.0);vTint=vec3(1.0);
+      vGust=wave;vRoot=root.xz;vCorner=vec2(0.0);vTint=vec3(1.0);vBN=vec3(0.0,1.0,0.0);
       vec3 p;
       #ifdef SENGOKU
       if(uFlowerPass>.5){
@@ -1525,7 +1541,7 @@
         } else {
           vec3 hang=normalize(vec3(bow.x*1.4,.35,bow.y*1.4)+vec3(.0001,0.0,0.0));
           vec3 side=normalize(cross(hang,normalize(uWalker-top)+vec3(0.0,.0001,0.0)));
-          vKindF=2.0;vTip=tip;vCorner=vec2(aSide,tip*2.0-1.0);
+          vKindF=2.0;vTip=tip;vCorner=vec2(aSide,tip*2.0-1.0);vBN=normalize(cross(side,hang));
           p=top+hang*plume*tip+side*aSide*mix(.055,.02,tip)*step(.001,alive);
         }
       } else
@@ -1559,6 +1575,9 @@
 #endif
         p=root+across*aSide*width+vec3(lean.x*tip*tip*height,height*tip*(1.0-.16*dot(lean,lean)),lean.y*tip*tip*height);
         vKindF=fern;vTip=tip;
+        // The blade's own face normal, rounded across its width, so blades are not all lit like one flat sheet.
+        vec3 bdir=normalize(vec3(lean.x*height,max(height*(1.0-.16*dot(lean,lean)),.001),lean.y*height)+vec3(0.0,.001,0.0));
+        vBN=normalize(normalize(cross(across,bdir)+vec3(0.0,.0001,0.0))+across*aSide*.55);
       }
       finish(p);
     }`;
@@ -1569,7 +1588,7 @@
     precision mediump float;
 #endif
     uniform float uFog, uAnime; uniform mediump float uFlowerPass; uniform vec3 uBg, uSun, uHorizon;
-    varying float vTip; varying vec3 vTint; varying vec2 vCorner; varying float vGust; varying vec2 vRoot; varying float vKindF;
+    varying float vTip; varying vec3 vTint; varying vec2 vCorner; varying float vGust; varying vec2 vRoot; varying float vKindF; varying vec3 vBN;
     varying vec4 vShadow; varying float vDepth;
     ` + SHADOW_FN + `
     void main(){
@@ -1592,8 +1611,15 @@
           alb=mix(alb,uRamp1*.6,step(.5,vKindF));
           alb=mix(alb,vec3(.85,.86,.88),uEnv.y*(1.0-vTip)*.6);
         }
-        vec3 lit=sLight(toLin(alb),up,uSun,sh,.5+.5*vTip);
-        lit+=uKey*toLin(alb)*pow(max(dot(normalize(vWorld-uEye),uSun),0.0),4.0)*vTip*sh*.7*gloss;
+        // Two-sided blade normal (flipped to face the eye), leaning a little towards up so the field stays soft; a dry
+        // sheen along the blade and light through it when the sun is behind.
+        vec3 toEyeG=normalize(uEye-vWorld),nb=normalize(vBN);
+        if(dot(nb,toEyeG)<0.0)nb=-nb;
+        vec3 ng=normalize(mix(nb,up,vKindF>2.5?.8:.3));
+        if(vKindF>1.5&&vKindF<2.5)alb*=.82+.3*(1.0-abs(vCorner.x));
+        vec3 lit=sLight(toLin(alb),ng,uSun,sh,.5+.5*vTip);
+        lit+=uKey*toLin(alb)*pow(max(dot(-toEyeG,uSun),0.0),4.0)*vTip*sh*.7*gloss;
+        lit+=uKey*toLin(vec3(.85,.80,.68))*pow(max(dot(reflect(-uSun,ng),toEyeG),0.0),14.0)*.10*sh*vTip;
         gl_FragColor=vec4(aerial(lit,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
         return;
       }
@@ -1923,7 +1949,7 @@
     varying float vT; varying float vType; varying float vSeed;
     void main(){
       float kind=floor(aFire.w/1000.0),seed=mod(aFire.w,1000.0)/1000.0,scale=kind>.5?.55:1.0,ph=aSlot.x,t,size;
-      vec3 base=aFire.xyz+vec3(0.0,kind>.5?1.12:.1,0.0),p;
+      vec3 base=aFire.xyz+vec3(0.0,kind>.5?.9:.1,0.0),p;
       if(aSlot.y<.5){
         t=fract(uWindTime*1.7+ph*13.7+seed*7.0);float sw=(.35+.65*(1.0-t))*.34*scale;
         p=base+vec3(sin(ph*40.0+uWindTime*3.1)*sw,t*1.45*scale,cos(ph*31.0+uWindTime*2.7)*sw);size=mix(.85,.2,t)*scale;
@@ -2209,10 +2235,31 @@
     const R = { pos: [], y: [], life: [], info: [], bid: [], idx: [] };
     let nw = 0, nr = 0, seedN = 0;
     list.forEach((b, bi) => { b.bid = bi + 1; });
+    /* Footprints of different buildings overlap in places (up to about 30 m2), and adjoining blocks share walls. A face
+       whose outer side lies inside another building standing in the same years is cut down to that building's roof,
+       with separate pieces for the years when the other building did not stand. In the walking view, walls on slopes
+       also reach down to the terrain as a foundation (vWall.y < 0 below the storeys), so no building floats. */
+    const topOf = b => b.ground + b.storeys * b.floorH, polysOf = b => b.wings || [b.poly];
+    const boxOf = new Map(list.map(b => { const ps = polysOf(b).flat(); return [b, [Math.min(...ps.map(p => p[0])), Math.min(...ps.map(p => p[1])), Math.max(...ps.map(p => p[0])), Math.max(...ps.map(p => p[1]))]]; }));
+    const inside = (pt, o) => polysOf(o).some(poly => pointInPoly(pt, poly));
+    const lifeYears = b => { const l = lifeOf(b); return [l[0], l[1] || Infinity]; };
+    const segT = (p, q, r, s) => {
+      const dx = q[0] - p[0], dy = q[1] - p[1], ex = s[0] - r[0], ey = s[1] - r[1], den = dx * ey - dy * ex;
+      if (Math.abs(den) < 1e-12) return null;
+      const t = ((r[0] - p[0]) * ey - (r[1] - p[1]) * ex) / den, u = ((r[0] - p[0]) * dy - (r[1] - p[1]) * dx) / den;
+      return t > 1e-6 && t < 1 - 1e-6 && u >= -1e-9 && u <= 1 + 1e-9 ? t : null;
+    };
+    const ground = (u, v) => {
+      if (!GAME || !terrain || !terrain.hts0) return Infinity;
+      const T = terrain, i = clamp((u - T.x0) / T.step, 0, T.w - 1.001), j = clamp((v - T.y0) / T.step, 0, T.h - 1.001), i0 = Math.floor(i), j0 = Math.floor(j), fi = i - i0, fj = j - j0, k = j0 * T.w + i0;
+      return (T.hts0[k] * (1 - fi) + T.hts0[k + 1] * fi) * (1 - fj) + (T.hts0[k + T.w] * (1 - fi) + T.hts0[k + T.w + 1] * fi) * fj;
+    };
     for (const b of list){
       const parts = b.wings || [b.poly];
       const H = b.storeys * b.floorH, base = b.ground - 0.6, top = b.ground + H;
       const style = STYLE[b.style] || 1, seed = (seedN++ % 89) / 89, life = lifeOf(b);
+      // Wall material for the realistic look (vInfo.w carries it in thousands): 1 brick, 2 steel frame, 3 concrete.
+      const material = /brick/.test(b.structure || '') ? 1 : /steel/.test(b.structure || '') ? 2 : b.style === 'industrial' && /RC/.test(b.structure || '') ? 3 : 0;
       for (const part of parts){
         if (part.length < 3) continue;
         /* every outline in one winding: drawn the other way round, a wall quad faces inwards and back-face culling hides it from outside */
@@ -2225,12 +2272,52 @@
           let nx = ey, nz = -ex;
           if (cw){ nx = -nx; nz = -nz; }
           const l = Math.hypot(nx, nz) || 1; nx /= l; nz /= l;
-          for (const [pt, s, up] of [[p, 0, 0], [q, len, 0], [p, 0, 1], [q, len, 1]]){
-            W.pos.push(pt[0], pt[1]); W.y.push(base, up ? top : base); W.nor.push(nx, 0, nz);
-            W.wall.push(s, b.ground, H); W.info.push(style, b.floorH, seed, b.gone ? b.gone - 1900 : 0); W.life.push(life[0], life[1]); W.bid.push(b.bid);
+          /* (nx, nz) points into the building: the winding, not this normal, decides which side is drawn. The walking view
+             stores the outward normal so walls are lit on the side that faces the sun; the aerial views keep theirs. */
+          const ox = -nx, oz = -nz, sg = GAME ? -1 : 1;
+          const sb = [Math.min(p[0], q[0]), Math.min(p[1], q[1]), Math.max(p[0], q[0]), Math.max(p[1], q[1])], [a0, a1] = lifeYears(b);
+          const others = list.filter(o => { if (o === b) return false; const x = boxOf.get(o), [o0, o1] = lifeYears(o); return x[0] <= sb[2] + .2 && x[2] >= sb[0] - .2 && x[1] <= sb[3] + .2 && x[3] >= sb[1] - .2 && o0 < a1 && o1 > a0; });
+          const ts = [0, 1];
+          for (const o of others) for (const op of polysOf(o)) for (let k = 0; k < op.length; k++){
+            const r = op[k], t = segT(p, q, r, op[(k + 1) % op.length]);
+            if (t !== null) ts.push(t);
+            // Corners of the other outline lying on this wall also split it (shared, collinear walls).
+            const pr = ((r[0] - p[0]) * ex + (r[1] - p[1]) * ey) / (ex * ex + ey * ey), dl = Math.abs((r[0] - p[0]) * ey - (r[1] - p[1]) * ex) / Math.hypot(ex, ey);
+            if (dl < .03 && pr > 1e-6 && pr < 1 - 1e-6) ts.push(pr);
           }
-          W.idx.push(nw, nw + 2, nw + 1, nw + 1, nw + 2, nw + 3);
-          nw += 4;
+          ts.sort((x, y) => x - y);
+          for (let k = 0; k + 1 < ts.length; k++){
+            const t0 = ts[k], t1 = ts[k + 1];
+            if ((t1 - t0) * len < .05) continue;
+            const A = [p[0] + ex * t0, p[1] + ey * t0], Cq = [p[0] + ex * t1, p[1] + ey * t1], tm = (t0 + t1) / 2, probe = [p[0] + ex * tm + ox * .1, p[1] + ey * tm + oz * .1];
+            const cover = others.filter(o => inside(probe, o));
+            // Foundation: the lowest terrain along the face and 1 m in front of it.
+            let low = Infinity;
+            for (const f of [0, .25, .5, .75, 1]){ const u = A[0] + (Cq[0] - A[0]) * f, v = A[1] + (Cq[1] - A[1]) * f; low = Math.min(low, ground(u, v), ground(u + ox * 1.25, v + oz * 1.25)); }
+            const bottom = Math.min(base, low - .4);
+            // Year intervals in which the set of covering buildings is constant; each gets its own piece.
+            const cuts = [a0, a1];
+            for (const o of cover){ const [o0, o1] = lifeYears(o); if (o0 > a0 && o0 < a1) cuts.push(o0); if (o1 > a0 && o1 < a1) cuts.push(o1); }
+            const uniq = [...new Set(cuts)].sort((x, y) => x - y);
+            let run = null;
+            const flush = () => {
+              if (!run || run.from >= top - .05) return;
+              for (const [pt, s, up] of [[A, t0 * len, 0], [Cq, t1 * len, 0], [A, t0 * len, 1], [Cq, t1 * len, 1]]){
+                W.pos.push(pt[0], pt[1]); W.y.push(base, up ? top : run.from); W.nor.push(sg * nx, 0, sg * nz);
+                W.wall.push(s, b.ground, H); W.info.push(style, b.floorH, seed, (b.gone ? b.gone - 1900 : 0) + material * 1000); W.life.push(run.y0, run.y1 === Infinity ? 0 : run.y1); W.bid.push(b.bid);
+              }
+              W.idx.push(nw, nw + 2, nw + 1, nw + 1, nw + 2, nw + 3);
+              nw += 4;
+            };
+            for (let m = 0; m + 1 < uniq.length; m++){
+              const y0 = uniq[m], y1 = uniq[m + 1];
+              let from = bottom;
+              for (const o of cover){ const [o0, o1] = lifeYears(o); if (o0 <= y0 && o1 >= y1) from = Math.max(from, topOf(o)); }
+              if (run && run.from === from){ run.y1 = y1; continue; }
+              flush(); run = { y0, y1, from };
+            }
+            flush();
+          }
         }
         const tri = triangulate(poly);
         for (const p of poly){ R.pos.push(p[0], p[1]); R.y.push(base, top); R.life.push(life[0], life[1]); R.info.push(style, seed); R.bid.push(b.bid); }
@@ -2430,7 +2517,7 @@
     if (!sengoku() || !nature || !nature.fires || !nature.fires.length) return [];
     if (fireCache) return fireCache;
     const t = lookTime(), d = f => (f.x - st.wx) ** 2 + (f.z - st.wz) ** 2;
-    fireCache = nature.fires.slice().sort((a, b) => d(a) - d(b)).slice(0, 4).map(f => [f.x, f.y + (f.kind ? 1.25 : .7), f.z,
+    fireCache = nature.fires.slice().sort((a, b) => d(a) - d(b)).slice(0, 4).map(f => [f.x, f.y + (f.kind ? 1.05 : .7), f.z,
       (f.kind ? 1.1 : 2.0) * (.82 + .1 * Math.sin(t * 9.1 + f.seed) + .08 * Math.sin(t * 23.3 + f.seed * 3.1)) * (st.weather === 2 ? .7 : 1)]);
     return fireCache;
   }
@@ -2733,8 +2820,8 @@
     const fires = set.props.fires.map(fi => { const w = toWorldTrue(fi.u, fi.v); return { x: w[0], y: fi.y, z: w[1], kind: fi.kind, seed: fi.seed }; }), fa = [], fb = [];
     for (const fi of fires) for (const [n, type] of [[26, 0], [14, 1], [8, 2], [1, 3]]) for (let i = 0; i < n; i++){ fa.push(fi.x, fi.y, fi.z, fi.kind * 1000 + fi.seed); fb.push((i + .5) / n + N.hash(i, fi.seed, 7) * .37, type); }
     const propBins = new Map(), addProp = (u, v, r) => { const key = Math.floor(u / 8) + ',' + Math.floor(v / 8); if (!propBins.has(key)) propBins.set(key, []); propBins.get(key).push([u, v, r]); };
-    for (const fi of set.props.fires) addProp(fi.u, fi.v, fi.kind ? .45 : 1.05);
-    for (const l of set.props.lanterns) addProp(l.u, l.v, .42);
+    for (const fi of set.props.fires) addProp(fi.u, fi.v, fi.kind ? .38 : 1.05);
+    for (const l of set.props.lanterns) addProp(l.u, l.v, .2);
     for (const j of set.props.jizo) addProp(j.u, j.v, .25 * j.count + .2);
     for (const b of set.props.banners) addProp(b.u, b.v, .12);
     nature = { pond: pw ? [pw[0], pw[1], pd.r + .15, 1] : null, tex, f, plants, bins, segments, set, pools, parts: { buf: buffer(parts), count: parts.length / 4, patch }, birds: { buf: buffer(birds), count: 5 }, plantStyle: look.style,

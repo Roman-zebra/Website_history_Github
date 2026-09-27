@@ -246,8 +246,9 @@ function scatter(f,heights,opts){
  });
  return {trees,bushes,rocks};
 }
-/* Sengoku set dressing for the walking view's sengoku look: bonfires and braziers, stone lanterns beside the worn
-   paths, small jizo statues by walls and paths, and tall nobori banners. Placement is deterministic, on level open
+/* Set dressing for the walking view's realistic look, in the island's own years: drum-can fires by the buildings and a
+   few open fires, wooden utility poles with street lamps beside the worn paths, and small jizo statues by walls and paths
+   (banners are no longer placed). Placement is deterministic, on level open
    ground clear of every footprint, the sea, the arrival point and the other set pieces; fires keep off the paths.
    Illustrative only: none of this is evidence about Hashima. */
 function sengokuProps(f,heights,opts){
@@ -269,34 +270,28 @@ function sengokuProps(f,heights,opts){
   }
  };
  const apart=(list,u,v,d)=>!list.some(o=>Math.hypot(u-o.u,v-o.v)*MPP<d);
- // Fires: bonfires on open ground; braziers on paving near walls.
+ // Fires: drum cans on paving near walls, open fires on open ground.
  grid(lowEnd?30:22,401,(u,v,r,q)=>{
-  if(out.fires.length>=(lowEnd?8:14)||r>.7)return;
+  if(out.fires.length>=(lowEnd?5:8)||r>.7)return;
   const brazier=sample(f,f.toBuilding,u,v)<5&&sample(f,f.grass,u,v)<.3;
-  if(sample(f,f.path,u,v)>.3||!free(u,v,brazier?.6:1.4)||!apart(out.fires,u,v,20))return;
+  if(sample(f,f.path,u,v)>.3||!free(u,v,brazier?.6:1.4)||!apart(out.fires,u,v,28))return;
   out.fires.push({u,v,y:ground(u,v),kind:brazier?1:0,seed:Math.floor(q*997)});keep.push({u,v,r:brazier?.8:1.9});
  });
- // Stone lanterns on the edges of worn paths.
+ // Utility poles with street lamps on the edges of worn paths.
  grid(lowEnd?11:7,431,(u,v,r,q)=>{
-  if(out.lanterns.length>=(lowEnd?10:18))return;
+  if(out.lanterns.length>=(lowEnd?8:12))return;
   const p=sample(f,f.path,u,v);
-  if(p<.12||p>.4||r>.6||!free(u,v,.5)||!apart(out.lanterns,u,v,14))return;
+  if(p<.12||p>.4||r>.6||!free(u,v,.5)||!apart(out.lanterns,u,v,18))return;
   out.lanterns.push({u,v,y:ground(u,v),yaw:q*6.2832,seed:Math.floor(q*991),lit:r<.35?1:0});keep.push({u,v,r:.6});
  });
  // Jizo: one to three small statues against a wall or beside a path.
  grid(lowEnd?13:9,461,(u,v,r,q)=>{
-  if(out.jizo.length>=(lowEnd?8:14)||r>.5)return;
+  if(out.jizo.length>=(lowEnd?4:6)||r>.5)return;
   const wall=sample(f,f.toBuilding,u,v),p=sample(f,f.path,u,v);
   if(!((wall>1.2&&wall<2.6)||(p>.1&&p<.35))||!free(u,v,.5,1.1)||!apart(out.jizo,u,v,12))return;
   out.jizo.push({u,v,y:ground(u,v),count:1+Math.floor(q*3),yaw:hash(Math.round(u),Math.round(v),467)*6.2832,seed:Math.floor(q*983)});keep.push({u,v,r:1.2});
  });
- // Nobori banners along paths and plazas.
- grid(lowEnd?15:10,491,(u,v,r,q)=>{
-  if(out.banners.length>=(lowEnd?10:18)||r>.55)return;
-  const p=sample(f,f.path,u,v);
-  if(p>.3||!free(u,v,.4,1.2)||!apart(out.banners,u,v,11))return;
-  out.banners.push({u,v,y:ground(u,v),yaw:q*6.2832,tone:Math.floor(hash(Math.round(u),Math.round(v),497)*3),torn:hash(Math.round(v),Math.round(u),499),seed:Math.floor(q*977)});keep.push({u,v,r:.5});
- });
+ // No banners: they belonged to the first, Sengoku-styled version of this look (the list stays for the data shape).
  return out;
 }
 /* Indexed low-poly meshes, split into batches below 65,536 vertices for 16-bit index buffers.
@@ -489,17 +484,18 @@ function meshes(set,style){
   beam([g.u-ax[0]*.1/MPP,g.y+g.r-.2,g.v-ax[1]*.1/MPP],[g.u+ax[0]*.1/MPP,g.y+g.r+.2,g.v+ax[1]*.1/MPP],.4,.5,[.46,.36,.24],7,31);
  }
  if(sengoku&&set.props){
-  /* Kinds for the sengoku props: 9 worked stone, 10 iron, 11 cloth (colour carries (across, along, palette)), 12 glowing
-     embers or a lit lantern box (emissive). */
+  /* Kinds for the props: 9 worked stone, 10 iron, 11 cloth (colour carries (across, along, palette)), 12 glowing embers
+     or a lit lamp (emissive). */
   const box=(o,x,y,z,sx,sy,sz,c,kind,seed)=>beam([o.u+x/MPP,o.y+y,o.v+z/MPP],[o.u+x/MPP,o.y+y+sy,o.v+z/MPP],sx,sz,c,kind,seed);
   const ring=(o,cx,cy,cz,r,n,w,h,c,kind,seed)=>{for(let i=0;i<n;i++){const a=i/n*6.2832,b=(i+1)/n*6.2832;beam([o.u+(cx+Math.cos(a)*r)/MPP,o.y+cy,o.v+(cz+Math.sin(a)*r)/MPP],[o.u+(cx+Math.cos(b)*r)/MPP,o.y+cy,o.v+(cz+Math.sin(b)*r)/MPP],w,h,c,kind,seed+i);}};
   for(const fi of set.props.fires){
    if(fi.kind){
-    // Brazier: an iron basket of bars and hoops on three legs, glowing coals inside.
-    for(let i=0;i<3;i++){const a=fi.seed+i*2.094;limb(fi,[Math.cos(a)*.42,0,Math.sin(a)*.42],[Math.cos(a)*.12,.95,Math.sin(a)*.12],.04,[.12,.11,.10],fi.seed+i);}
-    for(let i=0;i<10;i++){const a=i/10*6.2832;beam([fi.u+Math.cos(a)*.26/MPP,fi.y+.95,fi.v+Math.sin(a)*.26/MPP],[fi.u+Math.cos(a)*.34/MPP,fi.y+1.35,fi.v+Math.sin(a)*.34/MPP],.03,.03,[.12,.11,.10],10,i);}
-    ring(fi,0,.97,0,.26,10,.035,.04,[.12,.11,.10],10,fi.seed);ring(fi,0,1.33,0,.34,10,.035,.04,[.12,.11,.10],10,fi.seed+20);
-    blob(fi,0,1.02,0,.28,.14,.28,[.85,.28,.06],0,0,12,fi.seed,true,null);
+    // Drum-can fire: a rusted 200-litre oil drum with rolled rims, scrap wood poking out and glowing coals at the top.
+    ring(fi,0,.44,0,.29,14,.025,.88,[.30,.20,.14],10,fi.seed);
+    ring(fi,0,.30,0,.30,14,.035,.03,[.26,.18,.13],10,fi.seed+20);ring(fi,0,.60,0,.30,14,.035,.03,[.26,.18,.13],10,fi.seed+40);
+    ring(fi,0,.87,0,.30,14,.04,.035,[.22,.16,.12],10,fi.seed+60);
+    blob(fi,0,.84,0,.26,.06,.26,[.85,.28,.06],0,0,12,fi.seed,true,null);
+    for(let i=0;i<3;i++){const a=fi.seed*.7+i*2.1;limb(fi,[Math.cos(a)*.12,.7,Math.sin(a)*.12],[Math.cos(a)*.34,1.08,Math.sin(a)*.34],.035,[.12,.10,.08],fi.seed+i);}
    } else {
     // Bonfire: a ring of stones, crossed charred logs and a bed of embers.
     for(let i=0;i<8;i++){const a=i/8*6.2832+fi.seed;rock({u:fi.u+Math.cos(a)*.95/MPP,v:fi.v+Math.sin(a)*.95/MPP,y:fi.y-.08},.42+.18*hash(i,fi.seed,5),[.34,.33,.31],fi.seed+i);}
@@ -508,13 +504,14 @@ function meshes(set,style){
    }
   }
   for(const l of set.props.lanterns){
-   // Stone lantern (toro): base, pillar, platform, fire box, broad roof and finial.
-   const st=[.34,.33,.31];
-   box(l,0,0,0,.62,.14,.62,st,9,l.seed);box(l,0,.14,0,.26,.95,.26,st,9,l.seed+1);box(l,0,1.09,0,.55,.1,.55,st,9,l.seed+2);
-   for(const [x,z] of [[-.17,-.17],[.17,-.17],[-.17,.17],[.17,.17]])box(l,x,1.19,z,.08,.34,.08,st,9,l.seed+3);
-   box(l,0,1.21,0,.28,.28,.28,l.lit?[1,.62,.3]:[.1,.09,.08],l.lit?12:9,l.seed+4);
-   box(l,0,1.53,0,.9,.1,.9,st,9,l.seed+5);box(l,0,1.63,0,.6,.1,.6,st,9,l.seed+6);box(l,0,1.73,0,.26,.08,.26,st,9,l.seed+7);
-   blob(l,0,1.81,0,.1,.14,.1,st,0,0,9,l.seed+8,true,null);
+   // Wooden utility pole with a crossarm, insulators and a street lamp: an iron arm, a dish shade and a bulb.
+   const d=[Math.cos(l.yaw),Math.sin(l.yaw)],e=[-d[1],d[0]];
+   limb(l,[0,0,0],[0,6.2,0],.11,[.18,.15,.12],l.seed);
+   limb(l,[-e[0]*.75,5.7,-e[1]*.75],[e[0]*.75,5.7,e[1]*.75],.06,[.20,.17,.14],l.seed+1);
+   for(const k of [-.6,-.2,.2,.6])box(l,e[0]*k,5.76,e[1]*k,.06,.1,.06,[.62,.60,.55],9,l.seed+2);
+   limb(l,[0,4.3,0],[d[0]*.9,4.45,d[1]*.9],.025,[.14,.13,.12],l.seed+3);
+   blob(l,d[0]*.9,4.36,d[1]*.9,.2,.05,.2,[.16,.15,.14],0,0,10,l.seed+4,false,null);
+   box(l,d[0]*.9,4.24,d[1]*.9,.09,.09,.09,l.lit?[1,.78,.46]:[.55,.55,.5],l.lit?12:9,l.seed+5);
   }
   for(const j of set.props.jizo){
    // Jizo: small rounded stone figures in red bibs, on a shared low plinth.
@@ -526,15 +523,6 @@ function meshes(set,style){
     blob(j,x,.55,z,.13,.14,.13,[.36,.35,.32],0,0,9,j.seed+i+9,false,null);
     beam([j.u+(x+e[0]*.06)/MPP,j.y+.34,j.v+(z+e[1]*.06)/MPP],[j.u+(x+e[0]*.1)/MPP,j.y+.46,j.v+(z+e[1]*.1)/MPP],.26,.05,[.2,.9,4.5],11,j.seed+i);
    }
-  }
-  for(const b of set.props.banners){
-   // Nobori: a pole with a top arm; the cloth hangs in eight rows so it can sway, its free edge torn on some.
-   const d=[Math.cos(b.yaw),Math.sin(b.yaw)],W=.62,L=2.5,top=4.6;
-   limb(b,[0,0,0],[0,top+.15,0],.07,[.20,.16,.12],b.seed);
-   limb(b,[0,top,0],[d[0]*(W+.08),top,d[1]*(W+.08)],.045,[.20,.16,.12],b.seed+1);
-   begin(18*2);const base=cur.count,n=[-d[1],0,d[0]];
-   for(let i=0;i<=8;i++){const t=i/8,y=top-.04-t*L;for(const k of [0,1]){const x=.05+k*W,uv=toUV(b.u,b.v,d[0]*x,d[1]*x);vert([uv[0],b.y+y,uv[1]],n,[k,t,b.tone+b.torn*.9],t*.8+k*.35,11,b.seed%97/97);}}
-   for(let i=0;i<8;i++){const a=base+i*2;cur.idx.push(a,a+2,a+1,a+1,a+2,a+3);}
   }
  }
  return batches.map(b=>({pos:new Float32Array(b.pos),nor:new Float32Array(b.nor),col:new Float32Array(b.col),info:new Float32Array(b.info),idx:new Uint16Array(b.idx),count:b.count}));
