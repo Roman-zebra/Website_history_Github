@@ -137,9 +137,19 @@ def context():
     prefs = ['Tokyo', 'Kanagawa', 'Kyoto', 'Osaka', 'Hiroshima', 'Hokkaido', 'Okinawa', 'Fukuoka', 'Yamanashi', 'Ishikawa', 'Nagasaki', 'Yamaguchi', 'Wakayama', 'Nagano']
     prow = ''.join('<tr><td>' + esc(PREF_JA.get(p, p)) + '</td>' + ''.join(
         f"<td class='num'>{rates.get(m, {}).get(p, 0):.1f}</td>" for m in ['ALL'] + MARKETS) + '</tr>' for p in prefs)
-    seg = aud.get('segments', {})
-    nik = ''.join(f"<li>{esc(x['country'])}：{num(x['figure'])}人 <span class='muted'>（{esc(x['definition'][:60])}・{esc(x['year'])}）</span></li>" for x in seg.get('nikkei', []))
-    hooks = ''.join(f"<li><b>{esc(MARKET_JA.get({'USA': 'US', 'UK': 'GB', 'Hong Kong': 'HK', 'Taiwan': 'TW', 'Korea': 'KR', 'China': 'CN', 'Thailand': 'TH', 'Australia': 'AU', 'Canada': 'CA', 'Singapore': 'SG'}.get(h['market'], ''), h['market']))}</b>・{esc(h['place'])}：{esc(h.get('evidence', '')[:170])}</li>" for h in aud.get('placeHooks', []))
+    nik = """<li>米国：158万6,652人（「日本人」単独または他の人種との組合せ、2020年国勢調査）。うちハワイ州31万2,668人＝州人口の21.5%</li>
+<li>カナダ：12万9,430人（民族的・文化的出自「日本」、2021年国勢調査）</li>
+<li>ブラジル約270万人・ペルー約20万人（外務省「海外日系人数推計」2023年。JICA資料経由）、世界計約500万人</li>"""
+    hooks = """<li><b>米国</b>：代々木公園は陸軍練兵場→米軍宿舎ワシントンハイツ→東京五輪選手村→公園と変わった。ペリーは1853年に久里浜へ上陸。米国人の神奈川訪問率17.0%（全体9.3%）。外国人宿泊に占める米国の割合は山口（岩国）14.8%、沖縄11.7%、青森（三沢）7.9%。</li>
+<li><b>英国</b>：グラバー（1859年来日）の旧グラバー住宅は現存最古の木造洋風建築。英国人の広島訪問率19.6%（全体4.1%）、神奈川19.6%。</li>
+<li><b>豪州</b>：倶知安町（ニセコ）の2025年度外国人宿泊は89.9万人泊で過去最高、豪州が首位の16万6,822人泊。豪州人の長野訪問率15.9%（白馬）。</li>
+<li><b>カナダ</b>：1886年にカナダ人宣教師ショーが軽井沢を避暑地として紹介。三尾（和歌山）からスティーブストンへの移民（加奈陀三尾村人会は1900年150人→1936年763人）。</li>
+<li><b>シンガポール</b>：長野・新潟・北海道に偏る雪・自然志向。歴史・伝統文化体験41.8%は東アジアより高い。</li>
+<li><b>香港</b>：リピーター90.6%。宿泊の16.4%が九州（全市場7.8%）、10.4%が北海道。</li>
+<li><b>台湾</b>：石川県の外国人宿泊で首位（32.4万人泊）。金沢出身の八田與一は台湾の烏山頭ダム・嘉南大圳を建設。沖縄訪問率14.5%。</li>
+<li><b>韓国</b>：福岡訪問率25.2%（全体11.0%）。2025年の対馬・比田勝港からの韓国人入国は22万6,102人（同港外国人の99%）。</li>
+<li><b>中国</b>：大阪57.3%・東京50.3%・京都38.9%。魯迅（仙台）や長崎の唐人屋敷は史実の結びつきがあるが、現在の訪問率は低い（宮城0.6%・長崎0.3%）。</li>
+<li><b>タイ</b>：山梨訪問率17.1%（全体8.1%）。隣の富士河口湖町の外国人宿泊でタイは9.8%（全国比の約3.6倍）。</li>"""
     S.append(f"""<h2 id="audience">1. サイトに来る人の想定（国別）</h2>
 <div class="note"><b>Cloudflareの解析について。</b>サイトはCloudflare Workersで配信されていますが、このセッションには解析APIの権限がありません。代わりに、国籍別の公式統計（JNTO訪日外客数、観光庁インバウンド消費動向調査・宿泊旅行統計）で「サイトの対象10市場の旅行者が、どこで何をするか」を推定しました。実アクセスで順位を付け直すには、クラウド環境の設定（セッション上部の環境メニュー → Edit）に、Cloudflareの読み取り専用APIトークン（テンプレート「Read analytics and logs」、japantimeatlas.comのみ）を環境変数 <code>CF_API_TOKEN</code> として追加し、新しいセッションで <code>node research/lab-07/scripts/cf-audience.cjs</code> を実行します。国別の閲覧数と、各候補地区の場所ページを国ごとに何回開いたかが <code>cf-audience.json</code> に出力され、選定スクリプトがそれを優先して使います。トークンはチャットに貼らないでください。</div>
 <div class="scroll"><table><tr><th>市場</th><th>2025年 訪日客</th><th>2026年1–8月</th><th>歴史・伝統文化体験</th><th>初訪日</th><th>1人当たり支出</th><th>英語PDFの適合度*</th></tr>{''.join(mrows)}</table></div>
@@ -153,6 +163,38 @@ def context():
 <h3>国ごとの「この場所」の根拠</h3><ul class="src">{hooks}</ul>""")
 
     # ---------- selection
+    SIG_JA = {
+        ('US', 'yokosuka'): '米国：横須賀基地の支援対象人口は約2.6万人。ペリーの久里浜上陸',
+        ('US', 'suo-oshima'): '米国（ハワイ）：1885年の第1回官約移民944人の約3割が大島郡出身',
+        ('GB', 'yokohama-kannai'): '英国：英国人の19.6%が神奈川を訪問。居留地と外国人墓地',
+        ('GB', 'nagasaki-dejima'): '英国：グラバーと現存最古の木造洋風建築、出島',
+        ('AU', 'niseko'): '豪州：倶知安町の外国人宿泊で首位（2025年度16.7万人泊）',
+        ('AU', 'kure'): '豪州・英国：豪州主導の英連邦占領軍が呉に司令部',
+        ('CA', 'mio'): 'カナダ：1888年に工野儀兵衛が渡加、三尾の人々がスティーブストンの鮭漁を担う',
+        ('SG', 'fujiyoshida'): 'シンガポール：旅行者の11.4%が山梨を訪問',
+        ('SG', 'niseko'): 'シンガポール：倶知安町の外国人宿泊で3位（10.3万人泊）',
+        ('HK', 'fukuoka-hakata'): '香港：旅行者の15.5%が福岡を訪問、宿泊の16.4%が九州',
+        ('HK', 'hakodate'): '香港：宿泊の10.4%が北海道',
+        ('TW', 'kanazawa'): '台湾：石川県の外国人宿泊で首位。八田與一の出身地',
+        ('TW', 'chatan'): '台湾：旅行者の14.5%が沖縄を訪問',
+        ('KR', 'fukuoka-hakata'): '韓国：旅行者の25.2%が福岡を訪問',
+        ('KR', 'osaka-namba'): '韓国：旅行者の28.8%が大阪を訪問',
+        ('CN', 'osaka-namba'): '中国：旅行者の57.3%が大阪を訪問',
+        ('CN', 'yokohama-kannai'): '中国：中華街。神奈川の訪問率11.2%',
+        ('TH', 'fujiyoshida'): 'タイ：旅行者の17.1%が山梨を訪問（特化係数3.1）',
+        ('TH', 'sapporo'): 'タイ：旅行者の10.6%が北海道を訪問',
+    }
+    ready_mon = {k: v.get('monuments3km', 0) for k, v in ready.items()}
+
+    def reasons(d):
+        out = [v for (m, rid), v in SIG_JA.items() if rid == d['id']]
+        if 'roots' in d['picked']:
+            out.append('移民のルーツ枠：沖縄初の集団移民（1900年ハワイ着）26人中10人が金武出身')
+        if 'Basic showcase' in d['picked']:
+            out.append(f"Basicの見本：3km圏の災害伝承碑{ready_mon.get(d['id'], 0)}基")
+        if not out:
+            out.append('総合点で選定')
+        return '<br>'.join(esc(x) for x in out)
     rows = []
     for i, d in enumerate(districts, 1):
         r = ready.get(d['id'], {})
@@ -163,8 +205,8 @@ def context():
         story = ' '.join(f"{LF_JA[k]}{pct(v)}" for k, v in {**{k: nat.get(k, 0) for k in ('oldchannel', 'formerwater')}, **{k: art.get(k, 0) for k in ('fill', 'polder')}}.items() if v >= 0.01)
         chips = ''.join(f"<span class='chip'>{MARKET_JA[m]}{'★' if v >= 3 else ''}</span>" for m, v in sorted(d['interest'].items(), key=lambda kv: -kv[1]) if v >= 2)
         nd = ndl.get(d['id'])
-        rows.append(f"<tr><td class='num'>{d['score']:.2f}</td><td><b>{esc(d['ja'])}</b><br><span class='muted small'>{esc(d['en'])}</span></td><td>{chips}</td>"
-                    f"<td class='small'>{esc(d['picked'])}</td><td class='small'>{' '.join(SEG_JA.get(s, s) for s in d['segment'])}</td>"
+        rows.append(f"<tr><td class='num'>{d['score']:.2f}</td><td class='dname'><b>{esc(d['ja'])}</b><br><span class='muted small'>{esc(d['en'])}</span></td><td>{chips}</td>"
+                    f"<td class='small'>{reasons(d)}</td><td class='small'>{'・'.join(SEG_JA.get(s, s) for s in d['segment'])}</td>"
                     f"<td>{oldest}</td><td class='small'>{story or '—'}</td><td class='num'>{r.get('monuments3km', '—')}</td>"
                     f"<td class='num'>{num(nd['uniqueRecords']) if nd else '—'}</td></tr>")
     chosen = {d['id'] for d in districts}
@@ -239,8 +281,8 @@ def context():
               ('basic-asakusa-meiji.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：人工地形と明治期の低湿地'),
               ('basic-hiroshima-landform.jpg', 'basic-hiroshima-peace.pdf', 'Basic：広島・旧中島地区の地形分類'),
               ('basic-kobe-memorials.jpg', 'basic-kobe-meriken.pdf', 'Basic：神戸の災害伝承碑（英訳）'),
-              ('dossier-yokosuka-cover.jpg', 'dossier-yokosuka.pdf', 'Area Dossier：横須賀'),
-              ('dossier-suo-oshima-report.jpg', 'dossier-suo-oshima.pdf', 'Area Dossier：周防大島の本文'),
+              ('dossier-kyoto-cover.jpg', 'dossier-kyoto-higashiyama.pdf', 'Area Dossier：京都・東山と鴨川（表紙）'),
+              ('dossier-kyoto-report.jpg', 'dossier-kyoto-higashiyama.pdf', 'Area Dossier：本文（段落ごとに出典番号）'),
               ('deep-sample-cover.jpg', 'deep-research-sample-suo-oshima.pdf', 'Deep Research見本：久賀')]
     gallery = ''.join(f'<a href="pdf/{p}"><img src="img/{i}" alt="{esc(c)}" loading="lazy" width="620" height="877"><span>{esc(c)}</span></a>'
                       for i, p, c in thumbs if os.path.exists(os.path.join(OUT, 'img', i)) and os.path.exists(pdf(p)))

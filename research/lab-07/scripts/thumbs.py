@@ -12,8 +12,9 @@ PICKS = [  # (pdf, page number starting at 1, output name)
     ('basic-tokyo-asakusa.pdf', 5, 'basic-asakusa-meiji.jpg'),
     ('basic-kobe-meriken.pdf', 6, 'basic-kobe-memorials.jpg'),
     ('basic-hiroshima-peace.pdf', 4, 'basic-hiroshima-landform.jpg'),
-    ('dossier-yokosuka.pdf', 1, 'dossier-yokosuka-cover.jpg'),
-    ('dossier-suo-oshima.pdf', 2, 'dossier-suo-oshima-report.jpg'),
+    ('dossier-kyoto-higashiyama.pdf', 1, 'dossier-kyoto-cover.jpg'),
+    ('dossier-kyoto-higashiyama.pdf', 2, 'dossier-kyoto-report.jpg'),
+
     ('deep-research-sample-suo-oshima.pdf', 1, 'deep-sample-cover.jpg'),
 ]
 

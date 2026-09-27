@@ -62,6 +62,7 @@ table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.5}
 th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 th{font-weight:600;color:var(--muted);white-space:nowrap;background:var(--chip)}
 td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.dname{min-width:11em}
 .chip{display:inline-block;background:var(--chip);border-radius:999px;padding:1px 8px;margin:1px 2px;font-size:12px;white-space:nowrap}
 details{background:var(--card);border:1px solid var(--line);border-radius:6px;margin:10px 0;padding:0 14px}
 details[open]{padding-bottom:10px}
