@@ -281,3 +281,14 @@ Walking view only. A new look, 戦国・写実, is the default; the v21 look sta
 Validation: 168/168 tests; 71 native GLES2 replays without GL errors (survey, nature, streets, sky and interiors, six skies, props, anime). A private demo of the branch was prepared for the user; nothing has been merged or published.
 
 Cache versions: renderer22, walk JS9/CSS7, walk-nature2, buildings5, interiors8, navigation3.
+
+## Realistic look after the first review — renderer v22, 2026-09-27 (branch, awaiting review)
+
+The user reviewed the private demo and asked for colours that fit the island's era rather than a Sengoku reinterpretation, for flat-looking fine surfaces such as grass to be fixed, and for buildings that looked joined, stuck out of the hill or overlapped to be fixed. `docs/gunkanjima-video-study-v22.md` ("First review and what changed") has the details.
+
+- The look is renamed 写実 in all five languages. Housing blocks and the school are weathered period concrete with painted sash windows, glass, curtains and laundry until 1974 and broken or boarded panes after it; the mine is brick, corrugated iron or concrete from the model's structure field; wooden houses are weatherboarded or rendered; late summer is the default season. Props are drum-can fires, utility poles with street lamps and a few jizo; banners and braziers are gone.
+- Geometry: wall faces inside another building standing in the same years are cut down to its roof, split by year (eleven overlapping pairs in 1962, up to about 30 m²); walls on slopes reach down to the terrain as foundations (twelve buildings had stood up to 6 m clear of it); steep hill cuts are masonry retaining walls.
+- The walking view stores outward wall normals. They had pointed inwards, so walls facing away from the sun were lit and window recesses were computed from the wrong side. The aerial views still carry the old normals.
+- Grass blades have their own rounded two-sided normals, sheen and back-light; the ground near the walker gets a fine bump in its lighting.
+
+Validation: 168/168 tests; 71 native GLES2 replays without GL errors plus 23 inspection views of hillside and overlapping buildings. SwiftShader frame cost: realistic look 1.48× v21, anime look equal to v21. A refreshed private demo was prepared; nothing has been merged or published.

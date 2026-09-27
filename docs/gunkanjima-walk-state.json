@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "in_progress",
-  "updatedAt": "2026-09-27T12:40:00+00:00",
+  "updatedAt": "2026-09-27T15:10:00+00:00",
   "activeRun": null,
   "scope": "Gunkanjima 3D walk only; preserve concurrent map/search changes",
   "lastCompleted": [
@@ -41,11 +41,12 @@
     "Renderer v20 verified live at 1118dc9b800daa043740edf65512add744a92f80 (merged with Building 3/30 releases); public HTML versions and six served walk assets byte-checked; public WebGL view not browser-checked because headless Chromium does not trust the proxy CA",
     "Renderer v21: sea-wall ring in the walking toon light with algae, joint weeds and a crest fringe; foliage at the eye skipped; island survey QA views",
     "Renderer v21 verified live at 7f9184531adad5d6a12671b9e5c6920140cd7e79; walk and reconstruction pages request renderer21 and the served renderer is byte-identical",
-    "Renderer v22 on branch claude/gunkanjima-sekiro-visual-update-oxw0mo: sengoku-realism look from the user's gameplay-recording study (castle-quarter facades, storehouses, six skies, fires and props, tussock grass, height fog and filmic grade) with per-look shader variants; anime look unchanged"
+    "Renderer v22 on branch claude/gunkanjima-sekiro-visual-update-oxw0mo: sengoku-realism look from the user's gameplay-recording study (castle-quarter facades, storehouses, six skies, fires and props, tussock grass, height fog and filmic grade) with per-look shader variants; anime look unchanged",
+    "Renderer v22 after the first review: period colours and materials instead of Sengoku (look renamed 写実), overlapping walls cut by year, foundations on slopes, retaining walls, outward wall normals in the walking view, grass and ground no longer lit flat"
   ],
   "nextActions": [
     "Wait for the user's review of the private v22 demo; do not merge to main or publish before approval",
-    "After feedback: narrow the remaining gap to the reference (darker shadows, more fine local contrast) in one bounded pass at a time",
+    "After feedback: narrow the remaining gap (fine local contrast, highlights) in one bounded pass at a time; fix the aerial views' inward wall normals separately",
     "Improve a bounded room-specific furnishing or source-grounded retaining-wall/terrain segment, preserving existing geometry evidence",
     "Verify iPhone Safari pinch round-trip and mobile WebGL on an available actual device",
     "Keep all other automatic work paused; do not restore SEO title schedule or IndexNow push trigger",
@@ -170,8 +171,12 @@
     "v22TranscriptSegments": 157,
     "v22VideoAssetsCommitted": false,
     "v22NativeGlesRenders": 71,
-    "v22AnimeLookByteIdentical": true,
-    "v22SoftwareFrameVsV21": "1709 ms sengoku, 1251 ms anime vs v21 1258 ms (SwiftShader 1100x680, not a frame rate)"
+    "v22AnimeLookByteIdentical": false,
+    "v22SoftwareFrameVsV21": "1866 ms realistic, 1225 ms anime vs v21 1258 ms (SwiftShader 1100x680, not a frame rate)",
+    "v22InspectionRenders": 23,
+    "v22OverlappingPairs1962": 11,
+    "v22BuildingsFloatingOver1m": 12,
+    "v22BuildingsCutIntoHillOver1_5m": 35
   },
   "publicationApproval": {
     "at": "2026-09-27T06:50:00+09:00",
@@ -189,7 +194,7 @@
     "walkNatureVersion": 1
   },
   "pendingReview": {
-    "what": "Renderer v22 sengoku look (walking view default)",
+    "what": "Renderer v22 realistic look (写実, walking view default) after the first review",
     "branch": "claude/gunkanjima-sekiro-visual-update-oxw0mo",
     "demo": "private claude.ai artifact shared with the user in the session",
     "publication": "not approved yet; main and the live site still serve renderer21"
