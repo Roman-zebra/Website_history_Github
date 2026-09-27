@@ -67,7 +67,7 @@
   const sunAt = (az, el) => [Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)];
   const SENGOKU = [
     { key: 'dusk', lift: [.02, .02, .024], gamma: [.96, 1, 1.06], gain: [1, .94, .86], sun: sunAt(-1.2, .26), top: [.235, .29, .39], horizon: [.94, .70, .48], far: [.60, .56, .60], sunC: [1, .69, .44], fog: [.55, .53, .56],
-      keyC: [1.45, 1.0, .68], ambS: [.19, .22, .32], ambG: [.10, .09, .08], fogK: [.0028, .015, .06, .97], cover: .45, storm: 0, snow: 0, wet: 0, rain: 0, night: 0, bg: [.30, .28, .31] },
+      keyC: [1.45, 1.0, .68], ambS: [.15, .17, .25], ambG: [.08, .07, .06], fogK: [.0028, .015, .06, .97], cover: .45, storm: 0, snow: 0, wet: 0, rain: 0, night: 0, bg: [.30, .28, .31] },
     { key: 'overcast', lift: [.10, .105, .11], gamma: [1.02, 1, .97], gain: [.86, .88, .90], sun: sunAt(-.9, .62), top: [.47, .50, .54], horizon: [.72, .72, .72], far: [.64, .66, .68], sunC: [.80, .80, .78], fog: [.63, .65, .67],
       keyC: [.52, .54, .58], ambS: [.40, .44, .50], ambG: [.15, .14, .13], fogK: [.006, .025, .05, .97], cover: .95, storm: .35, snow: 0, wet: .15, rain: 0, night: 0, bg: [.40, .42, .45] },
     { key: 'rain', lift: [.07, .08, .085], gamma: [1.03, 1, .96], gain: [.78, .81, .84], sun: sunAt(-.9, .6), top: [.30, .33, .37], horizon: [.52, .54, .56], far: [.46, .49, .52], sunC: [.55, .56, .58], fog: [.46, .49, .52],
@@ -119,7 +119,7 @@
   /* Each look has its own defaults; choosing a look restores them so the sliders suit it. */
   const LOOK_BASE = { quality: 'auto', grass: 1, flowers: 1, land: 1, haze: 1, cloudScale: 66, cloudSpeed: 3.5, spots: 1, wind: 1, sparkle: 1, ambient: 1, slope: 28 };
   const LOOK_STYLES = {
-    sengoku: { style: 'sengoku', preset: 'autumn', exposure: .9, saturation: .8, contrast: .25, warmth: 0, clouds: .3, mottle: .3, sheen: .05, streaks: 0, grain: .012, bloom: lowEnd ? 0 : .55 },
+    sengoku: { style: 'sengoku', preset: 'autumn', exposure: .9, saturation: .8, contrast: .32, warmth: 0, clouds: .3, mottle: .3, sheen: .05, streaks: 0, grain: .012, bloom: lowEnd ? 0 : .55 },
     anime: { style: 'anime', preset: 'summer', exposure: 1.04, saturation: 1.06, contrast: .2, warmth: .4, clouds: .55, mottle: .32, sheen: .13, streaks: .25, grain: .03, bloom: lowEnd ? 0 : .4 }
   };
   const LOOK_DEFAULT = Object.assign({}, LOOK_BASE, LOOK_STYLES.sengoku);
@@ -452,7 +452,13 @@
         }
         // Trampled paths: dark packed earth and mud.
         float pm=smoothstep(.22,.6,vMaskA.y)*smoothstep(.8,.95,n.y);
-        if(pm>.001)ground=mix(ground,mix(vec3(.16,.13,.10),vec3(.25,.21,.16),noise(vPos.xz*.9)),pm);
+        if(pm>.001){
+          // Packed earth with dry dusty patches, damp dark hollows and trodden-in grit.
+          vec3 path=mix(vec3(.16,.13,.10),vec3(.25,.21,.16),noise(vPos.xz*.9))*(.8+.4*fbm3(vPos.xz*1.6+4.0));
+          path=mix(path,vec3(.33,.30,.26),smoothstep(.55,.78,noise(vPos.xz*.7+9.0))*.45);
+          path*=1.0-.35*smoothstep(.6,.85,noise(vPos.xz*.35-3.0));
+          ground=mix(ground,path,pm);
+        }
         // Dry tufts in joints and along wall bases.
         float bare=(1.0-cover)*pavement;
         if(bare>.001&&(joint>.001||vMaskB.y>.001)){
@@ -735,7 +741,7 @@
         // vWall.z rises with the face like y; the wall's real top is its storeys plus the 0.6 m sunk below ground.
         H=(vTop+.6)*vAlive;
         vec3 alb=mix(vec3(.40,.39,.37),vec3(.49,.47,.43),hash(vec2(seed,41.0)));
-        float timber=0.0,tiles=0.0,castle=step(style,3.5),boards=0.0;
+        float timber=0.0,tiles=0.0,castle=step(style,3.5),boards=0.0,calm=max(castle,step(4.5,style));
         vec3 timberC=mix(vec3(.11,.09,.08),vec3(.19,.16,.13),noise(vec2(s*.5,y*3.0)+seed));
         if(castle>.5){
           // Castle quarter: the apartments, the 1918 housing and the school as old white plaster between dark timber posts
@@ -801,19 +807,19 @@
           vec3 wood=mix(vec3(.17,.14,.11),vec3(.26,.21,.17),hash(vec2(floor(y*4.2),floor(s/1.8)+seed)))*(1.0-.35*(1.0-smoothstep(0.0,.14,board)));
           float plasterBand=step(floorH*.62,fy*floorH);
           timber=clamp(step(.94,fract(s/1.8))+1.0-step(.06,fy),0.0,1.0)*plasterBand;
-          alb=mix(mix(wood,vec3(.66,.64,.58),plasterBand),vec3(.13,.11,.09),timber);
+          alb=mix(mix(wood,vec3(.60,.59,.55),plasterBand),vec3(.13,.11,.09),timber);
         }
         if(style>5.5){
           timber=clamp(step(.92,fract(s/2.0))+1.0-step(.08,fy),0.0,1.0);
           alb=mix(vec3(.70,.68,.62),vec3(.12,.10,.08),timber);
         }
         // Broad mottling, then rain streaks running down from the parapet, the sills and every beam.
-        alb*=mix(.86+.22*fbm3(vec2(s*.23,y*.19+seed*3.0)),.93+.1*fbm3(vec2(s*.23,y*.19+seed*3.0)),castle);
+        alb*=mix(.86+.22*fbm3(vec2(s*.23,y*.19+seed*3.0)),.93+.1*fbm3(vec2(s*.23,y*.19+seed*3.0)),calm);
         float closeDetail=1.0-smoothstep(6.0,26.0,vDepth);
-        if(closeDetail>.001)alb*=1.0-closeDetail*(.08*fbm3(vec2(s,y)*2.7+seed)+.08*smoothstep(.55,.8,noise(vec2(s*9.0,y*.9+seed)))-.05);
+        if(closeDetail>.001)alb*=1.0-closeDetail*mix(1.0,.5,calm)*(.08*fbm3(vec2(s,y)*2.7+seed)+.08*smoothstep(.55,.8,noise(vec2(s*9.0,y*.9+seed)))-.05);
         vec2 gq=vec2(s,y);
-        if(style>3.5&&style<4.5||timber>.5)gq.y*=.2; else if(style>4.5&&style<5.5)gq.x*=.2;
-        alb*=1.0+.3*grit(gq+seed,vDepth);
+        if(style>3.5&&style<4.5||timber>.5)gq.y*=.2; else if(style>4.5&&style<5.5&&fy<.62)gq.x*=.2;
+        alb*=1.0+mix(.3,.18,castle*(1.0-timber))*grit(gq+seed,vDepth);
         float streak=smoothstep(.45,.75,noise(vec2(s*2.4,y*mix(.11,.06,castle)+seed*5.0)))*(.4+.6*noise(vec2(s*.7+seed,y*.04)));
         alb*=1.0-(.55-.3*castle)*streak*(.55+.45*smoothstep(H-4.0,H,y))*(1.0-tiles);
         float underSill=step(left+.04,bay)*step(bay,right-.04)*step(fy,bottom)*(1.0-smoothstep(0.0,.45,bottom-fy));
@@ -827,9 +833,10 @@
         // Fallen plaster shows the clay and lath behind it; hairline cracks near the walker.
         if(nearDetail>.001&&win<.5&&castle>.5&&tiles<.5&&timber<.5&&boards<.5&&y>.62){
           // Irregular sharp-edged patches with a dirty rim; the lath shows as faint horizontal lines.
-          float pf=fbm3(vec2(s*.8,y*.6)+seed*3.0)+.2*noise(vec2(s,y)*5.0)-.1;
-          float spall=smoothstep(.62,.635,pf)*nearDetail,rim=smoothstep(.57,.62,pf)*(1.0-spall);
-          vec3 clay=mix(vec3(.29,.25,.20),vec3(.37,.32,.26),noise(vec2(s,y)*7.0))*(1.0-.35*step(.8,fract(y*9.0+.3*noise(vec2(s*3.0,y)))));
+          float pf=fbm3(vec2(s*1.7,y*1.3)+seed*3.0)+.16*noise(vec2(s,y)*9.0)+.08*noise(vec2(s,y)*23.0)-.12;
+          float spall=smoothstep(.64,.65,pf)*nearDetail,rim=smoothstep(.6,.64,pf)*(1.0-spall);
+          vec3 clay=mix(vec3(.28,.25,.21),vec3(.36,.32,.27),noise(vec2(s,y)*7.0))*(1.0+.5*grit(vec2(s,y)*1.3,vDepth));
+          clay*=1.0-.3*(1.0-smoothstep(.0,.25,abs(fract(y*7.0+.4*noise(vec2(s*2.0,y)))-.5)*2.0))*step(.5,noise(vec2(s*.9,y*.4)+seed));
           alb=mix(alb*(1.0-.2*rim*nearDetail),clay,spall*.9);
         }
         if(nearDetail>.001&&win<.5&&tiles<.5){
@@ -873,7 +880,7 @@
           float shoji=step(kind,.38),lamp=step(kind,.13)*(1.0-age)*uTone.w;
           vec2 kg=vec2(pane.x*paneWidth/.32,pane.y*paneHeight/.42);
           float kumiko=1.0-smoothstep(.012,.02,min(min(fract(kg.x),1.0-fract(kg.x))*.32,min(fract(kg.y),1.0-fract(kg.y))*.42));
-          float torn=step(.66-.3*age,noise(vec2(pane.x*paneWidth,pane.y*paneHeight)*3.1+bayId*7.0+storey))*(1.0-lamp);
+          float torn=step(.74-.22*age,noise(vec2(pane.x*paneWidth,pane.y*paneHeight)*5.3+bayId*7.0+storey)+.12*noise(vec2(pane.x,pane.y)*40.0))*(1.0-lamp);
           float lattice=mix(.38,1.0-smoothstep(.012,.024,abs(fract(pane.x*paneWidth/.11)-.5)*.11),nearDetail)*(1.0-shoji);
           // The opening is recessed 0.22 m: its head and one jamb shade it from the sun, and seen at an angle the inner jamb,
           // soffit or sill shows as a strip of wall.
@@ -1239,13 +1246,14 @@
         float window=smoothstep(1.6,1.1,abs(wrapAngle(az-1.95)));
         for(int i=0;i<3;i++){
           float fi=float(i),x=az*(4.0+fi*2.3)+fi*7.3;
-          float r=.55*abs(sin(x))+.3*abs(sin(x*2.13+1.3))+.15*abs(sin(x*4.7+.4))+.08*skyNoise(vec2(az*40.0,fi*9.0));
+          // Ridged sums: sharp summits and rounded saddles, as real ranges have (a sum of |sin| gives domes and notches).
+          float r=.5*(1.0-abs(sin(x)))+.3*(1.0-abs(sin(x*2.13+1.3)))+.15*(1.0-abs(sin(x*4.7+.4)))+.08*skyNoise(vec2(az*40.0,fi*9.0));
           float peak=(i==0?.105:i==1?.06:.032)*uLand*window*mix(.45,1.1,r);
-          if(i==0)peak=max(peak,uLand*.13*smoothstep(.55,0.0,abs(wrapAngle(az-2.25)))*window);
+          if(i==0)peak=max(peak,uLand*.13*pow(max(1.0-abs(wrapAngle(az-2.25))/.55,0.0),1.7)*(.92+.08*r)*window);
           if(el<peak&&el>-.02){
             float h=el/max(peak,.0001);
             vec3 m=mix(mix(uMid,uFogC,.3)*.95,uFogC*.35+uTop*.25,fi/2.0);
-            if(i==0)m=mix(m,mix(uFogC,uSunC*.7+uMid*.4,.5),smoothstep(.78,.95,h+.2*skyNoise(vec2(az*90.0,el*200.0)))*.45);
+            if(i==0)m=mix(m,mix(uFogC,uSunC*.7+uMid*.4,.5),smoothstep(.8,.95,h+.2*skyNoise(vec2(az*90.0,el*200.0)))*.45*smoothstep(.08,.11,peak));
             col=mix(m,hor,(1.0-smoothstep(0.0,.6,h))*(.55-fi*.15));
           }
         }
