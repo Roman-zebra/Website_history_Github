@@ -36,6 +36,7 @@
     "fill": 0.9073
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "water": 0.1133,
    "paddy": 0.0389,
@@ -105,6 +106,7 @@
     "works": 0.0169
    }
   },
+  "landformScale": "detailed",
   "meiji": {},
   "monuments": [
    "47209-001",
@@ -162,6 +164,7 @@
     "fill": 0.2517
    }
   },
+  "landformScale": "detailed",
   "meiji": {},
   "monuments": [
    "47215-001"
@@ -207,6 +210,7 @@
    },
    "artificial": {}
   },
+  "landformScale": "regional",
   "meiji": {},
   "monuments": [],
   "monumentRadiusKm": 8.0,
@@ -258,6 +262,7 @@
     "fill": 0.0146
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "paddy": 0.2046,
    "water": 0.0069,
@@ -319,6 +324,7 @@
     "cut": 0.1118
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "water": 0.1627,
    "paddy": 0.1186,
@@ -386,6 +392,7 @@
     "fill": 0.2027
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "paddy": 0.1319,
    "water": 0.0123,
@@ -452,6 +459,7 @@
     "cut": 0.0211
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "water": 0.283,
    "reed": 0.003,
@@ -513,6 +521,7 @@
     "cut": 0.0606
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "water": 0.463,
    "tidal": 0.0291,
@@ -572,6 +581,7 @@
    },
    "artificial": {}
   },
+  "landformScale": "detailed",
   "meiji": {
    "sand": 0.0201,
    "water": 0.0159,
@@ -603,7 +613,7 @@
  },
  "osaka-namba": {
   "id": "osaka-namba",
-  "then": "ort_1928",
+  "then": "ort_riku10",
   "series": [
    "ort_1928",
    "ort_riku10",
@@ -614,8 +624,8 @@
    "gazo3"
   ],
   "now": [
-   "nendophoto2017",
-   "2017"
+   "seamlessphoto",
+   "latest"
   ],
   "coverage": {
    "ort_1928": 0.923,
@@ -635,6 +645,7 @@
    },
    "artificial": {}
   },
+  "landformScale": "detailed",
   "meiji": {
    "water": 0.0584
   },
@@ -698,6 +709,7 @@
     "cut": 0.1275
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "water": 0.0703,
    "paddy": 0.0288,
@@ -733,7 +745,7 @@
  },
  "hiroshima-peace": {
   "id": "hiroshima-peace",
-  "then": "ort_USA10",
+  "then": "ort_old10",
   "series": [
    "ort_USA10",
    "ort_old10",
@@ -768,6 +780,7 @@
     "fill": 0.029
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "water": 0.1095,
    "sand": 0.016,
@@ -832,6 +845,7 @@
     "cut": 0.0482
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "water": 0.3994
   },
@@ -863,8 +877,8 @@
    "gazo2"
   ],
   "now": [
-   "nendophoto2008",
-   "2008"
+   "seamlessphoto",
+   "latest"
   ],
   "coverage": {
    "ort_1928": 0.0,
@@ -877,29 +891,36 @@
    "gazo4": 0.0
   },
   "landform": {
-   "natural": {},
+   "natural": {
+    "mountain": 0.6121,
+    "lowland": 0.3023,
+    "butte": 0.0856
+   },
    "artificial": {}
   },
+  "landformScale": "regional",
   "meiji": {
-   "paddy": 0.0459,
-   "water": 0.0011
+   "paddy": 0.1701,
+   "salt": 0.0129,
+   "water": 0.0035,
+   "tidal": 0.0019
   },
   "monuments": [
-   "35305-004",
+   "35305-001",
    "35305-003",
-   "35305-001"
+   "35305-004"
   ],
   "monumentRadiusKm": 3.0,
   "monuments3km": 3,
   "studyKm": [
-   3.2,
-   2.06
+   3.0,
+   1.94
   ],
   "bbox": [
-   33.917665,
-   132.197678,
-   33.936335,
-   132.232322
+   33.914748,
+   132.188261,
+   33.932252,
+   132.220739
   ],
   "generated": "2026-09-27"
  },
@@ -925,9 +946,13 @@
    "gazo4": 0.0
   },
   "landform": {
-   "natural": {},
+   "natural": {
+    "mountain": 0.5826,
+    "lowland": 0.1262
+   },
    "artificial": {}
   },
+  "landformScale": "regional",
   "meiji": {},
   "monuments": [
    "30205-004",
@@ -982,6 +1007,7 @@
    },
    "artificial": {}
   },
+  "landformScale": "detailed",
   "meiji": {},
   "monuments": [
    "01423-001"
@@ -1036,6 +1062,7 @@
     "cut": 0.0126
    }
   },
+  "landformScale": "detailed",
   "meiji": {},
   "monuments": [
    "01202-001"
@@ -1089,6 +1116,7 @@
     "fill": 0.1609
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "paddy": 0.2496,
    "water": 0.0505,
@@ -1150,6 +1178,7 @@
     "cut": 0.009
    }
   },
+  "landformScale": "detailed",
   "meiji": {
    "paddy": 0.0574,
    "water": 0.0159,

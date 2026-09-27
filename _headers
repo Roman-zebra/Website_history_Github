@@ -76,3 +76,8 @@
   Cache-Control: no-cache
 /sitemap.xml
   Cache-Control: no-cache
+
+# Unpublished lab pages: reachable by URL only, never indexed
+/lab/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache

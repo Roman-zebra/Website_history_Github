@@ -1159,14 +1159,14 @@
   },
   {
    "id": "suo-oshima",
-   "en": "Suo-Oshima (Hawaii emigrant villages)",
+   "en": "Suo-Oshima: Nishiyashiro and the Hawaii emigrant villages",
    "ja": "周防大島（山口県周防大島町）",
    "pref": "山口県",
    "center": [
-    33.927,
-    132.215
+    33.9235,
+    132.2045
    ],
-   "half": 1.6,
+   "half": 1.5,
    "segment": [
     "roots"
    ],
@@ -1543,7 +1543,7 @@
   },
   {
    "id": "mio",
-   "en": "Mio, the 'America Village' (Canada emigrants)",
+   "en": "Mio, the “America Village” (emigration to Canada)",
    "ja": "三尾・アメリカ村（和歌山県美浜町）",
    "pref": "和歌山県",
    "center": [

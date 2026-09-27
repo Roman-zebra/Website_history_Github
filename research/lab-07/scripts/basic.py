@@ -435,7 +435,13 @@ MEIJI_EN = {key: (en, ja, rgb) for rgb, key, en, ja in gsi.MEIJI}
 
 
 def year_en(y):
-    return 'unknown' if not y or y in ('不明', '不詳') else y
+    """Year a memorial was erected, as GSI records it: 不明 -> unknown, 1940頃 -> c. 1940."""
+    if not y or y in ('不明', '不詳'):
+        return 'unknown'
+    y = str(y)
+    if y.endswith('頃'):
+        return 'c. ' + y[:-1]
+    return y
 
 
 def build(c, mon_en):
@@ -451,7 +457,8 @@ def build(c, mon_en):
     labels = dict(SERIES)
     if not order:
         raise SystemExit(c['id'] + ': no historical series covers the study area')
-    then = order[0]
+    # the headline comparison needs a complete frame; partly covered older series stay in the decades grid
+    then = next((l for l in order if cov[l] >= 0.97), order[0])
     now_layer, now_label, now_img = now
     now_name = now_label if now_label != 'latest' else 'Latest'
     now_text = f'{now_label} annual orthophoto' if now_label != 'latest' else 'latest seamless mosaic'
@@ -544,7 +551,7 @@ def build(c, mon_en):
     else:
         note = '' if covered > 0.5 else '<p class="small muted">GSI\'s detailed landform survey covers only part of this frame (mainly lowland plains); unshaded ground was not classified at this scale.</p>'
     ground = f"""<section class="page"><p class="kicker">3 · How the ground was made</p><h2>Rivers, shorelines and terraces</h2>
-<figure><img src="{files['natural'][0]}" alt="Natural landform map"><figcaption>Natural landforms as classified by GSI, over a recent aerial photograph in grey. Dark blue outlines mark former river channels.</figcaption></figure>
+<figure><img src="{files['natural'][0]}" alt="Natural landform map"><figcaption>Natural landforms as classified by GSI, over a recent aerial photograph in gray. Dark blue outlines mark former river channels.</figcaption></figure>
 <div class="legend">{nat_rows or '<div class="muted">No detailed natural landform data for this frame.</div>'}</div>{note}
 <h3>What the main landforms mean</h3>{''.join(risks[:5]) or '<p class="small muted">—</p>'}
 <p class="small muted">Descriptions translated and condensed from GSI's landform-classification legend. They describe tendencies of each landform type, not the condition of any individual plot.</p></section>"""
@@ -567,13 +574,13 @@ def build(c, mon_en):
         en = mon_en.get(m['id'], {})
         name = en.get('name_en') or '—'
         dis = en.get('disaster_en') or m.get('dis', '')
-        rows.append(f'<tr><td class="n">{i}</td><td><b>{esc(name)}</b><br><span class="jp muted" style="font-size:7pt">{esc(m["name"])}</span></td><td>{esc(kind_en(m["kind"]))}<br><span class="muted">{esc(dis)}</span></td><td>{esc(year_en(m.get("year")))}</td><td>{m["dist_km"]:.1f} km</td></tr>')
+        rows.append(f'<tr><td class="n">{i}</td><td><b>{esc(name)}</b> <span class="jp muted" style="font-size:7pt">{esc(m["name"])}</span></td><td>{esc(dis)} <span class="muted">· {esc(kind_en(m["kind"]))}</span></td><td>{esc(year_en(m.get("year")))}</td><td style="white-space:nowrap">{m["dist_km"]:.1f} km</td></tr>')
         if en.get('summary_en') and len(notes) < 6:
             notes.append(f'<p class="risk"><b>{i}. {esc(name)}.</b> {esc(en["summary_en"])}</p>')
-    radius_note = '' if radius <= 3 else f'<p class="small">Fewer than three memorials stand within 3 km, so the nearest ones within {radius:.0f} km are listed.</p>'
-    disasters = f"""<section class="page"><p class="kicker">5 · Disasters remembered</p><h2>Memorials to natural disasters nearby</h2>
-<div class="grid2" style="grid-template-columns:1fr 1.08fr;align-items:start"><figure><img src="{files['monuments'][0]}" alt="Map of disaster memorials"><figcaption>Numbered memorials; the black rectangle is the study area of this brief. Frame {mm_km:.0f} km across.</figcaption></figure>
-<div>{radius_note}<table><tr><th></th><th>Memorial</th><th>Disaster</th><th>Erected</th><th>Distance</th></tr>{''.join(rows) or '<tr><td colspan="5">No memorial registered within 8 km.</td></tr>'}</table></div></div>
+    radius_note = '' if radius <= 3 else f'<p class="small">Fewer than three memorials stand within 3 km of the study area, so the nearest ones within {radius:.0f} km are listed.</p>'
+    disasters = f"""<section class="page stack"><p class="kicker">5 · Disasters remembered</p><h2>Memorials to natural disasters nearby</h2>
+<figure><img src="{files['monuments'][0]}" alt="Map of disaster memorials" style="max-height:92mm"><figcaption>Numbered memorials; the black rectangle is the study area of this brief. Frame {mm_km:.0f} km across.</figcaption></figure>
+{radius_note}<table><tr><th></th><th>Memorial</th><th>Disaster</th><th>Erected</th><th>Distance</th></tr>{''.join(rows) or '<tr><td colspan="5">No memorial is registered within 30 km.</td></tr>'}</table>
 <h3>What the memorials record</h3>{''.join(notes) or '<p class="small muted">English notes for these memorials are being prepared.</p>'}
 <p class="small muted">Source: GSI Natural Disaster Memorials (自然災害伝承碑). English names and notes are Japan Time Atlas translations and summaries of GSI's Japanese descriptions; the memorials' own inscriptions may say more. “Erected” is the year GSI records for the monument.</p></section>"""
     pg = {'photos': '2' + ('–3' if mids else ''), 'ground': str(4 if mids else 3), 'manmade': str(5 if mids else 4), 'memorials': str(6 if mids else 5)}
@@ -587,7 +594,7 @@ def build(c, mon_en):
 <li><b>Outline of Japan</b> — Data of Japan / JapanPrefGeoJson (public domain), simplified.</li>
 </ul>
 <h3>Method</h3>
-<p class="small">The study area is a fixed rectangle of {wkm:.1f} × {hkm:.1f} km. Every GSI photo series that covers at least 85% of it is included; the newest annual orthophoto covering at least 90% of it is used as “now”, with any gap filled from GSI's latest seamless mosaic. Landform shares are areas of the rectangle measured on GSI's polygons at zoom level 14, each class merged before measuring. Meiji-era shares count map pixels by legend colour. Memorials are selected by straight-line distance from the centre of the study area.</p>
+<p class="small">The study area is a fixed rectangle of {wkm:.1f} × {hkm:.1f} km. Every GSI photo series that covers at least 85% of it is included; the newest annual orthophoto covering at least 90% of it is used as “now”, with any gap filled from GSI's latest seamless mosaic. Landform shares are areas of the rectangle measured on GSI's polygons at zoom level 14, each class merged before measuring. Meiji-era shares count map pixels by legend color. Memorials are selected by straight-line distance from the center of the study area.</p>
 <h3>Limits</h3>
 <p class="small">Historical series are mosaics of photographs taken on different dates; GSI publishes the flight date of each photograph. Landform data record conditions at the time of survey. Nothing in this brief shows present-day access, safety or opening hours.</p>
 <div class="box"><p><b>Area Dossier.</b> The same district with a 4–8 page English history, written from Japanese library sources and cited page by page.</p><p><b>Deep Research.</b> A single hamlet or address, researched in libraries and archives.</p></div>
@@ -599,7 +606,7 @@ def build(c, mon_en):
         fh.write(page)
     meta = {'id': c['id'], 'then': then, 'series': order, 'now': [now_layer, now_label], 'coverage': {k: round(v, 3) for k, v in cov.items()},
             'landform': {'natural': {k: round(v, 4) for k, v in nat}, 'artificial': {k: round(v, 4) for k, v in art}},
-            'meiji': {k: round(v, 4) for k, v in meiji_sorted}, 'monuments': [m['id'] for m in mons], 'monumentRadiusKm': radius,
+            'landformScale': lf_scale, 'meiji': {k: round(v, 4) for k, v in meiji_sorted}, 'monuments': [m['id'] for m in mons], 'monumentRadiusKm': radius,
             'monuments3km': n3, 'studyKm': [round(wkm, 2), round(hkm, 2)], 'bbox': [round(x, 6) for x in bb], 'generated': TODAY}
     json.dump(meta, open(os.path.join(out_dir, 'meta.json'), 'w'), ensure_ascii=False, indent=1)
     json.dump(data, open(os.path.join(out_dir, 'sections.json'), 'w'), ensure_ascii=False)

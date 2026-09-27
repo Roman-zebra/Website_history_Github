@@ -30,7 +30,23 @@ def pdf_pages(path):
         return 0
 
 
-def ndl_block(d, nd):
+def fulltext_html(ft):
+    if not ft:
+        return ''
+    out = []
+    for q in ft['queries']:
+        if not q.get('total'):
+            out.append(f"<li><b>{esc(q['query'])}</b>：0件</li>")
+            continue
+        by = q.get('byAccess', {})
+        items = ''.join(
+            f"<li>{link(it['url'], (it['title'] or '')[:60])}{(' ' + esc(it['volume'])) if it.get('volume') else ''} <span class='muted'>({esc(it.get('year') or '')}・{ACCESS_JA.get(it.get('access'), it.get('access') or '')}"
+            f"{'・' + ','.join(str(f) for f in it['frames'][:6]) + 'コマ' if it.get('frames') else ''})</span></li>" for it in q['items'][:8])
+        out.append(f"<li><b>{esc(q['query'])}</b>{'（近接60字）' if q.get('proximity') else ''}：本文ヒット {q['total']:,}件（ネット公開 {by.get('internet', 0):,}・送信 {by.get('transmission', 0):,}・館内 {by.get('inlibrary', 0):,}）<ul class='src'>{items}</ul></li>")
+    return '<h3>デジタルコレクション全文検索（本文OCR・コマ番号つき）</h3><ul class="src">' + ''.join(out) + '</ul>'
+
+
+def ndl_block(d, nd, ft=None):
     """Per-district NDL result, collapsed."""
     if not nd:
         return f'<details><summary>{esc(d["ja"])} <small>NDL調査データなし</small></summary></details>'
@@ -56,11 +72,12 @@ def ndl_block(d, nd):
     for term, v in nd.get('crd', {}).items():
         for it in v.get('items', [])[:2]:
             crd.append(f'<li>{link(it["url"] or "https://crd.ndl.go.jp/", it["question"][:90])} <span class="muted">（{esc(it["library"])}）</span></li>')
-    jps = ''.join(f'<li>{link(j["jps"], (j["title"] or "")[:60])} <span class="muted">（{esc(j["provider"])}・{esc(j["rights"])}）</span></li>' for j in nd.get('japanSearchReusable', [])[:10])
+    jps = ''.join(f'<li>{link(j["jps"], (j["title"] or "")[:60])} <span class="muted">（{esc(j["provider"])}・{esc(j["rights"])}）</span></li>' for j in nd.get('japanSearchReusable', [])[:6])
     return f"""<details><summary>{esc(d['ja'])} <small>固有書誌 {nd['uniqueRecords']:,}件 ／ ネット公開 {acc.get('internet', 0):,}・個人送信 {acc.get('transmission', 0):,}・館内 {acc.get('inlibrary', 0):,}・紙 {acc.get('paper', 0):,}</small></summary>
 <div class="scroll"><table><tr><th>検索式（NDLサーチSRU）</th><th>ヒット</th></tr>{qrows}</table></div>
 <h3>ログインなしで読める資料（関連度上位）</h3><ul class="src">{internet or '<li class="muted">なし</li>'}</ul>
-<h3>目次で地名が見つかった公開図書（NDLラボ・コマ番号つき）</h3><ul class="src">{''.join(lab[:12]) or '<li class="muted">なし</li>'}</ul>
+{fulltext_html(ft)}
+<h3>目次で地名が見つかった公開図書（NDLラボ・コマ番号つき）</h3><ul class="src">{''.join(lab[:8]) or '<li class="muted">なし</li>'}</ul>
 <h3>Deep Research向け：個人送信・紙の郷土史</h3><ul class="src">{trans}{paper or ''}{'' if (trans or paper) else '<li class="muted">なし</li>'}</ul>
 <h3>レファレンス協同データベース（図書館の調査事例）</h3><ul class="src">{''.join(crd[:8]) or '<li class="muted">なし</li>'}</ul>
 <h3>ジャパンサーチ：商用利用可の権利表示がある資料（リンクのみ）</h3><ul class="src">{jps or '<li class="muted">なし</li>'}</ul></details>"""
@@ -74,6 +91,7 @@ def context():
     lic = load('licenses.json', None)
     districts = sel['districts']
     ndl = {d['id']: load(os.path.join('ndl', d['id'] + '.json'), None) for d in districts}
+    ftx = {d['id']: load(os.path.join('ndl-fulltext', d['id'] + '.json'), None) for d in districts}
     dossiers = {d['id']: load(os.path.join('dossier', d['id'] + '.json'), None) for d in districts}
     deep = load(os.path.join('deep', 'sample-suo-oshima-kuka.json'), None)
     pdf = lambda name: os.path.join(OUT, 'pdf', name)
@@ -91,6 +109,7 @@ def context():
     deep_pdf = os.path.exists(pdf('deep-research-sample-suo-oshima.pdf'))
 
     S = []
+    S.append('<nav class="toc" aria-label="目次"><a href="#summary">要約</a><a href="#audience">1 訪問者の想定</a><a href="#districts">2 20地区の選定</a><a href="#ndl">3 NDLサーチ調査</a><a href="#rights">4 権利</a><a href="#products">5 試作品</a><a href="#next">6 次の一手</a></nav>')
     S.append(f"""<h2 id="summary">要約</h2>
 <div class="grid">
 <div class="stat"><b>20地区</b><span>36候補から、国別の関心・有料調査の需要・データの揃い具合で選定</span></div>
@@ -102,7 +121,7 @@ def context():
 <li><b>誰が買うか。</b>英語の歴史商品の中心は米・英・豪・加です。訪日中に「日本の歴史・伝統文化体験」をした割合は65〜75%で、東アジア（12〜25%）の約3倍、1人当たり支出も最大です。数では韓国・中国・台湾が上回りますが、英語PDFの購買層ではありません（将来の各言語版の対象）。</li>
 <li><b>高単価（Deep Research）の母集団は二つ。</b>米国の日系人158.7万人（うちハワイ31.3万人、2020年国勢調査）など海外日系社会と、在日米軍の現役5.5万人とその家族・OBです。周防大島・三尾・金武は祖先の村探し、横須賀・北谷は基地の町の記憶に直結します。</li>
 <li><b>NDLサーチで「できる範囲」の中身。</b>戦前の町の案内記・郡誌・写真帖などは保護期間満了で誰でも読めます。戦後の市史・町誌の多くは「個人送信」（登録利用者のみ）か紙だけで、ここが人手の調査＝Deep Researchの価値になります。</li>
-<li><b>データの弱点。</b>沖縄は米国統治のため地理院の空中写真が1974年以降しかなく、ニセコ・対馬・周防大島・三尾は詳細な地形分類がありません（広域版で代用）。1945年前後の沖縄は米国国立公文書館の写真が補えます。</li>
+<li><b>データの弱点。</b>沖縄は米国の施政下にあったため地理院の空中写真が1974年以降しかありません（1945年前後は米国国立公文書館の写真で補える見込み）。{'・'.join(d['ja'].split('（')[0] for d in districts if bmeta.get(d['id'], {}).get('landformScale') == 'regional') or '一部の地区'}は詳細な地形分類がなく、国土地理院の広域版で代用しました。</li>
 <li><b>Cloudflareの実アクセスは未反映。</b>このセッションには解析の権限がないため、公式統計で代替しました。読み取り専用トークンがあれば、国別×ページ別の実数で順位を付け直せます（下記）。</li>
 </ul>""")
 
@@ -188,12 +207,13 @@ def context():
         a = n['byAccess']
         trows.append(f"<tr><td>{esc(d['ja'])}</td><td class='num'>{n['uniqueRecords']:,}</td><td class='num'>{a.get('internet', 0):,}</td><td class='num'>{a.get('transmission', 0):,}</td>"
                      f"<td class='num'>{a.get('inlibrary', 0) + a.get('paper', 0):,}</td><td class='num'>{labn}</td><td class='num'>{crdn:,}</td><td class='num'>{len(n['japanSearchReusable'])}</td></tr>")
-    blocks = ''.join(ndl_block(d, ndl.get(d['id'])) for d in districts)
+    blocks = ''.join(ndl_block(d, ndl.get(d['id']), ftx.get(d['id'])) for d in districts)
     S.append(f"""<h2 id="ndl">3. 国立国会図書館サーチでの調査（20地区）</h2>
 <p>各地区で、現在と旧来の地名・主題（例：「本所区」「横須賀製鉄所」「布哇 移民 山口」）を6語ずつ設定し、NDLサーチのAPI（SRU）でタイトル・件名・全項目の3通りに検索しました（計{tot_queries}本、1本あたり最大500件取得）。同名の別地域は除外語で落としています。取得した書誌は、デジタル化資料の公開範囲で4つに分けました。</p>
 <ul class="src"><li><b>ネット公開</b>：ログインなしで誰でも閲覧（保護期間満了など）。Area Dossierの根拠に使える。</li>
 <li><b>個人送信</b>：NDLの登録利用者だけが閲覧可。市史・町誌の多くがここ。Deep Researchで読む。</li>
 <li><b>館内限定・紙のみ</b>：国会図書館や地元の図書館で読む。Deep Researchの現地調査。</li></ul>
+<p>さらに、ブラウザ（Chromium）の自動操作で国立国会図書館デジタルコレクションの全文検索を調べ、その内部APIで各地区3本ずつ本文（OCR）を検索しました。約247万点のデジタル化資料の本文が対象で、登録利用者向けの「送信サービス」や館内限定の資料でも、どの本の何コマ目に地名が出てくるかまで分かります（本文や抜粋は保存せず、書名とコマ番号だけを記録）。複数語は60字以内に並ぶものに限りました。</p>
 <p>あわせて、NDLラボ（次世代デジタルライブラリー）で保護期間満了図書の目次を検索して地名が出るコマ番号を特定し、レファレンス協同データベースで各地の図書館が過去に受けた調査事例（{tot_crd:,}件ヒット）を、ジャパンサーチで商用利用可の権利表示（CC BY・PDM・CC0など）がある資料（{tot_jps}件）を集めました。保存したのは書誌・URL・コマ番号・短い目次行だけで、画像や本文は複製していません。</p>
 <div class="scroll"><table><tr><th>地区</th><th>固有書誌</th><th>ネット公開</th><th>個人送信</th><th>館内・紙</th><th>目次ヒット本</th><th>レファ協</th><th>商用可</th></tr>{''.join(trows)}</table></div>
 {blocks}""")
@@ -215,7 +235,17 @@ def context():
     basic_cards = ''.join(pdf_card(f'basic-{d["id"]}.pdf', d['en'], 'Basic') for d in districts)
     doss_cards = ''.join(pdf_card(f'dossier-{d["id"]}.pdf', d['en'], f"Area Dossier · 約{round(sum(len(re.sub('<[^>]+>', '', p['text']).split()) for s in (dossiers[d['id']] or {}).get('sections', []) for p in s['paragraphs']), -2)}語 · 出典{len((dossiers[d['id']] or {}).get('sources', []))}件") for d in districts if dossiers.get(d['id']))
     deep_card = pdf_card('deep-research-sample-suo-oshima.pdf', 'Deep Research sample: Kuka, Suo-Oshima', '架空の依頼・実在の資料')
+    thumbs = [('basic-asakusa-then-now.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：浅草・両国の1936–42年と2019年'),
+              ('basic-asakusa-meiji.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：人工地形と明治期の低湿地'),
+              ('basic-hiroshima-landform.jpg', 'basic-hiroshima-peace.pdf', 'Basic：広島・旧中島地区の地形分類'),
+              ('basic-kobe-memorials.jpg', 'basic-kobe-meriken.pdf', 'Basic：神戸の災害伝承碑（英訳）'),
+              ('dossier-yokosuka-cover.jpg', 'dossier-yokosuka.pdf', 'Area Dossier：横須賀'),
+              ('dossier-suo-oshima-report.jpg', 'dossier-suo-oshima.pdf', 'Area Dossier：周防大島の本文'),
+              ('deep-sample-cover.jpg', 'deep-research-sample-suo-oshima.pdf', 'Deep Research見本：久賀')]
+    gallery = ''.join(f'<a href="pdf/{p}"><img src="img/{i}" alt="{esc(c)}" loading="lazy" width="620" height="877"><span>{esc(c)}</span></a>'
+                      for i, p, c in thumbs if os.path.exists(os.path.join(OUT, 'img', i)) and os.path.exists(pdf(p)))
     S.append(f"""<h2 id="products">5. 試作品</h2>
+<div class="gallery">{gallery}</div>
 <h3>Basic（英語PDF・全自動）</h3>
 <p>地区の中心座標を与えるだけで、地理院タイルから①最古の空中写真と最新の年度別オルソ画像の比較、②その間の年代の写真、③地形分類（自然地形：旧河道など／人工地形：盛土・埋立・干拓）、④明治期の低湿地（田・湿地・水面）、⑤半径3km（なければ8km・30km）の自然災害伝承碑を英訳つきで並べ、出典と方法を書き添えたPDFを作ります。1地区あたり数分、人手ゼロ。地形の説明文と伝承碑の英訳は国土地理院の情報を翻訳・要約したもので、その旨を明記しています。</p>
 <div class="pdfs">{basic_cards or '<p class="muted">生成中</p>'}</div>
