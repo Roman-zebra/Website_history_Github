@@ -1,6 +1,6 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 test('look panel restores saved settings, builds labelled sliders and saves, switches presets and resets',()=>{
- const nodes=new Map(),events={},noop=()=>{},store=new Map([['jta-walk-look-v1',JSON.stringify({preset:'autumn',grass:.4})]]);
+ const nodes=new Map(),events={},noop=()=>{},store=new Map([['jta-walk-look-v2',JSON.stringify({preset:'autumn',grass:.4})]]);
  const make=id=>({id,textContent:'',style:{},value:'',dataset:{},attrs:{},hidden:id==='walkTools',disabled:id==='lookButton',open:false,children:[],options:[{}],selectedOptions:[{textContent:'1962'}],
   classList:{toggle:noop,remove:noop},setAttribute(k,v){this.attrs[k]=v;},addEventListener:noop,focus:noop,append(...c){this.children.push(...c);},remove:noop,replaceChildren:noop,
   getContext:()=>new Proxy({},{get:()=>noop}),showModal(){this.open=true;}});
@@ -20,11 +20,11 @@ test('look panel restores saved settings, builds labelled sliders and saves, swi
  const [name,input,out]=rows[1].children;assert.equal(name.textContent,'Grass');assert.equal(input.type,'range');assert.equal(+input.max,1.5);
  node('lookButton').onclick();assert.equal(node('lookDialog').open,true);assert.equal(+input.value,.4);assert.equal(out.textContent,'0.40');
  assert.equal(presets[2].attrs['aria-pressed'],'true');assert.equal(presets[1].attrs['aria-pressed'],'false');
- input.value='1.2';input.oninput();assert.equal(state.grass,1.2);assert.equal(JSON.parse(store.get('jta-walk-look-v1')).grass,1.2,'saved in this browser');
+ input.value='1.2';input.oninput();assert.equal(state.grass,1.2);assert.equal(JSON.parse(store.get('jta-walk-look-v2')).grass,1.2,'saved in this browser');
  presets[4].onclick();assert.equal(state.preset,'magic');assert.equal(presets[4].attrs['aria-pressed'],'true');
  node('lookQuality').value='low';node('lookQuality').onchange();assert.equal(state.quality,'low');
  const slope=rows.find(r=>r.children[0].textContent==='Bare-soil slope angle').children;assert.equal(slope[2].textContent,'28','whole degrees');
  answer='{"slope":35,"preset":"winter"}';node('lookPaste').onclick();assert.equal(state.slope,35);assert.equal(state.preset,'winter');assert.equal(slope[1].value,35);
  answer='not json';node('lookPaste').onclick();assert.equal(node('lookPaste').textContent,'Could not read those settings');assert.equal(state.slope,35);
- node('lookReset').onclick();assert.equal(state.preset,'summer');assert.equal(store.has('jta-walk-look-v1'),false);assert.equal(+input.value,1);
+ node('lookReset').onclick();assert.equal(state.preset,'summer');assert.equal(store.has('jta-walk-look-v2'),false);assert.equal(+input.value,1);
 });
