@@ -265,3 +265,19 @@ Validation: 164/164 full-build tests; 47 native GLES2 renders (`--nature`, `--st
 Cache versions: renderer21, walk JS8/CSS7, walk-nature1, buildings5, interiors8, navigation3.
 
 Publication: main fast-forwarded to `7f9184531adad5d6a12671b9e5c6920140cd7e79`; Cloudflare `release.json` reported it within about two minutes. The public walk page and the reconstruction pages request renderer21, and the served renderer is byte-identical to the commit.
+
+## Sengoku-realism video study — renderer v22, 2026-09-27 (branch, awaiting review)
+
+The user asked for every visual element of a 39:45 *SEKIRO: Shadows Die Twice* gameplay recording (supplied through Google Drive) to be applied to all structures and spaces of the walk, iterating towards that world and its graphics, with the same extraction method as before: one frame per second and a full transcription. 2,385 frames on 150 contact sheets were inspected and the soundtrack was transcribed (157 segments, mostly combat sound). `docs/gunkanjima-video-study-v22.md` has the method, the visual rules drawn from the recording, what was implemented, adapted and left out, performance and a colour check. The recording, audio, transcript and frames are not committed; no game asset was used.
+
+Walking view only. A new look, 戦国・写実, is the default; the v21 look stays as アニメ調 in the look menu and renders pixel for pixel as before.
+
+- Light and air: linear light with a filmic curve, hemisphere ambient, height fog with drifting banks and sun in-scatter, one colour cast per sky; six skies (dusk, overcast, rain, mist, snow, night) with stars, a lit cloud deck and ranges with sharp summits.
+- Buildings: apartments, the 1918 housing and the school as a castle quarter (plaster between timber posts and beams, black clapboard ground storey on a stone base, a tiled pent roof on every floor line, tiled coping, lattice and paper-screen openings, lamplit screens at dusk and night); workshops as board-and-batten storehouses; weathered plaster, streaks, moss.
+- Ground and water: slabs, rock, packed earth, straw grass in tussocks, pampas, dusty paths, grit and pebbles near the walker, snow and puddles; dark slate sea with fine ripples and lacy foam.
+- Trees, props and fire: maples, black pines, dead trees, shrubs with individual leaves near the walker; bonfires and braziers that light their surroundings, stone lanterns, jizo and banners that block walking; leaves, ash, crows and snowfall.
+- Rendering: each look compiles its own shader variant, which brought the sengoku frame from about 1.9× to 1.36× v21 in SwiftShader and the anime look back to v21's cost. The walls' fragment shader now uses the real wall top, which had spread top-of-wall effects (and snow) over whole walls.
+
+Validation: 168/168 tests; 71 native GLES2 replays without GL errors (survey, nature, streets, sky and interiors, six skies, props, anime). A private demo of the branch was prepared for the user; nothing has been merged or published.
+
+Cache versions: renderer22, walk JS9/CSS7, walk-nature2, buildings5, interiors8, navigation3.
