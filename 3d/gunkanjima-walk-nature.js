@@ -246,6 +246,59 @@ function scatter(f,heights,opts){
  });
  return {trees,bushes,rocks};
 }
+/* Sengoku set dressing for the walking view's sengoku look: bonfires and braziers, stone lanterns beside the worn
+   paths, small jizo statues by walls and paths, and tall nobori banners. Placement is deterministic, on level open
+   ground clear of every footprint, the sea, the arrival point and the other set pieces; fires keep off the paths.
+   Illustrative only: none of this is evidence about Hashima. */
+function sengokuProps(f,heights,opts){
+ opts=opts||{};
+ const avoid=opts.avoid||[],spawn=opts.spawn,keep=(opts.keepOut||[]).slice(),lowEnd=!!opts.lowEnd;
+ const out={fires:[],lanterns:[],jizo:[],banners:[]},ground=(u,v)=>sample(f,heights,u,v);
+ const free=(u,v,r,wall)=>{
+  if(spawn&&Math.hypot(u-spawn[0],v-spawn[1])*MPP<r+4)return false;
+  if(keep.some(o=>Math.hypot(u-o.u,v-o.v)*MPP<o.r+r))return false;
+  if(sample(f,f.toBuilding,u,v)<(wall===undefined?r+.8:wall)||sample(f,f.toSea,u,v)<r+2.5||sample(f,f.upright,u,v)<.95)return false;
+  for(const p of avoid)if(inPoly([u,v],p))return false;
+  return true;
+ };
+ const grid=(spacing,seed,fn)=>{
+  const s=spacing/MPP;
+  for(let gv=f.y0;gv<f.y0+(f.h-1)*f.step;gv+=s)for(let gu=f.x0;gu<f.x0+(f.w-1)*f.step;gu+=s){
+   const iu=Math.round(gu/s),iv=Math.round(gv/s);
+   fn(gu+hash(iu,iv,seed)*s,gv+hash(iu,iv,seed+1)*s,hash(iu,iv,seed+2),hash(iu,iv,seed+3));
+  }
+ };
+ const apart=(list,u,v,d)=>!list.some(o=>Math.hypot(u-o.u,v-o.v)*MPP<d);
+ // Fires: bonfires on open ground; braziers on paving near walls.
+ grid(lowEnd?30:22,401,(u,v,r,q)=>{
+  if(out.fires.length>=(lowEnd?8:14)||r>.7)return;
+  const brazier=sample(f,f.toBuilding,u,v)<5&&sample(f,f.grass,u,v)<.3;
+  if(sample(f,f.path,u,v)>.3||!free(u,v,brazier?.6:1.4)||!apart(out.fires,u,v,20))return;
+  out.fires.push({u,v,y:ground(u,v),kind:brazier?1:0,seed:Math.floor(q*997)});keep.push({u,v,r:brazier?.8:1.9});
+ });
+ // Stone lanterns on the edges of worn paths.
+ grid(lowEnd?11:7,431,(u,v,r,q)=>{
+  if(out.lanterns.length>=(lowEnd?10:18))return;
+  const p=sample(f,f.path,u,v);
+  if(p<.12||p>.4||r>.6||!free(u,v,.5)||!apart(out.lanterns,u,v,14))return;
+  out.lanterns.push({u,v,y:ground(u,v),yaw:q*6.2832,seed:Math.floor(q*991),lit:r<.35?1:0});keep.push({u,v,r:.6});
+ });
+ // Jizo: one to three small statues against a wall or beside a path.
+ grid(lowEnd?13:9,461,(u,v,r,q)=>{
+  if(out.jizo.length>=(lowEnd?8:14)||r>.5)return;
+  const wall=sample(f,f.toBuilding,u,v),p=sample(f,f.path,u,v);
+  if(!((wall>1.2&&wall<2.6)||(p>.1&&p<.35))||!free(u,v,.5,1.1)||!apart(out.jizo,u,v,12))return;
+  out.jizo.push({u,v,y:ground(u,v),count:1+Math.floor(q*3),yaw:hash(Math.round(u),Math.round(v),467)*6.2832,seed:Math.floor(q*983)});keep.push({u,v,r:1.2});
+ });
+ // Nobori banners along paths and plazas.
+ grid(lowEnd?15:10,491,(u,v,r,q)=>{
+  if(out.banners.length>=(lowEnd?10:18)||r>.55)return;
+  const p=sample(f,f.path,u,v);
+  if(p>.3||!free(u,v,.4,1.2)||!apart(out.banners,u,v,11))return;
+  out.banners.push({u,v,y:ground(u,v),yaw:q*6.2832,tone:Math.floor(hash(Math.round(u),Math.round(v),497)*3),torn:hash(Math.round(v),Math.round(u),499),seed:Math.floor(q*977)});keep.push({u,v,r:.5});
+ });
+ return out;
+}
 /* Indexed low-poly meshes, split into batches below 65,536 vertices for 16-bit index buffers.
    Positions are (u, y, v) in crop pixels/metres like interior boxes; normals are in the crop frame.
    `wind` is 0 at the ground and 1 at the top of each plant; `kind`: 0 trunk, 1 canopy, 2 bush, 3 rock, 4 blossom,
@@ -322,14 +375,18 @@ function meshes(set,style){
    const H=t.height*1.2,lean=[(hash(s,11,5)-.5)*1.6,(hash(s,12,5)-.5)*1.6];
    const P=k=>[lean[0]*k*k*H*.25+Math.sin(k*3+s)*.25,k*H,lean[1]*k*k*H*.25+Math.cos(k*2.3+s)*.25];
    let prev=P(0);
-   for(let i=1;i<=4;i++){const q=P(i/4);limb(t,prev,q,(.14+t.radius*.05)*(1.15-.2*i),bark,s+i);prev=q;}
-   const pads=4+Math.floor(hash(s,13,5)*3);
-   for(let i=0;i<pads;i++){
-    const k=.45+.55*i/(pads-1),c=P(Math.min(k,.98)),a=s*.7+i*2.4,reach=(1-k*.55)*t.radius*1.05;
-    const tip=[c[0]+Math.cos(a)*reach,c[1]+.15+.25*hash(i,s,7),c[2]+Math.sin(a)*reach];
-    limb(t,c,tip,.07,bark,s+20+i);
-    const R=(.85+.5*(1-k))*t.radius*.62,Y=.28+.12*hash(i,s,9);
-    blob(t,tip[0],tip[1],tip[2],R,Y,R*.85,[-1,hash(s,14,5),0],.3+.5*k,.6+.4*k,8,s+i*3,true,[tip[0],tip[1]-Y*1.5,tip[2]]);
+   for(let i=1;i<=4;i++){const q=P(i/4);limb(t,prev,q,(.2+t.radius*.06)*(1.2-.22*i),bark,s+i);prev=q;}
+   // Six to nine cloud pads from a third of the height up, each three overlapping flattened clumps, plus a crown pad.
+   const pads=6+Math.floor(hash(s,13,5)*4);
+   for(let i=0;i<=pads;i++){
+    const crown=i===pads,k=crown?1:.34+.62*i/(pads-1),c=P(Math.min(k,.98)),a=s*.7+i*2.4,reach=crown?0:(1-k*.5)*t.radius*1.1;
+    const tip=[c[0]+Math.cos(a)*reach,c[1]+.2+.3*hash(i,s,7),c[2]+Math.sin(a)*reach];
+    if(!crown)limb(t,c,tip,.09,bark,s+20+i);
+    const R=(.9+.6*(1-k))*t.radius*(crown?.62:.85),Y=.42+.22*hash(i,s,9);
+    for(let j=0;j<3;j++){
+     const b=a+j*2.1,o=j?R*.42:0,q=[tip[0]+Math.cos(b)*o,tip[1]+(j?-.08:.06),tip[2]+Math.sin(b)*o],r=R*(j?.72:.82);
+     blob(t,q[0],q[1],q[2],r,Y*(j?.85:1),r*.85,[-1,hash(s,14,5),0],.3+.5*k,.6+.4*k,8,s+i*3+j,true,[q[0],q[1]-Y*1.6,q[2]]);
+    }
    }
    continue;
   }
@@ -348,11 +405,13 @@ function meshes(set,style){
   limb(t,[0,0,0],[0,trunkH,0],.13+t.radius*.05,bark,s);
   const forks=2+Math.floor(hash(s,22,5)*2),variation=pick>.86?.1:.3+.7*hash(s,23,5);
   for(let i=0;i<forks;i++){const a=s*.9+i*6.2832/forks;limb(t,[0,trunkH*.92,0],[Math.cos(a)*spread*.45,trunkH+spread*.55,Math.sin(a)*spread*.45],.08,bark,s+i);}
+  // Three overlapping tiers of flattened clumps: a wide skirt, a fuller middle and a small crown.
   for(let L=0;L<3;L++){
-   const y=trunkH+spread*(.35+.42*L),R=spread*(1.05-.28*L),n=L===2?3:6;
-   for(let i=0;i<n;i++){
-    const a=s*.37+i*6.2832/n+L*.5,r=(L===2?.25:.62)*R*(.85+.3*hash(i,L,s)),cx=Math.cos(a)*r,cz=Math.sin(a)*r,rr=R*(L===2?.55:.48)*(.8+.4*hash(L,i,s+3));
-    blob(t,cx,y+.15*hash(i,s,L+4),cz,rr,rr*.5,rr*.9,[-1,variation,0],.3+.25*L,.8+.2*L,1,s+L*7+i,true,[cx*.4,y-rr*.8,cz*.4]);
+   const y=trunkH+spread*(.3+.3*L),R=spread*(1.12-.26*L),n=L===2?4:8;
+   for(let i=0;i<=n;i++){
+    const inner=i===n,a=s*.37+i*6.2832/n+L*.5,r=inner?0:(L===2?.3:.66)*R*(.85+.3*hash(i,L,s)),cx=Math.cos(a)*r,cz=Math.sin(a)*r;
+    const rr=R*(inner?.62:L===2?.52:.5)*(.8+.4*hash(L,i,s+3));
+    blob(t,cx,y+.2*hash(i,s,L+4),cz,rr,rr*.7,rr*.9,[-1,variation,0],.3+.25*L,.8+.2*L,1,s+L*7+i,true,[cx*.4,y-rr*.9,cz*.4]);
    }
   }
  }
@@ -429,6 +488,55 @@ function meshes(set,style){
    beam(rim(a,g.r*.72),rim(b,g.r*.72),.34,.3,[.50,.40,.26],7,i);beam(rim(a+.08,g.r*.78),rim(a+.08,g.r*1.02),.36,.24,[.48,.38,.24],7,i+20);}
   beam([g.u-ax[0]*.1/MPP,g.y+g.r-.2,g.v-ax[1]*.1/MPP],[g.u+ax[0]*.1/MPP,g.y+g.r+.2,g.v+ax[1]*.1/MPP],.4,.5,[.46,.36,.24],7,31);
  }
+ if(sengoku&&set.props){
+  /* Kinds for the sengoku props: 9 worked stone, 10 iron, 11 cloth (colour carries (across, along, palette)), 12 glowing
+     embers or a lit lantern box (emissive). */
+  const box=(o,x,y,z,sx,sy,sz,c,kind,seed)=>beam([o.u+x/MPP,o.y+y,o.v+z/MPP],[o.u+x/MPP,o.y+y+sy,o.v+z/MPP],sx,sz,c,kind,seed);
+  const ring=(o,cx,cy,cz,r,n,w,h,c,kind,seed)=>{for(let i=0;i<n;i++){const a=i/n*6.2832,b=(i+1)/n*6.2832;beam([o.u+(cx+Math.cos(a)*r)/MPP,o.y+cy,o.v+(cz+Math.sin(a)*r)/MPP],[o.u+(cx+Math.cos(b)*r)/MPP,o.y+cy,o.v+(cz+Math.sin(b)*r)/MPP],w,h,c,kind,seed+i);}};
+  for(const fi of set.props.fires){
+   if(fi.kind){
+    // Brazier: an iron basket of bars and hoops on three legs, glowing coals inside.
+    for(let i=0;i<3;i++){const a=fi.seed+i*2.094;limb(fi,[Math.cos(a)*.42,0,Math.sin(a)*.42],[Math.cos(a)*.12,.95,Math.sin(a)*.12],.04,[.12,.11,.10],fi.seed+i);}
+    for(let i=0;i<10;i++){const a=i/10*6.2832;beam([fi.u+Math.cos(a)*.26/MPP,fi.y+.95,fi.v+Math.sin(a)*.26/MPP],[fi.u+Math.cos(a)*.34/MPP,fi.y+1.35,fi.v+Math.sin(a)*.34/MPP],.03,.03,[.12,.11,.10],10,i);}
+    ring(fi,0,.97,0,.26,10,.035,.04,[.12,.11,.10],10,fi.seed);ring(fi,0,1.33,0,.34,10,.035,.04,[.12,.11,.10],10,fi.seed+20);
+    blob(fi,0,1.02,0,.28,.14,.28,[.85,.28,.06],0,0,12,fi.seed,true,null);
+   } else {
+    // Bonfire: a ring of stones, crossed charred logs and a bed of embers.
+    for(let i=0;i<8;i++){const a=i/8*6.2832+fi.seed;rock({u:fi.u+Math.cos(a)*.95/MPP,v:fi.v+Math.sin(a)*.95/MPP,y:fi.y-.08},.42+.18*hash(i,fi.seed,5),[.34,.33,.31],fi.seed+i);}
+    for(let i=0;i<5;i++){const a=fi.seed*.3+i*1.2566;limb(fi,[Math.cos(a)*.75,.05,Math.sin(a)*.75],[Math.cos(a)*.1,.62,Math.sin(a)*.1],.13,[.10,.08,.07],fi.seed+i);}
+    blob(fi,0,.02,0,.62,.16,.62,[.8,.24,.05],0,0,12,fi.seed,true,null);
+   }
+  }
+  for(const l of set.props.lanterns){
+   // Stone lantern (toro): base, pillar, platform, fire box, broad roof and finial.
+   const st=[.34,.33,.31];
+   box(l,0,0,0,.62,.14,.62,st,9,l.seed);box(l,0,.14,0,.26,.95,.26,st,9,l.seed+1);box(l,0,1.09,0,.55,.1,.55,st,9,l.seed+2);
+   for(const [x,z] of [[-.17,-.17],[.17,-.17],[-.17,.17],[.17,.17]])box(l,x,1.19,z,.08,.34,.08,st,9,l.seed+3);
+   box(l,0,1.21,0,.28,.28,.28,l.lit?[1,.62,.3]:[.1,.09,.08],l.lit?12:9,l.seed+4);
+   box(l,0,1.53,0,.9,.1,.9,st,9,l.seed+5);box(l,0,1.63,0,.6,.1,.6,st,9,l.seed+6);box(l,0,1.73,0,.26,.08,.26,st,9,l.seed+7);
+   blob(l,0,1.81,0,.1,.14,.1,st,0,0,9,l.seed+8,true,null);
+  }
+  for(const j of set.props.jizo){
+   // Jizo: small rounded stone figures in red bibs, on a shared low plinth.
+   const d=[Math.cos(j.yaw),Math.sin(j.yaw)],e=[-d[1],d[0]];
+   box(j,0,0,0,.5*j.count+.2,.12,.5,[.30,.29,.27],9,j.seed);
+   for(let i=0;i<j.count;i++){
+    const o=(i-(j.count-1)/2)*.5,x=d[0]*o,z=d[1]*o;
+    blob(j,x,.12,z,.17,.3,.15,[.36,.35,.32],0,0,9,j.seed+i,true,null);
+    blob(j,x,.55,z,.13,.14,.13,[.36,.35,.32],0,0,9,j.seed+i+9,false,null);
+    beam([j.u+(x+e[0]*.06)/MPP,j.y+.34,j.v+(z+e[1]*.06)/MPP],[j.u+(x+e[0]*.1)/MPP,j.y+.46,j.v+(z+e[1]*.1)/MPP],.26,.05,[.2,.9,4.5],11,j.seed+i);
+   }
+  }
+  for(const b of set.props.banners){
+   // Nobori: a pole with a top arm; the cloth hangs in eight rows so it can sway, its free edge torn on some.
+   const d=[Math.cos(b.yaw),Math.sin(b.yaw)],W=.62,L=2.5,top=4.6;
+   limb(b,[0,0,0],[0,top+.15,0],.07,[.20,.16,.12],b.seed);
+   limb(b,[0,top,0],[d[0]*(W+.08),top,d[1]*(W+.08)],.045,[.20,.16,.12],b.seed+1);
+   begin(18*2);const base=cur.count,n=[-d[1],0,d[0]];
+   for(let i=0;i<=8;i++){const t=i/8,y=top-.04-t*L;for(const k of [0,1]){const x=.05+k*W,uv=toUV(b.u,b.v,d[0]*x,d[1]*x);vert([uv[0],b.y+y,uv[1]],n,[k,t,b.tone+b.torn*.9],t*.8+k*.35,11,b.seed%97/97);}}
+   for(let i=0;i<8;i++){const a=base+i*2;cur.idx.push(a,a+2,a+1,a+1,a+2,a+3);}
+  }
+ }
  return batches.map(b=>({pos:new Float32Array(b.pos),nor:new Float32Array(b.nor),col:new Float32Array(b.col),info:new Float32Array(b.info),idx:new Uint16Array(b.idx),count:b.count}));
 }
 /* Grass and flower blades for the camera-centred wrapping patch. Each blade is one triangle:
@@ -471,6 +579,6 @@ function groundTexture(f,heights){
  }
  return out;
 }
-const api={inPoly,hash,noise,fbm,distance,field,shade,features,sample,scatter,meshes,blades,flowers,groundTexture,stampCover,MPP};
+const api={inPoly,hash,noise,fbm,distance,field,shade,features,sample,scatter,sengokuProps,meshes,blades,flowers,groundTexture,stampCover,MPP};
 if(typeof module==='object')module.exports=api;else root.JTAWalkNature=api;
 })(typeof window==='undefined'?this:window);

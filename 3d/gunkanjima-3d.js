@@ -56,7 +56,7 @@
   const WEATHER = [
     { key: 'clear', bg: [0.075, 0.117, 0.13], horizon: [0.40, 0.47, 0.50], sky: [0.10, 0.16, 0.20], sun: unit([0.492, 0.863, 0.112]), fog: 0.28, rain: 0 },
     { key: 'cloudy', bg: [0.12, 0.14, 0.15], horizon: [0.46, 0.49, 0.50], sky: [0.25, 0.29, 0.31], sun: unit([0.35, 0.72, 0.18]), fog: 0.72, rain: 0 },
-    { key: 'rain', lift: [.07, .08, .085], gamma: [1.03, 1, .96], gain: [.78, .81, .84], bg: [0.07, 0.09, 0.10], horizon: [0.30, 0.34, 0.36], sky: [0.13, 0.16, 0.18], sun: unit([0.30, 0.66, 0.12]), fog: 1.08, rain: 1 },
+    { key: 'rain', bg: [0.07, 0.09, 0.10], horizon: [0.30, 0.34, 0.36], sky: [0.13, 0.16, 0.18], sun: unit([0.30, 0.66, 0.12]), fog: 1.08, rain: 1 },
     { key: 'fog', bg: [0.31, 0.34, 0.34], horizon: [0.58, 0.60, 0.59], sky: [0.48, 0.51, 0.51], sun: unit([0.24, 0.72, 0.10]), fog: 1.65, rain: 0 }
   ];
   /* Walking view, sengoku look (the default): an original, SEKIRO-inspired treatment built from the user's reference
@@ -70,13 +70,13 @@
       keyC: [1.6, .98, .56], ambS: [.24, .28, .40], ambG: [.14, .12, .10], fogK: [.0028, .015, .06, .97], cover: .45, storm: 0, snow: 0, wet: 0, rain: 0, night: 0, bg: [.30, .28, .31] },
     { key: 'overcast', lift: [.10, .105, .11], gamma: [1.02, 1, .97], gain: [.86, .88, .90], sun: sunAt(-.9, .62), top: [.47, .50, .54], horizon: [.72, .72, .72], far: [.64, .66, .68], sunC: [.80, .80, .78], fog: [.63, .65, .67],
       keyC: [.52, .54, .58], ambS: [.40, .44, .50], ambG: [.15, .14, .13], fogK: [.006, .025, .05, .97], cover: .95, storm: .35, snow: 0, wet: .15, rain: 0, night: 0, bg: [.40, .42, .45] },
-    { key: 'rain', sun: sunAt(-.9, .6), top: [.30, .33, .37], horizon: [.52, .54, .56], far: [.46, .49, .52], sunC: [.55, .56, .58], fog: [.46, .49, .52],
+    { key: 'rain', lift: [.07, .08, .085], gamma: [1.03, 1, .96], gain: [.78, .81, .84], sun: sunAt(-.9, .6), top: [.30, .33, .37], horizon: [.52, .54, .56], far: [.46, .49, .52], sunC: [.55, .56, .58], fog: [.46, .49, .52],
       keyC: [.28, .30, .34], ambS: [.26, .29, .34], ambG: [.09, .09, .09], fogK: [.008, .03, .05, .98], cover: 1, storm: .8, snow: 0, wet: 1, rain: 1, night: 0, bg: [.22, .24, .27] },
     { key: 'mist', lift: [.14, .145, .145], gamma: [1, 1, .98], gain: [.86, .87, .87], sun: sunAt(-1.0, .45), top: [.62, .64, .65], horizon: [.80, .80, .78], far: [.72, .73, .73], sunC: [.95, .90, .82], fog: [.72, .73, .73],
       keyC: [.60, .58, .54], ambS: [.42, .45, .48], ambG: [.16, .15, .14], fogK: [.02, .08, .035, .995], cover: .8, storm: .2, snow: 0, wet: .35, rain: 0, night: 0, bg: [.52, .53, .53] },
     { key: 'snow', lift: [.10, .11, .12], gamma: [1.03, 1, .95], gain: [.88, .90, .94], sun: sunAt(-1.0, .5), top: [.52, .56, .62], horizon: [.80, .82, .86], far: [.72, .75, .80], sunC: [.92, .90, .88], fog: [.70, .73, .78],
-      keyC: [.72, .76, .86], ambS: [.46, .52, .64], ambG: [.26, .27, .30], fogK: [.007, .03, .04, .98], cover: .9, storm: .3, snow: 1, wet: 0, rain: 0, night: 0, bg: [.55, .58, .62] },
-    { key: 'night', lift: [.05, .07, .08], gamma: [1.05, 1, .92], gain: [.62, .70, .78], sun: sunAt(1.9, .55), top: [.035, .05, .09], horizon: [.20, .24, .33], far: [.13, .16, .23], sunC: [.62, .70, .86], fog: [.14, .17, .24],
+      keyC: [.55, .58, .66], ambS: [.36, .41, .51], ambG: [.20, .21, .24], fogK: [.007, .03, .04, .98], cover: .9, storm: .3, snow: 1, wet: 0, rain: 0, night: 0, bg: [.55, .58, .62] },
+    { key: 'night', lift: [.05, .07, .08], gamma: [1.02, 1, .96], gain: [.95, .93, .92], sun: sunAt(1.9, .55), top: [.035, .05, .09], horizon: [.20, .24, .33], far: [.13, .16, .23], sunC: [.62, .70, .86], fog: [.14, .17, .24],
       keyC: [.16, .21, .34], ambS: [.035, .05, .09], ambG: [.015, .015, .02], fogK: [.004, .02, .05, .96], cover: .35, storm: 0, snow: 0, wet: 0, rain: 0, night: 1, bg: [.04, .05, .08] }
   ];
   const sengoku = () => GAME && look.style === 'sengoku';
@@ -261,7 +261,7 @@
     vec3 fireAt(vec4 f,vec3 p,vec3 n){
       if(f.w<=0.0)return vec3(0.0);
       vec3 d=f.xyz-p;float l2=max(dot(d,d),.04);
-      return vec3(1.0,.42,.13)*f.w*clamp(dot(n,d)*inversesqrt(l2)*.75+.25,0.0,1.0)/(1.0+l2*.16);
+      return vec3(1.0,.45,.16)*f.w*clamp(dot(n,d)*inversesqrt(l2)*.75+.25,0.0,1.0)/(1.0+l2*.12);
     }
     vec3 fireLight(vec3 p,vec3 n){ return fireAt(uFire0,p,n)+fireAt(uFire1,p,n)+fireAt(uFire2,p,n)+fireAt(uFire3,p,n); }
     // Key light with its shadow and drifting cloud shadows, a sky/ground hemisphere ambient, a little warm bounce on faces
@@ -274,14 +274,18 @@
     }
     // Uniform haze plus exponential height fog integrated along the view ray, lightly broken into drifting banks; it
     // brightens and warms towards the sun.
-    vec3 sFog(vec3 col,vec3 wp){
+    float sFogAmount(vec3 wp){
       vec3 ray=wp-uEye;float dist=length(ray);vec3 dir=ray/max(dist,.001);
       float k=uFogK.z,dy=dir.y*dist,base=exp(-k*max(uEye.y,0.0));
       float column=abs(dir.y)>.002?base*(1.0-exp(-k*dy))/(k*dir.y):base*dist;
       float optical=uFogK.x*dist+uFogK.y*column*(.75+.5*noise(wp.xz*.012+vec2(uOverlay.w*.015,0.0)));
+      return min(1.0-exp(-optical),uFogK.w);
+    }
+    vec3 sFog(vec3 col,vec3 wp){
+      vec3 dir=normalize(wp-uEye);
       float mu=max(dot(dir,uSun),0.0);
       vec3 inscatter=uFogC+uSunC*(pow(mu,5.0)*.45+pow(mu,40.0)*.7)*(1.0-uEnv.w*.6);
-      return mix(col,inscatter,min(1.0-exp(-optical),uFogK.w));
+      return mix(col,inscatter,sFogAmount(wp));
     }
     // Filmic curve (Narkowicz's ACES fit), then saturation, split toning, contrast, warmth and a faint grain.
     vec3 sGrade(vec3 c){
@@ -396,7 +400,7 @@
         vec2 cellId=floor(vPos.xz/vec2(2.7,3.4)),panel=fract(vPos.xz/vec2(2.7,3.4));
         vec2 edgeD=min(panel,1.0-panel)*vec2(2.7,3.4);
         float chip=.06*noise(vPos.xz*2.7);
-        float joint=(1.0-smoothstep(.03+chip,.10+chip,min(edgeD.x,edgeD.y)))*nearSurface;
+        float joint=(1.0-smoothstep(.015+chip*.5,.05+chip*.6,min(edgeD.x,edgeD.y)))*nearSurface;
         vec3 slab=mix(vec3(.40,.38,.35),vec3(.52,.50,.46),hash(cellId+3.1))*(.84+.26*fbm3(vPos.xz*.9))*(.93+.1*noise(vPos.xz*6.0));
         if(nearSurface>.001){
           vec2 cr=worley(vPos.xz*.55);
@@ -404,7 +408,7 @@
         }
         slab=mix(slab,vec3(.23,.24,.22),smoothstep(.55,.85,noise(vPos.xz*.21+8.0))*.4);
         vec3 moss=mix(vec3(.12,.14,.08),vec3(.23,.25,.13),noise(vPos.xz*1.7));
-        slab=mix(slab,moss,joint*.85);
+        slab=mix(slab,moss*.8,joint*.7);
         vec3 rock=mix(vec3(.24,.25,.26),vec3(.38,.37,.35),fbm3(vPos.xz*.25+vPos.y*.2))*(.85+.3*noise(vec2(vPos.x+vPos.z,vPos.y*4.0)*.9));
         rock=mix(rock,moss*.9,smoothstep(.55,.9,n.y)*smoothstep(.4,.7,noise(vPos.xz*.6))*.8);
         vec3 surface=mix(rock,slab,pavement);
@@ -430,18 +434,18 @@
         ground*=1.0-.4*smoothstep(.955,.995,vMaskB.z)*(1.0-cover);
         // Snow on what faces up, thinning on slopes and in drifts; rain darkens the ground.
         float snow=uEnv.y*smoothstep(.62,.9,n.y)*smoothstep(.25,.55,fbm3(vPos.xz*.22)+uEnv.y*.35-pm*.3);
-        vec3 albedo=mix(ground*(1.0-.38*uEnv.z),vec3(.86,.88,.92),snow);
+        vec3 albedo=mix(ground*(1.0-.38*uEnv.z),vec3(.74,.76,.80),snow);
         col=sLight(toLin(albedo),n,uSun,sh,1.0-.35*vMaskB.y*(1.0-snow));
         // Wet sheen, and puddles on flat paving that mirror the sky (more and rippling in rain).
         vec3 eyeDir=normalize(uEye-vPos);float fres=pow(1.0-max(dot(n,eyeDir),0.0),4.0);
         col+=uFogC*fres*uEnv.z*.35*(1.0-snow);
         float level=pavement*(1.0-smoothstep(.02,.15,cover))*(1.0-pm*.5)*smoothstep(.97,.995,n.y)*(1.0-smoothstep(.9,.99,vMaskB.z))*(1.0-snow);
-        float pn=level>.001?.65*noise(vPos.xz*.21+17.0)+.35*noise(vPos.xz*.63-4.0):0.0,th=mix(.78,.64,uEnv.z);
-        float puddle=smoothstep(th,th+.015,pn)*level;
+        float pn=level>.001?.65*noise(vPos.xz*.21+17.0)+.35*noise(vPos.xz*.63-4.0):0.0,th=mix(.8,.71,uEnv.z);
+        float puddle=smoothstep(th,th+.012,pn)*level;
         if(puddle>.001){
           vec3 rdir=reflect(-eyeDir,vec3(0.0,1.0,0.0));
           vec3 sky=mix(uFogC,uAmbS*.6,smoothstep(0.0,.5,rdir.y))+uSunC*pow(max(dot(rdir,uSun),0.0),30.0)*1.5;
-          col=mix(col,sky*(.6+uEnv.z*.4*(noise(vPos.xz*9.0+uTime*3.0)-.5))*mix(.7,1.0,sh),puddle*(.35+.6*fres));
+          col=mix(col,sky*(.42+uEnv.z*.3*(noise(vPos.xz*9.0+uTime*3.0)-.5))*mix(.7,1.0,sh),puddle*(.3+.55*fres));
         }
       } else if(uAnime>0.5&&vSea<0.5){
         // Inhabited Hashima was predominantly concrete. Surface pattern/colour remain inferred.
@@ -689,6 +693,8 @@
         }
         // Broad mottling, then rain streaks running down from the parapet, the sills and every slab edge.
         alb*=.8+.32*fbm3(vec2(s*.23,y*.19+seed*3.0));
+        float closeDetail=1.0-smoothstep(6.0,26.0,vDepth);
+        if(closeDetail>.001)alb*=1.0-closeDetail*(.16*fbm3(vec2(s,y)*2.7+seed)+.1*smoothstep(.55,.8,noise(vec2(s*9.0,y*.9+seed)))-.08);
         float streak=smoothstep(.45,.75,noise(vec2(s*2.4,y*.11+seed*5.0)))*(.4+.6*noise(vec2(s*.7+seed,y*.04)));
         alb*=1.0-.55*streak*(.55+.45*smoothstep(H-4.0,H,y));
         float underSill=step(left+.04,bay)*step(bay,right-.04)*step(fy,bottom)*(1.0-smoothstep(0.0,.45,bottom-fy));
@@ -701,7 +707,7 @@
         alb=mix(alb,vec3(.36,.20,.11),rustLine*.6*nearDetail*(1.0-win));
         // Spalled patches expose darker aggregate; hairline cracks near the walker.
         vec2 sp=worley(vec2(s,y)*.7+seed);
-        float spall=(1.0-smoothstep(.18,.3,sp.x))*step(.7,noise(vec2(s*.3,y*.3)+seed*2.0))*(1.0-win)*(1.0-timber);
+        float spall=(1.0-smoothstep(.12,.22,sp.x+.18*noise(vec2(s,y)*4.0)))*step(.72,noise(vec2(s*.3,y*.3)+seed*2.0))*(1.0-win)*(1.0-timber)*step(style,3.5);
         alb=mix(alb,vec3(.30,.28,.25)*(.75+.5*noise(vec2(s,y)*11.0)),spall*.85);
         if(nearDetail>.001&&win<.5){
           vec2 wc=worley(vec2(s,y)*1.9+seed);
@@ -715,7 +721,13 @@
         // Galleries and recesses sit in deep shade; railings and columns catch the light.
         alb=mix(alb,alb*1.12,max(rail,column*.8));
         float ao=1.0-recess*.7-underSlab*.2;
-        vec3 lit=sLight(toLin(alb),n,uSun,sh,ao);
+        // Depth without geometry: projecting slabs shade a band under them and open galleries shade their depth, both from the
+        // real sun direction (t runs along the wall; sN, sT, sY are the sun's normal, lateral and vertical components).
+        vec3 t=normalize(vec3(n.z,0.0,-n.x));
+        float sN=max(dot(uSun,n),.03),sT=dot(uSun,t),sY=uSun.y;
+        float ledge=1.0-(1.0-win)*(1.0-step(.12*sY/sN,fy*floorH));
+        float gallery=1.0-recess*(1.0-step(1.6*sY/sN,(1.0-fy)*floorH*.62));
+        vec3 lit=sLight(toLin(alb),n,uSun,sh*ledge*gallery,ao);
         if(win>.5){
           // Openings: a dark room behind wooden lattice, cracked glass that dimly mirrors the sky, boarded bays and, at
           // dusk and night in the inhabited years, a few rooms glowing with lamplight.
@@ -726,31 +738,30 @@
           vec3 inside=(uAmbS*.5+uKey*.06)*toLin(vec3(.10,.09,.08))*(.4+pane.y);
           float broken=step(.45-.3*age,hash(vec2(floor(pane.x*2.0)+bayId*3.0,floor(pane.y*2.0)+storey+seed)));
           vec3 view=normalize(vWorld-uEye);
-          vec3 glass=mix(uFogC*.12+uSunC*.35*pow(max(dot(reflect(view,n),uSun),0.0),16.0),inside,broken);
+          vec3 glass=mix((uFogC*.12+uSunC*.22*pow(max(dot(reflect(view,n),uSun),0.0),64.0))*(.55+.6*noise(vec2(s*3.0,y*3.0)+seed)),inside,broken);
           float lattice=step(.5,kind)*(1.0-smoothstep(.012,.024,abs(fract(pane.x*paneWidth/.11)-.5)*.11))*nearDetail;
           float lamp=step(.9,kind)*(1.0-age)*uTone.w;
-          vec3 wcol=glass+toLin(vec3(1.0,.62,.30))*lamp*(.35+.65*pane.y)*(1.5-lattice);
-          wcol=mix(wcol,sLight(toLin(vec3(.13,.11,.09)),n,uSun,sh,.7),lattice);
+          // The opening is recessed 0.22 m: its head and one jamb shade the glass from the sun, and seen at an angle the
+          // inner jamb, soffit or sill shows as a strip of wall.
+          float D=.22,distTop=(1.0-pane.y)*paneHeight,distL=pane.x*paneWidth,distR=(1.0-pane.x)*paneWidth;
+          float reveal=max(step(distTop,D*sY/sN),step(sT>0.0?distR:distL,D*abs(sT)/sN));
+          float shIn=sh*(1.0-reveal);
+          vec3 toEye=normalize(uEye-vWorld);float vN=max(dot(toEye,n),.05),vT=dot(toEye,t);
+          float jamb=step(vT>0.0?distL:distR,D*abs(vT)/vN),soffit=step(distTop,D*max(-toEye.y,0.0)/vN),sill=step(pane.y*paneHeight,D*max(toEye.y,0.0)/vN);
+          vec3 wcol=glass*(.55+.45*(1.0-reveal))+toLin(vec3(1.0,.62,.30))*lamp*(.35+.65*pane.y)*(1.5-lattice);
+          wcol=mix(wcol,sLight(toLin(vec3(.13,.11,.09)),n,uSun,shIn,.7),lattice);
           float boarded=step(.9,kind)*step(.5,age+hash(vec2(seed,storey)));
           vec3 plank=mix(vec3(.19,.16,.12),vec3(.30,.25,.19),hash(vec2(floor(pane.y*paneHeight/.19),bayId+seed)))*(1.0-.4*(1.0-smoothstep(0.0,.1,fract(pane.y*paneHeight/.19))));
-          wcol=mix(wcol,sLight(toLin(plank),n,uSun,sh,.8),boarded);
-          wcol=mix(wcol,sLight(toLin(vec3(.14,.12,.10)),n,uSun,sh,.8),max(frame,mullion*.9)*nearDetail);
+          wcol=mix(wcol,sLight(toLin(plank),n,uSun,shIn,.8),boarded);
+          wcol=mix(wcol,sLight(toLin(vec3(.14,.12,.10)),n,uSun,shIn,.8),max(frame,mullion*.9)*nearDetail);
+          vec3 jambN=vT>0.0?t:-t;
+          wcol=mix(wcol,sLight(toLin(alb*.9),jambN,uSun,sh,.8),jamb*(1.0-boarded)*nearDetail);
+          wcol=mix(wcol,sLight(toLin(alb*.8),vec3(0.0,-1.0,0.0),uSun,sh,.6),soffit*(1.0-jamb)*nearDetail);
+          wcol=mix(wcol,sLight(toLin(alb*1.05),vec3(0.0,1.0,0.0),uSun,sh,.9),sill*(1.0-jamb)*nearDetail);
           lit=mix(lit,wcol,win);
         }
-        // Ivy and vines in the foliage tints, darker and sparser than the anime look.
-        float stretch=smoothstep(.55,.72,noise(vec2(s*.11,seed*5.3)))*step(.45,hash(vec2(seed*11.0,5.0)));
-        if(stretch>.001){
-          float reach=(mix(1.0,5.0,hash(vec2(seed*11.0,5.0)))+age*8.0)*(.4+.6*noise(vec2(s*.45,seed*2.7)));
-          float grow=stretch*smoothstep(-.35,.1,reach-y+.9*(noise(vec2(s,y)*2.2)-.5));
-          if(grow>.001){
-            vec4 lf=leafCell(vec2(s,y)*15.0+seed);
-            float cover=max(stretch*smoothstep(.25,.6,reach-y),grow*(1.0-smoothstep(.34,.44,lf.x)));
-            vec3 leafC=mix(mix(vec3(.10,.13,.07),vec3(.17,.20,.11),lf.w),mix(uRamp4,uRamp3,lf.w),step(.85,lf.w))*(.75+.35*lf.w);
-            lit=mix(lit,sLight(toLin(leafC),n,uSun,sh,.8),cover*(1.0-win*.6));
-          }
-        }
         float snowCap=uEnv.y*(1.0-smoothstep(.0,.06,H-y))*(1.0-win);
-        lit=mix(lit,sLight(toLin(vec3(.86,.88,.92)),vec3(0.0,1.0,0.0),uSun,sh,1.0),snowCap);
+        lit=mix(lit,sLight(toLin(vec3(.74,.76,.80)),vec3(0.0,1.0,0.0),uSun,sh,1.0),snowCap);
         lit*=1.0-uEnv.z*.25*(1.0-win);
         gl_FragColor = vec4(aerial(lit,uHorizon,uSun,uFog,vDepth,uAnime), uGhostPass > 0.5 ? 0.22 : 1.0);
         return;
@@ -937,7 +948,7 @@
         float bed=step(.55,fract(seed*37.3+style*.13))*(1.0-step(4.5,style)*step(style,5.5))*step(.18,bedCell.x)*step(bedCell.x,.78)*step(.1,bedCell.y)*step(bedCell.y,.9);
         alb=mix(alb,mix(vec3(.15,.11,.08),uRamp1,smoothstep(.45,.62,noise(m*2.2+seed*9.0))),bed);
         float snow=uEnv.y*smoothstep(.3,.6,fbm3(m*.3)+uEnv.y*.4);
-        col=sLight(toLin(mix(alb*(1.0-.35*uEnv.z),vec3(.86,.88,.92),snow)),vec3(0.0,1.0,0.0),uSun,sh,1.0);
+        col=sLight(toLin(mix(alb*(1.0-.35*uEnv.z),vec3(.74,.76,.80),snow)),vec3(0.0,1.0,0.0),uSun,sh,1.0);
         float pool=smoothstep(.66,.7,noise(m*.18+seed*3.0))*(1.0-bed)*(1.0-snow)*(.3+.7*uEnv.z);
         vec3 eyeDir=normalize(uEye-vWorld);
         col=mix(col,(mix(uFogC,uAmbS*.6,.5)+uSunC*pow(max(dot(reflect(-eyeDir,vec3(0.0,1.0,0.0)),uSun),0.0),30.0))*.7,pool*(.4+.6*pow(1.0-max(eyeDir.y,0.0),3.0)));
@@ -1170,6 +1181,7 @@
     /* material kinds: 0 flat 1 tatami 2 wood 3 concrete 4 rock 5 tile 6 metal 7 paper 8 glass 9 cloth 10 foliage 11 painted wall 12 water 13 soil.
        Two noise lookups per fragment, whatever the kind: the scales are chosen first, the noise is read once. */
     float lampPool(vec4 lamp){vec3 d=vLoc-lamp.xyz;return lamp.w>0.0?1.0/(1.0+dot(d,d)/(lamp.w*lamp.w*.18)):0.0;}
+    float sPool(vec4 lamp){vec3 d=vLoc-lamp.xyz;return lamp.w>0.0?1.3/(1.0+dot(d,d)/(lamp.w*lamp.w*.05)):0.0;}
     // Bounded analytic furniture contact shade, not a screen-space AO pass.
     float contactShade(vec4 contact){
       if(contact.w<=0.0)return 0.0;
@@ -1239,15 +1251,22 @@
       vec3 col = base * (amb + 0.62 * d * mix(0.4, 1.0, sh));
       if(uAnime>0.5&&uEnv.x>0.5){
         // Sengoku rooms: slightly darker, dustier and less saturated materials, a dim cool fill and warm lamp pools.
-        float l=dot(base,vec3(.3,.59,.11));
+        float l=dot(base,vec3(.3,.59,.11)),indoor=uTone.z;
         vec3 alb=toLin(mix(vec3(l),base,.72)*.92);
-        col=sLight(alb,n,uSun,sh,1.0);
+        // Indoors the rooms stay dark: only a trace of the sun gets in and the fill is dim, so windows read as bright wells.
+        float direct=clamp(dot(n,uSun),0.0,1.0)*sh*mix(1.0,.14,indoor);
+        col=alb*(uKey*direct+mix(uAmbG,uAmbS,n.y*.5+.5)*mix(1.0,.32,indoor)+fireLight(vWorld,n));
         if(uRoomLight>.5){
-          float pool=lampPool(uLamp0)+lampPool(uLamp1)+lampPool(uLamp2)+lampPool(uLamp3);
-          col=alb*(mix(uAmbG,uAmbS,n.y*.5+.5)*.45+uKey*.03+toLin(vec3(1.0,.64,.34))*min(pool*1.2,1.8)+fireLight(vWorld,n));
+          // Lamps light small warm pools that fall off quickly into dark corners.
+          float pool=sPool(uLamp0)+sPool(uLamp1)+sPool(uLamp2)+sPool(uLamp3);
+          col=alb*(uKey*direct+mix(uAmbG,uAmbS,n.y*.5+.5)*.22+toLin(vec3(1.0,.62,.30))*min(pool,1.4)+fireLight(vWorld,n));
         }
         if(n.y>.6)col*=1.0-.3*max(max(contactShade(uContact0),contactShade(uContact1)),max(contactShade(uContact2),contactShade(uContact3)));
         if(vMat.x>13.5)col=toLin(vCol.rgb)*2.2;
+        if(vMat.x>7.5&&vMat.x<8.5&&indoor>.5){
+          gl_FragColor=vec4(sGrade(uFogC*1.35+uSunC*.25),.9);
+          return;
+        }
         gl_FragColor=vec4(aerial(col,uHorizon,uSun,uFog,vDepth,uAnime),vCol.a);
         return;
       }
@@ -1549,7 +1568,7 @@
         if(kind>5.5&&kind<6.5){
           vec3 rdir=reflect(view,vec3(0.0,1.0,0.0));
           float fres=.03+.97*pow(1.0-max(-view.y,0.0),5.0);
-          vec3 w=mix(toLin(vec3(.05,.07,.06))*(uAmbS+uKey*.1),mix(uFogC,uAmbS*.7,smoothstep(0.0,.5,rdir.y))+uSunC*pow(max(dot(rdir,uSun),0.0),60.0)*4.0,fres);
+          vec3 w=mix(toLin(vec3(.12,.16,.15))*(uAmbS+uKey*.1),(mix(uFogC,uAmbS*.7,smoothstep(0.0,.5,rdir.y))+uSunC*pow(max(dot(rdir,uSun),0.0),60.0)*4.0)*.5,fres);
           vec2 lc=floor(vLoc.xz*4.0);
           float leaf=step(.84,hash(lc))*step(length(fract(vLoc.xz*4.0)-.5),.28);
           w=mix(w,sLight(toLin(mix(uRamp2,uRamp3,hash(lc+2.0))),vec3(0.0,1.0,0.0),uSun,sh,1.0),leaf);
@@ -1557,7 +1576,31 @@
           return;
         }
         vec3 alb=vCol;float ao=1.0,trans=0.0;vec3 nn=n;
-        float leafy=((kind>.5&&kind<2.5)||kind>7.5)?1.0:0.0;
+        float leafy=((kind>.5&&kind<2.5)||(kind>7.5&&kind<8.5))?1.0:0.0;
+        if(kind>11.5){
+          // Glowing embers and lit lantern boxes flicker; they are emissive, not lit.
+          float flick=.8+.2*noise(vec2(uTime*6.0,vKind.y*40.0))+.15*noise(vLoc.xz*6.0+uTime*2.0);
+          gl_FragColor=vec4(aerial(toLin(vCol)*mix(1.2,1.6,step(dot(vCol,vec3(.33)),.5))*flick,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
+          return;
+        }
+        if(kind>10.5){
+          // Cloth: nobori banners (colour holds across, along, palette + tear) and jizo bibs; two-sided and translucent.
+          float across=vCol.r,along=vCol.g,pal=floor(vCol.b),torn=fract(vCol.b)/.9;
+          if(pal<3.5){
+            if(along>1.0-torn*.35*noise(vec2(across*9.0,vKind.y*50.0))||(torn>.6&&noise(vLoc.xz*7.0+vLoc.y*5.0)<.13))discard;
+          }
+          vec3 cloth=pal<.5?vec3(.66,.63,.56):pal<1.5?vec3(.50,.17,.16):pal<2.5?vec3(.17,.21,.31):vec3(.55,.14,.12);
+          vec3 ink=pal<.5?vec3(.08,.07,.07):vec3(.80,.77,.70);
+          vec2 m=vec2((across-.5)*.62,along*2.5-.55);
+          float crest=pal<3.5?max(1.0-smoothstep(.02,.035,abs(length(m)-.2)),step(length(m),.17)*step(.72,fract(m.y*8.8+.36))):0.0;
+          float strokes=pal<3.5?step(.5,along)*step(along,.93)*step(abs(across-.5),.12)*step(.42,noise(vec2(across*6.0,along*14.0+vKind.y*30.0))):0.0;
+          cloth=mix(cloth,ink,max(crest,strokes)*.85);
+          cloth*=.82+.3*noise(vec2(across*3.0,along*9.0));
+          vec3 nn2=dot(n,view)>0.0?-n:n;
+          vec3 lit=sLight(toLin(cloth),nn2,uSun,sh,.9)+uKey*toLin(cloth)*pow(max(dot(view,uSun),0.0),2.0)*sh*.5;
+          gl_FragColor=vec4(aerial(lit,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
+          return;
+        }
         if(leafy>.5){
           // A ragged, leafy outline: fragments near the silhouette are cut away in noisy clusters.
           float rimF=1.0-abs(dot(n,view));
@@ -1575,7 +1618,7 @@
         } else if(kind>1.5&&kind<2.5){
           alb=mix(mix(vec3(.17,.21,.11),vec3(.07,.10,.06),vCol.r),uRamp3*.75,step(.78,vCol.g)*.7)*(.8+.35*noise(vLoc.xz*2.1+vLoc.y*2.0));
           trans=.35;
-        } else if(kind>7.5){
+        } else if(kind>7.5&&kind<8.5){
           alb=mix(vec3(.15,.20,.15),vec3(.05,.08,.07),vCol.r)*(.85+.3*noise(vLoc.xz*3.0+vLoc.y*3.0));
           trans=.2;
         } else if(kind<.5){
@@ -1586,6 +1629,13 @@
           vec2 cr=worley(vLoc.xz*1.6+vLoc.y*1.9);
           alb*=1.0-.4*(1.0-smoothstep(.02,.07,cr.y-cr.x))*step(.45,noise(vLoc.xz*.9+vLoc.y));
           alb=mix(alb,vec3(.13,.17,.08),smoothstep(.55,.9,n.y)*smoothstep(.45,.7,noise(vLoc.xz*1.2))*.8);
+        } else if(kind>9.5){
+          // Iron: nearly black with rust.
+          alb=mix(vCol,vec3(.26,.14,.08),smoothstep(.45,.8,noise(vLoc.xz*7.0+vLoc.y*6.0))*.6);
+        } else if(kind>8.5){
+          // Worked stone: grey granite with lichen speckle and moss on what faces up.
+          alb=vCol*(.82+.26*noise(vLoc.xz*6.0+vLoc.y*5.0))*(1.0-.15*step(.8,noise(vLoc.xz*23.0+vLoc.y*19.0)));
+          alb=mix(alb,vec3(.13,.17,.08),smoothstep(.55,.9,n.y)*smoothstep(.4,.75,noise(vLoc.xz*3.0+vLoc.y))*.7);
         } else if(kind<4.5){
           alb=mix(uRamp2,uRamp3,noise(vLoc.xz*5.0+vLoc.y*5.0));trans=.6;
         } else if(kind<5.5){
@@ -1596,7 +1646,7 @@
           alb=mix(vec3(.30,.29,.26)*(.8+.3*noise(vLoc.xz*3.0+vLoc.y*3.0)),mix(vec3(.11,.14,.07),vec3(.22,.25,.12),noise(vLoc.xz*4.0+vLoc.y*4.0)),m*.85);
           alb=mix(alb,vec3(.30,.17,.10),step(vCol.b,.3)*(1.0-m)*.6);
         }
-        alb=mix(alb,vec3(.86,.88,.92),uEnv.y*smoothstep(.45,.85,nn.y)*(leafy>.5?.55:.8));
+        alb=mix(alb,vec3(.74,.76,.80),uEnv.y*smoothstep(.45,.85,nn.y)*(leafy>.5?.55:.8));
         vec3 lit=sLight(toLin(alb),nn,uSun,sh,ao);
         lit+=uKey*toLin(alb)*pow(max(dot(view,uSun),0.0),3.0)*trans*sh*.6;
         gl_FragColor=vec4(aerial(lit,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
@@ -1644,6 +1694,66 @@
       gl_FragColor=vec4(aerial(col,uHorizon,uSun,uFog,vDepth,uAnime),1.0);
     }`;
 
+  /* Sengoku fires: flames, embers and smoke as point sprites anchored to each bonfire or brazier. aFire: world x, ground y,
+     z and kind * 1000 + seed; aSlot: phase and type (0 flame, 1 ember, 2 smoke). Flames and embers are added to the
+     graded image and fade into the fog; smoke is blended over it. */
+  const FIRE_VS = COMMON_VS + `
+    attribute vec4 aFire; attribute vec2 aSlot;
+    uniform float uWindTime, uPointScale;
+    varying float vT; varying float vType; varying float vSeed;
+    void main(){
+      float kind=floor(aFire.w/1000.0),seed=mod(aFire.w,1000.0)/1000.0,scale=kind>.5?.55:1.0,ph=aSlot.x,t,size;
+      vec3 base=aFire.xyz+vec3(0.0,kind>.5?1.12:.1,0.0),p;
+      if(aSlot.y<.5){
+        t=fract(uWindTime*1.7+ph*13.7+seed*7.0);float sw=(.35+.65*(1.0-t))*.34*scale;
+        p=base+vec3(sin(ph*40.0+uWindTime*3.1)*sw,t*1.45*scale,cos(ph*31.0+uWindTime*2.7)*sw);size=mix(.85,.2,t)*scale;
+      } else if(aSlot.y<1.5){
+        t=fract(uWindTime*.32+ph*17.3+seed*3.0);
+        p=base+vec3(sin(ph*23.0+uWindTime*.9)*t*1.4+.8*t*t,t*5.5*scale+.3,cos(ph*19.0+uWindTime*.8)*t*1.4+.55*t*t);size=.05;
+      } else if(aSlot.y>2.5){
+        t=.5;p=base+vec3(0.0,.55*scale,0.0);size=(3.2+.3*sin(uWindTime*7.0+seed*9.0))*scale;
+      } else {
+        t=fract(uWindTime*.12+ph*11.1+seed*5.0);
+        p=base+vec3(.83*t*t*4.0+sin(ph*9.0+uWindTime*.4)*.4,scale+t*7.0,.55*t*t*4.0+cos(ph*7.0+uWindTime*.3)*.4);size=mix(.7,2.8,t)*scale;
+      }
+      vT=t;vType=aSlot.y;vSeed=ph;
+      finish(p);
+      gl_PointSize=clamp(size*uPointScale/max(gl_Position.w,.1),1.0,256.0);
+    }`;
+  const FIRE_FS = `
+    precision mediump float;
+    uniform float uFog, uAnime, uSmoke; uniform vec3 uBg, uSun, uHorizon;
+    varying float vT; varying float vType; varying float vSeed;
+    varying vec4 vShadow; varying float vDepth;
+    ` + SHADOW_FN + `
+    void main(){
+      vec2 c=gl_PointCoord*2.0-1.0;float r=length(c);
+      if(vType>2.5){
+        if(uSmoke>.5)discard;
+        // The glow of the fire in the smoky air around it, much stronger at night.
+        gl_FragColor=vec4(vec3(1.0,.5,.18)*pow(max(1.0-r,0.0),2.2)*mix(.10,.42,uEnv.w)*(1.0-sFogAmount(vWorld)*.9),1.0);
+        return;
+      }
+      if(vType>1.5){
+        if(uSmoke<.5)discard;
+        float a=(1.0-smoothstep(.2,1.0,r))*.24*(1.0-vT)*smoothstep(0.0,.15,vT)*(.6+.4*noise(c*3.0+vSeed*9.0));
+        if(a<.01)discard;
+        gl_FragColor=vec4(sGrade(sFog(toLin(vec3(.30,.28,.27))*(uAmbS+uKey*.3+fireLight(vWorld,vec3(0.0,-1.0,0.0))*.3),vWorld)),a);
+        return;
+      }
+      if(uSmoke>.5)discard;
+      vec3 col;
+      if(vType<.5){
+        // A flame tongue: wide at the root, pointed at the tip (point-sprite y runs downwards), hottest in the core.
+        float yy=c.y*.5+.5,w=mix(.12,.85,yy)*(.85+.3*noise(vec2(c.y*3.0-vT*6.0,vSeed*20.0)));
+        float shape=(1.0-smoothstep(w*.55,w,abs(c.x)))*smoothstep(-1.0,-.6,c.y)*(1.0-smoothstep(.75,1.0,c.y));
+        vec3 hot=mix(vec3(1.0,.92,.62),vec3(1.0,.52,.14),smoothstep(.05,.55,vT+abs(c.x)*.6));
+        col=mix(hot,vec3(.62,.12,.03),smoothstep(.45,.95,vT))*shape*(1.0-vT*.75)*1.25;
+      } else {
+        col=vec3(1.0,.55,.16)*(1.0-smoothstep(.15,1.0,r))*(1.0-vT)*1.6;
+      }
+      gl_FragColor=vec4(col*(1.0-sFogAmount(vWorld)*.92),1.0);
+    }`;
   function compile(type, src){
     const s = gl.createShader(type);
     gl.shaderSource(s, src);
@@ -1678,7 +1788,7 @@
   } catch (err) { console.error(err); fallback(T.noWebgl); return; }
   /* The walking view's placeholder nature is optional: without vertex texture fetch, or if a program
      fails, the island is drawn exactly as before. */
-  let progG = null, progP = null, depthP = null, progA = null, progBright = null, progBlur = null, progComposite = null;
+  let progG = null, progP = null, depthP = null, progA = null, progBright = null, progBlur = null, progComposite = null, progF = null;
   const PLANT_A = ['aPos3', 'aNor', 'aCol', 'aInfo'];
   if (GAME && window.JTAWalkNature && gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS) > 0){
     try {
@@ -1689,7 +1799,8 @@
       progBright = program(POST_VS, BRIGHT_FS, ['aPos'], ['uTex', 'uTexel', 'uThreshold']);
       progBlur = program(POST_VS, BLUR_FS, ['aPos'], ['uTex', 'uDir']);
       progComposite = program(POST_VS, COMPOSITE_FS, ['aPos'], ['uTex', 'uBloom', 'uTexel', 'uBloomAmount']);
-    } catch (err) { console.error(err); progG = progP = depthP = progA = progBright = progBlur = progComposite = null; }
+      progF = program(FIRE_VS, FIRE_FS, ['aFire', 'aSlot'], COMMON_U.concat(['uPointScale', 'uSmoke']));
+    } catch (err) { console.error(err); progG = progP = depthP = progA = progBright = progBlur = progComposite = progF = null; }
   }
 
   function buffer(data, target){
@@ -2055,7 +2166,15 @@
      island, so shadows near the walker are about three times sharper; it is snapped to whole shadow texels so
      shadow edges do not crawl while walking. */
   /* Firelight for the sengoku look: up to four burning braziers nearest the walker, each (x, y, z, flickering strength). */
-  function fireLights(){ return []; }
+  let fireCache = null;
+  function fireLights(){
+    if (!sengoku() || !nature || !nature.fires || !nature.fires.length) return [];
+    if (fireCache) return fireCache;
+    const t = lookTime(), d = f => (f.x - st.wx) ** 2 + (f.z - st.wz) ** 2;
+    fireCache = nature.fires.slice().sort((a, b) => d(a) - d(b)).slice(0, 4).map(f => [f.x, f.y + (f.kind ? 1.25 : .7), f.z,
+      (f.kind ? 1.1 : 2.0) * (.82 + .1 * Math.sin(t * 9.1 + f.seed) + .08 * Math.sin(t * 23.3 + f.seed * 3.1)) * (st.weather === 2 ? .7 : 1)]);
+    return fireCache;
+  }
   const walkShadow = () => GAME && st.walk;
   function lightMatrix(){
     const R = 430, sun = env().sun, eye = [sun[0] * 1500, sun[1] * 1500, sun[2] * 1500], view = lookAt(eye, [0, 0, 0]);
@@ -2180,7 +2299,7 @@
         gl.uniform3fv(U.uKey, s.keyC); gl.uniform3fv(U.uAmbS, s.ambS); gl.uniform3fv(U.uAmbG, s.ambG); gl.uniform3fv(U.uSunC, s.sunC);
         gl.uniform3fv(U.uFogC, indoor ? s.fogC.map(x => x * .3) : s.fogC);
         gl.uniform4fv(U.uFogK, indoor ? [s.fogK[0] * .2, s.fogK[1] * .2, s.fogK[2], s.fogK[3]] : s.fogK);
-        gl.uniform4fv(U.uTone, [0, 0, 0, s.lamps]); gl.uniform3fv(U.uGLift, s.lift); gl.uniform3fv(U.uGGamma, s.gamma); gl.uniform3fv(U.uGGain, s.gain);
+        gl.uniform4fv(U.uTone, [0, 0, indoor && gameIndoor ? 1 : 0, s.lamps]); gl.uniform3fv(U.uGLift, s.lift); gl.uniform3fv(U.uGGamma, s.gamma); gl.uniform3fv(U.uGGain, s.gain);
         const fires = fireLights();
         for (let i = 0; i < 4; i++) gl.uniform4fv(U['uFire' + i], fires[i] || [0, 0, 0, 0]);
       }
@@ -2325,6 +2444,8 @@
     const pool = (count, metres, data) => ({ buf: buffer(data), count: data.length / 5, patch: metres / mpp, fade: metres * .5 });
     const F = f.features, scattered = N.scatter(f, terrain.hts0, { lowEnd, avoid: model.buildings.flatMap(b => b.wings || [b.poly]), spawn: [490, 650], keepOut: F.keepOut });
     const set = Object.assign({}, scattered, { trees: scattered.trees.concat(F.trees), rocks: scattered.rocks.concat(F.rocks), fences: F.fences, bridges: F.bridges, ponds: F.ponds, ruins: F.ruins });
+    set.props = N.sengokuProps(f, terrain.hts0, { lowEnd, avoid: model.buildings.flatMap(b => b.wings || [b.poly]), spawn: [490, 650],
+      keepOut: F.keepOut.concat(set.trees.map(t => ({ u: t.u, v: t.v, r: 1.2 })), set.rocks.map(r => ({ u: r.u, v: r.v, r: r.size * .6 })), set.ponds.map(p => ({ u: p.u, v: p.v, r: p.r + 1.5 }))) });
     const stamps = set.rocks.map(r => ({ u: r.u, v: r.v, r: r.size * .55 })).concat(set.trees.map(t => ({ u: t.u, v: t.v, r: .5 })), set.ponds.map(p => ({ u: p.u, v: p.v, r: p.r + .2 })), set.ruins.flatMap(r => r.pillars.map(p => ({ u: p.u, v: p.v, r: p.size * .8 })).concat([{ u: r.gear.u, v: r.gear.v, r: r.gear.r * .6 }])));
     const tex = gl.createTexture();
     gl.activeTexture(gl.TEXTURE3);
@@ -2332,7 +2453,7 @@
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, f.w, f.h, 0, gl.RGBA, gl.UNSIGNED_BYTE, N.stampCover(N.groundTexture(f, terrain.hts0), f, stamps));
     for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.NEAREST], [gl.TEXTURE_MAG_FILTER, gl.NEAREST], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
     gl.activeTexture(gl.TEXTURE0);
-    const plants = N.meshes(set).map(b => ({ pos3: buffer(b.pos), nor: buffer(b.nor), col: buffer(b.col), info: buffer(b.info), idx: buffer(b.idx, gl.ELEMENT_ARRAY_BUFFER), count: b.idx.length }));
+    const plants = plantMeshes(set);
     // Trunks and large rocks block walking; bins keep the check local.
     const bins = new Map(), add = (u, v, r) => { const key = Math.floor(u / 8) + ',' + Math.floor(v / 8); if (!bins.has(key)) bins.set(key, []); bins.get(key).push([u, v, r]); };
     for (const t of set.trees) add(t.u, t.v, .38 + t.radius * .07);
@@ -2349,7 +2470,25 @@
     for (let i = 0; i < parts.length / 4; i++){ parts[i * 4] = N.hash(i, 1, 61) * patch; parts[i * 4 + 1] = N.hash(i, 2, 61) * patch; parts[i * 4 + 2] = N.hash(i, 3, 61); parts[i * 4 + 3] = N.hash(i, 4, 61); }
     const birds = new Float32Array([0, 0, .1, 0, 1, -1, .4, 0, 1, 1, .7, 0, 2, -1, .2, 0, 2, 1, .9, 0]);
     const pd = set.ponds[0], pw = pd ? toWorldTrue(pd.u, pd.v) : null;
-    nature = { pond: pw ? [pw[0], pw[1], pd.r + .15, 1] : null, tex, f, plants, bins, segments, set, pools, parts: { buf: buffer(parts), count: parts.length / 4, patch }, birds: { buf: buffer(birds), count: 5 } };
+    // Sengoku props: fire sprites, firelight sources and colliders (these block walking only in the sengoku look).
+    const fires = set.props.fires.map(fi => { const w = toWorldTrue(fi.u, fi.v); return { x: w[0], y: fi.y, z: w[1], kind: fi.kind, seed: fi.seed }; }), fa = [], fb = [];
+    for (const fi of fires) for (const [n, type] of [[26, 0], [14, 1], [8, 2], [1, 3]]) for (let i = 0; i < n; i++){ fa.push(fi.x, fi.y, fi.z, fi.kind * 1000 + fi.seed); fb.push((i + .5) / n + N.hash(i, fi.seed, 7) * .37, type); }
+    const propBins = new Map(), addProp = (u, v, r) => { const key = Math.floor(u / 8) + ',' + Math.floor(v / 8); if (!propBins.has(key)) propBins.set(key, []); propBins.get(key).push([u, v, r]); };
+    for (const fi of set.props.fires) addProp(fi.u, fi.v, fi.kind ? .45 : 1.05);
+    for (const l of set.props.lanterns) addProp(l.u, l.v, .42);
+    for (const j of set.props.jizo) addProp(j.u, j.v, .25 * j.count + .2);
+    for (const b of set.props.banners) addProp(b.u, b.v, .12);
+    nature = { pond: pw ? [pw[0], pw[1], pd.r + .15, 1] : null, tex, f, plants, bins, segments, set, pools, parts: { buf: buffer(parts), count: parts.length / 4, patch }, birds: { buf: buffer(birds), count: 5 }, plantStyle: look.style,
+      fires, fireBuf: fires.length ? { a: buffer(new Float32Array(fa)), b: buffer(new Float32Array(fb)), count: fa.length / 4 } : null, propBins };
+  }
+  /* Tree, shrub and prop meshes for the current look: maples, pines and dead trees in the sengoku look, anime shapes otherwise. */
+  function plantMeshes(set){
+    return window.JTAWalkNature.meshes(set, sengoku() ? 'sengoku' : 'anime').map(b => ({ pos3: buffer(b.pos), nor: buffer(b.nor), col: buffer(b.col), info: buffer(b.info), idx: buffer(b.idx, gl.ELEMENT_ARRAY_BUFFER), count: b.idx.length }));
+  }
+  function syncPlants(){
+    if (!nature || nature.plantStyle === look.style) return;
+    for (const m of nature.plants) for (const k of ['pos3', 'nor', 'col', 'info', 'idx']) gl.deleteBuffer(m[k]);
+    nature.plants = plantMeshes(nature.set); nature.plantStyle = look.style;
   }
   // Deck height when (x, z) is on a bridge, else null. Ends are flush with the banks.
   function natureDeck(x, z){
@@ -2372,6 +2511,7 @@
       }
     }
     for (const pd of nature.set.ponds) if (Math.hypot(uv[0] - pd.u, uv[1] - pd.v) * mpp < pd.r + .15 && natureDeck(x, z) === null) return true;
+    if (sengoku()) for (let i = -1; i <= 1; i++) for (let j = -1; j <= 1; j++) for (const o of nature.propBins.get((bu + i) + ',' + (bv + j)) || []) if (Math.hypot(uv[0] - o[0], uv[1] - o[1]) * mpp < o[2] + .22) return true;
     return false;
   }
   function drawPlants(P, m){
@@ -2397,8 +2537,20 @@
     }
     gl.depthMask(true); gl.disable(gl.BLEND);
   }
+  function drawFires(M, lightPV, lift, ym){
+    if (!nature || !nature.fireBuf || !progF || !sengoku()) return;
+    setCommon(progF, M.pv, lightPV, lift, ym, false);
+    gl.uniform1f(progF.U.uYOff, 0); gl.uniform1f(progF.U.uPointScale, canvas.height * .5 * M.proj[5]);
+    gl.bindBuffer(gl.ARRAY_BUFFER, nature.fireBuf.a); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 4, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ARRAY_BUFFER, nature.fireBuf.b); gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 0, 0); disableFrom(2);
+    gl.enable(gl.BLEND); gl.depthMask(false);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.uniform1f(progF.U.uSmoke, 1); gl.drawArrays(gl.POINTS, 0, nature.fireBuf.count);
+    gl.blendFunc(gl.ONE, gl.ONE); gl.uniform1f(progF.U.uSmoke, 0); gl.drawArrays(gl.POINTS, 0, nature.fireBuf.count);
+    gl.depthMask(true); gl.disable(gl.BLEND);
+  }
   function drawNature(M, lightPV, lift, ym, shadowOn){
     if (!nature) return;
+    syncPlants();
     setCommon(progP, M.pv, lightPV, lift, ym, shadowOn);
     for (const m of nature.plants) drawPlants(progP, m);
     setCommon(progG, M.pv, lightPV, lift, ym, shadowOn);
@@ -2423,6 +2575,7 @@
   function draw(){
     const w = canvas.width, h = canvas.height;
     const e = env(), pp = terrain && st.walk ? postTargets() : null, screenFb = pp ? pp.scene.fb : null;
+    fireCache = null;
     gl.bindFramebuffer(gl.FRAMEBUFFER, screenFb);
     gl.viewport(0, 0, w, h);
     gl.clearColor(e.bg[0], e.bg[1], e.bg[2], 1);
@@ -2473,6 +2626,7 @@
       drawRoofs(progR, roofs);
       drawNature(M, lightPV, lift, ym, shadowOn);
       drawAmbient(M, lightPV, lift, ym);
+      drawFires(M, lightPV, lift, ym);
       if (sceneMesh){
         /* the interior: opaque boxes, then the assumed (translucent) ones, then the host building as a ghost shell */
         setCommon(progB, M.pv, lightPV, lift, ym, shadowOn);
@@ -2550,6 +2704,17 @@
     const w = weatherFx.width, h = weatherFx.height, rain = env().rain;
     weatherCtx.clearRect(0, 0, w, h);
     if (!rain && !reduce && GAME && !sengoku() && st.walk && !gameIndoor && st.weather < 2 && look.ambient > 0) drawLight(now);
+    if (!reduce && sengoku() && env().key === 'snow' && st.walk){
+      // Snowfall: soft flakes in three depths drifting down and sideways with the wind.
+      const cw = canvas.clientWidth, ch = canvas.clientHeight, count = lowEnd ? 110 : 240, t = now * .001;
+      weatherCtx.save(); weatherCtx.scale(w / Math.max(1, cw), h / Math.max(1, ch)); weatherCtx.fillStyle = 'rgba(228,232,240,.75)';
+      for (let i = 0; i < count; i++){
+        const a = Math.sin((i + 1) * 91.731) * 43758.5453 % 1, b = Math.sin((i + 9) * 41.13) * 9283.21 % 1, depth = 1 + i % 3, r = .8 + depth * .75;
+        const x = ((Math.abs(a) * (cw + 60) + t * (10 + 8 * depth) + Math.sin(t * .7 + i) * 14) % (cw + 60)) - 30, y = ((Math.abs(b) * (ch + 40) + t * (18 + 16 * depth)) % (ch + 40)) - 20;
+        weatherCtx.globalAlpha = .35 + .2 * depth; weatherCtx.beginPath(); weatherCtx.arc(x, y, r, 0, 6.2832); weatherCtx.fill();
+      }
+      weatherCtx.restore();
+    }
     if (!rain || reduce) return;
     weatherCtx.save();
     weatherCtx.scale(w / Math.max(1, canvas.clientWidth), h / Math.max(1, canvas.clientHeight));
