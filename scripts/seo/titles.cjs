@@ -162,16 +162,20 @@ function pick(code,cands=loadCandidates(),state=loadState()){
 }
 
 /* Ownership codes from Naver Search Advisor, Baidu, Bing, Yandex or Google go on the home page as meta tags
-   (a verification file would be answered with a redirect to the extensionless path). Empty codes add nothing. */
+   (a verification file would be answered with a redirect to the extensionless path). Empty codes add nothing.
+   Each tag is written exactly as the engines hand it out and goes straight after <head> and its charset, so a
+   checker that matches the text or reads only the start of the page still finds it. */
 const VERIFY=['google-site-verification','msvalidate.01','naver-site-verification','baidu-site-verification','yandex-verification'];
 function injectVerification(html,codes){
  const tags=VERIFY.filter(n=>codes&&codes[n]).map(n=>{
   if(!/^[\w.:-]{6,120}$/.test(codes[n]))throw new Error('verification code for '+n+' has unexpected characters');
-  return '<meta name="'+n+'" content="'+codes[n]+'">';
+  return '<meta name="'+n+'" content="'+codes[n]+'" />';
  });
  if(!tags.length)return html;
- if(!html.includes('</head>'))throw new Error('no </head> for the verification tags');
- return html.replace('</head>',tags.join('\n')+'\n</head>');
+ const top=/<head>\s*(?:<meta charset="[^"]*">\s*)?/.exec(html);
+ if(!top)throw new Error('no <head> for the verification tags');
+ const eol=html.includes('\r\n')?'\r\n':'\n',at=top.index+top[0].length;
+ return html.slice(0,at)+tags.join(eol)+eol+html.slice(at);
 }
 
 module.exports={BRAND,DEFAULTS,tokens,score,decide,validate,pick,binomCdf,expectedCtr,loadCandidates,loadSuggestions,loadState,saveState,loadVerification,injectVerification,VERIFY};

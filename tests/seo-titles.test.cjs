@@ -138,10 +138,12 @@ test('ownership codes for Naver, Baidu and others go on the home page only when 
  const codes=seo.loadVerification(),set=Object.entries(codes).filter(([,v])=>v);
  const home=seo.injectVerification(html,codes);
  assert.equal((home.match(/<meta name=/g)||[]).length,set.length);
- for(const [n,v] of set)assert.ok(home.includes('<meta name="'+n+'" content="'+v+'">'),n+' is not on the home page');
+ for(const [n,v] of set)assert.ok(home.includes('<meta name="'+n+'" content="'+v+'" />'),n+' is not on the home page');
  assert.match(codes['msvalidate.01'],/^[0-9A-F]{32}$/,'Bing ownership code');
  const out=seo.injectVerification(html,{'naver-site-verification':'abc123def456','baidu-site-verification':'codeva-XyZ12345'});
- assert.ok(out.includes('<meta name="naver-site-verification" content="abc123def456">\n<meta name="baidu-site-verification" content="codeva-XyZ12345">\n</head>'));
+ assert.ok(out.includes('<head><meta name="naver-site-verification" content="abc123def456" />\n<meta name="baidu-site-verification" content="codeva-XyZ12345" />\n<title>'));
+ // On the real home page they come straight after the charset, in the form the engines hand out, with the page's line ends.
+ assert.match(seo.injectVerification(read('index.html'),{'naver-site-verification':'abc123def456'}),/<head>(\r?\n)<meta charset="utf-8">\1<meta name="naver-site-verification" content="abc123def456" \/>\1<meta /);
  assert.throws(()=>seo.injectVerification(html,{'naver-site-verification':'"><script>alert(1)</script>'}));
  assert.deepEqual(Object.keys(seo.loadVerification()).sort(),[...seo.VERIFY].sort());
  assert.ok(read('scripts/build.cjs').includes('seo.injectVerification('),'the build applies them');
