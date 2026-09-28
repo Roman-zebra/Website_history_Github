@@ -49,9 +49,10 @@
    "heading": "Invasion and a village cut in two",
    "paragraphs": [
     {
-     "text": "War reached Chatan before the main invasion did. Japan's national record of civilian war dead, compiled by the Ministry of Internal Affairs and Communications, records 33 people killed in Chatan village in the air raid of 10 October 1944, the day US carrier aircraft struck targets across Okinawa; the same record dates the main invasion precisely, noting that American forces landed \"around Chatan village\" on 1 April 1945, part of a landing that ran along the coast from Yomitan through Kadena and into Chatan. Within days the old rice paddies and farmland were being cleared for what would become Kadena air base, and the prefectural archives' own account of the town's occupation describes its residential areas as comprehensively destroyed.",
+     "text": "War reached Chatan before the main invasion did. Japan's national record of civilian war dead, compiled by the Ministry of Internal Affairs and Communications, records 33 people killed in Chatan village in the air raid of 10 October 1944, the day US carrier aircraft struck targets across Okinawa. The main invasion followed on 1 April 1945: the Okinawa Prefectural Archives' own chronology puts some 1,400 to 1,500 ships and about 183,000 troops of four US Army and Marine divisions ashore along the coast running through Yomitan, Kadena and Chatan, and records that by nightfall the invaders held both the Japanese airfield at Yomitan and the one inside Chatan's own boundary — the airstrip this dossier's angle on Kadena Air Base begins from — against only light resistance. Within days the surrounding rice paddies and farmland were being cleared for what would grow into that base, and the prefectural archives' own account of the town's occupation describes its residential areas as comprehensively destroyed.",
      "cite": [
       "S13",
+      "S16",
       "S7"
      ]
     },
@@ -180,8 +181,9 @@
   },
   {
    "when": "1 April 1945",
-   "what": "US forces land on the coast around Chatan and Kadena; the village's farmland is soon cleared for a military airfield.",
+   "what": "About 183,000 US troops land on the coast around Yomitan, Kadena and Chatan; the Japanese airfield inside Chatan falls the same day and the village's farmland is soon cleared for what becomes Kadena Air Base.",
    "cite": [
+    "S16",
     "S13",
     "S7"
    ]
@@ -460,6 +462,16 @@
    "url": "https://www.chatan.jp/smph/choseijoho/tokei/jinko.html",
    "checked": "2026-09-28",
    "used": "Current population of Chatan (about 29,000 residents)."
+  },
+  {
+   "id": "S16",
+   "kind": "official",
+   "title": "1945年3月26日、4月1日 米軍が慶良間諸島・沖縄本島に上陸",
+   "titleEn": "26 March and 1 April 1945: US forces land on the Kerama Islands and Okinawa's main island",
+   "publisher": "沖縄県公文書館 (Okinawa Prefectural Archives)",
+   "url": "https://www.archives.pref.okinawa.jp/news/that_day/15071",
+   "checked": "2026-09-28",
+   "used": "Scale of the 1 April 1945 landing (about 1,400-1,500 ships, about 183,000 troops, four US Army/Marine divisions) and the same-day capture of the Japanese airfields at Yomitan and within Chatan's boundary."
   }
  ],
  "furtherReading": [

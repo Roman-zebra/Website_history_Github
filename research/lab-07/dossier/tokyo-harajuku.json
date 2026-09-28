@@ -9,13 +9,19 @@
     {
      "text": "The land here is drier and higher than the river districts nearer the bay: the Geospatial Information Authority classes most of the study area as terrace and slope rather than flood plain, cut into by the small valley of a stream once called the Onden River. Before Edo grew this far, that terrace held two separate farming villages of Toshima District, Harajuku and Yoyogi, each recorded in an early nineteenth-century gazetteer with its own parish temple: Harajuku's Ryuganji kept a bell cast in 1762, Yoyogi's Fukusenji one cast in 1719. Onden, the third hamlet folded into this dossier's ground, took its name, an 1917 town survey records, from Onda Gorozaemon, a retainer of Uesugi Sadamasa who retired here and whose farming descendants gave the place its familiar name before the Tokugawa era respelled it with the characters now read Onden.",
      "cite": [
-      "S17",
+      "S15",
       "S1",
       "S2"
      ]
     },
     {
      "text": "Under the shogunate the whole terrace was parcelled out to daimyo and hatamoto as detached residences and to temples as endowed land, the same 1917 survey notes: the Tokugawa main family's later estate had been the Kishu domain's own flower garden, the site of the Imperial Guard's 4th Regiment had belonged to a hatamoto named Mizuno, and the district still called Shin-yashiki, \"new residence,\" took its name from land once held by Naito Tango-no-kami and later divided among his retainers. Harajuku's own name is explained two ways in the same source: either from a post-station on the old road from Kamakura to Mutsu province, or, in a tradition kept at Ryuganji, from the eleventh-century general Minamoto no Yoshiie mustering his troops here before an eastern campaign, a story the slope by the temple gate still marks as Seizoroizaka, \"muster slope.\"",
+     "cite": [
+      "S2"
+     ]
+    },
+    {
+     "text": "The same survey preserves the origin story of the district's older Hachiman shrine, on ground in Sendagaya aza granted eight koku eight to of shogunal shrine-land: villagers are said to have seen strange lights and clouds over an ancient grove here, with white doves flying off toward the west, and built a small shrine they called Hato-no-mori, the Dove Grove; in 860 the itinerant priest Jikaku Daishi is said to have enshrined Empress Jingu, Emperor Ojin and Amenokoyane there on the model of Usa Hachiman, two and a half centuries before either Harajuku or Yoyogi is otherwise attested by name. A local warrior of the Shibuya clan later credited a battlefield victory to an arrow he found before the shrine after praying there, the same tradition holds, and went on to govern what were remembered as Shibuya's seven manors.",
      "cite": [
       "S2"
      ]
@@ -105,7 +111,8 @@
      "text": "Yoyogi Park's slightly irregular paths and open lawns, unusual for a Japanese metropolitan park, are themselves a trace of its double reuse: first as barrack housing laid out on the old parade ground's grid, then as an Olympic village whose surviving buildings and street pattern still shape the park built over them after 1964. Between the shrine's dense forest and the park's open ground, the terrace-and-slope landform recorded for this district by the land-survey authority is easiest to feel on foot, in the short, sharp drop from Sendagaya's old high ground down toward the former streambed that Cat Street now follows.",
      "cite": [
       "S11",
-      "S17"
+      "S15",
+      "S16"
      ]
     }
    ]
@@ -415,6 +422,26 @@
    "url": "https://www.shimzarchives.jp/heritage/heritage_390/",
    "checked": "2026-09-28",
    "used": "National Yoyogi Stadium's design team, completion date (September 1964) and construction scale."
+  },
+  {
+   "id": "S15",
+   "kind": "official",
+   "title": "地形分類（自然地形・人工地形）ベクトルタイル",
+   "titleEn": "Landform classification (natural and artificial) vector tiles",
+   "publisher": "国土地理院 (Geospatial Information Authority of Japan)",
+   "url": "https://github.com/gsi-cyberjapan/experimental_landformclassification",
+   "checked": "2026-09-28",
+   "used": "Classification of the study area as predominantly terrace and slope rather than flood plain."
+  },
+  {
+   "id": "S16",
+   "kind": "official",
+   "title": "地理院タイル 空中写真及び全国最新写真（シームレス）",
+   "titleEn": "GSI Tiles: aerial photographs and current seamless photographs",
+   "publisher": "国土地理院 (Geospatial Information Authority of Japan)",
+   "url": "https://maps.gsi.go.jp/development/ichiran.html",
+   "checked": "2026-09-28",
+   "used": "Basis for comparing historical and present-day aerial photography of the study area, including Yoyogi Park's layout."
   }
  ],
  "furtherReading": [
