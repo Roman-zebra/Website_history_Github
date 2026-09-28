@@ -501,6 +501,135 @@
           "used": "Sold since 1 Sep 2025: TIFF, 600 dpi, ¥610 per sheet, online via Japan Map Center; page updated 2026-04-01."
         }
       ]
+    },
+    {
+      "id": "C12",
+      "target": "dossier/kin.json",
+      "answers": "caveat: the exact wording of Toyama Kyuzo's verse on the 'World Stone' was not verified against a primary text",
+      "status": "still-open (and why)",
+      "summary": "NDL Digital Collections full-text search for 金武世界石 returns 119 items. The verse appears in more than twenty of them (1953-1999), including Kin Town Board of Education's own 1990 site survey (金武町の遺跡, pid 13202826), a Meiji-era Ryukyu Shimpo report of the stone's erection 'at the west end of the Kin babasaki' reprinted in a district newspaper collection (pid 13272176), Okinawa Prefecture's 1995 school-trip booklet (pid 14027969) and JICA Okinawa's 1982 emigration history (pid 13106674). Every one checked on the first results page is personal-transmission (送信サービス) or NDL-premises only, so under the Page 07 rules none can be the source of a sentence. The wording also varies between them (我ら/吾等, 五大州/五大洲, 誠一つの/誠ひとつの), which is exactly why a primary text matters. The commonly given form is いざ行かん 我らの家は五大州 誠一つの金武世界石.",
+      "suggestedText": "Keep the dossier's current approach (describe, do not quote). If a line is wanted, give an English rendering as 'commonly given' — 'Let us go: our home is the five continents' — and name the stone, without claiming the inscription's exact characters.",
+      "leadForDeepResearch": "Kin Town Board of Education, 金武町の遺跡 (1990), frame 9, and the Meiji newspaper report in 戦前新聞集成：並里区誌資料編 (1995), frame 210, are the two nearest-to-primary texts; both readable at NDL or a partner library via the transmission service.",
+      "sources": []
+    },
+    {
+      "id": "C13",
+      "target": "dossier/kin.json",
+      "answers": "new material for the walk and the Philippines paragraph (not a caveat)",
+      "status": "new",
+      "summary": "Kin Town's own page on the Toyama Memorial Hall (當山紀念館, updated 2023-10-18): built in 1935 to honour Toyama Kyuzo, paid for with the surplus of donations sent by emigrants overseas for his statue; one of the few pre-war reinforced-concrete buildings in Okinawa, designed by the Kin-born architect Oshiro Ryutaro; used before the war for emigrant education and the 1935 ceremony for the 30th anniversary of emigration to Hawaii (as the page words it), after the war as a kindergarten and then the town office and board of education; restored to its original form and reopened in October 2016; registered as a national Tangible Cultural Property on 26 February 2021, Kin's first; open 9:00-16:00, free, closed weekends and holidays. Kin Town Library's page for its 2019 picture-book biography: Oshiro Kozo, called the father of Philippine emigration, began with emigration to Benguet in the Philippines in 1904, then abaca (Manila hemp) cultivation at Bago, and organised Okinawan emigration to the Philippines.",
+      "suggestedWalkStop": {
+        "name": "Toyama Memorial Hall",
+        "ja": "當山紀念館",
+        "what": "A 1935 concrete hall built with money sent home by emigrants to honour Toyama Kyuzo, restored in 2016 and registered as a national cultural property in 2021; free, weekdays 9:00-16:00.",
+        "cite": [
+          "Kin Town: 當山紀念館"
+        ]
+      },
+      "suggestedText": "The Philippines stream had its own organiser from Kin: Oshiro Kozo, remembered in the town as the father of Philippine emigration, who went out with the 1904 emigration to Benguet and turned to growing abaca at Bago on Mindanao.",
+      "note": "Check 'on Mindanao' for Bago against a second source (Bago is in the Davao area, but the library page does not say Mindanao). The library entry summarises a children's book, so prefer it for names and dates only.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "當山紀念館",
+          "titleEn": "Toyama Memorial Hall",
+          "publisher": "金武町 (Kin Town), 企画課",
+          "url": "https://www.town.kin.okinawa.jp/soshiki/kikakuka/4/4/593.html",
+          "checked": "2026-09-28",
+          "used": "1935 construction and funding, architect, uses, 2016 restoration, national registration 26 Feb 2021, opening hours."
+        },
+        {
+          "kind": "institution",
+          "title": "フィリピン移民の父 大城孝蔵 －沖縄県金武町の偉人－（金武町の民話シリーズ⑦）",
+          "titleEn": "Oshiro Kozo, father of Philippine emigration (Kin Town Library picture book, 2019)",
+          "publisher": "金武町立図書館 (Kin Town Library)",
+          "url": "https://kin-lib.town.kin.okinawa.jp/06kyoudominwa.html",
+          "checked": "2026-09-28",
+          "used": "Oshiro Kozo: 1904 emigration to Benguet, abaca at Bago, Okinawan emigration to the Philippines."
+        }
+      ]
+    },
+    {
+      "id": "C14",
+      "target": "audience.json / districts.json (selection and the sales page)",
+      "answers": "gap: site-specific audience not available",
+      "status": "partly-resolved",
+      "summary": "The owner's Google Search Console (3 months to 2026-09-25, web search) holds too little data to rank districts; raw counts are kept out of this public repository. Directionally: impressions come first from the United States and Japan, then Germany, South Korea, Canada, Brazil and Hong Kong. Queries that reach the site: map-of-Hiroshima searches, Gunkanjima in Japanese, Korean and English, liminal Japan, and generic old-map searches (historical map of Japan, 日本 地図 昔, 旧市街 地図). The pages seen most in results are the home page, the Gunkanjima 3D pages, the historical-maps guide, the liminal guide and the Hiroshima place page. Of the 20 Page 07 districts only Hiroshima shows search demand so far. Cloudflare visitor counts were not read: the dashboard was signed out, and signing in is the owner's step.",
+      "forThePage": "Lead with Hiroshima as the sample Area Dossier and word the product for English-speaking visitors (US first by impressions). 'Historical map of Japan' and 'map of <city>' are the phrases people already type.",
+      "sources": [
+        {
+          "kind": "owner-data",
+          "title": "Google Search Console, Performance (web), 3 months",
+          "checked": "2026-09-28",
+          "used": "Countries, queries and pages with impressions, 2026-09-11 to 2026-09-25."
+        }
+      ]
+    },
+    {
+      "id": "C15",
+      "target": "audience.json (segments.nikkei, gaps)",
+      "answers": "gap: MOFA overseas Nikkei estimate returned HTTP 403",
+      "status": "partly-resolved",
+      "summary": "mofa.go.jp opens in Chrome, but the country table itself is a PDF (https://www.mofa.go.jp/mofaj/files/100646175.pdf) that Chrome shows in its own PDF viewer, which this browser tool cannot read; it was not downloaded. The ministry's country 'basic data' pages give the figures in HTML: Brazil — Nikkei population estimated at about 2.7 million (page updated 2026-08-03); Mexico — over 79,000 (updated 2025-08-05); Bolivia — about 13,000 (estimate; updated 2026-09-09); Paraguay — about 10,000 (estimate; updated 2026-06-19). The USA, Canada, Argentina, Peru, Philippines and Australia pages give no Nikkei figure.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "ブラジル基礎データ",
+          "publisher": "外務省 (MOFA)",
+          "url": "https://www.mofa.go.jp/mofaj/area/brazil/data.html",
+          "checked": "2026-09-28",
+          "used": "Nikkei population about 2.7 million (estimate)."
+        },
+        {
+          "kind": "official",
+          "title": "メキシコ基礎データ",
+          "publisher": "外務省 (MOFA)",
+          "url": "https://www.mofa.go.jp/mofaj/area/mexico/data.html",
+          "checked": "2026-09-28",
+          "used": "Nikkei population over 79,000."
+        },
+        {
+          "kind": "official",
+          "title": "ボリビア基礎データ",
+          "publisher": "外務省 (MOFA)",
+          "url": "https://www.mofa.go.jp/mofaj/area/bolivia/data.html",
+          "checked": "2026-09-28",
+          "used": "Nikkei about 13,000 (estimate)."
+        },
+        {
+          "kind": "official",
+          "title": "パラグアイ基礎データ",
+          "publisher": "外務省 (MOFA)",
+          "url": "https://www.mofa.go.jp/mofaj/area/paraguay/data.html",
+          "checked": "2026-09-28",
+          "used": "Nikkei about 10,000 (estimate)."
+        }
+      ]
+    },
+    {
+      "id": "C16",
+      "target": "audience.json (US installation personnel)",
+      "answers": "gap: no official figure for CFA Sasebo (navy.mil returned 403)",
+      "status": "partly-resolved",
+      "summary": "Commander Fleet Activities Sasebo's official pages open in Chrome but give no personnel count. They give: 12 separate areas on 1,285 acres around Sasebo Harbor; home of the Navy's only forward-deployed Amphibious Ready Group, anchored by USS America (LHA 6), with eight other forward-deployed ships. History page: Sasebo Naval Station began operations on 1 July 1889 as headquarters of the Imperial Japanese Navy's Third Naval District; in 1905 the Combined Fleet under Admiral Togo sailed from Sasebo to meet the Baltic Fleet; the arsenal employed some 50,000 people at the peak of the Second World War; the 21st Naval Air Arsenal (Sasebo and Omura) built 966 aircraft; the 5th Marine Division landed on 22 September 1945 and US Fleet Activities Sasebo was formally established in June 1946. Yokosuka's official personnel figure is in C05.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "About — CFA Sasebo",
+          "publisher": "Commander, Navy Region Japan (US Navy)",
+          "url": "https://cnrj.cnic.navy.mil/Installations/CFA-Sasebo/About/",
+          "checked": "2026-09-28",
+          "used": "Area (1,285 acres, 12 areas); Amphibious Ready Group and USS America."
+        },
+        {
+          "kind": "official",
+          "title": "History — CFA Sasebo",
+          "publisher": "Commander, Navy Region Japan (US Navy)",
+          "url": "https://cnrj.cnic.navy.mil/Installations/CFA-Sasebo/About/History/",
+          "checked": "2026-09-28",
+          "used": "1889 naval station; 1905; wartime arsenal of some 50,000; 966 aircraft; 22 Sep 1945 landing; June 1946 establishment."
+        }
+      ]
     }
   ],
   "forThePage": [

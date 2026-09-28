@@ -23,6 +23,11 @@ sources in the dossier schema:
 | C09 | tokyo-asakusa — Ryogoku Bridge "built in 1658" | correction suggested (Sumida's chronology: completed 1659) |
 | C10 | deep sample — Diplomatic Archives procedure and passport registers | resolved |
 | C11 | deep sample — GSI old maps for Kuka | partly resolved (service moved on 2026-03-07; sheet names found; edition dates open) |
+| C12 | kin — wording of Toyama's verse | still open: every NDL text carrying it is transmission/premises-only; spellings vary |
+| C13 | kin — Toyama Memorial Hall, Oshiro Kozo | new material (Kin Town pages) for the walk and the Philippines paragraph |
+| C14 | audience — the site's own search data | direction only (Search Console); Cloudflare needs the owner to sign in |
+| C15 | audience — MOFA Nikkei figures | partly: Brazil, Mexico, Bolivia, Paraguay from MOFA's HTML country pages |
+| C16 | audience — CFA Sasebo | official area, ships and history; no personnel figure published |
 
 Not done here: anything behind a terms-of-use or login screen that the owner has not approved (GSI edition history),
 and personal-transmission (個人送信) NDL items, which the Page 07 rules exclude as sources anyway.
