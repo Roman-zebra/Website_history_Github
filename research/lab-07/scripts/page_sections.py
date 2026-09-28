@@ -304,11 +304,13 @@ def context():
         return f'${v:g}' if isinstance(v, (int, float)) else esc(v or '')
     dp = rec.get('dossier') or {}
     dossier_price = (usd(dp.get('price')) + (f"（発売時 {usd(dp.get('launch'))}）" if dp.get('launch') else '')) if dp else '調査中'
-    deep_price = '<br>'.join(f"{esc(t.get('tier', ''))} {usd(t.get('price'))}" for t in rec.get('deepResearch') or []) or '調査中'
+    TIER_JA = {'Remote': '遠隔調査', 'With on-site visit': '現地調査つき'}
+    deep_price = '<br>'.join(f"{esc(TIER_JA.get(t.get('tier', ''), t.get('tier', '')))} {usd(t.get('price'))}" for t in rec.get('deepResearch') or []) or '調査中'
     SEG = {'a': '旅行・地域史のPDFガイド', 'b': '家・通りの歴史レポート', 'c': '日本の家系・戸籍調査'}
     comp_rows = ''.join(f"<tr><td>{esc(SEG.get(c.get('segment'), c.get('segment', '')))}</td><td>{esc(c.get('seller', ''))}<br><span class='muted small'>{esc(c.get('site', ''))}</span></td><td>{esc(c.get('product', ''))}</td><td class='num'>{esc(c.get('price', ''))}</td><td>{link(c['url'], '見る') if c.get('url') else ''}</td></tr>"
                         for c in (pricing or {}).get('comparables', []))
-    why = ''.join(f"<li><b>{esc(k)}</b>：{esc(v)}</li>" for k, v in [('Area Dossier', dp.get('why', ''))] + [(t.get('tier', ''), t.get('why', '')) for t in rec.get('deepResearch') or []] if v)
+    why = ('<li><b>Area Dossier</b>：Etsy・Gumroad・Lemon Squeezyなどで個人が売る日本旅行プランのPDFは約$10〜24（中央値は約$22）で、調査や出典はほぼありません。出典つきの歴史、1940年代の空中写真、伝承碑の英訳があるぶんそれらより上に置きますが、1地区を何度も売る既製品なので、個別調査の価格帯には近づけません。英国の自動生成の物件レポート（£9.95）が「安い自動版」の目安です。</li>'
+           '<li><b>Deep Research</b>：日本の家系調査の専門家は時給約$100〜118（例：Legacy Tree Genealogistsの25時間パック$2,950、Japan Genealogy Connectの$100/時）。遠隔$195は約2時間分で、当初案の$190とほぼ同じです。現地調査つきは、海外の家の歴史調査が$635〜995以上なので、$425に上げても相場より安い設定です。</li>') if pricing else ''
     S.append(f"""<h2 id="next">6. 見立てと次の一手</h2>
 <div class="scroll"><table><tr><th>商品</th><th>価格</th><th>主な買い手</th><th>作る手間</th><th>リスク</th></tr>
 <tr><td>Area Dossier</td><td>{dossier_price}</td><td>歴史志向の欧米豪の旅行者、日系人の家族旅行、基地OB・家族、日本の不動産を検討する外国人（ニセコなど）</td><td>空中写真・地形・伝承碑は自動。歴史レポートは1地区あたり調査・執筆＋照合（目安2〜4時間）で、一度作れば再利用</td><td>誤りの混入（販売前の校閲が必須）。地理院の空中写真を有料PDFに載せる条件の最終確認</td></tr>

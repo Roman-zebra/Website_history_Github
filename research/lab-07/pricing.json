@@ -1,0 +1,283 @@
+{
+  "checked": "2026-09-28",
+  "fx": "Approx. Sept 2026 rates used to convert non-USD listed prices: 1 GBP ≈ 1.27 USD; 1 AUD ≈ 0.66 USD. Prices already shown in USD by the seller are used as-is with no conversion.",
+  "comparables": [
+    {
+      "segment": "a",
+      "seller": "Etsy seller (Canva template shop)",
+      "site": "Etsy",
+      "product": "14-Day Japan Travel Itinerary (Canva Guide)",
+      "format": "PDF/Canva digital download",
+      "price": "$21.60 (badge: 65% off)",
+      "priceUSD": 21.60,
+      "url": "https://www.etsy.com/listing/1614929414/japan-travel-itinerary-template-digital",
+      "note": "Templated 100+ recommendation itinerary across Tokyo/Osaka/Kyoto; no original historical research. Figure as shown by listing; discount badge suggests checkout price may be lower."
+    },
+    {
+      "segment": "a",
+      "seller": "Etsy seller (Notion template shop)",
+      "site": "Etsy",
+      "product": "Tokyo Itinerary & Travel Guide (Notion Template)",
+      "format": "Notion template / digital download",
+      "price": "$24.21 (60% 'buy together' offer)",
+      "priceUSD": 24.21,
+      "url": "https://www.etsy.com/listing/1784425483/tokyo-itinerary-japan-travel-planner",
+      "note": "Flexible 1-10 day itinerary, 110+ attractions; template-based, no district history content."
+    },
+    {
+      "segment": "a",
+      "seller": "Etsy Star Seller",
+      "site": "Etsy",
+      "product": "Travel Itinerary Template, Japan Travel Guide",
+      "format": "Editable PDF template",
+      "price": "$9.73 (30% off)",
+      "priceUSD": 9.73,
+      "url": "https://www.etsy.com/listing/1545441580/travel-itinerary-template-travel",
+      "note": "Editable planner template, not researched history content."
+    },
+    {
+      "segment": "a",
+      "seller": "wideriche",
+      "site": "Gumroad",
+      "product": "2 Weeks in Japan Itinerary PDF E-book",
+      "format": "PDF ebook",
+      "price": "$9.99",
+      "priceUSD": 9.99,
+      "url": "https://wideriche.gumroad.com/l/2WeeksinJapanItinerary",
+      "note": "Common indie Gumroad anchor price for a Japan trip-planning ebook."
+    },
+    {
+      "segment": "a",
+      "seller": "Japan Unravelled",
+      "site": "Lemon Squeezy",
+      "product": "Japan Out There: Kansai Edition",
+      "format": "PDF guide",
+      "price": "$17.00",
+      "priceUSD": 17.00,
+      "url": "https://japanunravelled.lemonsqueezy.com/",
+      "note": "Independent creator's regional (Kansai) travel guide."
+    },
+    {
+      "segment": "a",
+      "seller": "Japan Unravelled",
+      "site": "Lemon Squeezy",
+      "product": "Japan Out There: Kansai Edition + Kyoto Hidden Gems mini-guide (bundle)",
+      "format": "PDF guide bundle",
+      "price": "$30.00",
+      "priceUSD": 30.00,
+      "url": "https://japanunravelled.lemonsqueezy.com/",
+      "note": "Two-guide bundle; upper end of plain indie PDF-guide pricing found."
+    },
+    {
+      "segment": "a",
+      "seller": "Joshua's Travel Guides",
+      "site": "Payhip",
+      "product": "The ULTIMATE Japan Travel Program",
+      "format": "PDF (5MB) bundled with itinerary coaching/video content",
+      "price": "$67.00 (pre-sale; stated to rise to $167)",
+      "priceUSD": 67.00,
+      "url": "https://payhip.com/UltimateJapanTravelGuide",
+      "note": "Confirmed via direct page fetch. This is a coaching/video bundle, not a plain PDF — priced far above simple guides because of the added personal-service component."
+    },
+    {
+      "segment": "a",
+      "seller": "GPSmyCity",
+      "site": "gpsmycity.com / app",
+      "product": "Self-guided GPS audio walking tours, Tokyo & Kyoto",
+      "format": "App-based audio walking tour with offline map",
+      "price": "$0–$5 per single route; $12.99–$18.99/year for all-city access",
+      "priceUSD": [0, 5],
+      "url": "https://www.gpsmycity.com/gps-tour-guides/kyoto-1958.html",
+      "note": "One route (e.g. the 5-stop, 2-hour 'Imperial Kyoto' walk) is much thinner content than the Area Dossier; annual pass unlocks 1,300–1,500+ cities' worth of routes."
+    },
+    {
+      "segment": "b",
+      "seller": "Past Discoveries (Lisa Dunbar)",
+      "site": "pastdiscoveries.co.uk",
+      "product": "House/family history research (hourly)",
+      "format": "Written research report",
+      "price": "£27.00/hour",
+      "priceUSD": 34.29,
+      "url": "https://www.pastdiscoveries.co.uk/prices",
+      "note": "UK independent genealogist; hourly rate for research, analysis and report compilation."
+    },
+    {
+      "segment": "b",
+      "seller": "Past Discoveries (Lisa Dunbar)",
+      "site": "pastdiscoveries.co.uk",
+      "product": "Surname research report",
+      "format": "Written report (flat fee)",
+      "price": "£25.00",
+      "priceUSD": 31.75,
+      "url": "https://www.pastdiscoveries.co.uk/prices",
+      "note": "Fixed-fee single-topic report; low-end UK comparable."
+    },
+    {
+      "segment": "b",
+      "seller": "Dorset Council",
+      "site": "dorsetcouncil.gov.uk",
+      "product": "Local history/archive record enquiry service",
+      "format": "Records lookup by council staff",
+      "price": "£18.00/half hour",
+      "priceUSD": 22.86,
+      "url": "https://www.dorsetcouncil.gov.uk/w/enquiries-and-research",
+      "note": "UK local-authority staff time rate for record lookups, not a written narrative history."
+    },
+    {
+      "segment": "b",
+      "seller": "The House Detective",
+      "site": "housedetective.com.au",
+      "product": "Silver house-history package",
+      "format": "Bound/PDF narrative report",
+      "price": "$2,600 AUD",
+      "priceUSD": 1716,
+      "url": "https://www.housedetective.com.au/hireme",
+      "note": "Confirmed via direct fetch. Mid-tier bespoke narrative house history, Australia. Also offers Platinum ($6,000 AUD) and a Date-of-Construction-only tier ($1,700 AUD)."
+    },
+    {
+      "segment": "b",
+      "seller": "The House Detective",
+      "site": "housedetective.com.au",
+      "product": "Hourly research (house/family history)",
+      "format": "Hourly research",
+      "price": "$240/hour AUD",
+      "priceUSD": 158.40,
+      "url": "https://www.housedetective.com.au/hireme",
+      "note": "Confirmed via direct fetch."
+    },
+    {
+      "segment": "b",
+      "seller": "HouseDossier",
+      "site": "housedossier.co.uk",
+      "product": "Quick Check property report",
+      "format": "Automated PDF/online report",
+      "price": "£9.95",
+      "priceUSD": 12.63,
+      "url": "https://housedossier.co.uk/property-history-search",
+      "note": "Confirmed via direct fetch. Automated records pull (sold prices, EPC, planning history) with no human-written narrative — comparable to a cheap 'automatic tier'."
+    },
+    {
+      "segment": "b",
+      "seller": "HouseDossier",
+      "site": "housedossier.co.uk",
+      "product": "Full Dossier property report",
+      "format": "Automated PDF/online report",
+      "price": "£19.95",
+      "priceUSD": 25.34,
+      "url": "https://housedossier.co.uk/property-history-search",
+      "note": "Confirmed via direct fetch. Fuller automated tier, still no human-written narrative or citations."
+    },
+    {
+      "segment": "b",
+      "seller": "WashingtonHistory.com",
+      "site": "washingtonhistory.com",
+      "product": "Residential house history research report",
+      "format": "Written narrative report",
+      "price": "$635–$995 (most commissions $635–$735)",
+      "priceUSD": [635, 995],
+      "url": "https://www.washingtonhistory.com/?q=content/cost-and-estimates",
+      "note": "Confirmed via direct fetch. US bespoke single-property narrative history from deeds, permits, city directories and fire-insurance maps; commercial building histories run $950–$3,500."
+    },
+    {
+      "segment": "c",
+      "seller": "Densho",
+      "site": "densho.org",
+      "product": "Koseki research assistance (find honseki/family kanji)",
+      "format": "Research service",
+      "price": "$30/hour",
+      "priceUSD": 30,
+      "url": "https://densho.org/koseki/services-and-fees/",
+      "note": "Nonprofit Japanese-American organization aiding descendants; low end of the market."
+    },
+    {
+      "segment": "c",
+      "seller": "Densho",
+      "site": "densho.org",
+      "product": "Koseki page translation",
+      "format": "Translation service (~30 min/page)",
+      "price": "$50/hour",
+      "priceUSD": 50,
+      "url": "https://densho.org/koseki/services-and-fees/",
+      "note": "Effectively about $25/page at the stated 30 minutes per page."
+    },
+    {
+      "segment": "c",
+      "seller": "CertTranslate",
+      "site": "certtranslate.com",
+      "product": "Koseki Tohon certified translation",
+      "format": "Certified document translation",
+      "price": "$24.95/page",
+      "priceUSD": 24.95,
+      "url": "https://certtranslate.com/documents/koseki-tohon",
+      "note": "Commercial certified-translation shop, flat per-page fee."
+    },
+    {
+      "segment": "c",
+      "seller": "Japan Genealogy Connect",
+      "site": "japan-genealogy.com",
+      "product": "Genealogy/koseki research & on-site services",
+      "format": "Hourly research/consultation service",
+      "price": "$100/hour",
+      "priceUSD": 100,
+      "url": "https://japan-genealogy.com/service/",
+      "note": "Japan-based specialist aimed at diaspora clients (Nikkei descendants); free initial consultation, then hourly billing; also offers on-site 'Roots Experience' visits."
+    },
+    {
+      "segment": "c",
+      "seller": "Legacy Tree Genealogists",
+      "site": "legacytree.com",
+      "product": "BASIC25 research package (25 hours)",
+      "format": "Written research report",
+      "price": "$2,950",
+      "priceUSD": 2950,
+      "url": "https://www.legacytree.com/product/basic-research-package",
+      "note": "Large international agency; states it has on-site genealogists in Japan. ~$118/hr effective rate."
+    },
+    {
+      "segment": "c",
+      "seller": "Legacy Tree Genealogists",
+      "site": "legacytree.com",
+      "product": "PREMIUM100 research package (100 hours)",
+      "format": "Written research report",
+      "price": "$10,800",
+      "priceUSD": 10800,
+      "url": "https://www.legacytree.com/product/premium100-research-package-uk",
+      "note": "Top published tier; ~$108/hr effective, shows the agency ceiling for extended projects."
+    },
+    {
+      "segment": "c",
+      "seller": "Industry-wide (context)",
+      "site": "Association of Professional Genealogists / general market commentary",
+      "product": "Professional genealogist hourly rate (general US market)",
+      "format": "Hourly consulting",
+      "price": "$50–$200/hour (some specialists over $200)",
+      "priceUSD": [50, 200],
+      "url": "https://www.apgen.org/how_to_hire_a_professional_gen.php",
+      "note": "Broad published range for context on professional genealogist rates; not Japan-specific."
+    }
+  ],
+  "summary": {
+    "a": "Generic indie Japan travel/itinerary PDFs on Etsy and Gumroad cluster at $9.73–$24.21 (median ~$21.60 among listed prices), with a coaching/video bundle outlier at $67. Enhanced regional guides on Lemon Squeezy run $17–$30. GPSmyCity's single-route audio walks are $0–$5, with $12.99–$18.99/year for all-city access. None of these include archival citations, then-and-now aerial imagery, translated disaster memorials or a bibliography — the Area Dossier's real differentiators versus this entire category.",
+    "b": "Pricing here is bimodal. Cheap automated UK property-record pull-ups cost $12.63–$25.34 (HouseDossier) with no human narrative. Human-staffed record lookups run $18–$34/hour-equivalent (Dorset Council, Past Discoveries). Fully bespoke, individually researched and written narrative house-history reports cost far more: $635–$995 in the US (WashingtonHistory.com) and AUD $1,700–$6,000 (~$1,122–$3,960) in Australia (The House Detective), i.e. roughly 25–50x the automated tier, because each report is commissioned once for one property.",
+    "c": "Koseki/family-register lookups and translations run $30–$50/hour or ~$25/page at nonprofit/community services aimed at descendants (Densho, CertTranslate). Commercial Japan-genealogy specialists aimed at the same diaspora audience charge $100/hour (Japan Genealogy Connect) and $108–$118/hour effective inside large multi-hour agency packages (Legacy Tree: $2,950/25hrs, $10,800/100hrs). The broader US professional-genealogist market spans $50–$200+/hour. Median effective rate across all c comparables is about $100/hour."
+  },
+  "recommendation": {
+    "dossier": {
+      "price": 14.99,
+      "launch": 9.99,
+      "why": "Generic Etsy/Gumroad Japan itinerary PDFs sell for $9.73–$24.21 (median ~$21.60) despite being templated content with no original research. The Area Dossier's cited 1,500–2,500-word history, then-and-now 1940s aerial photography, translated disaster memorials, ground-formation maps and bibliography put it in a different content class — closer in depth to what UK/AU house-history researchers charge $150–$1,700+ for bespoke single-property work, except it is productized once per district and resold to many buyers rather than commissioned per customer. $14.99 prices it clearly above the generic-template pack and near the upper end of enhanced indie guides (Lemon Squeezy's $17–$30 regional guides) while staying an impulse buy for history-minded travelers and Nikkei descendants. $9.99 as a launch price matches the single most common indie anchor price seen across Gumroad and other shops, useful for building early reviews. If a cheaper 'automatic' tier is kept alongside the full Dossier, it should sit near $6.99–$8.99 (in line with GPSmyCity's per-route price and HouseDossier's automated Quick Check at $12.63)."
+    },
+    "deepResearch": [
+      {
+        "tier": "Remote",
+        "price": 195,
+        "why": "Japan-specific specialists serving diaspora clients charge $100/hour (Japan Genealogy Connect) to $108–$118/hour effective inside agency packages (Legacy Tree). Even 1.5–2 hours of that professional-rate archive/register research plus assembling a written report already approaches $190–$235, so the owner's $190 idea is well-grounded market-wise (not underpriced relative to nonprofit koseki rates of $30–$50/hr, and a bargain next to Legacy Tree's $2,950 for a 25-hour package). Recommend holding at essentially the same level, rounded to $195."
+      },
+      {
+        "tier": "With on-site visit",
+        "price": 425,
+        "why": "Bespoke narrative property-history reports that involve dedicated researcher fieldwork run $635–$995 in the US and the AUD equivalent of roughly $1,100–$4,000 in Australia. The originally proposed +$200 jump (to $390) for adding an actual on-site visit, travel and logistics is thin next to that market. Raising the increment to about +$230 (total $425) still undercuts every bespoke on-site comparable found, while better covering the researcher's on-site time and travel."
+      }
+    ]
+  }
+}
