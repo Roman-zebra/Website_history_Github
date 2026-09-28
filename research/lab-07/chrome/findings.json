@@ -670,7 +670,7 @@
       "id": "C19",
       "target": "dossiers: tokyo-asakusa, hakodate, kure, osaka-namba",
       "answers": "spot-check of figures cited to NDL books (OCR-prone numbers)",
-      "status": "confirmed (with notes)",
+      "status": "consistent in OCR (not an independent check)",
       "summary": "Checked in NDL Lab's page-by-page OCR (lab.ndl.go.jp full text), kanji numerals read in context. Tokyo-Asakusa S4 (被服廠跡, 1932): the cremation table at frame 60, repeated at frame 91, gives 本所區被服廠跡 49,821 and 計十三ケ所 58,656; frame 97 gives the confirmed provisional name register of end-1929 with 38,826 names. Note: frame 39 of the same report says 38,825 names were written out for the altar, one fewer. Hakodate S2 (函館市誌, 1935): frame 421 gives the 16 November 1878 fire at 954 households and the 6 December 1879 fire from Horie-cho at 33 towns and 2,326 households including 31 public buildings; frame 423 gives the 25 August 1907 fire from the soap works at Higashikawa-cho 217, east wind, about 400,000 tsubo and 12,390 households, with the British and Russian consulates among the buildings lost. (The 1937 disaster record, frame 39, times that fire at 22:20 with a south-east wind; the city history says 22:35 and an east wind. The dossier gives no time, so nothing to change.) Kure S1 (大呉市民史 明治篇, 1943): frame 47 gives 39,637 people in 1898 and, for 1902, 13,809 households and 60,132 people, with 12,477 registered residents against 17,985 temporary residents in the registers. Osaka S1 (大阪府全志 巻之2, 1922): frame 454 gives 1,774 houses collapsed, 541 drowned and 45 bridges fallen or damaged.",
       "sourceUpdates": [
         {
@@ -701,7 +701,8 @@
           ]
         }
       ],
-      "sources": []
+      "sources": [],
+      "method": "NDL Lab's page OCR is the same text layer the Page 07 checker reads, so agreement here does not count as a second, independent confirmation. Only C01 (Suo-Oshima table) and C20 (Hakodate 1934 table) were read from the page images. What this check adds is the exact frame for each figure, and the fact that each figure sits in running text or a table whose rows add up."
     },
     {
       "id": "C20",
