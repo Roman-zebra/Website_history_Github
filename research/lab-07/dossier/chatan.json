@@ -93,16 +93,17 @@
    "heading": "From Hamby Airfield to American Village",
    "paragraphs": [
     {
-     "text": "The returned airstrip did not stay empty. A land readjustment project turned the old Hamby site into the Kitamae district, and from 1988 new landfill was raised along the shore immediately north of it to create the Mihama district; Chatan's own 2004 completion report for the project describes the two areas being planned as a single waterfront redevelopment from the start, with the coast formally zoned for recreation and tourism in 1987. The town settled on the concept that would define the site — an entertainment and shopping district styled after an American seaside town — in 1992, and construction began in earnest in 1997, with shops and attractions opening in stages from the following year until the complex now known as Mihama American Village was substantially complete by 2004.",
+     "text": "The returns of 1981 gave the town back two modest but well-placed parcels: Hamby Airfield, about 38 hectares on the western shore, and the inland May-Moscarella firing range, about 25 hectares. Chatan first tried to have the airfield site zoned as resort land, but prefectural planners, judging the island already had enough hotel capacity, blocked the idea; the town instead registered it for housing in 1985, completed fresh landfill along the adjoining shore by 1987, and only later, once the residential base was secured, steered the combined site back toward tourism and commerce. A land-readjustment project turned the old runway into the streets of a new Kitamae district, and Chatan's own 2004 completion report for the project describes Kitamae and the reclaimed Mihama district beside it as a single waterfront redevelopment in all but name.",
      "cite": [
-      "S3",
-      "S8"
+      "S14",
+      "S3"
      ]
     },
     {
-     "text": "The result sits deliberately close to what it replaced: a Ferris wheel, cinemas, restaurants and beachfront shops now occupy ground that was a US Marine Corps airfield within living memory, on a reclaimed shoreline immediately next to bases that, a few hundred metres inland, still occupy roughly half the town.",
+     "text": "The town settled on the concept that would define the site — an entertainment and shopping district styled after an American seaside town — in 1992, and construction began in earnest in 1997, with shops and attractions opening in stages from the following year until the complex now known as Mihama American Village was substantially complete by 2004. A Ferris wheel, cinemas, restaurants and beachfront shops now occupy ground that was a US Marine Corps airfield within living memory, on a reclaimed shoreline immediately next to bases that, a few hundred metres inland, still occupy roughly half the town.",
      "cite": [
-      "S6"
+      "S3",
+      "S8"
      ]
     }
    ]
@@ -111,16 +112,17 @@
    "heading": "Reading the ground today",
    "paragraphs": [
     {
-     "text": "Little of pre-war Chatan is visible at street level, which makes Chatan Gusuku's limestone walls worth the climb: unlike the vanished paddies below it, the castle's terraces and one-metre-plus walls survive largely as archaeologists have mapped them, predating by three centuries the airfield that would later reshape everything around it. Fenced perimeters remain the town's most persistent visual fact — Kadena Air Base's boundary, Camp Zukeran's, Camp Kuwae's — and comparing them with the pre-war extent of the old \"Chatan Tabukwa\" paddies is one of the more direct ways to see how much of the historic farmland this dossier's aerial photographs sit on now lies behind a fence rather than under a plough.",
+     "text": "Little of pre-war Chatan is visible at street level, which makes Chatan Gusuku's limestone walls worth the climb: unlike the vanished paddies below it, the castle's terraces and one-metre-plus walls survive largely as archaeologists have mapped them, predating by three centuries the airfield that would later reshape everything around it. Fenced perimeters remain the town's most persistent visual fact — Kadena Air Base's boundary, Camp Zukeran's, Camp Kuwae's — and comparing them with the pre-war extent of the old \"Chatan Tabukwa\" paddies is one of the more direct ways to see how much of the historic farmland this dossier's aerial photographs sit on now lies behind a fence rather than under a plough. The landform record behind this dossier's Basic brief shows much of the coastal strip, from Sunabe down through Mihama, mapped as filled or formerly open water — the geological signature of exactly the reclamation this section describes.",
      "cite": [
       "S11",
       "S6"
      ]
     },
     {
-     "text": "Where the fence has moved, as at Hamby, the change is total: a wartime and Cold War runway is now a grid of shopping streets and a public marina, a transformation the town itself presents as proof that returned base land can be redeveloped successfully — while making plain, in the same official accounting, how much more of Chatan has not yet followed it.",
+     "text": "Where the fence has moved, as at Hamby, the change is total: a wartime and Cold War runway is now a grid of shopping streets and a public marina, a transformation the town itself presents as proof that returned base land can be redeveloped successfully — while making plain, in the same official accounting, how much more of Chatan has not yet followed it. The town today counts close to 29,000 residents on the minority of its land left outside base fences, a density that owes as much to the bases' continued presence as to the reclaimed land American Village stands on.",
      "cite": [
-      "S3"
+      "S3",
+      "S15"
      ]
     }
    ]
@@ -438,6 +440,26 @@
    "url": "https://www.soumu.go.jp/main_sosiki/daijinkanbou/sensai/situation/state/okinawa_08.html",
    "checked": "2026-09-28",
    "used": "33 people recorded killed in Chatan village in the air raid of 10 October 1944, and the dating of the US landing to 1 April 1945 \"around Chatan village\"."
+  },
+  {
+   "id": "S14",
+   "kind": "article",
+   "title": "［ウチナーいまむかし探訪］（１）北谷アメリカンビレッジ 沖縄経済、発展の象徴 埋め立て地をリゾート化",
+   "titleEn": "Okinawa then and now (1): Chatan American Village, a symbol of Okinawa's economic development, turning reclaimed land into a resort",
+   "publisher": "沖縄タイムス (Okinawa Times)",
+   "url": "https://www.okinawatimes.co.jp/articles/-/940494",
+   "checked": "2026-09-28",
+   "used": "The size of the returned Hamby Airfield (about 38 ha) and May-Moscarella range (about 25 ha); the prefecture's initial refusal of resort zoning; the site's 1985 residential zoning and 1987 landfill completion before its later conversion to resort/commercial use."
+  },
+  {
+   "id": "S15",
+   "kind": "official",
+   "title": "住民基本台帳法による世帯人口表",
+   "titleEn": "Household and population table under the Basic Resident Register Act",
+   "publisher": "北谷町 (Chatan Town)",
+   "url": "https://www.chatan.jp/smph/choseijoho/tokei/jinko.html",
+   "checked": "2026-09-28",
+   "used": "Current population of Chatan (about 29,000 residents)."
   }
  ],
  "furtherReading": [
