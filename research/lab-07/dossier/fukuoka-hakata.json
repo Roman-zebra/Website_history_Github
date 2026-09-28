@@ -231,7 +231,12 @@
    "what": "The excavated foundations of Japan's only confirmed ancient diplomatic guesthouse, on the grounds it shares with Fukuoka Castle; imported ceramics and glass found here are on display.",
    "cite": [
     "S4"
-   ]
+   ],
+   "at": [
+    33.585954,
+    130.385358
+   ],
+   "atQuery": "鴻臚館跡展示館"
   },
   {
    "name": "Kushida Shrine",
@@ -241,7 +246,12 @@
     "S9",
     "S6",
     "S7"
-   ]
+   ],
+   "at": [
+    33.59307,
+    130.410684
+   ],
+   "atQuery": "櫛田神社"
   },
   {
    "name": "Jotenji",
@@ -250,7 +260,12 @@
    "cite": [
     "S5",
     "S3"
-   ]
+   ],
+   "at": [
+    33.595142,
+    130.417101
+   ],
+   "atQuery": "承天寺"
   },
   {
    "name": "Shofuku-ji",
@@ -259,7 +274,12 @@
    "cite": [
     "S1",
     "S3"
-   ]
+   ],
+   "at": [
+    33.597008,
+    130.414202
+   ],
+   "atQuery": "聖福寺"
   },
   {
    "name": "The Reisen neighborhood and the old Hakata grid",
@@ -275,7 +295,12 @@
    "what": "The river Kuroda Nagamasa chose as the boundary between his new castle town of Fukuoka and the older merchant town of Hakata in 1601, a division the two place names still preserve.",
    "cite": [
     "S1"
-   ]
+   ],
+   "at": [
+    33.59041,
+    130.408354
+   ],
+   "atQuery": "那珂川"
   }
  ],
  "sources": [

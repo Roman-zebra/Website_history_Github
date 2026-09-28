@@ -229,7 +229,12 @@
    "what": "Walk the line of the great south-eastern moat Toshinaga's engineers dug in 1592; the surviving Ishikawa Gate and reconstructed turrets stand on ground the Maeda family held for fourteen generations.",
    "cite": [
     "S1"
-   ]
+   ],
+   "at": [
+    36.565762,
+    136.659447
+   ],
+   "atQuery": "金沢城公園"
   },
   {
    "name": "Kenroku-en, Kasumi-ga-ike and the Tatsumi Canal inlet",
@@ -238,7 +243,12 @@
    "cite": [
     "S1",
     "S4"
-   ]
+   ],
+   "at": [
+    36.562427,
+    136.662355
+   ],
+   "atQuery": "兼六園"
   },
   {
    "name": "Nagamachi samurai district and its canal",
@@ -247,7 +257,12 @@
    "cite": [
     "S1",
     "S3"
-   ]
+   ],
+   "at": [
+    36.567161,
+    136.650925
+   ],
+   "atQuery": "長町武家屋敷跡"
   },
   {
    "name": "Higashi Chaya-gai",
@@ -255,7 +270,12 @@
    "what": "Lattice-fronted teahouses on the Asano River's far bank; the buildings are old, but the name that markets them to visitors today only became standard around 1990.",
    "cite": [
     "S6"
-   ]
+   ],
+   "at": [
+    36.572556,
+    136.666676
+   ],
+   "atQuery": "ひがし茶屋街"
   }
  ],
  "sources": [

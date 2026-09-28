@@ -265,7 +265,12 @@
    "cite": [
     "S16",
     "S14"
-   ]
+   ],
+   "at": [
+    26.455118,
+    127.921536
+   ],
+   "atQuery": "日秀洞"
   },
   {
    "name": "Toyama Memorial Hall",
@@ -292,7 +297,12 @@
    "cite": [
     "S6",
     "S13"
-   ]
+   ],
+   "at": [
+    26.490374,
+    127.906526
+   ],
+   "atQuery": "屋嘉"
   },
   {
    "name": "Shinkaichi and the taco rice diners",
@@ -300,7 +310,12 @@
    "what": "The strip of bars and restaurants that grew up outside a Camp Hansen gate from the 1950s; a diner here is credited with inventing taco rice around 1984 to feed young servicemen cheaply and quickly.",
    "cite": [
     "S11"
-   ]
+   ],
+   "at": [
+    26.500609,
+    127.903582
+   ],
+   "atQuery": "新開地"
   },
   {
    "name": "Okukubi River mangroves",
@@ -310,7 +325,12 @@
     "S1",
     "S17",
     "S10"
-   ]
+   ],
+   "at": [
+    26.471518,
+    127.925612
+   ],
+   "atQuery": "億首川"
   }
  ],
  "sources": [

@@ -281,7 +281,12 @@
    "cite": [
     "S6",
     "S2"
-   ]
+   ],
+   "at": [
+    35.711133,
+    139.796368
+   ],
+   "atQuery": "雷門・仲見世通り"
   },
   {
    "name": "Sensoji main hall and five-story pagoda",
@@ -289,7 +294,12 @@
    "what": "Rebuilt in reinforced concrete in 1958 and 1973, after the 1945 firebombing destroyed structures that had stood since the Edo period and had been declared National Treasures in 1911.",
    "cite": [
     "S6"
-   ]
+   ],
+   "at": [
+    35.714102,
+    139.796035
+   ],
+   "atQuery": "五重塔"
   },
   {
    "name": "Azuma Bridge and the Sumida embankment",
@@ -298,7 +308,12 @@
    "cite": [
     "S1",
     "S18"
-   ]
+   ],
+   "at": [
+    35.710107,
+    139.798931
+   ],
+   "atQuery": "吾妻橋・隅田川テラス"
   },
   {
    "name": "Kuramae riverside",
@@ -306,7 +321,12 @@
    "what": "Site of the shogunate's rice granaries and the fudasashi brokers who financed samurai households; no structure survives, but the long, narrow lot lines running back from the embankment road echo the old warehouse plan.",
    "cite": [
     "S3"
-   ]
+   ],
+   "at": [
+    35.703212,
+    139.790939
+   ],
+   "atQuery": "蔵前"
   },
   {
    "name": "Ekoin Temple",
@@ -314,7 +334,12 @@
    "what": "Founded in 1657 to bury the Meireki fire's unclaimed dead and still receiving disaster victims into the twentieth century; the Chikarazuka mound recalls its 76 years as Edo and Meiji Japan's licensed sumo venue.",
    "cite": [
     "S12"
-   ]
+   ],
+   "at": [
+    35.693339,
+    139.79204
+   ],
+   "atQuery": "回向院"
   },
   {
    "name": "Yokoamicho Park and the Tokyo Metropolitan Memorial Hall",
@@ -323,7 +348,12 @@
    "cite": [
     "S8",
     "S9"
-   ]
+   ],
+   "at": [
+    35.699506,
+    139.796415
+   ],
+   "atQuery": "横網町公園"
   }
  ],
  "sources": [

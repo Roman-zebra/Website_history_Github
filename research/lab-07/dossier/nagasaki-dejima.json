@@ -233,7 +233,12 @@
    "cite": [
     "S6",
     "S7"
-   ]
+   ],
+   "at": [
+    32.743418,
+    129.872962
+   ],
+   "atQuery": "出島"
   },
   {
    "name": "Shinchi Chinatown",
@@ -241,7 +246,12 @@
    "what": "The grid of restaurants and gates stands on the warehouse island the city built after the 1698 fire; the name Shinchi, \"new land,\" is original to that 1702 reclamation.",
    "cite": [
     "S1"
-   ]
+   ],
+   "at": [
+    32.743023,
+    129.875077
+   ],
+   "atQuery": "新地中華街"
   },
   {
    "name": "Tate-no-cho and the Tojin Yashiki remnants",
@@ -250,7 +260,12 @@
    "cite": [
     "S3",
     "S11"
-   ]
+   ],
+   "at": [
+    32.738949,
+    129.877063
+   ],
+   "atQuery": "館内町"
   },
   {
    "name": "Meganebashi and the Nakashima River bridges",
@@ -258,7 +273,12 @@
    "what": "Japan's oldest surviving stone arch bridge, built in 1634; several of its neighbors downstream were rebuilt after 1982 using stones recovered from the riverbed after that year's flood.",
    "cite": [
     "S12"
-   ]
+   ],
+   "at": [
+    32.747165,
+    129.880102
+   ],
+   "atQuery": "眼鏡橋"
   },
   {
    "name": "Oura Church",
@@ -266,7 +286,12 @@
    "what": "Japan's oldest standing church, completed in 1864; inside, a plaque marks where hidden Christians from Urakami identified themselves to Father Petitjean in 1865.",
    "cite": [
     "S10"
-   ]
+   ],
+   "at": [
+    32.734189,
+    129.870162
+   ],
+   "atQuery": "大浦天主堂"
   },
   {
    "name": "Glover Garden, Minamiyamate",
@@ -275,7 +300,12 @@
    "cite": [
     "S8",
     "S4"
-   ]
+   ],
+   "at": [
+    32.733367,
+    129.869055
+   ],
+   "atQuery": "グラバー園"
   }
  ],
  "sources": [

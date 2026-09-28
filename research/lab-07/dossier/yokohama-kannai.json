@@ -186,7 +186,12 @@
    "what": "Near the center of the reclaimed 1859 settlement, where the shogunate's customs post gave Kannai (\"inside the barrier\") its name; Nihon-odori and the five original settlement streets still run on their 1859 alignment.",
    "cite": [
     "S1"
-   ]
+   ],
+   "at": [
+    35.44675,
+    139.642698
+   ],
+   "atQuery": "日本大通り"
   },
   {
    "name": "Yokohama Chinatown",
@@ -195,7 +200,12 @@
    "cite": [
     "S3",
     "S10"
-   ]
+   ],
+   "at": [
+    35.442664,
+    139.645191
+   ],
+   "atQuery": "横浜中華街"
   },
   {
    "name": "Yamashita Park",
@@ -204,7 +214,12 @@
    "cite": [
     "S7",
     "S6"
-   ]
+   ],
+   "at": [
+    35.44571,
+    139.649949
+   ],
+   "atQuery": "山下公園"
   },
   {
    "name": "Yokohama Park (former racecourse and settlement land)",
@@ -212,7 +227,12 @@
    "what": "Laid out on former settlement ground and itself requisitioned by occupation forces from 1945, only partly released in April 1952, one of many central Yokohama sites held by the US military for years after the war.",
    "cite": [
     "S6"
-   ]
+   ],
+   "at": [
+    35.443688,
+    139.640232
+   ],
+   "atQuery": "横浜公園"
   }
  ],
  "sources": [

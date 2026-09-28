@@ -254,7 +254,12 @@
    "what": "The skeletal ruin of the 1915 Industrial Promotion Hall, about 160 meters from the hypocenter, left standing because the blast came down on it almost vertically; a UNESCO World Heritage Site since 1996.",
    "cite": [
     "S8"
-   ]
+   ],
+   "at": [
+    34.395466,
+    132.453524
+   ],
+   "atQuery": "原爆ドーム"
   },
   {
    "name": "Aioi Bridge",
@@ -262,7 +267,12 @@
    "what": "Rebuilt in 1983 on the same T-shaped plan as the bridge that was the bomb's aiming point; a newel post bearing traces of the blast is kept at the bridge end.",
    "cite": [
     "S13"
-   ]
+   ],
+   "at": [
+    34.396294,
+    132.452808
+   ],
+   "atQuery": "相生橋"
   },
   {
    "name": "Rest House",
@@ -270,7 +280,12 @@
    "what": "Once the Taishoya kimono shop; its basement, where Nomura Eizo survived as the only one of 37 staff at work that morning, is open to visitors.",
    "cite": [
     "S16"
-   ]
+   ],
+   "at": [
+    34.393826,
+    132.453255
+   ],
+   "atQuery": "レストハウス"
   },
   {
    "name": "Cenotaph and the north-south axis",
@@ -279,7 +294,12 @@
    "cite": [
     "S9",
     "S14"
-   ]
+   ],
+   "at": [
+    34.392972,
+    132.452571
+   ],
+   "atQuery": "原爆死没者慰霊碑"
   },
   {
    "name": "Korean Atomic Bomb Victims Memorial",
@@ -287,7 +307,12 @@
    "what": "A turtle-based monument moved into the park in 1999 after 29 years outside it near Honkawa Bridge.",
    "cite": [
     "S12"
-   ]
+   ],
+   "at": [
+    34.394135,
+    132.451829
+   ],
+   "atQuery": "韓国人原爆犠牲者慰霊碑"
   },
   {
    "name": "Honkawa Elementary School Peace Museum",
@@ -295,7 +320,12 @@
    "what": "Part of the school building gutted by the bomb 410 meters from the hypocenter, a relief station afterwards and now the school's peace museum.",
    "cite": [
     "S17"
-   ]
+   ],
+   "at": [
+    34.396219,
+    132.450859
+   ],
+   "atQuery": "本川小学校平和資料館"
   },
   {
    "name": "Motoyasu riverbank",

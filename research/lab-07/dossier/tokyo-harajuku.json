@@ -213,7 +213,12 @@
    "what": "Meiji Shrine's formal approach, laid out from Aoyama-dori to the shrine and opened in 1920 alongside the shrine itself, still runs on its original straight line.",
    "cite": [
     "S9"
-   ]
+   ],
+   "at": [
+    35.665622,
+    139.711477
+   ],
+   "atQuery": "表参道"
   },
   {
    "name": "Meiji Shrine forest and main hall",
@@ -222,7 +227,12 @@
    "cite": [
     "S9",
     "S7"
-   ]
+   ],
+   "at": [
+    35.675995,
+    139.699482
+   ],
+   "atQuery": "本殿"
   },
   {
    "name": "Cat Street",
@@ -231,7 +241,12 @@
    "cite": [
     "S12",
     "S13"
-   ]
+   ],
+   "at": [
+    35.665863,
+    139.705148
+   ],
+   "atQuery": "キャットストリート"
   },
   {
    "name": "Yoyogi Park",
@@ -239,7 +254,12 @@
    "what": "Former Yoyogi Parade Ground, then the postwar Washington Heights family-housing site, then the 1964 Olympic athletes' village; a surviving cottage once housing the Dutch team still stands near the park entrance, reopened in 2026 as a cafe.",
    "cite": [
     "S11"
-   ]
+   ],
+   "at": [
+    35.671405,
+    139.695172
+   ],
+   "atQuery": "代々木公園"
   },
   {
    "name": "National Yoyogi Stadium",
@@ -247,7 +267,12 @@
    "what": "Kenzo Tange's cable-suspension-roofed arena, built on part of the same former parade ground for the 1964 Olympics' swimming and basketball events, completed that September.",
    "cite": [
     "S14"
-   ]
+   ],
+   "at": [
+    35.667058,
+    139.699779
+   ],
+   "atQuery": "国立代々木競技場"
   },
   {
    "name": "Takeshita-dori",
@@ -255,7 +280,12 @@
    "what": "Runs through the old core of Harajuku village, subdivided into named micro-districts such as North and South Harajuku by the time of a 1922 land-value survey.",
    "cite": [
     "S3"
-   ]
+   ],
+   "at": [
+    35.671161,
+    139.704955
+   ],
+   "atQuery": "竹下通り"
   }
  ],
  "sources": [

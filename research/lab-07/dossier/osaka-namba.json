@@ -250,7 +250,12 @@
     "S1",
     "S5",
     "S6"
-   ]
+   ],
+   "at": [
+    34.66879,
+    135.501151
+   ],
+   "atQuery": "道頓堀・戎橋"
   },
   {
    "name": "Soemon-cho",
@@ -258,7 +263,12 @@
    "what": "A licensed teahouse quarter since 1857, on a block named for a man in the canal-builder Yasui family's own circle two centuries earlier.",
    "cite": [
     "S1"
-   ]
+   ],
+   "at": [
+    34.669698,
+    135.504232
+   ],
+   "atQuery": "宗右衛門町"
   },
   {
    "name": "Hozenji Yokocho and the Mizukake Fudo",
@@ -266,7 +276,12 @@
    "what": "A moss-covered Fudo Myo-o statue that survived the 1945 air raids when the rest of the temple did not; the custom of pouring water over it began only after the war.",
    "cite": [
     "S8"
-   ]
+   ],
+   "at": [
+    34.668185,
+    135.50267
+   ],
+   "atQuery": "法善寺横丁"
   },
   {
    "name": "The tsunami stone at Taisho Bridge",
@@ -275,7 +290,12 @@
    "cite": [
     "S1",
     "S9"
-   ]
+   ],
+   "at": [
+    34.667657,
+    135.480641
+   ],
+   "atQuery": "大正橋"
   },
   {
    "name": "The Kizu River embankment near Chishima-cho",

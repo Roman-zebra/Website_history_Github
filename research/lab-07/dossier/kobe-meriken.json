@@ -245,7 +245,12 @@
    "what": "Walk the grid of banks and trading-company buildings between Kaigan-dori and the Daimaru department store; the street widths and block sizes are still J. W. Hart's of 1868, even though almost every building standing today was rebuilt after 1945 or 1995.",
    "cite": [
     "S12"
-   ]
+   ],
+   "at": [
+    34.688168,
+    135.192336
+   ],
+   "atQuery": "旧居留地"
   },
   {
    "name": "Ikuta Shrine and Flower Road",
@@ -254,7 +259,12 @@
    "cite": [
     "S7",
     "S8"
-   ]
+   ],
+   "at": [
+    34.69461,
+    135.190617
+   ],
+   "atQuery": "生田神社"
   },
   {
    "name": "Kano-cho street grid",
@@ -262,7 +272,12 @@
    "what": "The blocks either side of Flower Road, laid out on the dry riverbed at an unusually generous 18 m road width for 1873, still bear Kano's name.",
    "cite": [
     "S6"
-   ]
+   ],
+   "at": [
+    34.697976,
+    135.193699
+   ],
+   "atQuery": "加納町"
   },
   {
    "name": "Meriken Park and the Port of Kobe Earthquake Memorial Park",
@@ -271,7 +286,12 @@
    "cite": [
     "S16",
     "S15"
-   ]
+   ],
+   "at": [
+    34.683309,
+    135.189321
+   ],
+   "atQuery": "メリケンパーク"
   },
   {
    "name": "Kobe Maritime Museum and Kobe Port Tower",
@@ -279,7 +299,12 @@
    "what": "Standing on filled ground that was harbor water within living memory, the museum sets Kobe's port history — sail, steam, container — beside the wharves it describes.",
    "cite": [
     "S16"
-   ]
+   ],
+   "at": [
+    34.68295,
+    135.18845
+   ],
+   "atQuery": "神戸海洋博物館"
   },
   {
    "name": "Kitano-cho and Yamamoto-dori (Kitano ijinkan-gai)",
@@ -288,7 +313,12 @@
    "cite": [
     "S10",
     "S11"
-   ]
+   ],
+   "at": [
+    34.701227,
+    135.189621
+   ],
+   "atQuery": "北野町"
   }
  ],
  "sources": [

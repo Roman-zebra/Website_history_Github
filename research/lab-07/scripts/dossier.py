@@ -8,7 +8,7 @@ lab/07/pdf/dossier-<id>.pdf: dossier cover, the history report with numbered cit
 timeline, walking notes, the Basic pages, and the full source list."""
 import html, json, os, re, subprocess, sys
 sys.path.insert(0, os.path.dirname(__file__))
-import basic
+import basic, walkmap
 
 HERE = basic.HERE
 DOSSIER_DIR = os.path.join(HERE, 'dossier')
@@ -30,6 +30,9 @@ sup.c{font:600 6.4pt Sans,sans-serif;color:#a33a2b;margin-left:.4mm}
 .srcs{font:7.9pt/1.38 Sans,JP,sans-serif;padding-left:6mm}
 .srcs li{margin-bottom:1.8mm;break-inside:avoid}
 .toc{font:9.5pt/1.6 Sans,JP,sans-serif;padding-left:5mm}
+img.wm{width:100%;height:auto;max-height:175mm;object-fit:contain;display:block;margin:0 auto}
+.wmlist{columns:2;column-gap:8mm;margin-top:4mm}.wmlist li{break-inside:avoid;padding-bottom:2mm}
+.maplink{font:600 7.5pt Sans,sans-serif;color:#a33a2b;text-decoration:none;white-space:nowrap}
 .draft{display:inline-block;font:700 7.5pt Sans,sans-serif;letter-spacing:.12em;color:#a33a2b;border:1.2px solid #a33a2b;padding:.8mm 2mm;margin-bottom:4mm}
 h1,h2,h3{break-after:avoid}
 .report p,.srcs li{orphans:3;widows:3}
@@ -100,8 +103,18 @@ def build(did):
     tl = ''.join(f'<tr><td class="w">{esc(r["when"])}</td><td>{rich(r["what"])}{cites(r.get("cite", []), num)}</td></tr>' for r in rep.get('timeline', []))
     def walk_item(w):
         ja = f' <span class="jp muted">{esc(w["ja"])}</span>' if w.get('ja') else ''
-        return f'<li><b>{esc(w["name"])}</b>{ja}. {rich(w["what"])}{cites(w.get("cite", []), num)}</li>'
+        pin = f' <a class="maplink" href="{walkmap.maps_url(w["at"])}">map&#8599;</a>' if w.get('at') else ''
+        return f'<li><b>{esc(w["name"])}</b>{ja}. {rich(w["what"])}{cites(w.get("cite", []), num)}{pin}</li>'
     walk = ''.join(walk_item(w) for w in rep.get('walk', []))
+    stops = rep.get('walk', [])
+    placed = [w for w in stops if w.get('at')]
+    wm = walkmap.draw(stops, os.path.join(out_dir, 'walkmap.jpg')) if stops and len(placed) >= 3 and len(placed) >= 0.6 * len(stops) else None
+    map_page = (f'<section class="page"><p class="kicker">Part 1 · Walking notes</p><h2>Walk map</h2>'
+                f'<figure><img class="wm" src="{wm[0]}" alt="Walk map"><figcaption>The walking stops, numbered as in the notes, on the latest GSI aerial photograph ({wm[1]:.1f} × {wm[2]:.1f} km, north up). '
+                f'Lines join the stops in order and are not a route; follow streets on the ground. '
+                + ('Stops not shown: ' + ', '.join(str(i) for i, w in enumerate(stops, 1) if not w.get('at')) + '. ' if len(placed) < len(stops) else '')
+                + 'Each stop in the notes links to a map app.</figcaption></figure>'
+                + '<ol class="walk wmlist">' + ''.join(f'<li><b>{esc(w["name"])}</b>' + (f' <a class="maplink" href="{walkmap.maps_url(w["at"])}">map&#8599;</a>' if w.get('at') else '') + '</li>' for w in stops) + '</ol></section>') if wm else ''
     srcs = ''.join(f'<li>{source_line(s)}</li>' for s in rep['sources'])
     further = ''.join(f'<li><i class="jp">{esc(f["title"])}</i>{" — " + esc(f["why"]) if f.get("why") else ""} {esc(f.get("url", ""))} ({esc(ACCESS_EN.get(f.get("access"), f.get("access", "")))})</li>' for f in rep.get('furtherReading', []))
     leads = ''.join(f'<li><b>{esc(l["what"])}</b> — {esc(l["where"])}{". " + esc(l["how"]) if l.get("how") else ""}</li>' for l in rep.get('deepResearchLeads', []))
@@ -117,11 +130,11 @@ def build(did):
 {('<h3>Further reading</h3><ul class="srcs">' + further + '</ul>') if further else ''}
 {('<h3>Where a Deep Research request would go next</h3><ul class="srcs">' + leads + '</ul>') if leads else ''}
 {('<h3>Caveats</h3><ul class="srcs">' + caveats + '</ul>') if caveats else ''}
-<p class="small muted">Digitised books are cited, not reproduced: the page frames let you open the same page in the NDL Digital Collections. Aerial photographs, landform and memorial data: GSI, processed by Japan Time Atlas. {f'This experimental edition was checked against its cited sources on {esc(rep["checked"])} but has not had independent fact-checking.' if rep.get('checked') else 'This experimental edition is a draft for testing the product and has not had independent fact-checking.'}</p></section>"""
+<p class="small muted">Digitised books are cited, not reproduced: the page frames let you open the same page in the NDL Digital Collections. Aerial photographs, landform and memorial data: GSI, processed by Japan Time Atlas. Positions of the walking stops: © OpenStreetMap contributors (ODbL), found with Nominatim. {f'This experimental edition was checked against its cited sources on {esc(rep["checked"])} but has not had independent fact-checking.' if rep.get('checked') else 'This experimental edition is a draft for testing the product and has not had independent fact-checking.'}</p></section>"""
     css = basic.CSS.replace('FONTDIR', 'file://' + basic.FONTS) + EXTRA_CSS
     page = (f'<!doctype html><html lang="en" data-footer="Japan Time Atlas · Area Dossier · {esc(c["en"])} · experimental edition {basic.TODAY}"><head><meta charset="utf-8">'
             f'<title>{esc(c["en"])} — Area Dossier (Japan Time Atlas)</title><style>{css}</style></head><body>'
-            + cover + report + tl_page + sections['thennow'] + sections.get('timeline', '') + sections['ground'] + sections['manmade'] + sections['disasters'] + back + '</body></html>')
+            + cover + report + tl_page + map_page + sections['thennow'] + sections.get('timeline', '') + sections['ground'] + sections['manmade'] + sections['disasters'] + back + '</body></html>')
     hp = os.path.join(out_dir, 'dossier.html')
     with open(hp, 'w', encoding='utf-8') as f:
         f.write(page)

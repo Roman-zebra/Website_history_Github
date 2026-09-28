@@ -230,7 +230,12 @@
    "what": "Faces the US Navy base across the water, close to where Léonce Verny's Yokosuka Ironworks broke ground in 1865; named for the engineer himself.",
    "cite": [
     "S2"
-   ]
+   ],
+   "at": [
+    35.283428,
+    139.658978
+   ],
+   "atQuery": "ヴェルニー公園"
   },
   {
    "name": "Former Yokosuka Naval District grounds",
@@ -247,7 +252,12 @@
    "what": "Named for the iron plates the naval arsenal once supplied to cover a drainage ditch running down the street; long an America-facing shopping street and the birthplace of the souvenir sukajan jacket.",
    "cite": [
     "S7"
-   ]
+   ],
+   "at": [
+    35.281885,
+    139.665754
+   ],
+   "atQuery": "どぶ板通り"
   },
   {
    "name": "Mikasa Park and the battleship Mikasa",
@@ -256,7 +266,12 @@
    "cite": [
     "S6",
     "S17"
-   ]
+   ],
+   "at": [
+    35.285382,
+    139.674047
+   ],
+   "atQuery": "三笠公園"
   },
   {
    "name": "Otaki-cho and Minato-cho",
@@ -264,7 +279,12 @@
    "what": "Now the city's central shopping streets, both built on land reclaimed between 1869 and the 1880s from what a 1917 study describes as a shoreline of a few thatched huts.",
    "cite": [
     "S1"
-   ]
+   ],
+   "at": [
+    35.281065,
+    139.669016
+   ],
+   "atQuery": "大滝町"
   }
  ],
  "sources": [

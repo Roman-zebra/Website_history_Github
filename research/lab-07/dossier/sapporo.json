@@ -284,7 +284,12 @@
    "cite": [
     "S10",
     "S1"
-   ]
+   ],
+   "at": [
+    43.062554,
+    141.353645
+   ],
+   "atQuery": "札幌市時計台"
   },
   {
    "name": "Former Hokkaido Government Building (Red Brick)",
@@ -292,7 +297,12 @@
    "what": "An 1888 brick office building, reopened in July 2025 after a five-year restoration, with new exhibits on Hokkaido's colonization, including Ainu culture, alongside the original government rooms.",
    "cite": [
     "S18"
-   ]
+   ],
+   "at": [
+    43.063966,
+    141.348024
+   ],
+   "atQuery": "北海道庁旧本庁舎"
   },
   {
    "name": "Odori Park at the Sosei crossing",
@@ -301,7 +311,12 @@
    "cite": [
     "S7",
     "S5"
-   ]
+   ],
+   "at": [
+    43.059902,
+    141.34751
+   ],
+   "atQuery": "大通公園"
   },
   {
    "name": "Sosei River Park and the \"Sapporo Construction Site\" monument",
@@ -312,7 +327,12 @@
     "S5",
     "S1",
     "S25"
-   ]
+   ],
+   "at": [
+    43.060257,
+    141.3573
+   ],
+   "atQuery": "創成川公園"
   },
   {
    "name": "Nijo Market",
@@ -320,7 +340,12 @@
    "what": "A working fish and produce market on the Sosei's east bank, tracing its trade to Meiji-era fishermen who rowed catches up the river, and to a thirteen-shop union formed soon after; rebuilt following an 1902 fire.",
    "cite": [
     "S19"
-   ]
+   ],
+   "at": [
+    43.058247,
+    141.35846
+   ],
+   "atQuery": "二条市場"
   }
  ],
  "sources": [

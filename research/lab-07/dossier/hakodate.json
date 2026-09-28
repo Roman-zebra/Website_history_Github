@@ -261,7 +261,12 @@
    "what": "Rebuilt in 1916 on the site of the Russian consulate's 1860 chapel, where the priest Nicholas began Japan's first Orthodox mission in 1861; listen for the bell known locally as \"Gan-gan-dera\".",
    "cite": [
     "S11"
-   ]
+   ],
+   "at": [
+    41.762845,
+    140.712213
+   ],
+   "atQuery": "函館ハリストス正教会"
   },
   {
    "name": "Kanemori Red Brick Warehouse",
@@ -269,7 +274,12 @@
    "what": "Fireproof brick warehouses rebuilt in 1909 after the 1907 fire destroyed their wooden predecessors; still standing on the waterfront they were built to protect.",
    "cite": [
     "S12"
-   ]
+   ],
+   "at": [
+    41.766307,
+    140.716844
+   ],
+   "atQuery": "金森赤レンガ倉庫"
   },
   {
    "name": "Old Public Hall of Hakodate Ward",
@@ -278,7 +288,12 @@
    "cite": [
     "S9",
     "S10"
-   ]
+   ],
+   "at": [
+    41.765038,
+    140.708921
+   ],
+   "atQuery": "旧函館区公会堂"
   },
   {
    "name": "Site of Usukeshi Kono-tate, Yayoi-cho",
@@ -286,7 +301,12 @@
    "what": "The flat ground in today's Yayoi-cho where Kono Masamichi's box-shaped fort stood from 1454, giving the city its name; later magistrates' offices occupied the same site for centuries.",
    "cite": [
     "S14"
-   ]
+   ],
+   "at": [
+    41.766316,
+    140.710176
+   ],
+   "atQuery": "宇須岸河野館跡"
   },
   {
    "name": "Old British Consulate (Kaiko Memorial Museum)",
@@ -296,7 +316,12 @@
     "S15",
     "S16",
     "S17"
-   ]
+   ],
+   "at": [
+    41.765979,
+    140.710706
+   ],
+   "atQuery": "函館市旧イギリス領事館"
   }
  ],
  "sources": [

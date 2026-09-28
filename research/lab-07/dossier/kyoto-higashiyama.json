@@ -299,7 +299,12 @@
     "S11",
     "S10",
     "S2"
-   ]
+   ],
+   "at": [
+    35.009045,
+    135.771721
+   ],
+   "atQuery": "三条大橋"
   },
   {
    "name": "Shijo Ohashi, Minamiza and Chugen-ji",
@@ -310,7 +315,12 @@
     "S2",
     "S4",
     "S5"
-   ]
+   ],
+   "at": [
+    35.003821,
+    135.7715
+   ],
+   "atQuery": "四条大橋"
   },
   {
    "name": "Gion Shinbashi and the Shirakawa",
@@ -318,7 +328,12 @@
    "what": "The teahouse street of 1712, with two-storey townhouses whose back rooms overhang the Shirakawa; stone paving and willows are protected with the buildings.",
    "cite": [
     "S12"
-   ]
+   ],
+   "at": [
+    35.005782,
+    135.774539
+   ],
+   "atQuery": "祇園新橋"
   },
   {
    "name": "Yasaka Shrine, west gate",
@@ -335,7 +350,12 @@
    "cite": [
     "S13",
     "S16"
-   ]
+   ],
+   "at": [
+    34.998239,
+    135.77991
+   ],
+   "atQuery": "産寧坂"
   },
   {
    "name": "Gojo-zaka down to Gojo Ohashi",
@@ -345,7 +365,12 @@
     "S4",
     "S19",
     "S2"
-   ]
+   ],
+   "at": [
+    35.001916,
+    135.76017
+   ],
+   "atQuery": "五条坂・五条大橋"
   },
   {
    "name": "Hokoji bell and Mimizuka",
@@ -353,7 +378,12 @@
    "what": "South of Gojo, the stone walls of the Great Buddha precinct run beside the National Museum; the bell of 1614 hangs at Hokoji, and west of Toyokuni Shrine the mound of Mimizuka, topped by a stone stupa, marks where the trophies taken in the invasions of Korea were buried.",
    "cite": [
     "S7"
-   ]
+   ],
+   "at": [
+    34.992066,
+    135.771859
+   ],
+   "atQuery": "方広寺"
   }
  ],
  "sources": [

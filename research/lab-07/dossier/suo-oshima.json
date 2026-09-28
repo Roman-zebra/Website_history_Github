@@ -265,7 +265,12 @@
    "cite": [
     "S10",
     "S11"
-   ]
+   ],
+   "at": [
+    33.921282,
+    132.20014
+   ],
+   "atQuery": "日本ハワイ移民資料館"
   },
   {
    "name": "Yashiro River",
@@ -273,7 +278,12 @@
    "what": "The area's largest river by the 1923 district history's own account, running from the island's interior to the sea past Yashiro village.",
    "cite": [
     "S1"
-   ]
+   ],
+   "at": [
+    33.910063,
+    132.213846
+   ],
+   "atQuery": "屋代川"
   },
   {
    "name": "Hillside citrus orchards",
@@ -298,7 +308,12 @@
    "what": "A short drive west, the 1,020-meter bridge that ended the island's ferry-only isolation in 1976; its walkway looks down on the fast tidal currents of the Obatake Strait.",
    "cite": [
     "S13"
-   ]
+   ],
+   "at": [
+    33.958342,
+    132.185323
+   ],
+   "atQuery": "大島大橋"
   }
  ],
  "sources": [

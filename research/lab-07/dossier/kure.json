@@ -245,7 +245,12 @@
    "what": "Kure's own maritime history museum, built around a large-scale model of the battleship Yamato; opened 2005 and now visited by well over a million people a year.",
    "cite": [
     "S3"
-   ]
+   ],
+   "at": [
+    34.241185,
+    132.55588
+   ],
+   "atQuery": "大和ミュージアム"
   },
   {
    "name": "Irifuneyama Memorial Hall",
@@ -262,7 +267,12 @@
    "cite": [
     "S1",
     "S11"
-   ]
+   ],
+   "at": [
+    34.22889,
+    132.562288
+   ],
+   "atQuery": "宮原"
   },
   {
    "name": "The Arsenal waterfront",
@@ -279,7 +289,12 @@
    "what": "A hillside district on the western edge of the old naval-port land takings, and the site of fatal debris flows in the heavy rains of July 2018, a reminder of the terrain that shaped the port as much as the navy did.",
    "cite": [
     "S12"
-   ]
+   ],
+   "at": [
+    34.257836,
+    132.527147
+   ],
+   "atQuery": "吉浦"
   }
  ],
  "sources": [
