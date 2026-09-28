@@ -89,10 +89,10 @@ def section_summary(ctx):
 def build(ctx):
     parts = [f"""<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>07 有料商品の実験：20地区とNDL調査</title>
-<meta name="description" content="Japan Time Atlas 非公開ページ07。英語PDF商品（Basic・Area Dossier・Deep Research）の実験と、候補20地区の国立国会図書館サーチ調査。">
+<meta name="description" content="Japan Time Atlas 非公開ページ07。英語PDF商品（Area Dossier・Deep Research）の実験と、候補20地区の国立国会図書館サーチ調査。">
 <link rel="icon" href="/icons/atlas-96.png" type="image/png"><style>{CSS}</style></head><body>
 <header><span class="tag">未公開 · 07</span><h1>有料商品の実験：候補20地区と国立国会図書館サーチ調査</h1>
-<p class="lead">英語PDFの3商品（Basic／Area Dossier／Deep Research）を想定し、訪問者の国ごとの関心から20地区を選び、国立国会図書館サーチでできる調査をすべて行い、試作品を作りました。{esc(TODAY)}時点。</p></header><main>"""]
+<p class="lead">英語PDFの2商品（1地区1冊のArea Dossier／個別調査のDeep Research）を想定し、訪問者の国ごとの関心から20地区を選び、国立国会図書館サーチでできる調査をすべて行い、試作品を作りました。{esc(TODAY)}時点。</p></header><main>"""]
     parts += ctx['sections']
     parts.append(f"""</main><footer>Japan Time Atlas · 実験ページ07（検索エンジン非表示・サイト内リンクなし）。データ出典：国土地理院（地理院タイル・地形分類・明治期の低湿地・自然災害伝承碑）、国立国会図書館（NDLサーチ・デジタルコレクション・NDLラボ・レファレンス協同データベース）、ジャパンサーチ、JNTO、観光庁ほか。図書館資料は書誌・URL・コマ番号の引用のみで、画像や本文は転載していません。調査データと生成スクリプト：research/lab-07/。 · <a href="/about">このサイトについて</a> · <a href="/support">サイトを支援</a></footer></body></html>""")
     return ''.join(parts)

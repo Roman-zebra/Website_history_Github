@@ -115,8 +115,8 @@ def context():
 <div class="grid">
 <div class="stat"><b>20地区</b><span>36候補から、国別の関心・有料調査の需要・データの揃い具合で選定</span></div>
 <div class="stat"><b>{tot_records:,}件</b><span>NDLサーチの固有書誌（{n_ndl}地区・検索{tot_queries}本）。うちログインなしで読める{tot_internet:,}件、個人送信{tot_trans:,}件</span></div>
-<div class="stat"><b>{len(basics)}本</b><span>Basic（英語PDF・自動生成）</span></div>
-<div class="stat"><b>{len(doss)}本</b><span>Area Dossier（Basic＋英語の歴史レポート）{'・Deep Research見本1本' if deep_pdf else ''}</span></div>
+<div class="stat"><b>{len(doss)}本</b><span>Area Dossier（空中写真・地形・伝承碑＋英語の歴史レポート。全本を出典と照合済み）</span></div>
+<div class="stat"><b>{'1本' if deep_pdf else '作成中'}</b><span>Deep Research見本（架空の依頼・実在の資料）</span></div>
 </div>
 <ul>
 <li><b>誰が買うか。</b>英語の歴史商品の中心は米・英・豪・加です。訪日中に「日本の歴史・伝統文化体験」をした割合は65〜75%で、東アジア（12〜25%）の約3倍、1人当たり支出も最大です。数では韓国・中国・台湾が上回りますが、英語PDFの購買層ではありません（将来の各言語版の対象）。</li>
@@ -192,7 +192,7 @@ def context():
         if 'roots' in d['picked']:
             out.append('移民のルーツ枠：沖縄初の集団移民（1900年ハワイ着）26人中10人が金武出身')
         if 'Basic showcase' in d['picked']:
-            out.append(f"Basicの見本：3km圏の災害伝承碑{ready_mon.get(d['id'], 0)}基")
+            out.append(f"伝承碑ページの見本：3km圏の災害伝承碑{ready_mon.get(d['id'], 0)}基")
         if not out:
             out.append('総合点で選定')
         return '<br>'.join(esc(x) for x in out)
@@ -214,7 +214,7 @@ def context():
     reserve = [r for r in sel.get('ranking', []) if r['id'] not in chosen][:8]
     cands = {c['id']: c for c in load('candidates.json', {'candidates': []})['candidates']}
     reserve_notes = {
-        'kamakura': '英語圏の関心は高い（神奈川の訪問率 英19.6%・米17.0%）が、3km圏の伝承碑が1基でBasicの見本として弱い。次点1位。',
+        'kamakura': '英語圏の関心は高い（神奈川の訪問率 英19.6%・米17.0%）が、3km圏の伝承碑が1基で伝承碑ページの見本として弱い。次点1位。',
         'iwakuni': '米国の宿泊シェア14.8%（山口）。基地の町は横須賀・北谷・金武で代表させた。',
         'sasebo': '海軍の町。基地人口の公式数値なし。横須賀で代表させた。',
         'fussa': '横田基地の門前町。1945–50年写真なし（1961年以降）。',
@@ -232,7 +232,7 @@ def context():
 <p>36候補のそれぞれについて、①需要（2025年の訪日客数 × 英語PDFの適合度 × 各国の関心度0〜3）、②データの揃い具合（最古の空中写真・旧河道や埋立地の割合・災害伝承碑・NDLの公開図書）、③有料調査への結びつき（移民のルーツ・基地・占領期・居留地など）を点数化しました（45:30:25）。そのうえで、</p>
 <ol><li>各国の旅行者が特に選ぶ「シグネチャー地区」を1〜2か所ずつ確保（訪問率・宿泊統計・歴史的な結びつきの根拠つき）</li>
 <li>Deep Researchの買い手がいる「移民のルーツ」3地区・「基地の町」3地区を確保</li>
-<li>Basicの見本として災害伝承碑が最も多い2地区（浅草・両国15基、神戸10基）を確保</li>
+<li>伝承碑ページの見本として災害伝承碑が最も多い2地区（浅草・両国15基、神戸10基）を確保</li>
 <li>残りを総合点順で補充</li></ol>
 <div class="scroll"><table><tr><th>点</th><th>地区</th><th>関心の強い国（★=最上位）</th><th>選定理由</th><th>分類</th><th>最古の写真</th><th>旧河道・埋立など</th><th>伝承碑3km</th><th>NDL書誌</th></tr>{''.join(rows)}</table></div>
 <p class="small muted">点数・関心度・根拠は research/lab-07/districts.json と scripts/select.py。関心度は観光庁の都道府県別訪問率、宿泊旅行統計、自治体統計、歴史的な結びつき（公式資料）に基づく編集判断です。</p>
@@ -275,36 +275,47 @@ def context():
         if not os.path.exists(path):
             return ''
         return f'<a href="pdf/{esc(name)}"><b>{esc(title)}</b><span>{esc(sub)} · {pdf_pages(path)}ページ · {mb(path)}</span></a>'
-    basic_cards = ''.join(pdf_card(f'basic-{d["id"]}.pdf', d['en'], 'Basic') for d in districts)
     doss_cards = ''.join(pdf_card(f'dossier-{d["id"]}.pdf', d['en'], f"Area Dossier · 約{round(sum(len(re.sub('<[^>]+>', '', p['text']).split()) for s in (dossiers[d['id']] or {}).get('sections', []) for p in s['paragraphs']), -2)}語 · 出典{len((dossiers[d['id']] or {}).get('sources', []))}件") for d in doss)
     deep_card = pdf_card('deep-research-sample-suo-oshima.pdf', 'Deep Research sample: Kuka, Suo-Oshima', '架空の依頼・実在の資料') if deep_pdf else ''
-    thumbs = [('basic-asakusa-then-now.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：浅草・両国の1936–42年と2019年'),
-              ('basic-asakusa-meiji.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：人工地形と明治期の低湿地'),
-              ('basic-hiroshima-landform.jpg', 'basic-hiroshima-peace.pdf', 'Basic：広島・旧中島地区の地形分類'),
-              ('basic-kobe-memorials.jpg', 'basic-kobe-meriken.pdf', 'Basic：神戸の災害伝承碑（英訳）'),
-              ('dossier-kyoto-cover.jpg', 'dossier-kyoto-higashiyama.pdf', 'Area Dossier：京都・東山と鴨川（表紙）'),
-              ('dossier-kyoto-report.jpg', 'dossier-kyoto-higashiyama.pdf', 'Area Dossier：本文（段落ごとに出典番号）'),
+    thumbs = [('basic-asakusa-then-now.jpg', 'dossier-tokyo-asakusa.pdf', '空中写真の新旧：浅草・両国の1936–42年と2019年'),
+              ('basic-asakusa-meiji.jpg', 'dossier-tokyo-asakusa.pdf', '人工地形と明治期の低湿地'),
+              ('basic-hiroshima-landform.jpg', 'dossier-hiroshima-peace.pdf', '広島・旧中島地区の地形分類'),
+              ('basic-kobe-memorials.jpg', 'dossier-kobe-meriken.pdf', '神戸の災害伝承碑（英訳）'),
+              ('dossier-kyoto-cover.jpg', 'dossier-kyoto-higashiyama.pdf', '表紙：京都・東山と鴨川'),
+              ('dossier-kyoto-report.jpg', 'dossier-kyoto-higashiyama.pdf', '歴史レポート本文（段落ごとに出典番号）'),
               ('deep-sample-cover.jpg', 'deep-research-sample-suo-oshima.pdf', 'Deep Research見本：久賀')]
     gallery = ''.join(f'<a href="pdf/{p}"><img src="img/{i}" alt="{esc(c)}" loading="lazy" width="620" height="877"><span>{esc(c)}</span></a>'
                       for i, p, c in thumbs if os.path.exists(os.path.join(OUT, 'img', i)) and os.path.exists(pdf(p)))
     S.append(f"""<h2 id="products">5. 試作品</h2>
 <div class="gallery">{gallery}</div>
-<h3>Basic（英語PDF・全自動）</h3>
-<p>地区の中心座標を与えるだけで、地理院タイルから①最古の空中写真と最新の年度別オルソ画像の比較、②その間の年代の写真、③地形分類（自然地形：旧河道など／人工地形：盛土・埋立・干拓）、④明治期の低湿地（田・湿地・水面）、⑤半径3km（なければ8km・30km）の自然災害伝承碑を英訳つきで並べ、出典と方法を書き添えたPDFを作ります。1地区あたり数分、人手ゼロ。地形の説明文と伝承碑の英訳は国土地理院の情報を翻訳・要約したもので、その旨を明記しています。</p>
-<div class="pdfs">{basic_cards or '<p class="muted">生成中</p>'}</div>
-<h3>Area Dossier（Basic＋英語の歴史レポート）</h3>
-<p>NDLのネット公開図書（コマ番号を明記）と自治体などの公式資料だけを根拠に、地区の成り立ちから現在までを英語で書き、年表・歩き方メモ・出典一覧・さらに調べる先（個人送信の市史など）を付けました。本文には段落ごとに出典番号があります。ここに載せているのは、記述を出典の本文と一つずつ照合する事実確認を済ませたものだけです（誤りは修正済み）。販売前には第三者による確認も行う想定です。</p>
+<h3>Area Dossier（1地区1冊・英語PDF）</h3>
+<p>当初はBasic（自動生成の空中写真・地形・伝承碑）と、それに歴史レポートを足したArea Dossierの2段階で考えていましたが、中身の差が小さく買い手に違いが伝わりにくいため、1地区1冊に統合しました。1冊に入るのは、①最古の空中写真と最新の年度別オルソ画像の比較と、その間の年代の写真、②地形分類（旧河道・盛土・埋立・干拓など）と明治期の低湿地、③半径3km（なければ8km・30km）の自然災害伝承碑の英訳、④NDLのネット公開図書（コマ番号を明記）と自治体などの公式資料に基づく英語の歴史レポート（段落ごとに出典番号）、⑤年表・歩き方メモ・出典一覧・さらに調べる先、です。①〜③は座標から自動で作り、④⑤は1地区ずつ書いて、記述を出典の本文と一つずつ照合しました（誤りは修正済み）。販売前には第三者による確認も行う想定です。</p>
 <div class="pdfs">{doss_cards or '<p class="muted">執筆中</p>'}</div>
 <h3>Deep Research（見本）</h3>
 <p>「曾祖父がハワイへ渡る前にいた周防大島の久賀村」を調べる、という架空の依頼に、実在の資料で答えた見本です。遠隔で確認できたこと、現地や本人の請求（戸籍など）が必要なこと、料金帯ごとの範囲を分けて示しています。</p>
 <div class="pdfs">{deep_card or '<p class="muted">作成中</p>'}</div>""")
 
     # ---------- economics and next steps
+    pricing = load('pricing.json', None)
+    rec = (pricing or {}).get('recommendation') or {}
+    def usd(v):
+        if isinstance(v, (list, tuple)):
+            return '$' + '–'.join(f'{x:g}' for x in v)
+        return f'${v:g}' if isinstance(v, (int, float)) else esc(v or '')
+    dp = rec.get('dossier') or {}
+    dossier_price = (usd(dp.get('price')) + (f"（発売時 {usd(dp.get('launch'))}）" if dp.get('launch') else '')) if dp else '調査中'
+    deep_price = '<br>'.join(f"{esc(t.get('tier', ''))} {usd(t.get('price'))}" for t in rec.get('deepResearch') or []) or '調査中'
+    SEG = {'a': '旅行・地域史のPDFガイド', 'b': '家・通りの歴史レポート', 'c': '日本の家系・戸籍調査'}
+    comp_rows = ''.join(f"<tr><td>{esc(SEG.get(c.get('segment'), c.get('segment', '')))}</td><td>{esc(c.get('seller', ''))}<br><span class='muted small'>{esc(c.get('site', ''))}</span></td><td>{esc(c.get('product', ''))}</td><td class='num'>{esc(c.get('price', ''))}</td><td>{link(c['url'], '見る') if c.get('url') else ''}</td></tr>"
+                        for c in (pricing or {}).get('comparables', []))
+    why = ''.join(f"<li><b>{esc(k)}</b>：{esc(v)}</li>" for k, v in [('Area Dossier', dp.get('why', ''))] + [(t.get('tier', ''), t.get('why', '')) for t in rec.get('deepResearch') or []] if v)
     S.append(f"""<h2 id="next">6. 見立てと次の一手</h2>
-<div class="scroll"><table><tr><th>商品</th><th>主な買い手</th><th>作る手間</th><th>リスク</th></tr>
-<tr><td>Basic</td><td>米英豪加の個人旅行者、日本の不動産を検討する外国人（ニセコなど）</td><td>自動（1地区数分）。新地区の追加は座標だけ</td><td>地理院の空中写真を有料PDFに載せる条件の最終確認</td></tr>
-<tr><td>Area Dossier<br>$29–39</td><td>歴史志向の欧米豪、日系人の家族旅行、基地OB</td><td>1地区あたり調査・執筆＋人の事実確認（目安2〜4時間）。一度作れば再利用</td><td>誤りの混入。販売前の校閲が必須</td></tr>
-<tr><td>Deep Research<br>$190–390</td><td>祖先の村を探す日系人、基地で暮らした家族</td><td>遠隔調査4〜8時間、現地1日。数量限定</td><td>個人情報（戸籍は本人・直系のみ請求可）。約束できる成果の線引き</td></tr></table></div>
+<div class="scroll"><table><tr><th>商品</th><th>価格</th><th>主な買い手</th><th>作る手間</th><th>リスク</th></tr>
+<tr><td>Area Dossier</td><td>{dossier_price}</td><td>歴史志向の欧米豪の旅行者、日系人の家族旅行、基地OB・家族、日本の不動産を検討する外国人（ニセコなど）</td><td>空中写真・地形・伝承碑は自動。歴史レポートは1地区あたり調査・執筆＋照合（目安2〜4時間）で、一度作れば再利用</td><td>誤りの混入（販売前の校閲が必須）。地理院の空中写真を有料PDFに載せる条件の最終確認</td></tr>
+<tr><td>Deep Research</td><td>{deep_price}</td><td>祖先の村を探す日系人、基地で暮らした家族</td><td>遠隔調査4〜8時間、現地1日。数量限定</td><td>個人情報（戸籍は本人・直系のみ請求可）。約束できる成果の線引き</td></tr></table></div>
+<h3>価格の根拠：海外の個人・小規模事業者の類似商品</h3>
+{('<ul class="src">' + why + '</ul>') if why else ''}
+{('<div class="scroll"><table><tr><th>分野</th><th>売り手</th><th>商品</th><th>価格</th><th></th></tr>' + comp_rows + '</table></div><p class="small muted">価格は各ページの表示どおり（確認日 ' + esc((pricing or {}).get('checked', '')) + '）。' + esc((pricing or {}).get('fx', '')) + '</p>') if comp_rows else '<p class="muted">調査中</p>'}
 <ol>
 <li><b>Cloudflareの実アクセスで再採点</b>（上記トークン）。サイト内で実際に開かれている場所ページと国の組み合わせを、関心度の代わりに使う。</li>
 <li><b>権利の最終確認</b>：地理院の空中写真・地形分類を有料PDFに使う条件（出典表示で足りるか）を国土地理院に照会する。販売開始前に規約を再確認。</li>
