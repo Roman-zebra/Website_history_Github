@@ -1,0 +1,754 @@
+{
+  "about": "Checks for Page 07 that needed a real desktop Chrome on a connection in Japan: sites that answered HTTP 403/503 or failed DNS for the cloud session, and NDL Digital Collections pages read as images. Each finding names the dossier file and caveat it answers, the evidence, and suggested text. Nothing here edits the dossiers; the Page 07 session applies what it accepts.",
+  "checked": "2026-09-28",
+  "method": "Claude in Chrome (the site owner's own browser). NDL items were read in the NDL viewer and through its IIIF image service; text was read on screen, not OCR. Quotes are short phrases kept for the fact-checker only.",
+  "findings": [
+    {
+      "id": "C01",
+      "target": "dossier/suo-oshima.json",
+      "answers": "caveat: 1920 statistical table could be read for its list of countries but not for exact yearly counts",
+      "status": "resolved",
+      "summary": "Table read from the page image. It covers five years (Taisho 5-9 = 1916-1920), departures (渡航) and returns (歸國) for 13 destinations. The rows of 1916-1919 add up exactly to the printed totals; in the 1920 column the rows add up to 218 departures and 184 returns while the printed totals say 227 and 207. That mismatch is in the book itself (digits re-checked at high zoom), which explains why OCR alignment could not be trusted.",
+      "table": {
+        "source": "山口県大島郡勢要覧 大正9年, printed page 13 「海外渡航及歸國」 = NDL frame 23 (right-hand page)",
+        "years": [
+          1916,
+          1917,
+          1918,
+          1919,
+          1920
+        ],
+        "departures": {
+          "布哇 Hawaii": [
+            216,
+            137,
+            211,
+            215,
+            141
+          ],
+          "北米合衆國 US mainland": [
+            89,
+            81,
+            114,
+            138,
+            69
+          ],
+          "加奈陀 Canada": [
+            16,
+            6,
+            21,
+            14,
+            2
+          ],
+          "秘露 Peru": [
+            36,
+            2,
+            4,
+            3,
+            0
+          ],
+          "伯剌西爾 Brazil": [
+            41,
+            2,
+            9,
+            0,
+            0
+          ],
+          "比律賓 Philippines": [
+            1,
+            0,
+            47,
+            17,
+            6
+          ],
+          "浦鹽斯德 Vladivostok": [
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "瓜哇 Java": [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          "新嘉坡 Singapore": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "墨西哥 Mexico": [
+            0,
+            0,
+            9,
+            1,
+            0
+          ],
+          "濠洲 Australia": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "西伯利亞 Siberia": [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          "佛領ニユーカレドニア French New Caledonia": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "printed total 總計": [
+            402,
+            228,
+            415,
+            392,
+            227
+          ]
+        },
+        "returns": {
+          "布哇 Hawaii": [
+            144,
+            131,
+            151,
+            148,
+            131
+          ],
+          "北米合衆國 US mainland": [
+            47,
+            45,
+            36,
+            80,
+            30
+          ],
+          "加奈陀 Canada": [
+            9,
+            5,
+            11,
+            13,
+            17
+          ],
+          "秘露 Peru": [
+            0,
+            0,
+            2,
+            2,
+            3
+          ],
+          "伯剌西爾 Brazil": [
+            4,
+            3,
+            0,
+            0,
+            1
+          ],
+          "比律賓 Philippines": [
+            1,
+            0,
+            0,
+            7,
+            2
+          ],
+          "浦鹽斯德 Vladivostok": [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          "瓜哇 Java": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "新嘉坡 Singapore": [
+            1,
+            0,
+            1,
+            2,
+            0
+          ],
+          "墨西哥 Mexico": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "濠洲 Australia": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "西伯利亞 Siberia": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "佛領ニユーカレドニア French New Caledonia": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "printed total 總計": [
+            206,
+            184,
+            202,
+            255,
+            207
+          ]
+        },
+        "blank cells": "printed as dotted leaders (····), recorded here as 0",
+        "derived": "Printed totals 1916-1920: 1,664 departures and 1,054 returns. Hawaii 920 departures (55%) and 705 returns; US mainland 491 departures. For 1916-1919 only (internally consistent): 1,437 departures, 847 returns, Hawaii 779 departures."
+      },
+      "suggestedText": "The district's own statistical overview for 1920 counts the traffic year by year. From 1916 to 1920 it recorded between about 230 and 415 departures abroad a year and 180 to 255 returns; Hawaii took more than half of those who left (920 of 1,664 in the printed totals), the US mainland most of the rest, while smaller parties went to Peru and Brazil (77 between them in 1916 alone), the Philippines (47 in 1918), Canada, Mexico, Singapore, Java and Vladivostok.",
+      "sourceUpdate": {
+        "id": "S4",
+        "frames": [
+          23
+        ],
+        "used": "1920 population by town and village (total 81,643); departures and returns by destination for 1916-1920 (printed page 13), read from the page image; the 1920 column's rows do not add up to its printed totals."
+      },
+      "sources": [
+        {
+          "kind": "ndl",
+          "title": "山口県大島郡勢要覧 大正9年",
+          "year": 1922,
+          "pid": "912951",
+          "frames": [
+            23
+          ],
+          "url": "https://dl.ndl.go.jp/pid/912951/1/23",
+          "access": "internet",
+          "checked": "2026-09-28",
+          "used": "Printed page 13, 海外渡航及歸國 table, read from the image (IIIF crops of frame 23)."
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "target": "dossier/osaka-namba.json",
+      "answers": "caveat: a 1626 date for licensing Dotonbori's theatres could not be tied to a frame in Osaka City History vol. 1",
+      "status": "resolved",
+      "summary": "The NDL viewer's own in-book full-text search (not NDL Lab positions) puts the passage at frame 203. Read on the page image: under the side heading 芝居と遊廓, 'In Kan'ei 3 (1626) Yasui Kyubei, to make Dotonbori prosper, obtained permission to set up a pleasure quarter and theatres' (寛永三年安井九兵衞道頓堀の繁榮を計らんが爲、遊所及芝居設置の許可を得), moving the theatres from Shiro-machi, then nicknamed Shibai-machi (theatre town). The same paragraph goes on to a Kyoto man called Dansuke staging 'Okuni kabuki' with the Shimo-Namba women, and, after women's kabuki was banned, Kyoto troupes (Shioya Kuroemon, Yamatoya Jinbei, Matsumoto Nazaemon and others) opening several small theatres on Dotonbori. Frame 150 (the one the dossier checked) is a different topic.",
+      "suggestedText": "In 1626, by Osaka City's own 1915 account, Yasui Kyubei obtained official permission to put theatres and a pleasure quarter on the new canal to bring it trade, and moved the theatres there from the district then nicknamed 'theatre town'. Later, after women's kabuki was banned, troupes from Kyoto opened several small theatres along the canal.",
+      "sourceUpdate": {
+        "id": "S3",
+        "frames": [
+          150,
+          203
+        ],
+        "used": "Add: frame 203, section 芝居と遊廓 — the 1626 permission for theatres and a pleasure quarter, and the move of theatres from Shiro-machi."
+      },
+      "sources": [
+        {
+          "kind": "ndl",
+          "title": "大阪市史 第１",
+          "year": 1915,
+          "pid": "980475",
+          "frames": [
+            203
+          ],
+          "url": "https://dl.ndl.go.jp/pid/980475/1/203",
+          "access": "internet",
+          "checked": "2026-09-28",
+          "used": "芝居と遊廓 paragraph, read on the page image after the viewer's in-book search for 寛永三年 returned frame 203 among 12 hits."
+        }
+      ],
+      "tip": "For big compiled volumes, use the viewer's 全文検索 tab (it returns frame numbers such as '203 0203.jp2' with a snippet); positions from other full-text services drift.",
+      "note": "If the dossier's four founders (from S1/S3) include Yasui Kyubei, say so here; this check did not re-read that part."
+    },
+    {
+      "id": "C03",
+      "target": "dossier/nagasaki-dejima.json",
+      "answers": "caveat: the 1997 architectural study of the Tojin Yashiki could not be opened through NDL Lab",
+      "status": "omission-confirmed",
+      "summary": "The item is 李陽浩『長崎唐人屋敷に関する建築的研究』(1997), pid 3135802, 57 frames. Its record says インターネット公開（許諾） and ログインなしで閲覧可能, and the viewer's search does return frames (元禄二年: 4, 14, 17, 19, 22, 24; 十善寺: 14, 17, 26, 40; 焼失: 40). But from a connection in Japan in desktop Chrome the viewer never loads a page image, and the IIIF service answers HTTP 404 with {\"checkResult\": \"NG\"} for this pid (the same service returns 200 for pid 912951). So the text cannot actually be read online today; keeping it out of the cited sources is right. Re-checked after letting the NDL viewer run its own access checks (api/check/allowedContents/internet/view): the IIIF service still answers 404 checkResult NG, the item's IIIF manifest URL is empty, and the page JPEG listed in the item record (contents/3135802/.../f70fd564-....jpg for frame 14) answers HTTP 401. The images are not publicly served, whatever the catalogue label says.",
+      "suggestedCaveat": "One further-reading item, a 1997 architectural study of the Tojin Yashiki (NDL pid 3135802), is catalogued as open online, but on 28 September 2026 its page images were not being served (NDL's image service refused the item), so it is listed but not cited.",
+      "sources": []
+    },
+    {
+      "id": "C04",
+      "target": "dossier/kin.json",
+      "answers": "caveat: Camp Hansen's English name and its connection to a named US serviceman could not be confirmed (USMC and Medal of Honor Society sites returned access errors)",
+      "status": "resolved",
+      "summary": "Marine Corps Installations Pacific's own article 'Okinawa bases named for fallen heroes' (8 July 2011) has a section headed Camp Hansen describing Pvt. Dale M. Hansen of Company E, 2nd Battalion, 1st Marines, 1st Marine Division. The article's original URL now returns 'Content Not Found' (removed, not blocked); its text was read in the Internet Archive capture of 22 November 2025. The same story is on the US Defense Department's DVIDS (story 73406, public domain), whose opening says the names of eight Medal of Honor recipients of the battle are carried by the island's installations. The Congressional Medal of Honor Society record gives: Private, USMC; action 7 May 1945 on Okinawa (a one-man assault on a pillbox and a mortar position); died 11 May 1945 on Okinawa; born 13 December 1922, Wisner, Nebraska; awarded posthumously, presented to his parents 30 May 1946.",
+      "suggestedText": "Camp Hansen is named for Private Dale M. Hansen, a US Marine from Nebraska awarded the Medal of Honor, after his death, for a one-man assault on Japanese positions on 7 May 1945; he died on Okinawa four days later. It is one of the installations on the island that carry the names of eight Medal of Honor recipients of the battle.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "Okinawa bases named for fallen heroes",
+          "publisher": "Marine Corps Installations Pacific (US Marine Corps)",
+          "year": 2011,
+          "url": "https://web.archive.org/web/20251122112438/https://www.mcipac.marines.mil/Media-Room/News/Article/531402/okinawa-bases-named-for-fallen-heroes/",
+          "checked": "2026-09-28",
+          "used": "The Camp Hansen section naming Pvt. Dale M. Hansen and his unit. Original URL (mcipac.marines.mil/Media-Room/News/Article/531402/) now returns Content Not Found; read in the Internet Archive capture of 22 Nov 2025."
+        },
+        {
+          "kind": "official",
+          "title": "What's in a name? Okinawa bases named for fallen heroes",
+          "publisher": "DVIDS (US Department of Defense), story 73406, by Cpl. Jovane Holland, III Marine Expeditionary Force",
+          "year": 2011,
+          "url": "https://www.dvidshub.net/news/73406/whats-name-okinawa-bases-named-fallen-heroes",
+          "checked": "2026-09-28",
+          "used": "Live official copy of the same story: eight Medal of Honor recipients' names carried by Okinawa's Marine installations (tagged Dale Hansen)."
+        },
+        {
+          "kind": "institution",
+          "title": "Dale Merlin Hansen — Medal of Honor recipient",
+          "publisher": "Congressional Medal of Honor Society",
+          "url": "https://www.cmohs.org/recipients/dale-m-hansen",
+          "checked": "2026-09-28",
+          "used": "Rank, unit, action date and place (7 May 1945, Okinawa), death (11 May 1945), birth (1922, Wisner, Nebraska), posthumous award."
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "target": "dossier/yokosuka.json",
+      "answers": "caveat: US Navy base figures came from a trade publication because history.navy.mil (503) and cnrj.cnic.navy.mil (403) failed",
+      "status": "corrected",
+      "summary": "cnrj.cnic.navy.mil opens normally in Chrome. Commander Fleet Activities Yokosuka's own Mission and Vision page: the base 'comprises 568 acres', 43 miles south of Tokyo at the entrance of Tokyo Bay; it is 'the largest overseas U.S. Naval installation in the world'; over 50 forward-deployed tenant commands, including the only permanently forward-deployed aircraft carrier, USS George Washington (CVN 73); and 'approximately 24,000 military and civilian personnel' live and work on the base. The dossier's 'something like 24,500' should become 'about 24,000' on the Navy's own figure. The same site's command history adds a then-and-now pair: by 1944 the Japanese navy yard covered 280 acres and employed over 40,000 workers; on 30 August 1945 Vice Admiral Totsuka surrendered the base, and Commander Fleet Activities Yokosuka was created shortly after the occupation began.",
+      "suggestedText": "The US Navy has held part of the old arsenal ever since: Fleet Activities Yokosuka, 568 acres and by the Navy's own description its largest installation overseas, supports the only aircraft carrier the Navy keeps permanently forward-deployed, USS George Washington, and about 24,000 military and civilian personnel live and work on the base. In 1944 the Japanese navy yard on the same shore covered 280 acres and employed more than 40,000 people.",
+      "replaceSource": "S8 (Military Times Installation Guide) with the two official pages below",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "Mission and Vision — Commander Fleet Activities Yokosuka",
+          "publisher": "Commander, Navy Region Japan (US Navy)",
+          "url": "https://cnrj.cnic.navy.mil/Installations/CFA-Yokosuka/About/Mission-and-Vision/",
+          "checked": "2026-09-28",
+          "used": "568 acres; largest overseas US naval installation; over 50 tenant commands; USS George Washington (CVN 73); approximately 24,000 military and civilian personnel."
+        },
+        {
+          "kind": "official",
+          "title": "CFAY Command History",
+          "publisher": "Commander, Navy Region Japan (US Navy)",
+          "url": "https://cnrj.cnic.navy.mil/Installations/CFA-Yokosuka/About/History/",
+          "checked": "2026-09-28",
+          "used": "Yokosuka Iron Works renamed Yokosuka Navy Yard in 1871; 280 acres and over 40,000 workers by 1944; surrender by Vice Admiral Totsuka on 30 August 1945; COMFLEACT created shortly after the 1945 occupation."
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "target": "dossier/yokosuka.json",
+      "answers": "caveat: Mikasa's postwar neglect (dance hall, aquarium) and 1958-61 restoration could not be confirmed on the preservation society's own site",
+      "status": "resolved",
+      "summary": "The Japanese page 'Battleship Mikasa' on the Mikasa Preservation Society's site has sections 戦後の荒廃 and 記念艦「三笠」の復元. It says: after the 1945 occupation the Soviet representative pressed for the ship to be scrapped; a private company to which Yokosuka City had entrusted the ship and the land around it removed the upper-deck structures and installed an aquarium and a dance hall, and sold guns and masts stored nearby. In 1955 a British trader, Mr Rubin, who had known the crew from the ship's building, wrote to The Japan Times about its condition; the Mikasa Preservation Society was re-formed in November 1958 (president Shibusawa Keizo) and a nationwide campaign followed; restoration was paid for by ¥160 million in donations at home and abroad and ¥98 million from the national budget, including ¥24 million from the US Navy; the restoration ceremony was held on 27 May 1961 with Prince Yoshi (Hitachi) attending. The same page confirms completion in March 1902 at Vickers, the memorial-ship decision under the Washington Treaty and the preservation ceremony of 12 November 1926.",
+      "suggestedText": "Under the occupation the Soviet delegate pressed for the ship to be scrapped. It survived, but a private company to which Yokosuka City had entrusted the ship and its surroundings removed the upper-deck structures, fitted an aquarium and a dance hall, and sold guns and masts stored nearby. A letter to The Japan Times in 1955 from a British trader who had known the crew from the ship's building started a national campaign; ¥160 million in donations and ¥98 million from the state, ¥24 million of it contributed by the US Navy, paid for a restoration marked by a ceremony on 27 May 1961.",
+      "sources": [
+        {
+          "kind": "institution",
+          "title": "戦艦「三笠」（戦後の荒廃／記念艦「三笠」の復元）",
+          "titleEn": "Battleship Mikasa: postwar neglect and restoration",
+          "publisher": "公益財団法人 三笠保存会 (Mikasa Preservation Society)",
+          "url": "https://www.kinenkan-mikasa.or.jp/mikasa/",
+          "checked": "2026-09-28",
+          "used": "Postwar use as an amusement facility (aquarium, dance hall), sale of guns and masts; 1955 Japan Times letter; society re-formed Nov 1958; funding ¥160m donations + ¥98m state incl. ¥24m US Navy; restoration ceremony 27 May 1961."
+        }
+      ]
+    },
+    {
+      "id": "C07",
+      "target": "dossier/hakodate.json",
+      "answers": "caveat: could not confirm the Old British Consulate's construction year, end of consular use, or designation date",
+      "status": "resolved",
+      "summary": "Two official sources agree. Agency for Cultural Affairs, Cultural Heritage Online (entry supplied by Hakodate City Board of Education): present building 1913 (Taisho 2), brick, two storeys, at Motomachi 33-14; first consul Hodgson arrived in 1859 and first worked from Shomyoji temple; the first consulate (1864) burned in 1866, and fires followed in 1879 and 1907, so the consulate moved and the present building went up in 1913; closed in 1934; bought by Hakodate City in 1940 and used until 1979 as, among other things, a nurses' dormitory for the municipal hospital; designated a Hakodate City Tangible Cultural Property on 23 October 1979. The consulate's own site: designed by the British government's Office of Works, Shanghai; consulate until 1934; restored for the city's 70th anniversary and opened as the Port Opening Memorial Hall in 1992; displays renewed in March 2009 for the port's 150th anniversary; the Union Jack flew there for 75 years from 1859.",
+      "suggestedText": "The consulate that visitors walk through today is not the first: the British consulate's first building, of 1864, burned in 1866, and fire struck the consulate again in 1879 and 1907. The present brick building, designed by the British government's Office of Works in Shanghai, opened in 1913 and served until the consulate closed in 1934. The city bought it in 1940 and used it for decades as a hospital nurses' dormitory before listing it as a municipal cultural property in 1979 and restoring it as the Port Opening Memorial Hall in 1992.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "旧イギリス領事館",
+          "titleEn": "Former British Consulate (Cultural Heritage Online)",
+          "publisher": "文化庁 文化遺産オンライン (Agency for Cultural Affairs); entry by 函館市教育委員会生涯学習部文化財課",
+          "url": "https://online.bunka.go.jp/heritages/detail/613953",
+          "checked": "2026-09-28",
+          "used": "1913 brick building, Motomachi 33-14; consular history 1859-1913 with fires of 1866, 1879 and 1907; closed 1934; bought by the city 1940; nurses' dormitory until 1979; city designation 23 Oct 1979."
+        },
+        {
+          "kind": "institution",
+          "title": "歴史 | 函館市旧イギリス領事館",
+          "titleEn": "History — Old British Consulate of Hakodate",
+          "publisher": "函館市旧イギリス領事館 (Old British Consulate of Hakodate)",
+          "url": "https://www.fbcoh.net/history",
+          "checked": "2026-09-28",
+          "used": "Designed by the Office of Works, Shanghai; completed 1913; consulate until 1934; designated 1979; restored and opened as Port Opening Memorial Hall 1992; displays renewed 2009."
+        }
+      ]
+    },
+    {
+      "id": "C08",
+      "target": "dossier/tokyo-asakusa.json",
+      "answers": "caveat: Ryogoku Kokugikan's building history (1909, postwar move, 1985) could not be confirmed from a citable source",
+      "status": "resolved",
+      "summary": "Sumida City's official chronology (墨田区の通史年表, updated 2011-03-10): 1833 — from the tenth-month tournament, the Ekoin grounds become the fixed venue for sumo; 1909 — the Kokugikan is completed in Ryogoku; 1945 — grand sumo resumes at the Ryogoku Kokugikan; 1950 — the Kokugikan moves to Kuramae in Taito Ward; November 1984 — the new Ryogoku Kokugikan is completed; January 1985 — the Kokugikan returns to Ryogoku (a 'Ninth' concert by 5,000 singers marked it on 9 January). The Japan Sumo Association's own museum page: the Sumo Museum was founded in the Kuramae Kokugikan, which opened in 1954, and moved when the Ryogoku Kokugikan was completed in 1985.",
+      "suggestedText": "Sumo outgrew the temple grounds in 1909, when a purpose-built hall, the Kokugikan, was completed in Ryogoku. In 1950 the tournaments moved to Kuramae in Taito Ward, where a new Kokugikan opened in 1954, and they came back to Ryogoku only in January 1985, when the present hall opened.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "墨田区の通史年表",
+          "titleEn": "Chronology of Sumida",
+          "publisher": "墨田区 (Sumida City)",
+          "url": "https://www.city.sumida.lg.jp/sisetu_info/siryou/kyoudobunka/sonota/mame/tuusi.html",
+          "checked": "2026-09-28",
+          "used": "Sumo at Ekoin from 1833; Kokugikan completed 1909; sumo resumed 1945; move to Kuramae 1950; new hall completed Nov 1984; return to Ryogoku Jan 1985."
+        },
+        {
+          "kind": "official",
+          "title": "過去の展示 - 平成26年",
+          "titleEn": "Sumo Museum past exhibitions, 2014",
+          "publisher": "日本相撲協会 (Japan Sumo Association)",
+          "url": "https://www.sumo.or.jp/KokugikanSumoMuseumDisplay/past?year=2014",
+          "checked": "2026-09-28",
+          "used": "Kuramae Kokugikan opened in 1954; the museum moved with the completion of the Ryogoku Kokugikan in 1985."
+        }
+      ]
+    },
+    {
+      "id": "C09",
+      "target": "dossier/tokyo-asakusa.json",
+      "answers": "claim: 'Built in 1658' for Ryogoku Bridge (paragraph and timeline, cite S13)",
+      "status": "correction-suggested",
+      "summary": "S13 (Sumida City exhibition page, updated 2007-02-20) does say 万治元年（1658）には両国橋が架けられました. But Sumida City's own chronology (updated 2011-03-10) splits it: 1658 (Manji 1) — Shibayama Gon'emon and Tsubouchi Tozaemon appointed bridge commissioners; 1659 (Manji 2), 12th month 13th day — Ryogoku Bridge completed. That lunar date falls in early 1660 in the Western calendar.",
+      "suggestedText": "Begun in 1658 and finished the following year, it ...  (timeline: '1658-59: Ryogoku Bridge is built across the Sumida ...')",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "墨田区の通史年表",
+          "titleEn": "Chronology of Sumida",
+          "publisher": "墨田区 (Sumida City)",
+          "url": "https://www.city.sumida.lg.jp/sisetu_info/siryou/kyoudobunka/sonota/mame/tuusi.html",
+          "checked": "2026-09-28",
+          "used": "1658 appointment of the bridge commissioners; completion on Manji 2.12.13."
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "target": "deep/sample-suo-oshima-kuka.json",
+      "answers": "limits: the Diplomatic Archives' website was unreachable, so its reading-room procedure came from NDL's guide",
+      "status": "resolved",
+      "summary": "mofa.go.jp and the archives' catalogue (da.mofa.go.jp) both open in Chrome. Reading-room guide dated 4 September 2026: pre- and post-war records can be read, photographed and copied; the archives answer reference questions but do not research on a user's behalf or read or translate documents for them; open Monday-Friday 10:00-17:30 (entry until 17:00), closed weekends, holidays and 28 Dec-4 Jan; 1-5-3 Azabudai, Minato-ku, Tokyo, tel 03-3585-4513; entry needs the user application form and photo ID; digital cameras, smartphones and desktop scanners may be used (no flash or tripods); copies can be ordered at the desk or by post or email, paid in advance with revenue stamps. The catalogue search for 旅券下付表 returns 387 records, among them the passport registers 海外旅券下付（附与）返納表進達一件（附与明細表）, classification 3.8.5.8, many volumes, open, paper originals kept at the Funabashi annex, read on microfilm/DVD (e.g. vol. 16 = 旅券5/MF, 旅券5/DVD), and 移民取扱人ヲ経由セル海外渡航者名簿 (lists of emigrants sent through emigration companies), 3.8.2.38, originals by special-use procedure, DVD copies. The volume records carry no year or prefecture, so which volume holds Yamaguchi for 1885-1900 has to be found in the reading room or through JACAR.",
+      "suggestedText": "The Diplomatic Archives of the Ministry of Foreign Affairs (Azabudai, Tokyo) holds the pre-war passport registers, series 3.8.5.8, and read them to visitors on microfilm or DVD; the Archives themselves state that they do not carry out research on a user's behalf, which is why a Deep Research engagement budgets reading-room time. Copies of identified pages can be ordered by post or email.",
+      "leadUpdate": "Lead 'A Yamaguchi-Prefecture-specific volume of the passport issuance register': where = Diplomatic Archives of MOFA, series 3.8.5.8 (and 3.8.2.38 for emigration-company lists); how = identify volumes by date in the reading room (catalogue records give no dates) or via JACAR, read on MF/DVD, photograph or order copies.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "本館閲覧室 利用案内",
+          "titleEn": "Diplomatic Archives reading room: how to use",
+          "publisher": "外務省外交史料館 (Diplomatic Archives of the Ministry of Foreign Affairs)",
+          "url": "https://www.mofa.go.jp/mofaj/annai/honsho/shiryo/annai.html",
+          "checked": "2026-09-28",
+          "used": "Services and their limits (no research on users' behalf), opening hours, entry, photography, copy orders by post/email."
+        },
+        {
+          "kind": "official",
+          "title": "外務省外交史料館所蔵史料検索システム: 海外旅券下付（附与）返納表進達一件（附与明細表） 第16巻",
+          "titleEn": "Diplomatic Archives catalogue: passport issue registers, vol. 16",
+          "publisher": "外務省外交史料館",
+          "url": "https://da.mofa.go.jp/material-detail?id=200-011302",
+          "checked": "2026-09-28",
+          "used": "Series 3.8.5.8 exists, open, paper at the Funabashi annex, microfilm 旅券5/MF and DVD 旅券5/DVD; no dates in the record."
+        }
+      ]
+    },
+    {
+      "id": "C11",
+      "target": "deep/sample-suo-oshima-kuka.json",
+      "answers": "limits and lead: GSI's map- and aerial-photograph ordering service was unreachable; which old map sheet shows Kuka is unknown",
+      "status": "resolved (see C17)",
+      "summary": "The service was not blocked: its old domain mapps.gsi.go.jp no longer exists (DNS NXDOMAIN in Chrome too). GSI renewed the service on 7 March 2026 at https://service.gsi.go.jp/map-photos/app/ (map search, aerial photographs, map editions 図歴, request basket); viewing at best quality and ordering copies need a free GSI online reading-room account, valid one year. Map sheets covering Kuka (33.9377N, 132.2670E), from the service's public sheet-grid data: 1:50,000 久賀 (sheet 116-9; latest edition listed 1994-02-01) and 1:25,000 久賀 (116-9-3; latest 2019-07-01); 1:200,000 松山. The edition history of those sheets sits behind the service's terms-of-use screen, which was not accepted in this session (the owner decides), so the Meiji/Taisho edition dates are still open. Since 1 September 2025 GSI sells scans of its old (柾判) 1:25,000 and 1:50,000 sheets: TIFF, 600 dpi, about 460 x 580 mm, ¥610 per sheet including tax, delivered online through the Japan Map Center shop (page updated 2026-04-01).",
+      "leadUpdate": "Replace 'telephone GSI's map-sales counter' with: search sheet 5万分1『久賀』(116-9) and 2万5千分1『久賀』(116-9-3) in the Map & Aerial Photo service's map-edition (図歴) search, then buy the oldest editions as old-map data (¥610 each). Licence check needed before any image of a purchased sheet goes into a paid PDF (Survey Act copying rules); a client can buy the same sheets directly.",
+      "retry": "The cloud session reaches other gsi.go.jp hosts, so it can probably query service.gsi.go.jp itself now that the new address is known.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "地図・空中写真閲覧サービス（トップ・お知らせ）",
+          "titleEn": "GSI Map and Aerial Photograph Service (renewed 7 March 2026)",
+          "publisher": "国土地理院 (GSI)",
+          "url": "https://service.gsi.go.jp/map-photos/app/",
+          "checked": "2026-09-28",
+          "used": "Renewal date, account and copy-request rules; sheet grid data used to identify the Kuka sheets."
+        },
+        {
+          "kind": "official",
+          "title": "2万5千分１地形図（旧版）及び5万分１地形図（旧版）データ",
+          "titleEn": "Old-edition 1:25,000 and 1:50,000 topographic map data",
+          "publisher": "国土地理院 (GSI)",
+          "url": "https://www.gsi.go.jp/MAP/map_data41031.html",
+          "checked": "2026-09-28",
+          "used": "Sold since 1 Sep 2025: TIFF, 600 dpi, ¥610 per sheet, online via Japan Map Center; page updated 2026-04-01."
+        }
+      ]
+    },
+    {
+      "id": "C12",
+      "target": "dossier/kin.json",
+      "answers": "caveat: the exact wording of Toyama Kyuzo's verse on the 'World Stone' was not verified against a primary text",
+      "status": "still-open (and why)",
+      "summary": "NDL Digital Collections full-text search for 金武世界石 returns 119 items. The verse appears in more than twenty of them (1953-1999), including Kin Town Board of Education's own 1990 site survey (金武町の遺跡, pid 13202826), a Meiji-era Ryukyu Shimpo report of the stone's erection 'at the west end of the Kin babasaki' reprinted in a district newspaper collection (pid 13272176), Okinawa Prefecture's 1995 school-trip booklet (pid 14027969) and JICA Okinawa's 1982 emigration history (pid 13106674). Every one checked on the first results page is personal-transmission (送信サービス) or NDL-premises only, so under the Page 07 rules none can be the source of a sentence. The wording also varies between them (我ら/吾等, 五大州/五大洲, 誠一つの/誠ひとつの), which is exactly why a primary text matters. The commonly given form is いざ行かん 我らの家は五大州 誠一つの金武世界石.",
+      "suggestedText": "Keep the dossier's current approach (describe, do not quote). If a line is wanted, give an English rendering as 'commonly given' — 'Let us go: our home is the five continents' — and name the stone, without claiming the inscription's exact characters.",
+      "leadForDeepResearch": "Kin Town Board of Education, 金武町の遺跡 (1990), frame 9, and the Meiji newspaper report in 戦前新聞集成：並里区誌資料編 (1995), frame 210, are the two nearest-to-primary texts; both readable at NDL or a partner library via the transmission service.",
+      "sources": []
+    },
+    {
+      "id": "C13",
+      "target": "dossier/kin.json",
+      "answers": "new material for the walk and the Philippines paragraph (not a caveat)",
+      "status": "new",
+      "summary": "Kin Town's own page on the Toyama Memorial Hall (當山紀念館, updated 2023-10-18): built in 1935 to honour Toyama Kyuzo, paid for with the surplus of donations sent by emigrants overseas for his statue; one of the few pre-war reinforced-concrete buildings in Okinawa, designed by the Kin-born architect Oshiro Ryutaro; used before the war for emigrant education and the 1935 ceremony for the 30th anniversary of emigration to Hawaii (as the page words it), after the war as a kindergarten and then the town office and board of education; restored to its original form and reopened in October 2016; registered as a national Tangible Cultural Property on 26 February 2021, Kin's first; open 9:00-16:00, free, closed weekends and holidays. Kin Town Library's page for its 2019 picture-book biography: Oshiro Kozo, called the father of Philippine emigration, began with emigration to Benguet in the Philippines in 1904, then abaca (Manila hemp) cultivation at Bago, and organised Okinawan emigration to the Philippines.",
+      "suggestedWalkStop": {
+        "name": "Toyama Memorial Hall",
+        "ja": "當山紀念館",
+        "what": "A 1935 concrete hall built with money sent home by emigrants to honour Toyama Kyuzo, restored in 2016 and registered as a national cultural property in 2021; free, weekdays 9:00-16:00.",
+        "cite": [
+          "Kin Town: 當山紀念館"
+        ]
+      },
+      "suggestedText": "The Philippines stream had its own organiser from Kin: Oshiro Kozo, remembered in the town as the father of Philippine emigration, who went out with the 1904 emigration to Benguet and turned to growing abaca at Bago on Mindanao.",
+      "note": "Check 'on Mindanao' for Bago against a second source (Bago is in the Davao area, but the library page does not say Mindanao). The library entry summarises a children's book, so prefer it for names and dates only.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "當山紀念館",
+          "titleEn": "Toyama Memorial Hall",
+          "publisher": "金武町 (Kin Town), 企画課",
+          "url": "https://www.town.kin.okinawa.jp/soshiki/kikakuka/4/4/593.html",
+          "checked": "2026-09-28",
+          "used": "1935 construction and funding, architect, uses, 2016 restoration, national registration 26 Feb 2021, opening hours."
+        },
+        {
+          "kind": "institution",
+          "title": "フィリピン移民の父 大城孝蔵 －沖縄県金武町の偉人－（金武町の民話シリーズ⑦）",
+          "titleEn": "Oshiro Kozo, father of Philippine emigration (Kin Town Library picture book, 2019)",
+          "publisher": "金武町立図書館 (Kin Town Library)",
+          "url": "https://kin-lib.town.kin.okinawa.jp/06kyoudominwa.html",
+          "checked": "2026-09-28",
+          "used": "Oshiro Kozo: 1904 emigration to Benguet, abaca at Bago, Okinawan emigration to the Philippines."
+        }
+      ]
+    },
+    {
+      "id": "C14",
+      "target": "audience.json / districts.json (selection and the sales page)",
+      "answers": "gap: site-specific audience not available",
+      "status": "partly-resolved",
+      "summary": "The owner's Google Search Console (3 months to 2026-09-25, web search) holds too little data to rank districts; raw counts are kept out of this public repository. Directionally: impressions come first from the United States and Japan, then Germany, South Korea, Canada, Brazil and Hong Kong. Queries that reach the site: map-of-Hiroshima searches, Gunkanjima in Japanese, Korean and English, liminal Japan, and generic old-map searches (historical map of Japan, 日本 地図 昔, 旧市街 地図). The pages seen most in results are the home page, the Gunkanjima 3D pages, the historical-maps guide, the liminal guide and the Hiroshima place page. Of the 20 Page 07 districts only Hiroshima shows search demand so far. Cloudflare visitor counts were not read: the dashboard was signed out, and signing in is the owner's step.",
+      "forThePage": "Lead with Hiroshima as the sample Area Dossier and word the product for English-speaking visitors (US first by impressions). 'Historical map of Japan' and 'map of <city>' are the phrases people already type.",
+      "sources": [
+        {
+          "kind": "owner-data",
+          "title": "Google Search Console, Performance (web), 3 months",
+          "checked": "2026-09-28",
+          "used": "Countries, queries and pages with impressions, 2026-09-11 to 2026-09-25."
+        }
+      ]
+    },
+    {
+      "id": "C15",
+      "target": "audience.json (segments.nikkei, gaps)",
+      "answers": "gap: MOFA overseas Nikkei estimate returned HTTP 403",
+      "status": "partly-resolved",
+      "summary": "mofa.go.jp opens in Chrome, but the country table itself is a PDF (https://www.mofa.go.jp/mofaj/files/100646175.pdf) that Chrome shows in its own PDF viewer, which this browser tool cannot read; it was not downloaded. The ministry's country 'basic data' pages give the figures in HTML: Brazil — Nikkei population estimated at about 2.7 million (page updated 2026-08-03); Mexico — over 79,000 (updated 2025-08-05); Bolivia — about 13,000 (estimate; updated 2026-09-09); Paraguay — about 10,000 (estimate; updated 2026-06-19). The USA, Canada, Argentina, Peru, Philippines and Australia pages give no Nikkei figure.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "ブラジル基礎データ",
+          "publisher": "外務省 (MOFA)",
+          "url": "https://www.mofa.go.jp/mofaj/area/brazil/data.html",
+          "checked": "2026-09-28",
+          "used": "Nikkei population about 2.7 million (estimate)."
+        },
+        {
+          "kind": "official",
+          "title": "メキシコ基礎データ",
+          "publisher": "外務省 (MOFA)",
+          "url": "https://www.mofa.go.jp/mofaj/area/mexico/data.html",
+          "checked": "2026-09-28",
+          "used": "Nikkei population over 79,000."
+        },
+        {
+          "kind": "official",
+          "title": "ボリビア基礎データ",
+          "publisher": "外務省 (MOFA)",
+          "url": "https://www.mofa.go.jp/mofaj/area/bolivia/data.html",
+          "checked": "2026-09-28",
+          "used": "Nikkei about 13,000 (estimate)."
+        },
+        {
+          "kind": "official",
+          "title": "パラグアイ基礎データ",
+          "publisher": "外務省 (MOFA)",
+          "url": "https://www.mofa.go.jp/mofaj/area/paraguay/data.html",
+          "checked": "2026-09-28",
+          "used": "Nikkei about 10,000 (estimate)."
+        }
+      ]
+    },
+    {
+      "id": "C16",
+      "target": "audience.json (US installation personnel)",
+      "answers": "gap: no official figure for CFA Sasebo (navy.mil returned 403)",
+      "status": "partly-resolved",
+      "summary": "Commander Fleet Activities Sasebo's official pages open in Chrome but give no personnel count. They give: 12 separate areas on 1,285 acres around Sasebo Harbor; home of the Navy's only forward-deployed Amphibious Ready Group, anchored by USS America (LHA 6), with eight other forward-deployed ships. History page: Sasebo Naval Station began operations on 1 July 1889 as headquarters of the Imperial Japanese Navy's Third Naval District; in 1905 the Combined Fleet under Admiral Togo sailed from Sasebo to meet the Baltic Fleet; the arsenal employed some 50,000 people at the peak of the Second World War; the 21st Naval Air Arsenal (Sasebo and Omura) built 966 aircraft; the 5th Marine Division landed on 22 September 1945 and US Fleet Activities Sasebo was formally established in June 1946. Yokosuka's official personnel figure is in C05.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "About — CFA Sasebo",
+          "publisher": "Commander, Navy Region Japan (US Navy)",
+          "url": "https://cnrj.cnic.navy.mil/Installations/CFA-Sasebo/About/",
+          "checked": "2026-09-28",
+          "used": "Area (1,285 acres, 12 areas); Amphibious Ready Group and USS America."
+        },
+        {
+          "kind": "official",
+          "title": "History — CFA Sasebo",
+          "publisher": "Commander, Navy Region Japan (US Navy)",
+          "url": "https://cnrj.cnic.navy.mil/Installations/CFA-Sasebo/About/History/",
+          "checked": "2026-09-28",
+          "used": "1889 naval station; 1905; wartime arsenal of some 50,000; 966 aircraft; 22 Sep 1945 landing; June 1946 establishment."
+        }
+      ]
+    },
+    {
+      "id": "C17",
+      "target": "deep/sample-suo-oshima-kuka.json",
+      "answers": "limits/lead: which old topographic map sheet shows Kuka in the Meiji or Taisho era",
+      "status": "resolved",
+      "summary": "Edition history (図歴) from GSI's Map and Aerial Photograph Service, read through the service's own history endpoint (/map-photos/app/api/history/<sheet id>) after the owner allowed accepting its terms. 1:50,000 sheet 久賀 (116-9): surveyed 1899 (Meiji 32), first published 28 December 1901 (list number 116-9-1), reprinted 30 September 1905 (116-9-12); revised 1928 (Showa 3), printed 25 and 30 August 1946; 'emergency revision' 1949 printed 1951, 1956 and 1962; supplementary survey 1963 (printed 1967); compiled 1969 (1970); revised 1979 (1982) and 1993 (1994). No Taisho edition is listed. 1:25,000 sheet 久賀 (116-9-3) begins only with the 1968 survey (printed 30 September 1970), then 1979, 1992, 2003 and 2019. So the map that shows Kuka as the emigrants left it is the 1:50,000 久賀 sheet surveyed in 1899 and printed in 1901; the next look is the 1928 revision.",
+      "suggestedText": "The oldest official map of Kuka is the 1:50,000 'Kuka' sheet, surveyed in 1899, fourteen years after the first government-sponsored departures for Hawaii, and printed in 1901; the next revision is dated 1928. GSI sells 600-dpi scans of its old sheets for ¥610 each.",
+      "note": "Check that the 1901 sheet is among the old-map scans on sale (the ¥610 product covers 柾判 old editions; the service marks lost sheets separately).",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "地図・空中写真閲覧サービス: 図歴 5万分1地形図「久賀」(116-9)／2万5千分1地形図「久賀」(116-9-3)",
+          "titleEn": "GSI map editions for the Kuka 1:50,000 and 1:25,000 sheets",
+          "publisher": "国土地理院 (GSI)",
+          "url": "https://service.gsi.go.jp/map-photos/app/map?search=history",
+          "checked": "2026-09-28",
+          "used": "Survey, revision and printing dates of every edition of both sheets."
+        }
+      ]
+    },
+    {
+      "id": "C18",
+      "target": "audience.json / the page's 'Cloudflare not reflected' note",
+      "answers": "gap: the site's own traffic was not available",
+      "status": "resolved (direction only in this public file)",
+      "summary": "Cloudflare Web Analytics for japantimeatlas.com, last 30 days, bots excluded, read in the owner's dashboard (raw counts kept out of this public repository; they are sampled and shown in tens). Visits come first from the United States and Japan, then Canada and France, then single sampled units from Peru, Brazil, Australia, Bahrain and China. Almost all visits are direct (no referrer); Bing and Google each bring a small share. Nearly all visits enter at the home page; the historical-maps guide, the Hiroshima place page, the liminal guide and the Gunkanjima 3D page are the only other entry pages in the top five. Desktop far outweighs mobile, and Windows leads. Direct visits to the home page from desktops are what the owner's and automated sessions' own checks look like, so real visitor numbers are lower than the totals. Together with Search Console (C14): Hiroshima is the only Page 07 district with visible demand, and English-speaking North America is the lead market.",
+      "sources": [
+        {
+          "kind": "owner-data",
+          "title": "Cloudflare Web Analytics, japantimeatlas.com, 30 days, bots excluded",
+          "checked": "2026-09-28",
+          "used": "Visits by country, referrer, entry path, device and browser."
+        }
+      ]
+    },
+    {
+      "id": "C19",
+      "target": "dossiers: tokyo-asakusa, hakodate, kure, osaka-namba",
+      "answers": "spot-check of figures cited to NDL books (OCR-prone numbers)",
+      "status": "consistent in OCR (not an independent check)",
+      "summary": "Checked in NDL Lab's page-by-page OCR (lab.ndl.go.jp full text), kanji numerals read in context. Tokyo-Asakusa S4 (被服廠跡, 1932): the cremation table at frame 60, repeated at frame 91, gives 本所區被服廠跡 49,821 and 計十三ケ所 58,656; frame 97 gives the confirmed provisional name register of end-1929 with 38,826 names. Note: frame 39 of the same report says 38,825 names were written out for the altar, one fewer. Hakodate S2 (函館市誌, 1935): frame 421 gives the 16 November 1878 fire at 954 households and the 6 December 1879 fire from Horie-cho at 33 towns and 2,326 households including 31 public buildings; frame 423 gives the 25 August 1907 fire from the soap works at Higashikawa-cho 217, east wind, about 400,000 tsubo and 12,390 households, with the British and Russian consulates among the buildings lost. (The 1937 disaster record, frame 39, times that fire at 22:20 with a south-east wind; the city history says 22:35 and an east wind. The dossier gives no time, so nothing to change.) Kure S1 (大呉市民史 明治篇, 1943): frame 47 gives 39,637 people in 1898 and, for 1902, 13,809 households and 60,132 people, with 12,477 registered residents against 17,985 temporary residents in the registers. Osaka S1 (大阪府全志 巻之2, 1922): frame 454 gives 1,774 houses collapsed, 541 drowned and 45 bridges fallen or damaged.",
+      "sourceUpdates": [
+        {
+          "target": "tokyo-asakusa S4",
+          "frames": [
+            60,
+            91,
+            97
+          ]
+        },
+        {
+          "target": "hakodate S2",
+          "frames": [
+            421,
+            423
+          ]
+        },
+        {
+          "target": "kure S1",
+          "frames": [
+            47
+          ]
+        },
+        {
+          "target": "osaka-namba S1",
+          "frames": [
+            454
+          ]
+        }
+      ],
+      "sources": [],
+      "method": "NDL Lab's page OCR is the same text layer the Page 07 checker reads, so agreement here does not count as a second, independent confirmation. Only C01 (Suo-Oshima table) and C20 (Hakodate 1934 table) were read from the page images. What this check adds is the exact frame for each figure, and the fact that each figure sits in running text or a table whose rows add up."
+    },
+    {
+      "id": "C20",
+      "target": "dossier/hakodate.json (1934 fire paragraph, cites S6, S4, S2)",
+      "answers": "claim check: the 2,166 dead and the cause breakdown; '102,000 people ... out of some 22,600 households'",
+      "status": "correction-suggested",
+      "summary": "The city's own page (S6, 函館大火, updated 2026-02-25) lists the dead as 2,166: burned 748, drowned 917, frozen 217, suffocated 143, other 29, and 112 who died after being taken in (その他収容後死亡). The dossier gives only the first four, which add up to 2,025, so the reader cannot reconcile them with 2,166. The same page gives about 102,001 people affected, 11,105 buildings and 22,667 households burned, 22 districts wholly and 18 partly burned, 416.39 ha, and a fire that started at 18:53 on 21 March 1934 when a whirlwind blew the roof off a wooden house at Sumiyoshi-cho 91 (estimated gusts of 39 m/s from the south-south-west). 'Some 22,600 households' should be 'about 22,700', and they are the households burned, not a total the 102,000 came 'out of'. For the record: the 1937 official disaster record (S4, frame 53) counts deaths on the night at the scene as 1,859 (557 burned, 913 drowned, 217 frozen, 143 suffocated, 29 other; men 792, women 1,067) and lists later deaths, mostly pneumonia, separately on frame 54. The city's 748 burned and 917 drowned are therefore not from S4's frames 52-53; keep S6 as the source for the breakdown.",
+      "suggestedText": "The City of Hakodate's own count of the dead is 2,166, and burning was not even the largest cause: its breakdown lists 917 drowned, 748 burned, 217 frozen and 143 suffocated, with 29 more killed in other ways and 112 who died later after being taken in. The fire hit about 102,000 people; some 22,700 households and 11,105 buildings burned across 22 wholly destroyed districts and 18 partly burned.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "函館大火",
+          "publisher": "函館市 (City of Hakodate)",
+          "url": "https://www.city.hakodate.hokkaido.jp/docs/2014012200615/",
+          "checked": "2026-09-28",
+          "used": "Full death breakdown summing to 2,166; 102,001 affected; 11,105 buildings and 22,667 households burned; start time, cause and wind."
+        },
+        {
+          "kind": "ndl",
+          "title": "函館大火災害誌",
+          "year": 1937,
+          "pid": "1257280",
+          "frames": [
+            53,
+            54
+          ],
+          "url": "https://dl.ndl.go.jp/pid/1257280/1/53",
+          "access": "internet",
+          "checked": "2026-09-28",
+          "used": "Deaths at the scene on the night by cause and sex (1,859), read from the page image; later deaths on frame 54."
+        }
+      ]
+    },
+    {
+      "id": "C21",
+      "target": "dossier/chatan.json (S3 and S4)",
+      "answers": "source quality: frames [0] and URLs ending /1/0",
+      "status": "fix-needed",
+      "summary": "Both are Chatan Town's own born-digital PDFs held by NDL and open without login (インターネット公開（許諾）): S4 = 沖縄県北谷町町勢要覧 (2023), one PDF of 39 pages, 18 MB; S3 = the 2004 American Village completion report. Born-digital PDFs have no scanned frames, so the full-text search API returns frame 0, and https://dl.ndl.go.jp/pid/<pid>/1/0 is not a working page link (the item's content link is /1/1). The dossier's own 'used' notes say both were read only as search snippets, which is below the Page 07 rule that a source must have been opened. The 29,000 population sentence also cites the town's resident table (S15), so it stands; the 68 percent figure rests on S4 alone.",
+      "suggestedFix": "Set url to https://dl.ndl.go.jp/pid/14491099/1/1 and https://dl.ndl.go.jp/pid/14491108/1/1, replace frames [0] with the PDF page numbers once the PDFs are opened (the NDL viewer shows them page by page), and change 'Read as OCR snippets' only after that reading.",
+      "sources": []
+    }
+  ],
+  "forThePage": [
+    "Deep Research: the Diplomatic Archives state that they do not research on users' behalf or read and translate documents for them (reading-room guide, 4 Sep 2026). That is the plainest official statement of why the paid tier exists.",
+    "Deep Research: GSI's old-map scans cost ¥610 a sheet; the value we add is choosing the sheets and reading them, not access. Say so, rather than implying the maps are hard to get.",
+    "Area Dossiers: five caveats above can move from 'could not confirm' to cited fact (Camp Hansen, Yokosuka figures, Mikasa, Hakodate consulate, Kokugikan). Fewer caveats of that kind make the sample read as finished work."
+  ]
+}

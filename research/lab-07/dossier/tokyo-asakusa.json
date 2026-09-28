@@ -61,10 +61,12 @@
      ]
     },
     {
-     "text": "The bridge that followed the fire made the crossing permanent and named the place: Ryogoku, \"both provinces,\" for its linking of Musashi and Shimosa. Built in 1658, it and the cleared ground around it grew within a generation into what Sumida City's own account calls Edo's premier entertainment ground — sideshow booths, street performers, small theaters and food stalls at both ends of the bridge, and summer fireworks over the river among the city's best-known sights. Sumo shared the same ground: Ekoin hosted the city's licensed tournaments for seventy-six years into the Meiji era, an age still remembered as \"Ekoin sumo,\" and its Chikarazuka mound still stands, where wrestlers pray for strength before the sumo hall a short walk away today.",
+     "text": "The bridge that followed the fire made the crossing permanent and named the place: Ryogoku, \"both provinces,\" for its linking of Musashi and Shimosa. Begun in 1658 and completed in the twelfth month of 1659 by the old calendar, it and the cleared ground around it grew within a generation into what Sumida City's own account calls Edo's premier entertainment ground — sideshow booths, street performers, small theaters and food stalls at both ends of the bridge, and summer fireworks over the river among the city's best-known sights. Sumo shared the same ground: Ekoin hosted the city's licensed tournaments for seventy-six years into the Meiji era, an age still remembered as \"Ekoin sumo,\" and its Chikarazuka mound still stands, where wrestlers pray for strength before the sumo hall a short walk away today. Sumo outgrew the temple grounds in 1909, when a purpose-built hall, the Kokugikan, was completed in Ryogoku; in 1950 the tournaments moved to Kuramae in Taito Ward, where a new Kokugikan opened in 1954, and they came back to Ryogoku only in January 1985, when the present hall opened.",
      "cite": [
       "S13",
-      "S12"
+      "S12",
+      "S20",
+      "S21"
      ]
     }
    ]
@@ -195,10 +197,11 @@
    ]
   },
   {
-   "when": "1658",
-   "what": "Ryogoku Bridge is built across the Sumida, and the ground around it becomes Edo's leading entertainment quarter.",
+   "when": "1658-59",
+   "what": "Ryogoku Bridge is built across the Sumida (completed in the twelfth month of 1659 by the old calendar), and the ground around it becomes Edo's leading entertainment quarter.",
    "cite": [
-    "S13"
+    "S13",
+    "S20"
    ]
   },
   {
@@ -557,6 +560,26 @@
    "url": "https://www.gotokyo.org/jp/spot/138/index.html",
    "checked": "2026-09-28",
    "used": "The museum's 2016 opening, its architect, and its connection to Hokusai's life in the area."
+  },
+  {
+   "id": "S20",
+   "kind": "official",
+   "title": "墨田区の通史年表",
+   "titleEn": "Chronology of Sumida",
+   "publisher": "墨田区 (Sumida City)",
+   "url": "https://www.city.sumida.lg.jp/sisetu_info/siryou/kyoudobunka/sonota/mame/tuusi.html",
+   "checked": "2026-09-28",
+   "used": "Ryogoku Bridge begun 1658 and completed in the twelfth month of 1659; sumo at Ekoin from 1833; the Kokugikan completed 1909; the move to Kuramae 1950; the return to Ryogoku in January 1985."
+  },
+  {
+   "id": "S21",
+   "kind": "official",
+   "title": "過去の展示 - 平成26年",
+   "titleEn": "Sumo Museum past exhibitions, 2014",
+   "publisher": "日本相撲協会 (Japan Sumo Association)",
+   "url": "https://www.sumo.or.jp/KokugikanSumoMuseumDisplay/past?year=2014",
+   "checked": "2026-09-28",
+   "used": "The Kuramae Kokugikan opened in 1954; the museum moved when the Ryogoku Kokugikan was completed in 1985."
   }
  ],
  "furtherReading": [
@@ -621,8 +644,7 @@
  "caveats": [
   "Casualty figures for the Army Clothing Depot site differ because different records count different things: 49,821 bodies cremated there (a 1932 official tally), about 30,000 estimated dead within the first hour (a 1934 account), 38,826 individually named and registered victims (finalized 1929), and \"about 38,000\" as today's park authority's headline figure. This dossier gives all four rather than resolving them into one.",
   "Sensoji's founding dates (628 for the statue's discovery, 645 for the first hall) rest on the temple's own tradition and are reported here as such, not as independently verified fact. The temple's own history page likewise flags the reading of Haji no Nakachi's name as uncertain (\"名前には諸説あり\"); other reconstructions include Nakatomo and Manakachi.",
-  "The pairing of Honjo and Mukojima wards into Sumida City in the March 1947 reorganization is well established, but this session confirmed it through search summaries of the reorganization rather than by reading an official page's full text describing that specific merger; the wider 1947 process and Taito City's own formation are independently sourced.",
-  "The Ryogoku Kokugikan sumo hall's own twentieth-century building history (its 1909 construction, a postwar move, and the present 1985 hall) could not be confirmed this session from a citable primary or official source, so this dossier describes only Ekoin's well-sourced Edo and Meiji sumo history and leaves the modern hall's building dates out."
+  "The pairing of Honjo and Mukojima wards into Sumida City in the March 1947 reorganization is well established, but this session confirmed it through search summaries of the reorganization rather than by reading an official page's full text describing that specific merger; the wider 1947 process and Taito City's own formation are independently sourced."
  ],
  "checked": "2026-09-28"
 }

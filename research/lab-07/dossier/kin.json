@@ -68,12 +68,13 @@
      ]
     },
     {
-     "text": "The same volumes credit a Kin-born planter, Oshiro Kozo, born in 1881, with a reputation among Japanese settlers as a benefactor of Philippine colonization and the head of a colonization company at Bago — a Davao district that still carries his name today, as Bago Oshiro — while a Kin man named Takaesu Izo, a graduate of the prefecture's First Middle School, moved on from an early spell at Davao to head a fishery cooperative at Iloilo. Other entries follow local men into commerce in Manila and into the Japanese army: none of it as famous as the Hawaii crossing, but together the entries show that by the interwar years Kin's emigrants, and the money and letters they sent home, reached well beyond the plantations of Oahu. Some of the men named in these directories came from hamlets — Kanna, Kochiya, and the village of Ginoza itself — that were still legally part of Kin at the time, and would separate to form Ginoza village only in April 1946.",
+     "text": "The same volumes credit a Kin-born planter, Oshiro Kozo, born in 1881, with a reputation among Japanese settlers as a benefactor of Philippine colonization and the head of a colonization company at Bago — a Davao district that still carries his name today, as Bago Oshiro, and Kin remembers him as the father of Philippine emigration, who went out with the 1904 emigration to Benguet before turning to abaca at Bago — while a Kin man named Takaesu Izo, a graduate of the prefecture's First Middle School, moved on from an early spell at Davao to head a fishery cooperative at Iloilo. Other entries follow local men into commerce in Manila and into the Japanese army: none of it as famous as the Hawaii crossing, but together the entries show that by the interwar years Kin's emigrants, and the money and letters they sent home, reached well beyond the plantations of Oahu. Some of the men named in these directories came from hamlets — Kanna, Kochiya, and the village of Ginoza itself — that were still legally part of Kin at the time, and would separate to form Ginoza village only in April 1946.",
      "cite": [
       "S5",
       "S4",
       "S12",
-      "S20"
+      "S20",
+      "S24"
      ]
     }
    ]
@@ -96,10 +97,12 @@
      ]
     },
     {
-     "text": "Occupation reorganized Kin's map as well as its economy. On 1 April 1946 the northern hamlets of the old Kin village — Kochiya (renamed Matsuda), Ginoza, Sokei and Kanna among them — were split off under the US military government to form the new village of Ginoza, whose own official history still describes the pre-1946 area as \"Kin village\", the same administrative unit the 1919 gazetteer and the 1930s emigrant directories describe. What remained was a smaller Kin, its old airfield on the peninsula soon repurposed: the prefectural archives record it in use as a firing range from 1947 and record fresh petitions over replacement land following a Marine Corps build-up in 1957, part of the process that made the base at Kin, later named Camp Hansen, into the fixture that still dominates the town.",
+     "text": "Occupation reorganized Kin's map as well as its economy. On 1 April 1946 the northern hamlets of the old Kin village — Kochiya (renamed Matsuda), Ginoza, Sokei and Kanna among them — were split off under the US military government to form the new village of Ginoza, whose own official history still describes the pre-1946 area as \"Kin village\", the same administrative unit the 1919 gazetteer and the 1930s emigrant directories describe. What remained was a smaller Kin, its old airfield on the peninsula soon repurposed: the prefectural archives record it in use as a firing range from 1947 and record fresh petitions over replacement land following a Marine Corps build-up in 1957, part of the process that made the base at Kin, later named Camp Hansen, into the fixture that still dominates the town. Camp Hansen is named for Private Dale M. Hansen, a US Marine from Nebraska awarded the Medal of Honor after his death for a one-man assault on Japanese positions on 7 May 1945; he died on Okinawa four days later. It is one of the island's installations that carry the names of eight Medal of Honor recipients of the battle.",
      "cite": [
       "S12",
-      "S6"
+      "S6",
+      "S22",
+      "S23"
      ]
     }
    ]
@@ -267,7 +270,7 @@
   {
    "name": "Toyama Memorial Hall",
    "ja": "當山記念館",
-   "what": "A 1935 reinforced-concrete hall with a curved, beamless ceiling and round windows, designed by Oshiro Ryutaro and funded from the surplus of Toyama Kyuzo's statue fund; restored and reopened in 2016, it now displays material on Kin's emigration history.",
+   "what": "A 1935 reinforced-concrete hall with a curved, beamless ceiling and round windows, designed by Oshiro Ryutaro and funded from the surplus of Toyama Kyuzo's statue fund; restored and reopened in 2016 and registered as a national cultural property in 2021, it now displays material on Kin's emigration history; admission is free, weekdays 9:00-16:00.",
    "cite": [
     "S9"
    ]
@@ -544,6 +547,37 @@
    "url": "https://archives.starbulletin.com/2000/01/05/news/story3.html",
    "checked": "2026-09-28",
    "used": "An 18-ton marble stone from Kin, inscribed with Toyama's verse, unveiled at the Hawaii Okinawa Center on 8 January 2000, the centennial of the 1900 arrival in Honolulu."
+  },
+  {
+   "kind": "official",
+   "title": "What's in a name? Okinawa bases named for fallen heroes",
+   "titleEn": "What's in a name? Okinawa bases named for fallen heroes",
+   "publisher": "DVIDS (US Department of Defense), story 73406, III Marine Expeditionary Force",
+   "year": 2011,
+   "url": "https://www.dvidshub.net/news/73406/whats-name-okinawa-bases-named-fallen-heroes",
+   "checked": "2026-09-28",
+   "used": "Okinawa's Marine installations carry the names of eight Medal of Honor recipients of the battle, Camp Hansen among them.",
+   "id": "S22"
+  },
+  {
+   "kind": "institution",
+   "title": "Dale Merlin Hansen — Medal of Honor recipient",
+   "titleEn": "Dale Merlin Hansen — Medal of Honor recipient",
+   "publisher": "Congressional Medal of Honor Society",
+   "url": "https://www.cmohs.org/recipients/dale-m-hansen",
+   "checked": "2026-09-28",
+   "used": "Private Dale M. Hansen, USMC: action 7 May 1945 on Okinawa, died 11 May 1945, born in Wisner, Nebraska, awarded posthumously.",
+   "id": "S23"
+  },
+  {
+   "kind": "institution",
+   "title": "フィリピン移民の父 大城孝蔵 －沖縄県金武町の偉人－（金武町の民話シリーズ⑦）",
+   "titleEn": "Oshiro Kozo, father of Philippine emigration (Kin Town Library picture book, 2019)",
+   "publisher": "金武町立図書館 (Kin Town Library)",
+   "url": "https://kin-lib.town.kin.okinawa.jp/06kyoudominwa.html",
+   "checked": "2026-09-28",
+   "used": "Oshiro Kozo as the father of Philippine emigration: the 1904 emigration to Benguet, then abaca growing at Bago.",
+   "id": "S24"
   }
  ],
  "furtherReading": [
@@ -620,8 +654,7 @@
  "caveats": [
   "The 1919 Kunigami County gazetteer (S1) that this dossier leans on for early geography and history — the peaks and prewar ports, and the date of Kushi district's separation from Kin and Nago (1674 in the original research's reading of the gazetteer) — could not be retrieved as searchable text in this fact-check session (the online full-text index refused this book), so those specific details rest on the original research rather than an independent re-check here; a widely repeated secondary account instead dates the Kushi separation to 1673.",
   "Details of the wartime detention camp at Yaka (numbers held, exact closure date) are reported in secondary sources this dossier could not verify directly; only what the Prefectural Archives' own exhibition and a library reference answer support is stated here.",
-  "The share of Kin's land occupied by US military facilities is given as an official exhibition reported it in 2019 (about 56 percent); current, precise figures were not independently retrieved in this session.",
-  "Camp Hansen's English name and its connection to a named US serviceman could not be confirmed from a source reachable in this session (US Marine Corps and Medal of Honor Society sites returned access errors), and is therefore left out rather than stated on the strength of unverified secondary accounts."
+  "The share of Kin's land occupied by US military facilities is given as an official exhibition reported it in 2019 (about 56 percent); current, precise figures were not independently retrieved in this session."
  ],
  "checked": "2026-09-28"
 }

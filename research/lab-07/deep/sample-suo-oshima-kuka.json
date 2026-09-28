@@ -116,10 +116,11 @@
      ]
     },
     {
-     "text": "Three things this session could not verify remotely, and a genuine Deep Research engagement would need to chase on-site. First, the Ministry of Foreign Affairs' own Diplomatic Archives website was unreachable from this session — a network restriction here, not a content problem — so its current reading-room procedures rely here on the National Diet Library's own guide to pre-war travel records rather than the Archives' page directly. Second, the Geospatial Information Authority's map- and aerial-photograph-ordering service was likewise unreachable; we confirmed programmatically, from the Authority's public photograph archive, that the oldest digitized, viewable aerial-photo mosaic covering Kuka in that archive dates to 1961–69, and that the Authority's own single-photograph index additionally lists an unstitched 1947 exposure of the same spot, by the U.S. military, that has not yet been scanned into a browsable layer; we could not identify which old paper topographic-map sheet, if any, shows Kuka from the Meiji or Taisho era. Third, and most important for a real client, no Kuka-specific population or household figure, and no Kuka-specific passport register or conscription file, turned up in this session; all three look likely to exist only on paper, in a local or prefectural archive, or in a JACAR series that needs volume-by-volume browsing rather than a keyword search — exactly the kind of gap an on-site visit, or a longer engagement, is for.",
+     "text": "Three things this session could not verify remotely, and a genuine Deep Research engagement would need to chase on-site. First, the Ministry of Foreign Affairs' own Diplomatic Archives website was unreachable from this session — a network restriction here, not a content problem — so its current reading-room procedures rely here on the National Diet Library's own guide to pre-war travel records rather than the Archives' page directly. Second, the Geospatial Information Authority's map- and aerial-photograph-ordering service was likewise unreachable; we confirmed programmatically, from the Authority's public photograph archive, that the oldest digitized, viewable aerial-photo mosaic covering Kuka in that archive dates to 1961–69, and that the Authority's own single-photograph index additionally lists an unstitched 1947 exposure of the same spot, by the U.S. military, that has not yet been scanned into a browsable layer. A later check of the Authority's map-edition records in a browser found the oldest official map of Kuka: the 1:50,000 'Kuka' sheet, surveyed in 1899, fourteen years after the first government-sponsored departures for Hawaii, and printed in 1901; the next revision is dated 1928. Copies of old editions can be ordered from the Authority. Third, and most important for a real client, no Kuka-specific population or household figure, and no Kuka-specific passport register or conscription file, turned up in this session; all three look likely to exist only on paper, in a local or prefectural archive, or in a JACAR series that needs volume-by-volume browsing rather than a keyword search — exactly the kind of gap an on-site visit, or a longer engagement, is for.",
      "cite": [
       "S12",
-      "S17"
+      "S17",
+      "S19"
      ]
     }
    ]
@@ -507,6 +508,16 @@
    "url": "https://suooshima-hawaii-imin.com/exhibition/",
    "checked": "2026-09-28",
    "used": "Confirms the museum’s Search Corner (検索コーナー) lets visitors search travel records for about 130,000 people (13万人分) who traveled from Japan to Hawaii, combining official contract emigrants and private travelers — the specific figure used in the report and in S8’s own used-field, which this session had mistakenly sourced only to S8’s About page."
+  },
+  {
+   "id": "S19",
+   "kind": "official",
+   "title": "地図・空中写真閲覧サービス: 図歴 5万分1地形図「久賀」(116-9)／2万5千分1地形図「久賀」(116-9-3)",
+   "titleEn": "GSI map editions for the Kuka 1:50,000 and 1:25,000 sheets",
+   "publisher": "国土地理院 (GSI)",
+   "url": "https://service.gsi.go.jp/map-photos/app/map?search=history",
+   "checked": "2026-09-28",
+   "used": "Survey, revision and printing dates of the old editions of the Kuka sheets: 1:50,000 surveyed 1899, printed 1901; next revision 1928."
   }
  ],
  "furtherReading": [
@@ -574,15 +585,15 @@
    "how": "Contact the Hawaii State Archives' Research Room directly by phone or email; for temple records, contact the Honpa Hongwanji Mission of Hawaii's own archives for guidance on the kind of graveyard and membership registers the 1889 account (S1) shows already existed."
   },
   {
-   "what": "The specific old topographic map sheet(s) covering Kuka, and any pre-1961 aerial photographs not in GSI's own online archive",
+   "what": "Copies of the 1901 1:50,000 'Kuka' sheet and its 1928 revision, and any pre-1961 aerial photographs not in GSI's own online archive",
    "where": "GSI's map- and aerial-photograph-ordering service (地図・空中写真閲覧サービス); US National Archives cartographic holdings for 1945–50 occupation-era imagery",
-   "how": "This session could not reach the GSI ordering service (blocked); query it directly by place name or coordinates, or telephone GSI's map-sales counter; for wartime/occupation aerial imagery, search NARA's cartographic record groups."
+   "how": "Order the old map editions through the service (search by place name or sheet number 116-9), or telephone GSI's map-sales counter; for wartime/occupation aerial imagery, search NARA's cartographic record groups."
   }
  ],
  "limits": [
   "This is a fictional client and request. No living person's name, address or contact details appear anywhere in this report. The historical individuals named in the 1889 and 1897 sources quoted here are long deceased, drawn from publicly available, out-of-copyright books, and are illustrations of what such records can show — not the fictional client's actual ancestors.",
   "No Meiji-era population or household count specific to Kuka itself (as opposed to Oshima District or Suo-Oshima as a whole) was found among the sources open to remote reading; the likeliest sources are paper-only at the National Diet Library and would need an on-site or by-request search.",
-  "The Ministry of Foreign Affairs' Diplomatic Archives website and the GSI's old-map ordering service could not be reached from this research session (both blocked by network policy); the description of what they hold relies on the National Diet Library's own research guide and on JACAR's digitized holdings, and should be confirmed directly before any client visit.",
+  "The Ministry of Foreign Affairs' Diplomatic Archives website could not be reached from this research session, and the GSI's old-map service only in a later browser check; the description of what they hold relies on the National Diet Library's own research guide and on JACAR's digitized holdings, and should be confirmed directly before any client visit.",
   "No historical page images, passenger-manifest scans or koseki forms were downloaded or reproduced in preparing this report; only bibliographic data, archive reference codes, page/frame numbers and our own notes are recorded here, as our sourcing policy requires."
  ],
  "checked": "2026-09-28"
