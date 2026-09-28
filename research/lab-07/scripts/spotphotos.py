@@ -6,6 +6,7 @@
     python3 spotphotos.py none    <id> <n> "<why no photo is used>"
     python3 spotphotos.py place   <id> <n> <lat> <lon> "<source of the position>"
     python3 spotphotos.py sheet   <id> ...                # the chosen photos of a dossier on one sheet
+    python3 spotphotos.py refresh <id> ... | all          # re-read the credits of the chosen photos
 
 Where candidates come from:
   - Wikidata (query.wikidata.org): items within --radius (default 300 m) of the stop (walk[].at), and items in the
@@ -98,7 +99,7 @@ def plain(v):
 def tokens(*texts):
     ja, en = [], []
     for s in texts:
-        s = re.sub(r'[（(][^）)]*[）)]', ' ', s or '')
+        s = re.sub(r'[（(]([^）)]*)[）)]', r' \1 ', s or '')     # names in brackets count too: カナダミュージアム（旧野田家住宅）
         ja += [t for t in re.split(r'[・／/、\s「」A-Za-z0-9\-\'.,]+', s) if len(t) >= 2]
         en += [t for t in re.findall(r"[A-Za-z][A-Za-z'\-]+", s) if t.lower() not in GENERIC and len(t) >= 4]
     return list(dict.fromkeys(ja)), list(dict.fromkeys(en))
@@ -175,6 +176,48 @@ def category_files(cat):
     return names, subs
 
 
+MONTHS = {m: i for i, m in enumerate(['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september',
+                                        'october', 'november', 'december'], 1)}
+ERAS = {'明治': 1867, '大正': 1911, '昭和': 1925, '平成': 1988, '令和': 2018}
+
+
+def norm_date(cell):
+    """ISO date (or year-month, or year) from a Commons 'Date' cell; '' if there is none."""
+    if not cell:
+        return ''
+    dt = re.search(r'datetime="(\d{4}(?:-\d{2}(?:-\d{2})?)?)', cell)
+    if dt:
+        return dt.group(1)
+    t = plain(cell)
+    m = re.search(r'(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})', t)
+    if m and m.group(2).lower() in MONTHS:
+        return f'{m.group(3)}-{MONTHS[m.group(2).lower()]:02d}-{int(m.group(1)):02d}'
+    m = re.search(r'([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})', t)
+    if m and m.group(1).lower() in MONTHS:
+        return f'{m.group(3)}-{MONTHS[m.group(1).lower()]:02d}-{int(m.group(2)):02d}'
+    m = re.search(r'(\d{4})[-/.](\d{1,2})(?:[-/.](\d{1,2}))?', t)
+    if m:
+        return f'{m.group(1)}-{int(m.group(2)):02d}' + (f'-{int(m.group(3)):02d}' if m.group(3) else '')
+    m = re.search(r'(明治|大正|昭和|平成|令和)(\d{1,2}|元)年', t)
+    if m:
+        return str(ERAS[m.group(1)] + (1 if m.group(2) == '元' else int(m.group(2))))
+    m = re.search(r'\b(1[89]\d\d|20\d\d)\b', t)
+    return m.group(1) if m else ''
+
+
+def clean_artist(a):
+    """(credit name, Japanese credit name or '') from the Author field or the requested attribution."""
+    a = re.split(r'You are free', a)[0]
+    a = re.sub(r'\(\s*talk\s*\)', '', a)
+    a = re.sub(r'^I,\s*', '', a.strip())
+    a = re.sub(r'(?i)^(this )?photo(graph)?\s+(was\s+)?taken\s+by\s*', '', a)
+    ja = re.search(r'(?:日本語|Japanese)\s*[:：]\s*(.+?)(?=\s*(?:English|英語)\s*[:：]|$)', a)
+    en = re.search(r'(?:English|英語)\s*[:：]\s*(.+)$', a)
+    main = en.group(1) if en else ja.group(1) if ja else a
+    tidy = lambda x: re.sub(r'\s+', ' ', x).strip(' .,;:-')[:80]
+    return tidy(main) or 'unknown', tidy(ja.group(1)) if ja else ''
+
+
 def file_meta(name):
     """Licence, author, date, description, size and camera position from the file's Commons page."""
     page = WIKI + 'File:' + urllib.parse.quote(name.replace(' ', '_'))
@@ -187,20 +230,20 @@ def file_meta(name):
     links = [plain(x) for x in re.findall(r'class="licensetpl_link"[^>]*>(.*?)</span>', h, re.S)]
     ok = [(s, links[i] if i < len(links) else '') for i, s in enumerate(shorts) if licence_ok(s)]
     ok.sort(key=lambda x: (0 if x[0].lower().startswith(('cc0', 'public', 'pd')) else 1 if 'sa' not in x[0].lower() else 2))
-    attr = re.search(r'class="licensetpl_attr"[^>]*>(.*?)</span>', h, re.S)
+    attr = re.search(r'class="licensetpl_attr"[^>]*>(.*?)</(?:span|div)>', h, re.S)
     aut = re.search(r'id="fileinfotpl_aut".*?</td>\s*<td[^>]*>(.*?)</td>', h, re.S)
     date = re.search(r'id="fileinfotpl_date".*?</td>\s*<td[^>]*>(.*?)</td>', h, re.S)
     desc = re.search(r'id="fileinfotpl_desc".*?<td class="description">(.*?)</td>', h, re.S)
     geo = re.search(r'class="geo"[^>]*>\s*(-?[\d.]+);\s*(-?[\d.]+)', h)
     dims = re.search(r'class="fileInfo">\(?([\d,]+) × ([\d,]+) pixels', h)
     orig = re.search(r'class="fullImageLink" id="file"><a href="(https://upload\.wikimedia\.org/wikipedia/commons/[^"?]+)', h)
-    dt = re.search(r'datetime="([^"]+)"', date.group(1)) if date else None
     m.update({'license': ok[0][0] if ok else (shorts[0] if shorts else ''), 'licenseUrl': ok[0][1] if ok else '',
-              'artist': (plain(attr.group(1)) if attr else plain(aut.group(1)) if aut else '')[:90] or 'unknown',
-              'date': (dt.group(1) if dt else plain(date.group(1)) if date else '')[:10],
+              'artist': '', 'artistJa': '', 'date': norm_date(date.group(1) if date else ''),
               'desc': re.sub(r'^(English|日本語|Japanese)\s*[:：]\s*', '', plain(desc.group(1)) if desc else '')[:200],
               'at': [float(geo.group(1)), float(geo.group(2))] if geo else None,
               'width': int(dims.group(1).replace(',', '')) if dims else 0, 'height': int(dims.group(2).replace(',', '')) if dims else 0})
+    raw = plain(attr.group(1)) if attr and 0 < len(plain(attr.group(1))) <= 120 else plain(aut.group(1)) if aut else ''
+    m['artist'], m['artistJa'] = clean_artist(raw)
     if orig:
         u = orig.group(1)
         base = u.rsplit('/', 1)[1]
@@ -220,7 +263,7 @@ def find(did, n, radius=300, cats=(), grep=(), api_queries=()):
     from PIL import Image, ImageDraw
     d = load(did)
     stop = d['walk'][n - 1]
-    ja, en = tokens(stop.get('ja'), stop.get('name'), *api_queries)
+    ja, en = tokens(stop.get('ja'), stop.get('name'))
     lines = [f"stop {n}: {stop['name']} / {stop.get('ja')}  at={stop.get('at')}\n  {stop['what']}"]
     cands = {}   # file name -> (rank, origin)
 
@@ -263,8 +306,9 @@ def find(did, n, radius=300, cats=(), grep=(), api_queries=()):
         try:
             r = json.loads(fetch(API + '?' + urllib.parse.urlencode({'action': 'query', 'list': 'search', 'format': 'json',
                                                                         'srsearch': q + ' filetype:bitmap', 'srnamespace': 6, 'srlimit': 30})))
+            qja, qen = tokens(q)
             for x in r.get('query', {}).get('search', []):
-                add(x['title'][5:], (score(x['title'], ja, en), -500), f'search "{q}"')
+                add(x['title'][5:], (max(score(x['title'], ja, en), score(x['title'], qja, qen)) + 1, -500), f'search "{q}"')
         except Exception as ex:
             print('   ! Commons search failed:', ex, file=sys.stderr)
     ranked = sorted(cands.items(), key=lambda kv: kv[1][0], reverse=True)[:16]
@@ -318,6 +362,7 @@ def choose(did, n, k, shows, shows_ja=''):
     stop = d['walk'][n - 1]
     c = json.load(open(os.path.join(spot_dir(did), f'find-{n}.json'), encoding='utf-8'))[k]
     ph = {'title': c['title'], 'fileName': c['fileName'], 'page': c['page'], 'file': c['file'], 'artist': c['artist'],
+          'artistJa': c.get('artistJa', ''),
           'license': c['license'], 'licenseUrl': c['licenseUrl'], 'date': c['date'], 'distanceM': c['distanceM'],
           'source': 'Wikimedia Commons', 'via': c['origin'].split(' ')[1] if c['origin'].startswith('WD ') else c['origin'],
           'shows': shows, 'showsJa': shows_ja, 'checked': basic.TODAY}
@@ -329,6 +374,25 @@ def choose(did, n, k, shows, shows_ja=''):
     stop['photo'] = ph
     save(did, d)
     print(f"stop {n}: {ph['title']} ({ph['license']}, {ph['artist']})")
+
+
+def refresh(did):
+    """Re-read licence, author and date of every chosen photo from its Commons page."""
+    d = load(did)
+    for i, w in enumerate(d.get('walk', []), 1):
+        ph = w.get('photo')
+        if not ph:
+            continue
+        m = file_meta(ph['fileName'])
+        if m.get('reject'):
+            print(f"stop {i}: {ph['fileName']}: {m['reject']} — photo removed, review again", file=sys.stderr)
+            w.pop('photo')
+            continue
+        for k in ('artist', 'artistJa', 'license', 'licenseUrl', 'date'):
+            ph[k] = m[k]
+        ph['distanceM'] = round(dist_m(w['at'], m['at'])) if w.get('at') and m.get('at') else None
+        print(f"stop {i}: {ph['artist']} | {ph['artistJa']} | {ph['license']} | {ph['date']}")
+    save(did, d)
 
 
 def none(did, n, why):
@@ -406,6 +470,10 @@ if __name__ == '__main__':
         none(rest[0], int(rest[1]), rest[2])
     elif cmd == 'place':
         place(rest[0], int(rest[1]), rest[2], rest[3], rest[4])
+    elif cmd == 'refresh':
+        for did in (sorted(f[:-5] for f in os.listdir(DOSSIER_DIR) if f.endswith('.json')) if rest == ['all'] else rest):
+            print('==', did)
+            refresh(did)
     elif cmd == 'sheet':
         for did in rest:
             sheet(did)

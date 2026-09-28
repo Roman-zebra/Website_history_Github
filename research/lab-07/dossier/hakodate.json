@@ -253,7 +253,23 @@
    "what": "Follow the roughly 1.5 km route from the harbor up to Motomachi Park; nationally protected since 1989, it holds most of the sites below within a few streets of one another.",
    "cite": [
     "S7"
-   ]
+   ],
+   "photo": {
+    "title": "Daisan-zaka Slope Hakodate Hokkaido Japan02n",
+    "fileName": "Daisan-zaka Slope Hakodate Hokkaido Japan02n.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Daisan-zaka_Slope_Hakodate_Hokkaido_Japan02n.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Daisan-zaka_Slope_Hakodate_Hokkaido_Japan02n.jpg/960px-Daisan-zaka_Slope_Hakodate_Hokkaido_Japan02n.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2012-07-26",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "search \"Motomachi Hakodate slope\"",
+    "shows": "The stone-paved Daisan-zaka slope in Motomachi, seen from the tram street",
+    "showsJa": "電車通りから見た元町の大三坂",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Hakodate Orthodox Church, Church of the Resurrection",
@@ -266,7 +282,23 @@
     41.762845,
     140.712213
    ],
-   "atQuery": "函館ハリストス正教会"
+   "atQuery": "函館ハリストス正教会",
+   "photo": {
+    "title": "Hakodate Orthodox Church Japan07s3",
+    "fileName": "Hakodate Orthodox Church Japan07s3.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Hakodate_Orthodox_Church_Japan07s3.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Hakodate_Orthodox_Church_Japan07s3.jpg/960px-Hakodate_Orthodox_Church_Japan07s3.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2012-07-26",
+    "distanceM": 24,
+    "source": "Wikimedia Commons",
+    "via": "Q4504662",
+    "shows": "The Hakodate Orthodox Church (Church of the Resurrection) with its tower",
+    "showsJa": "函館ハリストス正教会（復活聖堂）と塔",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Kanemori Red Brick Warehouse",
@@ -279,7 +311,23 @@
     41.766307,
     140.716844
    ],
-   "atQuery": "金森赤レンガ倉庫"
+   "atQuery": "金森赤レンガ倉庫",
+   "photo": {
+    "title": "Kanemori Red Brick Warehouse Hakodate Hokkaido pref Japan04n",
+    "fileName": "Kanemori Red Brick Warehouse Hakodate Hokkaido pref Japan04n.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kanemori_Red_Brick_Warehouse_Hakodate_Hokkaido_pref_Japan04n.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Kanemori_Red_Brick_Warehouse_Hakodate_Hokkaido_pref_Japan04n.jpg/960px-Kanemori_Red_Brick_Warehouse_Hakodate_Hokkaido_pref_Japan04n.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2012-07-28",
+    "distanceM": 102,
+    "source": "Wikimedia Commons",
+    "via": "Q11647285",
+    "shows": "The Kanemori Red Brick Warehouses seen along the street",
+    "showsJa": "通りから見た金森赤レンガ倉庫",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Old Public Hall of Hakodate Ward",
@@ -293,7 +341,23 @@
     41.765038,
     140.708921
    ],
-   "atQuery": "旧函館区公会堂"
+   "atQuery": "旧函館区公会堂",
+   "photo": {
+    "title": "Old public hall of Hakodate Ward 20240505",
+    "fileName": "Old public hall of Hakodate Ward 20240505.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Old_public_hall_of_Hakodate_Ward_20240505.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Old_public_hall_of_Hakodate_Ward_20240505.jpg/960px-Old_public_hall_of_Hakodate_Ward_20240505.jpg",
+    "artist": "掬茶",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2024-05-05",
+    "distanceM": 46,
+    "source": "Wikimedia Commons",
+    "via": "Q11510926",
+    "shows": "The blue-and-yellow Old Public Hall of Hakodate Ward",
+    "showsJa": "青と黄色の旧函館区公会堂",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Site of Usukeshi Kono-tate, Yayoi-cho",
@@ -306,7 +370,8 @@
     41.766316,
     140.710176
    ],
-   "atQuery": "宇須岸河野館跡"
+   "atQuery": "宇須岸河野館跡",
+   "photoNone": "No Commons photo of the Kono-tate site or a marker for it; nearby photos show the British Consulate, Motomachi Park and its Hakodate Magistrate's Office marker"
   },
   {
    "name": "Old British Consulate (Kaiko Memorial Museum)",
@@ -321,7 +386,23 @@
     41.765979,
     140.710706
    ],
-   "atQuery": "函館市旧イギリス領事館"
+   "atQuery": "函館市旧イギリス領事館",
+   "photo": {
+    "title": "Former British Consulate in Hakodate Hokkaido Japan01s3",
+    "fileName": "Former British Consulate in Hakodate Hokkaido Japan01s3.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Former_British_Consulate_in_Hakodate_Hokkaido_Japan01s3.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Former_British_Consulate_in_Hakodate_Hokkaido_Japan01s3.jpg/960px-Former_British_Consulate_in_Hakodate_Hokkaido_Japan01s3.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2012-07-26",
+    "distanceM": 33,
+    "source": "Wikimedia Commons",
+    "via": "Q22119962",
+    "shows": "The former British Consulate seen through its front gate",
+    "showsJa": "正門から見た旧イギリス領事館",
+    "checked": "2026-09-28"
+   }
   }
  ],
  "sources": [

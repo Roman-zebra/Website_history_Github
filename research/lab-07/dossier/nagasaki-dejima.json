@@ -238,7 +238,24 @@
     32.743418,
     129.872962
    ],
-   "atQuery": "出島"
+   "atQuery": "出島",
+   "photo": {
+    "title": "Dejima and trams of Nagasaki",
+    "fileName": "Dejima and trams of Nagasaki.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Dejima_and_trams_of_Nagasaki.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Dejima_and_trams_of_Nagasaki.jpg/960px-Dejima_and_trams_of_Nagasaki.jpg",
+    "artist": "Houjyou-Minori",
+    "artistJa": "",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "date": "2016-08-07",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Capitan Room (Dejima)",
+    "shows": "Dejima's restored buildings seen from the street, with a tram passing in front",
+    "showsJa": "路面電車が走る通りから見た出島の復元建物",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Shinchi Chinatown",
@@ -251,7 +268,24 @@
     32.743023,
     129.875077
    ],
-   "atQuery": "新地中華街"
+   "atQuery": "新地中華街",
+   "photo": {
+    "title": "Gembumon Gate of Nagasaki Shinchi Chinatown",
+    "fileName": "Gembumon Gate of Nagasaki Shinchi Chinatown.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Gembumon_Gate_of_Nagasaki_Shinchi_Chinatown.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Gembumon_Gate_of_Nagasaki_Shinchi_Chinatown.JPG/960px-Gembumon_Gate_of_Nagasaki_Shinchi_Chinatown.JPG",
+    "artist": "そらみみ (Soramimi)",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2015-09-26",
+    "distanceM": 131,
+    "source": "Wikimedia Commons",
+    "via": "Q63229",
+    "shows": "The Gembumon gate of Nagasaki Shinchi Chinatown",
+    "showsJa": "長崎新地中華街の玄武門",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Tate-no-cho and the Tojin Yashiki remnants",
@@ -265,7 +299,24 @@
     32.738949,
     129.877063
    ],
-   "atQuery": "館内町"
+   "atQuery": "館内町",
+   "photo": {
+    "title": "Kannon-do in Nagasaki",
+    "fileName": "Kannon-do in Nagasaki.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kannon-do_in_Nagasaki.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Kannon-do_in_Nagasaki.jpg/960px-Kannon-do_in_Nagasaki.jpg",
+    "artist": "Christophe95",
+    "artistJa": "",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2018-09-26",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Kannon-dō (Cultural Assets of Former Chinese Quarter in Nagasaki)",
+    "shows": "The small Kannon hall (Kannon-do) of the former Chinese quarter",
+    "showsJa": "唐人屋敷跡に残る小さな観音堂",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Meganebashi and the Nakashima River bridges",
@@ -278,7 +329,24 @@
     32.747165,
     129.880102
    ],
-   "atQuery": "眼鏡橋"
+   "atQuery": "眼鏡橋",
+   "photo": {
+    "title": "Meganebashi, Nagasaki cropped 1",
+    "fileName": "Meganebashi, Nagasaki cropped 1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Meganebashi%2C_Nagasaki_cropped_1.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Meganebashi%2C_Nagasaki_cropped_1.jpg/960px-Meganebashi%2C_Nagasaki_cropped_1.jpg",
+    "artist": "LuxTonnerre",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "date": "2008-07-20",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q74710",
+    "shows": "Meganebashi, the double stone arch bridge over the Nakashima River",
+    "showsJa": "中島川に架かる二連アーチの石橋・眼鏡橋",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Oura Church",
@@ -291,7 +359,24 @@
     32.734189,
     129.870162
    ],
-   "atQuery": "大浦天主堂"
+   "atQuery": "大浦天主堂",
+   "photo": {
+    "title": "Oura Cathedral 20180623",
+    "fileName": "Oura Cathedral 20180623.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Oura_Cathedral_20180623.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Oura_Cathedral_20180623.jpg/960px-Oura_Cathedral_20180623.jpg",
+    "artist": "Houjyou-Minori",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "date": "2018-06-23",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q430626",
+    "shows": "The white front and spire of Oura Church",
+    "showsJa": "大浦天主堂の白い正面と尖塔",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Glover Garden, Minamiyamate",
@@ -305,7 +390,24 @@
     32.733367,
     129.869055
    ],
-   "atQuery": "グラバー園"
+   "atQuery": "グラバー園",
+   "photo": {
+    "title": "Nagasaki-Glover-Garden-5415",
+    "fileName": "Nagasaki-Glover-Garden-5415.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Nagasaki-Glover-Garden-5415.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Nagasaki-Glover-Garden-5415.jpg/960px-Nagasaki-Glover-Garden-5415.jpg",
+    "artist": "Fg2",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "date": "2007",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q63465",
+    "shows": "The former Glover House in Glover Garden",
+    "showsJa": "グラバー園の旧グラバー住宅",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [

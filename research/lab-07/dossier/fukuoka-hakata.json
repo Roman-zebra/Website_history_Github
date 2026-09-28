@@ -236,7 +236,23 @@
     33.585954,
     130.385358
    ],
-   "atQuery": "鴻臚館跡展示館"
+   "atQuery": "鴻臚館跡展示館",
+   "photo": {
+    "title": "Fukuoka Kourokan 2010B",
+    "fileName": "Fukuoka Kourokan 2010B.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Fukuoka_Kourokan_2010B.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Fukuoka_Kourokan_2010B.jpg/960px-Fukuoka_Kourokan_2010B.jpg",
+    "artist": "ぱちょぴ（pacyopi）",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2010-10-21",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Korokan Ruins Museum",
+    "shows": "Excavated remains on display inside the Korokan ruins exhibition hall",
+    "showsJa": "鴻臚館跡展示館の館内で公開されている発掘遺構",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Kushida Shrine",
@@ -251,7 +267,23 @@
     33.59307,
     130.410684
    ],
-   "atQuery": "櫛田神社"
+   "atQuery": "櫛田神社",
+   "photo": {
+    "title": "Kushida Shrine float",
+    "fileName": "Kushida Shrine float.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kushida_Shrine_float.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Kushida_Shrine_float.jpg/960px-Kushida_Shrine_float.jpg",
+    "artist": "Immanuelle",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "date": "2024-06-01",
+    "distanceM": 25,
+    "source": "Wikimedia Commons",
+    "via": "Category:Kazariyama, Kushida-jinja",
+    "shows": "A decorated display float (kazariyama) in the Kushida Shrine precinct",
+    "showsJa": "櫛田神社境内の飾り山",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Jotenji",
@@ -265,7 +297,23 @@
     33.595142,
     130.417101
    ],
-   "atQuery": "承天寺"
+   "atQuery": "承天寺",
+   "photo": {
+    "title": "Udon soba introduction stele",
+    "fileName": "Udon soba introduction stele.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Udon_soba_introduction_stele.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Udon_soba_introduction_stele.jpg/960px-Udon_soba_introduction_stele.jpg",
+    "artist": "Nissy-KITAQ",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2008-06-23",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Steles at Jōten-ji",
+    "shows": "The stele inscribed \"birthplace of udon and soba\" in the Jotenji precinct",
+    "showsJa": "承天寺境内の「饂飩蕎麦発祥之地」の碑",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Shofuku-ji",
@@ -279,7 +327,23 @@
     33.597008,
     130.414202
    ],
-   "atQuery": "聖福寺"
+   "atQuery": "聖福寺",
+   "photo": {
+    "title": "Shōfuku-ji the façade of the sanmon 6-1 Gokushomachi Hakata-ku Fukuoka 20230720",
+    "fileName": "Shōfuku-ji the façade of the sanmon 6-1 Gokushomachi Hakata-ku Fukuoka 20230720.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sh%C5%8Dfuku-ji_the_fa%C3%A7ade_of_the_sanmon_6-1_Gokushomachi_Hakata-ku_Fukuoka_20230720.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Sh%C5%8Dfuku-ji_the_fa%C3%A7ade_of_the_sanmon_6-1_Gokushomachi_Hakata-ku_Fukuoka_20230720.jpg/960px-Sh%C5%8Dfuku-ji_the_fa%C3%A7ade_of_the_sanmon_6-1_Gokushomachi_Hakata-ku_Fukuoka_20230720.jpg",
+    "artist": "Hirho",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2023-07-20",
+    "distanceM": 67,
+    "source": "Wikimedia Commons",
+    "via": "Category:Sanmon, Shōfuku-ji (Fukuoka)",
+    "shows": "The two-storey Sanmon gate of Shofuku-ji, seen from the front",
+    "showsJa": "聖福寺の山門（楼門）の正面",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "The Reisen neighborhood and the old Hakata grid",
@@ -287,7 +351,8 @@
    "what": "Streets and block widths here still trace the 1587 Taiko Machiwari grid, laid out after the Shimazu burned the medieval town.",
    "cite": [
     "S6"
-   ]
+   ],
+   "photoNone": "No photo shows the old grid; Commons street views in Reisenmachi are of modern avenues (Taihaku Dori, Reisen Dori at that junction) and the stop has no single point"
   },
   {
    "name": "The Naka River between Hakata and Fukuoka",
@@ -300,7 +365,8 @@
     33.59041,
     130.408354
    ],
-   "atQuery": "那珂川"
+   "atQuery": "那珂川",
+   "photoNone": "Within 300 m Commons has only a night view and close-ups of the Nakasu Kakehashi bridge; the clear daytime river view is from Nishi-Ohashi, 450 m away"
   }
  ],
  "sources": [

@@ -286,7 +286,24 @@
     35.711133,
     139.796368
    ],
-   "atQuery": "雷門・仲見世通り"
+   "atQuery": "雷門・仲見世通り",
+   "photo": {
+    "title": "Kaminarimon (outer gate), Sensoji Temple, Akakusa, Tokyo",
+    "fileName": "Kaminarimon (outer gate), Sensoji Temple, Akakusa, Tokyo.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kaminarimon_%28outer_gate%29%2C_Sensoji_Temple%2C_Akakusa%2C_Tokyo.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Kaminarimon_%28outer_gate%29%2C_Sensoji_Temple%2C_Akakusa%2C_Tokyo.jpg/960px-Kaminarimon_%28outer_gate%29%2C_Sensoji_Temple%2C_Akakusa%2C_Tokyo.jpg",
+    "artist": "Daderot",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "date": "2008-01-22",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q2378708",
+    "shows": "Kaminarimon, Sensoji's outer gate, with its large red lantern",
+    "showsJa": "大提灯が下がる浅草寺の雷門",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Sensoji main hall and five-story pagoda",
@@ -299,7 +316,24 @@
     35.714102,
     139.796035
    ],
-   "atQuery": "五重塔"
+   "atQuery": "五重塔",
+   "photo": {
+    "title": "Sensoji 2023",
+    "fileName": "Sensoji 2023.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sensoji_2023.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Sensoji_2023.jpg/960px-Sensoji_2023.jpg",
+    "artist": "Akonnchiroll",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "date": "2023-11-04",
+    "distanceM": 57,
+    "source": "Wikimedia Commons",
+    "via": "Q615183",
+    "shows": "The main hall of Sensoji, seen from the courtyard in front",
+    "showsJa": "境内から見た浅草寺本堂",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Azuma Bridge and the Sumida embankment",
@@ -313,7 +347,24 @@
     35.710107,
     139.798931
    ],
-   "atQuery": "吾妻橋・隅田川テラス"
+   "atQuery": "吾妻橋・隅田川テラス",
+   "photo": {
+    "title": "Azuma Bridge 2",
+    "fileName": "Azuma Bridge 2.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Azuma_Bridge_2.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Azuma_Bridge_2.jpg/960px-Azuma_Bridge_2.jpg",
+    "artist": "Kakidai",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2018-11",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q794294",
+    "shows": "The red Azuma Bridge over the Sumida, with the Asahi Beer head office and Skytree",
+    "showsJa": "隅田川に架かる吾妻橋と、アサヒビール本社ビル、スカイツリー",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Kuramae riverside",
@@ -323,10 +374,11 @@
     "S3"
    ],
    "at": [
-    35.703212,
-    139.790939
+    35.701178,
+    139.792375
    ],
-   "atQuery": "蔵前"
+   "photoNone": "no photo of the Kuramae riverside or the granary site: candidates show nearby schools, the station, a shrine and Kuramae Bridge at sunset; Commons text search for 浅草御蔵跡 was rate-limited (HTTP 429)",
+   "atSource": "OpenStreetMap (Nominatim): west end of Kuramae Bridge, Kuramae 1-chome"
   },
   {
    "name": "Ekoin Temple",
@@ -339,7 +391,24 @@
     35.693339,
     139.79204
    ],
-   "atQuery": "回向院"
+   "atQuery": "回向院",
+   "photo": {
+    "title": "Sumo monuments in Ekoin 2008 August",
+    "fileName": "Sumo monuments in Ekoin 2008 August.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sumo_monuments_in_Ekoin_2008_August.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Sumo_monuments_in_Ekoin_2008_August.jpg/960px-Sumo_monuments_in_Ekoin_2008_August.jpg",
+    "artist": "Morio",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "date": "2008-08-23",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Power Mound (Ekoin)",
+    "shows": "The Chikarazuka monument at Ekoin on its walled platform, with stone lanterns",
+    "showsJa": "石垣の上に立つ回向院の力塚と石灯籠",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Yokoamicho Park and the Tokyo Metropolitan Memorial Hall",
@@ -353,7 +422,24 @@
     35.699506,
     139.796415
    ],
-   "atQuery": "横網町公園"
+   "atQuery": "横網町公園",
+   "photo": {
+    "title": "Tokyo Memorial Hall",
+    "fileName": "Tokyo Memorial Hall.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Memorial_Hall.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tokyo_Memorial_Hall.jpg/960px-Tokyo_Memorial_Hall.jpg",
+    "artist": "Lcsschiller",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2019-03-22",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11525324",
+    "shows": "The Tokyo Metropolitan Memorial Hall in Yokoamicho Park",
+    "showsJa": "横網町公園の東京都慰霊堂",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [

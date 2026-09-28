@@ -235,7 +235,24 @@
     35.283428,
     139.658978
    ],
-   "atQuery": "ヴェルニー公園"
+   "atQuery": "ヴェルニー公園",
+   "photo": {
+    "title": "USS Milius (DDG-69) seen from Verny Park",
+    "fileName": "USS Milius (DDG-69) seen from Verny Park.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:USS_Milius_%28DDG-69%29_seen_from_Verny_Park.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/USS_Milius_%28DDG-69%29_seen_from_Verny_Park.jpg/960px-USS_Milius_%28DDG-69%29_seen_from_Verny_Park.jpg",
+    "artist": "Bellona74",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "date": "2025-08-18",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Verny Park",
+    "shows": "Verny Park's waterfront boardwalk, facing the naval base across the water",
+    "showsJa": "海を隔てて基地に面するヴェルニー公園の遊歩道",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Former Yokosuka Naval District grounds",
@@ -244,7 +261,29 @@
    "cite": [
     "S4",
     "S3"
-   ]
+   ],
+   "at": [
+    35.284278,
+    139.665917
+   ],
+   "atSource": "Wikidata Q11511078",
+   "photo": {
+    "title": "Commander U.S. Naval Forces Japan",
+    "fileName": "Commander U.S. Naval Forces Japan.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Commander_U.S._Naval_Forces_Japan.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Commander_U.S._Naval_Forces_Japan.JPG/960px-Commander_U.S._Naval_Forces_Japan.JPG",
+    "artist": "のりまき at Japanese Wikipedia",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "date": "2011-09-23",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Yokosuka Naval District Headquarters",
+    "shows": "The former Naval District headquarters building, now used by the US Navy",
+    "showsJa": "旧横須賀鎮守府庁舎（現・在日米海軍司令部庁舎）",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Dobuita-dori",
@@ -257,7 +296,24 @@
     35.281885,
     139.665754
    ],
-   "atQuery": "どぶ板通り"
+   "atQuery": "どぶ板通り",
+   "photo": {
+    "title": "Dobuita street",
+    "fileName": "Dobuita street.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Dobuita_street.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Dobuita_street.jpg/960px-Dobuita_street.jpg",
+    "artist": "pcs34560 from jawp",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "date": "2008-12-30",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q3033438",
+    "shows": "Dobuita-dori, looking along the shop-lined street toward the Shioiri end",
+    "showsJa": "本町一丁目側から汐入駅側を望むどぶ板通り",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Mikasa Park and the battleship Mikasa",
@@ -271,7 +327,24 @@
     35.285382,
     139.674047
    ],
-   "atQuery": "三笠公園"
+   "atQuery": "三笠公園",
+   "photo": {
+    "title": "Yokosuka-mikasa-08-2010",
+    "fileName": "Yokosuka-mikasa-08-2010.png",
+    "page": "https://commons.wikimedia.org/wiki/File:Yokosuka-mikasa-08-2010.png",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Yokosuka-mikasa-08-2010.png/960px-Yokosuka-mikasa-08-2010.png",
+    "artist": "Nesnad",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2010-08-30",
+    "distanceM": 35,
+    "source": "Wikimedia Commons",
+    "via": "Q696891",
+    "shows": "The battleship Mikasa, seen from the park with a statue in the foreground",
+    "showsJa": "三笠公園から見た記念艦三笠と手前の銅像",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Otaki-cho and Minato-cho",
@@ -284,7 +357,8 @@
     35.281065,
     139.669016
    ],
-   "atQuery": "大滝町"
+   "atQuery": "大滝町",
+   "photoNone": "no photo of the Otaki-cho/Minato-cho shopping streets: the Otaki-cho Wikidata item has no image or category, nearby candidates show the post office, police station and Yokosuka-chuo Station, and a Commons search for 大滝町 finds only waterfalls elsewhere"
   }
  ],
  "sources": [

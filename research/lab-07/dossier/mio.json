@@ -226,12 +226,13 @@
   {
    "name": "Canada Museum (former Noda residence)",
    "ja": "カナダミュージアム（旧野田家住宅）",
-   "what": "A 1930s house built by the Nakatsu family, Vancouver returnees, mixing Japanese and Western styles; a national tangible cultural property since 2019, now telling Mio's own emigration story.",
+   "what": "A house built around 1934 by the Nakatsu family, Vancouver returnees, and later owned by the Noda family, mixing Japanese and Western styles; a national tangible cultural property since 2019, now telling Mio's own emigration story.",
    "cite": [
     "S6",
     "S7",
     "S5"
-   ]
+   ],
+   "photoNone": "No photo of the Canada Museum on Commons: no Wikidata item; the Mihama category has only a distant view of the village; a text search found nothing relevant"
   },
   {
    "name": "Canada Garden",
@@ -239,7 +240,8 @@
    "what": "Beside the museum: a Canadian-made totem pole, a 2022 bronze statue of Kuno Gihei donated by his great-grandson, and a Fresnel lens from the Hinomisaki lighthouse's second generation.",
    "cite": [
     "S5"
-   ]
+   ],
+   "photoNone": "No photo of the Canada Garden or its totem pole, statue or lens; the only 'Canada museum' file shows the Canada Memorial Hall in Hinomisaki Park, a different place"
   },
   {
    "name": "Former Mio Elementary School",
@@ -248,7 +250,8 @@
    "cite": [
     "S1",
     "S5"
-   ]
+   ],
+   "photoNone": "No photo of the former Mio Elementary School on Commons; Wikidata and a text search found nothing"
   },
   {
    "name": "Mio harbor",
@@ -256,7 +259,8 @@
    "what": "The working waterfront of a village whose economy, an Edo-period survey already noted, rested on fishing and coastal shipping long before Canada entered the picture.",
    "cite": [
     "S2"
-   ]
+   ],
+   "photoNone": "No photo of Mio harbor itself: the 'Mio fishing port' file is Mio in Hamasaka, Hyogo; the only Mio file is a distant view of the whole village"
   },
   {
    "name": "Hinomisaki",
@@ -270,7 +274,24 @@
     33.881802,
     135.061123
    ],
-   "atQuery": "日ノ御埼"
+   "atQuery": "日ノ御埼",
+   "photo": {
+    "title": "Mihama hinomisaki",
+    "fileName": "Mihama hinomisaki.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Mihama_hinomisaki.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Mihama_hinomisaki.jpg/960px-Mihama_hinomisaki.jpg",
+    "artist": "Opqr",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2017-08-02",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Kii-Hinomisaki",
+    "shows": "The Hinomisaki headland and its white lighthouse above the sea",
+    "showsJa": "海に面した日ノ御埼と白い灯台",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [

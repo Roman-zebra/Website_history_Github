@@ -82,10 +82,11 @@
    "heading": "Up the hill, along the water",
    "paragraphs": [
     {
-     "text": "By the 1880s the settlement's original lots were full of offices and warehouses, and foreign residents who worked there began building houses on the gentler, better-aired slope above it, in what is now Kitano-cho and Yamamoto-dori. Kobe City dates the move to around 1887 and says more than two hundred Western- and Japanese-style houses eventually stood on the hillside; war and later redevelopment cut that to about eighty Western-style buildings by the time of the 1995 earthquake. The Agency for Cultural Affairs designated 9.3 hectares of the hillside an Important Preservation District for Groups of Traditional Buildings on 10 April 1980, recognizing, among others, the houses today shown to the public as the Weathercock House and the former Hassam and Hunter residences.",
+     "text": "By the 1880s the settlement's original lots were full of offices and warehouses, and foreign residents who worked there began building houses on the gentler, better-aired slope above it, in what is now Kitano-cho and Yamamoto-dori. Kobe City dates the move to around 1887 and says more than two hundred Western- and Japanese-style houses eventually stood on the hillside; war and later redevelopment cut that to about eighty Western-style buildings by the time of the 1995 earthquake. The Agency for Cultural Affairs designated 9.3 hectares of the hillside an Important Preservation District for Groups of Traditional Buildings on 10 April 1980. The Weathercock House, the former Thomas residence and a national Important Cultural Property, stands inside it; the Hunter House, among the largest of Kobe's surviving foreign residences, was built on the slope but moved to Oji Zoo in 1963.",
      "cite": [
       "S10",
-      "S11"
+      "S11",
+      "S17"
      ]
     },
     {
@@ -265,7 +266,8 @@
     "via": "Q11511037",
     "shows": "The Old Settlement Hall No.38 at a street crossing in the Old Settlement",
     "showsJa": "旧居留地の交差点に建つ旧居留地38番館",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -280,7 +282,24 @@
     34.69461,
     135.190617
    ],
-   "atQuery": "生田神社"
+   "atQuery": "生田神社",
+   "photo": {
+    "title": "Ikuta-jinja, haiden-1",
+    "fileName": "Ikuta-jinja, haiden-1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ikuta-jinja%2C_haiden-1.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ikuta-jinja%2C_haiden-1.jpg/960px-Ikuta-jinja%2C_haiden-1.jpg",
+    "artist": "Saigen Jiro",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "date": "2020-06-21",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q710086",
+    "shows": "The worship hall (haiden) of Ikuta Shrine",
+    "showsJa": "生田神社の拝殿",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Kano-cho street grid",
@@ -293,7 +312,8 @@
     34.697976,
     135.193699
    ],
-   "atQuery": "加納町"
+   "atQuery": "加納町",
+   "photoNone": "No photo placeable in the Kano-cho blocks: located Flower Road photos are 476-999 m away (Sannomiya, Higashi Yuenchi), the others have no position or named spot; nearby Wikidata photos show single buildings"
   },
   {
    "name": "Meriken Park and the Port of Kobe Earthquake Memorial Park",
@@ -307,7 +327,24 @@
     34.683309,
     135.189321
    ],
-   "atQuery": "メリケンパーク"
+   "atQuery": "メリケンパーク",
+   "photo": {
+    "title": "Port of Kobe Earthquake Memorial Park2",
+    "fileName": "Port of Kobe Earthquake Memorial Park2.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Port_of_Kobe_Earthquake_Memorial_Park2.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Port_of_Kobe_Earthquake_Memorial_Park2.jpg/960px-Port_of_Kobe_Earthquake_Memorial_Park2.jpg",
+    "artist": "KENPEI",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "date": "2009-04-02",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q10855312",
+    "shows": "The cracked and tilted quay in the Port of Kobe Earthquake Memorial Park",
+    "showsJa": "神戸港震災メモリアルパークのひび割れ傾いた岸壁",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Kobe Maritime Museum and Kobe Port Tower",
@@ -320,12 +357,29 @@
     34.68295,
     135.18845
    ],
-   "atQuery": "神戸海洋博物館"
+   "atQuery": "神戸海洋博物館",
+   "photo": {
+    "title": "Kobe Maritime Museum & Kawasaki GoodTimes World",
+    "fileName": "Kobe Maritime Museum & Kawasaki GoodTimes World.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kobe_Maritime_Museum_%26_Kawasaki_GoodTimes_World.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Kobe_Maritime_Museum_%26_Kawasaki_GoodTimes_World.jpg/960px-Kobe_Maritime_Museum_%26_Kawasaki_GoodTimes_World.jpg",
+    "artist": "Tokumeigakarinoaoshima",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2021-01-15",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11295340",
+    "shows": "The Kobe Maritime Museum and its white lattice roof",
+    "showsJa": "神戸海洋博物館と白い骨組みの屋根",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Kitano-cho and Yamamoto-dori (Kitano ijinkan-gai)",
    "ja": "北野町・山本通（北野異人館街）",
-   "what": "Climb from the settlement to the houses foreign residents built on this slope from about 1887, among them the Weathercock House and the former Hassam and Hunter residences, within the 9.3 ha preservation district designated in 1980.",
+   "what": "Climb from the settlement to the houses foreign residents built on this slope from about 1887, among them the Weathercock House, within the 9.3 ha preservation district designated in 1980.",
    "cite": [
     "S10",
     "S11"
@@ -334,7 +388,24 @@
     34.701227,
     135.189621
    ],
-   "atQuery": "北野町"
+   "atQuery": "北野町",
+   "photo": {
+    "title": "Kobe kitano thomas house07 2816",
+    "fileName": "Kobe kitano thomas house07 2816.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kobe_kitano_thomas_house07_2816.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Kobe_kitano_thomas_house07_2816.jpg/960px-Kobe_kitano_thomas_house07_2816.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2006-05-03",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11282566",
+    "shows": "The Weathercock House (old Thomas House) in Kitano-cho, with the city behind",
+    "showsJa": "北野町の風見鶏の館と背後の市街",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [
@@ -545,6 +616,16 @@
    "url": "https://tabi.jtb.or.jp/res/280024-",
    "checked": "2026-09-28",
    "used": "Naka pier completed 1938; Meriken Park's 16 ha of reclamation and 1987 opening."
+  },
+  {
+   "id": "S17",
+   "kind": "official",
+   "title": "旧ハンター住宅",
+   "titleEn": "The former Hunter House",
+   "publisher": "神戸市立王子動物園 (Kobe Municipal Oji Zoo)",
+   "url": "https://www.kobe-ojizoo.jp/area/hunter",
+   "checked": "2026-09-28",
+   "used": "The house stood at Kitano-cho 3-chome until it was moved to the zoo in 1963 (昭和38年); among the largest of Kobe's surviving foreign residences."
   }
  ],
  "furtherReading": [

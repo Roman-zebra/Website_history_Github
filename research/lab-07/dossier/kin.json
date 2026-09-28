@@ -270,7 +270,23 @@
     26.455118,
     127.921536
    ],
-   "atQuery": "日秀洞"
+   "atQuery": "日秀洞",
+   "photo": {
+    "title": "KinKannonji",
+    "fileName": "KinKannonji.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:KinKannonji.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/KinKannonji.JPG/960px-KinKannonji.JPG",
+    "artist": "日:Muramasa",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2009-12-10",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11647330",
+    "shows": "The wooden main hall of Kin Kannon-ji",
+    "showsJa": "金武観音寺の木造の本堂",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Toyama Memorial Hall",
@@ -278,7 +294,8 @@
    "what": "A 1935 reinforced-concrete hall with a curved, beamless ceiling and round windows, designed by Oshiro Ryutaro and funded from the surplus of Toyama Kyuzo's statue fund; restored and reopened in 2016 and registered as a national cultural property in 2021, it now displays material on Kin's emigration history; admission is free, weekdays 9:00-16:00.",
    "cite": [
     "S9"
-   ]
+   ],
+   "photoNone": "No Commons photo of the Toyama Memorial Hall; searches found only the nearby statue of Toyama Kyuzo"
   },
   {
    "name": "Toyama Kyuzo's statue and the \"World Stone\"",
@@ -288,7 +305,24 @@
     "S3",
     "S9",
     "S21"
-   ]
+   ],
+   "photo": {
+    "title": "Kyuzo Toyama statue",
+    "fileName": "Kyuzo Toyama statue.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kyuzo_Toyama_statue.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Kyuzo_Toyama_statue.jpg/960px-Kyuzo_Toyama_statue.jpg",
+    "artist": "visitkintown",
+    "artistJa": "",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2020-08-24",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Kin, Okinawa",
+    "shows": "The bronze statue of Toyama Kyuzo, with one arm raised",
+    "showsJa": "片手を掲げる當山久三の銅像",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Yaka",
@@ -302,7 +336,8 @@
     26.490374,
     127.906526
    ],
-   "atQuery": "屋嘉"
+   "atQuery": "屋嘉",
+   "photoNone": "No present-day Commons photo of Yaka hamlet or the camp site; searches found only the Yaka expressway interchange and a 1954 photo"
   },
   {
    "name": "Shinkaichi and the taco rice diners",
@@ -312,10 +347,11 @@
     "S11"
    ],
    "at": [
-    26.500609,
-    127.903582
+    26.453464,
+    127.916399
    ],
-   "atQuery": "新開地"
+   "atSource": "Wikidata Q117217707",
+   "photoNone": "No Commons photo of the Shinkaichi strip or its taco rice diners"
   },
   {
    "name": "Okukubi River mangroves",

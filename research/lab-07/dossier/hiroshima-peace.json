@@ -259,7 +259,23 @@
     34.395466,
     132.453524
    ],
-   "atQuery": "原爆ドーム"
+   "atQuery": "原爆ドーム",
+   "photo": {
+    "title": "Genbaku Dome04-r",
+    "fileName": "Genbaku Dome04-r.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Genbaku_Dome04-r.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Genbaku_Dome04-r.JPG/960px-Genbaku_Dome04-r.JPG",
+    "artist": "Oilstreet",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2013-12-12",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q231140",
+    "shows": "The Atomic Bomb Dome, with the bare steel frame of its dome",
+    "showsJa": "原爆ドーム（鉄骨がむき出しのドーム）",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Aioi Bridge",
@@ -272,7 +288,23 @@
     34.396294,
     132.452808
    ],
-   "atQuery": "相生橋"
+   "atQuery": "相生橋",
+   "photo": {
+    "title": "Old Aioibashi ayahashira02",
+    "fileName": "Old Aioibashi ayahashira02.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Old_Aioibashi_ayahashira02.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Old_Aioibashi_ayahashira02.JPG/960px-Old_Aioibashi_ayahashira02.JPG",
+    "artist": "Taisyo You are free: to share – to copy, distribute and transmit the work to remix – to ad",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "date": "2010-03-07",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Aioi Bridge",
+    "shows": "Newel post of the previous (1932) Aioi Bridge, kept at the Nakajima-cho end",
+    "showsJa": "中島町側の橋詰に残る先代相生橋（1932年）の親柱",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Rest House",
@@ -285,7 +317,23 @@
     34.393826,
     132.453255
    ],
-   "atQuery": "レストハウス"
+   "atQuery": "レストハウス",
+   "photo": {
+    "title": "RestHouse-of-Hiroshima-Peace-Park-renewal2020",
+    "fileName": "RestHouse-of-Hiroshima-Peace-Park-renewal2020.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:RestHouse-of-Hiroshima-Peace-Park-renewal2020.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/RestHouse-of-Hiroshima-Peace-Park-renewal2020.jpg/960px-RestHouse-of-Hiroshima-Peace-Park-renewal2020.jpg",
+    "artist": "Tokyo-Good",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2020-08-16",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11349625",
+    "shows": "The Rest House in Peace Memorial Park after its 2020 renovation",
+    "showsJa": "改修後の平和記念公園レストハウス",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Cenotaph and the north-south axis",
@@ -299,7 +347,23 @@
     34.392972,
     132.452571
    ],
-   "atQuery": "原爆死没者慰霊碑"
+   "atQuery": "原爆死没者慰霊碑",
+   "photo": {
+    "title": "Cenotaph for A-Bomb Victims",
+    "fileName": "Cenotaph for A-Bomb Victims.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Cenotaph_for_A-Bomb_Victims.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Cenotaph_for_A-Bomb_Victims.JPG/960px-Cenotaph_for_A-Bomb_Victims.JPG",
+    "artist": "j. Miers - User: (WT-shared) Jtesla16 at wts wikivoyage",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "date": "2008-05",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11409718",
+    "shows": "The Cenotaph, with the Atomic Bomb Dome seen through its arch",
+    "showsJa": "アーチ越しに原爆ドームを望む原爆死没者慰霊碑",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Korean Atomic Bomb Victims Memorial",
@@ -312,7 +376,23 @@
     34.394135,
     132.451829
    ],
-   "atQuery": "韓国人原爆犠牲者慰霊碑"
+   "atQuery": "韓国人原爆犠牲者慰霊碑",
+   "photo": {
+    "title": "Korean Hibakusha Cenotaphs in Hiroshima Peace Park",
+    "fileName": "Korean Hibakusha Cenotaphs in Hiroshima Peace Park.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Korean_Hibakusha_Cenotaphs_in_Hiroshima_Peace_Park.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Korean_Hibakusha_Cenotaphs_in_Hiroshima_Peace_Park.JPG/960px-Korean_Hibakusha_Cenotaphs_in_Hiroshima_Peace_Park.JPG",
+    "artist": "Sky Wing Sky",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2013-06-17",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q104604935",
+    "shows": "The memorial to Korean A-bomb victims, standing on a stone turtle",
+    "showsJa": "亀の台座に立つ韓国人原爆犠牲者慰霊碑",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Honkawa Elementary School Peace Museum",
@@ -325,7 +405,23 @@
     34.396219,
     132.450859
    ],
-   "atQuery": "本川小学校平和資料館"
+   "atQuery": "本川小学校平和資料館",
+   "photo": {
+    "title": "Honkawa Elementary School Peace Museum01",
+    "fileName": "Honkawa Elementary School Peace Museum01.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Honkawa_Elementary_School_Peace_Museum01.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Honkawa_Elementary_School_Peace_Museum01.JPG/960px-Honkawa_Elementary_School_Peace_Museum01.JPG",
+    "artist": "Kiyokun",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "date": "2007-05-07",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11484615",
+    "shows": "The arched-window building of the Honkawa Elementary School Peace Museum",
+    "showsJa": "アーチ窓が並ぶ本川小学校平和資料館の建物",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Motoyasu riverbank",
@@ -333,7 +429,8 @@
    "what": "On the evening of 6 August, paper lanterns are floated here in memory of the dead, a practice the city traces to bereaved families in the years right after the war.",
    "cite": [
     "S11"
-   ]
+   ],
+   "photoNone": "No photo identifies the Motoyasu riverbank: the one lantern-floating photo found shows only lanterns on dark water, with no bank or landmark"
   }
  ],
  "sources": [

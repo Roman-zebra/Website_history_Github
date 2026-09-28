@@ -270,7 +270,24 @@
     33.921282,
     132.20014
    ],
-   "atQuery": "日本ハワイ移民資料館"
+   "atQuery": "日本ハワイ移民資料館",
+   "photo": {
+    "title": "日本ハワイ移民資料館",
+    "fileName": "日本ハワイ移民資料館.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:%E6%97%A5%E6%9C%AC%E3%83%8F%E3%83%AF%E3%82%A4%E7%A7%BB%E6%B0%91%E8%B3%87%E6%96%99%E9%A4%A8.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/%E6%97%A5%E6%9C%AC%E3%83%8F%E3%83%AF%E3%82%A4%E7%A7%BB%E6%B0%91%E8%B3%87%E6%96%99%E9%A4%A8.JPG/960px-%E6%97%A5%E6%9C%AC%E3%83%8F%E3%83%AF%E3%82%A4%E7%A7%BB%E6%B0%91%E8%B3%87%E6%96%99%E9%A4%A8.JPG",
+    "artist": "周防大島町",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2009",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11506736",
+    "shows": "The Japan-Hawaii Emigration Museum, a two-storey house with tiled roofs",
+    "showsJa": "瓦屋根の二階建ての日本ハワイ移民資料館",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Yashiro River",
@@ -280,10 +297,11 @@
     "S1"
    ],
    "at": [
-    33.910063,
-    132.213846
+    33.91247,
+    132.210186
    ],
-   "atQuery": "屋代川"
+   "photoNone": "no photo of the Yashiro River found: its Wikidata item has no image or Commons category, town/island categories hold only Yashiro Dam reservoir shots, and Commons text search was rate-limited (HTTP 429)",
+   "atSource": "OpenStreetMap (Nominatim): 屋代川 in the valley between Higashi- and Nishi-Yashiro (GSI address search)"
   },
   {
    "name": "Hillside citrus orchards",
@@ -292,7 +310,8 @@
    "cite": [
     "S9",
     "S1"
-   ]
+   ],
+   "photoNone": "no photo of citrus orchards identifiable as Higashi-/Nishi-Yashiro: town/island categories show Yashiro Dam, another village and views from the mainland; Commons text search rate-limited (HTTP 429)"
   },
   {
    "name": "The shore at Higashi-Yashiro",
@@ -300,7 +319,8 @@
    "what": "A shoreline view north toward Hiroshima Prefecture across the water, the same outlook the 1923 district history describes from this side of the island.",
    "cite": [
     "S1"
-   ]
+   ],
+   "photoNone": "no photo of the Higashi-Yashiro shore: nothing in the town/island categories, and a Commons search for 東屋代 finds only the Nagano station of that name"
   },
   {
    "name": "Oshima Bridge",
@@ -313,7 +333,24 @@
     33.958342,
     132.185323
    ],
-   "atQuery": "大島大橋"
+   "atQuery": "大島大橋",
+   "photo": {
+    "title": "山から見た大島大橋",
+    "fileName": "山から見た大島大橋.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:%E5%B1%B1%E3%81%8B%E3%82%89%E8%A6%8B%E3%81%9F%E5%A4%A7%E5%B3%B6%E5%A4%A7%E6%A9%8B.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/%E5%B1%B1%E3%81%8B%E3%82%89%E8%A6%8B%E3%81%9F%E5%A4%A7%E5%B3%B6%E5%A4%A7%E6%A9%8B.jpg/960px-%E5%B1%B1%E3%81%8B%E3%82%89%E8%A6%8B%E3%81%9F%E5%A4%A7%E5%B3%B6%E5%A4%A7%E6%A9%8B.jpg",
+    "artist": "Kiensvay",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2007-03-30",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11434874",
+    "shows": "The Oshima Bridge spanning the strait, seen from a mountain",
+    "showsJa": "山から見た大島大橋と海峡",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [

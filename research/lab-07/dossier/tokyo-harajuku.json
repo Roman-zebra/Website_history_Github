@@ -218,7 +218,24 @@
     35.665622,
     139.711477
    ],
-   "atQuery": "表参道"
+   "atQuery": "表参道",
+   "photo": {
+    "title": "Aoyama-Omotesando-02",
+    "fileName": "Aoyama-Omotesando-02.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Aoyama-Omotesando-02.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Aoyama-Omotesando-02.jpg/960px-Aoyama-Omotesando-02.jpg",
+    "artist": "Rs1421",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2010-05-05",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q1205090",
+    "shows": "Omotesando avenue seen from its crossing with Aoyama-dori, with a stone lantern",
+    "showsJa": "青山通りの表参道交差点から見た表参道と石灯籠",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Meiji Shrine forest and main hall",
@@ -232,7 +249,24 @@
     35.675995,
     139.699482
    ],
-   "atQuery": "本殿"
+   "atQuery": "本殿",
+   "photo": {
+    "title": "Courtyard of Meiji Shrine 20190717",
+    "fileName": "Courtyard of Meiji Shrine 20190717.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Courtyard_of_Meiji_Shrine_20190717.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Courtyard_of_Meiji_Shrine_20190717.jpg/960px-Courtyard_of_Meiji_Shrine_20190717.jpg",
+    "artist": "Tokuzo in Edomura",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2019-07-17",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q287165",
+    "shows": "The worship hall (haiden) of Meiji Shrine, framed by tall trees",
+    "showsJa": "大きな木々に囲まれた明治神宮の拝殿",
+    "checked": "2026-09-28",
+    "artistJa": "江戸村のとくぞう"
+   }
   },
   {
    "name": "Cat Street",
@@ -246,7 +280,24 @@
     35.665863,
     139.705148
    ],
-   "atQuery": "キャットストリート"
+   "atQuery": "キャットストリート",
+   "photo": {
+    "title": "Cat Street, Ura Harajuku 1",
+    "fileName": "Cat Street, Ura Harajuku 1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Cat_Street%2C_Ura_Harajuku_1.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Cat_Street%2C_Ura_Harajuku_1.jpg/960px-Cat_Street%2C_Ura_Harajuku_1.jpg",
+    "artist": "Aw1805",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2014-03-29",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11511093",
+    "shows": "Cat Street in Ura-Harajuku, a narrow lane lined with shops",
+    "showsJa": "店が並ぶ細い道、裏原宿のキャットストリート",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Yoyogi Park",
@@ -259,7 +310,24 @@
     35.671405,
     139.695172
    ],
-   "atQuery": "代々木公園"
+   "atQuery": "代々木公園",
+   "photo": {
+    "title": "Former-WashingtonHights-House-01",
+    "fileName": "Former-WashingtonHights-House-01.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Former-WashingtonHights-House-01.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Former-WashingtonHights-House-01.jpg/960px-Former-WashingtonHights-House-01.jpg",
+    "artist": "Rs1421",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2010-05",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Olympic Memorial House",
+    "shows": "The preserved Olympic village house in Yoyogi Park, once a Washington Heights home",
+    "showsJa": "代々木公園に残るオリンピック選手村の宿舎",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "National Yoyogi Stadium",
@@ -272,7 +340,24 @@
     35.667058,
     139.699779
    ],
-   "atQuery": "国立代々木競技場"
+   "atQuery": "国立代々木競技場",
+   "photo": {
+    "title": "Yoyogi National Gymnasium 1 Ⅱ",
+    "fileName": "Yoyogi National Gymnasium 1 Ⅱ.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Yoyogi_National_Gymnasium_1_%E2%85%A1.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Yoyogi_National_Gymnasium_1_%E2%85%A1.jpg/960px-Yoyogi_National_Gymnasium_1_%E2%85%A1.jpg",
+    "artist": "Kakidai",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2016-12-23",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q138875865",
+    "shows": "The First Gymnasium of the National Yoyogi Stadium, with its suspended roof",
+    "showsJa": "吊り屋根の国立代々木競技場第一体育館",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Takeshita-dori",
@@ -285,7 +370,24 @@
     35.671161,
     139.704955
    ],
-   "atQuery": "竹下通り"
+   "atQuery": "竹下通り",
+   "photo": {
+    "title": "Takeshita Street",
+    "fileName": "Takeshita Street.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Takeshita_Street.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Takeshita_Street.jpg/960px-Takeshita_Street.jpg",
+    "artist": "Syced",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "date": "2024-11-17",
+    "distanceM": 194,
+    "source": "Wikimedia Commons",
+    "via": "Q3179287",
+    "shows": "The entrance arch of Takeshita Street, with its name sign",
+    "showsJa": "名前の看板を掲げた竹下通り入口のアーチ",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [

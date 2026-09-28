@@ -248,7 +248,24 @@
     42.84885,
     140.722429
    ],
-   "atQuery": "比羅夫駅"
+   "atQuery": "比羅夫駅",
+   "photo": {
+    "title": "JR Hakodate-Main-Line Hirafu Station building",
+    "fileName": "JR Hakodate-Main-Line Hirafu Station building.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:JR_Hakodate-Main-Line_Hirafu_Station_building.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/JR_Hakodate-Main-Line_Hirafu_Station_building.jpg/960px-JR_Hakodate-Main-Line_Hirafu_Station_building.jpg",
+    "artist": "Mister0124",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2017-09-07",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q848238",
+    "shows": "The Hirafu Station building on the JR Hakodate Main Line",
+    "showsJa": "JR函館本線・比羅夫駅の駅舎",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Mount Yotei climbing trailhead, Hirafu (Kutchan) course",
@@ -256,7 +273,8 @@
    "what": "The western approach a 1924 guidebook described walking to from Hirafu Station; still the standard route up the mountain's Kutchan side today.",
    "cite": [
     "S1"
-   ]
+   ],
+   "photoNone": "No photo of the Kutchan-course trailhead: no Wikidata item; the Mount Yotei category has only views of the mountain; a text search found nothing"
   },
   {
    "name": "Hirafu Shrine",
@@ -264,7 +282,8 @@
    "what": "Built in 1912 to mark the local tradition connecting the district to the seventh-century general Abe no Hirafu, a claim also made by other towns.",
    "cite": [
     "S8"
-   ]
+   ],
+   "photoNone": "No photo of Hirafu Shrine: no Wikidata item; searches found only a statue at Hotaka Shrine (Nagano), a Hirafu street in snow and another shrine's talisman"
   },
   {
    "name": "Niseko Annupuri's Kutchan-facing slopes",
@@ -273,7 +292,24 @@
    "cite": [
     "S5",
     "S4"
-   ]
+   ],
+   "photo": {
+    "title": "ニセコひらふ2",
+    "fileName": "ニセコひらふ2.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:%E3%83%8B%E3%82%BB%E3%82%B3%E3%81%B2%E3%82%89%E3%81%B52.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/%E3%83%8B%E3%82%BB%E3%82%B3%E3%81%B2%E3%82%89%E3%81%B52.JPG/960px-%E3%83%8B%E3%82%BB%E3%82%B3%E3%81%B2%E3%82%89%E3%81%B52.JPG",
+    "artist": "Wakimasa",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2014-02-24",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Niseko Mt. Resort Grand Hirafu",
+    "shows": "The Grand Hirafu ski slopes of Niseko Annupuri, seen from near Hirafu Station",
+    "showsJa": "比羅夫駅付近から見たニセコアンヌプリのグラン・ヒラフスキー場",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Kutchan townscape and former Shiribeshi Subprefecture seat",
@@ -281,7 +317,24 @@
    "what": "The administrative and market town that grew from the 1892 settlement, seat of the Shiribeshi region's government from 1910 and now home to a large foreign-resident population.",
    "cite": [
     "S5"
-   ]
+   ],
+   "photo": {
+    "title": "Kutchan town from Asahigaoka",
+    "fileName": "Kutchan town from Asahigaoka.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Kutchan_town_from_Asahigaoka.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Kutchan_town_from_Asahigaoka.JPG/960px-Kutchan_town_from_Asahigaoka.JPG",
+    "artist": "Rockfender",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "date": "",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Kutchan, Hokkaido",
+    "shows": "The town of Kutchan seen from the Asahigaoka ski jump",
+    "showsJa": "旭ヶ丘スキー場のジャンプ台から見た倶知安の市街",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [

@@ -298,10 +298,26 @@
     "S3"
    ],
    "at": [
-    26.314995,
-    127.760634
+    26.316183,
+    127.756668
    ],
-   "atQuery": "美浜アメリカンビレッジ"
+   "atSource": "Wikidata Q11609171",
+   "photo": {
+    "title": "Mihama AV D Japan",
+    "fileName": "Mihama AV D Japan.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Mihama_AV_D_Japan.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Mihama_AV_D_Japan.jpg/960px-Mihama_AV_D_Japan.jpg",
+    "artist": "Amoriver Information",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "date": "2007-04",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11609171",
+    "shows": "Overview of American Village with its shops and Ferris wheel (2007)",
+    "showsJa": "美浜アメリカンビレッジの店舗と観覧車（2007年）",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Sunabe seawall",
@@ -309,7 +325,8 @@
    "what": "The coast road and seawall north of American Village front another of the old magiri's twelve hamlets, Sunabe, today better known for its dive sites and its view of Kadena Air Base's runway lights after dark.",
    "cite": [
     "S5"
-   ]
+   ],
+   "photoNone": "No Commons photo of the Sunabe seawall or coast road; search results show surfers in the water or other places in Chatan"
   }
  ],
  "sources": [

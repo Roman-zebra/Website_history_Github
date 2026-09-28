@@ -255,7 +255,24 @@
     34.66879,
     135.501151
    ],
-   "atQuery": "道頓堀・戎橋"
+   "atQuery": "道頓堀・戎橋",
+   "photo": {
+    "title": "Ebisubashi2017",
+    "fileName": "Ebisubashi2017.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ebisubashi2017.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Ebisubashi2017.jpg/960px-Ebisubashi2017.jpg",
+    "artist": "Takesi0705",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2017-06-24",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11495351",
+    "shows": "The Dotonbori canal and Ebisu-bashi, seen from Dotonbori-bashi",
+    "showsJa": "道頓堀橋から見た道頓堀川と戎橋",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Soemon-cho",
@@ -268,7 +285,24 @@
     34.669698,
     135.504232
    ],
-   "atQuery": "宗右衛門町"
+   "atQuery": "宗右衛門町",
+   "photo": {
+    "title": "Souemoncho-dori 2026",
+    "fileName": "Souemoncho-dori 2026.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Souemoncho-dori_2026.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Souemoncho-dori_2026.jpg/960px-Souemoncho-dori_2026.jpg",
+    "artist": "Tombus20032000",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2026-09-20",
+    "distanceM": 340,
+    "source": "Wikimedia Commons",
+    "via": "Category:Sōemonchō",
+    "shows": "The shop-lined Soemon-cho street by day",
+    "showsJa": "昼の宗右衛門町通",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Hozenji Yokocho and the Mizukake Fudo",
@@ -281,7 +315,24 @@
     34.668185,
     135.50267
    ],
-   "atQuery": "法善寺横丁"
+   "atQuery": "法善寺横丁",
+   "photo": {
+    "title": "法善寺 水掛不動",
+    "fileName": "法善寺 水掛不動.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:%E6%B3%95%E5%96%84%E5%AF%BA_%E6%B0%B4%E6%8E%9B%E4%B8%8D%E5%8B%95.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/%E6%B3%95%E5%96%84%E5%AF%BA_%E6%B0%B4%E6%8E%9B%E4%B8%8D%E5%8B%95.jpg/960px-%E6%B3%95%E5%96%84%E5%AF%BA_%E6%B0%B4%E6%8E%9B%E4%B8%8D%E5%8B%95.jpg",
+    "artist": "＋－ from jawp",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "date": "2006-06-24",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11555078",
+    "shows": "The moss-covered Mizukake Fudo statue at Hozenji",
+    "showsJa": "法善寺の苔むした水掛不動",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "The tsunami stone at Taisho Bridge",
@@ -295,7 +346,24 @@
     34.667657,
     135.480641
    ],
-   "atQuery": "大正橋"
+   "atQuery": "大正橋",
+   "photo": {
+    "title": "Taishobashi Osaka JPN 002",
+    "fileName": "Taishobashi Osaka JPN 002.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Taishobashi_Osaka_JPN_002.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Taishobashi_Osaka_JPN_002.jpg/960px-Taishobashi_Osaka_JPN_002.jpg",
+    "artist": "ignis",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "date": "2007-08-14",
+    "distanceM": 75,
+    "source": "Wikimedia Commons",
+    "via": "Category:O-Jishin Ryokawaguchi Tsunami-Ki",
+    "shows": "The tsunami memorial stone at the foot of Taisho Bridge",
+    "showsJa": "大正橋のたもとに立つ津波記念碑（大地震両川口津浪記）",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "The Kizu River embankment near Chishima-cho",
@@ -303,7 +371,8 @@
    "what": "The riverbank here was faced in stone and earth in 1898–99 as part of Osaka's modern port works, replacing the informal banks the 1854 tsunami had overrun.",
    "cite": [
     "S4"
-   ]
+   ],
+   "photoNone": "No photo of the Kizu River embankment near Chishima: Kizu River files show water gates, a ferry landing, a railway bridge, a station and a bridge in Nishi-ku"
   }
  ],
  "sources": [

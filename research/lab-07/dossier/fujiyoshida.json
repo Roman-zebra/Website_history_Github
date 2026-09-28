@@ -229,7 +229,23 @@
     35.471014,
     138.792638
    ],
-   "atQuery": "北口本宮冨士浅間神社"
+   "atQuery": "北口本宮冨士浅間神社",
+   "photo": {
+    "title": "Kitaguchi Hongu Fuji Sengen jinja 20190826a4",
+    "fileName": "Kitaguchi Hongu Fuji Sengen jinja 20190826a4.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kitaguchi_Hongu_Fuji_Sengen_jinja_20190826a4.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Kitaguchi_Hongu_Fuji_Sengen_jinja_20190826a4.jpg/960px-Kitaguchi_Hongu_Fuji_Sengen_jinja_20190826a4.jpg",
+    "artist": "江戸村のとくぞう",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2019-08-26",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Fujisan Otorii, Kitaguchi Hongu Fuji Sengen Shrine",
+    "shows": "The Great Torii (Fujisan Otorii) of Kitaguchi Hongu Fuji Sengen Shrine",
+    "showsJa": "北口本宮冨士浅間神社の富士山大鳥居",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Kamiyoshida's old oshi street and tatsumichi lanes",
@@ -237,7 +253,23 @@
    "what": "Long, narrow former pilgrim-lodge properties line the old main street; look for the private tatsumichi lanes running back from the road to each house's own shrine room, and signboards explaining individual oshi houses.",
    "cite": [
     "S1"
-   ]
+   ],
+   "photo": {
+    "title": "The former-Togawa family house",
+    "fileName": "The former-Togawa family house.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:The_former-Togawa_family_house.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/The_former-Togawa_family_house.JPG/960px-The_former-Togawa_family_house.JPG",
+    "artist": "Sakaori ( talk )",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2012-12-20",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Togawa Oshi House",
+    "shows": "Gate and entrance lane of the former Togawa family oshi house",
+    "showsJa": "旧外川家住宅（御師の家）の門と入口の小道",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Yoshida Tainai Jukei",
@@ -246,7 +278,23 @@
    "cite": [
     "S4",
     "S1"
-   ]
+   ],
+   "photo": {
+    "title": "Yoshida Tainai Lava Tree Molds",
+    "fileName": "Yoshida Tainai Lava Tree Molds.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Yoshida_Tainai_Lava_Tree_Molds.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Yoshida_Tainai_Lava_Tree_Molds.jpg/960px-Yoshida_Tainai_Lava_Tree_Molds.jpg",
+    "artist": "Hrykt",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2021-04-11",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Yoshida lava tree molds",
+    "shows": "Entrance to the main cave of Yoshida Tainai Jukei, closed by an iron gate",
+    "showsJa": "吉田胎内樹型の本穴入口（鉄の柵で閉じられている）",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Arakurayama Sengen Park and the Chureito pagoda",
@@ -260,7 +308,23 @@
     35.500487,
     138.80082
    ],
-   "atQuery": "新倉山浅間公園"
+   "atQuery": "新倉山浅間公園",
+   "photo": {
+    "title": "Chūrei-tō, Arakurayama Sengen Park 20241022",
+    "fileName": "Chūrei-tō, Arakurayama Sengen Park 20241022.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ch%C5%ABrei-t%C5%8D%2C_Arakurayama_Sengen_Park_20241022.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Ch%C5%ABrei-t%C5%8D%2C_Arakurayama_Sengen_Park_20241022.jpg/960px-Ch%C5%ABrei-t%C5%8D%2C_Arakurayama_Sengen_Park_20241022.jpg",
+    "artist": "This Photo was taken by Supanut Arunoprayote .",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "date": "2024-10-22",
+    "distanceM": 64,
+    "source": "Wikimedia Commons",
+    "via": "Category:Chūrei-tō (Arakurayama Sengen Park)",
+    "shows": "The five-storey Chureito pagoda in Arakurayama Sengen Park",
+    "showsJa": "新倉山浅間公園の五重塔・忠霊塔",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Kinuya-cho and a bowl of Yoshida udon",
@@ -268,7 +332,8 @@
    "what": "The old \"Silk House Town\" where noodle shops began serving thick Yoshida udon to textile wholesalers in the early Showa years; several shops in the area continue the tradition.",
    "cite": [
     "S1"
-   ]
+   ],
+   "photoNone": "No Commons photo of Kinuya-cho or its udon shops; searches returned only other places in Fujiyoshida"
   }
  ],
  "sources": [

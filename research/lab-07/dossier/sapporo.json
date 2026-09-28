@@ -298,13 +298,14 @@
     "artist": "Balon Greyjoy",
     "license": "CC0",
     "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "date": "19 January",
+    "date": "2020-01-19",
     "distanceM": 17,
     "source": "Wikimedia Commons",
     "via": "Q1140619",
     "shows": "The Sapporo Clock Tower from the front, with its clock face",
     "showsJa": "正面から見た札幌市時計台と時計の文字盤",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -318,7 +319,24 @@
     43.063966,
     141.348024
    ],
-   "atQuery": "北海道庁旧本庁舎"
+   "atQuery": "北海道庁旧本庁舎",
+   "photo": {
+    "title": "Hokkaido Prefectural Office02s5s4272",
+    "fileName": "Hokkaido Prefectural Office02s5s4272.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Hokkaido_Prefectural_Office02s5s4272.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Hokkaido_Prefectural_Office02s5s4272.jpg/960px-Hokkaido_Prefectural_Office02s5s4272.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2009-10-12",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q861554",
+    "shows": "The red-brick former Hokkaido Government Building, with a flowerbed in front",
+    "showsJa": "北海道庁旧本庁舎（赤れんが庁舎）と前庭の花壇",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Odori Park at the Sosei crossing",
@@ -329,10 +347,27 @@
     "S5"
    ],
    "at": [
-    43.059902,
-    141.34751
+    43.0608,
+    141.3574
    ],
-   "atQuery": "大通公園"
+   "photo": {
+    "title": "創成川公園 （Souseikawa Park） - panoramio (1)",
+    "fileName": "創成川公園 （Souseikawa Park） - panoramio (1).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:%E5%89%B5%E6%88%90%E5%B7%9D%E5%85%AC%E5%9C%92_%EF%BC%88Souseikawa_Park%EF%BC%89_-_panoramio_%281%29.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/%E5%89%B5%E6%88%90%E5%B7%9D%E5%85%AC%E5%9C%92_%EF%BC%88Souseikawa_Park%EF%BC%89_-_panoramio_%281%29.jpg/960px-%E5%89%B5%E6%88%90%E5%B7%9D%E5%85%AC%E5%9C%92_%EF%BC%88Souseikawa_Park%EF%BC%89_-_panoramio_%281%29.jpg",
+    "artist": "t-konno",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2012-06-15",
+    "distanceM": 341,
+    "source": "Wikimedia Commons",
+    "via": "Category:Sosei River",
+    "shows": "The Sosei River channel in Sosei River Park, with the TV Tower beyond",
+    "showsJa": "創成川公園の創成川の水路と奥のさっぽろテレビ塔",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   },
+   "atSource": "Odori Park's east end (OpenStreetMap outline) at the Sosei River (Sosei Bridge, Wikidata Q11398076)"
   },
   {
    "name": "Sosei River Park and the \"Sapporo Construction Site\" monument",
@@ -348,7 +383,24 @@
     43.060257,
     141.3573
    ],
-   "atQuery": "創成川公園"
+   "atQuery": "創成川公園",
+   "photo": {
+    "title": "Monument to the foundation of Sapporo",
+    "fileName": "Monument to the foundation of Sapporo.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Monument_to_the_foundation_of_Sapporo.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Monument_to_the_foundation_of_Sapporo.JPG/960px-Monument_to_the_foundation_of_Sapporo.JPG",
+    "artist": "禁樹なずな",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2015-04-22",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Sosei Bridge",
+    "shows": "The black “Sapporo Construction Site” monument and the plaque beside it",
+    "showsJa": "黒い「札幌建設の地」碑と脇の銘板",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Nijo Market",
@@ -361,7 +413,24 @@
     43.058247,
     141.35846
    ],
-   "atQuery": "二条市場"
+   "atQuery": "二条市場",
+   "photo": {
+    "title": "Nijo fish Market 2014",
+    "fileName": "Nijo fish Market 2014.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Nijo_fish_Market_2014.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Nijo_fish_Market_2014.jpg/960px-Nijo_fish_Market_2014.jpg",
+    "artist": "Wing1990hk",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "date": "2014-06-27",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11371661",
+    "shows": "The Nijo Market building seen from across the street",
+    "showsJa": "通りの向かいから見た二条市場",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [

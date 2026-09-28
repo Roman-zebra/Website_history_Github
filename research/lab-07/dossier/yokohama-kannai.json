@@ -191,7 +191,24 @@
     35.44675,
     139.642698
    ],
-   "atQuery": "日本大通り"
+   "atQuery": "日本大通り",
+   "photo": {
+    "title": "Kanagawa prefectural office02s3200",
+    "fileName": "Kanagawa prefectural office02s3200.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kanagawa_prefectural_office02s3200.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Kanagawa_prefectural_office02s3200.jpg/960px-Kanagawa_prefectural_office02s3200.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2007-03-24",
+    "distanceM": 146,
+    "source": "Wikimedia Commons",
+    "via": "Q11507884",
+    "shows": "Tree-lined Nihon-odori, with the Kanagawa Prefectural Office tower on the right",
+    "showsJa": "並木の日本大通りと右手の神奈川県庁舎",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Yokohama Chinatown",
@@ -205,7 +222,24 @@
     35.442664,
     139.645191
    ],
-   "atQuery": "横浜中華街"
+   "atQuery": "横浜中華街",
+   "photo": {
+    "title": "Yokohama Chinatown signage 2015",
+    "fileName": "Yokohama Chinatown signage 2015.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Yokohama_Chinatown_signage_2015.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Yokohama_Chinatown_signage_2015.jpg/960px-Yokohama_Chinatown_signage_2015.jpg",
+    "artist": "Wpcpey",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2015-05-27",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q1141498",
+    "shows": "An ornate gate of Yokohama Chinatown, with shops on either side",
+    "showsJa": "両側に店が並ぶ横浜中華街の門",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Yamashita Park",
@@ -219,7 +253,24 @@
     35.44571,
     139.649949
    ],
-   "atQuery": "山下公園"
+   "atQuery": "山下公園",
+   "photo": {
+    "title": "Parque Yamashita 2",
+    "fileName": "Parque Yamashita 2.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Parque_Yamashita_2.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Parque_Yamashita_2.JPG/960px-Parque_Yamashita_2.JPG",
+    "artist": "外国人",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "date": "2009-07-11",
+    "distanceM": 223,
+    "source": "Wikimedia Commons",
+    "via": "Q5372158",
+    "shows": "Yamashita Park seen from the Marine Tower, its gardens along the harbor",
+    "showsJa": "マリンタワーから見下ろした港沿いの山下公園",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Yokohama Park (former racecourse and settlement land)",
@@ -232,7 +283,24 @@
     35.443688,
     139.640232
    ],
-   "atQuery": "横浜公園"
+   "atQuery": "横浜公園",
+   "photo": {
+    "title": "Yokohama Park",
+    "fileName": "Yokohama Park.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Yokohama_Park.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Yokohama_Park.jpg/960px-Yokohama_Park.jpg",
+    "artist": "Space key",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2011-04-19",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11542924",
+    "shows": "Tulip beds under the trees in Yokohama Park",
+    "showsJa": "横浜公園の木立の下に広がるチューリップの花壇",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [

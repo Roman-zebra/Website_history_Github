@@ -250,7 +250,24 @@
     34.241185,
     132.55588
    ],
-   "atQuery": "大和ミュージアム"
+   "atQuery": "大和ミュージアム",
+   "photo": {
+    "title": "Yamato Museum in October 2008",
+    "fileName": "Yamato Museum in October 2008.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Yamato_Museum_in_October_2008.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Yamato_Museum_in_October_2008.JPG/960px-Yamato_Museum_in_October_2008.JPG",
+    "artist": "Nick-D",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2008-10-16",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q1063071",
+    "shows": "The front of the Yamato Museum and its brick-paved plaza",
+    "showsJa": "大和ミュージアムの正面と煉瓦敷きの広場",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Irifuneyama Memorial Hall",
@@ -258,7 +275,29 @@
    "what": "The former official residence of the Kure Naval District's commanders-in-chief, set in wooded grounds that also keep the old Naval Arsenal's clock tower.",
    "cite": [
     "S6"
-   ]
+   ],
+   "at": [
+    34.240278,
+    132.563889
+   ],
+   "atSource": "Wikidata Q11389025",
+   "photo": {
+    "title": "入船山紀念館 (48118220931)",
+    "fileName": "入船山紀念館 (48118220931).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:%E5%85%A5%E8%88%B9%E5%B1%B1%E7%B4%80%E5%BF%B5%E9%A4%A8_%2848118220931%29.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/%E5%85%A5%E8%88%B9%E5%B1%B1%E7%B4%80%E5%BF%B5%E9%A4%A8_%2848118220931%29.jpg/960px-%E5%85%A5%E8%88%B9%E5%B1%B1%E7%B4%80%E5%BF%B5%E9%A4%A8_%2848118220931%29.jpg",
+    "artist": "Wei-Te Wong from Taipei City, Taiwan, Republic of China",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "date": "2018-11-19",
+    "distanceM": 43,
+    "source": "Wikimedia Commons",
+    "via": "Category:Irifuneyama Memorial Museum",
+    "shows": "The half-timbered Western-style residence at Irifuneyama Memorial Hall",
+    "showsJa": "入船山記念館のハーフティンバー様式の洋館",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Miyahara",
@@ -272,7 +311,8 @@
     34.22889,
     132.562288
    ],
-   "atQuery": "宮原"
+   "atQuery": "宮原",
+   "photoNone": "No photo of the Miyahara district itself; the only candidates show Kure Miyahara High School, a single building about 750 m from the stop"
   },
   {
    "name": "The Arsenal waterfront",
@@ -281,7 +321,24 @@
    "cite": [
     "S2",
     "S3"
-   ]
+   ],
+   "photo": {
+    "title": "Port-of-Kure-3",
+    "fileName": "Port-of-Kure-3.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Port-of-Kure-3.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Port-of-Kure-3.jpg/960px-Port-of-Kure-3.jpg",
+    "artist": "Evelyn-rose",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "date": "2020-11-03",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:IHI Marine United Kure Shipyard",
+    "shows": "Cranes and docks of the Kure shipyard, seen from above",
+    "showsJa": "高所から見た呉の造船所のクレーンとドック",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Yoshiura",
@@ -294,7 +351,8 @@
     34.257836,
     132.527147
    ],
-   "atQuery": "吉浦"
+   "atQuery": "吉浦",
+   "photoNone": "No photo of the Yoshiura hillside district itself; candidates show Yoshiura Station, the junior high school 1.2 km away, a taxi and a 1945 photo"
   }
  ],
  "sources": [

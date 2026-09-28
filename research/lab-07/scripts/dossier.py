@@ -266,7 +266,8 @@ def build(did, lang='en'):
         shown.add(i)
         shows = ph.get('showsJa') if lang == 'ja' else ph.get('shows')
         lic = f'<a href="{esc(ph["licenseUrl"])}">{esc(ph["license"])}</a>' if ph.get('licenseUrl') else esc(ph['license'])
-        credit = T['photo_credit'].format(title=esc(ph['title']), artist=esc(ph['artist']), lic=lic,
+        artist = (ph.get('artistJa') or ph['artist']) if lang == 'ja' else ph['artist']
+        credit = T['photo_credit'].format(title=esc(ph['title']), artist=esc(artist), lic=lic,
                                           commons=f'<a href="{esc(ph["page"])}">Wikimedia Commons</a>')
         figs.append(f'<figure><img src="spot-{i}.jpg" alt="{esc(walk_name(w)[0])}"><figcaption><b>{i}. {esc(walk_name(w)[0])}</b>'
                     + (f'<br>{esc(shows)}' if shows else '') + f'<span class="credit">{credit}</span></figcaption></figure>')

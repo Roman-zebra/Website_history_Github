@@ -304,7 +304,24 @@
     35.009045,
     135.771721
    ],
-   "atQuery": "三条大橋"
+   "atQuery": "三条大橋",
+   "photo": {
+    "title": "Sanjo-Ohashi Bridge from east",
+    "fileName": "Sanjo-Ohashi Bridge from east.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Sanjo-Ohashi_Bridge_from_east.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Sanjo-Ohashi_Bridge_from_east.JPG/960px-Sanjo-Ohashi_Bridge_from_east.JPG",
+    "artist": "そらみみ",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2014-03-17",
+    "distanceM": 50,
+    "source": "Wikimedia Commons",
+    "via": "Q3087620",
+    "shows": "Sanjo Ohashi and its piers over the Kamo River, seen from the east end",
+    "showsJa": "東詰から見た三条大橋と鴨川に立つ橋脚",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Shijo Ohashi, Minamiza and Chugen-ji",
@@ -320,7 +337,24 @@
     35.003821,
     135.7715
    ],
-   "atQuery": "四条大橋"
+   "atQuery": "四条大橋",
+   "photo": {
+    "title": "Minami-za Theatre, Kyoto (Jan 2020)",
+    "fileName": "Minami-za Theatre, Kyoto (Jan 2020).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Minami-za_Theatre%2C_Kyoto_%28Jan_2020%29.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Minami-za_Theatre%2C_Kyoto_%28Jan_2020%29.jpg/960px-Minami-za_Theatre%2C_Kyoto_%28Jan_2020%29.jpg",
+    "artist": "Chainwit",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2020-01-03",
+    "distanceM": 99,
+    "source": "Wikimedia Commons",
+    "via": "Q919524",
+    "shows": "The facade of the Minamiza theatre",
+    "showsJa": "南座の正面",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Gion Shinbashi and the Shirakawa",
@@ -333,7 +367,24 @@
     35.005782,
     135.774539
    ],
-   "atQuery": "祇園新橋"
+   "atQuery": "祇園新橋",
+   "photo": {
+    "title": "Shirakara Canal, Gion, Kyoto",
+    "fileName": "Shirakara Canal, Gion, Kyoto.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Shirakara_Canal%2C_Gion%2C_Kyoto.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Shirakara_Canal%2C_Gion%2C_Kyoto.jpg/960px-Shirakara_Canal%2C_Gion%2C_Kyoto.jpg",
+    "artist": "MichaelMaggs",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+    "date": "2007-06-21",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q7498246",
+    "shows": "The Shirakawa canal in Gion, with the rear of teahouses along its bank",
+    "showsJa": "祇園の白川と川沿いに並ぶお茶屋の裏手",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Yasaka Shrine, west gate",
@@ -341,7 +392,29 @@
    "what": "The west gate closes the eastern end of Shijo-dori. Just inside it, on the left, find the old name Kanshin-in cut into the stone water basin, a survivor of the renaming of 1868.",
    "cite": [
     "S15"
-   ]
+   ],
+   "photo": {
+    "title": "20131014 02 Kyoto - Higashiyama - Yasaka Shrine (10512529846)",
+    "fileName": "20131014 02 Kyoto - Higashiyama - Yasaka Shrine (10512529846).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:20131014_02_Kyoto_-_Higashiyama_-_Yasaka_Shrine_%2810512529846%29.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/20131014_02_Kyoto_-_Higashiyama_-_Yasaka_Shrine_%2810512529846%29.jpg/960px-20131014_02_Kyoto_-_Higashiyama_-_Yasaka_Shrine_%2810512529846%29.jpg",
+    "artist": "Sjaak Kempe from Groningen, The Netherlands",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "date": "2013-10-14",
+    "distanceM": 32,
+    "source": "Wikimedia Commons",
+    "via": "Category:Nishi-rōmon, Yasaka-jinja",
+    "shows": "The vermilion west gate (Nishi-romon) of Yasaka Shrine",
+    "showsJa": "八坂神社の朱塗りの西楼門",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   },
+   "at": [
+    35.00373,
+    135.777531
+   ],
+   "atSource": "OpenStreetMap (Nominatim): 西楼門, Yasaka Shrine"
   },
   {
    "name": "Sannenzaka and Ninenzaka to Kiyomizu-dera",
@@ -355,7 +428,24 @@
     34.998239,
     135.77991
    ],
-   "atQuery": "産寧坂"
+   "atQuery": "産寧坂",
+   "photo": {
+    "title": "Pedestrian road with pavements and paper umbrellas, Higashiyama-ku, Kyoto, Japan, early morning",
+    "fileName": "Pedestrian road with pavements and paper umbrellas, Higashiyama-ku, Kyoto, Japan, early morning.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Pedestrian_road_with_pavements_and_paper_umbrellas%2C_Higashiyama-ku%2C_Kyoto%2C_Japan%2C_early_morning.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Pedestrian_road_with_pavements_and_paper_umbrellas%2C_Higashiyama-ku%2C_Kyoto%2C_Japan%2C_early_morning.jpg/960px-Pedestrian_road_with_pavements_and_paper_umbrellas%2C_Higashiyama-ku%2C_Kyoto%2C_Japan%2C_early_morning.jpg",
+    "artist": "Basile Morin",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2019-06-12",
+    "distanceM": 89,
+    "source": "Wikimedia Commons",
+    "via": "Q80622906",
+    "shows": "The stone-paved Ninenzaka lane in the early morning",
+    "showsJa": "早朝の二年坂の石畳の道",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Gojo-zaka down to Gojo Ohashi",
@@ -367,10 +457,27 @@
     "S2"
    ],
    "at": [
-    35.001916,
-    135.76017
+    34.995731,
+    135.767886
    ],
-   "atQuery": "五条坂・五条大橋"
+   "atSource": "Wikidata Q11372482",
+   "photo": {
+    "title": "五条大橋",
+    "fileName": "五条大橋.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:%E4%BA%94%E6%9D%A1%E5%A4%A7%E6%A9%8B.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/%E4%BA%94%E6%9D%A1%E5%A4%A7%E6%A9%8B.jpg/960px-%E4%BA%94%E6%9D%A1%E5%A4%A7%E6%A9%8B.jpg",
+    "artist": "KeraKera55",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2017-02-19",
+    "distanceM": 22,
+    "source": "Wikimedia Commons",
+    "via": "Category:Gojō Ōhashi",
+    "shows": "Gojo Ohashi across the Kamo River, seen from the riverbank",
+    "showsJa": "河岸から見た鴨川に架かる五条大橋",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   },
   {
    "name": "Hokoji bell and Mimizuka",
@@ -383,7 +490,24 @@
     34.992066,
     135.771859
    ],
-   "atQuery": "方広寺"
+   "atQuery": "方広寺",
+   "photo": {
+    "title": "Mimizuka2",
+    "fileName": "Mimizuka2.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Mimizuka2.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Mimizuka2.jpg/960px-Mimizuka2.jpg",
+    "artist": "KENPEI",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "date": "2009-08-14",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q707668",
+    "shows": "The Mimizuka mound topped by a stone stupa",
+    "showsJa": "頂に石塔が立つ耳塚",
+    "checked": "2026-09-28",
+    "artistJa": ""
+   }
   }
  ],
  "sources": [
