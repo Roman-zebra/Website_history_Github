@@ -111,6 +111,26 @@ def draw(walk, out_path, lang='en'):
     return name, w_km, h_km
 
 
+def closeup(at, out_path, w_km=0.48, h_km=0.36):
+    """The latest GSI aerial photograph of one stop (w_km × h_km, north up) with a ring on the spot: the fallback
+    picture for a stop no reusable ground-level photograph shows. Returns the file name, or None without imagery."""
+    from PIL import ImageDraw
+    lat0, lon0 = at
+    kx = 111.320 * math.cos(math.radians(lat0))
+    bb = (lat0 - h_km / 2 / 110.574, lon0 - w_km / 2 / kx, lat0 + h_km / 2 / 110.574, lon0 + w_km / 2 / kx)
+    img, covered = gsi.mosaic('seamlessphoto', bb, 18)
+    if covered < 0.9:
+        return None
+    img = basic.flatten(img).convert('RGB')
+    x, y = basic.to_px(bb, img.size)(lat0, lon0)
+    d = ImageDraw.Draw(img, 'RGBA')
+    r = img.width // 13
+    d.ellipse([x - r, y - r, x + r, y + r], outline=(255, 255, 255, 235), width=max(5, r // 5))
+    d.ellipse([x - r + 3, y - r + 3, x + r - 3, y + r - 3], outline=(163, 58, 43, 255), width=max(3, r // 8))
+    name, _ = basic.save_jpg(img, out_path, width=960, q=78)
+    return name
+
+
 if __name__ == '__main__':
     if len(sys.argv) < 3 or sys.argv[1] != 'geocode':
         sys.exit(__doc__)

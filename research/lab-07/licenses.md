@@ -66,6 +66,7 @@
 | B（軽） | 重ねるハザードマップ（〇のレイヤー） | 可（PDL1.0） | 可 | 「出典：『ハザードマップポータルサイト』」＋加工表示。「-」のレイヤー（ため池・液状化・盛土・地形分類基本調査）と背景地図は使わない。「重要事項説明に使用不可」と注記 |
 | B（承認） | J-SHIS（防災科研） | 条件付き | 問い合わせ後 | 「成果物の販売を予定されている方は…お問い合わせください」。生データをそのまま再配布するのは禁止 |
 | A | Wikidata | 可（CC0） | 可 | クレジットは任意。Commonsの画像やWikipediaの本文は別ライセンス（CC BY-SA） |
+| B（軽） | Wikimedia Commons の写真（立ち寄り先） | 可（CC0・PD・CC BY・CC BY-SAのみ） | 可 | 写真の横に作品名・撮影者・ライセンス（リンク）・Commonsのファイルページを表示（TASL）。縮小のみで加工しない（CC BY-SAでもPDF全体は継承対象外の「収集物」）。NC・ND・GFDLのみの写真と肖像権警告つきの写真は使わない。説明している地点そのものが写っているかを目で確認して採用 |
 | B（継承） | OpenStreetMap | 可（ODbL） | 可 | 「© OpenStreetMap contributors」と openstreetmap.org/copyright のURLを地図のそばかクレジット欄に印字。データベースを派生させて公開する場合はODbLで公開。OSMのタイルの一括取得・オフライン利用は禁止（自前で描画する） |
 | A | UT Austin PCLのAMS地図（Japan City Plans 1:12,500、1945〜46年、L771/L772） | 可（PD） | 可 | "Courtesy of the University of Texas Libraries" と書くよう依頼あり。米政府の印章は使わない |
 | A | NARA（米国連邦政府の記録） | 可（PD） | 可 | 各記録の「Use Restriction(s)」欄を確認。寄贈資料や写真は著作権ありの場合がある |

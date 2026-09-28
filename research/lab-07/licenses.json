@@ -400,6 +400,20 @@
     "notes": "Text in other namespaces = CC BY-SA 4.0. Images linked from items (P18, Wikimedia Commons) and Wikipedia text keep their own licences (often CC BY-SA → share-alike), so do not treat them as CC0. Verify facts; Wikidata can be wrong."
   },
   {
+    "id": "wikimedia-commons-photos",
+    "name": "Wikimedia Commons — photographs of the walking stops (CC0 / public domain / CC BY / CC BY-SA only)",
+    "class": "B",
+    "commercial": "Yes for CC0, public domain, CC BY and CC BY-SA files; NC and ND files are not used, nor GFDL-only files.",
+    "attribution": "Beside each photo: title, author, licence (linked) and 'via Wikimedia Commons' (linked to the file page) — the TASL form Commons asks for.",
+    "modificationNotice": "Not needed: photos are only scaled (never cropped, retouched or combined); the back page says so.",
+    "shareAlike": "CC BY-SA applies to the photo itself; an unmodified photo placed beside our own text is a collection, so the PDF does not become CC BY-SA.",
+    "embedInPaidPdf": "Yes, with the credit line beside the photo. Personality-rights-flagged files are skipped; no photo with an identifiable person as the main subject.",
+    "rehost": "The photo only inside the PDF; the file page is linked for the full licence.",
+    "notes": "Chosen by eye so that each photo shows the exact place the walking note describes (spotphotos.py; candidates from Wikidata P18 and Commons file pages, which robots.txt allows). Commons API is rate-limited to a few requests a minute from this environment.",
+    "url": "https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia",
+    "checked": "2026-09-28"
+  },
+  {
     "id": "osm",
     "name": "OpenStreetMap data (ODbL 1.0) — maps rendered in PDFs = Produced Work",
     "class": "B",

@@ -6,11 +6,11 @@ Reads the history report written for a district (research/lab-07/dossier/<id>.js
 --lang ja research/lab-07/dossier-ja/<id>.json, Japanese; see DOSSIER-SCHEMA in README) and the Basic
 brief built by basic.py for the same district, and renders lab/07/pdf/dossier-<id>.pdf (or
 dossier-ja-<id>.pdf): dossier cover, the history report with numbered citations, a timeline, walking
-notes, the Basic pages, and the full source list. --lang ja builds the Basic brief's images and
+notes with a walk map and photographs of the stops, the Basic pages, and the full source list. --lang ja builds the Basic brief's images and
 sections into a separate <BUILD>/<id>-ja/ folder, so the English build is never touched."""
-import html, json, os, re, subprocess, sys
+import html, json, os, re, shutil, subprocess, sys
 sys.path.insert(0, os.path.dirname(__file__))
-import basic, walkmap
+import basic, spotphotos, walkmap
 
 HERE = basic.HERE
 DOSSIER_DIR = os.path.join(HERE, 'dossier')
@@ -38,6 +38,12 @@ sup.c{font:600 6.4pt Sans,sans-serif;color:#a33a2b;margin-left:.4mm}
 img.wm{width:100%;height:auto;max-height:175mm;object-fit:contain;display:block;margin:0 auto}
 .wmlist{columns:2;column-gap:8mm;margin-top:4mm}.wmlist li{break-inside:avoid;padding-bottom:2mm}
 .maplink{font:600 7.5pt Sans,sans-serif;color:#a33a2b;text-decoration:none;white-space:nowrap}
+.spots{display:grid;grid-template-columns:1fr 1fr;gap:4.5mm 6mm;margin-top:3mm}
+.spots figure{margin:0;break-inside:avoid}
+.spots figure img{height:56mm;object-fit:contain;background:#f1eee8;border:0}
+.spots figcaption{color:#1d2230}
+.spots .credit{display:block;font:6.3pt/1.3 Sans,JP,sans-serif;color:#6b7282;margin-top:.7mm;overflow-wrap:anywhere}
+.spots .credit a{color:inherit;text-decoration:none}
 .draft{display:inline-block;font:700 7.5pt Sans,sans-serif;letter-spacing:.12em;color:#a33a2b;border:1.2px solid #a33a2b;padding:.8mm 2mm;margin-bottom:4mm}
 h1,h2,h3{break-after:avoid}
 .report p,.srcs li{orphans:3;widows:3}
@@ -79,6 +85,18 @@ TXT = {
                          'follow streets on the ground. '),
         'walkmap_missing': 'Stops not shown: {list}. ',
         'walkmap_apps': 'Each stop in the notes links to a map app.',
+        'toc_walk_photos': 'Walking notes, walk map and photographs of the stops',
+        'photos_h2': 'The stops today',
+        'photos_note': ('Recent photographs of the stops, numbered as in the walking notes. Each was checked against the '
+                        'place the note describes; the line under the name says what it shows.'),
+        'photos_missing': ('No picture for stop{s} {list}: no reusable photograph shows the place the note describes, '
+                           'and its position is not certain enough for an aerial view.'),
+        'photo_credit': '“{title}” by {artist}, {lic}, via {commons}',
+        'aerial_note': ('No reusable ground-level photograph shows this place, so here is the latest GSI aerial '
+                        'photograph of the spot (ringed), north up, about 480 m across.'),
+        'aerial_credit': 'Aerial photograph: Geospatial Information Authority of Japan (GSI), seamless aerial photos',
+        'back_photos': ('Photographs of the stops: Wikimedia Commons contributors, under the licences named beside each; '
+                        'scaled, not otherwise altered. '),
         'sources_kicker': 'Sources', 'sources_h2': 'Sources', 'further_h3': 'Further reading',
         'leads_h3': 'Where a Deep Research request would go next', 'caveats_h3': 'Caveats',
         'back_credit': ("Digitised books are cited, not reproduced: the page frames let you open the same page in "
@@ -109,6 +127,16 @@ TXT = {
                          '現地の道路に従うこと。'),
         'walkmap_missing': '地図に示していない立ち寄り先：{list}。',
         'walkmap_apps': '各立ち寄り先の番号から地図アプリを開ける。',
+        'toc_walk_photos': '歩き方メモ・散策マップ・立ち寄り先の写真',
+        'photos_h2': '立ち寄り先の写真',
+        'photos_note': ('歩き方メモと同じ番号で、各立ち寄り先の最近の写真を示す。どの写真も、メモが説明する場所を写していることを'
+                        '確認した。名前の下に、何が写っているかを記した。'),
+        'photos_missing': ('{list}番の立ち寄り先は、メモが説明する場所を写した再利用可能な写真がなく、位置も空中写真で示せるほど'
+                           '確かでないため、画像を載せていない。'),
+        'photo_credit': '写真：{artist}「{title}」{lic}、{commons}より',
+        'aerial_note': 'この場所を写した再利用可能な地上写真が見つからないため、国土地理院の最新空中写真で地点（円）を示す。上が北、幅約480 m。',
+        'aerial_credit': '空中写真：国土地理院（シームレス空中写真）',
+        'back_photos': '立ち寄り先の写真：Wikimedia Commonsの各撮影者による。ライセンスは各写真に記載。縮小のみで、ほかの加工はしていない。',
         'sources_kicker': '出典', 'sources_h2': '出典', 'further_h3': 'さらに読む',
         'leads_h3': 'Deep Researchで次に調べる先', 'caveats_h3': '注意',
         'back_credit': ('デジタル化資料は引用のみで、転載はしていない。コマ番号から国立国会図書館デジタルコレクション'
@@ -182,8 +210,9 @@ def build(did, lang='en'):
         if os.path.exists(en_path):
             en_walk = json.load(open(en_path, encoding='utf-8')).get('walk', [])
             for i, w in enumerate(rep.get('walk', [])):
-                if not w.get('at') and i < len(en_walk) and en_walk[i].get('at'):
-                    w['at'] = en_walk[i]['at']
+                for key in ('at', 'photo'):
+                    if not w.get(key) and i < len(en_walk) and en_walk[i].get(key):
+                        w[key] = en_walk[i][key]
     out_dir = os.path.join(basic.BUILD, did + ('-ja' if lang == 'ja' else ''))
     sec_path = os.path.join(out_dir, 'sections.json')
     if not os.path.exists(sec_path):
@@ -223,6 +252,30 @@ def build(did, lang='en'):
                 + (T['walkmap_missing'].format(list=', '.join(str(i) for i, w in enumerate(stops, 1) if not w.get('at'))) if len(placed) < len(stops) else '')
                 + T['walkmap_apps'] + '</figcaption></figure>'
                 + '<ol class="walk wmlist">' + ''.join(f'<li><b>{esc(walk_name(w)[0])}</b>' + (f' <a class="maplink" href="{walkmap.maps_url(w["at"])}">{basic.TXT[lang]["map_link"]}&#8599;</a>' if w.get('at') else '') + '</li>' for w in stops) + '</ol></section>') if wm else ''
+    figs, shown = [], set()
+    for i, w in enumerate(stops, 1):
+        ph = w.get('photo')
+        if not ph:     # fallback: the latest aerial photograph of the exact spot, never an invented picture
+            fn = walkmap.closeup(w['at'], os.path.join(out_dir, f'spot-{i}.jpg')) if w.get('at') else None
+            if fn:
+                shown.add(i)
+                figs.append(f'<figure><img src="{fn}" alt="{esc(walk_name(w)[0])}"><figcaption><b>{i}. {esc(walk_name(w)[0])}</b>'
+                            f'<br>{T["aerial_note"]}<span class="credit">{T["aerial_credit"]}</span></figcaption></figure>')
+            continue
+        shutil.copyfile(spotphotos.ensure(did, i, ph), os.path.join(out_dir, f'spot-{i}.jpg'))
+        shown.add(i)
+        shows = ph.get('showsJa') if lang == 'ja' else ph.get('shows')
+        lic = f'<a href="{esc(ph["licenseUrl"])}">{esc(ph["license"])}</a>' if ph.get('licenseUrl') else esc(ph['license'])
+        credit = T['photo_credit'].format(title=esc(ph['title']), artist=esc(ph['artist']), lic=lic,
+                                          commons=f'<a href="{esc(ph["page"])}">Wikimedia Commons</a>')
+        figs.append(f'<figure><img src="spot-{i}.jpg" alt="{esc(walk_name(w)[0])}"><figcaption><b>{i}. {esc(walk_name(w)[0])}</b>'
+                    + (f'<br>{esc(shows)}' if shows else '') + f'<span class="credit">{credit}</span></figcaption></figure>')
+    shots = [w for w in stops if w.get('photo')]
+    missing = [str(i) for i in range(1, len(stops) + 1) if i not in shown]
+    photo_page = (f'<section class="page"><p class="kicker">{T["part_walk"]}</p><h2>{T["photos_h2"]}</h2><p class="small">{T["photos_note"]}</p>'
+                  f'<div class="spots">{"".join(figs)}</div>'
+                  + (f'<p class="small muted" style="margin-top:4mm">{T["photos_missing"].format(s="s" if len(missing) > 1 else "", list=", ".join(missing))}</p>' if missing else '')
+                  + '</section>') if figs else ''
     srcs = ''.join(f'<li>{source_line(s, lang)}</li>' for s in rep['sources'])
     access_map = ACCESS_EN if lang == 'en' else ACCESS_JA
     further = ''.join(f'<li><i class="jp">{esc(f["title"])}</i>{" — " + esc(f["why"]) if f.get("why") else ""} {esc(f.get("url", ""))} ({esc(access_map.get(f.get("access"), f.get("access", "")))})</li>' for f in rep.get('furtherReading', []))
@@ -232,7 +285,7 @@ def build(did, lang='en'):
     cover = f"""<section class="page"><p class="kicker">Japan Time Atlas · Area Dossier</p><span class="draft">{T['draft_badge'].format(d=basic.TODAY)}</span>
 <h1>{rich(rep['title'])}</h1><p class="stand">{rich(rep['standfirst'])}</p>
 <div class="cover-grid"><div><img src="locator.png" alt="Location in Japan"><p class="small muted" style="margin-top:2mm"><span class="jp">{esc(c['ja'] if lang == 'en' else c['en'])}</span></p></div>
-<div><h3 style="margin-top:0">{T['in_this_dossier']}</h3><ol class="toc"><li>{T['toc_history'].format(n=len(rep['sections']), w=word_unit)}</li><li>{T['toc_timeline']}</li>{'<li>' + T['toc_walk'] + '</li>' if walk else ''}<li>{T['toc_thennow']}</li><li>{T['toc_ground']}</li><li>{T['toc_disasters']}</li><li>{T['toc_sources'].format(n=len(rep['sources']))}</li></ol>
+<div><h3 style="margin-top:0">{T['in_this_dossier']}</h3><ol class="toc"><li>{T['toc_history'].format(n=len(rep['sections']), w=word_unit)}</li><li>{T['toc_timeline']}</li>{'<li>' + T['toc_walk_photos' if figs else 'toc_walk'] + '</li>' if walk else ''}<li>{T['toc_thennow']}</li><li>{T['toc_ground']}</li><li>{T['toc_disasters']}</li><li>{T['toc_sources'].format(n=len(rep['sources']))}</li></ol>
 <div class="box"><p>{T['cover_box']}</p></div></div></div></section>"""
     report = f'<section class="page report"><p class="kicker">{T["part_history"]}</p>{"".join(body)}</section>'
     tl_page = f'<section class="page"><p class="kicker">{T["part_timeline"]}</p><h2>{T["timeline_h2"]}</h2><table class="tl">{tl}</table>' + (f'<h2>{T["walk_h2"]}</h2><p class="small">{T["walk_note"]}</p><ol class="walk">{walk}</ol>' if walk else '') + '</section>'
@@ -241,12 +294,12 @@ def build(did, lang='en'):
 {(f'<h3>{T["further_h3"]}</h3><ul class="srcs">' + further + '</ul>') if further else ''}
 {(f'<h3>{T["leads_h3"]}</h3><ul class="srcs">' + leads + '</ul>') if leads else ''}
 {(f'<h3>{T["caveats_h3"]}</h3><ul class="srcs">' + caveats + '</ul>') if caveats else ''}
-<p class="small muted">{T['back_credit'].format(checked=checked)}</p></section>"""
+<p class="small muted">{T['back_credit'].format(checked=(T['back_photos'] if shots else '') + checked)}</p></section>"""
     css = basic.CSS.replace('FONTDIR', 'file://' + basic.FONTS) + EXTRA_CSS + (JA_CSS if lang == 'ja' else '')
     place = c['en'] if lang == 'en' else c['ja']
     page = (f'<!doctype html><html lang="{lang}" data-footer="{T["footer"].format(place=esc(place), d=basic.TODAY)}"><head><meta charset="utf-8">'
             f'<title>{T["title_tag"].format(place=esc(place))}</title><style>{css}</style></head><body>'
-            + cover + report + tl_page + map_page + sections['thennow'] + sections.get('timeline', '') + sections['ground'] + sections['manmade'] + sections['disasters'] + back + '</body></html>')
+            + cover + report + tl_page + map_page + photo_page + sections['thennow'] + sections.get('timeline', '') + sections['ground'] + sections['manmade'] + sections['disasters'] + back + '</body></html>')
     hp = os.path.join(out_dir, 'dossier.html')
     with open(hp, 'w', encoding='utf-8') as f:
         f.write(page)

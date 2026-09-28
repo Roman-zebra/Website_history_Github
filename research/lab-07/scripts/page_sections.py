@@ -268,6 +268,14 @@ def context():
         S.append(f"""<h2 id="rights">4. 商用で使えるデータ源と引用ルール</h2>
 <div class="scroll"><table><tr><th>データ源</th><th>区分</th><th>出典表示</th><th>有料PDFへの掲載</th><th>注意</th><th>確認先</th></tr>{lrows}</table></div>
 <p class="small muted">確認日 {TODAY}。規約は変わるため、販売開始前に再確認します。図書館資料は「引用」（主従関係・明瞭区別・出所明示）の範囲で要約し、画像やPDFの転載はしません。</p>""")
+    rules_path = os.path.join(HERE, 'rules.md')
+    if os.path.exists(rules_path):
+        checklist = re.findall(r'^\d+\.\s+(.+)$', open(rules_path, encoding='utf-8').read().split('## チェックリスト', 1)[-1], re.M)
+        if checklist:
+            S.append('<h3>個人で有料PDFを出すときのルール（引用・写真・AI画像・表記）</h3>'
+                     '<p>同人誌の頒布と同じく、非営利でなくても引用は認められますが、要件を守る必要があります。文化庁・e-Gov・NDL・Creative Commons・'
+                     'Wikimedia・消費者庁の公式情報をもとに整理したチェックリストです（根拠と出典は <code>research/lab-07/rules.md</code>、法的助言ではありません）。</p>'
+                     '<ol class="src">' + ''.join(f'<li>{esc(x)}</li>' for x in checklist) + '</ol>')
 
     # ---------- products
     def pdf_card(name, title, sub):
@@ -283,17 +291,22 @@ def context():
               ('basic-kobe-memorials.jpg', 'dossier-kobe-meriken.pdf', '神戸の災害伝承碑（英訳）'),
               ('dossier-kyoto-cover.jpg', 'dossier-kyoto-higashiyama.pdf', '表紙：京都・東山と鴨川'),
               ('dossier-kyoto-report.jpg', 'dossier-kyoto-higashiyama.pdf', '歴史レポート本文（段落ごとに出典番号）'),
+              ('dossier-kyoto-walkmap.jpg', 'dossier-kyoto-higashiyama.pdf', '散策マップ（地図アプリへのリンクつき）'),
+              ('dossier-kyoto-photos.jpg', 'dossier-kyoto-higashiyama.pdf', '立ち寄り先の写真（撮影者・ライセンスつき）'),
               ('deep-sample-cover.jpg', 'deep-research-sample-suo-oshima.pdf', 'Deep Research見本：久賀')]
     gallery = ''.join(f'<a href="pdf/{p}"><img src="img/{i}" alt="{esc(c)}" loading="lazy" width="620" height="877"><span>{esc(c)}</span></a>'
                       for i, p, c in thumbs if os.path.exists(os.path.join(OUT, 'img', i)) and os.path.exists(pdf(p)))
+    stops = [w for d in doss for w in (dossiers[d['id']] or {}).get('walk', [])]
+    photo_stat = (f"全{len(stops)}地点のうち地上写真{sum(1 for w in stops if w.get('photo'))}地点、空中写真での代用"
+                  f"{sum(1 for w in stops if not w.get('photo') and w.get('at'))}地点。AI生成画像は使っていません")
     S.append(f"""<h2 id="products">5. 試作品</h2>
 <div class="gallery">{gallery}</div>
 <h3>Area Dossier（1地区1冊・英語PDF）</h3>
-<p>当初はBasic（自動生成の空中写真・地形・伝承碑）と、それに歴史レポートを足したArea Dossierの2段階で考えていましたが、中身の差が小さく買い手に違いが伝わりにくいため、1地区1冊に統合しました。1冊に入るのは、①最古の空中写真と最新の年度別オルソ画像の比較と、その間の年代の写真、②地形分類（旧河道・盛土・埋立・干拓など）と明治期の低湿地、③半径3km（なければ8km・30km）の自然災害伝承碑の英訳、④NDLのネット公開図書（コマ番号を明記）と自治体などの公式資料に基づく英語の歴史レポート（段落ごとに出典番号）、⑤年表・歩き方メモ・出典一覧・さらに調べる先、⑥散策マップ（立ち寄り先を最新の空中写真に番号で示し、各地点から地図アプリを開けるリンク付き）、です。①〜③は座標から自動で作り、④⑤は1地区ずつ書いて、記述を出典の本文と一つずつ照合しました（誤りは修正済み）。販売前には第三者による確認も行う想定です。</p>
+<p>当初はBasic（自動生成の空中写真・地形・伝承碑）と、それに歴史レポートを足したArea Dossierの2段階で考えていましたが、中身の差が小さく買い手に違いが伝わりにくいため、1地区1冊に統合しました。1冊に入るのは、①最古の空中写真と最新の年度別オルソ画像の比較と、その間の年代の写真、②地形分類（旧河道・盛土・埋立・干拓など）と明治期の低湿地、③半径3km（なければ8km・30km）の自然災害伝承碑の英訳、④NDLのネット公開図書（コマ番号を明記）と自治体などの公式資料に基づく英語の歴史レポート（段落ごとに出典番号）、⑤年表・歩き方メモ・出典一覧・さらに調べる先、⑥散策マップ（立ち寄り先を最新の空中写真に番号で示し、各地点から地図アプリを開けるリンク付き）、⑦立ち寄り先の写真（Wikimedia Commonsの商用利用可の写真のうち、説明している地点そのものを写していると目で確かめたものだけを、撮影者・ライセンスを添えて掲載。該当する写真がない地点は国土地理院の最新空中写真の拡大で地点を示す。{photo_stat}）、です。①〜③は座標から自動で作り、④⑤は1地区ずつ書いて、記述を出典の本文と一つずつ照合しました（誤りは修正済み）。販売前には第三者による確認も行う想定です。</p>
 <div class="pdfs">{doss_cards or '<p class="muted">執筆中</p>'}</div>
 <h3>競合と比べた強みと弱み</h3>
-<ul class="src"><li><b>強み</b>：1940年代の空中写真と現在の比較、旧河道や埋立など土地の成り立ち、災害伝承碑の英訳、原典のコマ番号まで示した出典、そして歩ける散策マップ。とくに日系人の故郷（周防大島・金武・三尾）や基地の町（横須賀・北谷・呉）は、英語で「その場所」の歴史を出典つきでまとめた商品がほぼなく、買う理由がはっきりしています。</li>
-<li><b>弱み</b>：定番観光地（浅草・京都など）では無料の情報や散策アプリとの差が伝わりにくい。地上の写真がない（権利の都合で空中写真のみ）。A4のPDFでスマホでは読みにくい。販売ページでは空中写真の新旧比較と散策マップを見本として見せ、スマホ向けの版を次の改善とします。</li></ul>
+<ul class="src"><li><b>強み</b>：1940年代の空中写真と現在の比較、旧河道や埋立など土地の成り立ち、災害伝承碑の英訳、原典のコマ番号まで示した出典、そして歩ける散策マップと、地点ごとに確かめた写真。とくに日系人の故郷（周防大島・金武・三尾）や基地の町（横須賀・北谷・呉）は、英語で「その場所」の歴史を出典つきでまとめた商品がほぼなく、買う理由がはっきりしています。</li>
+<li><b>弱み</b>：定番観光地（浅草・京都など）では無料の情報や散策アプリとの差が伝わりにくい。地上写真は自由ライセンスで地点を確認できたものに限られ、ない地点は空中写真で代用しています。A4のPDFでスマホでは読みにくい。販売ページでは空中写真の新旧比較と散策マップを見本として見せ、スマホ向けの版を次の改善とします。</li></ul>
 <h3>日本語版（試作：京都・東山と鴨川）</h3>
 <p>国内の「まち歩き・土地の成り立ち」好きの読者向けに、1地区だけ日本語版を作りました。本文は英語版の事実だけを使って日本語で書き直し、地形の名前は国土地理院の用語、災害伝承碑は英訳ではなく碑の原文で載せています。</p>
 <div class="pdfs">{pdf_card('dossier-ja-kyoto-higashiyama.pdf', '河原・神門・坂道 ― 東山と鴨川', '日本語版・試作')}</div>
