@@ -107,7 +107,7 @@ def context():
     basics = [d for d in districts if os.path.exists(pdf(f'basic-{d["id"]}.pdf'))]
     # only dossiers that have been checked against their sources ("checked": date) are shown
     doss = [d for d in districts if os.path.exists(pdf(f'dossier-{d["id"]}.pdf')) and (dossiers.get(d['id']) or {}).get('checked')]
-    deep_pdf = os.path.exists(pdf('deep-research-sample-suo-oshima.pdf'))
+    deep_pdf = os.path.exists(pdf('deep-research-sample-suo-oshima.pdf')) and bool((load(os.path.join('deep', 'sample-suo-oshima-kuka.json'), None) or {}).get('checked'))
 
     S = []
     S.append('<nav class="toc" aria-label="目次"><a href="#summary">要約</a><a href="#audience">1 訪問者の想定</a><a href="#districts">2 20地区の選定</a><a href="#ndl">3 NDLサーチ調査</a><a href="#rights">4 権利</a><a href="#products">5 試作品</a><a href="#next">6 次の一手</a></nav>')
@@ -277,7 +277,7 @@ def context():
         return f'<a href="pdf/{esc(name)}"><b>{esc(title)}</b><span>{esc(sub)} · {pdf_pages(path)}ページ · {mb(path)}</span></a>'
     basic_cards = ''.join(pdf_card(f'basic-{d["id"]}.pdf', d['en'], 'Basic') for d in districts)
     doss_cards = ''.join(pdf_card(f'dossier-{d["id"]}.pdf', d['en'], f"Area Dossier · 約{round(sum(len(re.sub('<[^>]+>', '', p['text']).split()) for s in (dossiers[d['id']] or {}).get('sections', []) for p in s['paragraphs']), -2)}語 · 出典{len((dossiers[d['id']] or {}).get('sources', []))}件") for d in doss)
-    deep_card = pdf_card('deep-research-sample-suo-oshima.pdf', 'Deep Research sample: Kuka, Suo-Oshima', '架空の依頼・実在の資料')
+    deep_card = pdf_card('deep-research-sample-suo-oshima.pdf', 'Deep Research sample: Kuka, Suo-Oshima', '架空の依頼・実在の資料') if deep_pdf else ''
     thumbs = [('basic-asakusa-then-now.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：浅草・両国の1936–42年と2019年'),
               ('basic-asakusa-meiji.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：人工地形と明治期の低湿地'),
               ('basic-hiroshima-landform.jpg', 'basic-hiroshima-peace.pdf', 'Basic：広島・旧中島地区の地形分類'),

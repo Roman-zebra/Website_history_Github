@@ -65,7 +65,7 @@ def build(path=SRC):
 <h1>{rich(rep['title'])}</h1><p class="stand">{rich(rep.get('subtitle', ''))}</p>
 <div class="box"><p><b>The request</b></p><p class="req">{rich(rep['request'])}</p></div>
 <h3>Answer in brief</h3><ul class="srcs" style="font-size:9.2pt">{summary}</ul>
-<div class="cover-grid" style="margin-top:4mm"><div><img src="locator.png" alt="Location"></div><div class="small">This sample shows the format and the method of a Deep Research report. The client and the request are invented; every source, archive and record type described is real and was checked on {basic.TODAY}. Nothing in this report identifies a real person.</div></div></section>
+<div class="cover-grid" style="margin-top:4mm"><div><img src="locator.png" alt="Location"></div><div class="small">This sample shows the format and the method of a Deep Research report. The client and the request are invented; every source, archive and record type described is real and was checked on {basic.TODAY}. Nothing in this report identifies a living person.</div></div></section>
 <section class="page report"><p class="kicker">Report</p>{''.join(body)}</section>
 <section class="page stack"><p class="kicker">The hamlet from the air</p><h2>Kuka then and now</h2>{figs}</section>
 <section class="page"><p class="kicker">Records trail</p><h2>Where the records are, and who can open them</h2>
