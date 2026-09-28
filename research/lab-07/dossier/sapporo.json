@@ -289,7 +289,23 @@
     43.062554,
     141.353645
    ],
-   "atQuery": "札幌市時計台"
+   "atQuery": "札幌市時計台",
+   "photo": {
+    "title": "20200119 Sapporo Clock Tower",
+    "fileName": "20200119 Sapporo Clock Tower.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:20200119_Sapporo_Clock_Tower.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/20200119_Sapporo_Clock_Tower.jpg/960px-20200119_Sapporo_Clock_Tower.jpg",
+    "artist": "Balon Greyjoy",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "date": "19 January",
+    "distanceM": 17,
+    "source": "Wikimedia Commons",
+    "via": "Q1140619",
+    "shows": "The Sapporo Clock Tower from the front, with its clock face",
+    "showsJa": "正面から見た札幌市時計台と時計の文字盤",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Former Hokkaido Government Building (Red Brick)",

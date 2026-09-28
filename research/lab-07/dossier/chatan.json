@@ -248,7 +248,28 @@
    "cite": [
     "S11",
     "S12"
-   ]
+   ],
+   "at": [
+    26.30947,
+    127.76698
+   ],
+   "atSource": "Wikidata Q109363823",
+   "photo": {
+    "title": "Chatan Gusuku 01",
+    "fileName": "Chatan Gusuku 01.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Chatan_Gusuku_01.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Chatan_Gusuku_01.jpg/960px-Chatan_Gusuku_01.jpg",
+    "artist": "Bérangère444",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "date": "2024-12-01",
+    "distanceM": 0,
+    "source": "Wikimedia Commons",
+    "via": "search \"Chatan Castle\"",
+    "shows": "The wooded hill of the Chatan Gusuku site, seen from National Route 58",
+    "showsJa": "国道58号から見た北谷城跡の緑の丘",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Site of the Chatan Tabukwa paddies",
@@ -256,7 +277,8 @@
    "what": "The low ground inland of the old village center once carried paddies ranked among Okinawa's three finest rice tracts; compare the aerial photographs in this dossier to see how completely base construction and later urban development erased them.",
    "cite": [
     "S5"
-   ]
+   ],
+   "photoNone": "No Commons photo of the former Tabukwa paddy ground; the stop is an erased area with no position or marked point"
   },
   {
    "name": "Kadena Air Base perimeter",
@@ -265,7 +287,8 @@
    "cite": [
     "S6",
     "S9"
-   ]
+   ],
+   "photoNone": "No Commons photo of the Kadena Air Base perimeter fence from a public vantage point; the stop has no fixed point"
   },
   {
    "name": "Mihama American Village",

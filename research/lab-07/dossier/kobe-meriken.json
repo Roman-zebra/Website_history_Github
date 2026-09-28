@@ -250,7 +250,23 @@
     34.688168,
     135.192336
    ],
-   "atQuery": "旧居留地"
+   "atQuery": "旧居留地",
+   "photo": {
+    "title": "The old settlement hall of no.38 01s3200",
+    "fileName": "The old settlement hall of no.38 01s3200.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:The_old_settlement_hall_of_no.38_01s3200.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/The_old_settlement_hall_of_no.38_01s3200.jpg/960px-The_old_settlement_hall_of_no.38_01s3200.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2007-04-08",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Q11511037",
+    "shows": "The Old Settlement Hall No.38 at a street crossing in the Old Settlement",
+    "showsJa": "旧居留地の交差点に建つ旧居留地38番館",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Ikuta Shrine and Flower Road",
