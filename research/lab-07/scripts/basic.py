@@ -28,10 +28,124 @@ SERIES = [  # layer, label, decade key
     ('ort_old10', '1961–1969'), ('gazo1', '1974–1978'), ('gazo2', '1979–1983'),
     ('gazo3', '1984–1986'), ('gazo4', '1987–1990'),
 ]
+SERIES_JA = {  # same series, Japanese-language captions for the --lang ja Area Dossier
+    'ort_1928': '1928年頃', 'ort_riku10': '1936〜1942年頃', 'ort_USA10': '1945〜1950年',
+    'ort_old10': '1961〜1969年', 'gazo1': '1974〜1978年', 'gazo2': '1979〜1983年',
+    'gazo3': '1984〜1986年', 'gazo4': '1987〜1990年',
+}
 KIND_EN = {'洪水': 'flood', '土砂災害': 'landslide or debris flow', '地震': 'earthquake', '津波': 'tsunami',
            '高潮': 'storm surge', '火山災害': 'volcanic disaster', 'その他': 'other'}
 Z_PHOTO = 16
 W_BIG = 1120
+
+# Fixed English/Japanese strings for the sections basic.build() writes into sections.json
+# (thennow, timeline, ground, manmade, disasters — the ones dossier.py embeds in the Area
+# Dossier PDF). Keyed the same in both languages; used as TXT[lang][key]. The 'en' side is
+# copied verbatim from the strings basic.py used before --lang existed, so lang='en' (the
+# default everywhere) renders exactly as before.
+TXT = {
+    'en': {
+        'thennow_kicker': '1 · Then and now',
+        'thennow_compare': ('<b>How to compare.</b> Anchor on features that rarely move — river banks, rail lines, '
+                             'shrine and temple grounds, main roads — then look for what changed around them. '
+                             'Differences in tone come from film, camera and season, not from the land itself.'),
+        'today': 'today', 'latest': 'Latest',
+        'decades_kicker': '2 · In between', 'decades_h2': 'The decades in between',
+        'decades_note': ("Every further GSI series that covers the same frame, oldest first. Each series is a "
+                          "compilation: photographs within one series were taken on different dates, which is why "
+                          "seams and changes of tone can appear inside a frame."),
+        'us_military': ' (US military photography)', 'processed': 'processed',
+        'ground_kicker': '3 · How the ground was made', 'ground_h2': 'Rivers, shorelines and terraces',
+        'ground_fig': ('Natural landforms as classified by GSI, over a recent aerial photograph in gray. Dark blue '
+                        'outlines mark former river channels.'),
+        'ground_none': 'No detailed natural landform data for this frame.',
+        'ground_regional': ("GSI has no detailed landform survey for this frame, so the map uses GSI's regional "
+                             "classification (compiled for zoom levels 9–13). It shows the broad landform only; "
+                             "former river channels and man-made ground are not mapped at that scale."),
+        'ground_partial': ("GSI's detailed landform survey covers only part of this frame (mainly lowland plains); "
+                            "unshaded ground was not classified at this scale."),
+        'ground_meaning': 'What the main landforms mean',
+        'ground_credit': ("Descriptions translated and condensed from GSI's landform-classification legend. They "
+                           "describe tendencies of each landform type, not the condition of any individual plot."),
+        'manmade_kicker': '4 · Made by people, and the Meiji landscape',
+        'manmade_h2': 'Fill, reclamation and the fields beneath the town',
+        'manmade_fig': ('Hatching: man-made ground as classified by GSI. Teal outlines: former sea, river or pond. '
+                         'Dark blue outlines: former river channels.'),
+        'meiji_fig': ('GSI “Meiji-era lowland” data, traced from topographic maps of the 1880s–1900s; GSI warns '
+                       'that positions can be off by a considerable distance, especially in the Kanto and Kinki '
+                       'regions. Only low, wet or open ground was traced: towns, dry fields and forest of the '
+                       'period are left blank.'),
+        'meiji_h3': 'Meiji-era lowland', 'meiji_none': 'GSI has not traced Meiji-era lowland for this frame.',
+        'manmade_h3': 'Man-made ground', 'manmade_none': 'No man-made ground mapped in this frame.',
+        'disasters_kicker': '5 · Disasters remembered', 'disasters_h2': 'Memorials to natural disasters nearby',
+        'disasters_fig': 'Numbered memorials; the black rectangle is the study area of this brief. Frame {km:.0f} km across.',
+        'disasters_radius': ('Fewer than three memorials stand within 3 km of the study area, so the nearest ones '
+                              'within {r:.0f} km are listed.'),
+        'th_memorial': 'Memorial', 'th_disaster': 'Disaster', 'th_erected': 'Erected', 'th_distance': 'Distance',
+        'disasters_none': 'No memorial is registered within 30 km.',
+        'disasters_meaning': 'What the memorials record',
+        'disasters_notes_none': 'English notes for these memorials are being prepared.',
+        'disasters_credit': ('Source: GSI Natural Disaster Memorials (自然災害伝承碑). English names and notes are '
+                              'Japan Time Atlas translations and summaries of GSI\'s Japanese descriptions; the '
+                              'memorials\' own inscriptions may say more. “Erected” is the year GSI records for '
+                              'the monument.'),
+        'unknown_year': 'unknown',
+        # image-overlay label/sub text drawn by annotate() (basic.py) and walkmap.draw()
+        'lbl_aerial_sub': 'Aerial photograph', 'lbl_natural': 'Natural landforms', 'lbl_manmade': 'Man-made ground',
+        'sub_landform_class': 'GSI landform classification', 'lbl_meiji': 'Meiji-era lowland',
+        'sub_meiji_source': 'GSI, from maps of the 1880s–1900s', 'lbl_disasters_nearby': 'Disasters remembered nearby',
+        'sub_memorials': 'Natural-disaster memorials (GSI)', 'lbl_walkmap': 'Walk map',
+        'sub_walkmap': 'Latest aerial photograph',
+    },
+    'ja': {
+        'thennow_kicker': '1 · いまとむかし',
+        'thennow_compare': ('<b>見比べ方。</b>川岸、鉄道の線路、神社仏閣の境内、幹線道路など位置が変わりにくい目印を'
+                             '基準にして、その周りで何が変わったかを見る。色調の違いはフィルムやカメラ、撮影季節の'
+                             '違いによるもので、土地そのものの変化ではない。'),
+        'today': '現在', 'latest': '最新',
+        'decades_kicker': '2 · その間の年代', 'decades_h2': 'その間の年代',
+        'decades_note': ('同じ範囲を写した国土地理院の他の写真シリーズを、古い順にすべて掲載した。各シリーズは'
+                          '撮影日の異なる写真をまとめた合成図であり、そのため1枚の中に写真のつなぎ目や色調の違いが'
+                          '生じることがある。'),
+        'us_military': '（米軍撮影）', 'processed': '加工',
+        'ground_kicker': '3 · 土地の成り立ち', 'ground_h2': '川・海岸・段丘',
+        'ground_fig': '国土地理院の分類による自然地形。背景はグレー処理した最近の空中写真。濃い青の輪郭線は旧河道を示す。',
+        'ground_none': 'この範囲の詳細な自然地形データはない。',
+        'ground_regional': ('この範囲には国土地理院の詳細な地形分類調査がないため、地図は国土地理院の地方版の分類'
+                             '（ズームレベル9〜13向け）を用いている。大まかな地形のみを示し、旧河道や人工地形は'
+                             'この縮尺では表されていない。'),
+        'ground_partial': ('国土地理院の詳細な地形分類調査は、この範囲の一部（主に低地の平野部）しか対象としていない。'
+                            '着色していない土地はこの縮尺では分類されていない。'),
+        'ground_meaning': '主な地形の意味',
+        'ground_credit': ('国土地理院の地形分類の凡例による説明。地形の種類ごとの一般的な傾向を示すもので、'
+                           '個々の土地の状態を示すものではない。'),
+        'manmade_kicker': '4 · 人がつくった土地と明治の低湿地',
+        'manmade_h2': '盛土・埋立と、町の下に眠る田畑',
+        'manmade_fig': ('ハッチング：国土地理院の分類による人工地形。青緑の輪郭線：旧水部（かつての海・河川・池）。'
+                         '濃い青の輪郭線：旧河道。'),
+        'meiji_fig': ('国土地理院「明治期の低湿地」データ。1880〜1900年代の地形図から作成されたもので、位置は特に'
+                       '関東・近畿地方でかなりずれる場合があると国土地理院自身が注記している。低くて湿った土地や'
+                       '空地のみが対象で、当時の市街地・畑・森林は着色していない。'),
+        'meiji_h3': '明治期の低湿地', 'meiji_none': 'この範囲について、国土地理院は明治期の低湿地を調査していない。',
+        'manmade_h3': '人工地形', 'manmade_none': 'この範囲に人工地形は分類されていない。',
+        'disasters_kicker': '5 · 災害の記憶', 'disasters_h2': '災害の記憶（自然災害伝承碑）',
+        'disasters_fig': '番号は伝承碑。黒い枠はこの資料の対象範囲。画像の幅は{km:.0f} km。',
+        'disasters_radius': ('対象範囲から3 km以内の伝承碑が3件に満たないため、{r:.0f} km以内にある最も近いものを'
+                              '掲載した。'),
+        'th_memorial': '伝承碑', 'th_disaster': '災害', 'th_erected': '建立', 'th_distance': '距離',
+        'disasters_none': '半径30 km以内に登録された伝承碑はない。',
+        'disasters_meaning': '碑が伝えること',
+        'disasters_notes_none': 'この碑については国土地理院のデータに説明の記載がない。',
+        'disasters_credit': ('出典：国土地理院 自然災害伝承碑。碑文はここに記した以上のことを伝えている場合がある。'
+                              '「建立」は国土地理院の記録による年。'),
+        'unknown_year': '不明',
+        'lbl_aerial_sub': '空中写真', 'lbl_natural': '自然地形', 'lbl_manmade': '人工地形',
+        'sub_landform_class': '国土地理院の地形分類', 'lbl_meiji': '明治期の低湿地',
+        'sub_meiji_source': '国土地理院、1880〜1900年代の地図による', 'lbl_disasters_nearby': '周辺の災害の記憶',
+        'sub_memorials': '自然災害伝承碑（国土地理院）', 'lbl_walkmap': '散策マップ',
+        'sub_walkmap': '最新の空中写真',
+    },
+}
 
 
 def esc(s):
@@ -87,11 +201,15 @@ def nice_scale(width_m, px_width, target_px=160):
     return 5000, 5000 / m_per_px
 
 
-def annotate(img, label, width_km, sub=None):
-    """Label box, scale bar and north arrow on a map image (in place)."""
+def annotate(img, label, width_km, sub=None, lang='en'):
+    """Label box, scale bar and north arrow on a map image (in place). label/sub are drawn
+    with Noto Sans JP when lang='ja' (Inter, used otherwise, has no Japanese glyphs)."""
     d = ImageDraw.Draw(img, 'RGBA')
     W, H = img.size
-    f1, f2 = font('Inter-SemiBold.ttf', 22), font('Inter-Regular.ttf', 17)
+    if lang == 'ja':
+        f1, f2 = font('NotoSansJP-Bold.ttf', 22), font('NotoSansJP-Regular.ttf', 17)
+    else:
+        f1, f2 = font('Inter-SemiBold.ttf', 22), font('Inter-Regular.ttf', 17)
     tw = d.textlength(label, font=f1)
     sw = d.textlength(sub, font=f2) if sub else 0
     bw = max(tw, sw) + 24
@@ -206,7 +324,7 @@ def outline(d, f, g, fill, width):
             d.line(ring + [ring[0]], fill=fill, width=width)
 
 
-def landform_maps(bb, base_img, width_km):
+def landform_maps(bb, base_img, width_km, lang='en'):
     """(natural map, man-made map, shares). Natural: GSI colours; man-made: hatching; both show
     former river channels as dark-blue outlines."""
     from shapely.ops import unary_union
@@ -252,7 +370,7 @@ def landform_maps(bb, base_img, width_km):
     od = ImageDraw.Draw(nat)
     for g in old_channels:
         outline(od, f, g, (16, 52, 120, 255), 4)
-    nat = annotate(nat.convert('RGB'), 'Natural landforms', width_km, 'GSI landform classification')
+    nat = annotate(nat.convert('RGB'), TXT[lang]['lbl_natural'], width_km, TXT[lang]['sub_landform_class'], lang)
 
     man = gray_base(base_img, 0.3).convert('RGBA')
     for cls, g in art:
@@ -267,11 +385,11 @@ def landform_maps(bb, base_img, width_km):
         outline(md, f, g, (0, 128, 128, 255), 3)
     for g in old_channels:
         outline(md, f, g, (16, 52, 120, 255), 5)
-    man = annotate(man.convert('RGB'), 'Man-made ground', width_km, 'GSI landform classification')
+    man = annotate(man.convert('RGB'), TXT[lang]['lbl_manmade'], width_km, TXT[lang]['sub_landform_class'], lang)
     return nat, man, shares
 
 
-def meiji_map(bb, base_img, width_km):
+def meiji_map(bb, base_img, width_km, lang='en'):
     """GSI 'Meiji-era lowland' overlay on the grey photograph, and its shares by class."""
     img, cov = gsi.mosaic('swale', bb, 15)
     if cov < 0.002:
@@ -282,7 +400,7 @@ def meiji_map(bb, base_img, width_km):
     a = over.getchannel('A').point(lambda v: 0 if v < 60 else 215)
     over.putalpha(a)
     out = Image.alpha_composite(base, over).convert('RGB')
-    return annotate(out, 'Meiji-era lowland', width_km, 'GSI, from maps of the 1880s–1900s'), shares
+    return annotate(out, TXT[lang]['lbl_meiji'], width_km, TXT[lang]['sub_meiji_source'], lang), shares
 
 
 def monuments_for(center):
@@ -297,7 +415,7 @@ def monuments_for(center):
     return near[:12], radius, len(gsi.monuments_near(center, 3.0))
 
 
-def monument_map(center, study_bb, mons, radius):
+def monument_map(center, study_bb, mons, radius, lang='en'):
     half = max(radius, max([m['dist_km'] for m in mons], default=1) + 0.4)
     half = min(max(half, 2.0), 32.0)
     lat, lon = center
@@ -320,7 +438,7 @@ def monument_map(center, study_bb, mons, radius):
         d.ellipse((x - r, y - r, x + r, y + r), fill=(200, 40, 40, 240), outline=(255, 255, 255, 255), width=3)
         t = str(i)
         d.text((x - d.textlength(t, font=fn) / 2, y - fn.size * 0.62), t, font=fn, fill=(255, 255, 255))
-    img = annotate(base.convert('RGB'), 'Disasters remembered nearby', 2 * half, 'Natural-disaster memorials (GSI)')
+    img = annotate(base.convert('RGB'), TXT[lang]['lbl_disasters_nearby'], 2 * half, TXT[lang]['sub_memorials'], lang)
     return img, 2 * half
 
 

@@ -138,7 +138,32 @@ def landform_legend():
     if _LFC is None:
         with open(os.path.join(os.path.dirname(__file__), 'landform-legend.json'), encoding='utf-8') as f:
             _LFC = json.load(f)
+        _fill_class_ja(_LFC)
     return _LFC
+
+
+def _fill_class_ja(legend):
+    """The per-code entries in landform-legend.json already carry origin_ja/risk_ja
+    (GSI's own Japanese wording), but the deduplicated 'classes' entries used by the
+    Basic brief only ever picked up 'ja' (the class name), not the Japanese origin/risk
+    prose. Fill those in here, in memory, from the code whose English origin/risk text
+    matches the class's (so we reuse GSI's own Japanese rather than writing our own)."""
+    codes = legend.get('codes', {})
+    for cls, info in legend.get('classes', {}).items():
+        if 'origin_ja' in info and 'risk_ja' in info:
+            continue
+        match = None
+        for code_info in codes.values():
+            if code_info.get('class') != cls:
+                continue
+            if code_info.get('origin') == info.get('origin') and code_info.get('risk') == info.get('risk'):
+                match = code_info
+                break
+            if match is None:
+                match = code_info  # fallback: any code of this class, in case none matches exactly
+        if match:
+            info.setdefault('origin_ja', match.get('origin_ja', info.get('origin', '')))
+            info.setdefault('risk_ja', match.get('risk_ja', info.get('risk', '')))
 
 
 def landform_features(bb, z=14):
