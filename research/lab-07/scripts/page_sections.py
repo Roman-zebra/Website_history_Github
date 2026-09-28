@@ -105,7 +105,8 @@ def context():
     tot_jps = sum(len(n['japanSearchReusable']) for n in ndl.values() if n)
     n_ndl = sum(1 for n in ndl.values() if n)
     basics = [d for d in districts if os.path.exists(pdf(f'basic-{d["id"]}.pdf'))]
-    doss = [d for d in districts if os.path.exists(pdf(f'dossier-{d["id"]}.pdf'))]
+    # only dossiers that have been checked against their sources ("checked": date) are shown
+    doss = [d for d in districts if os.path.exists(pdf(f'dossier-{d["id"]}.pdf')) and (dossiers.get(d['id']) or {}).get('checked')]
     deep_pdf = os.path.exists(pdf('deep-research-sample-suo-oshima.pdf'))
 
     S = []
@@ -275,7 +276,7 @@ def context():
             return ''
         return f'<a href="pdf/{esc(name)}"><b>{esc(title)}</b><span>{esc(sub)} · {pdf_pages(path)}ページ · {mb(path)}</span></a>'
     basic_cards = ''.join(pdf_card(f'basic-{d["id"]}.pdf', d['en'], 'Basic') for d in districts)
-    doss_cards = ''.join(pdf_card(f'dossier-{d["id"]}.pdf', d['en'], f"Area Dossier · 約{round(sum(len(re.sub('<[^>]+>', '', p['text']).split()) for s in (dossiers[d['id']] or {}).get('sections', []) for p in s['paragraphs']), -2)}語 · 出典{len((dossiers[d['id']] or {}).get('sources', []))}件") for d in districts if dossiers.get(d['id']))
+    doss_cards = ''.join(pdf_card(f'dossier-{d["id"]}.pdf', d['en'], f"Area Dossier · 約{round(sum(len(re.sub('<[^>]+>', '', p['text']).split()) for s in (dossiers[d['id']] or {}).get('sections', []) for p in s['paragraphs']), -2)}語 · 出典{len((dossiers[d['id']] or {}).get('sources', []))}件") for d in doss)
     deep_card = pdf_card('deep-research-sample-suo-oshima.pdf', 'Deep Research sample: Kuka, Suo-Oshima', '架空の依頼・実在の資料')
     thumbs = [('basic-asakusa-then-now.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：浅草・両国の1936–42年と2019年'),
               ('basic-asakusa-meiji.jpg', 'basic-tokyo-asakusa.pdf', 'Basic：人工地形と明治期の低湿地'),
@@ -292,7 +293,7 @@ def context():
 <p>地区の中心座標を与えるだけで、地理院タイルから①最古の空中写真と最新の年度別オルソ画像の比較、②その間の年代の写真、③地形分類（自然地形：旧河道など／人工地形：盛土・埋立・干拓）、④明治期の低湿地（田・湿地・水面）、⑤半径3km（なければ8km・30km）の自然災害伝承碑を英訳つきで並べ、出典と方法を書き添えたPDFを作ります。1地区あたり数分、人手ゼロ。地形の説明文と伝承碑の英訳は国土地理院の情報を翻訳・要約したもので、その旨を明記しています。</p>
 <div class="pdfs">{basic_cards or '<p class="muted">生成中</p>'}</div>
 <h3>Area Dossier（Basic＋英語の歴史レポート）</h3>
-<p>NDLのネット公開図書（コマ番号を明記）と自治体などの公式資料だけを根拠に、地区の成り立ちから現在までを英語で書き、年表・歩き方メモ・出典一覧・さらに調べる先（個人送信の市史など）を付けました。本文には段落ごとに出典番号があります。試作版のため、販売前に第三者の事実確認が必要です。</p>
+<p>NDLのネット公開図書（コマ番号を明記）と自治体などの公式資料だけを根拠に、地区の成り立ちから現在までを英語で書き、年表・歩き方メモ・出典一覧・さらに調べる先（個人送信の市史など）を付けました。本文には段落ごとに出典番号があります。ここに載せているのは、記述を出典の本文と一つずつ照合する事実確認を済ませたものだけです（誤りは修正済み）。販売前には第三者による確認も行う想定です。</p>
 <div class="pdfs">{doss_cards or '<p class="muted">執筆中</p>'}</div>
 <h3>Deep Research（見本）</h3>
 <p>「曾祖父がハワイへ渡る前にいた周防大島の久賀村」を調べる、という架空の依頼に、実在の資料で答えた見本です。遠隔で確認できたこと、現地や本人の請求（戸籍など）が必要なこと、料金帯ごとの範囲を分けて示しています。</p>

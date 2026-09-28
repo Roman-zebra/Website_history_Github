@@ -115,7 +115,7 @@ def build(did):
 {('<h3>Further reading</h3><ul class="srcs">' + further + '</ul>') if further else ''}
 {('<h3>Where a Deep Research request would go next</h3><ul class="srcs">' + leads + '</ul>') if leads else ''}
 {('<h3>Caveats</h3><ul class="srcs">' + caveats + '</ul>') if caveats else ''}
-<p class="small muted">Digitised books are cited, not reproduced: the page frames let you open the same page in the NDL Digital Collections. Aerial photographs, landform and memorial data: GSI, processed by Japan Time Atlas. This experimental edition is a draft for testing the product and has not had independent fact-checking.</p></section>"""
+<p class="small muted">Digitised books are cited, not reproduced: the page frames let you open the same page in the NDL Digital Collections. Aerial photographs, landform and memorial data: GSI, processed by Japan Time Atlas. {f'This experimental edition was checked against its cited sources on {esc(rep["checked"])} but has not had independent fact-checking.' if rep.get('checked') else 'This experimental edition is a draft for testing the product and has not had independent fact-checking.'}</p></section>"""
     css = basic.CSS.replace('FONTDIR', 'file://' + basic.FONTS) + EXTRA_CSS
     page = (f'<!doctype html><html lang="en" data-footer="Japan Time Atlas · Area Dossier · {esc(c["en"])} · experimental edition {basic.TODAY}"><head><meta charset="utf-8">'
             f'<title>{esc(c["en"])} — Area Dossier (Japan Time Atlas)</title><style>{css}</style></head><body>'
