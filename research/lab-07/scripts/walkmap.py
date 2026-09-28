@@ -73,7 +73,7 @@ def maps_url(at):
     return f'https://www.google.com/maps/search/?api=1&query={at[0]},{at[1]}'
 
 
-def draw(walk, out_path):
+def draw(walk, out_path, lang='en'):
     """Numbered stops on the latest aerial photo; returns (file name, width_km, height_km) or None."""
     from PIL import ImageDraw
     pts = [(i, w['at']) for i, w in enumerate(walk, 1) if w.get('at')]
@@ -106,7 +106,7 @@ def draw(walk, out_path):
         t = str(i)
         tw = d.textlength(t, font=num_font)
         d.text((x - tw / 2, y - r * 0.72), t, font=num_font, fill=(255, 255, 255, 255))
-    basic.annotate(img, 'Walk map', w_km, 'Latest aerial photograph')
+    basic.annotate(img, basic.TXT[lang]['lbl_walkmap'], w_km, basic.TXT[lang]['sub_walkmap'], lang)
     name, _ = basic.save_jpg(img, out_path)
     return name, w_km, h_km
 

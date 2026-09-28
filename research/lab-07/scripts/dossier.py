@@ -1,19 +1,24 @@
 """Area Dossier assembler (page 07 experiment).
 
-    python3 dossier.py <district-id> [...]      # or: all  (districts that have a dossier JSON)
+    python3 dossier.py [--lang ja] <district-id> [...]      # or: all  (districts that have a dossier JSON)
 
-Reads the English history report written for a district (research/lab-07/dossier/<id>.json, see
-DOSSIER-SCHEMA in README) and the Basic brief built by basic.py for the same district, and renders
-lab/07/pdf/dossier-<id>.pdf: dossier cover, the history report with numbered citations, a
-timeline, walking notes, the Basic pages, and the full source list."""
+Reads the history report written for a district (research/lab-07/dossier/<id>.json, English, or with
+--lang ja research/lab-07/dossier-ja/<id>.json, Japanese; see DOSSIER-SCHEMA in README) and the Basic
+brief built by basic.py for the same district, and renders lab/07/pdf/dossier-<id>.pdf (or
+dossier-ja-<id>.pdf): dossier cover, the history report with numbered citations, a timeline, walking
+notes, the Basic pages, and the full source list. --lang ja builds the Basic brief's images and
+sections into a separate <BUILD>/<id>-ja/ folder, so the English build is never touched."""
 import html, json, os, re, subprocess, sys
 sys.path.insert(0, os.path.dirname(__file__))
 import basic, walkmap
 
 HERE = basic.HERE
 DOSSIER_DIR = os.path.join(HERE, 'dossier')
+DOSSIER_DIR_JA = os.path.join(HERE, 'dossier-ja')
 ACCESS_EN = {'internet': 'open online (NDL Digital Collections, no login)', 'transmission': 'NDL individual digital transmission (registered users)',
              'inlibrary': 'NDL premises only', 'paper': 'print only', None: ''}
+ACCESS_JA = {'internet': 'オンライン公開（国立国会図書館デジタルコレクション、ログイン不要）', 'transmission': '国立国会図書館個人向けデジタル化資料送信サービス（登録利用者向け）',
+             'inlibrary': '国立国会図書館館内限定', 'paper': '紙媒体のみ', None: ''}
 
 EXTRA_CSS = r"""
 .report p{margin:0 0 3mm;text-align:left;hyphens:auto}
@@ -38,6 +43,84 @@ h1,h2,h3{break-after:avoid}
 .report p,.srcs li{orphans:3;widows:3}
 """
 
+# Japanese-mode overrides: Noto Sans JP for body text (no Japanese serif face is available),
+# comfortable Japanese line height, no hyphenation. Appended after CSS+EXTRA_CSS so it wins the
+# cascade on these properties only; never applied in English mode (lang='en'), which stays on
+# CSS+EXTRA_CSS exactly as before.
+JA_CSS = r"""
+html{font-family:JP,sans-serif;line-height:1.75}
+.report p{hyphens:none}
+.stand{line-height:1.75}
+.walk li{font-size:8.5pt;line-height:1.55;padding-bottom:2.2mm}
+.tl td{line-height:1.45}
+"""
+
+# Fixed English/Japanese strings for dossier.py's own chrome (cover, part headers, back matter).
+# TXT['en'] is the literal text dossier.py used before --lang existed, so lang='en' (the default)
+# renders exactly as before.
+TXT = {
+    'en': {
+        'ndl_frame': '; NDL frame{s} {nums}', 'checked': ', checked {d}', 'used_for': '. <span class="muted">Used for: {u}</span>',
+        'draft_badge': 'EXPERIMENTAL EDITION · {d}',
+        'in_this_dossier': 'In this dossier',
+        'toc_history': 'A history of the district ({n} chapters, about {w} words)',
+        'toc_timeline': 'Timeline', 'toc_walk': 'Walking notes', 'toc_thennow': 'Then and now: aerial photographs',
+        'toc_ground': 'How the ground was made', 'toc_disasters': 'Disasters remembered',
+        'toc_sources': 'Sources ({n}) and further reading',
+        'cover_box': ('Written in English from Japanese library sources — chiefly books digitised by the National '
+                       'Diet Library — and official records. Superscript numbers point to the numbered sources at '
+                       'the end, with page frames for the digitised books.'),
+        'part_history': 'Part 1 · History', 'part_timeline': 'Part 1 · Timeline', 'part_walk': 'Part 1 · Walking notes',
+        'timeline_h2': 'Timeline', 'walk_h2': 'Walking notes',
+        'walk_note': "Places to stand and look, in walking order. Straight-line distances only; check today's access and opening before you go.",
+        'walkmap_h2': 'Walk map', 'walkmap_alt': 'Walk map',
+        'walkmap_fig': ('The walking stops, numbered as in the notes, on the latest GSI aerial photograph '
+                         '({w:.1f} × {h:.1f} km, north up). Lines join the stops in order and are not a route; '
+                         'follow streets on the ground. '),
+        'walkmap_missing': 'Stops not shown: {list}. ',
+        'walkmap_apps': 'Each stop in the notes links to a map app.',
+        'sources_kicker': 'Sources', 'sources_h2': 'Sources', 'further_h3': 'Further reading',
+        'leads_h3': 'Where a Deep Research request would go next', 'caveats_h3': 'Caveats',
+        'back_credit': ("Digitised books are cited, not reproduced: the page frames let you open the same page in "
+                         "the NDL Digital Collections. Aerial photographs, landform and memorial data: GSI, "
+                         "processed by Japan Time Atlas. Positions of the walking stops: © OpenStreetMap "
+                         "contributors (ODbL), found with Nominatim. {checked}"),
+        'checked_yes': 'This experimental edition was checked against its cited sources on {d} but has not had independent fact-checking.',
+        'checked_no': 'This experimental edition is a draft for testing the product and has not had independent fact-checking.',
+        'footer': 'Japan Time Atlas · Area Dossier · {place} · experimental edition {d}',
+        'title_tag': '{place} — Area Dossier (Japan Time Atlas)',
+    },
+    'ja': {
+        'ndl_frame': '；NDLコマ{nums}', 'checked': '、確認日 {d}', 'used_for': '。<span class="muted">利用箇所：{u}</span>',
+        'draft_badge': '実験版 · {d}',
+        'in_this_dossier': '収録内容',
+        'toc_history': '地区の歴史（全{n}章、本文約{w}字）',
+        'toc_timeline': '年表', 'toc_walk': '歩き方メモ', 'toc_thennow': '空中写真で見るいまとむかし',
+        'toc_ground': '土地の成り立ち', 'toc_disasters': '災害の記憶',
+        'toc_sources': '出典（{n}）とさらに読む',
+        'cover_box': ('国立国会図書館デジタルコレクションを中心とする日本語の図書館資料と公的記録をもとに執筆。'
+                       '肩付き数字は巻末の出典番号を示し、デジタル化資料にはコマ番号を付した。'),
+        'part_history': '第1部・歴史', 'part_timeline': '第1部・年表', 'part_walk': '第1部・歩き方メモ',
+        'timeline_h2': '年表', 'walk_h2': '歩き方メモ',
+        'walk_note': '歩く順に、立ち止まって眺めたい場所を並べた。距離はすべて直線距離。訪問前に最新のアクセス方法と開館状況を確認すること。',
+        'walkmap_h2': '散策マップ', 'walkmap_alt': '散策マップ',
+        'walkmap_fig': ('歩き方メモと同じ番号を付けた立ち寄り先を、最新の国土地理院空中写真（{w:.1f}×{h:.1f} km、'
+                         '上が北）の上に示した。線は立ち寄り先を順番につないだだけで、実際の経路ではない。道順は'
+                         '現地の道路に従うこと。'),
+        'walkmap_missing': '地図に示していない立ち寄り先：{list}。',
+        'walkmap_apps': '各立ち寄り先の番号から地図アプリを開ける。',
+        'sources_kicker': '出典', 'sources_h2': '出典', 'further_h3': 'さらに読む',
+        'leads_h3': 'Deep Researchで次に調べる先', 'caveats_h3': '注意',
+        'back_credit': ('デジタル化資料は引用のみで、転載はしていない。コマ番号から国立国会図書館デジタルコレクション'
+                         'の同じページを開ける。空中写真・地形・伝承碑データ：国土地理院、Japan Time Atlasが加工。'
+                         '立ち寄り先の位置：© OpenStreetMap contributors（ODbL）、Nominatimで検索。{checked}'),
+        'checked_yes': 'この実験版は{d}に出典と照合したが、第三者による事実確認は受けていない。',
+        'checked_no': 'この実験版は製品を試すための下書きであり、第三者による事実確認は受けていない。',
+        'footer': 'Japan Time Atlas · Area Dossier · {place} · 実験版 {d}',
+        'title_tag': '{place} — Area Dossier（Japan Time Atlas）',
+    },
+}
+
 
 def esc(s):
     return html.escape(str(s if s is not None else ''))
@@ -54,7 +137,9 @@ def cites(ids, num):
     return ''.join(f'<sup class="c">{n}</sup>' for n in ns) if ns else ''
 
 
-def source_line(s):
+def source_line(s, lang='en'):
+    T = TXT[lang]
+    access_map = ACCESS_EN if lang == 'en' else ACCESS_JA
     bits = []
     if s.get('author'):
         bits.append(esc(s['author']))
@@ -69,87 +154,123 @@ def source_line(s):
     line = ', '.join(b for b in bits if b)
     if s.get('frames'):
         fr = s['frames']
-        line += f'; NDL frame{"s" if len(fr) > 1 else ""} {esc(", ".join(str(x) for x in fr))}'
+        line += T['ndl_frame'].format(s='s' if len(fr) > 1 else '', nums=esc(', '.join(str(x) for x in fr)))
     if s.get('url'):
         line += f'. {esc(s["url"])}'
     if s.get('access'):
-        line += f' ({esc(ACCESS_EN.get(s["access"], s["access"]))})'
+        line += f' ({esc(access_map.get(s["access"], s["access"]))})'
     if s.get('checked'):
-        line += f', checked {esc(s["checked"])}'
+        line += T['checked'].format(d=esc(s['checked']))
     if s.get('used'):
-        line += f'. <span class="muted">Used for: {esc(s["used"])}</span>'
+        line += T['used_for'].format(u=esc(s['used']))
     return line
 
 
-def build(did):
+def build(did, lang='en'):
+    T = TXT[lang]
     districts = basic.load_districts()
     c = districts[did]
-    rep = json.load(open(os.path.join(DOSSIER_DIR, did + '.json'), encoding='utf-8'))
-    out_dir = os.path.join(basic.BUILD, did)
+    dossier_dir = DOSSIER_DIR_JA if lang == 'ja' else DOSSIER_DIR
+    rep = json.load(open(os.path.join(dossier_dir, did + '.json'), encoding='utf-8'))
+    if lang == 'ja':
+        # the Japanese JSON follows the English writer's convention of keeping walk[].name in
+        # English/romanized form with the Japanese name in .ja; it is not expected to carry its own
+        # .at coordinates, so copy them from the English dossier's walk stops by position (same
+        # order, same count) rather than re-geocoding. This only changes the in-memory dict used to
+        # render — the Japanese dossier JSON on disk is never written to.
+        en_path = os.path.join(DOSSIER_DIR, did + '.json')
+        if os.path.exists(en_path):
+            en_walk = json.load(open(en_path, encoding='utf-8')).get('walk', [])
+            for i, w in enumerate(rep.get('walk', [])):
+                if not w.get('at') and i < len(en_walk) and en_walk[i].get('at'):
+                    w['at'] = en_walk[i]['at']
+    out_dir = os.path.join(basic.BUILD, did + ('-ja' if lang == 'ja' else ''))
     sec_path = os.path.join(out_dir, 'sections.json')
     if not os.path.exists(sec_path):
         mon_path = os.path.join(HERE, 'monuments-en.json')
         mon_en = json.load(open(mon_path, encoding='utf-8')) if os.path.exists(mon_path) else {}
-        basic.build(c, mon_en)
+        basic.build(c, mon_en, lang=lang, out_dir=out_dir)
     sections = json.load(open(sec_path, encoding='utf-8'))
     num = {s['id']: i for i, s in enumerate(rep['sources'], 1)}
-    words = 0
+    units = 0  # word count in English, character count in Japanese (Japanese prose has no spaces)
     body = []
     for sec in rep['sections']:
         body.append(f'<h2>{rich(sec["heading"])}</h2>')
         for p in sec['paragraphs']:
-            words += len(re.sub('<[^>]+>', '', p['text']).split())
+            plain = re.sub('<[^>]+>', '', p['text'])
+            units += len(plain.split()) if lang == 'en' else len(plain)
             body.append(f'<p>{rich(p["text"])}{cites(p.get("cite", []), num)}</p>')
     tl = ''.join(f'<tr><td class="w">{esc(r["when"])}</td><td>{rich(r["what"])}{cites(r.get("cite", []), num)}</td></tr>' for r in rep.get('timeline', []))
+    def walk_name(w):
+        """(primary display name, secondary gloss or None). In ja mode the Japanese .ja name (GSI/
+        the writer's own Japanese) leads and the English/romanized .name becomes the gloss, mirroring
+        English mode exactly (never rewriting either string, just swapping which one is bold)."""
+        if lang == 'ja' and w.get('ja'):
+            return w['ja'], w.get('name')
+        return w['name'], (w.get('ja') if lang == 'en' else None)
     def walk_item(w):
-        ja = f' <span class="jp muted">{esc(w["ja"])}</span>' if w.get('ja') else ''
-        pin = f' <a class="maplink" href="{walkmap.maps_url(w["at"])}">map&#8599;</a>' if w.get('at') else ''
-        return f'<li><b>{esc(w["name"])}</b>{ja}. {rich(w["what"])}{cites(w.get("cite", []), num)}{pin}</li>'
+        primary, secondary = walk_name(w)
+        gloss_cls = 'jp muted' if lang == 'en' else 'muted'
+        gloss = f' <span class="{gloss_cls}">{esc(secondary)}</span>' if secondary else ''
+        pin = f' <a class="maplink" href="{walkmap.maps_url(w["at"])}">{basic.TXT[lang]["map_link"]}&#8599;</a>' if w.get('at') else ''
+        return f'<li><b>{esc(primary)}</b>{gloss}. {rich(w["what"])}{cites(w.get("cite", []), num)}{pin}</li>'
     walk = ''.join(walk_item(w) for w in rep.get('walk', []))
     stops = rep.get('walk', [])
     placed = [w for w in stops if w.get('at')]
-    wm = walkmap.draw(stops, os.path.join(out_dir, 'walkmap.jpg')) if stops and len(placed) >= 3 and len(placed) >= 0.6 * len(stops) else None
-    map_page = (f'<section class="page"><p class="kicker">Part 1 · Walking notes</p><h2>Walk map</h2>'
-                f'<figure><img class="wm" src="{wm[0]}" alt="Walk map"><figcaption>The walking stops, numbered as in the notes, on the latest GSI aerial photograph ({wm[1]:.1f} × {wm[2]:.1f} km, north up). '
-                f'Lines join the stops in order and are not a route; follow streets on the ground. '
-                + ('Stops not shown: ' + ', '.join(str(i) for i, w in enumerate(stops, 1) if not w.get('at')) + '. ' if len(placed) < len(stops) else '')
-                + 'Each stop in the notes links to a map app.</figcaption></figure>'
-                + '<ol class="walk wmlist">' + ''.join(f'<li><b>{esc(w["name"])}</b>' + (f' <a class="maplink" href="{walkmap.maps_url(w["at"])}">map&#8599;</a>' if w.get('at') else '') + '</li>' for w in stops) + '</ol></section>') if wm else ''
-    srcs = ''.join(f'<li>{source_line(s)}</li>' for s in rep['sources'])
-    further = ''.join(f'<li><i class="jp">{esc(f["title"])}</i>{" — " + esc(f["why"]) if f.get("why") else ""} {esc(f.get("url", ""))} ({esc(ACCESS_EN.get(f.get("access"), f.get("access", "")))})</li>' for f in rep.get('furtherReading', []))
+    wm = walkmap.draw(stops, os.path.join(out_dir, 'walkmap.jpg'), lang=lang) if stops and len(placed) >= 3 and len(placed) >= 0.6 * len(stops) else None
+    map_page = (f'<section class="page"><p class="kicker">{T["part_walk"]}</p><h2>{T["walkmap_h2"]}</h2>'
+                f'<figure><img class="wm" src="{wm[0]}" alt="{T["walkmap_alt"]}"><figcaption>{T["walkmap_fig"].format(w=wm[1], h=wm[2])}'
+                + (T['walkmap_missing'].format(list=', '.join(str(i) for i, w in enumerate(stops, 1) if not w.get('at'))) if len(placed) < len(stops) else '')
+                + T['walkmap_apps'] + '</figcaption></figure>'
+                + '<ol class="walk wmlist">' + ''.join(f'<li><b>{esc(walk_name(w)[0])}</b>' + (f' <a class="maplink" href="{walkmap.maps_url(w["at"])}">{basic.TXT[lang]["map_link"]}&#8599;</a>' if w.get('at') else '') + '</li>' for w in stops) + '</ol></section>') if wm else ''
+    srcs = ''.join(f'<li>{source_line(s, lang)}</li>' for s in rep['sources'])
+    access_map = ACCESS_EN if lang == 'en' else ACCESS_JA
+    further = ''.join(f'<li><i class="jp">{esc(f["title"])}</i>{" — " + esc(f["why"]) if f.get("why") else ""} {esc(f.get("url", ""))} ({esc(access_map.get(f.get("access"), f.get("access", "")))})</li>' for f in rep.get('furtherReading', []))
     leads = ''.join(f'<li><b>{esc(l["what"])}</b> — {esc(l["where"])}{". " + esc(l["how"]) if l.get("how") else ""}</li>' for l in rep.get('deepResearchLeads', []))
     caveats = ''.join(f'<li>{rich(x)}</li>' for x in rep.get('caveats', []))
-    cover = f"""<section class="page"><p class="kicker">Japan Time Atlas · Area Dossier</p><span class="draft">EXPERIMENTAL EDITION · {basic.TODAY}</span>
+    word_unit = round(units, -2)
+    cover = f"""<section class="page"><p class="kicker">Japan Time Atlas · Area Dossier</p><span class="draft">{T['draft_badge'].format(d=basic.TODAY)}</span>
 <h1>{rich(rep['title'])}</h1><p class="stand">{rich(rep['standfirst'])}</p>
-<div class="cover-grid"><div><img src="locator.png" alt="Location in Japan"><p class="small muted" style="margin-top:2mm"><span class="jp">{esc(c['ja'])}</span></p></div>
-<div><h3 style="margin-top:0">In this dossier</h3><ol class="toc"><li>A history of the district ({len(rep['sections'])} chapters, about {round(words, -2)} words)</li><li>Timeline</li>{'<li>Walking notes</li>' if walk else ''}<li>Then and now: aerial photographs</li><li>How the ground was made</li><li>Disasters remembered</li><li>Sources ({len(rep['sources'])}) and further reading</li></ol>
-<div class="box"><p>Written in English from Japanese library sources — chiefly books digitised by the National Diet Library — and official records. Superscript numbers point to the numbered sources at the end, with page frames for the digitised books.</p></div></div></div></section>"""
-    report = f'<section class="page report"><p class="kicker">Part 1 · History</p>{"".join(body)}</section>'
-    tl_page = f'<section class="page"><p class="kicker">Part 1 · Timeline</p><h2>Timeline</h2><table class="tl">{tl}</table>' + (f'<h2>Walking notes</h2><p class="small">Places to stand and look, in walking order. Straight-line distances only; check today\'s access and opening before you go.</p><ol class="walk">{walk}</ol>' if walk else '') + '</section>'
-    back = f"""<section class="page"><p class="kicker">Sources</p><h2>Sources</h2><ol class="srcs">{srcs}</ol>
-{('<h3>Further reading</h3><ul class="srcs">' + further + '</ul>') if further else ''}
-{('<h3>Where a Deep Research request would go next</h3><ul class="srcs">' + leads + '</ul>') if leads else ''}
-{('<h3>Caveats</h3><ul class="srcs">' + caveats + '</ul>') if caveats else ''}
-<p class="small muted">Digitised books are cited, not reproduced: the page frames let you open the same page in the NDL Digital Collections. Aerial photographs, landform and memorial data: GSI, processed by Japan Time Atlas. Positions of the walking stops: © OpenStreetMap contributors (ODbL), found with Nominatim. {f'This experimental edition was checked against its cited sources on {esc(rep["checked"])} but has not had independent fact-checking.' if rep.get('checked') else 'This experimental edition is a draft for testing the product and has not had independent fact-checking.'}</p></section>"""
-    css = basic.CSS.replace('FONTDIR', 'file://' + basic.FONTS) + EXTRA_CSS
-    page = (f'<!doctype html><html lang="en" data-footer="Japan Time Atlas · Area Dossier · {esc(c["en"])} · experimental edition {basic.TODAY}"><head><meta charset="utf-8">'
-            f'<title>{esc(c["en"])} — Area Dossier (Japan Time Atlas)</title><style>{css}</style></head><body>'
+<div class="cover-grid"><div><img src="locator.png" alt="Location in Japan"><p class="small muted" style="margin-top:2mm"><span class="jp">{esc(c['ja'] if lang == 'en' else c['en'])}</span></p></div>
+<div><h3 style="margin-top:0">{T['in_this_dossier']}</h3><ol class="toc"><li>{T['toc_history'].format(n=len(rep['sections']), w=word_unit)}</li><li>{T['toc_timeline']}</li>{'<li>' + T['toc_walk'] + '</li>' if walk else ''}<li>{T['toc_thennow']}</li><li>{T['toc_ground']}</li><li>{T['toc_disasters']}</li><li>{T['toc_sources'].format(n=len(rep['sources']))}</li></ol>
+<div class="box"><p>{T['cover_box']}</p></div></div></div></section>"""
+    report = f'<section class="page report"><p class="kicker">{T["part_history"]}</p>{"".join(body)}</section>'
+    tl_page = f'<section class="page"><p class="kicker">{T["part_timeline"]}</p><h2>{T["timeline_h2"]}</h2><table class="tl">{tl}</table>' + (f'<h2>{T["walk_h2"]}</h2><p class="small">{T["walk_note"]}</p><ol class="walk">{walk}</ol>' if walk else '') + '</section>'
+    checked = T['checked_yes'].format(d=esc(rep['checked'])) if rep.get('checked') else T['checked_no']
+    back = f"""<section class="page"><p class="kicker">{T['sources_kicker']}</p><h2>{T['sources_h2']}</h2><ol class="srcs">{srcs}</ol>
+{(f'<h3>{T["further_h3"]}</h3><ul class="srcs">' + further + '</ul>') if further else ''}
+{(f'<h3>{T["leads_h3"]}</h3><ul class="srcs">' + leads + '</ul>') if leads else ''}
+{(f'<h3>{T["caveats_h3"]}</h3><ul class="srcs">' + caveats + '</ul>') if caveats else ''}
+<p class="small muted">{T['back_credit'].format(checked=checked)}</p></section>"""
+    css = basic.CSS.replace('FONTDIR', 'file://' + basic.FONTS) + EXTRA_CSS + (JA_CSS if lang == 'ja' else '')
+    place = c['en'] if lang == 'en' else c['ja']
+    page = (f'<!doctype html><html lang="{lang}" data-footer="{T["footer"].format(place=esc(place), d=basic.TODAY)}"><head><meta charset="utf-8">'
+            f'<title>{T["title_tag"].format(place=esc(place))}</title><style>{css}</style></head><body>'
             + cover + report + tl_page + map_page + sections['thennow'] + sections.get('timeline', '') + sections['ground'] + sections['manmade'] + sections['disasters'] + back + '</body></html>')
     hp = os.path.join(out_dir, 'dossier.html')
     with open(hp, 'w', encoding='utf-8') as f:
         f.write(page)
-    return hp, words
+    return hp, units
 
 
 def main():
-    ids = sys.argv[1:]
+    argv = sys.argv[1:]
+    lang = 'en'
+    if argv[:1] == ['--lang']:
+        lang = argv[1]
+        argv = argv[2:]
+        if lang not in TXT:
+            raise SystemExit(f'--lang {lang}: unsupported (have: {", ".join(TXT)})')
+    ids = argv
+    dossier_dir = DOSSIER_DIR_JA if lang == 'ja' else DOSSIER_DIR
     if ids == ['all']:
-        ids = sorted(f[:-5] for f in os.listdir(DOSSIER_DIR) if f.endswith('.json'))
+        ids = sorted(f[:-5] for f in os.listdir(dossier_dir) if f.endswith('.json'))
     pairs = []
+    prefix = 'dossier-ja-' if lang == 'ja' else 'dossier-'
     for did in ids:
-        hp, words = build(did)
-        pairs += [hp, os.path.join(basic.PDF_DIR, f'dossier-{did}.pdf')]
-        print('dossier', did, words, 'words', flush=True)
+        hp, units = build(did, lang=lang)
+        pairs += [hp, os.path.join(basic.PDF_DIR, f'{prefix}{did}.pdf')]
+        print('dossier', did, units, ('chars' if lang == 'ja' else 'words'), flush=True)
     env = dict(os.environ, NODE_PATH=basic.NODE_PATH)
     subprocess.run(['node', os.path.join(os.path.dirname(__file__), 'render_pdf.cjs')] + pairs, check=True, env=env)
 

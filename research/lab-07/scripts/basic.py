@@ -46,6 +46,12 @@ W_BIG = 1120
 TXT = {
     'en': {
         'thennow_kicker': '1 · Then and now',
+        'thennow_h2': 'The same ground, {a} and {b}',
+        'thennow_cap1': (' aerial photograph{us} — GSI Tiles <i>{layer}</i>, cropped and annotated by Japan Time '
+                          'Atlas. North is up; the frame is identical in both images.'),
+        'thennow_cap2': (' — GSI Tiles <i>{layer}</i>, cropped and annotated by Japan Time Atlas. Capture dates '
+                          'within a mosaic can differ from place to place.'),
+        'decades_cap': ' · GSI Tiles <i>{layer}</i>, processed',
         'thennow_compare': ('<b>How to compare.</b> Anchor on features that rarely move — river banks, rail lines, '
                              'shrine and temple grounds, main roads — then look for what changed around them. '
                              'Differences in tone come from film, camera and season, not from the land itself.'),
@@ -95,10 +101,17 @@ TXT = {
         'sub_landform_class': 'GSI landform classification', 'lbl_meiji': 'Meiji-era lowland',
         'sub_meiji_source': 'GSI, from maps of the 1880s–1900s', 'lbl_disasters_nearby': 'Disasters remembered nearby',
         'sub_memorials': 'Natural-disaster memorials (GSI)', 'lbl_walkmap': 'Walk map',
-        'sub_walkmap': 'Latest aerial photograph',
+        'sub_walkmap': 'Latest aerial photograph', 'under_half_pct': 'under 0.5%', 'map_link': 'map',
+        'alt_now': 'Recent aerial photograph', 'alt_natural': 'Natural landform map',
+        'alt_manmade': 'Man-made ground map', 'alt_meiji': 'Meiji-era lowland map',
+        'alt_monuments': 'Map of disaster memorials',
     },
     'ja': {
         'thennow_kicker': '1 · いまとむかし',
+        'thennow_h2': '同じ土地の{a}と{b}',
+        'thennow_cap1': 'の空中写真{us} ― 地理院タイル<i>{layer}</i>を切り出し・注記してJapan Time Atlas作成。上が北で、両方の画像は同じ範囲を写している。',
+        'thennow_cap2': ' ― 地理院タイル<i>{layer}</i>を切り出し・注記してJapan Time Atlas作成。モザイク内の撮影日は場所によって異なることがある。',
+        'decades_cap': '・地理院タイル<i>{layer}</i>を加工',
         'thennow_compare': ('<b>見比べ方。</b>川岸、鉄道の線路、神社仏閣の境内、幹線道路など位置が変わりにくい目印を'
                              '基準にして、その周りで何が変わったかを見る。色調の違いはフィルムやカメラ、撮影季節の'
                              '違いによるもので、土地そのものの変化ではない。'),
@@ -143,7 +156,10 @@ TXT = {
         'sub_landform_class': '国土地理院の地形分類', 'lbl_meiji': '明治期の低湿地',
         'sub_meiji_source': '国土地理院、1880〜1900年代の地図による', 'lbl_disasters_nearby': '周辺の災害の記憶',
         'sub_memorials': '自然災害伝承碑（国土地理院）', 'lbl_walkmap': '散策マップ',
-        'sub_walkmap': '最新の空中写真',
+        'sub_walkmap': '最新の空中写真', 'under_half_pct': '0.5%未満', 'map_link': '地図',
+        'alt_now': '最近の空中写真', 'alt_natural': '自然地形の地図',
+        'alt_manmade': '人工地形の地図', 'alt_meiji': '明治期の低湿地の地図',
+        'alt_monuments': '伝承碑の地図',
     },
 }
 
@@ -471,12 +487,17 @@ def kind_en(kind):
     return ' / '.join(KIND_EN.get(k, k) for k in kind.split('・'))
 
 
-def pct(v):
+def kind_label(kind, lang='en'):
+    """Memorial disaster-kind text: GSI's own Japanese in ja mode (never the English names)."""
+    return kind_en(kind) if lang == 'en' else kind
+
+
+def pct(v, lang='en'):
     if v >= 0.095:
         return f'{v * 100:.0f}%'
     if v >= 0.005:
         return f'{v * 100:.1f}%'
-    return 'under 0.5%'
+    return TXT[lang]['under_half_pct']
 
 
 CSS = r"""
@@ -562,8 +583,18 @@ def year_en(y):
     return y
 
 
-def build(c, mon_en):
-    out_dir = os.path.join(BUILD, c['id'])
+def year_label(y, lang='en'):
+    """Year a memorial was erected. In ja mode: exactly as GSI wrote it (its own 不明/頃 usage
+    included), never the English 'unknown'/'c. ' rendering."""
+    if lang == 'en':
+        return year_en(y)
+    return str(y) if y else TXT['ja']['unknown_year']
+
+
+def build(c, mon_en, lang='en', out_dir=None):
+    T_ = TXT[lang]
+    if out_dir is None:
+        out_dir = os.path.join(BUILD, c['id'])
     if os.path.isdir(out_dir):
         for name in os.listdir(out_dir):
             if name.endswith(('.jpg', '.png', '.html')):
@@ -573,31 +604,39 @@ def build(c, mon_en):
     cov, imgs, now = pick_series(bb)
     order = [l for l, _ in SERIES if l in imgs]
     labels = dict(SERIES)
+    lbl = labels if lang == 'en' else SERIES_JA  # display labels for the series in this build's language
     if not order:
         raise SystemExit(c['id'] + ': no historical series covers the study area')
     # the headline comparison needs a complete frame; partly covered older series stay in the decades grid
     then = next((l for l in order if cov[l] >= 0.97), order[0])
     now_layer, now_label, now_img = now
-    now_name = now_label if now_label != 'latest' else 'Latest'
-    now_text = f'{now_label} annual orthophoto' if now_label != 'latest' else 'latest seamless mosaic'
+    if lang == 'en':
+        now_name = now_label if now_label != 'latest' else 'Latest'
+        now_word = now_label if now_label != 'latest' else 'today'
+        now_text = f'{now_label} annual orthophoto' if now_label != 'latest' else 'latest seamless mosaic'
+    else:
+        now_name = T_['latest'] if now_label == 'latest' else f'{now_label}年'
+        now_word = T_['today'] if now_label == 'latest' else f'{now_label}年'
+        now_text = '最新のシームレス空中写真' if now_label == 'latest' else f'{now_label}年の年次オルソ画像'
     files = {}
-    files['then'] = save_jpg(annotate(flatten(imgs[then]), labels[then], wkm, 'Aerial photograph'), os.path.join(out_dir, 'then.jpg'))
-    files['now'] = save_jpg(annotate(flatten(now_img), now_name, wkm, 'Aerial photograph'), os.path.join(out_dir, 'now.jpg'))
+    files['then'] = save_jpg(annotate(flatten(imgs[then]), lbl[then], wkm, T_['lbl_aerial_sub'], lang), os.path.join(out_dir, 'then.jpg'))
+    files['now'] = save_jpg(annotate(flatten(now_img), now_name, wkm, T_['lbl_aerial_sub'], lang), os.path.join(out_dir, 'now.jpg'))
     mids = [l for l in order if l != then][:6]
     for l in mids:
-        files[l] = save_jpg(annotate(flatten(imgs[l]), labels[l], wkm), os.path.join(out_dir, l + '.jpg'), width=640, q=64)
-    nat_img, man_img, shares = landform_maps(bb, now_img, wkm)
+        files[l] = save_jpg(annotate(flatten(imgs[l]), lbl[l], wkm, lang=lang), os.path.join(out_dir, l + '.jpg'), width=640, q=64)
+    nat_img, man_img, shares = landform_maps(bb, now_img, wkm, lang)
     files['natural'] = save_jpg(nat_img, os.path.join(out_dir, 'natural.jpg'), q=76)
     files['manmade'] = save_jpg(man_img, os.path.join(out_dir, 'manmade.jpg'), width=980, q=62)
-    meiji_img, meiji = meiji_map(bb, now_img, wkm)
+    meiji_img, meiji = meiji_map(bb, now_img, wkm, lang)
     if meiji_img is not None:
         files['meiji'] = save_jpg(meiji_img, os.path.join(out_dir, 'meiji.jpg'), width=980, q=70)
     mons, radius, n3 = monuments_for(c['center'])
-    mm_img, mm_km = monument_map(c['center'], bb, mons, radius)
+    mm_img, mm_km = monument_map(c['center'], bb, mons, radius, lang)
     files['monuments'] = save_jpg(mm_img, os.path.join(out_dir, 'monuments.jpg'), width=860, q=68)
     japan_locator(c['center']).save(os.path.join(out_dir, 'locator.png'), optimize=True)
 
     legend = gsi.landform_legend()['classes']
+    LFK, ORK, RIK = ('en', 'origin', 'risk') if lang == 'en' else ('ja', 'origin_ja', 'risk_ja')
     lf_scale = shares.get('scale', 'detailed')
     nat = sorted(shares['natural'].items(), key=lambda kv: -kv[1])
     art = sorted(shares['artificial'].items(), key=lambda kv: -kv[1])
@@ -635,17 +674,19 @@ def build(c, mon_en):
 <p><b>What it is not.</b> Not a hazard assessment or a property survey. Landform classes describe typical tendencies of the ground; for present-day risk, read the official hazard map of the municipality.</p></div>
 <p class="small muted">Edition {TODAY}. Aerial photographs, landform and Meiji-era lowland data: Geospatial Information Authority of Japan (GSI), processed by Japan Time Atlas. Memorial data: GSI Natural Disaster Memorials, summarised and translated by Japan Time Atlas.</p>
 </section>"""
+    us_note = T_['us_military'] if then == 'ort_USA10' else ''
+    now_text_disp = (now_text[0].upper() + now_text[1:]) if lang == 'en' else now_text
     thennow = f"""<section class="page tn">
-<p class="kicker">1 · Then and now</p><h2>The same ground, {esc(labels[then])} and {esc(now_label if now_label != 'latest' else 'today')}</h2>
-<figure><img src="{files['then'][0]}" alt="Aerial photograph {esc(labels[then])}"><figcaption>{esc(labels[then])} aerial photograph{' (US military photography)' if then == 'ort_USA10' else ''} — GSI Tiles <i>{then}</i>, cropped and annotated by Japan Time Atlas. North is up; the frame is identical in both images.</figcaption></figure>
-<figure><img src="{files['now'][0]}" alt="Recent aerial photograph"><figcaption>{esc(now_text[0].upper() + now_text[1:])} — GSI Tiles <i>{now_layer}</i>, cropped and annotated by Japan Time Atlas. Capture dates within a mosaic can differ from place to place.</figcaption></figure>
-<p class="small"><b>How to compare.</b> Anchor on features that rarely move — river banks, rail lines, shrine and temple grounds, main roads — then look for what changed around them. Differences in tone come from film, camera and season, not from the land itself.</p>
+<p class="kicker">{T_['thennow_kicker']}</p><h2>{T_['thennow_h2'].format(a=esc(lbl[then]), b=esc(now_word))}</h2>
+<figure><img src="{files['then'][0]}" alt="{T_['lbl_aerial_sub']} {esc(lbl[then])}"><figcaption>{esc(lbl[then])}{T_['thennow_cap1'].format(us=us_note, layer=then)}</figcaption></figure>
+<figure><img src="{files['now'][0]}" alt="{T_['alt_now']}"><figcaption>{esc(now_text_disp)}{T_['thennow_cap2'].format(layer=now_layer)}</figcaption></figure>
+<p class="small">{T_['thennow_compare']}</p>
 </section>"""
     timeline = ''
     if mids:
-        cells = ''.join(f'<figure><img src="{files[l][0]}" alt="{esc(labels[l])}"><figcaption>{esc(labels[l])}{" (US military photography)" if l == "ort_USA10" else ""} · GSI Tiles <i>{l}</i>, processed</figcaption></figure>' for l in mids)
-        timeline = f"""<section class="page"><p class="kicker">2 · In between</p><h2>The decades in between</h2>
-<p class="small">Every further GSI series that covers the same frame, oldest first. Each series is a compilation: photographs within one series were taken on different dates, which is why seams and changes of tone can appear inside a frame.</p>
+        cells = ''.join(f'<figure><img src="{files[l][0]}" alt="{esc(lbl[l])}"><figcaption>{esc(lbl[l])}{T_["us_military"] if l == "ort_USA10" else ""}{T_["decades_cap"].format(layer=l)}</figcaption></figure>' for l in mids)
+        timeline = f"""<section class="page"><p class="kicker">{T_['decades_kicker']}</p><h2>{T_['decades_h2']}</h2>
+<p class="small">{T_['decades_note']}</p>
 <div class="grid2">{cells}</div></section>"""
 
     def legend_row(k, v, manmade=False):
@@ -654,53 +695,59 @@ def build(c, mon_en):
             sw = f'background:repeating-linear-gradient(45deg,rgb{colr[:3]} 0 1.3px,#fff 1.3px 3.6px)'
         else:
             sw = f'background:{legend[k]["color"]};opacity:.8'
-        return f'<div><span class="sw" style="{sw}"></span>{esc(legend[k]["en"])} <span class="share">{pct(v)}</span></div>'
+        return f'<div><span class="sw" style="{sw}"></span>{esc(legend[k][LFK])} <span class="share">{pct(v, lang)}</span></div>'
     nat_rows = ''.join(legend_row(k, v) for k, v in nat if v >= 0.003 and k in legend)
     art_rows = ''.join(legend_row(k, v, True) for k, v in art if v >= 0.003 and k in legend)
     risks = []
     for k, v in nat:
         if k in ('water',) or v < 0.04 or k not in legend or not legend[k].get('risk'):
             continue
-        risks.append(f'<p class="risk"><b>{esc(legend[k]["en"])}</b> ({pct(v)}). {esc(legend[k]["origin"])} <span class="muted">{esc(legend[k]["risk"])}</span></p>')
+        risks.append(f'<p class="risk"><b>{esc(legend[k][LFK])}</b> ({pct(v, lang)}). {esc(legend[k][ORK])} <span class="muted">{esc(legend[k][RIK])}</span></p>')
     if oldch and oldch < 0.04:
-        risks.append(f'<p class="risk"><b>{esc(legend["oldchannel"]["en"])}</b> ({pct(oldch)}). {esc(legend["oldchannel"]["origin"])} <span class="muted">{esc(legend["oldchannel"]["risk"])}</span></p>')
+        risks.append(f'<p class="risk"><b>{esc(legend["oldchannel"][LFK])}</b> ({pct(oldch, lang)}). {esc(legend["oldchannel"][ORK])} <span class="muted">{esc(legend["oldchannel"][RIK])}</span></p>')
     if lf_scale == 'regional':
-        note = '<p class="small muted">GSI has no detailed landform survey for this frame, so the map uses GSI\'s regional classification (compiled for zoom levels 9–13). It shows the broad landform only; former river channels and man-made ground are not mapped at that scale.</p>'
+        note = f'<p class="small muted">{T_["ground_regional"]}</p>'
     else:
-        note = '' if covered > 0.5 else '<p class="small muted">GSI\'s detailed landform survey covers only part of this frame (mainly lowland plains); unshaded ground was not classified at this scale.</p>'
-    ground = f"""<section class="page"><p class="kicker">3 · How the ground was made</p><h2>Rivers, shorelines and terraces</h2>
-<figure><img src="{files['natural'][0]}" alt="Natural landform map"><figcaption>Natural landforms as classified by GSI, over a recent aerial photograph in gray. Dark blue outlines mark former river channels.</figcaption></figure>
-<div class="legend">{nat_rows or '<div class="muted">No detailed natural landform data for this frame.</div>'}</div>{note}
-<h3>What the main landforms mean</h3>{''.join(risks[:5]) or '<p class="small muted">—</p>'}
-<p class="small muted">Descriptions translated and condensed from GSI's landform-classification legend. They describe tendencies of each landform type, not the condition of any individual plot.</p></section>"""
+        note = '' if covered > 0.5 else f'<p class="small muted">{T_["ground_partial"]}</p>'
+    ground = f"""<section class="page"><p class="kicker">{T_['ground_kicker']}</p><h2>{T_['ground_h2']}</h2>
+<figure><img src="{files['natural'][0]}" alt="{T_['alt_natural']}"><figcaption>{T_['ground_fig']}</figcaption></figure>
+<div class="legend">{nat_rows or f'<div class="muted">{T_["ground_none"]}</div>'}</div>{note}
+<h3>{T_['ground_meaning']}</h3>{''.join(risks[:5]) or '<p class="small muted">—</p>'}
+<p class="small muted">{T_['ground_credit']}</p></section>"""
     art_text = []
     for k, v in art:
         if v >= 0.02 and k in legend and legend[k].get('risk'):
-            art_text.append(f'<p class="risk"><b>{esc(legend[k]["en"])}</b> ({pct(v)}). {esc(legend[k]["origin"])} <span class="muted">{esc(legend[k]["risk"])}</span></p>')
-    meiji_rows = ''.join(f'<div><span class="sw" style="background:rgb{MEIJI_EN[k][2]}"></span>{esc(MEIJI_EN[k][0])} <span class="share">{pct(v)}</span></div>' for k, v in meiji_sorted if v >= 0.003)
-    meiji_fig = (f'<figure><img src="{files["meiji"][0]}" alt="Meiji-era lowland map"><figcaption>GSI “Meiji-era lowland” data, traced from topographic maps of the 1880s–1900s; GSI warns that positions can be off by a considerable distance, especially in the Kanto and Kinki regions. Only low, wet or open ground was traced: towns, dry fields and forest of the period are left blank.</figcaption></figure>'
+            art_text.append(f'<p class="risk"><b>{esc(legend[k][LFK])}</b> ({pct(v, lang)}). {esc(legend[k][ORK])} <span class="muted">{esc(legend[k][RIK])}</span></p>')
+    meiji_ix = 0 if lang == 'en' else 1
+    meiji_rows = ''.join(f'<div><span class="sw" style="background:rgb{MEIJI_EN[k][2]}"></span>{esc(MEIJI_EN[k][meiji_ix])} <span class="share">{pct(v, lang)}</span></div>' for k, v in meiji_sorted if v >= 0.003)
+    meiji_fig = (f'<figure><img src="{files["meiji"][0]}" alt="{T_["alt_meiji"]}"><figcaption>{T_["meiji_fig"]}</figcaption></figure>'
                  if 'meiji' in files else '')
-    meiji_leg = (f'<div><h3 style="margin-top:0">Meiji-era lowland</h3><div class="legend" style="grid-template-columns:1fr">{meiji_rows}</div></div>' if 'meiji' in files
-                 else '<div><h3 style="margin-top:0">Meiji-era lowland</h3><p class="small muted">GSI has not traced Meiji-era lowland for this frame.</p></div>')
-    manmade = f"""<section class="page stack"><p class="kicker">4 · Made by people, and the Meiji landscape</p><h2>Fill, reclamation and the fields beneath the town</h2>
-<figure><img src="{files['manmade'][0]}" alt="Man-made ground map"><figcaption>Hatching: man-made ground as classified by GSI. Teal outlines: former sea, river or pond. Dark blue outlines: former river channels.</figcaption></figure>
+    meiji_leg = (f'<div><h3 style="margin-top:0">{T_["meiji_h3"]}</h3><div class="legend" style="grid-template-columns:1fr">{meiji_rows}</div></div>' if 'meiji' in files
+                 else f'<div><h3 style="margin-top:0">{T_["meiji_h3"]}</h3><p class="small muted">{T_["meiji_none"]}</p></div>')
+    manmade = f"""<section class="page stack"><p class="kicker">{T_['manmade_kicker']}</p><h2>{T_['manmade_h2']}</h2>
+<figure><img src="{files['manmade'][0]}" alt="{T_['alt_manmade']}"><figcaption>{T_['manmade_fig']}</figcaption></figure>
 {meiji_fig}
-<div class="grid2" style="align-items:start"><div><h3 style="margin-top:0">Man-made ground</h3><div class="legend" style="grid-template-columns:1fr">{art_rows or '<div class="muted">No man-made ground mapped in this frame.</div>'}</div></div>{meiji_leg}</div>
+<div class="grid2" style="align-items:start"><div><h3 style="margin-top:0">{T_['manmade_h3']}</h3><div class="legend" style="grid-template-columns:1fr">{art_rows or f'<div class="muted">{T_["manmade_none"]}</div>'}</div></div>{meiji_leg}</div>
 {''.join(art_text[:2])}</section>"""
     rows, notes = [], []
     for i, m in enumerate(mons, 1):
-        en = mon_en.get(m['id'], {})
-        name = en.get('name_en') or '—'
-        dis = en.get('disaster_en') or m.get('dis', '')
-        rows.append(f'<tr><td class="n">{i}</td><td><b>{esc(name)}</b> <span class="jp muted" style="font-size:7pt">{esc(m["name"])}</span></td><td>{esc(dis)} <span class="muted">· {esc(kind_en(m["kind"]))}</span></td><td>{esc(year_en(m.get("year")))}</td><td style="white-space:nowrap">{m["dist_km"]:.1f} km</td></tr>')
-        if en.get('summary_en') and len(notes) < 6:
-            notes.append(f'<p class="risk"><b>{i}. {esc(name)}.</b> {esc(en["summary_en"])}</p>')
-    radius_note = '' if radius <= 3 else f'<p class="small">Fewer than three memorials stand within 3 km of the study area, so the nearest ones within {radius:.0f} km are listed.</p>'
-    disasters = f"""<section class="page stack"><p class="kicker">5 · Disasters remembered</p><h2>Memorials to natural disasters nearby</h2>
-<figure><img src="{files['monuments'][0]}" alt="Map of disaster memorials" style="max-height:92mm"><figcaption>Numbered memorials; the black rectangle is the study area of this brief. Frame {mm_km:.0f} km across.</figcaption></figure>
-{radius_note}<table><tr><th></th><th>Memorial</th><th>Disaster</th><th>Erected</th><th>Distance</th></tr>{''.join(rows) or '<tr><td colspan="5">No memorial is registered within 30 km.</td></tr>'}</table>
-<h3>What the memorials record</h3>{''.join(notes) or '<p class="small muted">English notes for these memorials are being prepared.</p>'}
-<p class="small muted">Source: GSI Natural Disaster Memorials (自然災害伝承碑). English names and notes are Japan Time Atlas translations and summaries of GSI's Japanese descriptions; the memorials' own inscriptions may say more. “Erected” is the year GSI records for the monument.</p></section>"""
+        if lang == 'ja':
+            name, name_gloss = m['name'], ''
+            dis, info = m.get('dis', ''), m.get('info', '')
+        else:
+            en = mon_en.get(m['id'], {})
+            name = en.get('name_en') or '—'
+            name_gloss = f' <span class="jp muted" style="font-size:7pt">{esc(m["name"])}</span>'
+            dis, info = en.get('disaster_en') or m.get('dis', ''), en.get('summary_en', '')
+        rows.append(f'<tr><td class="n">{i}</td><td><b>{esc(name)}</b>{name_gloss}</td><td>{esc(dis)} <span class="muted">· {esc(kind_label(m["kind"], lang))}</span></td><td>{esc(year_label(m.get("year"), lang))}</td><td style="white-space:nowrap">{m["dist_km"]:.1f} km</td></tr>')
+        if info and len(notes) < 6:
+            notes.append(f'<p class="risk"><b>{i}. {esc(name)}.</b> {esc(info)}</p>')
+    radius_note = '' if radius <= 3 else f'<p class="small">{T_["disasters_radius"].format(r=radius)}</p>'
+    disasters = f"""<section class="page stack"><p class="kicker">{T_['disasters_kicker']}</p><h2>{T_['disasters_h2']}</h2>
+<figure><img src="{files['monuments'][0]}" alt="{T_['alt_monuments']}" style="max-height:92mm"><figcaption>{T_['disasters_fig'].format(km=mm_km)}</figcaption></figure>
+{radius_note}<table><tr><th></th><th>{T_['th_memorial']}</th><th>{T_['th_disaster']}</th><th>{T_['th_erected']}</th><th>{T_['th_distance']}</th></tr>{''.join(rows) or f'<tr><td colspan="5">{T_["disasters_none"]}</td></tr>'}</table>
+<h3>{T_['disasters_meaning']}</h3>{''.join(notes) or f'<p class="small muted">{T_["disasters_notes_none"]}</p>'}
+<p class="small muted">{T_['disasters_credit']}</p></section>"""
     pg = {'photos': '2' + ('–3' if mids else ''), 'ground': str(4 if mids else 3), 'manmade': str(5 if mids else 4), 'memorials': str(6 if mids else 5)}
     sources = f"""<section class="page"><p class="kicker">6 · Sources and method</p><h2>Where every element comes from</h2>
 <ul class="src small">
