@@ -12,6 +12,12 @@
       "S9",
       "S1"
      ]
+    },
+    {
+     "text": "The name Yokosuka is older than that fishing hamlet suggests. A 1936 guide published by the city's chamber of commerce traces the Miura Peninsula's medieval lords back to the Miura clan, who held it for some four and a half centuries from the eleventh century and rose to lead the Kamakura shogunate's own military bureau; by the time the Odawara Hojo dominated the peninsula in the sixteenth century, the guide records, a named local lord, Yokosuka Aki-no-kami Sadatoki, held Yokosuka itself as a fief, with neighbouring holdings under other Hojo vassals. Only after Tokugawa Ieyasu took the Kanto region in 1590 and placed the peninsula under a shogunate magistrate did the named fief fade into the scattered, nameless fishing hamlets the 1917 study describes.",
+     "cite": [
+      "S12"
+     ]
     }
    ]
   },
@@ -78,9 +84,10 @@
    "heading": "1945: one navy replaces another",
    "paragraphs": [
     {
-     "text": "Surrender did not empty the naval base; it changed its flag. Film held in the US National Archives, and catalogued by Japan's own National Showa Memorial Museum, shows American Marines coming ashore at \"Green Beach\" on Yokosuka's southern waterfront on 30 August 1945, days before the formal surrender, moving through the city's streets to secure the former Japanese base while disarmament continued at Kurihama into early September. The US Navy has held part of the old arsenal ever since; today's Fleet Activities Yokosuka reports something like 24,500 military and civilian personnel supporting the US Navy's forward-deployed forces in the Western Pacific, on grounds that overlap the yard Verny built.",
+     "text": "Surrender did not empty the naval base; it changed its flag. Film held in the US National Archives, and catalogued by Japan's own National Showa Memorial Museum, shows American Marines coming ashore at \"Green Beach\" on Yokosuka's southern waterfront on 30 August 1945, days before the formal surrender, moving through the city's streets to secure the former Japanese base while disarmament continued at Kurihama into early September. Everything the Imperial Navy had built was confiscated; a 1950 national law allowing former naval-port cities to convert military land to civilian use let Yokosuka rebuild parts of the yard as industry and schools, and the city calls that period its turn toward becoming a \"peaceful industrial port city.\" It never fully demilitarised: the city's own current figures put US bases at three facilities across four sites, about 3.36 million square metres, alongside 37 Japanese Self-Defense Force sites covering a further 2.79 million square metres, together some 6 percent of the city's land. Some base land has gone back to civilian use over the decades, including the Inaoka district in 1982 and the former naval officers' club in 1983, but Fleet Activities Yokosuka still reports on the order of 24,500 US military and civilian personnel on grounds that overlap the yard Verny built.",
      "cite": [
       "S5",
+      "S11",
       "S8"
      ]
     }
@@ -97,16 +104,32 @@
      ]
     },
     {
-     "text": "Between the two, the town's oldest bones are easiest to find in what does not sit on fill: the old shrine ground, the natural slopes the 1923 record judged safest, and the line of the original shore now buried under Otaki-cho and Minato-cho. Almost everywhere else — the naval district's grounds, the shipyard itself, the flat approach to the station — is reclaimed or cut ground built in the four decades after Oguri's 1865 groundbreaking, a sequence still visible in the sharp edge where the Miura Peninsula's hills give way to the flat, filled shelf the modern port and base now occupy.",
+     "text": "Between the two, the town's oldest bones are easiest to find in what does not sit on fill: the old shrine ground, the natural slopes the 1923 record judged safest, and the line of the original shore now buried under Otaki-cho and Minato-cho. Almost everywhere else — the naval district's grounds, the shipyard itself, the flat approach to the station — is reclaimed or cut ground built in the four decades after Oguri's 1865 groundbreaking, a sequence still visible in the sharp edge where the Miura Peninsula's hills give way to the flat, filled shelf the modern port and base now occupy. Comparing the historical and current aerial photography held elsewhere in this dossier package over that same shelf shows how little the base's own outline has changed since the mid-twentieth century, even as the civilian city around it has been rebuilt and, in a few small districts, handed back.",
      "cite": [
       "S1",
-      "S9"
+      "S9",
+      "S10"
      ]
     }
    ]
   }
  ],
  "timeline": [
+  {
+   "when": "11th-16th centuries",
+   "what": "The Miura clan, then Sengoku-era lords including Yokosuka Aki-no-kami Sadatoki, hold the Miura Peninsula and Yokosuka itself as named fiefs.",
+   "cite": [
+    "S12"
+   ]
+  },
+  {
+   "when": "1590",
+   "what": "Tokugawa Ieyasu takes the Kanto region; a shogunate magistrate replaces local lordship, and Yokosuka fades into scattered fishing hamlets.",
+   "cite": [
+    "S12",
+    "S1"
+   ]
+  },
   {
    "when": "1853",
    "what": "American warships under Perry enter Uraga Bay, just south of this district, ending the shogunate's closed-coast policy.",
@@ -190,6 +213,20 @@
    "what": "A preservation campaign restores the neglected Mikasa; it is rededicated in 1961.",
    "cite": [
     "S6"
+   ]
+  },
+  {
+   "when": "1950",
+   "what": "A national law lets Yokosuka convert confiscated naval land to civilian industrial and educational use.",
+   "cite": [
+    "S11"
+   ]
+  },
+  {
+   "when": "1982-1985",
+   "what": "The Inaoka district, the former naval officers' club and Nagai housing are returned from US base land to civilian use.",
+   "cite": [
+    "S11"
    ]
   }
  ],
@@ -359,6 +396,32 @@
    "url": "https://maps.gsi.go.jp/development/ichiran.html",
    "checked": "2026-09-28",
    "used": "Basis for comparing historical and present-day aerial photography of the study area."
+  },
+  {
+   "id": "S12",
+   "kind": "ndl",
+   "title": "横須賀商工案内 昭和十一年版",
+   "titleEn": "Yokosuka commercial and industrial guide, 1936 edition",
+   "author": "横須賀商工会議所編 (Yokosuka Chamber of Commerce, ed.)",
+   "year": 1936,
+   "pid": "1027771",
+   "frames": [
+    22,
+    23
+   ],
+   "url": "https://dl.ndl.go.jp/pid/1027771/1/23",
+   "access": "internet",
+   "used": "The Miura clan's medieval hold on the peninsula and the named Sengoku-era lord of Yokosuka itself, Yokosuka Aki-no-kami Sadatoki, before the Tokugawa magistracy replaced local lordship in 1590."
+  },
+  {
+   "id": "S11",
+   "kind": "official",
+   "title": "横須賀市の沿革と基地の現況",
+   "titleEn": "Yokosuka City's history and the current state of its bases",
+   "publisher": "横須賀市 (Yokosuka City)",
+   "url": "https://www.city.yokosuka.kanagawa.jp/0535/kithitai/01/index.html",
+   "checked": "2026-09-28",
+   "used": "The 1950 former-naval-port conversion law, current US and Self-Defense Force base area and facility counts, and specific land returns in 1982-1985."
   }
  ],
  "furtherReading": [
