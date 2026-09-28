@@ -37,8 +37,8 @@ LF_JA = {'oldchannel': '旧河道', 'formerwater': '旧水部', 'fill': '盛土�
 
 CSS = r"""
 :root{--bg:#f3f1ea;--card:#fbfaf6;--ink:#1f2f2c;--muted:#5f6c68;--line:#d6dbd1;--accent:#1f5d56;--warn:#9a4a1c;--chip:#e6ece6}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#171c1f;--card:#1f262a;--ink:#e7e9e4;--muted:#a8b3ae;--line:#334046;--accent:#8fd0c3;--warn:#f0a36b;--chip:#2a3438}}
-:root[data-theme=dark]{--bg:#171c1f;--card:#1f262a;--ink:#e7e9e4;--muted:#a8b3ae;--line:#334046;--accent:#8fd0c3;--warn:#f0a36b;--chip:#2a3438}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#171c1f;--card:#1f262a;--ink:#e7e9e4;--muted:#a8b3ae;--line:#334046;--accent:#8fd0c3;--warn:#f0a36b;--chip:#2a3438}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#171c1f;--card:#1f262a;--ink:#e7e9e4;--muted:#a8b3ae;--line:#334046;--accent:#8fd0c3;--warn:#f0a36b;--chip:#2a3438}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.75 -apple-system,"Hiragino Sans","Yu Gothic UI","Noto Sans JP",sans-serif;overflow-wrap:anywhere}
 header,main,footer{max-width:64rem;margin:0 auto;padding:0 16px}

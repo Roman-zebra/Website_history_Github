@@ -1,7 +1,10 @@
 # Page 07 — progress (for resuming after an interruption)
 
-Branch `claude/compassionate-allen-6kj1jh`. Preview after push:
-https://claude-compassionate-allen-6kj1jh-japan-then-and-now.hiddenjapan.workers.dev/lab/07/
+Branch `claude/compassionate-allen-6kj1jh`. Branch previews are not deployed for this Worker (its
+`wrangler.jsonc` declares a Durable Object, and Cloudflare does not create preview URLs for such versions), so the
+unpublished page is shared as a private claude.ai Artifact: https://claude.ai/artifact/1sq84fDmvCUsA48WSrrRX6
+(`scripts/artifact.py <out.html>` makes that version and lists the pdf/ and img/ files to publish with it).
+On the site itself it appears at japantimeatlas.com/lab/07/ (noindex, unlinked) only once the branch is merged.
 
 - [x] Audience proxies (JNTO / JTA) → `audience.json`; Cloudflare script `scripts/cf-audience.cjs` (needs `CF_API_TOKEN`)
 - [x] Licences → `licenses.json`, `licenses.md`
@@ -12,7 +15,7 @@ https://claude-compassionate-allen-6kj1jh-japan-then-and-now.hiddenjapan.workers
 - [x] Final Basic PDFs for all 20 (`scripts/basic.py all`, fonts in $LAB07_FONTS) → `lab/07/pdf/basic-<id>.pdf`
 - [ ] Dossier JSONs (7 research agents) → `dossier/<id>.json`; PDFs via `scripts/dossier.py all`
 - [ ] Deep Research sample → `deep/sample-suo-oshima-kuka.json`; PDF via `scripts/deep.py`
-- [ ] Page → `scripts/page.py` writes `lab/07/index.html`
+- [x] Page → `scripts/page.py` writes `lab/07/index.html`; Artifact version via `scripts/artifact.py` (published 2026-09-28)
 - [x] First push of /lab/07/ with the 20 Basic PDFs (commit 285307a)
 - [ ] Final: dossier + deep PDFs, page regenerated, `node scripts/build.cjs` passes (revert the generated place/3d/visit pages it rewrites), commit, push, preview verified
 
