@@ -1,19 +1,19 @@
 {
  "id": "osaka-namba",
  "title": "A Canal Named for the Dead: Namba and Dotonbori",
- "standfirst": "Osaka's most famous canal is named after a man who never saw it finished: Yasui Doton died fighting in 1615, weeks before his ditch became a waterway of theatres and teahouses. The same delta sent tsunami up its rivers twice in recorded memory, and a plain-spoken stone still asks passers-by to keep its ink fresh so no one forgets again. This dossier follows the canal, the quarter and the flood.",
+ "standfirst": "Osaka's most famous canal is named after a man who never saw it finished: Yasui Doton died fighting in 1615, weeks before his ditch became a waterway of theaters and teahouses. The same delta sent tsunami up its rivers twice in recorded memory, and a plain-spoken stone still asks passers-by to keep its ink fresh so no one forgets again. This dossier follows the canal, the quarter and the flood.",
  "sections": [
   {
    "heading": "A sandbar at the delta's edge",
    "paragraphs": [
     {
-     "text": "Namba sits on ground the Yodo River built. Across this district's study area, more than three-fifths of the natural terrain is classed as sandbar and most of the rest as floodplain — low, flat land raised by centuries of river silt at the point where the delta's channels reached the sea. It was never solid ground so much as negotiated ground, and every century since has renegotiated it: Toyotomi-era engineers dug canals through it for defence and trade, Edo-period developers filled and platted its banks for houses, and the rivers that made the land periodically took some of it back.",
+     "text": "Namba sits on ground the Yodo River built. Across this district's study area, the Geospatial Information Authority's landform classification reads close to three-fifths of the natural terrain as sandbar and most of the rest as floodplain — low, flat land raised by centuries of river silt at the point where the delta's channels reached the sea. It was never solid ground so much as negotiated ground, and every century since has renegotiated it: Toyotomi-era engineers dug canals through it for defense and trade, Edo-period developers filled and platted its banks for houses, and the rivers that made the land periodically took some of it back.",
      "cite": [
-      "S5"
+      "S10"
      ]
     },
     {
-     "text": "Osaka City's own account of its waterways starts the story with Toyotomi Hideyoshi, who had the Higashi-Yokobori canal dug as the outer moat of Osaka Castle in the 1580s and 1590s — the first of a network that would eventually lace the whole delta. Namba and Dotonbori were never inside the castle's defences; they were the marshy, half-reclaimed land just beyond them, the kind of ground a city expands into once its centre is full. Everything this dossier describes, from a private canal dug by a man who did not live to see it finished to a licensed pleasure quarter and a tsunami stone, happened on land that was still, in living memory, more water than earth.",
+     "text": "Osaka City's own account of its waterways starts the story with Toyotomi Hideyoshi, who had the Higashi-Yokobori canal dug as the outer moat of Osaka Castle in the 1580s and 1590s — the first of a network that would eventually lace the whole delta. Namba and Dotonbori were never inside the castle's defenses; they were the marshy, half-reclaimed land just beyond them, the kind of ground a city expands into once its center is full. Everything this dossier describes, from a private canal dug by a man who did not live to see it finished to a licensed pleasure quarter and a tsunami stone, happened on land that was still, in living memory, more water than earth.",
      "cite": [
       "S5"
      ]
@@ -31,7 +31,7 @@
      ]
     },
     {
-     "text": "The following year the canal's banks were surveyed and platted into what became known as the river's \"eight towns,\" several of them, such as Soemon-cho and Kyuzaemon-cho, named after people in Yasui's own circle. Shimanouchi, the island of land the canal helped define, was still mostly empty in 1621, when Kyubei was made a chief city warden and ordered to fill it with houses; he took over the old spoil-yard on the canal's south bank, turned it into a lumber depot, and building followed. What had been a construction camp was, within a decade of Doton's death, becoming a neighbourhood.",
+     "text": "The following year the canal's banks were surveyed and platted into what became known as the river's \"eight towns,\" several of them, such as Soemon-cho and Kyuzaemon-cho, named after people in Yasui's own circle. Shimanouchi, the island of land the canal helped define, was still mostly empty in 1621, when Kyubei was made a chief city warden and ordered to fill it with houses; he took over the old spoil-yard on the canal's south bank, turned it into a lumber depot, and building followed. What had been a construction camp was, within a decade of Doton's death, becoming a neighborhood.",
      "cite": [
       "S1",
       "S3"
@@ -40,12 +40,13 @@
    ]
   },
   {
-   "heading": "Theatres, teahouses and a second canal",
+   "heading": "Theaters, teahouses and a second canal",
    "paragraphs": [
     {
-     "text": "Entertainment followed the lumber trade. The 1922 gazetteer traces Namba's first licensed pleasure quarter to Nuriya-machi, nicknamed Rokken-cho — \"six-house town\" — for the six brothel-keepers who worked there; the playwright Chikamatsu Monzaemon set a scene of one of his puppet plays among its lantern-lit lattices. The trade later spread into Soemon-cho and Gozen-cho, and a mid-nineteenth-century licensing drive in 1857 authorised fifty new teahouses in Soemon-cho and twenty in Gozen-cho; Gozen-cho's quarter had faded out within a decade, but Soemon-cho's did not, and the name still marks a nightlife lane in Dotonbori today.",
+     "text": "Entertainment followed the lumber trade. The 1922 gazetteer traces Namba's first licensed pleasure quarter to Nuriya-machi, nicknamed Rokken-cho — \"six-house town\" — for the six brothel-keepers who worked there; the playwright Chikamatsu Monzaemon set a scene of one of his puppet plays among its lantern-lit lattices. Osaka City's own 1915 history dates the canal's own theater district to 1626, when Yasui Kyubei — already at work developing Shimanouchi — obtained permission to move theaters to Dotonbori from the district then nicknamed Shibai-machi, \"theater town,\" and to open a pleasure quarter alongside them, both meant to build up the new canal's trade. The trade later spread into Soemon-cho and Gozen-cho, and a mid-nineteenth-century licensing drive in 1857 authorised fifty new teahouses in Soemon-cho and twenty in Gozen-cho; Gozen-cho's quarter had faded out within a decade, but Soemon-cho's did not, and the name still marks a nightlife lane in Dotonbori today.",
      "cite": [
-      "S1"
+      "S1",
+      "S3"
      ]
     },
     {
@@ -60,19 +61,19 @@
    "heading": "A history the delta kept repeating",
    "paragraphs": [
     {
-     "text": "The same rivers that made Namba's land also, every so often, tried to reclaim it. Osaka's 1922 gazetteer strings together a chronicle of storm surges reaching back to antiquity: a storm surge recorded for the year 753 that damaged over a hundred dwellings and drowned more than five hundred people at Settsu Mitsu-mura; another in 817; a nationwide earthquake and tsunami in 887 that struck Settsu hardest of all; and two tsunamis in successive years, 1360 and 1361, remembered locally as leaving no diver alive who had been at sea when they struck. A great storm in 1670 breached more than 4,000 ken of embankment and drove seawater over some 4,700 koku of farmland along the Kizu River mouth, sweeping large ships into the Tosabori, Denbo and Dotonbori canals.",
+     "text": "The same rivers that made Namba's land also, every so often, tried to reclaim it. Osaka's 1922 gazetteer strings together a chronicle of storm surges reaching back to antiquity: a storm surge recorded for the year 753 that damaged over a hundred dwellings and drowned more than five hundred people at Settsu Mitsu-mura; another in 817; a nationwide earthquake and tsunami in 887 that struck Settsu hardest of all; and two tsunamis in successive years, 1360 and 1361 — the second remembered locally as leaving no diver alive who had been at sea when it struck. A great storm in 1670 breached more than 4,000 ken of embankment and drove seawater over some 4,700 koku of farmland along the Kizu River mouth, sweeping large ships into the Tosabori, Denpo and Dotonbori canals.",
      "cite": [
       "S1"
      ]
     },
     {
-     "text": "A closer call, in institutional memory if not in scale, came on 23 August 1670, when a great storm breached more than 4,000 ken of embankment along the Kizu River mouth and the Shikanjima channel. Ninety-two houses belonging to the shogunate's own boatmen's corps were swept away and 121 of its retainers and foot soldiers drowned; more than 330 houses were destroyed across villages from Shikanjima to Kizu-mura and Imazaike-mura, some 4,700 koku of farmland went under salt water, and large ships were carried bodily into the Tosabori, Denbo and Dotonbori canals — the same three names that would recur, worse, less than four decades later.",
+     "text": "A closer call, in institutional memory if not in scale, came on 6 October 1670, when a great storm breached more than 4,000 ken of embankment along the Kizu River mouth and the Shikanjima channel. Ninety-two houses belonging to the shogunate's own boatmen's corps were swept away and 121 of its retainers and foot soldiers drowned; more than 330 houses were destroyed across villages from Shikanjima to Kizu-mura and Imazaike-mura, some 4,700 koku of farmland went under salt water, and large ships were carried bodily into the Tosabori, Denpo and Dotonbori canals — the same three names that would recur, worse, less than four decades later.",
      "cite": [
       "S1"
      ]
     },
     {
-     "text": "The clearest rehearsal for what came later struck on 4 October 1707, in the earthquake known as the Hoei quake. The gazetteer's account has the sea bed roaring before the water came, a tsunami surging in from a sandbar at the Kizugawa river mouth, and small boats crowded with fleeing residents crushed under larger vessels the wave drove upstream as far as Nihonbashi; bystanders on the banks, it says, could only watch. Osaka's toll that day, by the same account, was 1,774 houses collapsed, 541 people drowned, 45 bridges destroyed or damaged, and more than 950 boats of all kinds wrecked or lost. It was a disaster large enough, one might think, that no one downstream would ever need reminding of it again.",
+     "text": "The clearest rehearsal for what came later struck on 28 October 1707, in the earthquake known as the Hoei quake. The gazetteer's account has the sea bed roaring before the water came, a tsunami surging in from a sandbar at the Kizugawa river mouth, and small boats crowded with fleeing residents crushed under larger vessels the wave drove upstream as far as Nipponbashi; bystanders on the banks, it says, could only watch. Osaka's toll that day, by the same account, was 1,774 houses collapsed, 541 people drowned, 45 bridges destroyed or damaged, and more than 950 boats of all kinds wrecked or lost. It was a disaster large enough, one might think, that no one downstream would ever need reminding of it again.",
      "cite": [
       "S1"
      ]
@@ -83,14 +84,14 @@
    "heading": "The night the two river mouths flooded",
    "paragraphs": [
     {
-     "text": "They needed reminding within a century and a half. An earthquake shook Osaka on the night of 14 June 1854, and after weeks of aftershocks a far larger one struck on the morning of 4 November, damaging houses across Temma, Dojima, Nakanoshima and the western wards while sparing the higher ground of Uemachi. The real disaster came the next afternoon: a second great shock set the sea bed roaring again, and a tsunami surged up from a sandbar at the mouth of the Kizu River. Large coastal ships anchored in the rivers snapped their moorings and were driven upstream by the wave; on the Dotonbori canal every bridge as far as Daikoku-bashi was knocked down by the battering hulls, and small boats already crowded with old people, children and household goods — loaded there in fear of the earthquake — were crushed beneath the larger vessels as onlookers on the bank could do nothing to help. By the gazetteer's count for this stretch of river alone, 273 people drowned and ten bridges were lost; a separate national earthquake survey puts Osaka's citywide toll at roughly 1,500 vessels destroyed and 392 drowned.",
+     "text": "They needed reminding within a century and a half. An earthquake shook Osaka on the night of 9 July 1854, and after weeks of aftershocks a far larger one struck on the morning of 23 December, damaging houses across Temma, Dojima, Nakanoshima and the western wards while sparing the higher ground of Uemachi. The real disaster came the next afternoon: a second great shock set the sea bed roaring again, and a tsunami surged up from a sandbar at the mouth of the Kizu River. Large coastal ships anchored in the rivers snapped their moorings and were driven upstream by the wave; on the Dotonbori canal every bridge as far as Daikoku-bashi was knocked down by the battering hulls, and small boats already crowded with old people, children and household goods — loaded there in fear of the earthquake — were crushed beneath the larger vessels as onlookers on the bank could do nothing to help. By the gazetteer's count for this stretch of river alone, 273 people drowned and ten bridges were lost; a separate national earthquake survey puts Osaka's citywide toll at roughly 1,500 vessels destroyed and 392 drowned.",
      "cite": [
       "S1",
       "S2"
      ]
     },
     {
-     "text": "Local residents raised a stone to it the following year, and it still stands, now a registered tangible cultural property of Osaka City, at Sachimachi 3-chome by the east end of Taisho Bridge. Its inscription, reproduced in full in the 1922 gazetteer, is written not in the gazetteer's formal style but in a plain, almost breathless voice, closing with the reason for its own existence: it notes that the Hoei disaster of 1707 was already a distant memory only 148 years later, so that few now living had heard of it, \"and therefore so many again came to harm\" in 1854 — and it asks that its own text be kept freshly inked, so that future generations, whenever the ground shakes hard near the sea, will remember to expect a tsunami and get to high ground.",
+     "text": "Local residents raised a stone to it the following year, and it still stands, now a city-designated tangible cultural property of Osaka, at Sachimachi 3-chome by the east end of Taisho Bridge. Its inscription, reproduced in full in the 1922 gazetteer, is written not in the gazetteer's formal style but in a plain, almost breathless voice, closing with the reason for its own existence: it notes that the Hoei disaster of 1707 was already a distant memory only 148 years later, so that few now living had heard of it, \"and therefore so many again came to harm\" in 1854 — and it asks that its own text be kept freshly inked, so that future generations, whenever the ground shakes hard near the sea, will remember to expect a tsunami and get to high ground.",
      "cite": [
       "S1",
       "S9"
@@ -102,13 +103,14 @@
    "heading": "Embankments, storms and a canal district cut in half",
    "paragraphs": [
     {
-     "text": "River engineering became more permanent, if less poetic, as Osaka built its modern port. Between June 1898 and December 1899, in two contracted phases, the city's port office faced the north bank of the Kizu River near Chishima-cho with a stone-and-earth revetment more than 1,600 ken long, part of the same port-construction programme that gave Osaka its modern harbour works. It did not stop the weather: the Muroto Typhoon of 21 September 1934 drove a storm surge back up the same rivers, and this dossier's companion Basic brief sets out the district's own memorial stones and the city's official casualty count for that day, and for the later storms that followed it.",
+     "text": "River engineering became more permanent, if less poetic, as Osaka built its modern port. Between June 1898 and December 1899, in two contracted phases, the city's port office faced the north bank of the Kizu River near Chishima-cho with a stone-and-earth revetment more than 1,600 ken long, part of the same port-construction program that gave Osaka its modern harbor works. It did not stop the weather: the Muroto Typhoon of 21 September 1934 drove a storm surge back up the same rivers, as it did up the Ajikawa, and this dossier's companion Basic brief sets out the district's own memorial stones and the city's official casualty count for that day, and for the later storms that followed it.",
      "cite": [
-      "S4"
+      "S4",
+      "S11"
      ]
     },
     {
-     "text": "War reached Namba by air rather than by water. Osaka's prefectural police recorded, in an October 1945 tally still cited by the city's own peace museum today, 12,620 dead and 2,173 missing across the city from the wartime air raids — close to 15,000 casualties in all, including Korean and Chinese residents among the dead — and a project begun in 2002 to identify every victim by name had reached 9,171 names by the museum's most recent count. Peace, once it came, still reworked the district's water: with the sewers finally doing the work canals once did, and with wartime rubble needing somewhere to go, Osaka City filled in most of its historic canal network after 1945. Of a network that had once included Temma-bori, Nagahori, Namba-shinkawa and a dozen others, only the Higashi-Yokobori, Hideyoshi's sixteenth-century castle moat, and the Dotonbori itself survive as open water today.",
+     "text": "War reached Namba by air rather than by water. Osaka's prefectural police recorded, in an October 1945 tally still cited by Osaka's own peace museum today, 12,620 dead and 2,173 missing across the prefecture from the wartime air raids — close to 15,000 casualties in all, including Korean and Chinese residents among the dead — and a project begun in 2002 to identify every victim by name had reached 9,171 names by the museum's most recent count. Peace, once it came, still reworked the district's water: with the sewers finally doing the work canals once did, and with wartime rubble needing somewhere to go, Osaka City filled in most of its historic canal network after 1945. Of a network that had once included Temma-bori, Nagahori, Namba-shinkawa and a dozen others, only the Higashi-Yokobori, Hideyoshi's sixteenth-century castle moat, and the Dotonbori itself survive as open water today.",
      "cite": [
       "S7",
       "S5"
@@ -120,13 +122,13 @@
    "heading": "Reading the ground today",
    "paragraphs": [
     {
-     "text": "Dotonbori's most photographed feature has its own layered history. The first Glico sign, a 33-metre neon tower with a runner in six flashing colours, went up near Ebisu-bashi in 1935 and was pulled down for its metal in 1943; the version visitors photograph today, switched on in 2014 with some 140,000 LED units, is the sixth in a lineage that survived the war only as an idea, rebuilt from scratch in 1955, refitted into a fountain of coloured light in 1963, and redesigned twice more before the current sign went up.",
+     "text": "Dotonbori's most photographed feature has its own layered history. The first Glico sign, a 33-meter neon tower with a runner in six flashing colors, went up near Ebisu-bashi in 1935 and was pulled down for its metal in 1943; the version visitors photograph today, switched on in 2014 with some 140,000 LED units, is the sixth in a lineage that survived the war only as an idea, rebuilt from scratch in 1955, refitted into a fountain of colored light in 1963, and redesigned twice more before the current sign went up.",
      "cite": [
       "S6"
      ]
     },
     {
-     "text": "War also reshaped Hozenji, the small temple a short walk from the canal whose moss-covered Fudo Myo-o statue is now one of Namba's most recognisable images. Air raids destroyed the temple's buildings in 1945, but the statue itself survived the fire; the custom of pouring water over it, which gave it both its covering of moss and its popular name, the Mizukake Fudo, took hold only after the war, as a way of drawing the district back to life. Between that statue, Soemon-cho's surviving name, and a tsunami stone at Taisho Bridge that still asks to be kept legible, Namba's ground carries more of its own history in plain sight than its crowds of visitors usually realise.",
+     "text": "War also reshaped Hozenji, the small temple a short walk from the canal whose moss-covered Fudo Myo-o statue is now one of Namba's most recognizable images. Air raids destroyed the temple's buildings in 1945, but the statue itself survived the fire; the custom of pouring water over it, which gave it both its covering of moss and its popular name, the Mizukake Fudo, took hold only after the war, as a way of drawing the district back to life. Between that statue, Soemon-cho's surviving name, and a tsunami stone at Taisho Bridge that still asks to be kept legible, Namba's ground carries more of its own history in plain sight than its crowds of visitors usually realise.",
      "cite": [
       "S8"
      ]
@@ -172,14 +174,14 @@
    ]
   },
   {
-   "when": "1707 (4 Oct)",
+   "when": "1707 (28 Oct)",
    "what": "The Hoei earthquake sends a tsunami up the Kizu River mouth; Osaka counts 541 drowned.",
    "cite": [
     "S1"
    ]
   },
   {
-   "when": "1854 (4–5 Nov)",
+   "when": "1854 (23–24 Dec)",
    "what": "The Ansei earthquakes are followed by a tsunami that sweeps ships up the Dotonbori and Aji rivers.",
    "cite": [
     "S1",
@@ -212,7 +214,8 @@
    "when": "1934 (21 Sep)",
    "what": "The Muroto Typhoon drives a storm surge back up the district's rivers.",
    "cite": [
-    "S4"
+    "S4",
+    "S11"
    ]
   },
   {
@@ -241,7 +244,7 @@
  "walk": [
   {
    "name": "Dotonbori canal and Ebisu-bashi",
-   "ja": "道頃堀・戸肥池",
+   "ja": "道頓堀・戎橋",
    "what": "The water itself is the 1615 canal, one of only two Edo-period waterways left open in central Osaka; the Glico sign above Ebisu-bashi is the sixth of a line going back to 1935.",
    "cite": [
     "S1",
@@ -267,7 +270,7 @@
   },
   {
    "name": "The tsunami stone at Taisho Bridge",
-   "ja": "大正橋・大地震両川口津波記磑",
+   "ja": "大正橋・大地震両川口津波記碑",
    "what": "Erected in 1855 at the east end of the bridge, its plain-spoken inscription describes the 1854 tsunami and asks that its text be kept freshly inked so later generations do not forget, as Osaka had forgotten the 1707 disaster.",
    "cite": [
     "S1",
@@ -276,7 +279,7 @@
   },
   {
    "name": "The Kizu River embankment near Chishima-cho",
-   "ja": "木津川护岸（千島町附近）",
+   "ja": "木津川護岸（千島町附近）",
    "what": "The riverbank here was faced in stone and earth in 1898–99 as part of Osaka's modern port works, replacing the informal banks the 1854 tsunami had overrun.",
    "cite": [
     "S4"
@@ -328,11 +331,12 @@
    "year": 1915,
    "pid": "980475",
    "frames": [
-    150
+    150,
+    203
    ],
    "url": "https://dl.ndl.go.jp/pid/980475/1/150",
    "access": "internet",
-   "used": "Osaka City's own account of the Dotonbori canal's four founders, Doton's death in battle, and Matsudaira Tadaakira's naming of the finished canal, confirming the account in S1."
+   "used": "Osaka City's own account of the Dotonbori canal's four founders, Doton's death in battle, and Matsudaira Tadaakira's naming of the finished canal, confirming the account in S1; frame 203's 1626 licensing of Dotonbori's theater district and pleasure quarter under Yasui Kyubei."
   },
   {
    "id": "S4",
@@ -362,7 +366,7 @@
   {
    "id": "S6",
    "kind": "official",
-   "title": "道頃堀グリコサイン",
+   "title": "道頓堀グリコサイン",
    "titleEn": "The Dotonbori Glico sign",
    "publisher": "大阪市中央区 (City of Osaka, Chuo Ward)",
    "url": "https://www.city.osaka.lg.jp/chuo/page/0000645831.html",
@@ -392,23 +396,43 @@
   {
    "id": "S9",
    "kind": "official",
-   "title": "10. 大地震両川口津波記磑",
+   "title": "10. 大地震両川口津波記碑",
    "titleEn": "10. The two-river-mouths tsunami-record stone",
    "publisher": "大阪市 (City of Osaka)",
    "url": "https://www.city.osaka.lg.jp/kensetsu/page/0000009541.html",
    "checked": "2026-09-28",
    "used": "The stone's 1855 erection date, its present location at Taisho Bridge, its inscription's request to be kept legible, and the city's own casualty figures for the 1854 tsunami."
+  },
+  {
+   "id": "S10",
+   "kind": "official",
+   "title": "地形分類（自然地形・人工地形）ベクトルタイル",
+   "titleEn": "Landform classification (natural and artificial) vector tiles",
+   "publisher": "国土地理院 (Geospatial Information Authority of Japan)",
+   "url": "https://github.com/gsi-cyberjapan/experimental_landformclassification",
+   "checked": "2026-09-28",
+   "used": "Classification of the study area as close to three-fifths sandbar and most of the rest flood plain."
+  },
+  {
+   "id": "S11",
+   "kind": "institution",
+   "title": "80年前に大阪を襲った室戸台風",
+   "titleEn": "The Muroto Typhoon that struck Osaka 80 years ago",
+   "publisher": "大阪歴史博物館 (Osaka Museum of History)",
+   "url": "https://www.osakamushis.jp/news/2014/tenjigae/140916.html",
+   "checked": "2026-09-28",
+   "used": "The Muroto Typhoon's storm surge flooding roughly 27% of Osaka's built-up area and sweeping moored vessels far upstream on the Ajikawa, confirming the surge reached the district's rivers."
   }
  ],
  "furtherReading": [
   {
    "title": "浪速叢書 第12（船越政一郎 編, 1927）",
    "url": "https://dl.ndl.go.jp/pid/3436503",
-   "access": "transmission",
+   "access": "internet",
    "why": "A compiled anthology of old Naniwa texts, including reprinted Edo-period accounts of Namba's twelve views and ten sights; useful for cross-checking the district's early-modern reputation."
   },
   {
-   "title": "蘀分船：難波名所（一無軒道治 著, 延宝頃、古版地誌刊行会編, 1924復刻）",
+   "title": "蘆分船：難波名所（一無軒道冶 著, 延宝頃、古版地誌刊行会編, 1924復刻）",
    "url": "https://dl.ndl.go.jp/pid/1246160",
    "access": "internet",
    "why": "A reprint of a 17th-century guide to Naniwa's famous places with its own Dotonbori entry (frame 20); listed here rather than cited because this session's OCR of its cursive text could not be read reliably."
@@ -416,13 +440,13 @@
   {
    "title": "東区史（大阪市東区役所 編, 1942）",
    "url": "https://dl.ndl.go.jp/pid/1042191",
-   "access": "transmission",
+   "access": "internet",
    "why": "A ward-level history covering the districts on the Dotonbori's north bank in more administrative detail than this dossier could verify from internet-open sources."
   },
   {
    "title": "明治大正大阪市史（大阪市役所 編, 1934）",
    "url": "https://dl.ndl.go.jp/pid/1236998",
-   "access": "transmission",
+   "access": "internet",
    "why": "Osaka City's own Meiji–Taisho-era city history, a natural continuation of the Edo-period material cited here into the era of the port works and early Minami entertainment industry."
   },
   {
@@ -436,12 +460,12 @@
   {
    "what": "Original leasehold and water-register (mizucho) records for the Dotonbori \"eight towns\" and Sachimachi",
    "where": "Osaka City Central Library's local history division and the Osaka Museum of History",
-   "how": "Search the library's digital archive for 道頃堀川とwater-register documents (mizucho) by town name; the museum's research division can advise on surviving Edo-period cadastral records."
+   "how": "Search the library's digital archive for 道頓堀川と water-register documents (mizucho) by town name; the museum's research division can advise on surviving Edo-period cadastral records."
   },
   {
    "what": "Administrative and engineering records of the 1854 tsunami relief effort and the 1855 stone's erection",
    "where": "Osaka Prefectural Archives (大阪府公文書館) and Osaka City's cultural properties section, which administers the stone's 2007 designation",
-   "how": "Search the prefectural archive catalogue for 安政大地震 and 津波 administrative files from 1854–55; contact the cultural properties section for the 2007 designation report."
+   "how": "Search the prefectural archive catalog for 安政大地震 and 津波 administrative files from 1854–55; contact the cultural properties section for the 2007 designation report."
   },
   {
    "what": "Full contemporary records of the 1707 Hoei tsunami's effect on the Dotonbori and Kizu river frontage",
@@ -449,8 +473,8 @@
    "how": "Search each museum's collection database for 宝永地震 Osaka-related items; request viewing through their research-access procedures."
   },
   {
-   "what": "Individual company and shop records for the Dotonbori theatre and teahouse district before 1945",
-   "where": "Osaka Museum of History and the Shochiku company archive (successor to several Dotonbori theatres)",
+   "what": "Individual company and shop records for the Dotonbori theater and teahouse district before 1945",
+   "where": "Osaka Museum of History and the Shochiku company archive (successor to several Dotonbori theaters)",
    "how": "Contact the museum's business-history collections desk and Shochiku's corporate archive directly; some prewar playbills and account books are known to survive in private hands."
   },
   {
@@ -462,7 +486,7 @@
  "caveats": [
   "Casualty figures for the 1854 tsunami differ by scope: this dossier's main NDL source counts 273 drowned along the Dotonbori/Namba river frontage specifically, while a national earthquake-history source and an official Osaka City page give citywide figures of roughly 392 and \"over 600\" drowned respectively; all describe the same event at different geographic scales.",
   "A reprinted 17th-century guidebook to Naniwa (Ashiwakebune, 1679) has its own Dotonbori entry, but this session's OCR of its old cursive typeface could not be read reliably enough to cite; it is listed in furtherReading instead.",
-  "One frame reference that appeared to give an exact 1626 date for the licensing of Dotonbori's first theatres and pleasure quarter could not be confirmed: the large compiled volume it came from (Osaka City History vol. 1) has an unreliable correspondence between full-text search position and actual scanned frame number, and the frame this dossier was able to verify at that position discussed an unrelated topic. The dossier therefore describes the quarter's early growth without committing to that specific year.",
   "This dossier omits a historically documented but discriminatory place name for a small fort once standing at the Dotonbori river mouth, used during the 1614 Siege of Osaka; the name targets a premodern outcaste group and is not essential to the district's history as told here."
- ]
+ ],
+ "checked": "2026-09-28"
 }

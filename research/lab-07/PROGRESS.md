@@ -13,11 +13,11 @@ On the site itself it appears at japantimeatlas.com/lab/07/ (noindex, unlinked) 
 - [x] NDL Digital Collections full-text survey for all 20 → `ndl-fulltext/<id>.json` (`scripts/ndl_fulltext.py`)
 - [x] English memorial notes → `monuments-en.json` (subagent)
 - [x] Final Basic PDFs for all 20 (`scripts/basic.py all`, fonts in $LAB07_FONTS) → `lab/07/pdf/basic-<id>.pdf`
-- [ ] Dossier JSONs (7 research agents) → `dossier/<id>.json`; PDFs via `scripts/dossier.py all`
-- [ ] Deep Research sample → `deep/sample-suo-oshima-kuka.json`; PDF via `scripts/deep.py`
+- [x] Dossier JSONs for all 20 districts → `dossier/<id>.json`, each fact-checked against its cited sources (`scripts/fetch_sources.py`, `scripts/verify_sources.py`, reports in the session scratchpad) and dated with `"checked"`; PDFs via `scripts/dossier.py all`
+- [x] Deep Research sample → `deep/sample-suo-oshima-kuka.json` (checked); PDF via `scripts/deep.py`
 - [x] Page → `scripts/page.py` writes `lab/07/index.html`; Artifact version via `scripts/artifact.py` (published 2026-09-28)
 - [x] First push of /lab/07/ with the 20 Basic PDFs (commit 285307a)
-- [ ] Final: dossier + deep PDFs, page regenerated, `node scripts/build.cjs` passes (revert the generated place/3d/visit pages it rewrites), commit, push, preview verified
+- [x] Final: dossier + deep PDFs rendered, page regenerated, private Artifact republished. Browser findings from `claude/lab07-chrome-checks` (`chrome/findings.json`) C04-C09, C13, C17, C20, C21 applied.
 
 Fonts for the PDFs (Source Serif 4, Inter, Noto Sans JP; OFL) are downloaded from Google Fonts into the scratchpad, not
 committed. Chromium needs the agent proxy CA in `~/.pki/nssdb` (certutil) to open NDL pages.

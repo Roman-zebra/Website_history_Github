@@ -106,10 +106,11 @@
    "heading": "The Commonwealth at Kure",
    "paragraphs": [
     {
-     "text": "Defeat brought a different kind of occupation. A history of Hiroshima Prefecture's police records that the British and Australian-led force occupying Hiroshima, Shimane and Yamaguchi prefectures after the war placed its own headquarters at Kure and administered military government over all three from there; Australian troops were stationed at the Kure base from September 1946 and used an army training ground further inland for exercises. The former Imperial Naval Academy on the nearby island of Etajima became one of the occupying force's main facilities, employing thousands of Japanese laborers in its operation; a photograph reproduced in the city's own official history shows some of them building a pumping station for the Commonwealth headquarters there on 26 November 1947, after the base ran short of water.",
+     "text": "Defeat brought a different kind of occupation. The British Commonwealth Occupation Force (BCOF) — troops from Britain, India, New Zealand and Australia, about 45,000 in all, of whom roughly 16,000 were Australian — landed its main body at Kure on 21 February 1946 and made the former naval port its headquarters, administering Hiroshima, Shimane, Yamaguchi, Tottori and Okayama prefectures and Shikoku on the Allied occupation's behalf. A history of Hiroshima Prefecture's police records that Commonwealth troops based at Kure used an army training ground further inland for exercises from September 1946. The former Imperial Naval Academy on the nearby island of Etajima became the occupying force's general headquarters, its full facilities put to work running the occupation and employing thousands of Japanese laborers; a photograph reproduced in the city's own official history shows some of them building a pumping station for the Commonwealth headquarters there on 26 November 1947, after the base ran short of water.",
      "cite": [
       "S9",
-      "S10"
+      "S10",
+      "S13"
      ]
     }
    ]
@@ -223,10 +224,10 @@
    ]
   },
   {
-   "when": "September 1946",
-   "what": "Australian-led Commonwealth occupation troops, headquartered at Kure, are stationed at the base.",
+   "when": "21 February 1946",
+   "what": "The main body of the British Commonwealth Occupation Force -- troops from Britain, India, New Zealand and Australia -- lands at Kure and makes the former naval port its headquarters.",
    "cite": [
-    "S9"
+    "S13"
    ]
   },
   {
@@ -414,6 +415,16 @@
    "url": "https://maps.gsi.go.jp/",
    "checked": "2026-09-28",
    "used": "The July 2018 debris-flow disaster in Yoshiura and its death toll."
+  },
+  {
+   "id": "S13",
+   "kind": "institution",
+   "title": "British Commonwealth Occupation Force 1945–52",
+   "titleEn": "British Commonwealth Occupation Force 1945–52",
+   "publisher": "Australian War Memorial",
+   "url": "https://www.awm.gov.au/articles/atwar/bcof",
+   "checked": "2026-09-28",
+   "used": "The main body of Australian troops' arrival at Kure on 21 February 1946; BCOF's total strength (about 45,000, including roughly 16,000 Australians, with British, Indian and New Zealand troops); and the full list of prefectures and Shikoku it administered."
   }
  ],
  "furtherReading": [
@@ -457,7 +468,7 @@
   {
    "what": "British and Australian-side records of BCOF's headquarters functions at Kure and its facilities on Etajima",
    "where": "National Archives of Australia, the Australian War Memorial, and the UK National Archives (Kew)",
-   "how": "Search by unit war diaries for BCOF headquarters and its Kure/Etajima area commands; this session could not reach these archives' websites directly and could not confirm precise troop numbers or the force's full command structure."
+   "how": "Search by unit war diaries for BCOF headquarters and its Kure/Etajima area commands; this session reached the Australian War Memorial's own summary page directly (see source S13) but not these two archives' own finding aids, and could not confirm the force's full command structure beyond its four contributing countries."
   },
   {
    "what": "Full casualty and building-loss records for the four 1945 air raids on Kure and the mine-laying campaign",
@@ -477,8 +488,9 @@
  ],
  "caveats": [
   "Two sources used here (from 1935 and 1943) both date the Kure chinjufu's formal opening ceremony to 1890, a year after the naval ordinance that created it (28 May 1889) and the arrival of its first commander (22 June 1889); this dossier reports both dates rather than resolving the apparent gap on its own authority.",
-  "This dossier could not reach Australian government or war-memorial websites this session (repeated server errors), so BCOF facts here rely on Japanese library and archive sources (via the Collaborative Reference Database) rather than an English-language institutional account; troop numbers and the force's full command structure are not stated here because they could not be verified.",
+  "This dossier's BCOF facts are checked against the Australian War Memorial's own account, reached directly in this session, for the force's arrival date, total strength and the prefectures it administered. Japanese library and archive sources (via the Collaborative Reference Database) supply the remaining detail used here: Commonwealth troops' use of an inland training ground from September 1946, and Japanese laborers' work for the force at Etajima. The Department of Veterans' Affairs' Anzac Portal returned a server error and could not be checked; BCOF's full command structure beyond its four contributing countries is not stated here because it could not be verified.",
   "The exact construction date of the Irifuneyama commander-in-chief's residence, and the exact year of Kure's Japan Heritage designation, could not be confirmed from the official pages read this session and are therefore not stated.",
   "Casualty figures for the 1945 and 1967 disasters and the 2018 Yoshiura debris flow come from this project's own disaster-memorial dataset (drawn from the Geospatial Information Authority's Natural Disaster Legacy Monuments register) rather than from a source independently read in full this session."
- ]
+ ],
+ "checked": "2026-09-28"
 }
