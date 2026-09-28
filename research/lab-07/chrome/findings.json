@@ -283,7 +283,7 @@
       "target": "dossier/nagasaki-dejima.json",
       "answers": "caveat: the 1997 architectural study of the Tojin Yashiki could not be opened through NDL Lab",
       "status": "omission-confirmed",
-      "summary": "The item is 李陽浩『長崎唐人屋敷に関する建築的研究』(1997), pid 3135802, 57 frames. Its record says インターネット公開（許諾） and ログインなしで閲覧可能, and the viewer's search does return frames (元禄二年: 4, 14, 17, 19, 22, 24; 十善寺: 14, 17, 26, 40; 焼失: 40). But from a connection in Japan in desktop Chrome the viewer never loads a page image, and the IIIF service answers HTTP 404 with {\"checkResult\": \"NG\"} for this pid (the same service returns 200 for pid 912951). So the text cannot actually be read online today; keeping it out of the cited sources is right.",
+      "summary": "The item is 李陽浩『長崎唐人屋敷に関する建築的研究』(1997), pid 3135802, 57 frames. Its record says インターネット公開（許諾） and ログインなしで閲覧可能, and the viewer's search does return frames (元禄二年: 4, 14, 17, 19, 22, 24; 十善寺: 14, 17, 26, 40; 焼失: 40). But from a connection in Japan in desktop Chrome the viewer never loads a page image, and the IIIF service answers HTTP 404 with {\"checkResult\": \"NG\"} for this pid (the same service returns 200 for pid 912951). So the text cannot actually be read online today; keeping it out of the cited sources is right. Re-checked after letting the NDL viewer run its own access checks (api/check/allowedContents/internet/view): the IIIF service still answers 404 checkResult NG, the item's IIIF manifest URL is empty, and the page JPEG listed in the item record (contents/3135802/.../f70fd564-....jpg for frame 14) answers HTTP 401. The images are not publicly served, whatever the catalogue label says.",
       "suggestedCaveat": "One further-reading item, a 1997 architectural study of the Tojin Yashiki (NDL pid 3135802), is catalogued as open online, but on 28 September 2026 its page images were not being served (NDL's image service refused the item), so it is listed but not cited.",
       "sources": []
     },
@@ -477,7 +477,7 @@
       "id": "C11",
       "target": "deep/sample-suo-oshima-kuka.json",
       "answers": "limits and lead: GSI's map- and aerial-photograph ordering service was unreachable; which old map sheet shows Kuka is unknown",
-      "status": "partly-resolved",
+      "status": "resolved (see C17)",
       "summary": "The service was not blocked: its old domain mapps.gsi.go.jp no longer exists (DNS NXDOMAIN in Chrome too). GSI renewed the service on 7 March 2026 at https://service.gsi.go.jp/map-photos/app/ (map search, aerial photographs, map editions 図歴, request basket); viewing at best quality and ordering copies need a free GSI online reading-room account, valid one year. Map sheets covering Kuka (33.9377N, 132.2670E), from the service's public sheet-grid data: 1:50,000 久賀 (sheet 116-9; latest edition listed 1994-02-01) and 1:25,000 久賀 (116-9-3; latest 2019-07-01); 1:200,000 松山. The edition history of those sheets sits behind the service's terms-of-use screen, which was not accepted in this session (the owner decides), so the Meiji/Taisho edition dates are still open. Since 1 September 2025 GSI sells scans of its old (柾判) 1:25,000 and 1:50,000 sheets: TIFF, 600 dpi, about 460 x 580 mm, ¥610 per sheet including tax, delivered online through the Japan Map Center shop (page updated 2026-04-01).",
       "leadUpdate": "Replace 'telephone GSI's map-sales counter' with: search sheet 5万分1『久賀』(116-9) and 2万5千分1『久賀』(116-9-3) in the Map & Aerial Photo service's map-edition (図歴) search, then buy the oldest editions as old-map data (¥610 each). Licence check needed before any image of a purchased sheet goes into a paid PDF (Survey Act copying rules); a client can buy the same sheets directly.",
       "retry": "The cloud session reaches other gsi.go.jp hosts, so it can probably query service.gsi.go.jp itself now that the new address is known.",
@@ -630,6 +630,119 @@
           "used": "1889 naval station; 1905; wartime arsenal of some 50,000; 966 aircraft; 22 Sep 1945 landing; June 1946 establishment."
         }
       ]
+    },
+    {
+      "id": "C17",
+      "target": "deep/sample-suo-oshima-kuka.json",
+      "answers": "limits/lead: which old topographic map sheet shows Kuka in the Meiji or Taisho era",
+      "status": "resolved",
+      "summary": "Edition history (図歴) from GSI's Map and Aerial Photograph Service, read through the service's own history endpoint (/map-photos/app/api/history/<sheet id>) after the owner allowed accepting its terms. 1:50,000 sheet 久賀 (116-9): surveyed 1899 (Meiji 32), first published 28 December 1901 (list number 116-9-1), reprinted 30 September 1905 (116-9-12); revised 1928 (Showa 3), printed 25 and 30 August 1946; 'emergency revision' 1949 printed 1951, 1956 and 1962; supplementary survey 1963 (printed 1967); compiled 1969 (1970); revised 1979 (1982) and 1993 (1994). No Taisho edition is listed. 1:25,000 sheet 久賀 (116-9-3) begins only with the 1968 survey (printed 30 September 1970), then 1979, 1992, 2003 and 2019. So the map that shows Kuka as the emigrants left it is the 1:50,000 久賀 sheet surveyed in 1899 and printed in 1901; the next look is the 1928 revision.",
+      "suggestedText": "The oldest official map of Kuka is the 1:50,000 'Kuka' sheet, surveyed in 1899, fourteen years after the first government-sponsored departures for Hawaii, and printed in 1901; the next revision is dated 1928. GSI sells 600-dpi scans of its old sheets for ¥610 each.",
+      "note": "Check that the 1901 sheet is among the old-map scans on sale (the ¥610 product covers 柾判 old editions; the service marks lost sheets separately).",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "地図・空中写真閲覧サービス: 図歴 5万分1地形図「久賀」(116-9)／2万5千分1地形図「久賀」(116-9-3)",
+          "titleEn": "GSI map editions for the Kuka 1:50,000 and 1:25,000 sheets",
+          "publisher": "国土地理院 (GSI)",
+          "url": "https://service.gsi.go.jp/map-photos/app/map?search=history",
+          "checked": "2026-09-28",
+          "used": "Survey, revision and printing dates of every edition of both sheets."
+        }
+      ]
+    },
+    {
+      "id": "C18",
+      "target": "audience.json / the page's 'Cloudflare not reflected' note",
+      "answers": "gap: the site's own traffic was not available",
+      "status": "resolved (direction only in this public file)",
+      "summary": "Cloudflare Web Analytics for japantimeatlas.com, last 30 days, bots excluded, read in the owner's dashboard (raw counts kept out of this public repository; they are sampled and shown in tens). Visits come first from the United States and Japan, then Canada and France, then single sampled units from Peru, Brazil, Australia, Bahrain and China. Almost all visits are direct (no referrer); Bing and Google each bring a small share. Nearly all visits enter at the home page; the historical-maps guide, the Hiroshima place page, the liminal guide and the Gunkanjima 3D page are the only other entry pages in the top five. Desktop far outweighs mobile, and Windows leads. Direct visits to the home page from desktops are what the owner's and automated sessions' own checks look like, so real visitor numbers are lower than the totals. Together with Search Console (C14): Hiroshima is the only Page 07 district with visible demand, and English-speaking North America is the lead market.",
+      "sources": [
+        {
+          "kind": "owner-data",
+          "title": "Cloudflare Web Analytics, japantimeatlas.com, 30 days, bots excluded",
+          "checked": "2026-09-28",
+          "used": "Visits by country, referrer, entry path, device and browser."
+        }
+      ]
+    },
+    {
+      "id": "C19",
+      "target": "dossiers: tokyo-asakusa, hakodate, kure, osaka-namba",
+      "answers": "spot-check of figures cited to NDL books (OCR-prone numbers)",
+      "status": "confirmed (with notes)",
+      "summary": "Checked in NDL Lab's page-by-page OCR (lab.ndl.go.jp full text), kanji numerals read in context. Tokyo-Asakusa S4 (被服廠跡, 1932): the cremation table at frame 60, repeated at frame 91, gives 本所區被服廠跡 49,821 and 計十三ケ所 58,656; frame 97 gives the confirmed provisional name register of end-1929 with 38,826 names. Note: frame 39 of the same report says 38,825 names were written out for the altar, one fewer. Hakodate S2 (函館市誌, 1935): frame 421 gives the 16 November 1878 fire at 954 households and the 6 December 1879 fire from Horie-cho at 33 towns and 2,326 households including 31 public buildings; frame 423 gives the 25 August 1907 fire from the soap works at Higashikawa-cho 217, east wind, about 400,000 tsubo and 12,390 households, with the British and Russian consulates among the buildings lost. (The 1937 disaster record, frame 39, times that fire at 22:20 with a south-east wind; the city history says 22:35 and an east wind. The dossier gives no time, so nothing to change.) Kure S1 (大呉市民史 明治篇, 1943): frame 47 gives 39,637 people in 1898 and, for 1902, 13,809 households and 60,132 people, with 12,477 registered residents against 17,985 temporary residents in the registers. Osaka S1 (大阪府全志 巻之2, 1922): frame 454 gives 1,774 houses collapsed, 541 drowned and 45 bridges fallen or damaged.",
+      "sourceUpdates": [
+        {
+          "target": "tokyo-asakusa S4",
+          "frames": [
+            60,
+            91,
+            97
+          ]
+        },
+        {
+          "target": "hakodate S2",
+          "frames": [
+            421,
+            423
+          ]
+        },
+        {
+          "target": "kure S1",
+          "frames": [
+            47
+          ]
+        },
+        {
+          "target": "osaka-namba S1",
+          "frames": [
+            454
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": "C20",
+      "target": "dossier/hakodate.json (1934 fire paragraph, cites S6, S4, S2)",
+      "answers": "claim check: the 2,166 dead and the cause breakdown; '102,000 people ... out of some 22,600 households'",
+      "status": "correction-suggested",
+      "summary": "The city's own page (S6, 函館大火, updated 2026-02-25) lists the dead as 2,166: burned 748, drowned 917, frozen 217, suffocated 143, other 29, and 112 who died after being taken in (その他収容後死亡). The dossier gives only the first four, which add up to 2,025, so the reader cannot reconcile them with 2,166. The same page gives about 102,001 people affected, 11,105 buildings and 22,667 households burned, 22 districts wholly and 18 partly burned, 416.39 ha, and a fire that started at 18:53 on 21 March 1934 when a whirlwind blew the roof off a wooden house at Sumiyoshi-cho 91 (estimated gusts of 39 m/s from the south-south-west). 'Some 22,600 households' should be 'about 22,700', and they are the households burned, not a total the 102,000 came 'out of'. For the record: the 1937 official disaster record (S4, frame 53) counts deaths on the night at the scene as 1,859 (557 burned, 913 drowned, 217 frozen, 143 suffocated, 29 other; men 792, women 1,067) and lists later deaths, mostly pneumonia, separately on frame 54. The city's 748 burned and 917 drowned are therefore not from S4's frames 52-53; keep S6 as the source for the breakdown.",
+      "suggestedText": "The City of Hakodate's own count of the dead is 2,166, and burning was not even the largest cause: its breakdown lists 917 drowned, 748 burned, 217 frozen and 143 suffocated, with 29 more killed in other ways and 112 who died later after being taken in. The fire hit about 102,000 people; some 22,700 households and 11,105 buildings burned across 22 wholly destroyed districts and 18 partly burned.",
+      "sources": [
+        {
+          "kind": "official",
+          "title": "函館大火",
+          "publisher": "函館市 (City of Hakodate)",
+          "url": "https://www.city.hakodate.hokkaido.jp/docs/2014012200615/",
+          "checked": "2026-09-28",
+          "used": "Full death breakdown summing to 2,166; 102,001 affected; 11,105 buildings and 22,667 households burned; start time, cause and wind."
+        },
+        {
+          "kind": "ndl",
+          "title": "函館大火災害誌",
+          "year": 1937,
+          "pid": "1257280",
+          "frames": [
+            53,
+            54
+          ],
+          "url": "https://dl.ndl.go.jp/pid/1257280/1/53",
+          "access": "internet",
+          "checked": "2026-09-28",
+          "used": "Deaths at the scene on the night by cause and sex (1,859), read from the page image; later deaths on frame 54."
+        }
+      ]
+    },
+    {
+      "id": "C21",
+      "target": "dossier/chatan.json (S3 and S4)",
+      "answers": "source quality: frames [0] and URLs ending /1/0",
+      "status": "fix-needed",
+      "summary": "Both are Chatan Town's own born-digital PDFs held by NDL and open without login (インターネット公開（許諾）): S4 = 沖縄県北谷町町勢要覧 (2023), one PDF of 39 pages, 18 MB; S3 = the 2004 American Village completion report. Born-digital PDFs have no scanned frames, so the full-text search API returns frame 0, and https://dl.ndl.go.jp/pid/<pid>/1/0 is not a working page link (the item's content link is /1/1). The dossier's own 'used' notes say both were read only as search snippets, which is below the Page 07 rule that a source must have been opened. The 29,000 population sentence also cites the town's resident table (S15), so it stands; the 68 percent figure rests on S4 alone.",
+      "suggestedFix": "Set url to https://dl.ndl.go.jp/pid/14491099/1/1 and https://dl.ndl.go.jp/pid/14491108/1/1, replace frames [0] with the PDF page numbers once the PDFs are opened (the NDL viewer shows them page by page), and change 'Read as OCR snippets' only after that reading.",
+      "sources": []
     }
   ],
   "forThePage": [

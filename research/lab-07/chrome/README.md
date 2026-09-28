@@ -28,6 +28,13 @@ sources in the dossier schema:
 | C14 | audience — the site's own search data | direction only (Search Console); Cloudflare needs the owner to sign in |
 | C15 | audience — MOFA Nikkei figures | partly: Brazil, Mexico, Bolivia, Paraguay from MOFA's HTML country pages |
 | C16 | audience — CFA Sasebo | official area, ships and history; no personnel figure published |
+| C17 | deep sample — old maps of Kuka | resolved: 1:50,000 久賀 surveyed 1899, printed 1901; next revision 1928 |
+| C18 | audience — the site's own traffic (Cloudflare) | direction only: US and Japan lead, almost all visits direct to the home page |
+| C19 | asakusa, hakodate, kure, osaka — figures cited to NDL books | confirmed in NDL Lab OCR, with exact frames |
+| C20 | hakodate — 1934 fire figures | correction suggested: breakdown omits 29 + 112; households ≈ 22,700 |
+| C21 | chatan — S3/S4 links end in /1/0 | fix needed: born-digital PDFs, read only as snippets |
+
+C03 was re-checked after letting the NDL viewer run its own access checks: the page images still answer 404/401.
 
 Not done here: anything behind a terms-of-use or login screen that the owner has not approved (GSI edition history),
 and personal-transmission (個人送信) NDL items, which the Page 07 rules exclude as sources anyway.
