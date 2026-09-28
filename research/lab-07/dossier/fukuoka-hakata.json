@@ -251,7 +251,8 @@
     "via": "Category:Korokan Ruins Museum",
     "shows": "Excavated remains on display inside the Korokan ruins exhibition hall",
     "showsJa": "鴻臚館跡展示館の館内で公開されている発掘遺構",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -282,7 +283,8 @@
     "via": "Category:Kazariyama, Kushida-jinja",
     "shows": "A decorated display float (kazariyama) in the Kushida Shrine precinct",
     "showsJa": "櫛田神社境内の飾り山",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -312,7 +314,8 @@
     "via": "Category:Steles at Jōten-ji",
     "shows": "The stele inscribed \"birthplace of udon and soba\" in the Jotenji precinct",
     "showsJa": "承天寺境内の「饂飩蕎麦発祥之地」の碑",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -342,7 +345,8 @@
     "via": "Category:Sanmon, Shōfuku-ji (Fukuoka)",
     "shows": "The two-storey Sanmon gate of Shofuku-ji, seen from the front",
     "showsJa": "聖福寺の山門（楼門）の正面",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -352,7 +356,12 @@
    "cite": [
     "S6"
    ],
-   "photoNone": "No photo shows the old grid; Commons street views in Reisenmachi are of modern avenues (Taihaku Dori, Reisen Dori at that junction) and the stop has no single point"
+   "photoNone": "No photo shows the old grid; Commons street views in Reisenmachi are of modern avenues (Taihaku Dori, Reisen Dori at that junction) and the stop has no single point",
+   "at": [
+    33.594402,
+    130.411957
+   ],
+   "atSource": "GSI address search: 博多区冷泉町 (the neighborhood itself)"
   },
   {
    "name": "The Naka River between Hakata and Fukuoka",
@@ -366,7 +375,23 @@
     130.408354
    ],
    "atQuery": "那珂川",
-   "photoNone": "Within 300 m Commons has only a night view and close-ups of the Nakasu Kakehashi bridge; the clear daytime river view is from Nishi-Ohashi, 450 m away"
+   "photo": {
+    "title": "Nakagawa River from Nishi-Ohashi Bridge",
+    "fileName": "Nakagawa River from Nishi-Ohashi Bridge.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Nakagawa_River_from_Nishi-Ohashi_Bridge.JPG",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Nakagawa_River_from_Nishi-Ohashi_Bridge.JPG/960px-Nakagawa_River_from_Nishi-Ohashi_Bridge.JPG",
+    "artist": "そらみみ",
+    "artistJa": "",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2014-09-27",
+    "distanceM": 450,
+    "source": "Wikimedia Commons",
+    "via": "Q11642765",
+    "shows": "The Naka River seen from the Nishi-Ohashi bridge",
+    "showsJa": "西大橋から見た那珂川",
+    "checked": "2026-09-28"
+   }
   }
  ],
  "sources": [

@@ -135,7 +135,7 @@
      ]
     },
     {
-     "text": "Behind the built history, the land itself still shows what the sources describe: the mangrove-lined estuary of the Okukubi River northeast of the old village center, cited today as the only place on Okinawa's main island where all four native mangrove species grow together, sits exactly where the 1919 gazetteer placed Kin's spring-fed lowland, and the wells and taro paddies still worked in the valley draw on the same limestone groundwater the old sources took for granted. Aerial coverage available for this dossier's companion photo pages begins only in the 1970s, after reversion; the US forces who administered Okinawa before then held their own imagery of the landing beaches and the airfield years earlier; readers wanting to see Kin during the occupation itself will need to look to American, not Japanese, archives.",
+     "text": "Behind the built history, the land itself still shows what the sources describe: the mangrove-lined estuary of the Okukubi River east of the old village center, cited today as the only place on Okinawa's main island where all four native mangrove species grow together, sits exactly where the 1919 gazetteer placed Kin's spring-fed lowland, and the wells and taro paddies still worked in the valley draw on the same limestone groundwater the old sources took for granted. Aerial coverage available for this dossier's companion photo pages begins only in the 1970s, after reversion; the US forces who administered Okinawa before then held their own imagery of the landing beaches and the airfield years earlier; readers wanting to see Kin during the occupation itself will need to look to American, not Japanese, archives.",
      "cite": [
       "S1",
       "S17",
@@ -276,7 +276,7 @@
     "fileName": "KinKannonji.JPG",
     "page": "https://commons.wikimedia.org/wiki/File:KinKannonji.JPG",
     "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/KinKannonji.JPG/960px-KinKannonji.JPG",
-    "artist": "日:Muramasa",
+    "artist": "Muramasa",
     "license": "CC BY-SA 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "date": "2009-12-10",
@@ -285,7 +285,8 @@
     "via": "Q11647330",
     "shows": "The wooden main hall of Kin Kannon-ji",
     "showsJa": "金武観音寺の木造の本堂",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -327,17 +328,17 @@
   {
    "name": "Yaka",
    "ja": "屋嘉",
-   "what": "The hamlet north of the old village center where a US detention camp held Japanese soldiers, civilians and Koreans from 1945; the town's annual Yaka-bushi singing contest each August commemorates a folk song local histories trace to the camp.",
+   "what": "The hamlet west of the old village center where a US detention camp held Japanese soldiers, civilians and Koreans from 1945; the town's annual Yaka-bushi singing contest each August commemorates a folk song local histories trace to the camp.",
    "cite": [
     "S6",
     "S13"
    ],
    "at": [
-    26.490374,
-    127.906526
+    26.455166,
+    127.849152
    ],
-   "atQuery": "屋嘉",
-   "photoNone": "No present-day Commons photo of Yaka hamlet or the camp site; searches found only the Yaka expressway interchange and a 1954 photo"
+   "photoNone": "No present-day Commons photo of Yaka hamlet or the camp site; searches found only the Yaka expressway interchange and a 1954 photo",
+   "atSource": "GSI address search: 金武町屋嘉"
   },
   {
    "name": "Shinkaichi and the taco rice diners",
@@ -356,17 +357,18 @@
   {
    "name": "Okukubi River mangroves",
    "ja": "億首川",
-   "what": "An estuary northeast of the town center where all four mangrove species found on the Okinawan mainland grow; the spring-fed valley behind it still carries the taro paddies and wells that the area's limestone groundwater has supported for generations.",
+   "what": "An estuary east of the town center where all four mangrove species found on the Okinawan mainland grow; the spring-fed valley behind it still carries the taro paddies and wells that the area's limestone groundwater has supported for generations.",
    "cite": [
     "S1",
     "S17",
     "S10"
    ],
    "at": [
-    26.471518,
-    127.925612
+    26.454094,
+    127.944519
    ],
-   "atQuery": "億首川"
+   "photoNone": "No Commons photo of the Okukubi River estuary or its mangroves",
+   "atSource": "Wikidata Q28685592 (億首川, river mouth)"
   }
  ],
  "sources": [

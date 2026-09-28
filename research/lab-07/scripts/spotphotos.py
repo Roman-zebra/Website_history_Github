@@ -210,6 +210,7 @@ def clean_artist(a):
     a = re.split(r'You are free', a)[0]
     a = re.sub(r'\(\s*talk\s*\)', '', a)
     a = re.sub(r'^I,\s*', '', a.strip())
+    a = re.sub(r'^(?:日|ja|en)\s*:\s*(?=\S)', '', a)          # interwiki prefix of a user name (日:Muramasa)
     a = re.sub(r'(?i)^(this )?photo(graph)?\s+(was\s+)?taken\s+by\s*', '', a)
     ja = re.search(r'(?:日本語|Japanese)\s*[:：]\s*(.+?)(?=\s*(?:English|英語)\s*[:：]|$)', a)
     en = re.search(r'(?:English|英語)\s*[:：]\s*(.+)$', a)

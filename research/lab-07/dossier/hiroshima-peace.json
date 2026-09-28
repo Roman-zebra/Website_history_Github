@@ -274,7 +274,8 @@
     "via": "Q231140",
     "shows": "The Atomic Bomb Dome, with the bare steel frame of its dome",
     "showsJa": "原爆ドーム（鉄骨がむき出しのドーム）",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -294,7 +295,7 @@
     "fileName": "Old Aioibashi ayahashira02.JPG",
     "page": "https://commons.wikimedia.org/wiki/File:Old_Aioibashi_ayahashira02.JPG",
     "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Old_Aioibashi_ayahashira02.JPG/960px-Old_Aioibashi_ayahashira02.JPG",
-    "artist": "Taisyo You are free: to share – to copy, distribute and transmit the work to remix – to ad",
+    "artist": "Taisyo",
     "license": "CC BY 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
     "date": "2010-03-07",
@@ -303,7 +304,8 @@
     "via": "Category:Aioi Bridge",
     "shows": "Newel post of the previous (1932) Aioi Bridge, kept at the Nakajima-cho end",
     "showsJa": "中島町側の橋詰に残る先代相生橋（1932年）の親柱",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -332,7 +334,8 @@
     "via": "Q11349625",
     "shows": "The Rest House in Peace Memorial Park after its 2020 renovation",
     "showsJa": "改修後の平和記念公園レストハウス",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -362,7 +365,8 @@
     "via": "Q11409718",
     "shows": "The Cenotaph, with the Atomic Bomb Dome seen through its arch",
     "showsJa": "アーチ越しに原爆ドームを望む原爆死没者慰霊碑",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -391,7 +395,8 @@
     "via": "Q104604935",
     "shows": "The memorial to Korean A-bomb victims, standing on a stone turtle",
     "showsJa": "亀の台座に立つ韓国人原爆犠牲者慰霊碑",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -420,7 +425,8 @@
     "via": "Q11484615",
     "shows": "The arched-window building of the Honkawa Elementary School Peace Museum",
     "showsJa": "アーチ窓が並ぶ本川小学校平和資料館の建物",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -430,7 +436,28 @@
    "cite": [
     "S11"
    ],
-   "photoNone": "No photo identifies the Motoyasu riverbank: the one lantern-floating photo found shows only lanterns on dark water, with no bank or landmark"
+   "photo": {
+    "title": "Ceremonia de linternas en Hiroshima",
+    "fileName": "Ceremonia de linternas en Hiroshima.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ceremonia_de_linternas_en_Hiroshima.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Ceremonia_de_linternas_en_Hiroshima.jpg/960px-Ceremonia_de_linternas_en_Hiroshima.jpg",
+    "artist": "Christian Córdova",
+    "artistJa": "",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "date": "2024-08-06",
+    "distanceM": 248,
+    "source": "Wikimedia Commons",
+    "via": "Category:6th August Tōrō-nagashi",
+    "shows": "Lanterns floating on the Motoyasu River on 6 August, with the Atomic Bomb Dome on the bank",
+    "showsJa": "8月6日、原爆ドームの前の元安川に流された灯籠",
+    "checked": "2026-09-28"
+   },
+   "at": [
+    34.393889,
+    132.453611
+   ],
+   "atSource": "Wikidata Q11387826 (元安橋, Motoyasu Bridge), where the lanterns are floated"
   }
  ],
  "sources": [

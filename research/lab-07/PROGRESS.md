@@ -20,7 +20,7 @@ On the site itself it appears at japantimeatlas.com/lab/07/ (noindex, unlinked) 
 - [x] Final: dossier + deep PDFs rendered, page regenerated, private Artifact republished. Browser findings from `claude/lab07-chrome-checks` (`chrome/findings.json`) C04-C09, C13, C17, C20, C21 applied.
 - [x] Product merged into one Area Dossier per district (Basic pages + report + walk map); prices in `pricing.json`; Japanese edition via `scripts/dossier.py --lang ja` (`dossier-ja/kyoto-higashiyama.json`)
 - [x] Rules memo for selling PDFs as an individual (quotation, protection terms, NDL, Commons photos, AI images, 特定商取引法) → `rules.md`; checklist shown on the page
-- [ ] Stop photos: `scripts/spotphotos.py` (Wikidata P18 + Commons file pages; the Commons API is rate-limited here). Each photo chosen by eye so it shows the exact place the note describes → `walk[].photo` (credit + caption) or `walk[].photoNone`; stops without a photo get a GSI aerial close-up (`walkmap.closeup`). No AI images without the owner's approval.
+- [x] Stop photos (109 stops: 85 photos, 10 GSI aerial close-ups, 14 without a picture; 2026-09-28): `scripts/spotphotos.py` (Wikidata P18 + Commons file pages; the Commons API is rate-limited here). Each photo chosen by eye so it shows the exact place the note describes → `walk[].photo` (credit + caption) or `walk[].photoNone`; stops without a photo get a GSI aerial close-up (`walkmap.closeup`). No AI images without the owner's approval.
 
 Fonts for the PDFs (Source Serif 4, Inter, Noto Sans JP; OFL) are downloaded from Google Fonts into the scratchpad, not
 committed. Chromium needs the agent proxy CA in `~/.pki/nssdb` (certutil) to open NDL pages.

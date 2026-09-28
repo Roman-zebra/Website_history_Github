@@ -268,7 +268,8 @@
     "via": "search \"Motomachi Hakodate slope\"",
     "shows": "The stone-paved Daisan-zaka slope in Motomachi, seen from the tram street",
     "showsJa": "電車通りから見た元町の大三坂",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -297,7 +298,8 @@
     "via": "Q4504662",
     "shows": "The Hakodate Orthodox Church (Church of the Resurrection) with its tower",
     "showsJa": "函館ハリストス正教会（復活聖堂）と塔",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -326,7 +328,8 @@
     "via": "Q11647285",
     "shows": "The Kanemori Red Brick Warehouses seen along the street",
     "showsJa": "通りから見た金森赤レンガ倉庫",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -356,7 +359,8 @@
     "via": "Q11510926",
     "shows": "The blue-and-yellow Old Public Hall of Hakodate Ward",
     "showsJa": "青と黄色の旧函館区公会堂",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   },
   {
@@ -371,7 +375,23 @@
     140.710176
    ],
    "atQuery": "宇須岸河野館跡",
-   "photoNone": "No Commons photo of the Kono-tate site or a marker for it; nearby photos show the British Consulate, Motomachi Park and its Hakodate Magistrate's Office marker"
+   "photo": {
+    "title": "Motomachi Park Hakodate Hokkaido pref Japan04n",
+    "fileName": "Motomachi Park Hakodate Hokkaido pref Japan04n.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Motomachi_Park_Hakodate_Hokkaido_pref_Japan04n.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Motomachi_Park_Hakodate_Hokkaido_pref_Japan04n.jpg/960px-Motomachi_Park_Hakodate_Hokkaido_pref_Japan04n.jpg",
+    "artist": "663highland",
+    "artistJa": "",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "date": "2012-07-26",
+    "distanceM": 75,
+    "source": "Wikimedia Commons",
+    "via": "search \"宇須岸\"",
+    "shows": "The marker for the Hakodate Magistrate's Office, which stood on the same site",
+    "showsJa": "同じ場所にあった箱館奉行所の跡を示す標柱",
+    "checked": "2026-09-28"
+   }
   },
   {
    "name": "Old British Consulate (Kaiko Memorial Museum)",
@@ -401,7 +421,8 @@
     "via": "Q22119962",
     "shows": "The former British Consulate seen through its front gate",
     "showsJa": "正門から見た旧イギリス領事館",
-    "checked": "2026-09-28"
+    "checked": "2026-09-28",
+    "artistJa": ""
    }
   }
  ],
