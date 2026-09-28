@@ -31,6 +31,8 @@ sup.c{font:600 6.4pt Sans,sans-serif;color:#a33a2b;margin-left:.4mm}
 .srcs li{margin-bottom:1.8mm;break-inside:avoid}
 .toc{font:9.5pt/1.6 Sans,JP,sans-serif;padding-left:5mm}
 .draft{display:inline-block;font:700 7.5pt Sans,sans-serif;letter-spacing:.12em;color:#a33a2b;border:1.2px solid #a33a2b;padding:.8mm 2mm;margin-bottom:4mm}
+h1,h2,h3{break-after:avoid}
+.report p,.srcs li{orphans:3;widows:3}
 """
 
 
