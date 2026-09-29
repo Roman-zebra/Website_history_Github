@@ -14,7 +14,7 @@ The final site is published from GitHub through the repository's existing Cloudf
 | T5 | Historical moving features and rideable vehicles | Planned |
 | T6 | Lazily generated paid interiors | Planned |
 | T7 | Games, postcards, mysteries, photo mode, eras, and audio | Planned |
-| T8 | Stripe test Checkout, signed webhook, license restoration, and protected paid delivery | Planned |
+| T8 | Stripe test Checkout, signed webhook, license restoration, and protected paid delivery with encrypted payloads in the public GitHub repository | Planned; see `paid-content-architecture.md` and benchmark Workers Free limits before committing paid assets |
 | T9 | Performance gates and Claude's Chrome/GPU check | Planned |
 | T10 | Wallpaper, PDF, and soundtrack delivery | Planned |
 
