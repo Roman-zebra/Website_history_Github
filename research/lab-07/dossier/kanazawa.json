@@ -293,10 +293,9 @@
     "S3"
    ],
    "at": [
-    36.567161,
-    136.650925
+    36.564083,
+    136.649997
    ],
-   "atQuery": "長町武家屋敷跡",
    "photo": {
     "title": "Nagamachi Bukeyashiki",
     "fileName": "Nagamachi Bukeyashiki.jpg",
@@ -313,7 +312,8 @@
     "showsJa": "長町武家屋敷跡の土塀が続く小路",
     "checked": "2026-09-28",
     "artistJa": ""
-   }
+   },
+   "atSource": "OpenStreetMap (Nominatim): 長町武家屋敷跡 野村家, beside the Onosho canal"
   },
   {
    "name": "Higashi Chaya-gai",
