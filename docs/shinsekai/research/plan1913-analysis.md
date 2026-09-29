@@ -18,4 +18,6 @@ Reading a south-up plan: left on the page corresponds to geographic east, right 
 
 The plan is an artist/developer plan rather than a geodetic survey. T3 can use it for relative placement but needs modern street alignment, photo control points, and the original plan to make georeferenced geometry. `layout-1912.geojson` accordingly has no surveyed building/road lines.
 
+A distinct Taisho-period park program's bird's-eye map **is** visible as a [350-pixel museum preview](https://www.osakamushis.jp/news/2012/tenjigae/120523.html). It is too small for facility footprints or labels; see `program-map-analysis.md` for the museum's own topology description and reuse limit. The program copy's identity relative to the Osaka Prefectural Library `枚-282` copy is unconfirmed.
+
 An additional original copy is catalogued by [Kansai University's Naniwa-Osaka Research Center](https://www.kansai-u.ac.jp/naniwa-osaka/collection/list/) as *大阪新名所 新世界*, 1913, edited/published by 傍士定治 / 大阪土地建物株式会社, 26.4 × 36.0 cm. Its searchable catalogue showed item metadata but no page scan. The Osaka Prefectural Library copy and its separate park program also remain undigitized in the material inspected here. The low-resolution modern reproduction is sufficient for topology only.
