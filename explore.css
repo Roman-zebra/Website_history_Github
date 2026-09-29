@@ -685,6 +685,9 @@ border-radius:8px;cursor:pointer}
   border-radius:50%;background:rgba(255,250,240,.89);font-size:22px;
   box-shadow:0 3px 9px rgba(12,24,35,.26);
 }
+/* the map picture in place of the emoji: larger, on a rounded tile so it reads over a photograph */
+.home .card-emoji.card-art{width:58px;height:58px;padding:3px;border-radius:16px;top:10px;left:10px}
+.card-emoji.card-art img{width:100%;height:100%;object-fit:contain;display:block}
 .home .card-era{top:13px;right:12px;background:#ffe19d;color:#604114;box-shadow:0 2px 8px rgba(12,24,35,.22)}
 .home .card-body{padding:15px 16px}
 .home .card-ja{color:#ffd987}
@@ -808,7 +811,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
   .home .card{aspect-ratio:.83;border-radius:16px}.home .card-body{padding:12px}
   .home .card-name{font-size:18px}.home .card-hook{font-size:12px;line-height:1.6}
   .home .card-ja{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .home .card-era{font-size:9px;right:8px;top:12px}.home .card-emoji{left:9px;width:30px;height:30px;font-size:20px}
+  .home .card-era{font-size:9px;right:8px;top:12px}.home .card-emoji{left:9px;width:30px;height:30px;font-size:20px}.home .card-emoji.card-art{width:48px;height:48px;left:8px;top:8px;border-radius:13px}
   .home .hero{padding:30px 20px 20px}.home .hero-search{font-size:14px;padding:12px 18px;max-width:100%}
   .panel-inner{padding-left:18px;padding-right:18px}.p-name{font-size:25px}.p-story p,.p-story p:first-child{font-size:15px}
   .topbar{gap:6px}.ctl-lang{padding:0 8px}.ctl{min-width:40px}.search-wrap{min-width:90px}

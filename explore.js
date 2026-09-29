@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.52';
+const DATA_V = '0.53';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
    ask for, not a number written here that falls behind (the search worker sat at 0.80). */
@@ -747,6 +747,13 @@ function thumb(url, px){
   return u.replace(/\/(\d+)px-/, '/' + px + 'px-');
 }
 
+/* The card's corner badge shows the place's picture from the map (SPOT_ART / LANDMARK_ART) instead of an
+   emoji. If the picture cannot be loaded the badge falls back to the emoji. */
+function cardBadge(emoji, art){
+  if (!art) return '<span class="card-emoji" aria-hidden="true">' + emoji + '</span>';
+  return '<span class="card-emoji card-art" aria-hidden="true"><img src="' + art + '" alt="" width="192" height="192" decoding="async" data-emoji="' + esc(emoji) + '"'
+    + ' onerror="this.parentElement.classList.remove(\'card-art\');this.parentElement.textContent=this.dataset.emoji"></span>';
+}
 function buildLiminalCards(){
   $('cards').innerHTML = LIMINAL.map((p, i) => {
     const hook = (p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook);
@@ -757,7 +764,7 @@ function buildLiminalCards(){
       + 'src="' + esc(PHOTOS['l:' + p.id] ? PHOTOS['l:' + p.id].src : p.img ? thumb(p.img, 480) : tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16))
       + '" data-full="' + esc((PHOTOS['l:' + p.id] || {}).src || p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16)) + '" '
       + 'onerror="if(this.dataset.full&&this.src!==this.dataset.full){this.src=this.dataset.full}">'
-      + '<span class="card-emoji">' + p.emoji + '</span>'
+      + cardBadge(p.emoji, landmarkArt({ artKey: 'l:' + p.id }))
       + '<div class="card-body">'
       + '<p class="card-ja">' + esc(p.ja) + '</p>'
       + '<p class="card-name">' + esc(placeName(p)) + '</p>'
@@ -788,9 +795,9 @@ for (const [lang,copy] of Object.entries(ACTIVITY_COPY)) {
 function buildActivityCards(){
  $('cards').innerHTML = ACTIVITIES.filter(p=>p.category===mode).map(p=>
   '<button class="card card-activity" data-activity="'+esc(p.id)+'">'
-  +'<img class="card-img card-photo" width="480" height="320" alt="" loading="lazy" decoding="async" src="'+tileURL(NOW_LAYER.id,NOW_LAYER.ext,p.lat,p.lon,15)+'">'
-  +'<span class="card-emoji" aria-hidden="true">'+p.emoji+'</span>'
-  +'<span class="card-era">'+esc(activityText(5))+'</span>'
+  +'<img class="card-img card-photo" width="480" height="320" alt="" loading="lazy" decoding="async" src="'+esc((PHOTOS['a:'+p.id]||{}).src||tileURL(NOW_LAYER.id,NOW_LAYER.ext,p.lat,p.lon,15))+'">'
+  +cardBadge(p.emoji,landmarkArt(p))
+  +(PHOTOS['a:'+p.id]?'':'<span class="card-era">'+esc(activityText(5))+'</span>')   // 'Map preview' only when it still is one
   +'<div class="card-body"><p class="card-ja">'+esc(p.ja)+'</p>'
   +'<p class="card-name">'+esc(placeName(p))+'</p>'
   +'<p class="card-hook">'+esc(p.hooks[LANG]||p.hooks.en)+'</p>'
@@ -833,7 +840,7 @@ function restoreActivity(){
 /* Tab 06: the 3D reconstructions. One entry per reconstruction; the next place is added here and
    gets its card, and scripts/build-3d-pages.cjs lists the same set on the /3d/ series pages. */
 const LAB_ITEMS = [{
-  path: 'gunkanjima', img: '/3d/gunkanjima-card.jpg?v=4', era: '1947 → NOW · 3D', ja: '端島 · Hashima',
+  path: 'gunkanjima', artKey: 'l:hashima-island', img: '/3d/gunkanjima-card.jpg?v=4', era: '1947 → NOW · 3D', ja: '端島 · Hashima',
   name: { en: 'Gunkanjima (Hashima Island) in 3D, 1947 to today', ja: 'よみがえる軍艦島（端島）　全盛期の町並みと当時の暮らしを3Dで', ko: '군함도(하시마) 3D 복원, 1947년부터 지금까지', 'zh-Hans': '军舰岛（端岛）3D复原，1947年至今', 'zh-Hant': '軍艦島（端島）3D復原，1947年至今' },
   hook: { en: 'The coal-mining island rebuilt building by building. Slide through the years, tap a building for its facts, step inside, or listen to the audio guide.', ja: '炭鉱で栄えた島を建物ごとに再現。年代を動かすと全盛期の町並みが立ち上がり、建物を押すと竣工年や用途、中に入ると当時の暮らしが見られます。音声ガイドつき。', ko: '탄광 섬을 건물별로 복원. 연도를 움직이고, 건물을 눌러 준공년과 용도를 읽고, 안에 들어가고, 음성 가이드도 들을 수 있습니다.', 'zh-Hans': '逐栋复原煤矿岛。拖动年代，点按建筑查看竣工年和用途，走进内部，也能收听音频导览。', 'zh-Hant': '逐棟復原煤礦島。拖曳年代，點按建築查看竣工年和用途，走進內部，也能收聽語音導覽。' }
 }];
@@ -843,7 +850,7 @@ function labHref(item){ return '/3d/' + (LAB_DIR[LANG] || '') + item.path; }
 function buildLabCards(){
   $('cards').innerHTML = LAB_ITEMS.map(it => '<a class="card card-lab" href="' + labHref(it) + '">'
     + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="' + it.img + '">'
-    + '<span class="card-emoji">🧪</span>'
+    + cardBadge('🧪', it.artKey ? landmarkArt({ artKey: it.artKey }) : '')
     + '<span class="card-era">' + esc(it.era) + '</span>'
     + '<span class="card-cta">' + esc(LAB_OPEN[LANG] || LAB_OPEN.en) + '</span>'
     + '<div class="card-body">'
@@ -862,9 +869,12 @@ function buildCards(){
     const lyr = (p.then && THEN[p.then]) ? p.then : NOW_LAYER.id;
     const cfg = p.then && THEN[p.then];
     const ext = cfg ? cfg.ext : NOW_LAYER.ext;
+    // the same ground-level photograph as the panel; the old aerial tile only where there is none
+    const ph = PHOTOS['f:' + p.id];
+    const pic = ph ? ph.src : (p.monument && p.monument.img) || tileURL(lyr, ext, p.lat, p.lon, 15);
     return '<a class="card" data-id="' + esc(p.id) + '" href="' + esc(placeURL(p.id)) + '">'
-      + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="' + tileURL(lyr, ext, p.lat, p.lon, 15) + '">'
-      + '<span class="card-emoji">' + p.emoji + '</span>'
+      + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="' + esc(pic) + '">'
+      + cardBadge(p.emoji, landmarkArt({ ...p, pop: p.pop || 1 }, 'p1'))
       + (p.thenLabel ? '<span class="card-era">' + esc(p.thenLabel) + ' → NOW</span>' : '')
       + '<div class="card-body">'
       + '<p class="card-ja">' + esc(p.ja) + ' · ' + esc(p.romaji) + '</p>'
@@ -2478,8 +2488,7 @@ function showLandmark(p,refresh=false){
     bodyHTML: extractHTML(p, 240) || '<p>' + (p.regional ? PlaceUI.pick(['Explore this place with the historical map. Details are available in the linked article.','歴史地図を重ねて周辺をたどれます。詳しい由来はリンク先の記事をご覧ください。','옛 지도와 함께 주변을 살펴보세요. 자세한 내용은 연결된 문서에서 확인할 수 있습니다.','叠加历史地图探索周边，详细介绍请参阅链接文章。','疊加歷史地圖探索周邊，詳細介紹請參閱連結文章。'],LANG) : t('famous')) + '</p>',
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
-    ...((p.pop || 3) <= 3 ? photoFields(p.regional ? 'rg:' + p.id : 'lm:' + p.wiki_en, airPhoto(p.lat, p.lon), t('photoAir'))
-                          : { img: airPhoto(p.lat, p.lon), cap: t('photoAir') }),
+    ...photoFields(p.regional ? 'rg:' + p.id : 'lm:' + p.wiki_en, airPhoto(p.lat, p.lon), t('photoAir')),
     share: { title: p.name, url: location.origin + location.pathname },
     searchName: p.ja,
     src: p.regional ? ((articleLink(p)||{}).src||'Wikipedia (CC BY-SA 4.0)') + ' · ' + (p.coordSource.includes('openstreetmap')?'Coordinates © OpenStreetMap contributors.':'Coordinates from Wikipedia.') : (LANG === 'ja' ? '座標の出典：ウィキペディア' : 'Coordinates from Wikipedia.')
@@ -2617,6 +2626,19 @@ function showLocal(p,refresh=false){
     src: LANG === 'en' ? '© OpenStreetMap contributors (ODbL).'
                        : '© OpenStreetMap contributors（ODbL）'
   });
+  /* 13,653 local spots name their own Wikipedia article. Its lead picture (free images only) shows the
+     place better than the aerial tile, which stays for the rest. Late answers for another panel are dropped. */
+  const wt = wl && wikiTagParse(tg.wikipedia);
+  if (wt){
+    const token = panelToken;
+    wikiExtractByTitle(wt.title, wt.lang).then(pg => {
+      const src = pg && pg.thumbnail && pg.thumbnail.source;
+      if (!src || token !== panelToken) return;
+      paintPanelPhoto({ img: src, srcset: '', name: nm,
+        cap: PlaceUI.pick(['Photo: lead image of the Wikipedia article', '写真：ウィキペディアの記事の代表画像', '사진: 위키백과 문서의 대표 이미지', '照片：维基百科条目的代表图片', '照片：維基百科條目的代表圖片'], LANG),
+        capHref: 'https://' + wt.lang + '.wikipedia.org/wiki/' + encodeURIComponent(wt.title.replace(/ /g, '_')) });
+    });
+  }
 }
 
 /* -------------------------------------------------------------------------
@@ -3119,8 +3141,11 @@ function openPlace(p, keepView,refresh=false){
     kicker: {emoji:p.emoji,label:t('modePlaces'),note:'  '+placeName(p)},
     placeId:p.id, adTier:p.pop||1, ja: LANG==='ja'?'':p.ja, name:placeName(p),
     query: p.name,
-    bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join('') + '<p class="place-guide-link"><a href="/place/' + ({en:'',ja:'ja/',ko:'ko/','zh-Hans':'zh-cn/','zh-Hant':'zh-tw/'}[LANG] || '') + encodeURIComponent(p.id) + '">' + esc(({en:'Read the place guide',ja:'この場所の解説を読む',ko:'장소 안내 읽기','zh-Hans':'阅读地点指南','zh-Hant':'閱讀地點指南'})[LANG] || 'Read the place guide') + '</a></p>',
-    ...(p.monument && p.monument.img ? { img: p.monument.img, cap: cap } : photoFields('f:' + p.id, '', '')),
+    bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join('')
+      // the memorial stone in the story keeps its photograph when the panel shows the building instead
+      + (p.monument && p.monument.img && PHOTOS['f:' + p.id] ? '<p class="p-srcnote"><a href="' + esc(p.monument.img) + '" target="_blank" rel="noopener">\u{1F4F7} ' + esc(cap || '') + '</a></p>' : '')
+      + '<p class="place-guide-link"><a href="/place/' + ({en:'',ja:'ja/',ko:'ko/','zh-Hans':'zh-cn/','zh-Hant':'zh-tw/'}[LANG] || '') + encodeURIComponent(p.id) + '">' + esc(({en:'Read the place guide',ja:'この場所の解説を読む',ko:'장소 안내 읽기','zh-Hans':'阅读地点指南','zh-Hant':'閱讀地點指南'})[LANG] || 'Read the place guide') + '</a></p>',
+    ...photoFields('f:' + p.id, (p.monument && p.monument.img) || '', (p.monument && p.monument.img) ? cap : ''),
     at: [p.lat, p.lon], share: { title: p.name, url: location.origin + location.pathname + '#' + p.id },
     searchName: p.name_ja || p.ja,
     wiki: (articleLink(p) || {}).url || '',
@@ -3463,17 +3488,21 @@ consumeMapQuery();
 applyLang();
 /* Small (13KB gzipped) and not needed to draw the map, so it loads beside everything else. A panel opened
    before it lands shows the aerial tile and is given its photograph when it arrives. */
+let photosSettled = false;
 fetch(dj('data/spot-photos-v1.json')).then(r => r.ok ? r.json() : null).then(j => {
-  if (!j) return;
-  PHOTOS = j.photos || {};
+  if (j) PHOTOS = j.photos || {};
   if (panelPhoto && PHOTOS[panelPhoto.key] && $('panel').classList.contains('open'))
     paintPanelPhoto({ ...photoFields(panelPhoto.key), name: panelPhoto.name });
-  if (mode === 'liminal' && LIMINAL.length) buildCards();
-}).catch(() => {});
+}).catch(() => {}).then(() => {
+  photosSettled = true;
+  if ((mode === 'liminal' && LIMINAL.length) || (mode === 'places' && PLACES.length) || isActivityMode(mode)) buildCards();
+});
 fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   PLACES = j.places.filter(p => JapanBoundary.contains(p.lat,p.lon));
   paintDirectory();
-  buildCards();
+  /* Tab 01's cards show the photographs. Wait for them briefly, so the first paint does not fetch
+     aerial tiles that are replaced a moment later; build anyway if they are slow or fail. */
+  if (photosSettled) buildCards(); else setTimeout(() => { if (!photosSettled) buildCards(); }, 2500);
   /* 件数は起動時（applyLang → modeNote）に PLACES がまだ空のまま書かれる。
      ここで書き直さないと 19枚のカードの上に「0か所」が残る（タブを切り替えるまで直らない）。
      リミナル側は下の liminal.json の .then で同じことをしている。 */

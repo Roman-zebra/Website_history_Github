@@ -45,12 +45,12 @@ test('the pins and the selected pin of tabs 03/04/05 carry their art key',()=>{
 
 test('every p1-p3 record and every tab 03/04/05 record has a checked ground-level photograph',()=>{
  const want=[
-  ...featured.filter(p=>!(p.monument&&p.monument.img)).map(p=>'f:'+p.id),
-  ...landmarks.filter(p=>(p.pop||3)<=3).map(p=>'lm:'+p.wiki_en),
+  ...featured.filter(p=>p.id!=='aneyoshi').map(p=>'f:'+p.id),   // Aneyoshi's subject is the stone, and its photo is the stone
+  ...landmarks.map(p=>'lm:'+p.wiki_en),   // every landmark, p4 included (2026-09-29 round 3)
   ...regional.map(p=>'rg:'+p.id),
   ...activities.map(p=>'a:'+p.id),
   ...liminal.filter(p=>p.id!=='qua-palace').map(p=>'l:'+p.id)];
- assert.equal(want.length,202);
+ assert.equal(want.length,206);
  for(const k of want)assert.ok(photos[k],k+' has no photograph');
  const keys=new Set(want);
  for(const k of Object.keys(photos))assert.ok(keys.has(k),k+' is not a p1-p3 or tab 03/04/05 record');
@@ -66,8 +66,32 @@ test('the panels use the photograph first and the aerial tile only as the fallba
  assert.ok(source.includes("photoFields(p.regional ? 'rg:' + p.id : 'lm:' + p.wiki_en, airPhoto(p.lat, p.lon), t('photoAir'))"));
  assert.ok(source.includes("...photoFields('a:'+p.id,tileURL("));
  assert.ok(source.includes("...photoFields('l:' + p.id, p.img || tileURL("));
- assert.ok(source.includes("photoFields('f:' + p.id, '', '')"));
+ assert.ok(source.includes("...photoFields('f:' + p.id, (p.monument && p.monument.img) || '',"),'featured: photo first, memorial stone next');
+ assert.ok(source.includes("const pic = ph ? ph.src : (p.monument && p.monument.img) || tileURL(lyr, ext, p.lat, p.lon, 15);"),'tab 01 cards use the photograph');
+ assert.ok(photos['f:okayama']&&/Okayama/i.test(photos['f:okayama'].file),'Okayama shows the castle');
  // a previous spot's srcset must never survive into the next panel
  assert.ok(/else \{ img\.removeAttribute\('srcset'\); img\.removeAttribute\('sizes'\); \}/.test(source));
  assert.ok(read('sw.js').includes("'spot-photos-v1.json'"));
+});
+
+test('the cards of tabs 01, 03, 04, 05 and 06 show the map picture instead of an emoji',()=>{
+ const ctx=art();
+ for(const p of featured)assert.match(ctx.landmarkArt({...p,pop:p.pop||1},'p1'),/^\/icons\/landmarks\/.+\.webp$/,p.id);
+ assert.match(ctx.landmarkArt({artKey:'l:hashima-island'}),/hashima-island/);
+ assert.ok(source.includes("cardBadge(p.emoji, landmarkArt({ artKey: 'l:' + p.id }))"));
+ assert.ok(source.includes("cardBadge(p.emoji, landmarkArt({ ...p, pop: p.pop || 1 }, 'p1'))"));
+ assert.ok(source.includes("+cardBadge(p.emoji,landmarkArt(p))"));
+ assert.ok(source.includes("it.artKey ? landmarkArt({ artKey: it.artKey }) : ''"));
+ assert.ok(source.includes("path: 'gunkanjima', artKey: 'l:hashima-island'"));
+ assert.ok(/onerror="this\.parentElement\.classList\.remove\(\\'card-art\\'\)/.test(source),'a missing picture falls back to the emoji');
+});
+
+test('food and shopping cards show the photograph and drop the map-preview label with it',()=>{
+ assert.ok(source.includes("(PHOTOS['a:'+p.id]||{}).src||tileURL("));
+ assert.ok(source.includes("+(PHOTOS['a:'+p.id]?'':'<span class=\"card-era\">'"));
+});
+
+test('local spots with their own Wikipedia article ask for its picture, guarded against a changed panel',()=>{
+ assert.ok(source.includes('const wt = wl && wikiTagParse(tg.wikipedia);'));
+ assert.ok(source.includes('if (!src || token !== panelToken) return;'));
 });
