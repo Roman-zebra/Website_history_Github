@@ -260,7 +260,23 @@
    "cite": [
     "S2"
    ],
-   "photoNone": "No photo of Mio harbor itself: the 'Mio fishing port' file is Mio in Hamasaka, Hyogo; the only Mio file is a distant view of the whole village"
+   "photo": {
+    "title": "Mihama mio",
+    "fileName": "Mihama mio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Mihama_mio.jpg",
+    "file": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Mihama_mio.jpg/960px-Mihama_mio.jpg",
+    "artist": "Opqr",
+    "artistJa": "",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "date": "2017-08-02",
+    "distanceM": null,
+    "source": "Wikimedia Commons",
+    "via": "Category:Mihama, Wakayama",
+    "shows": "Mio village and its harbor breakwaters, seen from the hills above",
+    "showsJa": "高台から見た三尾の集落と漁港の防波堤",
+    "checked": "2026-09-29"
+   }
   },
   {
    "name": "Hinomisaki",

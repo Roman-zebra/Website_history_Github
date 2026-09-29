@@ -15,6 +15,7 @@ import basic, spotphotos, walkmap
 HERE = basic.HERE
 DOSSIER_DIR = os.path.join(HERE, 'dossier')
 DOSSIER_DIR_JA = os.path.join(HERE, 'dossier-ja')
+AI_DIR = os.path.join(HERE, 'ai-images')   # <id>/<n>.png: an AI picture for a stop no reusable photograph shows
 ACCESS_EN = {'internet': 'open online (NDL Digital Collections, no login)', 'transmission': 'NDL individual digital transmission (registered users)',
              'inlibrary': 'NDL premises only', 'paper': 'print only', None: ''}
 ACCESS_JA = {'internet': 'オンライン公開（国立国会図書館デジタルコレクション、ログイン不要）', 'transmission': '国立国会図書館個人向けデジタル化資料送信サービス（登録利用者向け）',
@@ -44,6 +45,7 @@ img.wm{width:100%;height:auto;max-height:175mm;object-fit:contain;display:block;
 .spots figcaption{color:#1d2230}
 .spots .credit{display:block;font:6.3pt/1.3 Sans,JP,sans-serif;color:#6b7282;margin-top:.7mm;overflow-wrap:anywhere}
 .spots .credit a{color:inherit;text-decoration:none}
+.aibadge{display:inline-block;font:700 6.3pt Sans,JP,sans-serif;color:#fff;background:#6b4fa3;padding:.3mm 1.5mm;border-radius:.8mm;margin-right:1mm}
 .draft{display:inline-block;font:700 7.5pt Sans,sans-serif;letter-spacing:.12em;color:#a33a2b;border:1.2px solid #a33a2b;padding:.8mm 2mm;margin-bottom:4mm}
 h1,h2,h3{break-after:avoid}
 .report p,.srcs li{orphans:3;widows:3}
@@ -95,6 +97,8 @@ TXT = {
         'aerial_note': ('No reusable ground-level photograph shows this place, so here is the latest GSI aerial '
                         'photograph of the spot (ringed), north up, about 480 m across.'),
         'aerial_credit': 'Aerial photograph: Geospatial Information Authority of Japan (GSI), seamless aerial photos',
+        'ai_badge': 'AI-generated', 'ai_note': 'A picture of the place as the note describes it, made with ChatGPT (OpenAI). Not a photograph.',
+        'back_ai': 'Pictures marked "AI-generated" were made with ChatGPT (OpenAI) and are not photographs. ',
         'back_photos': ('Photographs of the stops: Wikimedia Commons contributors, under the licences named beside each; '
                         'scaled, not otherwise altered. '),
         'sources_kicker': 'Sources', 'sources_h2': 'Sources', 'further_h3': 'Further reading',
@@ -136,6 +140,8 @@ TXT = {
         'photo_credit': '写真：{artist}「{title}」{lic}、{commons}より',
         'aerial_note': 'この場所を写した再利用可能な地上写真が見つからないため、国土地理院の最新空中写真で地点（円）を示す。上が北、幅約480 m。',
         'aerial_credit': '空中写真：国土地理院（シームレス空中写真）',
+        'ai_badge': 'AI生成', 'ai_note': 'メモが説明する場所のイメージを、ChatGPT（OpenAI）で作成した画像。実際の写真ではない。',
+        'back_ai': '「AI生成」と表示した画像はChatGPT（OpenAI）で作成したもので、写真ではない。',
         'back_photos': '立ち寄り先の写真：Wikimedia Commonsの各撮影者による。ライセンスは各写真に記載。縮小のみで、ほかの加工はしていない。',
         'sources_kicker': '出典', 'sources_h2': '出典', 'further_h3': 'さらに読む',
         'leads_h3': 'Deep Researchで次に調べる先', 'caveats_h3': '注意',
@@ -252,10 +258,19 @@ def build(did, lang='en'):
                 + (T['walkmap_missing'].format(list=', '.join(str(i) for i, w in enumerate(stops, 1) if not w.get('at'))) if len(placed) < len(stops) else '')
                 + T['walkmap_apps'] + '</figcaption></figure>'
                 + '<ol class="walk wmlist">' + ''.join(f'<li><b>{esc(walk_name(w)[0])}</b>' + (f' <a class="maplink" href="{walkmap.maps_url(w["at"])}">{basic.TXT[lang]["map_link"]}&#8599;</a>' if w.get('at') else '') + '</li>' for w in stops) + '</ol></section>') if wm else ''
-    figs, shown = [], set()
+    figs, shown, ai_used = [], set(), False
     for i, w in enumerate(stops, 1):
         ph = w.get('photo')
-        if not ph:     # fallback: the latest aerial photograph of the exact spot, never an invented picture
+        ai = next((os.path.join(AI_DIR, did, f'{i}.{x}') for x in ('png', 'jpg', 'jpeg') if os.path.exists(os.path.join(AI_DIR, did, f'{i}.{x}'))), None)
+        if not ph and ai:  # the owner's AI picture, always labelled as one
+            name = f'spot-{i}-ai' + os.path.splitext(ai)[1]
+            shutil.copyfile(ai, os.path.join(out_dir, name))
+            shown.add(i)
+            ai_used = True
+            figs.append(f'<figure><img src="{name}" alt="{esc(walk_name(w)[0])}"><figcaption><b>{i}. {esc(walk_name(w)[0])}</b>'
+                        f'<span class="credit"><span class="aibadge">{T["ai_badge"]}</span>{T["ai_note"]}</span></figcaption></figure>')
+            continue
+        if not ph:     # fallback: the latest aerial photograph of the exact spot
             fn = walkmap.closeup(w['at'], os.path.join(out_dir, f'spot-{i}.jpg')) if w.get('at') else None
             if fn:
                 shown.add(i)
@@ -295,7 +310,7 @@ def build(did, lang='en'):
 {(f'<h3>{T["further_h3"]}</h3><ul class="srcs">' + further + '</ul>') if further else ''}
 {(f'<h3>{T["leads_h3"]}</h3><ul class="srcs">' + leads + '</ul>') if leads else ''}
 {(f'<h3>{T["caveats_h3"]}</h3><ul class="srcs">' + caveats + '</ul>') if caveats else ''}
-<p class="small muted">{T['back_credit'].format(checked=(T['back_photos'] if shots else '') + checked)}</p></section>"""
+<p class="small muted">{T['back_credit'].format(checked=(T['back_photos'] if shots else '') + (T['back_ai'] if ai_used else '') + checked)}</p></section>"""
     css = basic.CSS.replace('FONTDIR', 'file://' + basic.FONTS) + EXTRA_CSS + (JA_CSS if lang == 'ja' else '')
     place = c['en'] if lang == 'en' else c['ja']
     page = (f'<!doctype html><html lang="{lang}" data-footer="{T["footer"].format(place=esc(place), d=basic.TODAY)}"><head><meta charset="utf-8">'

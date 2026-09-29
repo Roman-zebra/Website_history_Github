@@ -16,6 +16,8 @@ PICKS = [  # (pdf, page number starting at 1 or a heading found on the page, out
     ('dossier-kyoto-higashiyama.pdf', 2, 'dossier-kyoto-report.jpg'),
     ('dossier-kyoto-higashiyama.pdf', 'Walk map', 'dossier-kyoto-walkmap.jpg'),
     ('dossier-kyoto-higashiyama.pdf', 'The stops today', 'dossier-kyoto-photos.jpg'),
+    ('booklet-tokyo-asakusa.pdf', 1, 'booklet-asakusa-cover.jpg'),
+    ('booklet-tokyo-asakusa.pdf', 4, 'booklet-asakusa-stop.jpg'),
 
     ('deep-research-sample-suo-oshima.pdf', 1, 'deep-sample-cover.jpg'),
 ]

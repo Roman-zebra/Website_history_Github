@@ -293,12 +293,20 @@ def context():
               ('dossier-kyoto-report.jpg', 'dossier-kyoto-higashiyama.pdf', '歴史レポート本文（段落ごとに出典番号）'),
               ('dossier-kyoto-walkmap.jpg', 'dossier-kyoto-higashiyama.pdf', '散策マップ（地図アプリへのリンクつき）'),
               ('dossier-kyoto-photos.jpg', 'dossier-kyoto-higashiyama.pdf', '立ち寄り先の写真（撮影者・ライセンスつき）'),
+              ('booklet-asakusa-cover.jpg', 'booklet-tokyo-asakusa.pdf', '大衆向け試作：今昔さんぽ（表紙）'),
+              ('booklet-asakusa-stop.jpg', 'booklet-tokyo-asakusa.pdf', '立ち寄り先ごとの1936年と現在'),
               ('deep-sample-cover.jpg', 'deep-research-sample-suo-oshima.pdf', 'Deep Research見本：久賀')]
     gallery = ''.join(f'<a href="pdf/{p}"><img src="img/{i}" alt="{esc(c)}" loading="lazy" width="620" height="877"><span>{esc(c)}</span></a>'
                       for i, p, c in thumbs if os.path.exists(os.path.join(OUT, 'img', i)) and os.path.exists(pdf(p)))
     stops = [w for d in doss for w in (dossiers[d['id']] or {}).get('walk', [])]
     photo_stat = (f"全{len(stops)}地点のうち地上写真{sum(1 for w in stops if w.get('photo'))}地点、空中写真での代用"
                   f"{sum(1 for w in stops if not w.get('photo') and w.get('at'))}地点。AI生成画像は使っていません")
+    booklets = []
+    for f in sorted(os.listdir(os.path.join(HERE, 'booklet'))) if os.path.isdir(os.path.join(HERE, 'booklet')) else []:
+        bj = load(os.path.join('booklet', f), None) if f.endswith('.json') else None
+        if bj and os.path.exists(pdf(f'booklet-{bj["id"]}.pdf')):
+            booklets.append(pdf_card(f'booklet-{bj["id"]}.pdf', bj['title'], '日本語・大衆向け試作 · A5'))
+    booklet_cards = ''.join(booklets) or '<p class="muted">作成中</p>'
     S.append(f"""<h2 id="products">5. 試作品</h2>
 <div class="gallery">{gallery}</div>
 <h3>Area Dossier（1地区1冊・英語PDF）</h3>
@@ -310,6 +318,13 @@ def context():
 <h3>日本語版（試作：京都・東山と鴨川）</h3>
 <p>国内の「まち歩き・土地の成り立ち」好きの読者向けに、1地区だけ日本語版を作りました。本文は英語版の事実だけを使って日本語で書き直し、地形の名前は国土地理院の用語、災害伝承碑は英訳ではなく碑の原文で載せています。</p>
 <div class="pdfs">{pdf_card('dossier-ja-kyoto-higashiyama.pdf', '河原・神門・坂道 ― 東山と鴨川', '日本語版・試作')}</div>
+<h3>大衆向けの新商品（試作）：空から見る 今昔さんぽ</h3>
+<p>英語のArea Dossierは「歴史好きの旅行者」向けの専門的な商品です。もっと広い層に届く商品として、日本語の短い散歩本を試作しました。
+A5判10ページ（同人誌の標準サイズでスマートフォンでも読める）で、立ち寄り先ごとに<b>「その場所の1936〜42年ごろの空中写真と現在の空中写真」</b>を並べ、確認済みの写真、やさしい日本語の短い物語、地図アプリを開くQRコードを載せています。
+文章の事実はすべて出典と照合済みのドシエに基づいています。売り方の想定は、PDFをBOOTHやKindleで500〜800円、紙の冊子を文学フリマやコミックマーケット（評論・情報ジャンル）で頒布、空中写真の今昔をSNSで見せて集客、です。
+国立国会図書館の個人送信で読める郷土史（20地区で書名に地名が入るもの46点。<code>research/lab-07/ndl-reading-list.md</code>）から、登録者ご本人が読んだ事実を加えると、物語をさらに厚くできます。
+写真のない場所はChatGPTで作った画像を「AI生成」と明示して入れられます（プロンプト集：<code>research/lab-07/ai-prompts.md</code>）。</p>
+<div class="pdfs">{booklet_cards}</div>
 <h3>Deep Research（見本）</h3>
 <p>「曾祖父がハワイへ渡る前にいた周防大島の久賀村」を調べる、という架空の依頼に、実在の資料で答えた見本です。遠隔で確認できたこと、現地や本人の請求（戸籍など）が必要なこと、料金帯ごとの範囲を分けて示しています。</p>
 <div class="pdfs">{deep_card or '<p class="muted">作成中</p>'}</div>""")

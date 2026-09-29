@@ -111,14 +111,18 @@ def draw(walk, out_path, lang='en'):
     return name, w_km, h_km
 
 
-def closeup(at, out_path, w_km=0.48, h_km=0.36):
-    """The latest GSI aerial photograph of one stop (w_km × h_km, north up) with a ring on the spot: the fallback
-    picture for a stop no reusable ground-level photograph shows. Returns the file name, or None without imagery."""
+def closeup(at, out_path, w_km=0.48, h_km=0.36, layer='seamlessphoto'):
+    """A GSI aerial photograph of one stop (w_km × h_km, north up, the latest one unless `layer` names an older
+    series) with a ring on the spot: the fallback picture for a stop no reusable ground-level photograph shows,
+    and each half of a then-and-now pair. Returns the file name, or None without imagery."""
     from PIL import ImageDraw
     lat0, lon0 = at
     kx = 111.320 * math.cos(math.radians(lat0))
     bb = (lat0 - h_km / 2 / 110.574, lon0 - w_km / 2 / kx, lat0 + h_km / 2 / 110.574, lon0 + w_km / 2 / kx)
-    img, covered = gsi.mosaic('seamlessphoto', bb, 18)
+    for z in (18, 17):          # the 1945-50 US photographs stop at zoom 17
+        img, covered = gsi.mosaic(layer, bb, z)
+        if covered >= 0.9:
+            break
     if covered < 0.9:
         return None
     img = basic.flatten(img).convert('RGB')
