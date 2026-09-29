@@ -1,0 +1,13 @@
+# Review of imported Claude C2 findings
+
+`facts-claude.md`, `video-index.md`, and `ledger-claude.csv` preserve Claude's research handoff; they are evidence leads, not the approved 1912 scene specification. Claude watched and indexed the videos at one-second intervals. The clips may reuse undated archival film and postcards, and none grants a production reuse license. See `requests-to-claude.md` for corrections sent back to the existing local group.
+
+| Imported claim | Review decision | Reason |
+| --- | --- | --- |
+| Elevator shaft reached ground from opening | **Do not implement in 1912** | [Library reference](https://crd.ndl.go.jp/reference/entry/reference/show?id=1000291784) quotes 1913 album: roof garden at 50 shaku, elevator from there to top. [Library timeline](https://www.library.pref.osaka.jp/contents/wp-content/uploads/66_runa.pdf) dates ground-to-top connection to 1938. Video compilation date is not photograph date; cited [Osaka City short page](https://www.city.osaka.lg.jp/naniwa/page/0000000985.html) has no elevator description. |
+| Luna Park covered 132,000 m² | **Reject pending original measurement** | This exceeds the approximately 28,000 tsubo (about 92,600 m²) given for the *entire* Shinsekai development in the [operator interview](https://www.osaka-jc.or.jp/activities/2017/06/25/462/). The imported area came through Wikipedia, not an original survey. |
+| Semicircular plaza lay south of first tower | **Reverse** | The [south-up 1913 plan description](https://www.osaka-jc.or.jp/activities/2017/06/25/462/) places the semicircular garden at the geographic north end; first tower was south by 通天通, park farther south. The second tower later occupied the old garden. |
+| Bath, warm pool and all named attractions were in 1912 | **Split by date** | [Library timeline](https://www.library.pref.osaka.jp/contents/wp-content/uploads/66_runa.pdf) dates the bath to the 1913 second phase; later pool requires its own date proof. *大坂名勝* (1912) supports particular halls and White Tower facilities, but not every attraction on the later list. |
+| Film clip shows tower mechanism / night lights / ropeway | **Use only for visual research** | Source film dates and rights are mostly unspecified. Seek an original dated photograph/plan to make 1912 geometry and mechanics claims. |
+
+The independently useful findings are the one-second scene index, visual descriptions of tower ironwork and ropeway cabin, the absence of tower footage in NFA film N071, and the operator's historical PDF as an additional fact lead. These can guide T3 research without importing copyrighted frames or treating later scenes as opening day.
