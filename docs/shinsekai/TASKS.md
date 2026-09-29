@@ -8,7 +8,7 @@ The final site is published from GitHub through the repository's existing Cloudf
 | --- | --- | --- |
 | T0 | Prepare the fixed clone, instructions, project records, handoff, and tool inventory | Done |
 | T1 | Add the second, disabled Coming soon card to tab 06 in six languages | Done |
-| T2 | Source research, rights ledger, 1912 layout, gimmicks, and colour evidence | In progress: NDL source pass, rights ledger, provisional topology and feature/colour lists committed; original site plan and Claude video pass pending |
+| T2 | Source research, rights ledger, 1912 layout, gimmicks, and colour evidence | In progress: NDL source pass, Claude video index, rights ledger, 1912/1914 three-direction photo controls, provisional topology and feature/colour lists committed; original site/program map and exact facility positions pending |
 | T3 | Source-based Blender geometry and photographic alignment | Planned |
 | T4 | Browser engine and free tower exterior area; separate paid data | Planned |
 | T5 | Historical moving features and rideable vehicles | Planned |
