@@ -105,7 +105,7 @@ def build(did):
              f'<p class="small">空中写真：国土地理院。同じ範囲を上が北で写している。</p></section>')
     first = int(re.search(r'\d{4}', then_label).group(0)) if re.search(r'\d{4}', then_label) else None
     span = round(int(basic.TODAY[:4]) - first, -1) if first else None     # 1936 → 90年, 1961 → 60年
-    heading = b.get('routeTitle') or (f'足もとの{span}年を、空から' if span else '足もとの今昔を、空から')
+    heading = b.get('routeTitle') or (f'足もとの約{span}年を、空から' if span else '足もとの今昔を、空から')
     route = (f'<section class="page"><p class="kicker">はじめに</p><h2>{esc(heading)}</h2><p>{esc(b["intro"])}</p>'
              + (f'<div class="map"><img src="{wm[0]}" alt="散策マップ"></div>' if wm else '')
              + '<ol class="stops">' + ''.join(f'<li><span class="num">{i}</span>{esc(s["title"])}</li>' for i, s in enumerate(b['stops'], 1))
