@@ -13,7 +13,7 @@
      ]
     },
     {
-     "text": "The Ikuta River had a long literary life before it had a commercial one. An 1897 Kobe guidebook strings together a chain of classical poems on the river and on 生田磯, the strand in front of Ikuta Shrine, which it says older books place on the very coast later built up as the settlement. It also recalls the medieval tale, taken from the Yamato Monogatari, of the maiden of Unai and the two suitors who fought for her over this river until she drowned herself between them: a story much older than any consulate. To the west lay Hyogo, already a working port under the Taira and the Edo-period kitamae-bune trade; Kobe was chosen for the new foreign settlement precisely because it was the emptier, less-developed ground of the two, a point the settlement's own historical association still makes today.",
+     "text": "The Ikuta River had a long literary life before it had a commercial one. An 1897 Kobe guidebook strings together a chain of classical poems on the river and on 生田磯, the strand in front of Ikuta Shrine, which it says older books place on the very coast later built up as the settlement. It also recalls the medieval tale, taken from the Yamato Monogatari, of the maiden of Unai and the two suitors who fought for her over this river until she drowned herself between them: a story much older than any consulate. To the west lay Hyogo, already a working port under the Taira and the Edo-period kitamae-bune trade; Kobe was chosen for the new foreign settlement, the settlement's own historical association says, to keep foreigners and Japanese apart and avoid disputes: the site, 3.5 km east of Hyogo's town, was sand and fields in Kobe village.",
      "cite": [
       "S7",
       "S12"
@@ -69,7 +69,7 @@
      ]
     },
     {
-     "text": "Kano laid an eighteen-meter road down the middle of the old riverbed at a time when an ordinary Kobe street was 3.6 m wide, and built house lots on either side; the district took his name, Kano-cho, and his road is Kobe's Flower Road today. A 1922 planning survey lists the river-moving as one of a run of large works — the settlement's own land readjustment in 1873, new roads the same year, the Osaka-Kobe railway in 1874, and the Hyogo Shinkawa canal, dug through the old port at Hyogo, in 1875 — and opens its own chapter by noting that Kobe had grown in fifty-odd years into Japan's third-largest city. The rebuilt Ikuta channel was itself culverted in 1931 for road space, then reopened as open water after the 1938 flood proved the culvert a liability.",
+     "text": "Kano laid an eighteen-meter road down the middle of the old riverbed at a time when an ordinary Kobe street was 3.6 m wide, and built house lots on either side; the district took his name, Kano-cho, and his road is Kobe's Flower Road today. A 1922 planning survey lists the river-moving as one of a run of large works — the settlement's own land readjustment in 1873, new roads the same year, the Osaka-Kobe railway in 1874, and the Hyogo Shinkawa canal, dug through the old port at Hyogo, in 1875 — and opens its own chapter by noting that Kobe had grown in fifty-odd years into Japan's third-largest city. The rebuilt Ikuta channel was itself culverted in the early 1930s (1931 in the city's 1942 guide, 1932 on its website) for road space, then reopened as open water after the 1938 flood proved the culvert a liability.",
      "cite": [
       "S5",
       "S6",
@@ -120,10 +120,11 @@
    "heading": "Reading the ground today",
    "paragraphs": [
     {
-     "text": "The waterfront itself was made twice more after the war. In 1987, marking the anniversary of the port's opening, the city filled the sixteen hectares of water between the old Meriken wharf and the 1938 Naka pier to create Meriken Park, setting the Kobe Maritime Museum and, later, the Kobe Port Tower on ground that had been open harbor within living memory. Then, at 5:46 a.m. on 17 January 1995, the Great Hanshin-Awaji earthquake tore through the reclaimed waterfront along with the rest of the city; this dossier's companion Basic brief gives the district's memorials and the city's official casualty figures. The port authority left about sixty meters of the shattered Meriken wharf exactly as the earthquake had cracked and tilted it, opening the site as the Port of Kobe Earthquake Memorial Park in July 1997 and renewing its displays in January 2025 for the disaster's thirtieth anniversary.",
+     "text": "The waterfront itself was made twice more after the war. In 1987, marking the anniversary of the port's opening, the city filled the sixteen hectares of water between the old Meriken wharf and the 1938 Naka pier to create Meriken Park, setting the Kobe Maritime Museum on ground that had been open harbor within living memory, beside the Kobe Port Tower, which had stood at the water's edge since 1963. Then, at 5:46 a.m. on 17 January 1995, the Great Hanshin-Awaji earthquake tore through the reclaimed waterfront along with the rest of the city; this dossier's companion Basic brief gives the district's memorials and the city's official casualty figures. The port authority left about sixty meters of the shattered Meriken wharf exactly as the earthquake had cracked and tilted it, opening the site as the Port of Kobe Earthquake Memorial Park in July 1997 and renewing its displays in January 2025 for the disaster's thirtieth anniversary.",
      "cite": [
       "S15",
-      "S16"
+      "S16",
+      "S18"
      ]
     },
     {
@@ -626,6 +627,16 @@
    "url": "https://www.kobe-ojizoo.jp/area/hunter",
    "checked": "2026-09-28",
    "used": "The house stood at Kitano-cho 3-chome until it was moved to the zoo in 1963 (昭和38年); among the largest of Kobe's surviving foreign residences."
+  },
+  {
+   "id": "S18",
+   "kind": "official",
+   "title": "神戸ポートタワーについて",
+   "titleEn": "About Kobe Port Tower",
+   "publisher": "神戸観光局 (Kobe Tourism Bureau)",
+   "url": "https://www.kobe-port-tower.com/",
+   "checked": "2026-09-29",
+   "used": "The tower opened in 1963."
   }
  ],
  "furtherReading": [
