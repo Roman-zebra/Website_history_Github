@@ -22,3 +22,12 @@
 - requests-to-claude.md の T0：Blender 4.5.10 LTS は `C:\Program Files\Blender Foundation\Blender 4.5\blender.exe`（`--version` で確認、PATH には無い）。qa\tools.md も更新済み。
 - 公開経路：各コミットの check-run「Workers Builds: japan-then-and-now」が success＝GitHub の main から Cloudflare が自動でビルド・公開している。PLAN.md v3.2 §7 に「完成したサイトは GitHub 経由で動かす」を追加（TASKS.md の記載と同じ内容）。
 - 気づいた制約：公開に要るデータは全部リポジトリに入れる必要がある（GitHub は1ファイル 100MB まで、Cloudflare の静的アセットは1ファイル 25MiB まで。リポジトリは今 約267MB）。有料データも dist に入れて Worker が購入を確かめてから返す形なら、同じ経路で完結する。
+
+## 2026-09-30 01:33（5）調査用の動画の置き場所
+- あなた（ユーザー）の指示で、調査用の動画をこのPCに取得し、1秒ごとのコマにして確認する。置き場所は `JTA-shinsekai\video-work\`（claude-out の外）。**video-work\ はリポジトリに写さない**（動画・コマ画像は GitHub に上げない。容量と権利のため）。結果（場面・時刻・出典・権利）は従来どおり claude-out\research\ の video-index.md と ledger-claude.csv に書く。
+- 追加したツール：yt-dlp 2026.08.19、FFmpeg（yt-dlp 版 N-125875、2026-07-31）、Deno 2.9.7（どれも winget、ユーザー領域）。
+
+## 2026-09-30 01:40（6）ユーザーの新しい決まり：課金が要るものは止める（PLAN v3.3）
+- Codex も Claude も、課金が必要な項目が出たらその作業を止めて、課金しない安全な方法を探す。見つからなければ requests-to-claude.md に書いてユーザーの判断を待つ。
+- 当てはまりそうな例：Cloudflare Workers の有料プランが要る機能や上限超え、R2 など支払い方法の登録が要る機能、Git LFS の追加容量、有料の素材・フォント・音・API、Stripe Tax（有料の追加機能なので候補から外した）。GitHub Actions は公開リポジトリなら無料、Durable Objects は今の SQLite 型なら無料プランで使える。
+- Stripe は作品の販売の仕組みで、開発側が前払いする費用は無い（手数料は売上から引かれる）ので、計画どおりテストモードから進めてよい。

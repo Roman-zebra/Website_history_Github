@@ -1,0 +1,26 @@
+# NDL source inspection — 2026-09-30
+
+The raw IIIF manifests, NDL Lab OCR JSON, and seven 1600-pixel inspection scans are cached only at `../research-cache/ndl/` outside the Git repository. Run `node scripts/fetch-shinsekai-ndl.cjs` to fill missing cache entries; it does not refetch existing files. OCR is a search aid, not a transcription authority. Page numbers below are IIIF canvas numbers, not printed page numbers.
+
+| PID | Title; publication | Inspectable evidence | 1912 use |
+| --- | --- | --- | --- |
+| [962657](https://dl.ndl.go.jp/pid/962657) | *建築写真類聚*; 1921 | Canvases 48–49, plates 46–47, tower elevations from two camera positions. Already inspected by Claude in `refs/`. | Geometry reference, subject to later changes; compare with opening-era photos. |
+| [952032](https://dl.ndl.go.jp/pid/952032) | *大阪独案内*; 1914 | Canvas 95 has two distinct tower/arch photos and a ropeway cabin in the right photo. Canvases 95–96 describe a four-passenger ropeway, White Tower, waterfall, pond, attraction halls, animals, and a then-current amusement ride. Canvas 19 is a tram route diagram, **not** a park site plan. Canvas 30 is general text, canvas 47 a place-name list; OCR hits there do not indicate photographs. | Useful near-opening evidence; do not assume every 1914 facility was present on 1912-07-03. |
+| [917709](https://dl.ndl.go.jp/pid/917709) | *大大阪独案内*; 1926 | Canvas 39 mentions park/tower, theatre, film, and other entertainment, but its photo is of Tennoji Park. | Context after Luna Park closure; no opening layout evidence. |
+| [964429](https://dl.ndl.go.jp/pid/964429) | *四五日の旅*; 1922 | Canvas 170 includes a tower photograph and claims 250 shaku in text. | Tower silhouette, before dismantling; date of photograph unknown. |
+| [1112102](https://dl.ndl.go.jp/pid/1112102) | *新日本写真大観*; 1931 | Canvas 62 contains a small tower photo among a collage. | Park had closed by then; tower reference only. |
+
+All five IIIF manifests report `Access Restrictions: PDM`. The manifests give publication dates and official image services. Do not copy scans from modern books, videos, museum reconstructions, or third-party pages into the product. Before publishing any NDL scan, retain its exact canvas URL and credit, and check the [NDL reuse guidance](https://www.ndl.go.jp/use/reproduction). NDL's [landmarks exhibition](https://www.ndl.go.jp/landmarks/about) expressly permits commercial reuse of its selected copyright-expired images with source attribution; that statement applies to its selected images, not automatically to every image on the web.
+
+## Conflicts and gaps
+
+- The 1914 text on canvas 95 appears to claim 300 shaku for the tower, while the 1922 guide says 250 shaku and [Osaka City](https://www.city.osaka.lg.jp/naniwa/page/0000632322.html) says approximately 75 m. Use 75 m as the provisional design height and keep the conflict in the ledger.
+- [Osaka City](https://www.city.osaka.lg.jp/naniwa/page/0000632322.html) describes three streets radiating from the first tower: 恵美須通 (NW), 玉水通 (N), 合邦通 (NE), plus 精華園/清華園 and the semicircular 円街. The source's spelling varies. The 1913 original `新世界平面図` has not yet been inspected directly.
+- [Osaka Prefectural Library](https://www.library.pref.osaka.jp/nakato/shotenji/66_runa.html) holds the original 1913 photo album and an illustrated park program map (`枚-282`). Its prose lists a pond, octagonal music hall, circling ride and waterfowl house; this does not establish survey coordinates. The original program/map is the next source for facility placement.
+- A [2017 interview with the current tower operator](https://www.osaka-jc.or.jp/activities/2017/06/25/462/) says the 1956 tower was built on the old semicircular garden, while the first tower stood farther south by 通天通. The modern tower's OSM coordinate therefore **must not** be used as the first tower's coordinate. The interview's image failed to load in Chrome; its descriptive text was available. Historical original plan is needed to georeference.
+- A [historian-supervised Shinsekai Fest timeline](https://www.shinsekaifes.jp/%E3%83%92%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC) puts the first tower approximately 30 m south of the current tower. `layout-1912.geojson` records an approximate due-south point with 30 m uncertainty, not a surveyed footprint.
+- Do not include the 1913 radium bath, 1915 zoo, 1918 streetcar extension, or 1928 pool in the 1912 opening scene. They can belong in later-year scenes after their own evidence is checked.
+
+## Source attribution to retain
+
+`国立国会図書館デジタルコレクション`, title, publication year, PID, canvas number, and full IIIF image URL. Facts from contemporary city/library pages should cite those pages directly. Camera direction and image date must be annotated as inferred when not printed on the source.

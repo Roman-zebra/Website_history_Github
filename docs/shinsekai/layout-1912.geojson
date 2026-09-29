@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "name": "shinsekai-1912-provisional-topology",
+  "description": "Historical relationships and one approximate first-tower anchor. Other null geometry is intentional until the original 1913 Shinsekai plan is georeferenced; do not render these as surveyed locations.",
+  "status": "provisional",
+  "coordinateSystem": "WGS84 for the modern control point only",
+  "sources": ["S001", "S007", "S008", "S013"],
+  "features": [
+    {"type":"Feature","geometry":{"type":"Point","coordinates":[135.5063098,34.6525393]},"properties":{"id":"modern-tower-control","name":"Current second tower","era":"1956-present","role":"modern control point only","source":"S012","historical1912":false}},
+    {"type":"Feature","geometry":{"type":"Point","coordinates":[135.5063098,34.6522698]},"properties":{"id":"first-tower","name":"First tower","era":"1912-1943","zone":"central transition","relativeTo":"about 30 m south of the current tower, per Shinsekai Fest; north of Luna Park","source":"S001 S013 S015","confidence":"low","accuracyMeters":30,"method":"approximate 30m due-south displacement from modern OSM point; east-west displacement unknown","needs":"1913 plan georeferencing before production geometry"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"seikaen-garden","name":"精華園／清華園 garden","era":"1912","zone":"north district","relativeTo":"north of first tower; inside semicircular 円街","source":"S001 S013","confidence":"medium","needs":"original plan; spelling check"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"engai","name":"円街 semicircular frontage","era":"1912","zone":"north district","relativeTo":"around the garden","source":"S001","confidence":"high","needs":"original plan shape"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"ebisu-dori","name":"恵美須通","era":"1912","zone":"north district","relativeTo":"radiates northwest from the first tower toward Ebisucho / Nipponbashi","source":"S001","confidence":"high","needs":"original plan / modern street alignment"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"tamamizu-dori","name":"玉水通","era":"1912","zone":"north district","relativeTo":"radiates north from the first tower; now Kasuga-dori","source":"S001","confidence":"high","needs":"original plan / modern street alignment"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"gappo-dori","name":"合邦通","era":"1912","zone":"north district","relativeTo":"radiates northeast from the first tower toward Isshinji/Shitennoji","source":"S001","confidence":"high","needs":"original plan / modern street alignment"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"luna-park","name":"Luna Park grounds","era":"1912-1923","zone":"south district","relativeTo":"south of the first tower; entertainment buildings around its perimeter","source":"S001 S013","confidence":"high","needs":"1913 site and program maps"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"white-tower","name":"White Tower","era":"1912-1923","zone":"inside Luna Park","relativeTo":"opposite the first tower across the ropeway","source":"S001 S003 S007","confidence":"high","needs":"1913 site and program maps"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"ropeway","name":"Four-seat ropeway","era":"1912-1923","zone":"first tower to White Tower","relativeTo":"connects first-tower roof garden and White Tower","source":"S001 S003","confidence":"high","needs":"terminal heights and exact cable path"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"masumi-pond","name":"真澄が池","era":"1912?","zone":"Luna Park","relativeTo":"at White Tower foot per library photo description","source":"S007","confidence":"medium","needs":"original photo/plan check"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"music-hall","name":"Octagonal music hall","era":"1912?","zone":"Luna Park","relativeTo":"in view from White Tower near pond","source":"S007","confidence":"medium","needs":"original photo/plan check"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"circling-wave","name":"Circling Wave ride","era":"1912?","zone":"Luna Park","relativeTo":"one side of White Tower viewpoint; exact orientation unresolved","source":"S001 S007","confidence":"medium","needs":"original photo/plan check"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"waterfowl-house","name":"Waterfowl house","era":"1912?","zone":"Luna Park","relativeTo":"opposite side of White Tower viewpoint; exact orientation unresolved","source":"S007","confidence":"medium","needs":"original photo/plan check"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"front-gate","name":"Luna Park front gate","era":"1912","zone":"south district","relativeTo":"park perimeter; entrance direction unresolved","source":"S001 S007","confidence":"medium","needs":"program map"}},
+    {"type":"Feature","geometry":null,"properties":{"id":"radium-bath","name":"Radium bath","era":"1913 onward","zone":"south extension","relativeTo":"south of Luna Park","source":"S001 S007","confidence":"medium","excludeFrom1912":true}}
+  ]
+}
