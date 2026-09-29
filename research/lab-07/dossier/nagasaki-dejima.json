@@ -105,16 +105,19 @@
    "heading": "A flood, a bridge and the ground today",
    "paragraphs": [
     {
-     "text": "The Nakashima River, so useful for reclaiming land, turned violent on 23 July 1982, when a cloudburst dropped as much as 187 mm of rain in a single hour on Nagayo, just north of the city — still, by one specialist account, Japan's highest recorded hourly rainfall — and set off landslides that caused most of the disaster's deaths; this dossier's companion Basic brief gives the city's own casualty figures for the flood. Of the fourteen historic stone bridges spanning the Nakashima River, six were swept away outright and three more seriously damaged, and prefectural and national planners initially proposed clearing the survivors rather than rebuilding them. A campaign led by the planner Katayose Toshihide and local residents argued successfully for restoration instead, and by 1986 the damaged bridges, among them the Higashi-shin Bridge, had been rebuilt using stones recovered from the riverbed.",
+     "text": "The Nakashima River, so useful for reclaiming land, turned violent on 23 July 1982, when a cloudburst dropped as much as 187 mm of rain in a single hour on Nagayo, just north of the city — still, by one specialist account, Japan's highest recorded hourly rainfall — and set off landslides that caused most of the disaster's deaths: the prefectural and city disaster headquarters counted 299 dead or missing across Nagasaki Prefecture, 262 of them in the city itself. Of the fourteen historic stone bridges spanning the Nakashima River, six were swept away outright and three more seriously damaged, and prefectural and national planners initially proposed clearing the survivors rather than rebuilding them. A campaign led by the planner Katayose Toshihide and local residents argued successfully for restoration instead: the three damaged bridges were restored by 1985, and in 1986 four of the six lost ones, among them the Higashi-shin Bridge, were rebuilt as new stone arches.",
      "cite": [
-      "S12"
+      "S12",
+      "S15",
+      "S17"
      ]
     },
     {
-     "text": "Megane-bashi, the arched Spectacles Bridge a short walk upstream, is the oldest of them by far: built in 1634, the same year Dejima was ordered into being, by Mokusu Nyojo, the second head priest of Kofuku-ji temple, using stone-arch technique that almost certainly reached Nagasaki from China — the same channel of contact this whole district exists to tell. What a visitor sees walking from Dejima to Shinchi to Oura today is less a single street than three separate answers to the same problem: an island built and later erased, a quarter walled and later burned, and a hillside first refused and then, lot by numbered lot, let go.",
+     "text": "Megane-bashi, the arched Spectacles Bridge a short walk upstream from Dejima, is the oldest of them: built in 1634, the same year Dejima was ordered into being, by Mokusu Nyojo, the second head priest of Kofuku-ji temple, using stone-arch technique that almost certainly reached Nagasaki from China — the same channel of contact this whole district exists to tell. What a visitor sees walking from Dejima to Shinchi to Oura today is less a single street than three separate answers to the same problem: an island built and later erased, a quarter walled and later burned, and a hillside first refused and then, lot by numbered lot, let go.",
      "cite": [
       "S12",
-      "S1"
+      "S1",
+      "S15"
      ]
     }
    ]
@@ -321,9 +324,11 @@
   {
    "name": "Meganebashi and the Nakashima River bridges",
    "ja": "眼鏡橋・中島川の石橋群",
-   "what": "Japan's oldest surviving stone arch bridge, built in 1634; several of its neighbors downstream were rebuilt after 1982 using stones recovered from the riverbed after that year's flood.",
+   "what": "Japan's oldest surviving double-arch bridge, built of stone in 1634, badly damaged in the 1982 flood and restored in 1983; upstream, four of its neighbors that the flood swept away were rebuilt in 1986 as new stone arches.",
    "cite": [
-    "S12"
+    "S12",
+    "S14",
+    "S15"
    ],
    "at": [
     32.747165,
@@ -351,9 +356,10 @@
   {
    "name": "Oura Church",
    "ja": "大浦天主堂",
-   "what": "Japan's oldest standing church, completed in 1864; inside, a plaque marks where hidden Christians from Urakami identified themselves to Father Petitjean in 1865.",
+   "what": "Japan's oldest standing church, completed in 1864; inside stands the statue of the Virgin and Child to which Father Petitjean led the hidden Christians from Urakami when they revealed their faith to him in 1865.",
    "cite": [
-    "S10"
+    "S10",
+    "S13"
    ],
    "at": [
     32.734189,
@@ -381,10 +387,10 @@
   {
    "name": "Glover Garden, Minamiyamate",
    "ja": "グラバー園（南山手）",
-   "what": "Thomas Glover's residence occupies lot 3 of the settlement plots surveyed onto this hillside in 1861, the same land a magistrate had refused foreign consuls only months earlier.",
+   "what": "The former Glover House, built in 1863, stands on lot 3 of the 35 plots laid out in 1861 on this hillside, which the shogunate had long refused to foreign consuls; Thomas Glover leased the lot that October.",
    "cite": [
     "S8",
-    "S4"
+    "S16"
    ],
    "at": [
     32.733367,
@@ -555,7 +561,57 @@
    "publisher": "ミツカン水の文化センター、機関誌『水の文化』47号 (Mitsukan Water Culture Center)",
    "url": "https://www.mizu.gr.jp/kikanshi/no47/05.html",
    "checked": "2026-09-28",
-   "used": "Meganebashi's 1634 construction by Mokusu Nyojo; the 1982 flood's rainfall record and bridge damage; the 1980s campaign to restore rather than remove the damaged bridges."
+   "used": "Meganebashi's 1634 construction by Mokusu Nyojo; the 1982 flood's rainfall record, its toll of \"nearly 300\" dead, most of them in landslides, and the bridge damage; the 1980s campaign to restore rather than remove the stone bridges; the Higashi-shin Bridge and the other \"Showa stone bridges\" rebuilt in 1986."
+  },
+  {
+   "id": "S13",
+   "kind": "institution",
+   "title": "拝観の順路",
+   "titleEn": "Viewing route",
+   "publisher": "大浦天主堂 (Oura Catholic Church, official site)",
+   "url": "https://oura-church.jp/point",
+   "checked": "2026-09-29",
+   "used": "The statue of the Virgin and Child (\"Santa Maria of the Discovery of Believers\") to which Father Petitjean led the hidden Christians when they revealed their faith to him."
+  },
+  {
+   "id": "S14",
+   "kind": "official",
+   "title": "眼鏡橋",
+   "titleEn": "Meganebashi (national Important Cultural Property record)",
+   "publisher": "文化庁 文化遺産オンライン (Agency for Cultural Affairs, Cultural Heritage Online)",
+   "url": "https://online.bunka.go.jp/heritages/detail/176762",
+   "checked": "2026-09-29",
+   "used": "Built of stone in 1634 (Kan'ei 11) by the Chinese monk Nyojo; the oldest surviving double-arch bridge; Important Cultural Property since 1960."
+  },
+  {
+   "id": "S15",
+   "kind": "official",
+   "title": "「ナガジン」発見！長崎の歩き方",
+   "titleEn": "Nagazine walking guide: along the Nakashima River stone bridges",
+   "publisher": "長崎市 (City of Nagasaki)",
+   "url": "https://www.city.nagasaki.lg.jp/nagazine/hakken0206/index.html",
+   "checked": "2026-09-29",
+   "used": "The 1982 flood's damage to the river's fourteen stone arch bridges (Meganebashi and two others partly collapsed, six washed away); Meganebashi restored in October 1983, the Momotani and Fukuro bridges in January 1985; four lost bridges, among them the Higashi-shin Bridge, rebuilt as stone bridges in March 1986; the order of the bridges upstream from the river's Dejima end."
+  },
+  {
+   "id": "S16",
+   "kind": "institution",
+   "title": "旧グラバー住宅",
+   "titleEn": "The former Glover House",
+   "publisher": "グラバー園 (Glover Garden)",
+   "url": "https://glover-garden.jp/about/glover-house/",
+   "checked": "2026-09-29",
+   "used": "The house was built in 1863 on Minamiyamate lot 3 (南山手3番, today Minamiyamate-machi 8-1)."
+  },
+  {
+   "id": "S17",
+   "kind": "official",
+   "title": "1982年（昭和57年）7月豪雨（長崎大水害）",
+   "titleEn": "The July 1982 heavy rain (Nagasaki flood)",
+   "publisher": "気象庁 長崎地方気象台 (Japan Meteorological Agency, Nagasaki Local Meteorological Office)",
+   "url": "https://www.data.jma.go.jp/nagasaki-c/shosai/saigai/ooame/19820723/index.html",
+   "checked": "2026-09-29",
+   "used": "Casualty table compiled by the Nagasaki Prefecture and Nagasaki City disaster headquarters: 294 dead and 5 missing in the prefecture (299), 257 dead and 5 missing in the city (262)."
   }
  ],
  "furtherReading": [
@@ -618,7 +674,7 @@
   }
  ],
  "caveats": [
-  "Casualty figures for the 1982 Nagasaki flood vary: this dossier's companion Basic brief gives the city's own figure of 262 dead or missing, while a specialist water-history source used here rounds the toll to \"about 300\"; both describe the same disaster.",
+  "Casualty figures for the 1982 Nagasaki flood depend on the area counted: the prefectural and city disaster headquarters recorded 299 dead or missing across Nagasaki Prefecture and 262 within Nagasaki City, the figure this dossier's companion Basic brief uses; the water-history source used here speaks of \"nearly 300\" dead, in line with the prefectural total.",
   "The distance from the atomic bomb's hypocenter to Dejima given in this dossier (roughly four kilometers) is this writer's own calculation from the hypocenter's published coordinates and this district's study-area center, not a single published \"distance to Dejima\" figure.",
   "Dejima's founding is sometimes dated to 1634 (when the shogunate ordered it built) and sometimes to 1636 (when construction finished); this dossier uses both dates for what they each describe.",
   "One further-reading item, a 1997 architectural study of the Tojin Yashiki, appears in NDL's full-text search as internet-accessible but could not actually be opened through NDL Lab in this session, so it is omitted rather than cited."
