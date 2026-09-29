@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.51';
+const DATA_V = '0.52';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
    ask for, not a number written here that falls behind (the search worker sat at 0.80). */
@@ -592,9 +592,14 @@ function applySEO(){
    1. State
    ========================================================================= */
 const ACTIVITIES = window.AtlasActivities?.places || [];
+for (const p of ACTIVITIES) p.artKey = 'a:' + p.id;   // the picture for its pin (SPOT_ART)
 
 
 let PLACES = [], LANDMARKS = [], MONUMENTS = null, LOCALS = [], LIMINAL = [];
+/* Ground-level photographs for the panels of the p1-p3 pins and of tabs 03/04/05, keyed f:/lm:/rg:/a:/l:
+   (data/spot-photos-v1.json: Wikimedia Commons files chosen by eye on 2026-09-29, the whole building or place
+   from the front or another angle). Places without one keep the aerial tile. */
+let PHOTOS = {};
 let TOPICS = null, AREAS = null;   // 種類の記事 / まちの記事。無ければ黙る
 let mode = 'places';
 let MON_INDEX = [], MON_BY_ID = new Map();
@@ -749,8 +754,8 @@ function buildLiminalCards(){
     const lazy = 'lazy';
     return '<a class="card card-lim" data-lim="' + esc(p.id) + '" href="' + esc(liminalURL(p.id)) + '">'
       + '<img class="card-img card-photo" loading="' + lazy + '" decoding="async" alt="" '
-      + 'src="' + esc(p.img ? thumb(p.img, 480) : tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16))
-      + '" data-full="' + esc(p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16)) + '" '
+      + 'src="' + esc(PHOTOS['l:' + p.id] ? PHOTOS['l:' + p.id].src : p.img ? thumb(p.img, 480) : tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16))
+      + '" data-full="' + esc((PHOTOS['l:' + p.id] || {}).src || p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 16)) + '" '
       + 'onerror="if(this.dataset.full&&this.src!==this.dataset.full){this.src=this.dataset.full}">'
       + '<span class="card-emoji">' + p.emoji + '</span>'
       + '<div class="card-body">'
@@ -803,7 +808,7 @@ function showActivity(p,keepView,refresh=false){
  if(!keepView)map.setView([p.lat,p.lon],15);
  setTimeout(()=>map.invalidateSize(),60);
  setThenLayer(null,null);
- drawSpots([{lat:p.lat,lon:p.lon,name:placeName(p),emoji:p.emoji}],true,()=>showActivity(p,true));
+ drawSpots([{lat:p.lat,lon:p.lon,name:placeName(p),emoji:p.emoji,artKey:'a:'+p.id}],true,()=>showActivity(p,true));
  roaming=false; current=null;
  drawDetail(); setTimeout(drawDetail,900);
  panelShell({
@@ -813,7 +818,7 @@ function showActivity(p,keepView,refresh=false){
     +'<p class="p-pick">'+esc(activityText(p.category==='shopping'?10:p.id==='nakasu-yatai'?8:7))+'</p>'
     +(p.category==='food'?'<p>'+esc(activityText(9))+'</p>':'')
     +'<p class="place-guide-link"><a href="'+esc(p.official)+'" target="_blank" rel="noopener noreferrer">'+esc(activityText(4))+' ↗</a></p>',
-  img:tileURL(NOW_LAYER.id,NOW_LAYER.ext,p.lat,p.lon,16),cap:activityText(5),
+  ...photoFields('a:'+p.id,tileURL(NOW_LAYER.id,NOW_LAYER.ext,p.lat,p.lon,16),activityText(5)),
   share:{title:placeName(p),url:location.origin+location.pathname+'?lang='+(LANG_PARAM[LANG]||'en')+'#a-'+p.id},
   searchName:p.ja,src:'GSI Tiles · '+activityText(11)
  });
@@ -1284,7 +1289,81 @@ const LANDMARK_ART_BY_WIKI = Object.freeze({
   "Tokyo Station": "tokyo-station-v1.webp",
   "Tokyo Tower": "tokyo-tower-v1.webp"
 });
+/* Tabs 03 (liminal), 04 (food) and 05 (shopping) got the same kind of picture on 2026-09-29: each drawn
+   from reference photographs of the place with ChatGPT image generation, then cut to 192x192 WebP like the rest.
+   Their pins keep the p3 size (an editorial choice, not a measured rank), so these are keyed by record, not
+   by pop. Four activities are the same place as a landmark and share its art; Nakano Broadway is both a
+   liminal place and a shopping street. */
+const SPOT_ART = Object.freeze({
+  "l:aokigahara": "aokigahara-v1.webp",
+  "l:ashio-copper-mine": "ashio-copper-mine-v1.webp",
+  "l:chofu-airport": "chofu-airport-v1.webp",
+  "l:doai-station": "doai-station-v1.webp",
+  "l:hashima-island": "hashima-island-v1.webp",
+  "l:ikeshima": "ikeshima-v1.webp",
+  "l:ikoma-sanjo": "ikoma-sanjo-v1.webp",
+  "l:inujima": "inujima-v1.webp",
+  "l:kinugawa-onsen": "kinugawa-onsen-v1.webp",
+  "l:maya-kanko-hotel": "maya-kanko-hotel-v1.webp",
+  "l:musashino-kyogijomae": "musashino-kyogijomae-v1.webp",
+  "l:nakano-broadway": "nakano-broadway-v1.webp",
+  "l:negishi-racecourse": "negishi-racecourse-v1.webp",
+  "l:nokogiriyama": "nokogiriyama-v1.webp",
+  "l:okunoshima": "okunoshima-v1.webp",
+  "l:outer-underground-discharge": "outer-underground-discharge-v1.webp",
+  "l:oya-quarry": "oya-quarry-v1.webp",
+  "l:qua-palace": "qua-palace-v1.webp",
+  "l:sagamiko-arcade": "sagamiko-arcade-v1.webp",
+  "l:sarushima": "sarushima-v1.webp",
+  "l:shime-fukuoka": "shime-fukuoka-v1.webp",
+  "l:shimonoseki-consulate": "shimonoseki-consulate-v1.webp",
+  "l:tashirojima": "tashirojima-v1.webp",
+  "l:tomogashima": "tomogashima-v1.webp",
+  "l:yoro-reversible-destiny": "yoro-reversible-destiny-v1.webp",
+  "l:yubari-hokkaido": "yubari-hokkaido-v1.webp",
+  "l:zao-onsen": "zao-onsen-v1.webp",
+  "a:akihabara-shopping": "akihabara-electric-town-v1.webp",
+  "a:ameyoko": "ameyoko-v1.webp",
+  "a:aomori-nokkedon": "aomori-nokkedon-v1.webp",
+  "a:dotonbori-food": "dotonbori-food-v1.webp",
+  "a:ginza-shopping": "ginza-wako-v1.webp",
+  "a:hakodate-market": "hakodate-market-v1.webp",
+  "a:harajuku-shopping": "takeshita-street-v1.webp",
+  "a:hasshoku-center": "hasshoku-center-v1.webp",
+  "a:higashi-chaya-shopping": "higashi-chaya-v1.webp",
+  "a:hirome-market": "hirome-market-v1.webp",
+  "a:kanemori-shopping": "kanemori-warehouses-v1.webp",
+  "a:kappabashi": "kappabashi-v1.webp",
+  "a:karato-market": "karato-market-v1.webp",
+  "a:kobe-motomachi": "kobe-motomachi-v1.webp",
+  "a:kokusai-shopping": "kokusai-street-v1.webp",
+  "a:kurashiki-shopping": "kurashiki-bikan-v1.webp",
+  "a:kuromon-market": "kuromon-market-v1.webp",
+  "a:makishi-market": "makishi-market-v1.webp",
+  "a:miyagawa-market": "miyagawa-market-v1.webp",
+  "a:nakano-shopping": "nakano-broadway-v1.webp",
+  "a:nakasu-yatai": "nakasu-yatai-v1.webp",
+  "a:nijo-market": "nijo-market-v1.webp",
+  "a:nishiki-market": "nishiki-market-v1.webp",
+  "a:okonomimura": "okonomimura-v1.webp",
+  "a:omicho-market": "omicho-market-v1.webp",
+  "a:osu-shopping": "osu-shopping-v1.webp",
+  "a:pier-bandai": "pier-bandai-v1.webp",
+  "a:sendai-market": "sendai-market-v1.webp",
+  "a:shibuya-shopping": "shibuya-scramble-v1.webp",
+  "a:shin-yokohama-ramen": "shin-yokohama-ramen-v1.webp",
+  "a:shinsaibashi-shopping": "shinsaibashi-shopping-v1.webp",
+  "a:tanukikoji": "tanukikoji-v1.webp",
+  "a:tenjin-shopping": "tenjin-underground-v1.webp",
+  "a:tenjinbashisuji": "tenjinbashisuji-v1.webp",
+  "a:teramachi-shopping": "teramachi-shopping-v1.webp",
+  "a:tsukiji-outer": "tsukiji-outer-v1.webp"
+});
 function landmarkArt(p, size){
+  if (p.artKey){
+    const file = SPOT_ART[p.artKey];
+    return file && (!size || /^p[123](?:\s|$)/.test(size)) ? '/icons/landmarks/' + file : '';
+  }
   if (p.pop !== 1 && p.pop !== 2) return '';
   if (size && !/^p[12](?:\s|$)/.test(size)) return '';
   const file = p.id ? LANDMARK_ART_BY_ID[p.id] : LANDMARK_ART_BY_WIKI[p.wiki_en || p.wiki_ja || p.wiki];
@@ -1728,7 +1807,7 @@ async function drawDetail(){
       const k = POP_LIM - 1;
       if (!JapanBoundary.contains(p.lat,p.lon) || !b.contains([p.lat, p.lon]) || !free(p.lat, p.lon, POP_CLS[k])) continue;
       const nm = placeName(p);
-      L.marker([p.lat, p.lon], { icon: bigIcon({ emoji: p.emoji, name: nm }, 'ring-lim',
+      L.marker([p.lat, p.lon], { icon: bigIcon({ emoji: p.emoji, name: nm, artKey: 'l:' + p.id }, 'ring-lim',
                                                z >= 10 && freeLabel(p.lat, p.lon, 'lab'),
                                                CLS[k]), title: nm })
        .on('click', () => showLiminal(p)).addTo(group);
@@ -2221,6 +2300,34 @@ function paintCompareBtn(){
   b.innerHTML = '<span>\u25c0\u25b6</span> ' + esc(t('compareYear')(compareLayer.span || compareLayer.year));
 }
 
+/* The panel picture. A chosen photograph comes with its author and licence, linked to its Commons page;
+   otherwise whatever the caller passed (the aerial tile, a memorial stone). srcset is cleared every time,
+   or the previous spot's photograph would win over the new src. */
+let panelPhoto = null;
+function photoFields(key, fallbackImg, fallbackCap){
+  const v = key && PHOTOS[key];
+  if (!v) return { img: fallbackImg, cap: fallbackCap, photoKey: key };
+  const src2x = v.src2x || v.src.replace('/500px-', '/960px-');
+  return { img: v.src, srcset: v.src + ' 500w, ' + src2x + ' 960w', photoKey: key,
+           cap: t('photoBy') + ' \u2014 ' + (v.author ? v.author + ' / ' : '') + v.license,
+           capHref: v.page || 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(v.file.replace(/ /g, '_')) };
+}
+function paintPanelPhoto(o){
+  const fig = $('pFig'), img = $('pImg'), cap = $('pCap');
+  panelPhoto = o.photoKey ? { key: o.photoKey, name: o.name } : null;
+  if (o.srcset){ img.sizes = '(min-width: 860px) 420px, 100vw'; img.srcset = o.srcset; }
+  else { img.removeAttribute('srcset'); img.removeAttribute('sizes'); }
+  cap.textContent = '';
+  if (o.img){
+    img.src = o.img; img.alt = o.srcset ? o.name : (o.cap || o.name);
+    if (o.capHref){
+      const a = document.createElement('a');
+      a.href = o.capHref; a.target = '_blank'; a.rel = 'noopener'; a.textContent = o.cap || '';
+      cap.appendChild(a);
+    } else cap.textContent = o.cap || '';
+    fig.hidden = false;
+  } else { fig.hidden = true; img.removeAttribute('src'); img.alt = ''; }
+}
 function panelShell(o){
   window.AtlasWalking?.clear();
   window.AtlasTime?.close();
@@ -2241,11 +2348,7 @@ function panelShell(o){
      ここで必ず消す。pickOldLayer の返事を待つあいだ前の状態が見えていた。 */
   $('pNoOld').hidden = true;
   $('pNoOld').textContent = '';
-  const fig = $('pFig');
-  if (o.img){ $('pImg').src = o.img; $('pImg').alt = o.cap || o.name;
-              $('pCap').textContent = o.cap || ''; fig.hidden = false; }
-  else { fig.hidden = true; $('pImg').removeAttribute('src');
-         $('pImg').alt = ''; $('pCap').textContent = ''; }
+  paintPanelPhoto(o);
 
   $('pWord').innerHTML = o.kicker
     ? '<span class="w-jp">' + o.kicker.emoji + '</span><span class="w-txt"><b>'
@@ -2375,7 +2478,8 @@ function showLandmark(p,refresh=false){
     bodyHTML: extractHTML(p, 240) || '<p>' + (p.regional ? PlaceUI.pick(['Explore this place with the historical map. Details are available in the linked article.','歴史地図を重ねて周辺をたどれます。詳しい由来はリンク先の記事をご覧ください。','옛 지도와 함께 주변을 살펴보세요. 자세한 내용은 연결된 문서에서 확인할 수 있습니다.','叠加历史地图探索周边，详细介绍请参阅链接文章。','疊加歷史地圖探索周邊，詳細介紹請參閱連結文章。'],LANG) : t('famous')) + '</p>',
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
-    img: airPhoto(p.lat, p.lon), cap: t('photoAir'),
+    ...((p.pop || 3) <= 3 ? photoFields(p.regional ? 'rg:' + p.id : 'lm:' + p.wiki_en, airPhoto(p.lat, p.lon), t('photoAir'))
+                          : { img: airPhoto(p.lat, p.lon), cap: t('photoAir') }),
     share: { title: p.name, url: location.origin + location.pathname },
     searchName: p.ja,
     src: p.regional ? ((articleLink(p)||{}).src||'Wikipedia (CC BY-SA 4.0)') + ' · ' + (p.coordSource.includes('openstreetmap')?'Coordinates © OpenStreetMap contributors.':'Coordinates from Wikipedia.') : (LANG === 'ja' ? '座標の出典：ウィキペディア' : 'Coordinates from Wikipedia.')
@@ -2625,7 +2729,7 @@ function showLiminal(p, keepView,refresh=false){
   if (!keepView) map.setView([p.lat, p.lon], 15);
   setTimeout(() => map.invalidateSize(), 60);
   setThenLayer(null, null);
-  drawSpots([{ lat: p.lat, lon: p.lon, name: placeName(p), emoji: p.emoji }],
+  drawSpots([{ lat: p.lat, lon: p.lon, name: placeName(p), emoji: p.emoji, artKey: 'l:' + p.id }],
             true, () => showLiminal(p, true));
   roaming = false; current = null;
   drawDetail();
@@ -2638,13 +2742,12 @@ function showLiminal(p, keepView,refresh=false){
             + (why ? '<h3 class="p-h3">' + t('liminalWhat') + '</h3><p>' + esc(why) + '</p>' : '')
             + (p.note && LANG==='en' ? '<p class="p-pick">' + esc(p.note) + '</p>' : '')
             + ((LANG==='en'||LANG==='ja') && (p.extract||p.extract_ja) ? extractHTML({...p,summaries:null},220) : ''),
-    img: p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 17),
-    cap: p.img ? t('photoBy') : '',
+    ...photoFields('l:' + p.id, p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 17), p.img ? t('photoBy') : t('photoAir')),
     wiki: (articleLink(p) || {}).url || '',
     wikiLabel: (articleLink(p) || {}).label,
     share: { title: p.name, url: location.origin + location.pathname + '#l-' + p.id },
     searchName: p.ja,
-    src: ((articleLink(p) || {}).src || '') + ' ' + t('photoBy') + '.'
+    src: ((articleLink(p) || {}).src || '') + (PHOTOS['l:' + p.id] || p.img ? ' ' + t('photoBy') + '.' : '')
   });
   /* 言語切替やマーカー再タップでも showLiminal は呼ばれる。そのたびに同じ
      #l-<id> を積むと、戻るボタンを押しても同じ画面に戻るだけで効かなく見える。
@@ -3017,7 +3120,7 @@ function openPlace(p, keepView,refresh=false){
     placeId:p.id, adTier:p.pop||1, ja: LANG==='ja'?'':p.ja, name:placeName(p),
     query: p.name,
     bodyHTML: story.map(s => '<p>' + esc(s) + '</p>').join('') + '<p class="place-guide-link"><a href="/place/' + ({en:'',ja:'ja/',ko:'ko/','zh-Hans':'zh-cn/','zh-Hant':'zh-tw/'}[LANG] || '') + encodeURIComponent(p.id) + '">' + esc(({en:'Read the place guide',ja:'この場所の解説を読む',ko:'장소 안내 읽기','zh-Hans':'阅读地点指南','zh-Hant':'閱讀地點指南'})[LANG] || 'Read the place guide') + '</a></p>',
-    img: p.monument && p.monument.img, cap: cap,
+    ...(p.monument && p.monument.img ? { img: p.monument.img, cap: cap } : photoFields('f:' + p.id, '', '')),
     at: [p.lat, p.lon], share: { title: p.name, url: location.origin + location.pathname + '#' + p.id },
     searchName: p.name_ja || p.ja,
     wiki: (articleLink(p) || {}).url || '',
@@ -3358,6 +3461,15 @@ function consumeMapQuery(){
 LANG = detectLang();
 consumeMapQuery();
 applyLang();
+/* Small (13KB gzipped) and not needed to draw the map, so it loads beside everything else. A panel opened
+   before it lands shows the aerial tile and is given its photograph when it arrives. */
+fetch(dj('data/spot-photos-v1.json')).then(r => r.ok ? r.json() : null).then(j => {
+  if (!j) return;
+  PHOTOS = j.photos || {};
+  if (panelPhoto && PHOTOS[panelPhoto.key] && $('panel').classList.contains('open'))
+    paintPanelPhoto({ ...photoFields(panelPhoto.key), name: panelPhoto.name });
+  if (mode === 'liminal' && LIMINAL.length) buildCards();
+}).catch(() => {});
 fetch(dj('data/places-world.json')).then(r => r.json()).then(j => {
   PLACES = j.places.filter(p => JapanBoundary.contains(p.lat,p.lon));
   paintDirectory();

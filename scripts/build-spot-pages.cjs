@@ -22,27 +22,27 @@ const hubURL=l=>l==='en'?'/places':'/'+labels[l].route;
 const clip=(t,n=150)=>{t=String(t||'').replace(/\s+/g,' ').trim();return t.length>n?t.slice(0,n-1).replace(/[\s、，,。.]+\S*$/,'')+'…':t;};
 
 const UI={
- en:{kind:{food:'Markets and food streets',shopping:'Shopping streets',liminal:'Liminal places',landmark:'Famous places'},
+ en:{webHead:'About this place',webNote:'Pieced together from several public web pages listed below; treat it as a rough guide.',kind:{food:'Markets and food streets',shopping:'Shopping streets',liminal:'Liminal places',landmark:'Famous places'},
   title:{food:'Market & food street in Japan',shopping:'Shopping street in Japan',liminal:'A liminal place in Japan, then and now',landmark:'Historic aerial photos & walking map'},
   official:'Official visitor page',notes:'Before you go',checked:'Checked against the sources below',wiki:'Wikipedia',wikiNote:'Excerpt from Wikipedia (CC BY-SA)',
   caution:'Liminal describes a feeling, not permission. Look from public roads and open visitor areas; do not enter closed buildings, ruins, fenced or private land. A pin on the map is not permission to go inside.',
   pin:'The pin marks the area, not a particular shop.',lists:'More places in this language'},
- ja:{kind:{food:'ご当地グルメ・市場',shopping:'商店街・買い物',liminal:'リミナルスペース・異世界スポット',landmark:'名所'},
+ ja:{webHead:'この場所について',webNote:'下に挙げた複数の公開ページから組み立てた説明です。目安としてご覧ください。',kind:{food:'ご当地グルメ・市場',shopping:'商店街・買い物',liminal:'リミナルスペース・異世界スポット',landmark:'名所'},
   title:{food:'ご当地グルメ・市場と食の通り',shopping:'商店街・買い物スポット',liminal:'リミナルスペースの今昔',landmark:'昔の航空写真と街歩きマップ'},
   official:'公式の観光案内',notes:'出かける前に',checked:'下の出典で内容を確認しています',wiki:'ウィキペディア',wikiNote:'ウィキペディアからの抜粋（CC BY-SA）',
   caution:'リミナルは雰囲気の呼び名で、立ち入ってよいという意味ではありません。見るのは公道や公開されている場所からにしてください。閉鎖された建物・廃墟・柵の中・私有地には入らないでください。地図のピンは立ち入りの許可ではありません。',
   pin:'ピンは個別の店ではなく、エリアの目印です。',lists:'ほかの場所も日本語で見る'},
- ko:{kind:{food:'시장 · 먹거리 거리',shopping:'쇼핑 거리',liminal:'리미널 스페이스',landmark:'명소'},
+ ko:{webHead:'이곳에 대하여',webNote:'아래 여러 공개 웹페이지를 바탕으로 정리한 설명입니다. 참고용으로 보세요.',kind:{food:'시장 · 먹거리 거리',shopping:'쇼핑 거리',liminal:'리미널 스페이스',landmark:'명소'},
   title:{food:'일본의 시장 · 먹거리 거리',shopping:'일본의 쇼핑 거리',liminal:'일본의 리미널 스페이스, 과거와 현재',landmark:'옛 항공사진과 산책 지도'},
   official:'공식 관광 안내',notes:'가기 전에',checked:'아래 출처로 내용을 확인했습니다',wiki:'위키백과',wikiNote:'위키백과 발췌(CC BY-SA)',
   caution:'리미널은 분위기를 부르는 말이지, 들어가도 된다는 뜻이 아닙니다. 공공 도로나 공개된 곳에서만 보세요. 폐쇄된 건물, 폐허, 울타리 안이나 사유지에는 들어가지 마세요. 지도의 핀은 출입 허가가 아닙니다.',
   pin:'핀은 특정 가게가 아니라 지역을 나타냅니다.',lists:'다른 장소도 한국어로 보기'},
- 'zh-Hans':{kind:{food:'市场与美食街',shopping:'购物街',liminal:'阈限空间',landmark:'名胜'},
+ 'zh-Hans':{webHead:'关于这里',webNote:'根据下方列出的多个公开网页整理而成，仅供参考。',kind:{food:'市场与美食街',shopping:'购物街',liminal:'阈限空间',landmark:'名胜'},
   title:{food:'日本的市场与美食街',shopping:'日本的购物街',liminal:'日本的阈限空间：过去与现在',landmark:'旧航拍照片与城市漫步地图'},
   official:'官方旅游介绍',notes:'出发之前',checked:'内容已根据下方出处核对',wiki:'维基百科',wikiNote:'摘自维基百科（CC BY-SA）',
   caution:'“阈限”指的是一种氛围，并不代表可以进入。请只在公共道路或开放区域观看；不要进入已关闭的建筑、废墟、围栏内或私人土地。地图上的标记不代表允许进入。',
   pin:'标记表示区域，而不是某一家店。',lists:'用中文查看更多地点'},
- 'zh-Hant':{kind:{food:'市場與美食街',shopping:'購物街',liminal:'閾限空間',landmark:'名勝'},
+ 'zh-Hant':{webHead:'關於這裡',webNote:'根據下方列出的多個公開網頁整理而成，僅供參考。',kind:{food:'市場與美食街',shopping:'購物街',liminal:'閾限空間',landmark:'名勝'},
   title:{food:'日本的市場與美食街',shopping:'日本的購物街',liminal:'日本的閾限空間：過去與現在',landmark:'舊航拍照片與城市散步地圖'},
   official:'官方觀光介紹',notes:'出發之前',checked:'內容已依下方出處核對',wiki:'維基百科',wikiNote:'摘自維基百科（CC BY-SA）',
   caution:'「閾限」指的是一種氛圍，並不代表可以進入。請只在公共道路或開放區域觀看；不要進入已關閉的建築、廢墟、圍欄內或私人土地。地圖上的標記不代表允許進入。',
@@ -66,9 +66,12 @@ for(const a of activities)spots.push({key:'a-'+a.id,kind:a.category,lat:a.lat,lo
  map:l=>'/?lang='+encodeURIComponent(l)+'&amp;place=a-'+a.id,
  sources:l=>[a.official&&{url:a.official,label:UI[l].official},...(a.noteSources||[]).map(u=>({url:u,label:new URL(u).hostname.replace(/^www\./,'')}))].filter(Boolean)});
 for(const p of liminal)spots.push({key:'l-'+p.id,id:p.id,kind:'liminal',lat:p.lat,lon:p.lon,emoji:p.emoji,names:p.names,english:true,
- lead:l=>p.hooks?.[l],paras:l=>[p.summaries?.[l],l==='ja'?p.why_ja:null].filter(Boolean),wikiText:l=>l==='ja'?p.extract_ja:null,
+ lead:l=>p.hooks?.[l],paras:l=>[p.summaries?.[l],l==='ja'?p.why_ja:null].filter(Boolean),
+ // a web-aggregated description is not a Wikipedia excerpt: it gets its own note, and its pages are listed as sources
+ wikiText:l=>l==='ja'&&p.extractSrc!=='web (aggregated)'?p.extract_ja:null,webText:l=>l==='ja'&&p.extractSrc==='web (aggregated)'?p.extract_ja:null,
  map:l=>'/?lang='+encodeURIComponent(l)+'&amp;place=l-'+p.id,
- sources:l=>[{url:wikiURL('ja',p.wiki_ja),label:UI[l].wiki+' (日本語)'},{url:wikiURL('en',p.wiki_en||p.wiki),label:UI[l].wiki+' (English)'}].filter(s=>s.url)});
+ sources:l=>[{url:wikiURL('ja',p.wiki_ja),label:UI[l].wiki+' (日本語)'},{url:wikiURL('en',p.wiki_en||p.wiki),label:UI[l].wiki+' (English)'},
+  ...(p.sources||[]).map(u=>({url:u,label:new URL(u).hostname.replace(/^www\./,'')}))].filter(s=>s.url)});
 for(const m of landmarks){const id=landmarkId(m);if(!id)throw Error('landmark without an English page: '+m.name);
  spots.push({key:'m-'+id,kind:'landmark',lat:m.lat,lon:m.lon,emoji:m.emoji,names:m.names,english:true,
   lead:l=>m.summaries?.[l],paras:l=>[],wikiText:l=>l==='ja'?m.extract_ja:null,
@@ -110,6 +113,7 @@ function page(s,l){
  const nav='<nav aria-label="'+esc(t.home)+'"><a href="/">Japan Time Atlas</a><a href="'+hubURL(l)+'">'+esc(t.home)+'</a><a href="/visit">'+esc(t.markets)+'</a></nav>';
  const langNav='<nav aria-label="Language">'+LANGS.map(k=>'<a lang="'+k+'" href="'+pageURL(s,k)+'"'+(k===l?' aria-current="page"':'')+'>'+labels[k].name+'</a>').join('')+'</nav>';
  const notes=s.notes&&s.notes(l)?'<section><h2>'+esc(u.notes)+'</h2><p>'+esc(s.notes(l))+'</p><p class="srcnote">'+esc(u.checked)+'</p></section>':'';
+ const web=s.webText&&s.webText(l)?'<section lang="ja"><h2>'+esc(u.webHead)+'</h2><p>'+esc(clip(s.webText(l),600))+'</p><p class="srcnote">'+esc(u.webNote)+'</p></section>':'';
  const wiki=s.wikiText&&s.wikiText(l)?'<section lang="ja"><h2>'+esc(u.wiki)+'</h2><p>'+esc(clip(s.wikiText(l),600))+'</p><p class="srcnote">'+esc(u.wikiNote)+'</p></section>':'';
  const near=nearby(s,l);
  const body='<main><p class="where">'+esc((s.emoji?s.emoji+' ':'')+u.kind[s.kind])+'</p><h1>'+esc(name)+'</h1>'
@@ -118,7 +122,7 @@ function page(s,l){
   +'<p class="lead">'+esc(s.lead(l))+'</p>'+s.paras(l).map(p=>'<p>'+esc(p)+'</p>').join('')
   +(s.kind==='liminal'?'<p class="caution"><b>⚠</b> '+esc(u.caution)+'</p>':'')
   +((s.kind==='food'||s.kind==='shopping')?'<p class="srcnote">'+esc(u.pin)+'</p>':'')
-  +notes+guideBlock(s,l)+tile(s,l)+wiki
+  +notes+guideBlock(s,l)+tile(s,l)+wiki+web
   +'<section><h2>'+esc(t.source)+'</h2><ul>'+s.sources(l).map(x=>'<li><a href="'+esc(x.url)+'" rel="noopener">'+esc(x.label)+'</a></li>').join('')+'<li><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a></li></ul></section>'
   +'<section><h2>'+esc(t.near)+'</h2><p class="where">'+esc(t.distance)+'</p><ul class="near">'+near.map(o=>'<li><a href="'+o.url+'">'+esc(o.name)+'</a><span>'+(o.d<1?o.d.toFixed(1):Math.round(o.d))+' km</span></li>').join('')+'</ul></section>'
   +'<p class="cta"><a href="'+s.map(l)+'">'+esc(t.open)+'</a></p></main>';

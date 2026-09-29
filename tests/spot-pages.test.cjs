@@ -9,8 +9,8 @@ const sitemap=new Set([...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].ma
 const mKeys=fs.readdirSync(path.join(root,'place')).filter(f=>/^m-.+\.html$/.test(f)).map(f=>f.slice(0,-5));
 const keys=[...activities.map(a=>'a-'+a.id),...liminal.map(p=>'l-'+p.id),...mKeys];
 
-test('36 food and shopping spots, 26 liminal places and 34 landmarks each have five language pages',()=>{
- assert.equal(activities.length,36);assert.equal(liminal.length,26);assert.equal(mKeys.length,landmarks.length);
+test('36 food and shopping spots, 27 liminal places and 34 landmarks each have five language pages',()=>{
+ assert.equal(activities.length,36);assert.equal(liminal.length,27);assert.equal(mKeys.length,landmarks.length);
  for(const k of keys)for(const l of LANGS){const f='place/'+DIRS[l]+k+'.html';assert.ok(has(f),f+' is missing');}
 });
 

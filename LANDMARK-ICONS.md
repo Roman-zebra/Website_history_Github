@@ -15,3 +15,19 @@ These are multiple viewpoints, not an assertion that every possible angle has be
 ## Delivery
 
 The WebP assets are in `icons/landmarks/`; the explicit `LANDMARK_ART_BY_ID` and `LANDMARK_ART_BY_WIKI` tables in `explore.js` cover every p1/p2 data row. The image remains decorative and the marker keeps its localized title. Failed image loading retains the clickable emoji marker. Map visuals were checked for Himeji and Dōgo Onsen on desktop, and for Dōgo Onsen at phone width.
+
+# Tabs 03/04/05 and panel photographs — 2026-09-29
+
+The 27 liminal places (tab 03), 18 food places (04) and 18 shopping streets (05) now use the same kind of pictorial marker. 58 new illustrations were made with ChatGPT image generation from written descriptions of each place, after looking at reference photographs of it (the Commons photographs listed in `data/spot-photos-v1.json`, and press photographs for Qua Palace, which has no free photograph). The references were not given to the generator and are not distributed. Every result was checked by eye against its subject; two were redone (Zaō's file had picked up another picture, and Dōtonbori's billboards resembled real advertising characters, so it was redrawn with abstract signs only). Four activities share an existing landmark picture because they are the same place (Akihabara, Shibuya, Higashi Chaya, Kurashiki), and Nakano Broadway is shared by the liminal and shopping records.
+
+- Files: `icons/landmarks/<name>-v1.webp`, 192×192 transparent WebP, trimmed to the same 94% fill as the earlier set.
+- Mapping: `SPOT_ART` in `explore.js`, keyed `l:<liminal id>` / `a:<activity id>`. These pins keep their p3 size (an editorial choice, not a measured rank); the art is looked up by key, not by `pop`, at p1–p3 sizes and on the selected pin.
+- Tests: `tests/spot-photos.test.cjs`.
+
+## Panel photographs
+
+The panels of the larger pins (p1–p3: 17 featured places, 31 landmarks, 92 regional landmarks) and of tabs 03/04/05 show a ground-level photograph of the whole building or place — from the front or another angle — instead of the aerial tile. 202 Wikimedia Commons files were chosen by eye from contact sheets on 2026-09-29, preferring the subject of the pin's picture (for example Senkō-ji for Onomichi, the lighthouse for Cape Muroto). Underground places (the discharge channel, the Ōya quarry, Ryūsendō, Tenjin underground mall) show their main hall, which is what a visitor sees.
+
+- Data: `data/spot-photos-v1.json` (file, 500px thumbnail, author, licence; the 960px thumbnail and the file page are derived). Only CC0, public-domain, CC BY and CC BY-SA files; the caption names the author and licence and links to the Commons page.
+- Unchanged: p4 landmarks, Wikipedia/stone/local pins, and the two featured places whose panel shows their disaster-memorial stone (Okayama, Aneyoshi). Qua Palace keeps the aerial tile because no free photograph of it exists.
+- The liminal home cards use the same photographs (the old Shime card showed the town hall). The food and shopping cards stay labelled map previews.
