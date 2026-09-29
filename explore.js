@@ -837,18 +837,32 @@ function restoreActivity(){
  setMode(p.category); noPush(showActivity,p); return true;
 }
 
-/* Tab 06: the 3D reconstructions. One entry per reconstruction; the next place is added here and
-   gets its card, and scripts/build-3d-pages.cjs lists the same set on the /3d/ series pages. */
+/* Tab 06: published reconstructions link to their pages. Upcoming entries remain display-only. */
 const LAB_ITEMS = [{
   path: 'gunkanjima', artKey: 'l:hashima-island', img: '/3d/gunkanjima-card.jpg?v=4', era: '1947 → NOW · 3D', ja: '端島 · Hashima',
   name: { en: 'Gunkanjima (Hashima Island) in 3D, 1947 to today', ja: 'よみがえる軍艦島（端島）　全盛期の町並みと当時の暮らしを3Dで', ko: '군함도(하시마) 3D 복원, 1947년부터 지금까지', 'zh-Hans': '军舰岛（端岛）3D复原，1947年至今', 'zh-Hant': '軍艦島（端島）3D復原，1947年至今' },
   hook: { en: 'The coal-mining island rebuilt building by building. Slide through the years, tap a building for its facts, step inside, or listen to the audio guide.', ja: '炭鉱で栄えた島を建物ごとに再現。年代を動かすと全盛期の町並みが立ち上がり、建物を押すと竣工年や用途、中に入ると当時の暮らしが見られます。音声ガイドつき。', ko: '탄광 섬을 건물별로 복원. 연도를 움직이고, 건물을 눌러 준공년과 용도를 읽고, 안에 들어가고, 음성 가이드도 들을 수 있습니다.', 'zh-Hans': '逐栋复原煤矿岛。拖动年代，点按建筑查看竣工年和用途，走进内部，也能收听音频导览。', 'zh-Hant': '逐棟復原煤礦島。拖曳年代，點按建築查看竣工年和用途，走進內部，也能收聽語音導覽。' }
+},{
+  path: 'shinsekai', comingSoon: true, era: '1912 · 3D', ja: '大阪 · 1912',
+  name: { en: 'Osaka — Shinsekai & Luna Park, 1912', ja: '大阪・新世界とルナパーク（1912年）', ko: '오사카 신세카이와 루나파크 (1912년)', 'zh-Hans': '大阪·新世界与露娜乐园（1912年）', 'zh-Hant': '大阪·新世界與露娜樂園（1912年）', th: 'โอซาก้า — ชินเซไกและลูน่าพาร์ค (1912)' },
+  hook: { en: 'An interactive reconstruction of the 1912 streets and amusement park is in development.', ja: '1912年の街並みと遊園地を歩ける3D作品を制作中です。', ko: '1912년 거리와 유원지를 걸어볼 수 있는 3D 작품을 제작 중입니다.', 'zh-Hans': '可漫步于1912年街区与游乐园的3D作品正在制作中。', 'zh-Hant': '可漫步於1912年街區與遊樂園的3D作品正在製作中。', th: 'กำลังสร้างโลก 3 มิติให้เดินชมย่านเมืองและสวนสนุกในปี 1912' }
 }];
 const LAB_OPEN = { en: '▶ Open the 3D model', ja: '▶ 3Dモデルを開く', ko: '▶ 3D 모델 열기', 'zh-Hans': '▶ 打开3D模型', 'zh-Hant': '▶ 開啟3D模型' };
+const LAB_SOON = { en: 'Coming soon', ja: '近日公開', ko: '곧 공개', 'zh-Hans': '即将推出', 'zh-Hant': '即將推出', th: 'เร็ว ๆ นี้' };
 const LAB_DIR = { en: '', ja: 'ja/', ko: 'ko/', 'zh-Hans': 'zh-cn/', 'zh-Hant': 'zh-tw/' };
 function labHref(item){ return '/3d/' + (LAB_DIR[LANG] || '') + item.path; }
 function buildLabCards(){
-  $('cards').innerHTML = LAB_ITEMS.map(it => '<a class="card card-lab" href="' + labHref(it) + '">'
+  $('cards').innerHTML = LAB_ITEMS.map(it => it.comingSoon
+    ? '<div class="card card-lab card-lab-soon" role="group" aria-disabled="true">'
+    + '<div class="card-img card-lab-placeholder" aria-hidden="true"></div>'
+    + '<span class="card-era">' + esc(it.era) + '</span>'
+    + '<span class="card-cta">' + esc(LAB_SOON[LANG] || LAB_SOON.en) + '</span>'
+    + '<div class="card-body">'
+    + '<p class="card-ja">' + esc(it.ja) + '</p>'
+    + '<p class="card-name">' + esc(it.name[LANG] || it.name.en) + '</p>'
+    + '<p class="card-hook">' + esc(it.hook[LANG] || it.hook.en) + '</p>'
+    + '</div></div>'
+    : '<a class="card card-lab" href="' + labHref(it) + '">'
     + '<img class="card-img card-photo" alt="" loading="lazy" decoding="async" src="' + it.img + '">'
     + cardBadge('🧪', it.artKey ? landmarkArt({ artKey: it.artKey }) : '')
     + '<span class="card-era">' + esc(it.era) + '</span>'

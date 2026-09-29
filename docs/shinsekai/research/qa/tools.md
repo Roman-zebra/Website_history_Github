@@ -7,7 +7,7 @@
 | Git | 2.55.0.windows.5 | `C:\Program Files\Git\cmd\git.exe` | winget `Git.Git` | 有 |
 | Node.js（LTS） | v24.19.0 | `C:\Program Files\nodejs\node.exe` | winget `OpenJS.NodeJS.LTS` | 有 |
 | npm | 11.17.0 | `C:\Program Files\nodejs\npm.cmd` | Node.js に同梱 | 有 |
-| Blender（LTS） | 4.5.10（導入中） | `C:\Program Files\Blender Foundation\Blender 4.5\blender.exe`（予定） | winget `BlenderFoundation.Blender.LTS.4.5` | 無（フルパスで呼ぶ） |
+| Blender（LTS） | 4.5.10 LTS（build 2026-05-19） | `C:\Program Files\Blender Foundation\Blender 4.5\blender.exe` | winget `BlenderFoundation.Blender.LTS.4.5` | 無（フルパスで呼ぶ） |
 | KTX-Software（toktx・ktx） | v4.4.2 | `C:\Program Files\KTX-Software\bin\toktx.exe`、`ktx.exe`（ほかに ktxinfo・ktx2check・ktxsc・ktx2ktx2） | winget に無いため Khronos 公式 GitHub リリース `KTX-Software-4.4.2-Windows-x64.exe` を `/S` で導入（SHA-256 は GitHub の公開値と一致、Khronos Group Inc の署名は有効） | 無（フルパスで呼ぶ） |
 | gltfpack | 1.3（npm `gltfpack@1.3.0`、WASM 版） | `%APPDATA%\npm\gltfpack.cmd` | `npm install -g` | 有 |
 | gltf-validator | 2.0.0-dev.3.10（npm） | `%APPDATA%\npm\node_modules\gltf-validator` | `npm install -g` | —（ライブラリのみ。コマンドは無い） |
