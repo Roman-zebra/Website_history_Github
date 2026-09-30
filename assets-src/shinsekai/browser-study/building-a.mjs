@@ -10,6 +10,8 @@ import {createShopDreamLook} from './shop-dream-look.mjs';
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
 const dreamCheck=document.querySelector('#dreamLook');
+// Opt-in comparison: compileAsync still increases total readiness time here.
+const precompile=new URLSearchParams(location.search).has('precompile');
 const capture=document.querySelector('#capture');
 const buttons={cash:document.querySelector('#cash'),storage:document.querySelector('#storage')};
 const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:new URLSearchParams(location.search).has('webgl')});
@@ -25,6 +27,30 @@ const ground=new THREE.Mesh(new THREE.PlaneGeometry(140,140),new THREE.MeshStand
 const loader=new GLTFLoader(),glass=createPeriodGlassMaterial(),assets=[],exteriors=new Map(),drawers=new Map();
 let manifest,shots,cells,exterior=null,interior=null,currentLOD=null,requestedLOD=null,lodEpoch=0,frame=null,disposed=false,ready=false,lastTime=null,frames=0,envTarget=null,capturing=false,captureWait=null;
 let floorLook=null,dreamLook=null;
+let preparationQueue=Promise.resolve(),preparations=0,preparationPaused=false;
+const preparationHistory=[];
+function prepareScene(reason){
+ if(!precompile)return;
+ preparations++;cancel();controls.enabled=false;
+ select.disabled=glassCheck.disabled=dreamCheck.disabled=capture.disabled=true;Object.values(buttons).forEach(b=>b.disabled=true);
+ canvas.dataset.preparation='queued';status.textContent='描画を準備中…';
+ preparationQueue=preparationQueue.then(async()=>{
+  if(disposed||!ready)return;if(document.hidden){preparationPaused=true;return;}
+  // Let the loading message paint before node translation/driver compilation.
+  const paint=waitCaptureFrame({request:requestAnimationFrame,cancel:cancelAnimationFrame});await paint.promise;
+  if(disposed)return;if(document.hidden){preparationPaused=true;return;}
+  const start=performance.now();canvas.dataset.preparation='compiling';
+  await renderer.compileAsync(scene,camera,null,event=>{
+   if(disposed)return;status.textContent=`描画を準備中 ${event.loaded}/${event.total}`;
+   canvas.dataset.compilationProgress=JSON.stringify({loaded:event.loaded,total:event.total});
+  });
+  preparationHistory.push({reason,compileMs:performance.now()-start,visibility:document.visibilityState});if(preparationHistory.length>24)preparationHistory.shift();
+  canvas.dataset.preparationHistory=JSON.stringify(preparationHistory);
+ }).catch(error=>{if(!disposed){if(document.hidden){preparationPaused=true;return;}canvas.dataset.rendererError=error.message;ready=false;status.textContent='描画準備失敗：再読み込みしてください。';}}).finally(()=>{
+  preparations--;
+  if(!disposed&&!preparations){canvas.dataset.preparation=preparationPaused?'paused':ready?'prepared':'failed';controls.enabled=true;select.disabled=glassCheck.disabled=dreamCheck.disabled=false;Object.entries(buttons).forEach(([k,b])=>b.disabled=!drawers.has(k));request();}
+ });
+}
 function render(time=performance.now()){if(dreamCheck.checked){dreamLook??=createShopDreamLook(renderer,scene,camera);dreamLook.render(time);}else renderer.render(scene,camera);canvas.dataset.look=dreamCheck.checked?'dream':'base';}
 async function settleGPU(){
  const queue=renderer.backend.isWebGPUBackend?renderer.backend.device?.queue:null;if(!queue)return;
@@ -38,7 +64,9 @@ function release(model){
  for(const m of materials){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();}for(const t of textures){t.dispose();t.source?.data?.close?.();}for(const g of geometries)g.dispose();
 }
 async function load(part){
+ const loadStart=performance.now();
  const gltf=await loader.loadAsync(base+'runtime/'+part+'.glb');
+ gltf.studyLoadMs=performance.now()-loadStart;
  if(disposed){release(gltf);throw new DOMException('Page left','AbortError');}
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);
  meshes(gltf,o=>{o.castShadow=true;o.receiveShadow=true;
@@ -73,7 +101,7 @@ async function updateLOD(distance){
  if(!exteriors.has(desired))exteriors.set(desired,load('exterior-lod'+desired).catch(error=>{exteriors.delete(desired);throw error;}));
  try{
   const model=await exteriors.get(desired);if(disposed||epoch!==lodEpoch)return;
-  if(exterior)scene.remove(exterior.scene);exterior=model;currentLOD=desired;scene.add(model.scene);applyGlass();request();
+  if(exterior)scene.remove(exterior.scene);exterior=model;currentLOD=desired;scene.add(model.scene);applyGlass();prepareScene('exterior-lod'+desired);request();
  }catch(error){if(!disposed&&epoch===lodEpoch){canvas.dataset.loadError=error.message;status.textContent='外観を読み込めませんでした。再読み込みしてください。';}}
 }
 function bindDrawers(model){
@@ -97,7 +125,7 @@ function pose(){
 // and avoid resizing transmission/reflector render targets while they are used.
 function resize(){if(disposed||capturing)return;renderer.setSize(1280,720,false);camera.aspect=1280/720;camera.updateProjectionMatrix();request();}
 function draw(time){
- frame=null;if(disposed||document.hidden||capturing)return;
+ frame=null;if(disposed||document.hidden||capturing||preparations)return;
  try{
   const delta=lastTime===null?0:Math.min((time-lastTime)/1000,.25);lastTime=time;const changed=controls.update();
   cells.update(camera.position.toArray());updateLOD(camera.position.distanceTo(new THREE.Vector3(...manifest.position)));
@@ -106,12 +134,13 @@ function draw(time){
    const difference=d.target-d.progress;d.progress+=Math.sign(difference)*Math.min(Math.abs(difference),delta/.65);
    d.action.time=d.progress*d.clip.duration/2;d.mixer.update(0);moving||=d.progress!==d.target;
   }
-  const start=performance.now();render(time);frames++;
+  const start=performance.now();render(time);const submitMs=performance.now()-start;frames++;
+  if(interior&&interior.studyFirstSubmitMs===undefined){interior.studyFirstSubmitMs=submitMs;canvas.dataset.interiorPreparation=JSON.stringify({loadDecodeMs:interior.studyLoadMs,firstSubmitMs:submitMs,precompile,width:canvas.width,height:canvas.height,backend:renderer.backend.isWebGPUBackend?'WebGPU':'WebGL2',view:select.value});}
   canvas.dataset.renderedFrames=String(frames);canvas.dataset.interiorStatus=cells.snapshot()[0].status;canvas.dataset.exteriorLOD=String(currentLOD);
   canvas.dataset.drawerProgress=JSON.stringify(Object.fromEntries([...drawers].map(([k,d])=>[k,d.progress])));
   capture.disabled=currentLOD===null||currentLOD!==requestedLOD||cells.snapshot()[0].status==='loading';
   status.textContent=`${renderer.backend.isWebGPUBackend?'WebGPU':'WebGL 2'} · 外観LOD${currentLOD??'準備中'} · 室内 ${cells.snapshot()[0].status}`;
-  metrics.textContent=`${frames}回描画 · CPU送信 ${(performance.now()-start).toFixed(1)}ms · 停止時は追加描画なし。ガラス調整は透過色と微小な波打ちの試作です。`;
+  metrics.textContent=`${frames}回描画 · CPU送信 ${submitMs.toFixed(1)}ms · 停止時は追加描画なし。ガラス調整は透過色と微小な波打ちの試作です。`;
   if(changed||moving)request();else lastTime=null;
  }catch(error){canvas.dataset.rendererError=error.message;status.textContent='描画失敗：'+error.message;console.error(error);}
 }
@@ -136,10 +165,13 @@ capture.addEventListener('click',async()=>{
   if(!disposed){controls.enabled=true;select.disabled=glassCheck.disabled=dreamCheck.disabled=false;Object.entries(buttons).forEach(([k,b])=>b.disabled=!drawers.has(k));request();}
  }
 });
-window.addEventListener('resize',resize);document.addEventListener('visibilitychange',()=>{if(document.hidden){captureWait?.cancel();cancel();}else request();});
+window.addEventListener('resize',resize);document.addEventListener('visibilitychange',()=>{if(document.hidden){captureWait?.cancel();cancel();}else{if(preparationPaused){preparationPaused=false;prepareScene('visibility-resume');}request();}});
 window.addEventListener('pagehide',event=>{
- captureWait?.cancel();cancel();if(event.persisted)return;disposed=true;lodEpoch++;cells?.dispose();drawers.forEach(d=>d.mixer.stopAllAction());
- for(const promise of exteriors.values())promise.then(release).catch(()=>{});controls.dispose();dreamLook?.dispose();envTarget?.dispose();glass.dispose();ground.geometry.dispose();ground.material.dispose();renderer.dispose();
+ captureWait?.cancel();cancel();if(event.persisted)return;disposed=true;lodEpoch++;
+ const cleanup=()=>{cells?.dispose();drawers.forEach(d=>d.mixer.stopAllAction());for(const promise of exteriors.values())promise.then(release).catch(()=>{});controls.dispose();dreamLook?.dispose();envTarget?.dispose();glass.dispose();ground.geometry.dispose();ground.material.dispose();renderer.dispose();};
+ // compileAsync yields between objects. Do not dispose a model while its
+ // queued shader jobs still refer to geometry or textures.
+ if(preparations)preparationQueue.finally(cleanup);else cleanup();
 });window.addEventListener('pageshow',request);
 try{
  await renderer.init();if(disposed)throw new DOMException('Page left','AbortError');
@@ -155,6 +187,6 @@ try{
  const pmrem=new THREE.PMREMGenerator(renderer);envTarget=pmrem.fromScene(env,.04,.1,100,{size:128});scene.environment=envTarget.texture;scene.environmentIntensity=.45;pmrem.dispose();env.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
  [manifest,shots]=await Promise.all([fetch(base+'runtime/manifest.json').then(r=>{if(!r.ok)throw new Error('manifest '+r.status);return r.json();}),fetch(base+'review-cameras.json').then(r=>{if(!r.ok)throw new Error('cameras '+r.status);return r.json();})]);
  if(disposed)throw new DOMException('Page left','AbortError');
- cells=createInteriorCells({cells:[{id:'building-a',position:manifest.position}],enter:manifest.enter,leave:manifest.leave,load:()=>load('interior'),attach:(_,model)=>{interior=model;scene.add(model.scene);floorLook=connectShopFloor(scene,model);bindDrawers(model);applyGlass();request();},detach:(_,model)=>{if(interior===model){floorLook?.dispose();floorLook=null;scene.remove(model.scene);drawers.forEach(d=>d.mixer.stopAllAction());drawers.clear();interior=null;Object.values(buttons).forEach(b=>b.disabled=true);applyGlass();}release(model);},onChange:request});
+ cells=createInteriorCells({cells:[{id:'building-a',position:manifest.position}],enter:manifest.enter,leave:manifest.leave,load:()=>load('interior'),attach:(_,model)=>{interior=model;scene.add(model.scene);floorLook=connectShopFloor(scene,model);bindDrawers(model);applyGlass();prepareScene('interior');request();},detach:(_,model)=>{if(interior===model){floorLook?.dispose();floorLook=null;scene.remove(model.scene);drawers.forEach(d=>d.mixer.stopAllAction());drawers.clear();interior=null;Object.values(buttons).forEach(b=>b.disabled=true);applyGlass();}release(model);},onChange:request});
  ready=true;select.disabled=false;resize();request();
 }catch(error){if(!disposed){canvas.dataset.rendererError=error.message;status.textContent='準備失敗：'+error.message;console.error(error);}}
