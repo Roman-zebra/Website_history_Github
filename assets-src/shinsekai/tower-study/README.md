@@ -20,3 +20,19 @@ This is an editable **T3 preparation study**, not a production asset. `build-tow
 Run `blender -b --python assets-src/shinsekai/tower-study/build-tower.py` from the repository root. Pass `-- --export-only` to regenerate only the GLB. The source keeps each part named and editable; export joins parts by material to keep the current GLB to four meshes/materials and about 0.71 MB. Blender 4.5.10 generated the render and GLB. The current GLB passed glTF-Validator 2.0.0-dev.3.10 with **0 errors, 0 warnings, 4 unused-UV infos** on 2026-09-30; the validator was installed free in a temporary directory because Claude's reported global path was unavailable in this shell.
 
 Before using this model in T4: establish the site plan and tower anchor, match at least the north and White Tower photos with an explicit camera model, replace guessed dimensions/colours, then rerun glTF validation and visual/performance checks. Do not interpret this study as a reconstruction of the 1912 opening state.
+
+## v3 proposal (branch `claude/tower-shaft-v3`, Claude; not merged)
+
+Review notes are in Claude's local `claude-out/design/review-tower-study-v2.md`.
+- **Flared legs**: the shaft keeps its roof and box anchors. The legs are straight in the upper 55% and flare concavely below. The width ratios (about 0.47 at the box, 0.59 halfway, 1.0 at the roof) come from plate-46 outer widths; the taper rate below mid-height is about three times that above. These are photo ratios, and camera pitch is not removed.
+- **Central elevator well**: a lattice well from the roof garden to the box, with a car placeholder for T5 motion. Evidence: two vertical lines up each face in view A and plate 46, and the 1912 text 「此處よりエレベーターの裝置を以て塔の頂顚に達すべく」. There is no ground-level well; that is the 1938 alteration.
+- **Face lacing**: diamond cells of about 1.6 m (4–7 across) with belts every second band. Instancing and an LOD card are still to do.
+- **Era switch** `--era 1912|1920s`:
+  - 1912: solid band + open railed gallery + openwork ribbed crown (south-view proportions 15.5 : 14.5 : 22.5).
+  - 1920s: two-tier enclosed box + low solid cap (plate 46, OML 158880/158886). The shaft-top height is shared (a scenario).
+- **Iron colour** `--iron grey|redbrown`: red-brown is the hand-coloured opening-era postcard candidate, not a measured colour.
+- Outputs:
+  - `north-study.png` / `tower-study.glb` (1912, grey)
+  - `north-study-1920s.png` / `tower-study-1920s.glb`
+  - `north-study-redbrown.png` (the GLB is not committed)
+- glTF-Validator 2.0.0-dev.3.10: 0 errors, 0 warnings, 4 infos; 4 draw calls; about 24k triangles (1912) and 21.7k (1920s).
