@@ -37,9 +37,10 @@
     <button type="button" data-mode="night" aria-pressed="false">Night</button>
   </div>
   <p id="status" role="status">Loading renderer…</p>
+  <label>Ground study <select id="weather"><option value="dry">Dry</option><option value="rain">Wet / rain study</option></select></label>
   <label>Fixed review view <select id="lookView" disabled><option value="street-hero">Street hero · dusk</option><option value="roof-garden">Roof garden · dusk</option><option value="aerial-dusk">Aerial tower · dusk</option><option value="night-street">Night street</option><option value="north-overview">North overview · dusk</option><option value="south-oblique">South oblique · dusk</option></select></label>
   <button type="button" id="capture" disabled>Save review PNG</button>
-      <p id="captureStatus">1280×720 fixed view; current lighting. V4 geometry with CC0 PBR; smoke, sun, grade, wear, bulb pattern and wire placement assumed. TRAA, baked AO, real bulb lights, rain/reflections and surrounding site geometry pending.</p>
+  <p id="captureStatus">1280×720 fixed view;16 TRAA samples on High. V4 geometry, CC0 PBR, baked AO, nearby bulbs and wet ground with frozen rain. Smoke, sun, grade, wear and placement assumed. Rain motion, lightmaps and surrounding site geometry pending.</p>
   <button type="button" id="benchmark" disabled>Measure 5 seconds</button>
   <p id="metrics">Frames are drawn when the view changes.</p>
   </details>

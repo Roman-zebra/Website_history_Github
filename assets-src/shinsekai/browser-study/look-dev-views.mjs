@@ -13,5 +13,5 @@ export const SCENE_LOOK_VIEWS=Object.freeze({
  'street-hero':{position:[-55,1.5,80],target:[0,31,0],fov:41.1,mode:'dusk'},
  'roof-garden':{position:[-32,26,40],target:[0,17,0],fov:55,mode:'dusk'},
  'aerial-dusk':{position:[80,110,120],target:[0,25,0],fov:48,mode:'dusk'},
- 'night-street':{position:[20,1.5,55],target:[0,25,0],fov:41.1,mode:'night'}
+ 'night-street':{position:[20,1.5,55],target:[0,6,0],fov:41.1,mode:'night',weather:'rain'}
 });

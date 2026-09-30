@@ -17,3 +17,9 @@ export function bulbOutlineGroups({roof=15.15,shaftTop=58.7892,galleryFloor=63.4
  groups.push({id:'tower-bulbs-shaft',area:'tower',tier:'shaft',points});return groups;
 }
 export function bulbOutline(args){return bulbOutlineGroups(args).flatMap(g=>g.points);}
+// A fixed-size light pool follows the camera; parked tiers never illuminate.
+export function nearestBulbs(groups,position,count=24) {
+ if(position.length!==3||!position.every(Number.isFinite)||!Number.isInteger(count)||count<0||count>40)throw new Error('Invalid nearby bulb budget');
+ return groups.filter(g=>g.enabled).flatMap(g=>g.points.map((point,index)=>({id:g.id+':'+index,point,distance:point.reduce((sum,n,i)=>sum+(n-position[i])**2,0)})))
+  .sort((a,b)=>a.distance-b.distance||a.id.localeCompare(b.id)).slice(0,count);
+}

@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { createFrameBenchmark } from './frame-benchmark.mjs';
 import {LOOK_DEV_VIEWS,SCENE_LOOK_VIEWS,LOOK_DEV_SIZE} from './look-dev-views.mjs';
-import {waitCaptureFrame} from './capture-frame.mjs';
+import {waitCaptureFrame,encodeCanvasPng} from './capture-frame.mjs';
 
 const canvas = document.querySelector('#view');
 const status = document.querySelector('#status');
@@ -20,6 +20,8 @@ let renderedFrames = 0;
 const sceneLook=location.pathname.endsWith('/look.html');
 let capturing=false,currentMode=sceneLook?'dusk':'day',lookEffects=null,captureWait=null;
 const lookView=document.querySelector('#lookView'),capture=document.querySelector('#capture'),captureStatus=document.querySelector('#captureStatus');
+const weather=document.querySelector('#weather');
+weather?.addEventListener('change',()=>{benchmark.cancel('Measurement cancelled: weather changed.');lookEffects?.setWeather(weather.value);requestRender();});
 const benchmark = createFrameBenchmark({
   canStart: () => ready && !disposed && !document.hidden,
   onTimeout: cancelRender,
@@ -28,12 +30,14 @@ const benchmark = createFrameBenchmark({
     metrics.textContent = result
       ? `${result.framesPerSecond.toFixed(1)} frames/s · interval median ${result.medianMs.toFixed(1)} ms, p95 ${result.p95Ms.toFixed(1)} ms · ${canvas.width}×${canvas.height}. Static model only; not GPU execution time.`
       : message;
+    if(result)canvas.dataset.benchmarkResult=JSON.stringify({...result,width:canvas.width,height:canvas.height,visibilityStart:canvas.dataset.measurementVisibility,visibilityEnd:document.visibilityState,view:lookView.value,mode:currentMode,weather:weather?.value??'dry',backend:renderer.backend?.isWebGPUBackend?'WebGPU':'WebGL2',version:sceneLook?'v4-r3':'v2'});
   }
 });
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 600);
 const forceWebGL = new URLSearchParams(location.search).has('webgl');
-const renderer = new THREE.WebGPURenderer({ canvas, antialias: true, forceWebGL });
+const lookTemporal=sceneLook&&!new URLSearchParams(location.search).has('low')&&!new URLSearchParams(location.search).has('no-traa');
+const renderer = new THREE.WebGPURenderer({ canvas, antialias: !lookTemporal, forceWebGL });
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.AgXToneMapping;
 renderer.toneMappingExposure = 1.3;
@@ -84,10 +88,12 @@ controls.update();
 function fixedView() {
   const view=(sceneLook?SCENE_LOOK_VIEWS:LOOK_DEV_VIEWS)[lookView.value];
   if(sceneLook)setMode(view.mode);
+  if(weather){weather.value=view.weather??'dry';lookEffects?.setWeather(weather.value);}
   benchmark.cancel('Measurement cancelled: fixed view changed.');
   // Flush orbit damping before installing a deterministic review pose.
   controls.enableDamping=false;controls.update();
   camera.position.set(...view.position);controls.target.set(...view.target);camera.fov=view.fov;camera.updateProjectionMatrix();controls.update();controls.enableDamping=true;
+  lookEffects?.resetHistory();
   requestRender();
 }
 lookView.addEventListener('change',fixedView);
@@ -95,24 +101,25 @@ capture.addEventListener('click',async()=>{
   if(!ready||disposed||capturing||document.hidden)return;
   benchmark.cancel('Measurement cancelled: PNG capture.');
   fixedView();cancelRender();capturing=true;controls.enabled=false;
-  capture.disabled=lookView.disabled=true;buttons.forEach(b=>b.disabled=true);benchmarkButton.disabled=true;
+  capture.disabled=lookView.disabled=true;if(weather)weather.disabled=true;buttons.forEach(b=>b.disabled=true);benchmarkButton.disabled=true;
   const pixelRatio=renderer.getPixelRatio();
   try {
     renderer.setPixelRatio(1);renderer.setSize(...LOOK_DEV_SIZE,false);camera.aspect=LOOK_DEV_SIZE[0]/LOOK_DEV_SIZE[1];camera.updateProjectionMatrix();
     renderScene();
     captureWait=waitCaptureFrame({request:requestAnimationFrame,cancel:cancelAnimationFrame});await captureWait.promise;captureWait=null;
     if(disposed||document.hidden)throw new Error('Capture cancelled while hidden or leaving.');
-    renderScene();
-    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+    for(let i=0;i<(lookEffects?.captureFrames??1);i++)renderScene();
+    captureWait=encodeCanvasPng(canvas);const blob=await captureWait.promise;captureWait=null;
+    if(disposed||document.hidden)throw new Error('Capture cancelled while encoding.');
     if(!blob)throw new Error('PNG encoding failed.');
-    const name=`tower-${sceneLook?'look-v4-r2':'v2'}-${lookView.value}-${currentMode}-1280x720.png`,url=URL.createObjectURL(blob),link=document.createElement('a');
+    const name=`tower-${sceneLook?'look-v4-r3':'v2'}-${lookView.value}-${currentMode}${sceneLook?'-'+weather.value:''}-1280x720.png`,url=URL.createObjectURL(blob),link=document.createElement('a');
     link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),10000);
     captureStatus.textContent=`Saved ${name} · ${renderer.backend?.isWebGPUBackend?'WebGPU':'WebGL 2'} · provisional appearance`;
   } catch(error) {captureStatus.textContent=error.message;}
   finally {
     capturing=false;
     captureWait=null;
-    if(!disposed){renderer.setPixelRatio(pixelRatio);controls.enabled=true;capture.disabled=lookView.disabled=false;buttons.forEach(b=>b.disabled=false);benchmarkButton.disabled=!ready;resize();}
+    if(!disposed){renderer.setPixelRatio(pixelRatio);controls.enabled=true;capture.disabled=lookView.disabled=false;if(weather)weather.disabled=false;buttons.forEach(b=>b.disabled=false);benchmarkButton.disabled=!ready;resize();}
   }
 });
 
@@ -125,6 +132,7 @@ function resize() {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height, false);
+  lookEffects?.resetHistory();
   requestRender();
 }
 window.addEventListener('resize', resize);
@@ -154,7 +162,7 @@ function draw(time) {
     } else {
       metrics.textContent = `${renderedFrames} frames rendered · last CPU submission ${(performance.now() - started).toFixed(1)} ms. Idle between changes.`;
     }
-    if (changed || benchmark.active) requestRender();
+    if (changed || benchmark.active || lookEffects?.needsMoreFrames) requestRender();
   } catch (error) {
     ready = false;
     benchmark.cancel('Drawing stopped. Reload the study to retry.');
@@ -170,6 +178,8 @@ controls.addEventListener('start', () => {
   benchmark.cancel('Measurement cancelled: camera interaction. Run again with a fixed view.');
 });
 benchmarkButton.addEventListener('click', () => {
+  canvas.dataset.measurementVisibility=document.visibilityState;
+  delete canvas.dataset.benchmarkResult;
   if (benchmark.start()) requestRender();
 });
 document.addEventListener('visibilitychange', () => {
@@ -205,7 +215,7 @@ try {
   if(disposed)throw new DOMException("Study left while initializing.","AbortError");
   if(sceneLook){const {createSceneLook}=await import('./scene-look.mjs');if(disposed)throw new DOMException('Study left while loading effects.','AbortError');lookEffects=createSceneLook({scene,camera,renderer,hemisphere:sky,sun,ground,low:new URLSearchParams(location.search).has('low'),invalidate:requestRender});lookEffects.setMode(currentMode);}
   resize();
-  const gltf = await new GLTFLoader().loadAsync('../tower-study/'+(sceneLook?'tower-study-v4-look-uv.glb':'tower-study.glb'));
+  const gltf = await new GLTFLoader().loadAsync('../tower-study/'+(sceneLook?'tower-study-v4-look-ao.glb':'tower-study.glb'));
   if(disposed){gltf.scene.traverse(o=>{o.geometry?.dispose();[].concat(o.material||[]).forEach(m=>m.dispose());});throw new DOMException('Study left while loading geometry.','AbortError');}
   scene.add(gltf.scene);
   await lookEffects?.attach(gltf.scene);
