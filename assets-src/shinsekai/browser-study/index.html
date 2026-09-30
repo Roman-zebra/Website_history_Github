@@ -37,6 +37,9 @@
     <button type="button" data-mode="night" aria-pressed="false">Night</button>
   </div>
   <p id="status" role="status">Loading renderer…</p>
+  <label>Fixed review view <select id="lookView" disabled><option value="north-overview">North overview</option><option value="south-street">South street</option><option value="roof-transfer">Roof transfer</option><option value="shaft-detail">Shaft detail</option><option value="upper-gallery">Upper gallery</option></select></label>
+  <button type="button" id="capture" disabled>Save review PNG</button>
+  <p id="captureStatus">1280×720 fixed view; current lighting. Baseline v2 geometry, provisional appearance.</p>
   <button type="button" id="benchmark" disabled>Measure 5 seconds</button>
   <p id="metrics">Frames are drawn when the view changes.</p>
   </details>

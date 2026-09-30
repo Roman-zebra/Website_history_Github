@@ -2,6 +2,7 @@ import * as THREE from 'three/webgpu';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { createFrameBenchmark } from './frame-benchmark.mjs';
+import {LOOK_DEV_VIEWS,LOOK_DEV_SIZE} from './look-dev-views.mjs';
 
 const canvas = document.querySelector('#view');
 const status = document.querySelector('#status');
@@ -15,6 +16,8 @@ let ready = false;
 let disposed = false;
 let frame = null;
 let renderedFrames = 0;
+let capturing=false,currentMode='day';
+const lookView=document.querySelector('#lookView'),capture=document.querySelector('#capture'),captureStatus=document.querySelector('#captureStatus');
 const benchmark = createFrameBenchmark({
   canStart: () => ready && !disposed && !document.hidden,
   onTimeout: cancelRender,
@@ -53,6 +56,7 @@ const modes = {
 function setMode(mode) {
   const value = modes[mode];
   if (!value) return;
+  currentMode=mode;
   benchmark.cancel('Measurement cancelled: lighting changed. Run again with a fixed view.');
   scene.background = new THREE.Color(value.background);
   scene.fog = new THREE.FogExp2(value.fog, 0.0025);
@@ -74,7 +78,41 @@ controls.maxDistance = 270;
 controls.maxPolarAngle = Math.PI * 0.49;
 controls.update();
 
+function fixedView() {
+  const view=LOOK_DEV_VIEWS[lookView.value];
+  benchmark.cancel('Measurement cancelled: fixed view changed.');
+  // Flush orbit damping before installing a deterministic review pose.
+  controls.enableDamping=false;controls.update();
+  camera.position.set(...view.position);controls.target.set(...view.target);camera.fov=view.fov;camera.updateProjectionMatrix();controls.update();controls.enableDamping=true;
+  requestRender();
+}
+lookView.addEventListener('change',fixedView);
+capture.addEventListener('click',async()=>{
+  if(!ready||disposed||capturing||document.hidden)return;
+  benchmark.cancel('Measurement cancelled: PNG capture.');
+  fixedView();cancelRender();capturing=true;controls.enabled=false;
+  capture.disabled=lookView.disabled=true;buttons.forEach(b=>b.disabled=true);benchmarkButton.disabled=true;
+  const pixelRatio=renderer.getPixelRatio();
+  try {
+    renderer.setPixelRatio(1);renderer.setSize(...LOOK_DEV_SIZE,false);camera.aspect=LOOK_DEV_SIZE[0]/LOOK_DEV_SIZE[1];camera.updateProjectionMatrix();
+    renderer.render(scene,camera);
+    await new Promise(resolve=>requestAnimationFrame(resolve));
+    if(disposed||document.hidden)throw new Error('Capture cancelled while hidden or leaving.');
+    renderer.render(scene,camera);
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+    if(!blob)throw new Error('PNG encoding failed.');
+    const name=`tower-v2-${lookView.value}-${currentMode}-1280x720.png`,url=URL.createObjectURL(blob),link=document.createElement('a');
+    link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),10000);
+    captureStatus.textContent=`Saved ${name} · ${renderer.backend?.isWebGPUBackend?'WebGPU':'WebGL 2'} · provisional appearance`;
+  } catch(error) {captureStatus.textContent=error.message;}
+  finally {
+    capturing=false;
+    if(!disposed){renderer.setPixelRatio(pixelRatio);controls.enabled=true;capture.disabled=lookView.disabled=false;buttons.forEach(b=>b.disabled=false);benchmarkButton.disabled=!ready;resize();}
+  }
+});
+
 function resize() {
+  if(capturing||disposed)return;
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
   if (!width || !height) return;
@@ -91,7 +129,7 @@ resizeObserver.observe(canvas);
 // A static study needs frames only while the camera settles or lighting changes.
 // Count actual renders so a foreground idle check can detect accidental loops.
 function requestRender() {
-  if (ready && !disposed && !document.hidden && frame === null) frame = requestAnimationFrame(draw);
+  if (ready && !disposed && !capturing && !document.hidden && frame === null) frame = requestAnimationFrame(draw);
 }
 function cancelRender() {
   if (frame !== null) cancelAnimationFrame(frame);
@@ -167,6 +205,7 @@ try {
   const backend = renderer.backend?.isWebGPUBackend ? 'WebGPU' : 'WebGL 2 fallback';
   status.textContent = `${backend} · ${metres.y.toFixed(1)} m study height · ${gltf.scene.children.length} top-level parts. Source records: docs/shinsekai/research/.`;
   ready = true;
+  lookView.disabled=capture.disabled=false;
   benchmarkButton.disabled = false;
   requestRender();
 } catch (error) {
