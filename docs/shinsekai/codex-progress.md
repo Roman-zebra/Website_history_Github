@@ -202,3 +202,5 @@
 - Added three numeric/input tests; Chrome showed separate floor rows and v2 comparison at18766. Next independent work is local parameterised T5 motion while Claude reviews physical form/sector. Full-build checkpoint follows.
 
 - Full build passed **212/212 tests**. Generated unrelated pages restored from their clean baseline; research remains outside dist. Handoff78 reviewed immediately: conditional shaft/well/lattice/top-form prototype requested in Claude's separate branch, with photographic ratios and dates kept distinct from measured geometry. Codex next owns independent T5 motion. No production geometry/default changed.
+
+- Immediate79 arrived during publication: branchcc69851 reviewed and both GLBs independently validated (0 errors/0 warnings). Deferred merge for baseline preservation, neutral form names, separately exported elevator car, evidence metadata and photo checks. South camera already frees east/roll; retouching displacement bound is unsupported by sharpness alone. Requested concrete revisions.966522c passed Workers and live release; no model was adopted. This follow-up changes documentation only and uses the212-test build.
