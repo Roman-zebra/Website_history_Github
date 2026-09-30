@@ -7,6 +7,9 @@ const status = document.querySelector('#status');
 const buttons = [...document.querySelectorAll('[data-mode]')];
 const metrics = document.querySelector('#metrics');
 const benchmarkButton = document.querySelector('#benchmark');
+if (matchMedia('(max-width: 760px), (max-height: 600px)').matches) {
+  document.querySelector('#study-details').open = false;
+}
 let ready = false;
 let disposed = false;
 let frame = null;
@@ -85,6 +88,7 @@ function cancelRender() {
   frame = null;
 }
 function finishBenchmark(message) {
+  if (benchmark) clearTimeout(benchmark.timeout);
   benchmark = null;
   benchmarkButton.disabled = !ready;
   metrics.textContent = message;
@@ -126,7 +130,17 @@ controls.addEventListener('start', () => {
   if (benchmark) finishBenchmark('Measurement cancelled: camera interaction. Run again with a fixed view.');
 });
 benchmarkButton.addEventListener('click', () => {
-  benchmark = { measureFrom: performance.now() + 1000, last: null, intervals: [] };
+  if (!ready || disposed || document.hidden) {
+    metrics.textContent = 'Measurement needs a ready renderer and a visible tab.';
+    return;
+  }
+  const session = { measureFrom: performance.now() + 1000, last: null, intervals: [], timeout: null };
+  benchmark = session;
+  session.timeout = setTimeout(() => {
+    if (benchmark !== session) return;
+    finishBenchmark('Measurement cancelled: frames did not complete within 10 seconds. Retry in a visible tab.');
+    cancelRender();
+  }, 10000);
   benchmarkButton.disabled = true;
   metrics.textContent = 'Measuring a static model for 5 seconds after warm-up… Keep this tab visible.';
   requestRender();

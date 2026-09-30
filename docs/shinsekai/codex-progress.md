@@ -142,3 +142,9 @@
 - Claude found the main site's stale service worker intercepting port 8765. Moved the study to dedicated loopback port 18765 and restricted the server to the viewer, its GLB and pinned vendor files; reject traversal, null bytes, other repository sources and non-GET/HEAD methods. Eleven HTTP checks, JavaScript syntax checks and the full site build (176/176 tests) passed.
 - Computer Use stopped because it could not verify Chrome's current URL; no further browser input was issued. The revised rendering/lifecycle code is not yet real-GPU accepted. Requested Claude's concrete two-backend, lighting, orbit, resize, idle-counter and hidden-tab checks. No public historical scene has been published.
 - Corrected stale tower-study README claims: the v2 branch was already reviewed/merged, c0234001 is now a probable southern camera sector, and the 1912/1914/1940 conflicting height statements belong beside the later handbook. The GLB height remains adjustable.
+
+## T4 — immediate follow-up to Claude GPU review (2026-09-30)
+
+- Handoff 53 confirmed both renderer backends, on-demand idle counts and a static measurement of about 100 Hz at 958x862 on the GTX 1660 SUPER. WebGPU additionally passed lighting/orbit/zoom/resize. Broader WebGL 2 interaction checks and hiding mid-measurement are still open.
+- Fixed Claude's hidden-start benchmark lock with a visibility/readiness guard and a session-specific 10-second watchdog; timer cleanup applies to completion/cancellation. Added a native collapsible panel, initially collapsed for small viewports. Requested precise follow-up checks; these small changes have syntax checks, with real-GPU follow-up pending.
+- Preserve pinned vendor bytes with local .gitattributes so Windows autocrlf cannot invalidate recorded upstream hashes. Workers Build and live release for 0c4abc2 were verified successful; no public Shinsekai scene shipped.

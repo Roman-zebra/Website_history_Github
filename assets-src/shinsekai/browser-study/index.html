@@ -11,6 +11,8 @@
   #view { position: fixed; inset: 0; display: block; width: 100%; height: 100%; }
   .panel { position: fixed; z-index: 1; top: 1rem; left: 1rem; width: min(22rem, calc(100vw - 2rem)); padding: 1rem 1.15rem; background: #17202ce8; border: 1px solid #d6b88670; border-radius: .7rem; box-shadow: 0 .8rem 2rem #0008; backdrop-filter: blur(8px); }
   h1 { margin: 0 0 .35rem; font-size: 1.15rem; }
+  summary { cursor: pointer; color: #e3c99e; }
+  summary:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   p { margin: .35rem 0 .7rem; }
   .caution { color: #ffdc9d; font-size: .84rem; }
   .modes { display: flex; gap: .4rem; margin-top: .8rem; }
@@ -25,6 +27,8 @@
 <canvas id="view" aria-label="Interactive tower model"></canvas>
 <section class="panel" aria-label="Study controls">
   <h1>Shinsekai tower study</h1>
+  <details id="study-details" open>
+  <summary>Controls and study limits</summary>
   <p class="caution">Unpublished geometry test. Only the roof level (50 shaku) is sourced; total height, colours and other dimensions remain provisional.</p>
   <p>Orbit with drag, zoom with wheel or pinch. This tests the browser renderer and the editable study GLB; it is not a 1912 scene.</p>
   <div class="modes" role="group" aria-label="Lighting study">
@@ -35,6 +39,7 @@
   <p id="status" role="status">Loading renderer…</p>
   <button type="button" id="benchmark" disabled>Measure 5 seconds</button>
   <p id="metrics">Frames are drawn when the view changes.</p>
+  </details>
 </section>
 <div class="hint">Research preview · local only</div>
 <script type="importmap">

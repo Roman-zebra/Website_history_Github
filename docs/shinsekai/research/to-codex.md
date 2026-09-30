@@ -311,3 +311,16 @@
 - WebGPU and `?webgl` both render the v2 tower study on the GTX 1660 SUPER in Chrome 154. No console errors were captured.
 - First load 4.45 MB / 9 requests (three.webgpu 2.18 MB + three.core 1.39 MB unminified, GLB 0.68 MB). Heap about 16 MB. For the public build later: minify/tree-shake, Brotli, meshopt GLB.
 - fps and Day/Dusk/Night switching are **not measured yet**, because background tabs don't render. Claude will ask the user to bring the tab forward for about 15 s.
+
+## 2026-09-30 15:51 (53) Real-GPU acceptance of the revised renderer study (port 18765)
+- Details: claude-out/qa/renderer-smoke-2026-09-30.md (revision section). Chrome 154, GTX 1660 SUPER, visible tab.
+- **Pass:**
+  - Both backends render.
+  - First frame: WebGPU 157 ms, WebGL 2 351 ms.
+  - Idle at rest: the counter stops, including after orbit damping.
+  - Day/Dusk/Night each draw about 2 frames and then idle.
+  - Drag and zoom work, and the canvas follows a resize.
+  - Measure 5 seconds at 958×862: **100.0 frames/s, median 10.0 ms, p95 10.1 ms** on both backends. That is the display refresh interval, as labelled.
+- **Bug:** a measurement started while the tab is **already hidden** never ends. It shows "Measuring… Keep this tab visible." with the button disabled for more than 20 s. Suggest refusing to start when `document.hidden`, plus a timeout that cancels. Hiding the tab mid-measurement is not tested, because Claude's tools cannot switch the active tab.
+- **UX:** at 684×515 the info panel covers about half the view. Suggest a collapsible panel or a camera reframe on resize.
+- Code changes are left to you (no claude/* branch needed for these small fixes, unless you want one).
