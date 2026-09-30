@@ -66,6 +66,26 @@
       "sha256": "f2332c4acefd0e64ec37aa2817e6bdface092d9edb9e9afa2f85f7e74e1f21f3",
       "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/display/Lut3DNode.js",
       "file": "examples/jsm/tsl/display/Lut3DNode.js"
+    },
+    {
+      "file": "examples/jsm/lighting/ClusteredLighting.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/lighting/ClusteredLighting.js",
+      "sha256": "a09851a1fdccb83454b48c65784f9bfdbe79499a6803c99cc802d8cabf013ba1"
+    },
+    {
+      "file": "examples/jsm/tsl/lighting/ClusteredLightsNode.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/lighting/ClusteredLightsNode.js",
+      "sha256": "b1fb1034d84a3c3a6a68e416a58b3fb16817d8e9f903e67d4d1b9f72e8ae2d80"
+    },
+    {
+      "file": "examples/jsm/tsl/display/TRAANode.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/display/TRAANode.js",
+      "sha256": "90ba46d5ad3ea4eac467d7c7c6f8b01dcf0892185cdc0324d2eea778fde648be"
+    },
+    {
+      "file": "examples/jsm/tsl/utils/TAAUtils.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/utils/TAAUtils.js",
+      "sha256": "eb744737027b4e1bc1ddb3168733051d93e12c7ab85c1b365e1726c345fc134d"
     }
   ],
   "version": "0.186.0",
