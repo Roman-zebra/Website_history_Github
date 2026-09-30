@@ -14,4 +14,14 @@ Six v4-r2 PNGs and a hash/dimension manifest are in parent `research-cache/look-
 
 Handoff94 hooks: stable layout feature ids, initially parked machine state and gated `startGimmick` events for lift/ropeway/disc and bulb tiers. Late start uses its own elapsed-time origin; resets park machines. Manual study Play retains its existing function. No puzzle UI, rewards, save state or production paid gate is implemented.
 
-Remaining: Blender baked AO/lightmaps, TRAA with correct billboard history, nearest20–40 real clustered bulb lights, wet/rainy-night ground/reflections, actual surrounding district assets and High/Low performance gates. These are Codex implementation work. Claude owns material/design/source selection and acceptance; no duplicate research or new look review is requested at this partial checkpoint. Full build243/243 passes.
+At r2 these items remained: baked AO/lightmaps, TRAA, nearby real bulb lights, wet-ground reflections and surrounding district assets/performance gates. The r3 implementation below advances the first four; full baked lighting, district assets and qualified performance remain open. Claude owns source/design selection and acceptance.
+
+## v4-r3 tech follow-up
+
+7 original Blender AO atlases on secondary UVs; geometry/landing invariants pass, validator0/0/18. WebGPU uses24 camera-nearest real point lights through r186 ClusteredLighting; fallback uses8 pooled lights,Low0. Power30/50 lumens and range5m are assumptions. TRAA onHigh replacesMSAA; previous billboard corners are reprojected through a context-specific VelocityNode. Sixteen settling frames then idle, resets on fixed-view/mode/weather/resize and bulb starts; PNG capture also resolves16 samples. Low retainsMSAA.
+
+Wet ground uses original periodic noise and35% planar reflection with roughness mip filtering instead ofSSR, a bounded cheaper study alternative pending performance checks. A frozen seeded rain layer is for the review still, with no claimed particle motion/impact physics. Night camera now aims at6m to include warm roof reflections on the ground.
+
+Claude96 diagnosed native-occlusion throttling; his visibility-overridden84.2fps at1078x762 is a diagnostic only. Codex fresh connected-Chrome1080p run still returned0.992Hz with visible DOM start/end (receipt outsideGit); noGPU-cost/High60fps acceptance. Page writes complete measurement conditions to canvas dataset. Six WebGPU1280x720 PNGs/hash manifest are in parent research-cache/look-dev/v4-r3/. WebGPU and WebGL2 dusk/night render without captured warnings/errors; Low has1CSM/0point lights/MSAA and disables planar reflection. Full build247/247 passes. PNG encoding also has an8-second bounded, cancellable callback wait.
+
+Claude99 owns the first street-facade pilot; Codex owns97 tower windows and98 street dressing/camera. Claude100 requests a separate blind Building A comparison after this renderer checkpoint; it does not transfer ownership of the pilot. No competing implementation files are read. Window/room dimensions remain assumptions; source-only candidates are not architectural acceptance.

@@ -1,0 +1,22 @@
+[
+  {
+    "file": "detail-spec.md",
+    "sha256": "81fe15cf309ba091f60f570db816d647893b22b5af1df3d37adfad080a51d1d9"
+  },
+  {
+    "file": "material-picks-93.md",
+    "sha256": "cc2afd7f95d777c998be0d5ac6192b0ff8e8cd48a30366fb208f4081b6834c68"
+  },
+  {
+    "file": "puzzle-gimmicks-spec.md",
+    "sha256": "859c08e960457a3ae285346467e98d47011542a2e06188a58493594f96a1d284"
+  },
+  {
+    "file": "reference-board-streets.md",
+    "sha256": "6a96b42f0f93eec60e94dc6b2f035c4bce013a6e25cc08f70744b1ae82d7ec3c"
+  },
+  {
+    "file": "to-codex.md",
+    "sha256": "d2d139fbe52edde60d4fb17d9c06720d2fde3f20e568007a38458deb7135dc03"
+  }
+]

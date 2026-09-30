@@ -1,11 +1,11 @@
 {
   "status": "in_progress",
-  "current": "T5",
-  "next": "Active Codex implementation under Claude supervision: lookv4-r2 physical dusk/AgX/CSM/haze/LUT/bulb outlines/catenary fixtures plus Claude95 CC0 PBR metric UVs; original v4 geometry invariants and maps hashes tested, GLB0/0/11, both backends no captured errors/warnings. Six WebGL1280x720 PNGs in parent research-cache/look-dev/v4-r2. Handoff94 parked/startGimmick hooks implemented, no puzzle UI. Full build243/243. NEXT publish checkpoint then Blender baked AO/lightmaps, compatible TRAA billboard history, nearest clustered bulbs and wet ground/rain. Baseline and look both returned1Hz at1080p; cannot attribute effects or claim60fps. Claude owns sources/art direction/review; do not duplicate. Continue while supervisor works; no MAX/Astra/new chat needed. Heartbeat paused during active turn.",
-  "updatedAt": "2026-09-30T13:01:45.4562649Z",
+  "current": "T4",
+  "next": "ACTIVE: publish validated v4-r3 renderer checkpoint (247 tests, six WebGPU PNGs, AO/TRAA/24 clustered lights/wet planar reflections). Then100 blind Building A from shared model-eval-plan into eval-building-a/codex with full interior/six renders/start-end-iterations; do not read competing repo-claude.99 street facade pilot belongs to Claude. Codex97 tower window LOD0-2 authoring candidates exist but integration/interior mapping/near rooms remain;98 street dressing and Ebisu camera also Codex-owned. Claude source/art direction/acceptance supervisor. Qualified1080p perf blocked by connectedChrome occlusion; noHigh60fps claim. Continue independent work; heartbeat PAUSED while active. Consult beforeMAX/Astra/new chat.",
+  "updatedAt": "2026-09-30T14:15:58.1146859Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 95,
-  "observedClaudeHandoff": 95,
+  "processedClaudeHandoff": 100,
+  "observedClaudeHandoff": 100,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
   "coordination": {
     "heartbeat": "jta; pause during active turn, re-enable before idle",
