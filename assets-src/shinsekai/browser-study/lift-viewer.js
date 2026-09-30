@@ -3,10 +3,12 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {bindElevator} from './bind-elevator.mjs';
 import {readLiftLandings} from './lift-landings.mjs';
+import {MACHINES,createGimmickState,connectGimmickEvents} from './gimmick-state.mjs';
 import {shuttle,createRideClock} from './ride-motion.mjs';
 const $=id=>document.getElementById(id),canvas=$('view'),play=$('play'),reset=$('reset'),form=$('form'),ride=$('ride');
 let ready=false,disposed=false,frame=null,model=null,binding=null,layout=null,backend='',generation=0,rendered=0;
 const clock=createRideClock({canStart:()=>ready&&layout?.canTravel&&!disposed&&!document.hidden});
+const gimmicks=createGimmickState(MACHINES.filter(m=>m.id==='tower-lift'),{onStart:()=>{if(!clock.start(performance.now()))return false;play.textContent='Pause';requestRender();return true;}}),disconnectGimmicks=connectGimmickEvents(document,gimmicks);
 const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:new URLSearchParams(location.search).has('webgl')});
 renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.toneMapping=THREE.AgXToneMapping;
 const scene=new THREE.Scene();scene.background=new THREE.Color(0xaec6d8);
@@ -25,7 +27,7 @@ function update(time){if(!layout)return;const schedule=shuttle(layout.canTravel?
 function pause(message){const now=performance.now();clock.pause(now);play.textContent='Play';update(clock.sample(now));if(message)$('status').textContent=message;requestRender();}
 function draw(now){frame=null;if(!ready||disposed||document.hidden)return;try{const changed=ride.value==='overview'&&controls.update();update(clock.sample(now));renderer.render(scene,camera);canvas.dataset.renderedFrames=++rendered;if(clock.playing||changed)requestRender();}catch(error){pause();ready=false;cancelRender();play.disabled=reset.disabled=true;$('status').textContent='Stopped: '+error.message;console.error(error);}}
 function resize(){if(!canvas.clientWidth||!canvas.clientHeight)return;camera.aspect=canvas.clientWidth/canvas.clientHeight;camera.updateProjectionMatrix();renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);requestRender();}
-async function loadForm(){pause();ready=false;cancelRender();play.disabled=reset.disabled=form.disabled=true;const token=++generation;$('status').textContent='Loading candidate…';
+async function loadForm(){pause();gimmicks.parkAll();ready=false;cancelRender();play.disabled=reset.disabled=form.disabled=true;const token=++generation;$('status').textContent='Loading candidate…';
  let candidate;
  try{candidate=(await new GLTFLoader().loadAsync('/assets-src/shinsekai/tower-study/tower-study-v4-'+form.value+'.glb')).scene;
   if(disposed||token!==generation){disposeTree(candidate);return;}
@@ -33,12 +35,12 @@ async function loadForm(){pause();ready=false;cancelRender();play.disabled=reset
   $('status').textContent=layout.canTravel?`${backend} · floor ${layout.floors[0].toFixed(2)}–${layout.floors[1].toFixed(2)} m · upper floor assumed`:`${backend} · upper landing unresolved — travel disabled`;requestRender();
  }catch(error){if(candidate)disposeTree(candidate);form.disabled=false;$('status').textContent='Could not load: '+error.message;console.error(error);}
 }
-play.addEventListener('click',()=>{if(clock.playing)pause();else if(clock.start(performance.now())){play.textContent='Pause';requestRender();}});
-reset.addEventListener('click',()=>{pause();clock.seek(0,performance.now());update(0);requestRender();});
+play.addEventListener('click',()=>{if(clock.playing)pause();else if(clock.start(performance.now())){gimmicks.startGimmick('tower-lift');play.textContent='Pause';requestRender();}});
+reset.addEventListener('click',()=>{pause();gimmicks.parkAll();clock.seek(0,performance.now());update(0);requestRender();});
 form.addEventListener('change',loadForm);ride.addEventListener('change',()=>{controls.enabled=ride.value==='overview';if(controls.enabled)overview();requestRender();});
 $('travel').addEventListener('input',()=>{pause();$('duration').textContent=$('travel').value+' s';clock.seek(0,performance.now());update(0);requestRender();});
 controls.addEventListener('change',requestRender);const observer=new ResizeObserver(resize);observer.observe(canvas);
 document.addEventListener('visibilitychange',()=>{if(document.hidden){pause('Paused while hidden. Select Play to resume.');cancelRender();}else requestRender();});
-window.addEventListener('pagehide',event=>{pause();cancelRender();if(event.persisted)return;disposed=true;++generation;observer.disconnect();controls.dispose();disposeTree(scene);renderer.dispose();});
+window.addEventListener('pagehide',event=>{pause();cancelRender();if(event.persisted)return;disposed=true;++generation;disconnectGimmicks();observer.disconnect();controls.dispose();disposeTree(scene);renderer.dispose();});
 window.addEventListener('pageshow',requestRender);
 try{await renderer.init();if(!disposed){backend=renderer.backend?.isWebGPUBackend?'WebGPU':'WebGL 2 fallback';await loadForm();}}catch(error){$('status').textContent='Could not start: '+error.message;console.error(error);}

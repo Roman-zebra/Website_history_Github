@@ -4,12 +4,14 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {bindElevator} from './bind-elevator.mjs';
 import {readLiftLandings} from './lift-landings.mjs';
 import {createTurretTransfer} from './turret-transfer.mjs';
+import {MACHINES,createGimmickState,connectGimmickEvents} from './gimmick-state.mjs';
 import {shuttle,createRideClock} from './ride-motion.mjs';
 import {createRideAccess,dockedStation,nextLandingTime} from './ride-access.mjs';
 const $=id=>document.getElementById(id),canvas=$('view');
 let ready=false,disposed=false,frame=null,group=null,car=null,doors=[],access=null,stops=null,backend='',generation=0,rendered=0,lastCrossing=0;
 let layout=null;
 const canStart=()=>ready&&!disposed&&!document.hidden,clock=createRideClock({canStart:()=>canStart()&&layout?.canTravel}),crossing=createRideClock({canStart});
+const gimmicks=createGimmickState(MACHINES.filter(m=>m.id==='tower-lift'),{onStart:()=>{if(access?.transitioning||!clock.start(performance.now()))return false;stopAt=access?.mode==='riding'&&$('stopAtLanding').checked?nextLandingTime(clock.sample(performance.now()),Number($('travel').value),8):null;requestRender();return true;}}),disconnectGimmicks=connectGimmickEvents(document,gimmicks);
 const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:new URLSearchParams(location.search).has('webgl')});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.toneMapping=THREE.AgXToneMapping;
 const scene=new THREE.Scene();scene.background=new THREE.Color(0xaec6d8);const camera=new THREE.PerspectiveCamera(55,1,.05,500);
 const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.maxDistance=180;controls.maxPolarAngle=Math.PI*.49;
@@ -61,7 +63,7 @@ function update(now){if(!access)return;let time=clock.sample(now);if(stopAt!==nu
 function pause(message){const now=performance.now();clock.pause(now);crossing.pause(now);update(now);if(message)$('status').textContent=message;requestRender();}
 function draw(now){frame=null;if(!ready||disposed||document.hidden)return;try{const changed=$('viewMode').value==='overview'&&controls.update();update(now);renderer.render(scene,camera);canvas.dataset.renderedFrames=++rendered;if(clock.playing||crossing.playing||changed)requestRender();}catch(error){clock.pause(now);crossing.pause(now);ready=false;cancelRender();for(const id of ['play','board','exit','reset'])$(id).disabled=true;$('status').textContent='Stopped: '+error.message;console.error(error);}}
 function resize(){if(!canvas.clientWidth||!canvas.clientHeight)return;camera.aspect=canvas.clientWidth/canvas.clientHeight;camera.updateProjectionMatrix();renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);requestRender();}
-async function loadForm(){pause();ready=false;cancelRender();for(const id of ['play','reset','form','board','exit','landing'])$(id).disabled=true;const token=++generation;$('status').textContent='Loading car envelope…';let source;
+async function loadForm(){pause();gimmicks.parkAll();ready=false;cancelRender();for(const id of ['play','reset','form','board','exit','landing'])$(id).disabled=true;const token=++generation;$('status').textContent='Loading car envelope…';let source;
  try{source=(await new GLTFLoader().loadAsync('/assets-src/shinsekai/tower-study/tower-study-v4-'+$('form').value+'.glb')).scene;if(disposed||token!==generation){disposeTree(source);return;}
   layout=readLiftLandings(source.userData.lift);stops=layout.stops;if(layout.canTravel){const binding=bindElevator(source);for(const i of [0,1])if(Math.abs(binding.travel.point(i)[1]-stops[i])>1e-4)throw new Error('GLB/landing stops disagree');}
   const size=new THREE.Box3().setFromObject(source.getObjectByName('elevator_car')).getSize(new THREE.Vector3());
@@ -73,12 +75,12 @@ function beginCrossing(kind){const now=performance.now(),schedule=shuttle(clock.
  if(matchMedia('(prefers-reduced-motion: reduce)').matches)access.advance(access.duration);else crossing.start(now);update(now);requestRender();
 }
 $('board').addEventListener('click',()=>beginCrossing('board'));$('exit').addEventListener('click',()=>beginCrossing('exit'));
-$('play').addEventListener('click',()=>{if(clock.playing||crossing.playing)pause();else{const now=performance.now(),active=access.transitioning?crossing:clock;stopAt=active===clock&&access.mode==='riding'&&$('stopAtLanding').checked?nextLandingTime(clock.sample(now),Number($('travel').value),8):null;active.start(now);requestRender();}});
+$('play').addEventListener('click',()=>{if(clock.playing||crossing.playing)pause();else{const now=performance.now(),active=access.transitioning?crossing:clock;stopAt=active===clock&&access.mode==='riding'&&$('stopAtLanding').checked?nextLandingTime(clock.sample(now),Number($('travel').value),8):null;if(active.start(now)&&active===clock)gimmicks.startGimmick('tower-lift');requestRender();}});
 $('stopAtLanding').addEventListener('change',()=>{stopAt=clock.playing&&access.mode==='riding'&&$('stopAtLanding').checked?nextLandingTime(clock.sample(performance.now()),Number($('travel').value),8):null;});
-function resetAt(station=0){pause();access.reset(station);const now=performance.now();clock.seek(station?Number($('travel').value)+9:0,now);crossing.seek(0,now);lastCrossing=0;stopAt=null;update(now);requestRender();}
+function resetAt(station=0){pause();gimmicks.parkAll();access.reset(station);const now=performance.now();clock.seek(station?Number($('travel').value)+9:0,now);crossing.seek(0,now);lastCrossing=0;stopAt=null;update(now);requestRender();}
 $('reset').addEventListener('click',()=>{$('landing').value='0';resetAt(0);});$('landing').addEventListener('change',()=>resetAt(Number($('landing').value)));$('form').addEventListener('change',loadForm);
 $('travel').addEventListener('input',()=>{$('duration').textContent=$('travel').value+' s';resetAt(access.station);});$('look').addEventListener('input',()=>{$('lookValue').textContent=$('look').value+'°';requestRender();});
 $('viewMode').addEventListener('change',()=>{controls.enabled=$('viewMode').value==='overview';if(controls.enabled)overview();requestRender();});controls.addEventListener('change',requestRender);
 document.addEventListener('visibilitychange',()=>{if(document.hidden){pause('Paused while hidden. Select Play to resume.');cancelRender();}else requestRender();});
-const observer=new ResizeObserver(resize);observer.observe(canvas);window.addEventListener('pagehide',event=>{pause();cancelRender();if(event.persisted)return;disposed=true;++generation;observer.disconnect();controls.dispose();disposeTree(scene);renderer.dispose();});window.addEventListener('pageshow',requestRender);
+const observer=new ResizeObserver(resize);observer.observe(canvas);window.addEventListener('pagehide',event=>{pause();cancelRender();if(event.persisted)return;disposed=true;++generation;disconnectGimmicks();observer.disconnect();controls.dispose();disposeTree(scene);renderer.dispose();});window.addEventListener('pageshow',requestRender);
 try{await renderer.init();if(!disposed){backend=renderer.backend?.isWebGPUBackend?'WebGPU':'WebGL 2 fallback';await loadForm();}}catch(error){$('status').textContent='Could not start: '+error.message;console.error(error);}
