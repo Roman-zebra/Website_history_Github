@@ -1,7 +1,7 @@
 {
   "startedAt": "2026-09-30T15:28:38.665Z",
   "timingNote": "Local build.py file creation boundary, not a planning/authoring duration or API cost estimate",
-  "checkpointAt": "2026-09-30T22:06:58.350Z",
+  "checkpointAt": "2026-09-30T23:56:55.315Z",
   "handoffs": [
     104,
     105,
@@ -12,10 +12,11 @@
     110,
     111,
     112,
-    113
+    113,
+    114
   ],
-  "artisticRoundsTotal": 7,
-  "hybridArtisticRounds": 6,
+  "artisticRoundsTotal": 8,
+  "hybridArtisticRounds": 7,
   "technicalRepairs": [
     "portable tangents",
     "stair headroom",
@@ -26,12 +27,18 @@
     "bevel normal/export repair",
     "111 roughness factor baking, colour clamps, custom-normal tangent orthogonalization and UV1"
   ],
-  "status": "Round6 material/cavity/curtain/runners; subjective scores remain unchanged pending browser light and Claude-owned dressing",
+  "status": "Round8 optional cloth details;111 arrangement integrated; visual acceptance remains with Claude; flat lighting/periodic creases and qualified1080p are open",
   "runtimeCheckpointAt": "2026-09-30T17:22:04.832Z",
-  "runtimeStatus": "111 optional flower candidate preserves237anchors, paired1280x720 backends and release verified,273/273. Default111 retained; cloth/upper light and qualified1080p still open.",
+  "runtimeStatus": "111 opt-in cloth thickness/normal companion and 3 hero views; all source triangles preserved, closed patch edges, GLB0/0, max149226. Both1280x720 backends attach/dream/far/capture pass; corrected haori/control comparison and two-backend upper images saved, new captured warnings/errors0, fullbuild281/281. Default preserved; flat lighting/periodic crease tile and qualified1080p remain open.",
   "flowerIteration": {
     "sceneRounds": 1,
     "prototypePasses": 2,
     "visualAcceptance": false
+  },
+  "clothIteration": {
+    "sceneRounds": 1,
+    "visualAcceptance": false,
+    "addedTriangles": 2672,
+    "maxActiveWithPetals": 149226
   }
 }

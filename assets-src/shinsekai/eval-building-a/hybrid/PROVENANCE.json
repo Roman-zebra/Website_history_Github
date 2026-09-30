@@ -270,6 +270,26 @@
       "file": "runtime/dream-petals.glb",
       "bytes": 6292272,
       "sha256": "cc6b67fd7e0f313ba27b746d4859f57cff9d0084e29a333cd9d9ff5cc2d6865b"
+    },
+    {
+      "file": "upper_cloth.py",
+      "bytes": 4094,
+      "sha256": "cb7739d6b8ea6734fba6afe24ff39fcd0106ac8aa27309fe71c8dd8efef53ec5"
+    },
+    {
+      "file": "build-cloth.py",
+      "bytes": 2051,
+      "sha256": "286a2e2e0a504ec9a63c593ac8e9b88c3b4fd4c70e89ed458d013526ab0424b8"
+    },
+    {
+      "file": "cloth-111.md",
+      "bytes": 3242,
+      "sha256": "df6dc290e20069f7ece88a84fbcf7443d8ef8352670659ecd24f088949eaf345"
+    },
+    {
+      "file": "runtime/upper-cloth.glb",
+      "bytes": 4256416,
+      "sha256": "9afaa3331dc8e20c68ab69c77ba5eeaea26daabc439803f8c4d3b16b0a43a884"
     }
   ],
   "runtimeValidation": [
@@ -323,5 +343,26 @@
     "maxActiveInteriorTriangles": 146554,
     "sourceTags": "A: original procedural/inferred creative shapes and preserved authored placement; no source image pixels",
     "acceptance": "Opt-in only, awaiting Claude visual review"
+  },
+  "runtimeClothCandidate": {
+    "file": "runtime/upper-cloth.glb",
+    "bytes": 4256416,
+    "sha256": "9afaa3331dc8e20c68ab69c77ba5eeaea26daabc439803f8c4d3b16b0a43a884",
+    "sourceRevision": "e3dd4e7",
+    "validator": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 20
+    },
+    "addedTriangles": 2672,
+    "maxActiveInteriorTrianglesWithPetals": 149226,
+    "normalTile": {
+      "size": 256,
+      "metres": 0.12,
+      "source": "Original analytic fine wrinkle/weave height field; no reference pixels"
+    },
+    "dimensions": "A:1.2mm body;3mm folded lower edge; placement/silhouette from Claude",
+    "acceptance": "Opt-in only; both1280x720 backends attach/dream/far/capture pass; visual acceptance remains with Claude; qualified1080p pending",
+    "reproducibility": "UV1 packing can change serialized hashes; original position/UV0/colour triangles remain identical"
   }
 }

@@ -8,6 +8,7 @@ import {connectShopFloor} from './shop-floor.mjs';
 import {createShopDreamLook} from './shop-dream-look.mjs';
 import {createShopDreamLayer} from './shop-dream-layer.mjs';
 import {connectShopFlowers} from './shop-flower-look.mjs';
+import {connectShopCloth} from './shop-cloth-detail.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
@@ -15,6 +16,7 @@ const dreamCheck=document.querySelector('#dreamLook');
 // Opt-in comparison: compileAsync still increases total readiness time here.
 const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=new URLSearchParams(location.search).has('petals');
+const clothDetail=new URLSearchParams(location.search).has('cloth');
 const capture=document.querySelector('#capture');
 const buttons={cash:document.querySelector('#cash'),storage:document.querySelector('#storage')};
 const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:new URLSearchParams(location.search).has('webgl')});
@@ -78,6 +80,11 @@ async function load(part){
   try{gltf.studyFlowers=connectShopFlowers(gltf);}
   catch(error){release(gltf);throw error;}
  }
+ if(part==='interior'&&clothDetail){
+  let cloth;
+  try{cloth=await load('upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth);}
+  catch(error){if(cloth)release(cloth);release(gltf);throw error;}
+ }
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);
  meshes(gltf,o=>{o.castShadow=true;o.receiveShadow=true;
   for(const m of [].concat(o.material))if(m.transmission>0){
@@ -92,6 +99,9 @@ async function load(part){
  // Blender source watts were exported as high candela for its review lighting.
  // Calibrate this separate browser study, without changing the authoring GLB.
  gltf.scene.traverse(o=>{if(o.isPointLight){o.userData.studyLightGain=.003;o.intensity*=.003;o.distance=8;}});
+ // Include the optional cloth dependency in total readiness, not only the
+ // first interior download. The companion remains inside this cell's lifetime.
+ gltf.studyLoadMs=performance.now()-loadStart;
  return gltf;
 }
 function applyGlass(){
@@ -127,10 +137,15 @@ function bindDrawers(model){
 }
 function pose(){
  const view=select.value;
+ const clothShots={
+  'hero-haori':{position:[1.42,2.22,4.50],target:[.26,2.16,4.50],lens:24},
+  'hero-laundry':{position:[1.90,2.75,5.10],target:[1.90,4.44,5.08],lens:22},
+  'hero-cloth-bolt':{position:[3.05,1.35,4.15],target:[2.45,2.55,3.49],lens:30}
+ };
  controls.enableDamping=false;controls.update();
  if(view==='far'){camera.position.set(24,15,27);controls.target.set(3,2,-4.5);camera.fov=45;}
  else if(view==='floor-study'){camera.position.set(4.55,1.15,-3.7);controls.target.set(4.35,.08,-1.45);camera.fov=55;}
- else{const shot=shots.find(s=>s.file==='base-'+view+'.png');camera.position.set(shot.position[0],shot.position[2],-shot.position[1]);controls.target.set(shot.target[0],shot.target[2],-shot.target[1]);camera.fov=THREE.MathUtils.radToDeg(2*Math.atan(36/(2*shot.lens)/camera.aspect));}
+ else{const shot=clothShots[view]??shots.find(s=>s.file==='base-'+view+'.png');camera.position.set(shot.position[0],shot.position[2],-shot.position[1]);controls.target.set(shot.target[0],shot.target[2],-shot.target[1]);camera.fov=THREE.MathUtils.radToDeg(2*Math.atan(36/(2*shot.lens)/camera.aspect));}
  camera.updateProjectionMatrix();controls.update();controls.enableDamping=true;request();
 }
 // Fixed review resolution and letterboxed CSS keep live/captured framing equal
@@ -143,6 +158,7 @@ function draw(time){
   cells.update(camera.position.toArray());updateLOD(camera.position.distanceTo(new THREE.Vector3(...manifest.position)));
   dreamLayer.update(dreamCheck.checked&&Boolean(interior),select.value);canvas.dataset.dreamLayer=JSON.stringify(dreamLayer.snapshot());
   canvas.dataset.flowerInstances=dreamModel?.studyFlowers?JSON.stringify(dreamModel.studyFlowers.stats):'empty';
+  canvas.dataset.clothDetail=interior?.studyCloth?JSON.stringify(interior.studyCloth):'empty';
   let moving=false;
   for(const d of drawers.values()){
    const difference=d.target-d.progress;d.progress+=Math.sign(difference)*Math.min(Math.abs(difference),delta/.65);
