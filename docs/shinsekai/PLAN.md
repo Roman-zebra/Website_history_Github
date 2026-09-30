@@ -193,3 +193,7 @@ PC：Ryzen 5 1600／メモリ 16GB／GTX 1660 SUPER／C ドライブ空き 83.3G
 - 2026-09-30 01:40 v3.3（Claude）：動画は取得して1秒ごとに確認（yt-dlp・FFmpeg、§8）。課金が要る項目は止めて無料の安全な方法を探す（§0・§5・§10）
 - 2026-09-30 10:35 v3.4（Claude）：デザイン・配置の段階（M2〜M4）で Claude（Max）が見た目と配置を審査・提案（§6）
 - 2026-09-30 10:55 v3.5（Claude）：得意・不得意で分担し互いに監視。Claude はブランチで直し、Codex が確認して main に取り込む（§0・§7）
+
+## Current role split (user instruction, 2026-09-30; supersedes section6 hierarchy)
+
+Claude is the command centre/supervisor for look and behaviour, sets acceptance criteria and reviews visual milestones. Codex implements renderer/assets/behaviour, validates performance, builds/tests, commits and publishes main. Claude continues facts/sources/rights checks and may rework an item on a claude/* branch; Codex verifies/merges. Continue independent implementation work when useful tasks remain; do not finish a reply merely to wait for another command. Consult the user before MAX/Astra or a new group chat. This records the latest user direction without changing the original scope or budgets.

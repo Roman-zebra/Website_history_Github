@@ -1,0 +1,23 @@
+{
+  "branch": "1142cec",
+  "productionAcceptance": false,
+  "status": "88-90 implemented as local studies;91 roles recorded;92 queued for immediate scene implementation",
+  "handoffs": [
+    88,
+    89,
+    90,
+    91,
+    92
+  ],
+  "source": "claude-out/to-codex.md",
+  "snapshots": [
+    {
+      "path": "../research-cache/handoffs88-90-to-codex.md",
+      "sha256": "32F4061061CF31C76FA4DEA48C1AB27F8003CB927DFE08E34BB5AEB3A048010A"
+    },
+    {
+      "path": "../research-cache/handoffs91-92-to-codex.md",
+      "sha256": "32F4061061CF31C76FA4DEA48C1AB27F8003CB927DFE08E34BB5AEB3A048010A"
+    }
+  ]
+}
