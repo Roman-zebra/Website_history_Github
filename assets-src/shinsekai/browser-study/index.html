@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shinsekai tower browser study</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root { color-scheme: dark; font: 15px/1.45 system-ui, sans-serif; background: #171d25; color: #f4f0e8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  #view { position: fixed; inset: 0; display: block; width: 100%; height: 100%; }
+  .panel { position: fixed; z-index: 1; top: 1rem; left: 1rem; width: min(22rem, calc(100vw - 2rem)); padding: 1rem 1.15rem; background: #17202ce8; border: 1px solid #d6b88670; border-radius: .7rem; box-shadow: 0 .8rem 2rem #0008; backdrop-filter: blur(8px); }
+  h1 { margin: 0 0 .35rem; font-size: 1.15rem; }
+  p { margin: .35rem 0 .7rem; }
+  .caution { color: #ffdc9d; font-size: .84rem; }
+  .modes { display: flex; gap: .4rem; margin-top: .8rem; }
+  button { padding: .4rem .65rem; border: 1px solid #a4adba; border-radius: .35rem; background: #27364a; color: inherit; cursor: pointer; }
+  button[aria-pressed="true"] { background: #b88343; border-color: #ffdfac; color: #161616; }
+  button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  #status, #metrics { font-size: .83rem; color: #d3dae3; }
+  button:disabled { opacity: .55; cursor: default; }
+  .hint { position: fixed; bottom: 1rem; right: 1rem; z-index: 1; padding: .4rem .65rem; background: #17202ccf; border-radius: .35rem; font-size: .75rem; }
+  @media (max-width: 600px) { .panel { font-size: .9rem; } .hint { left: 1rem; right: auto; bottom: .5rem; } }
+</style>
+<canvas id="view" aria-label="Interactive tower model"></canvas>
+<section class="panel" aria-label="Study controls">
+  <h1>Shinsekai tower study</h1>
+  <p class="caution">Unpublished geometry test. Only the roof level (50 shaku) is sourced; total height, colours and other dimensions remain provisional.</p>
+  <p>Orbit with drag, zoom with wheel or pinch. This tests the browser renderer and the editable study GLB; it is not a 1912 scene.</p>
+  <div class="modes" role="group" aria-label="Lighting study">
+    <button type="button" data-mode="day" aria-pressed="true">Day</button>
+    <button type="button" data-mode="dusk" aria-pressed="false">Dusk</button>
+    <button type="button" data-mode="night" aria-pressed="false">Night</button>
+  </div>
+  <p id="status" role="status">Loading renderer…</p>
+  <button type="button" id="benchmark" disabled>Measure 5 seconds</button>
+  <p id="metrics">Frames are drawn when the view changes.</p>
+</section>
+<div class="hint">Research preview · local only</div>
+<script type="importmap">
+{
+  "imports": {
+    "three": "/vendor/three-r186/build/three.webgpu.js",
+    "three/webgpu": "/vendor/three-r186/build/three.webgpu.js",
+    "three/addons/": "/vendor/three-r186/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="./viewer.js"></script>
+</html>

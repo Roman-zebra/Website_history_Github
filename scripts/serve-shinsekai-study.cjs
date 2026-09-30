@@ -1,0 +1,45 @@
+// Local-only source preview. The published Workers build does not include assets-src/.
+const http = require('node:http');
+const fs = require('node:fs');
+const path = require('node:path');
+
+const root = path.resolve(__dirname, '..');
+// Keep this origin separate from the main site's development service worker.
+const port = Number(process.env.JTA_STUDY_PORT || 18765);
+const types = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.css': 'text/css' };
+if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('JTA_STUDY_PORT must be 1–65535.');
+const allowed = pathname => pathname.startsWith('/assets-src/shinsekai/browser-study/') ||
+  pathname.startsWith('/vendor/three-r186/') || pathname === '/assets-src/shinsekai/tower-study/tower-study.glb';
+const server = http.createServer((request, response) => {
+  if (!['GET', 'HEAD'].includes(request.method)) {
+    response.writeHead(405, { Allow: 'GET, HEAD' }).end(); return;
+  }
+  let pathname;
+  try { pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname); }
+  catch { response.writeHead(400).end(); return; }
+  if (pathname.includes('\0')) { response.writeHead(400).end(); return; }
+  const file = path.resolve(root, `.${pathname}`);
+  // Check the resolved path as well as the URL, including encoded traversal.
+  const relative = `/${path.relative(root, file).split(path.sep).join('/')}`;
+  if (!file.startsWith(`${root}${path.sep}`) || !allowed(relative)) { response.writeHead(403).end(); return; }
+  fs.realpath(file, (error, realFile) => {
+    if (error) { response.writeHead(404).end(); return; }
+    if (realFile !== file) { response.writeHead(403).end(); return; }
+    fs.stat(realFile, (error, stat) => {
+      if (error || !stat.isFile()) { response.writeHead(404).end(); return; }
+      const type = types[path.extname(file)] || 'application/octet-stream';
+      response.setHeader('Content-Type', `${type}${/^(text\/|application\/json)/.test(type) ? '; charset=utf-8' : ''}`);
+      response.setHeader('Content-Length', stat.size);
+      response.setHeader('X-Content-Type-Options', 'nosniff');
+      response.setHeader('Cache-Control', 'no-store');
+      if (request.method === 'HEAD') { response.end(); return; }
+      const stream = fs.createReadStream(realFile);
+      stream.on('error', () => response.destroy());
+      stream.pipe(response);
+    });
+  });
+});
+server.on('error', error => { console.error(`Study server: ${error.message}`); process.exitCode = 1; });
+server.listen(port, '127.0.0.1', () => {
+  console.log(`Shinsekai study: http://127.0.0.1:${port}/assets-src/shinsekai/browser-study/index.html`);
+});
