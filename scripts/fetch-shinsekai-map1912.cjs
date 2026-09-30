@@ -1,11 +1,12 @@
 #!/usr/bin/env node
-// Download the two 1912 OML cadastral sheets after checking individual CC0 records.
+// Download the 1912 OML cadastral sheets and index after checking individual CC0 records.
 const fs = require('node:fs/promises');
 const path = require('node:path');
 
 const sheets = [
   ['s0004038', '0000000021-OSK0186828', '3-8-甲; Shinsekai'],
   ['s0004031', '0000000021-OSK0186821', '2-8-乙; Tennoji east control'],
+  ['s0004001', '0000000021-OSK0186791', 'index and symbol legend'],
 ];
 const output = path.join(__dirname, '..', 'assets-src', 'shinsekai', 'references', 'oml', 'maps');
 const headers = { 'User-Agent': 'JapanTimeAtlas-source-research/1.0' };

@@ -1,7 +1,7 @@
 {
   "status": "in_progress",
   "current": "T2",
-  "next": "Check Claude's local handoff and claude/* branches every 10 minutes and integrate useful changes immediately; meanwhile find the 1912 survey-map legend and georeference its road/rail controls against 1928 and 1942 aerials, preserve the dashed circle as an unverified tower candidate, seek a contemporary ground elevation to resolve the 1922 sea-elevation versus 1924 height conflict, then fit multiple landmarks in north photographs before changing the tower model; continue seeking the original 1913 facility plan without paid access",
-  "updatedAt": "2026-09-30T11:54:00+09:00",
+  "next": "At each task start and milestone read Claude's claude-status.json and to-codex.md, plus claude/* branches; integrate useful progress immediately. Claude is currently fitting tower height at Max effort, so independently georeference CC0 1912 sheet S063 to at least four persistent 1928/1942 road or rail controls with residuals; keep the dashed circle unidentified because index S069 has no symbol for it; seek contemporary ground elevation and the original 1913 facility plan without paid access. Do not alter the tower study until the multi-view photo fit tests the 1921 floor-line ambiguity.",
+  "updatedAt": "2026-09-30T12:05:00+09:00",
   "lastCompleted": "T1"
 }

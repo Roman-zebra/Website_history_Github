@@ -33,6 +33,7 @@ const items = [
   ['d1979001', '0000000021-OSK0159601'],
   ['e0342001', '0000000021-OSK0160195'],
   ['c1523001', '0000000021-OSK0158231'],
+  ['c1518001', '0000000021-OSK0158226'],
 ];
 
 const output = path.join(__dirname, '..', 'assets-src', 'shinsekai', 'references', 'oml');

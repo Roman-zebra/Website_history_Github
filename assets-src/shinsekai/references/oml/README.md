@@ -1,6 +1,6 @@
 # Osaka Municipal Library CC0 source scans
 
-These 29 original JPEGs were downloaded from the [Osaka Municipal Library Digital Archive](https://image.oml.city.osaka.lg.jp/da/top) on 2026-09-30 using `node scripts/fetch-shinsekai-oml.cjs`. The script checks each individual page for its management number, `申請不要・二次利用可`, and `CC0（CC0 1.0 全世界 パブリック・ドメイン提供）` before downloading. The archive's [open data policy](https://www.oml.city.osaka.lg.jp/page/1633.html) applies. Credit the library and link to the item record when displayed, even though CC0 does not require attribution.
+These 30 original JPEGs were downloaded from the [Osaka Municipal Library Digital Archive](https://image.oml.city.osaka.lg.jp/da/top) on 2026-09-30 using `node scripts/fetch-shinsekai-oml.cjs`. The script checks each individual page for its management number, `申請不要・二次利用可`, and `CC0（CC0 1.0 全世界 パブリック・ドメイン提供）` before downloading. The archive's [open data policy](https://www.oml.city.osaka.lg.jp/page/1633.html) applies. Credit the library and link to the item record when displayed, even though CC0 does not require attribution.
 
 | File | Library item | Catalogue date | Research use |
 | --- | --- | --- | --- |
@@ -12,7 +12,7 @@ These 29 original JPEGs were downloaded from the [Osaka Municipal Library Digita
 | `d0285001.jpg` | [From White Tower toward the first tower](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0158887) | 1912–1925 | South high viewpoint, music-hall/arch relation; individual structures still need identification |
 | `e0343001.jpg` | [Opening commemorative colour triptych](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0160196) | 1912 | Named Mystery Hall, White Tower and music hall silhouettes; printed colours are decorative, not a measured facade palette |
 
-The additional 22 individual records and dates are in `docs/shinsekai/ledger.csv` (S041–S062). Research groups:
+The additional 23 individual records and dates are in `docs/shinsekai/ledger.csv` (S041–S062 and S068). Research groups:
 
 | Files | Use and limit |
 | --- | --- |
@@ -24,5 +24,6 @@ The additional 22 individual records and dates are in `docs/shinsekai/ledger.csv
 | `e0341001`, `e0344001`, `e0342001`, `c1523001` | Commemorative graphics and small facility views; artwork is not a measured colour or light record |
 | `c0313001`, `c0319001`, `d0761001` | Hand-tinted reddish tower and red cabin proposals; paint hues remain unverified |
 | `d1160001`, `c0120001`, `d1979001` | Wider park and captioned tower views; individual text needs reading |
+| `c1518001` | 531 × 344 px park panorama with ropeway and postal mark; catalogue spans 1912–1925 and does not establish an opening-day state |
 
 All catalogue dates are creation/publication ranges, **not confirmed exposure dates**. Geometry alignment still needs camera stations and a measured site plan. No people, protected ads, or modern tower marks are to be copied into the 3D scene.
