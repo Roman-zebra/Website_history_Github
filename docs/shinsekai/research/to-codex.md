@@ -252,3 +252,14 @@
 ## 2026-09-30 13:58（43）W0 の写真上の位置（8×7 モザイク）
 - **std (78, 1497) ±8、1928 (70, 1505) ±20、1936–42 (57, 1507) ±12**。交わる線：S063 では**南海本線（複線1本）×関西本線**の中心線。今の std は南北が2組（4線）なので2組の真ん中を取った（片方なら ±15）。1936–42 は高架の上面の明るい筋（左の黒い帯は影）を中心にした。
 - 四点アフィンの予測との差：1928 で約94 px（約46m）、1936–42 で約66 px（約32m）。Codex の目測（(70,1530)・(75,1515)）とは y で 8〜25 px の差。画像：claude-out\research\controls\w0z.jpg・w0_three.jpg。
+
+## 2026-09-30 14:15（44）江戸東京博物館「新世界案内図」（88133639）の読み取り
+- 詳細：claude-out\research\edohaku-guide-map.md。画像は保存していない（アプリ内のブラウザで拡大して見ただけ）。
+- 北は右（上の矢印）。凡例はイロハ順に 30 ほど。主なもの：イ 通天閣、井 白塔、ノ 音楽堂、ラ 不思議館、ム 埃及館、ネ 清華殿、ワ 水禽舎、ヨ 孔雀舎、カ スケーチングホール、ヲ ルナパーク正門、リ 劇場、ヌ 活動写真館、ル 仮設興行館、**オ 角力常設館敷地**。
+- **年代の手がかり**：「角力常設館**敷地**」＝大阪国技館（1919年開館）が建つ前 → **1918〜19年ごろ**の図の可能性が高い（計画・着工年は要確認）。正門があるので1923年の閉園より前。スケーチングホールなど開業時の一覧に無い施設もある → 1912年の配置の証拠にはしない。
+- 形（位置関係のみ）：南側の大きなルナパークの区画の中央に丸い池、池の南寄りに白塔、東寄りに音楽堂。区画の西は国技館の敷地の空き地と仮設興行館。塔はルナパークの区画の外の北側。白塔と塔はほぼ南北の軸の上（略図なので確かさ低〜中）。1913年の写真帖の平面図とプログラムは Claude の手元に無く、直接の照合はできない（プログラムの見本の絵は白塔を南西に描く＝略図どうしで軽い差）。
+
+## 2026-09-30 14:16 (45) New user instruction (v3.6): English working language; Ko-fi/Substack alternative deferred to M5
+- **Language, effective now:** the user asks that all their instructions be translated into English before we act on them. Claude's and Codex's working outputs (handoffs, docs, state, commit messages) may be in English, which the user reads. From this handoff on, Claude writes in English. This concerns the working language only, not the public site's text; ask the user before changing that.
+- **Monetization, deferred to M5 (do not start now):** the paid perk remains browser access to areas beyond the free tower zone, with Stripe as the primary route. If Stripe-to-system integration is difficult, an allowed alternative is a supporters-only dedicated page inside the JTA site, gated by Ko-fi or Substack membership. At M5, compare fees, automatic membership verification without paid add-ons or paid APIs, and how the unlock reaches the browser. The v3.3 rule still applies: stop and look for a free path if anything needs payment.
+- Updated: PLAN.md v3.6 (§0, §5), CLAUDE.md, CODEX-PROMPT.md, INSTRUCTIONS-LOG.md (22nd instruction, in English).
