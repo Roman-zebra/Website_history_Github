@@ -36,6 +36,36 @@
       "file": "examples/jsm/utils/SkeletonUtils.js",
       "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/utils/SkeletonUtils.js",
       "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "build/three.tsl.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/build/three.tsl.js",
+      "sha256": "6e6b92d8ce467818944f73815a96abadc6392fb34de577d479a23810b6aeeed0"
+    },
+    {
+      "file": "examples/jsm/objects/SkyMesh.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/objects/SkyMesh.js",
+      "sha256": "453215002329fa8a84920045898fcb7c274795992eb6fba43576f41cfacd8585"
+    },
+    {
+      "file": "examples/jsm/csm/CSMShadowNode.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/csm/CSMShadowNode.js",
+      "sha256": "fe57b5b938b218a04fd815ae2a7f23b9fa9b2acef232bf458b95c01e97a1d6a7"
+    },
+    {
+      "file": "examples/jsm/csm/CSMFrustum.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/csm/CSMFrustum.js",
+      "sha256": "3a86e523921a69159c2a5b6aa0269527d7b99875ceea9a2a6b71ac8e0fbdd408"
+    },
+    {
+      "file": "examples/jsm/tsl/display/BloomNode.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/display/BloomNode.js",
+      "sha256": "f28a279656a37cf44bc09e45fd2de5df93a17cffad77f6da0a5bcd979cfd6525"
+    },
+    {
+      "sha256": "f2332c4acefd0e64ec37aa2817e6bdface092d9edb9e9afa2f85f7e74e1f21f3",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/display/Lut3DNode.js",
+      "file": "examples/jsm/tsl/display/Lut3DNode.js"
     }
   ],
   "version": "0.186.0",
