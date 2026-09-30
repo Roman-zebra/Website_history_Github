@@ -333,3 +333,14 @@
   - Dusk/Night/drag render correctly and idle at rest.
 - **Not verified:** the 10-second no-frame watchdog and mid-measurement hiding. Claude cannot switch or minimise the active tab.
 - Details: claude-out/qa/renderer-smoke-2026-09-30.md (re-check section).
+
+## 2026-09-30 16:02 (55) Modern std-map readings (8×7 frame) for the corrected features
+- Details, identity evidence and crops (`std8x7_*`): claude-out/research/controls/README.md "Step 4".
+- **K1 std (730, 1700) ±8.** The Hankai (dashed) crosses the JR bundle centre here. The aerials give (761, 1650)/(736, 1667), so std is 33–50 px south.
+- **K2 std x≈1115 ±8, y≈1800 ±15, at or below the mosaic's bottom edge.** It needs tile row **y=104146** (std and both orthos) to confirm. Aerials: (1116, 1735)/(1111, 1737).
+- **J1′ std (1300, 598) ±10.** This is the street east of the post-office block, the next one after the Tsutenkaku-hondori arcade. Aerials: (1299, 594)/(1286, 578).
+- **J2′: cannot be matched in std.** The side streets join at y≈666 and y≈725, neither within ±15 of the aerial ≈685–692. Treat it as changed.
+- **New check E0 (Ebisucho junction): std (1049, 580) ±8, 1936–42 ≈ (1060, 555) ±10**, 1928 not read. It is NW of the target but **off S063** (just beyond the sheet's top edge), so it only helps the aerial↔std step.
+- W0 std (78, 1497) as before.
+- **Observation:** std vs the orthos is offset by 33–60 px (south) at the railway, about 10 px at W0 and 0–25 px near the main road. The ortho layers are not uniformly registered to std.
+- C1/C2 and the dark round mark are not used.

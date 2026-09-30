@@ -92,3 +92,26 @@ Evidence crops:
 **Other notes (conditional, not controls).**
 - S063's central-street axis, extended south, meets the north edge of the Luna Park block at (5900, 3137). This is the likely gate position on the axis (1914 guide: 中央見付け).
 - The street segment between the plaza and the wide E–W street is about 22 m long, and the photo-fit base depth is 20.7–30.5 m. So a base straddling this street would roughly fill the segment.
+
+## Step 4 (2026-09-30 16:02, English): modern std-map readings in the 8×7 frame (x229740..229747, y104139..104145, z18)
+Evidence crops (prefix `std8x7_`; origins are in the 8×7 frame; zoom and grid are noted on each):
+- `std8x7_r_K1.jpg`: std | 1928 | 1936–42, origin (690,1590), ×3, grid 10 px.
+- `std8x7_std_K1w.png`: std, origin (620,1580), ×3, grid 10 px.
+- `std8x7_k2w.jpg`: std | 1936–42 | 1928, origin (1000,1640), ×3 shown at ×2.27, grid 10 px.
+- `std8x7_r_J1.jpg`: std | 1928 | 1936–42, origin (1220,520), ×3, grid 10 px.
+- `std8x7_jw_pair.jpg`: std | 1936–42, origin (1000,460), ×2 shown at ×1.625, grid 20 px.
+
+| Feature | std reading (8×7) | Identity evidence | Aerial readings (8×7 = old 7×7 + 256 in x) | Status |
+|---|---|---|---|---|
+| **K1**: Hankai × Kansai-line (JR) underpass | **(730, 1700) ±8** | The dashed dark-red pair is the Hankai (新今宮駅前 stop label beside it). The JR is the E–W bundle of dark-red lines; the reading is at the bundle centre. | 1928 (761, 1650), 1936–42 (736, 1667) | Matched. std is 33–50 px **south** of the aerial embankment reading. |
+| **K2**: east N–S road × railway | x **≈1115 ±8**; y **≈1800 ±15**, at or below the mosaic's bottom edge | The same N–S street, between the large block (former city-tram depot site) and the police-station blocks. It reaches the JR lines only at the bottom edge. | 1928 (1116, 1735), 1936–42 (1111, 1737) | x matches; **y needs one more tile row (y=104146)**. The std railway appears about 60 px south of the aerial embankment band. |
+| **J1′**: main E–W road × first SSW street ESE of Ebisucho | **(1300, 598) ±10** | The street runs between the post-office (大阪新世界郵便局) block and the next block east, and is the next street east after the Tsutenkaku-hondori arcade. | 1928 (1299, 594), 1936–42 (1286, 578) | Matched within 14–20 px. |
+| **J2′**: the same street about 52–59 m south, where an E–W side street joins | **cannot be matched** | std shows side streets joining at y≈666 and y≈725. Neither is near the aerial readings (≈685–692) within ±15, so the 1912/1930s side street may have moved. | 1928 (1296, 692), 1936–42 (1283, 685) | Unmatched: do not use in std. |
+| **E0 (new check)**: Ebisucho junction (Hankai terminus / Sakaisuji × main road) | **(1049, 580) ±8** | The subway station symbol and the Hankai dashed line meet the main road; the arcade street starts here. | 1936–42 ≈ (1060, 555) ±10; 1928 not read | Candidate check point NW of the target. **Not on S063**: it lies just off the sheet's top edge. |
+| **W0**: Nankai × Kansai line | (78, 1497) ±8 (earlier) | — | 1928 (70, 1505), 1936–42 (57, 1507) | Matched (earlier). |
+- **Pattern:**
+  - Near the railway, std sits about 33–60 px **south** of the 1928/1936–42 orthos (K1, K2).
+  - At W0, std sits within about 10 px of the orthos.
+  - Near the main road (J1′, E0), std sits about 0–25 px south or east.
+  - So the aerial orthos are not uniformly registered to std. Their offset varies across roughly 1 km, which may explain part of the residual pattern seen with S063.
+- Not used, per Codex: C1/C2 and the dark round mark.

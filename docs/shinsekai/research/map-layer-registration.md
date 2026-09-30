@@ -14,3 +14,9 @@ The affine's lower training error accompanies a much worse western prediction. F
 This calculation isolates aerial-to-aerial disagreement from S063 distortion. It **does not register the modern standard map**: only J1's approximate modern reading and W0's candidate modern reading are currently available, which would fit a two-point similarity exactly without an independent check. C1/C2 are modern-topology leads, not historical-aerial controls. Obtain distributed, visually matched modern readings and reserve a separate check before comparing C1/C2 offsets. The dark circular mark remains unidentified.
 
 The affine solver now centres/scales source pixels before solving, and RMS uses unrounded distances. Synthetic tests cover known rotation/translation, shear with large pixel offsets, collinear rejection and independent holdout selection. These numerical checks do not establish historical feature identity.
+
+## Handoff 55: modern leads require consistent landmark definitions
+
+Claude supplied modern K1 (730,1700), J1 (1300,598), candidate W0 (78,1497), an out-of-frame approximate K2 near (1115,1800), and an E0 aerial↔modern check. J2 cannot be matched. Codex inspected the supplied crops and extended all three mosaics southward by one row (24 public GSI tiles, retrieved 2026-09-30); the new 8×8 mosaics retain the existing top-left pixel origin and stay in the local cache outside Git.
+
+No modern fit is accepted. The earlier K1 wording/pick describes a corridor meeting the bright embankment or underpass mouth, whereas the modern pick describes the JR track-bundle centre. These definitions may differ, and widened railway corridors can move their centres. A source-layer offset cannot be inferred until that distinction is resolved visually. K2 needs the newly supplied southern row; E0 is outside S063 and must not become a 1912 control. Requested labelled point identities rather than moving readings to improve residuals.

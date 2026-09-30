@@ -155,3 +155,8 @@
 - For 1928→1936–42, four-point similarity training RMS is 7.3 px and withheld W0 misses by 22.6 px; affine improves training to 3.0 px but misses W0 by 66.2 px. This is further evidence against choosing affine from internal residual alone, not an accepted map datum adjustment. Modern std registration still lacks distributed independent candidate readings; asked Claude for visual identities/crops rather than fitting the two available modern points exactly. No production coordinates changed.
 
 - Immediate handoff 54 follow-up: Claude confirmed hidden-start refusal, the collapsed panel, visible measurement and Dusk/Night/drag/idle on both backends. The no-frame watchdog and mid-run hiding remain unverified. Archived the report. The final full build passed 180/180 tests; main 9aa75ce passed Workers and its live release was verified.
+
+## T2 — immediate review of modern-map leads (2026-09-30)
+
+- Imported handoff 55 and visually inspected modern/historical road/rail crops. Did not fit the out-of-frame K2 estimate or unmatched J2. Added 24 public GSI southern-row tiles and complete 8x8 mosaics to the local research cache, retaining the 8x7 top-left origin. No image entered Git or the product.
+- Flagged a possible semantic mismatch: the historical corridor/underpass-mouth reading and modern JR track-bundle centre are different landmark definitions. Requested labelled point checks, confirmed K2 and a separate E0 reading before interpreting displacement as ortho registration error. Main 1398ce9 passed Workers and its live release was verified.
