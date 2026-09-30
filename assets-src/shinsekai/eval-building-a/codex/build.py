@@ -95,6 +95,10 @@ def beam(name,a,b,radius,material,vertices=8):
     a,b=Vector(a),Vector(b);o=cylinder(name,(a+b)/2,radius,(b-a).length,material,vertices)
     o.rotation_euler=(b-a).to_track_quat('Z','Y').to_euler();return o
 
+def ball(name,loc,radius,material):
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,radius=radius,location=loc)
+    return finish(bpy.context.object,name,material)
+
 def wall_span(x0,x1,z0,z1,y=.125):
     if x1-x0>.005 and z1-z0>.005:box('front plaster section',((x0+x1)/2,y,(z0+z1)/2),(x1-x0,.25,z1-z0),plaster,.008)
 
@@ -314,6 +318,16 @@ def inside():
     return root
 
 roots=[outside(lod) for lod in [0,1,2]];interior=inside()
+sys.path.insert(0,str(OUT))
+from room_dressing import decorate
+def set_zone(value):
+    global ZONE
+    ZONE=value
+decorate(box,beam,cylinder,mesh,ball,MATS,interior,set_zone)
+polished=wood.copy();polished.name='waxed corridor boards';polished.node_tree.nodes.get('Principled BSDF').inputs['Roughness'].default_value=.18
+for obj in PARTS:
+    if obj.parent==interior and obj.name.startswith(('upper main walk floor','upper stair front or rear landing')):
+        obj.data.materials[0]=polished
 
 def merge_groups(root):
     print('Merging '+root.name,flush=True)
@@ -402,7 +416,7 @@ ao_manifest=[]
 if '--no-ao' not in sys.argv:
     for obj in descendants(roots[0])+descendants(interior):
         original=obj.data.materials[0]
-        if original in [glass,paper] or obj['triangleCount']<50:continue
+        if original in [glass,paper] or sum(p.area for p in obj.data.polygons)<.15:continue
         # Use512 atlases except the large plaster shell. Limit total texture budget.
         size=512 if original==plaster else 256
         image=bpy.data.images.new('AO '+obj.name,width=size,height=size,alpha=False,float_buffer=True)
@@ -450,6 +464,7 @@ for m,source,base in preview_links:m.node_tree.links.new(source,base)
 # Review staging is not exported into the asset. Six fixed views are independent
 # of the live JTA renderer, and are clearly labelled Blender comparison renders.
 scene.render.engine='BLENDER_EEVEE_NEXT';scene.render.resolution_x=1280;scene.render.resolution_y=720;scene.render.resolution_percentage=100
+if hasattr(scene.eevee,'use_raytracing'):scene.eevee.use_raytracing=True
 scene.render.image_settings.file_format='PNG';scene.render.image_settings.color_mode='RGB'
 scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs['Color'].default_value=(.16,.23,.36,1)
 scene.world.node_tree.nodes['Background'].inputs['Strength'].default_value=.35
@@ -465,6 +480,9 @@ def light(name,loc,power,color,size=2):
     o.rotation_euler=(Vector((0,3,2.5))-o.location).to_track_quat('-Z','Y').to_euler();return o
 light('dusk soft sky',(-4,-4,11),700,(.49,.64,1),12)
 light('raking evening key',(-8,-12,9),2300,(1,.65,.35),8)
+bpy.ops.object.light_add(type='SUN',location=(-8,-12,9));window_sun=bpy.context.object
+window_sun.name='assumed late-afternoon window sun';window_sun.data.energy=2.0;window_sun.data.color=(1,.81,.59);window_sun.data.angle=.06
+window_sun.rotation_euler=Vector((-.28,.78,-.56)).to_track_quat('-Z','Y').to_euler()
 for x,y,z in [(-1.5,3,2.55),(-1.1,7,2.5),(-1.3,2,5.35),(-1.5,7.2,5.3)]:
     bpy.ops.object.light_add(type='POINT',location=(x,y,z));o=bpy.context.object;o.data.energy=75;o.data.color=(1,.63,.32);o.data.shadow_soft_size=.5
 bpy.ops.object.camera_add();camera=bpy.context.object;scene.camera=camera

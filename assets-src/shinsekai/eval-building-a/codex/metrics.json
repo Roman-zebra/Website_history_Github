@@ -3,7 +3,7 @@
     "building-a-exterior-lod0": 7792,
     "building-a-exterior-lod1": 2896,
     "building-a-exterior-lod2": 1524,
-    "building-a-interior-cell": 6736
+    "building-a-interior-cell": 13268
   },
   "ao": [
     {
@@ -14,7 +14,7 @@
         256
       ],
       "uvChannel": 1,
-      "sha256": "7e75feeb4a3ddd3fdaa05bebced5e4c2e55c03e83d80a3dc8fdebdf97daedde7"
+      "sha256": "b942eb82547d43745b3a2d6507046f85241499d3bd4e5fd267b5bec78d0c843e"
     },
     {
       "file": "ao-1.png",
@@ -28,26 +28,36 @@
     },
     {
       "file": "ao-2.png",
+      "node": "building-a-exterior-lod0 / front / dry soot and splash",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "4229c7c554105003e0ae4b93c1fa9ddf7181af05ddd878e913859f126edffd2c"
+    },
+    {
+      "file": "ao-3.png",
       "node": "building-a-exterior-lod0 / front / warm lime plaster",
       "sizePx": [
         512,
         512
       ],
       "uvChannel": 1,
-      "sha256": "b5d84f530641b49c895c82c201e8ed1c52429f86a6b8408ae68831752430f64c"
+      "sha256": "11b27e02d4aa17861946bb75cc85cd71b21f6a7e63a59220bc6b419039605380"
     },
     {
-      "file": "ao-3.png",
+      "file": "ao-4.png",
       "node": "building-a-exterior-lod0 / front / oiled dark timber",
       "sizePx": [
         256,
         256
       ],
       "uvChannel": 1,
-      "sha256": "bf1f56d057467c9b6c1db40475bdc5d17788f23df770b9cdd3015bd1132e7bc9"
+      "sha256": "5e64c1ef2c7ef2abd9861b819d1ea28d1f1f4ae7f950ba9347cc113dd2c16a84"
     },
     {
-      "file": "ao-4.png",
+      "file": "ao-5.png",
       "node": "building-a-exterior-lod0 / front / damp plinth",
       "sizePx": [
         256,
@@ -57,27 +67,37 @@
       "sha256": "b5032a2891f61e9eb1cdf793607584ef5cbd2cec99b5d8cb9d6cd1ea90dffee1"
     },
     {
-      "file": "ao-5.png",
-      "node": "building-a-exterior-lod0 / front / aged brass",
-      "sizePx": [
-        256,
-        256
-      ],
-      "uvChannel": 1,
-      "sha256": "69262dff00e6b0dba014617186cab93f1b85ed0db957edec44563c7014a56076"
-    },
-    {
       "file": "ao-6.png",
-      "node": "building-a-exterior-lod0 / front / cream ceramic",
+      "node": "building-a-exterior-lod0 / left / warm lime plaster",
       "sizePx": [
-        256,
-        256
+        512,
+        512
       ],
       "uvChannel": 1,
-      "sha256": "03c3783fe0b2f218434c7306934f77509bcc766857d51d6bbc340703afb0d2f4"
+      "sha256": "003e987c6d649bfe6809dd87d90bb3036c9ccdb6fe71949fce7d803e6b6548fc"
     },
     {
       "file": "ao-7.png",
+      "node": "building-a-exterior-lod0 / right / warm lime plaster",
+      "sizePx": [
+        512,
+        512
+      ],
+      "uvChannel": 1,
+      "sha256": "f0da42891c9d43d5be11b2cf9e56a2e1189e7345cf8542bd872ea54300bced86"
+    },
+    {
+      "file": "ao-8.png",
+      "node": "building-a-exterior-lod0 / back / warm lime plaster",
+      "sizePx": [
+        512,
+        512
+      ],
+      "uvChannel": 1,
+      "sha256": "9ee68e6a5acc22f79cf480bc6f15036e2b12e21e870eb12e73dbe3018229a160"
+    },
+    {
+      "file": "ao-9.png",
       "node": "building-a-exterior-lod0 / front / painted iron",
       "sizePx": [
         256,
@@ -87,7 +107,7 @@
       "sha256": "3303ac45780f89f064918109a5f79cab09cb6e4345ef058dab9c658c6ac00a0d"
     },
     {
-      "file": "ao-8.png",
+      "file": "ao-10.png",
       "node": "building-a-exterior-lod0 / front / ochre sign paint",
       "sizePx": [
         256,
@@ -97,7 +117,7 @@
       "sha256": "d7fb186513f087fbae52762f164a0d7e7a9db55b77d30a596556c0524b9fd3ab"
     },
     {
-      "file": "ao-9.png",
+      "file": "ao-11.png",
       "node": "building-a-exterior-lod0 / roof / oiled dark timber",
       "sizePx": [
         256,
@@ -107,7 +127,7 @@
       "sha256": "a127ba198f4445da0d301eaf3e05a8b692301c29a0aca4ccccc15cfed439874f"
     },
     {
-      "file": "ao-10.png",
+      "file": "ao-12.png",
       "node": "building-a-exterior-lod0 / right / painted iron",
       "sizePx": [
         256,
@@ -117,54 +137,114 @@
       "sha256": "38676bfae3287a2809d515cb35b15fd701e52566aed1d69b89a48efd1946d5df"
     },
     {
-      "file": "ao-11.png",
-      "node": "building-a-exterior-lod0 / right / cream ceramic",
-      "sizePx": [
-        256,
-        256
-      ],
-      "uvChannel": 1,
-      "sha256": "701c01bc65d3375f60eb2c1bb63729b8d365c7d0bd89b1fa4a9c031f123e41cd"
-    },
-    {
-      "file": "ao-12.png",
+      "file": "ao-13.png",
       "node": "building-a-interior-cell / interior / oiled dark timber",
       "sizePx": [
         256,
         256
       ],
       "uvChannel": 1,
-      "sha256": "c85a0635046a6909746fa2dac126fe8dbff1ac77a242131cda6404c77218293d"
+      "sha256": "8643505f849b28ca05440c0869170f5ca7d5733f700a5ce2e98ff485c64b58c3"
     },
     {
-      "file": "ao-13.png",
+      "file": "ao-14.png",
+      "node": "building-a-interior-cell / interior / damp plinth",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "9f4a29ae5a7574f6571afb5d11aa5d81fa2c156d7a87a5069ad3eb25a30675bb"
+    },
+    {
+      "file": "ao-15.png",
       "node": "building-a-interior-cell / interior / woven rush",
       "sizePx": [
         256,
         256
       ],
       "uvChannel": 1,
-      "sha256": "66d8553026d090b7ee932cafba53ad458df56867b444515afee681465335df88"
+      "sha256": "cfdec487957854448ac6f3d544154b5017ab4d8ebe2cda8418bbf1a81f9934c4"
     },
     {
-      "file": "ao-14.png",
+      "file": "ao-16.png",
       "node": "building-a-interior-cell / interior / tatami border",
       "sizePx": [
         256,
         256
       ],
       "uvChannel": 1,
-      "sha256": "9d92a0cb92ae2eae6d3106400994d7a0a11a087ebebe6516f90171afe9f261c4"
+      "sha256": "38a73f0b6dc43e9825fc9c4471ec43e884c116b98ed1064ba105d4cbb251e9c4"
     },
     {
-      "file": "ao-15.png",
+      "file": "ao-17.png",
+      "node": "building-a-interior-cell / interior / waxed corridor boards",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "e975506fbbb50f2c29d396e212a4dbd26b53aa128cebd20552efc8b33591de83"
+    },
+    {
+      "file": "ao-18.png",
       "node": "building-a-interior-cell / interior / cream ceramic",
       "sizePx": [
         256,
         256
       ],
       "uvChannel": 1,
-      "sha256": "65181b0f114026d655e2ff3bd9721c7a49f6692049fdbc07de12094c7512a3f7"
+      "sha256": "bde8882143357120ac33a0ce024fbae7075d2f1a40f8d2ea1b57b9fa44455c73"
+    },
+    {
+      "file": "ao-19.png",
+      "node": "building-a-interior-cell / interior / painted iron",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "000d6c0dc3130029fdbc5df43f7427169dc65ee39298bfe11b71491911665dc9"
+    },
+    {
+      "file": "ao-20.png",
+      "node": "building-a-interior-cell / interior / aged brass",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "502e0862e57927ac3a6661b802fd634605690f3b97d1a12b3d1a7e60d9d724f8"
+    },
+    {
+      "file": "ao-21.png",
+      "node": "building-a-interior-cell / ceiling / oiled dark timber",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "8c537ff0846cd6fb79a95f30bf001f3bea34624d8729bed35eafa3a5339d6a19"
+    },
+    {
+      "file": "ao-22.png",
+      "node": "building-a-interior-cell / interior / blue green canvas",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "034103a44bbbe851128f90d3abf97949aa572eef20d2d17ccff83906528c52b3"
+    },
+    {
+      "file": "ao-23.png",
+      "node": "building-a-interior-cell / interior / ochre sign paint",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "dd4a983fbfa8eecac7844d548c994bbdbf71bc3afe57705682f2975c174dd06c"
     }
   ],
   "noAo": false

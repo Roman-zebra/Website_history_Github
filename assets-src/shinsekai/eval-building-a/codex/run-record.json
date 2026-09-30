@@ -7,13 +7,15 @@
     "aaa-look-study.md",
     "OML158514,157003,157013 local images"
   ],
-  "status": "v1 validated, all six images inspected; new shared101-103 directive starts tuning",
-  "iterations": 5,
+  "status": "Round1 inspected; superseded by hybrid pipeline per104",
+  "iterations": 6,
   "competingFilesRead": false,
   "startedAt": "2026-09-30T14:27:08.5937871Z",
   "model": "Current Codex model; no override or new chat",
   "authoringStartedAt": "2026-09-30T14:17:36.269Z",
   "timingNote": "Last wall-clock read before planning/authoring; startedAt is first Blender execution. These are recorded boundaries, not token/API cost.",
   "checkpointAt": "2026-09-30T14:49:57.184Z",
-  "artisticIterations": 0
+  "artisticIterations": 1,
+  "round1CompletedAt": "2026-09-30T15:23:40.246Z",
+  "blindnessLiftedBy": 104
 }
