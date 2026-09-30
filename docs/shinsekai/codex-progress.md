@@ -204,3 +204,7 @@
 - Full build passed **212/212 tests**. Generated unrelated pages restored from their clean baseline; research remains outside dist. Handoff78 reviewed immediately: conditional shaft/well/lattice/top-form prototype requested in Claude's separate branch, with photographic ratios and dates kept distinct from measured geometry. Codex next owns independent T5 motion. No production geometry/default changed.
 
 - Immediate79 arrived during publication: branchcc69851 reviewed and both GLBs independently validated (0 errors/0 warnings). Deferred merge for baseline preservation, neutral form names, separately exported elevator car, evidence metadata and photo checks. South camera already frees east/roll; retouching displacement bound is unsupported by sharpness alone. Requested concrete revisions.966522c passed Workers and live release; no model was adopted. This follow-up changes documentation only and uses the212-test build.
+
+## T5 schematic motion / immediate Claude80 review
+
+See research/motion-study.md. Paired shuttle/elevator/rigid-disc local prototype and five invariant/lifecycle tests; both Chrome backends/ride views inspected. Actual hidden-tab integration remains open. Reviewed/rebuilt/validated Claude19025f7 immediately and preserved v2; v3 accepted only as separate research candidates, not production photographic/site geometry. Next bind separate GLB car with dimensions/clearance-aware centre stops, then boarding/exit limits. Full build217/217 passed; research assets remain outside dist.

@@ -51,3 +51,7 @@ T3v2 is implemented; see camera-profile-v2-study.md and summary. Eight rolled fl
 Full build212/212 passed. See research/tower-shaft-review.md and requests-to-claude.md: Claude prototype requested on claude/tower-shaft-v3 in its separate checkout; Codex validates before main. Photograph width ratios are perspective/occlusion-dependent, form variants remain undated and defaults/site placement unchanged. Next Codex work: independent local T5 motion with explicit timing/span/terminal assumptions. Inspect Claude branches promptly when new commits arrive.
 
 Immediate79: cc69851 GLBs independently validate, but merge deferred for concrete export/provenance/baseline fixes (see tower-shaft-review.md and requests). Existing solver already frees south east/roll; no new datum supplied. Next independent T5 motion remains.966522c Workers/live verified.
+
+## Motion checkpoint through80
+
+See research/motion-study.md. Paired shuttle/elevator/rigid-disc local prototype and five invariant/lifecycle tests; both Chrome backends/ride views inspected. Actual hidden-tab integration remains open. Reviewed/rebuilt/validated Claude19025f7 immediately and preserved v2; v3 accepted only as separate research candidates, not production photographic/site geometry. Next bind separate GLB car with dimensions/clearance-aware centre stops, then boarding/exit limits. Full build217/217 passed; research assets remain outside dist.

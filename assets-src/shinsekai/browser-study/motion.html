@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Shinsekai motion study</title>
+<style>
+:root{color-scheme:dark;font:15px/1.45 system-ui;background:#14202d;color:#f2eee6}*{box-sizing:border-box}body{margin:0}#view{width:100%;height:100vh;display:block}.panel{position:fixed;top:16px;left:16px;width:min(325px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;background:#172433ed;border:1px solid #8596ab;border-radius:10px;padding:18px}h1{font-size:20px;margin:0 0 8px}p{font-size:13px}button,select,input{font:inherit}button,select{padding:6px;background:#30455d;color:inherit;border:1px solid #91a5bc;border-radius:5px}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #fff}label{display:block;font-size:13px;margin:12px 0}input[type=range]{width:100%}output{color:#ffd797}summary{cursor:pointer;color:#ffd797}.actions{display:flex;gap:8px}#status{color:#bdd4ed}#phase{font-variant-numeric:tabular-nums}a{color:#bdd4ed}@media(max-width:650px){.panel{width:270px;font-size:13px}}
+</style>
+<canvas id="view" aria-label="Schematic motion study with ropeway, elevator and tilted disc"></canvas>
+<section class="panel" aria-label="Motion controls">
+<h1>Motion study</h1>
+<p>Local schematic, without people. Layout, terminal heights, timing and cable sag are assumptions. The roof-level boarding route has source evidence; these shapes are placeholders.</p>
+<div class="actions"><button id="play" disabled>Play</button><button id="reset" disabled>Reset</button></div>
+<label>View <select id="ride"><option value="overview">Overview</option><option value="ropeway">Ride cabin A</option><option value="elevator">Ride elevator</option></select></label>
+<p id="status" role="status">Loading renderer…</p><p id="phase">Paused at 0.0 s</p>
+<details id="parameters"><summary>Assumed motion parameters</summary>
+<label>Span <output id="span-value">100 m</output><input id="span" aria-label="Assumed span" type="range" min="60" max="150" value="100" step="5"></label>
+<label>Arrival cable height <output id="endHeight-value">30 m</output><input id="endHeight" aria-label="Assumed arrival height" type="range" min="15" max="45" step="0.5" value="30"></label>
+<label>Cable sag <output id="sag-value">2 m</output><input id="sag" aria-label="Assumed cable sag" type="range" min="0" max="6" step="0.5" value="2"></label>
+<label>One-way travel <output id="travelSeconds-value">65 s</output><input id="travelSeconds" aria-label="Assumed one-way travel time" type="range" min="30" max="120" step="5" value="65"></label>
+<p>Two distinct tracks use opposite shuttle fractions, with 8 s dwell and smooth starts/stops. The cable is a parabolic visual approximation. The disc is one rigid tilted rotating candidate. These values are not recovered operating measurements.</p>
+</details>
+<p>Drag to orbit in overview; select a cabin to follow its movement. Hidden tabs pause. Playback starts only on request, including with reduced-motion preferences.</p>
+<a href="index.html">Tower study</a>
+</section>
+<script type="importmap">{"imports":{"three":"/vendor/three-r186/build/three.webgpu.js","three/webgpu":"/vendor/three-r186/build/three.webgpu.js","three/addons/":"/vendor/three-r186/examples/jsm/"}}</script>
+<script type="module" src="motion-viewer.js"></script>
+</html>

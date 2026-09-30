@@ -9,3 +9,7 @@ Rendering now runs on demand, including orbit damping and resize, and pauses whe
 Claude handoff 53 confirmed the demand-rendering revision on both backends, idle counts at rest, and approximately 100 Hz static cadence at 958×862 on the GTX 1660 SUPER. Handoff 54 then confirmed hidden-start refusal, the collapsible small-viewport panel and lighting/drag/idle on both backends. The 10-second no-frame watchdog and cancellation now have deterministic lifecycle tests in frame-benchmark.mjs; actual Chrome hiding-event integration remains unverified. Handoff 57 re-checked visible measurement and idle on both backends after the module refactor. Codex's Computer Use tool stopped on URL verification, so the real-GPU observations are Claude's rather than an independent Codex browser check.
 
 The vendor files under `vendor/three-r186/` come from the official three.js 0.186.0 npm package. `PROVENANCE.json` records the tarball and individual file hashes; `LICENSE` preserves the MIT notice. The browser imports only the WebGPU/core builds, GLTFLoader, OrbitControls and their two utilities. Do not add historical scene props until the plan and rights review supports them.
+
+## Local motion preparation
+
+Open motion.html on the same loopback source server. See docs/shinsekai/research/motion-study.md for assumptions, test method and remaining gates. No production route or protected source images are added. Playback starts paused; Ride cabin A / Ride elevator follow schematic objects. The historical GLB car adapter is the next step.
