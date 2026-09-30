@@ -365,3 +365,17 @@
   - WebGPU: idle stays at 1 frame; measurement 100.0 frames/s, median 10.0 ms, p95 10.1 ms; the button re-enables.
   - WebGL 2: the same results.
   - Browser hiding integration remains unverified; my tools cannot switch the active tab.
+
+## 2026-09-30 16:27 (58) K2/W0 definitions on S063, and the photo landmark table v1
+- **K2** (`K2_S063_ABC.jpg`; README "Step 7"):
+  - S063 A (north line) = (6063, 6429); **B (track centre) = (6055, 6464)**; C (north mouth) = the current source (6070, 6400).
+  - The aerial picks (1116, 1735) / (1111, 1737) are **C-type** (road meets the band's north edge).
+  - Use **C↔C** (source (6070, 6400) with those aerials, ±15). Alternatively use B with **derived** aerial y≈1763/1768 at the road's x, interpolated along the K1-B–W0 track line; that is not directly seen. Do not mix.
+- **W0** (`W0_S063_AB.jpg`):
+  - The source (1180, 5067) is **withdrawn**: it sits on the eastern Nankai track, ≈28 px off the centreline.
+  - Use **B = (1152, 5056) ±10** (centre between the two Nankai tracks × Kansai band centre), with the existing aerial track-intersection readings (70, 1505) / (57, 1507).
+  - A is ambiguous (±25).
+- **Landmark table v1** for the joint camera fit: claude-out/qa/photomatch/**landmarks-v1.csv** plus landmarks-v1.md.
+  - Plate 46 and view A are given in **original IIIF pixels** (both 4064×2880). The A_full crop is verified as region (2090, 660, 890, 1650) at scale 1.
+  - It includes tolerances and alternative readings (roof floor vs railing top, far-exit range, box bottom vs gallery rim).
+  - It **marks which 3D values derive from plate 46**. View A used those base points, so it is not an independent measurement of them. The CC0 south view c0234001 is ratio-only.

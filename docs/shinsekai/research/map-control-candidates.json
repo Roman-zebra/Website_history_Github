@@ -50,13 +50,28 @@
     },
     {
       "id": "K2",
-      "feature": "candidate eastern road beneath Kansai rail embankment",
-      "sourcePixel": [6070, 6400],
+      "feature": "candidate eastern road and north underpass mouth intersection (definition C)",
+      "sourcePixel": [
+        6070,
+        6400
+      ],
       "sourceUncertaintyPx": 15,
-      "targetPixels": {"1928": [1116, 1735], "1936-42": [1111, 1737]},
-      "targetUncertaintyPx": {"1928": 30, "1936-42": 15},
+      "targetPixels": {
+        "1928": [
+          1116,
+          1735
+        ],
+        "1936-42": [
+          1111,
+          1737
+        ]
+      },
+      "targetUncertaintyPx": {
+        "1928": 30,
+        "1936-42": 15
+      },
       "confidence": "medium",
-      "note": "Could be confused with another nearby north-south road; no planned depot was used as a control."
+      "note": "Handoff 58 identifies the existing S063 point as C at the north mouth; the historical aerial candidates meet the north tonal-band edge (C-type, not track centre B). Retain conservative original aerial reading tolerances. Derived centre-B aerial y values interpolated from K1/W0 are excluded to preserve control independence. Modern K2 has no common underpass and is rejected."
     },
     {
       "id": "J1",
@@ -80,13 +95,28 @@
     },
     {
       "id": "W0",
-      "feature": "candidate Nankai and Kansai rail grade separation",
-      "sourcePixel": [1180, 5067],
-      "sourceUncertaintyPx": 15,
-      "targetPixels": {"1928": [70, 1505], "1936-42": [57, 1507]},
-      "targetUncertaintyPx": {"1928": 20, "1936-42": 12},
+      "feature": "candidate Nankai double-track centre and Kansai railway track-band centre intersection (definition B)",
+      "sourcePixel": [
+        1152,
+        5056
+      ],
+      "sourceUncertaintyPx": 10,
+      "targetPixels": {
+        "1928": [
+          70,
+          1505
+        ],
+        "1936-42": [
+          57,
+          1507
+        ]
+      },
+      "targetUncertaintyPx": {
+        "1928": 20,
+        "1936-42": 12
+      },
       "confidence": "medium",
-      "note": "Held out of the four-point fits. Check whether the historical centreline moved before treating it as a permanent control."
+      "note": "Handoff 58 and its labelled S063 crop identify B between the two Nankai tracks; source [1180,5067] was on the eastern track and is withdrawn. Historical aerial readings are track intersections. W0 remains withheld. Do not equate to the widened modern railway bundle centres or adopt a production coordinate."
     }
   ]
 }

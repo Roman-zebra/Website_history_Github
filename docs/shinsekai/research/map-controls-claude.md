@@ -146,3 +146,21 @@ Image `K1_S063_AB.jpg`: S063 origin (4050,5720), ×2.
 **Can each be matched in both historical aerials? (8×8 frame; subtract 256 in x for the old 7×7 frame)**
 - **B: yes, approximately.** The track band's centre is readable in both: 1928 **(757, 1675) ±15**, 1936–42 **(740, 1676) ±12** (`K1_definitions.jpg`). Recommend B for the common historical table: S063 (4239, 5915) with these readings.
 - **A: not reliably.** The earlier aerial "north edge" readings, 1928 (761, 1650) and 1936–42 (736, 1667), are edges of the tonal band. That band may be the crest, the north toe of the hachured slope, or a shadow. In 1928 it sits ≈25 px (≈12 m) north of B, much more than the 4 m A–B gap on S063, so it probably includes the slope. Do not pair S063 A with those readings.
+
+## Step 7 (2026-09-30 16:27, English): K2 and W0 definitions on S063 vs aerials
+Images: `K2_S063_ABC.jpg` (origin (5880,6220), ×2) and `W0_S063_AB.jpg` (origin (980,4880), ×2). Red = the current or withdrawn source point.
+
+**K2 (east road under the Kansai-line embankment).**
+- On S063 the road's centreline continues straight under the band, and the hachures are interrupted for it, so this is an underpass.
+- **A** (road centre × the band's north line): (6063, 6429) ±10.
+- **B** (road centre × centre between the bar rows): **(6055, 6464) ±10**.
+- **C** (north mouth, where the road meets the hachure gap / toe) = the **current source (6070, 6400)**.
+- Aerial picks (1928 (1116, 1735), 1936–42 (1111, 1737), 8×8 frame) were "the road meets the north edge of the tonal band", i.e. **C or A, not B**. For B, the aerial track-centre line interpolated through K1-B and W0 lies at y≈1763 (1928) / ≈1768 (1936–42) at the road's x. That value is **derived, not directly seen** (±15).
+- **Shared definition:** C (north mouth) is the only one directly visible in all three. Its aerials remain (1116, 1735) / (1111, 1737) ±15. B needs the interpolated aerial y. Do not mix C-source with B-aerials.
+
+**W0 (Nankai × Kansai line).**
+- The Nankai is drawn as two separate tracks.
+- **B** (centre between the two Nankai tracks × Kansai band centre) = **(1152, 5056) ±10**.
+- **A** (Nankai centre × north boundary) ≈ (1158, 5010) ±25. Ambiguous: the slope lines and band edge are not separable here.
+- The **current source (1180, 5067) is withdrawn**. It sits ≈28 px east of the Nankai centreline, on the eastern track.
+- The aerial readings (1928 (70, 1505), 1936–42 (57, 1507)) were track-intersection (B-type) readings. Use **B consistently: S063 (1152, 5056)** with those aerials.

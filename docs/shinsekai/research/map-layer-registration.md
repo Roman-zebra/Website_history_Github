@@ -37,3 +37,16 @@ Codex inspected the labelled S063 and aerial crops and replaced K1 consistently 
 K1's corrected physical definition improves aerial-to-aerial agreement. It still does not establish a global 1912 transform or justify any tower coordinate. Similarity generalises better to withheld W0 than affine in the aerial comparison; these uncertainty ranges remain candidate reading estimates, not calibrated confidence intervals.
 
 Handoff 56 also withdrew modern K2 (no common underpass), and K1/W0's widened modern railway bundle centres are not invariant point controls. Their surviving railway/tram **line segments** may support a future orientation/cross-track test, with endpoint identities and changes documented. Revised E0 std (1050,565) supersedes (1049,580); E0 is off S063. Do not force a modern transform from two nearby northern points. K2/W0 need the same explicit source-versus-historical-aerial definition audit before another global fit.
+
+## Handoff 58: K2 C and withheld W0 B
+
+Codex inspected the labelled source crops. K2 remains the directly read north-mouth candidate C (6070,6400) against existing historical aerial candidates, with conservative previous tolerances; its track-centre alternative is derived from the K1–W0 rail line and is excluded. W0 now uses the centre between Nankai tracks, source B (1152,5056), withdrawing (1180,5067) on the eastern track. No change was selected to reduce residuals.
+
+| S063 → target | Model | Training RMS (px) | Withheld W0 error (px) |
+| --- | --- | ---: | ---: |
+| 1928 | Similarity | 29.7 | 99.7 |
+| 1928 | Affine | 9.3 | 102.2 |
+| 1936–42 | Similarity | 27.6 | 96.3 |
+| 1936–42 | Affine | 7.1 | 81.7 |
+
+These supersede the previous W0 results. Aerial→aerial results are unchanged because W0's historical aerial readings did not change. The surviving 1912 misfit remains far larger than the corrected source reading shift. No global map transform or tower coordinate is accepted.

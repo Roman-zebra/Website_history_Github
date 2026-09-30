@@ -1,0 +1,22 @@
+version,photo,source,original_px,feature,x_orig,y_orig,tol_px,alt_readings,notes
+v1,plate46,NDL 962657 R0000048 (1921 建築写真類聚 plate 46),4064x2880,horizon (standing adults' heads),,1840,12,heads 1835-1845,camera eye level assumption 1.3-1.7 m
+v1,plate46,NDL 962657 R0000048,4064x2880,roof-garden floor at north facade (railing base = eave top),1262,1462,8,railing top ~1394; 1921 sign band sits inside railing (A vs plate ratio 0.115/0.113),sourced height 15.15 m
+v1,plate46,NDL 962657 R0000048,4064x2880,near arch intrados crown,1262,1580,5,,
+v1,plate46,NDL 962657 R0000048,4064x2880,near arch feet (intrados becomes vertical) W/E,983|1540,1800,10,,image-left = east
+v1,plate46,NDL 962657 R0000048,4064x2880,far (south) exit bright top edge,1262,1665,15,1661-1692 (vault glare),identity as same-height far crown = assumption
+v1,plate46,NDL 962657 R0000048,4064x2880,far exit width at y~1800,,1800,20,occluded sides possible,width ~320 px
+v1,plate46,NDL 962657 R0000048,4064x2880,lightning rod / flagpole tip,1262,500,6,,
+v1,plate46,NDL 962657 R0000048,4064x2880,top crown (ribbed dome) top,1262,560,6,,
+v1,plate46,NDL 962657 R0000048,4064x2880,observation box underside,1262,800,6,,
+v1,plate46,NDL 962657 R0000048,4064x2880,turret dome crowns E|W,921|1609,1272,6,finial tips ~1250,x from photomatch marks
+v1,plate46,NDL 962657 R0000048,4064x2880,turret outer edges E|W (at ~row 1365),855|1675,1365,8,,edge lean 0.6 deg (+-0.3) converging upward
+v1,viewA,NDL 952032 R0000095 (1914 大阪独案内 right photo),4064x2880,lightning rod tip,2527.5,715,5,,A_full = region (2090,660,890,1650) scale 1
+v1,viewA,NDL 952032 R0000095,4064x2880,top crown top,2527.5,752.5,5,,
+v1,viewA,NDL 952032 R0000095,4064x2880,observation box top edge,2527.5,840,6,,box width at top 350-525 in A_full (x 2440-2615)
+v1,viewA,NDL 952032 R0000095,4064x2880,observation box bottom edge,2527.5,955,6,could be lower gallery rim,
+v1,viewA,NDL 952032 R0000095,4064x2880,roof floor at facade centre (railing base),2493,1605,8,railing top 1567,
+v1,viewA,NDL 952032 R0000095,4064x2880,turret outer edges E|W at roof level,2175|2812,1605,8,,
+v1,viewA,NDL 952032 R0000095,4064x2880,turret dome tops E|W,2235|2773,1427|1453,6,finial tips 1363|1393,
+v1,viewA,NDL 952032 R0000095,4064x2880,arch outer crown (moulding top),2503,1680,6,,
+v1,viewA,NDL 952032 R0000095,4064x2880,arch inner crown,2503,1697,6,,
+v1,viewA,NDL 952032 R0000095,4064x2880,tower leg outer extent at railing top E|W,2350|2627,1540|1543,10,legs hidden below railing,
