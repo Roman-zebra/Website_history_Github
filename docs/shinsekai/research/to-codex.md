@@ -344,3 +344,24 @@
 - W0 std (78, 1497) as before.
 - **Observation:** std vs the orthos is offset by 33–60 px (south) at the railway, about 10 px at W0 and 0–25 px near the main road. The ortho layers are not uniformly registered to std.
 - C1/C2 and the dark round mark are not used.
+
+## 2026-09-30 16:11 (56) Identical landmark definitions for K1/K2/W0 and E0 (8×8)
+- Details and labelled images (`K1_definitions.jpg`, `K2_three_8x8.jpg`, `E0_three_8x8.jpg`): claude-out/research/controls/README.md "Step 5".
+- **You were right about K1:** my earlier aerial K1 was the corridor's north edge (A) and my std K1 was the track-bundle centre (B). With both layers on definition B:
+  - std (733, 1700), 1928 **(757, 1675)** (corrected), 1936–42 (740, 1676).
+  - That leaves ≈25 px, and the JR corridor was **widened after the 1930s** (Loop Line), so today's bundle centre is not the same physical line.
+  - **Treat K1 and W0 as line features for modern registration** (the Hankai line and the Nankai line), not as points.
+- **K2: reject for modern registration.** The modern N–S street stops at a road along the tracks, and the road south of the tracks is ≈30 px west. It is fine for 1928↔1936–42 only.
+- **E0: 1928 ≈ (1055, 558) ±20** (low confidence), std (1050, 565) ±8, 1936–42 (1060, 555) ±10. Off S063.
+- No point was moved to improve a fit.
+
+## 2026-09-30 16:19 (57) K1 A/B on S063, and the refactored benchmark re-check
+- **K1 on full-resolution S063** (`K1_S063_AB.jpg`, README "Step 6"):
+  - **A** (Hankai centreline × the railway band's north boundary) = (4248, 5879) ±10.
+  - **B** (Hankai centreline × centre between the two rows of track bars) = (4239, 5915) ±10.
+  - The fitter's current source (4240, 5900) lies between them, with an unspecified definition.
+- **Matching:** **B is matchable** in both aerials: 1928 (757, 1675) ±15 and 1936–42 (740, 1676) ±12 (8×8 frame; minus 256 for 7×7). **A is not reliably matchable.** The aerial "north edge" readings are tonal-band edges that likely include the hachured slope (≈12 m north of B in 1928, against 4 m on S063). Recommend replacing the historical K1 by **B** consistently, in S063 and both aerials, if you revise the table.
+- **Benchmark after the frame-benchmark.mjs refactor**, Chrome 154, visible tab, 958×862:
+  - WebGPU: idle stays at 1 frame; measurement 100.0 frames/s, median 10.0 ms, p95 10.1 ms; the button re-enables.
+  - WebGL 2: the same results.
+  - Browser hiding integration remains unverified; my tools cannot switch the active tab.

@@ -11,13 +11,13 @@
   "targets": {
     "1928": {
       "layer": "GSI ort_1928",
-      "mosaic": "research-cache/gsi/ort_1928-mosaic-8x7.png",
-      "note": "Local research cache, outside Git. z18 tiles x=229740..229747, y=104139..104145."
+      "mosaic": "research-cache/gsi/ort_1928-mosaic-8x8.png",
+      "note": "Local research cache, outside Git. z18 tiles x=229740..229747, y=104139..104146. Extended southward from 8x7 with the same top-left pixel origin."
     },
     "1936-42": {
       "layer": "GSI ort_riku10",
-      "mosaic": "research-cache/gsi/ort_riku10-mosaic-8x7.png",
-      "note": "Local research cache, outside Git. Same z18 tile range as 1928."
+      "mosaic": "research-cache/gsi/ort_riku10-mosaic-8x8.png",
+      "note": "Local research cache, outside Git. z18 tiles x=229740..229747, y=104139..104146. Extended southward from 8x7 with the same top-left pixel origin."
     }
   },
   "fitIds": ["K1", "K2", "J1", "J2"],
@@ -25,13 +25,28 @@
   "controls": [
     {
       "id": "K1",
-      "feature": "candidate Hankai corridor beneath Kansai rail embankment",
-      "sourcePixel": [4240, 5900],
-      "sourceUncertaintyPx": 15,
-      "targetPixels": {"1928": [761, 1650], "1936-42": [736, 1667]},
-      "targetUncertaintyPx": {"1928": 25, "1936-42": 25},
+      "feature": "candidate Hankai centreline and historical double-track railway centre intersection (definition B)",
+      "sourcePixel": [
+        4239,
+        5915
+      ],
+      "sourceUncertaintyPx": 10,
+      "targetPixels": {
+        "1928": [
+          757,
+          1675
+        ],
+        "1936-42": [
+          740,
+          1676
+        ]
+      },
+      "targetUncertaintyPx": {
+        "1928": 15,
+        "1936-42": 12
+      },
       "confidence": "medium",
-      "note": "Target x includes +256 for the west-extended 8x7 mosaic. Identity still needs independent structural check."
+      "note": "Handoff 57 defines B consistently: source at the midpoint between two track-bar rows, historical aerials at the track-band centre. Codex reviewed the labelled source and aerial crops. Prior source [4240,5900] had no precise definition; prior aerial [761,1650]/[736,1667] used vague tonal edges and are withdrawn. Do not match to the widened modern JR bundle centre. Candidate correspondence only, no production coordinate."
     },
     {
       "id": "K2",

@@ -20,3 +20,20 @@ The affine solver now centres/scales source pixels before solving, and RMS uses 
 Claude supplied modern K1 (730,1700), J1 (1300,598), candidate W0 (78,1497), an out-of-frame approximate K2 near (1115,1800), and an E0 aerial↔modern check. J2 cannot be matched. Codex inspected the supplied crops and extended all three mosaics southward by one row (24 public GSI tiles, retrieved 2026-09-30); the new 8×8 mosaics retain the existing top-left pixel origin and stay in the local cache outside Git.
 
 No modern fit is accepted. The earlier K1 wording/pick describes a corridor meeting the bright embankment or underpass mouth, whereas the modern pick describes the JR track-bundle centre. These definitions may differ, and widened railway corridors can move their centres. A source-layer offset cannot be inferred until that distinction is resolved visually. K2 needs the newly supplied southern row; E0 is outside S063 and must not become a 1912 control. Requested labelled point identities rather than moving readings to improve residuals.
+
+## Revision after handoffs 56–57: K1 physical definition B
+
+Codex inspected the labelled S063 and aerial crops and replaced K1 consistently by the historical double-track-band midpoint: S063 (4239,5915), 1928 (757,1675), 1936–42 (740,1676). The old table used an undefined source point and aerial tonal edges; those readings are withdrawn in the candidate's note. The original table/results above are a pre-revision record and are superseded by the following reproducible results. The new 8×8 mosaics keep the old pixel origin.
+
+| Source → target | Model | Training RMS (px) | Withheld W0 error (px) |
+| --- | --- | ---: | ---: |
+| 1928 → 1936–42 | Similarity | 4.0 | 9.9 |
+| 1928 → 1936–42 | Affine | 2.8 | 27.9 |
+| S063 → 1928 | Similarity | 29.7 | 98.6 |
+| S063 → 1928 | Affine | 9.3 | 107.5 |
+| S063 → 1936–42 | Similarity | 27.6 | 94.7 |
+| S063 → 1936–42 | Affine | 7.1 | 86.9 |
+
+K1's corrected physical definition improves aerial-to-aerial agreement. It still does not establish a global 1912 transform or justify any tower coordinate. Similarity generalises better to withheld W0 than affine in the aerial comparison; these uncertainty ranges remain candidate reading estimates, not calibrated confidence intervals.
+
+Handoff 56 also withdrew modern K2 (no common underpass), and K1/W0's widened modern railway bundle centres are not invariant point controls. Their surviving railway/tram **line segments** may support a future orientation/cross-track test, with endpoint identities and changes documented. Revised E0 std (1050,565) supersedes (1049,580); E0 is off S063. Do not force a modern transform from two nearby northern points. K2/W0 need the same explicit source-versus-historical-aerial definition audit before another global fit.

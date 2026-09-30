@@ -115,3 +115,34 @@ Evidence crops (prefix `std8x7_`; origins are in the 8×7 frame; zoom and grid a
   - Near the main road (J1′, E0), std sits about 0–25 px south or east.
   - So the aerial orthos are not uniformly registered to std. Their offset varies across roughly 1 km, which may explain part of the residual pattern seen with S063.
 - Not used, per Codex: C1/C2 and the dark round mark.
+
+## Step 5 (2026-09-30 16:11, English): identical landmark definitions (8×8 mosaics; origin unchanged)
+Images:
+- `K1_definitions.jpg`: std | 1928 | 1936–42, origin (680,1600), ×3. Cyan A = north edge of the railway corridor at the Hankai; blue B = Hankai centreline × track-bundle centre.
+- `K2_three_8x8.jpg`: std / 1928 / 1936–42 stacked, origin (1040,1690), ×3, grid 10 px.
+- `E0_three_8x8.jpg`: std | 1928 | 1936–42, origin (990,500), ×3, grid 10 px.
+
+| Point | Definition | std | 1928 | 1936–42 | Notes |
+|---|---|---|---|---|---|
+| K1 | A: north edge of the railway corridor at the Hankai line | (733, 1690) ±6 (northernmost JR line) | (761, 1650) ±15 (earlier reading; the edge is vague) | (736, 1667) ±10 | Earlier aerial readings used A; the earlier std reading used B. That mismatch explains most of the "33–60 px" offset reported in handoff 55. |
+| K1 | B: Hankai centreline × track-bundle centre | (733, 1700) ±6 | **(757, 1675) ±15** (corrected; the earlier B at y 1698 was on a lighter band south of the tracks, probably a road) | (740, 1676) ±12 | Still ≈25 px (≈12 m) between std and the orthos. **The corridor was widened after the 1930s** (Osaka Loop Line and more tracks), so today's bundle centre is not the same physical line. |
+| K2 | Road × railway | **No common point**: the modern N–S street ends at a road along the north side of the tracks, and the road south of the tracks is offset ≈30 px west. No straight underpass is drawn. | Road meets embankment band ≈ (1116, 1735) | ≈ (1111, 1737) | **Reject K2 for modern registration.** Keep it only for 1928↔1936–42, where the road along the depot's east edge meets the embankment north edge in both. |
+| W0 | Nankai centreline × Kansai-line centre | (78, 1497) ±8 (centre of today's two Nankai pairs) | (70, 1505) ±20 | (57, 1507) ±12 | Same caveat as K1: both corridors were widened. The agreement (≈10–20 px) may be partly coincidental. |
+| E0 | Centre of the Ebisucho junction (Sakaisuji × main road) | (1050, 565) ±8 | ≈ (1055, 558) ±20, low confidence (blurred) | (1060, 555) ±10 | Off S063. For aerial↔std only. |
+- **Conclusion:**
+  - For modern registration, **K1 and W0 are line features, not points**. K1's x (the Hankai line) is consistent at 733–761. Its y depends on a railway corridor that has since changed.
+  - K2 is rejected for modern use.
+  - No point was moved to improve a fit.
+
+## Step 6 (2026-09-30 16:19, English): K1 definitions A and B on full-resolution S063
+Image `K1_S063_AB.jpg`: S063 origin (4050,5720), ×2.
+- **Hankai centreline**: the double line with dots. Dots at (4280,5752), (4265,5815), (4250,5867) north of the embankment and (4222,5967), (4207,6040) south; slope −0.252 px x per px y. The line is hidden under the railway band.
+- **Railway symbol**: a band bounded by two parallel lines with two rows of black bars (double track), with hachured slopes north and south.
+- **A (north crest edge)**: Hankai centreline × the band's northern boundary line = **(4248, 5879) ±10**.
+- **B (track centre)**: Hankai centreline × the line midway between the two bar rows = **(4239, 5915) ±10**.
+- **Current fitter source (4240, 5900)** lies between A and B. Its definition is unspecified, so it should be replaced by one of them explicitly.
+- A and B are only about 37 px (≈4 m) apart on S063. The hachured slopes extend a further ≈60–80 px (6–8 m) each side, so the embankment's outer toe is a third, different line.
+
+**Can each be matched in both historical aerials? (8×8 frame; subtract 256 in x for the old 7×7 frame)**
+- **B: yes, approximately.** The track band's centre is readable in both: 1928 **(757, 1675) ±15**, 1936–42 **(740, 1676) ±12** (`K1_definitions.jpg`). Recommend B for the common historical table: S063 (4239, 5915) with these readings.
+- **A: not reliably.** The earlier aerial "north edge" readings, 1928 (761, 1650) and 1936–42 (736, 1667), are edges of the tonal band. That band may be the crest, the north toe of the hachured slope, or a shadow. In 1928 it sits ≈25 px (≈12 m) north of B, much more than the 4 m A–B gap on S063, so it probably includes the slope. Do not pair S063 A with those readings.
