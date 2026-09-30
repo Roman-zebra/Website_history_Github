@@ -7,22 +7,22 @@ const latitude = 34.6525393;
 const longitude = 135.5063098; // modern tower control point, NOT the 1912 tower
 const cache = path.resolve(__dirname, '../../research-cache/gsi');
 const layers = [
-  ['std', 18, 'current GSI street map: persistent road-control cross-check only'],
-  ['ort_1928', 18, '1928 aerial: first tower still present, Luna Park closed'],
-  ['ort_riku10', 18, '1936–1942 aerial: first tower still present, Luna Park closed'],
-  ['ort_USA10', 17, '1945–1950 aerial: after first tower removal']
+  ['std', 18, 2, 'current GSI street map: persistent road-control cross-check only'],
+  ['ort_1928', 18, 2, '1928 aerial: first tower still present, Luna Park closed'],
+  ['ort_riku10', 18, 2, '1936–1942 aerial: first tower still present, Luna Park closed'],
+  ['ort_USA10', 17, 1, '1945–1950 aerial: after first tower removal']
 ];
 
 async function main() {
   await fs.mkdir(cache, { recursive: true });
-  for (const [layer, zoom, purpose] of layers) {
+  for (const [layer, zoom, radius, purpose] of layers) {
     const n = 2 ** zoom;
     const centerX = Math.floor((longitude + 180) / 360 * n);
     const centerY = Math.floor((1 - Math.asinh(Math.tan(latitude * Math.PI / 180)) / Math.PI) / 2 * n);
     const dir = path.join(cache, layer);
     await fs.mkdir(dir, { recursive: true });
-    for (let dy = -1; dy <= 1; dy++) {
-      for (let dx = -1; dx <= 1; dx++) {
+    for (let dy = -radius; dy <= radius; dy++) {
+      for (let dx = -radius; dx <= radius; dx++) {
         const x = centerX + dx;
         const y = centerY + dy;
         const file = path.join(dir, `${zoom}-${x}-${y}.png`);
