@@ -3,8 +3,8 @@
 Run with Blender 4.5: blender -b --python build-tower.py
 Axes: X east, Y north, Z up; the camera views south from the north side.
 The approximately 50-shaku roof-garden level is sourced. The 75.76 m
-ground-relative total height is provisional because a 1922 description uses
-250 shaku for sea elevation. Horizontal and other intermediate heights are
+ground-relative total height is provisional because the 1924 height table and
+a 1922 sea-elevation description disagree on the 250-shaku reference. Horizontal and other intermediate heights are
 photo-proportion estimates awaiting calibrated camera matching.
 """
 
@@ -17,7 +17,7 @@ from mathutils import Vector
 
 
 OUT = Path(__file__).resolve().parent
-HEIGHT = 75.76  # Provisional: 250 shaku may describe sea elevation, not tower height.
+HEIGHT = 75.76  # Provisional: 1924 height table conflicts with 1922 sea-elevation text.
 ROOF_GARDEN_Z = 15.15  # about 50 shaku; lower than the turret crowns
 ARCH_RADIUS = 8.5
 ARCH_SPRING = 5.0
