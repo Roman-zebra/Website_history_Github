@@ -1,0 +1,77 @@
+{
+  "status": "research-candidates-only",
+  "note": "Image pixels only. No control is accepted as a 1912 geographic coordinate. The dashed circle is excluded.",
+  "source": {
+    "id": "S063",
+    "path": "assets-src/shinsekai/references/oml/maps/s0004038.jpg",
+    "width": 7288,
+    "height": 9941,
+    "origin": "top-left"
+  },
+  "targets": {
+    "1928": {
+      "layer": "GSI ort_1928",
+      "mosaic": "research-cache/gsi/ort_1928-mosaic-8x7.png",
+      "note": "Local research cache, outside Git. z18 tiles x=229740..229747, y=104139..104145."
+    },
+    "1936-42": {
+      "layer": "GSI ort_riku10",
+      "mosaic": "research-cache/gsi/ort_riku10-mosaic-8x7.png",
+      "note": "Local research cache, outside Git. Same z18 tile range as 1928."
+    }
+  },
+  "fitIds": ["K1", "K2", "J1", "J2"],
+  "holdoutIds": ["W0"],
+  "controls": [
+    {
+      "id": "K1",
+      "feature": "candidate Hankai corridor beneath Kansai rail embankment",
+      "sourcePixel": [4240, 5900],
+      "sourceUncertaintyPx": 15,
+      "targetPixels": {"1928": [761, 1650], "1936-42": [736, 1667]},
+      "targetUncertaintyPx": {"1928": 25, "1936-42": 25},
+      "confidence": "medium",
+      "note": "Target x includes +256 for the west-extended 8x7 mosaic. Identity still needs independent structural check."
+    },
+    {
+      "id": "K2",
+      "feature": "candidate eastern road beneath Kansai rail embankment",
+      "sourcePixel": [6070, 6400],
+      "sourceUncertaintyPx": 15,
+      "targetPixels": {"1928": [1116, 1735], "1936-42": [1111, 1737]},
+      "targetUncertaintyPx": {"1928": 30, "1936-42": 15},
+      "confidence": "medium",
+      "note": "Could be confused with another nearby north-south road; no planned depot was used as a control."
+    },
+    {
+      "id": "J1",
+      "feature": "candidate northeast tram road and north-south road junction",
+      "sourcePixel": [6461, 907],
+      "sourceUncertaintyPx": 20,
+      "targetPixels": {"1928": [1546, 665], "1936-42": [1499, 638]},
+      "targetUncertaintyPx": {"1928": 25, "1936-42": 15},
+      "confidence": "medium",
+      "note": "1912 operation of the depicted tram line remains unverified; road position may still be useful."
+    },
+    {
+      "id": "J2",
+      "feature": "candidate road junction south of J1",
+      "sourcePixel": [6425, 1475],
+      "sourceUncertaintyPx": 20,
+      "targetPixels": {"1928": [1531, 785], "1936-42": [1484, 752]},
+      "targetUncertaintyPx": {"1928": 35, "1936-42": 20},
+      "confidence": "low",
+      "note": "Nearby J1 on the same road; adds limited independent spatial coverage."
+    },
+    {
+      "id": "W0",
+      "feature": "candidate Nankai and Kansai rail grade separation",
+      "sourcePixel": [1180, 5067],
+      "sourceUncertaintyPx": 15,
+      "targetPixels": {"1928": [70, 1505], "1936-42": [57, 1507]},
+      "targetUncertaintyPx": {"1928": 20, "1936-42": 12},
+      "confidence": "medium",
+      "note": "Held out of the four-point fits. Check whether the historical centreline moved before treating it as a permanent control."
+    }
+  ]
+}
