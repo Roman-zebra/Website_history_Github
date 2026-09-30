@@ -1,6 +1,6 @@
 # Shinsekai task list
 
-Baseline: `PLAN.md` (v3.3) and the later user decisions recorded in `research/to-codex.md`. The free area is the tower exterior and surrounding street/plaza only, and Stripe is the payment provider. Claude is working locally in the existing "JTA通天閣パーク作成" group; Codex owns repository writes. Free local/GitHub/Cloudflare work and routine decisions are authorized without repeated requests.
+Baseline: `PLAN.md` (v3.5) and the later user decisions recorded in `research/to-codex.md`. The free area is the tower exterior and surrounding street/plaza only, and Stripe is the payment provider. Claude is working locally in the existing "JTA通天閣パーク作成" group; Codex alone writes `main`, while Claude may propose reviewed branches from its separate checkout. Free local/GitHub/Cloudflare work and routine decisions are authorized without repeated requests.
 
 The final site is published from GitHub through the repository's existing Cloudflare Workers build/deploy route. Local files are for authoring and verification only.
 
