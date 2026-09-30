@@ -6,7 +6,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 // Keep this origin separate from the main site's development service worker.
 const port = Number(process.env.JTA_STUDY_PORT || 18765);
-const types = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.css': 'text/css' };
+const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.css': 'text/css' };
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('JTA_STUDY_PORT must be 1–65535.');
 const allowed = pathname => pathname.startsWith('/assets-src/shinsekai/browser-study/') ||
   pathname.startsWith('/vendor/three-r186/') || pathname === '/assets-src/shinsekai/tower-study/tower-study.glb';

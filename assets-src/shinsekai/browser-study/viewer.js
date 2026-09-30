@@ -1,6 +1,7 @@
 import * as THREE from 'three/webgpu';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { createFrameBenchmark } from './frame-benchmark.mjs';
 
 const canvas = document.querySelector('#view');
 const status = document.querySelector('#status');
@@ -14,7 +15,16 @@ let ready = false;
 let disposed = false;
 let frame = null;
 let renderedFrames = 0;
-let benchmark = null;
+const benchmark = createFrameBenchmark({
+  canStart: () => ready && !disposed && !document.hidden,
+  onTimeout: cancelRender,
+  onChange: ({ running, message, result }) => {
+    benchmarkButton.disabled = running || !ready;
+    metrics.textContent = result
+      ? `${result.framesPerSecond.toFixed(1)} frames/s · interval median ${result.medianMs.toFixed(1)} ms, p95 ${result.p95Ms.toFixed(1)} ms · ${canvas.width}×${canvas.height}. Static model only; not GPU execution time.`
+      : message;
+  }
+});
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 600);
 const forceWebGL = new URLSearchParams(location.search).has('webgl');
@@ -43,7 +53,7 @@ const modes = {
 function setMode(mode) {
   const value = modes[mode];
   if (!value) return;
-  if (benchmark) finishBenchmark('Measurement cancelled: lighting changed. Run again with a fixed view.');
+  benchmark.cancel('Measurement cancelled: lighting changed. Run again with a fixed view.');
   scene.background = new THREE.Color(value.background);
   scene.fog = new THREE.FogExp2(value.fog, 0.0025);
   sky.intensity = value.ambient;
@@ -68,7 +78,7 @@ function resize() {
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
   if (!width || !height) return;
-  if (benchmark) finishBenchmark('Measurement cancelled: viewport changed. Run again with a fixed size.');
+  benchmark.cancel('Measurement cancelled: viewport changed. Run again with a fixed size.');
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height, false);
@@ -87,12 +97,6 @@ function cancelRender() {
   if (frame !== null) cancelAnimationFrame(frame);
   frame = null;
 }
-function finishBenchmark(message) {
-  if (benchmark) clearTimeout(benchmark.timeout);
-  benchmark = null;
-  benchmarkButton.disabled = !ready;
-  metrics.textContent = message;
-}
 function draw(time) {
   frame = null;
   if (!ready || disposed || document.hidden) return;
@@ -102,58 +106,37 @@ function draw(time) {
     renderer.render(scene, camera);
     renderedFrames++;
     canvas.dataset.renderedFrames = renderedFrames;
-    if (benchmark) {
-      // Warm up for one second; measure five seconds after shader setup.
-      if (time >= benchmark.measureFrom) {
-        if (benchmark.last !== null) benchmark.intervals.push(time - benchmark.last);
-        benchmark.last = time;
-      }
-      if (time >= benchmark.measureFrom + 5000 && benchmark.intervals.length) {
-        const samples = benchmark.intervals.sort((a, b) => a - b);
-        const average = samples.reduce((sum, value) => sum + value, 0) / samples.length;
-        const percentile = p => samples[Math.min(samples.length - 1, Math.floor(samples.length * p))];
-        finishBenchmark(`${(1000 / average).toFixed(1)} frames/s · interval median ${percentile(0.5).toFixed(1)} ms, p95 ${percentile(0.95).toFixed(1)} ms · ${canvas.width}×${canvas.height}. Static model only; not GPU execution time.`);
-      }
+    if (benchmark.active) {
+      benchmark.sample(time);
     } else {
       metrics.textContent = `${renderedFrames} frames rendered · last CPU submission ${(performance.now() - started).toFixed(1)} ms. Idle between changes.`;
     }
-    if (changed || benchmark) requestRender();
+    if (changed || benchmark.active) requestRender();
   } catch (error) {
     ready = false;
-    finishBenchmark('Drawing stopped. Reload the study to retry.');
+    benchmark.cancel('Drawing stopped. Reload the study to retry.');
+    benchmarkButton.disabled = true;
+    metrics.textContent = 'Drawing stopped. Reload the study to retry.';
     status.textContent = `Renderer study failed: ${error.message}`;
     console.error(error);
   }
 }
 controls.addEventListener('change', requestRender);
 controls.addEventListener('start', () => {
-  if (benchmark) finishBenchmark('Measurement cancelled: camera interaction. Run again with a fixed view.');
+  benchmark.cancel('Measurement cancelled: camera interaction. Run again with a fixed view.');
 });
 benchmarkButton.addEventListener('click', () => {
-  if (!ready || disposed || document.hidden) {
-    metrics.textContent = 'Measurement needs a ready renderer and a visible tab.';
-    return;
-  }
-  const session = { measureFrom: performance.now() + 1000, last: null, intervals: [], timeout: null };
-  benchmark = session;
-  session.timeout = setTimeout(() => {
-    if (benchmark !== session) return;
-    finishBenchmark('Measurement cancelled: frames did not complete within 10 seconds. Retry in a visible tab.');
-    cancelRender();
-  }, 10000);
-  benchmarkButton.disabled = true;
-  metrics.textContent = 'Measuring a static model for 5 seconds after warm-up… Keep this tab visible.';
-  requestRender();
+  if (benchmark.start()) requestRender();
 });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     cancelRender();
-    if (benchmark) finishBenchmark('Measurement cancelled: tab became hidden. Run again with this tab visible.');
+    benchmark.cancel('Measurement cancelled: tab became hidden. Run again with this tab visible.');
   } else requestRender();
 });
 window.addEventListener('pagehide', event => {
   cancelRender();
-  if (benchmark) finishBenchmark('Measurement cancelled: page left.');
+  benchmark.cancel('Measurement cancelled: page left.');
   if (event.persisted) return; // Keep resources for back/forward cache restoration.
   disposed = true;
   resizeObserver.disconnect();
