@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shinsekai tower browser study</title>
+<title>Shinsekai scene look development</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
   :root { color-scheme: dark; font: 15px/1.45 system-ui, sans-serif; background: #171d25; color: #f4f0e8; }
@@ -26,23 +26,22 @@
 </style>
 <canvas id="view" aria-label="Interactive tower model"></canvas>
 <section class="panel" aria-label="Study controls">
-  <h1>Shinsekai tower study</h1>
+  <h1>Scene look development</h1>
   <details id="study-details" open>
   <summary>Controls and study limits</summary>
   <p class="caution">Unpublished geometry test. Only the roof level (50 shaku) is sourced; total height, colours and other dimensions remain provisional.</p>
-  <p>Orbit with drag, zoom with wheel or pinch. This tests the browser renderer and the editable study GLB; it is not a 1912 scene.</p>
+  <p>Orbit with drag, zoom with wheel or pinch. Separate scene look study under Claude art direction. July dusk is a look target, not an ephemeris calculation. No surveyed surrounding district.</p>
   <div class="modes" role="group" aria-label="Lighting study">
     <button type="button" data-mode="day" aria-pressed="true">Day</button>
     <button type="button" data-mode="dusk" aria-pressed="false">Dusk</button>
     <button type="button" data-mode="night" aria-pressed="false">Night</button>
   </div>
   <p id="status" role="status">Loading renderer…</p>
-  <label>Fixed review view <select id="lookView" disabled><option value="north-overview">North overview</option><option value="south-oblique">South oblique</option><option value="roof-transfer">Roof transfer</option><option value="shaft-detail">Shaft detail</option><option value="upper-gallery">Upper gallery</option></select></label>
+  <label>Fixed review view <select id="lookView" disabled><option value="street-hero">Street hero · dusk</option><option value="roof-garden">Roof garden · dusk</option><option value="aerial-dusk">Aerial tower · dusk</option><option value="night-street">Night street</option><option value="north-overview">North overview · dusk</option><option value="south-oblique">South oblique · dusk</option></select></label>
   <button type="button" id="capture" disabled>Save review PNG</button>
-  <p id="captureStatus">1280×720 fixed view; current lighting. Baseline v2 geometry, provisional appearance.</p>
+      <p id="captureStatus">1280×720 fixed view; current lighting. V4 geometry with CC0 PBR; smoke, sun, grade, wear, bulb pattern and wire placement assumed. TRAA, baked AO, real bulb lights, rain/reflections and surrounding site geometry pending.</p>
   <button type="button" id="benchmark" disabled>Measure 5 seconds</button>
   <p id="metrics">Frames are drawn when the view changes.</p>
-  <p><a href="look.html">Scene look development</a></p>
   </details>
 </section>
 <div class="hint">Research preview · local only</div>
@@ -50,10 +49,11 @@
 {
   "imports": {
     "three": "/vendor/three-r186/build/three.webgpu.js",
-    "three/webgpu": "/vendor/three-r186/build/three.webgpu.js",
+    "three/webgpu": "/vendor/three-r186/build/three.webgpu.js", "three/tsl": "/vendor/three-r186/build/three.tsl.js",
     "three/addons/": "/vendor/three-r186/examples/jsm/"
   }
 }
 </script>
 <script type="module" src="./viewer.js"></script>
 </html>
+
