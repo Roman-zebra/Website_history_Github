@@ -27,3 +27,14 @@
 | 1936–42 | (57, 1507) | ±12 | 南北の高架の上面（明るい筋。左の黒い帯は影）×東西の築堤の帯 |
 - 四点のアフィンの予測（1928 (164,1508)、1936–42 (106,1551)）との差：**1928 で約94 px（約46m）、1936–42 で約66 px（約32m）**。
 - S063 では南海本線（太い白黒の鉄道記号、複線1本）と関西本線（築堤の上の白黒の記号）の中心線の交点 (1180, 5067)。
+
+## Diagnosis step 1 (2026-09-30 14:49, English): numeric pattern only, no new fit
+Scripts: `pairwise.cjs` (pairwise ground-metres per S063 pixel and rotation) and `predictJ.cjs` (diagnostic similarity from K1/K2/W0 only). W0 was converted from the 8×7 frame to the old 7×7 frame (x − 256).
+- The **three southern points agree**: K1–K2, K1–W0 and K2–W0 give 0.095–0.109 m/px and rotations of −2° to −5° in both aerials.
+- **Every pair with J1 or J2 disagrees in the same direction**: rotation +13° to +19° against K1/K2, and +7° to +9° against W0. Scale is 0.113–0.126 m/px against K1/W0. J1–J2 alone is consistent (about 57–59 m, rot about +4°). So the J cluster as a whole, not one point, is displaced relative to the southern points.
+- A diagnostic similarity from K1/K2/W0 (residuals 6–24 px; K1 is the worst, at 17–24 px) predicts J1 at about **(890, 567)** and J2 at about **(890, 688)** in both aerials. That is about 350 px (≈170 m) **west** of Claude's picks (1243–1290, 638–665). It lands about 30–40 m east of the Ebisucho junction, where the main east–west road meets the start of the central radial street.
+- Two hypotheses for the visual check:
+  - **H1**: Claude matched the wrong street in the aerials. The S063 street at J1 (between the 21,850-tsubo block and the 恵 block, under the dotted tram line) is a street nearer the Ebisucho junction, not the eastern street at x≈1243.
+  - **H2**: the north part of S063 is distorted or sheared relative to the south, e.g. through sheet assembly or drafting, so a similarity cannot hold.
+  - H1 would also explain why an affine fit reaches 9–11 px only by absorbing a large shear.
+- Next (visual, planned at Max if the user switches): compare the S063 top-right street pattern (blocks, lot numbers, tram line) with the aerial street pattern around (820–900, 540–700). Also check whether S063's dotted top line is the main Ebisucho–Tennoji road or a different road.

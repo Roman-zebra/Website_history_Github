@@ -251,3 +251,21 @@ Codex の依頼（Coordination after the 12:03 status update）への回答。**
 ### そのほかの高さの書き方（出典の数を数えるため）
 - 『大阪案内』（大阪商品研究会、1941、NDL 1105591 コマ126、p.215、ログイン不要）：「高さ二百五十尺の通天閣」（地面からか海抜かは書いていない。観光案内の文）。
 - まとめ：「高さ250尺」＝1924年の表・1941年の案内、「海抜250尺」＝1922年、「海抜300尺」＝1939年。どれも二次的な書き方で、測った値は見つかっていない。
+
+## 18. P12 dimension-source comparison (English from here; 2026-09-30 14:38)
+Total-height statements found so far, ordered by publication date. None is a measured value with a stated datum, and no 1911–1914 drawing, project record or survey was found.
+| Published | Source (NDL unless noted; login-free) | Wording | Datum stated |
+|---|---|---|---|
+| 1912 (Taisho 1) | 『最近の大阪市 附・地図』増訂再版, 大久保高城, PID 946141 frames 267–268 | 「其中心にある高塔通天閣は**高さ二百五十尺**に達し」; same passage: roof garden 「地上五十尺」, 200 tsubo | "height" (高さ), no datum |
+| 1914 (Taisho 3) | 『大阪独案内』 PID 952032 frame 48 | 「…通天閣と称する…**二百五十尺の高塔**を立て」 | none |
+| 1914 (Taisho 3) | same book, frame 95 (main text, left page) | 「新世界は**三百尺の高さ**を有するエッフエール式通天閣を以て其中心として」 | "height", no datum |
+| 1922 | PID 964429 frame 170 (earlier) | 海抜二百五十尺 | sea level |
+| 1924 | 『メートル式度量衡便覧』 PID 917132 frame 25 (earlier) | 75米76糎（250尺） as "height" | none |
+| 1939 | 『光輝近畿大観』 PID 1030146 frame 355 | 海抜三百尺 | sea level |
+| 1940 | 『大林芳五郎伝』 (Shirasugi Yoshiaki), Obayashi official chronicle web page | 「高さ**二百尺**の鉄骨高塔」, and the facing raised point (White Tower mound) 「二百尺を隔てて」 with 「一條の鐵索」 | none |
+| 1941 | 『大阪案内』 PID 1105591 frame 126 | 高さ二百五十尺 | none |
+- The 1914 guide alone gives both 250 and 300 shaku, so period guidebooks were not internally consistent about the tower's height. The 300-shaku figure appears in 1914 already, long before the 1939 "sea level 300" wording.
+- The 1940 contractor account is a retrospective. Its companion numbers look loose: a tower-to-White-Tower span of 200 shaku (about 60.6 m) and a single cable ("一條"), whereas the 1912 description says "二條の鐵索" and later references give about 100 m for the ropeway. So its 200 shaku cannot be read as a design value without a project record.
+- Nothing found separates a planned 200-shaku design from an as-built height. The 1912 statement (250 shaku), made within months of opening, is the earliest height figure. The photo fits remain conditional (plate 46 about 63–68 m with t = 0.5; view A 53–66 m), i.e. between 200 shaku (60.6 m) and 250 shaku (75.8 m), and do not favour one statement.
+- The 1914 guide frame 95 also gives the White Tower as 「高さ百□尺」 on the mound. The OCR reads 百一尺 and the print is unclear; other sources give 150 shaku. Unresolved.
+- Not yet checked: the 1913 developer album text beyond the roof-garden quotation (not online), and 1911–1912 newspapers (not in NDL Digital; would need library access).

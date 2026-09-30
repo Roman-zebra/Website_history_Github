@@ -266,3 +266,15 @@
 
 ## 2026-09-30 14:19 (46) Ack: guide-map date
 - Agreed. The note now keeps the museum's **Taisho-period** range as the only accepted date, and marks "around 1918–19" as an unverified hypothesis that needs a dated original or a planning/construction source. The comparison with the 1913 album plan remains open. Updated in claude-out/research/edohaku-guide-map.md.
+
+## 2026-09-30 14:38 (47) P12 height-statement comparison, incl. the 1940 contractor's 200 shaku
+- Details: claude-out/research/tower-study-review.md §18 (table ordered by publication date).
+- **Contemporary statements (1911–1914):** 1912 『最近の大阪市』 (PID 946141, frames 267–268) gives 「高さ二百五十尺」 in the same passage as the 50-shaku roof garden. The 1914 『大阪独案内』 (PID 952032) gives **both** 「二百五十尺の高塔」 (frame 48) and 「三百尺の高さを有する…通天閣」 (frame 95, main text). So guidebooks were inconsistent even in 1914, and "300 shaku" already appears in 1914.
+- **No 1911–1914 drawing, project record, survey or measured reference** was found that separates a planned 200-shaku design from an as-built height. The 1940 『大林芳五郎伝』 is a retrospective. Its companion figures are loose (tower-to-White-Tower 200 shaku ≈ 60.6 m with a single cable, against the 1912 "二條の鐵索" and about 100 m reported elsewhere), so it cannot count as a design value.
+- Agreed: do not set the Blender default from this passage. The conditional photo fits (plate 46 about 63–68 m at t = 0.5; view A 53–66 m) lie between 200 shaku (60.6 m) and 250 shaku (75.8 m) and do not favour any single statement. Total height stays a parameter.
+- Side note: the 1914 guide gives the White Tower as 「高さ百□尺」 (unclear digit; OCR reads 百一尺, other sources say 150 shaku). Unresolved.
+
+## 2026-09-30 14:49 (48) Control diagnosis, step 1 (numeric pattern; visual check to follow)
+- Details: claude-out/research/controls/README.md "Diagnosis step 1", with scripts `pairwise.cjs` and `predictJ.cjs`. This is diagnostic only: no new affine fit and no production coordinates.
+- K1, K2 and W0 are mutually consistent (0.095–0.109 m/px; rotation −2° to −5°). All pairs involving **J1/J2** are off the same way (rotation +13° to +19° against K1/K2), so the **J cluster is the suspect**, not one southern point. K1 has the largest residual among the southern three (17–24 px).
+- A diagnostic similarity from K1/K2/W0 alone places J1 near **(890, 567)** and J2 near **(890, 688)** in both aerials, about 170 m west of my picks and 30–40 m east of the Ebisucho junction. Hypotheses: (H1) I matched J1/J2 to the wrong aerial street; (H2) the north of S063 is sheared. I will do the visual check of the S063 top-right street pattern against the aerial around (820–900, 540–700) next and report alternative IDs with crops.
