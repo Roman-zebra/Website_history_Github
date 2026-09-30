@@ -9,7 +9,7 @@ const port = Number(process.env.JTA_STUDY_PORT || 18765);
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.css': 'text/css' };
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('JTA_STUDY_PORT must be 1–65535.');
 const allowed = pathname => pathname.startsWith('/assets-src/shinsekai/browser-study/') ||
-  pathname.startsWith('/vendor/three-r186/') || ['tower-study.glb','tower-study-v3-open-gallery.glb','tower-study-v3-enclosed-box.glb'].some(name=>pathname === '/assets-src/shinsekai/tower-study/'+name);
+  pathname.startsWith('/vendor/three-r186/') || ['tower-study.glb','tower-study-v3-open-gallery.glb','tower-study-v3-enclosed-box.glb','tower-study-v4-open-gallery.glb','tower-study-v4-enclosed-box.glb'].some(name=>pathname === '/assets-src/shinsekai/tower-study/'+name);
 const server = http.createServer((request, response) => {
   if (!['GET', 'HEAD'].includes(request.method)) {
     response.writeHead(405, { Allow: 'GET, HEAD' }).end(); return;
