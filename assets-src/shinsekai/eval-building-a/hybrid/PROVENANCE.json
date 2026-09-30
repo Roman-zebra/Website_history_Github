@@ -1,25 +1,25 @@
 {
-  "source": "Opus/Sonnet inputs104/105; original Codex material and runtime108, all interior/dream/numeric detail A:inferred; no source-photo or reference-video pixels",
+  "source": "Frozen Opus/Sonnet104/105 and Claude111 e3dd4e7 upper/dream; original Codex material/runtime and portable exporter repairs. All numeric/interior/dream detail A inferred; no reference-video or photo pixels.",
   "validator": {
     "errors": 0,
     "warnings": 0,
-    "infos": 522
+    "infos": 749
   },
   "files": [
     {
       "file": "build.py",
-      "bytes": 17010,
-      "sha256": "57c5a3b23ad54c0e35e9efae39f7fd734d068f6a40ce28442d6d6990e1f7e14e"
+      "bytes": 19787,
+      "sha256": "eb70d1e57b265af1bf9297e8a2a7ab5415f660f6b495a79a97e65f193a183ae0"
     },
     {
       "file": "building-a.glb",
-      "bytes": 15268084,
-      "sha256": "5683bd7a8a63692b18901e26acd04543082527761ae26582f53d1304beda521d"
+      "bytes": 29606188,
+      "sha256": "de5d4ff2a11c36a9d778227a607221b9233d572407e33bb027f234d0fe48a89a"
     },
     {
       "file": "metrics.json",
-      "bytes": 1519,
-      "sha256": "39a918f925e9a839dd7065e310e0e55f296350b24044d13816815d1fb9269fc2"
+      "bytes": 3324,
+      "sha256": "0e4757702ec0e56f161c2da43fbb8fa2bbbfd471c970af742ca6ac470d25696e"
     },
     {
       "file": "micro_props.py",
@@ -28,8 +28,8 @@
     },
     {
       "file": "README.md",
-      "bytes": 11140,
-      "sha256": "f3d070cf9a2a583156bd933f7d9b303e6164eda7b4deef840077271360194884"
+      "bytes": 15324,
+      "sha256": "74634ab874fbe33450a49369f9886c149b0ea42226feb4d5a6cf35e03f5b9b43"
     },
     {
       "file": "review-cameras.json",
@@ -38,13 +38,13 @@
     },
     {
       "file": "run-record.json",
-      "bytes": 954,
-      "sha256": "ad97a6680fde4ba662333f4829118a6744f7480e64a8a3b1af7c7f41f91af1bb"
+      "bytes": 1142,
+      "sha256": "7e91b8af88f2daca7319d2b1f09f45a89bf3c6fdc75e4b66b4324577da720531"
     },
     {
       "file": "inputs/PROVENANCE.json",
-      "bytes": 1568,
-      "sha256": "70aade8fe6f4757b94c6b178996aa8c161069bed37737895830c231b41e0715d"
+      "bytes": 2788,
+      "sha256": "a2cc9ddee6e04133ad323ed7f6965320f216d6a72f2713652a64e1cfbffc7a66"
     },
     {
       "file": "renders/base-ground-axis.png",
@@ -189,7 +189,7 @@
     {
       "file": "runtime/exterior-lod0.glb",
       "bytes": 3511908,
-      "sha256": "137bf810f13ebd8bc24fb55e45821ac6433add87c67b5be4463d07c2c43e1f71"
+      "sha256": "7c94fee4aea2b336dfd085586d209701044c32b4a3931b41e3048ce25decb97c"
     },
     {
       "file": "runtime/exterior-lod1.glb",
@@ -203,13 +203,13 @@
     },
     {
       "file": "runtime/interior.glb",
-      "bytes": 11508820,
-      "sha256": "562b01811fd5fc3e3dff7ec61bd89239e95f134ad29418f266d8eb1209beecd2"
+      "bytes": 25846956,
+      "sha256": "a5c102f5c499eaca29a6dede27b5bf419c8296e1752ec1c88af281dee43bd935"
     },
     {
       "file": "runtime/manifest.json",
-      "bytes": 1126,
-      "sha256": "cf967cdd5f4ae292cec4efafc380318fa9e63342418d8647ce93fe8237aa9b8c"
+      "bytes": 1330,
+      "sha256": "798485ea8404d310334db61e45e603f2e488b62c17c5dca05568dd8aa5410d2a"
     },
     {
       "file": "inputs/opus/build-building-a.py",
@@ -230,6 +230,70 @@
       "file": "inputs/sonnet/README.md",
       "bytes": 9235,
       "sha256": "e80ec9ca05beff01105c36dd0308d0e283b6b81a94b04b63a35549b80abab39d"
+    },
+    {
+      "file": "upper_portable.py",
+      "bytes": 5097,
+      "sha256": "596e8f8495fe45212cc02016259b1a2251b47193a5a0a116cb53d0902b6c768e"
+    },
+    {
+      "file": "runtime/dream.glb",
+      "bytes": 9585328,
+      "sha256": "960a435a930bba71ff11d5e742703970558a11733793437ccb7aaff085dbcb71"
+    },
+    {
+      "file": "inputs/upper/build-upper-dream.py",
+      "bytes": 166134,
+      "sha256": "794f2f436e7e562d861c2af9c0af5f0fa45efd55c269a2db50402d8a47239959"
+    },
+    {
+      "file": "inputs/upper/MERGE.md",
+      "bytes": 7353,
+      "sha256": "0c3a366487db773704952b9f1e41dac244edf027fc6feb47e8277cb8ca91c55c"
+    },
+    {
+      "file": "inputs/upper/README.md",
+      "bytes": 7618,
+      "sha256": "50d3e188c846d281fabd2c41e77d9c445bb0b5a7b1c2215f27553bc8cfa0588a"
     }
-  ]
+  ],
+  "runtimeValidation": [
+    {
+      "file": "building-a.glb",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 749
+    },
+    {
+      "file": "runtime/exterior-lod0.glb",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 148
+    },
+    {
+      "file": "runtime/exterior-lod1.glb",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 38
+    },
+    {
+      "file": "runtime/exterior-lod2.glb",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 19
+    },
+    {
+      "file": "runtime/interior.glb",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 542
+    },
+    {
+      "file": "runtime/dream.glb",
+      "errors": 0,
+      "warnings": 0,
+      "infos": 63
+    }
+  ],
+  "renderNote": "renders/ remains round6 historical Blender images; current111 actual browser captures are parent look-dev/runtime-003. No stale render is evidence of111 geometry."
 }

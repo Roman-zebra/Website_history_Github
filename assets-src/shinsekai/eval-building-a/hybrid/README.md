@@ -1,5 +1,8 @@
 # Building A hybrid integration — Claude104/105
 
+Current111 checkpoint: the later add-on integration below supersedes the round6
+counts and pending upper-room ownership described in the historical sections.
+
 Opus's sourced envelope and inferred floors/stair, with Sonnet's interior dressing adapted by Codex. The blind comparison was closed by Claude104; no competitor files were read before the Codex v1 submission. Claude's original entries/pilot are not merged wholesale. Frozen source scripts/notes in inputs are reproducible authoring dependencies, checked against the pushed branch1e2e773 with LF normalization per105.
 
 Run Blender4.5 `--python-exit-code 1 --python assets-src/shinsekai/eval-building-a/hybrid/build.py`; `-- --no-render` exports only. Outputs are a source-only GLB and28 Eevee1280x720 review PNGs: axis,1.5m corner, ceiling, window wall and street-through-window for each storey, plus four hero close-ups at0.5–1m, repeated with separate dream staging. Render staging, dream colour/flowers/spheres, camera and sky/fill lights are excluded from GLB. This is not a published experience or a performance measurement.
@@ -39,3 +42,62 @@ Actual later-draw tests exposed r186 destroyed-framebuffer errors when physical 
 The source viewer offers explicit `?precompile` (`?webgl&precompile` for WebGL) to compare queued `compileAsync` before rendering attached cells/LODs. It paints a preparation message and object progress, locks scene controls during preparation, pauses before starting hidden work and defers page-exit disposal until queued compilation finishes. Default remains the original path: preparation made total readiness longer. Canvas datasets separate GLB load/decode, compile history and the first whole-scene CPU submission with an attached interior; these are not GPU timings.
 
 One sequential same-view WebGL1280×720 trial: control load/decode417.8ms and first submission2345.6ms; candidate276.4ms load/decode,8111.8ms interior compilation,883.2ms first submission. Driver cache was not cleared. WebGPU candidate413.1ms load/decode,1733.5ms compile and846.5ms first submission; no matched control, so no comparative speedup claim. Both complete73/73 jobs without new captured errors; prepared WebGL drawers reach1/1 then0/0 and leaving unloads the room. Parent receipt: look-dev/runtime-002/shader-preparation-110.json. First-frame driver work remains substantial, and native page hiding/pending-exit integration needs further observation. No qualified1080p/60fps claim.
+
+## 111 upper-room add-on and separate dream delivery
+
+Three frozen source files from claude/building-a-upper-dream e3dd4e7 are under
+inputs/upper, verified against exact Git blob bytes. Source archive CRLF was
+normalized to upstream LF without changing content. No upstream GLB, video
+comparison frames, make-compare.py or render images are imported. A process-local
+text-render basename prevents concurrent authoring from sharing the original
+temporary PNG. All room/prop/layout/colour values remain A assumptions; electric
+pendant, cylinder phonograph and rubber balloon retain unchecked-era dagger tags.
+
+MERGE removes1,053 whole Sonnet upper faces (1,894 triangulated faces), retains
+the floor/envelope/stair and adds41,586 base triangles. Upper lamp moves to
+Blender(3,2.4,5.50), andon light to(5.15,1.15,3.95). Optional lantern light uses
+the existing browser.003 gain. The4-triangle emissive sun-pool cards are omitted;
+the browser's36-degree directional light and actual window grid provide shadows.
+
+upper_portable.py fixes four roughness factors>1 by multiplying their own
+Non-Color texture copies and clamping the resulting roughness; it does not
+flatten the intended texture variation.1,116 invalid float colour components
+are clamped. Authored triangulation and36 custom-normal meshes are preserved;
+UV1 is packed and tangents are exported. Independent tests found non-orthogonal
+MikkTSpace frames despite standard validator success. Gram-Schmidt fixes994
+base and829 dream frames without changing normals/positions/UVs;12 parallel
+dream frames use a stable fallback direction, not a claim of meaningful UV
+orientation. All six generated GLBs validate0 errors/0 warnings.
+
+Base interior117,770 triangles/25,846,956bytes. Separate dream33,494 triangles/
+9,585,328bytes is fetched only when dream is enabled in a loaded room, retired
+on disable/room exit, and late responses are released. The four flower nodes
+total22,464 triangles; at most one impossible object is visible per specified
+review view. Maximum active interior143,710 triangles stays below150k; loading
+all dream objects simultaneously would exceed that budget. Unspecified hero/floor
+views show flowers only. Production proximity/time staging remains pending.
+The combined base-only study GLB is29,606,188bytes (<40MB local study limit),
+above25MiB asset delivery size and excluded from Workers like all assets-src.
+Runtime parts and hashes are in runtime/manifest.json; dream is a fifth part.
+
+The runtime keeps the existing LUT/bloom/grain/reflection, with new geometry
+independent from the colour toggle's rendering path. Only M_Glass exterior
+glazing gets the clear-window replacement; opal shades and authored glassware
+are preserved. New tests cover actual visible-node budgets, late-load retirement,
+normal/tangent frames, vertex-colour range and UV1. Artistic-round counter stays6:
+this is delivery/validation of Claude's completed arrangement. Flower atlas/
+instances and stronger petal volume, cloth hem thickness/wrinkle detail, and
+qualified1920×1080 performance remain subsequent Codex work.
+
+Actual111 browser checks: WebGPU and WebGL2 both draw/capture base and dream
+upper-axis1280×720, select phonograph then bed independently, and far-camera
+retirement reaches interior/dream empty/LOD2 with drawers disabled. WebGPU also
+selects the ceiling balloon alone. No new captured errors. Parent runtime-003
+contains five verified PNGs and receipt.json (Chrome's same-name suffix files
+were checked by timestamp before copying; WebGL is not the earlier WebGPU file).
+WebGPU upper GLB load/decode850.3ms/first whole-scene CPU2072.1ms; WebGL699ms/
+17190.8ms. These different-backend observations are not like-for-like performance
+comparisons or GPU frame rates. Additional materials make cold readiness a
+remaining problem; optional compileAsync remains opt-in. Visual self-review:
+upper density improved, but lighting stays flat, cloth lacks edge thickness and
+the chrysanthemum petals read as flat stars. No visual acceptance claimed.

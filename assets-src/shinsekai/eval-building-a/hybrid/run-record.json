@@ -1,13 +1,17 @@
 {
   "startedAt": "2026-09-30T15:28:38.665Z",
   "timingNote": "Local build.py file creation boundary, not a planning/authoring duration or API cost estimate",
-  "checkpointAt": "2026-09-30T18:35:35.567Z",
+  "checkpointAt": "2026-09-30T21:03:04.691Z",
   "handoffs": [
     104,
     105,
     106,
     107,
-    108
+    108,
+    109,
+    110,
+    111,
+    112
   ],
   "artisticRoundsTotal": 6,
   "hybridArtisticRounds": 5,
@@ -18,9 +22,10 @@
     "stair cavity",
     "approach ray tests",
     "hero camera correction",
-    "bevel normal/export repair"
+    "bevel normal/export repair",
+    "111 roughness factor baking, colour clamps, custom-normal tangent orthogonalization and UV1"
   ],
   "status": "Round6 material/cavity/curtain/runners; subjective scores remain unchanged pending browser light and Claude-owned dressing",
   "runtimeCheckpointAt": "2026-09-30T17:22:04.832Z",
-  "runtimeStatus": "Round6 light/reflection/grade and drawers/unload verified on both backends;110 queued compilation remains opt-in because total readiness regressed. Claude-owned dressing pending."
+  "runtimeStatus": "111 upper/dream integrated and verified both backends at1280x720, one impossible object, separate lazy dream and far disposal. Cold WebGL CPU17.2s, lighting/cloth/flower detail remain open. No1080p performance or visual acceptance."
 }

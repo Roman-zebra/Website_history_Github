@@ -7,8 +7,9 @@ test('runtime parts keep all LOD geometry and a separate bounded animated interi
   const part=read(path.join(base,'runtime',entry.file));
   assert.equal(crypto.createHash('sha256').update(part.bytes).digest('hex'),entry.sha256);
   assert.equal(part.bytes.length,entry.bytes);
-  const root=entry.part==='interior'?'Hybrid_InteriorCell':'Hybrid_LOD'+entry.part.at(-1);
-  assert.equal(part.triangles(part.node(root)),original.triangles(original.node(root)));
+  const root=entry.part==='interior'?'Hybrid_InteriorCell':entry.part==='dream'?'UD_Dream':'Hybrid_LOD'+entry.part.at(-1);
+  if(entry.part!=='dream')assert.equal(part.triangles(part.node(root)),original.triangles(original.node(root)));
+  else{assert.equal(original.node('UD_Dream'),-1);assert.equal(part.triangles(part.node(root)),entry.triangles);}
   assert.equal(part.triangles(part.node('BuildingA_Hybrid')),entry.triangles);
   if(entry.part==='interior'){
    assert.ok(part.json.animations.length>0);assert.ok(part.node('Cash drawer slider')>=0);

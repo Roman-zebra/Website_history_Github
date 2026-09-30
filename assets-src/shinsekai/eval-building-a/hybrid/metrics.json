@@ -4,7 +4,7 @@
     "lod1": 1142,
     "lod2": 112
   },
-  "interiorTriangles": 78078,
+  "interiorTriangles": 117770,
   "collisionTriangles": 240,
   "adaptations": [
     "Opus shell/floors/stair retained; rear boards cut around stair opening",
@@ -14,13 +14,72 @@
     "Duplicate mats/stair/kitchen/four-window dressing excluded"
   ],
   "performance": "Blender review only; qualifying1920x1080 browser harness unavailable; no60fps claim",
-  "bytes": 15268084,
+  "upper111": {
+    "removedUpperFaces": 1053,
+    "encoding": {
+      "roughness": [
+        {
+          "material": "UD_ceramic_unglazed",
+          "factorBakedIntoTexture": 1.3636363744735718,
+          "clippedComponents": 38808
+        },
+        {
+          "material": "UD_iron",
+          "factorBakedIntoTexture": 1.0545454025268555,
+          "clippedComponents": 180
+        },
+        {
+          "material": "UD_plank",
+          "factorBakedIntoTexture": 1.0909091234207153,
+          "clippedComponents": 1377
+        },
+        {
+          "material": "UD_wood_raw",
+          "factorBakedIntoTexture": 1.2727272510528564,
+          "clippedComponents": 10125
+        }
+      ],
+      "colours": [
+        {
+          "object": "UD_TobaccoTray",
+          "attribute": "Color",
+          "clampedComponents": 144
+        },
+        {
+          "object": "UD_Hibachi_Kettle",
+          "attribute": "Color",
+          "clampedComponents": 972
+        }
+      ],
+      "customNormalMeshes": 36
+    },
+    "dreamTriangles": 33494,
+    "flowerTriangles": 22464,
+    "maxImpossibleTriangles": 3476,
+    "maxActiveInteriorTriangles": 143710,
+    "combinedTangentRepair": {
+      "orthogonalized": 994,
+      "fallbacks": 0,
+      "maximumDotBefore": 0.1289095995325873
+    },
+    "interiorTangentRepair": {
+      "orthogonalized": 994,
+      "fallbacks": 0,
+      "maximumDotBefore": 0.1289095995325873
+    },
+    "dreamTangentRepair": {
+      "orthogonalized": 829,
+      "fallbacks": 12,
+      "maximumDotBefore": 1.0
+    }
+  },
+  "bytes": 29606188,
   "runtimeParts": [
     {
       "part": "exterior-lod0",
       "file": "exterior-lod0.glb",
       "bytes": 3511908,
-      "sha256": "137bf810f13ebd8bc24fb55e45821ac6433add87c67b5be4463d07c2c43e1f71",
+      "sha256": "7c94fee4aea2b336dfd085586d209701044c32b4a3931b41e3048ce25decb97c",
       "triangles": 19671
     },
     {
@@ -40,10 +99,17 @@
     {
       "part": "interior",
       "file": "interior.glb",
-      "bytes": 11508820,
-      "sha256": "562b01811fd5fc3e3dff7ec61bd89239e95f134ad29418f266d8eb1209beecd2",
-      "triangles": 78078
+      "bytes": 25846956,
+      "sha256": "a5c102f5c499eaca29a6dede27b5bf419c8296e1752ec1c88af281dee43bd935",
+      "triangles": 117770
+    },
+    {
+      "part": "dream",
+      "file": "dream.glb",
+      "bytes": 9585328,
+      "sha256": "960a435a930bba71ff11d5e742703970558a11733793437ccb7aaff085dbcb71",
+      "triangles": 33494
     }
   ],
-  "buildSeconds": 194.99
+  "buildSeconds": 41.77
 }

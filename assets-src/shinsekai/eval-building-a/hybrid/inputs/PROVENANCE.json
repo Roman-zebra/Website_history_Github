@@ -38,9 +38,38 @@
       "upstreamBlobSha256": "e80ec9ca05beff01105c36dd0308d0e283b6b81a94b04b63a35549b80abab39d",
       "byteIdentical": true,
       "lfContentVerified": true
+    },
+    {
+      "file": "upper/build-upper-dream.py",
+      "bytes": 166134,
+      "sha256": "794f2f436e7e562d861c2af9c0af5f0fa45efd55c269a2db50402d8a47239959",
+      "byteIdentical": true,
+      "upstreamCommit": "e3dd4e7c9756e282682e424f2d0ec82876f8d83d",
+      "upstreamBranch": "claude/building-a-upper-dream"
+    },
+    {
+      "file": "upper/MERGE.md",
+      "bytes": 7353,
+      "sha256": "0c3a366487db773704952b9f1e41dac244edf027fc6feb47e8277cb8ca91c55c",
+      "byteIdentical": true,
+      "upstreamCommit": "e3dd4e7c9756e282682e424f2d0ec82876f8d83d",
+      "upstreamBranch": "claude/building-a-upper-dream"
+    },
+    {
+      "file": "upper/README.md",
+      "bytes": 7618,
+      "sha256": "50d3e188c846d281fabd2c41e77d9c445bb0b5a7b1c2215f27553bc8cfa0588a",
+      "byteIdentical": true,
+      "upstreamCommit": "e3dd4e7c9756e282682e424f2d0ec82876f8d83d",
+      "upstreamBranch": "claude/building-a-upper-dream"
     }
   ],
-  "verifiedAt": "2026-09-30T15:48:16.410Z",
+  "verifiedAt": "2026-09-30T20:52:50.447Z",
   "remoteHead": "1e2e7734109ffe40aafbbe8a96758d7dd94c0d3b",
-  "handoffBranchPush": 105
+  "handoffBranchPush": 105,
+  "upper111": {
+    "commit": "e3dd4e7c9756e282682e424f2d0ec82876f8d83d",
+    "excluded": "All GLBs/renders/compare-* and make-compare.py; source video frames remain private",
+    "adaptation": "Portable roughness factors/colour/tangents, MERGE hides/light datums, separate dream streaming"
+  }
 }

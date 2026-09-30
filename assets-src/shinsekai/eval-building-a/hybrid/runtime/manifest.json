@@ -13,7 +13,7 @@
       "part": "exterior-lod0",
       "file": "exterior-lod0.glb",
       "bytes": 3511908,
-      "sha256": "137bf810f13ebd8bc24fb55e45821ac6433add87c67b5be4463d07c2c43e1f71",
+      "sha256": "7c94fee4aea2b336dfd085586d209701044c32b4a3931b41e3048ce25decb97c",
       "triangles": 19671
     },
     {
@@ -33,9 +33,16 @@
     {
       "part": "interior",
       "file": "interior.glb",
-      "bytes": 11508820,
-      "sha256": "562b01811fd5fc3e3dff7ec61bd89239e95f134ad29418f266d8eb1209beecd2",
-      "triangles": 78078
+      "bytes": 25846956,
+      "sha256": "a5c102f5c499eaca29a6dede27b5bf419c8296e1752ec1c88af281dee43bd935",
+      "triangles": 117770
+    },
+    {
+      "part": "dream",
+      "file": "dream.glb",
+      "bytes": 9585328,
+      "sha256": "960a435a930bba71ff11d5e742703970558a11733793437ccb7aaff085dbcb71",
+      "triangles": 33494
     }
   ]
 }

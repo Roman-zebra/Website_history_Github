@@ -3,7 +3,7 @@ Blender4.5 --python build.py -- [--no-render] [--review-only]
 Frozen author inputs are loaded without calling either author's main().
 All coordinates/colours/interiors remain assumptions; review staging is not exported.
 """
-import ast, hashlib, json, math, sys, time, types
+import ast, hashlib, json, math, sys, time, types, os
 from pathlib import Path
 import bpy, bmesh
 from mathutils import Vector
@@ -15,6 +15,17 @@ START=time.time()
 ARGS=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
 sys.path.insert(0,str(OUT))
 from micro_props import build as build_micro_props
+from upper_portable import repair as repair_upper, repair_export_tangents
+
+upper_path=OUT/'inputs'/'upper'/'build-upper-dream.py'
+upper=types.ModuleType('building_a_upper');upper.__file__=str(upper_path);upper.UD_NO_MAIN=True
+upper_tree=ast.parse(upper_path.read_text(encoding='utf8'),filename=str(upper_path))
+# The author text rasterizer has a shared temp basename. Give this process its
+# own basename so concurrent Claude rendering cannot overwrite/remove it.
+temp_names=[n for n in ast.walk(upper_tree) if isinstance(n,ast.Constant) and n.value=='ud_txt_tmp.png']
+assert len(temp_names)==1
+temp_names[0].value=f'ud_codex111_{os.getpid()}.png'
+exec(compile(upper_tree,str(upper_path),'exec'),upper.__dict__)
 
 def author(who):
     path=OUT/'inputs'/who/'build-building-a.py'
@@ -92,6 +103,11 @@ for kind,make in [('shop',sonnet.build_shop_props),('raised',sonnet.build_room_g
     if kind=='raised':sonnet.andon=lambda *a,**kw:None
     p=make()
     sonnet.andon=old_andon
+    if kind=='upper':
+        # MERGE111: remove whole faces inside the six replacement boxes only.
+        drop=[f for f in p.bm.faces if any(all(all(lo[k]-.004<=v.co[k]<=hi[k]+.004 for k in range(3)) for v in f.verts) for _,lo,hi in upper.HIDE_UPPER)]
+        upper_removed=len(drop)
+        bmesh.ops.delete(p.bm,geom=drop,context='FACES')
     if kind=='raised':
         # Opus has a raised rear room rather than Sonnet's rear doma kitchen.
         # Remove that incompatible kitchen/storage (including spanning faces),
@@ -119,9 +135,23 @@ geometry.extend(micro['meshes'])
 for o in geometry:
     if o.parent!=collision and o not in dress:opus.add_uv2(o)
 for name,pos,col,power,radius in lamps:
+    if name=='upper_room':pos=(3,2.4,5.50)
+    if name=='andon':pos=(5.15,1.15,3.95)
     # These are explicit local study lighting assumptions, not source evidence.
     data=bpy.data.lights.new('HybridLamp_'+name,'POINT');data.energy=power;data.color=col;data.shadow_soft_size=radius
     obj=bpy.data.objects.new(data.name,data);scene.collection.objects.link(obj);obj.location=pos;obj.parent=cell
+
+upper.build_materials();upper.build_all()
+addon=upper.get_root();addon.name='UpperDressing_Addon';addon.parent=cell
+dream_group=upper.get_group('UD_Dream');dream_group.parent=root
+# Emissive sun cards assume the author's old18-degree sun. Real window-grid
+# shadows in this study use36 degrees and must come from the runtime light.
+sun_cards=bpy.data.objects.get('UD_SunPool_Decals')
+if sun_cards:bpy.data.objects.remove(sun_cards,do_unlink=True)
+upper_objects=[o for o in scene.objects if o.name.startswith('UD_') or o.name.startswith('UDLamp_')]
+upper.uv1_pack([o for o in upper_objects if o.type=='MESH'])
+upper_repair=repair_upper(upper_objects)
+geometry.extend(o for o in upper_objects if o.type=='MESH')
 
 def count(parent):
     total=0
@@ -133,6 +163,10 @@ def count(parent):
     return total
 metrics={'triangles':{'lod'+str(i):count(lods[i]) for i in range(3)},'interiorTriangles':count(cell),'collisionTriangles':count(collision),'adaptations':['Opus shell/floors/stair retained; rear boards cut around stair opening','Sonnet shop lowered0.50m; floating coat/clock post restored','Sonnet rear props fit into6.02..8.85m raised room','Sonnet upper built at3.455m','Duplicate mats/stair/kitchen/four-window dressing excluded'],'performance':'Blender review only; qualifying1920x1080 browser harness unavailable; no60fps claim'}
 assert metrics['triangles']['lod0']<=20000 and metrics['interiorTriangles']<=150000
+flowers=sum(n.tris() for n in upper.NODES if n.obj and n.extras.get('dreamObject')=='flowers')
+impossible=max(n.tris() for n in upper.NODES if n.obj and n.extras.get('dreamObject') not in [None,'flowers'])
+metrics['upper111']={'removedUpperFaces':upper_removed,'encoding':upper_repair,'dreamTriangles':count(dream_group),'flowerTriangles':flowers,'maxImpossibleTriangles':impossible,'maxActiveInteriorTriangles':count(cell)+flowers+impossible}
+assert metrics['upper111']['maxActiveInteriorTriangles']<=150000
 
 # Five explicit cameras for each of the two storeys, each repeated in a separate
 # dream staging variant. Base architecture and object coordinates stay unchanged.
@@ -232,21 +266,25 @@ if '--review-only' not in ARGS:
     # Blender cannot compute MikkTSpace on the source's n-gons. Triangulate
     # explicitly so the generated glass/roof normal maps carry portable tangents.
     for o in geometry:
+        if all(len(p.vertices)==3 for p in o.data.polygons):continue
         bm=bmesh.new();bm.from_mesh(o.data)
         bmesh.ops.triangulate(bm,faces=list(bm.faces))
         bm.to_mesh(o.data);bm.free();o.data.update()
     bpy.ops.object.select_all(action='DESELECT');root.select_set(True)
     for o in scene.objects:
+        if o==dream_group:continue
         p=o.parent
         while p is not None:
+            if p==dream_group:break
             if p==root:o.select_set(True);break
             p=p.parent
     bpy.ops.export_scene.gltf(filepath=str(OUT/'building-a.glb'),export_format='GLB',use_selection=True,export_extras=True,export_lights=True,export_cameras=False,export_tangents=True,export_attributes=True,export_vertex_color='ACTIVE')
+    metrics['upper111']['combinedTangentRepair']=repair_export_tangents(OUT/'building-a.glb')
     metrics['bytes']=(OUT/'building-a.glb').stat().st_size
     if '--runtime-splits' in ARGS:
         runtime=OUT/'runtime';runtime.mkdir(exist_ok=True)
         entries=[]
-        for part,name in [(lods[i],'exterior-lod'+str(i)) for i in range(3)]+[(cell,'interior')]:
+        for part,name in [(lods[i],'exterior-lod'+str(i)) for i in range(3)]+[(cell,'interior'),(dream_group,'dream')]:
             bpy.ops.object.select_all(action='DESELECT');root.select_set(True)
             for o in scene.objects:
                 p=o
@@ -255,6 +293,8 @@ if '--review-only' not in ARGS:
                     p=p.parent
             file=runtime/(name+'.glb')
             bpy.ops.export_scene.gltf(filepath=str(file),export_format='GLB',use_selection=True,export_extras=True,export_lights=True,export_cameras=False,export_tangents=True,export_attributes=True,export_vertex_color='ACTIVE')
+            tangent_repair=repair_export_tangents(file)
+            if name in ['interior','dream']:metrics['upper111'][name+'TangentRepair']=tangent_repair
             entries.append({'part':name,'file':file.name,'bytes':file.stat().st_size,'sha256':hashlib.sha256(file.read_bytes()).hexdigest(),'triangles':count(part)})
         (runtime/'manifest.json').write_text(json.dumps({'source':'Source-only local hybrid derivative; no paid delivery implemented','position':[3,1.8,-4.5],'enter':15,'leave':18,'coordinateSystem':'glTF X right,Y up,-Z toward rear; Blender X,Z,-Y','entries':entries},indent=2),encoding='utf8')
         metrics['runtimeParts']=entries

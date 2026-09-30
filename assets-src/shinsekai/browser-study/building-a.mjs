@@ -6,6 +6,7 @@ import {createPeriodGlassMaterial} from './interior-mapping.mjs';
 import {waitCaptureFrame,encodeCanvasPng} from './capture-frame.mjs';
 import {connectShopFloor} from './shop-floor.mjs';
 import {createShopDreamLook} from './shop-dream-look.mjs';
+import {createShopDreamLayer} from './shop-dream-layer.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
@@ -27,6 +28,8 @@ const ground=new THREE.Mesh(new THREE.PlaneGeometry(140,140),new THREE.MeshStand
 const loader=new GLTFLoader(),glass=createPeriodGlassMaterial(),assets=[],exteriors=new Map(),drawers=new Map();
 let manifest,shots,cells,exterior=null,interior=null,currentLOD=null,requestedLOD=null,lodEpoch=0,frame=null,disposed=false,ready=false,lastTime=null,frames=0,envTarget=null,capturing=false,captureWait=null;
 let floorLook=null,dreamLook=null;
+let dreamModel=null;
+const dreamLayer=createShopDreamLayer({load:()=>load('dream'),attach:model=>{dreamModel=model;scene.add(model.scene);applyGlass();prepareScene('dream');request();},release:model=>{scene.remove(model.scene);if(dreamModel===model)dreamModel=null;release(model);},onChange:request});
 let preparationQueue=Promise.resolve(),preparations=0,preparationPaused=false;
 const preparationHistory=[];
 function prepareScene(reason){
@@ -75,7 +78,7 @@ async function load(part){
    // destroyed framebuffer textures on later draws. Use explicitly approximate
    // thin-sheet alpha here; preserve the authored transmission in the GLB.
    m.userData.authoredTransmission=m.transmission;
-   m.opacity=Math.min(m.opacity,/glass/i.test(m.name)?.18:1-m.transmission*.65);
+   m.opacity=Math.min(m.opacity,/^M_Glass$|glass_clear/i.test(m.name)?.18:1-m.transmission*.65);
    m.transmission=0;m.transparent=true;m.depthWrite=false;m.needsUpdate=true;
   }
  });
@@ -85,9 +88,11 @@ async function load(part){
  return gltf;
 }
 function applyGlass(){
- for(const model of [exterior,interior].filter(Boolean))meshes(model,o=>{
+ for(const model of [exterior,interior,dreamModel].filter(Boolean))meshes(model,o=>{
   o.userData.authoringMaterial??=o.material;
-  const replacement=m=>/glass/i.test(m.name)&&glassCheck.checked&&Boolean(interior)?glass:m;
+  // Preserve the add-on's opal lamp shade and small glassware. The toggle
+  // adjusts exterior glazing only, whose separate frame casts the grid shadow.
+  const replacement=m=>m.name==='M_Glass'&&glassCheck.checked&&Boolean(interior)?glass:m;
   o.material=Array.isArray(o.userData.authoringMaterial)?o.userData.authoringMaterial.map(replacement):replacement(o.userData.authoringMaterial);
   // Glass does not cast an opaque shadow; the separate frame still does.
   o.castShadow=![].concat(o.material).every(m=>m===glass);
@@ -129,6 +134,7 @@ function draw(time){
  try{
   const delta=lastTime===null?0:Math.min((time-lastTime)/1000,.25);lastTime=time;const changed=controls.update();
   cells.update(camera.position.toArray());updateLOD(camera.position.distanceTo(new THREE.Vector3(...manifest.position)));
+  dreamLayer.update(dreamCheck.checked&&Boolean(interior),select.value);canvas.dataset.dreamLayer=JSON.stringify(dreamLayer.snapshot());
   let moving=false;
   for(const d of drawers.values()){
    const difference=d.target-d.progress;d.progress+=Math.sign(difference)*Math.min(Math.abs(difference),delta/.65);
@@ -138,7 +144,8 @@ function draw(time){
   if(interior&&interior.studyFirstSubmitMs===undefined){interior.studyFirstSubmitMs=submitMs;canvas.dataset.interiorPreparation=JSON.stringify({loadDecodeMs:interior.studyLoadMs,firstSubmitMs:submitMs,precompile,width:canvas.width,height:canvas.height,backend:renderer.backend.isWebGPUBackend?'WebGPU':'WebGL2',view:select.value});}
   canvas.dataset.renderedFrames=String(frames);canvas.dataset.interiorStatus=cells.snapshot()[0].status;canvas.dataset.exteriorLOD=String(currentLOD);
   canvas.dataset.drawerProgress=JSON.stringify(Object.fromEntries([...drawers].map(([k,d])=>[k,d.progress])));
-  capture.disabled=currentLOD===null||currentLOD!==requestedLOD||cells.snapshot()[0].status==='loading';
+  capture.disabled=currentLOD===null||currentLOD!==requestedLOD||cells.snapshot()[0].status==='loading'||dreamLayer.snapshot().status==='loading';
+  if(dreamLayer.snapshot().status==='failed')throw new Error('夢部品の読み込み失敗：'+dreamLayer.snapshot().error);
   status.textContent=`${renderer.backend.isWebGPUBackend?'WebGPU':'WebGL 2'} · 外観LOD${currentLOD??'準備中'} · 室内 ${cells.snapshot()[0].status}`;
   metrics.textContent=`${frames}回描画 · CPU送信 ${submitMs.toFixed(1)}ms · 停止時は追加描画なし。ガラス調整は透過色と微小な波打ちの試作です。`;
   if(changed||moving)request();else lastTime=null;
@@ -168,7 +175,7 @@ capture.addEventListener('click',async()=>{
 window.addEventListener('resize',resize);document.addEventListener('visibilitychange',()=>{if(document.hidden){captureWait?.cancel();cancel();}else{if(preparationPaused){preparationPaused=false;prepareScene('visibility-resume');}request();}});
 window.addEventListener('pagehide',event=>{
  captureWait?.cancel();cancel();if(event.persisted)return;disposed=true;lodEpoch++;
- const cleanup=()=>{cells?.dispose();drawers.forEach(d=>d.mixer.stopAllAction());for(const promise of exteriors.values())promise.then(release).catch(()=>{});controls.dispose();dreamLook?.dispose();envTarget?.dispose();glass.dispose();ground.geometry.dispose();ground.material.dispose();renderer.dispose();};
+ const cleanup=()=>{dreamLayer.dispose();cells?.dispose();drawers.forEach(d=>d.mixer.stopAllAction());for(const promise of exteriors.values())promise.then(release).catch(()=>{});controls.dispose();dreamLook?.dispose();envTarget?.dispose();glass.dispose();ground.geometry.dispose();ground.material.dispose();renderer.dispose();};
  // compileAsync yields between objects. Do not dispose a model while its
  // queued shader jobs still refer to geometry or textures.
  if(preparations)preparationQueue.finally(cleanup);else cleanup();
