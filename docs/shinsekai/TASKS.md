@@ -9,7 +9,7 @@ The final site is published from GitHub through the repository's existing Cloudf
 | T0 | Prepare the fixed clone, instructions, project records, handoff, and tool inventory | Done |
 | T1 | Add the second, disabled Coming soon card to tab 06 in six languages | Done |
 | T2 | Source research, rights ledger, 1912 layout, gimmicks, and colour evidence | In progress: 30 individually CC0-checked OML pictures plus two CC0 1912 survey sheets and their CC0 index; streets and parcels found, but georeferencing remains and the index does not identify the dashed circle; exact facility positions still need an inspectable site plan |
-| T3 | Source-based Blender geometry and photographic alignment | Preparation: editable, unaligned first-tower study has rounded cupolas, two galleries and an open crown; GLB validator passes; 50-shaku roof level is sourced, while 250 shaku may be sea elevation; landmark fitting and production geometry remain |
+| T3 | Source-based Blender geometry and photographic alignment | Preparation: editable, unaligned first-tower study has rounded cupolas, two galleries and an open crown; GLB validator passes; 50-shaku roof level is sourced; two CC0 postcards are probable south views; a 1921 single-photo fit suggests roughly 65 m conditionally, while 250 shaku has conflicting source descriptions; multi-view fitting and production geometry remain |
 | T4 | Browser engine and free tower exterior area; separate paid data | Planned |
 | T5 | Historical moving features and rideable vehicles | Planned |
 | T6 | Lazily generated paid interiors | Planned |

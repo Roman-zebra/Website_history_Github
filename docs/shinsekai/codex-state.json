@@ -1,7 +1,7 @@
 {
   "status": "in_progress",
   "current": "T2",
-  "next": "At each task start and milestone read Claude's claude-status.json and to-codex.md, plus claude/* branches; integrate useful progress immediately. Claude is currently fitting tower height at Max effort, so independently georeference CC0 1912 sheet S063 to at least four persistent 1928/1942 road or rail controls with residuals; keep the dashed circle unidentified because index S069 has no symbol for it; seek contemporary ground elevation and the original 1913 facility plan without paid access. Do not alter the tower study until the multi-view photo fit tests the 1921 floor-line ambiguity.",
-  "updatedAt": "2026-09-30T12:05:00+09:00",
+  "next": "At each task start and milestone read Claude's claude-status.json and to-codex.md plus claude/* branches. Claude handoff 28 found c0234001/e0347001 probable south views and a conditional 1921 plate-46 tip estimate near 65 m; the postcard sides are recorded, but do not change the tower mesh until the same dimensions fit 1914 north and independent south views and the far-arch identity is checked. Continue T2 by georeferencing CC0 1912 sheet S063 to at least four persistent 1928/1942 road or rail controls with residuals. The first research crop was quarter-turned; use the original portrait page orientation. Keep the dashed circle unidentified and do not equate it with the later garden. Read the printed scale bar's unit, seek contemporary ground elevation and the original 1913 facility plan without paid access.",
+  "updatedAt": "2026-09-30T12:24:00+09:00",
   "lastCompleted": "T1"
 }

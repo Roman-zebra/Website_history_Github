@@ -12,3 +12,7 @@ Next alignment work:
 4. Continue seeking the original 1913 site/facility plan for actual attraction footprints. Parcel boundaries alone cannot supply those.
 
 The map date is a publication year, not proof that every road or planned tram depot shown was complete on the opening day. The term `大阪市電鉄車庫予定地` explicitly describes a *planned* site. Do not promote it to a built 1912 feature.
+
+## Registration check in progress (2026-09-30)
+
+The research cache now has fixed GSI `ort_1928` and `ort_riku10` z18 aerial tiles and a matching current `std` street-map mosaic, fetched by `scripts/fetch-shinsekai-gsi.cjs`. They are **different dates** and are used only to select surviving road and rail controls; the current map cannot prove a feature's 1912 existence. A first crop was inadvertently displayed with a quarter-turn from the source sheet. Returning the crop to the sheet's original page orientation puts the tram corridor west of the semicircular frontage, consistent with the later aerials. The circle and the modern garden are visually close, but no transformation or residual has yet been calculated, so neither is a geographic control or a tower position. The printed scale bar's historical unit also still needs reading before it can be used as a metric constraint.
