@@ -1,20 +1,190 @@
 {
-  "source": "Opus/Sonnet inputs per104/105, original Codex composition/adaptations, no source-photo pixels",
+  "source": "Opus/Sonnet inputs104/105; original Codex composition and micro_props106, all interior/dream/numeric detail A:inferred; no source-photo pixels",
   "validator": {
     "errors": 0,
     "warnings": 0,
-    "infos": 282
+    "infos": 475
   },
   "files": [
     {
       "file": "build.py",
-      "bytes": 14186,
-      "sha256": "ce6c93d4fa9f37c8b6538db02003795d5fff31e5390da888fa7bb264edc8d4fe"
+      "bytes": 15770,
+      "sha256": "3c8e8e8d4ca121c239c927a929a9fa2eb11c8810d8b61bd81b1910bea391314d"
     },
     {
       "file": "building-a.glb",
-      "bytes": 11051828,
-      "sha256": "3721646963b88a9dd0179210f6aa58ca8b582383645dc0f2d331ae7987840a9f"
+      "bytes": 15039012,
+      "sha256": "ba5f901bf5cac46fdfdbb82d225aece4fcfa37716595916db4ef6aa1c4417988"
+    },
+    {
+      "file": "metrics.json",
+      "bytes": 631,
+      "sha256": "7469a01e8907264ef40ba3e0374517ed901d46af97e2851dc48cabd4966441ea"
+    },
+    {
+      "file": "micro_props.py",
+      "bytes": 15488,
+      "sha256": "bc364e3025c71da73b7592fa095a900277b62cf01ac36157fbd21522aa8d02ed"
+    },
+    {
+      "file": "README.md",
+      "bytes": 4701,
+      "sha256": "f72911275cc34fc190a8fe75c17d6607d2080a52581258ce967809a5b41d646e"
+    },
+    {
+      "file": "review-cameras.json",
+      "bytes": 10477,
+      "sha256": "ca30874fc31e60e77190fef48c22e21ee71394dddd34313027cc4febeddab2f3"
+    },
+    {
+      "file": "run-record.json",
+      "bytes": 660,
+      "sha256": "7c91bcfe4682c491e2128c894e7eecd9a0ec67200d6a454b0497b99d020364c8"
+    },
+    {
+      "file": "inputs/PROVENANCE.json",
+      "bytes": 1568,
+      "sha256": "70aade8fe6f4757b94c6b178996aa8c161069bed37737895830c231b41e0715d"
+    },
+    {
+      "file": "renders/base-ground-axis.png",
+      "bytes": 1323093,
+      "sha256": "08ef562fb0b5595b7fbbce748d0aabcedfadde5b405c1740b5a4404425fbc110"
+    },
+    {
+      "file": "renders/base-ground-ceiling.png",
+      "bytes": 1263021,
+      "sha256": "2a234396e3c026f985b7005812579b6a6444eea597974c656748b79f0a4f73b8"
+    },
+    {
+      "file": "renders/base-ground-corner.png",
+      "bytes": 1319349,
+      "sha256": "9f4e8b6c14070df427a41af001b234dc4403d8ff72fd19099df6c83fca56c4f6"
+    },
+    {
+      "file": "renders/base-ground-street.png",
+      "bytes": 1148041,
+      "sha256": "1d4883f20177b971d012d590d7a8c23e78cd2ed7c4065fcb595ffee4c056d043"
+    },
+    {
+      "file": "renders/base-ground-window.png",
+      "bytes": 1271038,
+      "sha256": "f7cf3b525e6a57bdd6ebc6185c72f7b57705af2b3923c2da9d79c38c974033df"
+    },
+    {
+      "file": "renders/base-hero-andon.png",
+      "bytes": 1306516,
+      "sha256": "be81b68f38daad7ab075156349bd44488208f26c4bbdfff74cf0d51c5eb51ff9"
+    },
+    {
+      "file": "renders/base-hero-counter.png",
+      "bytes": 1078830,
+      "sha256": "3bd53a123034f07881747761376d017242d2cbc03c42a4e6b5f548a4ff0dbf48"
+    },
+    {
+      "file": "renders/base-hero-shelf-goods.png",
+      "bytes": 1231555,
+      "sha256": "66b103ece52d3b477af496f91149d7c1df4b13b8488aa319280836a24205eb13"
+    },
+    {
+      "file": "renders/base-hero-stair-storage.png",
+      "bytes": 1195909,
+      "sha256": "eae7fd7e858460ac603accaf496333b3fac3ef9d79505fcb129f091ce4ecb02f"
+    },
+    {
+      "file": "renders/base-upper-axis.png",
+      "bytes": 1301776,
+      "sha256": "c494f4d6b5f2bfc4e03d70fa3b5fa9447e535cf22f23f7eac03662cce4ae5e3d"
+    },
+    {
+      "file": "renders/base-upper-ceiling.png",
+      "bytes": 1210268,
+      "sha256": "de10a195dd649ef03d840fa935ea7da59f6d0123bb2ac0fb42e37dc371841f24"
+    },
+    {
+      "file": "renders/base-upper-corner.png",
+      "bytes": 1231430,
+      "sha256": "27ce58111237469ae33506439e583a74ae1032d3cc847962941e5fe3eee16d53"
+    },
+    {
+      "file": "renders/base-upper-street.png",
+      "bytes": 1301368,
+      "sha256": "c9e835ed87d4f8c64df5a429f927ef892f9936e4cf298f38489acf6804a8991d"
+    },
+    {
+      "file": "renders/base-upper-window.png",
+      "bytes": 1263390,
+      "sha256": "d99f9ebe08cc5cef34819424d5957ee0b779a9b3c62e35204b13c2d5c11d1e75"
+    },
+    {
+      "file": "renders/dream-ground-axis.png",
+      "bytes": 1347653,
+      "sha256": "09df1e0144376c6790a29578f0f88e7d2972a41eefaaa7ddde7cd075c5b991dc"
+    },
+    {
+      "file": "renders/dream-ground-ceiling.png",
+      "bytes": 1279524,
+      "sha256": "e0abe642ef59a179d2eaaede7cc04b90d26756ca9fe242fecbc0990bd72a4d01"
+    },
+    {
+      "file": "renders/dream-ground-corner.png",
+      "bytes": 1343891,
+      "sha256": "a483375ce3d2da3c3e2daae3d26683b790d33518bf2f92542932179d771ba916"
+    },
+    {
+      "file": "renders/dream-ground-street.png",
+      "bytes": 1149836,
+      "sha256": "5629360c3979d211327d97066fa433155e9b01a01e804633e1be65a8d8fc2630"
+    },
+    {
+      "file": "renders/dream-ground-window.png",
+      "bytes": 1282083,
+      "sha256": "0a076e824966c1a2cc4871e5f6fed895283fd74ab65068f2bae8def4312c6f98"
+    },
+    {
+      "file": "renders/dream-hero-andon.png",
+      "bytes": 1359231,
+      "sha256": "3de18cb6b6587e79394a48144d7dd2bd2db60db21f570b4f9ade115eb0aa77a4"
+    },
+    {
+      "file": "renders/dream-hero-counter.png",
+      "bytes": 1081891,
+      "sha256": "dff69a6786e4bfea618530ea1d584b53a3e2b8a49b042919b513028a378dd300"
+    },
+    {
+      "file": "renders/dream-hero-shelf-goods.png",
+      "bytes": 1242600,
+      "sha256": "0758077d1f4b7ea34a1bc909f37c1c5731e67a442a710af5230e9c9f0e645bd2"
+    },
+    {
+      "file": "renders/dream-hero-stair-storage.png",
+      "bytes": 1201204,
+      "sha256": "8a5f4a4ff6944a9528f2d8a8d3fcda24a5772a2eaa61982aa3a94a9b1d175594"
+    },
+    {
+      "file": "renders/dream-upper-axis.png",
+      "bytes": 1362057,
+      "sha256": "9e6f2cd0442639897f7b40b9b1e0fedb1d430ff1cf713be504453d145f50fa40"
+    },
+    {
+      "file": "renders/dream-upper-ceiling.png",
+      "bytes": 1206857,
+      "sha256": "6ac81fa9557598199fa4db03a8095ce9bb3f59c2a0d62402d87928b76385927a"
+    },
+    {
+      "file": "renders/dream-upper-corner.png",
+      "bytes": 1275271,
+      "sha256": "eac6798e56949142379ba102f79106671dfd5bca238b19846e521e2458e1db90"
+    },
+    {
+      "file": "renders/dream-upper-street.png",
+      "bytes": 1322521,
+      "sha256": "7e16cdff8ca131c70f69a9ff77e9ae54e90a68f6e09e8bfa40c9b7a575379d2a"
+    },
+    {
+      "file": "renders/dream-upper-window.png",
+      "bytes": 1294458,
+      "sha256": "21e19b65e6924fe2dcd7f36cc3687071baf36d92d80f8c401ae135e369d181bb"
     },
     {
       "file": "inputs/opus/build-building-a.py",
@@ -35,126 +205,6 @@
       "file": "inputs/sonnet/README.md",
       "bytes": 9235,
       "sha256": "e80ec9ca05beff01105c36dd0308d0e283b6b81a94b04b63a35549b80abab39d"
-    },
-    {
-      "file": "metrics.json",
-      "bytes": 630,
-      "sha256": "6abe0a670b35d752915ad8d71c3fd6533b3d3565dcd2a4ca44219a63d9212d36"
-    },
-    {
-      "file": "README.md",
-      "bytes": 3672,
-      "sha256": "e9e908e7ba53f0ef950fbae12b9002c775144ff53b670d4e23b9786c11c28cfb"
-    },
-    {
-      "file": "renders/base-ground-axis.png",
-      "bytes": 1291915,
-      "sha256": "24cbc9d59f59d98c237db1be0843b2b083d51058d429df1f001e1605b2314183"
-    },
-    {
-      "file": "renders/base-ground-ceiling.png",
-      "bytes": 1263687,
-      "sha256": "06ece7a579c977232b67b18dd543a866d8a869c00c26acc8987b12210919ee97"
-    },
-    {
-      "file": "renders/base-ground-corner.png",
-      "bytes": 1305731,
-      "sha256": "4774d3a92afef9f1b9c2451f5b71cf88c8103b2857c24a9b03e1a431d40ed1e3"
-    },
-    {
-      "file": "renders/base-ground-street.png",
-      "bytes": 1148011,
-      "sha256": "e452f5307ee6fa28c959a0ce03bff3d0d490ff356a7eed37c38b0b9945ff7235"
-    },
-    {
-      "file": "renders/base-ground-window.png",
-      "bytes": 1254332,
-      "sha256": "d28292bdf17175e5b7d67dadc2a7f6169b1c98c5a702c25eeebd194aa13b6364"
-    },
-    {
-      "file": "renders/base-upper-axis.png",
-      "bytes": 1301777,
-      "sha256": "f46150e22c0f7db0284312d83b1daa9c87d0a8f1d26f6c7be5d3d75ec1373edc"
-    },
-    {
-      "file": "renders/base-upper-ceiling.png",
-      "bytes": 1210269,
-      "sha256": "c32b3b93c0d794f790eec4fa9e9fefcd3320d1454e1fccd062a7b66c33c70645"
-    },
-    {
-      "file": "renders/base-upper-corner.png",
-      "bytes": 1231431,
-      "sha256": "8d44f9be2b6acb8bc96ad3627282030c71b5e0f7961a4f4a179e28b57c0187d1"
-    },
-    {
-      "file": "renders/base-upper-street.png",
-      "bytes": 1301485,
-      "sha256": "6ea89218475955d330cc9883d21d13f31d1cda25045b18ac9ca70f2873def3e5"
-    },
-    {
-      "file": "renders/base-upper-window.png",
-      "bytes": 1263391,
-      "sha256": "75e249e7e2d1e4c06e5827f6427a47497d3d660beb8649457775a58bf2a7f4f8"
-    },
-    {
-      "file": "renders/dream-ground-axis.png",
-      "bytes": 1316059,
-      "sha256": "70d4bc42272e16205b2fc6c8ee6a3f91aabffbb7c381ae26fd54c7aa0f6ea8fa"
-    },
-    {
-      "file": "renders/dream-ground-ceiling.png",
-      "bytes": 1280069,
-      "sha256": "f05a93c51706d7babe6f41de6d6f5db2a839c4ecf00bc003a3a149182feacb1e"
-    },
-    {
-      "file": "renders/dream-ground-corner.png",
-      "bytes": 1330168,
-      "sha256": "fc612f3e2057114742bc3d2197fbff8d800ccabb9fdaf9df138370f511f2b447"
-    },
-    {
-      "file": "renders/dream-ground-street.png",
-      "bytes": 1149605,
-      "sha256": "3b643b6b8dfccbbf1eca28468f15e354eeec895f24caa74d11e8bcb702f09565"
-    },
-    {
-      "file": "renders/dream-ground-window.png",
-      "bytes": 1265192,
-      "sha256": "deb5d9c1b9891d62329680978e97f82c465b4ad06c117bb49519d8a5067a6d28"
-    },
-    {
-      "file": "renders/dream-upper-axis.png",
-      "bytes": 1362058,
-      "sha256": "993816cef7f9c3baa3b452f6803f4de7e55249bc5b5c038fd22ff3c39e06bd6b"
-    },
-    {
-      "file": "renders/dream-upper-ceiling.png",
-      "bytes": 1206858,
-      "sha256": "d8dda1ed624dc52c324a4e1ed3f26b5b00f44079ee105fe71a871b8e53732294"
-    },
-    {
-      "file": "renders/dream-upper-corner.png",
-      "bytes": 1275272,
-      "sha256": "0b06d7fe7c3aceaa7dd18008d07caeab9122f65752f0aa518f137d41820fa0a6"
-    },
-    {
-      "file": "renders/dream-upper-street.png",
-      "bytes": 1322541,
-      "sha256": "2a1be57bd3fb0108a4606522f43ca9b0ab19889455d1a9b57e75144fe03a662d"
-    },
-    {
-      "file": "renders/dream-upper-window.png",
-      "bytes": 1294459,
-      "sha256": "d3d5b9850e4bc2450aec5ab5f4417b4e752eab4bca121ed49559b8c4a8c8954c"
-    },
-    {
-      "file": "review-cameras.json",
-      "bytes": 7447,
-      "sha256": "00e5e1e3eb923ade042e701aecce6222f90a8a1234f4bc7e48b98c13f2dd908e"
-    },
-    {
-      "file": "run-record.json",
-      "bytes": 514,
-      "sha256": "a4a10b872ffeea036ba1720b0bf974bff31bca3283663ce8a86bcdcd7fd51cf4"
     }
   ]
 }

@@ -4,7 +4,7 @@
     "lod1": 1142,
     "lod2": 112
   },
-  "interiorTriangles": 39092,
+  "interiorTriangles": 69090,
   "collisionTriangles": 240,
   "adaptations": [
     "Opus shell/floors/stair retained; rear boards cut around stair opening",
@@ -14,6 +14,6 @@
     "Duplicate mats/stair/kitchen/four-window dressing excluded"
   ],
   "performance": "Blender review only; qualifying1920x1080 browser harness unavailable; no60fps claim",
-  "bytes": 11051828,
-  "buildSeconds": 72.37
+  "bytes": 15039012,
+  "buildSeconds": 156.56
 }

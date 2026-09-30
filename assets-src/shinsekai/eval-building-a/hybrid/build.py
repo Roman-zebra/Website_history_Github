@@ -13,6 +13,8 @@ REPO=OUT.parents[3]
 CACHE=REPO.parent/'research-cache'
 START=time.time()
 ARGS=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
+sys.path.insert(0,str(OUT))
+from micro_props import build as build_micro_props
 
 def author(who):
     path=OUT/'inputs'/who/'build-building-a.py'
@@ -61,6 +63,11 @@ original_box=opus.Part.box
 def open_stairwell(part,a,b,mat,*args,**kwargs):
     x0,y0,z0=a;x1,y1,z1=b
     hx0,hy0,hx1,hy1=5.10,6.35,5.82,8.27
+    if part.name=='BldgA_Interior_Structure' and abs(x0-5.10)<.001 and abs(x1-5.82)<.001 and abs(y0-7.01)<.001 and abs(y1-7.22)<.001 and abs(z0-.455)<.001 and z1>1.5:
+        # An actual small storage cavity opens on the left side of this box stair.
+        # Keep the back/side webs and the full upper tread supported.
+        for aa,bb in [((5.54,y0,z0),(x1,y1,z1)),((x0,y0,z0),(5.54,7.025,z1)),((x0,7.205,z0),(5.54,y1,z1)),((x0,7.025,z0),(5.54,7.205,.630)),((x0,7.025,1.015),(5.54,7.205,z1))]:original_box(part,aa,bb,mat,*args,**kwargs)
+        return
     if part.name=='BldgA_Interior_Structure' and z0>=3.25 and z1<=3.50 and x0<hx1 and x1>hx0 and y0<hy1 and y1>hy0:
         for ax,ay,bx,by in [(x0,y0,min(x1,hx0),y1),(max(x0,hx1),y0,x1,y1),(max(x0,hx0),y0,min(x1,hx1),min(y1,hy0)),(max(x0,hx0),max(y0,hy1),min(x1,hx1),y1)]:
             if bx-ax>1e-6 and by-ay>1e-6:original_box(part,(ax,ay,z0),(bx,by,z1),mat,*args,**kwargs)
@@ -81,7 +88,10 @@ sonnet.Z_FLOOR_U=opus.Z_F2
 sonnet.Z_RAISED=opus.Z_RAISED
 dress=[]
 for kind,make in [('shop',sonnet.build_shop_props),('raised',sonnet.build_room_g),('upper',sonnet.build_room_u)]:
+    old_andon=sonnet.andon
+    if kind=='raised':sonnet.andon=lambda *a,**kw:None
     p=make()
+    sonnet.andon=old_andon
     if kind=='raised':
         # Opus has a raised rear room rather than Sonnet's rear doma kitchen.
         # Remove that incompatible kitchen/storage (including spanning faces),
@@ -92,6 +102,10 @@ for kind,make in [('shop',sonnet.build_shop_props),('raised',sonnet.build_room_g
             v.co.x=.18+(v.co.x-.25)*(4.92-.18)/(4.93-.25)
             v.co.y=6.02+(v.co.y-4.60)*(8.85-6.02)/(7.50-4.60)
     if kind=='shop':
+        # Replace the original solid counter carcass while preserving its ledger,
+        # abacus, stock and cloth. The replacement is hollow and assembled.
+        drop=[f for f in p.bm.faces if p.slots[f.material_index]=='WOOD' and all(1.309<=v.co.x<=3.591 and 2.699<=v.co.y<=3.341 and .499<=v.co.z<=1.346 for v in f.verts)]
+        bmesh.ops.delete(p.bm,geom=drop,context='FACES')
         # Sonnet's coat/clock were attached to its structural centre post.
         # Restore that assumed support instead of leaving them floating.
         sonnet.mbox(p,'WOOD',2.92,4.29,.50,3.08,4.39,3.75,(96,74,56))
@@ -100,6 +114,8 @@ for kind,make in [('shop',sonnet.build_shop_props),('raised',sonnet.build_room_g
     source_tag(o,'A:Sonnet period-plausible dressing','Invented goods/trace of use; floor relocation and rear-room fit by Codex. Kitchen, duplicate stair/mats and incompatible window dressing excluded.')
     dress.append(o);geometry.append(o)
 sonnet.lightmap_uv1(dress)
+micro=build_micro_props(cell,OUT)
+geometry.extend(micro['meshes'])
 for o in geometry:
     if o.parent!=collision and o not in dress:opus.add_uv2(o)
 for name,pos,col,power,radius in lamps:
@@ -110,7 +126,10 @@ for name,pos,col,power,radius in lamps:
 def count(parent):
     total=0
     for o in geometry:
-        if o.parent==parent:o.data.calc_loop_triangles();total+=len(o.data.loop_triangles)
+        p=o.parent
+        while p is not None:
+            if p==parent:o.data.calc_loop_triangles();total+=len(o.data.loop_triangles);break
+            p=p.parent
     return total
 metrics={'triangles':{'lod'+str(i):count(lods[i]) for i in range(3)},'interiorTriangles':count(cell),'collisionTriangles':count(collision),'adaptations':['Opus shell/floors/stair retained; rear boards cut around stair opening','Sonnet shop lowered0.50m; floating coat/clock post restored','Sonnet rear props fit into6.02..8.85m raised room','Sonnet upper built at3.455m','Duplicate mats/stair/kitchen/four-window dressing excluded'],'performance':'Blender review only; qualifying1920x1080 browser harness unavailable; no60fps claim'}
 assert metrics['triangles']['lod0']<=20000 and metrics['interiorTriangles']<=150000
@@ -121,6 +140,7 @@ if '--no-render' not in ARGS:
     sonnet.make_render_materials();opus.setup_render(48)
     scene.render.engine='BLENDER_EEVEE_NEXT';scene.eevee.taa_render_samples=64
     scene.eevee.use_raytracing=True
+    scene.frame_set(31)
     opus.setup_world(18,220,.45,2.0)
     bpy.ops.object.camera_add();cam=bpy.context.object;scene.camera=cam
     for o in geometry:o.hide_render=o.parent in [lods[1],lods[2],collision]
@@ -141,6 +161,10 @@ if '--no-render' not in ARGS:
         'upper-window':((3.2,3.9,4.955),(1.5,.25,4.5),24),
         'upper-street':((2.2,-2.2,4.955),(1.5,1.3,4.4),35)
     }
+    cameras['hero-counter']=((2.9,3.9,1.0),(2.45,3.3,.6),50)
+    cameras['hero-stair-storage']=((4.15,6.75,1.18),(4.94,7.115,.82),35)
+    cameras['hero-andon']=((3.92,7.66,.99),(3.826,8.459,.63),40)
+    cameras['hero-shelf-goods']=((3.87,2.27,1.2),(3.37,2.88,.96),50)
     dream=empty('DreamReviewOnly',None)
     # One impossible object per room: a suspended teal sphere, explicitly a dream
     # assumption rather than a period artefact. No people or brand marks.
@@ -200,6 +224,7 @@ if '--no-render' not in ARGS:
             if mat in originals:obj.data.materials[i]=originals[mat]
 
 if '--review-only' not in ARGS:
+    scene.frame_set(1)
     # Export the selected asset only; no camera/sun/fill/sphere/dream grade.
     for m in list(opus._MAT_CACHE.values()):
         if m.name in opus.MATS:opus.export_material(m)

@@ -200,6 +200,86 @@
     "stage": "Blender Eevee64,1280x720; not browser performance"
   },
   {
+    "file": "base-hero-counter.png",
+    "position": [
+      2.9,
+      3.9,
+      1.0
+    ],
+    "target": [
+      2.45,
+      3.3,
+      0.6
+    ],
+    "lens": 50,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-hero-stair-storage.png",
+    "position": [
+      4.15,
+      6.75,
+      1.18
+    ],
+    "target": [
+      4.94,
+      7.115,
+      0.82
+    ],
+    "lens": 35,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-hero-andon.png",
+    "position": [
+      3.92,
+      7.66,
+      0.99
+    ],
+    "target": [
+      3.826,
+      8.459,
+      0.63
+    ],
+    "lens": 40,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-hero-shelf-goods.png",
+    "position": [
+      3.87,
+      2.27,
+      1.2
+    ],
+    "target": [
+      3.37,
+      2.88,
+      0.96
+    ],
+    "lens": 50,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
     "file": "dream-ground-axis.png",
     "position": [
       4.25,
@@ -392,6 +472,86 @@
       4.4
     ],
     "lens": 35,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-hero-counter.png",
+    "position": [
+      2.9,
+      3.9,
+      1.0
+    ],
+    "target": [
+      2.45,
+      3.3,
+      0.6
+    ],
+    "lens": 50,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-hero-stair-storage.png",
+    "position": [
+      4.15,
+      6.75,
+      1.18
+    ],
+    "target": [
+      4.94,
+      7.115,
+      0.82
+    ],
+    "lens": 35,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-hero-andon.png",
+    "position": [
+      3.92,
+      7.66,
+      0.99
+    ],
+    "target": [
+      3.826,
+      8.459,
+      0.63
+    ],
+    "lens": 40,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-hero-shelf-goods.png",
+    "position": [
+      3.87,
+      2.27,
+      1.2
+    ],
+    "target": [
+      3.37,
+      2.88,
+      0.96
+    ],
+    "lens": 50,
     "referenceFrames": [
       "mZX2Xqb13xc/00012",
       "mZX2Xqb13xc/00033",
