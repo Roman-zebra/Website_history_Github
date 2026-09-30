@@ -30,7 +30,8 @@ def repair_export_tangents(path):
                 n=struct.unpack_from('<3f',payload,no);t=struct.unpack_from('<4f',payload,to)
                 nn=sum(v*v for v in n);assert nn>.99
                 dot=sum(n[k]*t[k] for k in range(3));report['maximumDotBefore']=max(report['maximumDotBefore'],abs(dot))
-                if abs(dot)<.0001:continue
+                tangent_size=math.sqrt(sum(v*v for v in t[:3]))
+                if abs(dot)<.0001 and abs(tangent_size-1)<.0001:continue
                 projected=[t[k]-n[k]*dot/nn for k in range(3)]
                 size=math.sqrt(sum(v*v for v in projected))
                 if size<.0001:

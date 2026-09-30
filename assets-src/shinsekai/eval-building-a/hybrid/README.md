@@ -101,3 +101,14 @@ comparisons or GPU frame rates. Additional materials make cold readiness a
 remaining problem; optional compileAsync remains opt-in. Visual self-review:
 upper density improved, but lighting stays flat, cloth lacks edge thickness and
 the chrysanthemum petals read as flat stars. No visual acceptance claimed.
+## 111 runtime chrysanthemum candidate (Codex artistic round7)
+
+`building-a.html?petals` selects the separate `runtime/dream-petals.glb`; `?webgl&petals` exercises the fallback. Default dream geometry remains the111 baseline for direct comparisons. `chrysanthemum-study.html` compares a ring silhouette proxy with the original procedural atlas candidate; the proxy does not reproduce the source's jitter, materials or stems.
+
+All237 original flower matrices, palette values, pots, stems and RNG sequence are retained. Only16,116 blossom triangles are removed. Three curved rings of eight petals, three triangles each, plus an eight-triangle core give80tri per blossom:18,960 rendered triangles in two main colour-pass instance draws (shadow passes add draws). Four original128px alpha/relief tiles form a512×128 atlas; no photo/video pixels. Atlas raw arrays524,288bytes and instance/attribute/index arrays473,998bytes exclude mipmaps, driver allocation and download overhead. Instancing is not a claim of fewer rendered triangles.
+
+Candidate GLB6,292,272bytes /17,378 retained dream triangles; maximum active interior146,554tri including one impossible object, below150k. Standard validator0errors/0warnings/63infos. Eight zero-length tangents required a stable fallback alongside the existing non-orthogonal frame repair;20fallbacks total, no precise UV direction claim at degenerate vertices. Rebuilding independently preserved all anchors and counts; UV packing/serialization are not byte reproducible.
+
+Both actual1280×720 backends rendered/captured the upper-axis scene, with237blooms /5688petal instances; GPU dream-off and WebGL far-view release the dream scene. New captured console warnings/errors0. Captures: parent `research-cache/look-dev/flowers-111/upper-axis-petals-webgpu.png` and `upper-axis-petals-webgl.png`; baseline is `look-dev/runtime-003`. WebGL upper load/decode2578.4ms /first whole-scene CPU18,731.5ms, WebGPU1009.5ms /1893.4ms; these are unmatched readiness observations, not GPU FPS or performance improvement. Full build273/273 passes.
+
+Self-review: curved petals and four profiles improve the coarse ring silhouette, but the flower still looks stylized in close-up, upper light is flat and cloth edges remain thin. This is an opt-in candidate for Claude's acceptance, not a completed look or qualified1080p gate. Shape, colour and placement are A: inferred creative detail. The generator changes only the optional derivative, never the frozen upstream source or normal runtime GLBs.

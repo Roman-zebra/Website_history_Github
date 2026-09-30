@@ -7,12 +7,14 @@ import {waitCaptureFrame,encodeCanvasPng} from './capture-frame.mjs';
 import {connectShopFloor} from './shop-floor.mjs';
 import {createShopDreamLook} from './shop-dream-look.mjs';
 import {createShopDreamLayer} from './shop-dream-layer.mjs';
+import {connectShopFlowers} from './shop-flower-look.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
 const dreamCheck=document.querySelector('#dreamLook');
 // Opt-in comparison: compileAsync still increases total readiness time here.
 const precompile=new URLSearchParams(location.search).has('precompile');
+const flowerInstances=new URLSearchParams(location.search).has('petals');
 const capture=document.querySelector('#capture');
 const buttons={cash:document.querySelector('#cash'),storage:document.querySelector('#storage')};
 const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:new URLSearchParams(location.search).has('webgl')});
@@ -29,7 +31,7 @@ const loader=new GLTFLoader(),glass=createPeriodGlassMaterial(),assets=[],exteri
 let manifest,shots,cells,exterior=null,interior=null,currentLOD=null,requestedLOD=null,lodEpoch=0,frame=null,disposed=false,ready=false,lastTime=null,frames=0,envTarget=null,capturing=false,captureWait=null;
 let floorLook=null,dreamLook=null;
 let dreamModel=null;
-const dreamLayer=createShopDreamLayer({load:()=>load('dream'),attach:model=>{dreamModel=model;scene.add(model.scene);applyGlass();prepareScene('dream');request();},release:model=>{scene.remove(model.scene);if(dreamModel===model)dreamModel=null;release(model);},onChange:request});
+const dreamLayer=createShopDreamLayer({load:()=>load(flowerInstances?'dream-petals':'dream'),attach:model=>{dreamModel=model;scene.add(model.scene);applyGlass();prepareScene('dream');request();},release:model=>{scene.remove(model.scene);if(dreamModel===model)dreamModel=null;release(model);},onChange:request});
 let preparationQueue=Promise.resolve(),preparations=0,preparationPaused=false;
 const preparationHistory=[];
 function prepareScene(reason){
@@ -63,7 +65,8 @@ function request(){if(ready&&!disposed&&!capturing&&!document.hidden&&frame===nu
 function cancel(){if(frame!==null)cancelAnimationFrame(frame);frame=null;lastTime=null;}
 function meshes(model,fn){model.scene.traverse(o=>{if(o.isMesh)fn(o);});}
 function release(model){
- const geometries=new Set(),materials=new Set(),textures=new Set();meshes(model,o=>{geometries.add(o.geometry);for(const m of [].concat(o.material,o.userData.authoringMaterial??[]))if(m&&m!==glass)materials.add(m);});
+ model.studyFlowers?.disposeTextures();
+ const geometries=new Set(),materials=new Set(),textures=new Set();meshes(model,o=>{if(o.isInstancedMesh)o.dispose();geometries.add(o.geometry);for(const m of [].concat(o.material,o.userData.authoringMaterial??[]))if(m&&m!==glass)materials.add(m);});
  for(const m of materials){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();}for(const t of textures){t.dispose();t.source?.data?.close?.();}for(const g of geometries)g.dispose();
 }
 async function load(part){
@@ -71,6 +74,10 @@ async function load(part){
  const gltf=await loader.loadAsync(base+'runtime/'+part+'.glb');
  gltf.studyLoadMs=performance.now()-loadStart;
  if(disposed){release(gltf);throw new DOMException('Page left','AbortError');}
+ if(part==='dream-petals'){
+  try{gltf.studyFlowers=connectShopFlowers(gltf);}
+  catch(error){release(gltf);throw error;}
+ }
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);
  meshes(gltf,o=>{o.castShadow=true;o.receiveShadow=true;
   for(const m of [].concat(o.material))if(m.transmission>0){
@@ -135,6 +142,7 @@ function draw(time){
   const delta=lastTime===null?0:Math.min((time-lastTime)/1000,.25);lastTime=time;const changed=controls.update();
   cells.update(camera.position.toArray());updateLOD(camera.position.distanceTo(new THREE.Vector3(...manifest.position)));
   dreamLayer.update(dreamCheck.checked&&Boolean(interior),select.value);canvas.dataset.dreamLayer=JSON.stringify(dreamLayer.snapshot());
+  canvas.dataset.flowerInstances=dreamModel?.studyFlowers?JSON.stringify(dreamModel.studyFlowers.stats):'empty';
   let moving=false;
   for(const d of drawers.values()){
    const difference=d.target-d.progress;d.progress+=Math.sign(difference)*Math.min(Math.abs(difference),delta/.65);

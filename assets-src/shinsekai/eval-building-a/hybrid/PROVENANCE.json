@@ -28,8 +28,8 @@
     },
     {
       "file": "README.md",
-      "bytes": 15324,
-      "sha256": "74634ab874fbe33450a49369f9886c149b0ea42226feb4d5a6cf35e03f5b9b43"
+      "bytes": 17841,
+      "sha256": "c123fb601858593881c96b767b6a8812875afc732f433fcc181ba4db47f736ff"
     },
     {
       "file": "review-cameras.json",
@@ -38,8 +38,8 @@
     },
     {
       "file": "run-record.json",
-      "bytes": 1142,
-      "sha256": "7e91b8af88f2daca7319d2b1f09f45a89bf3c6fdc75e4b66b4324577da720531"
+      "bytes": 1200,
+      "sha256": "2594334ea96a749433e54a8e5a4539795d33bc34037e41c38373d3c8d2bb0ac9"
     },
     {
       "file": "inputs/PROVENANCE.json",
@@ -233,8 +233,8 @@
     },
     {
       "file": "upper_portable.py",
-      "bytes": 5097,
-      "sha256": "596e8f8495fe45212cc02016259b1a2251b47193a5a0a116cb53d0902b6c768e"
+      "bytes": 5191,
+      "sha256": "06faef69b90307f9e73a67bbadf32decdee755c22cc658ab5bd1f2365a252cde"
     },
     {
       "file": "runtime/dream.glb",
@@ -255,6 +255,21 @@
       "file": "inputs/upper/README.md",
       "bytes": 7618,
       "sha256": "50d3e188c846d281fabd2c41e77d9c445bb0b5a7b1c2215f27553bc8cfa0588a"
+    },
+    {
+      "file": "build-runtime-flowers.py",
+      "bytes": 2584,
+      "sha256": "f9ea8d59bdc6362aaaf8bfe51b0daa266a7b7fe4e6a49cd405e1a871a73e62d7"
+    },
+    {
+      "file": "upper_runtime_flowers.py",
+      "bytes": 1380,
+      "sha256": "ec622c55cf74a55f25eadffcec62e33b89f6d352fba1cf12319b34f25a7ae8f2"
+    },
+    {
+      "file": "runtime/dream-petals.glb",
+      "bytes": 6292272,
+      "sha256": "cc6b67fd7e0f313ba27b746d4859f57cff9d0084e29a333cd9d9ff5cc2d6865b"
     }
   ],
   "runtimeValidation": [
@@ -295,5 +310,18 @@
       "infos": 63
     }
   ],
-  "renderNote": "renders/ remains round6 historical Blender images; current111 actual browser captures are parent look-dev/runtime-003. No stale render is evidence of111 geometry."
+  "renderNote": "renders/ remains round6 historical Blender images;111 browser baseline parent look-dev/runtime-003 and optional flower comparison look-dev/flowers-111. No stale render used as new geometry evidence.",
+  "runtimeFlowerCandidate": {
+    "file": "runtime/dream-petals.glb",
+    "bytes": 6292272,
+    "sha256": "cc6b67fd7e0f313ba27b746d4859f57cff9d0084e29a333cd9d9ff5cc2d6865b",
+    "validator": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 63
+    },
+    "maxActiveInteriorTriangles": 146554,
+    "sourceTags": "A: original procedural/inferred creative shapes and preserved authored placement; no source image pixels",
+    "acceptance": "Opt-in only, awaiting Claude visual review"
+  }
 }
