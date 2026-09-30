@@ -2,6 +2,8 @@
 
 Claude's updated tower review measures the roof-garden edge at roughly 36–40% of the visible ground-to-top span in the 1914 and 1921 north photographs. The 1913 album states **“地上五十尺の所にはルーフガーデンあり”** ([Osaka Prefectural Library reference answer](https://crd.ndl.go.jp/reference/entry/reference/show?id=1000291784)), or about 15.15 m above ground. The [1924 *メートル式度量衡便覧* table](https://dl.ndl.go.jp/pid/917132/1/25) explicitly labels the tower's **height** as 75 m 76 cm (250 shaku), but a [1922 contemporary description](https://dl.ndl.go.jp/pid/964429/1/170) calls 250 shaku **“海拔”** (above sea level). These sources disagree on the reference level; neither page resolves the conflict. This numerical example tests only whether perspective *can* account for the apparent ratio; it is not a fitted camera or an adopted as-built height.
 
+The [1940 Obayashi contractor retrospective](tower-contractor-retrospective.md) adds a **200-shaku tower** statement, roughly 60.6 m, and a separate 200-shaku tower-to-raised-point distance. It is a rounded participant-side recollection without a defined height datum. It increases the documented conflict rather than proving the camera-derived 63–68 m scenarios. Keep total height adjustable pending an original design or construction record and a robust multi-view fit.
+
 For a simple pinhole camera at height 1.6 m, horizontal distance `D` from a vertical facade, and upward pitch `a`, projected vertical coordinate before focal length and image offset is:
 
 `v(h) = [cos(a) (h - 1.6) - sin(a) D] / [sin(a) (h - 1.6) + cos(a) D]`.
