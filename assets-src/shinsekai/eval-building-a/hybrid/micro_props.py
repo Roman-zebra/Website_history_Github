@@ -18,9 +18,19 @@ def build(parent,folder):
         if non_color:img.colorspace_settings.name='Non-Color'
         rgba=np.ones((*rgb.shape[:2],4),np.float32);rgba[:,:,:3]=rgb;img.pixels.foreach_set(rgba.ravel());img.pack();return img
     rng=np.random.default_rng(1912);u,v=np.meshgrid(np.arange(1024)/1024,np.arange(1024)/1024)
-    grain=np.sin(v*240+np.sin(u*7)*3)*.025+np.sin(v*950+u*30)*.007+rng.random((1024,1024))*.006
+    def field(cells):
+        lattice=rng.random((cells+1,cells+1));x=u*cells;y=v*cells;ix=x.astype(int);iy=y.astype(int)
+        fx=x-ix;fy=y-iy;fx=fx*fx*(3-2*fx);fy=fy*fy*(3-2*fy)
+        return (lattice[iy,ix]*(1-fx)+lattice[iy,ix+1]*fx)*(1-fy)+(lattice[iy+1,ix]*(1-fx)+lattice[iy+1,ix+1]*fx)*fy
+    bend=field(8);grain=np.sin(v*182+bend*14+np.sin(u*19)*2)*.018+np.sin(v*487+bend*24)*.006+(field(64)-.5)*.012
+    for ku,kv in [(.18,.37),(.78,.82)]:
+        radius=np.sqrt(((u-ku)/.055)**2+((v-kv)/.15)**2)
+        grain+=np.exp(-radius*radius*.6)*np.sin(radius*15)*.014
+    # Original stylised touch smudges and settled dust; no person's fingerprint.
+    touch=np.exp(-(((u-.56)/.13)**2+((v-.22)/.07)**2))*np.sin(np.sqrt(((u-.56)*1.6)**2+(v-.22)**2)*530)**2
+    dust=field(14)*.007;variation=np.clip(grain*.7+touch*.012+dust,-.035,.035)
     diffuse=image('Original counter wood,0.5m repeat',np.stack([.27+grain,.14+grain*.7,.065+grain*.35],axis=2))
-    rough=image('Original varnish micro variation',np.repeat((.27+grain*.75)[:,:,None],3,axis=2),True)
+    rough=image('Original varnish micro variation',np.repeat((.27+variation)[:,:,None],3,axis=2),True)
     n=2048;x,y=np.meshgrid(np.arange(n)/n,np.arange(n)/n)
     # Original shallow seam/screw-like normal detail tile; real hero screws below
     # are geometry. This atlas is a material detail, never fake controls or doors.
@@ -53,10 +63,20 @@ def build(parent,folder):
             for i in p.loop_indices:
                 c=o.matrix_world@o.data.vertices[o.data.loops[i].vertex_index].co
                 uv.data[i].uv=((c.y,c.z) if axis==0 else (c.x,c.z) if axis==1 else (c.x,c.y));uv.data[i].uv*=2
+                phase=sum(map(ord,name))+len(meshes)*17
+                uv.data[i].uv.x+=.023*math.sin(uv.data[i].uv.y*2.1+phase)+phase*.137
+                uv.data[i].uv.y+=phase*.271
         o['bevelM']=bevel;o['sourceTags']='A:original inferred furniture micro detail';meshes.append(o);return o
     def box(name,a,b,mat=wood,par=hero,bevel=.003):
         a,b=Vector(a),Vector(b);bpy.ops.mesh.primitive_cube_add(size=1,location=(a+b)/2);o=bpy.context.object;o.scale=b-a
-        bpy.ops.object.transform_apply(location=False,rotation=False,scale=True);return finish(o,name,mat,par,bevel)
+        bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+        if name in ['Counter inset front panel','Counter top,slightly offset']:
+            # Small geometric twist on decorative panels only. Runners and
+            # contact faces stay straight so slider support is not simulated.
+            for vertex in o.data.vertices:
+                if name=='Counter inset front panel':vertex.co.y+=.001*(vertex.co.x/max(b.x-a.x,.001))*(vertex.co.z/max(b.z-a.z,.001))*4
+                else:vertex.co.z+=.0008*(vertex.co.x/(b.x-a.x))*(vertex.co.y/(b.y-a.y))*4
+        return finish(o,name,mat,par,bevel)
     def cylinder(name,position,radius,depth,mat=brass,par=hero,bevel=.0007):
         bpy.ops.mesh.primitive_cylinder_add(vertices=20,radius=radius,depth=depth,location=position);return finish(bpy.context.object,name,mat,par,bevel)
     # Frame/panels/trim/feet/hardware are actual separate pieces. Rear stays open
@@ -108,6 +128,11 @@ def build(parent,folder):
         ('Stair drawer back',(5.501,7.047,.665),(5.515,7.183,.986)),
         ('Stair drawer proud front',(5.079,7.027,.641),(5.105,7.203,1.001))]:box(name,a,b,par=stair_slider,bevel=.003)
     for y in [7.048,7.180]:box('Stair drawer hardwood guide',(5.12,y,.633),(5.52,y+.008,.650),par=stair,bevel=.002)
+    for name,a,b in [
+        ('Storage lower reveal',(5.060,7.017,.615),(5.101,7.213,.638)),
+        ('Storage upper reveal',(5.060,7.017,1.005),(5.101,7.213,1.028)),
+        ('Storage left reveal',(5.060,7.007,.638),(5.101,7.026,1.005)),
+        ('Storage right reveal',(5.060,7.204,.638),(5.101,7.223,1.005))]:box(name,a,b,par=stair,bevel=.002)
     box('Stair drawer handle plate',(5.074,7.075,.790),(5.078,7.155,.846),brass,par=stair_slider,bevel=.001)
     knob=cylinder('Raised rounded stair drawer pull',(5.050,7.115,.818),.013,.05,brass,par=stair_slider,bevel=.001);knob.rotation_euler.y=math.pi/2
     for y in [7.086,7.145]:
@@ -119,6 +144,42 @@ def build(parent,folder):
     for i,(y0,y1,top) in enumerate([(4.70,5.00,.15),(5.00,5.35,.30),(5.35,5.70,.455)]):
         o=box('Inferred platform approach step'+str(i+1),(4.05,y0,0),(4.95,y1,top),par=parent,bevel=.005)
         o['sourceTags']='A:walkability repair; no original platform-access plan was supplied'
+
+    # Removable polished plank runners, explicitly inferred rather than a
+    # replacement of the source's doma/tatami floor. Keep original contact tests.
+    polish=wood.copy();polish.name='Hero polished aisle timber'
+    pbs=polish.node_tree.nodes.get('Principled BSDF');original=pbs.inputs['Roughness'].links[0].from_socket
+    gain=polish.node_tree.nodes.new('ShaderNodeMath');gain.operation='MULTIPLY';gain.inputs[1].default_value=.89
+    polish.node_tree.links.new(original,gain.inputs[0]);polish.node_tree.links.new(gain.outputs[0],pbs.inputs['Roughness'])
+    for label,x0,x1,y0,length,boards in [('entry',4.08,4.92,.70,3.97,18),('window',.95,2.40,1.85,.90,6)]:
+        for i in range(boards):
+            y=y0+length*i/boards
+            o=box('Polished inferred '+label+' floor plank'+str(i),(x0,y+.001,0),(x1,y+length/boards-.001,.018),polish,par=parent,bevel=.003)
+            o['sourceTags']='A:inferred removable polished wood runner; no original floor finish plan'
+
+    # A third physical window layer: glass at Blender y.225, these thin folded
+    # curtains behind it at y.34, and the real room behind. Display bay only;
+    # the door and Claude-owned upper-room dressing remain clear.
+    cloth=material('Hero translucent display curtains',(.75,.66,.51),.93)
+    cbs=cloth.node_tree.nodes.get('Principled BSDF');cbs.inputs['Alpha'].default_value=.56;cbs.inputs['Transmission Weight'].default_value=.16
+    cloth.surface_render_method='DITHERED'
+    curtains=root('Inferred display window curtain layer',parent);curtains['sourceTags']='A:period-plausible thin cloth behind sourced display-window shape; no historic curtain placement evidence'
+    for x0 in [.29,2.45]:
+        verts=[];faces=[];nx,nz=20,30
+        for j in range(nz+1):
+            z=.70+(2.62-.70)*j/nz
+            for i in range(nx+1):
+                x=x0+.34*i/nx;y=.34+.018*math.sin(i/nx*math.pi*8)+.004*math.sin(j/nz*math.pi*3)
+                verts.append((x,y,z))
+        for j in range(nz):
+            for i in range(nx):
+                k=j*(nx+1)+i;faces.append((k,k+1,k+nx+2,k+nx+1))
+        mesh=bpy.data.meshes.new('Original folded display cloth');mesh.from_pydata(verts,[],faces);mesh.update()
+        o=bpy.data.objects.new('Separate folded display curtain',mesh);bpy.context.scene.collection.objects.link(o);finish(o,o.name,cloth,curtains,0)
+    rod=cylinder('Curtain timber pole',(1.55,.34,2.65),.013,2.72,wood,par=curtains,bevel=.001);rod.rotation_euler.y=math.pi/2
+    for x in [.19,2.91]:
+        box('Curtain bracket plate',(x-.025,.28,2.61),(x+.025,.29,2.68),brass,par=curtains,bevel=.001)
+        cylinder('Curtain pole end cap',(x,.34,2.65),.018,.02,brass,par=curtains,bevel=.001).rotation_euler.y=math.pi/2
 
     lantern=root('Hero paper lantern',parent);lantern['heroProp']='andon';lantern['sourceTags']='A:original period-plausible oil-lamp assembly, not this shop historical fixture'
     lantern['texelDensityPxM']=2048
