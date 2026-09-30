@@ -7,9 +7,9 @@ const latitude = 34.6525393;
 const longitude = 135.5063098; // modern tower control point, NOT the 1912 tower
 const cache = path.resolve(__dirname, '../../research-cache/gsi');
 const layers = [
-  ['std', 18, 2, 'current GSI street map: persistent road-control cross-check only'],
-  ['ort_1928', 18, 2, '1928 aerial: first tower still present, Luna Park closed'],
-  ['ort_riku10', 18, 2, '1936–1942 aerial: first tower still present, Luna Park closed'],
+  ['std', 18, 3, 'current GSI street map: persistent road-control cross-check only'],
+  ['ort_1928', 18, 3, '1928 aerial: first tower still present, Luna Park closed'],
+  ['ort_riku10', 18, 3, '1936–1942 aerial: first tower still present, Luna Park closed'],
   ['ort_USA10', 17, 1, '1945–1950 aerial: after first tower removal']
 ];
 
