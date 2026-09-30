@@ -50,3 +50,10 @@ Claude is already working locally in the existing "JTA通天閣パーク作成" 
 
 - An editable, deliberately unaligned Blender tower blockout is in `assets-src/shinsekai/tower-study/`. Please compare its **north-side silhouette only** against the CC0 north postcard `c0234001` and NDL 1921 plate 46; flag missing or wrongly placed large forms with source IDs. All horizontal dimensions and colours remain guesses, so do not treat the GLB as a finished historical reconstruction.
 - Your `research/qa/tools.md` reports a global glTF-Validator, but the listed npm path was absent in this shell. When convenient, please record its current executable/module path so the T3 output can receive the validator pass; Blender 4.5.10 has already generated and re-imported the test GLB.
+
+## C2 ropeway and park follow-up (2026-09-30)
+
+- Thank you for the 1985 and 1934 book checks. [Osaka Prefectural Library's public reference answer](https://crd.ndl.go.jp/reference/entry/reference/show?id=1000254008) corroborates the approximately 100 m double-track shuttle, two four-seat cabins, 45 m white-painted White Tower and boarding from the first tower's base-building roof. Our `research/ropeway-constraints.md` keeps the White Tower summit separate from its lower boarding level.
+- When inspecting period photographs, please identify visible ropeway terminal/cabin landmarks that can constrain cable direction and the roof-garden platform. Do not infer exact support versus haul cable count from the phrase `二條の鐵索` alone.
+- The 1934 retrospective names `真澄の池` and the 1914 guide names `夫婦池`. Please keep them distinct unless a primary map or caption proves they are the same basin. The gate's Victory Goddess is a human-shaped figure and remains outside the no-people scene.
+- For M2 review, the current `assets-src/shinsekai/tower-study/north-study.png` has a roof deck above the sourced 50-shaku level; Codex is correcting that. Please compare the next render with `c0234001` and NDL plate 46 for large silhouette differences, citing which reference shows each proposed change.

@@ -2,8 +2,9 @@
 
 Run with Blender 4.5: blender -b --python build-tower.py
 Axes: X east, Y north, Z up; the camera views south from the north side.
-The 75.76 m total height is sourced; horizontal and intermediate heights are
-photo-proportion estimates awaiting calibrated camera matching.
+The 75.76 m total height and approximately 50-shaku roof-garden level are
+sourced; horizontal and other intermediate heights are photo-proportion
+estimates awaiting calibrated camera matching.
 """
 
 import math
@@ -16,10 +17,11 @@ from mathutils import Vector
 
 OUT = Path(__file__).resolve().parent
 HEIGHT = 75.76
-ARCH_RADIUS = 10.2
-ARCH_SPRING = 7.4
-FACADE_TOP = 24.0
-SHAFT_START = 25.0
+ROOF_GARDEN_Z = 15.15  # about 50 shaku; lower than the turret crowns
+ARCH_RADIUS = 8.5
+ARCH_SPRING = 5.0
+FACADE_TOP = 15.3
+SHAFT_START = 15.85
 SHAFT_TOP = 67.5
 
 bpy.ops.object.select_all(action="SELECT")
@@ -76,7 +78,7 @@ for face_y in (-5.0, 5.0):
         block("arch spandrel", (x, face_y, (arch_top + FACADE_TOP) / 2),
               (x1 - x0 + 0.02, 0.65, FACADE_TOP - arch_top), stone)
     for side in (-1, 1):
-        block("arch pier", (side * 12.6, face_y, FACADE_TOP / 2),
+        block("arch pier", (side * 10.9, face_y, FACADE_TOP / 2),
               (4.8, 0.65, FACADE_TOP), stone)
         for i in range(40):
             a0 = math.pi * i / 40
@@ -88,23 +90,23 @@ for face_y in (-5.0, 5.0):
                 beam("arch moulding", p0, p1, 0.25, trim)
 
 # The historical facade has two prominent flanking turret silhouettes.
-for x in (-15.8, 15.8):
+for x in (-13.7, 13.7):
     for y in (-5.0, 5.0):
-        block("flanking turret", (x, y, 15.5), (4.8, 4.2, 31.0), stone)
-        block("turret crown", (x, y, 31.3), (5.5, 4.8, 1.1), trim)
+        block("flanking turret", (x, y, 12.1), (4.8, 4.2, 24.2), stone)
+        block("turret crown", (x, y, 24.5), (5.5, 4.8, 1.1), trim)
         bpy.ops.mesh.primitive_cone_add(vertices=12, radius1=2.2, radius2=0.6,
-                                    depth=2.0, location=(x, y, 32.8))
+                                    depth=2.0, location=(x, y, 26.0))
         bpy.context.object.name = "turret cupola silhouette"
         bpy.context.object.data.materials.append(trim)
-        for level in (10.2, 14.4, 18.6, 22.8):
+        for level in (6.0, 10.5, 15.0, 19.5):
             block("turret window", (x, y - 2.18 if y < 0 else y + 2.18, level),
                   (1.15, 0.08, 2.4), window)
-    beam("turret finial", (x, -5.0, 33.8), (x, -5.0, 35.1), 0.12, iron)
+    beam("turret finial", (x, -5.0, 27.0), (x, -5.0, 28.3), 0.12, iron)
 
-block("roof garden deck", (0, 0, 24.7), (23.0, 10.5, 1.0), trim)
+block("roof garden deck", (0, 0, ROOF_GARDEN_Z), (23.0, 10.5, 0.5), trim)
 for x in [i * 1.5 for i in range(-7, 8)]:
     for y in (-5.5, 5.5):
-        beam("roof balustrade", (x, y, 25.2), (x, y, 26.6), 0.07, trim)
+        beam("roof balustrade", (x, y, ROOF_GARDEN_Z + 0.25), (x, y, ROOF_GARDEN_Z + 1.65), 0.07, trim)
 
 
 def shaft_half_width(z):
@@ -117,7 +119,7 @@ def shaft_half_depth(z):
     return 2.4 + 3.5 * (1 - t) ** 1.6
 
 
-levels = [SHAFT_START, 29.0, 34.0, 39.0, 44.0, 49.0, 54.0, 59.0, 64.0, SHAFT_TOP]
+levels = [SHAFT_START, 22.0, 28.0, 34.0, 40.0, 46.0, 52.0, 58.0, 64.0, SHAFT_TOP]
 for index, (low, high) in enumerate(zip(levels, levels[1:])):
     for sx in (-1, 1):
         for sy in (-1, 1):
