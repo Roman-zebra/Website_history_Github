@@ -1,11 +1,18 @@
-"""Parametric, deliberately provisional first-tower silhouette study.
+"""Parametric, deliberately provisional first-tower silhouette study (v2).
 
-Run with Blender 4.5: blender -b --python build-tower.py
+Run with Blender 4.5 from the repository root:
+    blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- [--height 75.76] [--passage-depth 26] [--export-only]
 Axes: X east, Y north, Z up; the camera views south from the north side.
-The approximately 50-shaku roof-garden level is sourced. The 75.76 m
-ground-relative total height is provisional because the 1924 height table and
-a 1922 sea-elevation description disagree on the 250-shaku reference. Horizontal and other intermediate heights are
-photo-proportion estimates awaiting calibrated camera matching.
+
+Sourced: the roof garden about 50 shaku (15.15 m) above ground.
+Parameters, not findings: total height (default 75.76 m, the 1924 table value that
+conflicts with the 1922 sea-elevation text) and the base depth along the passage
+(default 26 m; the photo fit gives about 20.7-30.5 m and the 1939 retrospective's
+"中段 十五間四角" would be about 27.3 m).
+v2 shape changes come from Claude's camera-matched overlays against the 1921 plate 46
+(NDL 962657 canvas 48) and the 1914 view A (NDL 952032 canvas 95); see
+claude-out/qa/photomatch in the local workspace and the branch notes in README.md.
+Plate 46 is a 1921 publication, so its facade details are later-period candidates.
 """
 
 import math
@@ -16,14 +23,48 @@ import bpy
 from mathutils import Vector
 
 
+def arg(name, default):
+    argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+    return float(argv[argv.index(name) + 1]) if name in argv else default
+
+
 OUT = Path(__file__).resolve().parent
-HEIGHT = 75.76  # Provisional: 1924 height table conflicts with 1922 sea-elevation text.
-ROOF_GARDEN_Z = 15.15  # about 50 shaku; lower than the turret crowns
-ARCH_RADIUS = 8.5
-ARCH_SPRING = 5.0
+HEIGHT = arg("--height", 75.76)             # parameter; see module docstring
+PASSAGE_DEPTH = arg("--passage-depth", 26.0)  # parameter; north-south depth of the base block
+ROOF_GARDEN_Z = 15.15   # about 50 shaku (sourced)
 FACADE_TOP = 15.3
 SHAFT_START = 15.85
-SHAFT_TOP = 67.5
+FACE_Y = PASSAGE_DEPTH / 2   # outer face of the north (+) and south (-) facades
+
+# Base block, measured in plate 46 at the roof-garden scale (about 27.7 px/m).
+FACADE_HALF_WIDTH = 14.5     # outer edges of the flanking turrets, about 28-29.6 m
+ARCH_HALF_SPAN = 10.05       # arch about 20.1 m wide at its feet
+ARCH_SPRING = 2.9            # the intrados becomes vertical about 2.9 m above ground
+ARCH_CROWN = 10.9            # intrados crown; flatter than a semicircle
+TURRET = 4.4                 # turret plan size (estimate)
+TURRET_X = FACADE_HALF_WIDTH - TURRET / 2
+TURRET_BODY_TOP = 19.6
+TURRET_DOME_TOP = 22.1       # plate 46 dome crown, about 22 m
+TURRET_FINIAL_TOP = 22.9
+
+# Tower shaft: legs about 11.4 m apart at the roof (36-42% of the facade width in
+# plate 46). The plan is assumed square; no source gives the leg footprint.
+SHAFT_BASE_HALF = 5.7
+SHAFT_TOP_HALF_W, SHAFT_TOP_HALF_D = 2.65, 2.4
+# Upper levels as fractions of the height above the roof garden. Both north views
+# agree: observation box bottom about 0.72-0.73, box top about 0.86, crown apex 0.94-0.96.
+SPAN = HEIGHT - ROOF_GARDEN_Z
+
+
+def above_roof(fraction):
+    return ROOF_GARDEN_Z + fraction * SPAN
+
+
+SHAFT_TOP = above_roof(0.72)
+ROOM_TOP = above_roof(0.845)
+CROWN_BASE = above_roof(0.86)
+CROWN_UPRIGHT_TOP = above_roof(0.93)
+CROWN_APEX = above_roof(0.955)
 
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.object.delete(use_global=False)
@@ -68,108 +109,116 @@ def beam(name, start, end, radius, mat, vertices=8):
     return obj
 
 
-# Triumphal arch: masonry strips leave a continuous open passage. The strip
-# count is for the blockout, not a claim about historical stone joints.
-for face_y in (-5.0, 5.0):
-    for step in range(48):
-        x0 = -ARCH_RADIUS + (2 * ARCH_RADIUS * step / 48)
-        x1 = -ARCH_RADIUS + (2 * ARCH_RADIUS * (step + 1) / 48)
-        x = (x0 + x1) / 2
-        arch_top = ARCH_SPRING + math.sqrt(max(0, ARCH_RADIUS ** 2 - x ** 2))
-        block("arch spandrel", (x, face_y, (arch_top + FACADE_TOP) / 2),
-              (x1 - x0 + 0.02, 0.65, FACADE_TOP - arch_top), stone)
-    for side in (-1, 1):
-        block("arch pier", (side * 10.9, face_y, FACADE_TOP / 2),
-              (4.8, 0.65, FACADE_TOP), stone)
-        for i in range(40):
-            a0 = math.pi * i / 40
-            a1 = math.pi * (i + 1) / 40
-            p0 = ((ARCH_RADIUS + 0.25) * math.cos(a0), face_y - 0.38, ARCH_SPRING + (ARCH_RADIUS + 0.25) * math.sin(a0))
-            p1 = ((ARCH_RADIUS + 0.25) * math.cos(a1), face_y - 0.38, ARCH_SPRING + (ARCH_RADIUS + 0.25) * math.sin(a1))
-            # Only one arch moulding per face; the side loop adds the two halves.
-            if (side == 1 and i < 20) or (side == -1 and i >= 20):
-                beam("arch moulding", p0, p1, 0.25, trim)
+def arch_z(x):
+    """Elliptical intrados above the springing line."""
+    return ARCH_SPRING + (ARCH_CROWN - ARCH_SPRING) * math.sqrt(max(0.0, 1 - (x / ARCH_HALF_SPAN) ** 2))
 
-# The historical facade has two prominent flanking turret silhouettes.
-for x in (-13.7, 13.7):
-    for y in (-5.0, 5.0):
-        block("flanking turret", (x, y, 12.1), (4.8, 4.2, 24.2), stone)
-        block("turret crown", (x, y, 24.5), (5.5, 4.8, 1.1), trim)
-        # The 1914 north view and 1921 plate show rounded cupolas, not cones.
-        # The sphere's lower half is hidden by the crown; radii remain guesses.
+
+# Base block with a vaulted passage running the full depth (north to south).
+# The strip count is for the blockout, not a claim about stone joints.
+side_width = FACADE_HALF_WIDTH - ARCH_HALF_SPAN
+for side in (-1, 1):
+    block("base side mass", (side * (ARCH_HALF_SPAN + side_width / 2), 0, FACADE_TOP / 2),
+          (side_width, PASSAGE_DEPTH, FACADE_TOP), stone)
+for step in range(48):
+    x0 = -ARCH_HALF_SPAN + 2 * ARCH_HALF_SPAN * step / 48
+    x1 = -ARCH_HALF_SPAN + 2 * ARCH_HALF_SPAN * (step + 1) / 48
+    top = max(arch_z(x0), arch_z(x1))
+    block("passage vault", ((x0 + x1) / 2, 0, (top + FACADE_TOP) / 2),
+          (x1 - x0 + 0.02, PASSAGE_DEPTH, FACADE_TOP - top), stone)
+for face in (-1, 1):
+    y = face * (FACE_Y + 0.2)
+    pts = [(ARCH_HALF_SPAN + 0.3) * math.cos(math.pi * i / 40) for i in range(41)]
+    for xa, xb in zip(pts, pts[1:]):
+        za = arch_z(xa * ARCH_HALF_SPAN / (ARCH_HALF_SPAN + 0.3)) + 0.3
+        zb = arch_z(xb * ARCH_HALF_SPAN / (ARCH_HALF_SPAN + 0.3)) + 0.3
+        beam("arch moulding", (xa, y, za), (xb, y, zb), 0.25, trim)
+    block("roof cornice", (0, face * FACE_Y, FACADE_TOP - 0.25), (2 * FACADE_HALF_WIDTH + 0.3, 0.5, 0.5), trim)
+
+# Four corner turrets, flush with the facades. The 1914 north view and 1921 plate
+# show rounded cupolas; heights follow plate 46, plan sizes are estimates.
+for x in (-TURRET_X, TURRET_X):
+    for face in (-1, 1):
+        y = face * (FACE_Y - TURRET / 2)
+        block("flanking turret", (x, y, TURRET_BODY_TOP / 2), (TURRET, TURRET, TURRET_BODY_TOP), stone)
+        block("turret crown", (x, y, TURRET_BODY_TOP + 0.35), (TURRET + 0.5, TURRET + 0.5, 0.7), trim)
+        dome_r = TURRET_DOME_TOP - (TURRET_BODY_TOP + 0.7)
         bpy.ops.mesh.primitive_uv_sphere_add(segments=16, ring_count=8,
-                                              location=(x, y, 25.05))
-        bpy.context.object.scale = (2.25, 1.95, 1.5)
+                                              location=(x, y, TURRET_BODY_TOP + 0.7))
+        bpy.context.object.scale = (TURRET / 2 - 0.2, TURRET / 2 - 0.2, dome_r)
         bpy.context.object.name = "rounded turret cupola study"
         bpy.context.object.data.materials.append(trim)
-        for level in (6.0, 10.5, 15.0, 19.5):
-            block("turret window", (x, y - 2.18 if y < 0 else y + 2.18, level),
-                  (1.15, 0.08, 2.4), window)
-        beam("turret finial", (x, y, 26.5), (x, y, 28.3), 0.12, iron)
+        for level in (5.5, 9.5, 13.0, 17.0):
+            block("turret window", (x, face * (FACE_Y + 0.02), level), (1.1, 0.08, 2.2), window)
+        beam("turret finial", (x, y, TURRET_DOME_TOP - 0.2), (x, y, TURRET_FINIAL_TOP), 0.1, iron)
 
-block("roof garden deck", (0, 0, ROOF_GARDEN_Z), (23.0, 10.5, 0.5), trim)
-for x in [i * 1.5 for i in range(-7, 8)]:
-    for y in (-5.5, 5.5):
-        beam("roof balustrade", (x, y, ROOF_GARDEN_Z + 0.25), (x, y, ROOF_GARDEN_Z + 1.65), 0.07, trim)
-
-
-def shaft_half_width(z):
-    t = (z - SHAFT_START) / (SHAFT_TOP - SHAFT_START)
-    return 2.65 + 8.3 * (1 - t) ** 1.75
-
-
-def shaft_half_depth(z):
-    t = (z - SHAFT_START) / (SHAFT_TOP - SHAFT_START)
-    return 2.4 + 3.5 * (1 - t) ** 1.6
+block("roof garden deck", (0, 0, ROOF_GARDEN_Z), (2 * FACADE_HALF_WIDTH, PASSAGE_DEPTH, 0.5), trim)
+rail_x = TURRET_X - TURRET / 2 - 0.4
+for i in range(15):
+    x = -rail_x + 2 * rail_x * i / 14
+    for face in (-1, 1):
+        beam("roof balustrade", (x, face * (FACE_Y - 0.3), ROOF_GARDEN_Z + 0.25),
+             (x, face * (FACE_Y - 0.3), ROOF_GARDEN_Z + 1.65), 0.07, trim)
+rail_y = FACE_Y - TURRET - 0.4
+for i in range(max(2, int(2 * rail_y / 1.5)) + 1):
+    y = -rail_y + 2 * rail_y * i / max(2, int(2 * rail_y / 1.5))
+    for side in (-1, 1):
+        beam("roof balustrade", (side * (FACADE_HALF_WIDTH - 0.3), y, ROOF_GARDEN_Z + 0.25),
+             (side * (FACADE_HALF_WIDTH - 0.3), y, ROOF_GARDEN_Z + 1.65), 0.07, trim)
 
 
-levels = [SHAFT_START, 22.0, 28.0, 34.0, 40.0, 46.0, 52.0, 58.0, 64.0, SHAFT_TOP]
+def shaft_half(z, top_half):
+    t = min(1.0, max(0.0, (z - SHAFT_START) / (SHAFT_TOP - SHAFT_START)))
+    return top_half + (SHAFT_BASE_HALF - top_half) * (1 - t) ** 0.9
+
+
+segments = 9
+levels = [SHAFT_START + (SHAFT_TOP - SHAFT_START) * i / segments for i in range(segments + 1)]
 for index, (low, high) in enumerate(zip(levels, levels[1:])):
+    wl, dl = shaft_half(low, SHAFT_TOP_HALF_W), shaft_half(low, SHAFT_TOP_HALF_D)
+    wh, dh = shaft_half(high, SHAFT_TOP_HALF_W), shaft_half(high, SHAFT_TOP_HALF_D)
     for sx in (-1, 1):
         for sy in (-1, 1):
-            a = (sx * shaft_half_width(low), sy * shaft_half_depth(low), low)
-            b = (sx * shaft_half_width(high), sy * shaft_half_depth(high), high)
-            beam("tapered lattice leg", a, b, 0.22 if index < 4 else 0.16, iron)
-            beam("face diagonal", a,
-                 (-sx * shaft_half_width(high), sy * shaft_half_depth(high), high),
-                 0.08, iron, 6)
-            beam("side diagonal", a,
-                 (sx * shaft_half_width(high), -sy * shaft_half_depth(high), high),
-                 0.075, iron, 6)
-    w, d = shaft_half_width(high), shaft_half_depth(high)
+            a = (sx * wl, sy * dl, low)
+            beam("tapered lattice leg", a, (sx * wh, sy * dh, high), 0.22 if index < 4 else 0.16, iron)
+            beam("face diagonal", a, (-sx * wh, sy * dh, high), 0.08, iron, 6)
+            beam("side diagonal", a, (sx * wh, -sy * dh, high), 0.075, iron, 6)
     for sy in (-1, 1):
-        beam("horizontal lattice rail", (-w, sy * d, high), (w, sy * d, high), 0.10, iron)
+        beam("horizontal lattice rail", (-wh, sy * dh, high), (wh, sy * dh, high), 0.10, iron)
     for sx in (-1, 1):
-        beam("horizontal side rail", (sx * w, -d, high), (sx * w, d, high), 0.10, iron)
+        beam("horizontal side rail", (sx * wh, -dh, high), (sx * wh, dh, high), 0.10, iron)
 
-# Two visible galleries and an open crown approximate the large forms in the
-# 1914 north view. Their heights and spans are still photo-proportion estimates.
-block("observation underdeck", (0, 0, 67.95), (10.1, 9.0, 0.9), iron)
-block("observation room", (0, 0, 70.35), (8.8, 7.8, 3.7), iron)
-for x in (-3.2, -1.1, 1.1, 3.2):
-    for y in (-3.96, 3.96):
-        block("observation window", (x, y, 70.35), (1.45, 0.07, 1.55), window)
-block("upper gallery deck", (0, 0, 72.4), (10.5, 9.5, 0.45), iron)
-for lower, upper in ((68.4, 69.5), (72.65, 73.55)):
-    for y in (-4.65, 4.65):
-        beam("gallery rim", (-5.1, y, upper), (5.1, y, upper), 0.08, trim)
-        for x in (-5.1, -2.55, 0, 2.55, 5.1):
+# Observation box with two galleries and an open crown, placed by the photo
+# fractions above. Plan sizes are estimates (box about 7.9 m wide in view A).
+block("observation underdeck", (0, 0, SHAFT_TOP + 0.45), (8.4, 8.0, 0.9), iron)
+room_bottom = SHAFT_TOP + 0.9
+block("observation room", (0, 0, (room_bottom + ROOM_TOP) / 2), (7.6, 7.2, ROOM_TOP - room_bottom), iron)
+for level in (room_bottom + 0.35 * (ROOM_TOP - room_bottom), room_bottom + 0.75 * (ROOM_TOP - room_bottom)):
+    for x in (-2.7, -0.9, 0.9, 2.7):
+        for y in (-3.62, 3.62):
+            block("observation window", (x, y, level), (1.3, 0.07, 1.5), window)
+block("upper gallery deck", (0, 0, ROOM_TOP + 0.22), (8.6, 8.2, 0.45), iron)
+for lower in (room_bottom, ROOM_TOP + 0.45):
+    upper = lower + 1.1
+    for y in (-4.05, 4.05):
+        beam("gallery rim", (-4.2, y, upper), (4.2, y, upper), 0.08, trim)
+        for x in (-4.2, -2.1, 0, 2.1, 4.2):
             beam("gallery post", (x, y, lower), (x, y, upper), 0.065, trim)
-    for x in (-5.1, 5.1):
-        beam("gallery side rim", (x, -4.65, upper), (x, 4.65, upper), 0.08, trim)
-        for y in (-2.3, 0, 2.3):
+    for x in (-4.2, 4.2):
+        beam("gallery side rim", (x, -4.05, upper), (x, 4.05, upper), 0.08, trim)
+        for y in (-2.0, 0, 2.0):
             beam("gallery side post", (x, y, lower), (x, y, upper), 0.065, trim)
-block("crown base", (0, 0, 72.95), (5.6, 5.0, 0.55), trim)
+block("crown base", (0, 0, CROWN_BASE), (5.6, 5.0, 0.55), trim)
 for n in range(12):
     angle = 2 * math.pi * n / 12
     next_angle = 2 * math.pi * (n + 1) / 12
-    p = (2.5 * math.cos(angle), 2.2 * math.sin(angle), 73.25)
-    q = (2.2 * math.cos(angle), 1.95 * math.sin(angle), 74.75)
-    ring_next = (2.5 * math.cos(next_angle), 2.2 * math.sin(next_angle), 73.25)
+    p = (2.5 * math.cos(angle), 2.2 * math.sin(angle), CROWN_BASE + 0.3)
+    q = (2.2 * math.cos(angle), 1.95 * math.sin(angle), CROWN_UPRIGHT_TOP)
+    ring_next = (2.5 * math.cos(next_angle), 2.2 * math.sin(next_angle), CROWN_BASE + 0.3)
     beam("open crown base ring", p, ring_next, 0.08, iron, 6)
     beam("open crown upright", p, q, 0.07, iron, 6)
-    beam("open crown dome rib", q, (0, 0, 75.45), 0.07, iron, 6)
-beam("top finial", (0, 0, 75.4), (0, 0, HEIGHT), 0.09, iron)
+    beam("open crown dome rib", q, (0, 0, CROWN_APEX), 0.07, iron, 6)
+beam("top finial", (0, 0, CROWN_APEX - 0.05), (0, 0, HEIGHT), 0.09, iron)
 
 # Neutral reference rendering. The generated GLB excludes camera and floor.
 bpy.ops.mesh.primitive_plane_add(size=200, location=(0, 0, -0.04))
@@ -224,4 +273,5 @@ for obj in scene.objects:
     if obj.type == "MESH" and obj != floor:
         obj.select_set(True)
 bpy.ops.export_scene.gltf(filepath=str(OUT / "tower-study.glb"), export_format="GLB", use_selection=True)
-print(f"Study written: {OUT / 'north-study.png'} and {OUT / 'tower-study.glb'}")
+print(f"Study written: {OUT / 'north-study.png'} and {OUT / 'tower-study.glb'} "
+      f"(height {HEIGHT} m, passage depth {PASSAGE_DEPTH} m)")

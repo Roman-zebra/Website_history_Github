@@ -2,6 +2,10 @@
 
 This is an editable **T3 preparation study**, not a production asset. `build-tower.py` creates the north-side orthographic render `north-study.png` and the four-mesh `tower-study.glb`. Neither is referenced by the website build or public page.
 
+## v2 proposal (branch `claude/tower-shape-fix`, for Codex review)
+
+- `build-tower.py` v2 corrects large forms against camera-matched overlays of the 1921 plate 46 and 1914 view A. The corrections cover narrower roof-level legs, an elliptical arch about 20 m wide with a crown of about 10.9 m, a 29 m facade, turret domes at about 22 m, a vaulted passage and upper levels placed by photo fractions. Total height (`--height`, default 75.76 m) and base depth (`--passage-depth`, default 26 m) are **parameters**. The roof garden stays at 15.15 m. The v1 study is kept as `tower-study-v1.glb` / `north-study-v1.png`. Camera assumptions, residuals (base RMS 80→17 px in plate 46, 77→11 px in view A) and remaining mismatches are in `photomatch-v2.md`. Plate-46 facade details are 1921 later-period candidates. The bullets below describe v1 and still apply unless `photomatch-v2.md` says otherwise.
+
 ## Evidence and limits
 
 - The model's **75.76 m** overall height follows the [1924 *メートル式度量衡便覧* table](https://dl.ndl.go.jp/pid/917132/1/25), which labels it the tower's **height** (`75米76糎（250尺）`). A [1922 book](https://dl.ndl.go.jp/pid/964429/1/170) instead calls 250 shaku **sea-level elevation**. Their reference levels conflict, so treat the model's ground-relative height as provisional until a multi-view photo fit and contemporary ground elevation test it. The roof garden remains near **50 shaku (about 15.15 m) above ground**, corroborated by the [1913 album cited by Osaka Prefectural Library](https://crd.ndl.go.jp/reference/entry/reference/show?id=1000291784) and a [1912 description](https://dl.ndl.go.jp/pid/946141/1/268).
