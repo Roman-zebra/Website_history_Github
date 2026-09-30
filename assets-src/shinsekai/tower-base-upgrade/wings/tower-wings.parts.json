@@ -1,0 +1,7086 @@
+{
+ "version": "tower-wings v1.0",
+ "command": "blender -b -P assets-src/shinsekai/tower-base-upgrade/wings/build-tower-wings.py -- ",
+ "frame": "v4 / INTERFACE world, metres, Z-up (glTF Y-up = (x, z, -y))",
+ "datums": {
+  "southFaceY": -9.0,
+  "northFaceY": 9.0,
+  "eaves": 9.5,
+  "roofCrown": 12.1,
+  "footwayTop": 0.15,
+  "kerbY": [
+   -12.45,
+   -12.75
+  ],
+  "halls": {
+   "W2": [
+    -87.2,
+    -51.025
+   ],
+   "W1": [
+    -51.025,
+    -14.5
+   ],
+   "E1": [
+    14.5,
+    39.075
+   ],
+   "E2": [
+    39.075,
+    63.325
+   ],
+   "E3": [
+    63.325,
+    87.2
+   ]
+  },
+  "clearBoxes": {
+   "W1": [
+    -50.8,
+    -14.95
+   ],
+   "W2": [
+    -86.75,
+    -51.25
+   ],
+   "E1": [
+    14.95,
+    38.85
+   ],
+   "E2": [
+    39.3,
+    63.1
+   ],
+   "E3": [
+    63.55,
+    86.75
+   ]
+  },
+  "W1door": {
+   "x": -29.45,
+   "w": 1.2,
+   "z": [
+    0.15,
+    2.65
+   ]
+  }
+ },
+ "fronts": {
+  "W1": {
+   "xc": -29.45,
+   "w": 11.0,
+   "d": 1.2,
+   "wall": "wall_W1",
+   "style": "arch",
+   "canopy": "glass",
+   "kiosk": [
+    "pyramid",
+    "joinery_green",
+    1,
+    "kiosk_0"
+   ],
+   "lamps": "bracket"
+  },
+  "W2": {
+   "xc": -69.0,
+   "w": 10.0,
+   "d": 1.2,
+   "wall": "wall_W2",
+   "style": "stepped",
+   "canopy": "awning",
+   "kiosk": [
+    "bell",
+    "joinery_cream",
+    -1,
+    "kiosk_1"
+   ],
+   "lamps": "goose"
+  },
+  "E1": {
+   "xc": 26.9,
+   "w": 9.0,
+   "d": 1.2,
+   "wall": "wall_E1",
+   "style": "pylons",
+   "canopy": "bullnose",
+   "kiosk": [
+    "cresting",
+    "joinery_red",
+    1,
+    "kiosk_2"
+   ],
+   "lamps": "goose"
+  },
+  "E2": {
+   "xc": 51.2,
+   "w": 10.0,
+   "d": 1.2,
+   "wall": "wall_E2",
+   "style": "karahafu",
+   "canopy": "lanterns",
+   "kiosk": [
+    "hip",
+    "timber",
+    -1,
+    "kiosk_0"
+   ],
+   "lamps": "lantern"
+  },
+  "E3": {
+   "xc": 75.3,
+   "w": 9.6,
+   "d": 1.2,
+   "wall": "wall_E3",
+   "style": "domes",
+   "canopy": "scallop",
+   "kiosk": [
+    "dome",
+    "joinery_blue",
+    1,
+    "kiosk_1"
+   ],
+   "lamps": "bracket"
+  }
+ },
+ "lods": {
+  "0": {
+   "tris": 147159,
+   "objects": 72,
+   "byPart": {
+    "E1F_backing": 20,
+    "E1F_curtain": 48,
+    "E1_backing": 70,
+    "E1_backing_dark": 4,
+    "E1_curtain": 132,
+    "E1_endwall": 6,
+    "E2F_backing": 20,
+    "E2F_curtain": 48,
+    "E2_backing": 70,
+    "E2_backing_dark": 6,
+    "E2_curtain": 132,
+    "E3F_backing": 30,
+    "E3F_curtain": 72,
+    "E3_backing": 90,
+    "E3_backing_dark": 24,
+    "E3_curtain": 180,
+    "W1F_backing": 20,
+    "W1F_curtain": 48,
+    "W1_backing_dark": 2,
+    "W1_endwall": 6,
+    "W2F_backing": 30,
+    "W2F_curtain": 72,
+    "W2_backing": 150,
+    "W2_backing_dark": 6,
+    "W2_curtain": 300,
+    "bamboo": 900,
+    "brass": 14744,
+    "bulb": 6336,
+    "enamel": 3008,
+    "footway": 4800,
+    "gilt": 2300,
+    "glass": 580,
+    "iron": 20910,
+    "joinery": 25404,
+    "joinery_blue": 1384,
+    "joinery_cream": 1384,
+    "joinery_green": 1384,
+    "joinery_red": 1384,
+    "kerb": 2562,
+    "kiosk_inner": 250,
+    "lamp_glass": 1788,
+    "lantern_red": 640,
+    "lantern_white": 576,
+    "medallion": 96,
+    "paint_cream": 374,
+    "paint_green": 4270,
+    "paint_ochre": 16,
+    "paint_red": 12,
+    "plinth": 194,
+    "porcelain": 3030,
+    "reveal": 1158,
+    "roof_lead": 824,
+    "roof_sheet": 6676,
+    "signs": 2044,
+    "sill": 2954,
+    "soffit": 224,
+    "tile": 150,
+    "timber": 7548,
+    "trim": 13959,
+    "trim_hi": 3602,
+    "wall_E1": 466,
+    "wall_E2": 476,
+    "wall_E3": 466,
+    "wall_W1": 638,
+    "wall_W2": 216,
+    "wall_hall": 252,
+    "wallh_E1": 316,
+    "wallh_E2": 290,
+    "wallh_E3": 530,
+    "wallh_W1": 352,
+    "wallh_W2": 746,
+    "wire": 3360
+   }
+  },
+  "1": {
+   "tris": 69971,
+   "objects": 72,
+   "byPart": {
+    "E1F_backing": 20,
+    "E1F_curtain": 24,
+    "E1_backing": 70,
+    "E1_backing_dark": 4,
+    "E1_curtain": 84,
+    "E1_endwall": 6,
+    "E2F_backing": 20,
+    "E2F_curtain": 24,
+    "E2_backing": 70,
+    "E2_backing_dark": 6,
+    "E2_curtain": 84,
+    "E3F_backing": 30,
+    "E3F_curtain": 36,
+    "E3_backing": 90,
+    "E3_backing_dark": 24,
+    "E3_curtain": 108,
+    "W1F_backing": 20,
+    "W1F_curtain": 24,
+    "W1_backing_dark": 2,
+    "W1_endwall": 6,
+    "W2F_backing": 30,
+    "W2F_curtain": 36,
+    "W2_backing": 150,
+    "W2_backing_dark": 6,
+    "W2_curtain": 180,
+    "bamboo": 600,
+    "brass": 2100,
+    "bulb": 6224,
+    "enamel": 2208,
+    "footway": 1600,
+    "gilt": 1384,
+    "glass": 436,
+    "iron": 11970,
+    "joinery": 7530,
+    "joinery_blue": 352,
+    "joinery_cream": 352,
+    "joinery_green": 352,
+    "joinery_red": 352,
+    "kerb": 862,
+    "kiosk_inner": 30,
+    "lamp_glass": 584,
+    "lantern_red": 240,
+    "lantern_white": 216,
+    "medallion": 48,
+    "paint_cream": 122,
+    "paint_green": 2398,
+    "paint_ochre": 16,
+    "paint_red": 8,
+    "plinth": 194,
+    "porcelain": 2216,
+    "reveal": 934,
+    "roof_lead": 464,
+    "roof_sheet": 2560,
+    "signs": 480,
+    "sill": 1086,
+    "soffit": 170,
+    "tile": 50,
+    "timber": 2916,
+    "trim": 8791,
+    "trim_hi": 2466,
+    "wall_E1": 316,
+    "wall_E2": 356,
+    "wall_E3": 350,
+    "wall_W1": 526,
+    "wall_W2": 140,
+    "wall_hall": 156,
+    "wallh_E1": 192,
+    "wallh_E2": 186,
+    "wallh_E3": 306,
+    "wallh_W1": 192,
+    "wallh_W2": 426,
+    "wire": 3360
+   }
+  },
+  "2": {
+   "tris": 22247,
+   "objects": 53,
+   "byPart": {
+    "E1F_backing": 4,
+    "E1_backing": 14,
+    "E2F_backing": 4,
+    "E2_backing": 14,
+    "E3F_backing": 6,
+    "E3_backing": 18,
+    "W1F_backing": 4,
+    "W1_backing_dark": 2,
+    "W2F_backing": 6,
+    "W2_backing": 30,
+    "bamboo": 500,
+    "brass": 240,
+    "enamel": 1824,
+    "footway": 20,
+    "gilt": 504,
+    "glass": 34,
+    "iron": 3432,
+    "joinery": 2606,
+    "joinery_blue": 124,
+    "joinery_cream": 124,
+    "joinery_green": 124,
+    "joinery_red": 124,
+    "kerb": 82,
+    "kiosk_inner": 30,
+    "lamp_glass": 224,
+    "lantern_red": 160,
+    "lantern_white": 144,
+    "medallion": 48,
+    "paint_cream": 122,
+    "paint_green": 10,
+    "paint_ochre": 16,
+    "plinth": 194,
+    "reveal": 790,
+    "roof_lead": 104,
+    "roof_sheet": 384,
+    "signs": 240,
+    "sill": 832,
+    "soffit": 118,
+    "tile": 50,
+    "timber": 872,
+    "trim": 5099,
+    "trim_hi": 970,
+    "wall_E1": 70,
+    "wall_E2": 146,
+    "wall_E3": 164,
+    "wall_W1": 146,
+    "wall_W2": 136,
+    "wall_hall": 84,
+    "wallh_E1": 192,
+    "wallh_E2": 186,
+    "wallh_E3": 282,
+    "wallh_W1": 192,
+    "wallh_W2": 402
+   }
+  }
+ },
+ "budgetLOD0": 150000,
+ "bulbsLOD0": 746,
+ "windowsLOD0": 50,
+ "doorsLOD0": 11,
+ "windows": [
+  [
+   "W2F",
+   "",
+   "round",
+   0.9,
+   5.3,
+   7.45,
+   [
+    -66.6,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "W2F",
+   "",
+   "round",
+   0.9,
+   5.3,
+   7.45,
+   [
+    -69.0,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "W2F",
+   "",
+   "round",
+   0.9,
+   5.3,
+   7.45,
+   [
+    -71.4,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_S0",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -85.136,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_S1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -81.909,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_S2",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -78.682,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_S3",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -75.455,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_S7",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -62.545,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_S8",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -59.318,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_S9",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -56.091,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_S10",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -52.864,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_N1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -81.909,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_N3",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -75.455,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_N5",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -69.0,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_N7",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -62.545,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_N9",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -56.091,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "W1F",
+   "",
+   "seg",
+   1.0,
+   5.3,
+   7.45,
+   [
+    -25.2,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "W1F",
+   "",
+   "seg",
+   1.0,
+   5.3,
+   7.45,
+   [
+    -33.7,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "E1F",
+   "",
+   "seg",
+   0.8,
+   5.4,
+   7.32,
+   [
+    30.65,
+    -10.2,
+    5.4
+   ]
+  ],
+  [
+   "E1F",
+   "",
+   "seg",
+   0.8,
+   5.4,
+   7.32,
+   [
+    23.15,
+    -10.2,
+    5.4
+   ]
+  ],
+  [
+   "E1",
+   "window_E1_S0",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    16.657,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E1",
+   "window_E1_S1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    20.071,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E1",
+   "window_E1_S5",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    33.729,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E1",
+   "window_E1_S6",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    37.143,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E1",
+   "window_E1_N1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    20.071,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "E1",
+   "window_E1_N3",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    26.9,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "E1",
+   "window_E1_N5",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    33.729,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "E2F",
+   "",
+   "seg",
+   1.0,
+   5.3,
+   7.45,
+   [
+    54.5,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "E2F",
+   "",
+   "seg",
+   1.0,
+   5.3,
+   7.45,
+   [
+    47.9,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "E2",
+   "window_E2_S0",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    41.0,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E2",
+   "window_E2_S1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    44.4,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E2",
+   "window_E2_S5",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    58.0,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E2",
+   "window_E2_S6",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    61.4,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E2",
+   "window_E2_N1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    44.4,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "E2",
+   "window_E2_N3",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    51.2,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "E2",
+   "window_E2_N5",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    58.0,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "E3F",
+   "",
+   "round",
+   0.9,
+   5.3,
+   7.45,
+   [
+    77.9,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "E3F",
+   "",
+   "round",
+   0.9,
+   5.3,
+   7.45,
+   [
+    75.3,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "E3F",
+   "",
+   "round",
+   0.9,
+   5.3,
+   7.45,
+   [
+    72.7,
+    -10.2,
+    5.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_S0",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    65.207,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_S1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    68.521,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_S5",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    81.779,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_S6",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    85.093,
+    -9.0,
+    6.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_N1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    68.521,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_N3",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    75.15,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_N5",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    81.779,
+    9.0,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_end0",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -87.2,
+    -4.5,
+    6.3
+   ]
+  ],
+  [
+   "W2",
+   "window_W2_end1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    -87.2,
+    4.5,
+    6.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_end0",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    87.2,
+    -4.5,
+    6.3
+   ]
+  ],
+  [
+   "E3",
+   "window_E3_end1",
+   "seg",
+   1.1,
+   6.3,
+   7.95,
+   [
+    87.2,
+    4.5,
+    6.3
+   ]
+  ]
+ ],
+ "materials": {
+  "trim": {
+   "baseColorLinear": [
+    0.66,
+    0.54,
+    0.33
+   ],
+   "roughness": 0.82,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\PaintedPlaster006",
+   "tileM": 2.0,
+   "source": "S:157431 lighter trims (estimated)"
+  },
+  "reveal": {
+   "baseColorLinear": [
+    0.52,
+    0.38,
+    0.2
+   ],
+   "roughness": 0.88,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "as wall"
+  },
+  "plinth": {
+   "baseColorLinear": [
+    0.18,
+    0.17,
+    0.16
+   ],
+   "roughness": 0.72,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\large_sandstone_blocks",
+   "tileM": 1.2,
+   "source": "A: granite-look plinth"
+  },
+  "sill": {
+   "baseColorLinear": [
+    0.42,
+    0.38,
+    0.31
+   ],
+   "roughness": 0.75,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\large_sandstone_blocks",
+   "tileM": 1.2,
+   "source": "A: stone sills/kerbs"
+  },
+  "roof_sheet": {
+   "baseColorLinear": [
+    0.045,
+    0.06,
+    0.055
+   ],
+   "roughness": 0.42,
+   "metallic": 0.35,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Metal041B",
+   "tileM": 1.0,
+   "source": "S:157437 dark caps; S:157431 greenish (estimated)"
+  },
+  "iron": {
+   "baseColorLinear": [
+    0.035,
+    0.045,
+    0.038
+   ],
+   "roughness": 0.55,
+   "metallic": 0.45,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\green_metal_rust",
+   "tileM": 1.0,
+   "source": "A: painted cast/wrought iron"
+  },
+  "wire": {
+   "baseColorLinear": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "roughness": 0.6,
+   "metallic": 0.6,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: copper line wire, weathered"
+  },
+  "joinery": {
+   "baseColorLinear": [
+    0.11,
+    0.045,
+    0.028
+   ],
+   "roughness": 0.34,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "S:157437 dark window frames (colour A:)"
+  },
+  "glass": {
+   "baseColorLinear": [
+    0.62,
+    0.7,
+    0.68
+   ],
+   "roughness": 0.04,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "detail-spec §1 period cylinder glass"
+  },
+  "backing": {
+   "baseColorLinear": [
+    0.16,
+    0.11,
+    0.075
+   ],
+   "roughness": 0.9,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "placeholder room box, replaced by the interior"
+  },
+  "curtain": {
+   "baseColorLinear": [
+    0.55,
+    0.44,
+    0.28
+   ],
+   "roughness": 0.95,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: cream cotton curtains"
+  },
+  "backing_dark": {
+   "baseColorLinear": [
+    0.05,
+    0.04,
+    0.035
+   ],
+   "roughness": 0.95,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "placeholder dark depth behind open doors, replaced by the interior"
+  },
+  "brass": {
+   "baseColorLinear": [
+    0.78,
+    0.52,
+    0.22
+   ],
+   "roughness": 0.26,
+   "metallic": 1.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "detail-spec §6 polished brass"
+  },
+  "porcelain": {
+   "baseColorLinear": [
+    0.82,
+    0.8,
+    0.74
+   ],
+   "roughness": 0.08,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: white glazed porcelain insulators"
+  },
+  "enamel": {
+   "baseColorLinear": [
+    0.015,
+    0.03,
+    0.09
+   ],
+   "roughness": 0.12,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: blank navy enamel plate, no text"
+  },
+  "bulb": {
+   "baseColorLinear": [
+    0.95,
+    0.88,
+    0.7
+   ],
+   "roughness": 0.1,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "T:fr.274 五萬燈 S:157871; carbon-filament 2200 K emission at night"
+  },
+  "lamp_glass": {
+   "baseColorLinear": [
+    0.9,
+    0.87,
+    0.8
+   ],
+   "roughness": 0.35,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: frosted globe"
+  },
+  "medallion": {
+   "baseColorLinear": [
+    0.07,
+    0.17,
+    0.1
+   ],
+   "roughness": 0.55,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\PaintedPlaster006",
+   "tileM": 1.0,
+   "source": "S:157431 green roundels"
+  },
+  "inner": {
+   "baseColorLinear": [
+    0.55,
+    0.52,
+    0.46
+   ],
+   "roughness": 0.9,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "interior shell, finishes by the interior agent"
+  },
+  "kerb": {
+   "baseColorLinear": [
+    0.3,
+    0.29,
+    0.27
+   ],
+   "roughness": 0.75,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\large_sandstone_blocks",
+   "tileM": 1.2,
+   "source": "A: granite kerbs and footways"
+  },
+  "wall_W1": {
+   "baseColorLinear": [
+    0.6,
+    0.46,
+    0.27
+   ],
+   "roughness": 0.86,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "S:158045 inset (pale fronts, hand-coloured tone) A: cream-ochre, estimated"
+  },
+  "wall_W2": {
+   "baseColorLinear": [
+    0.58,
+    0.36,
+    0.3
+   ],
+   "roughness": 0.86,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: rose render (estimated; no two fronts alike, detail-spec s2)"
+  },
+  "wall_E1": {
+   "baseColorLinear": [
+    0.4,
+    0.44,
+    0.36
+   ],
+   "roughness": 0.86,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: sage-grey render (estimated)"
+  },
+  "wall_E2": {
+   "baseColorLinear": [
+    0.55,
+    0.42,
+    0.23
+   ],
+   "roughness": 0.86,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: buff render (estimated)"
+  },
+  "wall_E3": {
+   "baseColorLinear": [
+    0.6,
+    0.32,
+    0.2
+   ],
+   "roughness": 0.86,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: salmon render (estimated)"
+  },
+  "wall_hall": {
+   "baseColorLinear": [
+    0.5,
+    0.42,
+    0.3
+   ],
+   "roughness": 0.88,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: plain render on the long walls, darker than the fronts"
+  },
+  "trim_hi": {
+   "baseColorLinear": [
+    0.72,
+    0.66,
+    0.52
+   ],
+   "roughness": 0.8,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\PaintedPlaster006",
+   "tileM": 2.0,
+   "source": "A: white-cream trims on the fronts"
+  },
+  "paint_red": {
+   "baseColorLinear": [
+    0.42,
+    0.045,
+    0.03
+   ],
+   "roughness": 0.45,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: red paint (pennant, paint pot)"
+  },
+  "paint_ochre": {
+   "baseColorLinear": [
+    0.46,
+    0.27,
+    0.07
+   ],
+   "roughness": 0.5,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "S:158045 inset (ray / fan pattern in the arched parapet) A: colours; deliberately not a flag motif"
+  },
+  "wallh_W1": {
+   "baseColorLinear": [
+    0.52,
+    0.41,
+    0.26
+   ],
+   "roughness": 0.88,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: long-wall render, a weathered shade of the W1 front"
+  },
+  "wallh_W2": {
+   "baseColorLinear": [
+    0.5,
+    0.36,
+    0.3
+   ],
+   "roughness": 0.88,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: long-wall render (W2)"
+  },
+  "wallh_E1": {
+   "baseColorLinear": [
+    0.4,
+    0.41,
+    0.34
+   ],
+   "roughness": 0.88,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: long-wall render (E1)"
+  },
+  "wallh_E2": {
+   "baseColorLinear": [
+    0.5,
+    0.4,
+    0.25
+   ],
+   "roughness": 0.88,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: long-wall render (E2)"
+  },
+  "wallh_E3": {
+   "baseColorLinear": [
+    0.52,
+    0.34,
+    0.24
+   ],
+   "roughness": 0.88,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "A: long-wall render (E3)"
+  },
+  "paint_cream": {
+   "baseColorLinear": [
+    0.74,
+    0.66,
+    0.48
+   ],
+   "roughness": 0.5,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "S:158045 inset rays, A: colour"
+  },
+  "paint_green": {
+   "baseColorLinear": [
+    0.03,
+    0.11,
+    0.06
+   ],
+   "roughness": 0.4,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: green trim paint"
+  },
+  "gilt": {
+   "baseColorLinear": [
+    0.75,
+    0.52,
+    0.2
+   ],
+   "roughness": 0.32,
+   "metallic": 1.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: gilded finials and studs"
+  },
+  "timber": {
+   "baseColorLinear": [
+    0.16,
+    0.09,
+    0.045
+   ],
+   "roughness": 0.62,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: oiled / weathered timber (barge boards, kiosk E2, ladder)"
+  },
+  "bamboo": {
+   "baseColorLinear": [
+    0.42,
+    0.32,
+    0.15
+   ],
+   "roughness": 0.55,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: bamboo nobori poles"
+  },
+  "lantern_red": {
+   "baseColorLinear": [
+    0.5,
+    0.05,
+    0.03
+   ],
+   "roughness": 0.9,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "S:157871 (large paper lanterns hung along the eaves at night) colour A:"
+  },
+  "lantern_white": {
+   "baseColorLinear": [
+    0.8,
+    0.74,
+    0.6
+   ],
+   "roughness": 0.9,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "S:157871 paper lanterns, A: colour"
+  },
+  "signs": {
+   "baseColorLinear": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "roughness": 0.7,
+   "metallic": 0.0,
+   "texture": "tex/tw-signs.png",
+   "tileM": 1.0,
+   "source": "fictional atlas (make-sign-atlas.py): hall names, titles, pictures invented"
+  },
+  "tile": {
+   "baseColorLinear": [
+    0.3,
+    0.13,
+    0.07
+   ],
+   "roughness": 0.35,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: encaustic tile porch floors"
+  },
+  "roof_lead": {
+   "baseColorLinear": [
+    0.1,
+    0.11,
+    0.11
+   ],
+   "roughness": 0.5,
+   "metallic": 0.3,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Metal041B",
+   "tileM": 1.0,
+   "source": "A: lead / zinc flashings"
+  },
+  "soffit": {
+   "baseColorLinear": [
+    0.55,
+    0.5,
+    0.4
+   ],
+   "roughness": 0.7,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: painted boarded eaves soffit"
+  },
+  "joinery_green": {
+   "baseColorLinear": [
+    0.02,
+    0.075,
+    0.035
+   ],
+   "roughness": 0.32,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: kiosk paint (detail-spec s6 lacquer/paint gloss)"
+  },
+  "joinery_red": {
+   "baseColorLinear": [
+    0.21,
+    0.03,
+    0.02
+   ],
+   "roughness": 0.32,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: kiosk paint"
+  },
+  "joinery_cream": {
+   "baseColorLinear": [
+    0.62,
+    0.54,
+    0.38
+   ],
+   "roughness": 0.34,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: kiosk paint"
+  },
+  "joinery_blue": {
+   "baseColorLinear": [
+    0.018,
+    0.035,
+    0.085
+   ],
+   "roughness": 0.32,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: kiosk paint"
+  },
+  "kiosk_inner": {
+   "baseColorLinear": [
+    0.13,
+    0.085,
+    0.05
+   ],
+   "roughness": 0.6,
+   "metallic": 0.0,
+   "texture": null,
+   "tileM": 1.0,
+   "source": "A: kiosk interior boarding"
+  },
+  "footway": {
+   "baseColorLinear": [
+    0.3,
+    0.29,
+    0.27
+   ],
+   "roughness": 0.78,
+   "metallic": 0.0,
+   "texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\large_sandstone_blocks",
+   "tileM": 1.2,
+   "source": "A: granite slab footway (1912 streets unpaved per S:158514; footway assumed like the base passage)"
+  }
+ },
+ "placeholders": "hide TW_LOD*_<hall>_backing, _backing_dark, _curtain when that hall's interior cell loads (W1 = cell_cinema)",
+ "signsUV": "TW_LOD*_signs uses UV0 in atlas space (tex/tw-signs.png, slots in tex/tw-signs.json); every other part has UV0 in metres",
+ "notes": [
+  {
+   "element": "front W2: frontispiece (stepped)",
+   "source": "A: stepped gable (variation; Western false fronts of 1910s Osaka street views, S:158225 parapets)",
+   "note": "width 10.0 m, projection 1.2 m (A:), parapet top 14.00 m"
+  },
+  {
+   "element": "front W2: canopy (awning)",
+   "source": "A: timber-bracketed sheet awning (庇)",
+   "note": ""
+  },
+  {
+   "element": "front W2: ticket kiosk (bell)",
+   "source": "A: 1912 kiosk type (no photo legible at this size); detail-spec s6 parts, gloss, raised button",
+   "note": "brass grille 15 bars, speaking oval, money arch and trough; bell push (+ unverified for 1912 Osaka); back door ajar"
+  },
+  {
+   "element": "hall W2: south wall",
+   "source": "T:fr.267 (wings, halls) A: bays on the interior rib lines, windows",
+   "note": ""
+  },
+  {
+   "element": "hall W2: north wall",
+   "source": "A: rear walls (not photographed); W1 solid to match ../interior",
+   "note": ""
+  },
+  {
+   "element": "hall W2: barrel roof",
+   "source": "S:157674 (large curved ribbed roof beside the base) A: galvanised sheet, crown 12.1 m (0.5 m under the base L3 sills 12.6), roll battens every 1.8 m",
+   "note": "ridge ventilators A: (halls needed ventilation); W1 booth vent pipe A: (from ../interior booth)"
+  },
+  {
+   "element": "front W1: frontispiece (arch)",
+   "source": "S:158045 inset (arched parapet filled with a ray / fan pattern, lantern rows, banners) A: proportions; rays in ochre / cream with a gilt half-disc (deliberately not a flag motif)",
+   "note": "width 11.0 m, projection 1.2 m (A:), parapet top 14.56 m"
+  },
+  {
+   "element": "front W1: canopy (glass)",
+   "source": "A: iron-and-glass canopy (period type); S:158045 inset (projecting canopy with lantern row)",
+   "note": ""
+  },
+  {
+   "element": "front W1: ticket kiosk (pyramid)",
+   "source": "A: 1912 kiosk type (no photo legible at this size); detail-spec s6 parts, gloss, raised button",
+   "note": "brass grille 15 bars, speaking oval, money arch and trough; bell push (+ unverified for 1912 Osaka); back door ajar"
+  },
+  {
+   "element": "hall W1: south wall",
+   "source": "T:fr.267; ../interior (W1 has no windows: the house is dark; the long wall carries painted boards and posters) A:",
+   "note": ""
+  },
+  {
+   "element": "hall W1: north wall",
+   "source": "A: rear walls (not photographed); W1 solid to match ../interior",
+   "note": ""
+  },
+  {
+   "element": "hall W1: barrel roof",
+   "source": "S:157674 (large curved ribbed roof beside the base) A: galvanised sheet, crown 12.1 m (0.5 m under the base L3 sills 12.6), roll battens every 1.8 m",
+   "note": "ridge ventilators A: (halls needed ventilation); W1 booth vent pipe A: (from ../interior booth)"
+  },
+  {
+   "element": "front E1: frontispiece (pylons)",
+   "source": "A: pylons + segmental pediment (variation); S:158225 (parapet facades with finials)",
+   "note": "width 9.0 m, projection 1.2 m (A:), parapet top 12.50 m"
+  },
+  {
+   "element": "front E1: canopy (bullnose)",
+   "source": "A: bullnose sheet verandah on cast-iron columns",
+   "note": ""
+  },
+  {
+   "element": "front E1: ticket kiosk (cresting)",
+   "source": "A: 1912 kiosk type (no photo legible at this size); detail-spec s6 parts, gloss, raised button",
+   "note": "brass grille 15 bars, speaking oval, money arch and trough; bell push (+ unverified for 1912 Osaka); back door ajar"
+  },
+  {
+   "element": "hall E1: south wall",
+   "source": "T:fr.267 (wings, halls) A: bays on the interior rib lines, windows",
+   "note": ""
+  },
+  {
+   "element": "hall E1: north wall",
+   "source": "A: rear walls (not photographed); W1 solid to match ../interior",
+   "note": ""
+  },
+  {
+   "element": "hall E1: barrel roof",
+   "source": "S:157674 (large curved ribbed roof beside the base) A: galvanised sheet, crown 12.1 m (0.5 m under the base L3 sills 12.6), roll battens every 1.8 m",
+   "note": "ridge ventilators A: (halls needed ventilation); W1 booth vent pipe A: (from ../interior booth)"
+  },
+  {
+   "element": "front E2: frontispiece (karahafu)",
+   "source": "A: 唐破風 cusped gable over a Western front (period theatre type; variation), S:157871 lanterns",
+   "note": "width 10.0 m, projection 1.2 m (A:), parapet top 13.40 m"
+  },
+  {
+   "element": "front E2: canopy (lanterns)",
+   "source": "S:157871 (big paper lanterns in rows along the eaves) A: beam",
+   "note": ""
+  },
+  {
+   "element": "front E2: ticket kiosk (hip)",
+   "source": "A: 1912 kiosk type (no photo legible at this size); detail-spec s6 parts, gloss, raised button",
+   "note": "brass grille 15 bars, speaking oval, money arch and trough; bell push (+ unverified for 1912 Osaka); back door ajar"
+  },
+  {
+   "element": "hall E2: south wall",
+   "source": "T:fr.267 (wings, halls) A: bays on the interior rib lines, windows",
+   "note": ""
+  },
+  {
+   "element": "hall E2: north wall",
+   "source": "A: rear walls (not photographed); W1 solid to match ../interior",
+   "note": ""
+  },
+  {
+   "element": "hall E2: barrel roof",
+   "source": "S:157674 (large curved ribbed roof beside the base) A: galvanised sheet, crown 12.1 m (0.5 m under the base L3 sills 12.6), roll battens every 1.8 m",
+   "note": "ridge ventilators A: (halls needed ventilation); W1 booth vent pipe A: (from ../interior booth)"
+  },
+  {
+   "element": "front E3: frontispiece (domes)",
+   "source": "S:158225 (domed corner building) S:158514 (small dome on a corner building) A: twin domed turrets",
+   "note": "width 9.6 m, projection 1.2 m (A:), parapet top 12.40 m"
+  },
+  {
+   "element": "front E3: canopy (scallop)",
+   "source": "A: glazed canopy with a scalloped sheet valance",
+   "note": ""
+  },
+  {
+   "element": "front E3: ticket kiosk (dome)",
+   "source": "A: 1912 kiosk type (no photo legible at this size); detail-spec s6 parts, gloss, raised button",
+   "note": "brass grille 15 bars, speaking oval, money arch and trough; bell push (+ unverified for 1912 Osaka); back door ajar"
+  },
+  {
+   "element": "hall E3: south wall",
+   "source": "T:fr.267 (wings, halls) A: bays on the interior rib lines, windows",
+   "note": ""
+  },
+  {
+   "element": "hall E3: north wall",
+   "source": "A: rear walls (not photographed); W1 solid to match ../interior",
+   "note": ""
+  },
+  {
+   "element": "hall E3: barrel roof",
+   "source": "S:157674 (large curved ribbed roof beside the base) A: galvanised sheet, crown 12.1 m (0.5 m under the base L3 sills 12.6), roll battens every 1.8 m",
+   "note": "ridge ventilators A: (halls needed ventilation); W1 booth vent pipe A: (from ../interior booth)"
+  },
+  {
+   "element": "end wall W2",
+   "source": "A: free wing end with an arched gable parapet over the barrel (S:157674 arched gable beside the base)",
+   "note": ""
+  },
+  {
+   "element": "end wall E3",
+   "source": "A: free wing end with an arched gable parapet over the barrel (S:157674 arched gable beside the base)",
+   "note": ""
+  },
+  {
+   "element": "fire walls between halls (右二棟 / 左三棟 = separate buildings)",
+   "source": "T:fr.267 (二棟 / 三棟: separate buildings) A: fire-wall parapets",
+   "note": ""
+  },
+  {
+   "element": "fire walls between halls (右二棟 / 左三棟 = separate buildings)",
+   "source": "T:fr.267 (二棟 / 三棟: separate buildings) A: fire-wall parapets",
+   "note": ""
+  },
+  {
+   "element": "fire walls between halls (右二棟 / 左三棟 = separate buildings)",
+   "source": "T:fr.267 (二棟 / 三棟: separate buildings) A: fire-wall parapets",
+   "note": ""
+  },
+  {
+   "element": "lead flashings at the base party walls",
+   "source": "A: roofs abut the base E/W walls below the L3 windows (INTERFACE: no windows below 10.0)",
+   "note": ""
+  },
+  {
+   "element": "footway, kerb and open gutter channel",
+   "source": "A: granite footway at 0.15 (= floor level), kerb, stone gutter channel (1912 streets unpaved per S:158514)",
+   "note": ""
+  },
+  {
+   "element": "street poles, crossarms, insulators, wires and pole lamps",
+   "source": "S:157101 S:157103 S:157218 (poles and wires) A: positions",
+   "note": ""
+  },
+  {
+   "element": "footway, kerb and open gutter channel",
+   "source": "A: granite footway at 0.15 (= floor level), kerb, stone gutter channel (1912 streets unpaved per S:158514)",
+   "note": ""
+  },
+  {
+   "element": "street poles, crossarms, insulators, wires and pole lamps",
+   "source": "S:157101 S:157103 S:157218 (poles and wires) A: positions",
+   "note": ""
+  },
+  {
+   "element": "implied event E1: handcart left mid-unload with crates of film cans",
+   "source": "A: (interior-directive s7.5 implied event; no figure)",
+   "note": ""
+  }
+ ],
+ "collision": [
+  "COL_wing_footway_W",
+  "COL_wing_footway_E",
+  "COL_wing_W1_front",
+  "COL_wing_W1_porch_floor",
+  "COL_wing_W1_wall_S",
+  "COL_wing_W1_wall_N",
+  "COL_wing_W1_kiosk",
+  "COL_wing_W2_front",
+  "COL_wing_W2_porch_floor",
+  "COL_wing_W2_wall_S",
+  "COL_wing_W2_wall_N",
+  "COL_wing_W2_kiosk",
+  "COL_wing_E1_front",
+  "COL_wing_E1_porch_floor",
+  "COL_wing_E1_wall_S",
+  "COL_wing_E1_wall_N",
+  "COL_wing_E1_kiosk",
+  "COL_wing_E2_front",
+  "COL_wing_E2_porch_floor",
+  "COL_wing_E2_wall_S",
+  "COL_wing_E2_wall_N",
+  "COL_wing_E2_kiosk",
+  "COL_wing_E3_front",
+  "COL_wing_E3_porch_floor",
+  "COL_wing_E3_wall_S",
+  "COL_wing_E3_wall_N",
+  "COL_wing_E3_kiosk",
+  "COL_wing_end_W",
+  "COL_wing_end_E",
+  "COL_wing_door_wing_W",
+  "COL_wing_door_wing_E",
+  "COL_wing_props"
+ ],
+ "interface": [
+  "IF_wing_W2_door_main",
+  "IF_wing_W2_door_exit",
+  "IF_wing_W2_door_rear",
+  "IF_wing_W1_door_main",
+  "IF_wing_E1_door_main",
+  "IF_wing_E1_door_rear",
+  "IF_wing_E2_door_main",
+  "IF_wing_E2_door_exit",
+  "IF_wing_E2_door_rear",
+  "IF_wing_E3_door_main",
+  "IF_wing_E3_door_rear",
+  "IF_wing_door_wing_W",
+  "IF_wing_door_wing_E"
+ ],
+ "timingsS": {
+  "build": 6.2,
+  "uv1": 3.7
+ },
+ "instancing": {
+  "note": "LOD0 bulbs, lanterns, nobori, poster frames, kerbs and footway slabs are baked into the LOD meshes and counted; the placements below let the runtime draw them as instances instead (world Z-up metres).",
+  "bulb": {
+   "prototype": "4-sided bipyramid, lathe (0,-0.06),(0.024,-0.036),(0,0), apex at the placement",
+   "trisEach": 8,
+   "count": 746,
+   "positions": [
+    [
+     -64.18,
+     -10.32,
+     11.14
+    ],
+    [
+     -64.54,
+     -10.32,
+     11.14
+    ],
+    [
+     -64.9,
+     -10.32,
+     11.14
+    ],
+    [
+     -65.06,
+     -10.32,
+     11.34
+    ],
+    [
+     -65.06,
+     -10.32,
+     11.7
+    ],
+    [
+     -65.18,
+     -10.32,
+     11.94
+    ],
+    [
+     -65.54,
+     -10.32,
+     11.94
+    ],
+    [
+     -65.9,
+     -10.32,
+     11.94
+    ],
+    [
+     -66.26,
+     -10.32,
+     11.94
+    ],
+    [
+     -66.26,
+     -10.32,
+     12.3
+    ],
+    [
+     -66.26,
+     -10.32,
+     12.66
+    ],
+    [
+     -66.54,
+     -10.32,
+     12.74
+    ],
+    [
+     -66.9,
+     -10.32,
+     12.74
+    ],
+    [
+     -67.26,
+     -10.32,
+     12.74
+    ],
+    [
+     -67.56,
+     -10.32,
+     12.8
+    ],
+    [
+     -67.56,
+     -10.32,
+     13.16
+    ],
+    [
+     -67.6036,
+     -10.32,
+     13.5016
+    ],
+    [
+     -67.864,
+     -10.32,
+     13.7497
+    ],
+    [
+     -68.1675,
+     -10.32,
+     13.9425
+    ],
+    [
+     -68.5032,
+     -10.32,
+     14.0685
+    ],
+    [
+     -68.8626,
+     -10.32,
+     14.089
+    ],
+    [
+     -69.2167,
+     -10.32,
+     14.1082
+    ],
+    [
+     -68.8832,
+     -10.32,
+     13.9726
+    ],
+    [
+     -68.5497,
+     -10.32,
+     13.8371
+    ],
+    [
+     -68.2162,
+     -10.32,
+     13.7016
+    ],
+    [
+     -67.8827,
+     -10.32,
+     13.566
+    ],
+    [
+     -67.6066,
+     -10.32,
+     13.4657
+    ],
+    [
+     -67.8783,
+     -10.32,
+     13.7018
+    ],
+    [
+     -68.1514,
+     -10.32,
+     13.9359
+    ],
+    [
+     -68.4855,
+     -10.32,
+     14.0692
+    ],
+    [
+     -68.8392,
+     -10.32,
+     14.135
+    ],
+    [
+     -69.1988,
+     -10.32,
+     14.1309
+    ],
+    [
+     -69.5506,
+     -10.32,
+     14.057
+    ],
+    [
+     -69.8788,
+     -10.32,
+     13.9128
+    ],
+    [
+     -70.1506,
+     -10.32,
+     13.6767
+    ],
+    [
+     -70.4153,
+     -10.32,
+     13.4449
+    ],
+    [
+     -70.0818,
+     -10.32,
+     13.5804
+    ],
+    [
+     -69.7483,
+     -10.32,
+     13.716
+    ],
+    [
+     -69.4148,
+     -10.32,
+     13.8515
+    ],
+    [
+     -69.0813,
+     -10.32,
+     13.9871
+    ],
+    [
+     -68.8163,
+     -10.32,
+     14.1072
+    ],
+    [
+     -69.1757,
+     -10.32,
+     14.0868
+    ],
+    [
+     -69.5345,
+     -10.32,
+     14.0636
+    ],
+    [
+     -69.8668,
+     -10.32,
+     13.9257
+    ],
+    [
+     -70.1659,
+     -10.32,
+     13.726
+    ],
+    [
+     -70.4238,
+     -10.32,
+     13.4748
+    ],
+    [
+     -70.44,
+     -10.32,
+     13.1217
+    ],
+    [
+     -70.44,
+     -10.32,
+     12.7617
+    ],
+    [
+     -70.7783,
+     -10.32,
+     12.74
+    ],
+    [
+     -71.1383,
+     -10.32,
+     12.74
+    ],
+    [
+     -71.4983,
+     -10.32,
+     12.74
+    ],
+    [
+     -71.74,
+     -10.32,
+     12.6217
+    ],
+    [
+     -71.74,
+     -10.32,
+     12.2617
+    ],
+    [
+     -71.7783,
+     -10.32,
+     11.94
+    ],
+    [
+     -72.1383,
+     -10.32,
+     11.94
+    ],
+    [
+     -72.4983,
+     -10.32,
+     11.94
+    ],
+    [
+     -72.8583,
+     -10.32,
+     11.94
+    ],
+    [
+     -72.94,
+     -10.32,
+     11.6617
+    ],
+    [
+     -72.94,
+     -10.32,
+     11.3017
+    ],
+    [
+     -73.1383,
+     -10.32,
+     11.14
+    ],
+    [
+     -73.4983,
+     -10.32,
+     11.14
+    ],
+    [
+     -73.8583,
+     -10.32,
+     11.14
+    ],
+    [
+     -66.86,
+     -11.85,
+     3.7
+    ],
+    [
+     -67.18,
+     -11.85,
+     3.7
+    ],
+    [
+     -67.5,
+     -11.85,
+     3.7
+    ],
+    [
+     -67.82,
+     -11.85,
+     3.7
+    ],
+    [
+     -68.14,
+     -11.85,
+     3.7
+    ],
+    [
+     -68.46,
+     -11.85,
+     3.7
+    ],
+    [
+     -68.78,
+     -11.85,
+     3.7
+    ],
+    [
+     -69.1,
+     -11.85,
+     3.7
+    ],
+    [
+     -69.42,
+     -11.85,
+     3.7
+    ],
+    [
+     -69.74,
+     -11.85,
+     3.7
+    ],
+    [
+     -70.06,
+     -11.85,
+     3.7
+    ],
+    [
+     -70.38,
+     -11.85,
+     3.7
+    ],
+    [
+     -70.7,
+     -11.85,
+     3.7
+    ],
+    [
+     -71.02,
+     -11.85,
+     3.7
+    ],
+    [
+     -74.32,
+     -10.41,
+     2.71
+    ],
+    [
+     -74.54,
+     -10.41,
+     2.71
+    ],
+    [
+     -74.76,
+     -10.41,
+     2.71
+    ],
+    [
+     -74.98,
+     -10.41,
+     2.71
+    ],
+    [
+     -75.2,
+     -10.41,
+     2.71
+    ],
+    [
+     -75.42,
+     -10.41,
+     2.71
+    ],
+    [
+     -75.64,
+     -10.41,
+     2.71
+    ],
+    [
+     -86.675,
+     -9.36,
+     9.38
+    ],
+    [
+     -86.225,
+     -9.36,
+     9.38
+    ],
+    [
+     -85.775,
+     -9.36,
+     9.38
+    ],
+    [
+     -85.325,
+     -9.36,
+     9.38
+    ],
+    [
+     -84.875,
+     -9.36,
+     9.38
+    ],
+    [
+     -84.425,
+     -9.36,
+     9.38
+    ],
+    [
+     -83.975,
+     -9.36,
+     9.38
+    ],
+    [
+     -83.525,
+     -9.36,
+     9.38
+    ],
+    [
+     -83.075,
+     -9.36,
+     9.38
+    ],
+    [
+     -82.625,
+     -9.36,
+     9.38
+    ],
+    [
+     -82.175,
+     -9.36,
+     9.38
+    ],
+    [
+     -81.725,
+     -9.36,
+     9.38
+    ],
+    [
+     -81.275,
+     -9.36,
+     9.38
+    ],
+    [
+     -80.825,
+     -9.36,
+     9.38
+    ],
+    [
+     -80.375,
+     -9.36,
+     9.38
+    ],
+    [
+     -79.925,
+     -9.36,
+     9.38
+    ],
+    [
+     -79.475,
+     -9.36,
+     9.38
+    ],
+    [
+     -79.025,
+     -9.36,
+     9.38
+    ],
+    [
+     -78.575,
+     -9.36,
+     9.38
+    ],
+    [
+     -78.125,
+     -9.36,
+     9.38
+    ],
+    [
+     -77.675,
+     -9.36,
+     9.38
+    ],
+    [
+     -77.225,
+     -9.36,
+     9.38
+    ],
+    [
+     -76.775,
+     -9.36,
+     9.38
+    ],
+    [
+     -76.325,
+     -9.36,
+     9.38
+    ],
+    [
+     -75.875,
+     -9.36,
+     9.38
+    ],
+    [
+     -75.425,
+     -9.36,
+     9.38
+    ],
+    [
+     -74.975,
+     -9.36,
+     9.38
+    ],
+    [
+     -74.525,
+     -9.36,
+     9.38
+    ],
+    [
+     -63.475,
+     -9.36,
+     9.38
+    ],
+    [
+     -63.025,
+     -9.36,
+     9.38
+    ],
+    [
+     -62.575,
+     -9.36,
+     9.38
+    ],
+    [
+     -62.125,
+     -9.36,
+     9.38
+    ],
+    [
+     -61.675,
+     -9.36,
+     9.38
+    ],
+    [
+     -61.225,
+     -9.36,
+     9.38
+    ],
+    [
+     -60.775,
+     -9.36,
+     9.38
+    ],
+    [
+     -60.325,
+     -9.36,
+     9.38
+    ],
+    [
+     -59.875,
+     -9.36,
+     9.38
+    ],
+    [
+     -59.425,
+     -9.36,
+     9.38
+    ],
+    [
+     -58.975,
+     -9.36,
+     9.38
+    ],
+    [
+     -58.525,
+     -9.36,
+     9.38
+    ],
+    [
+     -58.075,
+     -9.36,
+     9.38
+    ],
+    [
+     -57.625,
+     -9.36,
+     9.38
+    ],
+    [
+     -57.175,
+     -9.36,
+     9.38
+    ],
+    [
+     -56.725,
+     -9.36,
+     9.38
+    ],
+    [
+     -56.275,
+     -9.36,
+     9.38
+    ],
+    [
+     -55.825,
+     -9.36,
+     9.38
+    ],
+    [
+     -55.375,
+     -9.36,
+     9.38
+    ],
+    [
+     -54.925,
+     -9.36,
+     9.38
+    ],
+    [
+     -54.475,
+     -9.36,
+     9.38
+    ],
+    [
+     -54.025,
+     -9.36,
+     9.38
+    ],
+    [
+     -53.575,
+     -9.36,
+     9.38
+    ],
+    [
+     -53.125,
+     -9.36,
+     9.38
+    ],
+    [
+     -52.675,
+     -9.36,
+     9.38
+    ],
+    [
+     -52.225,
+     -9.36,
+     9.38
+    ],
+    [
+     -51.775,
+     -9.36,
+     9.38
+    ],
+    [
+     -51.325,
+     -9.36,
+     9.38
+    ],
+    [
+     -24.13,
+     -10.32,
+     11.44
+    ],
+    [
+     -24.49,
+     -10.32,
+     11.44
+    ],
+    [
+     -24.85,
+     -10.32,
+     11.44
+    ],
+    [
+     -25.0379,
+     -10.32,
+     11.6839
+    ],
+    [
+     -25.1831,
+     -10.32,
+     12.013
+    ],
+    [
+     -25.3519,
+     -10.32,
+     12.3306
+    ],
+    [
+     -25.5433,
+     -10.32,
+     12.6351
+    ],
+    [
+     -25.7565,
+     -10.32,
+     12.9248
+    ],
+    [
+     -25.9905,
+     -10.32,
+     13.1984
+    ],
+    [
+     -26.2479,
+     -10.32,
+     13.45
+    ],
+    [
+     -26.5232,
+     -10.32,
+     13.6816
+    ],
+    [
+     -26.8146,
+     -10.32,
+     13.8925
+    ],
+    [
+     -27.1206,
+     -10.32,
+     14.0815
+    ],
+    [
+     -27.4396,
+     -10.32,
+     14.2478
+    ],
+    [
+     -27.7701,
+     -10.32,
+     14.3904
+    ],
+    [
+     -28.1119,
+     -10.32,
+     14.5032
+    ],
+    [
+     -28.4611,
+     -10.32,
+     14.5899
+    ],
+    [
+     -28.8156,
+     -10.32,
+     14.6509
+    ],
+    [
+     -29.1735,
+     -10.32,
+     14.6859
+    ],
+    [
+     -29.5331,
+     -10.32,
+     14.6947
+    ],
+    [
+     -29.8927,
+     -10.32,
+     14.6773
+    ],
+    [
+     -30.2493,
+     -10.32,
+     14.6283
+    ],
+    [
+     -30.601,
+     -10.32,
+     14.5524
+    ],
+    [
+     -30.9461,
+     -10.32,
+     14.4511
+    ],
+    [
+     -31.2829,
+     -10.32,
+     14.3249
+    ],
+    [
+     -31.6096,
+     -10.32,
+     14.1744
+    ],
+    [
+     -31.9247,
+     -10.32,
+     14.0005
+    ],
+    [
+     -32.2235,
+     -10.32,
+     13.7996
+    ],
+    [
+     -32.5059,
+     -10.32,
+     13.5766
+    ],
+    [
+     -32.7711,
+     -10.32,
+     13.3337
+    ],
+    [
+     -33.0179,
+     -10.32,
+     13.0721
+    ],
+    [
+     -33.245,
+     -10.32,
+     12.7932
+    ],
+    [
+     -33.4514,
+     -10.32,
+     12.4983
+    ],
+    [
+     -33.6314,
+     -10.32,
+     12.1865
+    ],
+    [
+     -33.7867,
+     -10.32,
+     11.8619
+    ],
+    [
+     -33.9179,
+     -10.32,
+     11.5271
+    ],
+    [
+     -34.2164,
+     -10.32,
+     11.44
+    ],
+    [
+     -34.5764,
+     -10.32,
+     11.44
+    ],
+    [
+     -34.9364,
+     -10.32,
+     11.44
+    ],
+    [
+     -27.0,
+     -12.28,
+     4.15
+    ],
+    [
+     -27.3,
+     -12.28,
+     4.15
+    ],
+    [
+     -27.6,
+     -12.28,
+     4.15
+    ],
+    [
+     -27.9,
+     -12.28,
+     4.15
+    ],
+    [
+     -28.2,
+     -12.28,
+     4.15
+    ],
+    [
+     -28.5,
+     -12.28,
+     4.15
+    ],
+    [
+     -28.8,
+     -12.28,
+     4.15
+    ],
+    [
+     -29.1,
+     -12.28,
+     4.15
+    ],
+    [
+     -29.4,
+     -12.28,
+     4.15
+    ],
+    [
+     -29.7,
+     -12.28,
+     4.15
+    ],
+    [
+     -30.0,
+     -12.28,
+     4.15
+    ],
+    [
+     -30.3,
+     -12.28,
+     4.15
+    ],
+    [
+     -30.6,
+     -12.28,
+     4.15
+    ],
+    [
+     -30.9,
+     -12.28,
+     4.15
+    ],
+    [
+     -31.2,
+     -12.28,
+     4.15
+    ],
+    [
+     -31.5,
+     -12.28,
+     4.15
+    ],
+    [
+     -31.8,
+     -12.28,
+     4.15
+    ],
+    [
+     -22.37,
+     -10.41,
+     2.71
+    ],
+    [
+     -22.59,
+     -10.41,
+     2.71
+    ],
+    [
+     -22.81,
+     -10.41,
+     2.71
+    ],
+    [
+     -23.03,
+     -10.41,
+     2.71
+    ],
+    [
+     -23.25,
+     -10.41,
+     2.71
+    ],
+    [
+     -23.47,
+     -10.41,
+     2.71
+    ],
+    [
+     -23.69,
+     -10.41,
+     2.71
+    ],
+    [
+     -50.5,
+     -9.36,
+     9.38
+    ],
+    [
+     -50.05,
+     -9.36,
+     9.38
+    ],
+    [
+     -49.6,
+     -9.36,
+     9.38
+    ],
+    [
+     -49.15,
+     -9.36,
+     9.38
+    ],
+    [
+     -48.7,
+     -9.36,
+     9.38
+    ],
+    [
+     -48.25,
+     -9.36,
+     9.38
+    ],
+    [
+     -47.8,
+     -9.36,
+     9.38
+    ],
+    [
+     -47.35,
+     -9.36,
+     9.38
+    ],
+    [
+     -46.9,
+     -9.36,
+     9.38
+    ],
+    [
+     -46.45,
+     -9.36,
+     9.38
+    ],
+    [
+     -46.0,
+     -9.36,
+     9.38
+    ],
+    [
+     -45.55,
+     -9.36,
+     9.38
+    ],
+    [
+     -45.1,
+     -9.36,
+     9.38
+    ],
+    [
+     -44.65,
+     -9.36,
+     9.38
+    ],
+    [
+     -44.2,
+     -9.36,
+     9.38
+    ],
+    [
+     -43.75,
+     -9.36,
+     9.38
+    ],
+    [
+     -43.3,
+     -9.36,
+     9.38
+    ],
+    [
+     -42.85,
+     -9.36,
+     9.38
+    ],
+    [
+     -42.4,
+     -9.36,
+     9.38
+    ],
+    [
+     -41.95,
+     -9.36,
+     9.38
+    ],
+    [
+     -41.5,
+     -9.36,
+     9.38
+    ],
+    [
+     -41.05,
+     -9.36,
+     9.38
+    ],
+    [
+     -40.6,
+     -9.36,
+     9.38
+    ],
+    [
+     -40.15,
+     -9.36,
+     9.38
+    ],
+    [
+     -39.7,
+     -9.36,
+     9.38
+    ],
+    [
+     -39.25,
+     -9.36,
+     9.38
+    ],
+    [
+     -38.8,
+     -9.36,
+     9.38
+    ],
+    [
+     -38.35,
+     -9.36,
+     9.38
+    ],
+    [
+     -37.9,
+     -9.36,
+     9.38
+    ],
+    [
+     -37.45,
+     -9.36,
+     9.38
+    ],
+    [
+     -37.0,
+     -9.36,
+     9.38
+    ],
+    [
+     -36.55,
+     -9.36,
+     9.38
+    ],
+    [
+     -36.1,
+     -9.36,
+     9.38
+    ],
+    [
+     -35.65,
+     -9.36,
+     9.38
+    ],
+    [
+     -23.425,
+     -9.36,
+     9.38
+    ],
+    [
+     -22.975,
+     -9.36,
+     9.38
+    ],
+    [
+     -22.525,
+     -9.36,
+     9.38
+    ],
+    [
+     -22.075,
+     -9.36,
+     9.38
+    ],
+    [
+     -21.625,
+     -9.36,
+     9.38
+    ],
+    [
+     -21.175,
+     -9.36,
+     9.38
+    ],
+    [
+     -20.725,
+     -9.36,
+     9.38
+    ],
+    [
+     -20.275,
+     -9.36,
+     9.38
+    ],
+    [
+     -19.825,
+     -9.36,
+     9.38
+    ],
+    [
+     -19.375,
+     -9.36,
+     9.38
+    ],
+    [
+     -18.925,
+     -9.36,
+     9.38
+    ],
+    [
+     -18.475,
+     -9.36,
+     9.38
+    ],
+    [
+     -18.025,
+     -9.36,
+     9.38
+    ],
+    [
+     -17.575,
+     -9.36,
+     9.38
+    ],
+    [
+     -17.125,
+     -9.36,
+     9.38
+    ],
+    [
+     -16.675,
+     -9.36,
+     9.38
+    ],
+    [
+     -16.225,
+     -9.36,
+     9.38
+    ],
+    [
+     -15.775,
+     -9.36,
+     9.38
+    ],
+    [
+     -15.325,
+     -9.36,
+     9.38
+    ],
+    [
+     -14.875,
+     -9.36,
+     9.38
+    ],
+    [
+     31.22,
+     -10.32,
+     11.34
+    ],
+    [
+     30.86,
+     -10.32,
+     11.34
+    ],
+    [
+     30.5,
+     -10.32,
+     11.34
+    ],
+    [
+     30.143,
+     -10.32,
+     11.3481
+    ],
+    [
+     29.8712,
+     -10.32,
+     11.5841
+    ],
+    [
+     29.581,
+     -10.32,
+     11.7965
+    ],
+    [
+     29.2786,
+     -10.32,
+     11.9909
+    ],
+    [
+     28.9618,
+     -10.32,
+     12.1619
+    ],
+    [
+     28.6305,
+     -10.32,
+     12.3021
+    ],
+    [
+     28.2915,
+     -10.32,
+     12.4218
+    ],
+    [
+     27.9451,
+     -10.32,
+     12.5196
+    ],
+    [
+     27.5902,
+     -10.32,
+     12.58
+    ],
+    [
+     27.2329,
+     -10.32,
+     12.6186
+    ],
+    [
+     26.8734,
+     -10.32,
+     12.6355
+    ],
+    [
+     26.514,
+     -10.32,
+     12.6157
+    ],
+    [
+     26.1572,
+     -10.32,
+     12.5712
+    ],
+    [
+     25.8037,
+     -10.32,
+     12.5051
+    ],
+    [
+     25.4572,
+     -10.32,
+     12.4074
+    ],
+    [
+     25.1201,
+     -10.32,
+     12.2821
+    ],
+    [
+     24.7913,
+     -10.32,
+     12.1366
+    ],
+    [
+     24.4746,
+     -10.32,
+     11.9656
+    ],
+    [
+     24.1752,
+     -10.32,
+     11.7663
+    ],
+    [
+     23.8886,
+     -10.32,
+     11.5492
+    ],
+    [
+     23.6068,
+     -10.32,
+     11.34
+    ],
+    [
+     23.2468,
+     -10.32,
+     11.34
+    ],
+    [
+     22.8868,
+     -10.32,
+     11.34
+    ],
+    [
+     22.5268,
+     -10.32,
+     11.34
+    ],
+    [
+     29.5528,
+     -10.32,
+     11.3213
+    ],
+    [
+     29.2582,
+     -10.32,
+     11.2645
+    ],
+    [
+     28.9632,
+     -10.32,
+     11.2097
+    ],
+    [
+     28.6676,
+     -10.32,
+     11.1586
+    ],
+    [
+     28.3711,
+     -10.32,
+     11.1133
+    ],
+    [
+     28.0736,
+     -10.32,
+     11.0744
+    ],
+    [
+     27.7753,
+     -10.32,
+     11.0428
+    ],
+    [
+     27.4763,
+     -10.32,
+     11.0196
+    ],
+    [
+     27.1767,
+     -10.32,
+     11.0053
+    ],
+    [
+     26.8767,
+     -10.32,
+     11.0004
+    ],
+    [
+     26.5768,
+     -10.32,
+     11.0062
+    ],
+    [
+     26.2772,
+     -10.32,
+     11.0222
+    ],
+    [
+     25.9783,
+     -10.32,
+     11.0471
+    ],
+    [
+     25.6801,
+     -10.32,
+     11.0801
+    ],
+    [
+     25.3829,
+     -10.32,
+     11.1203
+    ],
+    [
+     25.0865,
+     -10.32,
+     11.1665
+    ],
+    [
+     24.7909,
+     -10.32,
+     11.2178
+    ],
+    [
+     24.496,
+     -10.32,
+     11.2731
+    ],
+    [
+     24.2015,
+     -10.32,
+     11.3302
+    ],
+    [
+     29.35,
+     -12.66,
+     3.76
+    ],
+    [
+     29.05,
+     -12.66,
+     3.76
+    ],
+    [
+     28.75,
+     -12.66,
+     3.76
+    ],
+    [
+     28.45,
+     -12.66,
+     3.76
+    ],
+    [
+     28.15,
+     -12.66,
+     3.76
+    ],
+    [
+     27.85,
+     -12.66,
+     3.76
+    ],
+    [
+     27.55,
+     -12.66,
+     3.76
+    ],
+    [
+     27.25,
+     -12.66,
+     3.76
+    ],
+    [
+     26.95,
+     -12.66,
+     3.76
+    ],
+    [
+     26.65,
+     -12.66,
+     3.76
+    ],
+    [
+     26.35,
+     -12.66,
+     3.76
+    ],
+    [
+     26.05,
+     -12.66,
+     3.76
+    ],
+    [
+     25.75,
+     -12.66,
+     3.76
+    ],
+    [
+     25.45,
+     -12.66,
+     3.76
+    ],
+    [
+     25.15,
+     -12.66,
+     3.76
+    ],
+    [
+     24.85,
+     -12.66,
+     3.76
+    ],
+    [
+     24.55,
+     -12.66,
+     3.76
+    ],
+    [
+     32.98,
+     -10.41,
+     2.71
+    ],
+    [
+     32.76,
+     -10.41,
+     2.71
+    ],
+    [
+     32.54,
+     -10.41,
+     2.71
+    ],
+    [
+     32.32,
+     -10.41,
+     2.71
+    ],
+    [
+     32.1,
+     -10.41,
+     2.71
+    ],
+    [
+     31.88,
+     -10.41,
+     2.71
+    ],
+    [
+     31.66,
+     -10.41,
+     2.71
+    ],
+    [
+     15.025,
+     -9.36,
+     9.38
+    ],
+    [
+     15.475,
+     -9.36,
+     9.38
+    ],
+    [
+     15.925,
+     -9.36,
+     9.38
+    ],
+    [
+     16.375,
+     -9.36,
+     9.38
+    ],
+    [
+     16.825,
+     -9.36,
+     9.38
+    ],
+    [
+     17.275,
+     -9.36,
+     9.38
+    ],
+    [
+     17.725,
+     -9.36,
+     9.38
+    ],
+    [
+     18.175,
+     -9.36,
+     9.38
+    ],
+    [
+     18.625,
+     -9.36,
+     9.38
+    ],
+    [
+     19.075,
+     -9.36,
+     9.38
+    ],
+    [
+     19.525,
+     -9.36,
+     9.38
+    ],
+    [
+     19.975,
+     -9.36,
+     9.38
+    ],
+    [
+     20.425,
+     -9.36,
+     9.38
+    ],
+    [
+     20.875,
+     -9.36,
+     9.38
+    ],
+    [
+     21.325,
+     -9.36,
+     9.38
+    ],
+    [
+     21.775,
+     -9.36,
+     9.38
+    ],
+    [
+     31.925,
+     -9.36,
+     9.38
+    ],
+    [
+     32.375,
+     -9.36,
+     9.38
+    ],
+    [
+     32.825,
+     -9.36,
+     9.38
+    ],
+    [
+     33.275,
+     -9.36,
+     9.38
+    ],
+    [
+     33.725,
+     -9.36,
+     9.38
+    ],
+    [
+     34.175,
+     -9.36,
+     9.38
+    ],
+    [
+     34.625,
+     -9.36,
+     9.38
+    ],
+    [
+     35.075,
+     -9.36,
+     9.38
+    ],
+    [
+     35.525,
+     -9.36,
+     9.38
+    ],
+    [
+     35.975,
+     -9.36,
+     9.38
+    ],
+    [
+     36.425,
+     -9.36,
+     9.38
+    ],
+    [
+     36.875,
+     -9.36,
+     9.38
+    ],
+    [
+     37.325,
+     -9.36,
+     9.38
+    ],
+    [
+     37.775,
+     -9.36,
+     9.38
+    ],
+    [
+     38.225,
+     -9.36,
+     9.38
+    ],
+    [
+     38.675,
+     -9.36,
+     9.38
+    ],
+    [
+     56.02,
+     -10.32,
+     11.14
+    ],
+    [
+     55.6619,
+     -10.32,
+     11.1735
+    ],
+    [
+     55.3155,
+     -10.32,
+     11.27
+    ],
+    [
+     54.9858,
+     -10.32,
+     11.4139
+    ],
+    [
+     54.6724,
+     -10.32,
+     11.5908
+    ],
+    [
+     54.3724,
+     -10.32,
+     11.7898
+    ],
+    [
+     54.0828,
+     -10.32,
+     12.0036
+    ],
+    [
+     53.7977,
+     -10.32,
+     12.2235
+    ],
+    [
+     53.5137,
+     -10.32,
+     12.4447
+    ],
+    [
+     53.2275,
+     -10.32,
+     12.6631
+    ],
+    [
+     52.9361,
+     -10.32,
+     12.8742
+    ],
+    [
+     52.6357,
+     -10.32,
+     13.0726
+    ],
+    [
+     52.3208,
+     -10.32,
+     13.2471
+    ],
+    [
+     51.9903,
+     -10.32,
+     13.3892
+    ],
+    [
+     51.6447,
+     -10.32,
+     13.4882
+    ],
+    [
+     51.2883,
+     -10.32,
+     13.5328
+    ],
+    [
+     50.9297,
+     -10.32,
+     13.5168
+    ],
+    [
+     50.5785,
+     -10.32,
+     13.4424
+    ],
+    [
+     50.2411,
+     -10.32,
+     13.3189
+    ],
+    [
+     49.9194,
+     -10.32,
+     13.1586
+    ],
+    [
+     49.6117,
+     -10.32,
+     12.9723
+    ],
+    [
+     49.315,
+     -10.32,
+     12.7685
+    ],
+    [
+     49.0262,
+     -10.32,
+     12.5536
+    ],
+    [
+     48.7422,
+     -10.32,
+     12.3324
+    ],
+    [
+     48.4582,
+     -10.32,
+     12.1112
+    ],
+    [
+     48.1704,
+     -10.32,
+     11.895
+    ],
+    [
+     47.8754,
+     -10.32,
+     11.6888
+    ],
+    [
+     47.5693,
+     -10.32,
+     11.4999
+    ],
+    [
+     47.2482,
+     -10.32,
+     11.3383
+    ],
+    [
+     46.9098,
+     -10.32,
+     11.2179
+    ],
+    [
+     46.5567,
+     -10.32,
+     11.1543
+    ],
+    [
+     55.65,
+     -11.32,
+     4.15
+    ],
+    [
+     55.35,
+     -11.32,
+     4.15
+    ],
+    [
+     55.05,
+     -11.32,
+     4.15
+    ],
+    [
+     54.75,
+     -11.32,
+     4.15
+    ],
+    [
+     54.45,
+     -11.32,
+     4.15
+    ],
+    [
+     54.15,
+     -11.32,
+     4.15
+    ],
+    [
+     53.85,
+     -11.32,
+     4.15
+    ],
+    [
+     53.55,
+     -11.32,
+     4.15
+    ],
+    [
+     53.25,
+     -11.32,
+     4.15
+    ],
+    [
+     52.95,
+     -11.32,
+     4.15
+    ],
+    [
+     52.65,
+     -11.32,
+     4.15
+    ],
+    [
+     52.35,
+     -11.32,
+     4.15
+    ],
+    [
+     52.05,
+     -11.32,
+     4.15
+    ],
+    [
+     51.75,
+     -11.32,
+     4.15
+    ],
+    [
+     51.45,
+     -11.32,
+     4.15
+    ],
+    [
+     51.15,
+     -11.32,
+     4.15
+    ],
+    [
+     50.85,
+     -11.32,
+     4.15
+    ],
+    [
+     50.55,
+     -11.32,
+     4.15
+    ],
+    [
+     50.25,
+     -11.32,
+     4.15
+    ],
+    [
+     49.95,
+     -11.32,
+     4.15
+    ],
+    [
+     49.65,
+     -11.32,
+     4.15
+    ],
+    [
+     49.35,
+     -11.32,
+     4.15
+    ],
+    [
+     49.05,
+     -11.32,
+     4.15
+    ],
+    [
+     48.75,
+     -11.32,
+     4.15
+    ],
+    [
+     48.45,
+     -11.32,
+     4.15
+    ],
+    [
+     48.15,
+     -11.32,
+     4.15
+    ],
+    [
+     47.85,
+     -11.32,
+     4.15
+    ],
+    [
+     47.55,
+     -11.32,
+     4.15
+    ],
+    [
+     47.25,
+     -11.32,
+     4.15
+    ],
+    [
+     46.95,
+     -11.32,
+     4.15
+    ],
+    [
+     46.65,
+     -11.32,
+     4.15
+    ],
+    [
+     45.88,
+     -10.41,
+     2.71
+    ],
+    [
+     45.66,
+     -10.41,
+     2.71
+    ],
+    [
+     45.44,
+     -10.41,
+     2.71
+    ],
+    [
+     45.22,
+     -10.41,
+     2.71
+    ],
+    [
+     45.0,
+     -10.41,
+     2.71
+    ],
+    [
+     44.78,
+     -10.41,
+     2.71
+    ],
+    [
+     44.56,
+     -10.41,
+     2.71
+    ],
+    [
+     39.6,
+     -9.36,
+     9.38
+    ],
+    [
+     40.05,
+     -9.36,
+     9.38
+    ],
+    [
+     40.5,
+     -9.36,
+     9.38
+    ],
+    [
+     40.95,
+     -9.36,
+     9.38
+    ],
+    [
+     41.4,
+     -9.36,
+     9.38
+    ],
+    [
+     41.85,
+     -9.36,
+     9.38
+    ],
+    [
+     42.3,
+     -9.36,
+     9.38
+    ],
+    [
+     42.75,
+     -9.36,
+     9.38
+    ],
+    [
+     43.2,
+     -9.36,
+     9.38
+    ],
+    [
+     43.65,
+     -9.36,
+     9.38
+    ],
+    [
+     44.1,
+     -9.36,
+     9.38
+    ],
+    [
+     44.55,
+     -9.36,
+     9.38
+    ],
+    [
+     45.0,
+     -9.36,
+     9.38
+    ],
+    [
+     45.45,
+     -9.36,
+     9.38
+    ],
+    [
+     45.9,
+     -9.36,
+     9.38
+    ],
+    [
+     56.725,
+     -9.36,
+     9.38
+    ],
+    [
+     57.175,
+     -9.36,
+     9.38
+    ],
+    [
+     57.625,
+     -9.36,
+     9.38
+    ],
+    [
+     58.075,
+     -9.36,
+     9.38
+    ],
+    [
+     58.525,
+     -9.36,
+     9.38
+    ],
+    [
+     58.975,
+     -9.36,
+     9.38
+    ],
+    [
+     59.425,
+     -9.36,
+     9.38
+    ],
+    [
+     59.875,
+     -9.36,
+     9.38
+    ],
+    [
+     60.325,
+     -9.36,
+     9.38
+    ],
+    [
+     60.775,
+     -9.36,
+     9.38
+    ],
+    [
+     61.225,
+     -9.36,
+     9.38
+    ],
+    [
+     61.675,
+     -9.36,
+     9.38
+    ],
+    [
+     62.125,
+     -9.36,
+     9.38
+    ],
+    [
+     62.575,
+     -9.36,
+     9.38
+    ],
+    [
+     63.025,
+     -9.36,
+     9.38
+    ],
+    [
+     79.92,
+     -10.32,
+     11.04
+    ],
+    [
+     79.56,
+     -10.32,
+     11.04
+    ],
+    [
+     79.2,
+     -10.32,
+     11.04
+    ],
+    [
+     78.84,
+     -10.32,
+     11.04
+    ],
+    [
+     78.48,
+     -10.32,
+     11.04
+    ],
+    [
+     78.12,
+     -10.32,
+     11.04
+    ],
+    [
+     77.76,
+     -10.32,
+     11.04
+    ],
+    [
+     77.4,
+     -10.32,
+     11.04
+    ],
+    [
+     77.1928,
+     -10.32,
+     11.2493
+    ],
+    [
+     77.0299,
+     -10.32,
+     11.5692
+    ],
+    [
+     76.8139,
+     -10.32,
+     11.8556
+    ],
+    [
+     76.5516,
+     -10.32,
+     12.0999
+    ],
+    [
+     76.2509,
+     -10.32,
+     12.2947
+    ],
+    [
+     75.9209,
+     -10.32,
+     12.4342
+    ],
+    [
+     75.5714,
+     -10.32,
+     12.5142
+    ],
+    [
+     75.2131,
+     -10.32,
+     12.5322
+    ],
+    [
+     74.8568,
+     -10.32,
+     12.4875
+    ],
+    [
+     74.5131,
+     -10.32,
+     12.3812
+    ],
+    [
+     74.1947,
+     -10.32,
+     12.2133
+    ],
+    [
+     73.9126,
+     -10.32,
+     11.9902
+    ],
+    [
+     73.674,
+     -10.32,
+     11.7218
+    ],
+    [
+     73.4859,
+     -10.32,
+     11.4163
+    ],
+    [
+     73.354,
+     -10.32,
+     11.083
+    ],
+    [
+     73.0254,
+     -10.32,
+     11.04
+    ],
+    [
+     72.6654,
+     -10.32,
+     11.04
+    ],
+    [
+     72.3054,
+     -10.32,
+     11.04
+    ],
+    [
+     71.9454,
+     -10.32,
+     11.04
+    ],
+    [
+     71.5854,
+     -10.32,
+     11.04
+    ],
+    [
+     71.2254,
+     -10.32,
+     11.04
+    ],
+    [
+     70.8654,
+     -10.32,
+     11.04
+    ],
+    [
+     70.5054,
+     -10.32,
+     11.04
+    ],
+    [
+     77.85,
+     -12.28,
+     4.21
+    ],
+    [
+     77.55,
+     -12.28,
+     4.21
+    ],
+    [
+     77.25,
+     -12.28,
+     4.21
+    ],
+    [
+     76.95,
+     -12.28,
+     4.21
+    ],
+    [
+     76.65,
+     -12.28,
+     4.21
+    ],
+    [
+     76.35,
+     -12.28,
+     4.21
+    ],
+    [
+     76.05,
+     -12.28,
+     4.21
+    ],
+    [
+     75.75,
+     -12.28,
+     4.21
+    ],
+    [
+     75.45,
+     -12.28,
+     4.21
+    ],
+    [
+     75.15,
+     -12.28,
+     4.21
+    ],
+    [
+     74.85,
+     -12.28,
+     4.21
+    ],
+    [
+     74.55,
+     -12.28,
+     4.21
+    ],
+    [
+     74.25,
+     -12.28,
+     4.21
+    ],
+    [
+     73.95,
+     -12.28,
+     4.21
+    ],
+    [
+     73.65,
+     -12.28,
+     4.21
+    ],
+    [
+     73.35,
+     -12.28,
+     4.21
+    ],
+    [
+     73.05,
+     -12.28,
+     4.21
+    ],
+    [
+     72.75,
+     -12.28,
+     4.21
+    ],
+    [
+     81.68,
+     -10.41,
+     2.71
+    ],
+    [
+     81.46,
+     -10.41,
+     2.71
+    ],
+    [
+     81.24,
+     -10.41,
+     2.71
+    ],
+    [
+     81.02,
+     -10.41,
+     2.71
+    ],
+    [
+     80.8,
+     -10.41,
+     2.71
+    ],
+    [
+     80.58,
+     -10.41,
+     2.71
+    ],
+    [
+     80.36,
+     -10.41,
+     2.71
+    ],
+    [
+     63.85,
+     -9.36,
+     9.38
+    ],
+    [
+     64.3,
+     -9.36,
+     9.38
+    ],
+    [
+     64.75,
+     -9.36,
+     9.38
+    ],
+    [
+     65.2,
+     -9.36,
+     9.38
+    ],
+    [
+     65.65,
+     -9.36,
+     9.38
+    ],
+    [
+     66.1,
+     -9.36,
+     9.38
+    ],
+    [
+     66.55,
+     -9.36,
+     9.38
+    ],
+    [
+     67.0,
+     -9.36,
+     9.38
+    ],
+    [
+     67.45,
+     -9.36,
+     9.38
+    ],
+    [
+     67.9,
+     -9.36,
+     9.38
+    ],
+    [
+     68.35,
+     -9.36,
+     9.38
+    ],
+    [
+     68.8,
+     -9.36,
+     9.38
+    ],
+    [
+     69.25,
+     -9.36,
+     9.38
+    ],
+    [
+     69.7,
+     -9.36,
+     9.38
+    ],
+    [
+     70.15,
+     -9.36,
+     9.38
+    ],
+    [
+     80.625,
+     -9.36,
+     9.38
+    ],
+    [
+     81.075,
+     -9.36,
+     9.38
+    ],
+    [
+     81.525,
+     -9.36,
+     9.38
+    ],
+    [
+     81.975,
+     -9.36,
+     9.38
+    ],
+    [
+     82.425,
+     -9.36,
+     9.38
+    ],
+    [
+     82.875,
+     -9.36,
+     9.38
+    ],
+    [
+     83.325,
+     -9.36,
+     9.38
+    ],
+    [
+     83.775,
+     -9.36,
+     9.38
+    ],
+    [
+     84.225,
+     -9.36,
+     9.38
+    ],
+    [
+     84.675,
+     -9.36,
+     9.38
+    ],
+    [
+     85.125,
+     -9.36,
+     9.38
+    ],
+    [
+     85.575,
+     -9.36,
+     9.38
+    ],
+    [
+     86.025,
+     -9.36,
+     9.38
+    ],
+    [
+     86.475,
+     -9.36,
+     9.38
+    ],
+    [
+     -87.32,
+     -8.8727,
+     10.5524
+    ],
+    [
+     -87.32,
+     -8.4807,
+     10.7734
+    ],
+    [
+     -87.32,
+     -8.0828,
+     10.9832
+    ],
+    [
+     -87.32,
+     -7.6805,
+     11.185
+    ],
+    [
+     -87.32,
+     -7.2719,
+     11.3733
+    ],
+    [
+     -87.32,
+     -6.8606,
+     11.5558
+    ],
+    [
+     -87.32,
+     -6.4424,
+     11.7218
+    ],
+    [
+     -87.32,
+     -6.0227,
+     11.8839
+    ],
+    [
+     -87.32,
+     -5.5964,
+     12.028
+    ],
+    [
+     -87.32,
+     -5.1683,
+     12.1666
+    ],
+    [
+     -87.32,
+     -4.736,
+     12.2915
+    ],
+    [
+     -87.32,
+     -4.301,
+     12.4061
+    ],
+    [
+     -87.32,
+     -3.8635,
+     12.5118
+    ],
+    [
+     -87.32,
+     -3.4227,
+     12.6019
+    ],
+    [
+     -87.32,
+     -2.9808,
+     12.6865
+    ],
+    [
+     -87.32,
+     -2.5358,
+     12.7537
+    ],
+    [
+     -87.32,
+     -2.0899,
+     12.8133
+    ],
+    [
+     -87.32,
+     -1.6425,
+     12.8614
+    ],
+    [
+     -87.32,
+     -1.1939,
+     12.8958
+    ],
+    [
+     -87.32,
+     -0.7448,
+     12.9241
+    ],
+    [
+     -87.32,
+     -0.2949,
+     12.9337
+    ],
+    [
+     -87.32,
+     0.155,
+     12.9367
+    ],
+    [
+     -87.32,
+     0.6049,
+     12.9271
+    ],
+    [
+     -87.32,
+     1.0543,
+     12.9047
+    ],
+    [
+     -87.32,
+     1.5033,
+     12.8759
+    ],
+    [
+     -87.32,
+     1.9508,
+     12.8283
+    ],
+    [
+     -87.32,
+     2.3975,
+     12.7746
+    ],
+    [
+     -87.32,
+     2.8424,
+     12.7074
+    ],
+    [
+     -87.32,
+     3.2854,
+     12.6288
+    ],
+    [
+     -87.32,
+     3.727,
+     12.5423
+    ],
+    [
+     -87.32,
+     4.165,
+     12.4389
+    ],
+    [
+     -87.32,
+     4.6016,
+     12.3304
+    ],
+    [
+     -87.32,
+     5.0339,
+     12.2055
+    ],
+    [
+     -87.32,
+     5.4638,
+     12.0728
+    ],
+    [
+     -87.32,
+     5.8901,
+     11.9287
+    ],
+    [
+     -87.32,
+     6.312,
+     11.7725
+    ],
+    [
+     -87.32,
+     6.7314,
+     11.6092
+    ],
+    [
+     -87.32,
+     7.1441,
+     11.43
+    ],
+    [
+     -87.32,
+     7.5554,
+     11.2475
+    ],
+    [
+     -87.32,
+     7.9577,
+     11.046
+    ],
+    [
+     -87.32,
+     8.3588,
+     10.8421
+    ],
+    [
+     -87.32,
+     8.7509,
+     10.6211
+    ],
+    [
+     87.32,
+     8.8727,
+     10.5524
+    ],
+    [
+     87.32,
+     8.4807,
+     10.7734
+    ],
+    [
+     87.32,
+     8.0828,
+     10.9832
+    ],
+    [
+     87.32,
+     7.6805,
+     11.185
+    ],
+    [
+     87.32,
+     7.2719,
+     11.3733
+    ],
+    [
+     87.32,
+     6.8606,
+     11.5558
+    ],
+    [
+     87.32,
+     6.4424,
+     11.7218
+    ],
+    [
+     87.32,
+     6.0227,
+     11.8839
+    ],
+    [
+     87.32,
+     5.5964,
+     12.028
+    ],
+    [
+     87.32,
+     5.1683,
+     12.1666
+    ],
+    [
+     87.32,
+     4.736,
+     12.2915
+    ],
+    [
+     87.32,
+     4.301,
+     12.4061
+    ],
+    [
+     87.32,
+     3.8635,
+     12.5118
+    ],
+    [
+     87.32,
+     3.4227,
+     12.6019
+    ],
+    [
+     87.32,
+     2.9808,
+     12.6865
+    ],
+    [
+     87.32,
+     2.5358,
+     12.7537
+    ],
+    [
+     87.32,
+     2.0899,
+     12.8133
+    ],
+    [
+     87.32,
+     1.6425,
+     12.8614
+    ],
+    [
+     87.32,
+     1.1939,
+     12.8958
+    ],
+    [
+     87.32,
+     0.7448,
+     12.9241
+    ],
+    [
+     87.32,
+     0.2949,
+     12.9337
+    ],
+    [
+     87.32,
+     -0.155,
+     12.9367
+    ],
+    [
+     87.32,
+     -0.6049,
+     12.9271
+    ],
+    [
+     87.32,
+     -1.0543,
+     12.9047
+    ],
+    [
+     87.32,
+     -1.5033,
+     12.8759
+    ],
+    [
+     87.32,
+     -1.9508,
+     12.8283
+    ],
+    [
+     87.32,
+     -2.3975,
+     12.7746
+    ],
+    [
+     87.32,
+     -2.8424,
+     12.7074
+    ],
+    [
+     87.32,
+     -3.2854,
+     12.6288
+    ],
+    [
+     87.32,
+     -3.727,
+     12.5423
+    ],
+    [
+     87.32,
+     -4.165,
+     12.4389
+    ],
+    [
+     87.32,
+     -4.6016,
+     12.3304
+    ],
+    [
+     87.32,
+     -5.0339,
+     12.2055
+    ],
+    [
+     87.32,
+     -5.4638,
+     12.0728
+    ],
+    [
+     87.32,
+     -5.8901,
+     11.9287
+    ],
+    [
+     87.32,
+     -6.312,
+     11.7725
+    ],
+    [
+     87.32,
+     -6.7314,
+     11.6092
+    ],
+    [
+     87.32,
+     -7.1441,
+     11.43
+    ],
+    [
+     87.32,
+     -7.5554,
+     11.2475
+    ],
+    [
+     87.32,
+     -7.9577,
+     11.046
+    ],
+    [
+     87.32,
+     -8.3588,
+     10.8421
+    ],
+    [
+     87.32,
+     -8.7509,
+     10.6211
+    ],
+    [
+     -50.7,
+     9.3067,
+     10.1405
+    ],
+    [
+     -50.7,
+     8.877,
+     10.3961
+    ],
+    [
+     -50.7,
+     8.4429,
+     10.6438
+    ],
+    [
+     -50.7,
+     7.9982,
+     10.8725
+    ],
+    [
+     -50.7,
+     7.5517,
+     11.0971
+    ],
+    [
+     -50.7,
+     7.0942,
+     11.2989
+    ],
+    [
+     -50.7,
+     6.636,
+     11.4988
+    ],
+    [
+     -50.7,
+     6.1675,
+     11.6737
+    ],
+    [
+     -50.7,
+     5.6988,
+     11.8477
+    ],
+    [
+     -50.7,
+     5.2212,
+     11.9956
+    ],
+    [
+     -50.7,
+     4.7433,
+     12.1425
+    ],
+    [
+     -50.7,
+     4.2582,
+     12.2636
+    ],
+    [
+     -50.7,
+     3.7726,
+     12.3826
+    ],
+    [
+     -50.7,
+     3.2815,
+     12.4767
+    ],
+    [
+     -50.7,
+     2.7899,
+     12.5672
+    ],
+    [
+     -50.7,
+     2.2944,
+     12.6344
+    ],
+    [
+     -50.7,
+     1.7983,
+     12.6959
+    ],
+    [
+     -50.7,
+     1.3,
+     12.7363
+    ],
+    [
+     -50.7,
+     0.8012,
+     12.7685
+    ],
+    [
+     -50.7,
+     0.3013,
+     12.7819
+    ],
+    [
+     -50.7,
+     -0.1985,
+     12.7847
+    ],
+    [
+     -50.7,
+     -0.6983,
+     12.7713
+    ],
+    [
+     -50.7,
+     -1.1974,
+     12.7446
+    ],
+    [
+     -50.7,
+     -1.6958,
+     12.7042
+    ],
+    [
+     -50.7,
+     -2.1925,
+     12.6483
+    ],
+    [
+     -50.7,
+     -2.6879,
+     12.581
+    ],
+    [
+     -50.7,
+     -3.1805,
+     12.4961
+    ],
+    [
+     -50.7,
+     -3.6715,
+     12.4019
+    ],
+    [
+     -50.7,
+     -4.1583,
+     12.2885
+    ],
+    [
+     -50.7,
+     -4.6434,
+     12.1674
+    ],
+    [
+     -50.7,
+     -5.1229,
+     12.0261
+    ],
+    [
+     -50.7,
+     -5.6005,
+     11.8781
+    ],
+    [
+     -50.7,
+     -6.0711,
+     11.7097
+    ],
+    [
+     -50.7,
+     -6.5396,
+     11.5348
+    ],
+    [
+     -50.7,
+     -7.0,
+     11.3404
+    ],
+    [
+     -50.7,
+     -7.4575,
+     11.1387
+    ],
+    [
+     -50.7,
+     -7.9067,
+     10.9195
+    ],
+    [
+     -50.7,
+     -8.3514,
+     10.6909
+    ],
+    [
+     -50.7,
+     -8.7885,
+     10.4487
+    ],
+    [
+     -50.7,
+     -9.2183,
+     10.1931
+    ],
+    [
+     38.75,
+     -9.3067,
+     10.1405
+    ],
+    [
+     38.75,
+     -8.877,
+     10.3961
+    ],
+    [
+     38.75,
+     -8.4429,
+     10.6438
+    ],
+    [
+     38.75,
+     -7.9982,
+     10.8725
+    ],
+    [
+     38.75,
+     -7.5517,
+     11.0971
+    ],
+    [
+     38.75,
+     -7.0942,
+     11.2989
+    ],
+    [
+     38.75,
+     -6.636,
+     11.4988
+    ],
+    [
+     38.75,
+     -6.1675,
+     11.6737
+    ],
+    [
+     38.75,
+     -5.6988,
+     11.8477
+    ],
+    [
+     38.75,
+     -5.2212,
+     11.9956
+    ],
+    [
+     38.75,
+     -4.7433,
+     12.1425
+    ],
+    [
+     38.75,
+     -4.2582,
+     12.2636
+    ],
+    [
+     38.75,
+     -3.7726,
+     12.3826
+    ],
+    [
+     38.75,
+     -3.2815,
+     12.4767
+    ],
+    [
+     38.75,
+     -2.7899,
+     12.5672
+    ],
+    [
+     38.75,
+     -2.2944,
+     12.6344
+    ],
+    [
+     38.75,
+     -1.7983,
+     12.6959
+    ],
+    [
+     38.75,
+     -1.3,
+     12.7363
+    ],
+    [
+     38.75,
+     -0.8012,
+     12.7685
+    ],
+    [
+     38.75,
+     -0.3013,
+     12.7819
+    ],
+    [
+     38.75,
+     0.1985,
+     12.7847
+    ],
+    [
+     38.75,
+     0.6983,
+     12.7713
+    ],
+    [
+     38.75,
+     1.1974,
+     12.7446
+    ],
+    [
+     38.75,
+     1.6958,
+     12.7042
+    ],
+    [
+     38.75,
+     2.1925,
+     12.6483
+    ],
+    [
+     38.75,
+     2.6879,
+     12.581
+    ],
+    [
+     38.75,
+     3.1805,
+     12.4961
+    ],
+    [
+     38.75,
+     3.6715,
+     12.4019
+    ],
+    [
+     38.75,
+     4.1583,
+     12.2885
+    ],
+    [
+     38.75,
+     4.6434,
+     12.1674
+    ],
+    [
+     38.75,
+     5.1229,
+     12.0261
+    ],
+    [
+     38.75,
+     5.6005,
+     11.8781
+    ],
+    [
+     38.75,
+     6.0711,
+     11.7097
+    ],
+    [
+     38.75,
+     6.5396,
+     11.5348
+    ],
+    [
+     38.75,
+     7.0,
+     11.3404
+    ],
+    [
+     38.75,
+     7.4575,
+     11.1387
+    ],
+    [
+     38.75,
+     7.9067,
+     10.9195
+    ],
+    [
+     38.75,
+     8.3514,
+     10.6909
+    ],
+    [
+     38.75,
+     8.7885,
+     10.4487
+    ],
+    [
+     38.75,
+     9.2183,
+     10.1931
+    ],
+    [
+     63.0,
+     -9.3067,
+     10.1405
+    ],
+    [
+     63.0,
+     -8.877,
+     10.3961
+    ],
+    [
+     63.0,
+     -8.4429,
+     10.6438
+    ],
+    [
+     63.0,
+     -7.9982,
+     10.8725
+    ],
+    [
+     63.0,
+     -7.5517,
+     11.0971
+    ],
+    [
+     63.0,
+     -7.0942,
+     11.2989
+    ],
+    [
+     63.0,
+     -6.636,
+     11.4988
+    ],
+    [
+     63.0,
+     -6.1675,
+     11.6737
+    ],
+    [
+     63.0,
+     -5.6988,
+     11.8477
+    ],
+    [
+     63.0,
+     -5.2212,
+     11.9956
+    ],
+    [
+     63.0,
+     -4.7433,
+     12.1425
+    ],
+    [
+     63.0,
+     -4.2582,
+     12.2636
+    ],
+    [
+     63.0,
+     -3.7726,
+     12.3826
+    ],
+    [
+     63.0,
+     -3.2815,
+     12.4767
+    ],
+    [
+     63.0,
+     -2.7899,
+     12.5672
+    ],
+    [
+     63.0,
+     -2.2944,
+     12.6344
+    ],
+    [
+     63.0,
+     -1.7983,
+     12.6959
+    ],
+    [
+     63.0,
+     -1.3,
+     12.7363
+    ],
+    [
+     63.0,
+     -0.8012,
+     12.7685
+    ],
+    [
+     63.0,
+     -0.3013,
+     12.7819
+    ],
+    [
+     63.0,
+     0.1985,
+     12.7847
+    ],
+    [
+     63.0,
+     0.6983,
+     12.7713
+    ],
+    [
+     63.0,
+     1.1974,
+     12.7446
+    ],
+    [
+     63.0,
+     1.6958,
+     12.7042
+    ],
+    [
+     63.0,
+     2.1925,
+     12.6483
+    ],
+    [
+     63.0,
+     2.6879,
+     12.581
+    ],
+    [
+     63.0,
+     3.1805,
+     12.4961
+    ],
+    [
+     63.0,
+     3.6715,
+     12.4019
+    ],
+    [
+     63.0,
+     4.1583,
+     12.2885
+    ],
+    [
+     63.0,
+     4.6434,
+     12.1674
+    ],
+    [
+     63.0,
+     5.1229,
+     12.0261
+    ],
+    [
+     63.0,
+     5.6005,
+     11.8781
+    ],
+    [
+     63.0,
+     6.0711,
+     11.7097
+    ],
+    [
+     63.0,
+     6.5396,
+     11.5348
+    ],
+    [
+     63.0,
+     7.0,
+     11.3404
+    ],
+    [
+     63.0,
+     7.4575,
+     11.1387
+    ],
+    [
+     63.0,
+     7.9067,
+     10.9195
+    ],
+    [
+     63.0,
+     8.3514,
+     10.6909
+    ],
+    [
+     63.0,
+     8.7885,
+     10.4487
+    ],
+    [
+     63.0,
+     9.2183,
+     10.1931
+    ]
+   ]
+  },
+  "lantern": {
+   "prototype": "8-sided paper lantern (5 rings) + 2 lacquered rings, top at the placement",
+   "trisEach": 112,
+   "count": 19,
+   "placements[x,y,zTop,r,h,colour]": [
+    [
+     -27.3,
+     -12.08,
+     4.16,
+     0.17,
+     0.42,
+     "red"
+    ],
+    [
+     -28.16,
+     -12.08,
+     4.16,
+     0.17,
+     0.42,
+     "white"
+    ],
+    [
+     -29.02,
+     -12.08,
+     4.16,
+     0.17,
+     0.42,
+     "red"
+    ],
+    [
+     -29.88,
+     -12.08,
+     4.16,
+     0.17,
+     0.42,
+     "white"
+    ],
+    [
+     -30.74,
+     -12.08,
+     4.16,
+     0.17,
+     0.42,
+     "red"
+    ],
+    [
+     -31.6,
+     -12.08,
+     4.16,
+     0.17,
+     0.42,
+     "white"
+    ],
+    [
+     29.0,
+     -12.55,
+     3.76,
+     0.16,
+     0.4,
+     "white"
+    ],
+    [
+     27.95,
+     -12.55,
+     3.76,
+     0.16,
+     0.4,
+     "red"
+    ],
+    [
+     26.9,
+     -12.55,
+     3.76,
+     0.16,
+     0.4,
+     "white"
+    ],
+    [
+     25.85,
+     -12.55,
+     3.76,
+     0.16,
+     0.4,
+     "red"
+    ],
+    [
+     24.8,
+     -12.55,
+     3.76,
+     0.16,
+     0.4,
+     "white"
+    ],
+    [
+     55.45,
+     -11.19,
+     4.05,
+     0.24,
+     0.62,
+     "red"
+    ],
+    [
+     54.236,
+     -11.19,
+     4.05,
+     0.24,
+     0.62,
+     "white"
+    ],
+    [
+     53.021,
+     -11.19,
+     4.05,
+     0.24,
+     0.62,
+     "red"
+    ],
+    [
+     51.807,
+     -11.19,
+     4.05,
+     0.24,
+     0.62,
+     "red"
+    ],
+    [
+     50.593,
+     -11.19,
+     4.05,
+     0.24,
+     0.62,
+     "white"
+    ],
+    [
+     49.379,
+     -11.19,
+     4.05,
+     0.24,
+     0.62,
+     "red"
+    ],
+    [
+     48.164,
+     -11.19,
+     4.05,
+     0.24,
+     0.62,
+     "red"
+    ],
+    [
+     46.95,
+     -11.19,
+     4.05,
+     0.24,
+     0.62,
+     "white"
+    ]
+   ]
+  },
+  "nobori": {
+   "prototype": "bamboo pole + stone foot + crossbar + 6-row double-sided cloth + 6 loops",
+   "count": 25,
+   "placements[x,y,z0,yaw,h,atlasSlot]": [
+    [
+     -75.6,
+     -12.17,
+     0.15,
+     1.533,
+     4.463753774258427,
+     "nobori_4"
+    ],
+    [
+     -72.3,
+     -12.17,
+     0.15,
+     1.767,
+     4.155087066415568,
+     "nobori_5"
+    ],
+    [
+     -67.1,
+     -12.17,
+     0.15,
+     1.334,
+     4.116658988418252,
+     "nobori_8"
+    ],
+    [
+     -65.7,
+     -12.17,
+     0.15,
+     1.345,
+     4.499890544287256,
+     "nobori_6"
+    ],
+    [
+     -62.4,
+     -12.17,
+     0.15,
+     1.527,
+     4.317638800749064,
+     "nobori_0"
+    ],
+    [
+     -36.55,
+     -12.17,
+     0.15,
+     1.805,
+     4.545554631630447,
+     "nobori_0"
+    ],
+    [
+     -33.71,
+     -12.17,
+     0.15,
+     1.637,
+     4.526795398451737,
+     "nobori_2"
+    ],
+    [
+     -32.77,
+     -12.17,
+     0.15,
+     1.719,
+     4.121417373450175,
+     "nobori_7"
+    ],
+    [
+     -26.13,
+     -12.17,
+     0.15,
+     1.725,
+     4.298973331708858,
+     "nobori_3"
+    ],
+    [
+     -25.19,
+     -12.17,
+     0.15,
+     1.781,
+     4.4259819460144785,
+     "nobori_9"
+    ],
+    [
+     -22.35,
+     -12.17,
+     0.15,
+     1.61,
+     4.48717555029837,
+     "nobori_1"
+    ],
+    [
+     20.8,
+     -12.17,
+     0.15,
+     -1.444,
+     4.388869758479169,
+     "nobori_1"
+    ],
+    [
+     24.867,
+     -12.17,
+     0.15,
+     -1.687,
+     4.5473373487478295,
+     "nobori_3"
+    ],
+    [
+     28.933,
+     -12.17,
+     0.15,
+     -1.69,
+     4.545943713337669,
+     "nobori_6"
+    ],
+    [
+     33.0,
+     -12.17,
+     0.15,
+     -1.335,
+     4.495220585590128,
+     "nobori_9"
+    ],
+    [
+     44.6,
+     -12.17,
+     0.15,
+     -1.761,
+     4.14333646276571,
+     "nobori_7"
+    ],
+    [
+     47.9,
+     -12.17,
+     0.15,
+     -1.332,
+     4.153449813439876,
+     "nobori_2"
+    ],
+    [
+     53.1,
+     -12.17,
+     0.15,
+     -1.441,
+     4.28377284413157,
+     "nobori_5"
+    ],
+    [
+     54.5,
+     -12.17,
+     0.15,
+     -1.518,
+     4.428530423035618,
+     "nobori_8"
+    ],
+    [
+     57.8,
+     -12.17,
+     0.15,
+     -1.798,
+     4.109928420454586,
+     "nobori_0"
+    ],
+    [
+     68.9,
+     -12.17,
+     0.15,
+     -1.658,
+     4.297567625331667,
+     "nobori_3"
+    ],
+    [
+     72.1,
+     -12.17,
+     0.15,
+     -1.362,
+     4.509042705788875,
+     "nobori_4"
+    ],
+    [
+     77.2,
+     -12.17,
+     0.15,
+     -1.726,
+     4.489191069111361,
+     "nobori_9"
+    ],
+    [
+     78.5,
+     -12.17,
+     0.15,
+     -1.606,
+     4.473841599311086,
+     "nobori_1"
+    ],
+    [
+     81.7,
+     -12.17,
+     0.15,
+     -1.619,
+     4.142242624823543,
+     "nobori_6"
+    ]
+   ]
+  },
+  "posterFrame": {
+   "count": 54,
+   "placements[x,y,zc,w,h,slot]": [
+    [
+     -70.4,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_1"
+    ],
+    [
+     -67.6,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_5"
+    ],
+    [
+     -66.65,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_10"
+    ],
+    [
+     -71.35,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_14"
+    ],
+    [
+     -84.716,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_2"
+    ],
+    [
+     -85.556,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_3"
+    ],
+    [
+     -78.262,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_5"
+    ],
+    [
+     -79.102,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_6"
+    ],
+    [
+     -58.898,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_8"
+    ],
+    [
+     -59.738,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_9"
+    ],
+    [
+     -52.444,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_11"
+    ],
+    [
+     -53.284,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_12"
+    ],
+    [
+     -30.95,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_0"
+    ],
+    [
+     -27.95,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_3"
+    ],
+    [
+     -27.0,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_9"
+    ],
+    [
+     -31.9,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_13"
+    ],
+    [
+     -48.75,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_2"
+    ],
+    [
+     -49.59,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_3"
+    ],
+    [
+     -45.491,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_5"
+    ],
+    [
+     -46.331,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_6"
+    ],
+    [
+     -42.232,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_8"
+    ],
+    [
+     -43.072,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_9"
+    ],
+    [
+     -38.973,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_11"
+    ],
+    [
+     -39.813,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_12"
+    ],
+    [
+     -35.714,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_14"
+    ],
+    [
+     -36.554,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_15"
+    ],
+    [
+     -19.419,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_17"
+    ],
+    [
+     -20.259,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_18"
+    ],
+    [
+     -16.16,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_0"
+    ],
+    [
+     -17.0,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_1"
+    ],
+    [
+     25.3,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_2"
+    ],
+    [
+     28.5,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_6"
+    ],
+    [
+     29.45,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_11"
+    ],
+    [
+     24.35,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_15"
+    ],
+    [
+     17.077,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_2"
+    ],
+    [
+     16.237,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_3"
+    ],
+    [
+     37.563,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_5"
+    ],
+    [
+     36.723,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_6"
+    ],
+    [
+     49.7,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_4"
+    ],
+    [
+     52.7,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_7"
+    ],
+    [
+     53.65,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_12"
+    ],
+    [
+     48.75,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_16"
+    ],
+    [
+     41.42,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_2"
+    ],
+    [
+     40.58,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_3"
+    ],
+    [
+     61.82,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_5"
+    ],
+    [
+     60.98,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_6"
+    ],
+    [
+     73.7,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_8"
+    ],
+    [
+     76.9,
+     -9.6,
+     1.75,
+     0.6,
+     0.9,
+     "poster_17"
+    ],
+    [
+     77.85,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_18"
+    ],
+    [
+     72.75,
+     -10.2,
+     1.85,
+     0.6,
+     0.9,
+     "poster_19"
+    ],
+    [
+     65.627,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_2"
+    ],
+    [
+     64.787,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_3"
+    ],
+    [
+     85.513,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_5"
+    ],
+    [
+     84.673,
+     -9.0,
+     1.85,
+     0.6,
+     0.9,
+     "poster_6"
+    ]
+   ]
+  },
+  "kerb": {
+   "count": 80,
+   "xRanges": [
+    [
+     -87.2,
+     -85.383
+    ],
+    [
+     -85.383,
+     -83.565
+    ],
+    [
+     -83.565,
+     -81.748
+    ],
+    [
+     -81.748,
+     -79.93
+    ],
+    [
+     -79.93,
+     -78.112
+    ],
+    [
+     -78.112,
+     -76.295
+    ],
+    [
+     -76.295,
+     -74.478
+    ],
+    [
+     -74.478,
+     -72.66
+    ],
+    [
+     -72.66,
+     -70.843
+    ],
+    [
+     -70.843,
+     -69.025
+    ],
+    [
+     -69.025,
+     -67.208
+    ],
+    [
+     -67.208,
+     -65.39
+    ],
+    [
+     -65.39,
+     -63.573
+    ],
+    [
+     -63.573,
+     -61.755
+    ],
+    [
+     -61.755,
+     -59.938
+    ],
+    [
+     -59.938,
+     -58.12
+    ],
+    [
+     -58.12,
+     -56.303
+    ],
+    [
+     -56.303,
+     -54.485
+    ],
+    [
+     -54.485,
+     -52.668
+    ],
+    [
+     -52.668,
+     -50.85
+    ],
+    [
+     -50.85,
+     -49.032
+    ],
+    [
+     -49.032,
+     -47.215
+    ],
+    [
+     -47.215,
+     -45.398
+    ],
+    [
+     -45.398,
+     -43.58
+    ],
+    [
+     -43.58,
+     -41.763
+    ],
+    [
+     -41.763,
+     -39.945
+    ],
+    [
+     -39.945,
+     -38.127
+    ],
+    [
+     -38.127,
+     -36.31
+    ],
+    [
+     -36.31,
+     -34.492
+    ],
+    [
+     -34.492,
+     -32.675
+    ],
+    [
+     -32.675,
+     -30.857
+    ],
+    [
+     -30.857,
+     -29.04
+    ],
+    [
+     -29.04,
+     -27.223
+    ],
+    [
+     -27.223,
+     -25.405
+    ],
+    [
+     -25.405,
+     -23.588
+    ],
+    [
+     -23.588,
+     -21.77
+    ],
+    [
+     -21.77,
+     -19.953
+    ],
+    [
+     -19.953,
+     -18.135
+    ],
+    [
+     -18.135,
+     -16.317
+    ],
+    [
+     -16.317,
+     -14.5
+    ],
+    [
+     14.5,
+     16.317
+    ],
+    [
+     16.317,
+     18.135
+    ],
+    [
+     18.135,
+     19.953
+    ],
+    [
+     19.953,
+     21.77
+    ],
+    [
+     21.77,
+     23.587
+    ],
+    [
+     23.587,
+     25.405
+    ],
+    [
+     25.405,
+     27.223
+    ],
+    [
+     27.223,
+     29.04
+    ],
+    [
+     29.04,
+     30.858
+    ],
+    [
+     30.858,
+     32.675
+    ],
+    [
+     32.675,
+     34.492
+    ],
+    [
+     34.492,
+     36.31
+    ],
+    [
+     36.31,
+     38.127
+    ],
+    [
+     38.127,
+     39.945
+    ],
+    [
+     39.945,
+     41.763
+    ],
+    [
+     41.763,
+     43.58
+    ],
+    [
+     43.58,
+     45.398
+    ],
+    [
+     45.398,
+     47.215
+    ],
+    [
+     47.215,
+     49.032
+    ],
+    [
+     49.032,
+     50.85
+    ],
+    [
+     50.85,
+     52.668
+    ],
+    [
+     52.668,
+     54.485
+    ],
+    [
+     54.485,
+     56.303
+    ],
+    [
+     56.303,
+     58.12
+    ],
+    [
+     58.12,
+     59.938
+    ],
+    [
+     59.938,
+     61.755
+    ],
+    [
+     61.755,
+     63.573
+    ],
+    [
+     63.573,
+     65.39
+    ],
+    [
+     65.39,
+     67.208
+    ],
+    [
+     67.208,
+     69.025
+    ],
+    [
+     69.025,
+     70.843
+    ],
+    [
+     70.843,
+     72.66
+    ],
+    [
+     72.66,
+     74.477
+    ],
+    [
+     74.477,
+     76.295
+    ],
+    [
+     76.295,
+     78.112
+    ],
+    [
+     78.112,
+     79.93
+    ],
+    [
+     79.93,
+     81.748
+    ],
+    [
+     81.748,
+     83.565
+    ],
+    [
+     83.565,
+     85.383
+    ],
+    [
+     85.383,
+     87.2
+    ]
+   ]
+  },
+  "footwaySlab": {
+   "count": 160,
+   "xRanges(2 rows)": [
+    [
+     -87.2,
+     -85.383
+    ],
+    [
+     -85.383,
+     -83.565
+    ],
+    [
+     -83.565,
+     -81.748
+    ],
+    [
+     -81.748,
+     -79.93
+    ],
+    [
+     -79.93,
+     -78.112
+    ],
+    [
+     -78.112,
+     -76.295
+    ],
+    [
+     -76.295,
+     -74.478
+    ],
+    [
+     -74.478,
+     -72.66
+    ],
+    [
+     -72.66,
+     -70.843
+    ],
+    [
+     -70.843,
+     -69.025
+    ],
+    [
+     -69.025,
+     -67.208
+    ],
+    [
+     -67.208,
+     -65.39
+    ],
+    [
+     -65.39,
+     -63.573
+    ],
+    [
+     -63.573,
+     -61.755
+    ],
+    [
+     -61.755,
+     -59.938
+    ],
+    [
+     -59.938,
+     -58.12
+    ],
+    [
+     -58.12,
+     -56.303
+    ],
+    [
+     -56.303,
+     -54.485
+    ],
+    [
+     -54.485,
+     -52.668
+    ],
+    [
+     -52.668,
+     -50.85
+    ],
+    [
+     -50.85,
+     -49.032
+    ],
+    [
+     -49.032,
+     -47.215
+    ],
+    [
+     -47.215,
+     -45.398
+    ],
+    [
+     -45.398,
+     -43.58
+    ],
+    [
+     -43.58,
+     -41.763
+    ],
+    [
+     -41.763,
+     -39.945
+    ],
+    [
+     -39.945,
+     -38.127
+    ],
+    [
+     -38.127,
+     -36.31
+    ],
+    [
+     -36.31,
+     -34.492
+    ],
+    [
+     -34.492,
+     -32.675
+    ],
+    [
+     -32.675,
+     -30.857
+    ],
+    [
+     -30.857,
+     -29.04
+    ],
+    [
+     -29.04,
+     -27.223
+    ],
+    [
+     -27.223,
+     -25.405
+    ],
+    [
+     -25.405,
+     -23.588
+    ],
+    [
+     -23.588,
+     -21.77
+    ],
+    [
+     -21.77,
+     -19.953
+    ],
+    [
+     -19.953,
+     -18.135
+    ],
+    [
+     -18.135,
+     -16.317
+    ],
+    [
+     -16.317,
+     -14.5
+    ],
+    [
+     14.5,
+     16.317
+    ],
+    [
+     16.317,
+     18.135
+    ],
+    [
+     18.135,
+     19.953
+    ],
+    [
+     19.953,
+     21.77
+    ],
+    [
+     21.77,
+     23.587
+    ],
+    [
+     23.587,
+     25.405
+    ],
+    [
+     25.405,
+     27.223
+    ],
+    [
+     27.223,
+     29.04
+    ],
+    [
+     29.04,
+     30.858
+    ],
+    [
+     30.858,
+     32.675
+    ],
+    [
+     32.675,
+     34.492
+    ],
+    [
+     34.492,
+     36.31
+    ],
+    [
+     36.31,
+     38.127
+    ],
+    [
+     38.127,
+     39.945
+    ],
+    [
+     39.945,
+     41.763
+    ],
+    [
+     41.763,
+     43.58
+    ],
+    [
+     43.58,
+     45.398
+    ],
+    [
+     45.398,
+     47.215
+    ],
+    [
+     47.215,
+     49.032
+    ],
+    [
+     49.032,
+     50.85
+    ],
+    [
+     50.85,
+     52.668
+    ],
+    [
+     52.668,
+     54.485
+    ],
+    [
+     54.485,
+     56.303
+    ],
+    [
+     56.303,
+     58.12
+    ],
+    [
+     58.12,
+     59.938
+    ],
+    [
+     59.938,
+     61.755
+    ],
+    [
+     61.755,
+     63.573
+    ],
+    [
+     63.573,
+     65.39
+    ],
+    [
+     65.39,
+     67.208
+    ],
+    [
+     67.208,
+     69.025
+    ],
+    [
+     69.025,
+     70.843
+    ],
+    [
+     70.843,
+     72.66
+    ],
+    [
+     72.66,
+     74.477
+    ],
+    [
+     74.477,
+     76.295
+    ],
+    [
+     76.295,
+     78.112
+    ],
+    [
+     78.112,
+     79.93
+    ],
+    [
+     79.93,
+     81.748
+    ],
+    [
+     81.748,
+     83.565
+    ],
+    [
+     83.565,
+     85.383
+    ],
+    [
+     85.383,
+     87.2
+    ]
+   ]
+  }
+ }
+}

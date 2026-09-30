@@ -1,0 +1,778 @@
+{
+ "version": "tower-wings v1.0 verify",
+ "files": {
+  "wings": "tower-wings.glb",
+  "exterior": "tower-base-exterior.glb",
+  "interior": "tower-base-interiors.glb"
+ },
+ "method": [
+  "(cell_cinema placed by its rule: world = T(-14.95, 8.55, 0.15) R180z cell).  Writes verify/tower-wings-verify.json:",
+  "",
+  "1. Entrances.  For every IF_wing_*_door_* (street doors, exits) a walking line runs from the footway at the kerb, through the porch,",
+  "   the reveal and 1 m past the wall line (into cell_cinema for W1), three lanes across the clear width, every 2 cm.  Downward rays",
+  "   find (a) the collision surface (COL_wing_* + cinema__col_floor) and (b) the visible walking surface (wing LOD0 without",
+  "   placeholders + base LOD0 + cell_cinema).  Pass: no sample without support; report the longest unsupported run, the height range",
+  "   and the largest step between neighbours.",
+  "2. door_wing_W / door_wing_E (base -> wing zone -> cell): the same lines along x from the base hall across the 0.45 m wing zone.",
+  "3. The W1 street door against the interior's own opening: horizontal rays along +y through a 2 cm grid of the opening must pass the",
+  "   wing wall zone (y -9.00..-8.55) without a hit (wing LOD0 without placeholders, cell meshes without the door leaves); the jamb and",
+  "   head positions are found by bisection separately in the wing geometry and in the cell's wall, and their difference is reported.",
+  "4. Intrusion.  Every wing LOD0 triangle (placeholders listed separately) is tested against the INTERFACE clear boxes (the five",
+  "   cinemas, both halls, the upper rooms, the four stair shafts) shrunk by 1 mm, with an exact triangle / box (SAT) test.",
+  "5. Party-wall clearance: the highest wing LOD0 point within 1 m of the base E/W faces, against the L3 window sills (12.60).",
+  "6. Footway continuity along both wings (y = -10.9 and -12.1, every 0.25 m) against the collision set."
+ ],
+ "entrances": {
+  "IF_wing_E1_door_main": {
+   "collision": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     -0.0,
+     0.15
+    ],
+    "largestStepM": 0.15,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.14,
+     0.18
+    ],
+    "largestStepM": 0.016,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     3.2,
+     -1
+    ]
+   },
+   "from": [
+    26.9,
+    -12.3
+   ],
+   "to": [
+    26.9,
+    -8.9
+   ],
+   "opening": {
+    "width": 2.2,
+    "sill": 0.15,
+    "head": 2.95,
+    "kind": "rect",
+    "hall": "E1",
+    "door": "main"
+   }
+  },
+  "IF_wing_E1_door_rear": {
+   "collision": {
+    "samples": 69,
+    "missing": 54,
+    "longestUnsupportedRunM": 0.36,
+    "zRange": [
+     -0.0,
+     0.0
+    ],
+    "largestStepM": 0.0,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 69,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.145,
+     0.18
+    ],
+    "largestStepM": 0.035,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     0.4,
+     -1
+    ]
+   },
+   "from": [
+    30.314,
+    9.35
+   ],
+   "to": [
+    30.314,
+    8.9
+   ],
+   "opening": {
+    "width": 1.2,
+    "sill": 0.15,
+    "head": 2.7,
+    "kind": "rect",
+    "hall": "E1",
+    "door": "rear"
+   }
+  },
+  "IF_wing_E2_door_exit": {
+   "collision": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.0,
+     0.15
+    ],
+    "largestStepM": 0.15,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.14,
+     0.18
+    ],
+    "largestStepM": 0.02,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     3.2,
+     -1
+    ]
+   },
+   "from": [
+    58.0,
+    -12.3
+   ],
+   "to": [
+    58.0,
+    -8.9
+   ],
+   "opening": {
+    "width": 1.2,
+    "sill": 0.15,
+    "head": 2.65,
+    "kind": "rect",
+    "hall": "E2",
+    "door": "exit"
+   }
+  },
+  "IF_wing_E2_door_main": {
+   "collision": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     -0.0,
+     0.15
+    ],
+    "largestStepM": 0.15,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.14,
+     0.18
+    ],
+    "largestStepM": 0.016,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     3.2,
+     -1
+    ]
+   },
+   "from": [
+    51.2,
+    -12.3
+   ],
+   "to": [
+    51.2,
+    -8.9
+   ],
+   "opening": {
+    "width": 2.2,
+    "sill": 0.15,
+    "head": 2.95,
+    "kind": "rect",
+    "hall": "E2",
+    "door": "main"
+   }
+  },
+  "IF_wing_E2_door_rear": {
+   "collision": {
+    "samples": 69,
+    "missing": 54,
+    "longestUnsupportedRunM": 0.36,
+    "zRange": [
+     0.0,
+     0.0
+    ],
+    "largestStepM": 0.0,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 69,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.145,
+     0.18
+    ],
+    "largestStepM": 0.035,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     0.32,
+     -1
+    ]
+   },
+   "from": [
+    54.6,
+    9.35
+   ],
+   "to": [
+    54.6,
+    8.9
+   ],
+   "opening": {
+    "width": 1.2,
+    "sill": 0.15,
+    "head": 2.7,
+    "kind": "rect",
+    "hall": "E2",
+    "door": "rear"
+   }
+  },
+  "IF_wing_E3_door_main": {
+   "collision": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.0,
+     0.15
+    ],
+    "largestStepM": 0.15,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.14,
+     0.18
+    ],
+    "largestStepM": 0.016,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     3.26,
+     -1
+    ]
+   },
+   "from": [
+    75.3,
+    -12.3
+   ],
+   "to": [
+    75.3,
+    -8.9
+   ],
+   "opening": {
+    "width": 2.2,
+    "sill": 0.15,
+    "head": 2.95,
+    "kind": "rect",
+    "hall": "E3",
+    "door": "main"
+   }
+  },
+  "IF_wing_E3_door_rear": {
+   "collision": {
+    "samples": 69,
+    "missing": 54,
+    "longestUnsupportedRunM": 0.36,
+    "zRange": [
+     0.0,
+     0.0
+    ],
+    "largestStepM": 0.0,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 69,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.145,
+     0.18
+    ],
+    "largestStepM": 0.035,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     0.3,
+     -1
+    ]
+   },
+   "from": [
+    78.464,
+    9.35
+   ],
+   "to": [
+    78.464,
+    8.9
+   ],
+   "opening": {
+    "width": 1.2,
+    "sill": 0.15,
+    "head": 2.7,
+    "kind": "rect",
+    "hall": "E3",
+    "door": "rear"
+   }
+  },
+  "IF_wing_W1_door_main": {
+   "collision": {
+    "samples": 714,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.15,
+     0.15
+    ],
+    "largestStepM": 0.0,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 714,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.14,
+     1.4491
+    ],
+    "largestStepM": 1.2991,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "cinema__walls",
+     3.76,
+     -1
+    ]
+   },
+   "from": [
+    -29.45,
+    -12.3
+   ],
+   "to": [
+    -29.45,
+    -7.55
+   ],
+   "opening": {
+    "width": 1.2,
+    "sill": 0.15,
+    "head": 2.65,
+    "kind": "rect",
+    "hall": "W1",
+    "door": "main",
+    "matches": "cell_cinema south exit door (cell x 14.5, 1.2 x 2.5): leaves belong to the interior"
+   }
+  },
+  "IF_wing_W2_door_exit": {
+   "collision": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     -0.0,
+     0.15
+    ],
+    "largestStepM": 0.15,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.14,
+     0.18
+    ],
+    "largestStepM": 0.02,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     3.2,
+     -1
+    ]
+   },
+   "from": [
+    -81.909,
+    -12.3
+   ],
+   "to": [
+    -81.909,
+    -8.9
+   ],
+   "opening": {
+    "width": 1.2,
+    "sill": 0.15,
+    "head": 2.65,
+    "kind": "rect",
+    "hall": "W2",
+    "door": "exit"
+   }
+  },
+  "IF_wing_W2_door_main": {
+   "collision": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     -0.0,
+     0.15
+    ],
+    "largestStepM": 0.15,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 513,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.14,
+     0.18
+    ],
+    "largestStepM": 0.016,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     3.26,
+     -1
+    ]
+   },
+   "from": [
+    -69.0,
+    -12.3
+   ],
+   "to": [
+    -69.0,
+    -8.9
+   ],
+   "opening": {
+    "width": 2.2,
+    "sill": 0.15,
+    "head": 2.95,
+    "kind": "rect",
+    "hall": "W2",
+    "door": "main"
+   }
+  },
+  "IF_wing_W2_door_rear": {
+   "collision": {
+    "samples": 69,
+    "missing": 54,
+    "longestUnsupportedRunM": 0.36,
+    "zRange": [
+     -0.0,
+     0.0
+    ],
+    "largestStepM": 0.0,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 69,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.145,
+     0.18
+    ],
+    "largestStepM": 0.035,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     0.3,
+     -1
+    ]
+   },
+   "from": [
+    -65.773,
+    9.35
+   ],
+   "to": [
+    -65.773,
+    8.9
+   ],
+   "opening": {
+    "width": 1.2,
+    "sill": 0.15,
+    "head": 2.7,
+    "kind": "rect",
+    "hall": "W2",
+    "door": "rear"
+   }
+  },
+  "IF_wing_door_wing_E": {
+   "collision": {
+    "samples": 81,
+    "missing": 12,
+    "longestUnsupportedRunM": 0.08,
+    "zRange": [
+     0.15,
+     0.15
+    ],
+    "largestStepM": 0.0,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 81,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.03,
+     0.15
+    ],
+    "largestStepM": 0.12,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "TW_LOD0_sill",
+     -0.0,
+     -1
+    ]
+   },
+   "from": [
+    14.94,
+    -0.0
+   ],
+   "to": [
+    14.4,
+    -0.0
+   ],
+   "opening": {
+    "width": 2.4,
+    "sill": 0.15,
+    "head": 3.4,
+    "kind": "rect",
+    "matches": "base door_wing_E + cell_cinema x=0 opening"
+   }
+  },
+  "IF_wing_door_wing_W": {
+   "collision": {
+    "samples": 234,
+    "missing": 15,
+    "longestUnsupportedRunM": 0.1,
+    "zRange": [
+     0.15,
+     0.15
+    ],
+    "largestStepM": 0.0,
+    "highestHit[object, distanceAlongLineM, lane]": null
+   },
+   "visible": {
+    "samples": 234,
+    "missing": 0,
+    "longestUnsupportedRunM": 0.0,
+    "zRange": [
+     0.03,
+     0.15
+    ],
+    "largestStepM": 0.12,
+    "highestHit[object, distanceAlongLineM, lane]": [
+     "cinema__shell",
+     0.0,
+     -1
+    ]
+   },
+   "from": [
+    -15.95,
+    0.0
+   ],
+   "to": [
+    -14.4,
+    -0.0
+   ],
+   "opening": {
+    "width": 2.4,
+    "sill": 0.15,
+    "head": 3.4,
+    "kind": "rect",
+    "matches": "base door_wing_W + cell_cinema x=0 opening"
+   }
+  }
+ },
+ "entrancesNote": "Street doors and exits run from the footway at the kerb (y -12.3) through the porch or the reveal: W1 continues 1 m into cell_cinema; W2 and E1-E3 have no interior cell yet, so their lines stop on the threshold in front of the closed leaves (0.1 m inside the wall face).  Rear doors: the yard north of the wings is outside this module (no ground, no collision there), so the line covers the step and the threshold only; collision 'missing' there is expected.  door_wing_W runs from 1 m inside cell_cinema across the 0.45 m wing zone onto the base threshold stone, stopping short of the base door leaves (x -14.35); the base side has no collision (the ticket-hall floor collision belongs to cell_hall), so the last 0.1 m reports collision 'missing' by design.  door_wing_E: same without a cell on the wing side.  The ajar exit-door leaves of cell_cinema are not a walking surface and are excluded.  The W1 highestHit (1.449 m) is the top of cinema__walls: the interior wainscot runs across the door below 1.45 m (interior request in README).",
+ "W1door": {
+  "gridRays": 7375,
+  "wingHitsInWallZone": 0,
+  "cellHitsInWallZone": 3835,
+  "edges": {
+   "wing": {
+    "jambWest": -30.05,
+    "jambEast": -28.85,
+    "head": 2.65
+   },
+   "cell": {
+    "jambWest": -30.0497,
+    "jambEast": -28.8496,
+    "head": 2.6495
+   }
+  },
+  "edgeDifferenceMm": {
+   "jambWest": 0.3,
+   "jambEast": 0.4,
+   "head": 0.5
+  }
+ },
+ "intrusion": {
+  "solid": {
+   "cinema_W1": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "cinema_W2": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "cinema_E1": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "cinema_E2": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "cinema_E3": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "ticket_hall": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "east_hall": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "upper_rooms_W": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "upper_rooms_E": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "stair_NW": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "stair_SW": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "stair_NE": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "stair_SE": {
+    "triangles": 0,
+    "byObject": {}
+   }
+  },
+  "placeholders(hidden when a cell loads)": {
+   "cinema_W1": {
+    "triangles": 2,
+    "byObject": {
+     "TW_LOD0_W1_backing_dark": 2
+    }
+   },
+   "cinema_W2": {
+    "triangles": 456,
+    "byObject": {
+     "TW_LOD0_W2_backing_dark": 6,
+     "TW_LOD0_W2_curtain": 300,
+     "TW_LOD0_W2_backing": 150
+    }
+   },
+   "cinema_E1": {
+    "triangles": 206,
+    "byObject": {
+     "TW_LOD0_E1_backing": 70,
+     "TW_LOD0_E1_curtain": 132,
+     "TW_LOD0_E1_backing_dark": 4
+    }
+   },
+   "cinema_E2": {
+    "triangles": 208,
+    "byObject": {
+     "TW_LOD0_E2_backing": 70,
+     "TW_LOD0_E2_curtain": 132,
+     "TW_LOD0_E2_backing_dark": 6
+    }
+   },
+   "cinema_E3": {
+    "triangles": 274,
+    "byObject": {
+     "TW_LOD0_E3_curtain": 180,
+     "TW_LOD0_E3_backing": 90,
+     "TW_LOD0_E3_backing_dark": 4
+    }
+   },
+   "ticket_hall": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "east_hall": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "upper_rooms_W": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "upper_rooms_E": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "stair_NW": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "stair_SW": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "stair_NE": {
+    "triangles": 0,
+    "byObject": {}
+   },
+   "stair_SE": {
+    "triangles": 0,
+    "byObject": {}
+   }
+  },
+  "note": "clear boxes from ../INTERFACE.md shrunk by 1 mm; exact triangle/box SAT test"
+ },
+ "partyWall": {
+  "highestWingPointWithin1mOfBaseFaceZ": 12.3,
+  "baseL3WindowSill": 12.6,
+  "clearanceM": 0.3
+ },
+ "footway": {
+  "W_y-10.9": {
+   "samples": 290,
+   "missing": 0,
+   "offLevel": 0
+  },
+  "W_y-12.1": {
+   "samples": 290,
+   "missing": 0,
+   "offLevel": 0
+  },
+  "E_y-10.9": {
+   "samples": 290,
+   "missing": 0,
+   "offLevel": 0
+  },
+  "E_y-12.1": {
+   "samples": 290,
+   "missing": 0,
+   "offLevel": 0
+  }
+ },
+ "timeS": 16.9
+}
