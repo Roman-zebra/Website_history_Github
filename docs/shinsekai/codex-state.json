@@ -1,7 +1,7 @@
 {
   "status": "in_progress",
   "current": "T2",
-  "next": "Seek an inspectable original 1913 site map or high-resolution program without paid access; check new Claude handoffs and relevant branches hourly; start measured camera alignment of the revised north tower study against the 1914 view A and later 1921 plate while treating c0234001/e0347001 directions as unresolved; proceed with independent T3 geometry and design tasks before waiting on Claude",
-  "updatedAt": "2026-09-30T11:16:00+09:00",
+  "next": "Every 10 minutes check Claude's local handoff and claude/* branches and immediately integrate useful progress; meanwhile measure north-photo landmarks in 1914 view A and CC0 c1815001 for a joint camera fit, seek the original 1913 site plan without paid access, and prepare an isolated T3 visual preview that cannot affect the public site; keep c0234001/e0347001 directions unresolved and the sourced 50-shaku roof level until projection is calibrated",
+  "updatedAt": "2026-09-30T11:32:00+09:00",
   "lastCompleted": "T1"
 }

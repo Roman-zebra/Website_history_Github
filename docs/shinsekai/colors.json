@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
   "status": "provisional",
-  "note": "Black-and-white primary photographs do not prove surface colors. The White Tower was described as white-painted, but its exact shade is unknown. Other swatches are art-direction estimates or later recollections; recheck opening-era color evidence before final publication.",
+  "note": "Black-and-white primary photographs do not prove surface colors. The White Tower was described as white-painted, but its exact shade is unknown. Three hand-tinted postcards agree on reddish tower ironwork and red cabin bodies; these remain artist-colour candidates rather than measured paint. Other swatches are art-direction estimates or later recollections.",
   "palette": [
     {"id":"tower-steel","hex":"#4d4b47","material":"painted or weathered iron","basis":"grayscale photographs and common early steel finish; color inferred","confidence":"low","sourceIds":["S002","S003"]},
+    {"id":"tower-steel-handtint-candidate","hex":"#8b4f3e","material":"possible reddish iron finish","basis":"Three distinct hand-tinted cards use reddish brown; the colourists may have chosen it decoratively and no original paint record has been found","confidence":"low","sourceIds":["S055","S056","S057"]},
     {"id":"tower-arch","hex":"#d1c3aa","material":"light rendered masonry","basis":"tonal contrast in 1914 photograph; hue inferred","confidence":"low","sourceIds":["S003"]},
-    {"id":"ropeway-accent","hex":"#9b3029","material":"limited red accent on ropeway cabin","basis":"current operator retrospective description calls the ropeway red; component and shade unresolved; hand-coloured postcards show a different multicolour treatment","confidence":"low","sourceIds":["S010"]},
+    {"id":"ropeway-accent","hex":"#9b3029","material":"provisional red ropeway cabin body","basis":"current operator retrospective and three hand-tinted cards show red; original body paint and shade remain unverified while one card shows multicolour trim","confidence":"low","sourceIds":["S010","S055","S056","S057"]},
     {"id":"ropeway-canopy","hex":"#d9c7a5","material":"light striped awning base","basis":"awning/scalloped edge shape appears in period photographs; hue and stripe colours inferred from hand-coloured postcards and may be decorative imagination","confidence":"low","sourceIds":["S003"]},
     {"id":"white-tower-render","hex":"#eeeae0","material":"white-painted tower render","basis":"Osaka Prefectural Library ropeway reference reports the White Tower was white-painted; warm off-white shade is an art-direction estimate","confidence":"medium for white paint; low for hex shade","sourceIds":["S038","S028"]},
     {"id":"garden-green","hex":"#56764a","material":"seasonal planting","basis":"plant species and hue not identified; art-direction estimate","confidence":"low","sourceIds":["S001"]},
