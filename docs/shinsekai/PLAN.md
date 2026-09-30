@@ -1,4 +1,4 @@
-# 新世界・ルナパーク（1912）3D 計画 v3.5
+# 新世界・ルナパーク（1912）3D 計画 v3.6
 
 Japan Time Atlas（japantimeatlas.com／GitHub: Roman-zebra/Website_history_Github）の3D再現の2本目。社内コード名 `shinsekai`。
 v1〜v3.5：すべて 2026-09-30（Claude）。旧版は `PLAN.v1.md`。変更はあなたの指示があった時だけ行い、「変更履歴」に追記する。
@@ -13,6 +13,8 @@ v1〜v3.5：すべて 2026-09-30（Claude）。旧版は `PLAN.v1.md`。変更�
 - v3.5：**得意・不得意で分担し、互いに監視**。デザインや配置で Codex ができなかったことは Claude が直接直してよい（逆も可）。Claude はブランチ claude/<内容> で直し、Codex が確認して main に取り込む。
 - v3.4：**デザインと配置の段階では Claude（Max）が Codex を補助**して見た目と配置を審査・提案する。
 - v3.3：**課金が要る項目が出たら止めて、課金しない安全な方法を探す**（Codex・Claude とも）。動画は1秒ごとに見る。
+
+- v3.6 (2026-09-30 14:16, in English): (a) Paid perk = browser access to areas beyond the free tower zone. Stripe remains primary; if Stripe-system integration is hard, an allowed alternative is a supporters-only page inside the JTA site gated by Ko-fi or Substack membership. Start only at M5. (b) All user instructions are translated into English before acting; Claude/Codex working outputs may be in English.
 
 ## 1. 何を作るか
 | 内容 | 価格（案） | 中身 |
@@ -72,6 +74,8 @@ v1〜v3.5：すべて 2026-09-30（Claude）。旧版は `PLAN.v1.md`。変更�
 - 購入の復元（別の端末・ブラウザ）：購入完了画面と領収メールに出すライセンスキーを入力。
 - まずテストモードで作る。Stripe のアカウント作成と秘密鍵の設定（wrangler secret）はあなたが行う。Claude と Codex は本物の鍵を扱わない。
 - 税（消費税・海外の付加価値税など）の扱いは M5 の前にあなたが確認する（Stripe Tax は有料の追加機能なので v3.3 で候補から外した）。
+
+- Alternative (v3.6, decide at M5 only): if Stripe integration is difficult, gate a dedicated supporters-only page inside the JTA site via Ko-fi or Substack membership. Compare at M5: platform fees, whether membership can be verified automatically without paid add-ons or paid APIs, and how the unlock reaches the browser. Stop and ask if anything requires payment (v3.3 rule).
 
 ## 6. 分担（Codex が主、Claude は補佐）
 | 領域 | Codex（主） | Claude（補佐＝Codex にできないことだけ） |
@@ -179,6 +183,7 @@ PC：Ryzen 5 1600／メモリ 16GB／GTX 1660 SUPER／C ドライブ空き 83.3G
 その他（申請不要・出典表示）：国土地理院 1945〜50年の空中写真（PDL1.0）、PLATEAU 大阪市（PDL1.0／CC BY 4.0 互換）、OpenStreetMap（ODbL）。
 
 ## 変更履歴
+- 2026-09-30 14:16 v3.6 (Claude): Ko-fi/Substack members-page alternative to Stripe, deferred to M5 (§0, §5). Working language switched to English for instructions and outputs.
 - 2026-09-30 v1（Claude）
 - 2026-09-30 00:30 v2（Claude）：Codex 主・Claude 補佐、画質目標、全ギミック・建物の中、再開と追加指示の仕組み、ツール導入、節約ルール
 - 2026-09-30 00:45 v2.1（Claude）：使う場所を「このPCのローカル」と「GitHub のリポジトリ」の2つに限定。VALORANT・Riot Client を削除し C ドライブ空き 83.3GB
