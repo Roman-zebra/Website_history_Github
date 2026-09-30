@@ -21,18 +21,44 @@ Run `blender -b --python assets-src/shinsekai/tower-study/build-tower.py` from t
 
 Before using this model in T4: establish the site plan and tower anchor, match at least the north and White Tower photos with an explicit camera model, replace guessed dimensions/colours, then rerun glTF validation and visual/performance checks. Do not interpret this study as a reconstruction of the 1912 opening state.
 
-## v3 proposal (branch `claude/tower-shaft-v3`, Claude; not merged)
+## v3 proposal (branch `claude/tower-shaft-v3`, Claude; for Codex review, not merged)
 
-Review notes are in Claude's local `claude-out/design/review-tower-study-v2.md`.
-- **Flared legs**: the shaft keeps its roof and box anchors. The legs are straight in the upper 55% and flare concavely below. The width ratios (about 0.47 at the box, 0.59 halfway, 1.0 at the roof) come from plate-46 outer widths; the taper rate below mid-height is about three times that above. These are photo ratios, and camera pitch is not removed.
-- **Central elevator well**: a lattice well from the roof garden to the box, with a car placeholder for T5 motion. Evidence: two vertical lines up each face in view A and plate 46, and the 1912 text 「此處よりエレベーターの裝置を以て塔の頂顚に達すべく」. There is no ground-level well; that is the 1938 alteration.
-- **Face lacing**: diamond cells of about 1.6 m (4–7 across) with belts every second band. Instancing and an LOD card are still to do.
-- **Era switch** `--era 1912|1920s`:
-  - 1912: solid band + open railed gallery + openwork ribbed crown (south-view proportions 15.5 : 14.5 : 22.5).
-  - 1920s: two-tier enclosed box + low solid cap (plate 46, OML 158880/158886). The shaft-top height is shared (a scenario).
-- **Iron colour** `--iron grey|redbrown`: red-brown is the hand-coloured opening-era postcard candidate, not a measured colour.
-- Outputs:
-  - `north-study.png` / `tower-study.glb` (1912, grey)
-  - `north-study-1920s.png` / `tower-study-1920s.glb`
-  - `north-study-redbrown.png` (the GLB is not committed)
-- glTF-Validator 2.0.0-dev.3.10: 0 errors, 0 warnings, 4 infos; 4 draw calls; about 24k triangles (1912) and 21.7k (1920s).
+The v2 study is unchanged: `build-tower-v2.py`, `north-study.png` and `tower-study.glb` are the files from main. v3 writes separate files.
+
+Reproducible builds (Blender 4.5.10, from the repository root):
+
+```
+blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-crown
+blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top enclosed-box
+blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-crown --iron redbrown
+```
+
+Every value below is a **conditional parameter**, not a measured world dimension:
+- `--height` (75.76) and `--passage-depth` (26) are unchanged from v2.
+- `--ratio-box 0.47`, `--ratio-mid 0.59` and `--flare-start 0.55` set the flared leg profile. They are plate-46 outer-width ratios in one perspective photo; camera pitch is not removed.
+- `--lace-cell 1.6` sets the diamond lacing density (visual reading).
+- `--well-fraction 0.28` sets the central elevator well size.
+- The open-crown band : gallery : crown split uses south-view pixel proportions.
+
+Parts and forms:
+- **Top forms** are named by what the photos show, with no date implied:
+  - `open-crown`: solid band, open railed gallery and openwork ribbed crown (view A; south c0234001; OML 158510).
+  - `enclosed-box`: two-tier enclosed box and low cap (plate 46; OML 158880/158886).
+  - The shaft-top height is shared between the two forms, as a scenario.
+- **Elevator interface for T5**: a separate unmerged node `elevator_car` at the bottom stop, and empties `elevator_well_bottom` (roof garden) and `elevator_well_top` (box underside). The opening-era well does not reach the ground; the ground-level shaft is the 1938 alteration.
+- **Per-part metadata**: `tower-study-v3-<top>.parts.json` lists evidence and assumptions for each part, plus the parameters and the build command. The GLB scene extras carry a short `study` record.
+- **Not modelled**, with scenarios kept open: the ropeway landing, roof planters, cinema wings and coping thickness. The iron colour stays an option: grey (provisional) or red-brown (postcard candidate).
+
+Outputs and budget (glTF-Validator 2.0.0-dev.3.10):
+
+| file | errors / warnings / infos | draw calls | vertices | triangles |
+|---|---|---|---|---|
+| tower-study-v3-open-crown.glb | 0 / 0 / 7 | 5 | 44,064 | 23,924 |
+| tower-study-v3-enclosed-box.glb | 0 / 0 / 7 | 5 | 39,936 | 21,660 |
+
+- Renders: `north-study-v3-open-crown.png`, `north-study-v3-enclosed-box.png`, `north-study-v3-open-crown-redbrown.png`. The red-brown GLB is not committed.
+- Instancing the lacing and an LOD card are still to do.
+
+Photo projections:
+- Before/after overlays of v2 and v3 in all three photos use the unchanged Codex camera settings for 75.76 m from `camera-profile-v2.json`. They are kept outside Git in `research-cache/claude-v3-overlays/`.
+- The base does not match in either version, because those cameras were fitted with the anchor-model base of the camera study (about 35.3 m × 15.2 m), not the study base. Only the shaft difference between v2 and v3 is meaningful there.

@@ -1,0 +1,65 @@
+{
+  "version": "v3-proposal",
+  "command": "blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top enclosed-box",
+  "parameters": {
+    "heightM": 75.76,
+    "passageDepthM": 26.0,
+    "top": "enclosed-box",
+    "iron": "grey",
+    "ratioBox": 0.47,
+    "ratioMid": 0.59,
+    "flareStart": 0.55,
+    "laceCellM": 1.6,
+    "wellFraction": 0.28
+  },
+  "parts": [
+    {
+      "part": "base block, arch, turrets, roof garden (unchanged from v2)",
+      "status": "carried-over",
+      "evidence": "v2 study; roof garden about 50 shaku (1912 text, 1913 album via reference)",
+      "assumption": "v2 dimensions; facade ground line not visible in any photo"
+    },
+    {
+      "part": "flared legs",
+      "status": "conditional",
+      "evidence": "plate-46 outer-width rows 820-1450 (Claude, original IIIF pixels); view A shows the same sweep",
+      "assumption": "ratios box 0.47, mid 0.59, flare start 0.55: perspective not removed; roof and box half-widths kept from v2"
+    },
+    {
+      "part": "face lacing and belts",
+      "status": "conditional",
+      "evidence": "view A and plate 46 show dense multi-cell diamond lacing (visual reading)",
+      "assumption": "cell width 1.6 m, belts every second band, member radii: visual, not measured"
+    },
+    {
+      "part": "elevator well",
+      "status": "conditional",
+      "evidence": "1912 text fr.268 (roof garden to the top); two central lines in view A and plate 46",
+      "assumption": "well half-size 0.28 x shaft top half-width; runs roof garden -> box underside only"
+    },
+    {
+      "part": "elevator car + limits (interface)",
+      "status": "conditional",
+      "evidence": "none (placeholder for T5)",
+      "assumption": "separate node 'elevator_car' at the bottom stop; empties elevator_well_bottom/top give the travel range"
+    },
+    {
+      "part": "top: enclosed box + low cap",
+      "status": "conditional",
+      "evidence": "plate 46 rows 497-800; OML 158880/158886",
+      "assumption": "tier fractions from plate-46 rows; shared shaft-top height (scenario); no date implied"
+    },
+    {
+      "part": "iron colour",
+      "status": "conditional",
+      "evidence": "hand-coloured postcards 157431/157437/159201 for red-brown; none for grey",
+      "assumption": "selected: grey; neither is a measured colour"
+    },
+    {
+      "part": "not modelled",
+      "status": "omitted",
+      "evidence": "-",
+      "assumption": "ropeway landing (scenarios unresolved), roof planters, cinema wings, coping thickness"
+    }
+  ]
+}
