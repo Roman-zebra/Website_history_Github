@@ -1,0 +1,18 @@
+[
+  {
+    "sha256": "6dee6b7c132cccd30d52ce6c7d760f98b83e3e4bdc6a832d83e42a2e36634a13",
+    "file": "dreamcore-study.md"
+  },
+  {
+    "sha256": "1938ef42a15a43c5cfd19efba6379237f36a345e3aa6d4b9f52ece7f4303254d",
+    "file": "interior-directive.md"
+  },
+  {
+    "sha256": "4c148bc7ca730250935351048f5a5a73b80c820104742ead6e8a14475e24a901",
+    "file": "interior-sources.md"
+  },
+  {
+    "sha256": "bd7c70d22bdae782adda2bd574d389dabbfa2416b77b315adfa436cd6ddb05af",
+    "file": "to-codex.md"
+  }
+]

@@ -4,7 +4,7 @@ Baseline: `PLAN.md` (v3.6) and the later user decisions recorded in `research/to
 
 The final site is published from GitHub through the repository's existing Cloudflare Workers build/deploy route. Local files are for authoring and verification only.
 
-**User resume:** work resumed in the new conversation; the existing heartbeat was migrated and is ACTIVE. Handoffs66–87 are reviewed; tasks remain incomplete. See `codex-state.json` and `HANDOFF.md`.
+**Current checkpoint through100:** Claude supervises source/design/acceptance; Codex implements and validates. The migrated heartbeat is PAUSED during this active turn and is re-enabled immediately before returning to idle. Handoffs99/100 preserve Claude's facade pilot while assigning Codex a separate blind Building A evaluation. Renderer6f30135 has exact-head Workers/live confirmation and247 passing tests. Tasks remain incomplete; see state/HANDOFF.
 
 | Task | Scope | Status |
 | --- | --- | --- |

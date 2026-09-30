@@ -1,0 +1,14 @@
+[
+  {
+    "sha256": "92229b4889f49e46678c92f592d6d37a0b9136ac9a72ea6d5a2b52f356280cbd",
+    "file": "breakdown-study.md"
+  },
+  {
+    "sha256": "40f70da9c6d04c9be78e2455f57723bee4598e058b1a3421d379ad3781624ef6",
+    "file": "model-eval-plan.md"
+  },
+  {
+    "sha256": "1ff3d1877b2c1a2b544b3af15b76b751bff997354e49b54fd76f87bfe5251b42",
+    "file": "to-codex.md"
+  }
+]

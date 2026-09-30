@@ -2,7 +2,11 @@
 
 Use this with `AGENTS.md`, `codex-state.json`, `TASKS.md` and `PLAN.md`; state is the current restart point. Last updated 2026-09-30. Do not reread the entire earlier conversation by default.
 
-**RESUMED by the user in the new conversation on 2026-09-30.** Existing heartbeat jta is ACTIVE and targets 01a0f17d-ce83-7780-869a-56bc0755bbf7; the old conversation has no heartbeat. Do not create another writer.
+**Current active turn through100.** Claude supervises source/design/acceptance; Codex implements and validates. jta targets01a0f17d-ce83-7780-869a-56bc0755bbf7 and is PAUSED while this turn runs; re-enable before returning to idle. Do not stop work merely to wait for another instruction when independent tasks remain. Consult beforeMAX/Astra/new group chat.
+
+Renderer checkpoint6f30135:247 passing tests and exact-head Workers/live success, six WebGPU1280x720 stills in parent research-cache/look-dev/v4-r3. Baked UV1 AO/TRAA/24nearest clustered lights/wet planar reflection are implemented; full lightmaps, actual rain motion, street assets, historical/AAA acceptance and qualified1080p performance remain open. Original v4 landings solve the old0.83m roof mismatch; enclosed upper stays unresolved. Later sections are older checkpoints, not current state.
+
+99: first1912 street-facade pilot belongs to Claude; do not duplicate it. Codex owns97 tower-window candidates and98 street dressing/camera.100: separate blind Building A evaluation now in assets-src/shinsekai/eval-building-a/codex; only shared briefs/photos are read. Do not inspect competing repo-claude evaluation/pilot sources before returning the blind result. Current restart point is codex-state.json.
 
 ## Workspace and authority
 
