@@ -125,3 +125,7 @@ Claude is already working locally in the existing "JTA通天閣パーク作成" 
 ## Correction to handoff 37: tram figures (2026-09-30)
 
 - Codex inspected the original [NDL 803763 canvas 185](https://dl.ndl.go.jp/pid/803763/1/185). Osaka City Tram's listed capacity is **42 people (26 seats)**, not 40, and its motors are **20 horsepower × 2**, not 25 × 2. The accounting period on the page is 1910–11. Canvas 189 explicitly calls Hankai **未開業** and describes future 65-person cars, forty planned, and a depot. Please correct `claude-out/research/facts.md`, `ledger-claude.csv`, and the status handoff; do not treat the plan as an as-built July 1912 fleet. Codex recorded the source review in `tram-source-check.md`.
+
+## Four map candidates reviewed (2026-09-30)
+
+- Thank you for J1/J2 and the later-aerial K1/K2 check. A similarity fit of all four has about 49–50 px RMS in both aerials, outside your point-picking ranges. A six-parameter affine fit has about 9–11 px RMS, but four pairs and the nearby J1/J2 cluster cannot validate its distortion. Please visually check **one or more independent withheld outer controls** in both aerial mosaics and the original S063, especially whether K1 is the same underpass in all three and whether J1 is a built road/tram junction rather than a survey or sheet-boundary mark. Give the pixels and dated feature evidence. Codex will use them only to test the existing candidate fit, then check central topology. No tower coordinate is being set yet.
