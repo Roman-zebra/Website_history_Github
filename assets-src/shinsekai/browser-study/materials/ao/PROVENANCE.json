@@ -1,0 +1,89 @@
+{
+  "sourceGlbSha256": "30d9679829fe22eeb9e70fc4265e1b77da8e8e281e84ceae9351cb9325845d15",
+  "maps": [
+    {
+      "node": "tower study - provisional pale masonry",
+      "file": "ao-0.png",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "uvChannel": 1,
+      "sha256": "ac04b1e9e842adb211ceb8b798e9a7a511d97f93b397455e6985650102836073",
+      "license": "original project bake; source geometry rights ledger applies",
+      "assumption": "Cycles ambient occlusion distance1.5m,32 samples; no historic lighting measurement"
+    },
+    {
+      "node": "tower study - provisional trim",
+      "file": "ao-1.png",
+      "sizePx": [
+        512,
+        512
+      ],
+      "uvChannel": 1,
+      "sha256": "06056d52882b555e09c9e498ceb8935eec663f2ce97f915542c08737dd52425d",
+      "license": "original project bake; source geometry rights ledger applies",
+      "assumption": "Cycles ambient occlusion distance1.5m,32 samples; no historic lighting measurement"
+    },
+    {
+      "node": "tower study - dark unglazed opening",
+      "file": "ao-2.png",
+      "sizePx": [
+        512,
+        512
+      ],
+      "uvChannel": 1,
+      "sha256": "5a43f87a88330b57058c4bbaca480fe6fd5d5bede6fcf7bd50ab65908f34148f",
+      "license": "original project bake; source geometry rights ledger applies",
+      "assumption": "Cycles ambient occlusion distance1.5m,32 samples; no historic lighting measurement"
+    },
+    {
+      "node": "tower study - provisional dark iron",
+      "file": "ao-3.png",
+      "sizePx": [
+        512,
+        512
+      ],
+      "uvChannel": 1,
+      "sha256": "4d120592dc64736f22b1035406a29dcc39db2a8394c290426bc3c4971c179b30",
+      "license": "original project bake; source geometry rights ledger applies",
+      "assumption": "Cycles ambient occlusion distance1.5m,32 samples; no historic lighting measurement"
+    },
+    {
+      "node": "roof_garden_deck",
+      "file": "ao-4.png",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "8cb1202b824e972145f194474e5d7d9b950faeb936ad522237d1d5e666948581",
+      "license": "original project bake; source geometry rights ledger applies",
+      "assumption": "Cycles ambient occlusion distance1.5m,32 samples; no historic lighting measurement"
+    },
+    {
+      "node": "elevator_car",
+      "file": "ao-5.png",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "eae868146073d130bd7089a1f5c61eefec8e5cb2d936edd699300b34fb94c121",
+      "license": "original project bake; source geometry rights ledger applies",
+      "assumption": "Cycles ambient occlusion distance1.5m,32 samples; no historic lighting measurement"
+    },
+    {
+      "node": "open_gallery_floor",
+      "file": "ao-6.png",
+      "sizePx": [
+        256,
+        256
+      ],
+      "uvChannel": 1,
+      "sha256": "58408c437a45bd192dd3626f87874f62722e648d9f5516328eaa80c4f2e17c3e",
+      "license": "original project bake; source geometry rights ledger applies",
+      "assumption": "Cycles ambient occlusion distance1.5m,32 samples; no historic lighting measurement"
+    }
+  ]
+}
