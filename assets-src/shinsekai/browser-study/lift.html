@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Candidate tower lift study</title>
+<style>:root{color-scheme:dark;font:15px/1.5 system-ui;background:#14202d;color:#f2eee6}body{margin:0}canvas{display:block;width:100%;height:100vh}.panel{position:fixed;left:16px;top:16px;width:290px;max-height:calc(100vh - 64px);overflow:auto;padding:16px;background:#172433ee;border:1px solid #8596ab;border-radius:10px}h1{font-size:20px;margin:0}p,label{font-size:13px}label{display:block;margin:12px 0}button,select,input{font:inherit}button,select{padding:6px;background:#30455d;color:inherit;border:1px solid #91a5bc}input{width:100%}a,output{color:#ffd797}:focus-visible{outline:2px solid white}</style>
+<canvas id="view" aria-label="Conditional tower model with moving elevator car"></canvas><section class="panel" aria-label="Lift controls"><h1>Candidate tower lift</h1>
+<p>Separate local v3 authoring candidates. Height, form, well and car dimensions are unaccepted assumptions. Five-centimetre axial clearance is a study margin; lateral collision and boarding are still unverified.</p>
+<button id="play" disabled>Play</button> <button id="reset" disabled>Reset</button>
+<label>Form <select id="form" disabled><option value="open-gallery">Open gallery</option><option value="enclosed-box">Enclosed box</option></select></label>
+<label>View <select id="ride"><option value="overview">Overview</option><option value="follow">Follow car from outside</option></select></label>
+<label>Assumed one-way travel <output id="duration">40 s</output><input id="travel" type="range" min="20" max="90" step="5" value="40"></label>
+<p id="status" role="status">Loading…</p><p id="phase">Paused at 0 s</p><p>Safe pivot stops use the actual car geometry and both well markers. Playback starts paused; hidden tabs pause and require Play again. Drag to orbit in overview.</p><a href="motion.html">Schematic rides</a> · <a href="index.html">Baseline tower</a></section>
+<script type="importmap">{"imports":{"three":"/vendor/three-r186/build/three.webgpu.js","three/webgpu":"/vendor/three-r186/build/three.webgpu.js","three/addons/":"/vendor/three-r186/examples/jsm/"}}</script><script type="module" src="lift-viewer.js"></script></html>
