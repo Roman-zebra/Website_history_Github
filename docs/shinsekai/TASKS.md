@@ -4,7 +4,7 @@ Baseline: `PLAN.md` (v3.6) and the later user decisions recorded in `research/to
 
 The final site is published from GitHub through the repository's existing Cloudflare Workers build/deploy route. Local files are for authoring and verification only.
 
-**Current checkpoint through107:** Claude supervises source/design/acceptance; Codex implements and validates. Heartbeat is PAUSED during active work and re-enabled before returning to idle.104/105 hybrid tuning has five artistic rounds,28base/dream renders with four hero close-ups, assembled props/drawer animation and actual stair/cavity/approach ray checks; appearance/runtime acceptance is open. Claude's facade pilot and107 tower-base-upgrade remain theirs. Codex separates cold view preparation from cadence measurement; exact1920×1080 performance remains open. a66a39d has exact Workers/live confirmation; new local full build261/261. Tasks remain incomplete, see state/HANDOFF.
+**Current checkpoint through110:** Claude supervises source/design/acceptance; Codex implements and validates. Heartbeat is PAUSED during active work. Building A has six artistic rounds, layered curtains, original wood wear/warp, polished runners, grid floor light/reflection and runtime dream grade. Both backends validate drawers/cells; r186 physical transmission+reflector fails, runtime thin-sheet alpha fixes later draws. Full build263/263, source GLBs0/0; physical refraction and qualified1080p remain open.752e841 Workers/live confirmed.109 tower-base36ec9ec received and privately validating, not yet imported;110 Building A upper/dream add-on is Claude-owned. Tasks remain incomplete.
 
 | Task | Scope | Status |
 | --- | --- | --- |

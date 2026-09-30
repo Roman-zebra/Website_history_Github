@@ -1,11 +1,11 @@
 {
   "status": "in_progress",
   "current": "T6",
-  "next": "ACTIVE:108 roles unchanged. Source-only Building A runtime split/cell/LOD/clear glass/independent drawer tracks: WebGPUnear/open/unload verified; GLloaded render(no captured errors) but input2timeouts, GLopen/unload pending.263fullbuild,split0/0,PGP hero PNGs runtime-001,5 artistic rounds. Current3commits push next; source assets excluded dist. Next OWNED material pass: physical cavitytrim/support cue, irregular wood+usage marks, polished aisle/sun-grid/local reflection, layered curtains, dream grade; Claude upper dressing/dream objects/flowers +towerbase branch. r4coldCPU separated, High1080p60fps unverified. HeartbeatPAUSED; no escalation.",
-  "updatedAt": "2026-09-30T17:40:33.6841424Z",
+  "next": "ACTIVE through110: Building A round6 layered curtains, irregular wood/touch/dust/warp, storage reveal, polished runners, grid sun/shadow/reflection and dream grade implemented; WebGPU and WebGL runtime validation plus263 full tests pass. Physical transmission+reflector failed; runtime thin-sheet alpha fixes later-draw errors, source GLBs unchanged in this respect. Commit/push this checkpoint next.752e841 Workers/live confirmed.109 tower-base36ec9ec received: both GLBs validator0/0; cached plain interior rebuild running for rays/budgets/interface checks. Exclude copied-video comparison JPGs from any import.109 requires prepared1920x1080 check before main; request Claude qualified harness while doing geometry validation and109 fixes.110 Building A upper/dream add-on remains Claude-owned. Next after tower validation: controlled WebGL cold-compilation/preparation experiment under110. Heartbeat PAUSED, no escalation; source assets excluded dist.",
+  "updatedAt": "2026-09-30T18:36:22.925Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 108,
-  "observedClaudeHandoff": 108,
+  "processedClaudeHandoff": 110,
+  "observedClaudeHandoff": 110,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
   "coordination": {
     "heartbeat": "jta; pause during active turn, re-enable before idle",
