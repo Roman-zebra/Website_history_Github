@@ -439,3 +439,50 @@ Four clips independently use actual exported samplers with quaternion SLERP,91po
 111 flower derivative is opt-in `building-a.html?petals` / `?webgl&petals`, with original default111 retained. Exact237anchor matrices/palette/RNG/stems/pots preserved,16,116original blossom tris removed,18,960runtime tris in2main colour-pass instance draws (shadow draws extra). Four original128pxalpha/relief tiles;6,292,272byte GLB0/0/63infos, maximum active interior146,554tri. Tangent zero-length fallback repaired; actual node/vertex/frame tests and fullbuild273/273 pass. Both1280×720 backends save upper-axis image, GPU dream-off and WebGL far unload verified, new warnings/errors0. CPU array bytes473,998+atlas524,288 exclude mip/driver/download cost; no rendered-triangle reduction or GPU FPS claim.
 
 Please compare parent look-dev/runtime-003 upper-axis-dream-* with look-dev/flowers-111/upper-axis-petals-webgpu.png and -webgl.png (receipt.json records verified hashes/dimensions). One actual room artistic round brings total7, plus2prototype passes excluded from count. Self-review: petals have curve/variation but still stylized; upper light flat and cloth thin. Visual acceptance remains yours; Codex continues cloth/light and tower runtime, no need to repeat geometry/export research. d78c89b exact Workers success confirmed. No MAX/Astra/new chat needed.
+
+## 113 runtime route and immediate 114 receipt
+
+The private 113 candidate is available at
+`http://127.0.0.1:18765/assets-src/shinsekai/browser-study/tower-base-113.html`;
+add `?size=1080` for a 1920 × 1080 buffer or `?webgl&size=1080` for fallback.
+Start with `node scripts/serve-shinsekai-study.cjs`. Manifest:
+`/study/tower-base-113/manifest.json`, backed by the parent
+`research-cache/tower-base-113-runtime/`. Source/cache directories are not served.
+The local study depends on these private files; no production geometry is imported.
+
+Eleven lossless cell/LOD splits validate with zero errors/warnings. Independent
+attribute/index/animation-value comparisons match the source exactly, and each
+gate track now targets only the loaded normal or dream cell. The helper fails
+explicitly on unsupported compressed/skinned data. Normal/dream cinema still
+exceeds 25MiB; compression and delivery packaging remain open.
+
+918 bulbs and 150 balusters are now instanced in the actual viewer. Total rendered
+geometry is unchanged; combined raw drawing-array/matrix storage saves 1,342,776
+bytes. Baluster UV1 is omitted from the repeated template only when no texture
+binds it; remaining trim retains UV1 and any UV1 binding rejects conversion.
+Both actual open and close gate clips are used, preserving different latch timing.
+Native WebGL verifies normal playback to closed, independent dream scrubbing and
+far retirement; WebGPU head/lift/dream scrubbing/retirement also passed, with its
+new playback controls now also verified: both actual open/close cycles return to closed, no new captured warnings/errors. Full build 279/279.
+Verified head/lift PNGs are in parent `look-dev/tower-base-113/`; the earlier
+`head-before-placeholder-fix-webgpu.png` is stale and excluded.
+
+A documented browser viewport override matched canvas buffer and client at
+1920 × 1080. Ready/visible north revision 1 produced 154 RAF samples over
+143407.9ms, mean about 1.074 RAF/s and median 1009.9ms. Pacing cause is
+unverified, so this does not measure GPU capacity or qualify the 60fps gate.
+The route also has no tower shaft, shadows, AO, SSR or final postprocessing.
+Please use your 107 measurement setup with matching ready/revision/error/client
+dimensions; source geometry and actual draw counts must be distinguished.
+
+114 `5159bba` received promptly. Raw 19,950,160-byte wings GLB and three
+lossless LOD splits all validate with zero errors/warnings; all attributes and
+indices match. LOD0/1/2 counts are 147159/69971/22247. Private split sizes are
+12,876,548 / 6,964,244 / 3,308,960 bytes, including their embedded original atlas.
+Your four inferred front types and fictional atlas are retained as estimates;
+reference-image pixels will not be imported. Structural/entrance integration is
+pending your fixes. Cinema entry wainscot/shell, base downpipes/wires and wing-door
+alignment remain yours; Codex will not duplicate them. The owned 109 cinema
+delta will be repinned after your interior repair rather than against a moving
+source. Codex continues independent runtime, cloth, lighting and weathering work.
+No MAX/Astra or new chat needed.
