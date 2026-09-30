@@ -1561,7 +1561,7 @@ def street_poles(side):
             insulator_bracket_short(base)
             near = min(tops, key=lambda arms: abs(arms[0].x - bx))
             for k, q in enumerate(near[:2]):
-                s0 = Vector((bx + (-0.25 if k == 0 else 0.25), WY - 0.45, 8.73))
+                s0 = Vector((bx + (-0.25 if k == 0 else 0.25), WY - 0.45, 8.72))     # v1.1: on the insulator apex (was 10 mm above it)
                 pts = [s0 + (q - s0) * (t / 8) + Vector((0, 0, -0.45 * math.sin(math.pi * t / 8))) for t in range(9)]
                 tube(part("wire"), [tuple(v) for v in pts], 0.004, 3)
     wnote("street poles, crossarms, insulators, wires and pole lamps", "S:157101 S:157103 S:157218 (poles and wires) A: positions", "")

@@ -1,5 +1,5 @@
 {
- "version": "tower-base-exterior v1.2",
+ "version": "tower-base-exterior v1.3",
  "command": "blender -b -P assets-src/shinsekai/tower-base-upgrade/exterior/build-tower-base-exterior.py -- ",
  "v4Constants": {
   "ROOF_GARDEN_Z": 15.15,
@@ -58,31 +58,47 @@
  },
  "lods": {
   "0": {
-   "tris": 140311,
-   "objects": 31,
+   "tris": 140867,
+   "objects": 47,
    "byPart": {
     "backing": 620,
     "backing_dark": 30,
-    "brass": 8132,
+    "brass": 7100,
     "bulb": 7344,
     "curtain": 1392,
     "deck": 22,
+    "door_wing_E_leafN_brass": 160,
+    "door_wing_E_leafN_glass": 2,
+    "door_wing_E_leafN_joinery": 312,
+    "door_wing_E_leafS_brass": 356,
+    "door_wing_E_leafS_glass": 2,
+    "door_wing_E_leafS_joinery": 312,
+    "door_wing_W_leafN_brass": 356,
+    "door_wing_W_leafN_glass": 2,
+    "door_wing_W_leafN_joinery": 312,
+    "door_wing_W_leafS_brass": 160,
+    "door_wing_W_leafS_glass": 2,
+    "door_wing_W_leafS_joinery": 312,
+    "downpipe": 3568,
     "enamel": 30,
     "flowers": 1000,
     "foliage": 1600,
-    "glass": 903,
+    "glass": 895,
     "inner": 1846,
-    "iron": 11648,
-    "joinery": 30604,
+    "iron": 8168,
+    "joinery": 29376,
     "kerb": 3240,
     "lamp_glass": 1520,
     "medallion": 720,
     "paving": 64,
     "plinth": 88,
-    "porcelain": 2312,
+    "porcelain": 264,
     "reveal": 1686,
     "roof_sheet": 5030,
-    "sill": 3460,
+    "service_iron": 244,
+    "service_porcelain": 1472,
+    "service_wire": 1632,
+    "sill": 3376,
     "soil": 8,
     "stairhead_NE": 572,
     "stairhead_NW": 572,
@@ -91,12 +107,12 @@
     "trim": 43768,
     "vault": 2808,
     "wall": 7348,
-    "wire": 800
+    "wire": 32
    }
   },
   "1": {
-   "tris": 64827,
-   "objects": 29,
+   "tris": 64863,
+   "objects": 40,
    "byPart": {
     "backing": 620,
     "backing_dark": 30,
@@ -104,20 +120,32 @@
     "bulb": 7344,
     "curtain": 696,
     "deck": 22,
+    "door_wing_E_leafN_glass": 2,
+    "door_wing_E_leafN_joinery": 12,
+    "door_wing_E_leafS_glass": 2,
+    "door_wing_E_leafS_joinery": 12,
+    "door_wing_W_leafN_glass": 2,
+    "door_wing_W_leafN_joinery": 12,
+    "door_wing_W_leafS_glass": 2,
+    "door_wing_W_leafS_joinery": 12,
+    "downpipe": 2192,
     "foliage": 1160,
-    "glass": 649,
+    "glass": 641,
     "inner": 1846,
-    "iron": 7084,
-    "joinery": 4542,
+    "iron": 4580,
+    "joinery": 4514,
     "kerb": 1080,
     "lamp_glass": 512,
     "medallion": 480,
     "paving": 64,
     "plinth": 88,
-    "porcelain": 1368,
+    "porcelain": 88,
     "reveal": 1306,
     "roof_sheet": 2438,
-    "sill": 1036,
+    "service_iron": 204,
+    "service_porcelain": 896,
+    "service_wire": 1296,
+    "sill": 1016,
     "soil": 8,
     "stairhead_NE": 48,
     "stairhead_NW": 48,
@@ -125,19 +153,19 @@
     "stairhead_SW": 48,
     "trim": 23354,
     "vault": 1944,
-    "wall": 6004,
-    "wire": 768
+    "wall": 6004
    }
   },
   "2": {
-   "tris": 16656,
-   "objects": 17,
+   "tris": 16676,
+   "objects": 19,
    "byPart": {
     "backing": 124,
     "deck": 6,
+    "downpipe": 416,
     "glass": 22,
-    "iron": 2140,
-    "joinery": 2516,
+    "iron": 1540,
+    "joinery": 2536,
     "kerb": 20,
     "lamp_glass": 224,
     "medallion": 480,
@@ -145,7 +173,8 @@
     "plinth": 88,
     "reveal": 1072,
     "roof_sheet": 630,
-    "sill": 1036,
+    "service_iron": 204,
+    "sill": 1016,
     "soil": 8,
     "trim": 6286,
     "vault": 30,
@@ -546,7 +575,7 @@
   {
    "element": "cast-iron downpipes with hopper heads, holderbats, shoes",
    "source": "A: (not legible in the photos; required by detail-spec §2)",
-   "note": "positions A:"
+   "note": "positions A:; v1.3: the E/W pipes offset (45 deg, two swan necks) to discharge into the wing eaves gutters instead of passing through the wing roofs"
   },
   {
    "element": "wall lamp brackets flanking the arch",
@@ -554,8 +583,8 @@
    "note": ""
   },
   {
-   "element": "service entry: iron bracket with porcelain pin insulators and wires",
-   "source": "S:157218 S:157103 (wires everywhere, 1912 streets) A: position",
+   "element": "service entry: iron bracket with porcelain pin insulators, service drop from the wing end pole, drip loops, entrance tubes",
+   "source": "S:157218 S:157103 (wires everywhere, 1912 streets) A: position, pole datums from ../wings",
    "note": ""
   },
   {
@@ -576,9 +605,304 @@
  ],
  "timingsS": {
   "build": 5.7,
-  "uv1": 1.6
+  "uv1": 1.8
  },
  "budgetLOD0": 160000,
+ "statedDoors": {
+  "door_wing_E_leafN": {
+   "door": "door_wing_E",
+   "hinge": [
+    14.354,
+    1.117,
+    0.0
+   ],
+   "openDeg": 90.0,
+   "width": 1.114,
+   "z": [
+    0.172,
+    3.117
+   ]
+  },
+  "door_wing_E_leafS": {
+   "door": "door_wing_E",
+   "hinge": [
+    14.354,
+    -1.117,
+    0.0
+   ],
+   "openDeg": -90.0,
+   "width": 1.114,
+   "z": [
+    0.172,
+    3.117
+   ]
+  },
+  "door_wing_W_leafN": {
+   "door": "door_wing_W",
+   "hinge": [
+    -14.354,
+    1.117,
+    0.0
+   ],
+   "openDeg": -90.0,
+   "width": 1.114,
+   "z": [
+    0.172,
+    3.117
+   ]
+  },
+  "door_wing_W_leafS": {
+   "door": "door_wing_W",
+   "hinge": [
+    -14.354,
+    -1.117,
+    0.0
+   ],
+   "openDeg": 90.0,
+   "width": 1.114,
+   "z": [
+    0.172,
+    3.117
+   ]
+  }
+ },
+ "serviceDrops": [
+  {
+   "conductor": 0.42,
+   "span": [
+    [
+     -14.9831,
+     -9.8025,
+     13.97
+    ],
+    [
+     -20.1057,
+     -13.2767,
+     9.39
+    ]
+   ],
+   "sagM": 0.165,
+   "poleInsulator": [
+    -20.14,
+    -13.3,
+    9.39
+   ],
+   "entranceTube": [
+    -14.575,
+    -9.78,
+    13.31
+   ]
+  },
+  {
+   "conductor": 0.14,
+   "span": [
+    [
+     -14.9839,
+     -10.0812,
+     13.97
+    ],
+    [
+     -20.1048,
+     -13.278,
+     8.69
+    ]
+   ],
+   "sagM": 0.17,
+   "poleInsulator": [
+    -20.14,
+    -13.3,
+    8.69
+   ],
+   "entranceTube": [
+    -14.575,
+    -10.06,
+    13.31
+   ]
+  },
+  {
+   "conductor": -0.14,
+   "span": [
+    [
+     -14.9841,
+     -10.3609,
+     13.97
+    ],
+    [
+     -19.7446,
+     -13.2783,
+     9.39
+    ]
+   ],
+   "sagM": 0.158,
+   "poleInsulator": [
+    -19.78,
+    -13.3,
+    9.39
+   ],
+   "entranceTube": [
+    -14.575,
+    -10.34,
+    13.31
+   ]
+  },
+  {
+   "conductor": -0.42,
+   "span": [
+    [
+     -14.985,
+     -10.6394,
+     13.97
+    ],
+    [
+     -19.7436,
+     -13.2798,
+     8.69
+    ]
+   ],
+   "sagM": 0.164,
+   "poleInsulator": [
+    -19.78,
+    -13.3,
+    8.69
+   ],
+   "entranceTube": [
+    -14.575,
+    -10.62,
+    13.31
+   ]
+  },
+  {
+   "conductor": -0.42,
+   "span": [
+    [
+     14.9831,
+     -9.8025,
+     13.97
+    ],
+    [
+     20.0995,
+     -13.2725,
+     9.39
+    ]
+   ],
+   "sagM": 0.165,
+   "poleInsulator": [
+    20.14,
+    -13.3,
+    9.39
+   ],
+   "entranceTube": [
+    14.575,
+    -9.78,
+    13.31
+   ]
+  },
+  {
+   "conductor": -0.14,
+   "span": [
+    [
+     14.9839,
+     -10.0812,
+     13.97
+    ],
+    [
+     20.0994,
+     -13.2746,
+     8.69
+    ]
+   ],
+   "sagM": 0.17,
+   "poleInsulator": [
+    20.14,
+    -13.3,
+    8.69
+   ],
+   "entranceTube": [
+    14.575,
+    -10.06,
+    13.31
+   ]
+  },
+  {
+   "conductor": 0.14,
+   "span": [
+    [
+     14.9841,
+     -10.3609,
+     13.97
+    ],
+    [
+     19.7393,
+     -13.2751,
+     9.39
+    ]
+   ],
+   "sagM": 0.158,
+   "poleInsulator": [
+    19.78,
+    -13.3,
+    9.39
+   ],
+   "entranceTube": [
+    14.575,
+    -10.34,
+    13.31
+   ]
+  },
+  {
+   "conductor": 0.42,
+   "span": [
+    [
+     14.985,
+     -10.6394,
+     13.97
+    ],
+    [
+     19.7392,
+     -13.2774,
+     8.69
+    ]
+   ],
+   "sagM": 0.164,
+   "poleInsulator": [
+    19.78,
+    -13.3,
+    8.69
+   ],
+   "entranceTube": [
+    14.575,
+    -10.62,
+    13.31
+   ]
+  }
+ ],
+ "wingDatumsRead": {
+  "roof": {
+   "z_wall": 9.62,
+   "crown": 12.1,
+   "half": 9.0,
+   "edge": 9.45,
+   "gutter_dy": 0.1,
+   "gutter_dz": -0.12,
+   "gutter_r": 0.075
+  },
+  "pole": {
+   "x": 20.5,
+   "y": -13.3,
+   "arms": [
+    9.25,
+    8.55
+   ],
+   "u": [
+    0.36,
+    0.72
+   ],
+   "ins_base": 0.1,
+   "ins_rmax": 0.045,
+   "ins_zmax": 0.04
+  },
+  "doorWingFloor": 0.15
+ },
  "instancing": {
   "note": "LOD0 bulbs and balusters are also baked into TB_EXT_LOD0_bulb / _trim (counted above). For runtime instancing, hide those faces and draw one prototype per placement (world Z-up metres; glTF Y-up = (x, z, -y)).",
   "bulb": {

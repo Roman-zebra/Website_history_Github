@@ -85,6 +85,20 @@ TCORN0 = 19.0                        # turret cornice 19.0..TBT
 LEVELS = {"L0": 0.15, "L1": 4.90, "L2": 8.40, "L3": 11.80, "roof": RG}
 RING = 0.9                           # voussoir ring width (A:)
 SCREEN_RING_OVERLAP = 0.1
+# v1.3 seams with the cinema wings (../wings, datums in its parts.json and INTERFACE change log 1.3): the base reads them, it does
+# not draw any wing geometry.  Wing barrel roof: 9.62 over the wall line (y +/-9.0), crown 12.1, overhang edge y +/-9.45; half-round
+# eaves gutter centred 0.10 beyond the edge (y +/-9.55), 0.12 below it.  Street poles at the wing ends nearest the base: x +/-20.5,
+# y -13.3, crossarms at 9.25 and 8.55, porcelain insulators at +/-0.36 / +/-0.72 along the arm (profile max radius 0.045, 0.04 above
+# the insulator base = arm + 0.10).
+WING_DOOR_FLOOR = 0.15               # finished threshold of door_wing_E/W = hall floor = wing zone = cinema floor
+WING_ROOF = dict(z_wall=9.62, crown=12.1, half=9.0, edge=9.45, gutter_dy=0.10, gutter_dz=-0.12, gutter_r=0.075)
+WING_POLE = dict(x=20.5, y=-13.3, arms=(9.25, 8.55), u=(0.36, 0.72), ins_base=0.10, ins_rmax=0.045, ins_zmax=0.04)
+
+
+def wing_roof_z(y):
+    rise = WING_ROOF["crown"] - WING_ROOF["z_wall"]
+    R = (WING_ROOF["half"] ** 2 + rise ** 2) / (2 * rise)
+    return WING_ROOF["crown"] - R + math.sqrt(max(0.0, R * R - y * y))
 
 IRON_COLOUR = argval("--iron", "redbrown")
 SAMPLES = argval("--samples", 96, int)
@@ -756,16 +770,24 @@ def door_leaf(pj, pg, pb, u0, u1, z0, z1, n_face, glazed=True, lod=0, hinge_left
             cbox(pb, (ku - 0.004, n_face + 0.003, lock - 0.085), (ku + 0.004, n_face + 0.0035, lock - 0.06))
 
 
-def door_fill(frame, o, leaves=2, glazed=True, open_angle=0.0, n_face=-0.15, threshold=True):
+LEAF_NODES = {}   # v1.3: (lod, "<door>_leaf<S|N>") -> pivot data for doors whose leaves are separate, animated nodes
+
+
+def door_fill(frame, o, leaves=2, glazed=True, open_angle=0.0, n_face=-0.15, threshold=True, leaf_node=None, leaf_z0=None,
+              frame_z0=None):
+    """leaf_node (v1.3): emit each leaf into its own parts '<leaf_node>_leaf<S|N>_<material>' (closed pose, 3 mm joints to the frame
+    and between the leaves) and register its hinge (the knuckle axis) in LEAF_NODES; main() turns them into pivot nodes with
+    glTF clips.  leaf_z0 / frame_z0 override the leaf bottom and the frame foot (finished threshold above the masonry sill)."""
     with local(frame):
         pj, pg, pb = part("joinery"), part("glass"), part("brass")
         fw = 0.08
         hw = o.w / 2
         top = o.z1
+        fz0 = o.z0 if frame_z0 is None else frame_z0
         # frame (jambs + head)
         cf = 0.005 if LOD == 0 else 0.0
-        cbox(pj, (o.uc - hw, n_face - 0.12, o.z0), (o.uc - hw + fw, n_face + 0.01, top), c=cf, skip=("-y",))
-        cbox(pj, (o.uc + hw - fw, n_face - 0.12, o.z0), (o.uc + hw, n_face + 0.01, top), c=cf, skip=("-y",))
+        cbox(pj, (o.uc - hw, n_face - 0.12, fz0), (o.uc - hw + fw, n_face + 0.01, top), c=cf, skip=("-y",))
+        cbox(pj, (o.uc + hw - fw, n_face - 0.12, fz0), (o.uc + hw, n_face + 0.01, top), c=cf, skip=("-y",))
         cbox(pj, (o.uc - hw, n_face - 0.12, top - fw), (o.uc + hw, n_face + 0.01, top), c=cf, skip=("-y",))
         if threshold:
             cbox(part("sill"), (o.uc - hw - 0.05, -0.45, o.z0 - 0.02), (o.uc + hw + 0.05, 0.12, o.z0 + 0.03), c=0.01 if LOD == 0 else 0)
@@ -782,6 +804,11 @@ def door_fill(frame, o, leaves=2, glazed=True, open_angle=0.0, n_face=-0.15, thr
             return
         inner0, inner1 = o.uc - hw + fw, o.uc + hw - fw
         z0, z1 = o.z0 + 0.03, top - fw
+        if leaf_z0 is not None:
+            z0 = leaf_z0
+        if leaf_node:
+            z1 -= 0.003                                     # 3 mm under the head, 3 mm off each jamb: the leaves can swing
+            inner0, inner1 = inner0 + 0.003, inner1 - 0.003
         if leaves == 2:
             um = (inner0 + inner1) / 2
             spans = [(inner0, um - 0.003, True), (um + 0.003, inner1, False)]
@@ -790,14 +817,24 @@ def door_fill(frame, o, leaves=2, glazed=True, open_angle=0.0, n_face=-0.15, thr
         for i, (a, b, hl) in enumerate(spans):
             ang = open_angle if i == 0 else -open_angle
             hinge = a if hl else b
+            lj, lg, lb = pj, pg, pb
+            if leaf_node:
+                ang = 0.0                                   # stated node: built closed, opened by its clip at runtime
+                hw_ = MAT @ Vector((hinge, n_face + 0.004, 0.0))     # hinge knuckle axis (door_leaf draws the knuckles there)
+                tag = "S" if hw_.y < 0 else "N"
+                key = f"{leaf_node}_leaf{tag}"
+                lj, lg, lb = part(key + "_joinery", "joinery"), part(key + "_glass", "glass"), part(key + "_brass", "brass")
+                # + open_angle about the local z opens toward +n (out of this wall face); local z = world z (right-handed frame)
+                LEAF_NODES[(LOD, key)] = dict(door=leaf_node, hinge=tuple(round(v, 5) for v in hw_), openDeg=90.0 if i == 0 else -90.0,
+                                              width=round(b - a, 4), z=[round(z0, 4), round(z1, 4)])
             m = Matrix.Translation((hinge, n_face, 0)) @ Matrix.Rotation(ang, 4, "Z") @ Matrix.Translation((-hinge, -n_face, 0))
             with local(m):
                 if LOD == 1:
-                    cbox(pj, (a, n_face - 0.05, z0), (b, n_face, z1))
+                    cbox(lj, (a, n_face - 0.05, z0), (b, n_face, z1))
                     if glazed:
-                        face(pg, [(a + 0.1, n_face + 0.002, z0 + 1.1), (b - 0.1, n_face + 0.002, z0 + 1.1), (b - 0.1, n_face + 0.002, z1 - 0.1), (a + 0.1, n_face + 0.002, z1 - 0.1)], out=(0, 1, 0))
+                        face(lg, [(a + 0.1, n_face + 0.002, z0 + 1.1), (b - 0.1, n_face + 0.002, z0 + 1.1), (b - 0.1, n_face + 0.002, z1 - 0.1), (a + 0.1, n_face + 0.002, z1 - 0.1)], out=(0, 1, 0))
                     continue
-                door_leaf(pj, pg, pb, a, b, z0, z1, n_face, glazed=glazed, lod=LOD, hinge_left=hl, knob=(leaves == 1 or i == 1))
+                door_leaf(lj, lg, lb, a, b, z0, z1, n_face, glazed=glazed, lod=LOD, hinge_left=hl, knob=(leaves == 1 or i == 1))
         pbk = part("backing_dark")
         face(pbk, [(o.uc - hw - 0.6, -2.5, o.z0), (o.uc + hw + 0.6, -2.5, o.z0), (o.uc + hw + 0.6, -2.5, top + 0.6), (o.uc - hw - 0.6, -2.5, top + 0.6)], out=(0, 1, 0))
 
@@ -1015,7 +1052,20 @@ def build_all():
         for o in doors:
             reveal(fr, o, WALL_T, "reveal")
             surround(fr, o)
-            door_fill(fr, o, leaves=2, glazed=True)
+            # v1.3: finished threshold at 0.15 (= ticket hall, wing zone and cinema floors; the masonry sill of the opening stays at
+            # 0.00, INTERFACE datum) and an oak saddle 15 mm high under the leaves; the leaves are stated nodes (closed by default)
+            # opening 90 deg into the wing (glTF clips door_wing_<E|W>_open / _close).
+            with local(fr):
+                hw = o.w / 2
+                face(part("sill"), [(o.uc - hw, 0.0, WING_DOOR_FLOOR), (o.uc + hw, 0.0, WING_DOOR_FLOOR), (o.uc + hw, -WALL_T, WING_DOOR_FLOOR),
+                                    (o.uc - hw, -WALL_T, WING_DOOR_FLOOR)], out=(0, 0, 1))
+                sad = [(0.07, WING_DOOR_FLOOR), (0.045, WING_DOOR_FLOOR + 0.015), (-0.055, WING_DOOR_FLOOR + 0.015), (-0.08, WING_DOOR_FLOOR)]
+                nf = -0.15 - 0.025                     # saddle centred under the leaves (leaf n -0.20..-0.15)
+                ends = [(Vector((o.uc - hw + 0.08, nf, 0)), Vector((0, 1, 0)), Vector((0, 0, 1))),
+                        (Vector((o.uc + hw - 0.08, nf, 0)), Vector((0, 1, 0)), Vector((0, 0, 1)))]
+                sweep(part("joinery"), sad, ends, smooth=False, caps=True)
+            door_fill(fr, o, leaves=2, glazed=True, threshold=False, leaf_node=o.tag, leaf_z0=WING_DOOR_FLOOR + 0.022,
+                      frame_z0=WING_DOOR_FLOOR)
             DOORS.append((fr, o))
     note("E/W side walls: party walls to the cinema wings, wing doors, L3 windows",
          "T:fr.267 (wings 各四十有餘間) T:fr.270 (cinemas beside the tower)", "wing height 9.5 m and door positions A:")
@@ -1696,37 +1746,89 @@ def planting(x0, y0, x1, y1, z):
                 lathe(pf, [(0.0, -0.02), (0.045, 0.0), (0.0, 0.025)], centre=P, seg=5)
 
 
+def fillet_path(pts, rad, n=4):
+    """Polyline with every interior corner replaced by a bend of radius ~rad (quadratic arc, n segments)."""
+    P = [Vector(q) for q in pts]
+    out = [P[0]]
+    for i in range(1, len(P) - 1):
+        a, b, c = P[i - 1], P[i], P[i + 1]
+        d1, d2 = (b - a).normalized(), (c - b).normalized()
+        ang = d1.angle(d2, 0.0)
+        if ang < 1e-3:
+            out.append(b)
+            continue
+        t = min(rad * math.tan(ang / 2), (b - a).length * 0.45, (c - b).length * 0.45)
+        p1, p2 = b - d1 * t, b + d2 * t
+        for k in range(n + 1):
+            f = k / n
+            out.append((1 - f) ** 2 * p1 + 2 * (1 - f) * f * b + f * f * p2)
+    out.append(P[-1])
+    return out
+
+
+def holderbat(p, x, y, z, ox, r, seg, axis=None):
+    """Split ring round the pipe (axis: pipe direction, default vertical) with ears bolted back to the wall (-ox side)."""
+    if axis is None or abs(Vector(axis).normalized().z) > 0.999:
+        lathe(p, [(r + 0.012, -0.03), (r + 0.012, 0.03)], centre=(x, y, z), seg=seg)
+    else:
+        q = Vector(axis).normalized().to_track_quat("Z", "X").to_matrix().to_4x4()
+        with local(Matrix.Translation((x, y, z)) @ q):
+            lathe(p, [(r + 0.012, -0.03), (r + 0.012, 0.03)], seg=seg)
+    wx = x - ox * (r + 0.06)
+    cbox(p, (min(x - ox * r, wx), y - 0.012, z - 0.03), (max(x - ox * r, wx), y + 0.012, z + 0.03))
+
+
 def services():
-    pi = part("iron")
-    # downpipes: 4 full-height on the turret outer sides near the front corners, 4 short on the E/W walls
-    pipes = []
+    pd = part("downpipe", "iron")       # v1.3: all downpipes in their own node (TB_EXT_LOD<n>_downpipe, material iron)
+    seg = {0: 8, 1: 6, 2: 4}[LOD]
+    r = 0.05
+    # 1. four full-height downpipes on the turret outer sides near the front corners (outside the wings: y +/-12.65)
     for sx in (-1, 1):
         for sy in (-1, 1):
-            x = sx * (FHW + 0.1)
-            y = sy * (FY - 0.35)
-            pipes.append((x, y, TCORN0 - 0.1, (sx, 0)))
-            pipes.append((sx * (FHW + 0.1), sy * (TY0 - 0.35), TBAND0 - 0.65, (sx, 0)))
-    for x, y, ztop, (ox, oy) in pipes:
-        r = 0.05
-        seg = {0: 8, 1: 6, 2: 4}[LOD]
-        zb = 0.18
-        if LOD <= 1:
-            # hopper head (LOD0 moulded) and a swan-neck at the top
-            cbox(pi, (x - 0.13 + ox * 0.0, y - 0.14, ztop - 0.35), (x + 0.13, y + 0.14, ztop - 0.05), c=0.006 if LOD == 0 else 0, skip=("+z",))
-            if LOD == 0:
-                cbox(pi, (x - 0.15, y - 0.16, ztop - 0.07), (x + 0.15, y + 0.16, ztop - 0.03), c=0.004)
-        tube(pi, [(x, y, ztop - 0.35), (x, y, zb + 0.25)], r, seg)
-        # shoe (kick-out at the foot)
-        tube(pi, [(x, y, zb + 0.25), (x, y, zb + 0.12), (x + ox * 0.12, y + oy * 0.12, zb + 0.04)], r, seg)
-        if LOD <= 1:
-            z = ztop - 0.6
-            while z > 0.6:
-                # holderbat: a split ring with ears, two bolts into the wall
-                lathe(pi, [(r + 0.012, -0.03), (r + 0.012, 0.03)], centre=(x, y, z), seg=seg)
-                wx = x - ox * (r + 0.06)
-                cbox(pi, (min(x - ox * r, wx), y - 0.012, z - 0.03), (max(x - ox * r, wx), y + 0.012, z + 0.03))
-                z -= 1.8
-    note("cast-iron downpipes with hopper heads, holderbats, shoes", "A: (not legible in the photos; required by detail-spec §2)", "positions A:")
+            x, y, ztop, ox = sx * (FHW + 0.1), sy * (FY - 0.35), TCORN0 - 0.1, sx
+            zb = 0.18
+            if LOD <= 1:
+                cbox(pd, (x - 0.13, y - 0.14, ztop - 0.35), (x + 0.13, y + 0.14, ztop - 0.05), c=0.006 if LOD == 0 else 0, skip=("+z",))
+                if LOD == 0:
+                    cbox(pd, (x - 0.15, y - 0.16, ztop - 0.07), (x + 0.15, y + 0.16, ztop - 0.03), c=0.004)
+            tube(pd, [(x, y, ztop - 0.35), (x, y, zb + 0.25)], r, seg)
+            tube(pd, [(x, y, zb + 0.25), (x, y, zb + 0.12), (x + ox * 0.12, y, zb + 0.04)], r, seg)       # shoe (kick-out at the foot)
+            if LOD <= 1:
+                z = ztop - 0.6
+                while z > 0.6:
+                    holderbat(pd, x, y, z, ox, r, seg)
+                    z -= 1.8
+    # 2. v1.3: the two E/W downpipes beside the side-mass walls (hoppers at y +/-8.25, 14.3) no longer run down through the wing
+    #    roofs: a 45-degree offset with two swan-neck bends carries each one along the wall face (x +/-14.6, 0.05 m off the
+    #    render) past the wing roof edge to y +/-9.55, the centre line of the wing's eaves gutter, and a shoe discharges into that
+    #    gutter 70 mm above its rim.  Holderbats on every run (A: route; the wing gutter drains to the wing's own downpipes).
+    gy = WING_ROOF["edge"] + WING_ROOF["gutter_dy"]
+    rim = wing_roof_z(WING_ROOF["edge"]) + WING_ROOF["gutter_dz"] + 0.012
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            x, ox = sx * (FHW + 0.1), sx
+            y8, y9 = sy * (TY0 - 0.35), sy * gy
+            ztop = TBAND0 - 0.65
+            zb1 = ztop - 0.75
+            zb2 = zb1 - abs(y9 - y8)                  # 45 degrees
+            z_end = rim + 0.07
+            if LOD <= 1:
+                cbox(pd, (x - 0.13, y8 - 0.14, ztop - 0.35), (x + 0.13, y8 + 0.14, ztop - 0.05), c=0.006 if LOD == 0 else 0, skip=("+z",))
+                if LOD == 0:
+                    cbox(pd, (x - 0.15, y8 - 0.16, ztop - 0.07), (x + 0.15, y8 + 0.16, ztop - 0.03), c=0.004)
+            path = [(x, y8, ztop - 0.35), (x, y8, zb1), (x, y9, zb2), (x, y9, z_end + 0.11), (x + ox * 0.065, y9, z_end)]
+            pts = fillet_path(path, 0.16, n={0: 5, 1: 3, 2: 2}[LOD])
+            tube(pd, pts, r, seg)
+            if LOD <= 1:
+                holderbat(pd, x, y8, ztop - 0.6, ox, r, seg)
+                ym, zm = (y8 + y9) / 2, (zb1 + zb2) / 2
+                holderbat(pd, x, ym, zm, ox, r, seg, axis=(0.0, y9 - y8, zb2 - zb1))
+                z = zb2 - 0.35
+                while z > z_end + 0.4:
+                    holderbat(pd, x, y9, z, ox, r, seg)
+                    z -= 1.6
+    note("cast-iron downpipes with hopper heads, holderbats, shoes", "A: (not legible in the photos; required by detail-spec §2)",
+         "positions A:; v1.3: the E/W pipes offset (45 deg, two swan necks) to discharge into the wing eaves gutters instead of passing through the wing roofs")
 
     # lamp brackets on the turret fronts flanking the arch (scroll arm + lantern), 1912 electric
     for sx in (-1, 1):
@@ -1735,12 +1837,14 @@ def services():
             bracket_lamp(base, Vector((0, sy, 0)))
     note("wall lamp brackets flanking the arch", "S:158510 (lamp standard beside a turret) A: bracket form", "")
 
-    # service insulators on the turret outer sides: bracket, crossarm, 4 pin insulators, wires off to the east/west
+    # service entry (v1.3): one bracket per side on the street-side turret (SW / SE outer faces), fed by a four-wire service drop
+    # from the wing end pole (x +/-20.5, y -13.3); dead-ended with tie wires on the bracket insulators, drip loops into porcelain
+    # entrance tubes in the wall.  The v1 yard-side brackets (NW / NE) are gone: no line reaches them (no poles on the yard side).
     for sx in (-1, 1):
-        for sy in (-1, 1):
-            base = Vector((sx * FHW, sy * (TY0 + 1.6), 13.8))
-            insulator_bracket(base, Vector((sx, 0, 0)))
-    note("service entry: iron bracket with porcelain pin insulators and wires", "S:157218 S:157103 (wires everywhere, 1912 streets) A: position", "")
+        base = Vector((sx * FHW, -(TY0 + 1.6), 13.8))
+        insulator_bracket(base, Vector((sx, 0, 0)), sx)
+    note("service entry: iron bracket with porcelain pin insulators, service drop from the wing end pole, drip loops, entrance tubes",
+         "S:157218 S:157103 (wires everywhere, 1912 streets) A: position, pole datums from ../wings", "")
 
 
 def bracket_lamp(base, nrm):
@@ -1779,29 +1883,74 @@ def bracket_lamp(base, nrm):
     LAMPS.append(m @ Vector((0, reach, -0.2)))
 
 
-def insulator_bracket(base, nrm):
-    pi, pp = part("iron"), part("porcelain")
+def tie_ring(p, centre, rad, rw=0.003, n=8):
+    """Tie wire wrapped round an insulator neck (closed ring in the horizontal plane, vertices at k * 360 / n deg, like lathe())."""
+    c = Vector(centre)
+    pts = [c + Vector((rad * math.cos(2 * math.pi * k / n), rad * math.sin(2 * math.pi * k / n), 0.0)) for k in range(n + 1)]
+    tube(p, pts, rw, 3)
+
+
+SERVICE = []     # LOD0: one entry per conductor (parts.json, seams check)
+
+
+def insulator_bracket(base, nrm, sx):
+    """Street-side service bracket: wall plate, stay, crossarm, 4 porcelain pin insulators (tie groove at 0.17), service drop to
+    the wing end pole, tie wires at both ends, drip loops into sloping porcelain entrance tubes 0.44-0.49 m under the bracket."""
+    pi, pp = part("service_iron", "iron"), part("service_porcelain", "porcelain")
+    pw = part("service_wire", "wire")
     m = frame_matrix(base, nrm)
+    us = (-0.42, -0.14, 0.14, 0.42)
     with local(m):
         cbox(pi, (-0.04, 0.0, -0.35), (0.04, 0.02, 0.05), c=0.003 if LOD == 0 else 0, skip=("-y",))
         rod(pi, (0, 0.01, -0.3), (0, 0.45, 0.0), 0.014, 5)
         cbox(pi, (-0.5, 0.42, -0.02), (0.5, 0.48, 0.02))
-        for u in (-0.42, -0.14, 0.14, 0.42):
+        for u in us:
             rod(pi, (u, 0.45, 0.02), (u, 0.45, 0.09), 0.008, 5)
             if LOD <= 1:
                 prof = [(0.0, 0.07), (0.035, 0.07), (0.045, 0.09), (0.04, 0.11), (0.06, 0.13), (0.055, 0.15), (0.035, 0.17), (0.04, 0.19),
                         (0.03, 0.21), (0.0, 0.215)]
                 lathe(pp, prof, centre=(u, 0.45, 0), seg=8 if LOD == 0 else 5)
-            # wire off into the street (catenary), and a drop into a porcelain entrance tube
-            W = [m @ Vector((u, 0.45, 0.19))]
-            for k in range(1, 9):
-                f = k / 8
-                W.append(m @ Vector((u + 0.2 * f, 0.45 + 9.0 * f, 0.19 - 1.4 * math.sin(math.pi * f * 0.5) - 0.2 * f)))
-            if LOD <= 1:
-                with local(m.inverted()):
-                    tube(part("wire"), W, 0.004, 3)
-        if LOD <= 1:
-            lathe(pp, [(0.02, 0.0), (0.02, -0.12), (0.03, -0.14), (0.0, -0.14)], centre=(0, 0.02, -0.38), seg=6) if False else None
+                # entrance tube (sloping down and out so the water drains away) with a flared lip
+                t_in, t_out = Vector((u, -0.02, -0.44)), Vector((u, 0.075, -0.49))
+                rod(pp, t_in, t_out, 0.016, 8 if LOD == 0 else 5)
+                d = (t_out - t_in).normalized()
+                rod(pp, t_out - d * 0.012, t_out, 0.022, 8 if LOD == 0 else 5)
+    if LOD >= 2:
+        return
+    # conductors: groove points of the bracket insulators (world) -> the four pole insulators on the base side of the wing end pole
+    grooves = [(u, m @ Vector((u, 0.45, 0.17))) for u in us]
+    grooves.sort(key=lambda g: -g[1].y)                      # nearest the wing first
+    xa, xb = sx * (WING_POLE["x"] - WING_POLE["u"][0]), sx * (WING_POLE["x"] - WING_POLE["u"][1])
+    zu = WING_POLE["arms"][0] + WING_POLE["ins_base"] + WING_POLE["ins_zmax"]
+    zl = WING_POLE["arms"][1] + WING_POLE["ins_base"] + WING_POLE["ins_zmax"]
+    # plan order kept (no crossings in plan): the two conductors nearest the wing go to the insulators farther along the arm
+    # (x +/-20.14, upper and lower arm), the other two to x +/-19.78
+    targets = [Vector((xa, WING_POLE["y"], zu)), Vector((xa, WING_POLE["y"], zl)), Vector((xb, WING_POLE["y"], zu)), Vector((xb, WING_POLE["y"], zl))]
+    # the wing's pole insulators are lathed with 5 sides in LOD0 and 4 in LOD1 (vertices at k * 360 / seg deg): the span end and
+    # the tie follow that polygon (end 1 mm off the facet it faces, tie ring 0.5 mm clear of facets and corners)
+    wseg = 5 if LOD == 0 else 4
+    apo = WING_POLE["ins_rmax"] * math.cos(math.pi / wseg)
+    for (u, g), tgt in zip(grooves, targets):
+        dh = Vector((tgt.x - g.x, tgt.y - g.y, 0.0)).normalized()
+        p0 = g + dh * (0.035 + 0.004 + 0.001)
+        th = math.atan2(-dh.y, -dh.x)
+        step = 2 * math.pi / wseg
+        phi = abs(th % step - step / 2)                  # angle to the nearest facet normal (facet normals at (k + 1/2) * step)
+        p1 = tgt - dh * (apo / math.cos(phi) + 0.004 + 0.001)
+        L = (p1 - p0).length
+        sag = 0.05 + 0.015 * L
+        n = 14 if LOD == 0 else 8
+        span = [p0 + (p1 - p0) * (k / n) - Vector((0, 0, sag * 4 * (k / n) * (1 - k / n))) for k in range(n + 1)]
+        tube(pw, span, 0.004, 3)
+        tie_ring(pw, g, 0.038)
+        tie_ring(pw, tgt, (apo + 0.0035) / math.cos(math.pi / wseg), n=wseg)      # 0.5 mm off the (wing-owned) insulator
+        # tail: from the wall side of the groove down in a drip loop into the entrance tube under the bracket
+        tl = [m @ Vector(q) for q in ((u, 0.45 - 0.04, 0.17), (u, 0.37, 0.06), (u, 0.29, -0.22), (u, 0.20, -0.50), (u, 0.15, -0.60),
+                                        (u, 0.12, -0.545), (u, 0.10, -0.503), (u, 0.075, -0.49))]
+        tube(pw, tl, 0.004, 3)
+        if LOD == 0:
+            SERVICE.append({"conductor": u, "span": [[round(v, 4) for v in p0], [round(v, 4) for v in p1]], "sagM": round(sag, 3),
+                            "poleInsulator": [round(v, 4) for v in tgt], "entranceTube": [round(v, 4) for v in tl[-1]]})
 
 
 def interior_shell():
@@ -2122,6 +2271,9 @@ def build_lod(lod):
     if lod == 0:
         INSTANCES["bulb"].clear()
         INSTANCES["baluster"].clear()
+        SERVICE.clear()
+    for k in [k for k in LEAF_NODES if k[0] == lod]:
+        del LEAF_NODES[k]
     WINDOWS, DOORS, LAMPS = [], [], []
     OPENINGS.clear()
     build_all()
@@ -2265,6 +2417,12 @@ def add_interface_empties(coll, root):
         e.parent = root
         e.matrix_world = fr @ Matrix.Translation((o.uc, 0.0, o.z0))
         e["opening"] = json.dumps({"width": o.w, "sill": o.z0, "head": o.top(), "kind": o.kind})
+        if o.tag.startswith("door_wing_"):       # v1.3: stated door (runtime flag + clips); leaves = pivot nodes, default closed
+            e["state"] = "closed"
+            e["door"] = json.dumps({"leaves": [f"TB_EXT_LOD{l}_{o.tag}_leaf{t}" for l in (0, 1) for t in ("S", "N")],
+                                    "clips": [f"{o.tag}_open", f"{o.tag}_close"], "seconds": DOOR_SECONDS, "openAngleDeg": 90,
+                                    "opensInto": "wing", "thresholdTop": WING_DOOR_FLOOR, "default": "closed",
+                                    "rule": "state 'open' = the end pose of the _open clip; LOD2 keeps a closed flat face"})
 
 
 def tri_count(objs):
@@ -2279,6 +2437,56 @@ def tri_count(objs):
 # ---------------------------------------------------------------------------------------------
 # 7. Main
 # ---------------------------------------------------------------------------------------------
+DOOR_FPS, DOOR_SECONDS = 30, 1.2
+
+
+def make_leaf_pivots(lod, objs, coll, root):
+    """v1.3: every leaf registered by door_fill(leaf_node=...) becomes an empty 'TB_EXT_LOD<n>_<door>_leaf<S|N>' on its hinge
+    (knuckle axis, world Z) with its material meshes as children, rest pose = closed, and two NLA tracks that the glTF exporter
+    writes as the clips '<door>_open' (0 -> +/-90 deg, 1.2 s, eased) and '<door>_close'."""
+    sc = bpy.context.scene
+    sc.render.fps = DOOR_FPS
+    nf = int(DOOR_FPS * DOOR_SECONDS)
+    for (lk, key), info in sorted(LEAF_NODES.items()):
+        if lk != lod:
+            continue
+        kids = [o for o in objs if o.name.startswith(f"TB_EXT_LOD{lod}_{key}_")]
+        if not kids:
+            continue
+        piv = bpy.data.objects.new(f"TB_EXT_LOD{lod}_{key}", None)
+        piv.empty_display_type = "SINGLE_ARROW"
+        piv.empty_display_size = 0.5
+        coll.objects.link(piv)
+        piv.parent = root
+        h = Vector(info["hinge"])
+        piv.location = h
+        for o in kids:
+            o.data.transform(Matrix.Translation(-h))
+            o.parent = piv
+        door = info["door"]
+        piv["door"] = door
+        piv["defaultState"] = "closed"
+        piv["openAngleDeg"] = info["openDeg"]
+        piv["axis"] = "node +Z (Blender) = glTF +Y, through the node origin = the hinge knuckle axis"
+        piv["clips"] = json.dumps([f"{door}_open", f"{door}_close"])
+        piv["leaf"] = json.dumps({"widthM": info["width"], "zM": info["z"], "opensInto": "wing (away from the base hall)"})
+        piv.rotation_mode = "XYZ"
+        ad = piv.animation_data_create()
+        a_open = math.radians(info["openDeg"])
+        for clip, (r0, r1) in ((f"{door}_open", (0.0, a_open)), (f"{door}_close", (a_open, 0.0))):
+            act = bpy.data.actions.new(f"{piv.name}__{clip}")
+            ad.action = act
+            for f, rz in ((0, r0), (nf, r1)):
+                piv.rotation_euler = (0.0, 0.0, rz)
+                piv.keyframe_insert("rotation_euler", frame=f)
+            ad.action = None
+            tr = ad.nla_tracks.new()
+            tr.name = clip
+            tr.strips.new(clip, 0, act)
+            tr.mute = True
+        piv.rotation_euler = (0.0, 0.0, 0.0)
+
+
 def main():
     global BUCKET, WINDOWS, DOORS
     bpy.ops.object.select_all(action="SELECT")
@@ -2305,6 +2513,7 @@ def main():
                 objs.append(make_object(key, p, coll, root))
         lod_stats[lod] = {"tris": tri_count(objs), "objects": len(objs),
                           "byPart": {o.name.split("_", 3)[-1]: tri_count([o]) for o in objs}}
+        make_leaf_pivots(lod, objs, coll, root)
         if lod == 0:
             lod0_windows, lod0_doors, lod0_lamps, lod0_bulbs = list(WINDOWS), list(DOORS), list(LAMPS), len(BULBS)
             parts_meta = list(PARTS)
@@ -2326,7 +2535,7 @@ def main():
     t_uv = time.time() - t0
     print("LOD stats", json.dumps({k: {"tris": v["tris"], "objects": v["objects"]} for k, v in lod_stats.items()}))
     meta = {
-        "version": "tower-base-exterior v1.2",
+        "version": "tower-base-exterior v1.3",
         "command": "blender -b -P assets-src/shinsekai/tower-base-upgrade/exterior/build-tower-base-exterior.py -- " + " ".join(ARGV),
         "v4Constants": {k: v for k, v in V4.items() if k != "LIFT"},
         "lift": V4.get("LIFT"),
@@ -2336,6 +2545,9 @@ def main():
         "parts": parts_meta,
         "timingsS": {"build": round(t_build, 1), "uv1": round(t_uv, 1)},
         "budgetLOD0": 160000,
+        "statedDoors": {f"{k[1]}": v for k, v in sorted(LEAF_NODES.items()) if k[0] == 0},
+        "serviceDrops": SERVICE,
+        "wingDatumsRead": {"roof": WING_ROOF, "pole": WING_POLE, "doorWingFloor": WING_DOOR_FLOOR},
         "instancing": {
             "note": "LOD0 bulbs and balusters are also baked into TB_EXT_LOD0_bulb / _trim (counted above). For runtime instancing, hide "
                     "those faces and draw one prototype per placement (world Z-up metres; glTF Y-up = (x, z, -y)).",
@@ -2355,7 +2567,8 @@ def main():
                 o.select_set(True)
         bpy.ops.export_scene.gltf(filepath=str(HERE / "tower-base-exterior.glb"), export_format="GLB", use_selection=True,
                                   export_extras=True, export_apply=False, export_texcoords=True, export_normals=True,
-                                  export_materials="EXPORT", export_yup=True)
+                                  export_materials="EXPORT", export_yup=True, export_animations=True,
+                                  export_animation_mode="NLA_TRACKS", export_force_sampling=True, export_optimize_animation_size=False)
     if RENDERS:
         import importlib.util
         spec = importlib.util.spec_from_file_location("tb_render", HERE / "render_setup.py")

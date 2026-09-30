@@ -164,3 +164,31 @@ Further gaps:
 - There are no flags, pennant strings or wires in the sky zone. That belongs to the street pass.
 - The collision stair proxies follow the interior stair plan (v1.2) as a ramp through the nosings; the interior cell's own collision has the same ramp.
 - The GLB has not been run through glTF-Validator here (no validator is installed; install nothing). It re-imports cleanly into Blender 4.5 with both UV sets, all 74 LOD meshes, 20 collision meshes and 16 interface empties.
+
+## v1.3 seams with the cinema wings (2026-10-01 08:05–08:55, Claude; INTERFACE change log 1.3)
+
+Receipt: `../verify/seams-verify.json` (`../verify/seams-verify.py`, reads the exported GLBs). Renders: `../verify/seams-renders/`.
+- **Downpipes** (own node `TB_EXT_LOD<n>_downpipe`, iron): the two E/W pipes beside the side-mass walls ran from their hoppers
+  (y ±8.25, 14.3) straight to the ground through the wing roofs. They now take a 45° offset with two swan-neck bends along the
+  wall face (x ±14.6, 50 mm off the render) to y ±9.55, the centre line of the wing eaves gutter, and end in a shoe 70 mm above
+  its rim (discharge into the gutter, which drains to the wing's own pipes). Holderbats on each run, one strapped round the rake.
+  The four full-height turret pipes (y ±12.65) stand clear of the wings and are unchanged. Wing datums are read, not drawn:
+  `WING_ROOF` (roof curve, edge ±9.45, gutter ±9.55 / -0.12).
+- **Service entry:** the four brackets sent their wires 9 m out into mid-air. The two street-side brackets (SW / SE turret outer
+  faces, 13.8) now take a four-wire service drop from the wing end pole (x ±20.5, y -13.3: the insulators at 0.36 / 0.72 on the
+  base side of both crossarms, `WING_POLE`). Plan order is kept so no span crosses another; sag 0.05 m + 1.5 % of the span; tie
+  wires at both ends (at the pole following the wing insulator's 5 / 4-sided lathe, 0.5 mm clear); drip loops from each insulator
+  into sloping porcelain entrance tubes 0.44–0.49 m under the bracket. The yard-side brackets (NW / NE) are removed: nothing feeds
+  them (no poles on the yard side). Nodes `_service_iron`, `_service_porcelain`, `_service_wire`; every span in parts.json →
+  `serviceDrops`.
+- **door_wing_E/W:** finished threshold 0.15 (flush with the ticket hall, the wing zone and the cinema; the v1.2 stone at 0.03 left
+  a 0.12 m step on each side and would have stopped the leaves) and a 15 mm oak saddle under the leaves; the frame starts at 0.15.
+  The leaves are stated nodes: `door_fill(..., leaf_node=...)` builds them closed with 3 mm joints, `make_leaf_pivots()` puts each
+  on an empty at its hinge knuckle axis (`TB_EXT_LOD<0|1>_door_wing_<E|W>_leaf<S|N>`, extras `defaultState` closed,
+  `openAngleDeg`, `clips`) and writes the NLA tracks that the exporter turns into the glTF clips `door_wing_<E|W>_open` / `_close`
+  (1.2 s, 30 fps, eased; 0 → ±90°, into the wing). `IF_door_wing_<E|W>` carries `state` = "closed" and `door` (leaves, clips,
+  rule). LOD2 keeps a closed flat face. parts.json → `statedDoors`.
+- Numbers: LOD0 **140,867** (v1.2 140,311: +556), LOD1 64,863 (+36), LOD2 16,676 (+20); 47 / 40 / 19 meshes. Build 9.7 s.
+- Checks: 0 base triangles intersect any wing mesh (roofs, gutters, fascia, porcelain; v1.2: 208 with the roofs); every base wire
+  end lies within 6.0 mm of a support (v1.2: 32 of 34 ends in mid-air); the leaves swept through the open clips touch nothing.
+  Informational: 124 back-to-back contacts remain where wing members butt against the base wall (fascia and cornice end caps).

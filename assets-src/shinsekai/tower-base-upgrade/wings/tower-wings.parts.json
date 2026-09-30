@@ -1888,8 +1888,8 @@
   "IF_wing_door_wing_E"
  ],
  "timingsS": {
-  "build": 6.2,
-  "uv1": 3.7
+  "build": 6.3,
+  "uv1": 4.3
  },
  "instancing": {
   "note": "LOD0 bulbs, lanterns, nobori, poster frames, kerbs and footway slabs are baked into the LOD meshes and counted; the placements below let the runtime draw them as instances instead (world Z-up metres).",

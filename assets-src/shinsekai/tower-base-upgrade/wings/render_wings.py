@@ -26,7 +26,44 @@ SHOTS = {
     "whole-base-with-wings": dict(loc=(4.0, -66.0, 1.7), target=(0.0, 0.0, 1.7), lens=15, night=False, hide_ctx=("ctx_opp",), shift=0.2),
     "night-cinemas": dict(loc=(-44.0, -16.2, 1.6), target=(-22.5, -9.4, 8.2), lens=18, night=True),
     "lod": dict(loc=(-51.0, -160.0, 23.6), target=(-51.0, 0.0, 23.6), lens=50, night=False),
+    # v1.3 seam review (../verify/seams-renders/): the interior cell_cinema is imported from ../interior (placed by its rule) for
+    # the W1 door shots; the wing placeholder behind that door is hidden as when the cell loads.
+    "seam-w1-door-street": dict(loc=(-28.25, -12.05, 1.55), target=(-29.45, -8.2, 1.3), lens=24, night=False, cell=True, seam=True),
+    "seam-w1-door-inside": dict(loc=(-30.0, -5.0, 1.62), target=(-29.35, -8.55, 1.25), lens=22, night=False, cell=True, seam=True, exp=1.6),
+    "seam-downpipe-S": dict(loc=(-18.6, -14.2, 11.9), target=(-14.6, -9.35, 10.9), lens=28, night=False, seam=True),
+    "seam-downpipe-N": dict(loc=(-19.2, 5.2, 14.2), target=(-14.6, 9.3, 10.9), lens=26, night=False, seam=True),
+    "seam-wires-bracket": dict(loc=(-17.3, -12.6, 13.35), target=(-14.75, -10.2, 13.45), lens=32, night=False, seam=True),
+    "seam-wires-pole": dict(loc=(-18.1, -15.2, 9.75), target=(-20.1, -13.3, 9.05), lens=30, night=False, seam=True),
 }
+INT_GLB = HERE.parent / "interior" / "tower-base-interiors.glb"
+SEAM_DIR = HERE.parent / "verify" / "seams-renders"
+
+
+def import_cell_cinema():
+    """Render-only: cell_cinema from the exported interiors GLB, placed world = T(-14.95, 8.55, 0.15) R180z cell; the other cells
+    are deleted."""
+    before = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=str(INT_GLB))
+    new = [o for o in bpy.data.objects if o not in before]
+    root = bpy.data.objects["cell_cinema"]
+    keep = {root}
+    stack = list(root.children)
+    while stack:
+        o = stack.pop()
+        keep.add(o)
+        stack.extend(o.children)
+    for o in new:
+        if o not in keep:
+            bpy.data.objects.remove(o, do_unlink=True)
+    for o in keep:
+        if o.animation_data:
+            o.animation_data_clear()
+        if o.type == "MESH" and "col_floor" in o.name:
+            o.hide_render = True
+        if o.type == "CAMERA":
+            o.hide_render = True
+    root.matrix_world = Matrix.Translation((-14.95, 8.55, 0.15)) @ Matrix.Rotation(math.pi, 4, "Z")
+    return list(keep)
 
 
 def load_rs(G):
@@ -408,6 +445,7 @@ def run(G, renders, samples, l0):
     image = bpy.data.images.load(str(G["ATLAS_PNG"]), check_existing=True)
     wing_roots = {o["lod"]: o for o in bpy.data.objects if o.name.startswith("TW_LOD") and o.type == "EMPTY"}
     base_root = bpy.data.objects.get("TB_EXT_LOD0")
+    cell_objs = import_cell_cinema() if any(SHOTS[n].get("cell") for n in names) else []
     for name in names:
         shot = SHOTS[name]
         night = shot["night"]
@@ -468,7 +506,16 @@ def run(G, renders, samples, l0):
                     o.hide_render = True
             cam = RS.camera("shotcam", shot["loc"], shot["target"], shot["lens"])
             cam.data.shift_y = shot.get("shift", 0.0)
+        for o in cell_objs:
+            if o.type in ("MESH", "LIGHT") and "col_floor" not in o.name:
+                o.hide_render = not shot.get("cell", False)
+        w1ph = bpy.data.objects.get("TW_LOD0_W1_backing_dark")
+        if w1ph is not None:
+            w1ph.hide_render = bool(shot.get("cell", False))
+        sc.view_settings.exposure += shot.get("exp", 0.0)
         sc.camera = cam
-        sc.render.filepath = str(HERE / f"{name}.png")
+        if shot.get("seam"):
+            SEAM_DIR.mkdir(parents=True, exist_ok=True)
+        sc.render.filepath = str((SEAM_DIR if shot.get("seam") else HERE) / f"{name}.png")
         bpy.ops.render.render(write_still=True)
         print("rendered", name)

@@ -248,3 +248,19 @@ Read back from the exported `tower-wings.glb`, `../exterior/tower-base-exterior.
 Further gaps: no interiors for W2 / E1-E3 (their openings are fixed in INTERFACE for later cells); the rear yard has no
 ground or collision; no glTF-Validator run (nothing installed; the GLB re-imports cleanly into Blender 4.5 in the
 verification with all LODs, 32 collision meshes and 13 empties).
+
+## v1.1 (2026-10-01 08:05–08:55, Claude): seams with the base and the interior
+
+The requests above were resolved in their owning modules (INTERFACE change log 1.3; receipt `../verify/seams-verify.json`):
+base 1 (the downpipes discharge into the wing eaves gutters via a 45° offset), base 3 (the service drops end on the base-side
+insulators of the end poles at x ±20.5, with tie wires and entrance tubes; the yard-side brackets are removed), base 4
+(door_wing_E/W leaves are stated nodes, default closed, clips `door_wing_<E|W>_open` / `_close`), base 5 (finished threshold 0.15
++ 15 mm saddle: the 0.12 m riser this module draws at x ±14.50 is now buried under the base threshold, no step), interior 1–3
+(single-owner shell, door casing and wainscot cut, cross aisle at the exit door). Base request 2 (drop the base E/W dressing under
+the wings) is still open.
+- Changed here: the W1 / E-front service drops started 10 mm above their wall insulators; they now start on the insulator apex
+  (`street_poles`, 8.73 → 8.72). Rebuilt and re-exported; triangles unchanged (147,159 / 69,971 / 22,247).
+- `render_wings.py`: six seam shots (`seam-*`, written to `../verify/seams-renders/`); the W1 door shots import `cell_cinema` from
+  the interiors GLB and hide `TW_LOD0_W1_backing_dark`.
+- `verify/verify-wings.py`: the cell's W1 door edges are measured on its hall face (the cell no longer draws the wall zone).
+  Re-run: 0 cell hits in the W1 door's wall zone (v1.0: 3,835), edges 0.2 / 0.2 / 0.0 mm; door_wing_W / E visible step 0.12 → 0.0.

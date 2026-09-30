@@ -2,6 +2,8 @@
 
     blender -b -P build-tower-base-interiors.py -- [--room hall|stair|lift|cinema|all] [--variant base|dream|both]
         [--render cams|closeups|none] [--export] [--samples 96] [--scale 1.0] [--iter 1] [--regen-tex]
+        [--door-wing-w 0]   (render-only pose of the base's door_wing_W leaves in degrees: 0 = closed = the canonical default,
+                             90 = the end pose of the base clip door_wing_W_open; the leaves themselves belong to the exterior)
 
 Blender axes: Z up. Every room is a standalone cell built around its own origin (0,0,0 = floor level, SW inner corner);
 the glb puts each cell under a node `cell_<room>[_dream]` so it can be placed later from INTERFACE.md (not yet
@@ -45,6 +47,7 @@ ITER = arg("--iter", 1, int)
 REGEN = flag("--regen-tex")
 ONLYCAM = arg("--cam", "")
 GATE_RENDERS = flag("--gate-renders")
+DOOR_WING_W_DEG = arg("--door-wing-w", 0.0, float)
 RNG = random.Random(1912)
 NPR = np.random.default_rng(1912)
 D2R = math.pi / 180.0
@@ -1156,7 +1159,7 @@ def export_glb(path):
               export_image_format="AUTO", export_attributes=False, export_animations=True,
               export_animation_mode="NLA_TRACKS", export_force_sampling=True, export_optimize_animation_size=False)
     if not flag("--no-draco"):
-        kw.update(export_draco_mesh_compression_enable=True, export_draco_mesh_compression_level=6, export_draco_position_quantization=14,
+        kw.update(export_draco_mesh_compression_enable=True, export_draco_mesh_compression_level=6, export_draco_position_quantization=16,
                   export_draco_normal_quantization=10, export_draco_texcoord_quantization=12, export_draco_color_quantization=8,
                   export_draco_generic_quantization=12)
     try:
@@ -3434,6 +3437,75 @@ SCREEN_X = 35.3
 BY = CW / 2
 
 
+def inner_wall(c, mat, M, outer, holes=(), sgn=1):
+    """v1.3: one inner finish face (no thickness, no reveal) in the local (u, v) plane of M (M_XZ / M_YZ), facing sgn * w."""
+    outer = _orient2(list(outer), True)
+    holes = [_orient2(list(h), False) for h in holes]
+    loops = [[Vector((q[0], q[1], 0)) for q in outer]] + [[Vector((q[0], q[1], 0)) for q in h] for h in holes]
+    flat = [q for l in loops for q in l]
+    with c.at(m=M):
+        for t in geometry.tessellate_polygon(loops):
+            pa, pb, pc = [(flat[i].x, flat[i].y) for i in t]
+            ar = (pb[0] - pa[0]) * (pc[1] - pa[1]) - (pc[0] - pa[0]) * (pb[1] - pa[1])
+            tt = t if (ar > 0) == (sgn > 0) else (t[0], t[2], t[1])
+            c.face([(flat[i].x, flat[i].y, 0.0) for i in tt], mat)
+
+
+def oface(c, pts, mat, out, smooth=False):
+    """Face oriented so that its normal points along `out` (cell frame, current transform identity)."""
+    n = _newell([np.array(q, dtype=float) for q in pts])
+    if float(np.dot(n, np.array(out, dtype=float))) < 0:
+        pts = pts[::-1]
+    c.face(pts, mat, smooth=smooth)
+
+
+# door casing (architrave) profile, (w across from the opening edge, d out of the wall face), traversed clockwise round the solid:
+# return face lining the opening edge, fillet, flat, ovolo, backband 0.10 proud (the dado rail 0.09 and the wainscot 0.07 stop
+# against it), outer side.  The back (d = 0) is against the plaster and is not drawn.
+CASING = [(0.0, 0.0), (0.0, 0.045), (0.012, 0.05), (0.085, 0.05), (0.095, 0.058), (0.105, 0.075), (0.112, 0.10), (0.15, 0.10), (0.15, 0.0)]
+
+
+def door_casing(c, x0, x1, head, wall_y, zb, mat="teak"):
+    """Mitred architrave round a rectangular opening x0..x1 x (floor..head) on a wall face at y = wall_y with the room on -y.
+    Jambs from zb (top of the plinth blocks) to the mitre; head across; profile CASING."""
+    for (w0, d0), (w1, d1) in zip(CASING, CASING[1:]):
+        ow, od = -(d1 - d0), (w1 - w0)          # clockwise traversal: outward normal in (w, d)
+        # left jamb: x = x0 - w, y = wall_y - d
+        oface(c, [(x0 - w0, wall_y - d0, zb), (x0 - w1, wall_y - d1, zb), (x0 - w1, wall_y - d1, head + w1), (x0 - w0, wall_y - d0, head + w0)],
+              mat, (-ow, -od, 0.0))
+        oface(c, [(x1 + w0, wall_y - d0, zb), (x1 + w1, wall_y - d1, zb), (x1 + w1, wall_y - d1, head + w1), (x1 + w0, wall_y - d0, head + w0)],
+              mat, (ow, -od, 0.0))
+        oface(c, [(x0 - w0, wall_y - d0, head + w0), (x1 + w0, wall_y - d0, head + w0), (x1 + w1, wall_y - d1, head + w1), (x0 - w1, wall_y - d1, head + w1)],
+              mat, (0.0, -od, ow))
+
+
+def cull_boundary(c, lo, hi, tol=0.001):
+    """v1.3 single-owner rule: drop every face that lies on a clear-box boundary plane (within tol) and faces out of the room;
+    such faces are always buried against the exterior's walls, floor or ceiling and would double the exterior's surfaces."""
+    planes = [(0, lo[0], -1), (0, hi[0], 1), (1, lo[1], -1), (1, hi[1], 1), (2, lo[2], -1), (2, hi[2], 1)]
+    keep, n_cull = [], 0
+    for f in c.F:
+        if f["g"].startswith("ref_"):
+            keep.append(f)
+            continue
+        vs = np.array(f["v"], dtype=float)
+        n = _newell(list(vs))
+        ln = float(np.linalg.norm(n))
+        drop = False
+        if ln > 1e-12:
+            n = n / ln
+            for ax, v, sg in planes:
+                if n[ax] * sg > 0.99 and np.all(np.abs(vs[:, ax] - v) < tol):
+                    drop = True
+                    break
+        if drop:
+            n_cull += 1
+        else:
+            keep.append(f)
+    c.F = keep
+    return n_cull
+
+
 def rev_reel_flange(c, r, mat="steel"):
     """Reel flange with 5 lightening holes, in the local XY plane (thickness 2 mm)."""
     outer = [(r * math.cos(a * D2R), r * math.sin(a * D2R)) for a in range(0, 360, 15)]
@@ -3657,22 +3729,28 @@ def build_cinema(dream=False):
     c.light("spot", "beam_spot", (2.9, cx, 5.0), color=(255, 240, 215), watt=1300, size=0.03, target=(sx - 0.3, cx, 3.0), spot=30)
 
     # ---------- shell ----------
+    # v1.3 single owner per surface (INTERFACE change log 1.3): the cell draws only the inner finish faces ON its clear-box
+    # boundary - floor, the two long walls (the south one holed for the exit door), the screen-end wall and a ceiling over the
+    # vault - one-sided, facing the room.  The 0.45 m wall zones with their outer faces, the reveal and threshold of the exit door
+    # and the entrance-end wall face (TW_*_W1_endwall at cell x = 0) belong to the wings.  Render-only stand-ins for the wall
+    # zones (ref_shell) sit 2 mm behind the inner faces so standalone renders keep their thickness.
+    door_x = 14.5 if not dream else 26.0
+    DX0, DX1, DHEAD = door_x - 0.6, door_x + 0.6, 2.5          # exit door clear opening (= wings W1 door: 1.2 x 0.15..2.65 world)
     with c.grp("shell"):
-        box(c, "boards_dk", (-tw, -tw, -0.3), (L + tw, CW + tw, -0.005), r=0)
         # floor: boards for aisles/foyer drawn as one grid of planks
         c.face([(0, 0, 0), (L, 0, 0), (L, CW, 0), (0, CW, 0)], "boards", uv=[(0, 0), (L, 0), (L, CW), (0, CW)])
-        # side walls (long): south wall (y=CW) with the exit door ajar; north wall (y=0)
-        door_x = 14.5 if not dream else 26.0
-        wallXZ(c, "plaster", -tw, L + tw, -0.3, CH + 0.3, -tw, 0.0)
-        wallXZ(c, "plaster", -tw, L + tw, -0.3, CH + 0.3, CW, CW + tw, holes=[rect_pts(door_x - 0.6, 0.0, door_x + 0.6, 2.5)])
-        # end walls: entrance (x=0) with the door_wing_W opening (2.4 wide, head 3.25), far wall behind the stage
-        with c.grp("ref_shell"):
-            wallYZ(c, "plaster", -tw, CW + tw, -0.3, CH + 0.3, -tw, 0.0, holes=[rect_pts(cx - 1.2, 0.0, cx + 1.2, 3.25)])
-        wallYZ(c, "plaster", -tw, CW + tw, -0.3, CH + 0.3, L, L + tw)
-        # barrel-vault ceiling made of ribs + boards: arch from spring z=6.2 to crown CH
-        for k in range(0, 1):
-            pass
-        box(c, "plaster_ceil", (-tw, -tw, CH), (L + tw, CW + tw, CH + 0.3), r=0)
+        inner_wall(c, "plaster", M_XZ(0.0), rect_pts(0.0, 0.0, L, CH), (), sgn=1)                     # north long wall
+        inner_wall(c, "plaster", M_XZ(CW), rect_pts(0.0, 0.0, L, CH), [rect_pts(DX0, 0.0, DX1, DHEAD)], sgn=-1)   # south, exit door
+        inner_wall(c, "plaster", M_YZ(L), rect_pts(0.0, 0.0, CW, CH), (), sgn=-1)                     # screen end
+        c.face([(0, 0, CH), (0, CW, CH), (L, CW, CH), (L, 0, CH)], "plaster_ceil")                    # over the vault, facing down
+    with c.grp("ref_shell"):
+        box(c, "boards_dk", (-tw, -tw, -0.3), (L + tw, CW + tw, -0.002), r=0)
+        wallXZ(c, "plaster", -tw, L + tw, -0.3, CH + 0.3, -tw, -0.002)
+        wallXZ(c, "plaster", -tw, L + tw, -0.3, CH + 0.3, CW + 0.002, CW + tw, holes=[rect_pts(DX0, 0.0, DX1, DHEAD)])
+        wallYZ(c, "plaster", -tw, CW + tw, -0.3, CH + 0.3, -tw, -0.002, holes=[rect_pts(cx - 1.2, 0.0, cx + 1.2, 3.25)])
+        wallYZ(c, "plaster", -tw, CW + tw, -0.3, CH + 0.3, L + 0.002, L + tw)
+        box(c, "plaster_ceil", (-tw, -tw, CH + 0.002), (L + tw, CW + tw, CH + 0.3), r=0)
+        box(c, "sandstone", (DX0, CW + 0.002, -0.05), (DX1, CW + tw, -0.002), r=0)                  # stand-in for the wings' threshold
     c.col.append([(0, 0, 0), (BX1 + 0.0, 0, 0), (BX1 + 0.0, CW, 0), (0, CW, 0)])
     c.col.append([(BX1, 0, 0), (sx - 4.5 + 0.0, 0, 0), (sx - 4.5, CW, 0), (BX1, CW, 0)])
     c.col.append([(sx - 3.8, 0, zs), (L, 0, zs), (L, CW, zs), (sx - 3.8, CW, zs)])
@@ -3693,7 +3771,7 @@ def build_cinema(dream=False):
         rib_out = arch_pts(0.0, CW, zsp, rise, 26, 5.8)
         rib_in = arch_pts(0.14, CW - 0.14, zsp - 0.0, rise - 0.14, 26, 5.8)
         for i in range(nbay + 1):
-            xk = i * bay
+            xk = min(max(i * bay, 0.11), L - 0.11)          # v1.3: the end ribs stand against the end walls, inside the clear box
             with c.at(m=Matrix(((0, 0, 1, xk - 0.11), (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 0, 1)))):
                 extrude(c, "teak", rib_out, [rib_in] if False else (), depth=0.22) if False else None
                 arch_ring(c, "teak", 0.0, CW, zsp, rise, 5.8, 0.0, 0.22, 0.0, n=26) if False else None
@@ -3753,33 +3831,41 @@ def build_cinema(dream=False):
         bay = L / nbay
         for (yy, sg) in ((0.0, 1), (CW, -1)):
             for i in range(nbay + 1):
-                xk = i * bay
+                xk = min(max(i * bay, 0.24), L - 0.24)      # v1.3: end pilasters stand against the end walls (were half inside them)
                 if sg < 0 and abs(xk - door_x) < 1.0:
                     continue
                 box(c, "plaster_dk", (xk - 0.18, yy if sg > 0 else yy - 0.20, 1.30), (xk + 0.18, yy + 0.20 if sg > 0 else yy, 5.6), r=0.006)
                 box(c, "sandstone", (xk - 0.24, yy if sg > 0 else yy - 0.26, 5.6), (xk + 0.24, yy + 0.26 if sg > 0 else yy, 5.75), r=0.008)
                 box(c, "sandstone", (xk - 0.24, yy if sg > 0 else yy - 0.26, 1.24), (xk + 0.24, yy + 0.26 if sg > 0 else yy, 1.30), r=0.008)
-            # wainscot (oak panelled dado) to 1.3 m, skirting, dado rail
-            box(c, "oak", (0.0, yy if sg > 0 else yy - 0.07, 0.0), (L, yy + 0.07 if sg > 0 else yy, 1.24), r=0.005)
-            box(c, "teak", (0.0, yy if sg > 0 else yy - 0.09, 1.24), (L, yy + 0.09 if sg > 0 else yy, 1.30), r=0.005)
+            # wainscot (oak panelled dado) to 1.3 m, skirting, dado rail; v1.3: on the south wall both stop against the exit door
+            # casing (they ran across the door before: the door was blocked below 1.45 m world)
+            spans = [(0.0, L)] if sg > 0 else [(0.0, DX0 - 0.15), (DX1 + 0.15, L)]
+            for xa_, xb_ in spans:
+                box(c, "oak", (xa_, yy if sg > 0 else yy - 0.07, 0.0), (xb_, yy + 0.07 if sg > 0 else yy, 1.24), r=0.005)
+                box(c, "teak", (xa_, yy if sg > 0 else yy - 0.09, 1.24), (xb_, yy + 0.09 if sg > 0 else yy, 1.30), r=0.005)
             for i in range(0, nbay, ST):
                 xa, xb = i * bay + 0.40, (i + 1) * bay - 0.40
-                with c.at(m=M_XZ(yy)):
-                    if abs((xa + xb) / 2 - door_x) > 1.3 or sg > 0:
-                        field(c, M_XZ(yy), sg, xa, xb, 1.55, 4.55, fw=0.05)
-                # painted wainscot panels (tri-economical)
-                with c.at(m=M_XZ(yy)):
-                    box(c, "paint_cream", (xa, 0.25, -0.03 if sg < 0 else 0.0), (xb, 1.10, 0.0 if sg < 0 else 0.03), r=0.004)
+                # v1.3: field() applies the wall matrix itself (the extra c.at(M_XZ) put the north fields flat on the floor and
+                # the south ones in the air outside the hall)
+                if abs((xa + xb) / 2 - door_x) > 1.3 or sg > 0:
+                    field(c, M_XZ(yy), sg, xa, xb, 1.55, 4.55, fw=0.05)
+                # painted wainscot panels (tri-economical), clipped to the wainscot runs
+                for xa_, xb_ in spans:
+                    pa, pb = max(xa, xa_ + 0.12), min(xb, xb_ - 0.12)
+                    if pb - pa < 0.3:
+                        continue
+                    with c.at(m=M_XZ(yy)):          # v1.3: 15 mm proud of the wainscot face (they were buried inside it)
+                        box(c, "paint_cream", (pa, 0.25, -0.085 if sg < 0 else 0.07), (pb, 1.10, -0.07 if sg < 0 else 0.085), r=0.004)
         # wall brackets + fictional posters on the long walls (every other bay), dim lamps
         for i in range(0, nbay, ST):
             xm = (i + 0.5) * bay
-            with c.at((xm, 0.07, 2.4), rz=0):
+            with c.at((xm, 0.005, 2.4), rz=0):             # v1.3: back plates on the wallpaper (they floated 70 mm off the wall)
                 sconce(c, real_light=(i % 3 == 0), name="s0_%d" % i, watt=10)
             if abs(xm - door_x) > 1.4:
-                with c.at((xm, CW - 0.07, 2.4), rz=180):
+                with c.at((xm, CW - 0.005, 2.4), rz=180):
                     sconce(c, real_light=(i % 3 == 1), name="s1_%d" % i, watt=10)
             if i % 2 == 1:
-                with c.at((xm + bay * 0.25, 0.04, 2.0)):
+                with c.at((xm + bay * 0.25, 0.029, 2.0)):      # v1.3: hung on the field moulding (0.028), was 12 mm in front of it
                     poster(c, 0.7, 1.05, i % 8)
         # porcelain cleats wire runs along the vault springing both sides
         porcelain_cleat_run(c, (0.2, 0.30, 5.9), (L - 0.2, 0.30, 5.9))
@@ -3788,21 +3874,37 @@ def build_cinema(dream=False):
             panel(c, "grime", 0.0, L, 4.6, 6.2, w=0.0025)
         with c.at(m=M_XZ(CW)):
             panel(c, "grime", 0.0, L, 4.6, 6.2, w=-0.0025, flip=True)
-    # ---------- exit door (ajar) with sun; exit lamp ----------
+    # ---------- exit door: casing, plinth blocks, threshold (v1.3), leaves ajar with sun; exit lamp ----------
+    # The opening is the wings' W1 street door (reveal and stone threshold in the 0.45 m wall zone belong to the wings; edges
+    # x DX0 / DX1 and head 2.5 cell = -30.05 / -28.85 / 2.65 world).  The cell adds, on its side of the wall face: a mitred teak
+    # architrave whose return face lines the opening edge, oak plinth blocks the wainscot stops against, and an oak threshold plate
+    # flush with the floor boards (6 mm, chamfered).
+    with c.grp("exit_door"):
+        door_casing(c, DX0, DX1, DHEAD, CW, 0.30)
+        for xa_, xb_ in ((DX0 - 0.165, DX0), (DX1, DX1 + 0.165)):
+            box(c, "oak", (xa_, CW - 0.11, 0.0), (xb_, CW, 0.30), r=0.006)
+        box(c, "oak", (DX0, CW - 0.10, 0.0), (DX1, CW, 0.006), r=0.002)
     with c.grp("doors"):
-        with c.at((door_x - 0.6, CW + 0.02, 0.0), rz=-60):
-            door_leaf(c, 0.6, 2.5)
-        with c.at((door_x + 0.6, CW + 0.02, 0.0), rz=-120 - 60):
-            door_leaf(c, 0.6, 2.5)
-        with c.at((door_x, CW - 0.08, 2.7)):
+        # two leaves hung on the hall-side edge of the reveal (hinge knuckles to the hall), both opening INTO the house (the
+        # wings left the reveal clear for them), standing ajar 75 deg; 3 mm joints at the jambs and the meeting stiles, 8 mm
+        # over the threshold plate.  (v1: one leaf swung out through the wall zone.)
+        T_, th_, wl_ = 0.055, 75.0 * D2R, (1.2 - 0.009) / 2
+        for sgn_, x_h in ((1, DX0 + 0.003), (-1, DX1 - 0.003)):
+            M_ = (Matrix.Translation((x_h, CW + 0.005, 0.008)) @ Matrix.Rotation(-sgn_ * th_, 4, "Z")
+                  @ Matrix.Diagonal((sgn_, -1.0, 1.0, 1.0)) @ Matrix.Translation((0.0, -T_, 0.0)))
+            with c.at(m=M_):
+                door_leaf(c, wl_, DHEAD - 0.003 - 0.008)
+        with c.at((door_x, CW - 0.04, 2.7)):
             box(c, "paint_dark", (-0.22, -0.04, 0), (0.22, 0.04, 0.22), r=0.004)
             box(c, "exit_lamp", (-0.19, -0.042, 0.02), (0.19, -0.03, 0.20), r=0.002)             # glowing pictogram panel (no text)
-        # entrance doors at x=0 (opened onto the vestibule) + double swing doors into the auditorium at x=BX1
-    with c.grp("ref_doors"):                                   # door_wing_W leaves belong to the exterior (INTERFACE v1.1); renders only
-        with c.at((-0.03, cx - 1.2, 0.0), rz=90 + 75):
-            door_leaf(c, 1.2, 3.25)
-        with c.at((-0.03, cx + 1.2, 0.0), rz=-90 - 75):
-            door_leaf(c, 1.2, 3.25)
+    with c.grp("ref_doors"):
+        # door_wing_W leaves belong to the exterior (TB_EXT_LOD*_door_wing_W_leaf<S|N>, pivots on the hinge knuckles at world
+        # x -14.354, y -/+1.117; 1.114 x 0.172..3.117 world).  Render-only copies in the same pose: closed by default (the canonical
+        # state), --door-wing-w 90 = the end pose of the clip door_wing_W_open (leaves swung into this foyer).
+        for yy_, rz_ in ((cx + 1.117, -90.0 + DOOR_WING_W_DEG), (cx - 1.117, 90.0 - DOOR_WING_W_DEG)):
+            flip_ = (1.0, -1.0, 1.0) if yy_ > cx else (1.0, 1.0, 1.0)
+            with c.at((-0.596, yy_, 0.022), rz=rz_, s=flip_):
+                door_leaf(c, 1.114, 2.945)
 
     # ---------- foyer + projection booth ----------
     with c.grp("foyer"):
@@ -3890,7 +3992,7 @@ def build_cinema(dream=False):
             yy = 0.4 + k * 2.0
             if abs(yy - cx) < 1.6:
                 continue
-            with c.at((0.12, yy, 0.0), rz=90):
+            with c.at((0.12, yy, 0.0), rz=-90):          # v1.3: back 0.12 m off the end wall (rz 90 put 0.23 m of it into the wall)
                 box(c, "teak", (-0.45, 0, 0.0), (0.45, 0.35, 0.06), r=0.004)
                 for zz in (0.06, 0.66, 1.26, 1.86):
                     box(c, "oak", (-0.45, 0, zz), (0.45, 0.35, zz + 0.03), r=0.003)
@@ -3927,16 +4029,25 @@ def build_cinema(dream=False):
         x_first = 4.2
         x_last = sx - 6.4
         pitch = (x_last - x_first) / (nrows - 1)
+        # v1.3: the bench of the south block in the row that stood 0 m from the exit door is left out, so the door opens onto a
+        # cross aisle (1.6 m between benches) leading to the aisle between the blocks
+        gap_row = min(range(nrows), key=lambda r_: abs(x_first + r_ * pitch - door_x))
         for r in range(nrows):
             xr = x_first + r * pitch
             for b in range(3):
+                if b == 2 and r == gap_row:
+                    continue
                 yc = y0s[b] + block_w / 2
                 with c.at((xr + 0.0, yc, 0.0), rz=90):
                     cinema_bench(c, block_w)
         # cushions left on a few benches, programme sheets on the floor (implied event: an empty house)
         for k in range(10):
-            xr = x_first + RNG.randint(1, nrows - 2) * pitch
-            yc = y0s[RNG.randint(0, 2)] + RNG.uniform(0.6, block_w - 0.6)
+            r_ = RNG.randint(1, nrows - 2)
+            b_ = RNG.randint(0, 2)
+            if b_ == 2 and r_ == gap_row:
+                r_ += 1
+            xr = x_first + r_ * pitch
+            yc = y0s[b_] + RNG.uniform(0.6, block_w - 0.6)
             with c.at((xr + 0.12, yc, 0.44), rz=RNG.uniform(0, 360)):
                 box(c, "leather", (-0.18, -0.18, 0.0), (0.18, 0.18, 0.07), r=0.03, vc=(1.0, 0.8, 0.8))
         for k in range(12):
@@ -3972,19 +4083,21 @@ def build_cinema(dream=False):
         box(c, "velvet", (ps - 0.75, cx - pw / 2 - 0.4, zs + 5.9), (ps - 0.30, cx + pw / 2 + 0.4, zs + 6.45), r=0.02)
         for k in range(60):                                                                           # gilt fringe of the pelmet
             tube(c, "brass", (ps - 0.74, cx - pw / 2 - 0.35 + k * (pw + 0.7) / 59, zs + 5.9), (ps - 0.74, cx - pw / 2 - 0.35 + k * (pw + 0.7) / 59, zs + 5.75), 0.004, 4)
-        # orchestra pit: rail, recessed floor, chairs and music stands
+        # orchestra area: rail on a bottom rail, chairs and music stands.  v1.3: at floor level (it was sunk 0.5 m under an
+        # unbroken floor, below the INTERFACE clear box: the stools were hidden and the stands pierced the floor)
         with c.at((ps - 1.0, 0, 0)):
             box(c, "teak", (-0.04, cx - 4.0, 1.0), (0.04, cx + 4.0, 1.06), r=0.006)
+            box(c, "teak", (-0.04, cx - 3.95, 0.0), (0.04, cx + 3.95, 0.08), r=0.006)
             for k in range(0, 41):
-                with c.at((0.0, cx - 4.0 + k * 0.2, 0.3)):
-                    lathe_baluster(c, 0.7)
+                with c.at((0.0, cx - 4.0 + k * 0.2, 0.08)):
+                    lathe_baluster(c, 0.92)
             for yy in (cx - 4.0, cx + 4.0):
                 box(c, "teak", (-0.05, yy - 0.05, 0.0), (0.05, yy + 0.05, 1.12), r=0.005)
-        box(c, "boards_dk", (ps - 2.6, cx - 4.0, -0.5), (ps - 0.3, cx + 4.0, -0.47), r=0)
+        box(c, "boards_dk", (ps - 2.6, cx - 4.0, 0.0), (ps - 1.06, cx + 4.0, 0.004), r=0)
         for k in range(5):
-            with c.at((ps - 1.7, cx - 2.6 + k * 1.3, -0.48), rz=RNG.uniform(160, 200)):
+            with c.at((ps - 1.7, cx - 2.6 + k * 1.3, 0.004), rz=RNG.uniform(160, 200)):
                 stool(c, 0.46)
-            with c.at((ps - 2.3, cx - 2.6 + k * 1.3 + RNG.uniform(-0.1, 0.1), -0.48), rz=RNG.uniform(0, 360)):
+            with c.at((ps - 2.3, cx - 2.6 + k * 1.3 + RNG.uniform(-0.1, 0.1), 0.010), rz=RNG.uniform(0, 360)):
                 tube(c, "iron", (0, 0, 0), (0, 0, 1.05), 0.009, 6)
                 for a in range(3):
                     tube(c, "iron", (0, 0, 0.05), (0.22 * math.cos(a * 2.09), 0.22 * math.sin(a * 2.09), 0.0), 0.006, 4)
@@ -4071,6 +4184,8 @@ def build_cinema(dream=False):
     ]
     if dream:
         c.cams.append(dict(name="cam6_impossible", loc=(sx - 6.4 - 1.8, cx - 1.3, 1.25), tgt=(sx - 6.4 - 0.25, cx, 0.85), lens=26))
+    c.culled = cull_boundary(c, (0.0, 0.0, 0.0), (L, CW, CH))
+    print(f"CULL {c.name}: {c.culled} faces on the clear-box boundary facing out", flush=True)
     return c
 
 

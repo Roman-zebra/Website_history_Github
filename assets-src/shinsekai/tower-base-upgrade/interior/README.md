@@ -78,3 +78,31 @@ Codex found (receipts `research-cache/tower-base-36ec9ec-rays.json`, `-stair-obs
 - Renders (1280x720, 64 spp): every stair and lift camera again, plus `stair_closeup_stairhead`, `stair_cam7_trimmers`, `stair_cam8_arrival`, and `lift_gate_*` at closed / half / open. `prop-closeup-lift-gate.png` is the new gate.
 - For Codex's ray check (`check-tower-base-rays.cjs`): its step sampler assumes 84 risers and quarter 8; take the samples from `stair-plan.json` instead (`walk.centre` etc., cell Z-up; glTF = (x, z, -y)). Its head-landing probe at cell (0.6, 0.4) now lies in the stairwell opening by design; probe the landing at e.g. (3.10, 1.75) (east strip, in front of the lift door) or (2.90, 3.00) (NE corner of the landing, clear of the door mat); expected finish 15.005 cell.
 - Still open: the stair and lift compare sheets show v1; the stair has no wall strings (treads die into the plaster) and the L1-L3 windows are crossed by flights (datums fixed by the exterior); the other three turrets are expected to reuse this cell mirrored (INTERFACE v1.2).
+
+## v1.3 seams with the wings (2026-10-01 08:05–08:55, Claude Opus 5.5; INTERFACE change log 1.3)
+
+Receipt: `../verify/seams-verify.json`; renders with the wings and the base: `../verify/seams-renders/seam-w1-door-*.png`.
+- **Single owner per surface.** `cinema__shell` is now four one-sided inner faces on the clear-box boundary (floor, north wall,
+  south wall holed for the exit door, screen-end wall) and a ceiling face over the vault. The 0.45 m wall slabs, the floor and
+  ceiling slabs and every outer face (which coincided with the wing walls at y ±9.00, x -51.25 and z 9.3) are gone from the
+  export; render-only stand-ins sit in `ref_shell` 2 mm behind the inner faces. `cull_boundary()` then drops every face lying on a
+  boundary plane and facing out of the room (593 in `cinema`, 743 in `cinema_dream`). Coplanar overlaps with the wings 233 + 113
+  → **0 + 0**; with the base 313 → **0**.
+- **Exit door (the W1 street door).** The wainscot and dado rail ran across it (the door was blocked below 1.45 m world). Both now
+  stop against a mitred teak architrave (group / mesh `cinema__exit_door`: casing 0.15 wide with a 0.10 backband, oak plinth blocks
+  0.30 high, an oak threshold plate 6 mm flush with the boards). The opening edges match the wings' reveal: 0.17 / 0.18 mm
+  (jambs), 0.05 mm (head). The leaves were one inward and one outward through the wall; both now hang on the hall-side edge of the
+  reveal and open into the house, 75° ajar, 3 mm joints, 8 mm over the plate. Seating: the south-block bench in the row that stood
+  at the door is left out (a 1.6 m cross aisle to the aisle between the blocks); a cushion that fell on it moves one row.
+  Walk street → hall (kerb → door → cross aisle → aisle to cell x 5): 0 missing samples, gap 0 mm, largest step 7.7 mm; a 0.6 m ×
+  0.20–2.15 m corridor touches nothing; 0 of 7,316 rays through the opening are blocked.
+- **door_wing_W** leaves belong to the exterior (stated nodes, clips, default closed). The render-only copies here use its hinges
+  and pose: `--door-wing-w <deg>` (0 = the closed default, 90 = the end pose of `door_wing_W_open`).
+- Also found and fixed while checking the clear box (all inside `cell_cinema`): the wall fields were transformed twice (the north
+  ones lay on the floor, the south ones floated outside the hall at 17 m) and are now on the walls; the painted wainscot panels
+  were buried inside the wainscot (now 15 mm proud); sconces floated 70 mm and posters 12 mm off the wall; the foyer film-can
+  shelves stood 0.23 m inside the end wall; the end ribs, tie rods and pilasters were half inside the end walls; the orchestra pit
+  was sunk 0.5 m under an unbroken floor (hidden chairs, stands through the floor) and is now at floor level behind its rail.
+  Only the exit-door leaves (in the opening, allowed) leave the clear box now (v1.2: 16,472 triangles outside).
+- Draco position quantization 14 → 16 bits (a 36 m mesh at 14 bits is a 2.2 mm grid; the seams are checked to 1 mm). GLB 22.6 MB.
+- Triangles: cinema **137,384** (v1.2 138,148), cinema_dream 143,016 (143,918); the other cells are unchanged. Full export 224 s.

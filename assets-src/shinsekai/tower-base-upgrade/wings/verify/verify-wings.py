@@ -108,7 +108,7 @@ ext_l0 = [o for o in ext_objs if o.type == "MESH" and o.name.startswith("TB_EXT_
 cin_meshes = [o for o in descendants(cin) if o.type == "MESH"]
 cin_col = [o for o in cin_meshes if "col_floor" in o.name]
 cin_vis = [o for o in cin_meshes if "col_floor" not in o.name]
-cin_wall = [o for o in cin_vis if o.name in ("cinema__shell", "cinema__walls")]
+cin_wall = [o for o in cin_vis if o.name in ("cinema__shell", "cinema__walls", "cinema__exit_door")]
 cin_noleaf = [o for o in cin_vis if o.name != "cinema__doors"]
 cin_walk = cin_noleaf          # the ajar exit-door leaves swing into the house by design (interior story); not a walking surface
 log("objects: wing LOD0", len(wing_l0), "col", len(wing_col), "ext LOD0", len(ext_l0), "cell", len(cin_meshes))
@@ -199,11 +199,12 @@ report["entrancesNote"] = ("Street doors and exits run from the footway at the k
                            "cell_cinema; W2 and E1-E3 have no interior cell yet, so their lines stop on the threshold in front of the closed "
                            "leaves (0.1 m inside the wall face).  Rear doors: the yard north of the wings is outside this module (no ground, no "
                            "collision there), so the line covers the step and the threshold only; collision 'missing' there is expected.  "
-                           "door_wing_W runs from 1 m inside cell_cinema across the 0.45 m wing zone onto the base threshold stone, stopping short "
-                           "of the base door leaves (x -14.35); the base side has no collision (the ticket-hall floor collision belongs to cell_hall), "
-                           "so the last 0.1 m reports collision 'missing' by design.  door_wing_E: same without a cell on the wing side.  The "
-                           "ajar exit-door leaves of cell_cinema are not a walking surface and are excluded.  The W1 highestHit (1.449 m) is the "
-                           "top of cinema__walls: the interior wainscot runs across the door below 1.45 m (interior request in README).")
+                           "door_wing_W runs from 1 m inside cell_cinema across the 0.45 m wing zone onto the base threshold (0.15 since base v1.3, "
+                           "with a 15 mm oak saddle under the leaves), stopping on the saddle short of the leaf plane (x -14.35); the base side has no "
+                           "collision (the ticket-hall floor collision belongs to cell_hall), so the last 0.1 m reports collision 'missing' by design.  "
+                           "door_wing_E: same without a cell on the wing side.  The ajar exit-door leaves of cell_cinema are not a walking surface "
+                           "and are excluded.  (v1.0 found the interior wainscot across the W1 door below 1.45 m; fixed in interior v1.3, see "
+                           "../../verify/seams-verify.json.)")
 
 # 3. W1 door alignment -------------------------------------------------------------------------------------------------
 X0 = -29.45
@@ -249,8 +250,9 @@ def blocked_wing(x, z):
 
 
 def blocked_cell(x, z):
-    y = hy(bvh_cellwall, x, z, -9.3, -8.3)
-    return y is not None and abs(y + 9.0) < 0.03
+    # v1.3: the cell no longer draws the wall zone (single owner per surface); its edges are those of its hall-face casing / wall face
+    h = bvh_cellwall.ray_cast(Vector((x, -8.40, z)), Vector((0, -1, 0)), 0.2)
+    return h[0] is not None
 
 
 edges = {}

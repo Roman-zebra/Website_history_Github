@@ -1,0 +1,741 @@
+{
+ "version": "tower-base-upgrade seams v1.3",
+ "files": {
+  "exterior": "tower-base-exterior.glb",
+  "wings": "tower-wings.glb",
+  "interior": "tower-base-interiors.glb"
+ },
+ "method": [
+  "Reads the exported files only (defaults: ../exterior/tower-base-exterior.glb, ../wings/tower-wings.glb,",
+  "../interior/tower-base-interiors.glb; cell_cinema placed by its rule world = T(-14.95, 8.55, 0.15) R180z cell) and writes",
+  "verify/seams-verify.json:",
+  "",
+  "1. Street -> W1 hall.  A walking line from the footway at the kerb (y -12.3) straight through the W1 porch and street door into",
+  "   the hall to the cross aisle (cell 14.5, 11.45), then along the aisle between the bench blocks to cell x 5.0; three lanes",
+  "   (-0.25, 0, +0.25 m), a downward ray every 1 cm against (a) the visible surfaces (wing LOD0 without placeholders + base LOD0 +",
+  "   cell) and (b) the collision set (COL_wing_* + cinema__col_floor).  Reported: missing samples, longest unsupported run, largest",
+  "   step between neighbouring samples.  Pass: gap 0 mm, step <= 20 mm.  A 1 mm scan across the wall zone (y -9.20..-8.30) checks",
+  "   the joints.  Body clearance: a 0.6 m wide corridor from 0.20 to 2.15 m (world) along the line must not touch any visible",
+  "   triangle (BVH overlap).  Door opening: rays along -y from inside the hall on a 2 cm grid of the clear opening through the wall",
+  "   zone must hit nothing; jamb / head edges by bisection in the wing (street side) and in the cell (hall side), difference in mm.",
+  "2. Coplanar overlaps.  Every triangle pair (cell x wing LOD0, cell x base LOD0, base LOD0 x wing LOD0) whose planes are parallel",
+  "   (|n.n'| > 0.9998) and within 1 mm, and whose projections overlap by more than 1 mm2 (convex clipping), is counted as",
+  "   same-facing (z-fighting) or opposite-facing (back to back).  Pass: 0 between the cell and the wings.",
+  "3. Downpipes / wires vs the wing roofs: exact triangle overlap (BVH) between the base LOD0 downpipe / service / wire meshes (and,",
+  "   for files older than v1.3, every base LOD0 iron / wire / porcelain triangle outside the base footprint |x| > 14.45) and the",
+  "   wing LOD0 roof sheet, lead flashing, soffit, fascia / ventilator joinery, gutters and every other wing mesh.  Pass: 0.",
+  "4. Wire ends.  Every wire (connected component of a wire-material mesh, vertices welded at 0.01 mm) has its open ends found as",
+  "   boundary loops; each end must lie within the wire radius + 2 mm of a non-wire surface (insulator, bracket, tube, wall).",
+  "5. door_wing_W / door_wing_E state.  The glTF clips <door>_open / <door>_close are read from the base GLB (samplers, target",
+  "   nodes); the leaf pivots must rest closed (identity) with extras defaultState = closed; the leaves are posed through each open",
+  "   clip at t = 0.25, 0.5, 0.75, 1.0 of its length and tested (BVH overlap, hinge hardware excluded) against the wings, the base",
+  "   and cell_cinema.  The interior GLB must carry no door_wing_W leaves of its own.",
+  "6. cell_cinema triangles outside its INTERFACE clear box (1 mm)."
+ ],
+ "streetToW1Hall": {
+  "path(world xy)": [
+   [
+    -29.45,
+    -12.3
+   ],
+   [
+    -29.45,
+    -2.9
+   ],
+   [
+    -19.95,
+    -2.9
+   ]
+  ],
+  "lanes": [
+   -0.25,
+   0.0,
+   0.25
+  ],
+  "visible": {
+   "samples": 5673,
+   "missing": 0,
+   "longestUnsupportedRunM": 0.0,
+   "zRange": [
+    0.1445,
+    0.156
+   ],
+   "largestStepM": 0.0077,
+   "largestStepAt": [
+    -29.2,
+    -8.546,
+    0.1483,
+    0.156,
+    "cinema__exit_door"
+   ]
+  },
+  "collision": {
+   "samples": 5673,
+   "missing": 0,
+   "longestUnsupportedRunM": 0.0,
+   "zRange": [
+    0.15,
+    0.15
+   ],
+   "largestStepM": 0.0,
+   "largestStepAt": [
+    -19.946,
+    -2.65,
+    0.15,
+    0.15,
+    null
+   ]
+  },
+  "wallZone1mm": {
+   "samples": 2703,
+   "missing": 0,
+   "largestStepM": 0.0123,
+   "zRange": [
+    0.1427,
+    0.156
+   ]
+  },
+  "corridor": {
+   "boxes": [
+    [
+     [
+      -29.75,
+      -12.3,
+      0.2
+     ],
+     [
+      -29.15,
+      -2.9,
+      2.15
+     ]
+    ],
+    [
+     [
+      -29.45,
+      -3.2,
+      0.2
+     ],
+     [
+      -19.95,
+      -2.6,
+      2.15
+     ]
+    ]
+   ],
+   "trianglesTouching": 0,
+   "byObject": {}
+  },
+  "doorOpening": {
+   "rays(-y, 2 cm grid, x -30.03..-28.87, z 0.17..2.63, y -8.30 -> -9.25)": 7316,
+   "blocked": 0,
+   "byObject": {}
+  },
+  "doorEdges": {
+   "wing(street face)": {
+    "jambWest": -30.05,
+    "jambEast": -28.85,
+    "head": 2.65
+   },
+   "cell(hall face)": {
+    "jambWest": -30.04983,
+    "jambEast": -28.85018,
+    "head": 2.64995
+   }
+  },
+  "doorEdgeDifferenceMm": {
+   "jambWest": 0.17,
+   "jambEast": 0.18,
+   "head": 0.05
+  }
+ },
+ "coplanar": {
+  "tolM": 0.001,
+  "minOverlapM2": 1e-06,
+  "cell_cinema x wings LOD0": {
+   "same": 0,
+   "opposite": 0,
+   "pairs": {},
+   "examples": [],
+   "trianglesTested": [
+    137370,
+    40
+   ]
+  },
+  "cinema__shell x wings LOD0": {
+   "same": 0,
+   "opposite": 0,
+   "pairs": {},
+   "examples": [],
+   "trianglesTested": [
+    14,
+    40
+   ]
+  },
+  "cell_cinema x wing placeholders (hidden when the cell loads)": {
+   "same": 0,
+   "opposite": 0,
+   "pairs": {},
+   "examples": [],
+   "trianglesTested": [
+    137370,
+    2
+   ]
+  },
+  "cell_cinema x base LOD0": {
+   "same": 0,
+   "opposite": 0,
+   "pairs": {},
+   "examples": [],
+   "trianglesTested": [
+    65491,
+    0
+   ]
+  },
+  "base LOD0 x wings LOD0": {
+   "same": 0,
+   "opposite": 124,
+   "pairs": {
+    "TB_EXT_LOD0_wall x TW_LOD0_trim (opposite)": 104,
+    "TB_EXT_LOD0_wall x TW_LOD0_joinery (opposite)": 20
+   },
+   "examples": [
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 1800.0,
+     "centroid": [
+      -14.5,
+      -11.533,
+      4.422
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 349.2,
+     "centroid": [
+      -14.5,
+      -11.533,
+      4.422
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 826.4,
+     "centroid": [
+      -14.5,
+      -11.533,
+      4.422
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 1285.9,
+     "centroid": [
+      -14.5,
+      -10.067,
+      4.278
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 369.1,
+     "centroid": [
+      -14.5,
+      -10.067,
+      4.278
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 2719.4,
+     "centroid": [
+      -14.5,
+      -10.067,
+      4.278
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 1750.0,
+     "centroid": [
+      -14.5,
+      -10.067,
+      4.633
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 2812.6,
+     "centroid": [
+      -14.5,
+      -11.533,
+      9.173
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 487.5,
+     "centroid": [
+      -14.5,
+      -11.533,
+      9.173
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 2524.5,
+     "centroid": [
+      -14.5,
+      -11.533,
+      9.173
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 3480.0,
+     "centroid": [
+      -14.5,
+      -11.533,
+      9.173
+     ]
+    },
+    {
+     "a": "TB_EXT_LOD0_wall",
+     "b": "TW_LOD0_trim",
+     "facing": "opposite",
+     "overlapMm2": 427.2,
+     "centroid": [
+      -14.5,
+      -11.533,
+      9.173
+     ]
+    }
+   ],
+   "trianglesTested": [
+    68769,
+    13315
+   ]
+  }
+ },
+ "servicesVsWings": {
+  "baseMeshes": [
+   "TB_EXT_LOD0_downpipe",
+   "TB_EXT_LOD0_iron",
+   "TB_EXT_LOD0_porcelain",
+   "TB_EXT_LOD0_service_iron",
+   "TB_EXT_LOD0_service_porcelain",
+   "TB_EXT_LOD0_service_wire",
+   "TB_EXT_LOD0_wire"
+  ],
+  "baseTrianglesOutsideFootprint": 6908,
+  "wingRoofs(roof_sheet, roof_lead, soffit, joinery, iron)": {
+   "trianglePairs": 0,
+   "byObject": {}
+  },
+  "allWingLOD0": {
+   "trianglePairs": 0,
+   "byObject": {}
+  }
+ },
+ "wireEnds": {
+  "tolM": "wire radius 0.004 + 0.002",
+  "base": {
+   "meshes": [
+    "TB_EXT_LOD0_service_wire",
+    "TB_EXT_LOD0_wire"
+   ],
+   "wires": 33,
+   "closedRings": 0,
+   "ends": 66,
+   "offSupport": 0,
+   "worstDistM": 0.006,
+   "offSupportList": []
+  },
+  "wings": {
+   "meshes": [
+    "TW_LOD0_wire"
+   ],
+   "wires": 58,
+   "closedRings": 0,
+   "ends": 116,
+   "offSupport": 0,
+   "worstDistM": 0.0,
+   "offSupportList": []
+  }
+ },
+ "doorWingState": {
+  "clipsInBaseGLB": [
+   "door_wing_E_close",
+   "door_wing_E_open",
+   "door_wing_W_close",
+   "door_wing_W_open"
+  ],
+  "door_wing_W": {
+   "door_wing_W_open": {
+    "TB_EXT_LOD0_door_wing_W_leafN": {
+     "seconds": 1.2,
+     "startDeg": 0.0,
+     "endDeg": -90.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD0_door_wing_W_leafS": {
+     "seconds": 1.2,
+     "startDeg": 0.0,
+     "endDeg": 90.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD1_door_wing_W_leafN": {
+     "seconds": 1.2,
+     "startDeg": 0.0,
+     "endDeg": -90.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD1_door_wing_W_leafS": {
+     "seconds": 1.2,
+     "startDeg": 0.0,
+     "endDeg": 90.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    }
+   },
+   "door_wing_W_close": {
+    "TB_EXT_LOD0_door_wing_W_leafN": {
+     "seconds": 1.2,
+     "startDeg": -90.0,
+     "endDeg": 0.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD0_door_wing_W_leafS": {
+     "seconds": 1.2,
+     "startDeg": 90.0,
+     "endDeg": 0.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD1_door_wing_W_leafN": {
+     "seconds": 1.2,
+     "startDeg": -90.0,
+     "endDeg": 0.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD1_door_wing_W_leafS": {
+     "seconds": 1.2,
+     "startDeg": 90.0,
+     "endDeg": 0.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    }
+   },
+   "poseSweepOpen(leaves vs wings + base + cell_cinema, hinge brass excluded)": {
+    "t=0.00": {
+     "trianglePairs": 0,
+     "byObject": {}
+    },
+    "t=0.25": {
+     "trianglePairs": 0,
+     "byObject": {}
+    },
+    "t=0.50": {
+     "trianglePairs": 0,
+     "byObject": {}
+    },
+    "t=0.75": {
+     "trianglePairs": 0,
+     "byObject": {}
+    },
+    "t=1.00": {
+     "trianglePairs": 0,
+     "byObject": {}
+    }
+   },
+   "interfaceEmpty": {
+    "state": "closed",
+    "door": "{\"leaves\": [\"TB_EXT_LOD0_door_wing_W_leafS\", \"TB_EXT_LOD0_door_wing_W_leafN\", \"TB_EXT_LOD1_door_wing_W_leafS\", \"TB_EXT_LOD1_door_wing_W_leafN\"], \"clips\": [\"door_wing_W_open\", \"door_wing_W_close\"], \"seconds\": 1.2, \"openAngleDeg\": 90, \"opensInto\": \"wing\", \"thresholdTop\": 0.15, \"default\": \"closed\", \"rule\": \"state 'open' = the end pose of the _open clip; LOD2 keeps a closed flat face\"}"
+   }
+  },
+  "door_wing_E": {
+   "door_wing_E_open": {
+    "TB_EXT_LOD0_door_wing_E_leafN": {
+     "seconds": 1.2,
+     "startDeg": 0.0,
+     "endDeg": 90.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD0_door_wing_E_leafS": {
+     "seconds": 1.2,
+     "startDeg": 0.0,
+     "endDeg": -90.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD1_door_wing_E_leafN": {
+     "seconds": 1.2,
+     "startDeg": 0.0,
+     "endDeg": 90.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD1_door_wing_E_leafS": {
+     "seconds": 1.2,
+     "startDeg": 0.0,
+     "endDeg": -90.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    }
+   },
+   "door_wing_E_close": {
+    "TB_EXT_LOD0_door_wing_E_leafN": {
+     "seconds": 1.2,
+     "startDeg": 90.0,
+     "endDeg": 0.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD0_door_wing_E_leafS": {
+     "seconds": 1.2,
+     "startDeg": -90.0,
+     "endDeg": 0.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD1_door_wing_E_leafN": {
+     "seconds": 1.2,
+     "startDeg": 90.0,
+     "endDeg": 0.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    },
+    "TB_EXT_LOD1_door_wing_E_leafS": {
+     "seconds": 1.2,
+     "startDeg": -90.0,
+     "endDeg": 0.0,
+     "keys": 37,
+     "restRotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "extras": "closed"
+    }
+   },
+   "poseSweepOpen(leaves vs wings + base + cell_cinema, hinge brass excluded)": {
+    "t=0.00": {
+     "trianglePairs": 0,
+     "byObject": {}
+    },
+    "t=0.25": {
+     "trianglePairs": 0,
+     "byObject": {}
+    },
+    "t=0.50": {
+     "trianglePairs": 0,
+     "byObject": {}
+    },
+    "t=0.75": {
+     "trianglePairs": 0,
+     "byObject": {}
+    },
+    "t=1.00": {
+     "trianglePairs": 0,
+     "byObject": {}
+    }
+   },
+   "interfaceEmpty": {
+    "state": "closed",
+    "door": "{\"leaves\": [\"TB_EXT_LOD0_door_wing_E_leafS\", \"TB_EXT_LOD0_door_wing_E_leafN\", \"TB_EXT_LOD1_door_wing_E_leafS\", \"TB_EXT_LOD1_door_wing_E_leafN\"], \"clips\": [\"door_wing_E_open\", \"door_wing_E_close\"], \"seconds\": 1.2, \"openAngleDeg\": 90, \"opensInto\": \"wing\", \"thresholdTop\": 0.15, \"default\": \"closed\", \"rule\": \"state 'open' = the end pose of the _open clip; LOD2 keeps a closed flat face\"}"
+   }
+  },
+  "interiorCarriesNoDoorWingLeaves": true
+ },
+ "cellOutsideClearBox": {
+  "box": [
+   [
+    -50.8,
+    -8.55,
+    0.15
+   ],
+   [
+    -14.95,
+    8.55,
+    9.0
+   ]
+  ],
+  "triangles": 444,
+  "byObject": {
+   "cinema__doors": 444
+  },
+  "note": "cinema__doors = the exit-door leaves hung in the opening (INTERFACE: leaves inside openings are allowed)"
+ },
+ "summary": {
+  "walkGapMm(visible, collision)": [
+   0.0,
+   0.0
+  ],
+  "walkMissing(visible, collision)": [
+   0,
+   0
+  ],
+  "walkMaxStepMm(visible)": 7.7,
+  "wallZone1mmMissing": 0,
+  "corridorTrianglesTouching": 0,
+  "doorOpeningBlockedRays": 0,
+  "doorEdgeDifferenceMm": {
+   "jambWest": 0.17,
+   "jambEast": 0.18,
+   "head": 0.05
+  },
+  "coplanarCellVsWings(same, opposite)": [
+   0,
+   0
+  ],
+  "coplanarShellVsWings(same, opposite)": [
+   0,
+   0
+  ],
+  "coplanarCellVsBase(same, opposite)": [
+   0,
+   0
+  ],
+  "coplanarBaseVsWings(same, opposite)": [
+   0,
+   124
+  ],
+  "servicesVsWingRoofsTrianglePairs": 0,
+  "servicesVsAllWingTrianglePairs": 0,
+  "wireEndsOffSupport(base, wings)": [
+   0,
+   0
+  ],
+  "doorWingWClips": [
+   "door_wing_W_close",
+   "door_wing_W_open"
+  ],
+  "doorWingWOpenSweepTrianglePairs": {
+   "t=0.00": 0,
+   "t=0.25": 0,
+   "t=0.50": 0,
+   "t=0.75": 0,
+   "t=1.00": 0
+  },
+  "cellOutsideClearBoxTriangles": 444
+ },
+ "seconds": 32.1
+}
