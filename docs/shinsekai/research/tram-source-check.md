@@ -1,0 +1,7 @@
+# 1912 directory: Osaka tram figures and Hankai planning state
+
+Source: [*日本電業者一覧 明治45年*, NDL 803763, canvas 185](https://dl.ndl.go.jp/pid/803763/1/185) and [canvas 189](https://dl.ndl.go.jp/pid/803763/1/189). Codex inspected both original page scans and canvas-185 OCR on 2026-09-30. The scans are retained only in the local research cache; their product reuse rights were not checked.
+
+Canvas 185 lists **200 Osaka City Tram cars**, body length **25 shaku**, width **6 feet 4 inches**, height **11 shaku**, capacity **42 people** including **26 seats**, a Brill 21-E-type single truck, and **two 20-horsepower motors**. It lists DC 600 V and double overhead wiring. The accompanying accounting period refers to 1910–11; the 1912 publication does not establish these exact cars as the whole fleet on the July 1912 Luna Park opening day. Earlier Claude handoff 37 transcribed **40 people and two 25-horsepower motors**; both are contradicted by the original page and must not enter geometry or UI text.
+
+Canvas 189 labels Hankai Electric Railway **未開業** and says it *plans* forty 65-person cars and a roughly 1,000-tsubo Minamigasumi depot. That description reflects a pre-opening information snapshot, even though the directory appeared in 1912. It is **not proof** that forty such cars or the planned depot operated in 1912. Check a dated operating record before modelling a specific Hankai vehicle.
