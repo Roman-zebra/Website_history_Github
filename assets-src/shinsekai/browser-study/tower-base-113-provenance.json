@@ -1,0 +1,27 @@
+{
+  "revision": "cb8231d",
+  "handoff": 113,
+  "scope": "Original Codex integration code; Claude geometry remains private and requires runtime manifest. No reference pixels.",
+  "entries": [
+    {
+      "file": "assets-src/shinsekai/browser-study/tower-base-113.html",
+      "sha256": "20224862aefc16292107df2a7b0bf2094632609d4b1c27f3476d3b4478c36d3e"
+    },
+    {
+      "file": "assets-src/shinsekai/browser-study/tower-base-113.mjs",
+      "sha256": "8efe7dc383b5d739526b33b9c8f8762c9659103f2b1511de0dc0a072a4c6eb07"
+    },
+    {
+      "file": "assets-src/shinsekai/browser-study/tower-baluster-instances.mjs",
+      "sha256": "8cc59d1816ebae77a24452c5c84a61266a614395c82bcef9f7367f0329473c01"
+    },
+    {
+      "file": "assets-src/shinsekai/browser-study/tower-gate-playback.mjs",
+      "sha256": "5090ce45e0f401d4ca35400c1d8a55d16be5caa11d6bea26004151096788c9a3"
+    },
+    {
+      "file": "scripts/shinsekai-glb-cell.cjs",
+      "sha256": "bb0c32b32050afe69733664556bed2c49a32b32a44909732ad780f956b2229e0"
+    }
+  ]
+}

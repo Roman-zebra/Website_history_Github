@@ -4,6 +4,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
+// Explicit generated review assets only; never serve author sources/cache trees.
+const towerReview = path.resolve(root, '../research-cache/tower-base-113-runtime');
+const towerNames = new Set(['manifest.json', ...[0,1,2].map(n=>`TB_EXT_LOD${n}.glb`), ...['hall','stair','lift','cinema'].flatMap(n=>[`cell_${n}.glb`,`cell_${n}_dream.glb`])]);
 // Keep this origin separate from the main site's development service worker.
 const port = Number(process.env.JTA_STUDY_PORT || 18765);
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.css': 'text/css', '.jpg':'image/jpeg','.png':'image/png' };
@@ -19,10 +22,12 @@ const server = http.createServer((request, response) => {
   try { pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname); }
   catch { response.writeHead(400).end(); return; }
   if (pathname.includes('\0')) { response.writeHead(400).end(); return; }
-  const file = path.resolve(root, `.${pathname}`);
+  const reviewName=pathname.startsWith('/study/tower-base-113/')?pathname.slice('/study/tower-base-113/'.length):null;
+  const reviewAllowed=reviewName!==null&&towerNames.has(reviewName);
+  const file = reviewAllowed?path.resolve(towerReview,reviewName):path.resolve(root, `.${pathname}`);
   // Check the resolved path as well as the URL, including encoded traversal.
   const relative = `/${path.relative(root, file).split(path.sep).join('/')}`;
-  if (!file.startsWith(`${root}${path.sep}`) || !allowed(relative)) { response.writeHead(403).end(); return; }
+  if (reviewAllowed?!file.startsWith(`${towerReview}${path.sep}`):(!file.startsWith(`${root}${path.sep}`) || !allowed(relative))) { response.writeHead(403).end(); return; }
   fs.realpath(file, (error, realFile) => {
     if (error) { response.writeHead(404).end(); return; }
     if (realFile !== file) { response.writeHead(403).end(); return; }
