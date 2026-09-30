@@ -38,3 +38,30 @@ Scripts: `pairwise.cjs` (pairwise ground-metres per S063 pixel and rotation) and
   - **H2**: the north part of S063 is distorted or sheared relative to the south, e.g. through sheet assembly or drafting, so a similarity cannot hold.
   - H1 would also explain why an affine fit reaches 9–11 px only by absorbing a large shear.
 - Next (visual, planned at Max if the user switches): compare the S063 top-right street pattern (blocks, lot numbers, tram line) with the aerial street pattern around (820–900, 540–700). Also check whether S063's dotted top line is the main Ebisucho–Tennoji road or a different road.
+
+## Diagnosis step 2 (2026-09-30 14:55, English; visual check, Max reasoning): J1/J2 were matched to the wrong aerial street
+Evidence crops: `s063_top.jpg` (S063 origin (4900,780), ×0.4, grid 200 orig px), `riku_c.jpg` (1936–42, origin (700,450), ×1.2, grid 50 px), `jz_three.jpg` (1936–42 | 1928 | std, origin (900,520), ×1.43, grid 20 px), `s063_k2wide.jpg` (S063 origin (4000,4900), ×1/3, grid 200 px), `tw_pair.jpg` (tower area, 1936–42 | 1928, origin (800,860), ×2, grid 20 px).
+
+**What J1 is on S063.** The street between the 21,850-tsubo lot and the 恵 block continues straight SSW (13° west of south) to the semicircular plaza, so it is the **north-east radial street**. J1 is where that radial meets the dotted tram road along the top edge. The tram road runs ESE and leaves the sheet westward; the Ebisucho junction (Hankai terminus) is just off the top edge, about 112 m WNW of J1 along the road.
+
+**What Claude had matched in the aerials.** (1243, 638) is the NE end of a 43° diagonal street that does not correspond to S063's north pattern. **Wrong street.**
+
+**Corrected identification (alternative ID, pixels in the 7×7 frame).**
+| Point | S063 | 1928 | 1936–42 | std (today) | Uncertainty | Evidence |
+|---|---|---|---|---|---|---|
+| J1′ | (6461, 907) | (1043, 594) | (1030, 578) | ≈(1015, 575) | ±15 px (aerials) | The first street ESE of the Ebisucho junction that runs SSW from the main road. Distance from the Ebisucho junction ≈113 m in the aerial vs ≈112 m on S063; direction 6–8° W of S in the aerial vs 13° on S063. Still a street today (next to the Shinsekai post office on the std map). |
+| J2′ | (6425, 1475) | (1040, 692) | (1027, 685) | – | ±15 px | The same street about 52 m south, where an E–W street between blocks joins from the west (S063: the street under the 21,850-tsubo lot's south edge; 58.6 m south of J1). |
+
+**Consistency after the correction** (`recheck.cjs`, diagnostic only; not a production fit):
+- Pairwise rotations now span −4.7° to +5.7° (before: −5° to +19°). Pairwise scale is 0.085–0.114 m per S063 px, with J1–J2, the shortest pair, the least reliable.
+- A diagnostic five-point similarity leaves residuals of **K1 6–11, J1 22–26, J2 30–31, W0 48–55, K2 60 px** (RMS about 38 px ≈ 19 m in 1936–42).
+- Leave-one-out predicts K2 at about (908–918, 1809–1815), south-east of the pick and 50–60 px south of the embankment. It predicts W0 about 100 px (≈50 m) north of the rail crossing, where it cannot lie, since W0 is on the embankment.
+- **K2's identity is supported by the along-rail distance**: K1→K2 is 189 m on S063 and 180–187 m in the aerials, and the adjacent road at x≈918 would make it 212–222 m. The residual therefore reflects geometry, not a mis-ID.
+
+**Remaining inconsistency is angular, not a single bad point.**
+- S063 draws the Hankai line and the NE radial nearly parallel (12.8° and 13.4° W of S). In the aerials they diverge (≈16° and 6–8°): about 113 m apart at the main road, about 146 m apart at the tower's latitude, versus about 110 m on S063.
+- The railway-to-Hankai angle is 87.6° on S063 and 93.8° in 1936–42.
+- So either S063 draws some lines several degrees off, or the built streets deviated from the drawn plan. The thesis says the built streets departed from the plan in detail.
+- Expect about 20–30 m residuals from any single similarity over this sheet. Prefer controls close to the area being registered.
+
+**Not concluded:** the first tower still stands in both aerials. A round spot in the semicircle area, (≈945, 977) in 1936–42 and (≈940, 1000) in 1928, matches the small circle drawn inside the semicircle in the early-Shōwa plan (thesis fig. 3.1.15). The tower's base could not be isolated at this resolution. No tower coordinate is proposed.

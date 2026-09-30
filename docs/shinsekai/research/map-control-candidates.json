@@ -45,23 +45,23 @@
     },
     {
       "id": "J1",
-      "feature": "candidate northeast tram road and north-south road junction",
+      "feature": "candidate northeast radial and northern tram road junction",
       "sourcePixel": [6461, 907],
       "sourceUncertaintyPx": 20,
-      "targetPixels": {"1928": [1546, 665], "1936-42": [1499, 638]},
-      "targetUncertaintyPx": {"1928": 25, "1936-42": 15},
+      "targetPixels": {"1928": [1299, 594], "1936-42": [1286, 578]},
+      "targetUncertaintyPx": {"1928": 15, "1936-42": 15},
       "confidence": "medium",
-      "note": "1912 operation of the depicted tram line remains unverified; road position may still be useful."
+      "note": "Handoff 49 visually reidentified the radial on 1928/1936-42 imagery; prior picks [1546,665]/[1499,638] followed a different diagonal and are rejected. 1912 operation of the depicted tram line remains unverified."
     },
     {
       "id": "J2",
       "feature": "candidate road junction south of J1",
       "sourcePixel": [6425, 1475],
       "sourceUncertaintyPx": 20,
-      "targetPixels": {"1928": [1531, 785], "1936-42": [1484, 752]},
-      "targetUncertaintyPx": {"1928": 35, "1936-42": 20},
+      "targetPixels": {"1928": [1296, 692], "1936-42": [1283, 685]},
+      "targetUncertaintyPx": {"1928": 15, "1936-42": 15},
       "confidence": "low",
-      "note": "Nearby J1 on the same road; adds limited independent spatial coverage."
+      "note": "Handoff 49 visually reidentified the same radial; prior picks [1531,785]/[1484,752] are rejected. Nearby J1 on the same road adds limited independent spatial coverage."
     },
     {
       "id": "W0",
