@@ -1,0 +1,26 @@
+{
+  "lod0_parts": {
+    "walls": 3084,
+    "sideL": 458,
+    "sideR": 458,
+    "rear": 1588,
+    "trim": 1850,
+    "windows": 2360,
+    "shopfront": 2344,
+    "roof": 2768,
+    "awning": 1206,
+    "signs": 2721,
+    "services": 834
+  },
+  "tris": {
+    "LOD0_exterior": 19671,
+    "LOD1_exterior": 1142,
+    "LOD2_exterior": 112,
+    "interior_structure": 5310,
+    "interior_props": 23161,
+    "interior_cell_total": 28471,
+    "collision": 240
+  },
+  "glb_bytes": 5574908,
+  "build_seconds": 6.7
+}
