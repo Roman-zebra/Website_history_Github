@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Building A 室内接続の検証</title>
+<style>
+:root{color-scheme:dark;font:14px/1.5 system-ui;background:#20252b;color:#eee}body{margin:0}#view{position:fixed;inset:0;width:100%;height:100%;display:block}
+.panel{position:fixed;left:1rem;top:1rem;width:min(20rem,calc(100vw - 4rem));padding:1rem;background:#19232dea;border:1px solid #7d898c;border-radius:8px;z-index:1}h1{font-size:1.1rem;margin:0 0 .5rem}p{margin:.5rem 0}label{display:block;margin:.6rem 0}button,select{font:inherit;padding:.3rem;background:#2d3c49;color:inherit;border:1px solid #96a3ab;border-radius:4px}button:disabled{opacity:.45}.small{font-size:.8rem;color:#d0c4a7}summary{cursor:pointer}*:focus-visible{outline:2px solid #edcda6;outline-offset:2px}
+</style>
+<canvas id="view" aria-label="Building Aの3D模型"></canvas>
+<section class="panel"><h1>Building A 室内接続の検証</h1>
+<details open><summary>視点と小物</summary>
+<p class="small">制作中のローカル模型。外観は1912年の写真と1905年の建築類型を参照。寸法・色・室内・備品・照明は推定です。</p>
+<label>検証視点 <select id="viewpoint" disabled>
+<option value="far">外観・遠景</option><option value="ground-street">外観・近景</option><option value="ground-axis">店内</option><option value="upper-axis">上階</option><option value="hero-counter">カウンター接写</option><option value="hero-stair-storage">階段収納接写</option><option value="hero-andon">行灯接写</option><option value="hero-shelf-goods">壺接写</option>
+</select></label>
+<label><input id="clearGlass" type="checkbox" checked> 室内に近い窓のガラス調整</label>
+<button id="cash" disabled>現金引き出しを開く</button> <button id="storage" disabled>階段収納を開く</button>
+<button id="capture" disabled>検証画像を保存</button>
+<p id="status" role="status">模型を準備中…</p><p id="metrics" class="small"></p>
+<p class="small">15m以内で室内を読み込み、18mを越えると解放。歩行・衝突・本番の有料配信は未実装。ドラッグで回転、ホイールで距離を調整できます。</p>
+</details></section>
+<script type="importmap">{"imports":{"three":"/vendor/three-r186/build/three.webgpu.js","three/webgpu":"/vendor/three-r186/build/three.webgpu.js","three/tsl":"/vendor/three-r186/build/three.tsl.js","three/addons/":"/vendor/three-r186/examples/jsm/"}}</script>
+<script type="module" src="./building-a.mjs"></script>
+</html>

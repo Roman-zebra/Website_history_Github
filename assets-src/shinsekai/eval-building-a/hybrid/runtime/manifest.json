@@ -1,21 +1,14 @@
 {
-  "triangles": {
-    "lod0": 19671,
-    "lod1": 1142,
-    "lod2": 112
-  },
-  "interiorTriangles": 69090,
-  "collisionTriangles": 240,
-  "adaptations": [
-    "Opus shell/floors/stair retained; rear boards cut around stair opening",
-    "Sonnet shop lowered0.50m; floating coat/clock post restored",
-    "Sonnet rear props fit into6.02..8.85m raised room",
-    "Sonnet upper built at3.455m",
-    "Duplicate mats/stair/kitchen/four-window dressing excluded"
+  "source": "Source-only local hybrid derivative; no paid delivery implemented",
+  "position": [
+    3,
+    1.8,
+    -4.5
   ],
-  "performance": "Blender review only; qualifying1920x1080 browser harness unavailable; no60fps claim",
-  "bytes": 15039012,
-  "runtimeParts": [
+  "enter": 15,
+  "leave": 18,
+  "coordinateSystem": "glTF X right,Y up,-Z toward rear; Blender X,Z,-Y",
+  "entries": [
     {
       "part": "exterior-lod0",
       "file": "exterior-lod0.glb",
@@ -44,6 +37,5 @@
       "sha256": "f9a8dda6c1ecbc2f75f06fdbdd3c38f16b8e8ea13c9c8d40a030890ab509dc8c",
       "triangles": 69090
     }
-  ],
-  "buildSeconds": 15.93
+  ]
 }

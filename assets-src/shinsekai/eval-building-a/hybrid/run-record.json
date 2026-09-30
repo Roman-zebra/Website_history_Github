@@ -19,5 +19,7 @@
     "hero camera correction",
     "bevel normal/export repair"
   ],
-  "status": "Five-round packet: needs glass, upper-room dressing/light, old stock and dream distribution"
+  "status": "Five-round packet: needs glass, upper-room dressing/light, old stock and dream distribution",
+  "runtimeCheckpointAt": "2026-09-30T17:22:04.832Z",
+  "runtimeStatus": "Technical split/lazy cell/LOD/animations/clear glass integration, artistic round count remains5;108 received"
 }

@@ -33,12 +33,12 @@ export function createInteriorMappingMaterial({width=3.4,floor=-1.25,height=2.8,
 // Static slight period-glass waviness, with independent glass mesh/depth.
 // A conservative alpha surface; physical transmission/refraction is pending.
 export function createPeriodGlassMaterial() {
- const material=new THREE.MeshPhysicalNodeMaterial({color:0x718884,roughness:.19,metalness:.03,
+ const material=new THREE.MeshPhysicalNodeMaterial({color:0x718884,roughness:.035,metalness:.03,
     transparent:true,opacity:.18,depthWrite:false,side:THREE.DoubleSide});
  const coordinates=uv();
  material.normalNode=normalMap(vec3(coordinates.x.mul(31).add(coordinates.y.mul(5)).sin().mul(.012).add(.5),
     coordinates.y.mul(23).add(coordinates.x.mul(4)).sin().mul(.010).add(.5),1));
  const corner=coordinates.x.min(coordinates.x.oneMinus()).min(coordinates.y.min(coordinates.y.oneMinus()));
- material.roughnessNode=corner.smoothstep(.01,.09).oneMinus().mul(.18).add(.19);
+ material.roughnessNode=corner.smoothstep(.01,.09).oneMinus().mul(.10).add(.035);
  material.name='separate subtly wavy period glass study';return material;
 }

@@ -8,18 +8,18 @@
   "files": [
     {
       "file": "build.py",
-      "bytes": 15770,
-      "sha256": "3c8e8e8d4ca121c239c927a929a9fa2eb11c8810d8b61bd81b1910bea391314d"
+      "bytes": 17010,
+      "sha256": "57c5a3b23ad54c0e35e9efae39f7fd734d068f6a40ce28442d6d6990e1f7e14e"
     },
     {
       "file": "building-a.glb",
       "bytes": 15039012,
-      "sha256": "ba5f901bf5cac46fdfdbb82d225aece4fcfa37716595916db4ef6aa1c4417988"
+      "sha256": "abb5a18b46a518f6efc8b226e384fe18b42de7240e5d3e7516eea492b596838b"
     },
     {
       "file": "metrics.json",
-      "bytes": 631,
-      "sha256": "7469a01e8907264ef40ba3e0374517ed901d46af97e2851dc48cabd4966441ea"
+      "bytes": 1518,
+      "sha256": "6a31567c44072983ce33f80e2fd61c991783e4a3442922fa42d962a41765ffcb"
     },
     {
       "file": "micro_props.py",
@@ -28,8 +28,8 @@
     },
     {
       "file": "README.md",
-      "bytes": 4701,
-      "sha256": "f72911275cc34fc190a8fe75c17d6607d2080a52581258ce967809a5b41d646e"
+      "bytes": 6820,
+      "sha256": "646ea5df6812a1e5af1e307643434dda0296222ccc29ed2727b4a55adcb71079"
     },
     {
       "file": "review-cameras.json",
@@ -38,8 +38,8 @@
     },
     {
       "file": "run-record.json",
-      "bytes": 660,
-      "sha256": "7c91bcfe4682c491e2128c894e7eecd9a0ec67200d6a454b0497b99d020364c8"
+      "bytes": 844,
+      "sha256": "ed2354b3a02116bac2affbeacac25e32147aac0c18d61e938ede326ed0e79955"
     },
     {
       "file": "inputs/PROVENANCE.json",
@@ -185,6 +185,31 @@
       "file": "renders/dream-upper-window.png",
       "bytes": 1294458,
       "sha256": "21e19b65e6924fe2dcd7f36cc3687071baf36d92d80f8c401ae135e369d181bb"
+    },
+    {
+      "file": "runtime/exterior-lod0.glb",
+      "bytes": 3511908,
+      "sha256": "a8a3df9aa8c2c692eb727de8f610b2caf85caf7fc679f5e4c088b889eeca0325"
+    },
+    {
+      "file": "runtime/exterior-lod1.glb",
+      "bytes": 624048,
+      "sha256": "5b78667a5166c48fbc0a4ec53d1530ea9fde211da45ff8dee30deb0a1ff2cfde"
+    },
+    {
+      "file": "runtime/exterior-lod2.glb",
+      "bytes": 454748,
+      "sha256": "96840acdc99793aed2b469451006f6ce218ea38764eecc4776e804f49c116cb7"
+    },
+    {
+      "file": "runtime/interior.glb",
+      "bytes": 11280176,
+      "sha256": "f9a8dda6c1ecbc2f75f06fdbdd3c38f16b8e8ea13c9c8d40a030890ab509dc8c"
+    },
+    {
+      "file": "runtime/manifest.json",
+      "bytes": 1126,
+      "sha256": "124f427cd906d4d55126e4b2f40f0a21cc094e2c56d5e5fa0fb0fd8b2d198e44"
     },
     {
       "file": "inputs/opus/build-building-a.py",

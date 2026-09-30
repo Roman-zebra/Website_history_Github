@@ -1,8 +1,8 @@
 {
   "status": "in_progress",
-  "current": "T4",
-  "next": "ACTIVE:108 received, overall2/7 needs work. Claude owns upper-room six-surface dressing + era-specific dream props/flowers after tower-base-upgrade. Codex owns clear layered windows, lattice sun-pools/gloss floor, dream grade/bloom/grain, irregular wood/fingerprints/warp/dirt. Five-round micro packet ready,261 fullbuild; r4 prep verified GPU5views+GL2views, no captured errors; GL first CPU21.8s/15.5s issue. Runtime split GLBs0warnings and guide contact closed/open pass; local Building A viewer far onlyLOD2, near loading. Next verify near glass/drawers/unload both backends; fullbuild + source provenance/push. HeartbeatPAUSED, no escalation.",
-  "updatedAt": "2026-09-30T16:59:57.2643082Z",
+  "current": "T6",
+  "next": "ACTIVE:108 roles unchanged. Source-only Building A runtime split/cell/LOD/clear glass/independent drawer tracks: WebGPUnear/open/unload verified; GLloaded render(no captured errors) but input2timeouts, GLopen/unload pending.263fullbuild,split0/0,PGP hero PNGs runtime-001,5 artistic rounds. Current3commits push next; source assets excluded dist. Next OWNED material pass: physical cavitytrim/support cue, irregular wood+usage marks, polished aisle/sun-grid/local reflection, layered curtains, dream grade; Claude upper dressing/dream objects/flowers +towerbase branch. r4coldCPU separated, High1080p60fps unverified. HeartbeatPAUSED; no escalation.",
+  "updatedAt": "2026-09-30T17:40:33.6841424Z",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 108,
   "observedClaudeHandoff": 108,

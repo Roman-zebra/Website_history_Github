@@ -243,6 +243,21 @@ if '--review-only' not in ARGS:
             p=p.parent
     bpy.ops.export_scene.gltf(filepath=str(OUT/'building-a.glb'),export_format='GLB',use_selection=True,export_extras=True,export_lights=True,export_cameras=False,export_tangents=True,export_attributes=True,export_vertex_color='ACTIVE')
     metrics['bytes']=(OUT/'building-a.glb').stat().st_size
+    if '--runtime-splits' in ARGS:
+        runtime=OUT/'runtime';runtime.mkdir(exist_ok=True)
+        entries=[]
+        for part,name in [(lods[i],'exterior-lod'+str(i)) for i in range(3)]+[(cell,'interior')]:
+            bpy.ops.object.select_all(action='DESELECT');root.select_set(True)
+            for o in scene.objects:
+                p=o
+                while p is not None:
+                    if p==part:o.select_set(True);break
+                    p=p.parent
+            file=runtime/(name+'.glb')
+            bpy.ops.export_scene.gltf(filepath=str(file),export_format='GLB',use_selection=True,export_extras=True,export_lights=True,export_cameras=False,export_tangents=True,export_attributes=True,export_vertex_color='ACTIVE')
+            entries.append({'part':name,'file':file.name,'bytes':file.stat().st_size,'sha256':hashlib.sha256(file.read_bytes()).hexdigest(),'triangles':count(part)})
+        (runtime/'manifest.json').write_text(json.dumps({'source':'Source-only local hybrid derivative; no paid delivery implemented','position':[3,1.8,-4.5],'enter':15,'leave':18,'coordinateSystem':'glTF X right,Y up,-Z toward rear; Blender X,Z,-Y','entries':entries},indent=2),encoding='utf8')
+        metrics['runtimeParts']=entries
 metrics['buildSeconds']=round(time.time()-START,2)
 (OUT/'metrics.json').write_text(json.dumps(metrics,indent=2),encoding='utf8')
 print(json.dumps(metrics),flush=True)
