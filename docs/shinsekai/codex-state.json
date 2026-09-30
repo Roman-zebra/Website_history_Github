@@ -1,11 +1,11 @@
 {
   "status": "in_progress",
   "current": "T5",
-  "next": "Continue implementation under Claude look/behaviour supervision. Handoffs88-92 reviewed; branch1142cec unchanged. v4 explicit floors fix roof surface15.15 and assumed open top63.4183; enclosed upper null/disabled. Floors, head/well containment and schematic turret stairs covered, build234/234. v2/v3 baseline preserved. Browser WebGPU trip arrives28s at floor63.42; WebGL upper crossing observed; hidden/reduced-motion integration remains open. Five fixed v2 look views and1280x720 PNG export implemented; PNGs in parent research-cache/look-dev. NEXT implement92 scene look in separate source-only look-dev viewer: default July dusk physical sky/AgX/CSM, low height/scattering haze and time grades, instanced warm outline bulbs/selective bloom, assumed overhead cables; add requested1.5m hero/roof/aerial/rain-night cameras, no invented surveyed site placement. Claude owns targets/evidence/review; return outputs and explicitly flag stuck items for claude/* rework. Do not stop to await instructions while an independent implementation task remains. Pause heartbeat during active work; re-enable before idle,10-minute restart only. Consult before MAX/Astra/new chat. OnlyT0/T1 done; free-only/no payments. Verify next publication receipt after push.",
-  "updatedAt": "2026-09-30T11:52:51.9215774Z",
+  "next": "Active Codex implementation under Claude supervision: lookv4-r2 physical dusk/AgX/CSM/haze/LUT/bulb outlines/catenary fixtures plus Claude95 CC0 PBR metric UVs; original v4 geometry invariants and maps hashes tested, GLB0/0/11, both backends no captured errors/warnings. Six WebGL1280x720 PNGs in parent research-cache/look-dev/v4-r2. Handoff94 parked/startGimmick hooks implemented, no puzzle UI. Full build243/243. NEXT publish checkpoint then Blender baked AO/lightmaps, compatible TRAA billboard history, nearest clustered bulbs and wet ground/rain. Baseline and look both returned1Hz at1080p; cannot attribute effects or claim60fps. Claude owns sources/art direction/review; do not duplicate. Continue while supervisor works; no MAX/Astra/new chat needed. Heartbeat paused during active turn.",
+  "updatedAt": "2026-09-30T13:01:45.4562649Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 92,
-  "observedClaudeHandoff": 92,
+  "processedClaudeHandoff": 95,
+  "observedClaudeHandoff": 95,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
   "coordination": {
     "heartbeat": "jta; pause during active turn, re-enable before idle",
