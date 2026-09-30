@@ -1,0 +1,178 @@
+{
+  "textures": "original procedural surface PNG and BVH AO; no third-party pixels",
+  "validator": {
+    "warnings": 0,
+    "infos": 61,
+    "errors": 0
+  },
+  "schemaVersion": 1,
+  "checkpoint": "v1 before shared101-103 tuning",
+  "source": "original procedural Blender asset; shared OML photos viewed only",
+  "files": [
+    {
+      "bytes": 30327,
+      "file": "build.py",
+      "sha256": "30e34fbd1bd58524691ac3ba3330947636f22e240342f97ffde4249839e2ec69"
+    },
+    {
+      "bytes": 4102412,
+      "file": "building-a.glb",
+      "sha256": "ae6fb1dc2439b5cf81cbf64cbfb0787577d9df1c0eab7a038ac29160d07e760a"
+    },
+    {
+      "bytes": 4604,
+      "file": "metrics.json",
+      "sha256": "d9ea82c54f13bcf11048a68bd9ee4e2ec8c6e2cb442ff07f9ba876e93e08dc46"
+    },
+    {
+      "bytes": 757,
+      "file": "run-record.json",
+      "sha256": "198d899b996d137d3ad3bba4d4c33788ea6352f3818b1e7a385882794e4bb2fb"
+    },
+    {
+      "bytes": 5763,
+      "file": "textures/ao-0.png",
+      "sha256": "7e75feeb4a3ddd3fdaa05bebced5e4c2e55c03e83d80a3dc8fdebdf97daedde7"
+    },
+    {
+      "bytes": 5045,
+      "file": "textures/ao-1.png",
+      "sha256": "9b5ea08f56d5ddee301dc3047cbcf8945c61567f8c454ffdc0ebd68254e995fe"
+    },
+    {
+      "bytes": 5750,
+      "file": "textures/ao-10.png",
+      "sha256": "38676bfae3287a2809d515cb35b15fd701e52566aed1d69b89a48efd1946d5df"
+    },
+    {
+      "bytes": 7083,
+      "file": "textures/ao-11.png",
+      "sha256": "701c01bc65d3375f60eb2c1bb63729b8d365c7d0bd89b1fa4a9c031f123e41cd"
+    },
+    {
+      "bytes": 7276,
+      "file": "textures/ao-12.png",
+      "sha256": "c85a0635046a6909746fa2dac126fe8dbff1ac77a242131cda6404c77218293d"
+    },
+    {
+      "bytes": 7182,
+      "file": "textures/ao-13.png",
+      "sha256": "66d8553026d090b7ee932cafba53ad458df56867b444515afee681465335df88"
+    },
+    {
+      "bytes": 4478,
+      "file": "textures/ao-14.png",
+      "sha256": "9d92a0cb92ae2eae6d3106400994d7a0a11a087ebebe6516f90171afe9f261c4"
+    },
+    {
+      "bytes": 12124,
+      "file": "textures/ao-15.png",
+      "sha256": "65181b0f114026d655e2ff3bd9721c7a49f6692049fdbc07de12094c7512a3f7"
+    },
+    {
+      "bytes": 23261,
+      "file": "textures/ao-2.png",
+      "sha256": "b5d84f530641b49c895c82c201e8ed1c52429f86a6b8408ae68831752430f64c"
+    },
+    {
+      "bytes": 10516,
+      "file": "textures/ao-3.png",
+      "sha256": "bf1f56d057467c9b6c1db40475bdc5d17788f23df770b9cdd3015bd1132e7bc9"
+    },
+    {
+      "bytes": 6827,
+      "file": "textures/ao-4.png",
+      "sha256": "b5032a2891f61e9eb1cdf793607584ef5cbd2cec99b5d8cb9d6cd1ea90dffee1"
+    },
+    {
+      "bytes": 4848,
+      "file": "textures/ao-5.png",
+      "sha256": "69262dff00e6b0dba014617186cab93f1b85ed0db957edec44563c7014a56076"
+    },
+    {
+      "bytes": 4238,
+      "file": "textures/ao-6.png",
+      "sha256": "03c3783fe0b2f218434c7306934f77509bcc766857d51d6bbc340703afb0d2f4"
+    },
+    {
+      "bytes": 6733,
+      "file": "textures/ao-7.png",
+      "sha256": "3303ac45780f89f064918109a5f79cab09cb6e4345ef058dab9c658c6ac00a0d"
+    },
+    {
+      "bytes": 5392,
+      "file": "textures/ao-8.png",
+      "sha256": "d7fb186513f087fbae52762f164a0d7e7a9db55b77d30a596556c0524b9fd3ab"
+    },
+    {
+      "bytes": 5827,
+      "file": "textures/ao-9.png",
+      "sha256": "a127ba198f4445da0d301eaf3e05a8b692301c29a0aca4ccccc15cfed439874f"
+    },
+    {
+      "bytes": 351393,
+      "file": "textures/blue green canvas.png",
+      "sha256": "2b45f84df3434f1c36528520f709309842ff62549750a70a47d52c98c0a841c7"
+    },
+    {
+      "bytes": 263299,
+      "file": "textures/blue grey fired roof.png",
+      "sha256": "05d39661723a00b4c688481f6032f87bfdd68cb94e88d1a7cb8a3782356a869a"
+    },
+    {
+      "bytes": 305641,
+      "file": "textures/damp plinth.png",
+      "sha256": "7bcf43dcc6cc932b3e9f8af6d5e9e3c663861c8a84aa6c9687c3f7e5674dd0ce"
+    },
+    {
+      "bytes": 279304,
+      "file": "textures/oiled dark timber.png",
+      "sha256": "7d6c7e51bb7de62f751cdcffb470f76e7bae3c50f734de101095a693a2e8e3a7"
+    },
+    {
+      "bytes": 359601,
+      "file": "textures/unprinted washi.png",
+      "sha256": "ebef866bdabcd5e632feeb42511c1128934a6033f9329d575fa2fe83eac7b8a3"
+    },
+    {
+      "bytes": 362057,
+      "file": "textures/warm lime plaster.png",
+      "sha256": "915b98eaf64dcf2941265a266cbb7ecbbfed1cdc3b0a1d233a2aafef1ef89163"
+    },
+    {
+      "bytes": 340526,
+      "file": "textures/woven rush.png",
+      "sha256": "d7fb920aa235b7f8935d7aa2308736ed6fa3c2d25895def467b17bf1edcc991d"
+    },
+    {
+      "bytes": 1044190,
+      "file": "renders/cutaway.png",
+      "sha256": "b274a5f231eb0865b55f1d92c51bd4370ccca4293952e0c2ff9c2ab36c5a4b29"
+    },
+    {
+      "bytes": 998271,
+      "file": "renders/interior-ground.png",
+      "sha256": "4bd35725c69c1bc03b1eef1af0c91914993b7f5994a907da24bd5bbb44f13929"
+    },
+    {
+      "bytes": 976788,
+      "file": "renders/interior-upper.png",
+      "sha256": "d8b92c3a95259ab04f22d9d5f8f4680c97a95a9f1a1f161e7ffa50d5a21f8871"
+    },
+    {
+      "bytes": 908896,
+      "file": "renders/lod.png",
+      "sha256": "7a997ba93d2c1c4f37ad3cd50ace030696dc8c7bcfe1639a96bbcd04e6b77fb7"
+    },
+    {
+      "bytes": 832600,
+      "file": "renders/street.png",
+      "sha256": "5f77f48fe96b36b8117f7e5810fe3faf6b5f8bd3272d38e387c5ef5e413bf58c"
+    },
+    {
+      "bytes": 1212471,
+      "file": "renders/window-closeup.png",
+      "sha256": "47b906b6b1e4dc755c5858603a409187ef2d0f6d72dc94be90f19a1c5b5cd2a5"
+    }
+  ]
+}
