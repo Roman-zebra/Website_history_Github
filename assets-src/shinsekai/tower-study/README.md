@@ -17,6 +17,52 @@ This is an editable **T3 preparation study**, not a production asset. `build-tow
 
 ## Rebuild and acceptance
 
-Run `blender -b --python assets-src/shinsekai/tower-study/build-tower.py` from the repository root. Pass `-- --export-only` to regenerate only the GLB. The source keeps each part named and editable; export joins parts by material to keep the current GLB to four meshes/materials and about 0.71 MB. Blender 4.5.10 generated the render and GLB. The current GLB passed glTF-Validator 2.0.0-dev.3.10 with **0 errors, 0 warnings, 4 unused-UV infos** on 2026-09-30; the validator was installed free in a temporary directory because Claude's reported global path was unavailable in this shell.
+For the preserved v2 baseline, run `blender -b --python assets-src/shinsekai/tower-study/build-tower-v2.py` from the repository root. Pass `-- --export-only` to regenerate only the GLB. The source keeps each part named and editable; export joins parts by material to keep the current GLB to four meshes/materials and about 0.71 MB. Blender 4.5.10 generated the render and GLB. The current GLB passed glTF-Validator 2.0.0-dev.3.10 with **0 errors, 0 warnings, 4 unused-UV infos** on 2026-09-30; the validator was installed free in a temporary directory because Claude's reported global path was unavailable in this shell.
 
 Before using this model in T4: establish the site plan and tower anchor, match at least the north and White Tower photos with an explicit camera model, replace guessed dimensions/colours, then rerun glTF validation and visual/performance checks. Do not interpret this study as a reconstruction of the 1912 opening state.
+
+## v3 conditional study (reviewed from Claude branch19025f7)
+
+The v2 study is unchanged: `build-tower-v2.py`, `north-study.png` and `tower-study.glb` are the files from main. v3 writes separate files.
+
+Reproducible builds (Blender 4.5.10, from the repository root):
+
+```
+blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-crown
+blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top enclosed-box
+blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-crown --iron redbrown
+```
+
+Every value below is a **conditional parameter**, not a measured world dimension:
+- `--height` (75.76) and `--passage-depth` (26) are unchanged from v2.
+- `--ratio-box 0.47`, `--ratio-mid 0.59` and `--flare-start 0.55` set the flared leg profile. They are plate-46 outer-width ratios in one perspective photo; camera pitch is not removed.
+- `--lace-cell 1.6` sets the diamond lacing density (visual reading).
+- `--well-fraction 0.28` sets the central elevator well size.
+- The open-crown band : gallery : crown split uses south-view pixel proportions.
+
+Parts and forms:
+- **Top forms** are named by what the photos show, with no date implied:
+  - `open-crown`: solid band, open railed gallery and openwork ribbed crown (view A; south c0234001; OML 158510).
+  - `enclosed-box`: two-tier enclosed box and low cap (plate 46; OML 158880/158886).
+  - The shaft-top height is shared between the two forms, as a scenario.
+- **Elevator interface for T5**: a separate unmerged node `elevator_car` at the bottom stop, and empties `elevator_well_bottom` (roof garden) and `elevator_well_top` (box underside). The opening-era well does not reach the ground; the ground-level shaft is the 1938 alteration.
+- **Per-part metadata**: `tower-study-v3-<top>.parts.json` lists evidence and assumptions for each part, plus the parameters and the build command. The GLB scene extras carry a short `study` record.
+- **Not modelled**, with scenarios kept open: the ropeway landing, roof planters, cinema wings and coping thickness. The iron colour stays an option: grey (provisional) or red-brown (postcard candidate).
+
+Outputs and budget (glTF-Validator 2.0.0-dev.3.10):
+
+| file | errors / warnings / infos | material primitives | vertices | triangles |
+|---|---|---|---|---|
+| tower-study-v3-open-crown.glb | 0 / 0 / 7 | 5 | 44,064 | 23,924 |
+| tower-study-v3-enclosed-box.glb | 0 / 0 / 7 | 5 | 39,936 | 21,660 |
+
+- Renders: `north-study-v3-open-crown.png`, `north-study-v3-enclosed-box.png`, `north-study-v3-open-crown-redbrown.png`. The red-brown GLB is not committed.
+- Instancing the lacing and an LOD card are still to do.
+
+Photo projections:
+- Before/after overlays of v2 and v3 in all three photos use the unchanged Codex camera settings for 75.76 m from `camera-profile-v2.json`. They are kept outside Git in `research-cache/claude-v3-overlays/`.
+- The base does not match in either version, because those cameras were fitted with the anchor-model base of the camera study (about 35.3 m × 15.2 m), not the study base. Only the shaft difference between v2 and v3 is meaningful there.
+
+Codex independently rebuilt both forms with Blender4.5.10 and validated both supplied GLBs (0 errors/0 warnings/7 infos). Rebuild JSON and all floating-point accessor bytes are identical; triangle ordering differs, but the oriented triangle sets are identical. These are reproducible geometry results, not byte-identical GLBs or a photographic acceptance. Both old GLB/render and archived v2 generator were checked against main. No public viewer/default changed.
+
+Generator guards reject non-finite/infeasible parameters before editing the scene. The lacing-cell range0.25–5m is a local build budget constraint, not source evidence. Red-brown metadata writes to its own suffix rather than overwriting grey metadata. Travel markers delimit the well (15.85..58.7892m in this scenario), not permissible car-centre heights: a motion adapter must subtract the car half-height and clearance from the upper limit and add them at the bottom. Instancing/LOD, shape/camera consistency and three-photo acceptance remain open.
