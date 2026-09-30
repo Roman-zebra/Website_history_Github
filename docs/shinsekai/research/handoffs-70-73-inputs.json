@@ -1,0 +1,27 @@
+{
+  "status": "reviewed-leads-not-adopted-geometry-or-content",
+  "handoffs": [
+    70,
+    71,
+    72,
+    73
+  ],
+  "snapshots": [
+    {
+      "file": "research/datum-check-claude.md",
+      "sha256": "fd882ab2b2694fc5e00c7b39a4264bed43236313fcc3703e99a88f807e550ef6"
+    },
+    {
+      "file": "design/audio-sources-claude.md",
+      "sha256": "0bd5ae39e4a272912bd2488138c73d0a79be44c450ed35ec4b90f92a3cba40ee"
+    },
+    {
+      "file": "design/postcards-mysteries-draft-claude.md",
+      "sha256": "6594ead50e4f77b0632e4387d9578088153c1a9e7e3e9b09c8281d2dc09d654b"
+    },
+    {
+      "file": "research/map1912-resumed-claude.md",
+      "sha256": "019c0c829c46af2bef4d4eeded0550a423bfe32434693667ae61296685952ac5"
+    }
+  ]
+}

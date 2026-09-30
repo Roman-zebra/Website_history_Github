@@ -36,3 +36,7 @@ Use this with `AGENTS.md`, `codex-state.json`, `TASKS.md` and `PLAN.md`; state i
 ## Recurring work / later conversation transfer
 
 Heartbeat `jta` retains its 10-minute schedule and is **ACTIVE in the resumed conversation** 01a0f17d-ce83-7780-869a-56bc0755bbf7. The tool update and saved target/status were verified. Notify only for meaningful progress/failure/action needed; stop when T0–T10 actually finish. Do not duplicate it or resume work in the old conversation.
+
+## Immediate follow-up through73
+
+See research/datum-and-drafts-review.md and current state. Facade ground hidden; pedestrian stature/horizon is an assumed prior, not a surveyed metric. Next T3 scenario: separate coping top/bottom with shared thickness; preserve rawv2 and explicitly version refined gallery/crown readings. PID12874185/frame87 reproduces the1913 plan under personal-transmission access; facts-only lead, no coordinates or scan reuse adopted. Audio/postcard drafts are archived, with unsupported measured-height/caption claims flagged.

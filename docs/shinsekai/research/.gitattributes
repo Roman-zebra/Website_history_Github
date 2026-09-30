@@ -5,3 +5,6 @@ photo-landmarks-v3-claude.csv -text
 floor-line-samples-claude.csv -text
 lunapark-facilities-claude.md -text
 layout-proposals-1912text-claude.md -text
+
+datum-check-claude.md -text
+map1912-resumed-claude.md -text
