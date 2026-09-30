@@ -1,0 +1,200 @@
+{
+  "status": "conditional-profile-not-historical-measurement",
+  "scenarioFile": "camera-scenario-v1.json",
+  "rawResults": "../research-cache/camera-profile-v1.json (local only)",
+  "heightMeaning": "Early photograph rod-tip height above assumed ground; no late-form height is inferred",
+  "initialisationsPerFit": 3,
+  "profile": [
+    {
+      "heightM": 60,
+      "cost": 0.13733803014980145,
+      "converged": false,
+      "reason": "iteration-limit",
+      "boundHits": [
+        "depth",
+        "plate46.eye"
+      ],
+      "training": {
+        "plate46": {
+          "rmsPx": 0.6026430083508011,
+          "scaledRms": 0.09008977372332158,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.6030014130752409,
+          "scaledRms": 0.08969621044494033,
+          "components": 18
+        }
+      },
+      "northHoldout": {
+        "plate46": 5.681944246270387,
+        "viewA": 0.6481033489447503
+      },
+      "jointRank": 28,
+      "jointParameters": 29,
+      "minSingularValue": 1.217365703549277e-7,
+      "maxSingularValue": 1505.0549375900803,
+      "southCalibrationRms": 0.19389472562478213,
+      "southPredictionRms": [
+        21.001521095721884,
+        21.00152109866366,
+        21.001521098961163
+      ],
+      "southBoundHits": [
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "heightM": 68,
+      "cost": 0.15719440159176623,
+      "converged": true,
+      "reason": "projected-gradient",
+      "boundHits": [
+        "depth",
+        "plate46.eye",
+        "viewA.distance"
+      ],
+      "training": {
+        "plate46": {
+          "rmsPx": 0.6949658930933411,
+          "scaledRms": 0.10070470456031118,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.5757293189487284,
+          "scaledRms": 0.0919316783916366,
+          "components": 18
+        }
+      },
+      "northHoldout": {
+        "plate46": 5.939165080453929,
+        "viewA": 1.8872077196079482
+      },
+      "jointRank": 28,
+      "jointParameters": 29,
+      "minSingularValue": 0.000005002215465613429,
+      "maxSingularValue": 1866.0154249437442,
+      "southCalibrationRms": 0.1969111492006071,
+      "southPredictionRms": [
+        24.006364129311066,
+        24.006364049395533,
+        24.00636415701522
+      ],
+      "southBoundHits": [
+        [
+          "south_c0234001.pitch"
+        ],
+        [
+          "south_c0234001.pitch"
+        ],
+        [
+          "south_c0234001.pitch"
+        ]
+      ]
+    },
+    {
+      "heightM": 75.76,
+      "cost": 0.2620507970300501,
+      "converged": true,
+      "reason": "projected-gradient",
+      "boundHits": [
+        "archFeet",
+        "plate46.eye",
+        "viewA.focal"
+      ],
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7639709575814249,
+          "scaledRms": 0.11337012418089054,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.7660226600891374,
+          "scaledRms": 0.13301149347820607,
+          "components": 18
+        }
+      },
+      "northHoldout": {
+        "plate46": 6.0063332542071945,
+        "viewA": 2.162361558182873
+      },
+      "jointRank": 28,
+      "jointParameters": 29,
+      "minSingularValue": 2.250605850893863e-9,
+      "maxSingularValue": 1796.4993945980518,
+      "southCalibrationRms": 0.20028691890906608,
+      "southPredictionRms": [
+        23.71598269626534,
+        23.715983744975127,
+        23.71598268606387
+      ],
+      "southBoundHits": [
+        [
+          "south_c0234001.pitch"
+        ],
+        [
+          "south_c0234001.pitch"
+        ],
+        [
+          "south_c0234001.pitch"
+        ]
+      ]
+    },
+    {
+      "heightM": 85,
+      "cost": 0.4780049314216037,
+      "converged": false,
+      "reason": "iteration-limit",
+      "boundHits": [
+        "archFeet",
+        "plate46.distance",
+        "viewA.focal"
+      ],
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7308310755917217,
+          "scaledRms": 0.11152131067873872,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 1.1861299140303356,
+          "scaledRms": 0.20507692582095832,
+          "components": 18
+        }
+      },
+      "northHoldout": {
+        "plate46": 5.354292360740234,
+        "viewA": 1.9906994893234435
+      },
+      "jointRank": 28,
+      "jointParameters": 29,
+      "minSingularValue": 3.96371162127833e-7,
+      "maxSingularValue": 1616.3832119232409,
+      "southCalibrationRms": 0.19688569026244312,
+      "southPredictionRms": [
+        18.87662652358246,
+        18.87662652283853,
+        18.876626525938626
+      ],
+      "southBoundHits": [
+        [],
+        [],
+        []
+      ]
+    }
+  ],
+  "gates": {
+    "historicalHeight": "open",
+    "southPrediction": "open",
+    "productionGeometry": "open"
+  },
+  "limitations": [
+    "Conditional local optimisation, not certified global minima. Some runs did not converge.",
+    "Exact roof-fixed similarity gauge makes height unidentifiable from these training anchors.",
+    "Imposed parameter bounds and chosen shape/correspondence scenarios influence profile cost.",
+    "South upper predictions fail at the current small-scan tracing weights; no geometry default adopted.",
+    "Three similar distance/focal seeds do not exhaust camera ambiguity."
+  ]
+}

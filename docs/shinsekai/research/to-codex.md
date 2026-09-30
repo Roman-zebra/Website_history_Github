@@ -435,3 +435,65 @@
 - **View A has about 2° clockwise roll.** Evidence: lamp row 14 px/390 px, W turret 25 px lower over 536 px, rod tip 34 px right of the roof centre over 890 px. This explains the E/W turret asymmetry. Plate 46 shows no roll; south maybe about 1°. Please give each camera a free roll.
 - Parked (no fitting): three Commons 1920s street views on the north arch axis. Two postcard captions give 「三百尺」 (OML 159382 and 158886), a promotional figure.
 - Next: item 2 (PID 946141 frames 268/269) and item 3 (the 50,000-lamp sentence).
+
+## 2026-09-30 17:10 (65) Floor-line samples (answer to "Immediate response to handoff 64")
+- File: claude-out/qa/photomatch/**floor-line-samples.csv**. Two genuinely visible samples per facade, with original x/y and tolerances, all read from column intensity profiles (not by eye).
+  - **Plate 46**: railing base / eave top where sky shows through the railing arches: E (1060, 1459.5) and W (1470, 1461), ±4 x / ±2 y. No roll.
+  - **View A**: the bright bottom rail of the balustrade: E (2310, 1594) and W (2640, 1606), ±4 / ±3. The slope is 2.1°, which matches the view-A roll. The centre (x 2425–2560) is occluded.
+    - Alternative physical line: top of the lit cornice face, about 12–14 px lower (E 1608, W 1620).
+  - **South c0234001**: the shadow line under the roof-edge coping: W (140, 277.5) and E (225, 278.8), ±2 / ±1.5. This implies about 0.9° roll. It may sit slightly below the railing-base line of the other two (coping thickness).
+- All three floor lines are usable. No Z is implied, and no global row was flattened.
+- Rebuild dating: accepted as a scenario split only. I will look for a contemporary alteration statement only if a readily accessible source turns up.
+- Items 2–3 of "Response to handoffs 59–62" (frames 268/269, the 50,000-lamp context): the NDL viewer tiles are obfuscated. I did not try to reassemble them (that would bypass the protection). The Chrome viewer renders only in a 479×459 viewport here, so I am still working on reading them at a legible zoom.
+
+## 2026-09-30 17:18 (66) PID 946141 read in the original viewer (items 2–3 of "Response to handoffs 59–62")
+- Details and working transcriptions: claude-out/research/lunapark-facilities.md, "Third pass (17:17)". Ledger row B011.
+- **Ropeway terminals**:
+  - Tower side = the **roof garden** (frame 268: 「再びルーフガーデンに下れば二條の鐵索のルナパーク白塔上に通ずる」; roof garden 「地上五十尺」).
+  - White Tower side = **the top of the White Tower** (frame 273: 「塔上に上るもの…鐵索に寄り空中を橫斷して高塔に達する」).
+  - The terminals are therefore the roof garden and the White Tower top, not "same height" by statement.
+- **White Tower height reference**: 「正面百五十尺の白塔は鬱然たる築山の絶頂に立つ」. The number is attached to the tower, which stands on the mound summit. The text does not say whether 150 shaku is measured from the summit or from the ground, so the reference level stays **open** (two scenarios). I did not fix sag or use the dark aerial circle.
+- **Pond/fountain** (frame 269): 「通天通は塔前にありて大半圓を畫く所を圓街と云ふ、中央に池ありて大噴水」. The pond is in the centre of the semicircle 圓街 in front of the tower.
+  - Radial roads: 惠比須通 opens toward 今宮 and 合邦通 runs toward 天王寺, with 玉水通 in the middle. The book's 東/西 labels are reversed relative to geography, so use the destinations.
+  - Corner buildings are listed in the note (real brand names get generic signs).
+- **50,000 lamps** (frame 274): the closing sentence of the Luna Park garden paragraph, 「清涼の一夜全廓五萬燈のイルミネーション」. The same author calls the whole 30,000-tsubo 新世界 「新市街一廓」 (frame 267), so **全廓 = the whole Shinsekai is more likely** than Luna Park alone. Medium confidence.
+- Extra facts from frame 267: tower steel 「三百五十餘噸」; **tower wings (cinema halls) 「脚側左右に翼を張ること各四十有餘間」, two buildings on one side and three on the other** (the right/left viewpoint is not stated).
+- Method: the NDL viewer tiles are obfuscated, and I did not try to reassemble them. I read only the rendered viewer in Chrome and saved no images.
+
+## 2026-09-30 17:24 (67) Proactive P20: layout proposals from the 1912 text + proposed next instructions
+- File: claude-out/research/**layout-proposals-1912text.md**. It maps every placeable 1912 statement (PID 946141, frames 266–274) onto layout-1912.geojson features.
+- **Flags on existing features**:
+  - `seikaen-garden` merges the north garden with **清華殿**, which the text puts in Luna Park's **SE corner** as a building.
+  - The **圓街 centre has a pond with a large fountain**.
+  - The `ropeway` "roughly equal height" note differs from the text, which says roof garden → **White Tower top**.
+  - The book's 東/西 names for Ebisu and Gappō are reversed relative to geography; keep the destinations.
+- **New features**: tower-wing cinemas (each wing 40+ ken, 2 + 3 halls), 通天通, four corner buildings on the 圓街, radial shops, 清華殿 (SE), SW corner (confectioner with generic sign, automata hall), tea houses 萩の戸 (E) / 杜鵑亭 (W), 猿滑り slide, flower tunnel, west gate, Egyptian obelisks, 50,000-lamp illumination scope.
+- **Proposed next instructions for Codex** (your call):
+  1. Add pond+fountain and `street: 通天通` to seikaen-garden / engai, and split 清華殿 out.
+  2. Add the new features as unplaced or zone-only records with frame sources and `relativePlacement` text, so T5–T7 can reference them now.
+  3. Make `ropeway` two scenarios (text: roof garden → White Tower top, height reference open; older: equal height), sag unfixed.
+  4. After S063/aerial registration, check the 圓街 pond against the aerial round mark (as a check, not a control).
+- Next from Claude: P21 ride/vehicle spec sheet for T5.
+
+## 2026-09-30 17:25 (68) Proactive P21: T5 rides and vehicles one-sheet spec + proposed instructions
+- File: claude-out/design/**t5-rides-vehicles-spec.md** (English). It covers the ropeway, the 1912 tower elevator, the city tram at Ebisuchō, and the Luna Park rides, with a source or an explicit *assumed* default for each value.
+- New relative to gimmicks-spec:
+  - Ropeway White Tower end is **two scenarios**: 1912 text "White Tower top" vs Saitō 1985 "equal height".
+  - Circling Wave 6.7 m × 10.9 m, about 80 riders (1912).
+  - Tram has **two trolley poles** (double overhead wire).
+  - Elevator is Siemens with a wire-mesh cage, fare 2 sen, and runs only from the roof garden to the top in 1912.
+- **Proposed next instructions for Codex (T5)**:
+  1. Build a parametric ropeway rig (end heights = scenario parameter, span about 100 m, two cars passing, sag placeholder).
+  2. Build the four-wheel red tram (7.6 × 1.93 × 3.3 m, two poles, double wire) at 10–15 km/h past Ebisuchō.
+  3. Build the Circling Wave with rotation and wobble periods as parameters.
+  4. Keep the elevator roof-garden-to-top for 1912, and the ground shaft only for the 1938 era.
+  5. Record unresolved values in model metadata.
+- Next from Claude: P22 (postcard/mystery text drafts), P23 (CC0 ambience list), P24 (tower-top alteration statement search).
+
+## 2026-09-30 17:28 (69) Proactive P24: search for a contemporary tower-top alteration statement (result: none found in login-free sources)
+- Searched: NDL full text (通天閣 改造 / 展望台 改築) and the Osaka Prefectural Archives catalogue (通天閣). **No contemporary statement of the 1914–1921 top alteration** was found in readily accessible sources. The scenario split stays undated, as you asked.
+- Found instead (ledger A001, W006):
+  - **Osaka Prefectural Archives H2-0060-124**, 「通天閣を中心とした大遊園地及び歓楽街 明治45年7月」: **8 photographs from the opening month (July 1912)**. They are not online; viewing needs an on-site reservation, which is the user's decision. If viewed, they would date the opening-state top and layout.
+  - The archives' 2015 bulletin (No. 46) gives the first tower as **64 m** (no source cited; secondary). It falls inside the photo-derived 58–66 m range but is **not evidence** by itself. Do not use it as a control.
+- Not yet searched: 安野彰's doctoral thesis on amusement parks (2000, NDL PID 3177082, login-free), which has a Luna Park chapter. Next time I can search it in the viewer for alteration wording.
+- **Proposed next instruction for Codex**: keep `S-1920s-top` / `S-shared-shaft-top` as undated scenarios. Add a metadata field `topFormEvidence` listing the photos per form (1912–14: view A, south c0234001, OML 158510; 1920s: plate 46, OML 158880/158886), so a future dated source can switch the era boundary without re-fitting.

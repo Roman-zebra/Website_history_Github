@@ -4,12 +4,14 @@ Baseline: `PLAN.md` (v3.6) and the later user decisions recorded in `research/to
 
 The final site is published from GitHub through the repository's existing Cloudflare Workers build/deploy route. Local files are for authoring and verification only.
 
+**User pause:** work and the recurring heartbeat are paused at the numerical checkpoint. Resume only on explicit user instruction; see `codex-state.json` and `HANDOFF.md`. Tasks remain incomplete.
+
 | Task | Scope | Status |
 | --- | --- | --- |
 | T0 | Prepare the fixed clone, instructions, project records, handoff, and tool inventory | Done |
 | T1 | Add the second, disabled Coming soon card to tab 06 in six languages | Done |
 | T2 | Source research, rights ledger, 1912 layout, gimmicks, and colour evidence | In progress: 30 individually CC0-checked OML pictures plus two CC0 1912 survey sheets and their CC0 index; S063 matches the 1912 opening-period parcel topology rather than the 1911 star proposal, but georeferencing remains and the dashed circle is unidentified; the four-point affine fails an independent west-side crossing; a separate Taisho-period museum guide-map postcard is under label/topology review with image rights restricted; exact facility positions still need a dated, inspectable site plan |
-| T3 | Source-based Blender geometry and photographic alignment | Preparation: editable v2 tower study remains adjustable and unpublished; competing reported heights lack a common measured datum. A 41-record v2 photograph table is archived with original/crop/era/rights metadata and one declared CSV quoting repair. Typed point/line/x-only-edge/row projection primitives and eleven mathematical/input tests are ready; variable shared geometry, deterministic height profiles, identifiability and independent south prediction remain to implement. Production geometry remains. |
+| T3 | Source-based Blender geometry and photographic alignment | Research preparation: v2 study remains adjustable/unpublished. Typed observations, explicit variable geometry and deterministic bounded camera/height profiles are implemented; 20 numeric/input tests contribute to a 205-test passing build. Height-augmented rank28/29 and an exact roof-fixed scale test demonstrate nonidentifiability; bound-dependent minima and failed south predictions are not accepted heights. Floor/upper/datum scenarios need further evidence; production geometry remains. Paused at user request. |
 | T4 | Browser engine and free tower exterior area; separate paid data | Technical preparation: a local-only three.js r186 WebGPU/WebGL 2 viewer loads the unpublished tower study GLB and tests orbit/lighting with demand rendering and an optional frame-interval measurement; Claude verified rendering, lighting, orbit/idle and visible measurement on both backends; five deterministic benchmark lifecycle tests pass, while actual Chrome hiding-event integration remains open; no historical site geometry, public route or paid asset is shipped. Production free-zone work remains planned. |
 | T5 | Historical moving features and rideable vehicles | Planned |
 | T6 | Lazily generated paid interiors | Planned |
