@@ -53,6 +53,13 @@ RATIO_MID = arg("--ratio-mid", 0.59)         # conditional: width at the flare s
 FLARE_START = arg("--flare-start", 0.55)     # conditional: fraction of shaft length (from the box) that is straight
 LACE_CELL = arg("--lace-cell", 1.6)          # conditional: lacing cell width in metres (visual density)
 WELL_FRACTION = arg("--well-fraction", 0.28) # conditional: well half-size / shaft top half-width
+DETAIL_WINDOWS = "--detail-windows" in sys.argv
+WINDOW_LOD = arg("--window-lod", 0, int)
+if DETAIL_WINDOWS:
+    if TOP != "open-gallery" or WINDOW_LOD not in (0, 1, 2):
+        raise SystemExit("Detail candidate requires open-gallery and window LOD0..2")
+    sys.path.insert(0, str(OUT))
+    from window_kit import place_tower_window
 if TOP not in ("open-gallery", "enclosed-box") or IRON not in ("grey", "redbrown"):
     raise SystemExit("--top must be open-gallery|enclosed-box and --iron grey|redbrown")
 if not all(math.isfinite(v) for v in (HEIGHT, PASSAGE_DEPTH, RATIO_BOX, RATIO_MID, FLARE_START, LACE_CELL, WELL_FRACTION)):
@@ -60,7 +67,7 @@ if not all(math.isfinite(v) for v in (HEIGHT, PASSAGE_DEPTH, RATIO_BOX, RATIO_MI
 if not (HEIGHT > 30 and PASSAGE_DEPTH > 9 and 0 < RATIO_BOX < RATIO_MID < 1
         and 0 < FLARE_START < 1 and 0.25 <= LACE_CELL <= 5 and 0 < WELL_FRACTION < 1):
     raise SystemExit("Infeasible study parameters (lace-cell budget range 0.25..5 m)")
-SUFFIX = "-v4-" + TOP + ("" if IRON == "grey" else "-" + IRON)
+SUFFIX = ("-v5-detail-lod" + str(WINDOW_LOD) + "-" if DETAIL_WINDOWS else "-v4-") + TOP + ("" if IRON == "grey" else "-" + IRON)
 ROOF_GARDEN_Z = 15.15   # about 50 shaku (sourced)
 FACADE_TOP = 15.3
 LATTICE_BASE = 15.85
@@ -186,6 +193,7 @@ for face in (-1, 1):
 
 # Four corner turrets, flush with the facades. The 1914 north view and 1921 plate
 # show rounded cupolas; heights follow plate 46, plan sizes are estimates.
+window_index = 0
 for x in (-TURRET_X, TURRET_X):
     for face in (-1, 1):
         y = face * (FACE_Y - TURRET / 2)
@@ -198,7 +206,11 @@ for x in (-TURRET_X, TURRET_X):
         bpy.context.object.name = "rounded turret cupola study"
         bpy.context.object.data.materials.append(trim)
         for level in (5.5, 9.5, 13.0, 17.0):
-            block("turret window", (x, face * (FACE_Y + 0.02), level), (1.1, 0.08, 2.2), window)
+            if DETAIL_WINDOWS:
+                place_tower_window(x, face, FACE_Y, level, window_index, WINDOW_LOD)
+                window_index += 1
+            else:
+                block("turret window", (x, face * (FACE_Y + 0.02), level), (1.1, 0.08, 2.2), window)
         beam("turret finial", (x, y, TURRET_DOME_TOP - 0.2), (x, y, TURRET_FINIAL_TOP), 0.1, iron)
 
 roof_deck = block("roof_garden_deck", (0, 0, ROOF_GARDEN_Z - ROOF_SLAB_T / 2),
@@ -387,6 +399,10 @@ note("iron colour", "hand-coloured postcards 157431/157437/159201 for red-brown;
      f"selected: {IRON}; neither is a measured colour")
 note("not modelled", "-", "ropeway landing (scenarios unresolved), roof planters, cinema wings, coping thickness",
      "omitted")
+if DETAIL_WINDOWS:
+    note("16 recessed tower windows and room voids", "Claude97 detail spec;98 typology references",
+         "existing bay count/positions retained; reveal0.30m,6 panes,glass0.04m behind frame,room3.4x2.8x2.8m assumed; no accepted room plan",
+         "assumed detail study")
 
 # Neutral reference rendering. The generated GLB excludes camera and floor.
 bpy.ops.mesh.primitive_plane_add(size=200, location=(0, 0, -0.04))
@@ -430,6 +446,7 @@ if "--export-only" not in sys.argv:
 for mat in (stone, iron, trim, window):
     members = [obj for obj in scene.objects
                if obj.type == "MESH" and obj != floor and obj.name not in ("roof_garden_deck", "open_gallery_floor")
+               and not obj.get("windowKit", False)
                and obj.data.materials and obj.data.materials[0] == mat]
     if not members:
         continue
@@ -440,21 +457,24 @@ for mat in (stone, iron, trim, window):
     bpy.ops.object.join()
     members[0].name = f"tower study - {mat.name}"
 
-scene["study"] = json.dumps({"version": "v4-landings", "top": TOP, "iron": IRON, "heightM": HEIGHT,
+scene["study"] = json.dumps({"version": "v5-detail-study" if DETAIL_WINDOWS else "v4-landings", "top": TOP, "iron": IRON, "heightM": HEIGHT,
                              "passageDepthM": PASSAGE_DEPTH, "status": "conditional study, not production"})
 scene["lift"] = json.dumps(LIFT)
+if DETAIL_WINDOWS:
+    scene["windowDetail"] = json.dumps({"handoffs": [97, 98], "windows": window_index, "lod": WINDOW_LOD,
+        "status": "recess/panes/room cuts assumed; original16 bay positions retained; not accepted historic geometry"})
 bpy.ops.object.select_all(action="DESELECT")
 for obj in scene.objects:
     if (obj.type == "MESH" and obj != floor) or obj.type == "EMPTY":
         obj.select_set(True)
 bpy.ops.export_scene.gltf(filepath=str(OUT / f"tower-study{SUFFIX}.glb"), export_format="GLB",
                           use_selection=True, export_extras=True)
-meta = {"version": "v4-landings", "command": "blender -b --python assets-src/shinsekai/tower-study/build-tower-v4.py -- "
+meta = {"version": "v5-detail-study" if DETAIL_WINDOWS else "v4-landings", "command": "blender -b --python assets-src/shinsekai/tower-study/build-tower-v4.py -- "
         + " ".join(sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []),
         "parameters": {"heightM": HEIGHT, "passageDepthM": PASSAGE_DEPTH, "top": TOP, "iron": IRON,
                        "ratioBox": RATIO_BOX, "ratioMid": RATIO_MID, "flareStart": FLARE_START,
                        "laceCellM": LACE_CELL, "wellFraction": WELL_FRACTION},
         "lift": LIFT, "parts": PARTS}
 (OUT / f"tower-study{SUFFIX}.parts.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
-print(f"Study written: north-study{SUFFIX}.png, tower-study{SUFFIX}.glb, tower-study-v4-{TOP}.parts.json "
+print(f"Study written: north-study{SUFFIX}.png, tower-study{SUFFIX}.glb, tower-study{SUFFIX}.parts.json "
       f"(top {TOP}, iron {IRON}, height {HEIGHT} m, passage depth {PASSAGE_DEPTH} m)")

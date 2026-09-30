@@ -1,0 +1,107 @@
+{
+  "version": "v5-detail-study",
+  "command": "blender -b --python assets-src/shinsekai/tower-study/build-tower-v4.py -- --detail-windows --window-lod 0 --export-only",
+  "parameters": {
+    "heightM": 75.76,
+    "passageDepthM": 26.0,
+    "top": "open-gallery",
+    "iron": "grey",
+    "ratioBox": 0.47,
+    "ratioMid": 0.59,
+    "flareStart": 0.55,
+    "laceCellM": 1.6,
+    "wellFraction": 0.28
+  },
+  "lift": {
+    "schemaVersion": 1,
+    "form": "open-gallery",
+    "landings": [
+      {
+        "id": "roof",
+        "floor": 15.15,
+        "status": "source-relative surface; ground datum unresolved"
+      },
+      {
+        "id": "top",
+        "floor": 63.41832333333333,
+        "status": "assumed gallery surface"
+      }
+    ],
+    "car": {
+      "height": 2.3,
+      "width": 0.8904,
+      "depth": 0.8904,
+      "floorThickness": 0.08,
+      "status": "assumed; capacity unknown"
+    },
+    "well": {
+      "bottom": 15.02,
+      "top": 65.68832333333333,
+      "clearance": 0.05
+    },
+    "pivots": {
+      "bottom": 16.22,
+      "top": 64.48832333333334
+    },
+    "structure": {
+      "latticeBase": 15.85,
+      "headTop": 67.2746
+    }
+  },
+  "parts": [
+    {
+      "part": "base block, arch and turrets (carried over); roof deck surface corrected",
+      "status": "conditional",
+      "evidence": "v2 study; roof garden about 50 shaku (1912 text, 1913 album via reference)",
+      "assumption": "base dimensions retained; slab top now roof datum, slab thickness assumed; facade ground unknown"
+    },
+    {
+      "part": "flared legs",
+      "status": "conditional",
+      "evidence": "plate-46 outer-width rows 820-1450 (Claude, original IIIF pixels); view A shows the same sweep",
+      "assumption": "ratios box 0.47, mid 0.59, flare start 0.55: perspective not removed; roof and box half-widths kept from v2"
+    },
+    {
+      "part": "face lacing and belts",
+      "status": "conditional",
+      "evidence": "view A and plate 46 show dense multi-cell diamond lacing (visual reading)",
+      "assumption": "cell width 1.6 m, belts every second band, member radii: visual, not measured"
+    },
+    {
+      "part": "elevator well",
+      "status": "conditional",
+      "evidence": "1912 text fr.268 (roof garden to the top); two central lines in view A and plate 46",
+      "assumption": "well half-size 0.28; limits derive from landing floors; enclosed visual shaft is not a travel limit"
+    },
+    {
+      "part": "elevator car + limits (interface)",
+      "status": "conditional",
+      "evidence": "none (placeholder for T5)",
+      "assumption": "floor thickness0.08m, car height2.3m, clearance0.05m assumed; enclosed top remains null/disabled"
+    },
+    {
+      "part": "top: open gallery + ribbed crown",
+      "status": "conditional",
+      "evidence": "view A; south c0234001 rows 49-107; OML 158510",
+      "assumption": "band/gallery/crown split from south pixel proportions 15.5:14.5:22.5; plan sizes from v2; no date implied"
+    },
+    {
+      "part": "iron colour",
+      "status": "conditional",
+      "evidence": "hand-coloured postcards 157431/157437/159201 for red-brown; none for grey",
+      "assumption": "selected: grey; neither is a measured colour"
+    },
+    {
+      "part": "not modelled",
+      "status": "omitted",
+      "evidence": "-",
+      "assumption": "ropeway landing (scenarios unresolved), roof planters, cinema wings, coping thickness"
+    },
+    {
+      "part": "16 recessed tower windows and room voids",
+      "status": "assumed detail study",
+      "evidence": "Claude97 detail spec;98 typology references",
+      "assumption": "existing bay count/positions retained; reveal0.30m,6 panes,glass0.04m behind frame,room3.4x2.8x2.8m assumed; no accepted room plan"
+    }
+  ]
+}
