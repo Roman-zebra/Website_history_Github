@@ -775,6 +775,13 @@ SHOTS = {
     "night-outline": dict(loc=(-16.0, 62.0, 2.5), target=(0.0, 0.0, 17.0), lens=26, night=True),
     "prop-closeup": dict(loc=(-9.36, -11.78, 16.7), target=(-10.05, -11.92, 16.58), lens=32, night=False),
     "lod": dict(loc=(0.0, 150.0, 12.0), target=(0.0, 0.0, 12.0), lens=50, night=False),
+    # v1.2 review shots: bevelled sash / muntins / frame of the SW turret L1 side window in the grazing dusk light; the open NE
+    # stair head (landing, opening, guard rail); the NW head floor from the stair below (trimmer, header, slab edge).  The
+    # placeholder room boxes / dark cards are hidden in these shots so the shell itself is visible.
+    "window-bevel": dict(loc=(-15.95, -10.15, 7.05), target=(-14.30, -10.80, 6.62), lens=35, night=False, hide=("backing", "curtain")),
+    "stairhead-open": dict(loc=(11.55, 6.35, 16.80), target=(12.35, 10.70, 15.25), lens=22, night=False, hide=("backing",), fill=((12.3, 9.6, 17.6), 60.0)),
+    "turret-soffit": dict(loc=(-13.55, 10.65, 14.10), target=(-11.60, 9.80, 14.80), lens=16, night=False, hide=("backing", "curtain"),
+                          fill=((-12.6, 10.8, 13.6), 45.0)),
 }
 
 
@@ -848,10 +855,18 @@ def run(renders, here, v4glb, cc0, samples, lamps, windows, iron_colour):
             for lod, root in lod_roots.items():
                 root.location = (0, 0, 0)
                 for ch in root.children:
-                    ch.hide_render = lod != 0
+                    ch.hide_render = lod != 0 or any(h in ch.name for h in shot.get("hide", ()))
             for o in ctx + tower:
                 o.hide_render = False
             cam = camera("shotcam", shot["loc"], shot["target"], shot["lens"])
+            for o in [o for o in bpy.data.objects if o.name.startswith("ctx_fill")]:
+                bpy.data.objects.remove(o, do_unlink=True)
+            if shot.get("fill"):
+                ld = bpy.data.lights.new("ctx_fill", "POINT")
+                ld.energy, ld.shadow_soft_size, ld.color = shot["fill"][1], 0.3, (1.0, 0.86, 0.68)
+                lo = bpy.data.objects.new("ctx_fill", ld)
+                lo.location = shot["fill"][0]
+                bpy.context.scene.collection.objects.link(lo)
         sc.camera = cam
         sc.render.filepath = str(here / f"{name}.png")
         bpy.ops.render.render(write_still=True)

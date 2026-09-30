@@ -22,7 +22,8 @@ blender -b -P assets-src/shinsekai/tower-base-upgrade/exterior/build-tower-base-
 Outputs:
 - **`tower-base-exterior.glb`**:
   - `TB_EXT_LOD0`, `TB_EXT_LOD1` and `TB_EXT_LOD2` roots (switch distances 0 / 25 / 80 m in extras), with one child mesh per material, `TB_EXT_LOD<n>_<material>`.
-  - `TB_EXT_COLLISION` with 20 `COL_*` meshes (no material, extras `collision: true`).
+  - `TB_EXT_COLLISION` with 24 `COL_*` meshes (no material, extras `collision: true`). v1.2: `COL_turret_head_floor_<t>` is L-shaped (the head landing, 2 boxes), `COL_stair_proxy_<t>` is a ramp through the nosings of all 74 steps of the interior stair (mirrored per turret), and `COL_stairhead_guard_<t>` is a 1.0 m guard along each opening.
+  - `TB_EXT_LOD0|1_stairhead_<NE|NW|SE|SW>`: placeholder guard rail round each stairwell opening. Hide it for a turret whose stair cell is loaded (the cell carries the real balustrade).
   - `TB_EXT_INTERFACE` with 16 `IF_*` opening empties.
   - UV0 (`UVMap`) is in **metres**: a world-planar projection per face, and sweeps and lathes are unwrapped as path length × profile length. UV1 is a Smart-UV unique unwrap for lightmaps and AO. The bulbs have UV0 only.
 - **`tower-base-exterior.parts.json`**: parameters, the v4 constants used, triangle counts per LOD and per part, material definitions (linear base colour, roughness, metallic, CC0 texture path, tile size in metres, source) and the per-element source list.
@@ -31,6 +32,9 @@ Outputs:
   - `night-outline.png` shows the bulb rails lit.
   - `prop-closeup.png` is a 0.7 m close-up.
   - `lod.png` is an orthographic north elevation with LOD0, LOD1 and LOD2 from left to right.
+  - v1.2 review shots (placeholder room boxes hidden so the shell shows; the two interior views add one warm review fill light, not exported): `window-bevel.png` (SW turret L1 side window in the grazing dusk light: bevelled sashes, muntins, frame), `stairhead-open.png` (through the open NE stair-head door: landing, guard rail, opening), `turret-soffit.png` (NW head floor from the stair below: trimmer, header, slab edge). `roof-garden.png` was re-rendered with the v1.2 geometry.
+
+**v1.2 fixes (2026-10-01, Claude Opus 5.5).** (1) Turret head floors with the stairwell opening and steel framing, placeholder rails and collision, see the Stair heads row and ../INTERFACE.md change log 1.2. (2) The lowest voussoirs of both arch rings reached |x| 11.07 and passed through the turret inner walls into all four stair shafts at z 2.9-4 m (hidden from outside behind the turret fronts, but inside the interior clear boxes); every ring point is now clamped at the shaft face |x| 10.50. ../verify finds no exterior LOD0 triangle inside the four stair shafts or the two halls except the head floors (and the NE stair-head leaves, which stand open onto their landing by design). (3) §6 bevels restored (budget 160k).
 
 **Runtime replacement of v4** (listed in `parts.json` → `replacesInV4`):
 - Hide `tower study - provisional pale masonry`, `tower study - dark unglazed opening` and `roof_garden_deck`.
@@ -52,7 +56,7 @@ Tags: S: OML CC0 photo, T: 1912 text (PID 946141), P: plate 46 (1921; later peri
 | Frieze and cornice | Frieze (13.1–14.35 m) of 9 lesenes and 10 green roundels. Main cornice with bed mould, corona, cyma and 41 modillions. The turret band continues the corona round each turret | S: 157431 (row of green roundels above the arch), S: 157437 (vertical strips); A: profiles |
 | Turrets | Scored ashlar with alternating long and short quoins on the two front corners, L1–L3 windows with segmental heads, T4 paired round-headed lights, the turret cornice with modillions, **segmental gables with an oculus on all four faces**, a **bell cap** (square at the eaves, round at the neck) with 4 corner ribs, 4 face ribs and standing seams, an 8-post lantern, a lantern cap and a finial at the v4 heights (22.1 / 22.9 m) | S: 157431, S: 157437, S: 158510 (paired upper lights, curved gables with oculi, dark caps with lanterns and spikes); A: window sizes and levels (fitted to the INTERFACE floors), gable rise, cap profile |
 | Roof garden | Terracotta paver deck; a balustrade 1.16 m above the deck (plinth, turned balusters, moulded rail, piers every ~2.5 m with ball caps); four flower beds with stone kerbs, clipped edging and flower clumps; moulded masonry pedestals with steel shoe plates, gussets and anchor nuts for the four legs | T: fr.268 (flower beds 四時の花卉); S: 157431 (piers along the roof edge); A: balusters (an iron railing is equally possible), pavers, bed positions |
-| Stair heads | The four turret heads are the stair exits (T: fr.268 「階段の昇降口自ら四隅の小塔を為す」). Each has a double door with a segmental head and a bracketed sheet-metal hood (a "roofed opening"). The NE leaves stand open | T: fr.268; A: door and hood form |
+| Stair heads | The four turret heads are the stair exits (T: fr.268 「階段の昇降口自ら四隅の小塔を為す」). Each has a double door with a segmental head and a bracketed sheet-metal hood (a "roofed opening"). The NE leaves stand open. **v1.2:** inside each turret head a 0.30 m head floor (tile top at 15.15, plaster soffit) with the stairwell opening of the interior stair (SW x -14.05..-11.45, y -12.55..-10.00, mirrored in the other turrets), framed by a riveted-type steel trimmer I 250 x 125 bearing in pockets in both end walls and a header framing into it with angle cleats; a placeholder guard rail `stairhead_<turret>` round the opening | T: fr.268; A: door and hood form, steel framing (period-typical), landing layout from ../interior |
 | Lift transfer door | SW turret head, facing the lift landing: glazed double door with a hood, an electric bell push (porcelain rose, 2.5 mm brass push with a ring groove, two slotted screws), a blank navy enamel plate (no text) and a cloth-covered bell wire | A: position (brief); detail-spec §6; bell push † unverified for 1912 Osaka |
 | Doors | Ticket-hall doors (one ajar), the ticket window, the east-hall window, turret street doors and wing doors. Panelled glazed leaves with raised chamfered panels, butt hinges, kick plates, brass knobs with roses and escutcheons, stone thresholds | A: positions (INTERFACE) |
 | Windows (58) | See the detail-spec §1 table below | detail-spec §1 |
@@ -77,7 +81,7 @@ Tags: S: OML CC0 photo, T: 1912 text (PID 946141), P: plate 46 (1921; later peri
 
 - **Edges:** chamfers on all masonry blocks, quoins (outer corner), voussoirs, sills, kerbs, pedestals, piers and panels; a 7 mm arris on window frames; 1.5 mm on the enamel plate; lathe profiles are bevelled.
   - The rustication and the ashlar are real V-grooves, which catch the dusk light in `facade-closeup.png`.
-  - Plain (unbevelled) boxes remain on sash members, muntins, hinge plates, footway slabs and inner-corner quoins. This was a triangle-budget decision.
+  - v1.2 (LOD0 budget raised to 160k by the Claude supervisor): the v1 plain boxes are bevelled now: sash stiles and rails 4 mm, muntins 3 mm, transoms 4 mm, circle-light bars 3 mm, door frames 5 mm, door stiles and rails 3 mm, hinge plates 1 mm, footway slabs 6 mm, inner-corner quoins 18 mm like the outer ones. `cbox` no longer emits the bevel strips and corners of a skipped (buried) face, which pays for most of it (joinery 17k -> 31k instead of 52k).
 - **Seams and gaps:** 12 mm voussoir joints; 24 mm quoin joints; 4 mm kerb joints; 6 mm door meeting gap; standing seams on the caps; separate hinge knuckles, kick plates and escutcheons.
 - **Raised control:** the bell push, with a porcelain rose, a raised brass push, a ring groove and slotted screws (`prop-closeup.png`).
 - **Material roughness:** in `parts.json` and the render shaders.
@@ -100,9 +104,11 @@ Tags: S: OML CC0 photo, T: 1912 text (PID 946141), P: plate 46 (1921; later peri
 
 | LOD | triangles | meshes | largest parts |
 |---|---|---|---|
-| LOD0 | **118,905** (budget 120,000) | 27 | trim 41k, joinery 17k, iron 10.5k, bulbs 7.3k, brass 6.6k, wall 7.3k, roof sheet 5k |
-| LOD1 | 64,203 | 25 | |
+| LOD0 | **140,311** (budget 160,000 from v1.2; v1 118,905 / 120,000) | 31 | trim 43.8k, joinery 30.6k, iron 11.6k, bulbs 7.3k, wall 7.3k, brass 6.6k, roof sheet 5k, stair-head rails 4 x 0.6k |
+| LOD1 | 64,827 | 29 | |
 | LOD2 | 16,656 | 17 | |
+
+- **Instancing (v1.2):** the 918 bulbs and 150 balusters are still baked into `TB_EXT_LOD0_bulb` / `_trim` and counted above. `parts.json` → `instancing` lists every bulb position and every baluster placement (x, y, base z, height) with its prototype, so Codex can draw them as instances (about 14.8k LOD0 triangles become 2 prototypes of 8 and 50).
 
 - **Window LOD0:** about 300 triangles per window plus surround, sill and backing, well under the 800 limit.
 - **GLB size:** 14.5 MB. It carries 3 LODs, is uncompressed and has no embedded textures. Run it through gltfpack or meshopt in the Codex pipeline. The textures are the CC0 sets in `research-cache/materials-93/` by path, tiled in metres per `parts.json`.
@@ -148,7 +154,7 @@ Tags: S: OML CC0 photo, T: 1912 text (PID 946141), P: plate 46 (1921; later peri
    - turret window levels, the gable rise and the cap profile
    - Plate 46 (1921) was not used for details. Colours are estimates from hand-coloured postcards, as the v3 policy allows.
 2. **The weathering and scored joints exist only in the render shaders.** The GLB has UV0 in metres and UV1, but no baked AO or dirt maps and no textures. Until Codex ports `weather()` to TSL or bakes to UV1, the runtime look will be cleaner than these renders.
-3. **The budget is at its ceiling (LOD0 118,905 / 120k).** Several §6 bevels had to become plain boxes: sash members, muntins, inner-corner quoins, footway slabs. The 918 bulbs are 8-triangle bipyramids, which read only when emissive. Instancing the bulbs and balusters, as positions plus one mesh, is the obvious runtime win.
+3. **Budget (v1.2: LOD0 140,311 / 160k).** The §6 bevels are restored. The 918 bulbs are still 8-triangle bipyramids, which read only when emissive; their positions and the baluster placements are in `parts.json` → `instancing` for runtime instancing.
 
 Further gaps:
 - The E/W faces are dressed as if exposed, but in reality the cinema wings abut them below about 9.5 m. The wings are not built; the envelope is in INTERFACE.
@@ -156,5 +162,5 @@ Further gaps:
 - The lift landing footprint on the deck is left empty for the interior agent, and the v4 elevator car was hidden in the renders.
 - The sign band on the parapet (1921, plate 46) is deliberately **not** modelled, as a later period.
 - There are no flags, pennant strings or wires in the sky zone. That belongs to the street pass.
-- The collision stair proxies are ramps. Replace them with the interior stairs.
+- The collision stair proxies follow the interior stair plan (v1.2) as a ramp through the nosings; the interior cell's own collision has the same ramp.
 - The GLB has not been run through glTF-Validator here (no validator is installed; install nothing). It re-imports cleanly into Blender 4.5 with both UV sets, all 74 LOD meshes, 20 collision meshes and 16 interface empties.

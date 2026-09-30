@@ -216,11 +216,16 @@ def cbox(p, lo, hi, c=0.0, skip=(), jitter=0.0):
                 s[a], s[b], s[d] = sa, sb, sd
                 pts.append(vert(s, a))
             face(p, pts, out=sum(pts, Vector()) / 4 - ctr)
+    def hidden(axis, sgn):
+        return (("+" if sgn else "-") + names[axis]) in skip
+
     for a in range(3):
         for b in range(a + 1, 3):
             d = 3 - a - b
             for sa in (0, 1):
                 for sb in (0, 1):
+                    if hidden(a, sa) or hidden(b, sb):      # v1.2: the bevel strip of a buried (skipped) face is buried too
+                        continue
                     pts = []
                     for sd, ax in ((0, a), (1, a), (1, b), (0, b)):
                         s = [0, 0, 0]
@@ -230,6 +235,8 @@ def cbox(p, lo, hi, c=0.0, skip=(), jitter=0.0):
     for sx in (0, 1):
         for sy in (0, 1):
             for sz in (0, 1):
+                if hidden(0, sx) or hidden(1, sy) or hidden(2, sz):
+                    continue
                 pts = [vert((sx, sy, sz), ax) for ax in range(3)]
                 face(p, pts, out=sum(pts, Vector()) / 3 - ctr)
 
@@ -621,8 +628,8 @@ def window_fill(frame, o, lit_seed=0, sash_rows=2, sash_cols=3, backing=True):
             n = 16
             face(pg, [(o.uc + r * math.cos(2 * math.pi * k / n), fz - 0.04, o.z1 + r * math.sin(2 * math.pi * k / n)) for k in range(n)], out=(0, 1, 0))
             if LOD == 0:
-                cbox(pj, (o.uc - r, fz - 0.035, o.z1 - 0.012), (o.uc + r, fz - 0.005, o.z1 + 0.012))
-                cbox(pj, (o.uc - 0.012, fz - 0.035, o.z1 - r), (o.uc + 0.012, fz - 0.005, o.z1 + r))
+                cbox(pj, (o.uc - r, fz - 0.035, o.z1 - 0.012), (o.uc + r, fz - 0.005, o.z1 + 0.012), c=0.003)
+                cbox(pj, (o.uc - 0.012, fz - 0.035, o.z1 - r), (o.uc + 0.012, fz - 0.005, o.z1 + r), c=0.003)
             if backing:
                 pb = part("backing")
                 face(pb, [(o.uc - 0.6, -0.9, o.z1 - 0.6), (o.uc + 0.6, -0.9, o.z1 - 0.6), (o.uc + 0.6, -0.9, o.z1 + 0.6), (o.uc - 0.6, -0.9, o.z1 + 0.6)], out=(0, 1, 0))
@@ -640,25 +647,26 @@ def window_fill(frame, o, lit_seed=0, sash_rows=2, sash_cols=3, backing=True):
             if o.kind == "rect" and sb > spring:
                 sb = spring - fw
             top_edge = sb if o.kind != "rect" else min(sb, spring - fw)
-            # stiles and rails
-            cbox(pj, (o.uc - hw, nf - 0.045, sa), (o.uc - hw + sw, nf, top_edge), skip=("-z", "+z", "-x"))
-            cbox(pj, (o.uc + hw - sw, nf - 0.045, sa), (o.uc + hw, nf, top_edge), skip=("-z", "+z", "+x"))
-            cbox(pj, (o.uc - hw + sw, nf - 0.045, sa), (o.uc + hw - sw, nf, sa + (0.07 if sa == z0 else sw)), skip=("-x", "+x"))
-            cbox(pj, (o.uc - hw + sw, nf - 0.045, top_edge - sw), (o.uc + hw - sw, nf, top_edge), skip=("-x", "+x"))
+            # stiles and rails: 4 mm arris on every visible edge (v1.2, detail-spec s6; hidden end faces still skipped)
+            cs = 0.004 if LOD == 0 else 0.0
+            cbox(pj, (o.uc - hw, nf - 0.045, sa), (o.uc - hw + sw, nf, top_edge), c=cs, skip=("-z", "+z", "-x"))
+            cbox(pj, (o.uc + hw - sw, nf - 0.045, sa), (o.uc + hw, nf, top_edge), c=cs, skip=("-z", "+z", "+x"))
+            cbox(pj, (o.uc - hw + sw, nf - 0.045, sa), (o.uc + hw - sw, nf, sa + (0.07 if sa == z0 else sw)), c=cs, skip=("-x", "+x"))
+            cbox(pj, (o.uc - hw + sw, nf - 0.045, top_edge - sw), (o.uc + hw - sw, nf, top_edge), c=cs, skip=("-x", "+x"))
             gz = nf - 0.035
             face(pg, [(o.uc - hw + sw, gz, sa), (o.uc + hw - sw, gz, sa), (o.uc + hw - sw, gz, top_edge), (o.uc - hw + sw, gz, top_edge)], out=(0, 1, 0))
             if LOD == 0:
                 mw = 0.02
                 for c in range(1, sash_cols):
                     u = o.uc - hw + 2 * hw * c / sash_cols
-                    cbox(pj, (u - mw / 2, nf - 0.03, sa), (u + mw / 2, nf - 0.004, top_edge), skip=("-z", "+z"))
+                    cbox(pj, (u - mw / 2, nf - 0.03, sa), (u + mw / 2, nf - 0.004, top_edge), c=0.003, skip=("-z", "+z"))
                 h = top_edge - sa
                 for r in range(1, sash_rows):
                     z = sa + h * r / sash_rows
-                    cbox(pj, (o.uc - hw, nf - 0.03, z - mw / 2), (o.uc + hw, nf - 0.004, z + mw / 2), skip=("-x", "+x"))
+                    cbox(pj, (o.uc - hw, nf - 0.03, z - mw / 2), (o.uc + hw, nf - 0.004, z + mw / 2), c=0.003, skip=("-x", "+x"))
         # head: fanlight for round / segmental heads
         if o.kind in ("round", "seg"):
-            cbox(pj, (o.uc - hw, fz - 0.06, spring - 0.03), (o.uc + hw, fz, spring + 0.03))
+            cbox(pj, (o.uc - hw, fz - 0.06, spring - 0.03), (o.uc + hw, fz, spring + 0.03), c=0.004 if LOD == 0 else 0.0)
             head = [(u, z) for u, z in o.outline() if z > spring - 1e-6]
             # glass fan
             fan = [(o.uc, fz - 0.035, spring + 0.03)]
@@ -707,7 +715,7 @@ def door_leaf(pj, pg, pb, u0, u1, z0, z1, n_face, glazed=True, lod=0, hinge_left
     """Panelled leaf in the local frame, face at n_face, thickness 0.05."""
     t = 0.05
     st = 0.11
-    c = 0.0
+    c = 0.003 if lod == 0 else 0.0            # v1.2: 3 mm arris on stiles and rails (detail-spec s6)
     nb = n_face - t
     cbox(pj, (u0, nb, z0), (u0 + st, n_face, z1), c=c)
     cbox(pj, (u1 - st, nb, z0), (u1, n_face, z1), c=c)
@@ -737,7 +745,7 @@ def door_leaf(pj, pg, pb, u0, u1, z0, z1, n_face, glazed=True, lod=0, hinge_left
         for hz in (z0 + 0.25, (z0 + z1) / 2, z1 - 0.25):
             rod(pb, (hu, n_face + 0.004, hz - 0.05), (hu, n_face + 0.004, hz + 0.05), 0.009, 6)
             cbox(pb, (hu - 0.04 if hinge_left else hu - 0.001, n_face - 0.0, hz - 0.05),
-                 (hu + 0.001 if hinge_left else hu + 0.04, n_face + 0.003, hz + 0.05), skip=("-y",))
+                 (hu + 0.001 if hinge_left else hu + 0.04, n_face + 0.003, hz + 0.05), c=0.001, skip=("-y",))
         cbox(pb, (u0 + 0.02, n_face, z0 + 0.02), (u1 - 0.02, n_face + 0.002, z0 + 0.2), skip=("-y",))
         if knob:
             ku = u1 - 0.07 if hinge_left else u0 + 0.07
@@ -755,9 +763,10 @@ def door_fill(frame, o, leaves=2, glazed=True, open_angle=0.0, n_face=-0.15, thr
         hw = o.w / 2
         top = o.z1
         # frame (jambs + head)
-        cbox(pj, (o.uc - hw, n_face - 0.12, o.z0), (o.uc - hw + fw, n_face + 0.01, top), skip=("-y",))
-        cbox(pj, (o.uc + hw - fw, n_face - 0.12, o.z0), (o.uc + hw, n_face + 0.01, top), skip=("-y",))
-        cbox(pj, (o.uc - hw, n_face - 0.12, top - fw), (o.uc + hw, n_face + 0.01, top), skip=("-y",))
+        cf = 0.005 if LOD == 0 else 0.0
+        cbox(pj, (o.uc - hw, n_face - 0.12, o.z0), (o.uc - hw + fw, n_face + 0.01, top), c=cf, skip=("-y",))
+        cbox(pj, (o.uc + hw - fw, n_face - 0.12, o.z0), (o.uc + hw, n_face + 0.01, top), c=cf, skip=("-y",))
+        cbox(pj, (o.uc - hw, n_face - 0.12, top - fw), (o.uc + hw, n_face + 0.01, top), c=cf, skip=("-y",))
         if threshold:
             cbox(part("sill"), (o.uc - hw - 0.05, -0.45, o.z0 - 0.02), (o.uc + hw + 0.05, 0.12, o.z0 + 0.03), c=0.01 if LOD == 0 else 0)
         if o.kind in ("seg", "round"):
@@ -794,6 +803,8 @@ def door_fill(frame, o, leaves=2, glazed=True, open_angle=0.0, n_face=-0.15, thr
 
 
 def baluster(p, x, y, z0, z1, seg):
+    if LOD == 0:
+        INSTANCES["baluster"].append([round(x, 4), round(y, 4), round(z0, 4), round(z1 - z0, 4)])
     h = z1 - z0
     prof = ([(0.075, 0.0), (0.045, 0.1), (0.075, 0.34), (0.045, 0.5), (0.042, 0.6), (0.075, 0.72)]
             if seg > 4 else [(0.075, 0.0), (0.05, 0.1), (0.075, 0.34), (0.04, 0.58), (0.07, 0.72)])
@@ -817,11 +828,16 @@ def bulb_row(pts, spacing, out_dir=None):
         acc = s - L
 
 
+INSTANCES = {"bulb": [], "baluster": []}     # LOD0 placements for runtime instancing (written to parts.json)
+
+
 def emit_bulbs():
     pr, pbu = part("iron"), part("bulb")
     for pos, out in BULBS:
         if LOD <= 1:
             lathe(pbu, [(0.0, -0.06), (0.024, -0.036), (0.0, 0.0)], centre=tuple(pos), seg=4)
+        if LOD == 0:
+            INSTANCES["bulb"].append([round(pos.x, 4), round(pos.y, 4), round(pos.z, 4)])
 
 
 # ---------------------------------------------------------------------------------------------
@@ -1034,6 +1050,7 @@ def build_all():
     deck_and_balustrade()
     services()
     interior_shell()
+    turret_stair_heads()
     inner_faces()
     emit_bulbs()
 
@@ -1132,7 +1149,7 @@ def quoins(sx, sy):
             # block hugging the corner: extends inward (-dx) along x and (-dy) along y
             x_lo, x_hi = sorted((cx + dx * pr, cx - dx * lx))
             y_lo, y_hi = sorted((cy + dy * pr, cy - dy * ly))
-            cbox(p, (x_lo, y_lo, za), (x_hi, y_hi, zb), c=0.018 if (LOD == 0 and abs(abs(cx) - FHW) < 1e-6) else 0.0, jitter=0.4)
+            cbox(p, (x_lo, y_lo, za), (x_hi, y_hi, zb), c=0.018 if LOD == 0 else 0.0, jitter=0.4)          # v1.2: inner quoins bevelled too
     if sx == 1 and sy == 1:
         note("turret quoins", "S:157437 (light corner strips on the turrets)", "0.55 m courses, 35 mm proud A:")
 
@@ -1336,6 +1353,10 @@ def arch_ring_and_vault():
             ths = [th0 + (th1 - th0) * k / sub for k in range(sub + 1)]
             inner = [ell(t, 0.0)[0] for t in ths]
             outer = [ell(t, ring)[0] for t in ths]
+            # v1.2: the springing voussoirs reach |x| 11.07, i.e. through the turret inner walls into the stair shafts (hidden from
+            # outside behind the turret fronts): clamp every ring point to the shaft face |x| <= 10.50
+            lim = TIN + WALL_T
+            outer = [Vector((max(-lim, min(lim, v.x)), 0, v.z)) for v in outer]
             if is_key:
                 # keystone: straight-sided, wider at the top
                 mid = ell((th0 + th1) / 2, 0)[0]
@@ -1815,6 +1836,175 @@ def interior_shell():
     note("interior shell (slabs, cross walls, shaft floor/ceiling)", "../INTERFACE.md", "contents belong to the interior agent")
 
 
+# ---------------------------------------------------------------------------------------------
+# 5b. Turret heads: head floor slab with the stairwell opening (v1.2, 2026-10-01; INTERFACE change log 1.2)
+# ---------------------------------------------------------------------------------------------
+# The stair cell (../interior, stair_SW) is authored in a cell frame x 0..3.55, y 0..3.5 (x toward the passage wall, y toward
+# the deck) with z = world - 0.15.  The other three turrets are its mirror images: world X = sx * (14.05 - x), Y = sy * (12.55 - y).
+# Head floor = L of the strip along the passage-side wall (x 2.60..3.55) and the strip along the deck-side wall (y 2.55..3.5);
+# the opening x 0..2.60, y 0..2.55 is framed by a riveted steel trimmer (I 250 x 125) along x 2.60 bearing on both end walls and a
+# header along y 2.55 from the outer wall into the trimmer.  75 risers of 200 mm (must match ../interior).
+ST_NR, ST_HEAD, ST_X0 = 75, 15.0, 0.05
+ST_R = ST_HEAD / ST_NR
+ST_OPEN = (0.0, 0.0, 2.60, 2.55)
+ST_LANDING = [(2.60, 0.0), (3.55, 0.0), (3.55, 3.5), (0.0, 3.5), (0.0, 2.55), (2.60, 2.55)]
+ST_SLAB, ST_TRIM_D, ST_TRIM_B = 0.30, 0.25, 0.125
+TURRET_NAMES = {(-1, -1): "SW", (-1, 1): "NW", (1, -1): "SE", (1, 1): "NE"}
+
+
+def st_world(sx, sy):
+    return lambda x, y, z: (sx * (14.05 - x), sy * (12.55 - y), z + 0.15)
+
+
+def stair_steps_cell():
+    """Same plan as ../interior stair_steps(): list of (poly cell xy, z top, kind)."""
+    def rot(p, k):
+        x, y = p[0] - 1.75, p[1] - 1.75
+        for _ in range(k % 4):
+            x, y = -y, x
+        return (x + 1.75 + ST_X0, y + 1.75)
+    out = []
+
+    def quarter(k, ntr, pitch, final=False):
+        y0 = 2.55 - ntr * pitch
+        for i in range(ntr):
+            a, b = y0 + i * pitch, y0 + (i + 1) * pitch
+            out.append(([rot(p, k) for p in ((2.55, a), (3.5, a), (3.5, b), (2.55, b))], (len(out) + 1) * ST_R, "tread"))
+        if final:
+            return
+        P = (2.55, 2.55)
+        for poly in ([P, (3.5, 2.55), (3.5, 3.10)], [P, (3.5, 3.10), (3.5, 3.5), (3.10, 3.5)], [P, (3.10, 3.5), (2.55, 3.5)]):
+            out.append(([rot(p, k) for p in poly], (len(out) + 1) * ST_R, "winder"))
+    quarter(0, 11, 2.55 / 11)
+    for k in range(1, 7):
+        quarter(k, 6, 1.6 / 6)
+    quarter(7, 6, 1.6 / 6, final=True)
+    assert len(out) == ST_NR - 1
+    return out
+
+
+def turret_stair_heads():
+    """Head floor slab + opening + steel framing in every turret (LOD0/1), and a placeholder guard rail round each opening
+    (`stairhead_<turret>`, hidden when that turret's stair cell is loaded; the cell carries the real balustrade)."""
+    if LOD >= 2:
+        return
+    pi, pd, ps = part("inner"), part("deck"), part("iron")
+    x0o, y0o, x1o, y1o = ST_OPEN
+    zs = ST_HEAD - ST_SLAB
+    zb = zs - ST_TRIM_D
+    B = ST_TRIM_B
+    for (sx, sy), nm in TURRET_NAMES.items():
+        T = st_world(sx, sy)
+        mir = sx * sy < 0
+
+        def wbox(p, lo, hi, c=0.0):
+            a, b = T(*lo), T(*hi)
+            cbox(p, tuple(min(u, v) for u, v in zip(a, b)), tuple(max(u, v) for u, v in zip(a, b)), c=c)
+        top = [T(x, y, ST_HEAD) for x, y in ST_LANDING]
+        bot = [T(x, y, zs) for x, y in ST_LANDING]
+        face(pd, top, out=(0, 0, 1))
+        face(pi, bot, out=(0, 0, -1))
+        # opening edge faces (the slab edge along x 2.60 and along y 2.55); outward = into the opening
+        for (a, b, o) in (((x1o, 0.0), (x1o, y1o), (-1, 0)), ((0.0, y1o), (x1o, y1o), (0, -1))):
+            q = [T(a[0], a[1], zs), T(b[0], b[1], zs), T(b[0], b[1], ST_HEAD), T(a[0], a[1], ST_HEAD)]
+            face(pi, q, out=(o[0] * sx * -1, o[1] * sy * -1, 0))
+        # trimmer (x 2.60..2.725, y -0.2..3.7 into the wall pockets) and header (y 2.55..2.675, x -0.2..web)
+        tf, tw = 0.012, 0.008
+        cz = 0.002 if LOD == 0 else 0.0
+        for lo, hi in (((x1o, -0.2, zs - tf), (x1o + B, 3.7, zs)), ((x1o, -0.2, zb), (x1o + B, 3.7, zb + tf)),
+                       ((x1o + B / 2 - tw / 2, -0.2, zb + tf), (x1o + B / 2 + tw / 2, 3.7, zs - tf))):
+            wbox(ps, lo, hi, cz)
+        xe = x1o + B / 2 - tw / 2 - 0.004
+        for lo, hi in (((-0.2, y1o, zs - tf), (xe - 0.06, y1o + B, zs)), ((-0.2, y1o, zb + 0.03), (xe - 0.06, y1o + B, zb + 0.03 + tf)),
+                       ((-0.2, y1o + B / 2 - tw / 2, zb + 0.03 + tf), (xe, y1o + B / 2 + tw / 2, zs - tf))):
+            wbox(ps, lo, hi, cz)
+        for sgn in (-1, 1):                                                   # angle cleats
+            yc = y1o + B / 2 + sgn * tw / 2
+            wbox(ps, (xe - 0.07, min(yc, yc + sgn * 0.008), zb + 0.06), (xe, max(yc, yc + sgn * 0.008), zs - 0.04), cz)
+        # placeholder guard rail round the opening on the head floor (the interior cell replaces it)
+        pr = part("stairhead_" + nm, "iron")
+        rx_, ry_ = x1o + 0.055, y1o + 0.025
+        runs = [((rx_, 0.925), (rx_, ry_)), ((rx_, ry_), (0.03, ry_))]
+        zt = ST_HEAD
+        for (pa, pb) in runs:
+            A = Vector(T(pa[0], pa[1], zt + 0.93))
+            Bv = Vector(T(pb[0], pb[1], zt + 0.93))
+            rod(pr, A, Bv, 0.025, 6 if LOD == 0 else 4)
+            if LOD == 0:
+                rod(pr, Vector(T(pa[0], pa[1], zt + 0.08)), Vector(T(pb[0], pb[1], zt + 0.08)), 0.012, 4)
+                L_ = math.dist(pa, pb)
+                nb = int(L_ / 0.11)
+                for i in range(1, nb):
+                    t = i / nb
+                    px, py = pa[0] + (pb[0] - pa[0]) * t, pa[1] + (pb[1] - pa[1]) * t
+                    rod(pr, Vector(T(px, py, zt + 0.08)), Vector(T(px, py, zt + 0.91)), 0.008, 4)
+        for (px, py) in ((rx_, 0.925), (rx_, ry_)):
+            wbox(pr, (px - 0.045, py - 0.045, zt), (px + 0.045, py + 0.045, zt + 1.2), 0.004 if LOD == 0 else 0.0)
+    note("turret heads: head floor slab with the stairwell opening, riveted steel trimmer + header, placeholder guard rail",
+         "T:fr.268 (stair exits form the turrets) ../INTERFACE.md change log 1.2", "framing and rail form A:; mirrored from the SW stair cell")
+
+
+def stair_collision(coll, parent):
+    """COL_turret_head_floor_<t> (L-shaped head floor, 2 boxes), COL_stair_proxy_<t> (ramp through the nosings of every flight and
+    winder, same plan as the interior stair cell), COL_stairhead_guard_<t> (1.0 m guard along the opening)."""
+    steps = stair_steps_cell()
+    for (sx, sy), nm in TURRET_NAMES.items():
+        T = st_world(sx, sy)
+        mir = sx * sy < 0
+        # head floor: two boxes in one mesh
+        vs, fs = [], []
+        for lo, hi in (((2.60, 0.0, ST_HEAD - ST_SLAB), (3.55, 3.5, ST_HEAD)), ((0.0, 2.55, ST_HEAD - ST_SLAB), (2.60, 3.5, ST_HEAD))):
+            a, b = T(*lo), T(*hi)
+            x0, y0, z0 = (min(a[0], b[0]), min(a[1], b[1]), min(a[2], b[2]))
+            x1, y1, z1 = (max(a[0], b[0]), max(a[1], b[1]), max(a[2], b[2]))
+            k = len(vs)
+            vs += [(x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0), (x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1)]
+            fs += [tuple(k + i for i in f) for f in ((0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7))]
+        me = bpy.data.meshes.new(f"COL_turret_head_floor_{nm}")
+        me.from_pydata(vs, [], fs)
+        o = bpy.data.objects.new(me.name, me)
+        coll.objects.link(o)
+        o.parent = parent
+        o["collision"] = True
+        o.hide_render = True
+        # stair ramp
+        vs, fs = [], []
+        for poly, z, kind in steps:
+            if kind == "tread":
+                pts = [(poly[0], z), (poly[1], z), (poly[2], z + ST_R), (poly[3], z + ST_R)]
+            else:
+                q = poly[1:]
+                pts = [(poly[0], z + ST_R / 2)] + [(p, z + ST_R * i / (len(q) - 1)) for i, p in enumerate(q)]
+            k = len(vs)
+            vs += [T(p[0], p[1], zz) for p, zz in pts]
+            f = tuple(range(k, k + len(pts)))
+            fs.append(f[::-1] if mir else f)
+        me = bpy.data.meshes.new(f"COL_stair_proxy_{nm}")
+        me.from_pydata(vs, [], fs)
+        o = bpy.data.objects.new(me.name, me)
+        coll.objects.link(o)
+        o.parent = parent
+        o["collision"] = True
+        o.hide_render = True
+        # guard along the opening edges (x 2.60..2.70 from y 0.95, y 2.55..2.65 to the outer wall), 1.0 m high
+        col_box_w = []
+        for lo, hi in (((2.60, 0.95, ST_HEAD), (2.70, 2.65, ST_HEAD + 1.0)), ((0.0, 2.55, ST_HEAD), (2.60, 2.65, ST_HEAD + 1.0))):
+            a, b = T(*lo), T(*hi)
+            col_box_w.append((tuple(min(u, v) for u, v in zip(a, b)), tuple(max(u, v) for u, v in zip(a, b))))
+        vs, fs = [], []
+        for (x0, y0, z0), (x1, y1, z1) in col_box_w:
+            k = len(vs)
+            vs += [(x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0), (x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1)]
+            fs += [tuple(k + i for i in f) for f in ((0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7))]
+        me = bpy.data.meshes.new(f"COL_stairhead_guard_{nm}")
+        me.from_pydata(vs, [], fs)
+        o = bpy.data.objects.new(me.name, me)
+        coll.objects.link(o)
+        o.parent = parent
+        o["collision"] = True
+        o.hide_render = True
+
+
 OPENINGS = []
 
 
@@ -1917,7 +2107,7 @@ def passage_floor():
         k = 0
         while yy < FY + 2.0 - 1e-6:
             yl = min(yy + 0.9, FY + 2.0)
-            cbox(pk, (sx0 + 0.003, yy + 0.003, 0.08), (sx1 - 0.003, yl - 0.003, 0.15), skip=("-z",))
+            cbox(pk, (sx0 + 0.003, yy + 0.003, 0.08), (sx1 - 0.003, yl - 0.003, 0.15), c=0.006 if LOD == 0 else 0.0, skip=("-z",))
             yy = yl
     if LOD == 2:
         for sx in (-1, 1):
@@ -1929,6 +2119,9 @@ def passage_floor():
 def build_lod(lod):
     global LOD, WINDOWS, DOORS, LAMPS
     LOD = lod
+    if lod == 0:
+        INSTANCES["bulb"].clear()
+        INSTANCES["baluster"].clear()
     WINDOWS, DOORS, LAMPS = [], [], []
     OPENINGS.clear()
     build_all()
@@ -2042,16 +2235,10 @@ def build_collision(coll, root):
     for sx in (-1, 1):
         a, b = sorted((sx * TIN, sx * (FHW - WALL_T)))
         col_box(coll, root, f"COL_roof_deck_side_{'E' if sx > 0 else 'W'}", (a, -TY0, RG - 0.35), (b, TY0, RG))
-        for sy in (-1, 1):
-            nm = ("N" if sy > 0 else "S") + ("E" if sx > 0 else "W")
-            xa, xb = sorted((sx * 10.5, sx * 14.05))
-            ya, yb = sorted((sy * 9.05, sy * 12.55))
-            # provisional ramp proxy (replace with the interior stair collision)
-            col_ramp(coll, root, f"COL_stair_proxy_{nm}", [(xa, ya, LEVELS['L0']), (xb, ya, LEVELS['L0']), (xb, yb, RG), (xa, yb, RG)])
-            col_box(coll, root, f"COL_turret_head_floor_{nm}", (xa, ya, RG - 0.3), (xb, yb, RG))
     for sx in (-1, 1):
         a, b = sorted((sx * TIN, sx * (TIN + WALL_T)))
         col_box(coll, root, f"COL_passage_wall_{'E' if sx > 0 else 'W'}", (a, -FY, 0.0), (b, FY, ASP))
+    stair_collision(coll, root)
     for fs in (-1, 1):
         a, b = sorted((fs * (SCREEN_Y - WALL_T), fs * SCREEN_Y))
         col_box(coll, root, f"COL_parapet_{'N' if fs > 0 else 'S'}", (-TIN, a, RG), (TIN, b, RG + 1.16))
@@ -2139,7 +2326,7 @@ def main():
     t_uv = time.time() - t0
     print("LOD stats", json.dumps({k: {"tris": v["tris"], "objects": v["objects"]} for k, v in lod_stats.items()}))
     meta = {
-        "version": "tower-base-exterior v1",
+        "version": "tower-base-exterior v1.2",
         "command": "blender -b -P assets-src/shinsekai/tower-base-upgrade/exterior/build-tower-base-exterior.py -- " + " ".join(ARGV),
         "v4Constants": {k: v for k, v in V4.items() if k != "LIFT"},
         "lift": V4.get("LIFT"),
@@ -2148,6 +2335,14 @@ def main():
                           "cc0Texture": (str(TEX / v[3]) if v[3] else None), "tileM": v[4], "source": v[5]} for k, v in MATDEF.items()},
         "parts": parts_meta,
         "timingsS": {"build": round(t_build, 1), "uv1": round(t_uv, 1)},
+        "budgetLOD0": 160000,
+        "instancing": {
+            "note": "LOD0 bulbs and balusters are also baked into TB_EXT_LOD0_bulb / _trim (counted above). For runtime instancing, hide "
+                    "those faces and draw one prototype per placement (world Z-up metres; glTF Y-up = (x, z, -y)).",
+            "bulb": {"prototype": "4-sided bipyramid: lathe (r, z) = (0, -0.06), (0.024, -0.036), (0, 0), apex at the placement",
+                     "trisEach": 8, "count": len(INSTANCES["bulb"]), "positions": INSTANCES["bulb"]},
+            "baluster": {"prototype": "5-sided turned baluster, profile (r, z/0.72 of height) = (0.075,0),(0.045,0.1),(0.075,0.34),(0.045,0.5),(0.042,0.6),(0.075,0.72), scaled to the height",
+                         "trisEach": 50, "count": len(INSTANCES["baluster"]), "placements[x, y, zBase, height]": INSTANCES["baluster"]}},
         "replacesInV4": ["tower study - provisional pale masonry", "tower study - dark unglazed opening", "roof_garden_deck",
                          "tower study - provisional trim: faces below z 16.6 and turret crowns/domes (|x|>9 or |y|>9, z<23)",
                          "tower study - provisional dark iron: turret finials (|x|>9, z<23)"],

@@ -14,7 +14,7 @@ Period rule: 1912 Osaka, no fluorescent light / AC / CRT.  Items marked (+) in n
 import bpy, bmesh, math, random, sys, os, time, json
 from contextlib import contextmanager
 from pathlib import Path
-from mathutils import Matrix, Vector, Euler, geometry
+from mathutils import Matrix, Vector, Euler, Quaternion, geometry
 import numpy as np
 
 
@@ -44,6 +44,7 @@ SCALE = arg("--scale", 1.0, float)
 ITER = arg("--iter", 1, int)
 REGEN = flag("--regen-tex")
 ONLYCAM = arg("--cam", "")
+GATE_RENDERS = flag("--gate-renders")
 RNG = random.Random(1912)
 NPR = np.random.default_rng(1912)
 D2R = math.pi / 180.0
@@ -74,6 +75,8 @@ class Cell:
         self.pivots = {}
         self.col = []
         self.env = {}
+        self.gates = []          # KinGate instances (articulated parts, clips)
+        self.anims = {}
 
     @contextmanager
     def at(self, loc=(0, 0, 0), rx=0.0, ry=0.0, rz=0.0, s=1.0, m=None):
@@ -950,6 +953,121 @@ def realize(cell, offset, do_uv1=False):
 
 
 # ======================================================================================================================
+# articulated parts: rivet empties, kinematic extras, NLA clips (exported as named glTF animations), render poses
+# ======================================================================================================================
+def rig_cell(cell, coll, root):
+    if not cell.gates:
+        return
+    sc = bpy.context.scene
+    sc.render.fps = GATE_FPS
+    info = {}
+    for gate in cell.gates:
+        fr = gate.frames()
+        M3 = gate.M3
+        info[gate.key] = dict(clips=[f"{gate.key}_open", f"{gate.key}_close"], seconds=GATE_T, fps=GATE_FPS, cells=gate.N,
+                              widthClosed=gate.wmax, widthOpen=gate.wmin, widthRest=gate.wrest, strapHalfLength=GATE_L,
+                              bands=list(gate.bands), rule="pitch s = W/N, strap angle = acos(s / 2l); straps turn about their picket rivet")
+        for g, p in gate.parts.items():
+            ob = bpy.data.objects.get(f"{cell.name}__{g}")
+            if ob is None:
+                print("RIG missing", g)
+                continue
+            ob.rotation_mode = "QUATERNION"
+            ob["kin"] = json.dumps({k: v for k, v in p.items() if k in ("kind", "i", "b", "lay")})
+            pins = {pn: tuple(M3 @ Vector(off)) for pn, off in p.get("pins", {}).items()}
+            if p["kind"] == "strap" and p["lay"] == "A":
+                for pn, off in pins.items():
+                    e = bpy.data.objects.new(f"{cell.name}__{gate.key}_{pn}", None)
+                    e.empty_display_size = 0.012
+                    coll.objects.link(e)
+                    e.parent = ob
+                    e.location = off
+                    e["rivet"] = pn
+            elif pins:
+                ob["pin_local"] = json.dumps({pn: [round(x, 6) for x in v] for pn, v in pins.items()})
+            if p["kind"] in ("latch", "roller"):
+                e = bpy.data.objects.new(f"{cell.name}__{gate.key}_{'latch_pin' if p['kind'] == 'latch' else 'axle%d' % p['i']}", None)
+                e.empty_display_size = 0.012
+                coll.objects.link(e)
+                e.parent = ob
+                e["rivet"] = "pivot"
+            rest_loc = Vector(ob.location)
+            ad = ob.animation_data_create()
+            for clip, keys in fr[g].items():
+                act = bpy.data.actions.new(f"{cell.name}__{g}__{clip}")
+                ad.action = act
+                for (f, loc, (axis, ang)) in keys:
+                    ob.location = loc
+                    ob.rotation_quaternion = Quaternion(axis, ang)
+                    ob.keyframe_insert("location", frame=f)
+                    ob.keyframe_insert("rotation_quaternion", frame=f)
+                ad.action = None
+                tr = ad.nla_tracks.new()
+                tr.name = clip
+                tr.strips.new(clip, 0, act)
+                tr.mute = True
+            ob.location = rest_loc
+            ob.rotation_quaternion = Quaternion()
+    root["gates"] = json.dumps(info)
+
+
+def pose_gate(cell, gate, W, latch=0.0):
+    for g, (loc, (axis, ang)) in gate.pose(W, latch).items():
+        ob = bpy.data.objects.get(f"{cell.name}__{g}")
+        if ob is not None:
+            ob.location = loc
+            ob.rotation_quaternion = Quaternion(axis, ang)
+
+
+def render_gate_states(cell, coll, outdir):
+    """Gate closeups at closed / half / open (1280x720): each gate is posed through the same kinematics as its clips; the other
+    gate stays at its rest pose."""
+    sc = bpy.context.scene
+    outdir.mkdir(parents=True, exist_ok=True)
+    for c_ in bpy.data.collections:
+        c_.hide_render = c_ is not coll
+    setup_render(getattr(cell, "env", {}), SAMPLES)
+    root = bpy.data.objects["cell_" + cell.name]
+    cams = {"car_gate": ((2.72, 0.98, 1.50), (2.02, 1.60, 1.12), 26), "landing_gate": ((2.62, 0.52, 1.48), (1.92, 1.43, 1.12), 24)}
+    for gate in cell.gates:
+        for other in cell.gates:
+            pose_gate(cell, other, other.wrest)
+        loc, tgt, lens = cams[gate.key]
+        dz = 0.45 if (cell.dream and gate.key == "car_gate") else 0.0
+        cd = bpy.data.cameras.new("gatecam")
+        cd.lens, cd.sensor_width, cd.clip_start = lens, 36, 0.02
+        co = bpy.data.objects.new("gatecam_" + gate.key, cd)
+        coll.objects.link(co)
+        co.parent = root
+        co.location = (loc[0], loc[1], loc[2] + dz)
+        co.rotation_euler = (Vector(tgt) - Vector(loc)).to_track_quat("-Z", "Y").to_euler()
+        sc.camera = co
+        for state, W, la in (("closed", gate.wmax, 0.0), ("half", 0.5 * (gate.wmax + gate.wmin), GATE_LATCH_LIFT * D2R), ("open", gate.wmin, 0.0)):
+            pose_gate(cell, gate, W, la)
+            bpy.context.view_layer.update()
+            sc.view_settings.exposure = cell.env.get("exposure", 0.0)
+            pth = outdir / f"{cell.name}_gate_{gate.key}_{state}.png"
+            sc.render.filepath = str(pth)
+            t0 = time.time()
+            bpy.ops.render.render(write_still=True)
+            print(f"RENDER {pth.name} {time.time() - t0:.1f}s", flush=True)
+        pose_gate(cell, gate, gate.wrest)
+
+
+def write_stair_plan(cell):
+    """stair-plan.json: every step polygon (cell coords, Z-up), its tread height, walking samples, the head landing and the
+    opening, plus the cell->world transform, so the runtime and the ray check use the same numbers."""
+    steps = cell.stair_steps
+    out = dict(version="v1.2", risers=ST_NR, riser=ST_R, headZ=ST_HEAD, cellToWorld="world = cell + (-14.05, -12.55, +0.15)",
+               opening=ST_OPEN, headLanding=ST_LANDING, slab=ST_SLAB, trimmerDepth=ST_TRIM_D,
+               doors={"stairhead": {"wall": "y 3.5", "x": [1.075, 2.475], "z": [15.0, 17.5]},
+                      "liftTransfer": {"wall": "x 3.55", "y": [0.85, 2.65], "z": [15.0, 17.75]}},
+               steps=[dict(n=s["n"], kind=s["kind"], quarter=s["k"], z=round(s["z"], 4), poly=[[round(a, 4), round(b, 4)] for a, b in s["poly"]],
+                           walk={k: [round(v[0], 4), round(v[1], 4)] for k, v in st_walk_samples(s).items()}) for s in steps])
+    (HERE / "stair-plan.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
+
+
+# ======================================================================================================================
 # render
 # ======================================================================================================================
 def setup_render(env, samples):
@@ -1035,7 +1153,8 @@ def export_glb(path):
         c_.hide_render = False
     kw = dict(filepath=str(path), export_format="GLB", export_apply=False, export_cameras=True, export_lights=True,
               export_extras=True, export_yup=True, export_texcoords=True, export_normals=True, export_materials="EXPORT",
-              export_image_format="AUTO", export_attributes=False)
+              export_image_format="AUTO", export_attributes=False, export_animations=True,
+              export_animation_mode="NLA_TRACKS", export_force_sampling=True, export_optimize_animation_size=False)
     if not flag("--no-draco"):
         kw.update(export_draco_mesh_compression_enable=True, export_draco_mesh_compression_level=6, export_draco_position_quantization=14,
                   export_draco_normal_quantization=10, export_draco_texcoord_quantization=12, export_draco_color_quantization=8,
@@ -1466,7 +1585,7 @@ def muntin_grid(c, mat, u0, u1, v0, v1, cols, rows, w0, th=0.022, dp=0.03):
 
 
 def arched_window(c, wall_plane_x, yc, w=1.3, sill=0.9, spring=3.1, wall=0.5, frame_mat="paint_cream", curtain=True, M=None,
-                  dirt=True, glass_mat="glass", sun_ref=False):
+                  dirt=True, glass_mat="glass", sun_ref=False, inner_trim=True):
     """Deep-reveal arched sash window with muntins and a tie-back curtain in a YZ wall (plane at x=wall_plane_x, wall
     extends to -x by `wall`).  Local frame: u=y, v=z, w=x.  Glass sits 4 cm behind the frame face (detail-spec s1)."""
     rise = w / 2
@@ -1497,15 +1616,19 @@ def arched_window(c, wall_plane_x, yc, w=1.3, sill=0.9, spring=3.1, wall=0.5, fr
             box(c, "brass", (-0.03, -0.006, 0), (0.03, 0.006, 0.012), r=0.002)
             with c.at((0.0, 0.0, 0.012)):
                 cyl(c, "brass", 0.0045, 0.008, 8)
-        # inner architrave (room side) + moulded outer ring
-        arch_ring(c, frame_mat, u0, u1, spring, rise, sill, 0.12, 0.028, -0.005)
-        arch_ring(c, frame_mat, u0, u1, spring, rise, sill, 0.075, 0.02, 0.020)
-        # stone sill with drip edge, projecting into the room (apron below)
-        box(c, "sandstone", (u0 - 0.10, sill - 0.06, -wall - 0.02), (u1 + 0.10, sill, 0.07), r=0.008)
-        box(c, "sandstone", (u0 - 0.06, sill - 0.20, -0.005), (u1 + 0.06, sill - 0.06, 0.03), r=0.006)
-        # keystone
-        with c.at(((u0 + u1) / 2, spring + rise + 0.10, 0.0)):
-            extrude(c, "sandstone", [(-0.07, -0.05), (0.07, -0.05), (0.09, 0.09), (-0.09, 0.09)], (), depth=0.03, w0=0.0)
+        if inner_trim:
+            # inner architrave (room side) + moulded outer ring
+            arch_ring(c, frame_mat, u0, u1, spring, rise, sill, 0.12, 0.028, -0.005)
+            arch_ring(c, frame_mat, u0, u1, spring, rise, sill, 0.075, 0.02, 0.020)
+            # stone sill with drip edge, projecting into the room (apron below)
+            box(c, "sandstone", (u0 - 0.10, sill - 0.06, -wall - 0.02), (u1 + 0.10, sill, 0.07), r=0.008)
+            box(c, "sandstone", (u0 - 0.06, sill - 0.20, -0.005), (u1 + 0.06, sill - 0.06, 0.03), r=0.006)
+            # keystone
+            with c.at(((u0 + u1) / 2, spring + rise + 0.10, 0.0)):
+                extrude(c, "sandstone", [(-0.07, -0.05), (0.07, -0.05), (0.09, 0.09), (-0.09, 0.09)], (), depth=0.03, w0=0.0)
+        else:
+            # a flight crosses this window: stone sill only inside the reveal (flush with the wall face), no room-side trim
+            box(c, "sandstone", (u0, sill - 0.04, -wall + 0.02), (u1, sill, -0.004), r=0.006)
     if dirt:      # rain-streak grime below the sill on the inside (dust) is subtle; put a decal on the wall face
         with c.at(m=M_YZ(wall_plane_x)):
             pass
@@ -2144,20 +2267,36 @@ def build_hall(dream=False):
 
 
 # ======================================================================================================================
-# ROOM 2 - TURRET STAIR SW  (INTERFACE.md `stair_SW`: world x -14.05..-10.55, y -12.55..-9.05, z 0.15..19.20)
-#   Cell frame: x 0..3.5, y 0..3.5, z 0..19.05 (cell = world + (14.05, 12.55, -0.15)); walls 0.45 outside the box.
-#   84 risers of 178.6 mm (15.0 m rise ground -> head floor = roof-garden deck 15.15 world).  T: 「各二個の階段ありて塔上に誘ふ」 /
-#   「階段の昇降口自ら四隅の小塔を為す」 (fr.268).  A: winder-cornered square newel stair around a 1.6 m eyewell; the first
-#   flight is a steep-ish 14-riser run up the east strip so that every later flight passes >= 2.5 m above the two ground
-#   doors (hall door x 1.15-2.35 north wall, street door south wall).  Rotation is counter-clockwise seen from above.
-#   Openings (INTERFACE): hall door N wall z 0..2.45, street door S wall z 0..2.55 (150 mm step), windows S and W faces
-#   (w 1.0, sill/head 5.65/7.45, 9.15/10.85, 12.55/14.25; head T4 paired 0.8 at 15.95/18.25), stair-head door N wall
-#   (1.4 wide, z 15.0..17.5) and lift-transfer door E wall (1.8 wide, z 15.0..17.75).
-#   Story: the cleaner stopped mid-sweep on the landing: broom leaning on the rail, a dustpan with a heap, a bucket and a wet
-#   stripe down three steps.  Over-abundance: a string of pendant bulbs hanging down the eyewell to the ground.
+# ROOM 2 - TURRET STAIR SW  (INTERFACE.md `stair_SW`: world x -14.05..-10.50, y -12.55..-9.05, z 0.15..19.20)
+#   Cell frame: x 0..3.55, y 0..3.5, z 0..19.05 (cell = world + (14.05, 12.55, -0.15)); walls 0.45 outside the box.
+#   v1.2 (2026-10-01, Codex review 109): 75 risers of 200 mm (15.0 m rise ground -> head floor = roof-garden deck 15.15 world),
+#   going 267 mm on the side flights (2R+G 667 mm), 232 mm on the first flight.  The v1 stair (84 x 178.6 mm) ended with a
+#   flight up the east strip that ran under the head floor (headroom 1.75 -> 0.14 m); v1.2 ends with a straight flight up the
+#   south strip that arrives on a proper head landing: the L of the east strip + north strip at z 15.0, which carries the lift
+#   transfer door (east wall, y 0.85..2.65) and the stair-head door (north wall, x 1.075..2.475) with full thresholds.
+#   Stairwell opening in the head floor: cell x 0..2.60, y 0..2.55 (eyewell + west strip + SW corner + south strip), framed by a
+#   steel trimmer along x 2.60 (south wall -> north wall) and a header along y 2.55 (west wall -> trimmer) under a 0.30 m slab
+#   (exterior owns slab + steel; the interior owns finishes, nosings, fascia and the balustrade round the opening).
+#   T: 「各二個の階段ありて塔上に誘ふ」 / 「階段の昇降口自ら四隅の小塔を為す」 (fr.268).  A: winder-cornered square newel stair around a
+#   1.6 m eyewell, first flight up the east strip (14 risers) so later flights pass >= 2.5 m over the two ground doors.
+#   Openings (INTERFACE): hall door N wall z 0..2.45, street door S wall z 0..2.55, windows S and W faces (w 1.0, sill/head
+#   5.65/7.45, 9.15/10.85, 12.55/14.25; T4 paired 0.8 at 15.95/18.25), stair-head door N wall (1.4 wide, z 15.0..17.5) and lift
+#   transfer door E wall (1.8 wide, z 15.0..17.75).  Where a flight crosses an L1-L3 window the inner trim is omitted.
+#   Story: the cleaner stopped mid-sweep and went out onto the roof garden: broom leaning in the dead-end corner of the head
+#   landing, dustpan with a heap, bucket, and a wet stripe down the top three treads.  Over-abundance: a string of pendant bulbs
+#   hanging down the eyewell to the ground.
 # ======================================================================================================================
-ST_W, ST_R, ST_NSTEP, ST_HEAD = 3.5, 15.0 / 84.0, 84, 15.0
+ST_NR = 75                                   # risers
+ST_W, ST_HEAD = 3.5, 15.0
+ST_R = ST_HEAD / ST_NR                       # 0.200 m
 ST_H = 19.05
+ST_X0 = 0.05                                 # the 3.5 m stair square sits at cell x 0.05..3.55 (5 cm timber gap on the west wall)
+ST_WX, ST_WY = 3.55, 3.5
+ST_OPEN = (0.0, 0.0, 2.60, 2.55)             # stairwell opening in the head floor, cell (x0, y0, x1, y1)
+ST_SLAB = 0.30                               # head floor slab (exterior), soffit at 14.70
+ST_TRIM_D, ST_TRIM_B = 0.25, 0.125           # steel trimmer / header: depth below the soffit, flange width
+ST_LANDING = [(2.60, 0.0), (3.55, 0.0), (3.55, 3.5), (0.0, 3.5), (0.0, 2.55), (2.60, 2.55)]   # head landing (L), z 15.0
+ST_RAIL = 0.95                               # landing guard height
 
 
 def rot_pt(p, k, cx=1.75, cy=1.75):
@@ -2167,57 +2306,149 @@ def rot_pt(p, k, cx=1.75, cy=1.75):
     return (x + cx, y + cy)
 
 
+def st_pt(x, y, k):
+    """Template point (x, y) of quarter k -> cell coordinates."""
+    q = rot_pt((x, y), k)
+    return (q[0] + ST_X0, q[1])
+
+
 def stair_steps():
-    """Return list of (n, polygon [(x,y)..] in plan, z_top, kind) for steps 1..83 (84 = head landing)."""
+    """Steps 1..74 as dicts: n, poly [(x, y)] in cell coords, z (tread top), kind tread|winder, k (quarter), and for treads the
+    template y-range ty0..ty1 (template: east strip x 2.55..3.5, travel +y).  Step 75 is the head landing (z 15.0)."""
     steps = []
-    n = 0
-    # quarter 0: east strip, 11 treads to y=2.55 then 3 winders; later quarters: 6 treads + 3 winders, rotated by 90 deg * k
+
+    def emit(poly, kind, k, ty=None):
+        n = len(steps) + 1
+        d = dict(n=n, poly=[st_pt(x, y, k) for (x, y) in poly], z=n * ST_R, kind=kind, k=k, tpl=poly)
+        if ty:
+            d["ty0"], d["ty1"] = ty
+        steps.append(d)
+
     def quarter(k, ntr, pitch, final=False):
-        nonlocal n
         y0 = 2.55 - ntr * pitch
         for i in range(ntr):
-            n += 1
-            poly = [(2.55, y0 + i * pitch), (3.5, y0 + i * pitch), (3.5, y0 + (i + 1) * pitch), (2.55, y0 + (i + 1) * pitch)]
-            steps.append((n, [rot_pt(p, k) for p in poly], n * ST_R, "tread", k))
+            a, b = y0 + i * pitch, y0 + (i + 1) * pitch
+            emit([(2.55, a), (3.5, a), (3.5, b), (2.55, b)], "tread", k, (a, b))
         if final:
             return
         P = (2.55, 2.55)
-        w = [[P, (3.5, 2.55), (3.5, 3.10)],
-             [P, (3.5, 3.10), (3.5, 3.5), (3.10, 3.5)],
-             [P, (3.10, 3.5), (2.55, 3.5)]]
-        for poly in w:
-            n += 1
-            steps.append((n, [rot_pt(p, k) for p in poly], n * ST_R, "winder", k))
+        for poly in ([P, (3.5, 2.55), (3.5, 3.10)], [P, (3.5, 3.10), (3.5, 3.5), (3.10, 3.5)], [P, (3.10, 3.5), (2.55, 3.5)]):
+            emit(poly, "winder", k)
+
     quarter(0, 11, 2.55 / 11)
-    for k in range(1, 8):
+    for k in range(1, 7):
         quarter(k, 6, 1.6 / 6)
-    quarter(8, 6, 1.6 / 6, final=True)
+    quarter(7, 6, 1.6 / 6, final=True)            # the final flight: south strip, heading east, onto the head landing
+    assert len(steps) == ST_NR - 1
     return steps
+
+
+def _pip(p, poly):
+    x, y = p
+    ins = False
+    for i in range(len(poly)):
+        (x0, y0), (x1, y1) = poly[i], poly[(i + 1) % len(poly)]
+        if (y0 > y) != (y1 > y) and x < x0 + (y - y0) * (x1 - x0) / (y1 - y0):
+            ins = not ins
+    return ins
+
+
+def st_top_below(steps, x, y, zmax):
+    """Highest walking surface (tread, head landing or ground) at plan point (x, y) not above zmax."""
+    best = 0.0
+    for s in steps:
+        if s["z"] <= zmax + 1e-6 and s["z"] > best and _pip((x, y), s["poly"]):
+            best = s["z"]
+    if ST_HEAD <= zmax + 1e-6 and _pip((x, y), ST_LANDING):
+        best = ST_HEAD
+    return best
+
+
+def st_walk_samples(s):
+    """Walking-line samples for a step (cell x, y): centre + both edges of the clear width (inner rail line + 0.10, wall rail - 0.08).
+    Treads: at mid-going.  Winders: along the bisector at radii 0.30 / 0.475 / 0.80 (kite 0.95) from the newel pivot."""
+    k = s["k"]
+    if s["kind"] == "tread":
+        ym = (s["ty0"] + s["ty1"]) / 2
+        return {"inner": st_pt(2.575 + 0.10, ym, k), "centre": st_pt(3.025, ym, k), "outer": st_pt(3.44 - 0.017 - 0.08, ym, k)}
+    P = s["tpl"][0]
+    q = s["tpl"][1:]
+    a0 = math.atan2(q[0][1] - P[1], q[0][0] - P[0])
+    a1 = math.atan2(q[-1][1] - P[1], q[-1][0] - P[0])
+    am = (a0 + a1) / 2
+    far = 0.95 if len(q) == 3 else 0.80
+    out = {}
+    for nm, r in (("inner", 0.30), ("centre", 0.475), ("outer", far)):
+        out[nm] = st_pt(P[0] + r * math.cos(am), P[1] + r * math.sin(am), k)
+    return out
 
 
 def pendant_string(c, z_top, n=22, seed=3):
     """Over-abundance: a chain of pendant bulbs of many heights hanging in the eyewell down to the ground floor."""
     rr = random.Random(seed)
     for i in range(n):
-        x = 1.75 + rr.uniform(-0.55, 0.55)
+        x = 1.75 + ST_X0 + rr.uniform(-0.55, 0.55)
         y = 1.75 + rr.uniform(-0.55, 0.55)
         z = z_top - 0.5 - i * (z_top - 1.7) / n
         with c.at((x, y, z + 0.9)):
             pendant(c, 0.9, r=0.10, real_light=(i % 4 == 0), name="well%d" % i, watt=45, rose=False)
 
 
+def st_head_structure(c, slab_mat="plaster_ceil", steel_mat="iron", rivets=True):
+    """The head floor as the exterior builds it (render stand-in): 0.30 m slab with the stairwell opening, a riveted steel trimmer
+    (I 250 x 125) along x 2.60 bearing on the S and N walls, a header along y 2.55 from the W wall framing into the trimmer with
+    angle cleats.  Bottom flanges at z 14.45, visible from the stair."""
+    x0, y0, x1, y1 = ST_OPEN
+    zt, zs = ST_HEAD, ST_HEAD - ST_SLAB
+    zb = zs - ST_TRIM_D
+    extrude(c, slab_mat, ST_LANDING, (), depth=ST_SLAB, w0=zs)
+    tf, tw = 0.012, 0.008
+    # trimmer along x = x1 (flange x1..x1+B), y from -0.2 (wall pocket) to WY + 0.2
+    B = ST_TRIM_B
+    for (lo, hi) in (((x1, -0.2, zs - tf), (x1 + B, ST_WY + 0.2, zs)), ((x1, -0.2, zb), (x1 + B, ST_WY + 0.2, zb + tf)),
+                     ((x1 + B / 2 - tw / 2, -0.2, zb + tf), (x1 + B / 2 + tw / 2, ST_WY + 0.2, zs - tf))):
+        box(c, steel_mat, lo, hi, r=0.002)
+    # header along y = y1 (flange y1..y1+B), x from -0.2 (wall pocket) to the trimmer web
+    xe = x1 + B / 2 - tw / 2 - 0.004
+    for (lo, hi) in (((-0.2, y1, zs - tf), (xe - 0.06, y1 + B, zs)), ((-0.2, y1, zb + 0.03), (xe - 0.06, y1 + B, zb + 0.03 + tf)),
+                     ((-0.2, y1 + B / 2 - tw / 2, zb + 0.03 + tf), (xe, y1 + B / 2 + tw / 2, zs - tf))):
+        box(c, steel_mat, lo, hi, r=0.002)
+    # angle cleats (header web -> trimmer web) with rivets
+    for sgn in (-1, 1):
+        yc = y1 + B / 2 + sgn * (tw / 2 + 0.004)
+        box(c, steel_mat, (xe - 0.07, min(yc, yc + sgn * 0.008), zb + 0.06), (xe, max(yc, yc + sgn * 0.008), zs - 0.04), r=0.001)
+        if rivets:
+            for zz in (zb + 0.09, zs - 0.07):
+                with c.at((xe - 0.04, yc + sgn * 0.008, zz), rx=-90 * sgn):
+                    lathe(c, steel_mat, [(0, 0), (0.009, 0), (0.008, 0.003), (0.004, 0.006), (0, 0.0065)], 8, True)
+    if rivets:                                      # flange rivets along the trimmer and header soffits
+        for i in range(12):
+            yy = 0.15 + i * (ST_WY - 0.3) / 11
+            for dx in (0.03, B - 0.03):
+                with c.at((x1 + dx, yy, zb), rx=180):
+                    lathe(c, steel_mat, [(0, 0), (0.008, 0), (0.007, 0.003), (0.0035, 0.0055), (0, 0.006)], 6, True)
+        for i in range(8):
+            xx = 0.15 + i * (xe - 0.3) / 7
+            for dy in (0.03, B - 0.03):
+                with c.at((xx, y1 + dy, zb + 0.03), rx=180):
+                    lathe(c, steel_mat, [(0, 0), (0.008, 0), (0.007, 0.003), (0.0035, 0.0055), (0, 0.006)], 6, True)
+
+
 def build_stair(dream=False):
     c = Cell("stair_dream" if dream else "stair", dream)
-    WX, WY = 3.55, 3.5                              # INTERFACE v1.1 clear plan 3.55 x 3.50; the 3.5 m stair square sits at x 0.05..3.55
+    rs = random.Random("stair-dream" if dream else "stair")
+    WX, WY = ST_WX, ST_WY                            # INTERFACE v1.1 clear plan 3.55 x 3.50
     W = WY
     c.lod = 0
-    c.goff = {n: (0.05, 0, 0) for n in ("stair", "pendants", "props", "var_fire_buckets", "lobby", "dream")}
     c.env = dict(exposure=1.2 if not dream else 1.6, sun_elev=38, sun_rot=230, sky=0.5, glare_thr=0.9)
     sun_dir = Vector((0.55, 0.62, -0.56)).normalized()
     c.light("sun", "sun", Vector((1.75, 1.0, 6.0)) - sun_dir * 40, color=(255, 232, 196) if not dream else (255, 210, 190),
             watt=26.0, size=1.0, target=(1.75, 1.0, 6.0))
     tw = 0.45
     CXW, CYW = 1.775, 1.75                          # turret centre: x on the S wall, y on the W wall
+    steps = stair_steps()
+    c.stair_steps = steps
+    x0o, y0o, x1o, y1o = ST_OPEN
 
     def win_holes(cx):
         out = []
@@ -2232,24 +2463,31 @@ def build_stair(dream=False):
 
     with c.grp("shell_finish"):                                             # exported: floor finishes + ceiling skin inside the clear box
         c.face([(0, 0, 0.003), (WX, 0, 0.003), (WX, WY, 0.003), (0, WY, 0.003)], "stone_floor", uv=[(0, 0), (WX / 1.2, 0), (WX / 1.2, WY / 1.2), (0, WY / 1.2)])
-        with c.at(m=Matrix.Translation((0, 0, ST_HEAD + 0.001))):
-            extrude(c, "boards", rect_pts(0, 0, WX, WY), [rect_pts(1.0, 0.95, 2.6, 2.55)], depth=0.004)
+        with c.at(m=Matrix.Translation((0, 0, ST_HEAD + 0.001))):          # head landing boards (L), the opening is x 0..2.60, y 0..2.55
+            extrude(c, "boards", ST_LANDING, (), depth=0.004)
         c.face([(0, 0, ST_H - 0.003), (0, WY, ST_H - 0.003), (WX, WY, ST_H - 0.003), (WX, 0, ST_H - 0.003)], "plaster_ceil")
-    with c.grp("ref_shell"):                                                # walls + slabs are drawn by the exterior (INTERFACE); render-only
-        with c.at(m=Matrix.Translation((0, 0, 0))):
-            extrude(c, "stone_floor", rect_pts(-tw, -tw, WX + tw, WY + tw), (), depth=0.30, w0=-0.30, caps=True)
-        with c.at(m=Matrix.Translation((0, 0, ST_HEAD - 0.25))):
-            extrude(c, "boards", rect_pts(0, 0, WX, WY), [rect_pts(1.0, 0.95, 2.6, 2.55)], depth=0.25)
+    with c.grp("ref_shell"):                                                # walls + slabs + steel are drawn by the exterior (INTERFACE); render-only
+        extrude(c, "stone_floor", rect_pts(-tw, -tw, WX + tw, WY + tw), (), depth=0.30, w0=-0.30, caps=True)
+        st_head_structure(c)
         box(c, "plaster_ceil", (-tw, -tw, ST_H), (WX + tw, WY + tw, ST_H + 0.3), r=0)
         wallXZ(c, "plaster", -tw, WX + tw, -0.3, ST_H + 0.3, -tw, 0.0, holes=[rect_pts(CXW - 0.6, 0.0, CXW + 0.6, 2.55)] + win_holes(CXW))
         wallYZ(c, "plaster", -tw, WY + tw, -0.3, ST_H + 0.3, -tw, 0.0, holes=win_holes(CYW) + [l0_hole(CYW)])
         wallXZ(c, "plaster", -tw, WX + tw, -0.3, ST_H + 0.3, WY, WY + tw, holes=[rect_pts(CXW - 0.6, 0.0, CXW + 0.6, 2.45), rect_pts(CXW - 0.7, ST_HEAD, CXW + 0.7, 17.5)])
         wallYZ(c, "plaster", -tw, WY + tw, -0.3, ST_H + 0.3, WX, WX + tw, holes=[rect_pts(0.85, ST_HEAD, 2.65, 17.75), l0_hole(CYW)])
+    # collision: ground floor, head landing (L) and a ramp through the nosings of every flight / winder fan
     c.col.append([(0, 0, 0), (WX, 0, 0), (WX, WY, 0), (0, WY, 0)])
-    c.col.append([(0, 0, ST_HEAD), (WX, 0, ST_HEAD), (WX, 0.95, ST_HEAD), (0, 0.95, ST_HEAD)])
-    c.col.append([(0, 2.55, ST_HEAD), (WX, 2.55, ST_HEAD), (WX, WY, ST_HEAD), (0, WY, ST_HEAD)])
-    c.col.append([(0, 0.95, ST_HEAD), (1.0, 0.95, ST_HEAD), (1.0, 2.55, ST_HEAD), (0, 2.55, ST_HEAD)])
-    c.col.append([(2.6, 0.95, ST_HEAD), (WX, 0.95, ST_HEAD), (WX, 2.55, ST_HEAD), (2.6, 2.55, ST_HEAD)])
+    c.col.append([(2.60, 0.0, ST_HEAD), (WX, 0.0, ST_HEAD), (WX, WY, ST_HEAD), (2.60, WY, ST_HEAD)])
+    c.col.append([(0.0, 2.55, ST_HEAD), (2.60, 2.55, ST_HEAD), (2.60, WY, ST_HEAD), (0.0, WY, ST_HEAD)])
+    for s in steps:
+        k = s["k"]
+        if s["kind"] == "tread":
+            # nosing ramp: front edge at the step's own nosing (z), back edge at the next nosing (z + R)
+            (a, b, cc, d) = s["poly"]
+            c.col.append([(a[0], a[1], s["z"]), (b[0], b[1], s["z"]), (cc[0], cc[1], s["z"] + ST_R), (d[0], d[1], s["z"] + ST_R)])
+        else:
+            P, q = s["poly"][0], s["poly"][1:]
+            pts = [(P[0], P[1], s["z"] + ST_R * 0.5)] + [(p[0], p[1], s["z"] + ST_R * i / (len(q) - 1)) for i, p in enumerate(q)]
+            c.col.append(pts)
 
     with c.grp("ref_outside"):
         box(c, "sandstone", (-60, -60, -1.0), (60, 60, -0.31), r=0)
@@ -2259,47 +2497,42 @@ def build_stair(dream=False):
             extrude(c, "sandstone", rect_pts(-tw, 0, WY + tw, ST_H + 0.3), win_holes(CYW) + [l0_hole(CYW)], depth=0.02)
 
     # ---------- windows (S and W faces, L0 windows on W and E) ----------
+    # L1-L3 and the east L0 window are crossed by flights: their inner architrave, sill and keystone are left off (reveal only)
     Mflip = Matrix(((0, 0, -1, WX), (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 0, 1)))        # E-face frame: room on -x
     with c.grp("windows"):
-        for (s, h) in ((5.65, 7.45), (9.15, 10.85), (12.55, 14.25)):
-            arched_window(c, 0.0, CYW, 1.0, s, h - 0.5, tw, curtain=False)
-            arched_window(c, 0.0, CXW, 1.0, s, h - 0.5, tw, curtain=False, M=M_XZ(0.0))
+        for (s_, h_) in ((5.65, 7.45), (9.15, 10.85), (12.55, 14.25)):
+            arched_window(c, 0.0, CYW, 1.0, s_, h_ - 0.5, tw, curtain=False, inner_trim=False)
+            arched_window(c, 0.0, CXW, 1.0, s_, h_ - 0.5, tw, curtain=False, M=M_XZ(0.0), inner_trim=False)
         for dx in (-0.5, 0.5):
             arched_window(c, 0.0, CYW + dx, 0.8, 15.95, 18.25 - 0.4, tw, curtain=False)
             arched_window(c, 0.0, CXW + dx, 0.8, 15.95, 18.25 - 0.4, tw, curtain=False, M=M_XZ(0.0))
         arched_window(c, 0.0, CYW, 0.9, 1.35, 3.15 - 0.45, tw, curtain=False)
-        arched_window(c, 0.0, CYW, 0.9, 1.35, 3.15 - 0.45, tw, curtain=False, M=Mflip)
-    with c.grp("ref_doors"):                                   # leaves of exterior doors belong to the exterior (INTERFACE v1.1); shown for renders only
+        arched_window(c, 0.0, CYW, 0.9, 1.35, 3.15 - 0.45, tw, curtain=False, M=Mflip, inner_trim=False)
+    with c.grp("ref_doors"):                                   # leaves of exterior doors belong to the exterior (INTERFACE v1.1); render-only, closed as built
         with c.at((CXW - 0.6, -0.10, 0.0)):
             door_leaf(c, 1.2, 2.55)
-        with c.at((CXW - 0.7, WY + 0.0, ST_HEAD), rz=-45):
-            door_leaf(c, 1.4, 2.5)
-        with c.at((WX + 0.02, 0.85, ST_HEAD), rz=90):
-            door_leaf(c, 0.9, 2.75)
-        with c.at((WX + 0.02, 2.65, ST_HEAD), rz=-90):
-            door_leaf(c, 0.9, 2.75)
+        for (u0, u1) in ((CXW - 0.62, CXW - 0.003), (CXW + 0.003, CXW + 0.62)):     # stair-head pair, frame line 0.15 in from the deck face
+            with c.at((u0, WY + 0.25, ST_HEAD + 0.03)):
+                door_leaf(c, u1 - u0, 2.39)
+        for (v0, v1) in ((0.93, 1.747), (1.753, 2.57)):                            # lift-transfer pair
+            with c.at((WX + 0.25, v0, ST_HEAD + 0.03), rz=90):
+                door_leaf(c, v1 - v0, 2.64)
 
     # ---------- the stair ----------
-    steps = stair_steps()
     with c.grp("stair"):
-        for (n, poly, zt, kind, k) in steps:
-            with c.at((0, 0, zt - 0.17)):
-                extrude(c, "boards" if kind == "tread" else "boards_dk", poly, (), depth=0.17)
-            if kind == "tread":
-                # brass nosing at the leading edge (edge facing the direction of travel toward the lower step)
-                a, b = poly[0], poly[1]
-                pass
-        # winder joint strips, carpet runner + brass rods on straight flights, nosing
-        for (n, poly, zt, kind, k) in steps:
-            if kind != "tread":
+        for s in steps:
+            with c.at((0, 0, s["z"] - 0.17)):
+                extrude(c, "boards" if s["kind"] == "tread" else "boards_dk", s["poly"], (), depth=0.17)
+        # carpet runner + brass nosing + stair rods on straight flights
+        for s in steps:
+            if s["kind"] != "tread":
                 continue
-            xs = [p[0] for p in poly]
-            ys = [p[1] for p in poly]
+            k = s["k"]
+            xs = [p[0] for p in s["poly"]]
+            ys = [p[1] for p in s["poly"]]
             cx, cy = sum(xs) / 4, sum(ys) / 4
-            with c.at((cx, cy, zt), rz=90 * k):
-                wd = 0.95
-                dpt = (abs(poly[2][0] - poly[0][0]) if k % 2 == 0 else abs(poly[2][1] - poly[0][1]))
-                dpt = abs(max(ys) - min(ys)) if k % 2 == 0 else abs(max(xs) - min(xs))
+            dpt = s["ty1"] - s["ty0"]
+            with c.at((cx, cy, s["z"]), rz=90 * k):
                 box(c, "velvet", (-0.30, -dpt / 2 + 0.005, 0.0), (0.30, dpt / 2, 0.007), r=0.002)
                 box(c, "brass", (-0.40, -dpt / 2 - 0.004, -0.008), (0.40, -dpt / 2 + 0.018, 0.002), r=0.002)           # nosing
                 tube(c, "brass", (-0.335, -dpt / 2 + 0.03, 0.013), (0.335, -dpt / 2 + 0.03, 0.013), 0.0045, 6)         # stair rod
@@ -2307,103 +2540,134 @@ def build_stair(dream=False):
                     with c.at((sx, -dpt / 2 + 0.03, 0.013)):
                         sphere(c, "brass", 0.007, 6, 4)
         # sloped plaster soffits under each straight flight (hides the saw-tooth underside of the stepped treads)
-        for k in range(0, 9):
-            fl = [s for s in steps if s[3] == "tread" and s[4] == k]
+        for k in range(0, 8):
+            fl = [s for s in steps if s["kind"] == "tread" and s["k"] == k]
             if len(fl) < 2:
                 continue
-            xs_ = [p[0] for s in fl for p in s[1]]
-            ys_ = [p[1] for s in fl for p in s[1]]
-            f0 = (sum(p[0] for p in fl[0][1]) / 4, sum(p[1] for p in fl[0][1]) / 4)
-            f1 = (sum(p[0] for p in fl[-1][1]) / 4, sum(p[1] for p in fl[-1][1]) / 4)
+            xs_ = [p[0] for s in fl for p in s["poly"]]
+            ys_ = [p[1] for s in fl for p in s["poly"]]
+            f0 = (sum(p[0] for p in fl[0]["poly"]) / 4, sum(p[1] for p in fl[0]["poly"]) / 4)
+            f1 = (sum(p[0] for p in fl[-1]["poly"]) / 4, sum(p[1] for p in fl[-1]["poly"]) / 4)
             dx, dy = f1[0] - f0[0], f1[1] - f0[1]
             dl = math.hypot(dx, dy)
             ux, uy = dx / dl, dy / dl
-            zb0_, zb1_ = fl[0][2] - 0.17, fl[-1][2] - 0.17
+            zb0_, zb1_ = fl[0]["z"] - 0.17, fl[-1]["z"] - 0.17
+
             def zat(px, py):
                 t = ((px - f0[0]) * ux + (py - f0[1]) * uy) / dl
                 return zb0_ + (zb1_ - zb0_) * t
             cs = [(min(xs_), min(ys_)), (max(xs_), min(ys_)), (max(xs_), max(ys_)), (min(xs_), max(ys_))]
             c.face([(p[0], p[1], zat(*p) - 0.02) for p in cs], "plaster_ceil")
-        # inner balustrade: iron bars, teak handrail per straight flight, newel posts at the winder pivots
-        for k in range(0, 9):
-            fl = [s for s in steps if s[3] == "tread" and s[4] == k]
+        # inner balustrade: iron bars, teak handrail per straight flight; brass wall rail on brackets
+        for k in range(0, 8):
+            fl = [s for s in steps if s["kind"] == "tread" and s["k"] == k]
             if not fl:
                 continue
             first, last = fl[0], fl[-1]
-            def ctr(s):
-                return (sum(p[0] for p in s[1]) / 4, sum(p[1] for p in s[1]) / 4)
-            (x0_, y0_), (x1_, y1_) = ctr(first), ctr(last)
-            # inner edge (toward the eyewell) in the k-th rotated frame: template inner line x = 2.55
-            pi0 = rot_pt((2.55, 0.0), k)
+
             def inner(s):
-                cxy = ctr(s)
-                if k % 4 == 0:
-                    return (2.575, cxy[1])
-                if k % 4 == 1:
-                    return (cxy[0], 2.575)
-                if k % 4 == 2:
-                    return (0.925, cxy[1])
-                return (cxy[0], 0.925)
+                return st_pt(2.575, (s["ty0"] + s["ty1"]) / 2, k)
+
+            def outer(s):
+                return st_pt(3.44, (s["ty0"] + s["ty1"]) / 2, k)
             a, b = inner(first), inner(last)
-            za, zb = first[2] + 0.92, last[2] + 0.92
-            tube(c, "teak", (a[0], a[1], za), (b[0], b[1], zb), 0.032, 8)
+            tube(c, "teak", (a[0], a[1], first["z"] + 0.92), (b[0], b[1], last["z"] + 0.92), 0.032, 8)
             for s in fl:
                 p = inner(s)
-                tube(c, "iron", (p[0], p[1], s[2]), (p[0], p[1], s[2] + 0.88), 0.008, 4)
-                tube(c, "iron", (p[0], p[1], s[2]), (p[0], p[1], s[2] + 0.88), 0.008, 4) if False else None
-            # wall-side handrail on brass brackets
-            def outer(s):
-                cxy = ctr(s)
-                if k % 4 == 0:
-                    return (3.44, cxy[1])
-                if k % 4 == 1:
-                    return (cxy[0], 3.44)
-                if k % 4 == 2:
-                    return (0.06, cxy[1])
-                return (cxy[0], 0.06)
+                tube(c, "iron", (p[0], p[1], s["z"]), (p[0], p[1], s["z"] + 0.88), 0.008, 4)
             oa, ob = outer(first), outer(last)
-            tube(c, "brass", (oa[0], oa[1], first[2] + 0.88), (ob[0], ob[1], last[2] + 0.88), 0.017, 8)
+            tube(c, "brass", (oa[0], oa[1], first["z"] + 0.88), (ob[0], ob[1], last["z"] + 0.88), 0.017, 8)
             for s in (first, last):
                 o = outer(s)
-                tube(c, "brass", (o[0] + (0.06 if k % 4 == 2 else -0.06 if k % 4 == 0 else 0), o[1] + (0.06 if k % 4 == 3 else -0.06 if k % 4 == 1 else 0), s[2] + 0.88), (o[0], o[1], s[2] + 0.88), 0.008, 6)
-        # newel posts at the inner winder pivots (every corner region), wooden with a brass ball
-        for k in range(0, 9):
-            P = rot_pt((2.55, 2.55), k)
-            wz = [s for s in steps if s[3] == "winder" and s[4] == k]
-            if not wz:
-                continue
-            z0 = wz[0][2]
+                w_ = st_pt(3.5, (s["ty0"] + s["ty1"]) / 2, k)
+                tube(c, "brass", (w_[0], w_[1], s["z"] + 0.88), (o[0], o[1], s["z"] + 0.88), 0.008, 6)
+        # newel posts at the inner winder pivots, wooden with a brass ball
+        for k in range(0, 7):
+            P = st_pt(2.55, 2.55, k)
+            wz = [s for s in steps if s["kind"] == "winder" and s["k"] == k]
+            z0 = wz[0]["z"]
             with c.at((P[0], P[1], z0)):
                 box(c, "teak", (-0.045, -0.045, 0.0), (0.045, 0.045, 1.25), r=0.004)
                 with c.at((0, 0, 1.25)):
                     sphere(c, "brass", 0.05, 10, 6)
-    # ---------- walls dressing: dado, fields, sconces, skirting, grime ----------
+        # ---- head landing: nosing + fascia on the opening edges, brass nosing at the arrival, balustrade with newels ----
+        zt = ST_HEAD
+        box(c, "teak", (x1o - 0.025, 0.93, zt - 0.03), (x1o + 0.07, y1o + 0.07, zt + 0.006), r=0.004)            # nosing along x 2.60
+        box(c, "teak", (-0.0, y1o - 0.025, zt - 0.03), (x1o - 0.025, y1o + 0.07, zt + 0.006), r=0.004)             # nosing along y 2.55
+        box(c, "paint_cream", (x1o - 0.012, 0.95, ST_HEAD - ST_SLAB + 0.02), (x1o, y1o, zt - 0.03), r=0.002)        # fascia over the slab edge
+        box(c, "paint_cream", (0.0, y1o - 0.012, ST_HEAD - ST_SLAB + 0.02), (x1o, y1o, zt - 0.03), r=0.002)
+        box(c, "boards_dk", (x1o - 0.012, 0.0, zt - 0.20), (x1o, 0.95, zt - 0.03), r=0.002)                        # top riser board
+        box(c, "brass", (x1o - 0.004, 0.005, zt - 0.008), (x1o + 0.018, 0.94, zt + 0.004), r=0.002)                # arrival nosing
+        with c.at((x1o + 0.12, 0.475, zt + 0.005)):
+            box(c, "velvet", (-0.10, -0.30, 0.0), (0.10, 0.30, 0.006), r=0.002)                                     # runner turns onto the landing
+        # toe kerb + iron balusters + teak rail round the opening (x = 2.625 from y 0.925 to 2.575, then y = 2.575 to the W wall)
+        rx_, ry_ = x1o + 0.025, y1o + 0.025
+        run = [((rx_ + 0.03, 0.925), (rx_ + 0.03, ry_)), ((rx_ + 0.03, ry_), (0.03, ry_))]
+        for (pa, pb) in run:
+            lo = (min(pa[0], pb[0]) - 0.03, min(pa[1], pb[1]) - 0.03, zt + 0.006)
+            hi = (max(pa[0], pb[0]) + 0.03, max(pa[1], pb[1]) + 0.03, zt + 0.075)
+            box(c, "teak", lo, hi, r=0.004)
+            L_ = math.dist(pa, pb)
+            nb = int(L_ / 0.11)
+            for i in range(1, nb):
+                t = i / nb
+                p = (pa[0] + (pb[0] - pa[0]) * t, pa[1] + (pb[1] - pa[1]) * t)
+                box(c, "iron", (p[0] - 0.008, p[1] - 0.008, zt + 0.075), (p[0] + 0.008, p[1] + 0.008, zt + ST_RAIL - 0.03), r=0.0015)
+            tube(c, "teak", (pa[0], pa[1], zt + ST_RAIL - 0.01), (pb[0], pb[1], zt + ST_RAIL - 0.01), 0.032, 8)
+        for (px, py, hgt) in ((rx_ + 0.03, 0.925, 1.25), (rx_ + 0.03, ry_, 1.25)):
+            with c.at((px, py, zt + 0.006)):
+                box(c, "teak", (-0.05, -0.05, 0.0), (0.05, 0.05, 0.12), r=0.006)
+                box(c, "teak", (-0.042, -0.042, 0.12), (0.042, 0.042, hgt - 0.08), r=0.004)
+                box(c, "teak", (-0.05, -0.05, hgt - 0.08), (0.05, 0.05, hgt - 0.05), r=0.006)
+                with c.at((0, 0, hgt)):
+                    sphere(c, "brass", 0.05, 10, 6)
+        box(c, "teak", (0.0, ry_ - 0.035, zt + 0.006), (0.03, ry_ + 0.035, zt + ST_RAIL + 0.03), r=0.004)           # wall plate at the W end
+        # the final flight's inner rail runs on to the head newel
+        fl = [s for s in steps if s["kind"] == "tread" and s["k"] == 7]
+        a = st_pt(2.575, (fl[-1]["ty0"] + fl[-1]["ty1"]) / 2, 7)
+        tube(c, "teak", (a[0], a[1], fl[-1]["z"] + 0.92), (rx_ + 0.03, 0.925, zt + 1.05), 0.032, 8)
+    # ---------- walls dressing: lobby / landing dado, fields, sconces, grime ----------
+    # (v1.2: the mid-height horizontal dado bands crossed the flights and were removed; fields, posters, sconces and switch
+    #  plates are placed from the stair geometry so nothing wall-mounted sits in the 2.0 m headroom zone above a tread)
     with c.grp("walls"):
-        for (M_, sgn, span) in ((M_XZ(0.0), 1, WX), (M_XZ(W), -1, WX), (M_YZ(0.0), 1, W), (M_YZ(WX), -1, W)):
+        def dado(M_, sgn, spans, z0, z1):
             with c.at(m=M_):
-                # dado: painted lower wall to 1.2 m up each level; skirting follows the flights - use panel bands at each level
-                for lvl in range(0, 4):
-                    z0 = lvl * 5.0 + 0.0
-                    box(c, "plaster_dk", (0.0, z0, 0.0 if sgn > 0 else -0.05), (span, z0 + 1.1, 0.05 if sgn > 0 else 0.0), r=0.004)
-                    box(c, "sandstone" if lvl == 0 else "paint_cream", (0.0, z0 + 1.1, 0.0 if sgn > 0 else -0.06), (span, z0 + 1.16, 0.06 if sgn > 0 else 0.0), r=0.004)
-        # tall wall fields with wallpaper between the levels, on the two full walls (E, N) not pierced by windows
-        for lvl in range(0, 3):
-            z0 = 1.5 + lvl * 4.0
-            field(c, M_YZ(WX), -1, 0.15, 3.35, z0, z0 + 2.0, fw=0.04) if lvl > 0 else None
-            field(c, M_XZ(W), -1, 0.15, 1.0, z0, z0 + 2.0, fw=0.04)
-            field(c, M_XZ(W), -1, 2.5, 3.35, z0, z0 + 2.0, fw=0.04)
-        # posters / framed notices on the E and N walls at each level, sconces at every landing height
-        for lvl in range(0, 4):
-            zb = lvl * 4.55 + 1.8
-            with c.at((WX - 0.05, 1.0 + (lvl % 2) * 1.5, zb), rz=90):
-                poster(c, 0.42, 0.62, lvl * 2 % 8)
-        for zs in (2.2, 4.9, 7.5, 10.2, 12.9, 15.6, 17.2):
-            for (ang, px, py) in ((-90, 3.42, 1.0), (180, 2.9, 3.44)):
-                with c.at((px, py, zs), rz=ang + 90 if ang == 180 else ang + 90):
-                    sconce(c, real_light=(zs in (4.9, 10.2, 15.6)), name="sc%d%d" % (int(zs * 10), int(px)), watt=16)
-        # brass electric wire runs along the E wall with porcelain cleats, switch plates at landings
-        porcelain_cleat_run(c, (3.36, 0.3, 0.15 + 2.6), (3.36, 3.2, 0.15 + 2.6))
-        for zs in (3.0, 8.0, 13.0):
+                for (u0, u1) in spans:
+                    box(c, "plaster_dk", (u0, z0, 0.0 if sgn > 0 else -0.05), (u1, z1 - 0.06, 0.05 if sgn > 0 else 0.0), r=0.004)
+                    box(c, "sandstone" if z0 < 1 else "paint_cream", (u0, z1 - 0.06, 0.0 if sgn > 0 else -0.06), (u1, z1, 0.06 if sgn > 0 else 0.0), r=0.004)
+        dado(M_XZ(0.0), 1, ((0.0, CXW - 0.6), (CXW + 0.6, 2.60)), 0.0, 1.16)                 # S wall lobby (street door, E-strip foot excluded)
+        dado(M_XZ(W), -1, ((0.0, CXW - 0.6), (CXW + 0.6, 2.60)), 0.0, 1.16)                  # N wall lobby (hall door)
+        dado(M_YZ(0.0), 1, ((0.0, W),), 0.0, 1.16)                                           # W wall lobby
+        dado(M_XZ(W), -1, ((0.0, CXW - 0.7), (CXW + 0.7, WX)), ST_HEAD, ST_HEAD + 1.16)      # N wall on the head landing
+        dado(M_YZ(WX), -1, ((0.0, 0.85), (2.65, W)), ST_HEAD, ST_HEAD + 1.16)                # E wall on the head landing
+        # wallpaper fields in the wall areas no flight crosses
+        field(c, M_YZ(WX), -1, 0.15, 3.35, 5.5, 7.45, fw=0.04)
+        field(c, M_XZ(W), -1, 0.15, 0.95, 1.5, 3.5, fw=0.04)
+        field(c, M_XZ(W), -1, 0.15, 1.0, 5.5, 7.5, fw=0.04)
+        field(c, M_XZ(W), -1, 2.5, 3.35, 5.5, 7.5, fw=0.04)
+        field(c, M_XZ(W), -1, 0.15, 0.95, 12.3, 14.3, fw=0.04)
+        field(c, M_XZ(W), -1, 2.5, 3.35, 11.0, 13.0, fw=0.04)
+        # posters at eye level over the flights beside them (E wall)
+        for i, (py, zmax) in enumerate(((1.0, 3.0), (2.5, 10.0), (1.0, 9.0))):
+            zb = st_top_below(steps, WX - 0.2, py, zmax) + 1.35
+            with c.at((WX, py, zb), rz=90):
+                poster(c, 0.42, 0.62, (i * 3) % 8)
+        # sconces 2.2 m over the surface below them (E wall y 1.0 / 0.45 and N wall x 2.9); back plate on the wall face
+        sc_pts = []
+        for zmax in (3.0, 9.0):
+            sc_pts.append((90, WX, 1.0, st_top_below(steps, 3.3, 1.0, zmax) + 2.2))
+        sc_pts.append((90, WX, 0.45, ST_HEAD + 2.0))
+        for zmax in (3.0, 10.1):
+            sc_pts.append((180, 2.9, WY, st_top_below(steps, 2.9, 3.35, zmax) + 2.2))
+        sc_pts.append((180, 2.9, WY, ST_HEAD + 2.0))
+        for i, (ang, px, py, zs) in enumerate(sc_pts):
+            with c.at((px, py, zs), rz=ang):
+                sconce(c, real_light=(i in (1, 2, 4)), name="sc%d%d" % (int(zs * 10), int(px * 10)), watt=16)
+        # open wiring on porcelain cleats along the E wall above the first flight; switch plates beside the NE winders / landing
+        with c.at((WX, 0.0, 5.0), ry=-90):
+            porcelain_cleat_run(c, (0.0, 0.3, 0.0), (0.0, 3.2, 0.0))
+        for zmax in (3.0, 10.1, ST_HEAD):
+            zs = st_top_below(steps, WX - 0.2, 3.05, zmax) + 1.3
             with c.at((WX - 0.0, 3.05, zs), ry=-90):
                 switch_plate(c)
         with c.at(m=M_YZ(WX)):
@@ -2412,39 +2676,39 @@ def build_stair(dream=False):
             panel(c, "grime", 0.0, W, ST_H - 1.5, ST_H, w=-0.0025, flip=True)
     # ---------- ceiling rose + eyewell lamp string ----------
     with c.grp("pendants"):
-        with c.at((1.75, 1.75, ST_H)):
+        with c.at((1.75 + ST_X0, 1.75, ST_H)):
             lathe(c, "plaster_ceil", [(0.70, 0.0), (0.70, -0.03), (0.52, -0.06), (0.30, -0.09), (0.0, -0.11)], 24, True)
         pendant_string(c, ST_H, 22)
-    # ---------- story: cleaner mid-sweep + fire bucket rack (+) ----------
+    # ---------- story: the cleaner went out onto the roof garden (props in the dead-end NW corner of the head landing) ----------
     with c.grp("props"):
-        # broom leaning on the newel at the second N-wall flight landing; dustpan with a heap; bucket on the landing
-        zL = steps[22][2] if len(steps) > 22 else 4.0
-        with c.at((0.45, 3.05, steps[23][2]), rz=10):
-            with c.at((0, 0, 0.0), ry=-12):
-                tube(c, "teak", (0, 0, 0), (0, 0, 1.30), 0.012, 8)
-                with c.at((0, 0, 0.02)):
+        zt = ST_HEAD + 0.005
+        with c.at((0.40, 3.20, zt), rz=-35):                                  # broom leaning into the W/N wall corner
+            with c.at((0, 0, 0.0), ry=-14):
+                tube(c, "teak", (0, 0, 0.09), (0, 0, 1.30), 0.012, 8)
+                with c.at((0, 0, 0.09)):
                     box(c, "oak", (-0.14, -0.02, 0.0), (0.14, 0.02, 0.07), r=0.004)
                     for i in range(14):                                     # bristles
-                        tube(c, "leather", (-0.13 + i * 0.02, 0.0, 0.0), (-0.13 + i * 0.02 + RNG.uniform(-0.01, 0.01), RNG.uniform(-0.02, 0.02), -0.09), 0.003, 4)
-        with c.at((0.7, 0.4, steps[47][2]), rz=30):
+                        tube(c, "leather", (-0.13 + i * 0.02, 0.0, 0.0), (-0.13 + i * 0.02 + rs.uniform(-0.01, 0.01), rs.uniform(-0.02, 0.02), -0.085), 0.003, 4)
+        with c.at((0.62, 3.02, zt), rz=30):                                   # dustpan with a heap
             box(c, "iron", (-0.09, -0.11, 0.0), (0.09, 0.11, 0.012), r=0.003)
             box(c, "iron", (-0.09, 0.09, 0.012), (0.09, 0.11, 0.05), r=0.002)
             for i in range(9):
-                with c.at((RNG.uniform(-0.06, 0.06), RNG.uniform(-0.07, 0.05), 0.012)):
-                    sphere(c, "rubber", RNG.uniform(0.006, 0.012), 5, 3)
-        # bucket + wet stripe on three steps
-        zb = steps[28][2]
-        with c.at((0.35, 1.6, zb)):
+                with c.at((rs.uniform(-0.06, 0.06), rs.uniform(-0.07, 0.05), 0.012)):
+                    sphere(c, "rubber", rs.uniform(0.006, 0.012), 5, 3)
+        with c.at((0.32, 2.92, zt)):                                          # bucket
             lathe(c, "iron", [(0.0, 0), (0.12, 0), (0.14, 0.02), (0.16, 0.26), (0.165, 0.28), (0.16, 0.27), (0.0, 0.05)], 16, True)
             tube(c, "iron", (-0.165, 0, 0.27), (0.0, 0, 0.36), 0.004, 4)
             tube(c, "iron", (0.165, 0, 0.27), (0.0, 0, 0.36), 0.004, 4)
-        for i in (26, 27, 28):
-            n, poly, zt, kind, k = steps[i]
-            with c.at((sum(p[0] for p in poly) / len(poly), sum(p[1] for p in poly) / len(poly), zt + 0.002)):
+        for s in steps[-3:]:                                                  # wet stripe down the top three treads
+            cx = sum(p[0] for p in s["poly"]) / 4
+            cy = sum(p[1] for p in s["poly"]) / 4
+            with c.at((cx, cy, s["z"] + 0.009), rz=90 * s["k"]):
                 decal(c, "water", 0.5, 0.2)
-        # fire-bucket rack (+ unverified) on the E wall at the ground lobby
+        with c.at((x1o + 0.25, 0.5, zt + 0.004)):
+            decal(c, "water", 0.35, 0.5)
+    # fire-bucket rack (+ unverified) on the S wall of the ground lobby (clear of the first flight)
     with c.grp("var_fire_buckets"):
-        with c.at((3.42, 2.6, 1.2), rz=90):
+        with c.at((0.55, 0.0, 1.2), rz=0):
             box(c, "teak", (-0.35, 0, 0), (0.35, 0.03, 0.10), r=0.003)
             for xx in (-0.2, 0.2):
                 tube(c, "iron", (xx, 0.03, 0.02), (xx, 0.10, 0.02), 0.006, 6)
@@ -2452,43 +2716,51 @@ def build_stair(dream=False):
                     lathe(c, "paint_red", [(0.0, 0), (0.09, 0), (0.12, 0.28), (0.125, 0.30), (0.0, 0.30)], 12, True)
     # ground lobby floor dressing: runner, mat, dirt
     with c.grp("lobby"):
-        with c.at((1.75, 1.75, 0.001)):
+        with c.at((1.75 + ST_X0, 1.75, 0.001)):
             for k in range(10):
-                with c.at((RNG.uniform(-1.4, 1.4), RNG.uniform(-1.4, 1.4), 0.0), rz=RNG.uniform(0, 360)):
-                    decal(c, "dirt", RNG.uniform(0.5, 1.0), RNG.uniform(0.3, 0.6))
-        with c.at((1.75, 0.55, 0.002)):
+                with c.at((rs.uniform(-1.4, 1.4), rs.uniform(-1.4, 1.4), 0.0), rz=rs.uniform(0, 360)):
+                    decal(c, "dirt", rs.uniform(0.5, 1.0), rs.uniform(0.3, 0.6))
+        with c.at((CXW, 0.55, 0.002)):
             box(c, "rubber", (-0.55, -0.35, 0.0), (0.55, 0.35, 0.02), r=0.006)                # door mat
-        with c.at((1.75, 3.0, 0.002)):
+        with c.at((CXW, 3.0, 0.002)):
             box(c, "rubber", (-0.55, -0.30, 0.0), (0.55, 0.30, 0.02), r=0.006)
+        with c.at((CXW, 3.0, ST_HEAD + 0.006)):
+            box(c, "rubber", (-0.55, -0.30, 0.0), (0.55, 0.30, 0.012), r=0.004)             # mat at the stair-head door
     if dream:
         with c.grp("dream"):
-            # petals on every tread (over-abundance), one hanging inverted stair (impossible object)
-            for (n, poly, zt, kind, k) in steps:
-                cx = sum(p[0] for p in poly) / len(poly)
-                cy = sum(p[1] for p in poly) / len(poly)
+            # petals on every tread (over-abundance), bouquets in the wall corner of every kite winder, and one upside-down stair
+            # hanging from the ceiling over the open part of the stairwell only (bottom >= 17.2: >= 2.0 m over the head landing)
+            for s in steps:
+                cx = sum(p[0] for p in s["poly"]) / len(s["poly"])
+                cy = sum(p[1] for p in s["poly"]) / len(s["poly"])
                 for j in range(3):
-                    with c.at((cx + RNG.uniform(-0.3, 0.3), cy + RNG.uniform(-0.1, 0.1), zt + 0.004), rz=RNG.uniform(0, 360)):
-                        decal(c, "petal_a" if j % 2 else "petal_b", RNG.uniform(0.04, 0.08), RNG.uniform(0.03, 0.05))
-            with c.at((0, 0, ST_H - 0.35)):                               # impossible object: an upside-down stair hanging from the ceiling
-                for (n, poly, zt, kind, k) in [s_ for s_ in steps if 34 <= s_[0] <= 60]:
-                    extrude(c, "boards_dk", poly, (), depth=0.17, w0=-(n - 34) * ST_R * 0.55 - 0.17)
+                    with c.at((cx + rs.uniform(-0.3, 0.3), cy + rs.uniform(-0.1, 0.1), s["z"] + 0.009), rz=rs.uniform(0, 360)):
+                        decal(c, "petal_a" if j % 2 else "petal_b", rs.uniform(0.04, 0.08), rs.uniform(0.03, 0.05))
+            for s in steps:
+                if s["kind"] == "winder" and len(s["poly"]) == 4:
+                    corner = s["poly"][2]
+                    P = s["poly"][0]
+                    d = (P[0] - corner[0], P[1] - corner[1])
+                    L_ = math.hypot(*d)
+                    with c.at((corner[0] + d[0] / L_ * 0.15, corner[1] + d[1] / L_ * 0.15, s["z"]), rz=rs.uniform(0, 360)):
+                        flower_pot_bouquet(c, n=6, h=0.36, vase=(s["n"] % 2 == 0))
+            with c.at((0, 0, ST_H - 0.35)):
+                for s in [s_ for s_ in steps if 24 <= s_["n"] <= 38]:
+                    extrude(c, "boards_dk", s["poly"], (), depth=0.17, w0=-(s["n"] - 24) * ST_R * 0.45 - 0.17)
     # ---------- cameras ----------
-            # overgrowth: bouquets on the winder landings at every turn, pots of chrysanthemum-like flowers along the flights
-            for (n, poly, zt, kind, k) in steps:
-                if kind == "winder" and n % 3 == 1 or (kind == "tread" and n % 7 == 0):
-                    cx = sum(p[0] for p in poly) / len(poly)
-                    cy = sum(p[1] for p in poly) / len(poly)
-                    with c.at((cx, cy, zt), rz=RNG.uniform(0, 360)):
-                        flower_pot_bouquet(c, n=6, h=0.45, vase=(n % 2 == 0))
+    z_ = {s["n"]: s["z"] for s in steps}
     c.cams = [
         dict(name="cam1_axis", loc=(1.80, 1.80, 1.2), tgt=(1.74, 1.72, 18.0), lens=15),
-        dict(name="cam2_corner", loc=(0.25, 3.25, steps[35][2] + 1.55), tgt=(3.2, 0.3, steps[35][2] + 0.8), lens=18),
-        dict(name="cam3_ceiling", loc=(2.9, 0.4, ST_HEAD + 1.4), tgt=(1.2, 2.6, ST_H - 0.2), lens=18),
-        dict(name="cam4_window", loc=(2.95, 2.6, steps[29][2] + 1.5), tgt=(1.6, 0.0, 6.7), lens=24),
+        dict(name="cam2_corner", loc=(0.25, 3.25, z_[36] + 1.55), tgt=(3.2, 0.3, z_[36] + 0.8), lens=18),
+        dict(name="cam3_ceiling", loc=(3.05, 0.4, ST_HEAD + 1.5), tgt=(1.0, 2.2, ST_H - 0.6), lens=18),
+        dict(name="cam4_window", loc=(2.95, 2.6, z_[29] + 1.5), tgt=(1.6, 0.0, 6.7), lens=24),
         dict(name="cam5_street", loc=(1.75, -7.0, 6.0), tgt=(1.75, 0.0, 6.6), lens=28),
+        dict(name="closeup_stairhead", loc=(0.75, 3.30, ST_HEAD + 1.55), tgt=(2.45, 0.55, ST_HEAD - 0.25), lens=20),
+        dict(name="cam7_trimmers", loc=(0.55, 1.95, z_[62] + 1.55), tgt=(2.45, 2.75, ST_HEAD - 0.35), lens=16),
+        dict(name="cam8_arrival", loc=(1.15, 0.45, z_[69] + 1.62), tgt=(3.55, 1.6, ST_HEAD + 1.0), lens=20),
     ]
     if dream:
-        c.cams.append(dict(name="cam6_impossible", loc=(2.9, 2.6, ST_HEAD + 0.9), tgt=(1.0, 1.0, ST_H - 1.0), lens=18))
+        c.cams.append(dict(name="cam6_impossible", loc=(3.0, 2.9, ST_HEAD + 1.2), tgt=(1.0, 1.0, ST_H - 1.0), lens=18))
     return c
 
 
@@ -2562,46 +2834,272 @@ def angle_post(c, x, y, z0, z1, s=0.045, t=0.006, mat="steel"):
     box(c, mat, (x, y, z0), (x + t, y + s, z1), r=0.0015)
 
 
-def scissor_gate(c, x0, x1, height, rows=5, cells=7, tag="g"):
-    """Pantograph (scissor) gate in the XZ plane between x0..x1 (current width), y = 0.  Flat links with pivot rivets, jamb post,
-    leading post with brass pull, top guide rail with rollers, bottom track, and a hook latch with a keeper (detail-spec s6)."""
-    W = x1 - x0
-    hr = (height - 0.16) / rows
-    pcell = W / cells
-    bar_w, bar_t = 0.024, 0.0035
-    for j in range(rows):
-        zb = 0.08 + j * hr
-        for i in range(cells):
-            xa = x0 + i * pcell
-            xb = xa + pcell
-            for (p, q, yo) in (((xa, zb), (xb, zb + hr), 0.004), ((xb, zb), (xa, zb + hr), -0.004)):
-                dx, dz = q[0] - p[0], q[1] - p[1]
-                L = math.hypot(dx, dz) + 0.03
-                with c.at(((p[0] + q[0]) / 2, yo, (p[1] + q[1]) / 2), ry=-math.atan2(dz, dx) / D2R):
-                    box(c, "iron", (-L / 2, -bar_t / 2, -bar_w / 2), (L / 2, bar_t / 2, bar_w / 2), r=0.0008)
-            for (x_, z_) in (((xa + xb) / 2, zb + hr / 2),):
-                with c.at((x_, 0, z_), rx=90):
-                    cyl(c, "brass", 0.0055, 0.014, 8, z0=-0.007, ch=0.001)
-            with c.at((xa, 0, zb), rx=90):
-                cyl(c, "brass_worn", 0.0045, 0.012, 8, z0=-0.006)
-    # posts, top rail with rollers, bottom track
-    box(c, "steel", (x0 - 0.02, -0.012, 0.0), (x0 + 0.012, 0.012, height), r=0.002)
-    box(c, "steel", (x1 - 0.012, -0.012, 0.0), (x1 + 0.02, 0.012, height), r=0.002)
-    box(c, "iron", (x0 - 0.02, -0.02, height - 0.04), (x0 + 1.05, 0.02, height), r=0.002)
-    box(c, "iron", (x0 - 0.02, -0.02, 0.0), (x0 + 1.05, 0.02, 0.03), r=0.002)
-    for i in range(cells + 1):
-        with c.at((x0 + i * pcell, 0.0, height - 0.055), rx=90):
-            cyl(c, "brass", 0.011, 0.012, 10, z0=-0.006, ch=0.002)
-    # pull handle + hook latch on the leading post
-    with c.at((x1 + 0.02, 0.0, 1.02)):
-        tube(c, "brass", (0.0, -0.05, -0.16), (0.0, -0.05, 0.16), 0.010, 8)
-        for dz in (-0.14, 0.14):
-            tube(c, "brass", (0.0, -0.05, dz), (0.0, 0.0, dz), 0.007, 6)
-    with c.at((x1 - 0.005, -0.016, 0.84)):
-        box(c, "brass", (-0.02, 0, -0.02), (0.02, 0.006, 0.05), r=0.001)
-        with c.at((0.0, 0.006, 0.0), rx=90):
-            cyl(c, "brass", 0.006, 0.010, 8, z0=-0.010)
-        box(c, "brass", (-0.006, 0.006, -0.11), (0.006, 0.014, 0.02), r=0.001)          # hook latch, hangs from the pin
+# ---- articulated scissor (lazy-tongs) gates, v1.2 ------------------------------------------------------------------
+# Kinematics (Bostwick-type folding gate, A: period-typical): N+1 vertical channel pickets hang from rollers in a top track and are
+# guided by tongues in a bottom channel.  Each lattice band is an independent lazy-tongs chain: at every picket an X of two flat
+# straps (half-length l) crosses at a rivet on the picket; strap ends meet the neighbouring X's straps at end pins halfway between
+# pickets.  Gate width W sets everything: picket pitch s = W / N, strap angle theta = acos(s / 2l), band half-height h = l sin theta.
+# Layers (gate-local v, the lattice on the -v side): picket channel | 1 mm | back strap layer B | 1 mm | front strap layer A |
+# rivet heads.  Same-layer straps are parallel with a perpendicular gap s sin(theta) - bar width >= 10 mm at the collapsed pitch.
+# The latch is a gravity drop latch on the lead post whose notch drops over a stud on the strike side.
+GATE_FPS, GATE_T = 30, 1.5
+GATE_L = 0.29                       # strap half length (pin to pin 0.58 m)
+GATE_SMIN = 0.032                   # collapsed picket pitch
+GATE_BW, GATE_BT = 0.022, 0.005     # strap width, thickness
+GV_PK = (-0.0115, 0.0065)           # picket channel depth range
+GV_B = (-0.0175, -0.0125)           # back strap layer
+GV_A = (-0.0235, -0.0185)           # front strap layer
+GATE_RR = 0.013                     # roller radius
+GATE_LATCH_LIFT = 35.0              # degrees
+
+
+def _smoother(t):
+    t = max(0.0, min(1.0, t))
+    return t * t * t * (t * (6 * t - 15) + 10)
+
+
+@contextmanager
+def part_grp(c, name):
+    """Switch the face group without applying a group offset (the enclosing group's transform already holds it)."""
+    old = c.group
+    c.group = name
+    try:
+        yield
+    finally:
+        c.group = old
+
+
+def _stadium(xa, xb, r, n=5):
+    pts = []
+    for i in range(n + 1):
+        a = -math.pi / 2 + math.pi * i / n
+        pts.append((xb + r * math.cos(a), r * math.sin(a)))
+    for i in range(n + 1):
+        a = math.pi / 2 + math.pi * i / n
+        pts.append((xa + r * math.cos(a), r * math.sin(a)))
+    return pts
+
+
+def _rivet(c, mat="brass_worn", r=0.0055):
+    lathe(c, mat, [(0, 0), (r, 0), (r * 0.92, r * 0.35), (r * 0.6, r * 0.68), (0, r * 0.8)], 8, True)
+
+
+class KinGate:
+    """Build an articulated scissor gate in the current local frame (u = along the gate, v = depth, w = up), register its moving
+    parts as separate groups with pivots, its rivet pivot empties, and the open / close clips.  Static parts (tracks, jamb picket,
+    strike, keeper) go into the enclosing group."""
+
+    def __init__(self, c, key, x0, wmax, wrest, ncell, bands, zb, zt, zlatch, handle_v, strike_post=False, name_pfx=None):
+        self.c, self.key, self.x0, self.N = c, key, x0, ncell
+        self.wmax, self.wmin, self.wrest = wmax, ncell * GATE_SMIN, wrest
+        self.bands, self.zb, self.zt, self.zlatch, self.handle_v = bands, zb, zt, zlatch, handle_v
+        self.zpk0, self.zpk1 = zb + 0.020, zt - 0.006          # picket body
+        self.zax = zt + 0.004 + GATE_RR + 0.0005               # roller axle height
+        self.Mg = c.st[-1].copy()
+        self.M3 = self.Mg.to_3x3()
+        u, v, w = Vector((1, 0, 0)), Vector((0, 1, 0)), Vector((0, 0, 1))
+        self.ax_rot = (self.M3 @ u).cross(self.M3 @ w).normalized()     # +angle maps +u toward +w
+        self.ax_v = (self.M3 @ v).normalized()
+        self.parts = {}
+        self.build(strike_post)
+        c.gates.append(self)
+
+    # ---- kinematics ----
+    def state(self, W):
+        s = W / self.N
+        th = math.acos(max(-1.0, min(1.0, s / (2 * GATE_L))))
+        return s, th
+
+    def x_i(self, i, W):
+        return self.x0 + i * W / self.N
+
+    def width_at(self, clip, t):
+        a = _smoother((t - 0.2) / 1.15)
+        W0, W1 = (self.wmax, self.wmin) if clip == "open" else (self.wmin, self.wmax)
+        if clip == "close":
+            a = _smoother((t - 0.0) / 1.15)
+        return W0 + (W1 - W0) * a
+
+    def latch_at(self, clip, t):
+        if clip == "open":       # lift 0..0.2 s, drop 1.35..1.5 s
+            up = _smoother(t / 0.2) if t < 0.2 else (1.0 - _smoother((t - 1.35) / 0.15) if t > 1.35 else 1.0)
+        else:                    # lifted while the gate travels, drops onto the stud at the end
+            up = _smoother(t / 0.15) if t < 0.15 else (1.0 - _smoother((t - 1.25) / 0.2) if t > 1.25 else 1.0)
+        return up * GATE_LATCH_LIFT * D2R
+
+    def cellp(self, u, v, w):
+        return tuple(self.Mg @ Vector((u, v, w)))
+
+    # ---- geometry ----
+    def reg(self, g, pivot_local, kind, **kw):
+        self.c.pivots[g] = self.cellp(*pivot_local)
+        self.parts[g] = dict(kind=kind, pivot=pivot_local, **kw)
+
+    def build(self, strike_post):
+        c, N = self.c, self.N
+        Wr = self.wrest
+        s_r, th_r = self.state(Wr)
+        # static: top track (C-channel open at the bottom), bottom channel, jamb picket with its bracket, strike + keeper stud
+        ua, ub = self.x0 - 0.03, self.x0 + self.wmax + 0.05
+        zt = self.zt
+        for lo, hi in (((ua, -0.022, zt + 0.036), (ub, 0.016, zt + 0.040)), ((ua, -0.022, zt), (ub, -0.018, zt + 0.036)),
+                       ((ua, 0.012, zt), (ub, 0.016, zt + 0.036)), ((ua, -0.022, zt), (ub, -0.007, zt + 0.004)),
+                       ((ua, 0.001, zt), (ub, 0.016, zt + 0.004))):
+            box(c, "steel", lo, hi, r=0.0008)
+        for uu in (ua + 0.01, ub - 0.01):                      # end stops
+            box(c, "steel", (uu - 0.004, -0.018, zt + 0.004), (uu + 0.004, 0.012, zt + 0.036), r=0.0008)
+        zb = self.zb
+        for lo, hi in (((ua, -0.012, zb), (ub, 0.006, zb + 0.003)), ((ua, -0.012, zb), (ub, -0.0065, zb + 0.016)),
+                       ((ua, 0.0005, zb), (ub, 0.006, zb + 0.016))):
+            box(c, "steel", lo, hi, r=0.0008)
+        self.picket_mesh(self.x0, jamb=True)
+        box(c, "steel", (self.x0 - 0.011, 0.0065, 0.9), (self.x0 + 0.011, 0.012, 1.1), r=0.001)          # fixing lug of the jamb
+        xs = self.x0 + self.wmax + 0.017                      # strike face (2 mm clear of the closed lead post)
+        if strike_post:
+            for lo, hi in (((xs, -0.0115, zb + 0.020), (xs + 0.030, -0.0095, zt - 0.006)), ((xs, 0.0045, zb + 0.020), (xs + 0.030, 0.0065, zt - 0.006)),
+                           ((xs + 0.028, -0.0115, zb + 0.020), (xs + 0.030, 0.0065, zt - 0.006))):
+                box(c, "steel", lo, hi, r=0.0008)
+            stud_v0 = 0.0065
+        else:
+            box(c, "steel", (xs, -0.010, self.zlatch - 0.07), (xs + 0.008, 0.005, self.zlatch + 0.03), r=0.001)       # keeper lug on the strike post
+            stud_v0 = 0.005
+        xstud = self.x0 + self.wmax + 0.021
+        with c.at((xstud, stud_v0, self.zlatch - 0.004), rx=-90):
+            cyl(c, "brass_worn", 0.004, 0.020 - stud_v0, 8, ch=0.0008)
+        # moving pickets 1..N (N = lead post), rollers
+        for i in range(1, N + 1):
+            g = f"anim_{self.key}_pk{i}"
+            xi = self.x_i(i, Wr)
+            with part_grp(c, g):
+                self.picket_mesh(xi, lead=(i == N))
+            self.reg(g, (xi, 0.0, self.zpk0), "picket", i=i, pins={f"pin_b{b}_{i}c": (0.0, 0.0, zc - self.zpk0) for b, zc in enumerate(self.bands)})
+            g = f"anim_{self.key}_rl{i}"
+            with part_grp(c, g):
+                for (va, vb) in ((-0.016, -0.007), (0.001, 0.010)):
+                    with c.at(m=Matrix.Translation((xi, va, self.zax)) @ Matrix.Rotation(-math.pi / 2, 4, "X")):
+                        lathe(c, "iron", [(0.004, 0.0), (GATE_RR - 0.0015, 0.0), (GATE_RR, 0.0015), (GATE_RR, vb - va - 0.0015),
+                                          (GATE_RR - 0.0015, vb - va), (0.004, vb - va), (0.004, 0.0)], 10, False)
+                    # a brass web mark on the outer face so the roll reads
+                    with c.at((xi, (va if va < 0 else vb), self.zax)):
+                        box(c, "brass", (-0.0012, -0.0005 if va < 0 else 0.0, 0.004), (0.0012, 0.0 if va < 0 else 0.0005, GATE_RR - 0.002), r=0)
+            self.reg(g, (xi, 0.0, self.zax), "roller", i=i)
+        # latch on the lead post
+        xl = self.x_i(N, Wr)
+        g = f"anim_{self.key}_latch"
+        with part_grp(c, g):
+            with c.at(m=Matrix.Translation((xl, 0.0085, self.zlatch)) @ Matrix(((1, 0, 0, 0), (0, 0, 1, 0), (0, 1, 0, 0), (0, 0, 0, 1)))):
+                # notch 0.008..0.027 over the stud (0.017..0.025): the left wall clears the stud on the lift arc
+                extrude(c, "brass", [(-0.045, -0.010), (0.008, -0.010), (0.008, 0.006), (0.027, 0.006), (0.027, -0.010), (0.040, -0.010),
+                                     (0.040, 0.012), (-0.045, 0.012)], (), depth=0.005)
+            with c.at((xl - 0.040, 0.0195, self.zlatch + 0.001)):
+                sphere(c, "brass", 0.006, 8, 5)                                        # thumb knob (behind the latch plate)
+            with c.at((xl, 0.0135, self.zlatch), rx=-90):
+                _rivet(c, "brass", 0.0045)
+        self.reg(g, (xl, 0.0, self.zlatch), "latch")
+        # lattice straps
+        for b, zc in enumerate(self.bands):
+            for i in range(0, N + 1):
+                xi = self.x_i(i, Wr)
+                for lay in ("A", "B"):
+                    ph = th_r if lay == "A" else -th_r
+                    xa, xb = (-GATE_L, GATE_L) if 0 < i < N else ((0.0, GATE_L) if i == 0 else (-GATE_L, 0.0))
+                    g = f"anim_{self.key}_b{b}_{lay}{i}"
+                    vr = GV_A if lay == "A" else GV_B
+                    Mst = (Matrix.Translation((xi, 0.0, zc)) @
+                           Matrix(((math.cos(ph), -math.sin(ph), 0, 0), (0, 0, 1, 0), (math.sin(ph), math.cos(ph), 0, 0), (0, 0, 0, 1))))
+                    with part_grp(c, g):
+                        with c.at(m=Mst):
+                            extrude(c, "iron", _stadium(xa, xb, GATE_BW / 2), (), depth=vr[1] - vr[0], w0=vr[0])
+                            if lay == "A":
+                                for xr in sorted({xa, 0.0, xb}):
+                                    with c.at((xr, 0.0, GV_A[0]), rx=180):
+                                        _rivet(c)
+                    self.reg(g, (xi, 0.0, zc), "strap", i=i, b=b, lay=lay, xa=xa, xb=xb)
+                    # pivot empties at every rivet (on the A strap = the rivet carrier); B straps / pickets carry the matching
+                    # local points as extras so the pin closure can be checked
+                    dirr = (math.cos(ph), math.sin(ph))
+                    pins = {}
+                    for xr in sorted({xa, 0.0, xb}):
+                        if xr == 0.0:
+                            pn = f"pin_b{b}_{i}c"
+                        elif lay == "A":
+                            pn = f"pin_b{b}_{i}t" if xr > 0 else f"pin_b{b}_{i - 1}b"
+                        else:
+                            pn = f"pin_b{b}_{i}b" if xr > 0 else f"pin_b{b}_{i - 1}t"
+                        pins[pn] = (xr * dirr[0], 0.0, xr * dirr[1])       # gate-local offset from the pivot at rest
+                    self.parts[g]["pins"] = pins
+        c.anims.setdefault("_gates", []).append(self.key)
+
+    def picket_mesh(self, xi, jamb=False, lead=False):
+        c = self.c
+        hw = 0.015 if lead else 0.011
+        z0, z1 = self.zpk0, self.zpk1
+        box(c, "steel", (xi - hw, 0.0045, z0), (xi + hw, GV_PK[1], z1), r=0.0008)                      # web
+        for (fa, fb) in ((xi - hw, xi - hw + 0.002), (xi + hw - 0.002, xi + hw)):                  # flanges
+            box(c, "steel", (fa, GV_PK[0], z0), (fb, 0.0045, z1), r=0.0006)
+        for zc in self.bands:                                                                         # centre rivet tails
+            with c.at((xi, GV_PK[1], zc), rx=-90):
+                _rivet(c, "steel", 0.0045)
+        if jamb:
+            return
+        box(c, "steel", (xi - 0.008, -0.005, z1 - 0.004), (xi + 0.008, -0.001, self.zax + 0.004), r=0.0005)    # hanger stem
+        with c.at(m=Matrix.Translation((xi, -0.016, self.zax)) @ Matrix.Rotation(-math.pi / 2, 4, "X")):
+            cyl(c, "steel", 0.003, 0.026, 8, ch=0.0005)                                                 # roller axle
+        box(c, "steel", (xi - 0.008, -0.0045, self.zb + 0.005), (xi + 0.008, -0.0015, z0 + 0.004), r=0.0005)   # guide tongue
+        if lead:
+            with c.at((xi, GV_PK[1], self.zlatch), rx=-90):
+                cyl(c, "brass", 0.007, 0.0015, 10)                                                     # latch pivot boss
+            hv = self.handle_v
+            zh = (0.80, 1.40) if hv > 0 else (0.77, 1.47)
+            v_from = GV_PK[1] if hv > 0 else GV_PK[0]
+            for zz in zh:
+                tube(c, "brass", (xi, v_from, zz), (xi, hv, zz), 0.006, 8)
+            tube(c, "brass", (xi, hv, zh[0] - 0.02), (xi, hv, zh[1] + 0.02), 0.010, 10)                 # pull bar
+
+    # ---- animation frames (cell space): {group: {clip: [(frame, loc, (axis, angle))]}} ----
+    def frames(self):
+        out = {}
+        n = int(GATE_T * GATE_FPS)
+        _, th_r = self.state(self.wrest)
+        for clip in ("open", "close"):
+            name = f"{self.key}_{clip}"
+            for f in range(n + 1):
+                t = f / GATE_FPS
+                W = self.width_at(clip, t)
+                _, th = self.state(W)
+                for g, p in self.parts.items():
+                    k = p["kind"]
+                    if k in ("picket", "roller"):
+                        xi = self.x_i(p["i"], W)
+                        loc = self.cellp(xi, 0.0, self.zpk0 if k == "picket" else self.zax)
+                        rot = (self.ax_v, (xi - self.x_i(p["i"], self.wrest)) / GATE_RR) if k == "roller" else (self.ax_v, 0.0)
+                    elif k == "latch":
+                        loc = self.cellp(self.x_i(self.N, W), 0.0, self.zlatch)
+                        rot = (self.ax_rot, self.latch_at(clip, t))
+                    else:
+                        loc = self.cellp(self.x_i(p["i"], W), 0.0, self.bands[p["b"]])
+                        ph, ph_r = (th, th_r) if p["lay"] == "A" else (-th, -th_r)
+                        rot = (self.ax_rot, ph - ph_r)
+                    out.setdefault(g, {}).setdefault(name, []).append((f, loc, rot))
+        return out
+
+    def pose(self, W, latch=0.0):
+        """Static pose (cell space) for renders: {group: (loc, (axis, angle))}."""
+        _, th = self.state(W)
+        _, th_r = self.state(self.wrest)
+        out = {}
+        for g, p in self.parts.items():
+            k = p["kind"]
+            if k in ("picket", "roller"):
+                xi = self.x_i(p["i"], W)
+                out[g] = (self.cellp(xi, 0.0, self.zpk0 if k == "picket" else self.zax),
+                          (self.ax_v, (xi - self.x_i(p["i"], self.wrest)) / GATE_RR if k == "roller" else 0.0))
+            elif k == "latch":
+                out[g] = (self.cellp(self.x_i(self.N, W), 0.0, self.zlatch), (self.ax_rot, latch))
+            else:
+                ph, ph_r = (th, th_r) if p["lay"] == "A" else (-th, -th_r)
+                out[g] = (self.cellp(self.x_i(p["i"], W), 0.0, self.bands[p["b"]]), (self.ax_rot, ph - ph_r))
+        return out
 
 
 def cage_car(c, gate_open=0.45, dream=False):
@@ -2639,12 +3137,11 @@ def cage_car(c, gate_open=0.45, dream=False):
         pass
     with c.at(m=Matrix.Translation((-hw + 0.045, -hw + 0.045, H - 0.03)) @ Matrix(((1, 0, 0, 0), (0, 0, 1, 0), (0, 1, 0, 0), (0, 0, 0, 1)))):
         mesh_panel(c, 2 * hw - 0.09, 2 * hw - 0.09)
-    # front gate (scissor) half drawn to the +x side
-    gx0 = -hw + 0.05
-    with c.grp("anim_car_gate"):
-        c.pivots["anim_car_gate"] = c.P((gx0, -hw + 0.02, 0.0))
-        with c.at((0, -hw + 0.02, 0.0)):
-            scissor_gate(c, gx0, gx0 + (2 * hw - 0.10) * gate_open, H - 0.1)
+    # front gate: articulated scissor gate (6 cells, 3 lattice bands) folding to the -x side; jamb at x -0.60, closed lead post at
+    # x 0.59 with a drop latch over the keeper stud on the right front post; gate plane 55 mm inside the car front (clear of the frame)
+    with c.at((0, -hw + 0.055, 0.0)):
+        KinGate(c, "car_gate", x0=-0.60, wmax=1.19, wrest=max(6 * GATE_SMIN, 1.19 * gate_open), ncell=6, bands=(0.40, 1.07, 1.74),
+                zb=0.024, zt=H - 0.13, zlatch=1.25, handle_v=0.05)
     # top gantry: rope sockets, safety-gear box, four hoist ropes going up out of the cell
     box(c, "steel", (-hw + 0.05, -0.10, H), (hw - 0.05, 0.10, H + 0.10), r=0.004)
     box(c, "brass_worn", (-0.16, -0.16, H + 0.10), (0.16, 0.16, H + 0.26), r=0.004)                 # safety-gear housing
@@ -2828,9 +3325,10 @@ def build_lift(dream=False):
         with c.at((cx, cx, car_lift)):
             cage_car(c, 0.45, dream)
     with c.grp("landing_gate"):
-        # outer landing gate: folded open to the west side; leading post + latch
-        with c.at((cx - WELL + 0.02, cx - WELL - 0.03, 0.0)):
-            scissor_gate(c, 0.0, 0.42, 2.25, rows=5, cells=6, tag="L")
+        # outer landing gate: articulated, 7 cells, folded open to the west side; strike post with the keeper stud on the east side
+        with c.at((0.0, cx - WELL - 0.03, 0.0)):
+            KinGate(c, "landing_gate", x0=cx - WELL + 0.02, wmax=1.415, wrest=0.26, ncell=7, bands=(0.42, 1.12, 1.82),
+                    zb=0.0, zt=2.27, zlatch=1.30, handle_v=-0.06, strike_post=True)
     with c.grp("dial"):
         with c.at((cx, cx - WELL - 0.06, 2.62)):
             landing_dial(c)
@@ -2904,7 +3402,7 @@ def build_lift(dream=False):
             with c.at((cx, cx, 0.001)):                                        # a shallow pool under the hovering car (water 180-190 deg)
                 for k in range(6):
                     pass
-                box(c, "water", (-0.95, -0.95, 0.0), (0.95, 0.95, 0.012), r=0.006)
+                box(c, "water", (-0.95, -WELL + 0.03, 0.0), (0.95, 0.95, 0.012), r=0.006)       # stops inside the well, behind the landing gate track
     c.cams = [
         dict(name="cam1_axis", loc=(CXB + 0.05, 0.85, 1.35), tgt=(CXB, CXB + 0.3, 1.15), lens=20),
         dict(name="cam2_corner", loc=(0.7, 0.85, 1.55), tgt=(3.15, 3.15, 1.0), lens=20),
@@ -3597,17 +4095,26 @@ def main():
     for rm in rooms:
         for dr in variants:
             t1 = time.time()
+            if rm != "hall":           # v1.2: every room after the hall starts from its own seed (independent of the others' draws)
+                RNG.seed(f"{rm}-{'dream' if dr else 'base'}")
             cell = BUILDERS[rm](dr)
             off = tuple(np.array(POS[rm]) + np.array((60 if dr else 0, 0, 0)))
             if DO_EXPORT:
                 cell.F = [f for f in cell.F if not f["g"].startswith("ref_")]
             coll, root, st = realize(cell, off, do_uv1=DO_EXPORT)
+            rig_cell(cell, coll, root)
+            if rm == "stair" and not dr:
+                write_stair_plan(cell)
             made.append((cell, coll))
             print(f"CELL {cell.name}: {sum(v for k, v in st.items() if not k.startswith('ref_'))} tris (ex ref), {len(cell.lights)} lights, groups {st}  build {time.time() - t1:.1f}s", flush=True)
     if DO_RENDER != "none":
         for cell, coll in made:
             names = [ONLYCAM] if ONLYCAM else None
             render_cams(cell, coll, RENDERDIR / f"iter-{ITER:03d}", names)
+    if GATE_RENDERS:
+        for cell, coll in made:
+            if cell.gates:
+                render_gate_states(cell, coll, RENDERDIR / f"iter-{ITER:03d}")
     if DO_EXPORT:
         export_glb(HERE / "tower-base-interiors.glb")
     print(f"TOTAL {time.time() - t0:.1f}s")
