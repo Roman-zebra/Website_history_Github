@@ -1,0 +1,402 @@
+[
+  {
+    "file": "base-ground-axis.png",
+    "position": [
+      4.25,
+      1.0,
+      1.5
+    ],
+    "target": [
+      2.6,
+      7.3,
+      1.1
+    ],
+    "lens": 22,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-ground-corner.png",
+    "position": [
+      5.45,
+      4.7,
+      1.5
+    ],
+    "target": [
+      0.8,
+      1.7,
+      1.1
+    ],
+    "lens": 22,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-ground-ceiling.png",
+    "position": [
+      3,
+      3,
+      1.5
+    ],
+    "target": [
+      3,
+      5.7,
+      3.05
+    ],
+    "lens": 24,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-ground-window.png",
+    "position": [
+      2.8,
+      4.4,
+      1.5
+    ],
+    "target": [
+      2.4,
+      0,
+      1.15
+    ],
+    "lens": 24,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-ground-street.png",
+    "position": [
+      4.4,
+      -2.0,
+      1.5
+    ],
+    "target": [
+      3,
+      3.9,
+      1.15
+    ],
+    "lens": 30,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-upper-axis.png",
+    "position": [
+      4.3,
+      4.4,
+      4.955
+    ],
+    "target": [
+      1.5,
+      0.55,
+      4.2
+    ],
+    "lens": 22,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-upper-corner.png",
+    "position": [
+      0.8,
+      0.6,
+      4.955
+    ],
+    "target": [
+      4.1,
+      4.3,
+      4.15
+    ],
+    "lens": 22,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-upper-ceiling.png",
+    "position": [
+      3,
+      2,
+      4.955
+    ],
+    "target": [
+      3,
+      4.3,
+      5.9
+    ],
+    "lens": 24,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-upper-window.png",
+    "position": [
+      3.2,
+      3.9,
+      4.955
+    ],
+    "target": [
+      1.5,
+      0.25,
+      4.5
+    ],
+    "lens": 24,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "base-upper-street.png",
+    "position": [
+      2.2,
+      -2.2,
+      4.955
+    ],
+    "target": [
+      1.5,
+      1.3,
+      4.4
+    ],
+    "lens": 35,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-ground-axis.png",
+    "position": [
+      4.25,
+      1.0,
+      1.5
+    ],
+    "target": [
+      2.6,
+      7.3,
+      1.1
+    ],
+    "lens": 22,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-ground-corner.png",
+    "position": [
+      5.45,
+      4.7,
+      1.5
+    ],
+    "target": [
+      0.8,
+      1.7,
+      1.1
+    ],
+    "lens": 22,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-ground-ceiling.png",
+    "position": [
+      3,
+      3,
+      1.5
+    ],
+    "target": [
+      3,
+      5.7,
+      3.05
+    ],
+    "lens": 24,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-ground-window.png",
+    "position": [
+      2.8,
+      4.4,
+      1.5
+    ],
+    "target": [
+      2.4,
+      0,
+      1.15
+    ],
+    "lens": 24,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-ground-street.png",
+    "position": [
+      4.4,
+      -2.0,
+      1.5
+    ],
+    "target": [
+      3,
+      3.9,
+      1.15
+    ],
+    "lens": 30,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-upper-axis.png",
+    "position": [
+      4.3,
+      4.4,
+      4.955
+    ],
+    "target": [
+      1.5,
+      0.55,
+      4.2
+    ],
+    "lens": 22,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-upper-corner.png",
+    "position": [
+      0.8,
+      0.6,
+      4.955
+    ],
+    "target": [
+      4.1,
+      4.3,
+      4.15
+    ],
+    "lens": 22,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-upper-ceiling.png",
+    "position": [
+      3,
+      2,
+      4.955
+    ],
+    "target": [
+      3,
+      4.3,
+      5.9
+    ],
+    "lens": 24,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-upper-window.png",
+    "position": [
+      3.2,
+      3.9,
+      4.955
+    ],
+    "target": [
+      1.5,
+      0.25,
+      4.5
+    ],
+    "lens": 24,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  },
+  {
+    "file": "dream-upper-street.png",
+    "position": [
+      2.2,
+      -2.2,
+      4.955
+    ],
+    "target": [
+      1.5,
+      1.3,
+      4.4
+    ],
+    "lens": 35,
+    "referenceFrames": [
+      "mZX2Xqb13xc/00012",
+      "mZX2Xqb13xc/00033",
+      "mZX2Xqb13xc/00044"
+    ],
+    "stage": "Blender Eevee64,1280x720; not browser performance"
+  }
+]

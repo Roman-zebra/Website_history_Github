@@ -1,0 +1,46 @@
+{
+  "handoff": 104,
+  "blindnessLifted": true,
+  "upstreamBranch": "claude/facade-kit-1912",
+  "commits": {
+    "opus": "8e615e5",
+    "sonnet": "1e2e773"
+  },
+  "files": [
+    {
+      "file": "opus/build-building-a.py",
+      "sha256": "b80bdd44ee6a357fffd1f38fedbc3298e1cbb28a82531f863086920d45cf8fa2",
+      "bytes": 136516,
+      "upstreamBlobSha256": "b80bdd44ee6a357fffd1f38fedbc3298e1cbb28a82531f863086920d45cf8fa2",
+      "byteIdentical": true,
+      "lfContentVerified": true
+    },
+    {
+      "file": "opus/README.md",
+      "sha256": "b679f8629efaaae38f981010a0b53d809049767dc4528553eb802c8b49632165",
+      "bytes": 10838,
+      "upstreamBlobSha256": "b679f8629efaaae38f981010a0b53d809049767dc4528553eb802c8b49632165",
+      "byteIdentical": true,
+      "lfContentVerified": true
+    },
+    {
+      "file": "sonnet/build-building-a.py",
+      "sha256": "12939c1288cbac09f7706cdc3b6e904ebd441aabcaf9e8fb0a9041ee7307cc46",
+      "bytes": 158440,
+      "upstreamBlobSha256": "409af2d871c6470603c1c014e79eacc6192cfb625f1ff2f1631301fa13afe776",
+      "byteIdentical": false,
+      "lfContentVerified": true
+    },
+    {
+      "file": "sonnet/README.md",
+      "sha256": "e80ec9ca05beff01105c36dd0308d0e283b6b81a94b04b63a35549b80abab39d",
+      "bytes": 9235,
+      "upstreamBlobSha256": "e80ec9ca05beff01105c36dd0308d0e283b6b81a94b04b63a35549b80abab39d",
+      "byteIdentical": true,
+      "lfContentVerified": true
+    }
+  ],
+  "verifiedAt": "2026-09-30T15:48:16.410Z",
+  "remoteHead": "1e2e7734109ffe40aafbbe8a96758d7dd94c0d3b",
+  "handoffBranchPush": 105
+}

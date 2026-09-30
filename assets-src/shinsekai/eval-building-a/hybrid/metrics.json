@@ -1,0 +1,19 @@
+{
+  "triangles": {
+    "lod0": 19671,
+    "lod1": 1142,
+    "lod2": 112
+  },
+  "interiorTriangles": 39092,
+  "collisionTriangles": 240,
+  "adaptations": [
+    "Opus shell/floors/stair retained; rear boards cut around stair opening",
+    "Sonnet shop lowered0.50m; floating coat/clock post restored",
+    "Sonnet rear props fit into6.02..8.85m raised room",
+    "Sonnet upper built at3.455m",
+    "Duplicate mats/stair/kitchen/four-window dressing excluded"
+  ],
+  "performance": "Blender review only; qualifying1920x1080 browser harness unavailable; no60fps claim",
+  "bytes": 11051828,
+  "buildSeconds": 72.37
+}
