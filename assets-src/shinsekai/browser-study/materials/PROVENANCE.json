@@ -1,0 +1,246 @@
+{
+  "sourceHandoff": 95,
+  "derivation": "Blender resample/JPEG; facade2K, other1K; original hashes retained",
+  "textures": [
+    {
+      "file": "large_sandstone_blocks_diff_2048.jpg",
+      "asset": "large_sandstone_blocks",
+      "channel": "diff",
+      "sizePx": [
+        2048,
+        2048
+      ],
+      "colorSpace": "sRGB",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/large_sandstone_blocks/large_sandstone_blocks_diff_2k.jpg",
+      "sourceSha256": "0555a72f01754bb90d6ee8f5dffb92557cdf2dc13c4271e813e86114ce95cd87",
+      "sha256": "f68e9f4b00f8b2edd152594345fd37aece915dbe1c817958db58723d6b6aaf6f",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "large_sandstone_blocks_nor_gl_2048.jpg",
+      "asset": "large_sandstone_blocks",
+      "channel": "nor_gl",
+      "sizePx": [
+        2048,
+        2048
+      ],
+      "colorSpace": "linear data",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/large_sandstone_blocks/large_sandstone_blocks_nor_gl_2k.jpg",
+      "sourceSha256": "4e07f92c151c202914c33f329a8c1c6123a6158c5c3a23db4df03c2ab309d340",
+      "sha256": "698fe1242bb8c1f7bf32224c8e59e346900cbd502d4fdffd6df62d55208aa76e",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "green_metal_rust_diff_1024.jpg",
+      "asset": "green_metal_rust",
+      "channel": "diff",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "sRGB",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/green_metal_rust/green_metal_rust_diff_2k.jpg",
+      "sourceSha256": "727515554ffb6410be82d3625a2837fe46612cb186ec391f77c50bd52c4d7ab2",
+      "sha256": "1ef8a85ce0967fdc66f03322ba99c670bcd2d20a3a3e49cbaa83f299e577fe1b",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "green_metal_rust_nor_gl_1024.jpg",
+      "asset": "green_metal_rust",
+      "channel": "nor_gl",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "linear data",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/green_metal_rust/green_metal_rust_nor_gl_2k.jpg",
+      "sourceSha256": "45ec5d256c91ccf4a87dd4c4a90f6c58b460f3862287f014bfde432055ece239",
+      "sha256": "03968391914c4675856e71d3dd18f1160a77b925b68000b349e7bbc6fb8fbeb0",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "large_sandstone_blocks_arm_2048.jpg",
+      "asset": "large_sandstone_blocks",
+      "channel": "arm",
+      "sizePx": [
+        2048,
+        2048
+      ],
+      "colorSpace": "linear data",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/large_sandstone_blocks/large_sandstone_blocks_arm_2k.jpg",
+      "sourceSha256": "a66a309322f96558f58f9eb3162d8c025c4cc950ab643b11253a5c81017ed921",
+      "sha256": "5842fef0fe3940aa40b466e682cda70313a63855e313d722162afff4c6eeeb33",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "green_metal_rust_arm_1024.jpg",
+      "asset": "green_metal_rust",
+      "channel": "arm",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "linear data",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/green_metal_rust/green_metal_rust_arm_2k.jpg",
+      "sourceSha256": "5e6592a800b82bff8cd24fa0ceb84588c1396ee56992ab8c85fd44f607f4de46",
+      "sha256": "1152c9bde93364eedcee5842aff1a41ea5dd34c046c795e06f2c9e3cd0309c5a",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "Plaster007_Color_1024.jpg",
+      "asset": "Plaster007",
+      "channel": "Color",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "sRGB",
+      "source": "https://ambientcg.com/get?file=Plaster007_2K-JPG.zip",
+      "sourceSha256": "3dab115cfc492ca0ca0e2ec989a9dd1ccb3681b76c3eb3d0ac069192998a231c",
+      "sha256": "0d7435897f63e7fd3c517c7591fdfbb5482491c5a2db9af14095b26cbdde4585",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "Plaster007_NormalGL_1024.jpg",
+      "asset": "Plaster007",
+      "channel": "NormalGL",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "linear data",
+      "source": "https://ambientcg.com/get?file=Plaster007_2K-JPG.zip",
+      "sourceSha256": "3dab115cfc492ca0ca0e2ec989a9dd1ccb3681b76c3eb3d0ac069192998a231c",
+      "sha256": "8bfebae27436ffd0e1f29a33aca573165fb8808466f47ccc2a37e67536793a74",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "Plaster007_Roughness_1024.jpg",
+      "asset": "Plaster007",
+      "channel": "Roughness",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "linear data",
+      "source": "https://ambientcg.com/get?file=Plaster007_2K-JPG.zip",
+      "sourceSha256": "3dab115cfc492ca0ca0e2ec989a9dd1ccb3681b76c3eb3d0ac069192998a231c",
+      "sha256": "385a39de31989370f85fd072a214790eb1cbc9144fc9818d4887276b1bbf73f0",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "PaintedPlaster006_Color_1024.jpg",
+      "asset": "PaintedPlaster006",
+      "channel": "Color",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "sRGB",
+      "source": "https://ambientcg.com/get?file=PaintedPlaster006_2K-JPG.zip",
+      "sourceSha256": "d0611e8bffe77cb7f9cc37ddbefa13797e4c23038da586af443b3407ce4133f8",
+      "sha256": "c0f2815efa5c8005fb3abf2bf3e9edca73c7ba247b80edd17ce62afb89acadbb",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "PaintedPlaster006_NormalGL_1024.jpg",
+      "asset": "PaintedPlaster006",
+      "channel": "NormalGL",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "linear data",
+      "source": "https://ambientcg.com/get?file=PaintedPlaster006_2K-JPG.zip",
+      "sourceSha256": "d0611e8bffe77cb7f9cc37ddbefa13797e4c23038da586af443b3407ce4133f8",
+      "sha256": "fddfb7a1b8bcaa73db43580cd0bb338f03afbe664f12b70cfa4f073089e2c782",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "PaintedPlaster006_Roughness_1024.jpg",
+      "asset": "PaintedPlaster006",
+      "channel": "Roughness",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "linear data",
+      "source": "https://ambientcg.com/get?file=PaintedPlaster006_2K-JPG.zip",
+      "sourceSha256": "d0611e8bffe77cb7f9cc37ddbefa13797e4c23038da586af443b3407ce4133f8",
+      "sha256": "f8d393bb6096e9bc480b28e082f764f995af8f1ab53fe8f8da52a3a6faaebd83",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "Metal041B_Color_1024.jpg",
+      "asset": "Metal041B",
+      "channel": "Color",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "sRGB",
+      "source": "https://ambientcg.com/get?file=Metal041B_2K-JPG.zip",
+      "sourceSha256": "5930fb7ed48e2e0ba4bd3749b689d966d0c7dc09a833e0f434a74d2acc92b024",
+      "sha256": "4a4f7a135d7ba3222c25d4a0290771c253ef1ffce7f3ab24bc033328fd1fe887",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "Metal041B_NormalGL_1024.jpg",
+      "asset": "Metal041B",
+      "channel": "NormalGL",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "linear data",
+      "source": "https://ambientcg.com/get?file=Metal041B_2K-JPG.zip",
+      "sourceSha256": "5930fb7ed48e2e0ba4bd3749b689d966d0c7dc09a833e0f434a74d2acc92b024",
+      "sha256": "403e23321799374fbd03545fe6e89be991c84501e15be1507e90ebe75b230d9c",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    },
+    {
+      "file": "Metal041B_Roughness_1024.jpg",
+      "asset": "Metal041B",
+      "channel": "Roughness",
+      "sizePx": [
+        1024,
+        1024
+      ],
+      "colorSpace": "linear data",
+      "source": "https://ambientcg.com/get?file=Metal041B_2K-JPG.zip",
+      "sourceSha256": "5930fb7ed48e2e0ba4bd3749b689d966d0c7dc09a833e0f434a74d2acc92b024",
+      "sha256": "12f9e24147723badd3eb15685009d9c833f28df0fe99dd1726b008973b0f503d",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "use": "Claude95 art-direction choice; not a measured 1912 material"
+    }
+  ]
+}
