@@ -1,0 +1,3 @@
+# Hash-checked photographic input snapshots must preserve exact received bytes on Windows and Linux.
+photo-landmarks-v2-claude.csv -text
+photo-landmarks-v2.csv -text

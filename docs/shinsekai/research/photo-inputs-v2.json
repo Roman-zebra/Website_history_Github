@@ -1,0 +1,49 @@
+{
+  "status": "research-observations-only",
+  "handoff": 59,
+  "landmarks": {
+    "file": "photo-landmarks-v2.csv",
+    "sha256": "a3c4d17b89d159ba4635ca00f3d51979f251a925c3aaf0add7236cdec6d62ec5",
+    "rawFile": "photo-landmarks-v2-claude.csv",
+    "rawSha256": "22f5bc1bd198900df28741c0c89c2922aae8cb6ab17a3c9f678f9755be89f56e",
+    "normalization": "Data row 15's final notes field contains unquoted commas. Quote that field only; all 41 records and numeric values unchanged. Audit compares parsed cells after this single declared repair."
+  },
+  "views": {
+    "plate46": {
+      "originalPx": [4064, 2880],
+      "imageLeft": "east",
+      "sector": "north",
+      "sourceDate": "1921",
+      "metadataUrl": "https://dl.ndl.go.jp/api/iiif/962657/R0000048/info.json",
+      "crop": {"offsetPx": [560, 440], "scale": 1, "sizePx": [1391, 1860]},
+      "cropProvenance": "Claude supplied IIIF region; Codex checked local crop size, not translation by matching.",
+      "rights": "Protected scan/overlays remain outside Git; only numeric observations archived.",
+      "role": "training candidate"
+    },
+    "viewA": {
+      "originalPx": [4064, 2880],
+      "imageLeft": "east",
+      "sector": "north",
+      "sourceDate": "1914",
+      "metadataUrl": "https://dl.ndl.go.jp/api/iiif/952032/R0000095/info.json",
+      "crop": {"offsetPx": [2090, 660], "scale": 1, "sizePx": [890, 1650]},
+      "cropProvenance": "Claude reports image matching MSE 0.7; Codex checked size, not independent matching.",
+      "rights": "Protected scan/overlays remain outside Git; only numeric observations archived.",
+      "role": "training candidate; prior fixed base dimensions were dependent on plate46"
+    },
+    "south_c0234001": {
+      "originalPx": [347, 534],
+      "imageLeft": "west",
+      "sector": "probable south (medium confidence)",
+      "sourceDate": "1912-1925 catalogue range; exposure day unknown",
+      "sourceUrl": "https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0157352",
+      "ledgerId": "S032",
+      "crop": {"offsetPx": [0, 0], "scale": 1, "sizePx": [347, 534]},
+      "rights": "Individual OML record checked CC0; source image archived under assets-src.",
+      "role": "reserved prediction candidate; fit camera from a declared calibration subset and withhold other features, never estimate shared geometry from this image"
+    }
+  },
+  "scaleScenario": "50-shaku roof-floor statement (~15.15 m), not a surveyed control",
+  "geometryBindings": "unassigned",
+  "southPredictionGate": "open"
+}
