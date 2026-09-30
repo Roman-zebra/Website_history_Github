@@ -11,16 +11,21 @@
 <p>Local schematic, without people. Layout, terminal heights, timing and cable sag are assumptions. The roof-level boarding route has source evidence; these shapes are placeholders.</p>
 <div class="actions"><button id="play" disabled>Play</button><button id="reset" disabled>Reset</button></div>
 <label>View <select id="ride"><option value="overview">Overview</option><option value="ropeway">Ride cabin A</option><option value="elevator">Ride elevator</option></select></label>
+<label>Cabin view candidate <select id="orientation"><option value="sideways">Sideways (later-photo interpretation)</option><option value="along">Along route</option></select></label>
 <p id="status" role="status">Loading renderer…</p><p id="phase">Paused at 0.0 s</p>
 <details id="parameters"><summary>Assumed motion parameters</summary>
 <label>Span <output id="span-value">100 m</output><input id="span" aria-label="Assumed span" type="range" min="60" max="150" value="100" step="5"></label>
-<label>Arrival cable height <output id="endHeight-value">30 m</output><input id="endHeight" aria-label="Assumed arrival height" type="range" min="15" max="45" step="0.5" value="30"></label>
+<label>Terminal candidate <select id="arrival"><option value="equal">Similar elevation, secondary account</option><option value="unknown">Upper terminal, height unknown</option></select></label>
+<label>Assumed arrival cable height <output id="endHeight-value">15.15 m</output><input id="endHeight" aria-label="Assumed arrival height" type="range" min="15.15" max="45.15" step="0.5" value="15.15" disabled></label>
 <label>Cable sag <output id="sag-value">2 m</output><input id="sag" aria-label="Assumed cable sag" type="range" min="0" max="6" step="0.5" value="2"></label>
 <label>One-way travel <output id="travelSeconds-value">65 s</output><input id="travelSeconds" aria-label="Assumed one-way travel time" type="range" min="30" max="120" step="5" value="65"></label>
+<label>Disc precession period (0 = fixed tilt) <output id="wavePrecessionPeriod-value">0 s</output><input id="wavePrecessionPeriod" aria-label="Assumed precession period" type="range" min="0" max="60" step="5" value="0"></label>
+<p>1912 report: disc diameter 36 shaku (about 10.9 m), height 22 shaku (about 6.7 m), capacity about 80. Radius uses that report; support height and twenty four-place benches remain schematic. Fixed tilt and precession are alternative readings. Terminal height, sideways orientation and timing are unconfirmed for 1912.</p>
 <p>Two distinct tracks use opposite shuttle fractions, with 8 s dwell and smooth starts/stops. The cable is a parabolic visual approximation. The disc is one rigid tilted rotating candidate. These values are not recovered operating measurements.</p>
 </details>
 <p>Drag to orbit in overview; select a cabin to follow its movement. Hidden tabs pause. Playback starts only on request, including with reduced-motion preferences.</p>
 <a href="index.html">Tower study</a>
+ · <a href="lift.html">Candidate tower lift</a>
 </section>
 <script type="importmap">{"imports":{"three":"/vendor/three-r186/build/three.webgpu.js","three/webgpu":"/vendor/three-r186/build/three.webgpu.js","three/addons/":"/vendor/three-r186/examples/jsm/"}}</script>
 <script type="module" src="motion-viewer.js"></script>

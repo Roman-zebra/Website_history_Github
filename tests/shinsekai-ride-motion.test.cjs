@@ -13,9 +13,19 @@ test('shuttle dwells at both terminals and joins travel with zero velocity/accel
  assert.throws(()=>shuttle(-1,65,8));
 });
 test('cable keeps unequal endpoint heights and declared midpoint sag; elevator stays inside roof/top bounds',async()=>{
- const {cablePoint,elevator,DEFAULT_RIDES:c}=await load();near(cablePoint(0,-1)[1],c.startHeight);near(cablePoint(1,-1)[1],c.endHeight);near(cablePoint(.5,-1)[1],(c.startHeight+c.endHeight)/2-c.sag);
+ const {cablePoint,elevator,DEFAULT_RIDES:defaults}=await load(),c={...defaults,endHeight:30};near(cablePoint(0,-1,c)[1],c.startHeight);near(cablePoint(1,-1,c)[1],c.endHeight);near(cablePoint(.5,-1,c)[1],(c.startHeight+c.endHeight)/2-c.sag);
  for(let t=0;t<400;t+=.33){const h=elevator(t).height;assert.ok(h>=c.elevatorLow&&h<=c.elevatorHigh);}
  assert.throws(()=>cablePoint(1.1,1));
+});
+test('dwell preserves the preceding direction including a full-cycle return',async()=>{
+ const {ropeway}=await load();for(const [t,direction] of [[0,1],[75,1],[145,-1],[150,-1],[160,1]]){const {cars}=ropeway(t);assert.equal(cars[0].direction,direction);assert.equal(cars[1].direction,-direction);}
+});
+test('precessing wave remains rigid in its moving plane',async()=>{
+ const {waveSeat,DEFAULT_RIDES:c}=await load(),config={...c,wavePrecessionPeriod:35};let distance;
+ for(const t of [0,7,19,35,900]){const p=2*Math.PI*(t%35)/35,normal=[-Math.sin(c.waveTilt)*Math.cos(p),Math.cos(c.waveTilt),Math.sin(c.waveTilt)*Math.sin(p)],a=waveSeat(t,0,20,config),b=waveSeat(t,1,20,config);near(a.reduce((s,v,i)=>s+v*normal[i],0),0);near(Math.hypot(...a),c.waveRadius);const d=Math.hypot(...a.map((v,i)=>v-b[i]));if(distance===undefined)distance=d;else near(d,distance);}
+});
+test('blocked start while hidden or unready cannot advance the clock',async()=>{
+ const {createRideClock}=await load();let visible=false;const clock=createRideClock({canStart:()=>visible});assert.equal(clock.start(1000),false);near(clock.sample(31000),0);assert.equal(clock.playing,false);visible=true;assert.equal(clock.start(32000),true);near(clock.sample(33000),1);clock.pause(33000);visible=false;assert.equal(clock.start(34000),false);near(clock.sample(90000),1);
 });
 test('wave candidate is rigid and coplanar, preserving seat spacing and radius',async()=>{
  const {waveSeat,DEFAULT_RIDES:c}=await load();let distance;
