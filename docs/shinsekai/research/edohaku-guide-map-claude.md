@@ -1,4 +1,4 @@
-> Archived Claude visual transcription. The `1918–19` date inference below is **not accepted**: the hall-site reservation and postcard print dates are unknown. See [the Codex review](program-map-analysis.md).
+> Archived Claude visual transcription, updated with its correction at 14:19. The museum's Taisho-period range is the only accepted date. See [Codex review](program-map-analysis.md).
 
 # 江戸東京博物館「新世界案内図」絵葉書（88133639）の読み取り（Claude、2026-09-30 14:15）
 - 見たもの：https://www.edohakuarchives.jp/detail-106762.html の拡大画像（1000×655 px）をアプリ内のブラウザで拡大して閲覧。**画像は保存していない**（再利用には館の許可が要る）。年代の書誌は「大正期」だけ。喜多川周之コレクション。
@@ -14,10 +14,14 @@
 - 白塔と塔は図の中でほぼ同じ横の列（＝南北の軸の上）に見える。安野の博士論文の「白塔も軸線上」と矛盾しない（確かさ：低〜中。略図）。
 
 ## 年代の手がかり
-- **「角力常設館敷地」**（オ）＝大阪国技館（1919年開館）の**建つ前の敷地**。国技館の計画が出てから完成までの間、**1918〜1919年ごろ**の図と考えられる（国技館の計画・着工の年は要確認）。ルナパーク正門がまだあるので1923年の閉園より前。
+- （14:19 訂正）**「角力常設館敷地」**（オ）は大阪国技館の建設前の敷地として描かれている。図の印刷年や敷地の予約年は不明。博物館の「大正期」だけが確認できる年代。
 - 「仮設興行館」「スケーチングホール」「ホーリング館」は開業時（1912）の一覧（1914年の案内）には無い名前で、後の時期の施設の可能性。
-- → **1912年の開業の日の配置の証拠としては使えない**（Codex の方針どおり）。1918〜19年ごろの配置の略図として、施設の並び（池・白塔・音楽堂・塔の関係）の照合にだけ使う。
+- → **1912年の開業の日の配置の証拠としては使えない**（Codex の方針どおり）。年代未確定の大正期の略図として、施設の並び（池・白塔・音楽堂・塔の関係）の照合にだけ使う。
 
 ## 1913年の写真帖の平面図・大阪歴史博物館のプログラムとの照合
 - どちらの画像も Claude は持っていない（1913年の写真帖の平面図はネットに無し、歴史博物館のプログラムは小さな見本の絵だけ）。見本の絵は「白塔が塔の南西」で、この図は「白塔はほぼ真南（軸の上）」。どちらも略図なので、食い違いとまでは言えない。
 - 「真澄の池」と「夫婦池」：この図の池は1つ（名前なし）。区別の判断には使えない。
+
+## Correction (2026-09-30 14:19, after Codex review)
+- The catalogue date **"Taisho period"** is the only accepted date. "Around 1918–19" is an **unverified hypothesis**. The label 角力常設館敷地 shows only that the print shows the hall's site as not yet built. Osaka City states the hall was completed in September 1919, but that dates neither the site reservation nor this print, and an older guide may have been sold later. A tighter date needs a dated original or a planning/construction source.
+- The comparison with the 1913 developer album plan is still open (the plan was not available to Claude).
