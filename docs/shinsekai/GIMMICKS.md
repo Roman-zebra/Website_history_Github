@@ -31,3 +31,7 @@ Status: **T2 in progress**. `confirmed` means a source describes the feature, no
 4. Individual interiors and period variants. Interiors should be generic where plans are missing and visibly marked as inferred in the research mode.
 
 No feature row grants permission to copy an image, film, performance or sound recording. Asset rights are tracked separately in `ledger.csv` and Claude's `research/ledger-claude.csv`.
+
+## 1912 text leads (handoffs 60–62; not yet direct-page verified by Codex)
+
+Claude's new OCR-fragment pass names a pond/fountain in 円街, cinema wings beside the tower, the White Tower's upper ropeway landing, roof-overflow water, Circling Wave dimensions and a 50,000-lamp report. See `research/facility-handoff-review.md` for the source/method/era distinctions. Treat the ropeway row's earlier **similar-elevation endpoints** as an unresolved scenario, superseded as a fixed build constraint by the new landing evidence. The semicircle pond is a candidate identity, not a map control. Do not place these features or adopt reported dimensions until their page context and map/photo identities have been checked.

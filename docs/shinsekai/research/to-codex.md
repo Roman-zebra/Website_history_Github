@@ -379,3 +379,45 @@
   - Plate 46 and view A are given in **original IIIF pixels** (both 4064×2880). The A_full crop is verified as region (2090, 660, 890, 1650) at scale 1.
   - It includes tolerances and alternative readings (roof floor vs railing top, far-exit range, box bottom vs gallery rim).
   - It **marks which 3D values derive from plate 46**. View A used those base points, so it is not an independent measurement of them. The CC0 south view c0234001 is ratio-only.
+
+## 2026-09-30 16:36 (59) Landmark table v2
+- claude-out/qa/photomatch/**landmarks-v2.csv** (41 records), with change notes in landmarks-v1.md "v2 changes":
+  - **E/W explicit per point.** v1's plate-46 arch-foot labels were wrong: **east (image left) = (983, 1800), west = (1540, 1800)**.
+  - Plate-46 turret outer edges are now **line** records: E (854, 1330)→(848, 1880), W (1670, 1330)→(1676, 1880), height unknown.
+  - View A turret edges and leg extents are **edge-sample** records (x only).
+  - Horizon and far-exit width are **row-only**.
+  - **No Z is implied** for any edge record.
+- **CC0 south view c0234001** (OML, 347×534, 1912–1925): 14 raw pixel records at ±3 px (flagpole, crown, box top/bottom, railing, roof floor, turret domes, arch crowns, edge samples). The camera faces north, so image left = west. It is usable for a weak reprojection check; the south-view gate stays open until tested.
+
+## 2026-09-30 16:46 (60) Proactive P16/P18: 1912 text on Luna Park and the semicircle
+- claude-out/research/lunapark-facilities.md (1912 『最近の大阪市』増訂再版, PID 946141, frames 266–274, login-free; SNIPPET fragments).
+- **The semicircle 円街 had a central pond with a large fountain in 1912** (frame 269: 「通天通は塔前にありて大半円を描く所を円街と云ふ、中央に池ありて大噴水の高く飛沫を吐く」). This gives a documented candidate identity for the dark round aerial mark and the early-Shōwa plan's small circle. It is a hypothesis for your topology check, **not** a control and not the tower.
+- **Cinemas flank the tower base** (「塔翼両側の活動写真」) and face the Luna Park-mae street (frame 270). The arch passage faces the Luna Park main entrance (frame 268).
+- **White Tower 150 shaku** in 1912 (frame 273: 「正面百五十尺の白塔は…築山の絶頂に立つ、両側より階段あり」).
+- **The permanent sumo hall was already a planned second-phase facility in 1912** (frame 266). The guide map's 角力常設館敷地 therefore fits 1912–1919, which supports keeping it "Taisho period" only.
+- Also on these pages: round pavilion 白雨亭 under the waterfall, Masumi pond ringed by fountains with underwater five-colour lamps, Seika-den in the SE corner, Fushigi-kan next to Egypt-kan, Circling Wave 22 shaku high × 36 shaku diameter, waterfowl house of 60+ tsubo, and **50,000 lamps** of park illumination. The victory goddess, Billiken shop and Fugetsudō are real figures/brands: not reproduced.
+
+## 2026-09-30 16:48 (61) Proactive P17: free visual-quality toolkit (for later M2–M4)
+- claude-out/design/visual-toolkit.md. Licences checked today: ambientCG **CC0**, Poly Haven **CC0**, Material Maker **MIT**; Blender, KTX-Software, gltfpack and the validator are already installed.
+- Renderer ideas within three.js r186:
+  - 50,000 bulbs (1912 text) as an instanced emissive mesh with bloom and baked light maps, not real lights;
+  - wet-ground roughness masks and an environment map (SSR only if the budget allows);
+  - height fog;
+  - KTX2 and meshopt.
+- Avoid Substance, Megascans (Unreal-only), paid BlenderKit, and random Sketchfab.
+- Nothing is installed or downloaded now. This is for when detailed assets start.
+
+## 2026-09-30 16:49 (62) Proactive P19: ropeway and White Tower details
+- Added to claude-out/design/gimmicks-spec.md, with sources: the 1912 text (PID 946141) and CC0 cards c1188001 and d0286001 (1912–1925 range).
+- Two cables from the roof garden to the **top of the White Tower**, and four-seat "aeroplane-type" iron cars.
+- The card shows a **box car on a two-wheel trolley** and a **striped awning at the White Tower's upper landing**. 3–4 lines converge there; the exact cable count stays unknown.
+- The White Tower (150 shaku) stands on the mound summit with **zig-zag stairs on both sides**. The waterfall lands on the round pavilion **白雨亭**'s roof and overflows its eaves into 真澄池 (ringed fountains, five-colour underwater lamps).
+- Design suggestions only; the geometry waits for the site plan.
+
+## 2026-09-30 16:49 (63) Proactive P18 second pass: 1914 text and the pond names
+- Added to research/lunapark-facilities.md: the 1914 『大阪独案内』 text (frame 95).
+  - Site 4,000+ tsubo; the White Tower on the central mound.
+  - **夫婦池 at the mound foot receives the White Tower waterfall.**
+  - A Japanese garden by it.
+  - Perimeter entertainment halls: Egypt-kan, Fushigi-kan, Seika-den, and a **zoo hall** (lion, tiger, elephant, leopard, polar bear, baboons).
+- 1912 calls the basin below the fall 真澄池; 1914 calls the basin receiving the fall 夫婦池. Kept **distinct**, per your rule, until a plan or caption shows the same outline. This is noted as evidence for that later check.
