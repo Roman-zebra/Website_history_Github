@@ -486,3 +486,46 @@ alignment remain yours; Codex will not duplicate them. The owned 109 cinema
 delta will be repinned after your interior repair rather than against a moving
 source. Codex continues independent runtime, cloth, lighting and weathering work.
 No MAX/Astra or new chat needed.
+
+## 111 cloth detail implemented and independently validated
+
+New opt-in `building-a.html?cloth` (`&petals` / `&webgl` as needed) preserves
+the default 111 scene for comparison. Only haori, drying garments and the
+unrolled bolt are replaced. Original front-position/UV0/colour triangles and
+RNG calls are retained; closed reverse surfaces add an inferred 1.2mm body and
+3mm lower hem. A new original 256px/12cm fine wrinkle-and-weave normal tile
+changes the selected patches' normal input, preserving colour/roughness/sheen.
+Three review views cover the cloth without changing your arrangement.
+
+Independent exported triangle-subset comparison retains all 4612 original
+triangles, including winding. Replacement7284 adds2672; max active interior
+with the flower prototype149226/150000. Thickened patches alone4464 triangles
+and6696 position-welded edges all have exactly two incident triangles. This
+checks closed surfaces, not all prop contacts or swept collision. GLB4256416
+bytes, validator0errors/0warnings/20infos;108 tangent frames repaired without
+moving geometry/UVs. The committed asset's hash is in PROVENANCE.json.
+`build-cloth.py` reproduces privately without overwriting your inputs/default
+GLBs. UV1 packing changes serialized hashes between runs; actual source
+position/UV0/colour triangles still match in both independent builds.
+
+Runtime verifies all three complete world matrices and rejects missing/moved/
+unrelated replacement nodes before hiding originals. The companion belongs to
+the loaded cell, including late-response disposal. Both1280x720 backends attach,
+show cloth with237flower anchors/phonograph dream, save images and retire all
+interior/cloth/flower/dream state at far distance. New captured warnings/errors0;
+fullbuild281/281. Readiness includes the companion dependency. WebGPU corrected
+haori734.7ms load/decode+1430.9ms firstCPU submission; WebGL512.8+5004.6ms.
+Caches/warm states are unmatched, so these are observations, not FPS or an
+optimization comparison. Cold submission remains slow.
+
+Please review parent `research-cache/look-dev/cloth-111/haori-control-webgpu.png`
+versus `haori-webgpu.png`; laundry/bolt close-ups, `haori-webgl.png`, and the
+two `upper-cloth-petals-*` images are there too. receipt.json records hashes,
+dimensions and checks. `haori-material-close-webgpu.png` intentionally crops
+the hem and is excluded from whole-garment comparison. One actual cloth room
+pass brings the artistic counter8 (hybrid7); visual acceptance remains yours.
+Self-review: thickness/relief improves detail, but lighting remains flat and
+the fine crease tile repeats. Codex immediately continues owned lighting/AO
+and weathering, plus runtime packaging. Your114 entry-wall/shell/downpipe/wire/
+door source repairs remain yours; no duplicate geometry work or cinema repin
+before the repaired source. No MAX/Astra or new chat needed.
