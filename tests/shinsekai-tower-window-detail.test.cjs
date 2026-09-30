@@ -21,3 +21,19 @@ test('tower detail LOD candidates preserve landings,16 stable bays, real recess 
  }
  assert.ok(counts[0]>counts[1]&&counts[1]>counts[2],`LODs must reduce triangles: ${counts}`);
 });
+
+test('metric UV derivative preserves detailed panes, geometry and landing contract',()=>{
+ const source=read('tower-study-v5-detail-lod0-open-gallery.glb'),mapped=read('tower-study-v5-detail-look-uv.glb');
+ assert.deepEqual(mapped.scenes[0].extras.lift,source.scenes[0].extras.lift);
+ assert.deepEqual(mapped.nodes.map(n=>[n.name,n.mesh,n.children,n.translation,n.rotation,n.scale]),source.nodes.map(n=>[n.name,n.mesh,n.children,n.translation,n.rotation,n.scale]));
+ // Metric UV seams may duplicate vertices; compare actual triangle positions.
+ assert.deepEqual(mapped.meshes.map(m=>m.primitives.map(p=>mapped.accessors[p.indices].count)),source.meshes.map(m=>m.primitives.map(p=>source.accessors[p.indices].count)));
+ const {read:geometry}=require('./helpers/gltf-study-geometry.cjs');
+ const before=geometry(path.join(folder,'tower-study-v5-detail-lod0-open-gallery.glb')),after=geometry(path.join(folder,'tower-study-v5-detail-look-uv.glb'));
+ for(let i=0;i<source.meshes.length;i++)for(let j=0;j<source.meshes[i].primitives.length;j++){
+  const a=source.meshes[i].primitives[j],b=mapped.meshes[i].primitives[j];
+  const signature=(asset,p)=>{const v=asset.data(p.attributes.POSITION,3),indices=asset.data(p.indices,1).flat(),faces=[];for(let k=0;k<indices.length;k+=3)faces.push(indices.slice(k,k+3).map(i=>v[i].map(x=>Math.round(x*1e6)/1e6).join(',')).sort().join(';'));return faces.sort();};
+  assert.deepEqual(signature(after,b),signature(before,a));
+ }
+ assert.equal(mapped.nodes.filter(n=>n.extras?.windowStudy).length,16);
+});

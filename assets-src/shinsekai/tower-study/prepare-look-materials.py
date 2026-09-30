@@ -1,20 +1,28 @@
 """Author metric box UVs on a separate v4 copy; prepare selected CC0 texture variants.
 No vertex, landing, height or historical placement change. Run with Blender's Python.
 """
-import bpy, json, struct, hashlib
+import bpy, json, struct, hashlib, argparse, sys
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]
+parser=argparse.ArgumentParser()
+parser.add_argument('--source');parser.add_argument('--out');parser.add_argument('--reuse-textures',action='store_true')
+args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 CACHE=ROOT.parent/'research-cache'/'materials-93'
-SOURCE=ROOT/'assets-src/shinsekai/tower-study/tower-study-v4-open-gallery.glb'
-OUT=ROOT/'assets-src/shinsekai/tower-study/tower-study-v4-look-uv.glb'
+SOURCE=Path(args.source).resolve() if args.source else ROOT/'assets-src/shinsekai/tower-study/tower-study-v4-open-gallery.glb'
+OUT=Path(args.out).resolve() if args.out else ROOT/'assets-src/shinsekai/tower-study/tower-study-v4-look-uv.glb'
 TEXTURES=ROOT/'assets-src/shinsekai/browser-study/materials'
 TEXTURES.mkdir(parents=True,exist_ok=True)
 receipt=json.loads((CACHE/'download-receipt.json').read_text(encoding='utf8'))
 if receipt['failures'] or len(receipt['files'])!=9:
     raise RuntimeError('Claude95 material download verification incomplete')
 manifest=[]
-for item in receipt['files']:
+if args.reuse_textures:
+    existing=json.loads((TEXTURES/'PROVENANCE.json').read_text(encoding='utf8'))
+    for item in existing['textures']:
+        if hashlib.sha256((TEXTURES/item['file']).read_bytes()).hexdigest()!=item['sha256']:
+            raise RuntimeError('Prepared texture hash changed: '+item['file'])
+for item in [] if args.reuse_textures else receipt['files']:
     original=CACHE/item['file']
     if hashlib.sha256(original.read_bytes()).hexdigest()!=item['sha256']:
         raise RuntimeError('Source asset hash changed: '+item['file'])
@@ -56,6 +64,9 @@ blob=SOURCE.read_bytes();length=struct.unpack_from('<I',blob,12)[0];source=json.
 for key,value in source['scenes'][source.get('scene',0)].get('extras',{}).items():bpy.context.scene[key]=value
 for obj in bpy.context.scene.objects:
     if obj.type!='MESH':continue
+    # Pane UVs are authored0..1; shared window-kit meshes must not be overwritten
+    # by the world projection of whichever instance happens to run last.
+    if obj.get('windowKit',False):continue
     mesh=obj.data
     layer=mesh.uv_layers[0] if mesh.uv_layers else mesh.uv_layers.new(name='world-metric')
     mesh.uv_layers.active_index=0;layer.active_render=True
@@ -70,8 +81,9 @@ for obj in bpy.context.scene.objects:
             elif axis==1:u,v=(point.x if normal.y>0 else -point.x),point.z
             else:u,v=point.x,(point.y if normal.z>0 else -point.y)
             layer.data[loop_index].uv=(u/scale,v/scale)
-bpy.context.scene['lookUv']=json.dumps({'version':'v4-look-r2','method':'metric box projection; facade3m, other1m','geometry':'v4 unchanged','lightmap':'not baked yet'})
+bpy.context.scene['lookUv']=json.dumps({'version':'v4-look-r2' if not args.source else OUT.stem,'method':'metric box projection; facade3m, other1m; authored window UV retained','geometry':SOURCE.name+' unchanged','lightmap':'not baked yet'})
 bpy.ops.object.select_all(action='SELECT')
 bpy.ops.export_scene.gltf(filepath=str(OUT),export_format='GLB',use_selection=True,export_extras=True)
-(TEXTURES/'PROVENANCE.json').write_text(json.dumps({'sourceHandoff':95,'derivation':'Blender resample/JPEG; facade2K, other1K; original hashes retained','textures':manifest},indent=2),encoding='utf8')
+if not args.reuse_textures:
+    (TEXTURES/'PROVENANCE.json').write_text(json.dumps({'sourceHandoff':95,'derivation':'Blender resample/JPEG; facade2K, other1K; original hashes retained','textures':manifest},indent=2),encoding='utf8')
 print('Authored look UV copy and '+str(len(manifest))+' texture variants')
