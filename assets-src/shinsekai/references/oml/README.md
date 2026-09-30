@@ -5,8 +5,8 @@ These seven original JPEGs were downloaded from the [Osaka Municipal Library Dig
 | File | Library item | Catalogue date | Research use |
 | --- | --- | --- | --- |
 | `c1529001.jpg` | [Park-side distant tower](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0158237) | 1912–1943 | Park roofline and first tower; date too broad for opening-specific detail |
-| `c0234001.jpg` | [First tower front](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0157352) | 1912–1925 | North garden pavilion, arch and flanking wings |
-| `e0347001.jpg` | [North garden panorama](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0160200) | 1912–1925 | Arch, flags, central pavilion and symmetric forecourt |
+| `c0234001.jpg` | [First tower frontage](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0157352) | 1912–1925 | Arch and flanking wings; camera side and pavilion identity unresolved |
+| `e0347001.jpg` | [Tower and pavilion panorama](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0160200) | 1912–1925 | Arch, flags and pavilion; camera side unresolved |
 | `d0289001.jpg` | [Luna Park and White Tower](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0158891) | 1912–1925 | Ropeway cabin, park pavilions, White Tower mound |
 | `c1819001.jpg` | [Ebisudori street](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0158514) | 1912 | Northwest radial approach, street edges, first-tower axis |
 | `d0285001.jpg` | [From White Tower toward the first tower](https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0158887) | 1912–1925 | South high viewpoint, music-hall/arch relation; individual structures still need identification |

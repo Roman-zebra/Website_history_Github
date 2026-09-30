@@ -94,14 +94,17 @@ for x in (-13.7, 13.7):
     for y in (-5.0, 5.0):
         block("flanking turret", (x, y, 12.1), (4.8, 4.2, 24.2), stone)
         block("turret crown", (x, y, 24.5), (5.5, 4.8, 1.1), trim)
-        bpy.ops.mesh.primitive_cone_add(vertices=12, radius1=2.2, radius2=0.6,
-                                    depth=2.0, location=(x, y, 26.0))
-        bpy.context.object.name = "turret cupola silhouette"
+        # The 1914 north view and 1921 plate show rounded cupolas, not cones.
+        # The sphere's lower half is hidden by the crown; radii remain guesses.
+        bpy.ops.mesh.primitive_uv_sphere_add(segments=16, ring_count=8,
+                                              location=(x, y, 25.05))
+        bpy.context.object.scale = (2.25, 1.95, 1.5)
+        bpy.context.object.name = "rounded turret cupola study"
         bpy.context.object.data.materials.append(trim)
         for level in (6.0, 10.5, 15.0, 19.5):
             block("turret window", (x, y - 2.18 if y < 0 else y + 2.18, level),
                   (1.15, 0.08, 2.4), window)
-    beam("turret finial", (x, -5.0, 27.0), (x, -5.0, 28.3), 0.12, iron)
+        beam("turret finial", (x, y, 26.5), (x, y, 28.3), 0.12, iron)
 
 block("roof garden deck", (0, 0, ROOF_GARDEN_Z), (23.0, 10.5, 0.5), trim)
 for x in [i * 1.5 for i in range(-7, 8)]:
@@ -138,19 +141,34 @@ for index, (low, high) in enumerate(zip(levels, levels[1:])):
     for sx in (-1, 1):
         beam("horizontal side rail", (sx * w, -d, high), (sx * w, d, high), 0.10, iron)
 
-# A glazed-looking observation volume and light crown approximate the outline.
-block("observation underdeck", (0, 0, 68.1), (10.1, 9.0, 1.2), iron)
-block("observation room", (0, 0, 70.7), (9.3, 8.3, 4.2), iron)
+# Two visible galleries and an open crown approximate the large forms in the
+# 1914 north view. Their heights and spans are still photo-proportion estimates.
+block("observation underdeck", (0, 0, 67.95), (10.1, 9.0, 0.9), iron)
+block("observation room", (0, 0, 70.35), (8.8, 7.8, 3.7), iron)
 for x in (-3.2, -1.1, 1.1, 3.2):
-    for y in (-4.21, 4.21):
-        block("observation window", (x, y, 70.8), (1.45, 0.07, 1.55), window)
-block("observation cornice", (0, 0, 73.1), (10.5, 9.5, 0.85), iron)
-block("crown base", (0, 0, 74.0), (6.2, 5.4, 0.7), trim)
+    for y in (-3.96, 3.96):
+        block("observation window", (x, y, 70.35), (1.45, 0.07, 1.55), window)
+block("upper gallery deck", (0, 0, 72.4), (10.5, 9.5, 0.45), iron)
+for lower, upper in ((68.4, 69.5), (72.65, 73.55)):
+    for y in (-4.65, 4.65):
+        beam("gallery rim", (-5.1, y, upper), (5.1, y, upper), 0.08, trim)
+        for x in (-5.1, -2.55, 0, 2.55, 5.1):
+            beam("gallery post", (x, y, lower), (x, y, upper), 0.065, trim)
+    for x in (-5.1, 5.1):
+        beam("gallery side rim", (x, -4.65, upper), (x, 4.65, upper), 0.08, trim)
+        for y in (-2.3, 0, 2.3):
+            beam("gallery side post", (x, y, lower), (x, y, upper), 0.065, trim)
+block("crown base", (0, 0, 72.95), (5.6, 5.0, 0.55), trim)
 for n in range(12):
     angle = 2 * math.pi * n / 12
-    p = (2.6 * math.cos(angle), 2.2 * math.sin(angle), 74.3)
-    beam("crown ribs", p, (0, 0, HEIGHT - 0.25), 0.075, iron, 6)
-beam("top finial", (0, 0, HEIGHT - 0.3), (0, 0, HEIGHT), 0.09, iron)
+    next_angle = 2 * math.pi * (n + 1) / 12
+    p = (2.5 * math.cos(angle), 2.2 * math.sin(angle), 73.25)
+    q = (2.2 * math.cos(angle), 1.95 * math.sin(angle), 74.75)
+    ring_next = (2.5 * math.cos(next_angle), 2.2 * math.sin(next_angle), 73.25)
+    beam("open crown base ring", p, ring_next, 0.08, iron, 6)
+    beam("open crown upright", p, q, 0.07, iron, 6)
+    beam("open crown dome rib", q, (0, 0, 75.45), 0.07, iron, 6)
+beam("top finial", (0, 0, 75.4), (0, 0, HEIGHT), 0.09, iron)
 
 # Neutral reference rendering. The generated GLB excludes camera and floor.
 bpy.ops.mesh.primitive_plane_add(size=200, location=(0, 0, -0.04))

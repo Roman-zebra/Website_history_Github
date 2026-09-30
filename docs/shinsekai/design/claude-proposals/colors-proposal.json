@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "author": "Claude",
+  "date": "2026-09-30",
+  "status": "proposal",
+  "note": "Proposed additions/changes to docs/shinsekai/colors.json. Only the White Tower's whiteness has a written source; every other hue is an art-direction estimate from grayscale tone, hand-tinted postcards (artist's colouring, not measurement) or period technology. Sources: claude-out/research/facts.md, c4-review.md, design-brief.md.",
+  "changes": [
+    {
+      "id": "ropeway-accent",
+      "action": "replace",
+      "note": "Single red body is supported by one modern retrospective only; the period hand-tinted postcard shows a striped awning and a pale painted body. Split into the entries below."
+    },
+    {
+      "id": "tower-steel",
+      "action": "candidate",
+      "hex": "#4d4b47",
+      "confidence": "low-medium",
+      "note": "Three independent hand-tinted postcards (OML CC0 157431, 157437, 159201) colour the lattice red-brown (red-oxide-like). Grayscale darkness is consistent. Prefer red-brown unless contrary evidence appears.",
+      "candidateHex": "#7a3b2a"
+    },
+    {
+      "id": "tower-arch",
+      "action": "adjust",
+      "hex": "#dcd2bd",
+      "confidence": "low",
+      "note": "Base reads very light in 1914/1921 photos; slightly lighter warm plaster/stone-imitation. Saito 1985: four storeys, stone-like."
+    }
+  ],
+  "additions": [
+    {
+      "id": "white-tower",
+      "hex": "#eeebe2",
+      "material": "white-painted building (plaster/paint)",
+      "basis": "Saito 1985 p.18: called 'White Tower' because the amusement hall was painted white. Slight warm off-white to avoid clipping in daylight.",
+      "confidence": "medium",
+      "sourceIds": [
+        "B002"
+      ]
+    },
+    {
+      "id": "ropeway-awning-stripes",
+      "hexes": [
+        "#d8443a",
+        "#f2efe6",
+        "#3f6fb0",
+        "#e8b94a",
+        "#7a5aa0",
+        "#5f9a5a"
+      ],
+      "material": "striped canvas awning with scalloped edge",
+      "basis": "Period hand-tinted postcard 'The air ship and white tower' (V005 5:12-5:15) shows multi-colour vertical stripes; order and exact hues are the colourist's. Saito 1985: tent roof on a frame.",
+      "confidence": "low",
+      "sourceIds": [
+        "V005",
+        "B002"
+      ]
+    },
+    {
+      "id": "ropeway-body",
+      "hex": "#b8322a",
+      "accentHex": "#e7a3b3",
+      "material": "painted boat-shaped car body with flower decoration",
+      "basis": "OML CC0 157431 and 159201 (hand-tinted) show a red car; V005 postcard shows a pale body with flowers; THE PAGE retrospective says red. Proposal: red body, striped awning.",
+      "confidence": "low-medium",
+      "sourceIds": [
+        "OML157431",
+        "OML159201",
+        "V005",
+        "S5"
+      ]
+    },
+    {
+      "id": "opening-green-arch",
+      "hex": "#2f4a2c",
+      "material": "evergreen foliage covering the opening-day gate",
+      "basis": "Opening postcard of the 恵美須通 gate covered with greenery ('祝開業'); species unknown.",
+      "confidence": "low",
+      "sourceIds": [
+        "V004"
+      ]
+    },
+    {
+      "id": "bunting-flags",
+      "hexes": [
+        "#c8342b",
+        "#f4f1ea",
+        "#2f5d9a",
+        "#e3b43c"
+      ],
+      "material": "small pennants on ropes radiating from the tower top",
+      "basis": "Pennant ropes are photographed (NDL 952032 canvas 95, V007); colours unknown.",
+      "confidence": "low",
+      "sourceIds": [
+        "NDL952032",
+        "V007"
+      ]
+    },
+    {
+      "id": "night-bulb-1912",
+      "hex": "#ffb766",
+      "material": "early incandescent lamp (carbon/early tungsten), approx. 2000-2400 K",
+      "basis": "Period technology; warmer and dimmer than modern lamps. Use instead of a neutral warm white.",
+      "confidence": "medium",
+      "sourceIds": [
+        "design-brief"
+      ]
+    },
+    {
+      "id": "waterfall-five-colours",
+      "hexes": [
+        "#e2463c",
+        "#3f7fe0",
+        "#3fbf6a",
+        "#f2cf4a",
+        "#f7f3ea"
+      ],
+      "material": "coloured electric light on the White Tower waterfall (夜光の瀧)",
+      "basis": "南海の栞 1912 p.44 '五色のイルミネーション…瀑布に映じ'; 新世界興隆史 1934 '五彩の電光'. The five actual colours are not stated; red/blue/green/yellow/white is an estimate.",
+      "confidence": "low",
+      "sourceIds": [
+        "P001",
+        "B003"
+      ]
+    },
+    {
+      "id": "pond-underlight",
+      "hex": "#9fd0ff",
+      "material": "light rising from the bottom of 真澄の池 at night",
+      "basis": "新世界興隆史 1934 p.41 'rainbow light rises from the pond bottom'; colour estimated.",
+      "confidence": "low",
+      "sourceIds": [
+        "B003"
+      ]
+    },
+    {
+      "id": "haze-far",
+      "hex": "#9aa3a8",
+      "material": "summer haze / smoke over the city ('煙の都')",
+      "basis": "Art direction: distant hills and city fade to blue-grey.",
+      "confidence": "low",
+      "sourceIds": [
+        "design-brief"
+      ]
+    },
+    {
+      "id": "street-earth",
+      "hex": "#a08f76",
+      "material": "compacted earth/gravel street",
+      "basis": "1914 photos show unpaved light-toned streets with tram rails; colour estimated.",
+      "confidence": "low",
+      "sourceIds": [
+        "NDL966056"
+      ]
+    }
+  ]
+}

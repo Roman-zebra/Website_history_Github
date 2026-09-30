@@ -9,7 +9,7 @@ The final site is published from GitHub through the repository's existing Cloudf
 | T0 | Prepare the fixed clone, instructions, project records, handoff, and tool inventory | Done |
 | T1 | Add the second, disabled Coming soon card to tab 06 in six languages | Done |
 | T2 | Source research, rights ledger, 1912 layout, gimmicks, and colour evidence | In progress: photo controls and rights ledger, 1912 feature evidence, library-corroborated ropeway/White Tower specifications, provisional topology; exact facility positions pending an inspectable site map |
-| T3 | Source-based Blender geometry and photographic alignment | Preparation: editable, unaligned first-tower silhouette study; source matching and production geometry pending T2 layout gate |
+| T3 | Source-based Blender geometry and photographic alignment | Preparation: editable, unaligned first-tower silhouette study now has rounded cupolas, two galleries and an open crown; GLB validator passes; camera alignment and production geometry pending T2 layout gate |
 | T4 | Browser engine and free tower exterior area; separate paid data | Planned |
 | T5 | Historical moving features and rideable vehicles | Planned |
 | T6 | Lazily generated paid interiors | Planned |
