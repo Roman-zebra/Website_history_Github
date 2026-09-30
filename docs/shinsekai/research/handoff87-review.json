@@ -1,0 +1,10 @@
+{
+  "source": "claude-out/to-codex.md",
+  "localSnapshot": "../research-cache/handoff87-to-codex.md",
+  "branch": "1142cec",
+  "handoff": 87,
+  "status": "attributed-notes-reviewed-no-new-scan-access",
+  "rejectedInference": "Nominal22-shaku phrase does not establish maximum-tilt upper bound",
+  "sha256": "22850f1ace58e00da7853705ed6dc1573ca6317ea61a6c952b0e5e3c683f72ba",
+  "geometryFinding": "Schematic floor15.98 vs roof datum15.15; level transfer not established"
+}

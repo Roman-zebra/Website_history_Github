@@ -1,10 +1,16 @@
 {
   "status": "in_progress",
   "current": "T5",
-  "next": "Read AGENTS/state/TASKS/PLAN and parent Claude status; fetch claude/* immediately. Reviewed84–86; branch remains1142cec. Local lift.html binds both v3 forms with actual car bounds/well markers: safe pivot17.05..57.5892m, assumed5cm axial clearance. Nested-transform/GLB containment tests pass. WebGPU both forms/upper dwell/follow observed; WebGL open-gallery movement and both forms loading checked. Motion84 fixes integrated; report dimensions vs assumed arrangement/support/timing separated.85 is Claude-reported user manual pause evidence, not automated visibility/performance acceptance;86 canonical Commons source read, rights/1912 applicability unresolved; OML reader failed, links retained as attributed leads. NEXT separate bounded landing/boarding/exit camera study; current solid car is not an interior. Independent visibility/frame budget checks remain. Historical height/site/photo gates unchanged; do not repeat rank29/30 same-height fits. Full build224/224; verify publication receipt after this batch. T0/T1 only done; free-only/no payments.",
-  "updatedAt": "2026-09-30T10:39:29.6073698Z",
+  "next": "Read AGENTS/state/TASKS/PLAN, parent Claude tail as well as status (status lagged86 when87 arrived), and fetch claude/* immediately.87 reviewed; branch1142cec unchanged. Local boarding.html adds exact-dwell boarding/exit, frozen crossings, bounded camera, reset/hidden clocks, reduced-motion immediate crossing, optional default-on next-landing pause. Five tests; final build229/229. Browser verification detailed in boarding-study.md. Source-only surrogate cage/doors/decks, not a historical interior or whole-tower collision test. NEXT explicit landing-floor metadata distinct from roof datum and well extents: current low pivot17.05 gives schematic floor15.98 vs roof15.15 (0.83m mismatch). Keep current v2/v3 exports/defaults; resolve well limits/floor margins before a bounded turret-stair transfer candidate. Upper-gallery floor unknown. Nominal6.7m is not a proven maximum-tilt inequality. Claude batch requests/results in requests-to-claude.md,20-minute cadence; no synchronous waiting. jta heartbeat is paused during active work and re-enabled before idle;10-minute idle resume only. Consult before MAX/Astra or new chat, user creates chat. Verify boarding-publication-receipt.json after this batch. T0/T1 only done; free-only/no payments; avoid repeated scale-gauge fitting.",
+  "updatedAt": "2026-09-30T11:09:24.8703839Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 86,
-  "observedClaudeHandoff": 86,
-  "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7"
+  "processedClaudeHandoff": 87,
+  "observedClaudeHandoff": 87,
+  "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
+  "coordination": {
+    "heartbeat": "jta; pause during active turn, re-enable before idle",
+    "claudeIntervalMinutes": 20,
+    "handoff": "docs/shinsekai/requests-to-claude.md",
+    "escalation": "Consult user before MAX/Astra or new group chat"
+  }
 }

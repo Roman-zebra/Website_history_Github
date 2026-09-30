@@ -2,6 +2,9 @@
 
 ## Instruction log
 
+- 2026-09-30, user continuation: ClaudeCode will act on Codex requests every20 minutes. Codex should coordinate development with that cadence, anticipate independent work when the request queue runs out, and batch results back to Claude. Use the existing single-writer requests/state file handoff; no new Claude session, parent-output writes or synchronous waiting. Codex's existing10-minute heartbeat remains a progress check unless the user changes it.
+- 2026-09-30, user follow-up:10-minute automation is for restarting this chat after ordinary work stops, not injecting repeated instructions into ongoing work. Updated existing jta prompt and paused it during this active turn; re-enable immediately before entering idle, stop permanently only on T0–T10 completion. Discuss MAX/Astra necessity before switching. Discuss a new group chat for economy; user creates it. No model or chat switch in this batch.
+
 - 2026-09-30 01:00 JST — Claude handoff records the user's later decisions: free area is the tower exterior and surrounding streets/plaza only; Stripe is the selected payment provider. These affect T4 and T8.
 - 2026-09-30 01:09 JST — User confirmed Claude is already working locally in the existing "JTA通天閣パーク作成" group. Do not start another Claude session or duplicate its research.
 - 2026-09-30 01:20 JST — User clarified that the finished site must run through the GitHub-based publishing path, rather than depend on files in the PC's local workspace. Keep the existing GitHub → Cloudflare Workers build/deploy route.
