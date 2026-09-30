@@ -1,11 +1,10 @@
 {
-  "status": "paused",
+  "status": "in_progress",
   "current": "T3",
-  "next": "PAUSED: do not work or reactivate heartbeat until explicit user resume. Read HANDOFF.md and camera-profile-study.md for restart. User-selected Sol6.1High; no model change requested. New typed floor samples65, bounded robust multi-start solver, explicit shared geometry and height-augmented SVD are implemented. Full build205 tests passed. Results in camera-profile-v1-summary.json and local ../research-cache/camera-profile-v1.json. H-augmented rank28/29 and an exact roof-fixed similarity test expose scale ambiguity; all north fits hit chosen bounds, some un-converged; south withheld predictions miss19-24px. No height/default/location adoption. After resume, reactivate existing jta heartbeat without duplication, inspect parent Claude sources66 onward (summaries through69 seen, details not yet integrated), seek physical ground/datum evidence and review floor/coping/crown/gallery alternatives before new profiles. Improve conditional diagnostics/overlays for Claude; stronger models cannot remove an exact mathematical gauge. Generic solver/data guards are tested; optional further sensitivity and profile visualisation remain. Preserve free-only GitHub to existing Workers publication and no paid API/payment. T0/T1 complete; T2-T10 incomplete. Last verified live before this checkpoint5c04e69; resolve pushed checkpoint head and release directly.",
-  "updatedAt": "2026-09-30T08:38:45.044Z",
+  "next": "Read compact HANDOFF/state/TASKS and parent Claude status; fetch claude branches. User resumed in this conversation; existing jta heartbeat migrated here and ACTIVE, no old-chat writer. Handoffs66-69 reviewed/archived; relative feature candidates null geometry, ropeway landing/datum/span/sag scenarios, whole-district lamp interpretation, undated top-form groups. Profile regenerated with current floor hash in ../research-cache/camera-profile-v1-reviewed.json; values unchanged. Local sparse-anchor review ../research-cache/camera-review-v1.html, serve with node scripts/render-shinsekai-camera-review.cjs ../research-cache/camera-profile-v1-reviewed.json ../research-cache/camera-review-v1.html --serve at port18766. Chrome displayed all three crops; review physical ground/roof/coping/gallery/crown identities before more fitting. Height gauge and south19-24px failures remain; no geometry/location/default adopted. Independent next: parameterised local T5 motion study with source/assumption metadata while Claude checks datum. Build/publish and Workers/live verify current head; T0/T1 only done. No paid API/assets/payment.",
+  "updatedAt": "2026-09-30T09:03:22.637Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 65,
-  "pausedAt": "2026-09-30T08:38:45.044Z",
-  "pauseReason": "User requested a pause at a clean checkpoint",
-  "observedClaudeHandoff": 69
+  "processedClaudeHandoff": 69,
+  "observedClaudeHandoff": 69,
+  "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7"
 }

@@ -35,3 +35,7 @@ No feature row grants permission to copy an image, film, performance or sound re
 ## 1912 text leads (handoffs 60–62; not yet direct-page verified by Codex)
 
 Claude's new OCR-fragment pass names a pond/fountain in 円街, cinema wings beside the tower, the White Tower's upper ropeway landing, roof-overflow water, Circling Wave dimensions and a 50,000-lamp report. See `research/facility-handoff-review.md` for the source/method/era distinctions. Treat the ropeway row's earlier **similar-elevation endpoints** as an unresolved scenario, superseded as a fixed build constraint by the new landing evidence. The semicircle pond is a candidate identity, not a map control. Do not place these features or adopt reported dimensions until their page context and map/photo identities have been checked.
+
+## Resumed source and motion review (handoffs 66–69)
+
+The source-method update and layout candidates are in research/facility-handoff-review.md. Ropeway landing elevation is now explicitly scenario-dependent in layout-1912.geojson; similar-height endpoints are not a fixed build constraint. White Tower datum/span/sag stay open. The 50,000 lamps likely concern the whole district and are not a per-park mesh count. The archived T5 ride sheet separates reported dimensions from assumed speed/timing; no prototype motion value is accepted as a historical measurement. The 1912 elevator route remains roof garden to tower top.

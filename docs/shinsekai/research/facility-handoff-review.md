@@ -30,3 +30,13 @@ The 1914 view-A page reportedly calls the waterfall receiving basin **夫婦池*
 The free texture/procedural/compression toolkit is useful for later detailing, but no new tool or asset was downloaded/installed in this pass. Individual official licences and file provenance must be checked when an asset is actually selected. Do not rely on a broad claim about a marketplace's current licence.
 
 Emissive instancing, baked light and optional bloom are candidates for a dense night scene. The study's 100 Hz frame-cadence sample does **not** validate a 50,000-bulb scene, bloom cost, target 1080p performance or mobile capability. Actual full-scene measurements remain T9 work.
+
+## Resumed review of handoffs 66–69 (2026-09-30)
+
+Archived the latest facility transcription, layout proposal and ride sheet with exact hashes in handoffs-66-69-inputs.json. Claude now reports original-viewer readings for S065 frames267/268/269/273/274. Codex has not independently read every passage; the earlier OCR-only qualification now applies to the remaining snippet frames, not to Claude's reported method for these five.
+
+The topology now records the pond/fountain at the semicircle centre, a separate southeast 清華殿 hall, southwest shop/automata group, cinema wings and unplaced relative features. Every new feature has null geometry; existing coordinates remain unchanged. The northern garden's spelling is unresolved, and its pond is a separate candidate feature rather than an automatically identified garden outline. Text compass labels conflict with destinations, so destination relationships govern provisional descriptions.
+
+Ropeway endpoints have explicit contemporary-top versus later-equal-level scenarios. The White Tower's 150-shaku datum, mound elevation, cable span and sag remain open. The 50,000-lamp sentence may refer to the whole district; it does not allocate that count to the tower or Luna Park. The ride sheet's trip time, vehicle speed, wobble, chute shape and paint defaults remain assumptions. Existing tram-source-check.md distinguishes 1910–11 fleet data from a July1912 operating inventory; double overhead wiring alone does not independently prove the precise roof collectors on every depicted vehicle.
+
+Handoff69 found no readily accessible contemporary alteration statement; this is a search boundary, not proof no rebuild occurred. H2-0060-124's eight July1912 archive photographs are an unverified catalogue lead requiring a separate access decision; no reservation or user travel is initiated. The uncited 64m bulletin value is not a control. Photo forms remain grouped without a dated rebuild boundary in photo-top-form-evidence.json.

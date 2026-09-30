@@ -43,3 +43,27 @@ Not yet read: the full sentences between these fragments (IIIF blocked); the pos
 - The 1914 text says the **waterfall under the White Tower flows into 夫婦池** at the foot of the mound.
 - Both describe the basin that receives the waterfall, but with different names two years apart. That could be a renaming, two connected basins, or an author's variation.
 - Per Codex's rule they **stay distinct** until a plan or caption shows the same outline. This is noted as supporting evidence for a later check against the 1913 developer album plan.
+
+## Third pass (17:17): the original NDL viewer (Chrome), frames 267, 268, 269, 273, 274
+Read from the page images at legible zoom, not from OCR. Quotes are short working transcriptions for fact-checking (old kanji kept; one uncertain character marked).
+- **Frame 267 (p.~396), section 「▲新世界の壯觀」**:
+  - The author calls the **whole** new town a 廓: 「其廣袤三萬有餘坪の新市街一廓を新世界と名け」.
+  - Tower: 「高さ二百五十尺」, 「鐵材のみにても實に三百五十餘噸」 (350+ t; the 1939 retrospective's 500 t is later and secondary).
+  - **Wings beside the tower**: 「脚側左右に翼を張ること各四十有餘間、右にありては二棟左にありては三棟の大活動寫眞館」. Each wing is 40+ ken (about 73 m or more), with two large cinema halls on the right and three on the left. The viewpoint of "right/left" is not stated.
+- **Frame 268: the ropeway landing on the tower side is the roof garden.**
+  - Roof garden: 「地上五十尺の處にルーフガーデンあり、廣さ二百坪、階段の昇降口自ら四隅の小塔を爲す」. The elevator runs from here to the top.
+  - After the view from the top: 「再びルーフガーデンに下れば二條の鐵索のルナパーク白塔上に通ずるあり、四人乘飛行機型の鐵車は凧(?)の如く樂園を橫斷して來往す」.
+  - So the cables run from the **tower roof garden (50 shaku above ground)** to the **top of the White Tower (白塔上)**.
+- **Frame 269: pond and fountain.**
+  - 「塔下の一路東西に通ずるものを通天通と稱す、通天通は塔前にありて大半圓を畫く所を圓街と云ふ、中央に池ありて大噴水の高く飛沫を吐くを見る」. The pond with the large fountain is in the **centre of the semicircle 圓街**, the part of 通天通 in front of the tower.
+  - Three radial roads leave the 圓街: 「東を惠比須通り、中央を玉水通り、西を合邦通り」. But 「惠比須通りは今宮に其口を開き合邦通りは天王寺に向つて走れる」. Geographically 今宮/恵美須 lies west and 天王寺 east, so the book's 東/西 labels look reversed. **Use the destinations, not the 東/西 words.**
+  - Corner buildings on the 圓街: 通天通 × 惠比須通 = 觀商場東京館; 惠比須 × 玉水 = a western restaurant (a real beer brand: use a generic sign); 玉水 × 合邦 = a beer hall 井筒; 合邦 × 通天通 = Japanese restaurants 玉水 and 千とせ.
+- **Frame 273: the White Tower.**
+  - Height: 「正面百五十尺の白塔は鬱然たる築山の絶頂に立つ、兩側より梯段ありて山上に到る」. The 150 shaku is attached grammatically to the White Tower itself, and the tower "stands on the summit" of the mound. The text **does not say** whether 150 shaku is measured from the summit or from the ground, so the reference level stays open.
+  - Ropeway on the White Tower side: 「塔上に上るもの四顧の展望を恣にせし後鐵索に寄り空中を橫斷して高塔に達するの仕懸なり」. Visitors board **at the top of the White Tower**.
+  - The ride is named 「猿滑り」 (a 人間轉がし) and starts from the hilltop.
+  - Same frame, south-west corner: an automata hall (自動器械) and the Fugetsudō branch 「更に其西南隅にある一館は風月堂の出店なり」. Also a bowling hall, a monkey house (「モンキーホール」, 150+ monkeys), a peacock house and a roller-skating rink.
+- **Frame 274 (pp.406–407): the 50,000 lamps.**
+  - The sentence closes the Luna Park garden paragraph (after the tea houses 萩の戸 in the east and 杜鵑亭 in the west, and the flower garden): 「殊に淸涼の一夜全廓五萬燈のイルミネーションを觀るに至つては宛然たる不夜城…」.
+  - Since the same author defines the whole 30,000-tsubo 新世界 as 「一廓」 (frame 267), **全廓 most likely means the whole Shinsekai enclosure** (tower, streets and Luna Park), not Luna Park alone. Medium confidence.
+  - Same page: Circling Wave 「高さ廿二尺直徑三十六尺…約八十人」; the Egyptian hall has two obelisks and a sphinx in front (statue, not a person).

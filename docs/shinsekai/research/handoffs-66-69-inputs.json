@@ -1,0 +1,25 @@
+{
+  "status": "reviewed-source-leads-not-production-assets",
+  "handoffs": [
+    66,
+    67,
+    68,
+    69
+  ],
+  "snapshots": [
+    {
+      "file": "research/lunapark-facilities-claude.md",
+      "sha256": "6d4e80df4031d5e4db46e601eadf9c8f91e4d3c9873336c40ae18ee4dc795c03"
+    },
+    {
+      "file": "research/layout-proposals-1912text-claude.md",
+      "sha256": "b341f3b5f443e47a5590c1c0e1a01809e729b0ccb7e8c9ac9386a04363449334"
+    },
+    {
+      "file": "design/t5-rides-vehicles-spec-claude.md",
+      "sha256": "bfd26b3b24266e3889fd428059d0837da9000b490eac73336029a870f5ac9aac"
+    }
+  ],
+  "sourceMethods": "1912 frames 267/268/269/273/274 are Claude original-viewer readings; other snippets and secondary claims remain separately labelled. Codex has not independently transcribed every page.",
+  "rights": "Facts only. No source scans, long source prose or overlays in the repository."
+}

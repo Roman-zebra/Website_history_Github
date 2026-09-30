@@ -2,7 +2,7 @@
 
 Use this with `AGENTS.md`, `codex-state.json`, `TASKS.md` and `PLAN.md`; state is the current restart point. Last updated 2026-09-30. Do not reread the entire earlier conversation by default.
 
-**PAUSED by the user at the numerical checkpoint.** Heartbeat jta is PAUSED. Do not resume automatically or reactivate it until an explicit user resume instruction.
+**RESUMED by the user in the new conversation on 2026-09-30.** Existing heartbeat jta is ACTIVE and targets 01a0f17d-ce83-7780-869a-56bc0755bbf7; the old conversation has no heartbeat. Do not create another writer.
 
 ## Workspace and authority
 
@@ -20,10 +20,10 @@ Use this with `AGENTS.md`, `codex-state.json`, `TASKS.md` and `PLAN.md`; state i
 - New v2 photos: 41 typed observations in `research/photo-landmarks-v2.csv`, exact Claude raw snapshot retained, one declared quoting repair, manifest in `photo-inputs-v2.json`. See `camera-projection-study.md` and `scripts/shinsekai-camera.cjs`. Eleven tests cover projection, line/edge semantics, crop transforms, scale ambiguity and input integrity.
 - Immediate handoff 64 adds `photo-landmarks-v3-claude.csv` and `photo-continuity-review.md`: all v2 values unchanged. Roof-centre x is inferred and upper forms differ between photographs; exclude/reclassify those inferred components in model bindings and use separate upper-geometry scenarios. A rebuild date is not established from publication years. v3 annotations are archived but not automatically applied by the executable v2 audit.
 - The numerical profile/optimiser and explicit geometry/role configuration are now implemented; see `research/camera-profile-study.md` and its compact JSON. Full build:205 tests. Height-augmented rank28/29 plus an exact roof-fixed similarity test show a remaining scale ambiguity. Every north fit hits chosen bounds; withheld south upper predictions miss ~19–24px. No height/production geometry adopted. Some profile fits did not converge.
-- **After explicit resume:** inspect handoffs66 onward (summaries through69 seen, detailed integration pending); review physical ground/datum and floor/upper identity alternatives, then improve numerical diagnostics/overlays for Claude. Model switches alone cannot remove the demonstrated ambiguity. Further camera Monte Carlo is unnecessary.
+- **Current:** handoffs66–69 are reviewed; topology records relative null-geometry candidates, two ropeway landing scenarios and lamp scope. Local sparse-anchor photo review is available at research-cache/camera-review-v1.html; regenerate/serve with scripts/render-shinsekai-camera-review.cjs using camera-profile-v1-reviewed.json on port18766. Review physical ground/datum and floor/upper identity alternatives with Claude. Model switches alone cannot remove the demonstrated ambiguity. Further camera Monte Carlo is unnecessary.
 - New facility/ropeway/toolkit leads: `facility-handoff-review.md`. OCR fragments remain distinct from direct page reading. Equal-height ropeway terminals and precise sag are assumptions; pond names/outlines and circle identity are unresolved. No assets installed/downloaded in this review.
 - T4: local-only demand-rendered WebGPU/WebGL2 study under `assets-src/shinsekai/browser-study/`, pinned three r186; preview server command `node scripts/serve-shinsekai-study.cjs`, loopback port **18765**. Claude verified both backends and visible frame-cadence measurement; actual browser hiding-event integration is open. ~100 Hz static sample is not GPU timing or T9 production performance.
-- The Codex-owned preview server is stopped for this pause; restart it with the command above after resume if visual review is needed.
+- The tower viewer on18765 remains stopped. The separate photo-review server on18766 is running for Claude review; its single HTML artifact remains outside Git.
 
 ## Efficient checks and publication
 
@@ -35,4 +35,4 @@ Use this with `AGENTS.md`, `codex-state.json`, `TASKS.md` and `PLAN.md`; state i
 
 ## Recurring work / later conversation transfer
 
-Heartbeat `jta` keeps its 10-minute schedule but is **PAUSED** in the current conversation. After an explicit user resume, reactivate this existing automation, with notifications only for meaningful progress/failure/action needed; stop when T0–T10 actually finish. Do not duplicate it in a new conversation. When a transfer is actually made, arrange its destination/status so the old and new chats do not both write main. This file alone does not create or migrate a conversation.
+Heartbeat `jta` retains its 10-minute schedule and is **ACTIVE in the resumed conversation** 01a0f17d-ce83-7780-869a-56bc0755bbf7. The tool update and saved target/status were verified. Notify only for meaningful progress/failure/action needed; stop when T0–T10 actually finish. Do not duplicate it or resume work in the old conversation.

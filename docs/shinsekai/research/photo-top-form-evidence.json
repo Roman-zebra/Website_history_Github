@@ -1,0 +1,36 @@
+{
+  "status": "undated-photographed-form-groups",
+  "rebuildBoundary": null,
+  "groups": [
+    {
+      "form": "ribbed-crown",
+      "photoIds": [
+        "viewA",
+        "south_c0234001",
+        "OML158510"
+      ],
+      "dateMeaning": "ViewA publication1914; south catalogue1912-1925; exposure/reproduction dates unresolved"
+    },
+    {
+      "form": "enclosed-box-low-cap",
+      "photoIds": [
+        "plate46",
+        "OML158880",
+        "OML158886"
+      ],
+      "dateMeaning": "Plate46 publication1921 does not date exposure or rebuilding"
+    }
+  ],
+  "scenarios": [
+    "S-1920s-top (working name only; no era boundary adopted)",
+    "S-shared-shaft-top (identity unresolved)"
+  ],
+  "source": "Claude handoffs64/69; Codex continuity review",
+  "archiveLead": {
+    "reference": "H2-0060-124",
+    "reportedCaption": "July1912 first-tower amusement district",
+    "reportedPhotos": 8,
+    "status": "Claude catalogue lead; not independently verified; no online image inspected"
+  },
+  "heightControl": "No uncited64m bulletin value or earlier conditional photo range is adopted"
+}

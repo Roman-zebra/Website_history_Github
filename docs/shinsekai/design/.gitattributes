@@ -1,0 +1,2 @@
+# Preserve the hash-checked Claude snapshot across checkouts.
+t5-rides-vehicles-spec-claude.md -text

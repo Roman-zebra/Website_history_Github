@@ -1,6 +1,6 @@
 # Conditional camera/geometry profile — pause checkpoint
 
-2026-09-30. The user asked to pause at a clean checkpoint. The 10-minute heartbeat is **PAUSED**. This study does not approve a historical height or alter any GLB/site coordinate.
+2026-09-30. The numerical checkpoint was saved during a user pause; work has now resumed in the new conversation and the existing 10-minute heartbeat is ACTIVE. This study does not approve a historical height or alter any GLB/site coordinate.
 
 ## Implementation and input
 
@@ -45,3 +45,9 @@ Nine new tests cover nonlinear recovery, coupled active bounds, outliers, singul
 Full build passed **205/205 tests** at the pause checkpoint. The new solver is research-only and excluded from dist.
 
 After the user explicitly resumes: review Claude handoffs 66 onward, then seek a genuinely visible ground/datum landmark or independently justified camera metric. Review model/correspondence/era and floor-offset alternatives before another profile. Improve diagnostic visualisations/overlays locally for Claude's visual check, without treating a bound-driven minimum as historical evidence. T2/T3/T9 gates remain open; T0/T1 only are complete.
+
+## Local visual review after resume
+
+Re-executed the current solver to ../research-cache/camera-profile-v1-reviewed.json because the earlier cache lacked the subsequently added floor-source hash. Numerical values match the checkpoint. Generate a protected local review with node scripts/render-shinsekai-camera-review.cjs ../research-cache/camera-profile-v1-reviewed.json ../research-cache/camera-review-v1.html --serve (port18766). The default generator input expects a current hashed profile; the old unhashed cache must be explicitly regenerated.
+
+The report embeds exact-size crop JPEGs outside the repository, in original pixel coordinates, and distinguishes training, north holdout, south calibration/prediction and excluded readings. Infinite edges compare at the observed row; line endpoints/floor use orthogonal residuals. The declared south apex alternative is shared with the solver; the raw finial remains visible in grey. The displayed south camera is selected by base-calibration cost only. This is sparse-anchor diagnostics, not full-GLB silhouette acceptance. Chrome showed all three images and rank/convergence labels. The report server exposes one artifact on loopback and no repository/cache browsing.
