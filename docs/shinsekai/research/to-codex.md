@@ -287,3 +287,27 @@
 - **W0 kept**: it is the only Nankai × Kansai crossing. The leave-out prediction puts it 50 m north of the embankment, which is impossible.
 - The remaining misfit is **angular**. S063 draws the Hankai and the NE radial nearly parallel, whereas they diverge by about 9° in the aerials. The railway-to-Hankai angle is 87.6° on S063 and 93.8° in the aerials. Either the sheet is inaccurate there, or the built streets departed from the plan (thesis). Expect about 20–30 m residuals from one global similarity; local controls near the target area will do better.
 - Not concluded: a round spot in the semicircle area in both aerials, (≈945, 977) and (≈940, 1000), matches the small circle in the early-Shōwa plan. The tower's base is not isolable at this resolution. No tower coordinate is proposed.
+
+## 2026-09-30 15:12 (50) Semicircle-area control and held-out point (conditional)
+- Details and crops: claude-out/research/controls/README.md "Diagnosis step 3"; script `predict-c.cjs`. No production transform.
+- **S063 geometry:** open plaza with a fitted circle of centre (5986, 2681) and radius ≈35 m. Two blocks close its south side, and a **central street** (≈14 m wide, 15° W of S) runs from the plaza to the wide E–W street along the Luna Park block.
+- **Persistence:** today's std map has a ≈35 m-radius round street pattern at the same place, with two lens-shaped blocks split by a street at ≈12° W of S, whose straight inner edges line up with S063's block edges. The street line appears to persist (moderate confidence); the blocks were rebuilt.
+- **C1 (control): centre of the central street at the plaza. S063 (6012, 2718) ±15, std (946, 972) ±5.**
+- **C2 (held-out): centre of the same street at its south end. S063 (5956, 2926) ±15, std (934, 1022) ±5.** C2 is only 22–25 m from C1 and in line with it, so it tests local position and rotation only. W0 and J1′/J2′ remain the far held-out points.
+- **The 1928 and 1936–42 aerials cannot isolate C1/C2 at this resolution.** A dark round object lies on the street line between them, (≈942, 978) in 1936–42 and (≈938, 1000) in 1928. It is consistent with the plan's tower position, but per your instruction it is not used as a control or tower coordinate. If historical-aerial controls are required here, redevelopment and resolution make them unavailable; the std map is the practical second source for C1/C2.
+- The existing diagnostic 5-point similarity predicts C1/C2 **35–50 px (17–25 m) west** of the std readings, a local translation similar to the global residual.
+
+## 2026-09-30 15:34 (51) User instruction v3.7: Codex on GPT Sol 6.1; re-split of work
+- The user now runs Codex on **GPT Sol 6.1, High** by default. Please revisit earlier work where 6.1 can improve it, and take over what Codex does better. Claude will tell the user in chat when a task warrants **Astra** or **6.1 Max**.
+- Suggested hand-overs to Codex (numeric/code work where Codex is stronger):
+  1. **Map registration**: cross-register the std, 1928 and 1936–42 layers first (your point on handoff 50), then evaluate K1/K2/J1′/J2′/W0 and the modern-topology leads C1/C2. The pixel tables and scripts are in claude-out/research/controls/.
+  2. **Joint camera fit for the tower**: turn Claude's single-photo scripts (claude-out/qa/towerfit-*.cjs, photomatch/towerfit-viewA.cjs, photomatch.py) into one multi-view adjustment with explicit priors and uncertainty. The landmark tables are in tower-study-review.md §13/§15 and photomatch/README.md. Claude would recommend **6.1 Max** for this one; it will ask the user.
+  3. **Renderer study**: stays yours. Claude continues the GPU smoke review (claude-out/qa/, next handoff).
+- Claude keeps: source reading and transcription (NDL, OML, museum sites), visual cross-checks, design review, and real-GPU checks on this PC.
+
+## 2026-09-30 15:38 (52) Renderer study smoke review (partial)
+- Details: claude-out/qa/renderer-smoke-2026-09-30.md.
+- **Blocking in Chrome:** a stale **service worker** (`/sw.js`, scope `/`) from an earlier local run of the main JTA site on **127.0.0.1:8765** serves the JTA home page at the study URL (no canvas). The study works on another port (`JTA_STUDY_PORT=8766`). Suggest a distinct default port for the study server, or a README note on unregistering that worker.
+- WebGPU and `?webgl` both render the v2 tower study on the GTX 1660 SUPER in Chrome 154. No console errors were captured.
+- First load 4.45 MB / 9 requests (three.webgpu 2.18 MB + three.core 1.39 MB unminified, GLB 0.68 MB). Heap about 16 MB. For the public build later: minify/tree-shake, Brotli, meshopt GLB.
+- fps and Day/Dusk/Night switching are **not measured yet**, because background tabs don't render. Claude will ask the user to bring the tab forward for about 15 s.

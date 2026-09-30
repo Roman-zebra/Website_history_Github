@@ -65,3 +65,30 @@ Evidence crops: `s063_top.jpg` (S063 origin (4900,780), ×0.4, grid 200 orig px)
 - Expect about 20–30 m residuals from any single similarity over this sheet. Prefer controls close to the area being registered.
 
 **Not concluded:** the first tower still stands in both aerials. A round spot in the semicircle area, (≈945, 977) in 1936–42 and (≈940, 1000) in 1928, matches the small circle drawn inside the semicircle in the early-Shōwa plan (thesis fig. 3.1.15). The tower's base could not be isolated at this resolution. No tower coordinate is proposed.
+
+## Diagnosis step 3 (2026-09-30 15:12, English; Max reasoning): a control at the semicircle and a held-out point (conditional)
+Evidence crops:
+- `s063_plaza.jpg`: S063 origin (5000,2250), ×0.5, grid 100 px.
+- `s063_c1h1.jpg`: S063 origin (5700,2500), ×1, grid 50 px.
+- `std_circle.png`: std origin (840,880), ×3, grid 10 px.
+- `ch_three.jpg`: 1936–42 | 1928 | std, origin (880,930), ×4, grid 10 px.
+- `pz_pair.jpg`: 1936–42 | 1928, origin (700,820), ×1.5 as shown, with S063 features projected by the diagnostic 5-point similarity. Yellow = block corners, cyan = plaza-rim points, red = plaza centre, magenta = dashed circle (reference only), green = Luna Park block edge.
+- `cs_pair.jpg`, `pc_three.jpg`: closer views.
+
+**S063 geometry, read at full scale.** The 1912 "semicircle" is an open plaza whose rim is formed by concave arcs of the blocks on its north side. A circle fitted through three rim points gives centre (5986, 2681), radius ≈341 px ≈35 m. Its south side is closed by two blocks, "mid" and "mid-right". Between them, a **central street** (≈14 m wide, running 15° W of S) leaves the plaza southward to the wide E–W street along the Luna Park block. The dash-dot line is a ward boundary, not a street. Lines read (orig px): mid block top-right corner (5945, 2698), SE corner (5890, 2905); mid-right block top-left corner (6078, 2737), SW corner (6022, 2947).
+
+**Persistence.** Today's GSI standard map shows the same arrangement: a round street pattern of radius ≈35 m (circle fit ≈34.7 m) where the radials meet, with two lens-shaped blocks split by a street running ≈12° W of S (now ≈9.5 m wide). The lens blocks' straight inner edges line up with S063's mid/mid-right block edges along the central street. Their outer edges are now curved: the blocks were rebuilt, but the street line appears to persist. Hypothesis, not proof: moderate confidence.
+
+**Proposed points (conditional; street centreline, not block corners):**
+| Point | Definition | S063 | std (today) | 1936–42 / 1928 aerial | Uncertainty |
+|---|---|---|---|---|---|
+| **C1** (control) | Centre of the central street where it leaves the plaza (between the two blocks' north corners) | (6012, 2718) | (946, 972) | Not isolable. The area shows a light open space and a dark round object ≈ (942, 978) / (938, 1000) | S063 ±15; std ±5 |
+| **C2** (held-out) | Centre of the same street at its south end (between the two blocks' south corners) | (5956, 2926) | (934, 1022) | Not isolable; covered by a dark band (street and/or shadows) | S063 ±15; std ±5 |
+- C1→C2 is 22 m on S063 (215 px) against 25.5 m on std, running 15° vs 12° W of S.
+- C2 is close to and in line with C1, so it tests only the local position and rotation, not an independent direction. The far held-out points remain W0 and J1′/J2′.
+- The existing diagnostic 5-point similarity predicts C1 at (899–911, 968–973) and C2 at (885–897, 1014–1018), which is **35–50 px (17–25 m) west** of std for both. That is a local translation of the same size as the global residual.
+- **The historical aerials cannot provide these two points at this resolution.** The dark round object sits on the central-street line between C1 and C2 in both aerials. It could be the tower, since the 1912 plan puts the tower directly south of the semicircle on this street, but per Codex it is **not** used as a control or a tower coordinate.
+
+**Other notes (conditional, not controls).**
+- S063's central-street axis, extended south, meets the north edge of the Luna Park block at (5900, 3137). This is the likely gate position on the axis (1914 guide: 中央見付け).
+- The street segment between the plaza and the wide E–W street is about 22 m long, and the photo-fit base depth is 20.7–30.5 m. So a base straddling this street would roughly fill the segment.
