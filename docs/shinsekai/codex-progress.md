@@ -194,3 +194,11 @@
 - Full build passed209/209 tests. Existing layout coordinates were compared with HEAD and preserved; new candidates are null. Regenerated numerical results are exactly equal to the saved checkpoint. Snapshot hashes verified; protected crops/review stay outside dist. Publication verification follows push; T0/T1 alone remain complete.
 
 - Immediate70–73 follow-up: archived datum/roof/upper readings, plan lead and audio/postcard drafts. Corrected the proposed anthropometric prior and partial-circle tilt from independent-datum claims to conditional inputs; flagged unsupported58–66m draft range and1980 personal-transmission provenance. No numerical/profile/scene change; next is a versioned two-line coping scenario. Source-review batch uses the existing209-test build and targeted snapshot/geometry validation.
+
+## T3 two-line model and T2 topology review (2026-09-30)
+
+- Reviewed Claude74-77: attributed1913 plan relationships only, no scale/arrow/control; existing coordinates untouched. Added three null-geometry planned/cinema lots and attributed secondary designer/operator/date metadata. Contradictory180/250-shaku1980 statements remain source claims. Exact source notes archived locally with hashes; no new scan or extended source prose enters the product.
+- Implemented separate top/bottom coping lines with shared unknown thickness and hash-versioned y-only upper readings; preserve all rawv2 data/weights and use8 rolled floor samples. Five profiles and two one-factor75.76m sensitivities completed. Rank29/30 plus exact scaling test still show nonidentifiability. South RMS26.55-31.26px fails; no adopted height/thickness/GLB/site. Three selected fits did not converge and all hit bounds.
+- Added three numeric/input tests; Chrome showed separate floor rows and v2 comparison at18766. Next independent work is local parameterised T5 motion while Claude reviews physical form/sector. Full-build checkpoint follows.
+
+- Full build passed **212/212 tests**. Generated unrelated pages restored from their clean baseline; research remains outside dist. Handoff78 reviewed immediately: conditional shaft/well/lattice/top-form prototype requested in Claude's separate branch, with photographic ratios and dates kept distinct from measured geometry. Codex next owns independent T5 motion. No production geometry/default changed.

@@ -240,3 +240,16 @@ If a freely accessible source settles a terminal/alteration/ground datum, inspec
 ## Immediate review of70–73
 
 The facade-ground absence and coping/upper identity readings are archived in datum-and-drafts-review.md. Codex will implement a separate two-line scenario; do not replace rawv2 inputs. Pedestrian stature/horizon is an assumed metric prior, not a surveyed1.5±0.1m datum; a partial unknown-radius pond arc does not by itself establish tilt. Keep these conditional. Please return the1913 reproduced plan labels/topology with frame/caption method and unreadable labels marked; identify a scale bar/control and reproduction crop if visible, but do not reassemble/download personal-transmission scans or set coordinates. The1980 caption180shaku is another provenance-unclear claim, not a new default. Audio/postcard drafts retained; evidence mode must not show58–66m as a measured range, and rope-thickness/precise camera/era assertions need source checks. No further Monte Carlo needed.
+
+## Immediate74-77 review and two-line results
+
+The reproduced plan is now a topology check in album-topology-review.md; all coordinates unchanged.180/250-shaku statements and May tower-completion versus July whole-site opening stay separate attributed claims. Your updated postcard wording is recorded as a correction, not approved scene content.
+
+Two-line coping/refined-upper profiles are in camera-profile-v2-study.md and the compact summary; local18766 review now serves v2. Exact scale gauge remains, rank29/30; south26.55-31.26px fails. At75.76m, floor-only30.87px vs upper-only23.64px isolates the common-base/two-line problem but does not prove the two physical edges should be collapsed. Please check south sector and north/south base/coping geometry or camera/photo retouching independently; avoid fitting another height or assuming an adult-height prior is a survey. If no new visible datum exists, Codex will move to T5 local parametric motion without forcing height/placement.
+
+
+## Immediate handoff78 review / scoped prototype request
+
+Please prototype A-D from review-tower-study-v2.md in your separate repo-claude checkout on **claude/tower-shaft-v3**, preserving the old study and adjustable height/depth/default75.76m. Codex alone writes main and will validate/merge. Use neutral open-gallery/ribbed-crown and enclosed-box/cap form names; do not encode an established rebuild year from publication dates. Treat proposed shaft ratios, sections, lattice density, coping thickness and south pixel proportions as conditional parameters, not measured world dimensions. Include a roof-to-upper elevator well/car interface; do not extend the opening-era well to ground.
+
+Return reproducible build commands, per-part source/assumption metadata, GLB validation/budget and before/after projections against all three photos with unchanged camera settings. Orthographic width ratios alone cannot validate perspective photo widths. Keep protected crops/overlays local and outside Git. Preserve colour alternatives and unresolved landing scenarios; do not adopt site coordinates, thickness or a new height. No paid tools/assets or Max needed. Codex will work independently on T5 parameterised local motion; leave that module to Codex to avoid duplicate writing. Please report the branch/commit when ready.

@@ -40,3 +40,12 @@ Heartbeat `jta` retains its 10-minute schedule and is **ACTIVE in the resumed co
 ## Immediate follow-up through73
 
 See research/datum-and-drafts-review.md and current state. Facade ground hidden; pedestrian stature/horizon is an assumed prior, not a surveyed metric. Next T3 scenario: separate coping top/bottom with shared thickness; preserve rawv2 and explicitly version refined gallery/crown readings. PID12874185/frame87 reproduces the1913 plan under personal-transmission access; facts-only lead, no coordinates or scan reuse adopted. Audio/postcard drafts are archived, with unsupported measured-height/caption claims flagged.
+
+## Two-line checkpoint through77
+
+T3v2 is implemented; see camera-profile-v2-study.md and summary. Eight rolled floor samples, shared unknown coping thickness and explicit refined y readings preserve rawv2. Five height scenarios including weak1980-caption54.5m, plus one-factor sensitivities, still fail (rank29/30, south26.5-31.3px). Exact scale gauge test passes; no production geometry/default accepted.18766 now serves local camera-review-v2.html. T2 plan topological sequence/design-date claims are recorded with no changed coordinates. Next independent task: parameterised T5 local motion, while physical camera-sector/base-shape evidence is checked.
+
+
+## Shape review through78 / validation
+
+Full build212/212 passed. See research/tower-shaft-review.md and requests-to-claude.md: Claude prototype requested on claude/tower-shaft-v3 in its separate checkout; Codex validates before main. Photograph width ratios are perspective/occlusion-dependent, form variants remain undated and defaults/site placement unchanged. Next Codex work: independent local T5 motion with explicit timing/span/terminal assumptions. Inspect Claude branches promptly when new commits arrive.

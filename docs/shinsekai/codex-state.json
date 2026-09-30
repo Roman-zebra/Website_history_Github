@@ -1,10 +1,10 @@
 {
   "status": "in_progress",
   "current": "T3",
-  "next": "Read compact handoff/state and parent Claude status; fetch branches. Existing single jta heartbeat ACTIVE in resumed chat01a0f17d-ce83-7780-869a-56bc0755bbf7. Handoffs66-73 reviewed and hash-archived. Next independent T3 work: new explicit two-line roof/coping scenario with shared unknown thickness, versioned846/958 north and76/106.5 south upper readings; preserve rawv2, roll and south holdouts. See datum-and-drafts-review.md. Facade ground is hidden; pedestrian1.5±0.1m is assumed anthropometry/horizon, not surveyed datum; partial pond circle is conditional. New1980 personal-transmission plan reproduction PID12874185/frame87 is facts-only and not independently validated; await labelled topology from Claude, no protected scan reuse or forced54.5m height. Optional independent T5 local parametric motion next. Old profiles exactly reproduced in research-cache/camera-profile-v1-reviewed.json; local review camera-review-v1.html/port18766. Height gauge and south19-24px RMS remain; no GLB/site/default adopted.209-test build passed;21d0297/2cafbf4 pushed, Workers2cafbf4 success; verify latest new source-review batch after push. T0/T1 only complete; free GitHub/existing Workers only; no paid API/payment.",
-  "updatedAt": "2026-09-30T09:10:07.860Z",
+  "next": "Read compact handoff/state/TASKS/PLAN, parent Claude status and fetch branches. Single jta heartbeat ACTIVE here. Handoffs74-78 reviewed; reproduced1913 topology only, no coordinates; secondary design/dates and contradictory180/250-shaku claims remain attributed. T3 two-line coping and y-only refined-upper v2 implemented; rawv2 preserved,8 rolled floor samples, unknown thickness. Five deterministic profiles54.5/60/68/75.76/85 plus one-factor75.76 sensitivities saved in camera-profile-v2-summary.json and local research-cache; exact free-thickness scale gauge persists, joint rank29/30, south26.5-31.3px fails. No height/default/GLB/site adoption. Local camera-review-v2.html now served on18766; Chrome verified both floor lines. Next independent work should move to T5 local parametric motion study (ropeway pair/elevator/Circling Wave), with bounds/timing/span/terminals explicitly assumed and no production placement, while Claude checks physical shape/camera-sector alternatives. Do not keep repeating height fits or add anthropometric/pond constraints as measurements. Full build212/212 passed; publish scoped batch and verify Workers/live. Claude shaft prototype requested on claude/tower-shaft-v3; inspect promptly when ready, preserving conditional form/shape parameters. T0/T1 only done; preserve map/search/Gunkanjima; free-only/no payments.",
+  "updatedAt": "2026-09-30T09:37:15.393Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 73,
-  "observedClaudeHandoff": 73,
+  "processedClaudeHandoff": 78,
+  "observedClaudeHandoff": 78,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7"
 }

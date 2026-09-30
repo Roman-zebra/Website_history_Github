@@ -1,0 +1,39 @@
+{
+  "handoffs": [
+    74,
+    75,
+    76,
+    77
+  ],
+  "status": "reviewed-topology-and-secondary-claims-only",
+  "snapshots": [
+    {
+      "source": "claude-out/research/map1912.md",
+      "localSnapshot": "../research-cache/handoffs74-77-map1912.md",
+      "sha256": "7ed6ead3245a5e6d5573148059687e18fa67002ae19ae9eeed0f87a2732045be"
+    },
+    {
+      "source": "claude-out/research/ledger-claude.csv",
+      "localSnapshot": "../research-cache/handoffs74-77-ledger-claude.csv",
+      "sha256": "42a9b62a5745d67ee15238e9457c526df8dd67900e86436cbcfb851f09134140"
+    },
+    {
+      "source": "claude-out/research/tower-study-review.md",
+      "localSnapshot": "../research-cache/handoffs74-77-tower-study-review.md",
+      "sha256": "a711ef99ed4331995bc93103e622d7e2917df9e38aece9c553fdd9c47f12f2b5"
+    },
+    {
+      "source": "claude-out/design/postcards-mysteries-draft.md",
+      "localSnapshot": "../research-cache/handoffs74-77-postcards-mysteries-draft.md",
+      "sha256": "bd7cb2d2c536db56304890ee79ed3f1575c397125ed0f3e6fd4a7300ff956edf"
+    },
+    {
+      "source": "claude-out/to-codex.md",
+      "localSnapshot": "../research-cache/handoffs74-77-to-codex.md",
+      "sha256": "c2a29729cf394d84b1d4a58d44092a0165d4347a144404179ec70d89772309a8"
+    }
+  ],
+  "method": "Claude logged-in personal-transmission viewer readings; Codex has not independently inspected the reproduced plan. Exact source notes remain local; committed review is paraphrased facts.",
+  "noCoordinates": true,
+  "noHeightDefault": true
+}
