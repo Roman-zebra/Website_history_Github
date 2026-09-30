@@ -1,11 +1,11 @@
 {
   "status": "in_progress",
   "current": "T4",
-  "next": "ACTIVE:104/105 hybrid Opus exterior/structure + Sonnet dressing built; repaired upper rear boards that blocked stair.12treads/headroom>=1.8m tested;11.05MB,19671/1142/112ext/39092int,validator0/0/282.20base/dream cameras reviewed. Next adjust cloudy glass, bare walls/floor light, dream hero/flowers; add ground platform approach; runtime material/cell work.3art rounds total;packet every5,technicalrepairsnotcounted.105input LF hashes verified origin1e2e773;do notmergeunmodifiedeval/pilot. Tower97UVactualtriangle/landinginvariants pass;TSLmapping onlysyntaxcheckednotconnected.7e8be53Workers/liveconfirmed. HeartbeatPAUSEDactive;noescalation/newchatneeded.",
-  "updatedAt": "2026-09-30T15:48:16.478Z",
+  "next": "ACTIVE:108 received, overall2/7 needs work. Claude owns upper-room six-surface dressing + era-specific dream props/flowers after tower-base-upgrade. Codex owns clear layered windows, lattice sun-pools/gloss floor, dream grade/bloom/grain, irregular wood/fingerprints/warp/dirt. Five-round micro packet ready,261 fullbuild; r4 prep verified GPU5views+GL2views, no captured errors; GL first CPU21.8s/15.5s issue. Runtime split GLBs0warnings and guide contact closed/open pass; local Building A viewer far onlyLOD2, near loading. Next verify near glass/drawers/unload both backends; fullbuild + source provenance/push. HeartbeatPAUSED, no escalation.",
+  "updatedAt": "2026-09-30T16:59:57.2643082Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 105,
-  "observedClaudeHandoff": 105,
+  "processedClaudeHandoff": 108,
+  "observedClaudeHandoff": 108,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
   "coordination": {
     "heartbeat": "jta; pause during active turn, re-enable before idle",

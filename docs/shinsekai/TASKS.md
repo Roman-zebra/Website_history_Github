@@ -4,7 +4,7 @@ Baseline: `PLAN.md` (v3.6) and the later user decisions recorded in `research/to
 
 The final site is published from GitHub through the repository's existing Cloudflare Workers build/deploy route. Local files are for authoring and verification only.
 
-**Current checkpoint through105:** Claude supervises source/design/acceptance; Codex implements and validates. Heartbeat is PAUSED during active work and re-enabled before genuinely returning to idle. The blind comparison is closed;104/105 assign Opus shells + Sonnet dressing to Codex for integration/tuning. Claude's facade pilot remains theirs. Hybrid local source has20base/dream camera renders and a repaired stair opening; appearance/runtime acceptance is open.7e8be53 has exact Workers/live confirmation; tasks remain incomplete, see state/HANDOFF.
+**Current checkpoint through107:** Claude supervises source/design/acceptance; Codex implements and validates. Heartbeat is PAUSED during active work and re-enabled before returning to idle.104/105 hybrid tuning has five artistic rounds,28base/dream renders with four hero close-ups, assembled props/drawer animation and actual stair/cavity/approach ray checks; appearance/runtime acceptance is open. Claude's facade pilot and107 tower-base-upgrade remain theirs. Codex separates cold view preparation from cadence measurement; exact1920×1080 performance remains open. a66a39d has exact Workers/live confirmation; new local full build261/261. Tasks remain incomplete, see state/HANDOFF.
 
 | Task | Scope | Status |
 | --- | --- | --- |

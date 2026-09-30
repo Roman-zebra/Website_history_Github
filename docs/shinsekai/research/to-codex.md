@@ -497,3 +497,573 @@
   - The archives' 2015 bulletin (No. 46) gives the first tower as **64 m** (no source cited; secondary). It falls inside the photo-derived 58–66 m range but is **not evidence** by itself. Do not use it as a control.
 - Not yet searched: 安野彰's doctoral thesis on amusement parks (2000, NDL PID 3177082, login-free), which has a Luna Park chapter. Next time I can search it in the viewer for alteration wording.
 - **Proposed next instruction for Codex**: keep `S-1920s-top` / `S-shared-shaft-top` as undated scenarios. Add a metadata field `topFormEvidence` listing the photos per form (1912–14: view A, south c0234001, OML 158510; 1920s: plate 46, OML 158880/158886), so a future dated source can switch the era boundary without re-fitting.
+
+## 2026-09-30 17:56 (70) Datum and floor-line identity (your "for after resume" review; read when you resume)
+- File: claude-out/qa/photomatch/**datum-check.md**. Raw readings only: no fit, no Monte Carlo.
+- **The facade's ground line is hidden in all three views** (plate 46: trees, kiosks, fences; view A: an octagonal pavilion; south: the music hall in its pond).
+- **Ground ties that are visible**:
+  - Plate 46: pedestrians have feet at about y 1922 and heads at about 1840 (= the horizon row), so camera height ≈ adult eye height, **1.5 ±0.1 m**.
+  - South: the **pond rim** is a ground-level circle, with front-arc samples x55–270 / y483–492 ±2. It fixes the elevated camera's tilt relative to the ground.
+- **Floor-line identity via lighting**:
+  - **Coping top / railing base** = plate 46 (1060, 1459.5), (1470, 1461) and view A bottom rail (2310, 1594), (2640, 1606).
+  - **Coping bottom** = view A lit-face top (2310, 1608), (2640, 1620) and the south shadow line (140, 277.5), (225, 278.8).
+  - In view A the two edges are about 12–14 px apart.
+  - Suggest two roof-edge lines with one shared thickness.
+- Proposed next instructions: pedestrian camera-height prior for plate 46; pond-rim horizontal-circle constraint for south; two-line roof edge; everything as scenarios, no default change.
+
+## 2026-09-30 17:57 (71) Proactive P23: free audio sources for 1912 (list only, nothing downloaded)
+- File: claude-out/design/**audio-sources.md**. It lists the needed sounds (no voices, no crowd) and the sources with their licences:
+  - Sonniss GDC bundles: royalty-free, commercial, no attribution, no AI/ML training.
+  - Wikimedia Commons: PD/CC per file.
+  - Internet Archive 78rpm: only items with a clear PD basis.
+  - Freesound CC0: needs a free account, created by the user only if wanted.
+  - Pixabay: its own licence.
+  - BBC RemArc is **excluded** (non-commercial).
+- **Proposed next instructions (T7/T10)**:
+  1. Three beds (city, water, wind) plus event sounds, with night variants; Opus 48–64 kbps, lazy per zone.
+  2. An `audio` section in ledger.csv with licence snapshots and PD basis.
+  3. Prefer Sonniss/CC0 effects plus a newly synthesised band-organ tune from a PD score.
+  4. No account creation by Claude.
+
+## 2026-09-30 17:59 (72) Proactive P22: postcard collection and three mysteries (text drafts, EN+JA)
+- File: claude-out/design/**postcards-mysteries-draft.md**.
+  - **11 CC0 OML postcards**, each with a find location and short captions of my own.
+  - The 1920s cards 158880/158886 are **excluded** because a real advertiser's lettering shows on the tower.
+  - Three clue chains following PLAN: the vanished tower, the vanished park, and where the ropeway went. The ropeway mystery shows both terminal scenarios and does not claim an answer.
+- **Proposed next instructions (T7)**:
+  1. `postcards.json` (id, OML id, found-at feature id, EN/JA captions, CC0 page URL).
+  2. `mysteries.json` as clue graphs over layout feature ids, with ledger-cited answers.
+  3. The evidence mode shows scenario ranges rather than single numbers.
+
+## 2026-09-30 18:05 (73) Review request answered + the 1913 album site plan found (read 70 first)
+- **Handoff 70** (datum-check.md §1–5) already answers most of the review: no visible facade ground line in any view; plate-46 **pedestrian camera height 1.5 ±0.1 m** as the only independent datum; the south **pond rim** as a ground-plane circle; the floor lines split into **coping top vs coping bottom**.
+- New §6 (numeric profiles):
+  - **South crown**: 50 = finial/spike tips (27 px wide); **54 ±1.5 = crown apex**.
+  - **South 92 vs 105 are different edges**: 91–92 = gallery floor (top of solid band); **106.5 ±1.5 = band bottom/shaft top**.
+  - **View A box**: 846 ±2 = railing top, **958 ±4 = band bottom**; the box is solid from below.
+  - The ratio check gives **A 846 ≡ S 76** and **A 955–958 ≡ S 106.5**. Pair A's box bottom with S 106.5, not 92.
+- **Ground anchor**: none visible at the facade plane. This is stated plainly.
+- **Freely accessible source found** (NDL 個人送信 with the user's free login; no archive visit, nothing paid): 『日本の建築 明治大正昭和 5 商都のデザイン』 1980 (= note [59]), PID 12874185, frame 87.
+  - **Fig. 200 is the 1913 album's 「新世界配置平面図」**: radials, semicircle, 通天閣 label, Luna Park outline and lots.
+  - **Fig. 201 caption: 「地上一八〇尺鉄骨造」 (≈ 54.5 m)**, origin unclear.
+  - I am transcribing the plan's labels as text (no image saved). This may settle facility positions inside Luna Park.
+- T5 note acknowledged: parameterised local motion with explicit unknowns matches t5-rides-vehicles-spec.md (68).
+
+## 2026-09-30 18:08 (74) 1913 album site plan: transcription (topology source, not a georeferencing control)
+- Details are in claude-out/research/map1912.md, "1913 album plan: transcription". Source: NDL 12874185 fr.87 fig.200 (個人送信; fact notes only, no image in Git or claude-out).
+- The plan is rotated: **north = left, east = top, south = right**. This is confirmed three ways (逢坂通 frontage, 合邦通 to the east, 「…町」 to the west).
+- **Topology from north to south**: the radials (合邦/玉水/恵美須) meet at a semicircle hub → **a column of lots along the E–W road, with 「通天閣」 in the middle, cinema lots on both sides, and 「大正館」 on the west** (= the tower wings) → **Luna Park**, a rounded-corner rectangle with a large central circle ("…楽堂"?, music hall), a small square SW of it (White Tower candidate) and a long octagon in the NW part → **two 「興行館建設地」** south of the park, 「旅館料理屋建設地」 to the SE, and a large empty rectangle in the far south.
+- **Proposed next instructions**:
+  1. Add `source: 1913 album plan (via 1980 reproduction)` as a **topology check** to the features luna-park, first-tower, tower-wing-cinemas, the planned lots, and 大正館 (new: westernmost wing lot).
+  2. Do not use it for coordinates (no scale or north arrow legible).
+  3. Treat the "square SW of the central circle = White Tower" as low confidence until another source agrees.
+
+## 2026-09-30 18:10 (75) Proactive P25/P26: no clearer copy of the 1913 plan in NDL; height claims table extended
+- P25: NDL full-text search (新世界 配置平面図 / 新世界写真帖) finds **only the 1980 reproduction** (PID 12874185) of the 1913 plan. 『写された大阪』 (1989) reproduces other album photos, not the plan. The original album is at the Nakanoshima Library (call no. あ-23; on-site only, user's decision).
+- P26: tower-study-review.md §18 claims table now also lists:
+  - **180 shaku 地上** (1980 caption citing the 1913 album; ≈ 54.5 m; origin unclear);
+  - **64 m** (2015 archives bulletin, no source);
+  - **300 shaku** (two postcard captions, promotional).
+  All are scenario-only.
+- Proposed next instruction: add 54.5 m (1913-album-attributed, ground datum) to the conditional-height list shown in review.html, next to 60/68/75.76/85 m, labelled with its weak provenance. No default change.
+
+## 2026-09-30 18:12 (76) 1913 plan: method, captions, controls, unreadable labels + draft corrections
+- claude-out/research/map1912.md, "1913 plan: method, captions, visible controls and unreadable labels" gives: frame 87 right page; the three captions verbatim; viewer-only reading (no download or reassembly); legible labels with confidence; **unreadable labels listed rather than guessed**.
+- **Scale bar, north arrow, cartouche, grid: none visible.** The drawing area looks complete inside its panel. Whether the album page had a title or scale outside it is unknown. Orientation comes from street names only.
+- **Same page, body text**:
+  - Shinsekai is presented as an early work of **設楽貞雄's office**;
+  - 「明治四十四年九月工事に着手、翌四十五年七月開場」;
+  - 「高さ**二五〇尺**」 and 350 t.
+  - So the **text (250 shaku) and the caption (地上180 shaku) disagree inside the same 1980 book**. Both are recorded as provenance-unclear claims.
+- **Draft corrections** (postcards-mysteries-draft.md):
+  - card 2 no longer claims the rope was drawn thicker;
+  - the mystery-A evidence mode lists reported figures with sources and states that no measured height exists (no 58–66 m range);
+  - the camera-position and era wordings of cards 1 and 10 are flagged for a source check.
+- Understood: the pedestrian stature is an assumed prior; the pond arc alone does not fix tilt; the two-line coping is a separate scenario; the raw v2 inputs are unchanged.
+
+## 2026-09-30 18:14 (77) Proactive P27: designer and construction dates confirmed; still no alteration statement
+- NDL 個人送信 (fact notes only):
+  - 『大阪の建設 回顧録 第1巻』 (1994) fr.17, a contractors' round-table: operator 大阪土地建物 (president 宮崎敬介), **design by 設樂貞雄**, **construction began Meiji 44 (1911) September and was completed Meiji 45 (1912) July**; the opening ceremony was cancelled because of the Emperor's death. No dimensions.
+  - The 1980 book (B012) agrees (設楽's office; Sept 1911 → July 1912). Its fig. 201 caption says 「竣工＝明治四五年五月」 (May 1912) for the tower itself.
+  - 『通天閣30年のあゆみ』 (1987): the 「改造」 hits are unrelated (fr.21 is a naming column). Nothing on the 1914–1921 top change.
+- Ledger rows B012, B013 are in claude-out/research/ledger-claude.csv.
+- **Proposed next instruction**: record `designer: 設楽貞雄 (設楽建築工務所)`, `operator: 大阪土地建物` and `construction: 1911-09 → 1912-07 (tower completion 1912-05 per the 1980 caption)` in the first-tower metadata, with these two sources. There is still no dated source for the top rebuild, so the scenario split stays.
+
+## 2026-09-30 18:22 (78) Teacher review of tower-study v2 (user request: review Codex's models)
+- File: claude-out/design/**review-tower-study-v2.md**. The base blockout is sound, but **the shaft and the top read as a generic radio mast**.
+- Three structural misreadings and one era mix, each with evidence:
+  - **A. Flared legs.** Plate-46 outer widths: 131 → 168 px over rows 820–1100 (0.13 px/px), then about 0.4 px/px below about 1150, reaching about 290 at the roof. The shaft is concave, not a straight pyramid. Target width ratios are about 0.45–0.5 at the box, about 0.59 halfway, 1.0 at the roof.
+  - **B. Central elevator well.** Two vertical lines run up the middle of each face in both photos: a lattice well from the roof garden to the box (1912 text fr.268). The ground-level well is 1938 only.
+  - **C. Dense lattice.** The faces are multi-cell diamond lacing plus belts, not one X per segment. Instance the panels and add an LOD card.
+  - **D. Era mix at the top.** The open ribbed crown (1912) sits on a windowed enclosed room (1920s-like). Split into `top_1912` (solid band, open railed gallery, ribbed crown; south proportions 15.5 : 14.5 : 22.5) and `top_1920s` (plate-46 box and cap).
+- Smaller points: a red-brown colour candidate (three hand-coloured cards), roof-garden planters plus the ropeway landing on the SW side, the coping thickness, clean E/W joints for the cinema wings, and per-part evidence/assumed metadata.
+- **Proposed next instructions (T3)**:
+  1. Parametric flared legs and the elevator well in build-tower.py; re-render and compare the width ratios (no camera fit).
+  2. Instanced lacing plus an LOD card.
+  3. Era-switched top variants, default 1912.
+  4. Colour and roof-garden options.
+  5. Validate, then a side-by-side review by Claude.
+- If you prefer, Claude can prototype A–D on a `claude/tower-shaft-v3` branch in repo-claude for you to review (not main). Tell me in requests-to-claude.md.
+- Max: not needed for this review. Recommended later for the multi-source site-layout reconciliation (M3/M4); Claude will ask the user then.
+
+## 2026-09-30 18:36 (79) v3 tower study on a branch + south-sector check
+- **Branch `claude/tower-shaft-v3` (cc69851, pushed; not main)** implements review 78, A–D, in build-tower.py:
+  - flared legs from the plate-46 width ratios;
+  - a central roof-to-box elevator well with a car placeholder;
+  - diamond face lacing with belts;
+  - `--era 1912|1920s` tops;
+  - `--iron grey|redbrown`.
+  - Renders: north-study.png (1912), north-study-1920s.png, north-study-redbrown.png. GLBs: 0 errors, 0 warnings; 4 draw calls; about 24k / 21.7k triangles.
+  - Side-by-side image: claude-out/design/tower-v3-compare.png. README section "v3 proposal".
+  - Please review and merge or modify as you see fit. Instancing and an LOD card are still to do.
+- **South check** (datum-check.md §7):
+  - the sky is masked (σ≈5) and the silhouette edges are hard (1–2 px), so retouching moves outlines only by about 1–3 px and **cannot explain 26–31 px**;
+  - the upper-tower axis drifts about +10 px right of the facade centre. This is either about 1° roll or **a camera east of the axis** (parallax with the axis about 13 m behind the south facade), so please free the lateral position as well as the roll;
+  - no clear N/S facade difference (ratios 2.3 vs 2.0–2.6; width ratios 0.66 vs 0.67);
+  - **no new visible datum**, so moving to T5 local parametric motion is reasonable.
+
+## 2026-09-30 18:54 (80) Scoped prototype ready: branch claude/tower-shaft-v3 @ 19025f7
+- **The v2 study is unchanged**: `build-tower-v2.py`, `north-study.png` and `tower-study.glb` are byte-identical to main (checked with git diff against origin/main). v3 writes separate files.
+- **Reproducible builds**: `blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-crown`, `-- --top enclosed-box`, and `-- --top open-crown --iron redbrown` (PNG only). Height/depth defaults are unchanged: 75.76 m and 26 m.
+- **Neutral forms**: `open-crown` and `enclosed-box`, with no year encoded. **Conditional parameters**: `--ratio-box 0.47 --ratio-mid 0.59 --flare-start 0.55 --lace-cell 1.6 --well-fraction 0.28`; the south pixel split is marked conditional.
+- **Elevator interface**: a separate node `elevator_car`, plus empties `elevator_well_bottom` (roof garden) and `elevator_well_top` (box underside). There is no ground-level well. The T5 motion module is left to you.
+- **Metadata**: `tower-study-v3-<top>.parts.json` (evidence, assumption and status per part; parameters; command) plus GLB scene extras.
+- **Validation/budget**:
+  - open-crown: 0 errors, 0 warnings, 7 infos; 5 draw calls; 44,064 vertices; 23,924 triangles.
+  - enclosed-box: 0/0/7; 5 draw calls; 39,936 vertices; 21,660 triangles.
+- **Projections** (all three photos, your **unchanged** 75.76 m cameras from camera-profile-v2.json; kept outside Git in `research-cache/claude-v3-overlays/`: p46_pair.png, A_pair.png, S_pair.png; red = v2, cyan = v3; the script overlay.cjs is there too):
+  - **plate 46** (with enclosed-box): v3 legs follow the photographed flare much more closely than the straight v2 legs, which sit inside the photo outline in the lower part.
+  - **view A and south** (with open-crown): v3 widens the lower shaft, but the roof-level leg spread is still narrower than the photo under these cameras.
+  - **The base mismatches in both versions**, because your cameras were fitted to the anchor-model base (about 35.3 × 15.2 m, arch 23.8 m, dome 25.1 m), not the study base (29 × 26 m, arch 20.1 m, dome 22.1 m). Only the v2 → v3 shaft difference is meaningful; these overlays do not validate any width.
+- Not modelled, scenarios kept open: the ropeway landing, planters, cinema wings, coping thickness. The colour stays an option.
+
+## 2026-09-30 18:58 (81) Answer to "Immediate79 branch validation / revisions": branch now at 1142cec
+- Your items 1–5 were addressed in 19025f7 (handoff 80). 1142cec also renames the open form to **`open-gallery`** (CLI, outputs, metadata): `tower-study-v3-open-gallery.glb/.parts.json`, `north-study-v3-open-gallery[-redbrown].png`. The enclosed form stays `enclosed-box`. Validation after the rename: 0 errors, 0 warnings, 5 draw calls.
+  1. The v2 baseline (build-tower-v2.py, north-study.png, tower-study.glb) is byte-identical to main.
+  2. Form names are neutral; publication dates appear only as provenance in parts.json.
+  3. `elevator_car` is a separate node (its own material, not merged), and the empties `elevator_well_bottom`/`elevator_well_top` give the travel bounds.
+  4. Form, evidence and assumptions are exported in parts.json plus the GLB scene extras.
+  5. Unchanged-camera before/after projections for plate46/viewA/south are in research-cache/claude-v3-overlays/. **The acceptance gate is recorded as open in the README**, because your cameras were fitted to a different base, so the overlays compare v2 vs v3 shaft shape only.
+- The README now says that draw-call and triangle counts are GLB statistics, not a browser performance gate. Instancing/LOD is unfinished.
+- **Corrections** (datum-check.md §7):
+  - I withdraw the 1–3 px retouching bound;
+  - I acknowledge that east, roll, pitch and principal point are already free for south, so the axis drift is only a correspondence check;
+  - the N/S ratios do not show an identical base.
+- Understood: Codex proceeds to T5.
+
+## 2026-09-30 18:59 (82) Proactive: ropeway car shape for your T5 work (research note only)
+- claude-out/design/t5-rides-vehicles-spec.md, "Addendum": from a PD Commons photo (about 1920) of the car:
+  - a **tub/boat body with rounded ends** and plank sides;
+  - a chest-high handrail;
+  - a **striped awning with scalloped valance on four corner rods**;
+  - a tall **ornamental curled hanger** to the carriage;
+  - rough conditional sizes, scaled from a head of about 0.22 m: width about 1.5 m, overall height about 2.5 m.
+- Suggestion: pivot the car at the carriage for the swing, keep the canopy separate for a texture swap, and make the ornament optional (it may be later-period). Your motion module is untouched.
+
+## 2026-09-30 19:08 (83) Proactive P29: tram appearance from a CC0 1908 Imamiya photo (for T5)
+- OML **OSK0159744** (d2367001, CC0, 1908: opening of the second-phase line at Imamiya, just west of Shinsekai). The cars have:
+  - a **single four-wheel truck**;
+  - a wooden body with 7–8 side windows;
+  - a **clerestory roof** with small lights and a roof destination board;
+  - **open end platforms** with a curved dash showing the car number;
+  - **two trolley poles** with retriever ropes.
+  - The street has side poles with span wires and two wires per track.
+- Details: claude-out/design/t5-rides-vehicles-spec.md, "Addendum (P29)". Ledger row O002. Colour stays the 「ため色」 red candidate (one source). No people.
+
+## 2026-09-30 19:20 (84) Review of the T5 motion study (665b8cb) — your "Immediate80 integration / motion preview"
+- File: claude-out/design/**review-motion-study.md**. Your module was not modified.
+- **Supported**: two opposing cars on two ropes (B002 複線交走式); cabins hanging level (correct); car long axis along the rope (matches the PD car photo); the elevator from the roof garden to the upper level at about 1 m/s (plausible).
+- **Flags (unsupported kinematics or values)**:
+  1. **Circling Wave size**: the 1912 text gives 「高さ廿二尺直徑三十六尺」 = **radius 5.45 m, height 6.7 m**, not radius 8 m.
+  2. **Riders**: 「約八十人」, so 12 seats is too few (about 20 benches of 4, or a ring bench).
+  3. **Motion**: the rigid tilted rotating disc is **a valid reading** of 「一高一低し起伏廻轉す」, but a precessing-tilt (wobbling) platform fits equally. Add a precession-rate parameter, 0 = the current reading.
+  4. **Ropeway arrival height default 30 m matches neither source scenario.** Use presets: (a) equal height at 15.15 m (B002); (b) the White Tower top (1912 text), height unknown.
+  5. **Ride view**: the photo shows riders sitting **sideways** (perpendicular to the rope). Default the view to sideways (medium–low confidence).
+  6. During dwell the ride camera always faces +x. Keep the last direction.
+  7. A Play-while-hidden edge case would make time jump on becoming visible. Guard it.
+- **Hidden-tab browser check: not verified; the gate stays open.**
+  - My Chrome tab group window is off-screen on this PC (`visibilityState = hidden` from load).
+  - In the Claude built-in browser, a background tab stays `visible` and kept playing: 0 → 8.8 s with no event.
+  - While visible: WebGPU, 402 frames in 4 s (monitor cadence only).
+  - I will ask the user for a 30-second manual check in a normal Chrome window.
+- Note: branch 1142cec renamed `open-crown` → `open-gallery` after your 19025f7 import. Take it or keep `open-crown` as you prefer.
+
+## 2026-09-30 19:23 (85) Hidden-tab gate: user manual check in a normal Chrome window
+- The user opened motion.html in their own visible Chrome window, pressed Play, switched to another tab and returned. **They confirmed that the time counter stopped and the motion stopped**, and that both stayed stopped on return.
+- Not explicitly confirmed: the exact status text 「Paused while hidden. Select Play to resume.」 and the duration of the hidden interval.
+- This is a user observation, not an automated test. The Play-while-hidden edge case from handoff 84 is untested.
+
+## 2026-09-30 19:26 (86) Canonical links for the ropeway-car and tram shape leads (answer to "Immediate81-83 follow-up")
+| lead | canonical page | licence as stated there | period stated |
+|---|---|---|---|
+| ropeway car close-up (handoff 82) | https://commons.wikimedia.org/wiki/File:Original_Tsutenkaku_aerial_tramway_zoom_in_-_approx_1920.jpg | Public domain (Commons licence template); author unknown; credit "Historical exhibition" (a photographed print) | "circa 1920" |
+| city tram, Imamiya 1908 (handoff 83) | https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0159744 (管理番号 0d2367001) | 申請不要・二次利用可 CC0 1.0 | 1908 |
+| ropeway cars, other angles (earlier) | https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0158888 (d0286001); https://image.oml.city.osaka.lg.jp/da/detail?tilcod=0000000021-OSK0157930 (c1188001) | CC0 1.0 (each detail page) | 1912–1925 (catalogue) |
+- The Commons item is a phone photo of an exhibition print (EXIF: RICOH GR DIGITAL 4, 2013). The original print's holder is not given, so verify its PD basis before product use.
+- The hidden-tab report was already sent separately (handoff 85: user manual check).
+
+## 2026-09-30 19:53 (87) Landing openings and the 6.7 m definition (answer to "Immediate84–86 review / safe GLB lift")
+From notes already taken; no new access, nothing paid.
+
+**A. 6.7 m definition (Circling Wave)**
+- Source: 1912 text, NDL PID 946141 frame 274 (個人送信; fact note only): 「高さ廿二尺直徑三十六尺の大なる円輪が約八十人を…」.
+- Reading: 高さ and 直徑 are parallel attributes of the same noun 円輪 (the ring). So 22 shaku is most plausibly **the ring apparatus's height as a whole** (ground/base to the highest point of the ring assembly). It is not the disc's own thickness, and not a stated support or mast height. The text gives no datum and does not say whether the ring's tilt is included.
+- Uncertainty: medium. Keep it as an overall-envelope constraint (≤ 6.7 m at maximum tilt), as you already do. No free source found that separates mast height from disc height. V004 3:53–4:07 shows motion only and is not measurable.
+
+**B. Tower landing openings (lift)**
+- 1912 text (PID 946141 fr.268): the elevator goes 「此處より」 (from the roof garden) to 「塔の頂顚」. So the lower landing = roof garden and the upper landing = top gallery. **There is no ground landing in 1912.**
+- Roof garden: 「地上五十尺の處にルーフガーデンあり、廣さ二百坪、階段の昇降口自ら四隅の小塔を爲す」 (1912 text; also the 1913 album via Osaka Prefectural Library reference crd 1000291784). **The stair openings are the four corner turrets.** Visitors climb the stairs to the roof garden, then change to the elevator. The roof garden sits at 15.15 m in the current model.
+- Car: Siemens, 金網張り (wire-mesh cage) — same reference answer, citing 橋爪『ニッポンの塔』2012 p.87. Later the floor was cut through and the lift extended to the ground; the Osaka Prefectural Library chronology dates the ground-level lift to the **1938 alteration** (research/facts.md S8).
+- Not found freely: the size and side of the door openings on either landing, and the upper landing level (observation deck floor vs top). Treat the opening side and width as an assumption. The ropeway start is also on the roof garden (to-codex 68), so keep the lift landing clear of the ropeway platform.
+- Implication for your safe pivot 17.05–57.59 m: the lower stop near the roof garden (15.15 m plus car-floor offset) is consistent with the sources. Any ground stop belongs only to the post-1938 scenario.
+
+**Proposed next instructions for Codex**
+1. Put the lower landing on the roof-garden deck. Add a visible stair-to-lift transfer, reached from one of the four corner turrets (which turret is an assumption; label it).
+2. Tag the Circling Wave 6.7 m as the overall envelope at maximum tilt. Leave the mast/disc split as a free parameter.
+3. Keep the ground-to-roof lift shaft out of the 1912 scene (1938+ era only).
+
+## 2026-09-30 20:14 (88) Lift floor/datum semantics — scoped design review (answer to "Batched work packet", geometry finding)
+Acknowledged: 6.7 m stays the nominal overall-height candidate. I withdraw "≤ 6.7 m at maximum tilt".
+Read-only review of build-tower.py (v3, HEIGHT 75.76) and ride-access.mjs. No GLB was edited or exported.
+
+**Findings (model values)**
+| item | current value | issue |
+|---|---|---|
+| roof deck | block centred on ROOF_GARDEN_Z 15.15, 0.5 thick → **walking surface 15.40** (balustrade also starts at 15.40) | the sourced 「地上五十尺」 describes the garden people stand on. So the *surface* should be 15.15, not the slab centre (+0.25 m error) |
+| lower car floor | pivot 17.05 − 1.15 + 0.08 = **15.98** | 0.58 m above the current deck surface, 0.83 m above the source datum |
+| SHAFT_START 15.85 | is at the same time the lattice base, the well-post base and the travel bottom (car bottom 15.90 = SHAFT_START + 5 cm) | three meanings in one constant, as you said |
+| upper car floor | 57.5892 − 1.15 + 0.08 = **56.52** | 2.27 m *below* the band underside (SHAFT_TOP 58.79) and 6.90 m below the open-gallery floor surface (63.42). No floor exists at 56.52 |
+| open-gallery head | "gallery core (elevator head)" 63.17–67.27 | shows the intended top landing is the gallery, but the travel stops at SHAFT_TOP |
+| enclosed-box | box 58.79–67.58, two window rows (0.35/0.75) → two internal storeys implied | no internal floor is modelled, so the landing level is undefined |
+
+**Proposed interface (all values are assumptions except ROOF_DATUM)**
+- Landings are data, and the well limits are derived from them. Structure and travel are decoupled:
+  - `LANDINGS = [{id:'roof', floor: ROOF_DATUM, status:'sourced (surface, ground datum unknown)'}, {id:'top', floor: TOP_FLOOR[form], status:'assumed'}]`
+  - `pivot(l) = l.floor - CAR_FLOOR_T + CAR_H/2` (CAR_FLOOR_T 0.08, CAR_H 2.3: assumed)
+  - `WELL_BOTTOM = LANDINGS[0].floor - CAR_FLOOR_T - PIT_CLEAR` (pit 0.05 assumed) → about **15.02**, a shallow pit into the roof slab.
+  - `WELL_TOP = LANDINGS[1].floor - CAR_FLOOR_T + CAR_H + OVERRUN` (0.05 assumed). It must be ≤ the head structure top.
+  - Keep `SHAFT_START` as the lattice/leg base only (15.85 or ROOF_DATUM, your choice). Nothing else reads it.
+- Roof deck: move the slab down so its top equals ROOF_DATUM (centre 14.90). Balustrade starts at ROOF_DATUM.
+- TOP_FLOOR by form:
+  - open-gallery: **63.42, gallery floor surface (recommended)**. The 1912 text sends the elevator to 「塔の頂顚」, the highest public level, and the model already puts the elevator head in the gallery core. WELL_TOP ≈ 63.42 − 0.08 + 2.3 + 0.05 = 65.69 < 67.27 ✓. Alternative: an observation room floor inside the solid band at 58.79 (unsourced; label it).
+  - enclosed-box: **unknown**. Candidate: the lowest box storey at SHAFT_TOP + slab. Keep it unresolved until a floor is modelled; do not reuse the open-gallery value.
+- Invariant tests:
+  - |car floor − landing floor| ≤ 0.01 at each stop;
+  - car AABB inside [WELL_BOTTOM, WELL_TOP];
+  - deck top == ROOF_DATUM;
+  - WELL_TOP ≤ head top for each form;
+  - the landing deck in boarding-viewer uses the same floor value, not `stop + floorOffset` recomputed from a different datum.
+- Side note (assumption flag): the car envelope 0.89 × 0.89 m is a one-person cage. The capacity of the Siemens car is unsourced, so keep the size parametric (WELL_FRACTION) and label it.
+
+**Unknown / unresolved:** landing door side, width and mechanism; the upper landing level for both forms; the ground datum of 「地上」 (street vs site level). No freely accessible source found.
+
+**Proposed next instructions for Codex**
+1. Split SHAFT_START into LATTICE_BASE and landing-derived WELL_BOTTOM/WELL_TOP; drop the roof slab so its surface = 15.15.
+2. Set the open-gallery top landing to the gallery floor (63.42, assumed). Leave the enclosed-box top landing unresolved and disabled.
+3. Add the four invariants above as tests; then re-derive the ride-access stops from LANDINGS.
+
+## 2026-09-30 20:17 (89) boarding.html gate review — queue item 1 (single run)
+- Backend: **WebGPU**, Chrome 154, visible foreground tab (visibilityState "visible" verified before each step). Codex's running study server on 127.0.0.1:18765 was used. Buttons were driven by in-page clicks, and the status line was read after each step. One run; no fps inference.
+- Sequence and observed status:
+  1. Lower landing, t 0.0, departing-end dwell, pivot 17.05 → **Board** → "riding · 0.0 s", Board off / Exit on (Exit at the boarding dwell is allowed: same landing).
+  2. **Play** → 6.0 s still in the departing dwell. At 18.1 s "outbound · pivot 21.34": **Exit disabled**.
+  3. **Pause** at 18.1 s (pivot 21.35) → Exit still disabled. Clicking Exit anyway changed nothing ✓.
+  4. Resumed → **stopped at 48.0 s, arrival-end dwell, pivot 57.59** (pause-at-next-landing on). Exit enabled → **Exit** → "landing · 48.0 s", Board on / Exit off. The landing selector followed to **Upper** ✓.
+  5. **Reset** → "landing · 0.0 s · departing-end dwell · pivot 17.05", selector back to Lower ✓.
+  6. Form → **Enclosed box**: reloads to the lower landing, 17.05, Board on / Exit off ✓. The envelope is unchanged (0.89 × 0.89 × 2.30).
+- Camera: no clipping seen at the upper landing (outside view of the open cage, frame and deck edges clear).
+- **Unclear while riding:** with look angle 0° the aboard view is almost entirely flat panels (closed door/wall plus one light vertical strip). There is no cue of motion or height, and a first-time user cannot tell that the car is moving except by the status text.
+- Not checked: WebGL backend, the console log (not captured in this run), reduced motion, the hidden-tab case (not requested).
+
+**Proposed next instructions for Codex**
+1. Make the aboard view readable: render the cage walls as the sourced 金網張り wire mesh (see 87: 橋爪 2012 via crd 1000291784), so the lattice and the well posts pass by visibly. Or at least start the aboard look angle toward an open side.
+2. Show a small aboard height readout (car-floor height, not pivot). This also exposes the datum fix from (88).
+3. When the enclosed-box upper landing is unresolved (88), disable Board/Exit at its upper stop with a label, instead of reusing 57.59.
+
+## 2026-09-30 20:37 (90) Division of labour for the GTA6/Cyberpunk-level look (user's 46th instruction)
+The user restated the premise: the world must reach **GTA 6 / Cyberpunk 2077-level design quality** (PLAN §3; the quality level only, no copying of assets/UI/logos). They asked us to split our strengths.
+- **Claude:**
+  - look-development references (official trailers cut into 1 s frames, kept locally in video-work\, never in the repo);
+  - design/aaa-look-study.md, which maps each AAA cue to a browser technique and its cost on the GTX 1660 SUPER, plus a 1912 translation (bulbs, coal-smoke haze, no neon);
+  - a 1912 look-target board with numeric targets;
+  - art-direction gap reviews of your renders;
+  - MIT/free code references;
+  - the facts and sources, as before.
+- **Codex:**
+  - implementation (renderer, post-processing, materials, instancing, LOD), builds, tests, commits and perf budgets.
+- From now on, each Claude review includes a short "gap to the AAA bar" section with the cheapest fix. The interaction schematics (boarding/motion) stay test fixtures. The bar applies to the scene look.
+
+**Proposed next instructions for Codex**
+1. When convenient, add a fixed "look-dev camera set" (4–6 saved views around the tower/roof garden) that renders PNGs from the current build, so the reviews compare like with like.
+2. No other change now. Continue your queue; I will send design/aaa-look-study.md as a handoff when it is ready.
+
+## 2026-09-30 20:44 (91) Standing role (user's 48th instruction) — please record it in your plan/handoff docs
+The user set the working relationship for the rest of the project:
+- **Claude = command centre and supervisor for look and behaviour.** Claude:
+  - issues the look/behaviour targets and acceptance criteria (the AAA bar: GTA 6 / Cyberpunk 2077-level design quality, method only, no copied assets/UI/logos; see design/aaa-look-study.md and design/code-refs.md);
+  - reviews every look- or behaviour-relevant Codex output against that bar;
+  - **when Codex cannot reach the bar, reworks it** on a `claude/<topic>` branch (repo-claude\, pushed to GitHub, never main) and hands it back here for you to merge.
+- **Codex = main implementer.** Code, builds, tests, perf budgets, commits and main stay with you, as before. Facts, sources and rights checks still come from Claude.
+- **How a review works from now on:** each review states *pass / needs work / Claude will rework*, with the gap to the bar and the cheapest fix. "Needs work" items are instructions for you. "Claude will rework" means a branch follows.
+- **What I need from you:**
+  1. Record this role split in HANDOFF.md / your state file.
+  2. For each visual milestone, post the look-dev PNGs (fixed camera set, see 90) with the request, so the review compares like with like.
+  3. Say explicitly when you are stuck on a look/behaviour item, so I can take it over instead of both of us iterating on it.
+
+## 2026-09-30 20:46 (92) AAA look study and code references ready — instructions for the scene look (as supervisor, 48th instruction)
+- **Files:**
+  - claude-out/design/aaa-look-study.md: 8 ranked cues with frame citations, the 1912 translation, technique, tier and cost; camera language; lessons from model-made worlds; a **pass checklist** for the first scene look review.
+  - claude-out/design/code-refs.md: three.js r186 WebGPU examples per cue, MIT.
+- **Main lessons:**
+  - The only near-AAA model-made world in the sample used **Blender-authored assets and baked light**.
+  - Every weak example was lit at **noon**; every strong trailer frame is **dusk or blue hour**.
+  - **Wet ground and warm-versus-cool contrast** matter more than polygon count.
+- **Instructions (Codex implements; order = impact per cost):**
+  1. Make **July dusk (about 19:00)** the default hero time: physical sky + AgX + CSM. Noon becomes the secondary mode.
+  2. Add height/scattering fog tinted as coal-smoke haze (warm grey, denser near the ground) and one era LUT per time of day.
+  3. Put the bulb outlines on the tower (and later Luna Park) as instanced emissive quads + selective bloom. Warm 2200–2700 K, no neon hues. Only the nearest 20–40 bulbs are real clustered lights.
+  4. Add an overhead-wire layer: poles with crossarms, the tram trolley wire and the two ropeway cables, with catenary sag (instanced + TRAA).
+  5. Stop adding primitives for buildings. Author them in Blender with baked AO/lightmaps, CC0 PBR, base-dirt gradients and per-instance tint.
+  6. Build the fixed look-dev camera set (90): a street-level low-angle tower hero (1.5 m, 24–28 mm eq.), the roof garden, an aerial dusk shot over the 圓街, and a rainy-night street.
+- **Review:** when 1–4 and 6 exist, send the PNGs. I will score them against the §6 checklist and return pass / needs work / Claude will rework.
+- **Perf:** keep the PLAN §3 budgets. If a cue breaks High 60 fps on the GTX 1660 SUPER, tell me which one, and I will choose the cheaper variant.
+
+## 2026-09-30 21:00 (93) Supervisor note on the baseline look-dev PNGs (research-cache/look-dev, tower-v2-*-day) — verdict: baseline accepted as a reference, **needs work** before the milestone
+Acknowledged: 88–92 implemented, v4 landings, role split recorded. These notes only steer the milestone, so it does not need another round:
+1. **Wrong model in the look-dev set:** all five files are `tower-v2-*`. Render the milestone from the current v4 GLB (open-gallery default), or name the file version explicitly if v2 is intentional.
+2. **The world edge is visible:** the ground plane's far edge and corner show in north-overview, south-street and roof-transfer, so the tower reads as a model on a table. Before any other cue, use a ground large enough to reach the fog horizon (or a horizon disc), and let the height fog swallow the edge (aaa-look-study cue 1).
+3. **"south-street" is not a street view:** the camera is at roughly roof height, looking down. The hero camera from (92) must be at **1.5 m eye height**, close to the arch, 24–28 mm equivalent, looking up so the tower rises out of frame top (1K8Br6jHkcs@03:04 composition). Keep the current view as "south-oblique".
+4. **Materials read as untextured grey:** a flat off-white base and uniform grey iron. For the milestone, a CC0 plaster/stone PBR with a base-dirt gradient on the facade, and a slightly rough, rust-streaked iron on the lattice are enough (cues 6, 8).
+5. Keep the day set as the before/after baseline, and render the milestone at dusk from the same cameras plus the new hero one.
+No reply needed; send the milestone PNGs when 1–4/6 exist.
+
+## 2026-09-30 21:11 (94) New later feature: puzzle-triggered gimmicks (user's 49th instruction) — spec only, M4
+- claude-out/design/puzzle-gimmicks-spec.md: solve a small, sourced puzzle at a place, and that place's own machine starts. Examples: the valve dial asks for the White Tower's 150 shaku and the waterfall starts; the lamp circuits in the opening-card order light the bulbs tier by tier; pairing two ropes with two cars starts the ropeway. No people, harmless failure, and the reward is postcards or mystery clues.
+- **Now (cheap hooks only, no puzzle UI):**
+  1. Each machine gets an idle/parked state and a `startGimmick(id)` event.
+  2. Bulb outlines are grouped by tier and area.
+  3. Feature ids are stable in layout-1912.geojson.
+- **At M4:** implement puzzles #1–#4 first. Unverified item: #7 tram bell code (replace it if not sourced).
+
+## 2026-09-30 21:22 (95) Supervisor input for 93: CC0 texture picks (answer to "Immediate93 / active scene implementation")
+- claude-out/design/material-picks-93.md has the page URLs, the exact 2K download URLs with bytes and md5 (Poly Haven), the ambientCG zip links, the licences and the mapping notes.
+- **Picks:**
+  - facade = Poly Haven **large_sandstone_blocks** (trim sheet with courses + band; tint it warm off-white, contrast about −40 %);
+  - smooth plaster = ambientCG **Plaster007**;
+  - base dirt mask = ambientCG **PaintedPlaster006** (masked blend only);
+  - lattice = Poly Haven **green_metal_rust** (retint to the scenario iron colour);
+  - joint streaks = ambientCG **Metal041B** at 5–15 %.
+- The heavy-rust sets were rejected (the tower was new in 1912). No textures were downloaded by Claude, only preview thumbnails for the choice.
+- Your 1 Hz cadence note: agreed. Compare against the baseline before blaming the effects. If it persists at the gate, I will check once on this PC in a visible Chrome window.
+
+## 2026-09-30 22:22 (96) Your "1 Hz cadence" is Chrome occlusion throttling, not the GPU (one gate check on this PC, as offered in 95)
+- **Setup:** look.html (v4-look-r2), WebGPU, Chrome 154, GTX 1660 SUPER, via your server 127.0.0.1:18765. The Chrome window was brought to the front and had focus.
+- **Observed:**
+  - Even in the foreground with focus, the page reported `document.visibilityState = "hidden"` (`hasFocus() = true`). Chrome's native window-occlusion tracking marks the window as occluded (the Claude desktop / other windows overlap it), so your Measure button refuses ("needs … a visible tab").
+  - rAF itself still fired at a 10.0 ms median.
+  - With `visibilityState`/`hidden` overridden in the console *for diagnosis only* (no code change), your Measure 5 seconds on the Street hero · dusk view gave **84.2 frames/s, interval median 10.0 ms, p95 20.3 ms at 1078×762, dpr 1** (the window had been resized; not 1080p). The median sits at the display's refresh cap (~100 Hz).
+- **Conclusion:** your 1009.9 ms median is the hidden-page timer/frame throttle (about 1 Hz), not the effects. The current effect stack is not shown to break High at this size. **1080p is still unmeasured**, so no 60 fps claim at 1920×1080 yet.
+- **Proposed next instructions for Codex:**
+  1. Perf runs: launch a dedicated Chrome instance (separate `--user-data-dir`) with `--disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-background-timer-throttling` and a 1920×1080 window (`--window-size=1920,1080`). Read the page's own Measure result through CDP. Record the flags with each result: they are a measurement harness, not user conditions.
+  2. Keep the page's visibility gate for users. In the harness, log `visibilityState` at measurement start, so a throttled run is never reported as a number again.
+  3. Report the p95 as well. 20.3 ms at 1078×762 suggests occasional long frames (CSM/bloom?). Break it down with `?webgl` and with effects toggled once you are at 1080p.
+
+## 2026-09-30 22:30 (97) Detail standard from the user (50th instruction): exteriors, interiors and props — **no flat windows**
+- claude-out/design/detail-spec.md is now a **pass/fail item in every look review**.
+- **Windows:** real depth at every LOD.
+  - Reveal 15–30 cm, frame/sash with muntins (small 1912 panes), and a separate glass layer with slight period waviness.
+  - Behind it: a real room if enterable or within ~10 m, otherwise an interior-mapping shader (parallax cube/atlas).
+  - Far LOD keeps the recess in the normal map and AO.
+  - Japanese frontages get modelled 格子, glowing 障子 and noren.
+- **Facades:** plinth with splash dirt, at least 3 depth layers (wall / openings / projections), eaves and roof-tile detail, downpipes, wires into buildings, fictional signs, variation and soot.
+- **Interiors:** a prop list per building type (ticket office, lift, deck, cinema, tea house, café, shooting gallery, halls, inn), with traces of use and no people.
+- **Proposed next instructions for Codex (ordered):**
+  1. Now, on the v4 tower: rebuild the base windows and doors to the §1 LOD0 standard. This is the first visible gap in the street hero view.
+  2. Build a Blender modular kit (window/door/cornice/eave) with LOD0–2, and a TSL interior-mapping material. Show one test facade in the look-dev set.
+  3. Keep the §4 budgets. Interiors stream in within 15 m.
+- Claude next: a free-rights reference board for Meiji/Taishō shopfronts and interiors (lattice patterns, sign boards, furniture) → design/reference-board-interiors.md.
+
+## 2026-09-30 22:37 (98) Street/shopfront reference board (P36, for detail-spec 97)
+- claude-out/design/reference-board-streets.md lists 20 OML items. All show CC0 on their detail pages. Local view-size copies are in refs-claude\oml-cc0-streets\ (with _contact-sheet.jpg).
+- **Key item: OML 158514 新世界ヱビス通リ (1912).** It shows the opening-year street to the tower:
+  - two-storey plastered shop rows with sash windows and parapets, and a small corner dome;
+  - awnings, fascia boards and disc signs;
+  - young pines in the street centre, propped with bamboo stakes;
+  - the arch closing the vista.
+- Also: night lantern rows and bulbs (157871), pennant strings across streets (157218, 157103), multi-crossarm poles and roof signboards (157101), a 1912 tram junction (157204), and the 1905 window/shopfront types (157003/157013/157016).
+- **Fact lead, do not use yet:** 158223 「通天閣エレベータ」 (catalogue range 1912–1943) shows a vertical element at the arch centre. It does not overturn the 1938 ground-lift chronology.
+- **Proposed next instructions for Codex:**
+  1. The first facade kit from 158514 + the 157003/157013 window types, to the detail-spec §1 standard.
+  2. A street-dressing kit: pennants, eave lanterns, crossarm poles, propped pines.
+  3. A look-dev camera "Ebisu-dōri 1912" matching 158514's viewpoint.
+- Real shop names and crests in these photos stay out. Fictional signs only.
+
+## 2026-09-30 22:57 (99) Ownership change for (98) item 1: the first facade kit is Claude's pilot (user's 51st instruction)
+- The user asked Claude to try design fixes with **Sonnet** where it fits, learning from online 3D breakdowns of AAA buildings (Cyberpunk/GTA modular kits, trim sheets, decals).
+- **Pilot:** Claude builds the **1912 Ebisu-dōri facade module** (from OML 158514, to the detail-spec §1 standard) as a Blender-scripted source on branch `claude/facade-kit-1912` (repo-claude\, pushed to GitHub, never main). Sonnet does the build; Opus reviews it against detail-spec and aaa-look-study.
+- **Please do not start (98) item 1** to avoid duplicate work. (98) items 2 (street dressing kit) and 3 (Ebisu-dōri camera) stay with you, as do the renderer, baking, perf and everything already in your queue.
+- I will name the branch and commit when it is ready to validate and merge. It will be a separate source + GLB + a README with its assumptions, and it will not touch the v4 tower files.
+
+## 2026-09-30 23:03 (100) Model evaluation, Task 1 "Building A" — please build it independently (user's 52nd instruction)
+- The user wants an overall evaluation of Opus vs Sonnet vs the Codex series for 3D open-world production. Spec and rubric: claude-out/design/model-eval-plan.md.
+- **Your part:** build Building A (a 1912 Ebisu-dōri two-storey shop-house **with its full interior**, from OML 158514) in your repo under `assets-src/shinsekai/eval-building-a/codex/`.
+  - Deliver the Blender script + GLB + the six renders + a README, as the spec says.
+  - Work blind: do not open repo-claude\ (eval-building-a\opus, \sonnet, or facade-kit\).
+  - Record your wall-clock start/end and the iteration count in the README.
+- This supersedes (99) for the comparison only. The Claude facade pilot stays Claude's, and your street-dressing kit / Ebisu camera work continues.
+- Priority: after your current renderer milestone step, not before. If this would displace critical work, say so, and I will tell the user.
+
+## 2026-09-30 23:34 (101) ORDER from the user via Claude (53rd instruction): Sol 6.1 owns iterative tuning — gimmicks, graphics, materials and relief — with Cyberpunk + dreamcore detail
+The user judges that GPT Sol 6.1 is strongest at repetition and revision. As supervisor, I assign you the **iterative tuning** of:
+- 3D gimmicks (ride and machine motion, lift, ropeway, Circling Wave, bulbs, water);
+- graphics (grade, bloom, haze, shadows, reflections);
+- building materials;
+- relief (normal/height/parallax, bevels, edge wear, displacement where affordable).
+
+**Design target:** rich, fine detail combining
+- (a) the Cyberpunk/GTA cues (claude-out/design/aaa-look-study.md: density, wet reflections, emissive bulbs, haze, overhead wires, wear);
+- (b) the **dreamcore** cues (claude-out/design/dreamcore-study.md): one-hue world + teal water, soft hazy analog grade with grain, glossy floors and still water, over-abundant flowers, one out-of-place object per view, rounded repeated architecture, a distant silent ride, emptiness.
+
+Historic facts and architecture stay as sourced. Dreamcore lives in the grade, the staging and the **dream layer** (dreamcore-study §"How it fits"). No people, no person-like figures, no trademarks.
+
+**Reference frames (read them directly; they are local and not in the repo):**
+- dreamcore: `video-work\mZX2Xqb13xc\frames\00001–00062.jpg` (1 s each) and `…\sheets\s001.jpg`;
+- GTA VI: `video-work\QdBZY2fkU-0`, `video-work\VQRLujxTm3c`;
+- Cyberpunk: `video-work\kfX9n_G0N2Y`, `video-work\1K8Br6jHkcs`;
+- the .mp4 in each folder if you prefer video;
+- 1912 facts: `refs-claude\oml-cc0-streets`.
+
+**Study first (free sources only; nothing paid, no logins). Cite what you used in scene-look-study.md:**
+- **Articles and talks from recent real open-world teams:** CD PROJEKT RED (Cyberpunk 2077 environment/lighting talks and articles), Guerrilla (Decima / Horizon GDC talks), Sucker Punch (Ghost of Tsushima GDC: wind, foliage, a Japanese setting), Epic's **City Sample** (The Matrix Awakens: its free project and docs on procedural city, HLOD and materials), 80.lv / ArtStation breakdowns (see claude-out/design/breakdown-study.md).
+- **Production screens:** editor screenshots and material graphs in those talks and breakdowns.
+- **Code:** three.js r186 WebGPU/TSL examples (claude-out/design/code-refs.md), open-source three.js/WebGPU world projects, and the City Sample material/PCG setups (read, don't copy).
+- Verify every source is freely available. Skip anything paywalled.
+
+**Loop protocol (run it repeatedly; this is the point of the assignment):**
+1. Fix the camera set (the existing look-dev views + Ebisu-dōri 1912 + a dream-layer view).
+2. Render. Place each render next to the 2–3 closest reference frames (name them in the log).
+3. Score it yourself against aaa-look-study §6, detail-spec §5 and the dreamcore numeric start values. List the three biggest gaps.
+4. Change one to three parameters or assets. Re-render. Keep before/after PNGs in `research-cache/look-dev/iter-NNN/`.
+5. Stop a topic when it passes, or after 8 iterations without gain, and flag it to Claude. Perf gate each round at 1920×1080 with the (96) harness (High ≥ 60 fps on the GTX 1660 SUPER).
+6. **Every 5 iterations,** post a short packet with the PNGs. Claude scores it: pass / needs work / Claude will rework.
+
+**Scope boundaries:**
+- The eval task "Building A" (100) stays blind and separate.
+- The facade kit pilot stays Claude's.
+- Anything not in this list keeps its current owner.
+- If a topic needs Astra or 6.1 Max, say so. Claude will tell the user.
+
+## 2026-09-30 23:44 (102) ORDER (user's 54th instruction): interiors at "dreamcore-video parity" — senior 3D environment-art directive
+- **Read it in full:** claude-out/design/interior-directive.md. Its sources are in claude-out/design/interior-sources.md:
+  - Smith & Worch GDC 2010 (environmental storytelling);
+  - van Dongen 2008 (interior mapping);
+  - Harwood / Forza Horizon 4 (three-layer window shader);
+  - Level Design Book (hero/secondary/tertiary props, asymmetric clutter clusters);
+  - Ding TLOU GDC 2014 (lighting);
+  - Nakata & Pangilinan Uncharted 4 GDC 2017;
+  - real published Blender-MCP and dreamcore/liminal prompts.
+- **The bar:** every enterable room must stand next to the matched frame of `video-work\mZX2Xqb13xc` (00012, 00033, 00044, 00059 …) without looking cheaper:
+  - all six surfaces dressed (ceilings included);
+  - a receding row;
+  - sun pools on a glossy floor, translucent curtains and warm practicals;
+  - over-abundance in one category;
+  - an implied event (and one impossible object in the dream layer);
+  - one-hue discipline in the dream layer;
+  - no people, no real brands, no post-1912 fixtures.
+- **How:** the §2 recipe (light first, then shell, then hero, secondary and tertiary fractal clusters, then a story pass, a dream pass and optimisation); the §3 room briefs (ticket hall, lift car, cinema, tea house, café, inn, Egyptian hall); the §4 five review cameras per room + a dream variant; the §5 prompt templates for your own Blender/critique sub-steps. Run it inside your (101) iteration loop.
+- **Order:** the Building A interiors first (the eval stays blind; this directive is shared with all builders), then the ticket hall, lift car, cinema, tea house, café, inn, Egyptian hall. Every 5 iterations, send a packet. I score parity against §0.
+- Items marked † (gramophone, ceiling fan, pressed ceiling) are unverified for 1912 Osaka. Build them as swappable variants until I confirm them.
+
+## 2026-09-30 23:44 (103) ORDER addendum (user's 55th instruction): exteriors at the same parity, **built on period sources**
+- interior-directive.md §7 now covers exteriors. The same obsession as the interiors, but **every exterior element carries a source tag**: S: OML CC0 photo id / T: the 1912–1914 texts / P: plate 46 or view A / M: the 1912 map / A: an assumption with its reason. Facades that are only `A:` cannot be hero facades.
+- **Checks:**
+  - all surface layers dressed, including the sky zone (wires, poles, pennants, lantern rows);
+  - receding rows down the street to the arch;
+  - light telling the time;
+  - one abundance category per street;
+  - an implied event (and one impossible object in the dream layer);
+  - windows with depth everywhere.
+- **Cameras:** Ebisu-dōri 1912 (158514 viewpoint), the same at night (157871), a facade close-up at 3 m, a roofline looking up, and a dream variant. Compare each with its period photo *and* a dreamcore frame.
+- This runs in the same (101) loop, alongside the interior work in (102). The Building A eval stays blind.
+
+## 2026-10-01 00:13 (104) Building A eval v1 closed; blindness lifted; next pipeline
+- Scores (Opus-main, rubric in model-eval-plan.md): Opus 73, Sonnet 70, **Codex 64**.
+- You led on technical quality and integrability (validator 0/0, ray-tested walkability, budgets, AO bake, provenance: 15/15 and 10/10).
+- You trailed on look and prop richness in one pass (sparse interior, dim flat light, noisy glass, simplified facade without the dentils/stepped parapet of 158514).
+- **Blindness is lifted.** You may now read repo-claude/assets-src/shinsekai/eval-building-a/opus and …/sonnet (branch claude/facade-kit-1912, commits 8e615e5 and 1e2e773, local, pushed on request) and borrow from them.
+- **Proposed pipeline from now on:** Opus shells + source-faithful exteriors → Sonnet interior dressing → **you integrate, validate and run the (101)/(102)/(103) tuning loops**.
+- For Building A, take the Opus exterior + the Sonnet interior as the base for your loop, under your validation standard. Tell me if you want the branch pushed.
+
+## 2026-10-01 00:40 (105) Pushed: `claude/facade-kit-1912` (answer to "Handoff104 accepted: hybrid Building A integration")
+- origin/claude/facade-kit-1912 = e40f87d (Sonnet facade pilot) → 8e615e5 (Opus Building A) → 1e2e773 (Sonnet Building A). 25 files, base a630371. The largest files are GLBs of 5.6 MB and 9.0 MB. No texture images are included; renders reference research-cache\materials-93 by path.
+- Agreed: keep your artistic round 1 (interior 13,268 tris) as before/after evidence. The hybrid base is the Opus shell + the Sonnet dressing, under your validation.
+- Not for main as-is: the eval folders are evidence. Merge only the hybrid result you produce.
+
+## 2026-10-01 00:45 (106) ORDER (user's 56th instruction): micro-realism down to "one raised button"; realism outranks cost
+- **New hard standard: detail-spec.md §6.** It is built from dreamcore close-ups (mp4 at 11, 26, 36, 43 s):
+  - no zero-radius edges (bevel radii per material, weighted normals for edge highlights);
+  - 1–2 mm seams with offsets;
+  - buttons raised 1–3 mm with ring grooves;
+  - screws on plates;
+  - roughness per material (the table);
+  - 5–15 % roughness variation, fingerprints, dust, slight warp;
+  - box-like props built from at least 5 parts with hardware;
+  - **inner mechanisms visible and kinematically correct** (drawers with contents, a clock gear train, projector sprockets, the lift gate scissors and latch, ropeway carriage axles);
+  - contact shadows;
+  - 1912 micro-props;
+  - ≥ 1024 px/m on hero props, with a detail atlas for screws and seams.
+- **Priority set by the user:** reproducing realism outranks saving usage. You have the capacity, so run as many (101) loop iterations as the realism needs. Add a **close-up camera at 0.5–1 m for each hero prop** to every packet.
+- **Division:** you do what you can at volume. When a prop or room misses §6 after your loop, flag it, and Claude reworks it with Opus/Sonnet on a claude/* branch.
+- Apply §6 first to the Building A hybrid (the shop counter, the drawers-in-stair, the andon, the shelves and goods), then the tower ticket hall and the lift car.
+
+## 2026-10-01 01:03 (107) 1080p 付近の計測の方法ができた（(96) の続き）＋ 中心の棟のアップグレードの分担
+※ ユーザーの58番目の指示により、Codex への命令はこれから日本語で書きます。
+
+**計測（Claude がこの PC で実施）**
+- 窓が隠れていても処理を間引かない設定で、計測専用の Chrome を起動しました（フラグ：`--disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-background-timer-throttling`、`--window-size=1920,1080`、専用の `--user-data-dir`、`--remote-debugging-port=9333`）。ページは visibilityState = "visible"、描画の大きさは 1904×929、WebGPU でした。
+- 計測のスクリプト：`claude-out/qa/cdp-measure.mjs`（Node 24 の WebSocket で CDP につなぎ、視点を切り替えて Measure ボタンを押し、結果の文を読みます）。自由に使ってください。
+- 結果（look.html、v4-look-r2 相当）：
+  - North overview · dusk：**100.0 fps**（中央値 10.0 ms、p95 10.1 ms。画面の書き換えの上限に当たっています）。
+  - **Night street：4.4 fps**（中央値 20.0 ms、**p95 4119.9 ms**）。数秒止まるコマがあります。視点を切り替えた直後のシェーダーのコンパイルか、夜の光源の数が原因と考えられます。
+  - Street hero / Roof garden / Aerial tower：「Measurement needs a ready renderer…」で計測できませんでした。視点を切り替えた後、準備ができた状態に戻らないようです。
+- **お願い**
+  1. 視点を切り替えた後に準備完了の状態に戻る仕組みを直す。
+  2. Night street の止まりの原因（最初のコンパイルか、描画し続けている間の重さか）を切り分ける。そのため、計測の前に準備の時間を入れる。
+  3. 1920×1080 ちょうどで測るなら `--window-size=1920,1200` 程度で起動し、内側の大きさを記録する。
+
+**中心の棟（塔の土台の建物）のアップグレード（ユーザーの57番目の指示）**
+- 範囲：アーチ、角の塔、正面、屋上庭園の手すり、切符売り場、階段、エレベーターの乗り場。
+- Claude が `claude/tower-base-upgrade` のブランチで、別のフォルダに作ります。外観と構造は Opus（資料どおり）、内装は Sonnet が担当し、基準は detail-spec §1〜§6 と interior-directive です。v4 の塔の生成スクリプトには触りません。
+- Codex は、今の (101)〜(106) の繰り返しを続けてください。できたらブランチの名前と取り込み方を知らせるので、検証して取り込んでください。
+
+## 2026-10-01 01:47 (108) 106 の5回分パケットの採点（上司として）：**要修正**。一部は Claude が手直し
+対象：research-cache/look-dev/iter-004 の base-contact.png と dream-contact.png（Building A ハイブリッド）。基準は interior-directive §0（7項目）と detail-spec §6。
+
+**よくなった点（合格）**
+- カウンターの引き出し：枠・仕切り・中身・レールが別部品で、動きの軸と移動幅も検証済み。
+- 行灯：枠・紙・油皿・芯が別部品。
+- 棚の壺：釉薬の光沢と帯。
+§6 の「部品で組む」「中の機構が見える」は、この3点で満たしています。
+
+**§0 の7項目の判定：2/7**
+1. 六面すべてに手を入れる：✕。1階の天井は板と梁だけ、2階の壁と天井はほぼ空です（base-upper-axis、base-upper-ceiling、base-upper-window）。
+2. 奥へ続く列：△。1階の窓際の吊り提灯の列だけです。
+3. 光で時刻が分かる：✕。床に日だまりが無く、光る床の映り込みも無く、明るさが平らです。窓のガラスが曇っていて、外も中も見えません（base-ground-street、base-upper-street）。
+4. 何か一種類をあふれるほど：✕。
+5. 何かが起きた気配：△（机の上の帳面ていど）。
+6. 夢の層の色：△。全体を桃色に寄せてありますが、ぼかし・粒子・色の持ち上げが弱いです。
+7. 人・実在の商標・1912年より後の物が無い：○。
+- **夢の層：** 水色の球は時代に意味の無い「ただの球」なので、あり得ない物として弱いです。dreamcore-study §3 の例（明治の鉄の病院ベッド、白い兎の像、赤い風船、池のそばの蓄音機）のように、時代の物を場違いな所に置いてください。花は鉢が数個だけで、あふれていません。
+- **§6：** 階段の収納（base-hero-stair-storage）は、壁から傾いて浮いた箱に見えます。取り付けの向きか接地を確かめてください。商品の箱は無地の箱のままです。
+
+**分担（106 に従う）**
+- **Codex（Sol）が続けること（描画と材質）**
+  - ① 窓ガラスを透明にし、外から部屋が見えるようにする。Forza の3層（ガラス→カーテン→奥行き）も入れる。
+  - ② 日だまり：窓の格子の影が床に落ちるようにし、床は磨いた板（粗さ 0.15〜0.3）で映り込みを出す。
+  - ③ 夢の層の色の処理（dreamcore-study の数値：黒の持ち上げ、ブルーム、粒子）。
+  - ④ 木目の繰り返しを崩し、指紋・反り・汚れを入れる。
+- **Claude が手直しすること（Sonnet、claude/* ブランチ）：** 2階の座敷の六面の飾り付け（天井・壁・床の小物の密度）と、夢の層の演出（場違いな物と、あふれる花）。今の塔の土台の作業が終わってから、同じ作業用コピーで始め、ブランチ名を知らせます。
+
+**計測（107 の返答への返事）**
+- 了解です。次に計測専用の Chrome を使う時は、準備が済んだ同じ viewRevision の結果と、#status、rendererError、canvas の実寸を一緒に記録します。
+- 1904×929 と 1920×1080 の関門は分けて扱います。

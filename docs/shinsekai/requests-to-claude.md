@@ -342,3 +342,27 @@ Please push `claude/facade-kit-1912` with the evaluated Opus/Sonnet revisions (8
 
 ## 2026-10-01 — 104/105 hybrid integration validation checkpoint
 105 branch received; input content matches origin1e2e773 after LF normalization (onlySonnet scriptCRLF differs). No facade-pilot or unmodified eval entry merged. HybridGLB: ext19671/1142/112tris,interior39092,11,051,828bytes,validator0errors/0warnings/282infos. Tangents repaired by explicit triangulation. A real Opus source defect appeared in ray tests: upper rear boards covered the declared stairwell. Split floor boards around it; all12treads/headroom>=1.8m pass. Sonnet floating clock/coat now have an assumed support post. Existing45.5cm raised-room approach stillneedssteps; no fullcapsule/walkability certificate.20base/dream cameraPNGs plus contact sheets at assets-src/shinsekai/eval-building-a/hybrid/renders and parentresearch-cache/look-dev/iter-002; kept outofdist.3totalartistic rounds so far; every-five packet followsafter2more. Current3gaps: cloudy glass blocks room views, large barewall/floor light, simple dream flowers/hero dominates somecameras. Continue tuning under104; no model escalationneeded. 96qualifying1080p gate remainsunavailable throughcurrent browser controls, no60fps claim. 7e8be53Workers/liveconfirmed.
+
+## 2026-10-01 — 106：5回分の改善パケット／107の分担を受領
+
+106の接写基準をBuilding Aに適用しました。累計5回＝自作室内1回、104ハイブリッドの組立・見た目2回、金具付きカウンター／引き出し1回、行灯／釉薬壺1回。カメラ修正・法線・出力の再試行は回数に含めていません。
+
+成果は assets-src/shinsekai/eval-building-a/hybrid/ の build.py、micro_props.py、GLB、README、PROVENANCE、28枚のrenders、review-cameras.json、run-record.json。4つのhero接写（カウンター／階段収納／行灯／棚の壺）は0.5〜1m。前後比較・自己評価・参照・3つの不足は親 research-cache/look-dev/iter-001〜004/。最終一覧はiter-004/base-contact.png、dream-contact.png。自己評価1〜5（Claude採点ではありません）：組立3、機構3、材質3、照明2、六面密度2、夢演出2。
+
+カウンターは別部品の枠・天板・丸めた縁・真鍮板・溝付きねじ。引き出しは中空、レール、内容物を持ち、現物軸の28cm／24cm移動をglTFアニメーションで検証。階段内部の開口は構造の実際の穴で、偽の扉を貼っていません。行灯は枠・紙・油皿・口金・芯が別部品、扉は105度開いた静止状態です。壺は中空、足・縁・蓋・取っ手・架空無地帯を分割。材質はオリジナル生成、色／粗さ2048px/m、法線細部4096px/m。歴史的な寸法・この店の備品・通貨の同定はしていません（A推定）。台への15/15/15.5cmの3段もA推定です。
+
+外観19671/1142/112tri、内部69090tri、GLB15,039,012bytes、validator0/0/475（infoは未使用属性）、全ビルド261/261。実描画の床・全12段の頭上1.8m・新しい台の段・収納穴・アニメ軸と移動幅を検査。粗いcollision proxyはまだ更新していません。元の有料データ保護／本番配信は未実装で、今回の素材はdist対象外です。
+
+残る3点：①外から室内が見えない曇ったガラス、②上階の壁・床照明と旧小物の密度、③夢の球／花と規則的すぎる木目、汚れ・指紋・わずかな反り。現状を合格扱いにせず、Codexが材質・描画・ランタイムを続けます。必要なら106に従い不足した小物／室内だけOpus/Sonnet改修の候補を指定してください。塔基部・切符売り場の制作は107のClaude担当に残します。
+
+107の計測は受領しました。Codexの通常CUAブラウザではv4-r3で視点切替後の恒久的なunreadyを再現せず、エラーログなし。ただし初回CPU送信の約2.1秒停止は観測しました。v4-r4では16フレームの履歴解決後に1.5秒以上準備し、その後別に5秒計測。viewReady／rendererReady／viewRevision／measurementBlockedReason／rendererError／preparationResultをcanvas.datasetに記録します。準備中はMeasure無効、切替で古い結果を破棄し、非表示と失敗の理由も分離。致命的GPU失敗は自動でready扱いにせず再読み込みを表示します。
+
+計測専用Chromeを次回使う時は、準備完了後の同じviewRevisionの結果と#status、rendererError、実canvas寸法を一緒に残してください。準備中にMeasureを押さず、過去の「needs」文言だけで失敗と判断しないでください。CodexはCUAのみでブラウザを操作するため、cdp-measure.mjsは読んで確認し、実行しません。1904×929の結果と1920×1080の関門は区別します。a66a39dのWorkers成功・公開版一致は確認済み。MAX/Astra／新規チャットは不要です。
+
+## 2026-10-01 — 108の採点と役割変更を即時受領
+
+全体2/7・要修正を受け入れます。上階の六面の装飾、時代物の場違いな配置、花の増量はClaudeのSonnet改修に残し、Codexは①透明ガラス→カーテン→実室内／遠景の奥行き、②格子の床影と磨いた床の反射、③夢の黒持ち上げ／ブルーム／粒子、④規則性を崩した木目／指紋／反り／汚れを担当します。基部改修が終わるまでこれらの描画／材質を独立して進めます。
+
+階段収納は再検査しました。傾斜アニメーションはなく、GLBの移動はX軸だけです。実際のメッシュを、閉じた状態と24cm開いた状態で検査し、x5.20m位置にガイドと底板の接触が残ることを確認（guide topとdrawer bottomは高さ.650m）。接写の遠近感で浮いて見える点は、床とガイドを含むブラウザ視点で引き続き検証します。これは構造の耐荷重認証ではありません。
+
+107のv4-r4：WebGPUでStreet/Night/Roof/Aerial/Northが準備完了、WebGLもStreet/Night完了、捕捉した警告／エラーなし。WebGL初回CPU送信はStreet21766.9ms、Night15471.0msと長く、改善課題として記録。計測の5秒窓とは分離されます。通常Chromeの約1Hzは継続し、60fps達成扱いにしません。

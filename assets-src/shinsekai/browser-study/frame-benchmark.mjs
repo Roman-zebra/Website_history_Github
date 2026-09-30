@@ -1,6 +1,7 @@
 // Static-view frame cadence, independent of the renderer and browser DOM.
 export function createFrameBenchmark({
   canStart, onChange, onTimeout,
+  startReason = () => 'Measurement needs a ready renderer and a visible tab.',
   now = () => performance.now(), setTimer = setTimeout, clearTimer = clearTimeout
 }) {
   let session = null;
@@ -14,7 +15,7 @@ export function createFrameBenchmark({
     start() {
       if (session) return false;
       if (!canStart()) {
-        finish('Measurement needs a ready renderer and a visible tab.');
+        finish(startReason());
         return false;
       }
       const current = { measureFrom: now() + 1000, last: null, intervals: [], timeout: null };

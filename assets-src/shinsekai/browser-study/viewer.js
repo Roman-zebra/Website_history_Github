@@ -2,6 +2,7 @@ import * as THREE from 'three/webgpu';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { createFrameBenchmark } from './frame-benchmark.mjs';
+import { createViewPreparation } from './view-preparation.mjs';
 import {LOOK_DEV_VIEWS,SCENE_LOOK_VIEWS,LOOK_DEV_SIZE} from './look-dev-views.mjs';
 import {waitCaptureFrame,encodeCanvasPng} from './capture-frame.mjs';
 
@@ -21,16 +22,45 @@ const sceneLook=location.pathname.endsWith('/look.html');
 let capturing=false,currentMode=sceneLook?'dusk':'day',lookEffects=null,captureWait=null;
 const lookView=document.querySelector('#lookView'),capture=document.querySelector('#capture'),captureStatus=document.querySelector('#captureStatus');
 const weather=document.querySelector('#weather');
-weather?.addEventListener('change',()=>{benchmark.cancel('Measurement cancelled: weather changed.');lookEffects?.setWeather(weather.value);requestRender();});
+const preparation=createViewPreparation();
+let preparationToken=0,interacting=false;
+function measurementReason(){
+  if(disposed)return 'Measurement unavailable: page left.';
+  if(!ready)return canvas.dataset.rendererError?'Measurement unavailable: drawing failed. Reload the study; see renderer status.':'Measurement unavailable: model or materials are still loading.';
+  if(document.hidden)return 'Measurement unavailable: tab is hidden.';
+  if(capturing)return 'Measurement unavailable: PNG capture is in progress.';
+  if(interacting)return 'Measurement unavailable: camera interaction is in progress.';
+  if(preparation.active||!preparation.result)return 'Measurement unavailable: preparing this view after shader submission and temporal settling.';
+  return '';
+}
+function syncMeasurement(){
+  const reason=measurementReason();
+  benchmarkButton.disabled=benchmark.active||Boolean(reason);
+  benchmarkButton.title=reason;
+  canvas.dataset.rendererReady=String(ready);
+  canvas.dataset.viewReady=String(!reason);
+  canvas.dataset.measurementBlockedReason=reason;
+  canvas.dataset.preparationPhase=preparation.active?'warming':preparation.result?'ready':'unavailable';
+}
+function prepareView(){
+  delete canvas.dataset.benchmarkResult;delete canvas.dataset.preparationResult;
+  if(!ready||disposed||document.hidden||capturing){preparation.cancel();syncMeasurement();return;}
+  preparationToken=preparation.begin();
+  canvas.dataset.viewRevision=String(preparationToken);
+  syncMeasurement();metrics.textContent='Preparing this view: first shader submission, 16 temporal frames, then at least 1.5 seconds of warm rendering.';
+  requestRender();
+}
+weather?.addEventListener('change',()=>{benchmark.cancel('Measurement cancelled: weather changed.');lookEffects?.setWeather(weather.value);prepareView();});
 const benchmark = createFrameBenchmark({
-  canStart: () => ready && !disposed && !document.hidden,
+  canStart: () => !measurementReason(),
+  startReason: measurementReason,
   onTimeout: cancelRender,
   onChange: ({ running, message, result }) => {
-    benchmarkButton.disabled = running || !ready;
+    syncMeasurement();
     metrics.textContent = result
       ? `${result.framesPerSecond.toFixed(1)} frames/s · interval median ${result.medianMs.toFixed(1)} ms, p95 ${result.p95Ms.toFixed(1)} ms · ${canvas.width}×${canvas.height}. Static model only; not GPU execution time.`
       : message;
-    if(result)canvas.dataset.benchmarkResult=JSON.stringify({...result,width:canvas.width,height:canvas.height,visibilityStart:canvas.dataset.measurementVisibility,visibilityEnd:document.visibilityState,view:lookView.value,mode:currentMode,weather:weather?.value??'dry',backend:renderer.backend?.isWebGPUBackend?'WebGPU':'WebGL2',version:sceneLook?'v4-r3':'v2'});
+    if(result)canvas.dataset.benchmarkResult=JSON.stringify({...result,preparation:preparation.result,width:canvas.width,height:canvas.height,visibilityStart:canvas.dataset.measurementVisibility,visibilityEnd:document.visibilityState,view:lookView.value,mode:currentMode,weather:weather?.value??'dry',backend:renderer.backend?.isWebGPUBackend?'WebGPU':'WebGL2',version:sceneLook?'v4-r4':'v2-prepared'});
   }
 });
 const scene = new THREE.Scene();
@@ -71,7 +101,7 @@ function setMode(mode) {
   renderer.toneMappingExposure = value.exposure;
   if(lookEffects)lookEffects.setMode(mode);
   for (const button of buttons) button.setAttribute('aria-pressed', button.dataset.mode === mode);
-  requestRender();
+  prepareView();
 }
 for (const button of buttons) button.addEventListener('click', () => setMode(button.dataset.mode));
 setMode(currentMode);
@@ -94,13 +124,13 @@ function fixedView() {
   controls.enableDamping=false;controls.update();
   camera.position.set(...view.position);controls.target.set(...view.target);camera.fov=view.fov;camera.updateProjectionMatrix();controls.update();controls.enableDamping=true;
   lookEffects?.resetHistory();
-  requestRender();
+  prepareView();
 }
 lookView.addEventListener('change',fixedView);
 capture.addEventListener('click',async()=>{
   if(!ready||disposed||capturing||document.hidden)return;
   benchmark.cancel('Measurement cancelled: PNG capture.');
-  fixedView();cancelRender();capturing=true;controls.enabled=false;
+  fixedView();cancelRender();capturing=true;preparation.cancel();syncMeasurement();controls.enabled=false;
   capture.disabled=lookView.disabled=true;if(weather)weather.disabled=true;buttons.forEach(b=>b.disabled=true);benchmarkButton.disabled=true;
   const pixelRatio=renderer.getPixelRatio();
   try {
@@ -112,7 +142,7 @@ capture.addEventListener('click',async()=>{
     captureWait=encodeCanvasPng(canvas);const blob=await captureWait.promise;captureWait=null;
     if(disposed||document.hidden)throw new Error('Capture cancelled while encoding.');
     if(!blob)throw new Error('PNG encoding failed.');
-    const name=`tower-${sceneLook?'look-v4-r3':'v2'}-${lookView.value}-${currentMode}${sceneLook?'-'+weather.value:''}-1280x720.png`,url=URL.createObjectURL(blob),link=document.createElement('a');
+    const name=`tower-${sceneLook?'look-v4-r4':'v2'}-${lookView.value}-${currentMode}${sceneLook?'-'+weather.value:''}-1280x720.png`,url=URL.createObjectURL(blob),link=document.createElement('a');
     link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),10000);
     captureStatus.textContent=`Saved ${name} · ${renderer.backend?.isWebGPUBackend?'WebGPU':'WebGL 2'} · provisional appearance`;
   } catch(error) {captureStatus.textContent=error.message;}
@@ -133,7 +163,7 @@ function resize() {
   camera.updateProjectionMatrix();
   renderer.setSize(width, height, false);
   lookEffects?.resetHistory();
-  requestRender();
+  prepareView();
 }
 window.addEventListener('resize', resize);
 const resizeObserver = new ResizeObserver(resize);
@@ -155,16 +185,24 @@ function draw(time) {
     const changed = controls.update();
     const started = performance.now();
     renderScene();
+    const completed=performance.now(),submitMs=completed-started;
     renderedFrames++;
     canvas.dataset.renderedFrames = renderedFrames;
     if (benchmark.active) {
       benchmark.sample(time);
+    } else if(preparation.active) {
+      if(preparation.sample(preparationToken,completed,submitMs)){
+        canvas.dataset.preparationResult=JSON.stringify(preparation.result);syncMeasurement();
+        metrics.textContent=`View prepared · first CPU submission ${preparation.result.firstSubmitMs.toFixed(1)} ms · preparation max ${preparation.result.maxSubmitMs.toFixed(1)} ms. Measure separately for steady frame cadence.`;
+      }
     } else {
       metrics.textContent = `${renderedFrames} frames rendered · last CPU submission ${(performance.now() - started).toFixed(1)} ms. Idle between changes.`;
     }
-    if (changed || benchmark.active || lookEffects?.needsMoreFrames) requestRender();
+    if (changed || benchmark.active || preparation.active || lookEffects?.needsMoreFrames) requestRender();
   } catch (error) {
     ready = false;
+    canvas.dataset.rendererError=error.message;
+    preparation.cancel();syncMeasurement();
     benchmark.cancel('Drawing stopped. Reload the study to retry.');
     benchmarkButton.disabled = true;
     metrics.textContent = 'Drawing stopped. Reload the study to retry.';
@@ -175,8 +213,11 @@ function draw(time) {
 controls.addEventListener('change', requestRender);
 function renderScene(){if(lookEffects)lookEffects.render();else renderer.render(scene,camera);canvas.dataset.cameraX=camera.position.x;canvas.dataset.cameraY=camera.position.y;canvas.dataset.cameraZ=camera.position.z;canvas.dataset.cameraFov=camera.fov;}
 controls.addEventListener('start', () => {
+  interacting=true;
   benchmark.cancel('Measurement cancelled: camera interaction. Run again with a fixed view.');
+  prepareView();
 });
+controls.addEventListener('end',()=>{interacting=false;prepareView();});
 benchmarkButton.addEventListener('click', () => {
   canvas.dataset.measurementVisibility=document.visibilityState;
   delete canvas.dataset.benchmarkResult;
@@ -187,12 +228,14 @@ document.addEventListener('visibilitychange', () => {
     captureWait?.cancel();
     cancelRender();
     benchmark.cancel('Measurement cancelled: tab became hidden. Run again with this tab visible.');
-  } else requestRender();
+    preparation.cancel();syncMeasurement();
+  } else prepareView();
 });
 window.addEventListener('pagehide', event => {
   captureWait?.cancel();
   cancelRender();
   benchmark.cancel('Measurement cancelled: page left.');
+  preparation.cancel();syncMeasurement();
   if (event.persisted) return; // Keep resources for back/forward cache restoration.
   disposed = true;
   resizeObserver.disconnect();
@@ -208,7 +251,7 @@ window.addEventListener('pagehide', event => {
   lookEffects?.dispose();
   renderer.dispose();
 });
-window.addEventListener('pageshow', requestRender);
+window.addEventListener('pageshow', prepareView);
 
 try {
   await renderer.init();
@@ -230,9 +273,8 @@ try {
   status.textContent = `${backend} · ${metres.y.toFixed(1)} m study height · ${lookEffects?lookEffects.label:gltf.scene.children.length+' top-level parts'}. Source records: docs/shinsekai/research/.`;
   ready = true;
   lookView.disabled=capture.disabled=false;
-  benchmarkButton.disabled = false;
   if(sceneLook)fixedView();
-  requestRender();
+  else prepareView();
 } catch (error) {
-  if(!disposed){status.textContent = `Renderer study could not start: ${error.message}`;console.error(error);}
+  if(!disposed){canvas.dataset.rendererError=error.message;syncMeasurement();status.textContent = `Renderer study could not start: ${error.message}`;console.error(error);}
 }
