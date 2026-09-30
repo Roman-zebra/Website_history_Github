@@ -1,0 +1,42 @@
+version,photo,source,original_px,type,feature,side,x_orig,y_orig,x2_orig,y2_orig,tol_px,alt_readings,notes,identity_v3,scenario_v3
+v3,plate46,NDL 962657 R0000048 (1921),4064x2880,row,horizon (standing adults' heads),,,1840,,,12,heads 1835-1845,row-only; no x,,
+v3,plate46,NDL 962657 R0000048,4064x2880,point,roof-garden floor at north facade centre (railing base = eave top),centre,1262,1462,,,8,railing top ~1394,sourced 15.15 m,visible eave/cornice-top line across the facade (x 983-1550 at ~1463); centre point itself hidden behind 1921 sign band and legs; x from symmetry,use as line or row; x inferred
+v3,plate46,NDL 962657 R0000048,4064x2880,point,near arch intrados crown,centre,1262,1580,,,5,,,,
+v3,plate46,NDL 962657 R0000048,4064x2880,point,near arch foot (intrados turns vertical),east (image left),983,1800,,,10,,camera faces south: image left = east,,
+v3,plate46,NDL 962657 R0000048,4064x2880,point,near arch foot (intrados turns vertical),west (image right),1540,1800,,,10,,,,
+v3,plate46,NDL 962657 R0000048,4064x2880,point,far (south) exit bright top edge,centre,1262,1665,,,15,1661-1692,same-height far crown = assumption,,
+v3,plate46,NDL 962657 R0000048,4064x2880,row,far exit width at y~1800,,,1800,,,20,sides may be occluded,row-only; width ~320 px,,
+v3,plate46,NDL 962657 R0000048,4064x2880,point,lightning rod / flagpole tip,centre,1262,500,,,6,,,1920s top; rod may differ from 1912-14 rod,S-1920s-top
+v3,plate46,NDL 962657 R0000048,4064x2880,point,top crown (ribbed dome) top,centre,1262,560,,,6,,,NOT a ribbed crown: low solid cap of the 1920s top; 560 = knob at rod foot (alt cap roof 565-567); not the same feature as viewA 752.5 / south 50,S-1920s-top
+v3,plate46,NDL 962657 R0000048,4064x2880,point,observation box underside,centre,1262,800,,,6,,,underside of the 1920s tall enclosed box = shaft top? unresolved: equals viewA 955 / south 105 only if the shaft top was unchanged by the remodel,"S-shared-shaft-top (alt: S-1920s-top, not shared)"
+v3,plate46,NDL 962657 R0000048,4064x2880,point,turret dome crown,east (image left),921,1272,,,6,finial tip ~1250,,,
+v3,plate46,NDL 962657 R0000048,4064x2880,point,turret dome crown,west (image right),1609,1272,,,6,finial tip ~1250,,,
+v3,plate46,NDL 962657 R0000048,4064x2880,line,turret outer vertical edge (height unknown),east (image left),854,1330,848,1880,6,,from §12 half-scale reading (x2); lean 0.6 deg; do NOT assign Z,,
+v3,plate46,NDL 962657 R0000048,4064x2880,line,turret outer vertical edge (height unknown),west (image right),1670,1330,1676,1880,6,,same,,
+v3,viewA,NDL 952032 R0000095 (1914),4064x2880,point,lightning rod tip,centre,2527.5,715,,,5,,"A_full = region (2090,660,890,1650) scale 1",,
+v3,viewA,NDL 952032 R0000095,4064x2880,point,top crown top,centre,2527.5,752.5,,,5,,,"knob/ring at the apex of the openwork ribbed crown where the rod starts (crown top, not finial)",1912-14 top
+v3,viewA,NDL 952032 R0000095,4064x2880,point,observation box top edge,centre,2527.5,840,,,6,,,gallery railing top (seen from below),same as south 75 (medium)
+v3,viewA,NDL 952032 R0000095,4064x2880,point,observation box bottom edge,centre,2527.5,955,,,6,could be lower gallery rim,,bottom of gallery base band = shaft top; railing+band merge into one dark box from below,same physical rim as south 105 (medium)
+v3,viewA,NDL 952032 R0000095,4064x2880,point,roof floor at facade centre (railing base),centre,2493,1605,,,8,railing top 1567,,visible railing-base line across the facade; centre x inferred from arch axis; image roll ~2 deg makes the line slope (right side lower),use as line or row; x inferred
+v3,viewA,NDL 952032 R0000095,4064x2880,edge-sample,turret outer vertical edge sampled at row 1605 (height unknown),east (image left),2175,1605,,,8,,x only is a constraint; do NOT assign Z,,
+v3,viewA,NDL 952032 R0000095,4064x2880,edge-sample,turret outer vertical edge sampled at row 1605 (height unknown),west (image right),2812,1605,,,8,,same,,
+v3,viewA,NDL 952032 R0000095,4064x2880,point,turret dome top,east (image left),2235,1427,,,6,finial tip 1363,,"lantern cap top (same feature E and W); the 25 px E/W row difference is explained by ~2 deg image roll, not by different turrets",needs free roll
+v3,viewA,NDL 952032 R0000095,4064x2880,point,turret dome top,west (image right),2773,1453,,,6,finial tip 1393,,"lantern cap top (same feature E and W); the 25 px E/W row difference is explained by ~2 deg image roll, not by different turrets",needs free roll
+v3,viewA,NDL 952032 R0000095,4064x2880,point,arch outer crown (moulding top),centre,2503,1680,,,6,,,,
+v3,viewA,NDL 952032 R0000095,4064x2880,point,arch inner crown,centre,2503,1697,,,6,,,,
+v3,viewA,NDL 952032 R0000095,4064x2880,edge-sample,tower leg outer extent at railing top (height unknown),east (image left),2350,1540,,,10,,legs hidden below railing,,
+v3,viewA,NDL 952032 R0000095,4064x2880,edge-sample,tower leg outer extent at railing top (height unknown),west (image right),2627,1543,,,10,,,,
+v3,south_c0234001,OML OSK0157352 c0234001 (CC0; 1912-1925 range),347x534,point,flagpole tip,centre,190,22.5,,,3,,camera faces NORTH: image left = west; elevated viewpoint,,
+v3,south_c0234001,OML OSK0157352,347x534,point,top crown top,centre,186,50,,,3,,,row 50 hits the finial/rib-end spikes around the crown; crown apex ring alt 53-55,alt 53-55
+v3,south_c0234001,OML OSK0157352,347x534,point,observation box top edge,centre,186,75,,,3,,,open railed gallery: railing top,same as viewA 840 (medium)
+v3,south_c0234001,OML OSK0157352,347x534,point,observation box bottom edge,centre,186,105,,,3,could be gallery rim,,"bottom of the solid band under the open gallery (gallery floor ~92, band 92-105/107) = shaft top",same as viewA 955 (medium); alt gallery floor 92
+v3,south_c0234001,OML OSK0157352,347x534,point,roof railing top at facade centre,centre,184,260,,,3,,south facade,,
+v3,south_c0234001,OML OSK0157352,347x534,point,roof floor / cornice top at facade centre,centre,184,277.5,,,3,,,visible cornice-top line; railing base hidden by the crowd on the roof; centre x inferred,use as line or row; x inferred
+v3,south_c0234001,OML OSK0157352,347x534,point,turret dome top,west (image left),112.5,232.5,,,3,finial 217.5,,,
+v3,south_c0234001,OML OSK0157352,347x534,point,turret dome top,east (image right),250,235,,,3,finial 220,,,
+v3,south_c0234001,OML OSK0157352,347x534,point,arch outer crown (moulding top),centre,180,297.5,,,3,,,,
+v3,south_c0234001,OML OSK0157352,347x534,point,arch inner crown,centre,180,305,,,3,,,,
+v3,south_c0234001,OML OSK0157352,347x534,edge-sample,turret outer vertical edge at roof-floor row (height unknown),west (image left),97.5,277.5,,,3,,,,
+v3,south_c0234001,OML OSK0157352,347x534,edge-sample,turret outer vertical edge at roof-floor row (height unknown),east (image right),265,277.5,,,3,,,,
+v3,south_c0234001,OML OSK0157352,347x534,edge-sample,tower leg outer extent at railing top (height unknown),west (image left),150,257,,,4,,,,
+v3,south_c0234001,OML OSK0157352,347x534,edge-sample,tower leg outer extent at railing top (height unknown),east (image right),220,257,,,4,,,,

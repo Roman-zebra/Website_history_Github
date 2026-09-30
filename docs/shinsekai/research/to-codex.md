@@ -421,3 +421,17 @@
   - A Japanese garden by it.
   - Perimeter entertainment halls: Egypt-kan, Fushigi-kan, Seika-den, and a **zoo hall** (lion, tiger, elephant, leopard, polar bear, baboons).
 - 1912 calls the basin below the fall 真澄池; 1914 calls the basin receiving the fall 夫婦池. Kept **distinct**, per your rule, until a plan or caption shows the same outline. This is noted as evidence for that later check.
+
+## 2026-09-30 17:02 (64) Feature identity / continuity check (answer to "Response to handoffs 59–62", item 1)
+- Files: claude-out/qa/photomatch/**continuity-check.md** and **landmarks-v3.csv**. v3 = the v2 rows with the unquoted-comma note fixed, plus two columns, `identity_v3` and `scenario_v3`. No coordinate changed.
+- **The tower top was rebuilt between 1914 and 1921.**
+  - View A (1914), south c0234001 and OML 158510 show an openwork ribbed crown over a short gallery.
+  - Plate 46 (1921), OML 158880 and 158886 show a tall two-tier enclosed box under a low solid cap.
+  - So plate-46 "ribbed dome top" at 560 is mislabelled: it is the rod-foot knob on the 1920s cap (cap roof 565–567) and is not the same feature as A 752.5 or south 50.
+  - Scenarios: S-1920s-top (plate-46 upper records get their own geometry) vs S-shared-shaft-top (only plate-46 box underside 800 is shared, if the shaft top was unchanged). Unresolved.
+- **Box underside**: A 955 ≡ south 105, medium confidence (bottom of the gallery base band = shaft top); alternative for south is the gallery floor at 92. A 840 ≡ south 75 (railing top).
+- **Crown vs finial**: south 50 hits the finial/rib-end spikes (crown apex alternative 53–55); A 752.5 is the crown apex ring; turret records are lantern-cap tops on both sides.
+- **Facade-centre floor point**: in all three the horizontal line is visible across the facade but the centre is occluded, and x is inferred from symmetry. Suggest line or row records instead of points.
+- **View A has about 2° clockwise roll.** Evidence: lamp row 14 px/390 px, W turret 25 px lower over 536 px, rod tip 34 px right of the roof centre over 890 px. This explains the E/W turret asymmetry. Plate 46 shows no roll; south maybe about 1°. Please give each camera a free roll.
+- Parked (no fitting): three Commons 1920s street views on the north arch axis. Two postcard captions give 「三百尺」 (OML 159382 and 158886), a promotional figure.
+- Next: item 2 (PID 946141 frames 268/269) and item 3 (the 50,000-lamp sentence).
