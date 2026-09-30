@@ -8,13 +8,15 @@ const point=world=>({kind:'point',world}),line=(origin,direction)=>({kind:'line'
 function geometry(g,H,scenario) {
   const W=g.width,L=g.depth,T=g.turretWidth,A=g.archCrown,F=g.archFeet,R=scenario.roofM;
   const crown=H-g.rodLength,top=crown-g.crownHeight,bottom=top-g.galleryHeight;
-  if(!(W>g.archSpan && T<W/2 && F<A && A<R && bottom>g.domeTop)) return null;
+  const thickness=scenario.floorVariant==='two-line'?g.copingThickness:0;
+  if(!(W>g.archSpan && T<W/2 && F<A && A<R-thickness && bottom>g.domeTop && thickness>=0)) return null;
   const anchors={earlyTip:point([0,(0.5-scenario.shaftSetbackFraction)*L,H]),earlyCrown:point([0,(0.5-scenario.shaftSetbackFraction)*L,crown]),
     earlyGalleryTop:point([0,(0.5-scenario.shaftSetbackFraction)*L,top]),earlyGalleryBottom:point([0,(0.5-scenario.shaftSetbackFraction)*L,bottom])};
   for(const [face,sign] of [['north',1],['south',-1]]) {
     const y=sign*L/2;
     anchors[face+'ArchCrown']=point([0,y,A]);anchors[face+'ArchOuter']=point([0,y,A+scenario.outerArchOffsetM]);
     anchors[face+'Floor']=line([-W/2,y,R],[1,0,0]);
+    anchors[face+'CopingBottom']=line([-W/2,y,R-thickness],[1,0,0]);
     for(const [side,xsign] of [['E',1],['W',-1]]) {
       anchors[face+'ArchFoot'+side]=point([xsign*g.archSpan/2,y,F]);
       anchors[face+'Dome'+side]=point([xsign*(W-T)/2,sign*(L-T)/2,g.domeTop]);
@@ -53,8 +55,20 @@ function readInputs(scenario) {
     const [x,y,tx,ty]=[o.x_orig,o.y_orig,o.tol_x,o.tol_y].map(Number);
     if(![x,y,tx,ty].every(Number.isFinite)||tx<=0||ty<=0||x<0||y<0||x>=view.originalPx[0]||y>=view.originalPx[1]) throw new Error('Invalid floor coordinates/tolerances');
     return {id:'floor:'+i,photo:o.photo,x,y,tx,ty,alternative:o.feature.startsWith('ALT:')};
-  }).filter(o=>o.photo!=='viewA'||o.alternative===(scenario.floorVariant==='cornice'));
+  }).filter(o=>scenario.floorVariant==='two-line'||o.photo!=='viewA'||o.alternative===(scenario.floorVariant==='cornice'));
   const ids=new Set(observations.map(o=>o.id));
+  if(scenario.observationOverrides) {
+    const source=scenario.observationUpdateSource;
+    if(!source||path.basename(source.file)!==source.file)throw new Error('Missing/invalid observation update source');
+    const bytes=fs.readFileSync(path.join(directory,source.file));
+    if(crypto.createHash('sha256').update(bytes).digest('hex')!==source.sha256)throw new Error('Observation update hash mismatch');
+    for(const [id,update] of Object.entries(scenario.observationOverrides)) {
+      const o=observations.find(o=>o.id===id),view=o&&manifest.views[o.photo];
+      if(!o||o.type!=='point'||!Number.isFinite(update.y)||update.y<0||update.y>=view.originalPx[1]||!update.sourceReading)throw new Error('Invalid observation override: '+id);
+      if(Object.keys(update).some(key=>!['y','sourceReading','reportedYTracingTolerancePx'].includes(key)))throw new Error('Unsupported observation override field');
+      if(update.reportedYTracingTolerancePx!==undefined&&!(Number.isFinite(update.reportedYTracingTolerancePx)&&update.reportedYTracingTolerancePx>0))throw new Error('Invalid reported y tolerance');
+    }
+  }
   for(const id of Object.keys(scenario.bindings)) if(!ids.has(id)) throw new Error('Binding without observation: '+id);
   for(const o of observations) if(!(o.id in scenario.bindings)&&!(o.id in scenario.exclusions)) throw new Error('Unclassified observation: '+o.id);
   for(const [role,list] of [['northHoldout',scenario.northHoldoutIds],['southCalibration',scenario.southCalibrationIds],['southHoldout',scenario.southHoldoutIds]]) {
@@ -66,20 +80,27 @@ function readInputs(scenario) {
   if(scenario.southCalibrationIds.some(id=>scenario.southHoldoutIds.includes(id))) throw new Error('South calibration/prediction must be disjoint');
   return {observations,floor};
 }
-function scenarioObservation(o) {
+function scenarioObservation(o,scenario={}) {
+  const update=scenario.observationOverrides?.[o.id];
+  if(update)return {...o,y:update.y}; // y-only refinement; do not invent a new x tolerance.
   // The raw south point marks finial/rib ends; this profile uses the declared apex-ring alternative.
   return o.id==='south_c0234001:29' ? {...o,y:54} : o;
+}
+function floorAnchor(o,scenario) {
+  const face=o.photo==='south_c0234001'?'south':'north';
+  return face+(scenario.floorVariant==='two-line'&&(face==='south'||o.alternative)?'CopingBottom':'Floor');
 }
 function measurements(anchors,cams,observations,floor,scenario) {
   const rows=[];
   for(const o of observations) {
     if(!(o.id in scenario.bindings)||(!scenario.includeFarCrown&&o.id==='plate46:6')) continue;
-    const measurement=scenarioObservation(o);
+    const measurement=scenarioObservation(o,scenario);
     const r=residual(cams[o.photo],measurement,anchors[scenario.bindings[o.id]]);
     rows.push({id:o.id,photo:o.photo,pixels:r.pixels,scaled:r.scaled});
   }
   for(const o of floor) {
-    const [a,b,c]=projectLine(cams[o.photo],anchors[o.photo==='south_c0234001'?'southFloor':'northFloor'].origin,[1,0,0]);
+    const anchor=anchors[floorAnchor(o,scenario)];
+    const [a,b,c]=projectLine(cams[o.photo],anchor.origin,anchor.direction);
     const pixel=a*o.x+b*o.y+c,tolerance=Math.hypot(a*o.tx,b*o.ty);
     rows.push({id:o.id,photo:o.photo,pixels:[pixel],scaled:[pixel/tolerance]});
   }
@@ -123,7 +144,8 @@ function fitHeight(H,scenario,inputs,options={}) {
       cameras:southFit.runs.map(run=>Object.fromEntries(southSpecs.map((s,i)=>[s.name,run.values[i]]))),gate:'open: compare multiple camera solutions; no default geometry adopted'}};
 }
 function run(scenario,options) {
-  if(scenario.status!=='conditional-research-scenario'||!scenario.heightsM.every(h=>Number.isFinite(h)&&h>scenario.roofM)||!['rail-base','cornice'].includes(scenario.floorVariant)) throw new Error('Invalid scenario');
+  if(scenario.status!=='conditional-research-scenario'||!scenario.heightsM.every(h=>Number.isFinite(h)&&h>scenario.roofM)||!['rail-base','cornice','two-line'].includes(scenario.floorVariant)) throw new Error('Invalid scenario');
+  if(scenario.floorVariant==='two-line'&&!scenario.geometryParameters.some(s=>s.name==='copingThickness'&&s.lower>0))throw new Error('Two-line scenario requires bounded coping thickness');
   const inputs=readInputs(scenario);
   return {status:'conditional-profile-not-historical-measurement',scenario,results:scenario.heightsM.map(H=>fitHeight(H,scenario,inputs,options)),
     gates:{historicalHeight:'open',southPrediction:'open',productionGeometry:'open'},note:'Bounds, near/far correspondence and base/upper model choices determine these conditional results. No confidence intervals or GLB/site updates.'};
@@ -136,4 +158,4 @@ if(require.main===module) {
   console.log(JSON.stringify(result.results.map(r=>({heightM:r.heightM,cost:r.best.cost,converged:r.best.converged,rank:r.best.rank,parameters:r.best.parameters,bounds:r.best.boundHits,
     northHoldout:Object.fromEntries(Object.entries(r.northHoldout).map(([k,v])=>[k,v.rmsPx])),southPredictions:r.south.predictions.map(p=>p.south_c0234001.rmsPx)})),null,2));
 }
-module.exports={geometry,cameraSpecs,cameras,readInputs,scenarioObservation,measurements,fitHeight,run};
+module.exports={geometry,cameraSpecs,cameras,readInputs,scenarioObservation,floorAnchor,measurements,fitHeight,run};

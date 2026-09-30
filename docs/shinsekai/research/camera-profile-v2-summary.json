@@ -1,0 +1,349 @@
+{
+  "status": "conditional-profile-not-historical-measurement",
+  "scenarioFile": "camera-scenario-v2.json",
+  "scenarioSha256": "0a70656fd75d81c023c997fe043637d3fd37046b0e5e6a8d5f652d0ff45c6867",
+  "rawResults": "../research-cache/camera-profile-v2.json (local only)",
+  "profile": [
+    {
+      "heightM": 54.5,
+      "cost": 0.18451179350589617,
+      "converged": false,
+      "reason": "iteration-limit",
+      "boundHits": [
+        "depth",
+        "plate46.eye"
+      ],
+      "copingThicknessM": 0.5651564746631142,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.6206391905283847,
+          "scaledRms": 0.0941325887636281,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.697831841394436,
+          "scaledRms": 0.10659467123977524,
+          "components": 20
+        }
+      },
+      "northHoldout": {
+        "plate46": 5.775971144221908,
+        "viewA": 0.9011306603869927
+      },
+      "jointRank": 29,
+      "jointParameters": 30,
+      "southCalibrationRms": 1.2648079075399463,
+      "southPredictionRms": [
+        26.548598066007475,
+        26.548598011895937,
+        26.548597985251956
+      ]
+    },
+    {
+      "heightM": 60,
+      "cost": 0.14978872742938773,
+      "converged": false,
+      "reason": "iteration-limit",
+      "boundHits": [
+        "depth",
+        "plate46.eye"
+      ],
+      "copingThicknessM": 0.6253065281855644,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.637544901380465,
+          "scaledRms": 0.09441237190025942,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.5932646855687412,
+          "scaledRms": 0.08858846408349375,
+          "components": 20
+        }
+      },
+      "northHoldout": {
+        "plate46": 5.817969468895629,
+        "viewA": 0.643404837228306
+      },
+      "jointRank": 29,
+      "jointParameters": 30,
+      "southCalibrationRms": 1.2917817922994776,
+      "southPredictionRms": [
+        28.589611906971907,
+        28.589612640700683,
+        28.589611905127693
+      ]
+    },
+    {
+      "heightM": 68,
+      "cost": 0.16754860145053713,
+      "converged": true,
+      "reason": "projected-gradient",
+      "boundHits": [
+        "depth",
+        "plate46.eye",
+        "viewA.distance"
+      ],
+      "copingThicknessM": 0.7044022132966279,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7189401614055624,
+          "scaledRms": 0.10318232809267561,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.569937829675448,
+          "scaledRms": 0.09076114741757109,
+          "components": 20
+        }
+      },
+      "northHoldout": {
+        "plate46": 6.028804755688184,
+        "viewA": 1.966753993103032
+      },
+      "jointRank": 29,
+      "jointParameters": 30,
+      "southCalibrationRms": 1.3257821601365778,
+      "southPredictionRms": [
+        31.25703264322975,
+        31.25703265314491,
+        31.25703268883795
+      ]
+    },
+    {
+      "heightM": 75.76,
+      "cost": 0.285394758705532,
+      "converged": true,
+      "reason": "projected-gradient",
+      "boundHits": [
+        "archFeet",
+        "plate46.eye",
+        "viewA.focal"
+      ],
+      "copingThicknessM": 0.7616448772100041,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7997827137612453,
+          "scaledRms": 0.11699085844703833,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.7710755651020772,
+          "scaledRms": 0.13262724871764936,
+          "components": 20
+        }
+      },
+      "northHoldout": {
+        "plate46": 6.074328571303671,
+        "viewA": 2.204789269404599
+      },
+      "jointRank": 29,
+      "jointParameters": 30,
+      "southCalibrationRms": 1.3521912071029967,
+      "southPredictionRms": [
+        30.764054279962924,
+        30.764054308513447,
+        30.764054277660993
+      ]
+    },
+    {
+      "heightM": 85,
+      "cost": 0.5167979265702053,
+      "converged": false,
+      "reason": "iteration-limit",
+      "boundHits": [
+        "archFeet",
+        "plate46.distance",
+        "viewA.focal"
+      ],
+      "copingThicknessM": 0.769204140586505,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7806747497184673,
+          "scaledRms": 0.11728494528432411,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 1.174780443271144,
+          "scaledRms": 0.20168090128899913,
+          "components": 20
+        }
+      },
+      "northHoldout": {
+        "plate46": 5.531663724616184,
+        "viewA": 1.9854120761474874
+      },
+      "jointRank": 29,
+      "jointParameters": 30,
+      "southCalibrationRms": 1.313610069747971,
+      "southPredictionRms": [
+        26.94539321140109,
+        26.945393254729243,
+        26.945393196254287
+      ]
+    }
+  ],
+  "sensitivityAt75_76": [
+    {
+      "name": "v1-one-line-original-upper",
+      "heightM": 75.76,
+      "cost": 0.2620507970300501,
+      "converged": true,
+      "reason": "projected-gradient",
+      "boundHits": [
+        "archFeet",
+        "plate46.eye",
+        "viewA.focal"
+      ],
+      "copingThicknessM": null,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7639709575814249,
+          "scaledRms": 0.11337012418089054,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.7660226600891374,
+          "scaledRms": 0.13301149347820607,
+          "components": 18
+        }
+      },
+      "northHoldout": {
+        "plate46": 6.0063332542071945,
+        "viewA": 2.162361558182873
+      },
+      "jointRank": 28,
+      "jointParameters": 29,
+      "southCalibrationRms": 0.20028691890906608,
+      "southPredictionRms": [
+        23.71598269626534,
+        23.715983744975127,
+        23.71598268606387
+      ]
+    },
+    {
+      "name": "two-line-original-upper",
+      "heightM": 75.76,
+      "cost": 0.2842140470550453,
+      "converged": true,
+      "reason": "projected-gradient",
+      "boundHits": [
+        "archFeet",
+        "plate46.eye",
+        "viewA.focal"
+      ],
+      "copingThicknessM": 0.7616245338345465,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7949047850110585,
+          "scaledRms": 0.11646017460428516,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.7717393635174649,
+          "scaledRms": 0.13255575012203757,
+          "components": 20
+        }
+      },
+      "northHoldout": {
+        "plate46": 6.066489384513187,
+        "viewA": 2.2027849529116597
+      },
+      "jointRank": 29,
+      "jointParameters": 30,
+      "southCalibrationRms": 1.351636892356249,
+      "southPredictionRms": [
+        30.869666080215385,
+        30.869666023165784,
+        30.869666185239847
+      ]
+    },
+    {
+      "name": "one-line-refined-upper",
+      "heightM": 75.76,
+      "cost": 0.26306659586195047,
+      "converged": true,
+      "reason": "projected-gradient",
+      "boundHits": [
+        "archFeet",
+        "plate46.eye",
+        "viewA.focal"
+      ],
+      "copingThicknessM": null,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7677969821717786,
+          "scaledRms": 0.11381803443711588,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.7653812066102249,
+          "scaledRms": 0.1330957200067023,
+          "components": 18
+        }
+      },
+      "northHoldout": {
+        "plate46": 6.0136556133436905,
+        "viewA": 2.1637658942582636
+      },
+      "jointRank": 28,
+      "jointParameters": 29,
+      "southCalibrationRms": 0.20038300363369738,
+      "southPredictionRms": [
+        23.644218875838725,
+        23.64421666548473,
+        23.64421688488706
+      ]
+    },
+    {
+      "name": "v2-two-line-refined-upper",
+      "heightM": 75.76,
+      "cost": 0.285394758705532,
+      "converged": true,
+      "reason": "projected-gradient",
+      "boundHits": [
+        "archFeet",
+        "plate46.eye",
+        "viewA.focal"
+      ],
+      "copingThicknessM": 0.7616448772100041,
+      "training": {
+        "plate46": {
+          "rmsPx": 0.7997827137612453,
+          "scaledRms": 0.11699085844703833,
+          "components": 16
+        },
+        "viewA": {
+          "rmsPx": 0.7710755651020772,
+          "scaledRms": 0.13262724871764936,
+          "components": 20
+        }
+      },
+      "northHoldout": {
+        "plate46": 6.074328571303671,
+        "viewA": 2.204789269404599
+      },
+      "jointRank": 29,
+      "jointParameters": 30,
+      "southCalibrationRms": 1.3521912071029967,
+      "southPredictionRms": [
+        30.764054279962924,
+        30.764054308513447,
+        30.764054277660993
+      ]
+    }
+  ],
+  "gates": {
+    "historicalHeight": "open",
+    "southPrediction": "open",
+    "productionGeometry": "open"
+  },
+  "limitations": [
+    "Exact roof-fixed gauge persists with free coping thickness; rank29/30 is not a measured height.",
+    "Three chosen camera seeds/local optima; every north profile hits imposed bounds and three selected fits are not converged.",
+    "The full v2 south prediction RMS is26.55-31.26px. No scenario passes the withheld upper gate.",
+    "Costs across one-line and two-line inputs have different residual counts; do not compare as common likelihoods.",
+    "54.5m is an approximate contradictory1980 caption scenario; no default or bound adoption.",
+    "New y-only readings retain conservative v2 isotropic weights; x precision is not inferred from reported y precision."
+  ]
+}

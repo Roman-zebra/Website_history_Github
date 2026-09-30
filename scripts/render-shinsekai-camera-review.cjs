@@ -2,7 +2,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {projectPoint,projectLine,residual}=require('./shinsekai-camera.cjs');
-const {geometry,cameras,readInputs,scenarioObservation}=require('./profile-shinsekai-camera.cjs');
+const {geometry,cameras,readInputs,scenarioObservation,floorAnchor}=require('./profile-shinsekai-camera.cjs');
 const root=path.resolve(__dirname,'..'),workspace=path.dirname(root);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function jpegSize(bytes) {
@@ -70,7 +70,7 @@ function render(result,imagePaths) {
           if(raw.x!==null&&raw.y!==null)marks.push(dot([raw.x,raw.y],'#a8a8a8',raw.id+' excluded: '+(scenario.exclusions[raw.id]||'scenario disabled'),true));
           continue;
         }
-        const o=scenarioObservation(raw),anchor=anchors[scenario.bindings[o.id]],p=prediction(cams[photo],o,anchor);
+        const o=scenarioObservation(raw,scenario),anchor=anchors[scenario.bindings[o.id]],p=prediction(cams[photo],o,anchor);
         const role=photo==='south_c0234001'?(scenario.southHoldoutIds.includes(o.id)?'south prediction':'south calibration'):(scenario.northHoldoutIds.includes(o.id)?'north holdout':'training');
         const color=role.includes('prediction')||role.includes('holdout')?'#fb923c':'#38bdf8';
         marks.push(`<path d="M ${o.x} ${o.y} L ${p[0]} ${p[1]}" stroke="${color}" stroke-width="${1.3*unit}"/>`,dot([o.x,o.y],'#facc15',o.id+' observed'),dot(p,color,o.id+' projected '+role,true));
@@ -79,19 +79,22 @@ function render(result,imagePaths) {
           if(clip)marks.push(`<path d="M ${clip[0].join(' ')} L ${clip[1].join(' ')}" stroke="${color}" stroke-width="${unit}"/>`);
           marks.push(dot([o.x2,o.y2],'#facc15',o.id+' observed second endpoint'),dot(p2,color,o.id+' projected second endpoint',true));
         }
-        if(o.y!==raw.y)marks.push(dot([raw.x,raw.y],'#a8a8a8',o.id+' raw finial reading; profile uses apex ring',true));
+        if(o.y!==raw.y)marks.push(dot([raw.x,raw.y],'#a8a8a8',o.id+' original v2 reading; profile uses declared refined y',true));
         const px=residual(cams[photo],o,anchor).pixels;
         table.push(`<tr><td>${esc(o.id)}</td><td>${esc(o.feature)}</td><td>${esc(role)}</td><td>${px.map(v=>v.toFixed(2)).join(', ')}</td></tr>`);
       }
-      const floorLine=projectLine(cams[photo],anchors[photo==='south_c0234001'?'southFloor':'northFloor'].origin,[1,0,0]),segment=lineSegment(floorLine,rect);
-      if(segment)marks.push(`<path d="M ${segment[0].join(' ')} L ${segment[1].join(' ')}" stroke="#38bdf8" stroke-width="${1.5*unit}" stroke-dasharray="${6*unit} ${4*unit}"/>`);
-      for(const o of inputs.floor.filter(o=>o.photo===photo)) {
+      const floorSamples=inputs.floor.filter(o=>o.photo===photo),floorLines={};
+      for(const name of new Set(floorSamples.map(o=>floorAnchor(o,scenario)))) {
+        const anchor=anchors[name],l=projectLine(cams[photo],anchor.origin,anchor.direction),segment=lineSegment(l,rect);floorLines[name]=l;
+        if(segment)marks.push(`<path d="M ${segment[0].join(' ')} L ${segment[1].join(' ')}" stroke="#38bdf8" stroke-width="${1.5*unit}" stroke-dasharray="${6*unit} ${4*unit}"><title>${esc(name)}</title></path>`);
+      }
+      for(const o of floorSamples) {
         marks.push(dot([o.x,o.y],'#facc15',o.id+' visible floor sample'));
-        const [a,b,c]=floorLine;table.push(`<tr><td>${o.id}</td><td>visible floor sample</td><td>floor calibration</td><td>${(a*o.x+b*o.y+c).toFixed(2)}</td></tr>`);
+        const name=floorAnchor(o,scenario),[a,b,c]=floorLines[name];table.push(`<tr><td>${o.id}</td><td>${esc(name)}</td><td>floor calibration</td><td>${(a*o.x+b*o.y+c).toFixed(2)}</td></tr>`);
       }
       return `<article><h3>${esc(photo)}</h3><svg role="img" aria-label="${esc(photo)} observed and projected anchors" viewBox="${rect.join(' ')}"><image href="${images[photo]}" x="${x}" y="${y}" width="${w}" height="${h}"/>${marks.join('')}</svg><details><summary>Residuals in original pixels</summary><table><thead><tr><th>ID</th><th>Feature</th><th>Role</th><th>Residual</th></tr></thead><tbody>${table.join('')}</tbody></table></details></article>`;
     }).join('');
-    return `<section id="h${r.heightM}"><h2>Conditional height ${r.heightM} m</h2><p>North convergence: ${r.best.converged}; bounds: ${esc(r.best.boundHits.join(', '))}; joint rank ${r.heightDiagnostics.rank}/${r.heightDiagnostics.parameterCount}. South camera start ${bestSouth+1} selected only by base-calibration cost; other starts retained in raw JSON.</p><div class="cards">${cards}</div></section>`;
+    return `<section id="h${r.heightM}"><h2>Conditional height ${r.heightM} m</h2><p>${esc(scenario.heightLabelsM?.[r.heightM]||'Chosen comparison scenario; not a measured height')}. Coping thickness: ${r.parameters.copingThickness?.toFixed(3)||'not modelled'} m (conditional). North convergence: ${r.best.converged}; bounds: ${esc(r.best.boundHits.join(', '))}; joint rank ${r.heightDiagnostics.rank}/${r.heightDiagnostics.parameterCount}. South camera start ${bestSouth+1} selected only by base-calibration cost; other starts retained in raw JSON.</p><div class="cards">${cards}</div></section>`;
   }).join('');
   return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Conditional tower photo review</title><style>body{font:16px system-ui;background:#10151d;color:#e5e7eb;margin:24px}h1{font-size:28px}p{max-width:1100px;line-height:1.5}a{color:#7dd3fc;margin-right:20px}section{border-top:1px solid #374151;margin-top:32px;padding-top:12px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}article{min-width:0}svg{width:100%;height:580px;background:#1f2937}table{border-collapse:collapse;font-size:12px;width:100%}td,th{padding:5px;border-bottom:1px solid #374151;text-align:left}summary{cursor:pointer;padding:12px 0}@media(max-width:850px){.cards{grid-template-columns:1fr}svg{height:560px}}</style><h1>Conditional tower photo review</h1><p>Local research only. These are projected sparse model anchors, not a rendered GLB silhouette or a historical height measurement. Roof-fixed scale ambiguity, chosen bounds and failed south predictions remain unresolved. Protected north crops must stay outside Git and the published site.</p><p><span style="color:#facc15">● observed</span> · <span style="color:#38bdf8">○ training/calibration prediction</span> · <span style="color:#fb923c">○ withheld prediction</span> · <span style="color:#a8a8a8">○ excluded raw reading</span>. South crown uses the declared y=54 apex alternative; the raw y=50 point remains grey. Floor residuals are perpendicular distances; edge residuals compare x at the observed row.</p><nav>${result.results.map(r=>`<a href="#h${r.heightM}">${r.heightM} m scenario</a>`).join('')}</nav>${profiles}</html>`;
 }
