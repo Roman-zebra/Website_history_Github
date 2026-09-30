@@ -1,13 +1,13 @@
 {
   "status": "conditional-authoring-not-photo-acceptance",
-  "claudeCommit": "19025f7",
+  "claudeCommit": "1142cec",
   "method": "Blender4.5.10 export-only rebuild; glTF-Validator2.0.0-dev.3.10; all floating-point accessor bytes and oriented index triangle sets compared, with order ignored; old GLB/render and normalized generator compared with pre-merge main",
   "baselinePreserved": true,
   "outputs": [
     {
-      "name": "tower-study-v3-open-crown.glb",
+      "name": "tower-study-v3-open-gallery.glb",
       "bytes": 1559852,
-      "sha256": "cbcaed8b7ef7a2632babf6ec55d9a96abce7e8d4897b514d3462e8c47ee89761",
+      "sha256": "3902a8ed4a6a8056afbf3224398e6cfee8549f224b242ff789c093b68bbd14e0",
       "rebuildByteIdentical": false,
       "rebuildIdenticalAttributesAndOrientedTriangleSets": true,
       "triangleOrderingDiffers": true,
@@ -31,7 +31,8 @@
           0
         ]
       },
-      "primitives": 5
+      "primitives": 5,
+      "renameIdenticalAttributesAndOrientedTriangles": true
     },
     {
       "name": "tower-study-v3-enclosed-box.glb",

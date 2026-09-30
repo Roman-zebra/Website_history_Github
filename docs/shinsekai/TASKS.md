@@ -4,7 +4,7 @@ Baseline: `PLAN.md` (v3.6) and the later user decisions recorded in `research/to
 
 The final site is published from GitHub through the repository's existing Cloudflare Workers build/deploy route. Local files are for authoring and verification only.
 
-**User resume:** work resumed in the new conversation; the existing heartbeat was migrated and is ACTIVE. Handoffs66–80 are reviewed; tasks remain incomplete. See `codex-state.json` and `HANDOFF.md`.
+**User resume:** work resumed in the new conversation; the existing heartbeat was migrated and is ACTIVE. Handoffs66–83 are reviewed; tasks remain incomplete. See `codex-state.json` and `HANDOFF.md`.
 
 | Task | Scope | Status |
 | --- | --- | --- |

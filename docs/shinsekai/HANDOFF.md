@@ -55,3 +55,5 @@ Immediate79: cc69851 GLBs independently validate, but merge deferred for concret
 ## Motion checkpoint through80
 
 See research/motion-study.md. Paired shuttle/elevator/rigid-disc local prototype and five invariant/lifecycle tests; both Chrome backends/ride views inspected. Actual hidden-tab integration remains open. Reviewed/rebuilt/validated Claude19025f7 immediately and preserved v2; v3 accepted only as separate research candidates, not production photographic/site geometry. Next bind separate GLB car with dimensions/clearance-aware centre stops, then boarding/exit limits. Full build217/217 passed; research assets remain outside dist.
+
+Immediate81-83: accepted1142cec neutral open-gallery rename with identical geometry/validator0/0/7, preserving Codex guards. Archived source lead snapshots locally; see motion-handoff-review.json. About1920 cabin/head-scaled sizes and1908 tram appearance are candidates, not1912 measurements or independently cleared product images. Retouching bound withdrawn; no scene/dimension adoption.

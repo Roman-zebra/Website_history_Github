@@ -1,0 +1,33 @@
+{
+  "reviewedHandoffs": [
+    81,
+    82,
+    83
+  ],
+  "branch": "1142cec",
+  "snapshots": [
+    {
+      "source": "claude-out/to-codex.md",
+      "localSnapshot": "../research-cache/handoffs81-83-to-codex.md",
+      "sha256": "e6ff8aa39cb2c10009e79661193aefc6b774843cd0b6d31adc1102f8c7bce3b0"
+    },
+    {
+      "source": "claude-out/design/t5-rides-vehicles-spec.md",
+      "localSnapshot": "../research-cache/handoffs81-83-t5-rides-vehicles-spec.md",
+      "sha256": "482951dd39af13b9d99f20c367b820d2fe5b9cf84145f77454660c651e186514"
+    },
+    {
+      "source": "claude-out/qa/photomatch/datum-check.md",
+      "localSnapshot": "../research-cache/handoffs81-83-datum-check.md",
+      "sha256": "5632088e812c836717b9f87f601c275fb1841912bf27084fb576c5b469a430f2"
+    }
+  ],
+  "status": "attributed-source-leads-only-no-placement-or-measured-size",
+  "notes": [
+    "Form rename independently verified as same binary geometry; validator0/0/7; local guards retained.",
+    "Retouching1-3px bound withdrawn by Claude; east/roll already free; N/S ratios do not prove common base.",
+    "Approx1920 photographed ropeway body/canopy/ornament candidate; passenger-head scale is an assumed anthropometric prior and no perspective correction; not measured or established1912 detail.",
+    "1908 Imamiya tram image is a nearby earlier-period appearance lead; no claim every car detail persisted at Ebisucho1912; monochrome does not establish red paint.",
+    "Claude reports Commons PD and OML CC0; no image obtained or product rights independently accepted in this review. Verify canonical item/licence before selecting any asset."
+  ]
+}
