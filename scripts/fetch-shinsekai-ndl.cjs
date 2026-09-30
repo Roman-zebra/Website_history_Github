@@ -46,6 +46,7 @@ async function main() {
 
   // Small inspection copies only; original IIIF scans remain at NDL.
   for (const [pid, page] of [
+    ['962657', 48], ['962657', 49],
     ['952032', 19], ['952032', 30], ['952032', 47], ['952032', 95],
     ['917709', 39], ['964429', 170], ['1112102', 62],
     ['966056', 174], ['966056', 176], ['966056', 177],
