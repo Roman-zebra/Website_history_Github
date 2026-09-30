@@ -1,0 +1,575 @@
+{
+ "version": "tower-base-exterior v1",
+ "command": "blender -b -P assets-src/shinsekai/tower-base-upgrade/exterior/build-tower-base-exterior.py -- --renders all --samples 128",
+ "v4Constants": {
+  "ROOF_GARDEN_Z": 15.15,
+  "FACADE_TOP": 15.3,
+  "LATTICE_BASE": 15.85,
+  "PASSAGE_DEPTH": 26.0,
+  "FACE_Y": 13.0,
+  "FACADE_HALF_WIDTH": 14.5,
+  "ARCH_HALF_SPAN": 10.05,
+  "ARCH_SPRING": 2.9,
+  "ARCH_CROWN": 10.9,
+  "TURRET": 4.4,
+  "TURRET_X": 12.3,
+  "TURRET_BODY_TOP": 19.6,
+  "TURRET_DOME_TOP": 22.1,
+  "TURRET_FINIAL_TOP": 22.9,
+  "SHAFT_BASE_HALF": 5.7,
+  "WELL": 0.742,
+  "HEIGHT": 75.76
+ },
+ "lift": {
+  "schemaVersion": 1,
+  "form": "open-gallery",
+  "landings": [
+   {
+    "id": "roof",
+    "floor": 15.15,
+    "status": "source-relative surface; ground datum unresolved"
+   },
+   {
+    "id": "top",
+    "floor": 63.41832333333333,
+    "status": "assumed gallery surface"
+   }
+  ],
+  "car": {
+   "height": 2.3,
+   "width": 0.8904,
+   "depth": 0.8904,
+   "floorThickness": 0.08,
+   "status": "assumed; capacity unknown"
+  },
+  "well": {
+   "bottom": 15.02,
+   "top": 65.68832333333333,
+   "clearance": 0.05
+  },
+  "pivots": {
+   "bottom": 16.22,
+   "top": 64.48832333333334
+  },
+  "structure": {
+   "latticeBase": 15.85,
+   "headTop": 67.2746
+  }
+ },
+ "lods": {
+  "0": {
+   "tris": 118905,
+   "objects": 27,
+   "byPart": {
+    "backing": 620,
+    "backing_dark": 30,
+    "brass": 6572,
+    "bulb": 7344,
+    "curtain": 1392,
+    "deck": 6,
+    "enamel": 42,
+    "flowers": 1000,
+    "foliage": 1792,
+    "glass": 903,
+    "inner": 1814,
+    "iron": 10528,
+    "joinery": 17378,
+    "kerb": 2360,
+    "lamp_glass": 1520,
+    "medallion": 720,
+    "paving": 64,
+    "plinth": 88,
+    "porcelain": 2312,
+    "reveal": 1686,
+    "roof_sheet": 5030,
+    "sill": 3652,
+    "soil": 8,
+    "trim": 41088,
+    "vault": 2808,
+    "wall": 7348,
+    "wire": 800
+   }
+  },
+  "1": {
+   "tris": 64203,
+   "objects": 25,
+   "byPart": {
+    "backing": 620,
+    "backing_dark": 30,
+    "brass": 192,
+    "bulb": 7344,
+    "curtain": 696,
+    "deck": 6,
+    "foliage": 1160,
+    "glass": 649,
+    "inner": 1814,
+    "iron": 6700,
+    "joinery": 4542,
+    "kerb": 1080,
+    "lamp_glass": 512,
+    "medallion": 480,
+    "paving": 64,
+    "plinth": 88,
+    "porcelain": 1368,
+    "reveal": 1306,
+    "roof_sheet": 2438,
+    "sill": 1036,
+    "soil": 8,
+    "trim": 23354,
+    "vault": 1944,
+    "wall": 6004,
+    "wire": 768
+   }
+  },
+  "2": {
+   "tris": 16656,
+   "objects": 17,
+   "byPart": {
+    "backing": 124,
+    "deck": 6,
+    "glass": 22,
+    "iron": 2140,
+    "joinery": 2516,
+    "kerb": 20,
+    "lamp_glass": 224,
+    "medallion": 480,
+    "paving": 64,
+    "plinth": 88,
+    "reveal": 1072,
+    "roof_sheet": 630,
+    "sill": 1036,
+    "soil": 8,
+    "trim": 6286,
+    "vault": 30,
+    "wall": 1910
+   }
+  }
+ },
+ "bulbsLOD0": 918,
+ "windowsLOD0": 58,
+ "doorsLOD0": 15,
+ "materials": {
+  "wall": {
+   "baseColorLinear": [
+    0.56,
+    0.4,
+    0.2
+   ],
+   "roughness": 0.86,
+   "metallic": 0.0,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "S:157431 S:157437 hand-coloured ochre-cream render (colour estimated)"
+  },
+  "trim": {
+   "baseColorLinear": [
+    0.66,
+    0.54,
+    0.33
+   ],
+   "roughness": 0.82,
+   "metallic": 0.0,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\PaintedPlaster006",
+   "tileM": 2.0,
+   "source": "S:157431 lighter trims (estimated)"
+  },
+  "reveal": {
+   "baseColorLinear": [
+    0.52,
+    0.38,
+    0.2
+   ],
+   "roughness": 0.88,
+   "metallic": 0.0,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "as wall"
+  },
+  "vault": {
+   "baseColorLinear": [
+    0.4,
+    0.33,
+    0.22
+   ],
+   "roughness": 0.9,
+   "metallic": 0.0,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Plaster007",
+   "tileM": 2.0,
+   "source": "S:158223 dark vault"
+  },
+  "plinth": {
+   "baseColorLinear": [
+    0.18,
+    0.17,
+    0.16
+   ],
+   "roughness": 0.72,
+   "metallic": 0.0,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\large_sandstone_blocks",
+   "tileM": 1.2,
+   "source": "A: granite-look plinth"
+  },
+  "sill": {
+   "baseColorLinear": [
+    0.42,
+    0.38,
+    0.31
+   ],
+   "roughness": 0.75,
+   "metallic": 0.0,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\large_sandstone_blocks",
+   "tileM": 1.2,
+   "source": "A: stone sills/kerbs"
+  },
+  "roof_sheet": {
+   "baseColorLinear": [
+    0.045,
+    0.06,
+    0.055
+   ],
+   "roughness": 0.42,
+   "metallic": 0.35,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\Metal041B",
+   "tileM": 1.0,
+   "source": "S:157437 dark caps; S:157431 greenish (estimated)"
+  },
+  "iron": {
+   "baseColorLinear": [
+    0.035,
+    0.045,
+    0.038
+   ],
+   "roughness": 0.55,
+   "metallic": 0.45,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\green_metal_rust",
+   "tileM": 1.0,
+   "source": "A: painted cast/wrought iron"
+  },
+  "wire": {
+   "baseColorLinear": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "roughness": 0.6,
+   "metallic": 0.6,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: copper line wire, weathered"
+  },
+  "joinery": {
+   "baseColorLinear": [
+    0.11,
+    0.045,
+    0.028
+   ],
+   "roughness": 0.34,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "S:157437 dark window frames (colour A:)"
+  },
+  "glass": {
+   "baseColorLinear": [
+    0.62,
+    0.7,
+    0.68
+   ],
+   "roughness": 0.04,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "detail-spec §1 period cylinder glass"
+  },
+  "backing": {
+   "baseColorLinear": [
+    0.16,
+    0.11,
+    0.075
+   ],
+   "roughness": 0.9,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "placeholder room box, replaced by the interior"
+  },
+  "curtain": {
+   "baseColorLinear": [
+    0.55,
+    0.44,
+    0.28
+   ],
+   "roughness": 0.95,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: cream cotton curtains"
+  },
+  "backing_dark": {
+   "baseColorLinear": [
+    0.05,
+    0.04,
+    0.035
+   ],
+   "roughness": 0.95,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "placeholder dark depth behind open doors, replaced by the interior"
+  },
+  "brass": {
+   "baseColorLinear": [
+    0.78,
+    0.52,
+    0.22
+   ],
+   "roughness": 0.26,
+   "metallic": 1.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "detail-spec §6 polished brass"
+  },
+  "porcelain": {
+   "baseColorLinear": [
+    0.82,
+    0.8,
+    0.74
+   ],
+   "roughness": 0.08,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: white glazed porcelain insulators"
+  },
+  "enamel": {
+   "baseColorLinear": [
+    0.015,
+    0.03,
+    0.09
+   ],
+   "roughness": 0.12,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: blank navy enamel plate, no text"
+  },
+  "bulb": {
+   "baseColorLinear": [
+    0.95,
+    0.88,
+    0.7
+   ],
+   "roughness": 0.1,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "T:fr.274 五萬燈 S:157871; carbon-filament 2200 K emission at night"
+  },
+  "lamp_glass": {
+   "baseColorLinear": [
+    0.9,
+    0.87,
+    0.8
+   ],
+   "roughness": 0.35,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: frosted globe"
+  },
+  "medallion": {
+   "baseColorLinear": [
+    0.07,
+    0.17,
+    0.1
+   ],
+   "roughness": 0.55,
+   "metallic": 0.0,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\PaintedPlaster006",
+   "tileM": 1.0,
+   "source": "S:157431 green roundels"
+  },
+  "deck": {
+   "baseColorLinear": [
+    0.33,
+    0.17,
+    0.09
+   ],
+   "roughness": 0.72,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: terracotta pavers 0.3 m"
+  },
+  "soil": {
+   "baseColorLinear": [
+    0.07,
+    0.05,
+    0.035
+   ],
+   "roughness": 0.95,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A:"
+  },
+  "foliage": {
+   "baseColorLinear": [
+    0.04,
+    0.09,
+    0.03
+   ],
+   "roughness": 0.8,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: clipped box edging"
+  },
+  "flowers": {
+   "baseColorLinear": [
+    0.7,
+    0.28,
+    0.2
+   ],
+   "roughness": 0.7,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: seasonal flowers (T: 四時の花卉)"
+  },
+  "inner": {
+   "baseColorLinear": [
+    0.55,
+    0.52,
+    0.46
+   ],
+   "roughness": 0.9,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "interior shell, finishes by the interior agent"
+  },
+  "paving": {
+   "baseColorLinear": [
+    0.13,
+    0.12,
+    0.105
+   ],
+   "roughness": 0.85,
+   "metallic": 0.0,
+   "cc0Texture": null,
+   "tileM": 1.0,
+   "source": "A: macadam carriageway"
+  },
+  "kerb": {
+   "baseColorLinear": [
+    0.3,
+    0.29,
+    0.27
+   ],
+   "roughness": 0.75,
+   "metallic": 0.0,
+   "cc0Texture": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\materials-93\\large_sandstone_blocks",
+   "tileM": 1.2,
+   "source": "A: granite kerbs and footways"
+  }
+ },
+ "parts": [
+  {
+   "element": "arch screen: scored ashlar render, frieze",
+   "source": "S:157431 S:157437 S:158510 P:plate46",
+   "note": "screen recessed 0.25 m behind the turrets (A: from lit turret returns); courses 0.6 m on one grid from the springing (2.9 m), 14 mm V-joints A:"
+  },
+  {
+   "element": "bell push and blank notice plate at the lift transfer door",
+   "source": "detail-spec §6 (raised control); A: electric bell pushes in 1912 Osaka († unverified)",
+   "note": ""
+  },
+  {
+   "element": "turret quoins",
+   "source": "S:157437 (light corner strips on the turrets)",
+   "note": "0.55 m courses, 35 mm proud A:"
+  },
+  {
+   "element": "turrets: faces, windows L1-L3 (segmental), T4 paired round-headed lights, street doors",
+   "source": "S:157431 S:157437 S:158510 (paired upper lights, gables with oculi, caps with lanterns) T:fr.268 (stair exits form the turrets)",
+   "note": "window sizes and levels A: (fit to INTERFACE floor levels); street doors A:"
+  },
+  {
+   "element": "E/W side walls: party walls to the cinema wings, wing doors, L3 windows",
+   "source": "T:fr.267 (wings 各四十有餘間) T:fr.270 (cinemas beside the tower)",
+   "note": "wing height 9.5 m and door positions A:"
+  },
+  {
+   "element": "passage walls: ticket-hall doors, ticket window, impost course",
+   "source": "T:fr.268 (arch passage) A: door/window positions (INTERFACE.md)",
+   "note": ""
+  },
+  {
+   "element": "arch: 33 voussoirs, projecting keystone with console, bulb rail",
+   "source": "S:158510 S:157431 (moulded archivolt) S:157871 (bulb outline) P:plate46 (span/crown)",
+   "note": "voussoir articulation, count and keystone console A: (158510 reads as a plain moulded archivolt: flagged)"
+  },
+  {
+   "element": "coffered elliptical vault, transverse bands, rosettes",
+   "source": "S:158223 (dark ribbed vault; 1938 photo, ribs only)",
+   "note": "13 x 9 coffers, 0.16 m deep A:"
+  },
+  {
+   "element": "main cornice with modillions, frieze of lesenes and roundels",
+   "source": "S:157431 (row of roundels above the arch, green) S:157437 (vertical strips)",
+   "note": "profile, 10 bays, modillion spacing A:"
+  },
+  {
+   "element": "tower leg pedestals on the deck",
+   "source": "P:plate46 (legs land on the roof)",
+   "note": "pedestal size, plates and anchors A: (legs at v4 SHAFT_BASE_HALF)"
+  },
+  {
+   "element": "roof garden deck, flower beds",
+   "source": "T:fr.268 (200 tsubo, flower beds; 677 m2 net here = 205 tsubo)",
+   "note": "terracotta pavers and bed positions A:"
+  },
+  {
+   "element": "roof balustrade: plinth, turned balusters, moulded rail, piers with ball caps",
+   "source": "S:157431 (piers along the roof edge) S:158510",
+   "note": "balusters (vs. iron railing) A:; height 1.16 m above the deck A:"
+  },
+  {
+   "element": "cast-iron downpipes with hopper heads, holderbats, shoes",
+   "source": "A: (not legible in the photos; required by detail-spec §2)",
+   "note": "positions A:"
+  },
+  {
+   "element": "wall lamp brackets flanking the arch",
+   "source": "S:158510 (lamp standard beside a turret) A: bracket form",
+   "note": ""
+  },
+  {
+   "element": "service entry: iron bracket with porcelain pin insulators and wires",
+   "source": "S:157218 S:157103 (wires everywhere, 1912 streets) A: position",
+   "note": ""
+  },
+  {
+   "element": "interior shell (slabs, cross walls, shaft floor/ceiling)",
+   "source": "../INTERFACE.md",
+   "note": "contents belong to the interior agent"
+  },
+  {
+   "element": "passage floor: cambered macadam carriageway, granite kerbs, raised footways",
+   "source": "A: (1912 streets unpaved per S:158514; footways assumed)",
+   "note": ""
+  }
+ ],
+ "timingsS": {
+  "build": 5.2,
+  "uv1": 1.6
+ },
+ "replacesInV4": [
+  "tower study - provisional pale masonry",
+  "tower study - dark unglazed opening",
+  "roof_garden_deck",
+  "tower study - provisional trim: faces below z 16.6 and turret crowns/domes (|x|>9 or |y|>9, z<23)",
+  "tower study - provisional dark iron: turret finials (|x|>9, z<23)"
+ ]
+}
