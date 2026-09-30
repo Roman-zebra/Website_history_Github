@@ -1,10 +1,10 @@
 {
   "version": "v3-proposal",
-  "command": "blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-crown --export-only",
+  "command": "blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-gallery --export-only",
   "parameters": {
     "heightM": 75.76,
     "passageDepthM": 26.0,
-    "top": "open-crown",
+    "top": "open-gallery",
     "iron": "grey",
     "ratioBox": 0.47,
     "ratioMid": 0.59,

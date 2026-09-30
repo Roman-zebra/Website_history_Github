@@ -28,9 +28,9 @@ The v2 study is unchanged: `build-tower-v2.py`, `north-study.png` and `tower-stu
 Reproducible builds (Blender 4.5.10, from the repository root):
 
 ```
-blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-crown
+blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-gallery
 blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top enclosed-box
-blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-crown --iron redbrown
+blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- --top open-gallery --iron redbrown
 ```
 
 Every value below is a **conditional parameter**, not a measured world dimension:
@@ -38,11 +38,11 @@ Every value below is a **conditional parameter**, not a measured world dimension
 - `--ratio-box 0.47`, `--ratio-mid 0.59` and `--flare-start 0.55` set the flared leg profile. They are plate-46 outer-width ratios in one perspective photo; camera pitch is not removed.
 - `--lace-cell 1.6` sets the diamond lacing density (visual reading).
 - `--well-fraction 0.28` sets the central elevator well size.
-- The open-crown band : gallery : crown split uses south-view pixel proportions.
+- The open-gallery band : gallery : crown split uses south-view pixel proportions.
 
 Parts and forms:
 - **Top forms** are named by what the photos show, with no date implied:
-  - `open-crown`: solid band, open railed gallery and openwork ribbed crown (view A; south c0234001; OML 158510).
+  - `open-gallery`: solid band, open railed gallery and openwork ribbed crown (view A; south c0234001; OML 158510).
   - `enclosed-box`: two-tier enclosed box and low cap (plate 46; OML 158880/158886).
   - The shaft-top height is shared between the two forms, as a scenario.
 - **Elevator interface for T5**: a separate unmerged node `elevator_car` at the bottom stop, and empties `elevator_well_bottom` (roof garden) and `elevator_well_top` (box underside). The opening-era well does not reach the ground; the ground-level shaft is the 1938 alteration.
@@ -53,12 +53,12 @@ Outputs and budget (glTF-Validator 2.0.0-dev.3.10):
 
 | file | errors / warnings / infos | draw calls | vertices | triangles |
 |---|---|---|---|---|
-| tower-study-v3-open-crown.glb | 0 / 0 / 7 | 5 | 44,064 | 23,924 |
+| tower-study-v3-open-gallery.glb | 0 / 0 / 7 | 5 | 44,064 | 23,924 |
 | tower-study-v3-enclosed-box.glb | 0 / 0 / 7 | 5 | 39,936 | 21,660 |
 
-- Renders: `north-study-v3-open-crown.png`, `north-study-v3-enclosed-box.png`, `north-study-v3-open-crown-redbrown.png`. The red-brown GLB is not committed.
-- Instancing the lacing and an LOD card are still to do.
+- Renders: `north-study-v3-open-gallery.png`, `north-study-v3-enclosed-box.png`, `north-study-v3-open-gallery-redbrown.png`. The red-brown GLB is not committed.
+- Instancing the lacing and an LOD card are still to do. The draw-call and triangle counts are GLB statistics, **not** a browser-measured performance gate; that gate (T9) stays open.
 
 Photo projections:
-- Before/after overlays of v2 and v3 in all three photos use the unchanged Codex camera settings for 75.76 m from `camera-profile-v2.json`. They are kept outside Git in `research-cache/claude-v3-overlays/`.
+- Acceptance gate (unchanged-camera projections): **open**. Before/after overlays of v2 and v3 in all three photos use the unchanged Codex camera settings for 75.76 m from `camera-profile-v2.json`. They are kept outside Git in `research-cache/claude-v3-overlays/`.
 - The base does not match in either version, because those cameras were fitted with the anchor-model base of the camera study (about 35.3 m × 15.2 m), not the study base. Only the shaft difference between v2 and v3 is meaningful there.

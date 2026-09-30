@@ -2,7 +2,7 @@
 
 Run with Blender 4.5 from the repository root:
     blender -b --python assets-src/shinsekai/tower-study/build-tower.py -- [--height 75.76] [--passage-depth 26]
-        [--top open-crown|enclosed-box] [--iron grey|redbrown] [--ratio-box 0.47] [--ratio-mid 0.59]
+        [--top open-gallery|enclosed-box] [--iron grey|redbrown] [--ratio-box 0.47] [--ratio-mid 0.59]
         [--flare-start 0.55] [--lace-cell 1.6] [--well-fraction 0.28] [--export-only]
 Outputs: north-study-v3-<top>[-redbrown].png, tower-study-v3-<top>[-redbrown].glb and
 tower-study-v3-<top>.parts.json (per-part source/assumption metadata). The v2 study
@@ -20,7 +20,7 @@ claude-out/qa/photomatch in the local workspace and the branch notes in README.m
 Plate 46 is a 1921 publication, so its facade details are later-period candidates.
 v3 (Claude proposal, claude-out/design/review-tower-study-v2.md): flared leg profile from
 plate-46 width ratios, a central lattice elevator well (roof garden to the box, 1912 text),
-multi-cell face lacing, and two photographed top forms selected by --top: "open-crown"
+multi-cell face lacing, and two photographed top forms selected by --top: "open-gallery"
 (open railed gallery + openwork ribbed crown, as in view A and south c0234001) and
 "enclosed-box" (two-tier enclosed box + low cap, as in plate 46). No rebuild year is
 encoded; publication dates do not date the change. All v3 ratios, cell sizes, section
@@ -46,15 +46,15 @@ def arg(name, default, cast=float):
 OUT = Path(__file__).resolve().parent
 HEIGHT = arg("--height", 75.76)             # parameter; see module docstring
 PASSAGE_DEPTH = arg("--passage-depth", 26.0)  # parameter; north-south depth of the base block
-TOP = arg("--top", "open-crown", str)        # "open-crown" or "enclosed-box" (photographed forms)
+TOP = arg("--top", "open-gallery", str)        # "open-gallery" or "enclosed-box" (photographed forms)
 IRON = arg("--iron", "grey", str)            # "grey" (provisional) or "redbrown" (postcard candidate)
 RATIO_BOX = arg("--ratio-box", 0.47)         # conditional: shaft width at the box / at the roof
 RATIO_MID = arg("--ratio-mid", 0.59)         # conditional: width at the flare start / at the roof
 FLARE_START = arg("--flare-start", 0.55)     # conditional: fraction of shaft length (from the box) that is straight
 LACE_CELL = arg("--lace-cell", 1.6)          # conditional: lacing cell width in metres (visual density)
 WELL_FRACTION = arg("--well-fraction", 0.28) # conditional: well half-size / shaft top half-width
-if TOP not in ("open-crown", "enclosed-box") or IRON not in ("grey", "redbrown"):
-    raise SystemExit("--top must be open-crown|enclosed-box and --iron grey|redbrown")
+if TOP not in ("open-gallery", "enclosed-box") or IRON not in ("grey", "redbrown"):
+    raise SystemExit("--top must be open-gallery|enclosed-box and --iron grey|redbrown")
 SUFFIX = "-v3-" + TOP + ("" if IRON == "grey" else "-" + IRON)
 ROOF_GARDEN_Z = 15.15   # about 50 shaku (sourced)
 FACADE_TOP = 15.3
@@ -293,7 +293,7 @@ for name, z in (("elevator_well_bottom", SHAFT_START), ("elevator_well_top", SHA
 note("elevator car + limits (interface)", "none (placeholder for T5)",
      "separate node 'elevator_car' at the bottom stop; empties elevator_well_bottom/top give the travel range")
 
-if TOP == "open-crown":
+if TOP == "open-gallery":
     # Photographed in view A (1914 book) and south c0234001 (catalogue 1912-1925): a solid
     # band, an open railed gallery (light shows through; south rows 77-90) and an openwork
     # ribbed crown. South-view proportions band : gallery : crown = 15.5 : 14.5 : 22.5 (one
@@ -335,7 +335,7 @@ if TOP == "open-crown":
 else:
     # Photographed in plate 46 (1921 book) and OML 158880/158886 (1920s catalogue range):
     # a tall two-tier enclosed box and a low solid cap, no ribbed crown. The shaft-top
-    # height is shared with the open-crown form (a scenario, not a finding).
+    # height is shared with the open-gallery form (a scenario, not a finding).
     WIDE_TOP = above_roof(0.865)
     NARROW_TOP = above_roof(0.909)
     CAP_TOP = above_roof(0.93)
