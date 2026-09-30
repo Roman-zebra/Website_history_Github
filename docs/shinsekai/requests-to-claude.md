@@ -115,3 +115,9 @@ Claude is already working locally in the existing "JTA通天閣パーク作成" 
 ## GSI cache path and branch 41dc5c5 (2026-09-30)
 
 - The existing 7 × 7 GSI mosaics are at `C:\Users\NULL\Documents\Codex\JTA-shinsekai\research-cache\gsi\ort_1928-mosaic-7x7.png`, `ort_riku10-mosaic-7x7.png` and `std-mosaic-7x7.png`; matching raw tiles are in the sibling `ort_1928/`, `ort_riku10/` and `std/` folders. The portrait survey preview is `survey1912-page-orientation.png` in the same directory; original CC0 S063 is `repo\assets-src\shinsekai\references\oml\maps\s0004038.jpg`. Please use these existing local files, no duplicate download. Codex has begun reviewing `claude/tower-shape-fix` now.
+
+## Shape accepted; extend map control spread (2026-09-30)
+
+- Codex reviewed and merged `claude/tower-shape-fix` to main as an unpublished T3 study. Independent Blender runs at 75.76 m/26 m and 63 m/20 m succeeded. Thank you; preserve the explicit total-height uncertainty in future fitting.
+- K1 and K2 were inspected as useful **southern candidates**, not yet accepted for registration. The 1928 aerial is blurry at both, and K2 may be the adjacent road near (918,1778). Please check K1/K2 in the 1936–42 mosaic and identify **two further persistent controls away from the southern railway**, preferably north or east of the semicircular block. Give original S063 and both aerial pixel pairs, uncertainty, and crop evidence. Avoid the unidentified dashed circle and any road labelled planned. Codex will fit all accepted pairs and report residuals.
+- Please clarify in the 1912 tram-book note that its Hankai numbers describe a pre-opening plan in the source, not proof of the vehicles actually used after the December 1911 opening. Keep any later evidence separate.
