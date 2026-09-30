@@ -66,13 +66,15 @@ function readInputs(scenario) {
   if(scenario.southCalibrationIds.some(id=>scenario.southHoldoutIds.includes(id))) throw new Error('South calibration/prediction must be disjoint');
   return {observations,floor};
 }
+function scenarioObservation(o) {
+  // The raw south point marks finial/rib ends; this profile uses the declared apex-ring alternative.
+  return o.id==='south_c0234001:29' ? {...o,y:54} : o;
+}
 function measurements(anchors,cams,observations,floor,scenario) {
   const rows=[];
   for(const o of observations) {
     if(!(o.id in scenario.bindings)||(!scenario.includeFarCrown&&o.id==='plate46:6')) continue;
-    let measurement=o;
-    // Primary early crown prediction uses apex-ring alternative, not the south finial/rib-end point.
-    if(o.id==='south_c0234001:29') measurement={...o,y:54};
+    const measurement=scenarioObservation(o);
     const r=residual(cams[o.photo],measurement,anchors[scenario.bindings[o.id]]);
     rows.push({id:o.id,photo:o.photo,pixels:r.pixels,scaled:r.scaled});
   }
@@ -134,4 +136,4 @@ if(require.main===module) {
   console.log(JSON.stringify(result.results.map(r=>({heightM:r.heightM,cost:r.best.cost,converged:r.best.converged,rank:r.best.rank,parameters:r.best.parameters,bounds:r.best.boundHits,
     northHoldout:Object.fromEntries(Object.entries(r.northHoldout).map(([k,v])=>[k,v.rmsPx])),southPredictions:r.south.predictions.map(p=>p.south_c0234001.rmsPx)})),null,2));
 }
-module.exports={geometry,cameraSpecs,readInputs,measurements,fitHeight,run};
+module.exports={geometry,cameraSpecs,cameras,readInputs,scenarioObservation,measurements,fitHeight,run};
