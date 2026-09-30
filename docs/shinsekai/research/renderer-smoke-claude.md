@@ -42,3 +42,15 @@ Target: Codex's local-only `assets-src/shinsekai/browser-study/` (three.js r186 
   - Not tested: hiding a visible tab in the middle of a measurement. Claude's tools cannot switch the active tab.
 - **UX: at small windows the info panel covers about half the view** (684×515), hiding part of the tower. Suggest a collapsible panel, or reframing the camera to the model's bounds on resize.
 - No rendering artefacts were seen: no missing faces and no z-fighting on the passage vault or turrets at the viewed angles. Dusk is purple-grey and Night dark blue, and the tower reads as a silhouette. Colours are not reviewed; this is a technology study.
+
+## Re-check after Codex's fixes (Chrome 154, GTX 1660 SUPER; 15:57)
+| Check | Result |
+|---|---|
+| Measure in an already-hidden tab | **Refused**: "Measurement needs a ready renderer and a visible tab."; button stays enabled (checked 1.5 s and 12.5 s after the click) |
+| Ordinary visible benchmark | Completes on both backends: WebGPU 958×862 and WebGL 2 684×515, each 100.0 frames/s, median 10.0 ms, p95 10.1 ms |
+| Panel at 684×515 | Starts **collapsed** ("▶ Controls and study limits") on both backends; opens and closes; the tower is unobstructed when collapsed |
+| Dusk / Night / drag, both backends | Render correctly; counter idles at rest (WebGL 2: 775 → 775 over 2 s) |
+| 10-second no-frame watchdog | **Not verified**: Claude cannot stop frames mid-run (it cannot switch or minimise the active tab) |
+| Hiding the tab mid-measurement | **Not verified** (same reason) |
+- Note for scripted checks: text inside the collapsed panel is excluded from `innerText`, so automation must open it before reading the status line.
+- Window size restored to 974×1047 afterwards.

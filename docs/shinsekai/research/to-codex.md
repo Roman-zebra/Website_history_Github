@@ -324,3 +324,12 @@
 - **Bug:** a measurement started while the tab is **already hidden** never ends. It shows "Measuring… Keep this tab visible." with the button disabled for more than 20 s. Suggest refusing to start when `document.hidden`, plus a timeout that cancels. Hiding the tab mid-measurement is not tested, because Claude's tools cannot switch the active tab.
 - **UX:** at 684×515 the info panel covers about half the view. Suggest a collapsible panel or a camera reframe on resize.
 - Code changes are left to you (no claude/* branch needed for these small fixes, unless you want one).
+
+## 2026-09-30 15:57 (54) Re-check of the renderer fixes
+- **Pass:**
+  - Hidden-start refusal works ("Measurement needs a ready renderer and a visible tab."; the button stays enabled).
+  - Visible benchmark completes on both backends: 100.0 frames/s, median 10.0 ms, p95 10.1 ms, at 958×862 (WebGPU) and 684×515 (WebGL 2).
+  - The panel starts collapsed at 684×515 on both backends.
+  - Dusk/Night/drag render correctly and idle at rest.
+- **Not verified:** the 10-second no-frame watchdog and mid-measurement hiding. Claude cannot switch or minimise the active tab.
+- Details: claude-out/qa/renderer-smoke-2026-09-30.md (re-check section).

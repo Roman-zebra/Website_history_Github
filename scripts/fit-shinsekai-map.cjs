@@ -2,10 +2,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const file = path.resolve(__dirname, '../docs/shinsekai/research/map-control-candidates.json');
-const data = JSON.parse(fs.readFileSync(file, 'utf8'));
-const controls = new Map(data.controls.map(point => [point.id, point]));
-
 function fitSimilarity(points, era) {
   const n = points.length;
   const sourceMean = [0, 1].map(axis => points.reduce((sum, point) => sum + point.sourcePixel[axis], 0) / n);
@@ -51,45 +47,65 @@ function solve3(matrix, values) {
 }
 
 function fitAffine(points, era) {
-  const rows = points.map(point => [...point.sourcePixel, 1]);
+  // Centre and scale pixels before solving, so the translation column does not
+  // compete with squared coordinates from a large source scan.
+  const mean = [0, 1].map(axis => points.reduce((sum, point) => sum + point.sourcePixel[axis], 0) / points.length);
+  const scale = Math.sqrt(points.reduce((sum, point) => sum +
+    (point.sourcePixel[0] - mean[0]) ** 2 + (point.sourcePixel[1] - mean[1]) ** 2, 0) / points.length);
+  if (!Number.isFinite(scale) || scale < 1e-9) throw new Error('Degenerate affine controls');
+  const rows = points.map(point => [(point.sourcePixel[0] - mean[0]) / scale, (point.sourcePixel[1] - mean[1]) / scale, 1]);
   const matrix = [0, 1, 2].map(i => [0, 1, 2].map(j => rows.reduce((sum, row) => sum + row[i] * row[j], 0)));
   const coefficients = [0, 1].map(axis => solve3(
     matrix,
     [0, 1, 2].map(j => rows.reduce((sum, row, i) => sum + row[j] * points[i].targetPixels[era][axis], 0))
   ));
-  return point => coefficients.map(row => row[0] * point[0] + row[1] * point[1] + row[2]);
+  return point => coefficients.map(row => row[0] * (point[0] - mean[0]) / scale + row[1] * (point[1] - mean[1]) / scale + row[2]);
 }
 
 function evaluate(fit, points, era) {
+  let squaredError = 0;
   const residuals = points.map(point => {
     const predicted = fit(point.sourcePixel);
     const observed = point.targetPixels[era];
+    const error = Math.hypot(predicted[0] - observed[0], predicted[1] - observed[1]);
+    squaredError += error ** 2;
     return {
       id: point.id,
       predicted: predicted.map(value => Number(value.toFixed(1))),
       observed,
-      errorPx: Number(Math.hypot(predicted[0] - observed[0], predicted[1] - observed[1]).toFixed(1))
+      errorPx: Number(error.toFixed(1))
     };
   });
-  const rmsPx = Math.sqrt(residuals.reduce((sum, row) => sum + row.errorPx ** 2, 0) / residuals.length);
+  const rmsPx = Math.sqrt(squaredError / residuals.length);
   return { rmsPx: Number(rmsPx.toFixed(1)), residuals };
 }
 
-if (data.status !== 'research-candidates-only') throw new Error('Unexpected coordinate status');
-for (const id of [...data.fitIds, ...data.holdoutIds]) {
-  if (!controls.has(id)) throw new Error(`Unknown control ${id}`);
-}
-const training = data.fitIds.map(id => controls.get(id));
-const holdout = data.holdoutIds.map(id => controls.get(id));
-const result = {};
-for (const era of Object.keys(data.targets)) {
-  result[era] = {};
-  for (const [model, fit] of [['similarity', fitSimilarity], ['affine', fitAffine]]) {
-    const transform = fit(training, era);
-    result[era][model] = {
-      training: evaluate(transform, training, era),
-      holdout: evaluate(transform, holdout, era)
-    };
+function run(data, sourceLayer = 'S063') {
+  if (data.status !== 'research-candidates-only') throw new Error('Unexpected coordinate status');
+  if (sourceLayer !== 'S063' && !Object.hasOwn(data.targets, sourceLayer)) throw new Error(`Unknown source layer ${sourceLayer}`);
+  const controls = new Map(data.controls.map(point => [point.id, {
+    ...point, sourcePixel: sourceLayer === 'S063' ? point.sourcePixel : point.targetPixels[sourceLayer]
+  }]));
+  if (data.fitIds.some(id => data.holdoutIds.includes(id))) throw new Error('Training and holdout must be independent');
+  for (const id of [...data.fitIds, ...data.holdoutIds]) {
+    if (!controls.has(id)) throw new Error(`Unknown control ${id}`);
   }
+  const training = data.fitIds.map(id => controls.get(id));
+  const holdout = data.holdoutIds.map(id => controls.get(id));
+  const result = {};
+  for (const era of Object.keys(data.targets).filter(era => era !== sourceLayer)) {
+    result[era] = {};
+    for (const [model, fit] of [['similarity', fitSimilarity], ['affine', fitAffine]]) {
+      const transform = fit(training, era);
+      result[era][model] = { training: evaluate(transform, training, era), holdout: evaluate(transform, holdout, era) };
+    }
+  }
+  return {status: data.status, sourceLayer, fitIds: data.fitIds, holdoutIds: data.holdoutIds, result};
 }
-console.log(JSON.stringify({status: data.status, fitIds: data.fitIds, holdoutIds: data.holdoutIds, result}, null, 2));
+if (require.main === module) {
+  const args = process.argv.slice(2);
+  if (args.length && (args.length !== 2 || args[0] !== '--source-layer')) throw new Error('Usage: node scripts/fit-shinsekai-map.cjs [--source-layer 1928|1936-42]');
+  const file = path.resolve(__dirname, '../docs/shinsekai/research/map-control-candidates.json');
+  console.log(JSON.stringify(run(JSON.parse(fs.readFileSync(file, 'utf8')), args[1]), null, 2));
+}
+module.exports = {fitSimilarity, fitAffine, evaluate, run};

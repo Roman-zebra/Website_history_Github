@@ -148,3 +148,10 @@
 - Handoff 53 confirmed both renderer backends, on-demand idle counts and a static measurement of about 100 Hz at 958x862 on the GTX 1660 SUPER. WebGPU additionally passed lighting/orbit/zoom/resize. Broader WebGL 2 interaction checks and hiding mid-measurement are still open.
 - Fixed Claude's hidden-start benchmark lock with a visibility/readiness guard and a session-specific 10-second watchdog; timer cleanup applies to completion/cancellation. Added a native collapsible panel, initially collapsed for small viewports. Requested precise follow-up checks; these small changes have syntax checks, with real-GPU follow-up pending.
 - Preserve pinned vendor bytes with local .gitattributes so Windows autocrlf cannot invalidate recorded upstream hashes. Workers Build and live release for 0c4abc2 were verified successful; no public Shinsekai scene shipped.
+
+## T2 — aerial-to-aerial numerical check (2026-09-30)
+
+- Extended the existing pixel fitter to select an historical source layer, with independent holdout enforcement. Centred/scaled the affine solve and calculated RMS before display rounding. Four meaningful synthetic/selection tests passed (known similarity, large-offset affine shear, collinear rejection and held-out W0).
+- For 1928→1936–42, four-point similarity training RMS is 7.3 px and withheld W0 misses by 22.6 px; affine improves training to 3.0 px but misses W0 by 66.2 px. This is further evidence against choosing affine from internal residual alone, not an accepted map datum adjustment. Modern std registration still lacks distributed independent candidate readings; asked Claude for visual identities/crops rather than fitting the two available modern points exactly. No production coordinates changed.
+
+- Immediate handoff 54 follow-up: Claude confirmed hidden-start refusal, the collapsed panel, visible measurement and Dusk/Night/drag/idle on both backends. The no-frame watchdog and mid-run hiding remain unverified. Archived the report. The final full build passed 180/180 tests; main 9aa75ce passed Workers and its live release was verified.
