@@ -1,10 +1,10 @@
 {
   "status": "in_progress",
   "current": "T5",
-  "next": "Read AGENTS/state/TASKS/PLAN and parent Claude status; fetch claude/* immediately. Handoffs80-83 reviewed; branch1142cec form rename verified, source car/tram leads attributed with rights/era/anthropometric limits. Branch19025f7 reviewed and added only as separate conditional v3 authoring candidates, preserving v2 GLB/render/generator and public/default viewer. Both Blender exports reproduced with identical float attributes/oriented triangles (index ordering differs); independent GLB validation0/0/7. Protected three-photo overlays remain local and fail whole-model acceptance; scale/rank and site gates unchanged. T5 schematic motion prototype at18765/browser-study/motion.html implements paired ropeway, roof-to-upper elevator and rigid tilted disc with explicit assumed timing/dimensions; five mathematical/lifecycle tests. Chrome WebGPU/WebGL advancing/pause/ride views observed; actual hidden-tab event integration and production performance open. NEXT bind v3 separate elevator_car/well markers in local motion viewer, computing safe centre stops from car height+clearance; validate both forms before boarding/exit camera constraints. Do not use well markers as centre limits. Full build217/217 passed; publish/verify this batch and consult latest motion-publication-receipt.json in local research-cache. Avoid repeated same-height fits; raw photos/coordinates/default75.76 unchanged; T0/T1 only done; free-only/no payments.",
-  "updatedAt": "2026-09-30T10:17:01.079Z",
+  "next": "Read AGENTS/state/TASKS/PLAN and parent Claude status; fetch claude/* immediately. Reviewed84–86; branch remains1142cec. Local lift.html binds both v3 forms with actual car bounds/well markers: safe pivot17.05..57.5892m, assumed5cm axial clearance. Nested-transform/GLB containment tests pass. WebGPU both forms/upper dwell/follow observed; WebGL open-gallery movement and both forms loading checked. Motion84 fixes integrated; report dimensions vs assumed arrangement/support/timing separated.85 is Claude-reported user manual pause evidence, not automated visibility/performance acceptance;86 canonical Commons source read, rights/1912 applicability unresolved; OML reader failed, links retained as attributed leads. NEXT separate bounded landing/boarding/exit camera study; current solid car is not an interior. Independent visibility/frame budget checks remain. Historical height/site/photo gates unchanged; do not repeat rank29/30 same-height fits. Full build224/224; verify publication receipt after this batch. T0/T1 only done; free-only/no payments.",
+  "updatedAt": "2026-09-30T10:39:29.6073698Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 83,
-  "observedClaudeHandoff": 83,
+  "processedClaudeHandoff": 86,
+  "observedClaudeHandoff": 86,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7"
 }

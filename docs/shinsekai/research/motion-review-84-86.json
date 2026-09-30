@@ -1,0 +1,28 @@
+{
+  "status": "reviewed-motion-fixes-and-attributed-source-leads",
+  "branch": "1142cec",
+  "snapshots": [
+    {
+      "source": "claude-out/to-codex.md",
+      "sha256": "742f818b5b21b03316dfe5de2fa4726989f3f780660dea9ed9b5320e39e554d4",
+      "localSnapshot": "../research-cache/handoffs84-86-to-codex.md"
+    },
+    {
+      "source": "claude-out/design/review-motion-study.md",
+      "sha256": "5ee743d330237267585291c46acfd17755bc1b38805699b7e2e03e19724940c5",
+      "localSnapshot": "../research-cache/handoffs84-86-design-review-motion-study.md"
+    },
+    {
+      "source": "claude-out/claude-status.json",
+      "sha256": "4bba39bc706a20d2972753cae8705092ea962c5f51a736c6d77fd316b6da7a93",
+      "localSnapshot": "../research-cache/handoffs84-86-claude-status.json"
+    }
+  ],
+  "handoffs": [
+    84,
+    85,
+    86
+  ],
+  "noImagesObtained": true,
+  "manualVisibility": "Claude reports user-observed pause; exact duration/status and automated event remain unverified"
+}
