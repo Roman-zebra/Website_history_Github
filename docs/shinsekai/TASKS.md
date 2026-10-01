@@ -185,3 +185,24 @@ maps or silhouettes. Current512px/noAA720px candidate is not approved for look;
 qualify close/context against matching source camera/light and adjust provisional
 resolution/AA budgets when needed. Next hall visibility/stream partition audit
 before geometric decimation. Real-device performance remains unmeasured.
+
+2026-10-01 —119 full-quality hall stream audit: exact source groups split into
+core/desk/lamps/furnishings,8 base/dream parts. All16 encoded/decoded validators
+0errors/0warnings. Direct original-to-decoded comparison170primitives/850
+attributes/170materials/images/samplers/48ancestor nodes passes; cyclic44 index
+rotations preserve triangle order/winding, union exact, sources untouched.
+With exteriorLOD2s conservative144895/144675tri,165/166draws,112MiB estimated
+maps; full union16.60/16.69MB still exceeds transfer budgets. No native/phone
+or graphics acceptance. Do not game cell totals with individually split requests.
+Lossless full-resolution WebP002 probe saves1.7%, two validators0/0;3 images
+changed/variant, exact PillowRGBA/dimensions/non-image bytes. ICC/EXIF and
+high-bit/animated originals retained, four meaningful Pillow tests pass.
+Three partition/four existing inventory tests pass; prior323fullbuild remains
+prior evidence, no new broad build needed for authoring-only utilities.
+Incomplete trials retained; no retry of unchanged failures, no runtime default
+change. See browser-study/hall-lossless-stream-119.md. Next native original/full
+assembly close/context1280x720 before portal/distance prefetch/visibility work;
+preserve source near graphics/AA, avoid holes/pop-in, hall entry repair separate.
+7099a27 exactWorkersSUCCESS14:16:27UTC verified. TRIPO added spend0, cloth7240,
+art26/hybrid23 unchanged. Goal ACTIVE; daily09JST balance check, no autoClaude
+call or agent. This is a technical round, not an art trial.

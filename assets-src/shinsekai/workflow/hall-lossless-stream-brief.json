@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "roundId": "hall-lossless-stream-001-20261001",
+  "status": "retained_private_equivalence_audit_native_pending",
+  "subject": "Preserve full-resolution hall graphics while reducing transport and simultaneous visible scope",
+  "baseline": "frozen115 aa030cd hall source4a22e2fed1db757ae884d40e86a378715afbcf7099511d583788dc83d5387218; original private base/dream cells",
+  "intendedResult": "Determine lossless full-resolution texture transport and exact subset costs before runtime streaming",
+  "scope": {
+    "firstCause": "image encoding only: PNG/JPEG decoded pixels to lossless WebP, no resize or material change",
+    "laterSeparateCause": "read-only partition candidates, all original triangle/attribute bytes retained, subset union exact",
+    "preserve": [
+      "source files/hashes",
+      "image dimensions and decoded RGBA",
+      "non-image bufferView bytes",
+      "geometry/UV/colour/normals/tangents/materials/lighting/transforms/animation",
+      "source graphics and desktop renderer"
+    ],
+    "defer": [
+      "geometry decimation",
+      "lossy textures",
+      "near-view detail deletion",
+      "runtime adoption until verified",
+      "real-device FPS or historical approval"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre in authored scenario",
+    "system": "glTF Y-up",
+    "origin": "unchanged source cell_hall root"
+  },
+  "lessons": [
+    "GLB re-export changes unrelated parts: repack original binary views",
+    "valid transport/count budgets do not establish visible quality"
+  ],
+  "references": [
+    {
+      "url": "https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Vendor/EXT_texture_webp/README.md",
+      "checkedAt": "2026-10-01",
+      "supports": "required EXT_texture_webp source image without fallback; image/webp; no ICCP/ANIM/EXIF"
+    },
+    {
+      "url": "https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#webp",
+      "checkedAt": "2026-10-01",
+      "supports": "Pillow12.3.0 lossless/exact encoder options"
+    },
+    {
+      "source": "vendor/three-r186/examples/jsm/loaders/GLTFLoader.js",
+      "supports": "pinned GLTFTextureWebPExtension loading"
+    }
+  ],
+  "comparison": {
+    "oneCausePerRound": true,
+    "cameras": [
+      "source hall close",
+      "west wing entry context"
+    ],
+    "resolution": [
+      1280,
+      720
+    ],
+    "lightAndAntialias": "unchanged desktop source",
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "pixelGate": "Pillow decodedRGBA exact; native browser comparison required because source JPEG decoding can vary"
+  },
+  "inputEvidence": {
+    "hallSourceBytes": 22028312,
+    "deskImage2048EncodedBytes": 6068466,
+    "wallImage2048EncodedBytes": 2700600,
+    "existingTexture512TransportBytes": 7621616
+  },
+  "verification": [
+    "source hashes unchanged",
+    "non-image bufferViews exact",
+    "scene JSON differs only image encoding and required texture extension",
+    "decoded pixels/dimensions exact in pinned Pillow",
+    "independent glTF validator and decoder",
+    "native same-camera/context images and load/save/unload before optional adoption",
+    "partition union of source triangles and materials exact; no missing surface or duplicate triangle"
+  ],
+  "cost": {
+    "additionalStudioCredits": 0,
+    "newTools": false,
+    "paidToolsOrApisAllowed": false
+  },
+  "coordination": {
+    "newAgents": false,
+    "automaticClaudeCalls": false
+  },
+  "results": {
+    "fullUnionDreamBytes": 16689600,
+    "transferBudgetPassed": false,
+    "additionalStudioCredits": 0,
+    "productionApproved": false,
+    "validatorWarnings": 0,
+    "fullUnionBaseBytes": 16599696,
+    "actualPhoneMeasured": false,
+    "sourceComparedDirectly": true,
+    "nativeRenderVerified": false,
+    "partitionValidatorChecks": 16,
+    "attributeChecks": 850,
+    "sourceUnchanged": true,
+    "materialChecks": 170,
+    "validatorErrors": 0,
+    "parts": 8
+  }
+}

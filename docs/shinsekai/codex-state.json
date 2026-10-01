@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "Continue T6 from tower-mobile-115.md with latest visual-quality priority: investigate hall stream/visibility partitioning and offscreen/distant work before cutting nearby textures or silhouettes. Hall still7.62MB, lift draw count and cinema triangles also exceed phone budgets. Current512px/noAA720px route is a technical candidate only, not visual approval; compare matching-camera/light close/context against source and reject jaggies/blur/lost details, adjust provisional resolution/AA if needed. Preserve immutable source, exact unrelated attributes, room placement and backing masks. Mobile exterior/stair base/dream pass both desktop backends; other cells blocked. Roof exactduplicates0, nearcontacts open. Check latest pushed main deployment at next checkpoint. TRIPO live3200 today/spend0; daily09JST guard. Material Maker CLI export unverified. Cloth7240/art26/hybrid23 retained; no automatic Claude calls or agents.",
-  "updatedAt": "2026-10-01T14:03:00Z",
+  "next": "Continue T6 from hall-lossless-stream-119.md: optional full-resolution hall part assembly and fixed1280x720 source/candidate near/context comparison on WebGPU/WebGL2, base/dream, unload/failure cleanup. Private hall-stream-transport-002 has8 parts,16 validator checks0/0 and direct source equivalence850 attributes/170materials; union16.60/16.69MB still fails transfer budget, no native acceptance. Keep source graphics and antialiasing: prefer portal/distance prefetch and scope partitioning before degrading nearby maps/silhouettes. Do not expose incomplete-room holes/pop-in or treat each request as passing cell total. WebP002 probe preserves dimensions/pixels but saves only1.7%; metadata/highbit sources retained, no runtime adoption yet. Preserve hall entry repair as separate proposal, roof nearcontacts still open. Latest7099a27 exactWorkersSUCCESS14:16:27UTC; check newest pushed checkpoint next. TRIPO Oct1 live3200/spend0, daily09JST once; Material Maker CLI unverified; cloth7240/art26/hybrid23 unchanged, Goal ACTIVE/no agents or autoClaude.",
+  "updatedAt": "2026-10-01T14:43:39.6233830Z",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 118,
@@ -67,6 +67,8 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 323
+    "fullBuildTests": 323,
+    "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
+    "hallCandidateNativeVerified": false
   }
 }
