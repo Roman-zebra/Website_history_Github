@@ -12,6 +12,14 @@ HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE))
 from upper_cloth import install, TARGETS
 from upper_portable import repair_export_tangents
+sewn='--sewn' in sys.argv
+hat_contact='--hat-contact' in sys.argv
+rail_contact='--rail-contact' in sys.argv
+assert not hat_contact or sewn,'Hat contact comparison requires --sewn'
+assert not rail_contact or hat_contact,'Rail contact comparison requires --hat-contact'
+bending=float(sys.argv[sys.argv.index('--haori-bending')+1]) if '--haori-bending' in sys.argv else 2
+assert math.isfinite(bending) and bending>0,'Invalid haori bending stiffness'
+assert bending==2 or rail_contact,'Bending comparison requires the rail-contact variant'
 
 source=HERE/'build.py'
 text=source.read_text(encoding='utf8').split('# Five explicit cameras')[0]
@@ -21,10 +29,9 @@ text=text.replace(needle,'upper.build_materials();cloth_state=install(upper);upp
 scope={'__file__':str(source),'__name__':'private_cloth118','install':install}
 exec(compile(text,str(source),'exec'),scope)
 upper=scope['upper']; scene=bpy.context.scene
-sewn='--sewn' in sys.argv
-hat_contact='--hat-contact' in sys.argv
-assert not hat_contact or sewn,'Hat contact comparison requires --sewn'
-out=scope['CACHE']/('upper-118-cloth-v2-sewn-hat' if hat_contact else 'upper-118-cloth-v2-sewn' if sewn else 'upper-118-cloth-v2');out.mkdir(exist_ok=True)
+variant='upper-118-cloth-v2-sewn-rail' if rail_contact else 'upper-118-cloth-v2-sewn-hat' if hat_contact else 'upper-118-cloth-v2-sewn' if sewn else 'upper-118-cloth-v2'
+if bending!=2:variant+='-bend-'+str(bending).replace('.','p')
+out=scope['CACHE']/variant;out.mkdir(exist_ok=True)
 roots={name:bpy.data.objects[name] for name in TARGETS}
 normal_material=next(m for m in bpy.data.materials if m.name.startswith('Original cloth with fine wrinkle normal'))
 receipt={'sourceRevision':'e3dd4e7','handoff':118,'sourceTags':'A: inferred original garment patterns/colour and Blender cloth simulation, no image pixels','simulation':[],'retainedHardware':{},'photographicAcceptance':False}
@@ -93,7 +100,7 @@ def panel(name,root,nu,nv,position,pin,colour,collision=False):
 h=roots['UD_CoatRail_Haori']; z=upper.ZF+1.46;yc=2.185
 if sewn:
     from haori_sewn import build as build_sewn_haori
-    build_sewn_haori(h,upper.ZF,normal_material,receipt,hat_collision=hat_contact)
+    build_sewn_haori(h,upper.ZF,normal_material,receipt,hat_collision=hat_contact,rail_collision=rail_contact,bending_stiffness=bending)
 else:
     for label,x,offset,width,colour in [('back',.255,-.23,.46,(38,44,66)),('frontL',.325,-.23,.205,(38,44,66)),('frontR',.325,.025,.205,(38,44,66))]:
         panel('Haori_'+label,h,8 if label=='back' else 4,16,

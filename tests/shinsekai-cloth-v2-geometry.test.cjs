@@ -18,7 +18,7 @@ function hardware(asset,node){
  }
  return result.sort();
 }
-for(const file of ['upper-cloth-v2.glb','upper-cloth-v2-sewn.glb','upper-cloth-v2-sewn-hat.glb']){
+for(const file of ['upper-cloth-v2.glb','upper-cloth-v2-sewn.glb','upper-cloth-v2-sewn-hat.glb','upper-cloth-v2-sewn-rail.glb']){
 test(file+' retains source hardware triangles, UV0 and colours exactly',()=>{
  const source=h.read(path.join(folder,'upper-cloth.glb')),v2=h.read(path.join(folder,file));
  let total=0;
@@ -54,7 +54,7 @@ test(file+' fabric bodies and rolled winding have closed exported surfaces',()=>
 });
 }
 
-for(const file of ['upper-cloth-v2-sewn.glb','upper-cloth-v2-sewn-hat.glb']){
+for(const file of ['upper-cloth-v2-sewn.glb','upper-cloth-v2-sewn-hat.glb','upper-cloth-v2-sewn-rail.glb']){
 test(file+' is one connected exported garment with attached sleeves and collar',()=>{
  const a=h.read(path.join(folder,file));
  const nodes=a.json.nodes.filter(n=>n.mesh!==undefined&&n.name.startsWith('Haori_'));

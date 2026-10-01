@@ -65,3 +65,19 @@ boundaries; existing cloth/interior Blender4.5.10 scene persistence passed,
 not a full shader/keyframe/export/visual certificate. Next garment silhouette/
 post occlusion, pins/hardware/contact preserved. No Claude calls/review requests
 or new heading; review deferred through21:45JST.
+
+2026-10-01 — Haori118 exported neighbour audit found oldpost164/rail166 surface
+crossings despite hat0. Full508rail+252hat+10boundedpost collider and initial
+right sleeve/shoulder clearance, then2.4mm collision distance/quality6, leave
+initial0/exportedpost+rail+hat0. Fixedpins0/.600338mm;2364hardware POS/UV0/RGB
+triangles exact, sixclosedbodies/onehaori;7456tri/max149398,validator0/0/14.
+Native contact/bending2 and0.6 near/context compared;0.2 rejected post9/rail23
+before rendering. Retain optionalclothrail bending0.6, SHA7240ebf2,3,473,404B.
+Both1280x720 backends base/dream/save/far cloth/interior/dream empty/errors0,
+full303tests. Source unchanged after scoped Blender4.5.10 scene save/reopen.
+Nine privatePNGs/receipt; two actual trials gives26art/23hybrid; technical contact
+iterations/0.2 are excluded. Flat sleeves remain; no visual/historical/mounting/
+whole-room/continuous/qualified1080p approval. Next initial sleeve rest shape
+with pins/hardware/contact/lighting held, no further bending-only tuning.
+caf90e3 exactWorkersSUCCESS. No Claude model/agent/review/acknowledgement call,
+no new heading; review packet remains deferred through21:45JST.

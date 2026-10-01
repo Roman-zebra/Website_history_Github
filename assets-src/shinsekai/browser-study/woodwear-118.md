@@ -70,7 +70,9 @@ errors0. WebGL combined/control mean absolute RGB differences are
 [0.06851,0.05677,0.04655]/255. Dream captures at counter(WebGPU) and upper-window
 (WebGL) are lifecycle evidence, not matched pixel comparisons. Cold combined
 load/first-submit: WebGPU4596.2/3980.8ms, WebGL1886.8/8823.5ms; WebGL control
-2820.3/24654.4ms. These are readiness, not FPS. CSS1920×863/buffer1280×720.
+2820.3/24654.4ms. These are readiness, not FPS. Buffer1280×720; the earlier
+1920×863 label denotes the browser viewport. With this page's fixed16:9 CSS,
+the canvas display is1534.21875×863, as measured in the subsequent cloth check.
 Far retires active interior/material references; exterior LOD caches remain
 until page cleanup. Eleven fresh direct PNGs, exact source hashes and scoped
 results are in the private receipt. Three actually inspected diagnostic material

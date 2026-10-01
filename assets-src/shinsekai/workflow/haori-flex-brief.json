@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "roundId": "haori-flex-118-20261001",
+  "status": "contact_and_bounded_bending_comparison_complete",
+  "subject": "Connected haori cloth simulation",
+  "baseline": {
+    "contextCommit": "caf90e359a5a23eec52ac80452202679dc86661d",
+    "glbSha256": "e3da5405d002a9bfc25e4a0e0ac217558c1ea944458aa0370668ebe0179d69a2"
+  },
+  "intendedResult": "Make the shoulder and sleeve read as flexible hanging cloth while retaining the established source placement and supports.",
+  "hypothesis": "Bending stiffness2 may keep the lightweight connected panels too broad and planar. Compare lower bending stiffness with all other simulation settings fixed before changing the pattern, colliders or light.",
+  "coordinates": {
+    "unit": "metre",
+    "authoring": "Blender Z-up",
+    "runtime": "glTF Y-up",
+    "origin": "Retained source111 root",
+    "geometryStatus": "Original inferred garment, not surveyed historical clothing"
+  },
+  "singleVariable": {
+    "name": "bending_stiffness",
+    "baseline": 2,
+    "candidates": [
+      0.6,
+      0.2
+    ],
+    "status": "inferred simulation settings, not measured fabric properties"
+  },
+  "preserve": [
+    "two peg pins",
+    "retained source2364 hardware triangles and root transforms",
+    "252 hat and200 peg collider triangles",
+    "initial hat-clearance field",
+    "mass0.008",
+    "air damping5",
+    "tension/compression60",
+    "shear40",
+    "32frames/quality10",
+    "1.2mm fabric",
+    "mesh topology and vertex colours",
+    "runtime wrinkle/sheens/light/camera"
+  ],
+  "references": [
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/physics/cloth/settings/shape.html",
+      "readAt": "2026-10-01",
+      "access": "official HTML fetched locally; web reader failed402",
+      "claimSupported": "Pin group weights constrain cloth; initial geometry normally defines the rest state. Our shared seam vertices are topology, not sewing springs."
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/physics/cloth/settings/collisions.html",
+      "readAt": "2026-10-01",
+      "access": "official HTML fetched and read locally",
+      "claimSupported": "Collider mesh physics and cloth collisions must both be enabled. Larger distance can reduce clipping but can also cause visible floating; inspect the result."
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/physics/cloth/settings/physical_properties.html",
+      "readAt": "2026-10-01",
+      "access": "official4.5 HTML fetched/read locally",
+      "claimSupported": "Bending affects fold scale; mass/tension/compression/shear are separate parameters held fixed in this comparison."
+    }
+  ],
+  "reusableLessons": [
+    "Check initial and exported contacts; collider alone previously failed.",
+    "Valid GLB does not accept silhouette; inspect direct near/context images.",
+    "Preserve current output timestamp/hash before repeating work."
+  ],
+  "comparison": {
+    "closeView": "hero-haori",
+    "contextView": "upper-window",
+    "buffer": [
+      1280,
+      720
+    ],
+    "query": "clothlook with matched cloth variant; no AO/daylight/wood variation",
+    "cameraLightExposureFixed": true
+  },
+  "verification": [
+    "fixed pins/support distances",
+    "retained hardware exact",
+    "closed connected garment",
+    "exported hat and actual neighbouring post/structure contacts",
+    "validator",
+    "both backends base/dream/save/far for retained candidate",
+    "appropriate tests/build"
+  ],
+  "decision": {
+    "retain": "optional rail-contact candidate bending0.6",
+    "visualAcceptance": false,
+    "nextStep": "Initial sleeve rest-shape comparison; no further bending-only tuning."
+  },
+  "cost": {
+    "paidToolsOrApisAllowed": false,
+    "claudeReviewRequested": false,
+    "newAgents": false
+  },
+  "contactFinding": {
+    "postBoundsMetres": [
+      [
+        0.18,
+        2.45,
+        3.461
+      ],
+      [
+        0.3,
+        2.57,
+        5.854
+      ]
+    ],
+    "baselineExportedStructurePairs": 164,
+    "baselineExportedRailPairs": 166,
+    "firstFullColliderTrialStructurePairs": 0,
+    "firstFullColliderTrialRailPairs": 203,
+    "increasedDistanceTrialStructurePairs": 0,
+    "increasedDistanceTrialRailPairs": 163,
+    "initialMidsurfacePairs": 66,
+    "decision": "Initial shoulder crosses peg shafts. Correct that before comparing bending; no candidate promoted yet.",
+    "correctedShoulderInitialPairs": 0,
+    "correctedShoulderCollisionQuality2FinalPegPairs": 10,
+    "correctedShoulderCollisionQuality6FinalPegPairs": 0,
+    "finalStructurePairs": 0,
+    "finalHatPairs": 0
+  },
+  "contactCandidate": {
+    "railColliderTriangles": 508,
+    "hatColliderTriangles": 252,
+    "boundedStructureColliderTriangles": 10,
+    "collisionDistanceMetres": 0.0024,
+    "collisionQuality": 6,
+    "rightSleeveInitialShiftMaxMetres": 0.07,
+    "shoulderInitialShiftMaxMetres": 0.065,
+    "pinsMovedMetres": 0,
+    "pinHardwareDistanceMetres": 0.0006003379821777344,
+    "glbSha256": "614e5f87b0f4226da932e23b2f246f6908d668cfe02abfaef87fb9c4c2104af8"
+  },
+  "sourceHashes": {
+    "assets-src/shinsekai/eval-building-a/hybrid/haori_sewn.py": "16ba45b7c539ad15a59587c4cc45285f00bc0a6afa370ad04b85eff6cfc14f31",
+    "assets-src/shinsekai/eval-building-a/hybrid/build-cloth-v2.py": "8c93d80fe605640480f8a3b02d6d47d633b2df9cc56a30796e7278fd2d724e4d",
+    "assets-src/shinsekai/eval-building-a/hybrid/inputs/upper/build-upper-dream.py": "794f2f436e7e562d861c2af9c0af5f0fa45efd55c269a2db50402d8a47239959",
+    "assets-src/shinsekai/browser-study/building-a.mjs": "f66e8cb603de814354fcb588df0ba23e4ed8754a3bbcb8466b2b93edc9504896",
+    "assets-src/shinsekai/eval-building-a/hybrid/runtime/upper-cloth-v2-sewn-rail.glb": "7240ebf2851bc40a80e5bb2fc95644b2c4f372a08935a597d8c04f730f0b0f30"
+  },
+  "boundedBendingResults": {
+    "2": "contact0; native near/context, shoulder partly exits close frame",
+    "0.6": "contact0; native near/context +both base/dream/save/far; shoulders in frame but planar sleeves remain",
+    "0.2": "validator/topology pass; post9/rail23 intersections, rejected before rendering"
+  },
+  "verificationResults": {
+    "initialColliderMidsurfacePairs": 0,
+    "exportedPostRailHatPairs": 0,
+    "hardwarePositionUV0ColourTrianglesExact": 2364,
+    "pinMovement": 0,
+    "pinHardwareDistanceMetres": 0.0006003379821777344,
+    "replacementTriangles": 7456,
+    "activeMaximumTriangles": 149398,
+    "validator": [
+      0,
+      0,
+      14
+    ],
+    "fullBuildTests": 303,
+    "sceneReopenReceipt": "research-cache/scene-reopen-20261001-haori-rail/receipt.json"
+  },
+  "nativeReceipt": "private research-cache/look-dev/haori-rail-118/receipt.json"
+}

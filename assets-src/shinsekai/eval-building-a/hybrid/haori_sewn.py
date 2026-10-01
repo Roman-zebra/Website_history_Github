@@ -9,7 +9,9 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 
-def build(root,zf,material,receipt,hat_collision=False):
+def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bending_stiffness=2):
+    assert not rail_collision or hat_collision,'Rail contact requires the retained hat comparison'
+    assert math.isfinite(bending_stiffness) and bending_stiffness>0,'Invalid bending stiffness'
     vertices=[];faces=[];colours=[]
     def vertex(p):
         vertices.append(tuple(p));return len(vertices)-1
@@ -93,6 +95,19 @@ def build(root,zf,material,receipt,hat_collision=False):
             shift=.12*yWeight*zWeight
             vertices[i]=(p[0]+shift,p[1],p[2]);initialHatShift=max(initialHatShift,shift)
 
+    initialRailShift=0.0
+    if rail_collision:
+        # Source post occupies x.18-.30/y2.45-2.57. Clear its initial sleeve
+        # overlap before adding its collision faces. The back layer initially
+        # crosses the peg shafts below their heads; bring the shoulder forward
+        # before settlement. Fixed pins stay exact and retain their head contact.
+        for i,p in enumerate(vertices):
+            if i in pinned:continue
+            post=.07*max(0.0,min(1.0,(p[1]-2.37)/.06))
+            shoulder=max(0.0,min(1.0,(p[2]-(zf+1.44-.08))/.06))
+            shift=max(post,.065*shoulder)
+            vertices[i]=(p[0]+shift,p[1],p[2]);initialRailShift=max(initialRailShift,shift)
+
     mesh=bpy.data.meshes.new('Haori connected pattern');mesh.from_pydata(vertices,[],faces);mesh.update()
     mesh.materials.append(material)
     uv=mesh.uv_layers.new(name='UVMap')
@@ -118,7 +133,7 @@ def build(root,zf,material,receipt,hat_collision=False):
     # A neighbouring hat is behind the garment in this fixed arrangement.
     # The default keeps collision on two actual support pegs. The opt-in hat
     # trial uses the same stiffness/mass and retains source hardware unchanged.
-    root.data.calc_loop_triangles();supportFaces=[];hatFaces=[]
+    root.data.calc_loop_triangles();supportFaces=[];hatFaces=[];railFaces=[]
     for tri in root.data.loop_triangles:
         points=[root.data.vertices[i].co for i in tri.vertices]
         centre=sum(points,Vector())/3
@@ -126,18 +141,49 @@ def build(root,zf,material,receipt,hat_collision=False):
             supportFaces.append(tuple(tri.vertices))
         if hat_collision and root.data.materials[tri.material_index].name.startswith('UD_wood_raw'):
             hatFaces.append(tuple(tri.vertices))
+        if rail_collision and root.data.materials[tri.material_index].name=='UD_wood':
+            railFaces.append(tuple(tri.vertices))
     assert supportFaces,'Missing retained peg collider'
     if hat_collision:assert hatFaces,'Missing retained hat collider'
+    supportVertices=[v.co.copy() for v in root.data.vertices]
+    colliderFaces=(railFaces if rail_collision else supportFaces)+hatFaces
+    structureFaces=0
+    if rail_collision:
+        bpy.context.view_layer.update()
+        structure=bpy.data.objects['BldgA_Interior_Structure'];structure.data.calc_loop_triangles()
+        transform=root.matrix_world.inverted()@structure.matrix_world
+        lo=[min(p[k] for p in vertices)-.02 for k in range(3)];hi=[max(p[k] for p in vertices)+.02 for k in range(3)]
+        for tri in structure.data.loop_triangles:
+            if not structure.data.materials[tri.material_index].name.startswith('M_Timber_Natural'):continue
+            points=[transform@structure.data.vertices[i].co for i in tri.vertices]
+            if any(max(p[k] for p in points)<lo[k] or min(p[k] for p in points)>hi[k] for k in range(3)):continue
+            start=len(supportVertices);supportVertices.extend(points);colliderFaces.append((start,start+1,start+2));structureFaces+=1
+        assert railFaces and structureFaces,'Missing retained rail or neighbouring post'
     supportMesh=bpy.data.meshes.new('Private retained peg collision')
-    supportMesh.from_pydata([v.co for v in root.data.vertices],[],supportFaces+hatFaces);supportMesh.update()
+    supportMesh.from_pydata(supportVertices,[],colliderFaces);supportMesh.update()
+    initialColliderPairs=None;initialByCollider={}
+    if rail_collision:
+        initialTree=BVHTree.FromPolygons([Vector(p) for p in vertices],faces)
+        colliderTree=BVHTree.FromPolygons(supportVertices,colliderFaces,all_triangles=True)
+        initialPairs=initialTree.overlap(colliderTree);initialColliderPairs=len(initialPairs)
+        for i,j in initialPairs:
+            if j>=len(railFaces)+len(hatFaces):label='structure post'
+            elif j>=len(railFaces):label='hat'
+            else:
+                y=sum(supportVertices[k].y for k in colliderFaces[j])/3
+                label='peg '+str(min([1.76,1.97,2.18,2.32],key=lambda p:abs(y-p)))
+            initialByCollider[label]=initialByCollider.get(label,0)+1
     support=bpy.data.objects.new('Private retained peg collision',supportMesh);scene=bpy.context.scene
     scene.collection.objects.link(support);support.parent=root;support.modifiers.new('Support collision','COLLISION')
     support.collision.thickness_outer=.0006;support.collision.thickness_inner=.0006
     modifier=obj.modifiers.new('Connected garment settlement','CLOTH')
     s=modifier.settings;s.quality=10;s.mass=.008;s.air_damping=5
-    s.tension_stiffness=60;s.compression_stiffness=60;s.shear_stiffness=40;s.bending_stiffness=2
+    s.tension_stiffness=60;s.compression_stiffness=60;s.shear_stiffness=40;s.bending_stiffness=bending_stiffness
     s.vertex_group_mass=group.name;s.pin_stiffness=1
-    modifier.collision_settings.use_collision=True;modifier.collision_settings.distance_min=.0006
+    collisionDistance=.0024 if rail_collision else .0006
+    modifier.collision_settings.use_collision=True;modifier.collision_settings.distance_min=collisionDistance
+    if rail_collision:modifier.collision_settings.collision_quality=6
+    collisionQuality=modifier.collision_settings.collision_quality
     modifier.collision_settings.use_self_collision=True;modifier.collision_settings.self_distance_min=.002
     modifier.point_cache.frame_start=1;modifier.point_cache.frame_end=32
     scene=bpy.context.scene
@@ -177,10 +223,11 @@ def build(root,zf,material,receipt,hat_collision=False):
     record=dict(name=obj.name,frames=32,quality=10,pinnedVertices=len(pinned),vertices=len(vertices),
         maxDisplacementMetres=maxShift,closedBodyThickness=.0012,connectedComponents=components,
         allThickenedEdgesHaveTwoFaces=True,pinDisplacementMetres=pinError,pinHardwareDistancesMetres=contact,
-        settings=dict(mass=.008,airDamping=5,tension=60,compression=60,shear=40,bending=2),
-        colliderTriangles=len(supportFaces)+len(hatFaces),
+        settings=dict(mass=.008,airDamping=5,tension=60,compression=60,shear=40,bending=bending_stiffness),
+        colliderTriangles=len(colliderFaces),
         supportScope=('Two fixed attachment points, retained pegs and hat surface; chin cord excluded; discrete final surface check only' if hat_collision else 'Two fixed attachment points and retained-peg collider only; neighbouring hat excluded; not whole garment collision or physical mounting certification'))
     if hat_collision:record.update(hatColliderTriangles=len(hatFaces),finalHatSurfaceTriangleOverlaps=hatOverlaps,initialHatClearanceShiftMetres=initialHatShift)
+    if rail_collision:record.update(railColliderTriangles=len(railFaces),structureColliderTriangles=structureFaces,initialRailClearanceShiftMetres=initialRailShift,initialColliderMidsurfacePairs=initialColliderPairs,initialColliderPairsByPart=initialByCollider,collisionDistanceMetres=collisionDistance,collisionQuality=collisionQuality,supportScope='Retained rail/four pegs/hat and bounded neighbouring timber post; chin cord excluded. Final exported surface audit still required.')
     receipt['simulation'].append(record);receipt['connectedHaori']=record
     obj.select_set(False);scene.frame_set(1)
     print('SEWN_HAORI',record,flush=True)
