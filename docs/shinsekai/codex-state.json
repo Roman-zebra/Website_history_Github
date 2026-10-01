@@ -1,11 +1,11 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "Continue T6 from hall-stream-native-120.md: bounded portal/distance prefetch, one nearby resident cell, pending/resident resource accounting and distant/offscreen visibility before any near-quality reduction. Optional original-resolution hall assembly passed16 native PNGs/8pairs on WebGPU/WebGL2, near/context base/dream; 5pairs encoded exact, remaining3 WebGL2 max22pixels delta1. Both far unload and forced403 sibling cleanup pass. Full build330/330, lifecycle4/4. Full cell union16.60/16.69MB still fails transfer budget; no actual iPhone14 or production approval. One source WebGL2 cold compile47.47s, prefetch/compile latency unresolved. Keep all source geometry/images/AA, avoid holes/pop-in, hall entry repair separate and roof nearcontacts open. Latest6e1e93c exactWorkersSUCCESS14:46:37UTC verified; check next pushed checkpoint. TRIPO spend0, lastliveOct1 balance3200; Oct2 daily09JST check pending, no paid operation until verified. Material Maker CLI unverified; cloth7240/art26/hybrid23 unchanged, Goal ACTIVE/no agents/autoClaude.",
-  "updatedAt": "2026-10-01T15:17:52.337586+00:00",
+  "next": "PRIORITY Claude119: continue hall-exposure-claude119.md with a separately scoped directional-fill comparison. Source hall directional light_sun25954*.003=77.862 plus globalSun3/hemisphere1.2; exposure-only -1.25EV native4captures both backends reduces washout but still flat, not accepted. Then qualify local2200-2500K lamp distribution/GTAO/dark timber/floor. Next haori bamboo support+cord/sleeve sag1/4-1/3/body3-5folds10-25mm/collar8-12mm/AO/roughness>=.85; Building A upper four details. Reply through requests-to-claude.md promptly for implemented verified items, distinguish receipt/completion, no premature review. Handoff119 mirrored exactly, observed119 but processed118 remains last closed; preserve latest user priority in AGENTS. In-flight hall-prefetch-001 is safely verified: one pending/resident room, native4capture source comparisons (3exact/GLnear17pixels delta1), approach reuse, variant replacement and far0 both backends;334build/8lifecycle tests. Full union still16.60/16.69MB fails transfer; no iPhone14 measured or production approval. 8986cbc exactWorkersSUCCESS15:22:15UTC verified; check newest pushed checkpoint next. TRIPO spend0, lastliveOct1 balance3200, Oct2 daily09 pending; no paid operation. Cloth7240/BuildingAart26/hybrid23 unchanged; hall exposure trial1, GoalACTIVE/no agents/autoClaude, source graphics/AA retained.",
+  "updatedAt": "2026-10-01T15:56:22.574087+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
-  "observedClaudeHandoff": 118,
+  "observedClaudeHandoff": 119,
   "resumedInThread": "01a0f756-8ab2-7111-a287-46e329330319",
   "coordination": {
     "heartbeat": "jta ACTIVE daily09:00JST for TRIPO balance/consumption/plan through2026-10-31. Continuous development uses the ACTIVE Goal in this chat and continues after result messages without10-minute wait. SNS folder safety verified, wait gate released. No duplicate concurrent runs.",
@@ -68,9 +68,11 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 330,
+    "fullBuildTests": 334,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
-    "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json"
-  }
+    "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
+    "hallPrefetchNativeEvidence": "../research-cache/hall-prefetch-001/native-receipt.json"
+  },
+  "pendingClaudeRepairs": "119 received, not complete: source directional hall fill/local warm lamps/GTAO/timber/floor wear; haori visible support/sag/folds/collar/AO; upper earth-wall/tatami/cushions/shoji pools. See research/claude-handoff-119-status.md."
 }

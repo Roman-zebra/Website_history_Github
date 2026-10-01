@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "roundId": "hall-prefetch-001-20261002",
+  "status": "optional_native_verified",
+  "subject": "Prepare one full-quality hall near its study entrance without increasing simultaneous room residency",
+  "baseline": "8986cbc; original-resolution hall-stream-transport-002, frozen115 aa030cd",
+  "singleChange": "Distance-triggered network/decode prefetch and bounded one-slot reuse; no asset, material, light, AA or source camera change",
+  "sourceStatus": "Study entrance position and8m/12m hysteresis are inferred runtime settings, not measured historical dimensions",
+  "preserve": [
+    "complete atomic room attachment",
+    "original encoded textures",
+    "near geometry and silhouettes",
+    "source placement and light gain applied once",
+    "1280x720 source-comparison views"
+  ],
+  "costPolicy": {
+    "maxSlotsIncludingPending": 1,
+    "studyBytes": 20971520,
+    "studyCellTextureBytes": 134217728,
+    "phoneTransferPassed": false
+  },
+  "verification": [
+    "stale delayed loads cannot attach or overlap a replacement reservation",
+    "cached entrance load is reused once",
+    "variant switch releases before replacement",
+    "failure does not retry per frame",
+    "far exit and page disposal release resources",
+    "both native backends source-quality near/context captures"
+  ],
+  "defer": [
+    "actual phone measurement",
+    "production default",
+    "compile-time readiness improvement",
+    "portal occlusion and exterior visibility cuts",
+    "art/historical acceptance"
+  ],
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "results": {
+    "captures": 4,
+    "sourceQualityPreservedAtFixedViews": true,
+    "maxChannelDelta": 1,
+    "maxDifferentPixels": 17,
+    "nativeBackends": 2,
+    "oneReservedRoom": true,
+    "farReservedBytes": 0,
+    "fullBuildTests": 334,
+    "lifecycleTests": 8,
+    "actualPhoneMeasured": false,
+    "productionApproved": false
+  }
+}

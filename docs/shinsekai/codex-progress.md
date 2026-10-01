@@ -434,3 +434,34 @@ near quality/no holes/pop-in; entry repair separate, roof nearcontacts open.
 6e1e93c exactWorkersSUCCESS14:46:37UTC verified. TRIPO spend0, last liveOct1
 balance3200, Oct2 daily09JST observation pending. Cloth7240/art26/hybrid23
 unchanged; technical round, Goal ACTIVE, no agents or automatic Claude call.
+
+2026-10-02 — Claude119 received and prioritized. Repository mirror now includes
+the parent21:15 review (identical source SHA D7B8588A3DB97B5C4A21ECCEE88D515102E7AFF8F1B2F384B871FC37C677AC73).
+Receipt was missing; transport technical-study119 did not satisfy that review.
+Observed119, last closed/processed118; see research/claude-handoff-119-status.md.
+Haori support/sag/folds/collar/AO, hall light/AO/material wear and upper four
+details remain incomplete. User rule: prioritize Claude work, promptly reply
+through the agreed file after real implementation/verification, receipt != done.
+No new model/agent/review calls; existing usage/cadence preserved.
+
+In-flight prefetch121 safely completed: one complete pending/resident room,
+8/12m inferred entrance hysteresis, stale result retirement before replacement,
+full-room cost guard and cleanup uncertainty holds reservation. Native both
+backends approach outside-room prep, same-byte reuse on entry, variant release
+before replacement, far reservation0; healthy console0. Four original-source
+image pairs:3exact; GLnear17pixels delta1. Both source maps/AA/geometry retained,
+one-time gain survives re-entry. Full static334/334, eight lifecycle tests pass;
+unrelated generated outputs restored preserving parallel work. Lookup0-.3ms
+excludes compile/draw; transfer still fails and actual phone not measured.
+
+Claude119 hall exposure trial1: optionalhallexposure normalhall -1.25EV,
+source1.15→.4835; dream/exteriorEV0 restored. Four1280x720 native near/context
+PNGs on both backends, same geometry counts/no errors. Luma reduced, near detail
+retained, but uniform fill/bright floor still fail artistic criteria. Not done.
+Source audit finds light_sun25954*.003=77.862 plus globalSun3/hemisphere1.2.
+Next separate directional-fill/light distribution, then GTAO/timber/floor,
+haori and upper remaining repairs. See hall-exposure-claude119.md.
+Exposure-only addition after334 build was syntax/native checked, not another
+broad-build claim. BuildingAart26/hybrid23 and cloth7240 unchanged.
+8986cbc exactWorkersSUCCESS15:22:15UTC verified. TRIPO spend0/lastliveOct1
+3200/Oct2 daily09pending. GoalACTIVE, no premature119 completion message.

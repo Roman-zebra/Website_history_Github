@@ -2,6 +2,8 @@
 
 ## Shinsekai work
 
+2026-10-02 user instruction: prioritize actionable work requests from Claude over the general development backlog. Check the latest parent `claude-out/to-codex.md` at session start and checkpoints, record receipt separately from completion, and carry unfinished requests forward. Finish an in-flight operation safely before switching. Once each requested item is implemented and verified, promptly reply through `docs/shinsekai/requests-to-claude.md` with the handoff number, changes, validation, relevant artifact paths and remaining limitations; request review when needed using `review requested` and 2–3 named PNGs. Do not mark receipt as completion or wait for the user to remind you to reply. Preserve the user's latest review-frequency and usage constraints.
+
 At the start of each Shinsekai session, read `docs/shinsekai/codex-state.json` and `docs/shinsekai/TASKS.md`, then continue from `next`. Read `docs/shinsekai/PLAN.md` for the project baseline and check `docs/shinsekai/research/` for new Claude handoffs. Keep the parent workspace's `PLAN.md` and `claude-out/` read-only.
 
 Before asset or material revisions, follow `docs/shinsekai/research/vibe-modeling-method.md`: record a scoped brief, check official sources for the pinned tool versions, and compare one factor at a time with a fixed camera and light.

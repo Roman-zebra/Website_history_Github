@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-hall-exposure-001-20261002",
+  "status": "native_compared_artistic_criteria_unmet",
+  "subject": "First isolated response to Claude119 overexposed flat hall",
+  "baseline": "source115 aa030cd, desktop1280x720, source geometry and materials",
+  "singleChange": "Normal hall exposure only, minus1.25EV from source1.15; dream/exterior exposure unchanged",
+  "inferredSetting": true,
+  "preserve": [
+    "encoded images and geometry",
+    "AA and source fixed cameras",
+    "source material/light parameters",
+    "dream and exterior exposure"
+  ],
+  "comparison": {
+    "views": [
+      "hall",
+      "hallDesk"
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "buffer": [
+      1280,
+      720
+    ]
+  },
+  "nextSeparateFactors": [
+    "2200\u20132500K lamp colour and reduced depth fill",
+    "GTAO",
+    "dark low-saturation timber",
+    "floor roughness and walking/edge wear",
+    "haori and upper-room remaining repairs"
+  ],
+  "acceptance": "Reduce washed-out hall without losing near details; entire119 not complete until all declared visual requirements are verified",
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "results": {
+    "captures": 4,
+    "normalHallEV": -1.25,
+    "dreamExteriorEV": 0,
+    "nativeBackends": 2,
+    "sourceDirectionalStudyIntensity": 77.862,
+    "claudeHandoffComplete": false,
+    "visualAcceptance": false
+  }
+}
