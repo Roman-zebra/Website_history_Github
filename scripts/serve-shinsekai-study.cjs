@@ -9,6 +9,8 @@ const towerReview = path.resolve(root, '../research-cache/tower-base-113-runtime
 const towerNames = new Set(['manifest.json', ...[0,1,2].map(n=>`TB_EXT_LOD${n}.glb`), ...['hall','stair','lift','cinema'].flatMap(n=>[`cell_${n}.glb`,`cell_${n}_dream.glb`])]);
 const tower115Review=path.resolve(root,'../research-cache/tower-base-115-runtime');
 const tower115Names=new Set([...towerNames,...[0,1,2].map(n=>`TW_LOD${n}.glb`)]);
+const towerMobileReview=path.resolve(root,'../research-cache/tower-mobile-transport-001');
+const towerMobileNames=new Set([...tower115Names,'phone-manifest.json']);
 const cinemaProposal=path.resolve(root,'../research-cache/cinema-115-proposal');
 const cinemaNames=new Set(['lossless-summary.json','cell_cinema-lossless-meshopt.glb','cell_cinema_dream-lossless-meshopt.glb']);
 const hallProposal=path.resolve(root,'../research-cache/hall-115-proposal');
@@ -45,10 +47,12 @@ const server = http.createServer((request, response) => {
   const liftName=pathname.startsWith('/study/lift-115-proposal/')?pathname.slice('/study/lift-115-proposal/'.length):null;
   const liftAllowed=liftNames.has(liftName);
   const reviewPrefix=['113','115'].find(n=>pathname.startsWith('/study/tower-base-'+n+'/'));
+  const mobileName=pathname.startsWith('/study/tower-mobile-115/')?pathname.slice('/study/tower-mobile-115/'.length):null;
+  const mobileAllowed=towerMobileNames.has(mobileName);
   const reviewName=reviewPrefix?pathname.slice(('/study/tower-base-'+reviewPrefix+'/').length):null;
-  const reviewRoot=tripoMobileAllowed?tripoMobileReview:tripoAllowed?tripoReview:liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
-  const reviewAllowed=tripoMobileAllowed||tripoAllowed||liftAllowed||hallAllowed||cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
-  const file = reviewAllowed?path.resolve(reviewRoot,tripoMobileAllowed?tripoMobileName:tripoAllowed?tripoName:liftAllowed?liftName:hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
+  const reviewRoot=mobileAllowed?towerMobileReview:tripoMobileAllowed?tripoMobileReview:tripoAllowed?tripoReview:liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
+  const reviewAllowed=mobileAllowed||tripoMobileAllowed||tripoAllowed||liftAllowed||hallAllowed||cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
+  const file = reviewAllowed?path.resolve(reviewRoot,mobileAllowed?mobileName:tripoMobileAllowed?tripoMobileName:tripoAllowed?tripoName:liftAllowed?liftName:hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
   // Check the resolved path as well as the URL, including encoded traversal.
   const relative = `/${path.relative(root, file).split(path.sep).join('/')}`;
   if (reviewAllowed?!file.startsWith(`${reviewRoot}${path.sep}`):(!file.startsWith(`${root}${path.sep}`) || !allowed(relative))) { response.writeHead(403).end(); return; }

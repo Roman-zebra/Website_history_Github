@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "roundId": "tower-mobile-texture-001-20261001",
+  "status": "retained_private_technical_candidate",
+  "baseline": "frozen115 aa030cd private split assets; manifest hashes verified by tower-mobile-audit-001",
+  "subject": "Phone texture/transfer derivative for existing tower115 geometry",
+  "intendedResult": "Reduce phone texture residency and transfer while retaining exact original geometry and animation",
+  "scope": {
+    "change": "image resolution only; separate lossless transport preserves attributes/animation/images and triangle order/winding, allowing cyclic index rotation",
+    "preserve": [
+      "source files",
+      "all non-image bufferView bytes",
+      "node/material/UV/index/normal/animation semantics",
+      "existing room placement and backing masks",
+      "desktop route"
+    ],
+    "defer": [
+      "geometry reduction",
+      "phone FPS acceptance",
+      "history or art approval"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre in authored source scenario",
+    "origin": "unchanged source",
+    "system": "glTF Y-up"
+  },
+  "references": [
+    {
+      "url": "https://pillow.readthedocs.io/en/stable/reference/Image.html",
+      "checkedAt": "2026-10-01",
+      "supports": "Pillow12.3.0 Image.resize LANCZOS, explicit dimensions and format"
+    },
+    {
+      "url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+      "checkedAt": "2026-10-01",
+      "supports": "embedded image bufferView/mimeType, aligned bufferViews; image views cannot share accessor regions"
+    }
+  ],
+  "lesson": "GLB import/export can change unrelated attributes: repack raw original non-image views instead of importing/re-exporting geometry",
+  "comparison": {
+    "oneChangedCause": "image resolution512px maximum; keep small images unchanged",
+    "fixedCameras": [
+      "north",
+      "hall",
+      "roof landing",
+      "lift",
+      "cinema"
+    ],
+    "resolution": [
+      1280,
+      720
+    ],
+    "lighting": "unchanged source viewer",
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ]
+  },
+  "inputEvidence": {
+    "wingTexture": "4096px/85.33MiB RGBA+mips estimate even at sourceLOD2",
+    "cellTextureEstimatesMiB": "68 to96 before wing texture",
+    "sourceBytes": "8.2 to27.3MB per room"
+  },
+  "targets": {
+    "textureEdge": 512,
+    "cellTransferBytes": 4194304,
+    "initialTransferBytes": 8388608,
+    "estimatedLiveTextureBytes": 134217728
+  },
+  "verification": [
+    "source hashes before/after",
+    "exact non-image views and normalized JSON comparison",
+    "lossless Meshopt decode: attribute/animation/image bytes exact; triangle order and winding exact, cyclic triangle-index rotation allowed",
+    "validator per derivative",
+    "actual native load/room switch/dream/retirement before exposing optional phone route"
+  ],
+  "cost": {
+    "additionalStudioCredits": 0,
+    "paidToolsOrApisAllowed": false
+  },
+  "coordination": {
+    "extraClaudeCalls": false,
+    "newAgents": false
+  },
+  "results": {
+    "additionalStudioCredits": 0,
+    "fullBuildTests": 323,
+    "sourceUnchanged": true,
+    "parts": 14,
+    "actualDeviceMeasured": false,
+    "validatedFiles": 28,
+    "errors": 0,
+    "warnings": 0,
+    "nativePhoneProfile": "both desktop backends north/stair base/dream/head/blocked hall/far720x324",
+    "productionApproved": false,
+    "fixedTextureComparison": "hall1280x720 source/512px only; other cameras pending"
+  }
+}

@@ -6,24 +6,27 @@ import {repeatedMeshInstances} from './repeated-mesh-instances.mjs';
 import {createTowerBalusterInstances} from './tower-baluster-instances.mjs';
 import {createTowerGatePlayback} from './tower-gate-playback.mjs';
 import {createTowerPlaceholderMask} from './tower-placeholder-mask.mjs';
+import {checkPhoneAssembly,phoneBuffer,PHONE_BUDGET} from './tower-mobile-profile.mjs';
 const canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const view=document.querySelector('#viewpoint'),dream=document.querySelector('#dream'),measure=document.querySelector('#measure'),capture=document.querySelector('#capture');
 const sliders={car:document.querySelector('#car'),landing:document.querySelector('#landing')};
 const playButtons={car:document.querySelector('#carPlay'),landing:document.querySelector('#landingPlay')};
 const review=document.documentElement.dataset.towerReview==='115'?'115':'113';
 if(review==='115')for(const key of ['wingW','wingE']){sliders[key]=document.querySelector('#'+key);playButtons[key]=document.querySelector('#'+key+'Play');}
-const query=new URLSearchParams(location.search),width=query.get('size')==='1080'?1920:1280,height=width*9/16;
-const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:query.has('webgl')});renderer.setPixelRatio(1);renderer.setSize(width,height,false);renderer.toneMapping=THREE.AgXToneMapping;renderer.toneMappingExposure=1.15;
+const query=new URLSearchParams(location.search),mobile=review==='115'&&(query.has('mobile')||(matchMedia('(pointer:coarse)').matches&&Math.min(innerWidth,innerHeight)<=600)),mobileTextures=review==='115'&&(mobile||query.has('mobiletextures'));
+let [width,height]=mobile?phoneBuffer(innerWidth,innerHeight):[query.get('size')==='1080'?1920:1280,query.get('size')==='1080'?1080:720];
+const renderer=new THREE.WebGPURenderer({canvas,antialias:!mobile,forceWebGL:query.has('webgl')});renderer.setPixelRatio(1);renderer.setSize(width,height,false);renderer.toneMapping=THREE.AgXToneMapping;renderer.toneMappingExposure=1.15;
+canvas.dataset.profile=mobile?'mobile':mobileTextures?'texture-comparison':'desktop';
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x99a9b5);scene.add(new THREE.HemisphereLight(0xdce7f1,0x72614e,1.2));
 const sun=new THREE.DirectionalLight(0xffe2ba,3);sun.position.set(-20,40,30);scene.add(sun);
 const camera=new THREE.PerspectiveCamera(50,width/height,.05,350),controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.maxDistance=200;
-const loader=new GLTFLoader(),base='/study/tower-base-'+review+'/';
-const cinemaProposal=review==='115'&&query.has('cinemaproposal');
-const hallProposal=review==='115'&&query.has('hallproposal'),hallBase='/study/hall-115-proposal/';
-const liftProposal=review==='115'&&query.has('liftproposal'),liftBase='/study/lift-115-proposal/';
+const loader=new GLTFLoader(),base=mobileTextures?'/study/tower-mobile-115/':'/study/tower-base-'+review+'/';
+const cinemaProposal=!mobileTextures&&review==='115'&&query.has('cinemaproposal');
+const hallProposal=!mobileTextures&&review==='115'&&query.has('hallproposal'),hallBase='/study/hall-115-proposal/';
+const liftProposal=!mobileTextures&&review==='115'&&query.has('liftproposal'),liftBase='/study/lift-115-proposal/';
 const proposalBase='/study/cinema-115-proposal/';
 let proposalReceipt,hallReceipt,liftReceipt;
-if(cinemaProposal)loader.setMeshoptDecoder((await import('three/addons/libs/meshopt_decoder.module.js')).MeshoptDecoder);
+if(cinemaProposal||mobileTextures)loader.setMeshoptDecoder((await import('three/addons/libs/meshopt_decoder.module.js')).MeshoptDecoder);
 const placement={hall:[-14.05,.15,8.6],stair:[-14.05,.15,12.55],lift:[-2.2,15.15,2.2],cinema:[-14.95,.15,-8.55]};
 const views={north:{pos:[0,10,-48],target:[0,11,0]},hall:{cell:'hall',pos:[-12.275,1.65,6.9],target:[-12.275,1.8,-3]},stair:{cell:'stair',pos:[-11.03,1.55,12.03],target:[-12.6,3,10.8]},head:{cell:'stair',pos:[-11.15,16.65,9.6],target:[-12.7,15.8,11.8]},lift:{cell:'lift',pos:[-1.2,16.7,1.8],target:[.3,16.8,-.7]},cinema:{cell:'cinema',pos:[-20,1.8,0],target:[-46,3,0]}};
 if(review==='115')Object.assign(views,{north:{pos:[0,17,-85],target:[0,8,0]},far:{lod:2,pos:[0,30,-145],target:[0,8,0]},wingW:{cell:'hall',pos:[-11.4,1.65,-.3],target:[-17,1.65,-.3]},wingE:{pos:[12,1.65,.3],target:[18,1.65,.3]},exit:{cell:'cinema',pos:[-29.45,1.65,11.7],target:[-29.45,1.65,5.5]}});
@@ -31,6 +34,7 @@ if(cinemaProposal){views.projector={cell:'cinema',pos:[-16.05,5.95,-1.65],target
 if(liftProposal){views.liftThreshold={cell:'lift',pos:[0,15.9,1.75],target:[0,15.2,.45]};const option=document.createElement('option');option.value='liftThreshold';option.textContent='昇降機入口の敷居';view.append(option);}
 let exterior,wings,manifest,placeholderMask,activeLOD=0,current=null,epoch=0,frame=null,disposed=false,preparing=false,ready=false,captureWait=null,pending=Promise.resolve(),initializing;
 let frames=0,lastTime=null,mixers={};const intervals=[];
+let blockedCell=false;
 const fail=error=>{if(disposed)return;canvas.dataset.error=error.message;canvas.dataset.ready='false';ready=false;status.textContent='検証失敗：'+error.message;console.error(error);};
 function release(model){if(!model)return;const gs=new Set(),ms=new Set(),ts=new Set();model.scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();if(o.geometry)gs.add(o.geometry);for(const m of [].concat(o.material??[]))ms.add(m);});for(const m of ms){for(const t of Object.values(m))if(t?.isTexture)ts.add(t);m.dispose();}for(const t of ts){t.dispose();t.source?.data?.close?.();}gs.forEach(g=>g.dispose());}
 function request(){if(!disposed&&ready&&!preparing&&!document.hidden&&frame===null)frame=requestAnimationFrame(draw);}
@@ -55,11 +59,13 @@ async function select(){
  const token=++epoch;ready=false;canvas.dataset.ready='false';intervals.length=0;cancel();locked(true);status.textContent='部屋を準備中…';
  // Serialization prevents releasing geometry while compileAsync still uses it.
  pending=pending.catch(()=>{}).then(async()=>{
-  if(disposed||token!==epoch)return;clearCell();const config=views[view.value];if(!await assembly(config.lod??0,token))return;camera.position.fromArray(config.pos);controls.target.fromArray(config.target);controls.update();
-  if(config.cell){const name='cell_'+config.cell+(dream.checked?'_dream':''),candidate=cinemaProposal&&config.cell==='cinema',hallCandidate=hallProposal&&config.cell==='hall',liftCandidate=liftProposal&&config.cell==='lift',start=performance.now(),model=await loader.loadAsync(candidate?proposalBase+name+'-lossless-meshopt.glb':hallCandidate?hallBase+name+'-retained.glb':liftCandidate?liftBase+name+'-retained.glb':base+name+'.glb');
+  if(disposed||token!==epoch)return;clearCell();const config=views[view.value];blockedCell=false;
+  if(mobile){const exteriorCheck=checkPhoneAssembly(manifest.parts);if(!exteriorCheck.allowed)throw new Error('軽量版の外観データを確認できません。');const name=config.cell?'cell_'+config.cell+(dream.checked?'_dream':''):null;const check=checkPhoneAssembly(manifest.parts,name);blockedCell=!check.allowed;canvas.dataset.phoneBudget=JSON.stringify(check);canvas.dataset.blockedCell=blockedCell?name:'none';}
+  if(!await assembly(mobile?2:config.lod??0,token))return;camera.position.fromArray(config.pos);controls.target.fromArray(config.target);controls.update();
+  if(config.cell&&!blockedCell){const name='cell_'+config.cell+(dream.checked?'_dream':''),candidate=cinemaProposal&&config.cell==='cinema',hallCandidate=hallProposal&&config.cell==='hall',liftCandidate=liftProposal&&config.cell==='lift',start=performance.now(),model=await loader.loadAsync(candidate?proposalBase+name+'-lossless-meshopt.glb':hallCandidate?hallBase+name+'-retained.glb':liftCandidate?liftBase+name+'-retained.glb':base+name+'.glb');
    if(disposed||token!==epoch){release(model);return;}
    model.scene.position.fromArray(placement[config.cell]);if(config.cell==='cinema')model.scene.rotation.y=Math.PI;
-   model.scene.traverse(o=>{if(o.isLight)o.intensity*=.003;});current={cell:name,model};scene.add(model.scene);canvas.dataset.loadDecodeMs=String(performance.now()-start);placeholders();
+   let localLights=0;model.scene.traverse(o=>{if(o.isLight){o.intensity*=.003;if(mobile&&++localLights>4)o.visible=false;}});current={cell:name,model};scene.add(model.scene);canvas.dataset.loadDecodeMs=String(performance.now()-start);placeholders();
    if(candidate){const receipt=proposalReceipt.find(r=>r.cell===name);canvas.dataset.cinemaProposal=JSON.stringify({codec:'EXT_meshopt_compression',bytes:receipt.compressedBytes,sha256:receipt.sha256,visualAcceptance:false});}else delete canvas.dataset.cinemaProposal;
    if(hallCandidate){const receipt=hallReceipt.find(r=>r.cell===name);canvas.dataset.hallProposal=JSON.stringify({bytes:receipt.bytes,sha256:receipt.sha256,visualAcceptance:false});}
    if(liftCandidate){const receipt=liftReceipt.find(r=>r.cell===name);canvas.dataset.liftProposal=JSON.stringify({bytes:receipt.bytes,sha256:receipt.sha256,visualAcceptance:false});}
@@ -76,22 +82,24 @@ function draw(time){
   for(const [key,playback]of Object.entries(mixers)){moving=playback.update(delta)||moving;sliders[key].value=String(playback.snapshot().progress);}
   canvas.dataset.gatePlayback=JSON.stringify(Object.fromEntries(Object.entries(mixers).map(([k,p])=>[k,p.snapshot()])));
   controls.update();renderer.render(scene,camera);frames++;
+  if(mobile&&(renderer.info.render.triangles>PHONE_BUDGET.triangles||renderer.info.render.drawCalls>PHONE_BUDGET.draws)){clearCell();throw new Error('実際の描画が軽量版の予算を超えました。外観へ戻してください。');}
   canvas.dataset.frames=String(frames);canvas.dataset.cpuSubmitMs=String(performance.now()-cpu);
   canvas.dataset.draws=String(renderer.info.render.drawCalls);canvas.dataset.triangles=String(renderer.info.render.triangles);canvas.dataset.ready='true';
   canvas.dataset.viewport=JSON.stringify({width:canvas.width,height:canvas.height,clientWidth:canvas.clientWidth,clientHeight:canvas.clientHeight,visibility:document.visibilityState});
   if(measure.checked&&lastTime!==null){intervals.push(time-lastTime);if(intervals.length>240)intervals.shift();}
   lastTime=time;canvas.dataset.frameIntervals=JSON.stringify(intervals);
-  status.textContent=`${canvas.dataset.backend} · ${current?.cell??'外観'} · ${width}×${height}${canvas.dataset.cinemaProposal?' · 活動写真館の圧縮・修正候補（未承認）':''}${canvas.dataset.hallProposal?' · 西翼入口の修正候補（未承認）':''}`;
+  status.textContent=`${canvas.dataset.backend} · ${current?.cell??'外観'} · ${width}×${height}${mobile?' · スマートフォン用の検証候補':''}${blockedCell?' · この部屋の軽量版は制作中です':''}${canvas.dataset.cinemaProposal?' · 活動写真館の圧縮・修正候補（未承認）':''}${canvas.dataset.hallProposal?' · 西翼入口の修正候補（未承認）':''}`;
   metrics.textContent=`${frames}回描画 · ${renderer.info.render.triangles}tri · 歩行・衝突・本番配信は未実装`;
   if(measure.checked||moving)request();
  }catch(error){fail(error);}
 }
 controls.addEventListener('change',request);view.addEventListener('change',select);dream.addEventListener('change',select);measure.addEventListener('change',()=>{intervals.length=0;lastTime=null;request();});
+if(mobile)addEventListener('resize',()=>{[width,height]=phoneBuffer(innerWidth,innerHeight);renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();request();});
 capture.addEventListener('click',async()=>{locked(true);cancel();try{if(document.hidden||!ready)throw new Error('表示・描画完了後に保存してください。');renderer.render(scene,camera);captureWait=waitCaptureFrame({request:requestAnimationFrame,cancel:cancelAnimationFrame});await captureWait.promise;captureWait=null;renderer.render(scene,camera);await settleGPU();if(disposed||document.hidden||canvas.dataset.error)throw new Error('保存を中止しました。');captureWait=encodeCanvasPng(canvas);const blob=await captureWait.promise;captureWait=null;if(!blob||disposed)throw new Error('画像を保存できませんでした。');const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`tower-base-${review}-${view.value}-${dream.checked?'dream':'base'}-${width}x${height}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);canvas.dataset.capture='saved';}catch(error){status.textContent=error.message;canvas.dataset.capture='failed';}finally{if(!disposed){locked(!ready);request();}}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancel();captureWait?.cancel();}else request();});
 window.addEventListener('pagehide',event=>{cancel();captureWait?.cancel();if(event.persisted)return;disposed=true;epoch++;Promise.allSettled([initializing,pending]).then(()=>{clearCell();placeholderMask?.dispose();release(exterior);release(wings);controls.dispose();renderer.dispose();});});
 initializing=(async()=>{try{await renderer.init();if(disposed)throw new DOMException('Page left','AbortError');if(renderer.backend.isWebGPUBackend)renderer.backend.device.addEventListener('uncapturederror',event=>fail(event.error));
- manifest=await fetch(base+'manifest.json').then(r=>{if(!r.ok)throw new Error('manifest '+r.status);return r.json();});canvas.dataset.sourceRevision=manifest.revision;
+ manifest=await fetch(base+(mobileTextures?'phone-manifest.json':'manifest.json')).then(r=>{if(!r.ok)throw new Error('manifest '+r.status);return r.json();});canvas.dataset.sourceRevision=manifest.revision;
  if(cinemaProposal){proposalReceipt=await fetch(proposalBase+'lossless-summary.json').then(r=>{if(!r.ok)throw new Error('cinema receipt '+r.status);return r.json();});if(!['cell_cinema','cell_cinema_dream'].every(cell=>proposalReceipt.some(r=>r.cell===cell&&r.compressedBytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid cinema compression receipt');}
  if(hallProposal){hallReceipt=await fetch(hallBase+'split-summary.json').then(r=>{if(!r.ok)throw new Error('hall receipt '+r.status);return r.json();});if(!['cell_hall','cell_hall_dream'].every(cell=>hallReceipt.some(r=>r.cell===cell&&r.bytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid hall receipt');}
  if(liftProposal){liftReceipt=await fetch(liftBase+'split-summary.json').then(r=>{if(!r.ok)throw new Error('lift receipt '+r.status);return r.json();});if(!['cell_lift','cell_lift_dream'].every(cell=>liftReceipt.some(r=>r.cell===cell&&r.bytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid lift receipt');}
