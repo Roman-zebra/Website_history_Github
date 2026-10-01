@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "status": "brief_required_before_authoring",
+  "roundId": "",
+  "subject": "",
+  "intendedResult": "",
+  "baseline": {"commit": "", "files": [], "sha256": {}},
+  "scope": {"change": "", "preserve": [], "defer": []},
+  "coordinates": {"unit": "metre", "system": "", "origin": "", "dimensions": {}, "dimensionEvidence": ""},
+  "references": [{"url": "", "checkedAt": "", "claimSupported": "", "versionCompatibility": "", "sourceStatus": ""}],
+  "plan": [],
+  "reusableLessons": {"reference": "docs/shinsekai/research/modeling-lessons.md", "applicableLessons": [], "suspectedCause": "", "evidenceToDistinguishCause": "", "verifiedReusableSettings": []},
+  "comparison": {"oneChangedCause": "", "controls": [], "fixedCameras": [], "resolution": [1280, 720], "beforeImages": [], "afterImages": []},
+  "verification": {"checks": [], "results": [], "savedSceneReopened": "not_checked", "sourceReloaded": "not_checked", "webgpu": "not_checked", "webgl": "not_checked"},
+  "decision": {"retain": null, "visualAcceptance": false, "reason": "", "remainingIssues": [], "nextStep": ""},
+  "cost": {"paidToolsOrApisAllowed": false},
+  "coordination": {"useExistingBatch": true, "requestExtraReview": false}
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-01",
+  "author": "KOBATAKA / shion_takk / its_kobataka",
+  "purpose": "Public modelling references for the ongoing Shinsekai historical browser reconstruction",
+  "paymentPolicy": {
+    "notePurchasesAllowed": false,
+    "noteMembershipAllowed": false,
+    "noteTipsAllowed": false,
+    "restrictedContentAccessAllowed": false,
+    "purchasesMade": 0
+  },
+  "sources": [
+    {"id": "X1", "url": "https://x.com/shion_takk/status/2105302605719347253", "scope": "public_article_through_ending", "reader": "browser", "read": true},
+    {"id": "X2", "url": "https://x.com/shion_takk/status/2101692530056401101", "scope": "public_post_text", "reader": "browser", "read": true},
+    {"id": "X3", "url": "https://x.com/shion_takk/status/2101209212986786270", "scope": "public_post_text", "reader": "browser", "read": true},
+    {"id": "X4", "url": "https://x.com/shion_takk/status/2105497221924090294", "scope": "public_post_and_quoted_announcement", "reader": "browser", "read": true, "limitation": "embedded_video_unavailable_no_video_review_claim"},
+    {"id": "N1", "url": "https://note.com/its_kobataka/n/nc7cb65776c0f", "scope": "public_text_to_purchase_boundary", "reader": "web_reader", "read": true, "restrictedContinuationRead": false},
+    {"id": "N2", "url": "https://note.com/its_kobataka/n/nec8edb6aadc8", "scope": "public_text_to_purchase_boundary", "reader": "web_reader", "read": true, "restrictedContinuationRead": false},
+    {"id": "N3", "url": "https://note.com/its_kobataka/n/n168241634101", "scope": "public_article_through_ending", "reader": "web_reader_and_browser", "read": true},
+    {"id": "N4", "url": "https://note.com/its_kobataka/n/n891577b5c7ff", "scope": "public_article_through_ending", "reader": "web_reader", "read": true},
+    {"id": "N5", "url": "https://note.com/its_kobataka/n/n5818e5e64040", "scope": "public_text_to_purchase_boundary", "reader": "web_reader", "read": true, "restrictedContinuationRead": false}
+  ],
+  "application": {
+    "instructions": "docs/shinsekai/research/kobataka-public-study.md",
+    "reusableLessons": "docs/shinsekai/research/modeling-lessons.md",
+    "activeProductionThreadId": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
+    "priority": ["finish_isolated_timber_comparisons", "cloth_silhouette_and_contact", "remaining_lift_route_obstacles"],
+    "automaticRecurringReadingRequested": false,
+    "modelTrainingClaim": false,
+    "allAuthorPostsReadClaim": false
+  }
+}
