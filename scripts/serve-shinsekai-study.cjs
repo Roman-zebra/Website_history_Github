@@ -15,6 +15,8 @@ const cinemaProposal=path.resolve(root,'../research-cache/cinema-115-proposal');
 const cinemaNames=new Set(['lossless-summary.json','cell_cinema-lossless-meshopt.glb','cell_cinema_dream-lossless-meshopt.glb']);
 const hallProposal=path.resolve(root,'../research-cache/hall-115-proposal');
 const hallNames=new Set(['split-summary.json','cell_hall-retained.glb','cell_hall_dream-retained.glb']);
+const hallStreamReview=path.resolve(root,'../research-cache/hall-stream-transport-002');
+const hallStreamNames=new Set(['stream-summary.json',...['cell_hall','cell_hall_dream'].flatMap(cell=>['core','desk','lamps','furnishings'].map(part=>cell+'-'+part+'.glb'))]);
 const liftProposal=path.resolve(root,'../research-cache/lift-115-proposal');
 const liftNames=new Set(['split-summary.json','cell_lift-retained.glb','cell_lift_dream-retained.glb']);
 const tripoReview=path.resolve(root,'../research-cache/tripo-intake/baluster-001');
@@ -44,15 +46,17 @@ const server = http.createServer((request, response) => {
   const cinemaAllowed=cinemaNames.has(cinemaName);
   const hallName=pathname.startsWith('/study/hall-115-proposal/')?pathname.slice('/study/hall-115-proposal/'.length):null;
   const hallAllowed=hallNames.has(hallName);
+  const hallStreamName=pathname.startsWith('/study/hall-115-stream/')?pathname.slice('/study/hall-115-stream/'.length):null;
+  const hallStreamAllowed=hallStreamNames.has(hallStreamName);
   const liftName=pathname.startsWith('/study/lift-115-proposal/')?pathname.slice('/study/lift-115-proposal/'.length):null;
   const liftAllowed=liftNames.has(liftName);
   const reviewPrefix=['113','115'].find(n=>pathname.startsWith('/study/tower-base-'+n+'/'));
   const mobileName=pathname.startsWith('/study/tower-mobile-115/')?pathname.slice('/study/tower-mobile-115/'.length):null;
   const mobileAllowed=towerMobileNames.has(mobileName);
   const reviewName=reviewPrefix?pathname.slice(('/study/tower-base-'+reviewPrefix+'/').length):null;
-  const reviewRoot=mobileAllowed?towerMobileReview:tripoMobileAllowed?tripoMobileReview:tripoAllowed?tripoReview:liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
-  const reviewAllowed=mobileAllowed||tripoMobileAllowed||tripoAllowed||liftAllowed||hallAllowed||cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
-  const file = reviewAllowed?path.resolve(reviewRoot,mobileAllowed?mobileName:tripoMobileAllowed?tripoMobileName:tripoAllowed?tripoName:liftAllowed?liftName:hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
+  const reviewRoot=hallStreamAllowed?hallStreamReview:mobileAllowed?towerMobileReview:tripoMobileAllowed?tripoMobileReview:tripoAllowed?tripoReview:liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
+  const reviewAllowed=hallStreamAllowed||mobileAllowed||tripoMobileAllowed||tripoAllowed||liftAllowed||hallAllowed||cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
+  const file = reviewAllowed?path.resolve(reviewRoot,hallStreamAllowed?hallStreamName:mobileAllowed?mobileName:tripoMobileAllowed?tripoMobileName:tripoAllowed?tripoName:liftAllowed?liftName:hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
   // Check the resolved path as well as the URL, including encoded traversal.
   const relative = `/${path.relative(root, file).split(path.sep).join('/')}`;
   if (reviewAllowed?!file.startsWith(`${reviewRoot}${path.sep}`):(!file.startsWith(`${root}${path.sep}`) || !allowed(relative))) { response.writeHead(403).end(); return; }

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "roundId": "hall-stream-native-001-20261002",
+  "status": "optional_native_verified_not_production_approved",
+  "subject": "Atomic assembly of exact original hall partitions, preserving visible graphics",
+  "baseline": "frozen115 aa030cd; hall-stream-transport-002/source-equivalence.json",
+  "singleChange": "Replace monolithic hall loading with complete four-part assembly; source images, geometry, lighting and placement unchanged",
+  "comparison": {
+    "views": ["hall", "hallDesk"],
+    "variants": ["base", "dream"],
+    "backends": ["WebGPU", "WebGL2"],
+    "buffer": [1280, 720],
+    "antialias": true,
+    "nearPosition": [-12.65, 1.65, 0.7],
+    "nearTarget": [-10.85, 1.2, 0.7]
+  },
+  "results": {
+    "nativeCaptures": 16,
+    "nativePairs": 8,
+    "encodedIdenticalPairs": 5,
+    "maxDifferentPixels": 22,
+    "maxChannelDelta": 1,
+    "sourceUnchanged": true,
+    "nativeRenderVerified": true,
+    "unloadBackendsPassed": 2,
+    "failureCleanupBackendsPassed": 2,
+    "fullBuildTestsPassed": 330,
+    "lifecycleTestsPassed": 4,
+    "transferBudgetPassed": false,
+    "actualPhoneMeasured": false,
+    "productionApproved": false,
+    "additionalStudioCredits": 0
+  },
+  "preserve": ["original images and source hash", "near geometry and silhouettes", "source light and antialiasing", "one light owner", "incomplete trials and private receipts"],
+  "next": "Bounded portal/distance prefetch and residency/visibility selection with no near-quality degradation or incomplete-room pop-in",
+  "coordination": {"newAgents": false, "automaticClaudeCalls": false, "goal": "active"}
+}

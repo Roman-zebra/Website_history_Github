@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "Continue T6 from hall-lossless-stream-119.md: optional full-resolution hall part assembly and fixed1280x720 source/candidate near/context comparison on WebGPU/WebGL2, base/dream, unload/failure cleanup. Private hall-stream-transport-002 has8 parts,16 validator checks0/0 and direct source equivalence850 attributes/170materials; union16.60/16.69MB still fails transfer budget, no native acceptance. Keep source graphics and antialiasing: prefer portal/distance prefetch and scope partitioning before degrading nearby maps/silhouettes. Do not expose incomplete-room holes/pop-in or treat each request as passing cell total. WebP002 probe preserves dimensions/pixels but saves only1.7%; metadata/highbit sources retained, no runtime adoption yet. Preserve hall entry repair as separate proposal, roof nearcontacts still open. Latest7099a27 exactWorkersSUCCESS14:16:27UTC; check newest pushed checkpoint next. TRIPO Oct1 live3200/spend0, daily09JST once; Material Maker CLI unverified; cloth7240/art26/hybrid23 unchanged, Goal ACTIVE/no agents or autoClaude.",
-  "updatedAt": "2026-10-01T14:43:39.6233830Z",
+  "next": "Continue T6 from hall-stream-native-120.md: bounded portal/distance prefetch, one nearby resident cell, pending/resident resource accounting and distant/offscreen visibility before any near-quality reduction. Optional original-resolution hall assembly passed16 native PNGs/8pairs on WebGPU/WebGL2, near/context base/dream; 5pairs encoded exact, remaining3 WebGL2 max22pixels delta1. Both far unload and forced403 sibling cleanup pass. Full build330/330, lifecycle4/4. Full cell union16.60/16.69MB still fails transfer budget; no actual iPhone14 or production approval. One source WebGL2 cold compile47.47s, prefetch/compile latency unresolved. Keep all source geometry/images/AA, avoid holes/pop-in, hall entry repair separate and roof nearcontacts open. Latest6e1e93c exactWorkersSUCCESS14:46:37UTC verified; check next pushed checkpoint. TRIPO spend0, lastliveOct1 balance3200; Oct2 daily09JST check pending, no paid operation until verified. Material Maker CLI unverified; cloth7240/art26/hybrid23 unchanged, Goal ACTIVE/no agents/autoClaude.",
+  "updatedAt": "2026-10-01T15:17:52.337586+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 118,
@@ -42,7 +42,8 @@
       "mobileCandidates": [
         "../research-cache/tripo-mobile-006",
         "../research-cache/tripo-mobile-007"
-      ]
+      ],
+      "nextDailyCheck": "2026-10-02 after09:00JST; Oct1 observed3200 is not a freshOct2 observation"
     },
     "materialMaker": {
       "version": "1.7",
@@ -67,8 +68,9 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 323,
+    "fullBuildTests": 330,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
-    "hallCandidateNativeVerified": false
+    "hallCandidateNativeVerified": true,
+    "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json"
   }
 }

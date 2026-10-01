@@ -206,3 +206,24 @@ preserve source near graphics/AA, avoid holes/pop-in, hall entry repair separate
 7099a27 exactWorkersSUCCESS14:16:27UTC verified. TRIPO added spend0, cloth7240,
 art26/hybrid23 unchanged. Goal ACTIVE; daily09JST balance check, no autoClaude
 call or agent. This is a technical round, not an art trial.
+
+2026-10-02 JST —120 optional exact hall assembly: four full-resolution parts
+attach atomically; delayed failed siblings are released, all cleanup attempted.
+Native WebGPU/WebGL2 normal/dream near/context16PNGs /8pairs: five PNG pairs
+byte-identical, three WebGL2 comparisons differ at17/20/22pixels by max1/255;
+no near blur, new jaggies or authored object loss observed at these fixed views.
+Both backends far retire empty/LOD2/38980tri/75draw, stream metadata cleared and
+all124 backing triangles restored. Healthy console warnings/errors0. Forced
+missing-desk403 on both releases3 successful parts, attaches no partial room,
+keeps exterior/backing, disables save; expected error separate from healthy.
+Server exposes bounded summary/eight encoded parts only, private receipts and
+traversal403. Full staticbuild330/330; camera-only option subsequently syntax/
+targeted/native checked, lifecycle4/4. SourceWebGL cold compile47.47s recorded;
+no FPS claim. Full cell16.60/16.69MB still fails transfer budget; original maps/
+geometry/lighting/AA retained, no phone or final-art/production acceptance.
+See browser-study/hall-stream-native-120.md and workflow scoped brief. Next
+bounded portal/distance prefetch and visibility/residency accounting preserving
+near quality/no holes/pop-in; entry repair separate, roof nearcontacts open.
+6e1e93c exactWorkersSUCCESS14:46:37UTC verified. TRIPO spend0, last liveOct1
+balance3200, Oct2 daily09JST observation pending. Cloth7240/art26/hybrid23
+unchanged; technical round, Goal ACTIVE, no agents or automatic Claude call.

@@ -108,3 +108,7 @@ requires it; real-device measurements and qualified graphics are still open.
 Original hall entry wall/bench obstruction remains a separate retained repair
 proposal; do not mix its geometry into this source-equivalence round.
 Cloth7240/art26/hybrid23 unchanged, spend0, no automatic Claude/agent calls.
+
+2026-10-02 continuation: optional original-image full assembly now has scoped
+native comparison/unload/failure evidence in `hall-stream-native-120.md`.
+The independent WebP probe remains unadopted/native-unverified.
