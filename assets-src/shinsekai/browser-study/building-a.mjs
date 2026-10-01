@@ -21,7 +21,8 @@ const dreamCheck=document.querySelector('#dreamLook');
 // Opt-in comparison: compileAsync still increases total readiness time here.
 const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
-const clothSewn=new URLSearchParams(location.search).has('clothsewn');
+const clothHat=new URLSearchParams(location.search).has('clothhat');
+const clothSewn=clothHat||new URLSearchParams(location.search).has('clothsewn');
 const clothV2=clothSewn||new URLSearchParams(location.search).has('clothv2');
 const clothDetail=clothV2||new URLSearchParams(location.search).has('cloth');
 const clothLook=new URLSearchParams(location.search).has('clothlook');
@@ -115,13 +116,13 @@ async function load(part){
   try{gltf.studyFlowers=connectShopFlowers(gltf);}
   catch(error){release(gltf);throw error;}
  }
- if(['upper-cloth','upper-cloth-v2','upper-cloth-v2-sewn'].includes(part))try{gltf.studyClothNormal=connectShopClothNormal(gltf,{fibreSheen:clothLook});}catch(error){release(gltf);throw error;}
+ if(['upper-cloth','upper-cloth-v2','upper-cloth-v2-sewn','upper-cloth-v2-sewn-hat'].includes(part))try{gltf.studyClothNormal=connectShopClothNormal(gltf,{fibreSheen:clothLook});}catch(error){release(gltf);throw error;}
  if(part==='exterior-lod0')try{gltf.studyPaperShadows=connectShopPaperShadows(gltf);}catch(error){release(gltf);throw error;}
  if(part==='interior'&&windowLight)try{gltf.studyPaperShadows=connectShopPaperShadows(gltf,{names:['SHOJI']});}catch(error){release(gltf);throw error;}
  if(['interior','exterior-lod0'].includes(part)&&wallWear)try{gltf.studyWallWear=connectShopWallWear(gltf);}catch(error){release(gltf);throw error;}
  if(part==='interior'&&clothDetail){
   let cloth;
-  try{cloth=await load(clothSewn?'upper-cloth-v2-sewn':clothV2?'upper-cloth-v2':'upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth,{suffix:clothV2?'_v2':''});gltf.studyCloth.normal=cloth.studyClothNormal;}
+  try{cloth=await load(clothHat?'upper-cloth-v2-sewn-hat':clothSewn?'upper-cloth-v2-sewn':clothV2?'upper-cloth-v2':'upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth,{suffix:clothV2?'_v2':''});gltf.studyCloth.normal=cloth.studyClothNormal;}
   catch(error){if(cloth)release(cloth);release(gltf);throw error;}
  }
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);

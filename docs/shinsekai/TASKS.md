@@ -36,3 +36,10 @@ backends upper base/dream/window saves and far retirement pass, no new errors.
 Full295 build and updated5 material tests pass. One actual surface pass brings
 total19/hybrid17; no-op selection retry excluded. Next timber/cloth contact;
 no visual/final1080p approval or Claude review call during conservation.
+
+Clothhat contact comparison adds retained hat collision and inferred initial
+clearance; exported hat/garment surface intersections58→0 (first trial474
+rejected). Hardware2364 exact, pins fixed, six closed bodies/one haori component.
+Both1280x720 backends same haori base/dream/save/far pass, new errors0;
+full298 build. Total20/hybrid18; five-pass review deferred. Next roof floor/
+lift landing height audit, then timber/silhouette; no whole-contact certificate.

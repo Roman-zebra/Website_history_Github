@@ -451,7 +451,7 @@
       },
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "6af94e7d62848cc081e73d45017416c86cdcebc214d8f476c6df718aee9f9c88"
+        "sha256": "28b4a5a6238a1b269c9ead765613bf9abdee26c83f6055abdf14405cae751af5"
       }
     ],
     "checks": "290/290 build; both native1280x720 backends haori base/dream save/far retirement, new errors/warnings0",
@@ -538,7 +538,7 @@
     "files": [
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "6af94e7d62848cc081e73d45017416c86cdcebc214d8f476c6df718aee9f9c88"
+        "sha256": "28b4a5a6238a1b269c9ead765613bf9abdee26c83f6055abdf14405cae751af5"
       },
       {
         "file": "assets-src/shinsekai/browser-study/shop-paper-shadow.mjs",
@@ -573,7 +573,7 @@
       },
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "6af94e7d62848cc081e73d45017416c86cdcebc214d8f476c6df718aee9f9c88"
+        "sha256": "28b4a5a6238a1b269c9ead765613bf9abdee26c83f6055abdf14405cae751af5"
       },
       {
         "file": "assets-src/shinsekai/browser-study/daylight-118.md",
@@ -609,7 +609,7 @@
       },
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "6af94e7d62848cc081e73d45017416c86cdcebc214d8f476c6df718aee9f9c88"
+        "sha256": "28b4a5a6238a1b269c9ead765613bf9abdee26c83f6055abdf14405cae751af5"
       },
       {
         "file": "assets-src/shinsekai/browser-study/wall-wear-118.md",
@@ -620,5 +620,62 @@
     "receipt": "parent research-cache/look-dev/wallwear-118/receipt.json",
     "visualAcceptance": false,
     "qualified1080p": false
+  },
+  "runtimeClothHatCandidate": {
+    "query": "?clothhat&clothlook",
+    "file": "runtime/upper-cloth-v2-sewn-hat.glb",
+    "bytes": 3471364,
+    "sha256": "e3da5405d002a9bfc25e4a0e0ac217558c1ea944458aa0370668ebe0179d69a2",
+    "sourceRevision": "e3dd4e7",
+    "handoff": 118,
+    "validator": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 14
+    },
+    "replacementTriangles": 7456,
+    "maxActiveInteriorWithPetals": 149398,
+    "retainedHardwareTriangles": 2364,
+    "connectedHaori": {
+      "name": "Haori_connected",
+      "frames": 32,
+      "quality": 10,
+      "pinnedVertices": 2,
+      "vertices": 426,
+      "maxDisplacementMetres": 0.07486355211922845,
+      "closedBodyThickness": 0.0012,
+      "connectedComponents": 1,
+      "allThickenedEdgesHaveTwoFaces": true,
+      "pinDisplacementMetres": 0.0,
+      "pinHardwareDistancesMetres": [
+        0.0006003379821777344,
+        0.0006003379821777344
+      ],
+      "settings": {
+        "mass": 0.008,
+        "airDamping": 5,
+        "tension": 60,
+        "compression": 60,
+        "shear": 40,
+        "bending": 2
+      },
+      "colliderTriangles": 452,
+      "supportScope": "Two fixed attachment points, retained pegs and hat surface; chin cord excluded; discrete final surface check only",
+      "hatColliderTriangles": 252,
+      "finalHatSurfaceTriangleOverlaps": 0,
+      "initialHatClearanceShiftMetres": 0.12
+    },
+    "exportedHatSurfaceIntersectingPairs": [
+      58,
+      474,
+      0
+    ],
+    "closedExportedFabricBodies": 6,
+    "native": "Both1280x720 backends same haori base/dream save/far empty cells, no new errors/warnings",
+    "checks": "298/298 build",
+    "receipt": "parent research-cache/look-dev/cloth-hat-118/receipt.json",
+    "visualAcceptance": false,
+    "qualified1080p": false,
+    "openIssues": "Broad silhouette/right post occlusion require review. Contact check excludes chin cord, other objects, containment, continuous contacts and mounting. Unmatched cold observations are not FPS."
   }
 }

@@ -9,7 +9,7 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 
-def build(root,zf,material,receipt):
+def build(root,zf,material,receipt,hat_collision=False):
     vertices=[];faces=[];colours=[]
     def vertex(p):
         vertices.append(tuple(p));return len(vertices)-1
@@ -75,6 +75,24 @@ def build(root,zf,material,receipt):
             return tuple(p)
         grid(8,2,collar,lambda j,i,front=front,index=index:front[j][index] if i==0 else None,(90,92,108))
 
+    # The default pattern starts through the hat. Preserve front/back spacing
+    # while translating the local overlap region before collision settlement;
+    # otherwise a thin collider cannot reliably resolve an initial penetration.
+    initialHatShift=0.0
+    if hat_collision:
+        hatVertices=[]
+        for face in root.data.polygons:
+            if root.data.materials[face.material_index].name.startswith('UD_wood_raw'):
+                hatVertices.extend(root.data.vertices[i].co for i in face.vertices)
+        assert hatVertices,'Missing source hat bounds'
+        hiY=max(p.y for p in hatVertices);loZ=min(p.z for p in hatVertices);hiZ=max(p.z for p in hatVertices)
+        for i,p in enumerate(vertices):
+            if i in pinned:continue
+            yWeight=max(0.0,min(1.0,(hiY+.05-p[1])/.05))
+            zWeight=max(0.0,min(1.0,(p[2]-loZ+.03)/.03,(hiZ+.03-p[2])/.03))
+            shift=.12*yWeight*zWeight
+            vertices[i]=(p[0]+shift,p[1],p[2]);initialHatShift=max(initialHatShift,shift)
+
     mesh=bpy.data.meshes.new('Haori connected pattern');mesh.from_pydata(vertices,[],faces);mesh.update()
     mesh.materials.append(material)
     uv=mesh.uv_layers.new(name='UVMap')
@@ -98,18 +116,20 @@ def build(root,zf,material,receipt):
     group=obj.vertex_groups.new(name='Actual peg-head attachments');group.add(pinned,1,'REPLACE')
     bpy.ops.object.select_all(action='DESELECT');obj.select_set(True);bpy.context.view_layer.objects.active=obj
     # A neighbouring hat is behind the garment in this fixed arrangement.
-    # Using the whole rail/hat as a collider folds the left sleeve around the
-    # hat. Keep collision on the actual two support pegs; retain the hardware
-    # unchanged and report this limited contact scope instead.
-    root.data.calc_loop_triangles();supportFaces=[]
+    # The default keeps collision on two actual support pegs. The opt-in hat
+    # trial uses the same stiffness/mass and retains source hardware unchanged.
+    root.data.calc_loop_triangles();supportFaces=[];hatFaces=[]
     for tri in root.data.loop_triangles:
         points=[root.data.vertices[i].co for i in tri.vertices]
         centre=sum(points,Vector())/3
         if .20<=centre.x<=.30 and abs(centre.z-(zf+1.44))<=.025 and min(abs(centre.y-y) for y in [1.97,2.32])<.024:
             supportFaces.append(tuple(tri.vertices))
+        if hat_collision and root.data.materials[tri.material_index].name.startswith('UD_wood_raw'):
+            hatFaces.append(tuple(tri.vertices))
     assert supportFaces,'Missing retained peg collider'
+    if hat_collision:assert hatFaces,'Missing retained hat collider'
     supportMesh=bpy.data.meshes.new('Private retained peg collision')
-    supportMesh.from_pydata([v.co for v in root.data.vertices],[],supportFaces);supportMesh.update()
+    supportMesh.from_pydata([v.co for v in root.data.vertices],[],supportFaces+hatFaces);supportMesh.update()
     support=bpy.data.objects.new('Private retained peg collision',supportMesh);scene=bpy.context.scene
     scene.collection.objects.link(support);support.parent=root;support.modifiers.new('Support collision','COLLISION')
     support.collision.thickness_outer=.0006;support.collision.thickness_inner=.0006
@@ -135,6 +155,12 @@ def build(root,zf,material,receipt):
     obj.modifiers.clear();obj.data=settled;bpy.data.objects.remove(support,do_unlink=True)
     thick=obj.modifiers.new('Inferred woven body1.2mm','SOLIDIFY');thick.thickness=.0012;thick.offset=0;thick.use_even_offset=True
     bpy.ops.object.modifier_apply(modifier=thick.name)
+    obj.data.calc_loop_triangles()
+    hatOverlaps=None
+    if hat_collision:
+        hatTree=BVHTree.FromPolygons([v.co for v in root.data.vertices],hatFaces,all_triangles=True)
+        garmentTree=BVHTree.FromPolygons([v.co for v in obj.data.vertices],[tuple(t.vertices) for t in obj.data.loop_triangles],all_triangles=True)
+        hatOverlaps=len(garmentTree.overlap(hatTree))
     bm=bmesh.new();bm.from_mesh(obj.data)
     assert all(len(e.link_faces)==2 for e in bm.edges),'Open/thickened garment'
     unseen=set(bm.verts);components=0
@@ -152,8 +178,9 @@ def build(root,zf,material,receipt):
         maxDisplacementMetres=maxShift,closedBodyThickness=.0012,connectedComponents=components,
         allThickenedEdgesHaveTwoFaces=True,pinDisplacementMetres=pinError,pinHardwareDistancesMetres=contact,
         settings=dict(mass=.008,airDamping=5,tension=60,compression=60,shear=40,bending=2),
-        colliderTriangles=len(supportFaces),
-        supportScope='Two fixed attachment points and retained-peg collider only; neighbouring hat excluded; not whole garment collision or physical mounting certification')
+        colliderTriangles=len(supportFaces)+len(hatFaces),
+        supportScope=('Two fixed attachment points, retained pegs and hat surface; chin cord excluded; discrete final surface check only' if hat_collision else 'Two fixed attachment points and retained-peg collider only; neighbouring hat excluded; not whole garment collision or physical mounting certification'))
+    if hat_collision:record.update(hatColliderTriangles=len(hatFaces),finalHatSurfaceTriangleOverlaps=hatOverlaps,initialHatClearanceShiftMetres=initialHatShift)
     receipt['simulation'].append(record);receipt['connectedHaori']=record
     obj.select_set(False);scene.frame_set(1)
     print('SEWN_HAORI',record,flush=True)

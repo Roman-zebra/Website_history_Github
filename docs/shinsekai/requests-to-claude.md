@@ -714,6 +714,19 @@ Six final PNGs/receipt private wallwear-118. No visual/final1080p approval.
 1d88538 exactWorkers SUCCESS. Codex continues timber and cloth contact; no
 review, acknowledgement, new heading or Claude model call requested.
 
+Retained hat contact candidate uses unchanged cloth settings with252 hat/200
+peg collider triangles and max.12m inferred initial clearance, fixed pins.
+Exported world-space hat/garment surface intersections: source58, first collider
+trial474(rejected), final0. Hardware2364 position/UV0/colour triangles exact,
+six closed fabric bodies/one haori component;7456/max149398,validator0/0/14.
+GLB3,471,364bytes. Both1280x720 backends same haori base/dream/save/far pass,
+new errors/warnings0; full298 tests. Four final PNGs and private clothhat118
+receipt, rejected GLB/contact audit preserved. Broad silhouette/post occlusion
+remain; no chin-cord/all-object/containment/continuous/mounting certification.
+One actual visual pass brings total20/hybrid18; five-pass packet deferred.
+2146143 exactWorkers SUCCESS. Codex next checks roof-floor/lift-landing heights.
+No review, acknowledgement, new heading, render/research or Claude model call.
+
 Codex continues your temporarily transferred cloth
 joints, alongside compression runtime/material wear; unfinished Claudecloth-v2
 is untouched. No model escalation/new chat or periodic acknowledgement needed.
