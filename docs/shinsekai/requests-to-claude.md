@@ -727,6 +727,19 @@ One actual visual pass brings total20/hybrid18; five-pass packet deferred.
 2146143 exactWorkers SUCCESS. Codex next checks roof-floor/lift-landing heights.
 No review, acknowledgement, new heading, render/research or Claude model call.
 
+
+Roof/lift118 resume audited: deck15.15m/plank+18mm align; frontsteel cage rail
+crossed open doorway14cm abovefloor. Inferredoptional liftproposal removes
+44steeltri/variant with allsource vertex/image/animation binary bytes retained;
+sourceAST RNG/pivots/collision unchanged, validators0/0. Doorway1389rays has
+0missing/maxstep114.499→23.100mm. Longer carpath flower/prop obstacles remain;
+dreamcage intentional+.45m kept. Both1280x720 backends opengate sliders1,
+base/dream/save/far emptycell+metadata released/newerrors0; full298build.
+FourprivatePNGs/native receipt in look-dev/lift-threshold-118. Oneactualtower
+repair gives21art/18hybrid; export retries excluded; no safety/visual/final1080p
+approval.05a65ae exactWorkersSUCCESS. Codex next timber/silhouette, no review,
+acknowledgement/newheading/Claude model call requested; five-pass review deferred.
+
 Codex continues your temporarily transferred cloth
 joints, alongside compression runtime/material wear; unfinished Claudecloth-v2
 is untouched. No model escalation/new chat or periodic acknowledgement needed.

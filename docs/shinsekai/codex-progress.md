@@ -237,3 +237,15 @@ v4-r2 CC0 PBR, metric UV copy, physical dusk/CSM/haze/LUT/selective bulb bloom, 
 **Current checkpoint through113:** Claude supervises source/design/acceptance; Codex implements and validates. Heartbeat PAUSED during active work.113 cb8231d independent exported rays/head support/91pose clip pins/88pose BVH pass; source stays private pending split runtime/qualified1080p160k gate.111 optional original flower atlas/instances preserves237anchors,6.292MBGLB0/0,max146554tri,both1280x720 captures and release,fullbuild273/273. Default111 preserved for Claude visual review. Cloth/upper light and cold readiness remain open. Claude owns cinema-wing exterior. T2–T10 remain incomplete. Parent receipts: tower-base-113-independent-{rays,clips,overlap}.json; look-dev/flowers-111/receipt.json. Flower is original A-inferred creative geometry, with no source-media pixels or history certification. Independent gate intersections sampled discretely, not swept. Next: private split/instanced tower runtime and cloth/light under113.
 
 2026-10-01 — User12h Claude API conservation until21:45JST, handoff118 hourly minute17/noagents/explicitreviewonly; Codex accepts transferred shapes/repairs and batches results. 307c956 exactWorkersSUCCESS.116 material pass plus118_v2 simulation candidate:286/286 build, both1280x720 backends base/dream/capture/far release with0newerrors; max149770tri,12closedfabric bodies,2364retainedhardware triangles/UV0/colours. Artistic10/hybrid9, joints/peg support/sheen still open, qualified1080p deferred. Cinema115 adapter private AST/ray/film-case checks pass; directlossless19MB candidates0/0, allfloat/image bytes retained and cyclicindexrotations preservewinding. No paid/API purchase/model escalation/newchat; main stays soleCodex-owned.
+
+2026-10-01 — Completed the earlier roof/lift consistency resume item. Source
+deck15.15m/planks+18mm align; discovered front14cm cage rail across doorway,
+separate from intentionally raised45cm dream cage. Optional118liftproposal
+removes44source steel triangles with originalvertex/image/animation bytes,
+nodes/materials/clips preserved; source-AST RNG/pivots/collision unchanged.
+BothGLBs0errors/0warnings; doorway1389probes0missing/maxstep114.499→23.100mm.
+Longerpath flower/prop obstacles remain. Both1280x720 backends base/dream open
+gates1 saves/far cell+metadata cleared/newerrors0; full298tests. Oneactualtower
+repair gives21art/18hybrid; export retries excluded. No historical/safety/final
+1080p certification.05a65ae exactWorkersSUCCESS. Claude heads/handoff unchanged,
+no review/acknowledgement/model call; batching remains under existingheading.

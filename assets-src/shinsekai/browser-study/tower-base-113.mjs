@@ -19,13 +19,15 @@ const camera=new THREE.PerspectiveCamera(50,width/height,.05,350),controls=new O
 const loader=new GLTFLoader(),base='/study/tower-base-'+review+'/';
 const cinemaProposal=review==='115'&&query.has('cinemaproposal');
 const hallProposal=review==='115'&&query.has('hallproposal'),hallBase='/study/hall-115-proposal/';
+const liftProposal=review==='115'&&query.has('liftproposal'),liftBase='/study/lift-115-proposal/';
 const proposalBase='/study/cinema-115-proposal/';
-let proposalReceipt,hallReceipt;
+let proposalReceipt,hallReceipt,liftReceipt;
 if(cinemaProposal)loader.setMeshoptDecoder((await import('three/addons/libs/meshopt_decoder.module.js')).MeshoptDecoder);
 const placement={hall:[-14.05,.15,8.6],stair:[-14.05,.15,12.55],lift:[-2.2,15.15,2.2],cinema:[-14.95,.15,-8.55]};
 const views={north:{pos:[0,10,-48],target:[0,11,0]},hall:{cell:'hall',pos:[-12.275,1.65,6.9],target:[-12.275,1.8,-3]},stair:{cell:'stair',pos:[-11.03,1.55,12.03],target:[-12.6,3,10.8]},head:{cell:'stair',pos:[-11.15,16.65,9.6],target:[-12.7,15.8,11.8]},lift:{cell:'lift',pos:[-1.2,16.7,1.8],target:[.3,16.8,-.7]},cinema:{cell:'cinema',pos:[-20,1.8,0],target:[-46,3,0]}};
 if(review==='115')Object.assign(views,{north:{pos:[0,17,-85],target:[0,8,0]},far:{lod:2,pos:[0,30,-145],target:[0,8,0]},wingW:{cell:'hall',pos:[-11.4,1.65,-.3],target:[-17,1.65,-.3]},wingE:{pos:[12,1.65,.3],target:[18,1.65,.3]},exit:{cell:'cinema',pos:[-29.45,1.65,11.7],target:[-29.45,1.65,5.5]}});
 if(cinemaProposal){views.projector={cell:'cinema',pos:[-16.05,5.95,-1.65],target:[-17.35,5.20,-.40]};const option=document.createElement('option');option.value='projector';option.textContent='映写機の修正候補';view.append(option);}
+if(liftProposal){views.liftThreshold={cell:'lift',pos:[0,15.9,1.75],target:[0,15.2,.45]};const option=document.createElement('option');option.value='liftThreshold';option.textContent='昇降機入口の敷居';view.append(option);}
 let exterior,wings,manifest,activeLOD=0,current=null,epoch=0,frame=null,disposed=false,preparing=false,ready=false,captureWait=null,pending=Promise.resolve(),initializing;
 let frames=0,lastTime=null,mixers={};const intervals=[];
 const fail=error=>{if(disposed)return;canvas.dataset.error=error.message;canvas.dataset.ready='false';ready=false;status.textContent='検証失敗：'+error.message;console.error(error);};
@@ -35,7 +37,7 @@ function cancel(){if(frame!==null)cancelAnimationFrame(frame);frame=null;lastTim
 async function settleGPU(){const queue=renderer.backend.isWebGPUBackend?renderer.backend.device?.queue:null;if(!queue)return;let timer;try{await Promise.race([queue.onSubmittedWorkDone(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('GPUの画像保存待機が終了しませんでした。')),5000);})]);}finally{clearTimeout(timer);}}
 function locked(value){view.disabled=dream.disabled=measure.disabled=capture.disabled=value;controls.enabled=!value;for(const key of Object.keys(sliders))sliders[key].disabled=playButtons[key].disabled=value||!mixers[key];}
 function placeholders(){if(!exterior)return;exterior.scene.traverse(o=>{if(/_backing|_curtain/.test(o.name))o.visible=!current;if(/_stairhead_SW$/.test(o.name))o.visible=!current?.cell.startsWith('cell_stair');});wings?.scene.traverse(o=>{if(/_W1_backing_dark$/.test(o.name))o.visible=!current?.cell.startsWith('cell_cinema');});}
-function clearCell(){Object.values(mixers).forEach(m=>m.dispose());mixers={};for(const [key,slider]of Object.entries(sliders)){slider.value='0';slider.oninput=null;playButtons[key].onclick=null;}delete canvas.dataset.gateProgress;delete canvas.dataset.cinemaProposal;delete canvas.dataset.hallProposal;if(current){scene.remove(current.model.scene);release(current.model);current=null;}placeholders();}
+function clearCell(){Object.values(mixers).forEach(m=>m.dispose());mixers={};for(const [key,slider]of Object.entries(sliders)){slider.value='0';slider.oninput=null;playButtons[key].onclick=null;}delete canvas.dataset.gateProgress;delete canvas.dataset.cinemaProposal;delete canvas.dataset.hallProposal;delete canvas.dataset.liftProposal;if(current){scene.remove(current.model.scene);release(current.model);current=null;}placeholders();}
 function gates(){mixers={};for(const [key,slider]of Object.entries(sliders)){slider.value='0';const wing=key.startsWith('wing'),model=wing?exterior:current?.model;if(!model)continue;const clipKey=wing?'door_wing_'+key.slice(-1):key==='car'?'car_gate':'landing_gate';const playback=createTowerGatePlayback(THREE,model,clipKey);if(!playback)continue;mixers[key]=playback;playback.scrub(0);slider.oninput=()=>{playback.scrub(Number(slider.value));request();};playButtons[key].onclick=()=>{playback.play();lastTime=null;request();};}}
 function instances(){
  const bulbs=exterior.scene.getObjectByName('TB_EXT_LOD'+activeLOD+'_bulb');if(bulbs)try{const result=repeatedMeshInstances(bulbs,{trianglesPerInstance:8});bulbs.parent.add(result.mesh);bulbs.parent.remove(bulbs);bulbs.geometry.dispose();canvas.dataset.bulbInstances=JSON.stringify(result.stats);}catch(error){canvas.dataset.bulbInstances=JSON.stringify({retainedOriginal:true,reason:error.message});}
@@ -53,12 +55,13 @@ async function select(){
  // Serialization prevents releasing geometry while compileAsync still uses it.
  pending=pending.catch(()=>{}).then(async()=>{
   if(disposed||token!==epoch)return;clearCell();const config=views[view.value];if(!await assembly(config.lod??0,token))return;camera.position.fromArray(config.pos);controls.target.fromArray(config.target);controls.update();
-  if(config.cell){const name='cell_'+config.cell+(dream.checked?'_dream':''),candidate=cinemaProposal&&config.cell==='cinema',hallCandidate=hallProposal&&config.cell==='hall',start=performance.now(),model=await loader.loadAsync(candidate?proposalBase+name+'-lossless-meshopt.glb':hallCandidate?hallBase+name+'-retained.glb':base+name+'.glb');
+  if(config.cell){const name='cell_'+config.cell+(dream.checked?'_dream':''),candidate=cinemaProposal&&config.cell==='cinema',hallCandidate=hallProposal&&config.cell==='hall',liftCandidate=liftProposal&&config.cell==='lift',start=performance.now(),model=await loader.loadAsync(candidate?proposalBase+name+'-lossless-meshopt.glb':hallCandidate?hallBase+name+'-retained.glb':liftCandidate?liftBase+name+'-retained.glb':base+name+'.glb');
    if(disposed||token!==epoch){release(model);return;}
    model.scene.position.fromArray(placement[config.cell]);if(config.cell==='cinema')model.scene.rotation.y=Math.PI;
    model.scene.traverse(o=>{if(o.isLight)o.intensity*=.003;});current={cell:name,model};scene.add(model.scene);canvas.dataset.loadDecodeMs=String(performance.now()-start);placeholders();
    if(candidate){const receipt=proposalReceipt.find(r=>r.cell===name);canvas.dataset.cinemaProposal=JSON.stringify({codec:'EXT_meshopt_compression',bytes:receipt.compressedBytes,sha256:receipt.sha256,visualAcceptance:false});}else delete canvas.dataset.cinemaProposal;
    if(hallCandidate){const receipt=hallReceipt.find(r=>r.cell===name);canvas.dataset.hallProposal=JSON.stringify({bytes:receipt.bytes,sha256:receipt.sha256,visualAcceptance:false});}
+   if(liftCandidate){const receipt=liftReceipt.find(r=>r.cell===name);canvas.dataset.liftProposal=JSON.stringify({bytes:receipt.bytes,sha256:receipt.sha256,visualAcceptance:false});}
   }
   gates();
   if(disposed||token!==epoch)return;preparing=true;const start=performance.now();try{await renderer.compileAsync(scene,camera);}finally{preparing=false;}
@@ -90,5 +93,6 @@ initializing=(async()=>{try{await renderer.init();if(disposed)throw new DOMExcep
  manifest=await fetch(base+'manifest.json').then(r=>{if(!r.ok)throw new Error('manifest '+r.status);return r.json();});canvas.dataset.sourceRevision=manifest.revision;
  if(cinemaProposal){proposalReceipt=await fetch(proposalBase+'lossless-summary.json').then(r=>{if(!r.ok)throw new Error('cinema receipt '+r.status);return r.json();});if(!['cell_cinema','cell_cinema_dream'].every(cell=>proposalReceipt.some(r=>r.cell===cell&&r.compressedBytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid cinema compression receipt');}
  if(hallProposal){hallReceipt=await fetch(hallBase+'split-summary.json').then(r=>{if(!r.ok)throw new Error('hall receipt '+r.status);return r.json();});if(!['cell_hall','cell_hall_dream'].every(cell=>hallReceipt.some(r=>r.cell===cell&&r.bytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid hall receipt');}
+ if(liftProposal){liftReceipt=await fetch(liftBase+'split-summary.json').then(r=>{if(!r.ok)throw new Error('lift receipt '+r.status);return r.json();});if(!['cell_lift','cell_lift_dream'].every(cell=>liftReceipt.some(r=>r.cell===cell&&r.bytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid lift receipt');}
  await select();
 }catch(error){fail(error);}})();

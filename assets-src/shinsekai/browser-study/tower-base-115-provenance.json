@@ -9,7 +9,7 @@
     },
     {
       "file": "assets-src/shinsekai/browser-study/tower-base-113.mjs",
-      "sha256": "c865b71f7ffb16bb0717d4b410c67a36abf44912631eabb31a1b9e7290e10760"
+      "sha256": "3114ab617b482698eedd10f4aea5bc815d14fa3f47ce03bea03a2f78b58e5287"
     },
     {
       "file": "assets-src/shinsekai/browser-study/tower-gate-playback.mjs",
@@ -17,7 +17,7 @@
     },
     {
       "file": "scripts/serve-shinsekai-study.cjs",
-      "sha256": "772d3239638366e335507731ce5aaf0a0c5545787b0f5f99bbd1808515877d41"
+      "sha256": "c763b4a5ddbfdb6ee719c74186609c1eaeee9c674538499d6621d769f49dba8c"
     },
     {
       "file": "scripts/shinsekai-meshopt-pack.mjs",
@@ -42,6 +42,14 @@
     {
       "file": "tests/shinsekai-retain-meshes.test.cjs",
       "sha256": "32e132e4282e71490513be5b8188f97050142b41f4e09a79d4e28e86bbc0282e"
+    },
+    {
+      "file": "assets-src/shinsekai/tower-base-adapters/lift-threshold-patch.py",
+      "sha256": "d0bcf51bc8a2d73625e05ded8a25120f0ad4cd0af3e0ead05d75fa72a04ddb6b"
+    },
+    {
+      "file": "assets-src/shinsekai/browser-study/lift-threshold-118.md",
+      "sha256": "74b70d2331b458a297b637137c9eb3418b7961d92539a9a5e210a6853fe15c66"
     }
   ],
   "runtimeManifest": "parent research-cache/tower-base-115-runtime/manifest.json",
@@ -72,6 +80,16 @@
       21899712
     ],
     "native": "Both1280x720 backends base/dream with west gate progress1 saved; far LOD2 cell empty and candidate metadata cleared; new errors/warnings0",
+    "visualAcceptance": false,
+    "qualified1080p": false
+  },
+  "liftProposal": {
+    "query": "?liftproposal",
+    "privateManifest": "parent research-cache/lift-115-proposal/split-summary.json",
+    "changes": "44front low steel rail triangles omitted/variant; all original binary vertex/image/clip bytes retained",
+    "geometry": "base doorway1389probes0missing; maxadjacent114.499mm\u219223.100mm; longer path props remain",
+    "native": "Both1280x720 backends base/dream gate sliders1 save/far LOD2 emptycell/candidate metadata release pass; newerrors/warnings0",
+    "nativeReceipt": "parent research-cache/look-dev/lift-threshold-118/receipt.json",
     "visualAcceptance": false,
     "qualified1080p": false
   }

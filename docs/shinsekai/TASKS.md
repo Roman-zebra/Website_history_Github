@@ -43,3 +43,10 @@ rejected). Hardware2364 exact, pins fixed, six closed bodies/one haori component
 Both1280x720 backends same haori base/dream/save/far pass, new errors0;
 full298 build. Total20/hybrid18; five-pass review deferred. Next roof floor/
 lift landing height audit, then timber/silhouette; no whole-contact certificate.
+
+Roof/lift118 audit: deck datum aligned; sourcefrontcage rail crosses the
+doorway14cm above it. Optionalliftproposal omits44steeltri/variant, retains
+allsource vertex/image/clip binary bytes; validator0/0. Base doorway1389rays
+has0missing; maxadjacentstep114.499→23.100mm. Longerpath props and dream+.45m
+remain. Both1280x720 backends gates1/base/dream/save/far pass, newerrors0;
+full298build. Totalart21/hybrid18. Next timber wear/silhouette; review deferred.

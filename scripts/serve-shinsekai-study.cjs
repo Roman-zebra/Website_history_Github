@@ -13,6 +13,8 @@ const cinemaProposal=path.resolve(root,'../research-cache/cinema-115-proposal');
 const cinemaNames=new Set(['lossless-summary.json','cell_cinema-lossless-meshopt.glb','cell_cinema_dream-lossless-meshopt.glb']);
 const hallProposal=path.resolve(root,'../research-cache/hall-115-proposal');
 const hallNames=new Set(['split-summary.json','cell_hall-retained.glb','cell_hall_dream-retained.glb']);
+const liftProposal=path.resolve(root,'../research-cache/lift-115-proposal');
+const liftNames=new Set(['split-summary.json','cell_lift-retained.glb','cell_lift_dream-retained.glb']);
 // Keep this origin separate from the main site's development service worker.
 const port = Number(process.env.JTA_STUDY_PORT || 18765);
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.css': 'text/css', '.jpg':'image/jpeg','.png':'image/png' };
@@ -32,11 +34,13 @@ const server = http.createServer((request, response) => {
   const cinemaAllowed=cinemaNames.has(cinemaName);
   const hallName=pathname.startsWith('/study/hall-115-proposal/')?pathname.slice('/study/hall-115-proposal/'.length):null;
   const hallAllowed=hallNames.has(hallName);
+  const liftName=pathname.startsWith('/study/lift-115-proposal/')?pathname.slice('/study/lift-115-proposal/'.length):null;
+  const liftAllowed=liftNames.has(liftName);
   const reviewPrefix=['113','115'].find(n=>pathname.startsWith('/study/tower-base-'+n+'/'));
   const reviewName=reviewPrefix?pathname.slice(('/study/tower-base-'+reviewPrefix+'/').length):null;
-  const reviewRoot=hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
-  const reviewAllowed=hallAllowed||cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
-  const file = reviewAllowed?path.resolve(reviewRoot,hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
+  const reviewRoot=liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
+  const reviewAllowed=liftAllowed||hallAllowed||cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
+  const file = reviewAllowed?path.resolve(reviewRoot,liftAllowed?liftName:hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
   // Check the resolved path as well as the URL, including encoded traversal.
   const relative = `/${path.relative(root, file).split(path.sep).join('/')}`;
   if (reviewAllowed?!file.startsWith(`${reviewRoot}${path.sep}`):(!file.startsWith(`${root}${path.sep}`) || !allowed(relative))) { response.writeHead(403).end(); return; }
