@@ -99,3 +99,32 @@ texture derivative before mobile delivery; do not silently globally decimate.
 Sources checked: [official Studio pricing](https://www.tripo3d.ai/pricing) and
 [Studio/API separation](https://www.tripo3d.ai/ja/help/api-plugins/tripo-studiotripo-api).
 Scheduled local work uses the [Codex scheduled-task facility](https://learn.chatgpt.com/docs/automations?surface=app).
+
+## Later continuation update, 2026-10-01
+
+The user explicitly requested continued development after result messages.
+Existing automation jta is ACTIVE every10 minutes in chat01a0f756-8ab2-7111-a287-46e329330319,
+throughOct31; do not create a duplicate. The first run after09:00JST observes
+balance and revises the daily plan once per day, not every10 minutes. Exact
+cost/before-after balance checks still apply to every charged operation. Skip
+duplicate concurrent development and remain quiet for unchanged/non-actionable
+state; notify meaningful progress, completion, failure or required user action.
+The SNS organization wait gate is released after verified junction/source safety.
+Local app/machine availability governs scheduled execution; this is not a
+provider-enforced spending guarantee. Stop the monthly automation onNov1.
+
+Current optional115 derivative: exterior1.98MB, stairs3.29/3.58MB, local spend0.
+Both desktop rendering backends load/switch/unload within provisional budgets;
+hall/lift/cinema still fail stream/draw/triangle budgets and are blocked before
+loading in the phone study. See tower-mobile-115.md for exact costs/limits.
+Real iPhone14 Safari sustained motion, memory and heat remain unmeasured.
+
+Latest user instruction2026-10-01 supersedes the10-minute development cadence:
+ACTIVE continuous Goal now follows PLAN/TASKS to world completion in this chat,
+with useful work continuing after result messages without scheduled waiting.
+Existing jta returned to daily09:00JST for balance/consumption/plan only, through
+Oct31; no duplicate development injection. OnNov1 stop that October schedule
+and TRIPO paid use while free local Goal work continues. Runtime availability,
+usage limits and required external input remain constraints; no completion
+claim until required functionality and qualified checks have evidence.
+Official Goal reference: https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex

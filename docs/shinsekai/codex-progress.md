@@ -343,3 +343,43 @@ Vulkan/library/HDR start verified; CLI map export still unsuccessful, no adopted
 maps. Existing Blender remains usable. Read recent ChatGPT tool discussions;
 paid/quota recommendations are not adopted, new GitHub/Reddit tools need consent.
 Claude remains occasional supervisor; no automatic call after old21:45 deadline.
+
+2026-10-01 — SNS folder safety confirmed from the completed SNS chat and
+JTA運用/整理完了.txt: junctions point to the original checkout/workspace,
+no source folder was moved, copied or deleted. Development wait gate released.
+Later human request keeps development going after result messages: existing jta
+ACTIVE every10 minutes in this resumed chat; visible TRIPO consumption/plan
+once daily at the first run after09JST, throughOct31. No duplicate concurrent
+run, SNS task changes, automatic Claude call or agent. Latest live3200, spend0.
+
+T6 source115 inventory and optional mobile derivative retained privately:
+14 image-only512px parts preserve all non-image bytes and normalized JSON;
+separate Meshopt transport preserves decoded attributes/animation/images,
+triangle order/winding with allowed cyclic index rotation. 28 encoded/decoded
+validator checks0errors/0warnings; all source hashes unchanged. Wing map estimate
+85.33 ->1.33MiB. ExteriorLOD2 transfer1,982,896B; stairs3,292,372B and dream
+3,583,112B. Optional profile limits720px/DPR1/4lights and blocks unknown or
+over-budget hall/lift/cinema before load. Actual render-budget guard retained.
+Both native backends pass north/stair base/dream/head/blocked hall/far, empty
+cell and124/124 backing restored, captured warnings/errors0. Stair native
+76,918tri/91draws, dream81,022tri/96draws; desktop720x324 buffer only, no actual
+iPhone14 or narrow-layout/FPS acceptance. Fixed1280x720 hall original/512px
+pair and native dream stair PNG inspected; no look/historical approval.
+
+Full323/323 tests/static build passed. Generated unrelated site pages restored
+with their diff preserved privately; concurrent committed SNS bird icons kept.
+Roof/wire/shell exactduplicate diagnostic0, but near-coplanar contacts still
+open. Next bounded hall geometry/streaming brief, then lift batching/cinema;
+see assets-src/shinsekai/browser-study/tower-mobile-115.md and private receipts.
+Cloth7240/art26/hybrid23 retained; technical round not an art trial.
+Material Maker1.7 export still unverified; no new tool or paid generation.
+
+Latest user instruction2026-10-01 supersedes the10-minute development cadence:
+ACTIVE continuous Goal now follows PLAN/TASKS to world completion in this chat,
+with useful work continuing after result messages without scheduled waiting.
+Existing jta returned to daily09:00JST for balance/consumption/plan only, through
+Oct31; no duplicate development injection. OnNov1 stop that October schedule
+and TRIPO paid use while free local Goal work continues. Runtime availability,
+usage limits and required external input remain constraints; no completion
+claim until required functionality and qualified checks have evidence.
+Official Goal reference: https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex
