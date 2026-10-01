@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude120 contacts/119 incomplete. Fill009 original globalSun gain.1 (3¨.3) scoped to normal hall frames, exact finally restoration; no new light/shadow/cache/global context/maps/AA/geometry changes. Four gain1 native near/context PNGs source exact both; six actual views retain detail/darker beam gaps and depth, contacts still weak/emitter clipping remains. Dream source/reentry first candidate exact both; far38980tri75draw/cache+reservation0/helper retired;14PNG/349tests/4inputs unchanged. Hallart16/BuildingA26/hybrid23/cloth7240. Next triangle/component-level contact audit using decoded core node13 floorY.003, desk node10 and furnishings node8; merged bounds alone do not identify individual feet. Separate actual gap from shading before choosing static contact AO with existing Blender or changed geometric route; shadow008 remains rejected. Then haori/upper4/fullworld; no119 completion/review yet, observed120/processed118. Baselineb4a2dfc exactWorkersSUCCESS2026-10-01 22:07:49UTC; next pushed SHA checked separately. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents.",
-  "updatedAt": "2026-10-01T22:31:21.832565+00:00",
+  "next": "PRIORITY Claude119/120 unfinished. Static floor contact010 implemented and native verified with actual frozen geometry AO bake. Bench/counter/shelf/wall floor contacts stronger, patterns/woodgrain/AA/glass fixed; moving-light shadows/upper surfaces not completed, emitters still clip. 512x2048 map450530bytes adds one owned texture/~5.33MiB RGBA+mips, no extra draw/tri; existingAO007 remains, no performance/device approval. 20nativePNGs/351tests/reopen/source unchanged; four current nulls exact to matching source (GLsame-order fresh source near3pixels/max1 vs historical009); initialGL5/max1 retained and zero returns original node. Both dream/reentry exact, far38980tri75draw/map retired/cache+reservation0/public states restored/errors0. Hallart17/BuildingA26/hybrid23/cloth7240. Next fulfill119 haori bamboo bar+cord/sleeve support, sleeve sag1/4-1/3,3-5vertical10-25mm folds, curled hem,8-12mm folded collar, wall-contactAO/roughness>=.85/weak sheen and front+side verification using existing Blender; read retained haori-rail-118/brief/lessons before changed model. Then BuildingA upper4, integrated1080p notice only when ready, production/fullworld/phone. Keep optional study; no full119 completion/review yet, observed120/processed118. Baseline5460c0f exactWorkersSUCCESS2026-10-01 22:34:25UTC; next pushed SHA checked separately. New explicit image server18771 session29232, original18770 retained. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/review calls.",
+  "updatedAt": "2026-10-01T23:04:25.423868+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 349,
+    "fullBuildTests": 351,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -84,7 +84,8 @@
     "hallDenoisedAONativeEvidence": "../research-cache/hall-ao-119-007/native-receipt.json",
     "hallRangeNativeEvidence": "../research-cache/hall-range-119-003/native-receipt.json",
     "hallShadowRejectedEvidence": "../research-cache/hall-shadow-119-008/native-receipt.json",
-    "hallFillNativeEvidence": "../research-cache/hall-fill-119-009/native-receipt.json"
+    "hallFillNativeEvidence": "../research-cache/hall-fill-119-009/native-receipt.json",
+    "hallBakedContactNativeEvidence": "../research-cache/hall-contact-119-010/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 unfinished/120 priority. Finite5m and scoped fill009 native verified partial. Contact shadows/emitter clipping, haori support/weight, upper4 and integrated1080p remain. Continue component/triangle contact audit; partial file handoff, no full119 review request."
+  "pendingClaudeRepairs": "119 unfinished.120 floor contacts implemented as retained static baked candidate, finite5m/fill009 verified; emitters/moving geometric lighting remain limitations. Next119 haori support/weight then upper4; integrated1080p and full119 review not ready. Observed120/processed118."
 }

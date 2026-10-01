@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-floor-baked-contact-010-20261002",
+  "status": "native_verified_retained_optional_static_contact",
+  "subject": "Geometry-derived static floor contact occlusion under benches/counter/shelf",
+  "intendedResult": "Anchor fixed hall furniture with local contact darkness while retaining source floor patterns and near AA",
+  "baseline": {
+    "commit": "5460c0f341d9556565e804c49ee38a0a130d6031",
+    "exactWorkersSuccess": "2026-10-01T22:34:25Z",
+    "sourceRevision": "aa030cd",
+    "look": "qualified AO007/range5/fill009/2350K/point.5/EV-1.25/full maps/AA",
+    "inputs": "parent hall-stream-transport-002 four decoded normal parts; hashes retained before/after"
+  },
+  "scope": {
+    "change": "Bake a local AO scalar from actual fixed geometry with Blender4.5 Cycles AO node distance.45m into an owned512x2048 non-colour image; apply only normal hall floor copies as static contact shading",
+    "preserve": [
+      "source geometry/UV/maps/files",
+      "lights/exposure/roughness/floor wear/camera/AA/glass",
+      "global renderer context/shadow/cache flags",
+      "dream/default/phone/far"
+    ],
+    "defer": [
+      "moving-light geometric shadow acceptance",
+      "cabinet/bench upper surfaces",
+      "haori/BuildingA upper4/device/fullworld"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "glTF X/Y/Z\u2192Blender X/-Z/Y; planar floor UV=(X/3.55,-Z/17.2)",
+    "origin": [
+      0,
+      0,
+      0
+    ],
+    "browserPlacement": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "dimensions": {
+      "floorWidth": 3.55,
+      "floorLength": 17.2,
+      "floorY": 0.003
+    },
+    "dimensionEvidence": "read-only010 predecessor audit:348 floor triangles,13 floor-near components with covered bottom projections,component minima3\u20134.91mm below floor; does not prove every support"
+  },
+  "references": [
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/render/shader_nodes/input/ao.html",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "AO node detects geometry occlusion within distance; OnlyLocal false includes other objects; baking avoids repeated ray cost",
+      "versionCompatibility": "Blender4.5.10 LTS installed",
+      "sourceStatus": "official pinned4.5 manual read"
+    },
+    {
+      "url": "https://docs.blender.org/UATEST/manual/en/4.5/render/cycles/baking.html",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "Cycles baking uses UV map and active image texture node; Emit pass can bake AO-node output",
+      "versionCompatibility": "4.5 manual; verify installed API",
+      "sourceStatus": "official4.5 test manual read; standard route fetch unavailable"
+    }
+  ],
+  "reusableLessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "applicableLessons": [
+      "source-null controls before actual art",
+      "owned opaque material copies preserve glass/global state",
+      "inspect outputs before timeout retry",
+      "save/reopen owned scene"
+    ],
+    "suspectedCause": "Weak contact shading despite floor-near geometry; no blanket furniture offset",
+    "evidenceToDistinguishCause": "Actual geometry bake plus fixed camera source/candidate; no guessed support rectangles"
+  },
+  "comparison": {
+    "oneChangedCause": "static local contact scalar",
+    "controls": [
+      "gain0 source-null both near/context before gain.8"
+    ],
+    "fixedCameras": [
+      "hallDesk",
+      "hall",
+      "hallFloor"
+    ],
+    "resolution": [
+      1280,
+      720
+    ],
+    "beforeImages": "parent hall-fill-119-009",
+    "afterImages": "parent hall-contact-119-010"
+  },
+  "verification": {
+    "checks": [
+      "source hashes/coordinate projection/map dimensions and nonempty variation",
+      "baked scene save/reopen geometry/UV/image/settings",
+      "material/source identity/failure/disposal tests",
+      "native both source-null/actual near-context-floor/dream/reentry/far/errors",
+      "full build and exact pushed SHA Workers"
+    ],
+    "results": [
+      "Blender bake/source hashes/reopen equal",
+      "four current matching source controls exact; GLhistorical rounding residual retained",
+      "six actual views/dream/reentry/far both verified",
+      "20scenePNGs/351tests/4encoded inputs unchanged"
+    ],
+    "visualAcceptance": false,
+    "savedSceneReopened": true,
+    "sourceReloaded": true,
+    "webgpu": "native_verified",
+    "webgl": "native_verified"
+  },
+  "parameters": {
+    "aoDistance": 0.45,
+    "aoNodeSamples": 16,
+    "cyclesSamples": 16,
+    "seed": 119010,
+    "mapSize": [
+      512,
+      2048
+    ],
+    "gain": 0.8,
+    "movingLightShadowCompletion": false
+  },
+  "cost": {
+    "additionalStudioCredits": 0,
+    "newTools": false,
+    "newAgents": false
+  },
+  "coordination": {
+    "observedClaudeHandoff": 120,
+    "processedClaudeHandoff": 118,
+    "119Complete": false,
+    "requestExtraReview": false
+  },
+  "technicalTrial": 10,
+  "artTrial": 17,
+  "visualAcceptance": false,
+  "nativeEvidence": "parent research-cache/hall-contact-119-010/native-receipt.json"
+}

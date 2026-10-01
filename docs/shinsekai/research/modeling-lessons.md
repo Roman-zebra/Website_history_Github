@@ -160,3 +160,29 @@ Read-only merged material bounds locate floorY.003 and bench iron/desk teak
 minima0. They do not identify every support; audit components/nearest floor
 triangles before snapping geometry or baking contact AO. No blanket offset.
 Evidence: parent hall-fill-119-009; browser-study/hall-fill-claude119.md.
+
+## Hall static floor contact010 (2026-10-02, optional retained candidate)
+Before moving apparently floating furniture, inspect decoded world geometry and
+floor triangle coverage. Thirteen floor-near material components have minima
+3–4.91mm below the floor. This does not identify every support, but it rejects
+a blanket downward offset. Bake actual frozen geometry AO to a planar receiver
+with Blender4.5 Cycles AO-node distance.45/OnlyLocal false/Emit target, preserving
+browser UV0/maps/geometry. Hide only the coincident source receiver; its ceiling
+is4.444m away and irrelevant to the local radius.512x2048 data map preserves
+source near detail and anchors feet/cabinet/wall floor contact with gain.8.
+This adds one texture/~5.33MiB with mips; existing AO007 still costs multipass
+work. Do not claim moving-light shadows, free GPU cost or phone qualification.
+
+Gain0 should return the original floor colour node instead of multiplying a
+sampled texture by zero. Initial GLcontext5pixels/max1 is retained. Current four
+nulls exactly match matching source; fresh GLnear has the same3pixels/max1
+historical residual as disabled candidate after equal view order. Do not infer
+a private compiler/cache cause, hide that residual or claim historical bitwise
+equality for all views. Actual near/context changes stay confined to visible
+floor; both dream source and candidate re-entry are exact, far map retired.
+Use explicit UTF8 for Python text reads/writes on Windows and normalize decoded
+CRLF before writing; system CP932 can fail or damage Unicode state files. JSON
+requires leading zero for fractional numeric literals. The first integration
+failed before editing and the brief/state were corrected before351-test build.
+Evidence: parent hall-contact-119-010/native-receipt.json and bake-receipt.json;
+browser-study/hall-contact-claude119.md. Continue haori/upper4, not full119 review.

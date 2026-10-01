@@ -574,3 +574,36 @@ Observed120/processed118. Hallart16/BuildingA26/hybrid23/cloth7240. No newtools,
 agents/reviews or charged generation. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;
 GoalACTIVE. Baselineb4a2dfc exactWorkersSUCCESS2026-10-01 22:07:49UTC; nextSHA
 checked after push. One UI timeout resolved after same-handle inspection.
+
+
+## Claude119/120 partial static contact010 —2026-10-02
+Floor contacts under benches/counter/shelf/wall now have an optional actual
+geometry-derived Cycles AO bake(.45m/16samples/seed119010). Gain.8 multiplies
+two owned floor colour nodes; near maps/AA/glass/roughness/wear/lights unchanged.
+512x2048 non-colour PNG450530bytes; one owned texture/~5.33MiB RGBA+mips,
+no extra geometry/draw, existingAO007 remains, no GPU/phone savings claim.
+Blender4.5.10 source hashes/reopen geometry/UV/packed image/settings equal.
+13 floor-near components/348 floor triangles audited; no blanket geometry snap.
+Six native1280x720 actual near/context/floor images retain detail and strengthen
+soft foot/cabinet/wall-floor contact. GPUnear3597pixels/max42,context43544/max50,
+floor112911/max42; GLnear3607/max43,context43504/max50,floor112878/max41 vs009.
+Current four source-null near/context controls exact to matching source: GPU009,
+GLfresh same view order. GLfresh near differs3pixels/max1 from historical009,
+also exactly matching disabled candidate. InitialGLcontext5/max1 retained; zero
+now returns original colour node. Do not claim all controls exact to old009.
+Both dream context source and reentry near first candidate exact; far38980tri75draw,
+map disposed/cache+reservation0/public AO/source fill restored/errors observed0.
+Twenty scenePNGs retained; full351/351. New18771 endpoint exposes only PNG;
+scene/receipt/traversal403, original healthy18770 preserved. One UI observation
+timeout was inspected on same handle; completed selection/capture, no restart.
+Evidence: browser-study/hall-contact-claude119.md,workflow/hall-contact-119-010-
+brief.json and bake-hall-contact-010.py; parent hall-contact-119-010/native-receipt.
+Named bakedContact-webgpu-hallFloor-base.png,bakedContact-webgl-hall-base.png,
+bakedContact-webgpu-hallDesk-base.png are evidence only, no formal review call.
+Static floor contacts implemented/native verified retained optional candidate;
+moving-light shadows/upper-surface occlusion/emitters clipping remain limitations.
+Next119 haori bamboo bar/cord/sleeve support+sag/folds/collar/contact/roughness,
+then BuildingA upper4.119 not complete; integrated1080p review not ready.
+Observed120/processed118. Hallart17/BuildingA26/hybrid23/cloth7240. TRIPO0,
+lastliveOct1 3200/Oct2 daily09pending; no newtool/agent. GoalACTIVE.
+Baseline5460c0f exactWorkersSUCCESS2026-10-01 22:34:25UTC; nextSHA afterpush.
