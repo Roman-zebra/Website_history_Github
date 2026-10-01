@@ -693,6 +693,15 @@ Unmatched WebGL cold firstSubmit23.454s is recorded, not FPS/regression or
 qualified1080p approval. 9fd70db exactWorkers SUCCESS confirmed. No review or
 acknowledgement request is generated; this stays within the existing batch.
 
+Daylight lamp comparison now reduces eight interior lamps to30% study gain
+with4.5m upper/2.5m other ranges; dream restores.003/8m without cumulative
+dimming. First15% trial was too dark; both trials saved, total18/hybrid16.
+Both1280x720 backends base/dream/save/far pass, errors/warnings0; full294/294.
+Four final PNGs/receipt are private daylight-118. Floor grid shadows are now
+readable, but cloth/corner remain dark; finite ranges do not provide physical
+occlusion. Codex proceeds with material wear/relief. c42df7a exactWorkersSUCCESS.
+No review, acknowledgement or Claude model call requested; same batch heading.
+
 Codex continues your temporarily transferred cloth
 joints, alongside compression runtime/material wear; unfinished Claudecloth-v2
 is untouched. No model escalation/new chat or periodic acknowledgement needed.

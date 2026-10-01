@@ -23,3 +23,9 @@ Optional windowlight front-window/paper/environment comparison passes both
 1280x720 backends base/dream/save/far retirement with no new errors;293 tests
 pass. Room remains flat/warm; point-light balance and material wear are next.
 Two actual lighting passes bring total16/hybrid14; review remains deferred.
+
+Daylight comparison limits eight interior lamps to inferred30% study gain and
+4.5m/2.5m ranges; dream restores prior lighting. Both1280x720 backends
+base/dream/save/far pass with no new errors; fullbuild294/294. Two trials bring
+total18/hybrid16. Corner/cloth still dark; finite ranges do not prove occlusion.
+Next: wall/wood wear and relief; no review request during conservation.

@@ -12,6 +12,7 @@ import {connectShopCloth} from './shop-cloth-detail.mjs';
 import {connectShopClothNormal} from './shop-cloth-normal.mjs';
 import {createShopAmbientLook} from './shop-ambient-look.mjs';
 import {connectShopPaperShadows} from './shop-paper-shadow.mjs';
+import {connectShopDaylight} from './shop-daylight.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
@@ -24,7 +25,8 @@ const clothV2=clothSewn||new URLSearchParams(location.search).has('clothv2');
 const clothDetail=clothV2||new URLSearchParams(location.search).has('cloth');
 const clothLook=new URLSearchParams(location.search).has('clothlook');
 const ambientDetail=new URLSearchParams(location.search).has('ao');
-const windowLight=new URLSearchParams(location.search).has('windowlight');
+const daylight=new URLSearchParams(location.search).has('daylight');
+const windowLight=daylight||new URLSearchParams(location.search).has('windowlight');
 const capture=document.querySelector('#capture');
 const buttons={cash:document.querySelector('#cash'),storage:document.querySelector('#storage')};
 const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:new URLSearchParams(location.search).has('webgl')});
@@ -72,6 +74,7 @@ function prepareScene(reason){
  });
 }
 function render(time=performance.now()){
+ canvas.dataset.daylight=interior?.studyDaylight?JSON.stringify(interior.studyDaylight.apply(!dreamCheck.checked)):'off';
  hemi.intensity=interior ? (windowLight ? .22 : .45) : .8;
  scene.environmentIntensity=interior&&windowLight ? .14 : .45;
  canvas.dataset.windowLight=windowLight?JSON.stringify({sun:[-5,9,18],target:[3,0,-4.5],interiorFill:.22,environmentIntensity:scene.environmentIntensity,shadowMap:[2048,2048],inferred:true,geometryChanged:false}):'source comparison';
@@ -92,6 +95,7 @@ function request(){if(ready&&!disposed&&!capturing&&!document.hidden&&frame===nu
 function cancel(){if(frame!==null)cancelAnimationFrame(frame);frame=null;lastTime=null;}
 function meshes(model,fn){model.scene.traverse(o=>{if(o.isMesh)fn(o);});}
 function release(model){
+ model.studyDaylight?.dispose();
  model.studyFlowers?.disposeTextures();
  const geometries=new Set(),materials=new Set(),textures=new Set();meshes(model,o=>{if(o.isInstancedMesh)o.dispose();geometries.add(o.geometry);for(const m of [].concat(o.material,o.userData.authoringMaterial??[]))if(m&&m!==glass)materials.add(m);});
  for(const m of materials)if(m.userData.studyOriginalWrinkleMaterial)materials.add(m.userData.studyOriginalWrinkleMaterial);
@@ -129,6 +133,7 @@ async function load(part){
  // Blender source watts were exported as high candela for its review lighting.
  // Calibrate this separate browser study, without changing the authoring GLB.
  gltf.scene.traverse(o=>{if(o.isPointLight){o.userData.studyLightGain=.003;o.intensity*=.003;o.distance=8;}});
+ if(part==='interior'&&daylight)gltf.studyDaylight=connectShopDaylight(gltf);
  // Include the optional cloth dependency in total readiness, not only the
  // first interior download. The companion remains inside this cell's lifetime.
  gltf.studyLoadMs=performance.now()-loadStart;

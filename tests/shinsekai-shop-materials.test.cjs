@@ -7,6 +7,20 @@ async function studyModule(name){
  const source=fs.readFileSync(path.join(root,'assets-src/shinsekai/browser-study',name),'utf8').replace("'three/webgpu'",JSON.stringify(webgpu)).replace("'three/tsl'",JSON.stringify(tsl));
  return import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 }
+
+test('daylight balance toggles from retained lamp values without compounding or touching other lights',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
+ const {connectShopDaylight}=await studyModule('shop-daylight.mjs');
+ const scene=new THREE.Group(),upper=new THREE.PointLight(0xffcc99,9,8),other=new THREE.PointLight(0xffffff,3,8),sun=new THREE.DirectionalLight(0xffffff,3);
+ upper.name='HybridLamp_upper_room';scene.add(upper,other,sun);
+ const beforeColour=upper.color.clone(),balance=connectShopDaylight({scene});
+ balance.apply(true);const daytimeIntensity=upper.intensity;balance.apply(true);assert.equal(upper.intensity,daytimeIntensity,'repeated rendering must not dim lamps cumulatively');
+ assert.ok(upper.intensity>0&&upper.intensity<9);assert.ok(other.intensity>0&&other.intensity<3);
+ assert.ok(upper.distance<8&&upper.distance>other.distance);assert.equal(sun.intensity,3);
+ assert.deepEqual(upper.color,beforeColour);assert.equal(upper.castShadow,false);
+ balance.apply(false);assert.equal(upper.intensity,9);assert.equal(other.intensity,3);assert.equal(upper.distance,8);
+ balance.apply(true);balance.dispose();assert.equal(upper.intensity,9);assert.equal(upper.distance,8);
+});
 test('cloth normal mixing preserves physical fields, shared materials and geometry',async()=>{
  const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
  const {connectShopClothNormal}=await studyModule('shop-cloth-normal.mjs');

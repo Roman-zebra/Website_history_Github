@@ -451,7 +451,7 @@
       },
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "35d9c84ba4fd9356127ef815d87d214f34dd480d560a29e1a50ebd6547214c6d"
+        "sha256": "beae3c6cb0e9604701e8f8dc024dcaf6c4ba3ec8411f5c121b56a064a1e36fd7"
       }
     ],
     "checks": "290/290 build; both native1280x720 backends haori base/dream save/far retirement, new errors/warnings0",
@@ -538,7 +538,7 @@
     "files": [
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "35d9c84ba4fd9356127ef815d87d214f34dd480d560a29e1a50ebd6547214c6d"
+        "sha256": "beae3c6cb0e9604701e8f8dc024dcaf6c4ba3ec8411f5c121b56a064a1e36fd7"
       },
       {
         "file": "assets-src/shinsekai/browser-study/shop-paper-shadow.mjs",
@@ -554,5 +554,36 @@
     "visualAcceptance": false,
     "qualified1080p": false,
     "openIssues": "Flat warm room; source point-light balance and material/weathering; cold WebGL readiness"
+  },
+  "runtimeDaylightCandidate": {
+    "query": "?clothsewn&clothlook&ao&daylight",
+    "inferred": true,
+    "geometryChanged": false,
+    "daytimeGain": 0.0009,
+    "ranges": [
+      4.5,
+      2.5
+    ],
+    "dreamRestoresOriginalCalibratedLight": true,
+    "extraShadowMaps": 0,
+    "files": [
+      {
+        "file": "assets-src/shinsekai/browser-study/shop-daylight.mjs",
+        "sha256": "3247ae2ebbeaa4470223d1d81ce0e1c523213178de6d35673e7c4ba688c209b8"
+      },
+      {
+        "file": "assets-src/shinsekai/browser-study/building-a.mjs",
+        "sha256": "beae3c6cb0e9604701e8f8dc024dcaf6c4ba3ec8411f5c121b56a064a1e36fd7"
+      },
+      {
+        "file": "assets-src/shinsekai/browser-study/daylight-118.md",
+        "sha256": "ecdb313d043614cda06b2ff15646e82a5fd59ca6029e4af720240b1ebc610884"
+      }
+    ],
+    "checks": "294/294 build; both native1280x720 backends base/dream/save/far, no new errors/warnings; dream lamp settings restored",
+    "receipt": "parent research-cache/look-dev/daylight-118/receipt.json",
+    "visualAcceptance": false,
+    "qualified1080p": false,
+    "openIssues": "Corner and cloth remain dark; bounded point ranges do not provide physical occlusion. Unmatched cold observations are not FPS or a controlled regression comparison."
   }
 }
