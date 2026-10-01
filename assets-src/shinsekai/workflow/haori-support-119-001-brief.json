@@ -1,0 +1,16 @@
+{
+  "handoff":119,
+  "round":"haori-support-119-001",
+  "scope":"Replace only connected haori shape; add visible bamboo support and two cords. Cloth colours/maps/material/light fixed. Sheen and wall AO are subsequent separate rounds.",
+  "source":"eval-building-a/hybrid/runtime/upper-cloth-v2-sewn-rail.glb",
+  "sourceSHA256":"7240ebf2851bc40a80e5bb2fc95644b2c4f372a08935a597d8c04f730f0b0f30",
+  "coordinate":"metres, Blender Z-up; source world origin retained; glTF Y-up on export",
+  "assumptions":"Artistic inferred garment/support, not surveyed historical dimensions",
+  "construction":{"barX":0.45,"barZ":4.87,"barRadius":0.012,"barY":[1.72,2.65],"clothThickness":0.0012,"bodyLength":0.78,"bodyWidth":0.46,"sleeveWidth":0.20,"sleeveDepth":0.39,"initialSleeveUndersideSag":0.11,"initialSagRatio":0.2820512821,"verticalFoldCount":4,"foldPeakToTrough":0.022,"collarFoldDepth":0.01,"inwardHemCurl":0.012},
+  "method":"Connected front/back/armholes and semicircular shoulder wrap over real bamboo collider; pinned wrap supported by bamboo; local32-frame cloth settlement. This changes support construction, not the rejected old sleeve-drop or bending-only family.",
+  "preserve":["source binary prefix and all unrelated meshes, UV, colours, maps, materials, hardware, nodes/transforms/clips","old candidates and authoring files","current browser default"],
+  "officialReferences":[{"url":"https://docs.blender.org/manual/es/4.5/physics/cloth/settings/collisions.html","claim":"Cloth and other mesh Collision plus quality/distance settings; save scene before simulation caching; discrete checks still required","read":"2026-10-02"},{"url":"https://docs.blender.org/UATEST/manual/en/4.5/physics/cloth/examples.html","claim":"Vertex-group pin weights support attached garment; collision geometry must be supplied","read":"2026-10-02"}],
+  "checks":["source hashes unchanged","initial/final discrete surface intersections with bamboo and source hardware/interior","connected closed fabric and pin drift/contact distances","explicit unrelated byte retention and GLB validator","save/reopen scene equality","matched front/context and added fixed side view on WebGPU/WebGL2 before visual acceptance"],
+  "qualification":"Shape-study only; no phone performance or full119 completion. Measured final sag/folds/collar may differ after settlement and must be recorded; old150k room budget is provisional, preserve visible quality first.",
+  "cost":{"newTools":0,"TRIPO":0}
+}

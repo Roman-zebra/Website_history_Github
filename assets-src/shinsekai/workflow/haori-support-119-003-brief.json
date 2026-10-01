@@ -1,0 +1,11 @@
+{
+ "round":"haori-support-119-003","handoff":119,
+ "source":"private haori-support-119-002/settled.blend; frozen runtime7240 remains unchanged",
+ "scope":"One geometry factor: lower supported garment and bamboo80mm, lengthen existing two cords to unchanged original peg anchors. Keep settled garment shape, UV, colours/material/light fixed.",
+ "reason":"002 passes exported neighbour checks but both native fixed front/side views hide the short cords behind the shoulder. Human119 requires visible bamboo and cords.",
+ "assumptions":"Inferred support height; Blender Z-up metres. Cloth simulation from001 retained as rigid translation, not resimulated; gravity-relative shape preserved, changed neighbours must be re-audited.",
+ "references":["haori-support-119-001-brief.json and pinned Blender4.5 collision documentation read2026-10-02"],
+ "checks":["re-audit exported source interior/exterior/hardware/support surfaces before native capture","GLB validation/source binary retention","matched source/candidate fixed whole front/side/context views both backends","scene save/reopen","final shape dimensions and contact qualification remain separate"],
+ "status":"Unqualified until actual results recorded; no full119 completion or phone acceptance",
+ "cost":{"TRIPO":0,"newTools":0}
+}

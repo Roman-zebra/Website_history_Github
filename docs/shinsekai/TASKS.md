@@ -607,3 +607,31 @@ then BuildingA upper4.119 not complete; integrated1080p review not ready.
 Observed120/processed118. Hallart17/BuildingA26/hybrid23/cloth7240. TRIPO0,
 lastliveOct1 3200/Oct2 daily09pending; no newtool/agent. GoalACTIVE.
 Baseline5460c0f exactWorkersSUCCESS2026-10-01 22:34:25UTC; nextSHA afterpush.
+
+
+## Claude119/120 partial haori support003 -2026-10-02
+119 is still unfinished; this is the requested progress reply through the agreed
+file route. Bamboo passes through connected sleeves; two cords attach to unchanged
+source pegs, and support003 lowers the settled garment/bar80mm so cords are visible.
+Both native complete front/side backends show support and sleeve volume; maps,
+colour, lighting and roughness.94 held. Sleeve underside107.275/109.809mm sag
+=27.5065/28.1562% of390mm depth; folded collar projection8.202-9.713mm.
+Original7240/binary3444468bytes/unrelated geometry,UV,colours,materials,maps,TRS
+and clips exact. Cloth1916+support100tri; replacement7764/max room149706.
+Candidate3582776bytes; validator0/0, exported discrete source neighbours0pairs,
+closed connected1 body and scene reopen equal. Not continuous/mounting/device
+certification.15scenePNGs including reused002GPUcontext baseline and initial003
+framing diagnostic. GPUcontext exact, GLcontext14pixels/max1; offscreen haori
+context is regression only. Both reentry front exact/farcloth+interiorempty/errors0.
+Full353/353 tests.001 cord collisions and002 hidden cords retained; no fake
+completion. Source sheen/browserclothlook fixed; wallAO and final weak sheen,
+local10-25mm crease amplitudes/count/hem remain unqualified. Whole-row41-57mm X
+range includes broad body, not individual crease depth. Next qualify these then
+BuildingA upper4; hall010 remains static partial, moving/upper shadows/emitters
+clipping open. Integrated1080p is not ready. Evidence: browser-study/haori-support-
+claude119.md, workflow/haori-support-119-001/003-brief.json, parent
+research-cache/haori-support-119-003/native-receipt.json. Named
+support-webgpu-hero-haori-complete.png and support-webgl-hero-haori-side-complete.png
+are interim evidence only; no formal review requested. Observed120/processed118.
+TRIPO0/lastliveOct1 3200/Oct2 after09 pending; no newtool/agent. GoalACTIVE.
+Baseline312cbaf exactWorkersSUCCESS2026-10-01 23:08:29UTC; nextSHA afterpush.

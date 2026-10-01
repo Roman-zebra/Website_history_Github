@@ -186,3 +186,22 @@ requires leading zero for fractional numeric literals. The first integration
 failed before editing and the brief/state were corrected before351-test build.
 Evidence: parent hall-contact-119-010/native-receipt.json and bake-receipt.json;
 browser-study/hall-contact-claude119.md. Continue haori/upper4, not full119 review.
+
+
+## Visible support needs a geometric and a native check -2026-10-02
+119 haori001 connected bamboo-supported construction cleared bar/hardware, but
+two new cords crossed cloth30/32 exported pairs.002 cords moved to exposed bar
+ends and original peg surface anchors(0distance), clearing all exported neighbour
+pairs; native fixed front/side still hid the short cords behind the shoulder.
+003 lowered settled cloth/bar80mm and lengthened cords, preserving gravity-relative
+shape without claiming a new simulation. Re-audit changed neighbours before native
+rendering. Both complete front/side backends now expose bar/cords and sleeve sag.
+Save original cramped views and qualify fixed full-garment views before claiming
+visibility. Sag27.5/28.2% and collar projection8.2-9.7mm are measured; rest22mm
+fold seed is not proof of final local creases. Whole-row41-57mm range includes
+macro deformation; measure individual folds separately. Source maps/materials
+and unrelated binary are exact; no new texture/AA reduction.353tests/reopen0/0
+validator, both reentry exact. GLcontext14pixelsmax1 retained without cause claim.
+Evidence: workflow/haori-support-119-001/003-brief.json, browser-study/haori-support-
+claude119.md and parent research-cache/haori-support-119-001/002/003. WallAO, final
+sheen/local crease/hem, upper4 and full119 remain unfinished.

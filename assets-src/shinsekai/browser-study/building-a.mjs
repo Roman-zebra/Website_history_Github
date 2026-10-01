@@ -22,7 +22,8 @@ const dreamCheck=document.querySelector('#dreamLook');
 // Opt-in comparison: compileAsync still increases total readiness time here.
 const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
-const clothRail=new URLSearchParams(location.search).has('clothrail');
+const clothSupport=new URLSearchParams(location.search).has('clothsupport');
+const clothRail=clothSupport||new URLSearchParams(location.search).has('clothrail');
 const clothHat=clothRail||new URLSearchParams(location.search).has('clothhat');
 const clothSewn=clothHat||new URLSearchParams(location.search).has('clothsewn');
 const clothV2=clothSewn||new URLSearchParams(location.search).has('clothv2');
@@ -115,7 +116,8 @@ function release(model){
 }
 async function load(part){
  const loadStart=performance.now();
- const gltf=await loader.loadAsync(base+'runtime/'+part+'.glb');
+ const gltf=await loader.loadAsync(clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
+ if(part==='upper-cloth-v2-sewn-rail')canvas.dataset.clothSupport=clothSupport?'haori-support-119-003':'source7240';
  gltf.studyLoadMs=performance.now()-loadStart;
  if(disposed){release(gltf);throw new DOMException('Page left','AbortError');}
  if(part==='dream-petals'){
@@ -187,6 +189,11 @@ function pose(){
  const view=select.value;
  const clothShots={
   'hero-haori':{position:[1.42,2.22,4.50],target:[.26,2.16,4.50],lens:24},
+  'hero-haori-side':{position:[.88,3.10,4.55],target:[.40,2.18,4.50],lens:28},
+  'hero-haori-support':{position:[1.75,2.22,4.55],target:[.38,2.18,4.55],lens:24},
+  'hero-haori-side-wide':{position:[1.10,3.40,4.55],target:[.40,2.18,4.50],lens:24},
+  'hero-haori-complete':{position:[1.90,2.22,4.48],target:[.38,2.18,4.48],lens:24},
+  'hero-haori-side-complete':{position:[1.25,3.65,4.48],target:[.40,2.18,4.46],lens:24},
   'hero-laundry':{position:[1.90,2.75,5.10],target:[1.90,4.44,5.08],lens:22},
   'hero-cloth-bolt':{position:[3.05,1.35,4.15],target:[2.45,2.55,3.49],lens:30}
  };
