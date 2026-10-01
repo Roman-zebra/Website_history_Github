@@ -1,0 +1,279 @@
+{
+ "measuredAt": "Thu Oct 01 2026 09:01:34 GMT+0900 (日本標準時)",
+ "machine": "GTX 1660 SUPER / Ryzen 5 1600 / Chrome 154, display ~100 Hz",
+ "harness": "dedicated Chrome, --disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-background-timer-throttling, window 1920x1200, page measure checkbox (continuous rAF), 240 intervals per view after ready",
+ "webgpu": {
+  "url": "http://127.0.0.1:18765/assets-src/shinsekai/browser-study/tower-base-113.html?size=1080",
+  "results": [
+   {
+    "view": "north",
+    "cell": "empty",
+    "revision": "2",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGPU",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.2,
+    "cpuSubmitMs": 0.9,
+    "draws": "34",
+    "triangles": "141215",
+    "vis": "visible"
+   },
+   {
+    "view": "hall",
+    "cell": "cell_hall",
+    "revision": "3",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGPU",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.2,
+    "cpuSubmitMs": 2.4,
+    "draws": "108",
+    "triangles": "240367",
+    "vis": "visible"
+   },
+   {
+    "view": "stair",
+    "cell": "cell_stair",
+    "revision": "4",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGPU",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.2,
+    "max": 13.9,
+    "cpuSubmitMs": 1.1,
+    "draws": "60",
+    "triangles": "176847",
+    "vis": "visible"
+   },
+   {
+    "view": "head",
+    "cell": "cell_stair",
+    "revision": "5",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGPU",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.4,
+    "cpuSubmitMs": 1.5,
+    "draws": "52",
+    "triangles": "166809",
+    "vis": "visible"
+   },
+   {
+    "view": "lift",
+    "cell": "cell_lift",
+    "revision": "6",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGPU",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.3,
+    "cpuSubmitMs": 2.9,
+    "draws": "208",
+    "triangles": "184995",
+    "vis": "visible"
+   },
+   {
+    "view": "cinema",
+    "cell": "cell_cinema",
+    "revision": "7",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGPU",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 16.3,
+    "cpuSubmitMs": 2.2,
+    "draws": "78",
+    "triangles": "232689",
+    "vis": "visible"
+   }
+  ]
+ },
+ "webgl": {
+  "url": "http://127.0.0.1:18765/assets-src/shinsekai/browser-study/tower-base-113.html?webgl&size=1080",
+  "results": [
+   {
+    "view": "north",
+    "cell": "empty",
+    "revision": "2",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGL2",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.4,
+    "cpuSubmitMs": 0.9,
+    "draws": "34",
+    "triangles": "141215",
+    "vis": "visible"
+   },
+   {
+    "view": "hall",
+    "cell": "cell_hall",
+    "revision": "3",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGL2",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.3,
+    "cpuSubmitMs": 1.6,
+    "draws": "108",
+    "triangles": "240367",
+    "vis": "visible"
+   },
+   {
+    "view": "stair",
+    "cell": "cell_stair",
+    "revision": "4",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGL2",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.6,
+    "cpuSubmitMs": 1.8,
+    "draws": "60",
+    "triangles": "176847",
+    "vis": "visible"
+   },
+   {
+    "view": "head",
+    "cell": "cell_stair",
+    "revision": "5",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGL2",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.3,
+    "cpuSubmitMs": 1.6,
+    "draws": "52",
+    "triangles": "166809",
+    "vis": "visible"
+   },
+   {
+    "view": "lift",
+    "cell": "cell_lift",
+    "revision": "6",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGL2",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 10.6,
+    "cpuSubmitMs": 2.9,
+    "draws": "208",
+    "triangles": "184995",
+    "vis": "visible"
+   },
+   {
+    "view": "cinema",
+    "cell": "cell_cinema",
+    "revision": "7",
+    "ready": "true",
+    "error": "",
+    "backend": "WebGL2",
+    "buffer": [
+     1920,
+     1080
+    ],
+    "viewport": "{\"width\":1920,\"height\":1080,\"clientWidth\":1904,\"clientHeight\":1105,\"visibility\":\"visible\"}",
+    "samples": 240,
+    "fps": 100,
+    "median": 10,
+    "p95": 10.1,
+    "max": 15,
+    "cpuSubmitMs": 1.7,
+    "draws": "78",
+    "triangles": "232689",
+    "vis": "visible"
+   }
+  ]
+ }
+}

@@ -61,8 +61,17 @@ A documented viewport override matched buffer and client at 1920 × 1080.
 154 visible-page RAF samples over 143,407.9ms ran at about 1.074 RAF/s
 (median 1009.9ms); the pacing cause is unverified. This does **not** qualify
 the 60fps gate or measure GPU capacity. This route also omits the tower shaft,
-shadows, AO, SSR and final postprocessing. Claude's prepared measurement route
-remains necessary before accepting the conditional 160k exterior budget.
+shadows, AO, SSR and final postprocessing.
+
+Claude116 subsequently accepted this scoped source113 gate using the dedicated
+Chrome107 measurement setup on GTX1660SUPER/Ryzen5 1600/Chrome154: 240 visible
+RAF intervals for each of six views on each backend, 1920x1080 render buffer,
+CSS client1904x1105. Mean100fps, median10ms, p95<=10.2ms, max<=16.3ms; ready,
+cell, revision and error fields were checked. The original receipt is retained
+in `docs/shinsekai/research/perf-tower-base-113-claude.json`. This is Claude's
+measurement, not an independent Codex rerun or evidence of GPU headroom beyond
+the ~100Hz display limit. Combined115 wings/cells and new lighting/AO/effects
+require their own performance checks; final production60fps remains open.
 
 Color, room equipment and lighting are estimates. No source-photo/video pixels,
 production entitlement or payment flow are included. Claude owns the subsequent

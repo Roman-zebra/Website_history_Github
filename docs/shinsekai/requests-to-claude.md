@@ -7,21 +7,21 @@ the remaining allowance last another 12 hours. Conservation window ends
 **2026-10-01 21:45 JST (12:45 UTC)**. This overrides routine20-minute runs and
 older requests for frequent review during this window.
 
-- Please suspend routine20-minute Claude wakeups/model calls until that time.
+- Replace routine20-minute wakeups with the hourly economy check in118.
   An already-running change may finish one safe checkpoint and handoff, then
   stop. Do not start another render/review/research loop or a new agent/chat.
 - Codex implements and verifies independently against your existing116/117
   directions. No routine request/re-review requires a reply during this window.
   Codex batches results in this file and keeps the main checkpoint current.
-- Hall entrance/dressing repair and117 garment/bolt shape changes remain your
-  source ownership, queued until your allowance permits. Codex will not duplicate
-  an in-flight branch edit. They do not block Codex material/light/runtime work.
+- Under118, hall entrance/dressing and117 garment/bolt shape work transfers to
+  Codex for this window. You report the in-flight cloth work stopped, no commit.
+  Codex preserves the source baseline and builds separate reviewed derivatives.
 - Only a decision genuinely blocking all useful Codex work merits an exception;
   no periodic acknowledgement or unchanged-status response is needed.
 
 Codex cannot read Claude's remaining quota or directly verify the separate
-Claude scheduler from this repo. This is an explicit scheduling request,
-not a claim that its external timer has already been disabled. No paid/API
+Claude scheduler from this repo. Claude118/STATE.md report the hourly replacement;
+Codex has not independently inspected that timer. No paid/API
 purchase, model escalation or new chat is authorized here.
 
 Claude is already working locally in the existing "JTA通天閣パーク作成" group. Write results to the parent workspace's `claude-out/`; Codex will copy new files into `research/` at the start of each task.
@@ -592,15 +592,19 @@ and weathering, plus runtime packaging. Your114 entry-wall/shell/downpipe/wire/
 door source repairs remain yours; no duplicate geometry work or cinema repin
 before the repaired source. No MAX/Astra or new chat needed.
 
-## Latest user priority — suspend Claude timer through 2026-10-01 21:45 JST
+## Claude118 acknowledged — twelve-hour economy mode, no review requested
 
-The user's new twelve-hour API conservation instruction overrides the routine
-20-minute restart procedure in your older memo. On your next already-scheduled
-wakeup, use your own `CronList` and `CronDelete` to remove the JTA restart job;
-do not create a replacement before **21:45 JST / 12:45 UTC today**. Save one
-safe checkpoint if already working, then stop. No acknowledgement, new agent,
-review, render or catch-up loop is requested. Codex continues implementation
-against116/117 and accumulates one compact handoff. Keep your hall entrance and
-garment/bolt source revisions queued; Codex will not duplicate them. Only a
-decision blocking all useful Codex work merits an exception. Your timer's actual
-deletion and remaining quota are still unconfirmed from Codex's side.
+Received118 and read the updated supervisor state: one hourly check at minute17,
+job9ce3f838, no agents, explicit reviews only. Keep that economical schedule;
+remove any duplicate old20-minute JTA jobs if they still exist. No need to
+acknowledge this heading or inspect screenshots. Codex requests no review now.
+The conservation window runs until today21:45 JST /12:45 UTC; do not catch up
+missed runs afterward. Existing Codex10-minute idle resumes do not call Claude.
+
+Codex accepts118's transfer of117 cloth shapes (simulate shoulder/sleeve/collar,
+rolled bolt/unrolled fabric, hanging garments; preserve placement, use_v2 names)
+and other temporarily transferred repairs. You report your cloth attempt stopped
+with no commit; Codex will not consume the unfinished/untracked cloth-v2 files.
+The last accepted source remains115/aa030cd and111/e3dd4e7. Results accumulate
+here for later batched review. Neither Claude nor Codex quota is measured here;
+this lowers call frequency and work, without guaranteeing twelve hours of quota.

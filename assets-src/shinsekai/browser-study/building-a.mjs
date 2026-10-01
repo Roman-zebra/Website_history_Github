@@ -9,19 +9,24 @@ import {createShopDreamLook} from './shop-dream-look.mjs';
 import {createShopDreamLayer} from './shop-dream-layer.mjs';
 import {connectShopFlowers} from './shop-flower-look.mjs';
 import {connectShopCloth} from './shop-cloth-detail.mjs';
+import {connectShopClothNormal} from './shop-cloth-normal.mjs';
+import {createShopAmbientLook} from './shop-ambient-look.mjs';
+import {connectShopPaperShadows} from './shop-paper-shadow.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
 const dreamCheck=document.querySelector('#dreamLook');
 // Opt-in comparison: compileAsync still increases total readiness time here.
 const precompile=new URLSearchParams(location.search).has('precompile');
-const flowerInstances=new URLSearchParams(location.search).has('petals');
+const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
 const clothDetail=new URLSearchParams(location.search).has('cloth');
+const ambientDetail=new URLSearchParams(location.search).has('ao');
 const capture=document.querySelector('#capture');
 const buttons={cash:document.querySelector('#cash'),storage:document.querySelector('#storage')};
 const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:new URLSearchParams(location.search).has('webgl')});
 renderer.setPixelRatio(1);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.AgXToneMapping;renderer.toneMappingExposure=1.1;
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
+renderer.shadowMap.transmitted=true;
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x8a9ba7);
 const camera=new THREE.PerspectiveCamera(45,1,.03,150);camera.position.set(24,15,27);
 const controls=new OrbitControls(camera,canvas);controls.target.set(3,2,-4.5);controls.enableDamping=true;controls.minDistance=.15;controls.maxDistance=65;
@@ -31,7 +36,7 @@ Object.assign(sun.shadow.camera,{left:-10,right:10,top:10,bottom:-10,near:.5,far
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(140,140),new THREE.MeshStandardMaterial({color:0x706654,roughness:.9}));ground.rotation.x=-Math.PI/2;ground.position.y=-.02;ground.receiveShadow=true;scene.add(ground);
 const loader=new GLTFLoader(),glass=createPeriodGlassMaterial(),assets=[],exteriors=new Map(),drawers=new Map();
 let manifest,shots,cells,exterior=null,interior=null,currentLOD=null,requestedLOD=null,lodEpoch=0,frame=null,disposed=false,ready=false,lastTime=null,frames=0,envTarget=null,capturing=false,captureWait=null;
-let floorLook=null,dreamLook=null;
+let floorLook=null,dreamLook=null,ambientLook=null;
 let dreamModel=null;
 const dreamLayer=createShopDreamLayer({load:()=>load(flowerInstances?'dream-petals':'dream'),attach:model=>{dreamModel=model;scene.add(model.scene);applyGlass();prepareScene('dream');request();},release:model=>{scene.remove(model.scene);if(dreamModel===model)dreamModel=null;release(model);},onChange:request});
 let preparationQueue=Promise.resolve(),preparations=0,preparationPaused=false;
@@ -58,7 +63,16 @@ function prepareScene(reason){
   if(!disposed&&!preparations){canvas.dataset.preparation=preparationPaused?'paused':ready?'prepared':'failed';controls.enabled=true;select.disabled=glassCheck.disabled=dreamCheck.disabled=false;Object.entries(buttons).forEach(([k,b])=>b.disabled=!drawers.has(k));request();}
  });
 }
-function render(time=performance.now()){if(dreamCheck.checked){dreamLook??=createShopDreamLook(renderer,scene,camera);dreamLook.render(time);}else renderer.render(scene,camera);canvas.dataset.look=dreamCheck.checked?'dream':'base';}
+function render(time=performance.now()){
+ hemi.intensity=interior ? .45 : .8;
+ renderer.toneMappingExposure=dreamCheck.checked ? 1.1*Math.pow(2,-.3) : 1.1;
+ if(ambientDetail)ambientLook??=createShopAmbientLook(renderer,scene,camera);
+ if(dreamCheck.checked){dreamLook??=createShopDreamLook(renderer,scene,camera,ambientLook?.beautyPass);dreamLook.render(time);}
+ else if(ambientLook)ambientLook.render();else renderer.render(scene,camera);
+ canvas.dataset.look=dreamCheck.checked?'dream':'base';
+ canvas.dataset.ambientOcclusion=ambientLook?'GTAO .35m half resolution indirect light':'off';
+ canvas.dataset.paperShadow=JSON.stringify(exterior?.studyPaperShadows??{materials:0});
+}
 async function settleGPU(){
  const queue=renderer.backend.isWebGPUBackend?renderer.backend.device?.queue:null;if(!queue)return;
  let timer;try{await Promise.race([queue.onSubmittedWorkDone(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('画像保存のGPU待機が完了しませんでした。')),5000);})]);}finally{clearTimeout(timer);}
@@ -69,6 +83,8 @@ function meshes(model,fn){model.scene.traverse(o=>{if(o.isMesh)fn(o);});}
 function release(model){
  model.studyFlowers?.disposeTextures();
  const geometries=new Set(),materials=new Set(),textures=new Set();meshes(model,o=>{if(o.isInstancedMesh)o.dispose();geometries.add(o.geometry);for(const m of [].concat(o.material,o.userData.authoringMaterial??[]))if(m&&m!==glass)materials.add(m);});
+ for(const m of materials)if(m.userData.studyOriginalWrinkleMaterial)materials.add(m.userData.studyOriginalWrinkleMaterial);
+ for(const m of materials)if(m.userData.studyOriginalShadowMaterial)materials.add(m.userData.studyOriginalShadowMaterial);
  for(const m of materials){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();}for(const t of textures){t.dispose();t.source?.data?.close?.();}for(const g of geometries)g.dispose();
 }
 async function load(part){
@@ -80,9 +96,11 @@ async function load(part){
   try{gltf.studyFlowers=connectShopFlowers(gltf);}
   catch(error){release(gltf);throw error;}
  }
+ if(part==='upper-cloth')try{gltf.studyClothNormal=connectShopClothNormal(gltf);}catch(error){release(gltf);throw error;}
+ if(part==='exterior-lod0')try{gltf.studyPaperShadows=connectShopPaperShadows(gltf);}catch(error){release(gltf);throw error;}
  if(part==='interior'&&clothDetail){
   let cloth;
-  try{cloth=await load('upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth);}
+  try{cloth=await load('upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth);gltf.studyCloth.normal=cloth.studyClothNormal;}
   catch(error){if(cloth)release(cloth);release(gltf);throw error;}
  }
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);
@@ -112,7 +130,7 @@ function applyGlass(){
   const replacement=m=>m.name==='M_Glass'&&glassCheck.checked&&Boolean(interior)?glass:m;
   o.material=Array.isArray(o.userData.authoringMaterial)?o.userData.authoringMaterial.map(replacement):replacement(o.userData.authoringMaterial);
   // Glass does not cast an opaque shadow; the separate frame still does.
-  o.castShadow=![].concat(o.material).every(m=>m===glass);
+  o.castShadow=![].concat(o.material).every(m=>m===glass||m.name==='M_Glass'||/glass_clear/i.test(m.name));
  });request();
 }
 async function updateLOD(distance){
@@ -199,7 +217,7 @@ capture.addEventListener('click',async()=>{
 window.addEventListener('resize',resize);document.addEventListener('visibilitychange',()=>{if(document.hidden){captureWait?.cancel();cancel();}else{if(preparationPaused){preparationPaused=false;prepareScene('visibility-resume');}request();}});
 window.addEventListener('pagehide',event=>{
  captureWait?.cancel();cancel();if(event.persisted)return;disposed=true;lodEpoch++;
- const cleanup=()=>{dreamLayer.dispose();cells?.dispose();drawers.forEach(d=>d.mixer.stopAllAction());for(const promise of exteriors.values())promise.then(release).catch(()=>{});controls.dispose();dreamLook?.dispose();envTarget?.dispose();glass.dispose();ground.geometry.dispose();ground.material.dispose();renderer.dispose();};
+ const cleanup=()=>{dreamLayer.dispose();cells?.dispose();drawers.forEach(d=>d.mixer.stopAllAction());for(const promise of exteriors.values())promise.then(release).catch(()=>{});controls.dispose();dreamLook?.dispose();ambientLook?.dispose();envTarget?.dispose();glass.dispose();ground.geometry.dispose();ground.material.dispose();renderer.dispose();};
  // compileAsync yields between objects. Do not dispose a model while its
  // queued shader jobs still refer to geometry or textures.
  if(preparations)preparationQueue.finally(cleanup);else cleanup();

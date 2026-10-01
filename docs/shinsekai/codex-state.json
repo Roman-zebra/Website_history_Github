@@ -1,24 +1,26 @@
 {
   "status": "in_progress",
   "current": "T6",
-  "next": "Active: 115route and hall-obstruction request pushed be63e79; exactWorkersSUCCESS.116/117 received, copied.113 scoped1920x1080 render-buffer gate accepted byClaude dedicated240sample/backends6views100fps; CSS1904x1105, no shaft/shadow/AO/SSR/finalfx.117 shapes remainClaude-owned. USER12h ClaudeAPI conservation until2026-10-01T12:45UTC: routine20minClaudecalls suspension requested viahandoff, external scheduler unconfirmed; no new review calls, Codex independently continues. Uncommitted: petals default/legacyflowers comparison; dreamblack.035 bloomthreshold1.05 exposure-.3EV; mixedclothnormals1/.37rotate37; GTAO?ao indirect context (fixedprepassMSAA samples0); papertransmittedshadow .40/.37/.32. Two meaningfulmaterialpreservation testsPASS. NativeGPUAO/materialloaded no newerrors afterMSAAfix; papernewreload upper-window loading, mustfinish bothbackends/base/dream/captures/retirement; initialAOcoldsubmit5707msnotFPS. Candidate109adapterrepinned reviewedASTbe0671..aa030cd/projectorASTsame, addsinferred35Whoodedworklamp/lowercase rightfilmfeedslot. Privatecinema115allbuildsession14767 exportingallrooms95MB; extractcinema-onlyparts/validator/rays/lightandfilm/crankpairedrenders beforecommit. Needsourceprovenance/docs/build283/fullpushafterchecks. Server18765session56557. Heartbeatpaused active; noMAX/Astra/newchat.",
-  "updatedAt": "2026-10-01T00:46:36.2952908Z",
+  "next": "Active:116/117 material candidate native both1280x720 backends base/dream captures/far retirement PASS/newerrors0; build283/283. Petals defaultaccepted116, clothnormalmixedscales, papertransmittedshadows, correctedglass, optionalGTAO single-sampleprepass, dreamblack.035 threshold1.05 exposure-.3. Commit/push material checkpoint; save exact Workers result.118 transfers shape and repairs to Codex during economy until21:45 JST; no Claude agents/review call. Next implement independent cloth simulation_v2 (shoulders/sleeves/collar, rolled bolt/unrolled fabric, laundry) in source placement, do not use unfinishedClaudecloth-v2. Cinema115 adapteraa030cd repin ASTsame, privateparts26806676/27405996B0/0 under150k but >25MiB; opticalraysclearfloor3.9 and exitfixture removed, pairedcrank and film-view renders private. Worklamp35W inferred; actualfilm/casecontact remains pending beforecommit. 115 hallobstruction known; temporarily transferredrepair allowed118 but preserveauthorbaseline. ColdfirstCPU2681.3msGPU/19182.7msGL unmatchednotFPS. Neednewqualifiedperfaftereffects/conservation. Server18765session56557. Heartbeatpaused; noMAX/Astra/newchat.",
+  "updatedAt": "2026-10-01T01:08:43.731660+00:00",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 115,
-  "observedClaudeHandoff": 117,
+  "processedClaudeHandoff": 118,
+  "observedClaudeHandoff": 118,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
   "coordination": {
     "heartbeat": "jta; pause during active turn, re-enable before idle",
-    "claudeIntervalMinutes": 20,
+    "claudeIntervalMinutes": 60,
     "handoff": "docs/shinsekai/requests-to-claude.md",
     "escalation": "Consult user before MAX/Astra or new group chat",
     "supervisor": "Claude: look/behaviour command centre and acceptance; Codex: implementation, tests, perf, main; needs work means implement, Claude will rework means await branch only for that item",
     "claudeConservation": {
       "requestedAt": "2026-10-01T00:45:00Z",
-      "policy": "Suspend routine Claude20min calls; Codex works independently and batches results; only true blocking decisions may escalate",
+      "policy": "Claude118 economy: hourly minute17 checks, no agents, reviews only when explicitly requested. Codex implements transferred cloth/repairs and batches results without calls.",
       "until": "2026-10-01T12:45:00Z",
       "externalSchedulerConfirmed": false,
-      "remainingQuota": "unavailable"
+      "remainingQuota": "unavailable",
+      "schedulerReport": "STATE.md reports hourly job9ce3f838; not independently inspected",
+      "quotaGuarantee": false
     }
   }
 }

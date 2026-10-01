@@ -86,6 +86,11 @@
       "file": "examples/jsm/tsl/utils/TAAUtils.js",
       "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/utils/TAAUtils.js",
       "sha256": "eb744737027b4e1bc1ddb3168733051d93e12c7ab85c1b365e1726c345fc134d"
+    },
+    {
+      "file": "examples/jsm/tsl/display/GTAONode.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/display/GTAONode.js",
+      "sha256": "0b9caf7f92cc8ad38a796b3060a9e975da43722dffb5e5dfe7709eef9104aa4b"
     }
   ],
   "version": "0.186.0",

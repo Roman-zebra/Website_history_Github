@@ -342,7 +342,7 @@
     },
     "maxActiveInteriorTriangles": 146554,
     "sourceTags": "A: original procedural/inferred creative shapes and preserved authored placement; no source image pixels",
-    "acceptance": "Opt-in only, awaiting Claude visual review"
+    "acceptance": "Claude116 accepted; now the default browser dream blossom; legacyflowers compares the earlier source"
   },
   "runtimeClothCandidate": {
     "file": "runtime/upper-cloth.glb",
@@ -362,7 +362,34 @@
       "source": "Original analytic fine wrinkle/weave height field; no reference pixels"
     },
     "dimensions": "A:1.2mm body;3mm folded lower edge; placement/silhouette from Claude",
-    "acceptance": "Opt-in only; both1280x720 backends attach/dream/far/capture pass; visual acceptance remains with Claude; qualified1080p pending",
-    "reproducibility": "UV1 packing can change serialized hashes; original position/UV0/colour triangles remain identical"
+    "acceptance": "Claude117 rejects the garment/bolt silhouettes; closed surfaces and normal implementation validated. Optional111 geometry retained pending simulated_v2 replacement transferred to Codex118.",
+    "reproducibility": "UV1 packing can change serialized hashes; original position/UV0/colour triangles remain identical",
+    "normalMix": {
+      "scales": [
+        1,
+        0.37
+      ],
+      "rotationDegrees": 37,
+      "weights": [
+        0.68,
+        0.32
+      ],
+      "geometryChanged": false
+    }
+  },
+  "runtimeLook116": {
+    "paperTransmittance": [
+      0.4,
+      0.37,
+      0.32
+    ],
+    "paperSourceTag": "A: inferred single-layer shadow approximation",
+    "hemisphereInterior": 0.45,
+    "dreamBlackLift": 0.035,
+    "dreamBloomThreshold": 1.05,
+    "dreamExposureEV": -0.3,
+    "AO": "optional GTAO .35m half resolution indirect context; single-sample depth prepass; final performance/acceptance open",
+    "checks": "283/283 build; native1280x720 both backends base/dream capture and far retirement, no new errors",
+    "receipt": "private parent research-cache/look-dev/shop-116-117/receipt.json"
   }
 }
