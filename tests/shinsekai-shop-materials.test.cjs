@@ -20,6 +20,23 @@ test('cloth normal mixing preserves physical fields, shared materials and geomet
  assert.equal(a.material.userData.studyOriginalWrinkleMaterial,source);assert.ok(a.material.normalNode?.isNode);
  assert.equal(c.material,other);assert.equal(source.normalNode,undefined);assert.equal(source.normalScale.x,.7);
 });
+test('optional fibre sheen separates shared coloured and uncoloured geometry without mutating source data',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
+ const {connectShopClothNormal}=await studyModule('shop-cloth-normal.mjs');
+ const source=new THREE.MeshPhysicalMaterial({sheen:1,sheenRoughness:.4,vertexColors:true});
+ source.name='Original cloth with fine wrinkle normal';source.normalMap=new THREE.Texture();
+ const coloured=new THREE.BoxGeometry(),plain=new THREE.BoxGeometry();
+ const colours=new Float32Array(coloured.getAttribute('position').count*3).fill(.02);
+ coloured.setAttribute('color',new THREE.BufferAttribute(colours,3));
+ const scene=new THREE.Group(),a=new THREE.Mesh(coloured,source),b=new THREE.Mesh(coloured,source),c=new THREE.Mesh(plain,source);
+ scene.add(a,b,c);const stats=connectShopClothNormal({scene},{fibreSheen:true});
+ assert.equal(a.material,b.material);assert.notEqual(a.material,c.material);
+ assert.ok(a.material.sheenNode?.isNode);assert.equal(c.material.sheenNode,null);
+ assert.equal(c.material.sheenRoughness,source.sheenRoughness);assert.equal(source.sheenRoughness,.4);
+ assert.equal(source.sheenNode,undefined);assert.equal(stats.tintedMaterials,1);
+ assert.equal(a.geometry,coloured);assert.equal(coloured.getAttribute('color').array,colours);
+ assert.deepEqual([...colours],new Array(colours.length).fill(Math.fround(.02)));
+});
 test('paper shadow transmission retains opaque visible paper and leaves timber unchanged',async()=>{
  const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
  const {connectShopPaperShadows}=await studyModule('shop-paper-shadow.mjs');

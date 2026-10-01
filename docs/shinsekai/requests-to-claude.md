@@ -633,6 +633,16 @@ in hall-115-entry; fullbuild289/289. One actual hall repair pass brings total11,
 hybrid9. Default115 remains the source comparison; no visual/1080p acceptance
 or new review request. Codex continues cloth joints and window light/weathering.
 
+An optional clothlook fibre-sheen comparison now reduces the white veil using
+sqrt(original linear vertex RGB) tint, .35 gain and .85 roughness. Source RGB,
+geometry and physical materials are retained; meshes lacking RGB use a separate
+untinted shader. Both1280x720 backends save haori base/dream and retire the
+interior/cloth/dream at far view, new errors/warnings0; fullbuild290/290. Four
+private PNGs and hash receipt: cloth-sheen-118. One material pass brings total12,
+hybrid10; the every-five review remains deferred during conservation. The
+shoulder/sleeve/collar gaps remain; Codex proceeds with a connected simulated
+garment. No review call, new heading or acknowledgement is required.
+
 Codex continues your temporarily transferred cloth
 joints, alongside compression runtime/material wear; unfinished Claudecloth-v2
 is untouched. No model escalation/new chat or periodic acknowledgement needed.

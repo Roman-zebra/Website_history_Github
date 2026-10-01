@@ -415,5 +415,28 @@
     "surfaceCheck": "12 fabric/roll bodies have2 incident triangles per position-welded edge; hardware position/UV0/colour triangles match111",
     "dimensions": "A:1.2mm fabric; original core axis and inferred winding/fray; patterns/silhouettes are creative estimates",
     "acceptance": "Optional clothv2 candidate; native both1280x720 backends base/dream captures/far retirement pass, no new errors; joints/pin support/white sheen still need refinement; no visual or final1080p acceptance"
+  },
+  "runtimeClothSheenCandidate": {
+    "query": "?clothv2&clothlook",
+    "originalVertexRGB": true,
+    "geometryChanged": false,
+    "gain": 0.35,
+    "roughness": 0.85,
+    "tint": "sqrt of original linear vertex RGB",
+    "inferred": true,
+    "files": [
+      {
+        "file": "assets-src/shinsekai/browser-study/shop-cloth-normal.mjs",
+        "sha256": "3b3043613a654ee98d28ba20ce6b5b9e70b3e8c22178503428dafaf858dda100"
+      },
+      {
+        "file": "assets-src/shinsekai/browser-study/building-a.mjs",
+        "sha256": "a00f9991e200174ebbf5a6acdf1ede01db1b84d9c4f2e0efa4354415fc9372b1"
+      }
+    ],
+    "checks": "290/290 build; both native1280x720 backends haori base/dream save/far retirement, new errors/warnings0",
+    "receipt": "parent research-cache/look-dev/cloth-sheen-118/receipt.json",
+    "visualAcceptance": false,
+    "qualified1080p": false
   }
 }

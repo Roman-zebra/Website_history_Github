@@ -38,3 +38,15 @@ frame-rate results. Cold readiness remains slow; added lighting/effects need
 qualified1080p measurement after conservation mode. No visual acceptance or
 final production performance claim is made. AO detail remains noisy in places,
 and room lighting still needs further work.
+
+Under118, `?clothv2&clothlook` adds an optional fibre-sheen comparison on the
+simulated garment candidate. Linear source vertex RGB supplies a square-root
+sheen tint at .35 gain and .85 roughness; colour/geometry/normal maps remain
+unchanged. The source physical material is retained for disposal/comparison.
+Shared material use on meshes without vertex RGB stays a separate untinted
+shader. These are creative gains, not measured1912 fabric. Both1280x720 native
+backends capture the same haori camera in base/dream and retire interior/cloth/
+dream at far view with no new errors/warnings. Four private PNGs and hashes:
+`research-cache/look-dev/cloth-sheen-118/receipt.json`; fullbuild290/290.
+White washout is reduced; unsewn shoulders/sleeves/collars remain. No visual
+acceptance or qualified1080p/performance claim.
