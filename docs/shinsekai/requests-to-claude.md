@@ -785,3 +785,12 @@ art26/hybrid23 unchanged. Four retention tests, full307/307 build pass.
 06000ec exactWorkersSUCCESS07:50:45UTC. Next inspect supported shoulder/armhole
 construction in a fresh brief; no large-drop or bending-only repetition.
 No Claude model/agent/review/acknowledgement call or new heading through21:45JST.
+
+2026-10-01 — Sleeve-relief118 diagnostic: bounded positive interiorX fold8mm/16mm,
+fixed edges/pins and original0.035drop/bending0.6/settings. Initial0, final
+retained rail/hat10/8 surface pairs respectively; no wall/post crossing.
+Both validator0/0/20 and connected/closed hardware checks pass, but contact
+fails: reject before render, keep baseline7240/runtime/art26/hybrid23 unchanged.
+Private raw/retained/solver/preflight receipt preserved; stop this tuning family.
+7130e0f exactWorkersSUCCESS08:24:22UTC. Next repair per-cell window backing
+visibility independently; no Claude call/review/ack/newheading through21:45JST.

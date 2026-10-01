@@ -9,10 +9,11 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 
-def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bending_stiffness=2,initial_sleeve_drop=.035):
+def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bending_stiffness=2,initial_sleeve_drop=.035,initial_sleeve_relief=0):
     assert not rail_collision or hat_collision,'Rail contact requires the retained hat comparison'
     assert math.isfinite(bending_stiffness) and bending_stiffness>0,'Invalid bending stiffness'
     assert math.isfinite(initial_sleeve_drop) and 0<=initial_sleeve_drop<=.25,'Invalid initial sleeve drop'
+    assert math.isfinite(initial_sleeve_relief) and 0<=initial_sleeve_relief<=.025,'Invalid initial sleeve relief'
     vertices=[];faces=[];colours=[]
     def vertex(p):
         vertices.append(tuple(p));return len(vertices)-1
@@ -58,6 +59,8 @@ def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bend
             def position(j,i,bodyIds=bodyIds,index=index):
                 p=Vector(vertices[bodyIds[j][index]])
                 p.x+=.04*math.sin(math.pi*j/6)*i/4
+                if initial_sleeve_relief and 0<i<4 and 0<j<6:
+                    p.x+=initial_sleeve_relief*.5*(1-math.cos(2*math.pi*i/4))*math.sin(math.pi*j/6)
                 p.y+=sign*.20*i/4;p.z-=initial_sleeve_drop*i/4
                 return tuple(p)
             sides.append(grid(6,4,position,lambda j,i,bodyIds=bodyIds,index=index:bodyIds[j][index] if i==0 else None,(34,40,60)))
@@ -225,7 +228,7 @@ def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bend
     record=dict(name=obj.name,frames=32,quality=10,pinnedVertices=len(pinned),vertices=len(vertices),
         maxDisplacementMetres=maxShift,closedBodyThickness=.0012,connectedComponents=components,
         allThickenedEdgesHaveTwoFaces=True,pinDisplacementMetres=pinError,pinHardwareDistancesMetres=contact,
-        settings=dict(mass=.008,airDamping=5,tension=60,compression=60,shear=40,bending=bending_stiffness),initialSleeveDropMetres=initial_sleeve_drop,
+        settings=dict(mass=.008,airDamping=5,tension=60,compression=60,shear=40,bending=bending_stiffness),initialSleeveDropMetres=initial_sleeve_drop,initialSleeveReliefMetres=initial_sleeve_relief,
         colliderTriangles=len(colliderFaces),
         supportScope=('Two fixed attachment points, retained pegs and hat surface; chin cord excluded; discrete final surface check only' if hat_collision else 'Two fixed attachment points and retained-peg collider only; neighbouring hat excluded; not whole garment collision or physical mounting certification'))
     if hat_collision:record.update(hatColliderTriangles=len(hatFaces),finalHatSurfaceTriangleOverlaps=hatOverlaps,initialHatClearanceShiftMetres=initialHatShift)

@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "roundId": "haori-sleeve-relief-118-20261001",
+  "status": "completed_rejected_candidates",
+  "subject": "Bounded sleeve midsurface relief with fixed supported edges",
+  "baseline": {
+    "commit": "7130e0f7f2d793691f0bc780c55304f71e676b3a",
+    "glbSha256": "7240ebf2851bc40a80e5bb2fc95644b2c4f372a08935a597d8c04f730f0b0f30",
+    "initialSleeveDrop": 0.035,
+    "bending": 0.6
+  },
+  "intendedResult": "A subtle depth fold in the sleeve, without lowering its supported shoulder or moving the armhole, wrist or hem edges.",
+  "singleVariable": {
+    "name": "initial_sleeve_relief",
+    "baseline": 0,
+    "candidates": [
+      0.008,
+      0.016
+    ],
+    "meaning": "Peak positive localX offset on sleeve interior, half(1-cos(2pi*i/4))*sin(pi*j/6). Zero at armhole, wrist, upper and lower sleeve edges; same field on front/back, before existing contact clearance."
+  },
+  "scope": {
+    "preserve": [
+      "426 vertex connected pattern",
+      "two pins and source hardware",
+      "body/collar/shoulder and sleeve edge positions",
+      "0.035 sleeve drop",
+      "all springs/mass/damping",
+      "32frames/quality10",
+      "770 colliders",
+      "collision2.4mm/quality6",
+      "hat/post/shoulder clearance",
+      "1.2mm closed bodies",
+      "runtime material/light/camera",
+      "source normal/colour/roughness maps"
+    ],
+    "defer": [
+      "historical garment dimensions",
+      "whole-room/continuous/mounting certification",
+      "qualified1080p performance",
+      "supervisor acceptance"
+    ]
+  },
+  "reusableLessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "failedFamily": "0.09/0.14 initial vertical sleeve drop: exported rail/hat326/439 plus wall40/122 despite initial0 and passing validator",
+    "hypothesis": "An interior depth fold can reduce planar shading while retaining the existing supported outline.",
+    "distinguishingEvidence": "Initial and exported contact first; compare matched near/context only for valid candidates. Reject if the fold disappears or reads as a bump."
+  },
+  "references": [
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/physics/cloth/settings/shape.html",
+      "checkedAt": "2026-10-01",
+      "status": "Pinned4.5 official HTML downloaded and read locally",
+      "claim": "Initial mesh ordinarily defines rest shape; pin weights control fixed attachment."
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/physics/cloth/settings/collisions.html",
+      "checkedAt": "2026-10-01",
+      "status": "Pinned4.5 official HTML downloaded and read locally",
+      "claim": "Collider and cloth settings must be enabled; exported result still checked."
+    }
+  ],
+  "coordinates": {
+    "unit": "metre",
+    "system": "BlenderZ-up, glTFY-up",
+    "origin": "Frozen111 source root",
+    "evidence": "Original inferred garment, not surveyed clothing"
+  },
+  "reproducibility": {
+    "newRandomness": false,
+    "execution": "Blender4.5.10 threads2; serialized generation and audit",
+    "source": "Frozen111/e3dd4e7, existing source seeds retained",
+    "sourceHashes": "Capture actual changed code/raw/retained hashes in result receipt",
+    "retention": "Narrow retainCloth preserves complete original binary prefix; reject unrelated edits and discard bounded non-target normal drift, without applying it."
+  },
+  "comparison": {
+    "cameras": [
+      "hero-haori",
+      "upper-window"
+    ],
+    "buffer": [
+      1280,
+      720
+    ],
+    "lighting": "Same source sun/fill/environment, clothlook; AO/daylight/wallwear/woodwear off",
+    "baselineImage": "Private prior rail0.6 images with exact same unchanged baseline SHA; save a fresh control before comparison if native context differs",
+    "backend": "WebGPU within fixed pairs; both backends for retained candidate lifecycle"
+  },
+  "plan": [
+    "Generate0.008 then require initial0 and exported wall/post/rail/hat0; preserve any failure",
+    "Generate0.016 separately with all other settings fixed and audit",
+    "Only valid candidates enter direct near/context visual comparison",
+    "If useful, check both backends base/dream/save/far and scoped scene reopen; then tests/build/commit/pull-rebase/push/Workers",
+    "Record rejection if candidates fail contact or useful appearance; do not count technical retries as art passes"
+  ],
+  "decision": {
+    "retain": "Existing baseline7240 unchanged",
+    "visualAcceptance": false,
+    "nextStep": "Close parameter tuning; switch to independent per-cell window-backing visibility repair."
+  },
+  "cost": {
+    "paidToolsOrApisAllowed": false
+  },
+  "coordination": {
+    "extraClaudeCalls": false,
+    "newAgents": false,
+    "newBatchHeading": false,
+    "reviewDeferredUntil": "2026-10-01T12:45:00Z"
+  },
+  "results": [
+    {
+      "reliefMetres": 0.008,
+      "retainedSha256": "f42e8ed932b2c4f4b76a17595f2a33d0b7466bd89c57d3b86e4c1cfdddbbc12e",
+      "initialColliderPairs": 0,
+      "exportedSurfacePairs": {
+        "BldgA_Interior_Structure": 0,
+        "UD_CoatRail_Haori_v2": 10
+      },
+      "validator": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 20
+      },
+      "decision": "Rejected before rendering"
+    },
+    {
+      "reliefMetres": 0.016,
+      "retainedSha256": "c40cf2bc8d5128577ae6b72f259cbb73e673e9c6c3b6cae1c3e6e175561bc8be",
+      "initialColliderPairs": 0,
+      "exportedSurfacePairs": {
+        "BldgA_Interior_Structure": 0,
+        "UD_CoatRail_Haori_v2": 8
+      },
+      "validator": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 20
+      },
+      "decision": "Rejected before rendering"
+    }
+  ]
+}
