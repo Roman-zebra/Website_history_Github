@@ -128,3 +128,12 @@ and TRIPO paid use while free local Goal work continues. Runtime availability,
 usage limits and required external input remain constraints; no completion
 claim until required functionality and qualified checks have evidence.
 Official Goal reference: https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex
+
+Latest visual-quality constraint: preserve existing attractive graphics during
+phone optimization. Jagged edges/blurred near surfaces/lost details fail visual
+acceptance even within numeric budgets. Prefer reduced simultaneous visible
+range, streamed cells, offscreen work and distant detail before cutting nearby
+maps or silhouettes. Current512px/noAA720px candidate is not approved for look;
+qualify close/context against matching source camera/light and adjust provisional
+resolution/AA budgets when needed. Next hall visibility/stream partition audit
+before geometric decimation. Real-device performance remains unmeasured.

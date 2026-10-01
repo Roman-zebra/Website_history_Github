@@ -1,7 +1,7 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "Continue T6 from tower-mobile-115.md: prepare a bounded hall geometry/streaming brief against source115 and private texture512/transport001; hall still7.62MB, lift draw count and cinema triangles also exceed phone budgets. Preserve immutable source, exact unrelated attributes, room placement and backing masks. Optional mobile route now passes exterior/stair base/dream on WebGPU/WebGL2, other cells blocked before loading. Roof/wire exact-duplicate inventory passed; near-coplanar contacts still open, no blind edits. TRIPO live3200 today/additional spend0; check once daily after09JST and guard all charged operations. Material Maker CLI export unverified; use existing tools. Cloth7240/art26/hybrid23 retained; no automatic Claude calls or agents.",
+  "next": "Continue T6 from tower-mobile-115.md with latest visual-quality priority: investigate hall stream/visibility partitioning and offscreen/distant work before cutting nearby textures or silhouettes. Hall still7.62MB, lift draw count and cinema triangles also exceed phone budgets. Current512px/noAA720px route is a technical candidate only, not visual approval; compare matching-camera/light close/context against source and reject jaggies/blur/lost details, adjust provisional resolution/AA if needed. Preserve immutable source, exact unrelated attributes, room placement and backing masks. Mobile exterior/stair base/dream pass both desktop backends; other cells blocked. Roof exactduplicates0, nearcontacts open. Check latest pushed main deployment at next checkpoint. TRIPO live3200 today/spend0; daily09JST guard. Material Maker CLI export unverified. Cloth7240/art26/hybrid23 retained; no automatic Claude calls or agents.",
   "updatedAt": "2026-10-01T14:03:00Z",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
@@ -58,6 +58,8 @@
     "actualDeviceMeasured": false,
     "wholeWorldWithinBudget": false,
     "candidate": "../research-cache/tower-mobile-transport-001",
+    "candidateVisualQualityApproved": false,
+    "qualityPolicy": "Preserve existing graphics: reduce simultaneous visible range/streamed cells/offscreen work and distant details before degrading nearby maps, silhouettes, antialiasing or render resolution. Reject jaggies/blur; provisional720px/512px budgets are adjustable and not quality acceptance.",
     "profile": "assets-src/shinsekai/browser-study/tower-mobile-115.md",
     "initialBytes": 1982896,
     "stairBytes": 3292372,

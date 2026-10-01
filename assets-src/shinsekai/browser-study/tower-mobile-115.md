@@ -2,6 +2,8 @@
 
 Private technical candidate; whole-world delivery, historical appearance and real iPhone14 performance are not accepted. Original frozen115 aa030cd files remain unchanged. The local115 viewer selects this profile with `?mobile` or coarse input at a short viewport edge <=600px; `?webgl` selects the fallback. `?mobiletextures` isolates texture resolution at the original1280x720 camera/light/LOD. Desktop113/115 retain their source route.
 
+Latest user quality constraint: preserve existing attractive graphics. The512px maps and720px/no-antialias output below are diagnostic candidates, not final quality settings. Reject visible jaggies, blurred nearby maps or lost silhouettes/details. First reduce simultaneous visible range, streamed cells, offscreen work and distant detail; retain close-view geometry/maps and restore antialiasing or raise buffer resolution where comparisons justify it. Provisional numerical budgets must not automatically override visual quality. This private study's coarse-input selection is not a production rollout.
+
 ## Results
 
 All14 source parts received an image-only512px derivative in `../research-cache/tower-mobile-textures-001`. Pillow12.3.0 preserves small image bytes, alpha and all non-image bufferViews exactly; normalized scene JSON is unchanged. The separate `tower-mobile-transport-001` stage uses existing lossless Meshopt encoding: decoded attributes/animations and resized images are exact, triangle order and winding are preserved, but cyclic rotation of a triangle's indices is allowed. Index bytes must not be described as identical after encoding. All14 compressed and14 decoded files validate with0 errors/0 warnings. Source hashes remain unchanged.
