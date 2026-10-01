@@ -106,3 +106,23 @@ performance. Actual AO still has weak feet contacts/small dark speckles and
 unoccluded global interior fill. Keep maps/AA and scope later tuning separately.
 Evidence: parent research-cache/hall-ao-119-005/differences.json and
 hall-ao-119-006/differences.json; workflow/hall-ao-119-006-brief.json.
+
+## Hall AO denoise007 (2026-10-02, optional; contacts unfinished)
+Filter the AO buffer with depth/normal similarity; never denoise the source
+beauty image to hide speckles. Existing r186 DenoiseNode can be prepared in an
+owned half-resolution red target and sampled by006 opaque material copies.
+Source-null four near/context PNGs remain exactly equal on both backends.
+The source package includes DenoiseNode/SimplexNoise even when our selected
+vendor subset does not: verify existing npm archive and byte-identical copies,
+record provenance, then explicitly reload after a failed module import. Do not
+restart a healthy server or add a tool installation for this missing-file case.
+Use public deterministic noiseNode and dispose its owned texture separately from
+the filter's default noise. Seeded noise does not guarantee bit-exact rendered
+output: GPU re-entry differs1pixel/max1; preserve and report that result.
+AO speckles are reduced, but foot/counter/shelf contact remains weak because
+direct global sun3 is still unshadowed. Extra filtering costs16samples/pixel;
+similar renderer counters do not demonstrate free GPU work or phone acceptance.
+Next inspect pinned public shadow APIs and add actual geometric occlusion with
+scoped/restorable geometry/light/shadow state. Keep maps/AA/glass/cameras fixed.
+Evidence: parent research-cache/hall-ao-119-007/differences.json,
+vendor-receipt.json and floor-residual-statistics.json; hall-denoise-claude119.md.

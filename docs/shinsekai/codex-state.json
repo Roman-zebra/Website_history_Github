@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude120 contacts/AO. AO004 rejected;005 isolates global main context as sufficient glass regression, preparation-only exact both backends. AO006 owned opaque hall material context repairs source-null near/context EXACT both backends;14nativePNGs/dream source exact/reentry exact/far38980tri75draw/reservations+maps0/errors0/4inputs unchanged/346tests. Fidelity route qualified, contact quality NOT complete: weak feet/counter/shelf and small speckles, unoccluded interior sun3/hemi1.2. Next changed007 investigate pinned public depth/normal-aware AO denoise before strength/fill/geometric shadows at fixed cameras; keep source-null controls/full maps/AA. Then finite4-6m,haori,upper4;119 incomplete/observed120/processed118. Hallart13/BuildingAart26/hybrid23/cloth7240. Baselinef46962a exactWorkersSUCCESS2026-10-01 20:01:36UTC; independently check new pushed SHA. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/reviews.",
-  "updatedAt": "2026-10-01T20:45:53.313941+00:00",
+  "next": "PRIORITY Claude120 contact shadows. AO007 optional depth/normal-aware denoise reduces speckles while source-null near/context EXACT both backends/full maps+AA;14nativePNGs/dream source exact/far38980tri75draw/cache+reservations0/public state restored/4inputs unchanged/346tests. GPUreentry1pixel/max1,GLexact; do not claim exact both. Existing r186 DenoiseNode/SimplexNoise copied unchanged from verified installed npm package/provenance; initial missing-module error resolved, no new errors after repair. Contacts still weak: global sun3 unshadowed/hemi1.2. Next changed008 implement geometric directional shadow on global sun with scoped/restored cast/receive/light/renderer state and near-room fitted map, keep AO007/light/exposure/maps/glass fixed; pinned public DirectionalLightShadow/Renderer docs checked, revalidate pinned shadow config and source ownership before code. Compare null/source and actual near/context/floor, dream/reentry/far; no unchanged denoise retry. Then finite4-6m,haori,upper4;119 incomplete/observed120/processed118. Hallart14/BuildingAart26/hybrid23/cloth7240. Baselinea070dff exactWorkersSUCCESS2026-10-01 20:48:38UTC; check new pushed SHA separately. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/reviews.",
+  "updatedAt": "2026-10-01T21:20:03.251970+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -80,7 +80,8 @@
     "hallPointNativeEvidence": "../research-cache/hall-point-119-002/native-receipt.json",
     "hallPassNativeEvidence": "../research-cache/hall-pass-119-001/native-receipt.json",
     "hallDirectAONativeEvidence": "../research-cache/hall-ao-119-003/native-receipt.json",
-    "hallMaterialAONativeEvidence": "../research-cache/hall-ao-119-006/native-receipt.json"
+    "hallMaterialAONativeEvidence": "../research-cache/hall-ao-119-006/native-receipt.json",
+    "hallDenoisedAONativeEvidence": "../research-cache/hall-ao-119-007/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete/120 contacts priority;AO006 source-null fidelity repaired both backends, contact strength/noise/fill/shadows pending. Then finite4-6m,haori,upper4. Partial file reply;observed120/processed118."
+  "pendingClaudeRepairs": "119 incomplete/120 contacts priority. AO007 reduces speckles with source-null fidelity both, contacts weak; implement scoped geometric direct-light shadows next. Then finite4-6m,haori,upper4. Partial file reply;observed120/processed118."
 }

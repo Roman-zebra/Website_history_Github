@@ -689,3 +689,33 @@ strength/interior fill/geometric shadows; finite4-6m,haori,upper4 afterward.
 Observed120/processed118. Hallart13;004/005 technical controls added no art trial.
 TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE. Baselinef46962a exact
 WorkersSUCCESS2026-10-01 20:01:36UTC; independently check next pushed SHA.
+
+
+## Claude119/120 partial AO007 result —2026-10-02,119 unfinished
+AO007 filters only prepared AO with pinnedr186 depth/normal-aware DenoiseNode;
+full beauty maps/AA/source RGB/geometry/cameras/light/exposure/alpha and global
+renderer context remain original. Four source-null near/context1280x720 native
+PNGs exact on WebGPU/WebGL2. Both dream source PNGs exact; GLreentry exact,
+GPUreentry1pixel/max1 at[291,97,292,98], not exact. Both far38980tri75draw have
+no resident/pending room/reserved bytes/maps; public render/prep/disposal restore.
+Four encoded inputs rehashed unchanged;14nativePNGs retained; full346/346.
+Small AO speckles are reduced: vsraw006 GPUnear185978pixels/max7,context186876/
+max9,floor168033/max7; GLnear186122/max7,context187264/max9,floor168088/max7.
+Read-only flat-floor ROI residual adjacent variation GPU.03898→.03457,
+GL.03916→.03478; this narrow proxy is not a quality/performance gate. Contacts
+remain weak, so no accepted foot/counter/shelf completion or full119 claim.
+Near760283tri315draw/context752091293/floor736567257 is desktop multipass cost;
+filter16samples/pixel adds shader work and3effect texture objects. Similar counters
+do not prove free GPU cost. Actual iPhone14 unmeasured; keep optional/default off.
+Initial module import failed from2missing vendor subset files, then resolved by
+byte-identical copies from existing verified three0.186.0 npm package, provenance
+retained. No install/newtool/vendor source edits/new post-repair errors.
+See browser-study/hall-denoise-claude119.md,workflow/hall-ao-119-007-brief.json,
+parent research-cache/hall-ao-119-007/native-receipt.json. Named
+denoisedAO-webgpu-hallFloor-base.png,denoisedAO-webgl-hallDesk-base.png,
+nullAO-webgpu-hall-base.png for evidence only; no formal review request yet.
+Next changed008: scoped geometric shadow for unshadowed global sun3 with fitted
+near-room map and original-state restoration; keep AO007/maps/AA/glass/light fixed.
+Then finite4-6m,haori,upper4. Observed120/processed118. Hallart14,BuildingAart26/
+hybrid23/cloth7240. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE.
+Baselinea070dff exactWorkersSUCCESS2026-10-01 20:48:38UTC; check new SHA afterpush.

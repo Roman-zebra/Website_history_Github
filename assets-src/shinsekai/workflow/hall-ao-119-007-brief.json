@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-depth-normal-denoise-007-20261002",
+  "status": "source_null_fidelity_passed_speckles_reduced_contacts_pending",
+  "subject": "Denoise only prepared hall AO while preserving full beauty maps and alpha",
+  "baseline": {
+    "commit": "a070dff",
+    "sourceRevision": "aa030cd",
+    "look": "AO006 material scope,2350K/point.5/EV-1.25/sourceSun.01/floorwallwear/full maps/AA",
+    "evidence": "parent research-cache/hall-ao-119-006/native-receipt.json",
+    "exactWorkersSuccess": "2026-10-01T20:48:38Z"
+  },
+  "scope": {
+    "change": "existing pinned depth/normal-aware DenoiseNode filters AO into owned half-resolution red target, then same opaque material scope; deterministic owned public noiseNode",
+    "preserve": [
+      "GTAO radius/thickness.35/resolutionScale.5",
+      "all beauty map resolution/AA/geometry/source RGB/light/cameras/exposure",
+      "global renderer context and alpha materials",
+      "source assignment restoration/cache/dream/exterior/default/phone"
+    ],
+    "defer": [
+      "contact strength and interior fill/geometric shadows until denoise inspection",
+      "finite range/haori/upper4",
+      "phone timing/production"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "measured model, no geometry change"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/DenoiseNode.html",
+      "checkedAt": "2026-10-02",
+      "support": "AO depth/normal-aware denoise, optional due added cost, public noiseNode/disposal"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/QuadMesh.html",
+      "checkedAt": "2026-10-02",
+      "support": "explicit preparation scheduling"
+    }
+  ],
+  "compatibility": "Local existing three-r186 package DenoiseNode takes AO texture/depth/signed normalView/camera; defaults radius/lumaPhi/depthPhi/normalPhi5 and16samples; owns default noise. It is a TempNode, not an owned target pass. Do not edit vendor internals. Seed a separate public noiseNode, dispose it and target separately.",
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md#hall-material-ao006",
+    "evidence": "006 source-null four PNGs exact both backends, actual weak contact/speckles; original unoccluded interior fill remains",
+    "changedAction": "one visual factor AO denoise; source-null gate first because owned RT preparation is new; never blur beauty"
+  },
+  "comparison": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "gateFirst": [
+      "constantAO1 through filtered preparation source near/context exact"
+    ],
+    "views": [
+      "hallDesk",
+      "hall",
+      "hallFloor"
+    ],
+    "checks": [
+      "actual denoise versus retained raw006 at fixed views, contact/edge/noise inspection",
+      "dream source equality/reentry deterministic/far retirement",
+      "owned resources/public state restoration/warnings/errors",
+      "source rehash/full build/desktop counter cost"
+    ]
+  },
+  "parameters": {
+    "aoRadius": 0.35,
+    "aoThickness": 0.35,
+    "aoResolutionScale": 0.5,
+    "filterRadius": 5,
+    "lumaPhi": 5,
+    "depthPhi": 5,
+    "normalPhi": 5,
+    "filterSamples": 16,
+    "filterTarget": "half-resolution red unsigned-byte no-depth no-MSAA",
+    "beautyAntialias": true
+  },
+  "technicalTrial": 7,
+  "artTrial": 14,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "latestObservedHandoff": 120,
+    "processedHandoff": 118,
+    "priority": "contacts/AO first;119 incomplete",
+    "requestExtraReview": false
+  },
+  "results": {
+    "nativeReceipt": "parent research-cache/hall-ao-119-007/native-receipt.json",
+    "nativePNGCount": 14,
+    "fullBuildTests": 346,
+    "sourceNullExactBoth": true,
+    "dreamExactBoth": true,
+    "reentry": {
+      "webgpu": {
+        "pixels": 1,
+        "max": 1,
+        "bbox": [
+          291,
+          97,
+          292,
+          98
+        ]
+      },
+      "webgl": {
+        "pixels": 0,
+        "max": 0,
+        "bbox": null
+      }
+    },
+    "initialModuleImportErrorResolved": true,
+    "contactCompletion": false,
+    "additionalStudioCredits": 0
+  }
+}
