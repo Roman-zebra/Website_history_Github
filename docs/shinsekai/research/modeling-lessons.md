@@ -87,3 +87,22 @@ main draw fixed; the proposed change remains unverified. Evidence: parent
 research-cache/hall-ao-119-003/native-receipt.json; browser-study/hall-ao-direct-
 claude119.md. Do not adopt this candidate or diagnose a particular private cache
 from the PNG bounds alone. AO contact is weak and dark speckles remain.
+
+## Hall material AO006 (2026-10-02, fidelity gate passed; look unfinished)
+AO004 removed RenderPipeline from preparation but kept the failed constantAO1
+near result. AO005 then isolated global main context from opaque preparation.
+On both backends, preparation-only near/context exactly matched source;
+context-only without preparation reproduced the glass regression. Thus the
+earlier RenderPipeline-sufficiency inference was incorrect. Do not change vendor
+cache internals based on equal public state or these image bounds.
+AO006 keeps global renderer context original and uses independent opaque hall
+material copies during the main draw only. Alpha materials/maps/geometry remain
+original; try/finally restores exact assignment references, including arrays.
+Four null-control near/context native PNGs exactly match original images on
+WebGPU and WebGL2. Ownership, source-alias rejection, lossy-copy/failure cleanup
+and render-throw restoration have meaningful tests; full build346/346.
+This qualifies the source-null route, not the final contact shading or phone
+performance. Actual AO still has weak feet contacts/small dark speckles and
+unoccluded global interior fill. Keep maps/AA and scope later tuning separately.
+Evidence: parent research-cache/hall-ao-119-005/differences.json and
+hall-ao-119-006/differences.json; workflow/hall-ao-119-006-brief.json.

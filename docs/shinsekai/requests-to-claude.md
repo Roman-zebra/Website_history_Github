@@ -1036,3 +1036,49 @@ processed118;119 incomplete. Hallart12/BuildingAart26/hybrid23/cloth7240 unchang
 except this AO candidate. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE,
 no new tools/agents/models/review calls. Baseline3b03c9a exactWorkersSUCCESS
 2026-10-01 19:34:54UTC; independently check new pushed SHA.
+
+## Claude119/120 status reply —2026-10-02 05:35JST, unfinished and continuing
+119 remains incomplete; contact AO is the active first priority from120.
+AO004 QuadMesh constantAO1 control still reproduces the glass regression.
+AO005 separates preparation and global main context: on both WebGPU/WebGL2,
+preparation-only near/context PNGs exactly match the original direct images;
+context-only without preparation reproduces prior glass differences
+(GPUnear114520/max69/context44906/max162; GLnear114508/max69/context44893/max165).
+Eight unchanged native005 PNGs and numeric differences are retained in parent
+research-cache/hall-ao-119-005. This corrects the earlier inference that the
+preparatory RenderPipeline itself was sufficient: global main context is
+sufficient here, preparation is not necessary. Private cache mechanism is not
+claimed diagnosed. Public state equality alone is not visual equality.
+AO006 is implemented using owned opaque hall material copies only, leaving
+global renderer context and alpha materials original. Three ownership/map/
+atomic-failure/restoration tests pass; native source-null gate and final full
+build are in progress. Do not treat it as accepted AO yet. No new art trial for
+004/005 technical controls. Next: verify006 fidelity before actual AO/contact
+strength/noise, then finite4-6m,haori,BuildingA upper4. No formal review request
+until all119 items are verified. TRIPO additional credits0; GoalACTIVE.
+
+
+## Claude119/120 partial AO006 result —2026-10-02,119 still incomplete
+AO006 repairs source-null fidelity using owned opaque hall material contexts;
+global renderer context and all alpha materials remain original. Four null
+near/context1280x720 native PNGs exactly match original source on WebGPU/WebGL2.
+Dream source exact both; re-entry near exact to first actual candidate both;
+far38980tri75draw/cache+reserved maps0/retired public state equal/errors0.
+54owned copies/77meshes/0newtextures preserve maps/scalars/RGB/geometry; exact
+assignment arrays restore even on failure. Meaningful scope/ownership/failure
+tests included; final346/346. Four encoded inputs rehashed unchanged.
+Actual AO vs source: GPUnear398254pixels/max18,context386068/max20,floor257307/
+max19; GLnear398178/max18,context385811/max20,floor257548/max18. Undersides and
+junctions darken; foot/counter/shelf contacts are weak and small speckles remain.
+This is a qualified source-null route, not accepted contact shading or full119.
+Near760284tri316draw/context752092294/floor736568258 is multipass desktop cost;
+actual iPhone14 unmeasured, no performance acceptance. Maps/AA/default preserved.
+See browser-study/hall-material-ao-claude119.md,workflow/hall-ao-119-006-brief.json,
+parent research-cache/hall-ao-119-006/native-receipt.json (14nativePNGs). Named
+materialAO-webgpu-hallFloor-base.png,materialAO-webgl-hallDesk-base.png,
+nullAO-webgpu-hall-base.png for evidence only; no formal review request yet.
+Next changed007: pinned public depth/normal-aware AO denoise, then contact
+strength/interior fill/geometric shadows; finite4-6m,haori,upper4 afterward.
+Observed120/processed118. Hallart13;004/005 technical controls added no art trial.
+TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE. Baselinef46962a exact
+WorkersSUCCESS2026-10-01 20:01:36UTC; independently check next pushed SHA.

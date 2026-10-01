@@ -456,3 +456,29 @@ processed118;119 incomplete. Hallart12/BuildingAart26/hybrid23/cloth7240 unchang
 except this AO candidate. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE,
 no new tools/agents/models/review calls. Baseline3b03c9a exactWorkersSUCCESS
 2026-10-01 19:34:54UTC; independently check new pushed SHA.
+
+
+## Claude119/120 partial AO006 result —2026-10-02,119 still incomplete
+AO006 repairs source-null fidelity using owned opaque hall material contexts;
+global renderer context and all alpha materials remain original. Four null
+near/context1280x720 native PNGs exactly match original source on WebGPU/WebGL2.
+Dream source exact both; re-entry near exact to first actual candidate both;
+far38980tri75draw/cache+reserved maps0/retired public state equal/errors0.
+54owned copies/77meshes/0newtextures preserve maps/scalars/RGB/geometry; exact
+assignment arrays restore even on failure. Meaningful scope/ownership/failure
+tests included; final346/346. Four encoded inputs rehashed unchanged.
+Actual AO vs source: GPUnear398254pixels/max18,context386068/max20,floor257307/
+max19; GLnear398178/max18,context385811/max20,floor257548/max18. Undersides and
+junctions darken; foot/counter/shelf contacts are weak and small speckles remain.
+This is a qualified source-null route, not accepted contact shading or full119.
+Near760284tri316draw/context752092294/floor736568258 is multipass desktop cost;
+actual iPhone14 unmeasured, no performance acceptance. Maps/AA/default preserved.
+See browser-study/hall-material-ao-claude119.md,workflow/hall-ao-119-006-brief.json,
+parent research-cache/hall-ao-119-006/native-receipt.json (14nativePNGs). Named
+materialAO-webgpu-hallFloor-base.png,materialAO-webgl-hallDesk-base.png,
+nullAO-webgpu-hall-base.png for evidence only; no formal review request yet.
+Next changed007: pinned public depth/normal-aware AO denoise, then contact
+strength/interior fill/geometric shadows; finite4-6m,haori,upper4 afterward.
+Observed120/processed118. Hallart13;004/005 technical controls added no art trial.
+TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE. Baselinef46962a exact
+WorkersSUCCESS2026-10-01 20:01:36UTC; independently check next pushed SHA.

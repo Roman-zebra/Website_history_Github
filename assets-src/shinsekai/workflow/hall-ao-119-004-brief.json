@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-contact-quad-004-20261002",
+  "status": "webgpu_null_near_gate_failed_no_art_candidate",
+  "subject": "Prepare the same opaque GTAO with explicit QuadMesh and no RenderPipeline",
+  "baseline": {
+    "commit": "f46962a",
+    "sourceRevision": "aa030cd",
+    "look": "2350K/point.5/EV-1.25/sourceSun.01/floorwallwear/full maps and AA",
+    "evidence": "parent research-cache/hall-ao-119-003/native-receipt.json"
+  },
+  "scope": {
+    "change": "replace only preparatory RenderPipeline with QuadMesh/NodeMaterial fragmentNode; same prepass/AO/direct main scoped context",
+    "preserve": [
+      "all maps/geometry/material assignments/light/cameras/exposure",
+      "same AO parameters",
+      "source alpha and output conversion",
+      "original dream/exterior/default/phone paths",
+      "retained failed AO001/002/003 and beauty isolation"
+    ],
+    "defer": [
+      "contact strength/noise/interior fill/shadows until null gate",
+      "finite4-6m range",
+      "haori/upper details",
+      "production/phone timing"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "measured model, no geometry change"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/QuadMesh.html",
+      "checkedAt": "2026-10-02",
+      "support": "public fullscreen helper with NodeMaterial and render; WebGPURenderer used with GPU and GL2 backend"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/NodeMaterial.html",
+      "checkedAt": "2026-10-02",
+      "support": "fragmentNode replaces fragment output"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/GTAONode.html",
+      "checkedAt": "2026-10-02",
+      "support": "normal/depth preparation and context sampling"
+    }
+  ],
+  "compatibility": "Pinnedr186 QuadMesh uses shared fullscreen geometry and public render; dispose only owned NodeMaterial, never shared geometry. GTAONode itself uses QuadMesh/NodeMaterial. New preparation adaptation remains experimental.",
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md#hall-ao-preparation003",
+    "failure": "AO003 repairs dream but constantAO1 normal near/context exactly match failed beauty-only images",
+    "changedAction": "avoid RenderPipeline global tone/output switch; first null controls, no private cache mutations"
+  },
+  "comparison": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "gateFirst": [
+      "constantAO1 source near/context exact"
+    ],
+    "views": [
+      "hallDesk",
+      "hall",
+      "hallFloor"
+    ],
+    "checks": [
+      "if null gate fails do not render unchanged AO candidate",
+      "if gate passes inspect actual AO near/context/floor",
+      "dream source exact after disposal",
+      "re-entry same image/settings",
+      "far cache/maps0 and actual counters/errors",
+      "source hashes/full build"
+    ]
+  },
+  "parameters": {
+    "radius": 0.35,
+    "thickness": 0.35,
+    "resolutionScale": 0.5,
+    "beautyAntialias": true,
+    "opaqueDepthOnly": true,
+    "indirectOnly": true
+  },
+  "technicalTrial": 4,
+  "artTrial": null,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "latestObservedHandoff": 120,
+    "processedHandoff": 118,
+    "priority": "contacts/AO first,119 incomplete",
+    "requestExtraReview": false
+  }
+}

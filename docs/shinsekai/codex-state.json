@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude120 contact shadows/AO. AO003 opaque preparation+direct beauty repairs dream source equality on both backends/reentry exact/public state/far reservations0,16nativePNGs/4inputs unchanged/343tests; normal constantAO1 still matches beauty-only regression (near114520GPU/114508GL,max69). NOT accepted. Next changed AO004 remove RenderPipeline from preparation: explicit QuadMesh/NodeMaterial scheduling same opaque prepass/GTAO, keep direct main AO context/constantAO1 control; require near/context original exact before contact strength/noise/interior fill and geometric shadow tuning. No unchanged retry. Then finite4-6m,haori,upper4;119 incomplete/observed120/processed118. Hallart12/BuildingAart26/hybrid23/cloth7240. 3b03c9a exactWorkersSUCCESS2026-10-01 19:34:54UTC; independently check next pushed SHA. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/reviews.",
-  "updatedAt": "2026-10-01T19:58:28.079842+00:00",
+  "next": "PRIORITY Claude120 contacts/AO. AO004 rejected;005 isolates global main context as sufficient glass regression, preparation-only exact both backends. AO006 owned opaque hall material context repairs source-null near/context EXACT both backends;14nativePNGs/dream source exact/reentry exact/far38980tri75draw/reservations+maps0/errors0/4inputs unchanged/346tests. Fidelity route qualified, contact quality NOT complete: weak feet/counter/shelf and small speckles, unoccluded interior sun3/hemi1.2. Next changed007 investigate pinned public depth/normal-aware AO denoise before strength/fill/geometric shadows at fixed cameras; keep source-null controls/full maps/AA. Then finite4-6m,haori,upper4;119 incomplete/observed120/processed118. Hallart13/BuildingAart26/hybrid23/cloth7240. Baselinef46962a exactWorkersSUCCESS2026-10-01 20:01:36UTC; independently check new pushed SHA. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/reviews.",
+  "updatedAt": "2026-10-01T20:45:53.313941+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 343,
+    "fullBuildTests": 346,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -79,7 +79,8 @@
     "hallLampNativeEvidence": "../research-cache/hall-lamp-119-001/native-receipt.json",
     "hallPointNativeEvidence": "../research-cache/hall-point-119-002/native-receipt.json",
     "hallPassNativeEvidence": "../research-cache/hall-pass-119-001/native-receipt.json",
-    "hallDirectAONativeEvidence": "../research-cache/hall-ao-119-003/native-receipt.json"
+    "hallDirectAONativeEvidence": "../research-cache/hall-ao-119-003/native-receipt.json",
+    "hallMaterialAONativeEvidence": "../research-cache/hall-ao-119-006/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete/120 priority1 contacts; AO003 restores dream but normal null-control glass fails. Qualified GTAO/contact strength/noise/fill/shadow remain, then finite4-6m,haori,upper4. Partial file reply;observed120/processed118."
+  "pendingClaudeRepairs": "119 incomplete/120 contacts priority;AO006 source-null fidelity repaired both backends, contact strength/noise/fill/shadows pending. Then finite4-6m,haori,upper4. Partial file reply;observed120/processed118."
 }

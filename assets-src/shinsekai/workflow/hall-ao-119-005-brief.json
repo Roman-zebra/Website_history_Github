@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-null-factor-isolation-005-20261002",
+  "status": "both_backends_causal_controls_verified_no_art_candidate",
+  "subject": "Separate opaque preparation from the main scoped constantAO1 context",
+  "baseline": {
+    "commit": "f46962a",
+    "sourceRevision": "aa030cd",
+    "look": "2350K/point.5/EV-1.25/sourceSun.01/floorwallwear/full maps/AA",
+    "evidence": "parent research-cache/hall-ao-119-004/gate-result.md"
+  },
+  "scope": {
+    "change": "null controls only: preparation with original main context, or no preparation with scoped constantAO1 main context",
+    "preserve": [
+      "all scene maps/geometry/materials/light/cameras/exposure",
+      "same QuadMesh/prepass/GTAO when preparation enabled",
+      "same source direct main draw",
+      "source/default/phone paths"
+    ],
+    "defer": [
+      "actual artistic AO candidate until null route qualifies",
+      "contacts/noise/fill/shadows",
+      "finite range/haori/upper4"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "measured model, no geometry change"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/QuadMesh.html",
+      "checkedAt": "2026-10-02",
+      "support": "preparation scheduling"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/Renderer.html",
+      "checkedAt": "2026-10-02",
+      "support": "public contextNode override"
+    }
+  ],
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md#hall-ao-preparation003",
+    "failure": "Quad004 null near exactly matches failed beauty isolation despite removing RenderPipeline",
+    "changedAction": "one factor: remove main context, or remove preparation; separate causal observations before another AO candidate"
+  },
+  "comparison": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "views": [
+      "hallDesk",
+      "hall"
+    ],
+    "modes": [
+      "source direct retained",
+      "quadcontrol prior prep+context",
+      "preparationcontrol prep only",
+      "contextcontrol context only"
+    ],
+    "checks": [
+      "native source near/context difference and fixed-view images",
+      "public render/preparation/disposal state",
+      "save/far retirement/warnings/errors",
+      "source hashes/full build"
+    ]
+  },
+  "technicalTrial": 5,
+  "artTrial": null,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "latestObservedHandoff": 120,
+    "processedHandoff": 118,
+    "priority": "contact shadows/AO first;119 incomplete",
+    "requestExtraReview": false
+  },
+  "results": {
+    "nativeReceipt": "parent research-cache/hall-ao-119-005/native-receipt.json",
+    "nativePNGCount": 8,
+    "fullBuildTests": 346,
+    "additionalStudioCredits": 0
+  }
+}

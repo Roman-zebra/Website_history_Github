@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-material-scoped-ao-006-20261002",
+  "status": "source_null_fidelity_gate_passed_contact_quality_pending",
+  "subject": "Scope AO to independent opaque hall materials; keep renderer and alpha materials original",
+  "baseline": {
+    "commit": "f46962a",
+    "sourceRevision": "aa030cd",
+    "look": "2350K/point.5/EV-1.25/sourceSun.01/floorwallwear/full maps/AA",
+    "evidence": "parent research-cache/hall-ao-119-005/differences.json"
+  },
+  "scope": {
+    "change": "same opaque GTAO preparation; apply context only on opaque hall material copies during main render, restore assignments immediately",
+    "preserve": [
+      "renderer context and transparent material identities",
+      "all maps/geometry/source RGB/light/cameras/exposure",
+      "original assignment arrays and source cache",
+      "dream/exterior/default/phone routes"
+    ],
+    "defer": [
+      "contact strength/noise/fill/shadows until source-null gate",
+      "finite range/haori/upper4",
+      "phone timing/production"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "measured model, no geometry change"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/NodeMaterial.html",
+      "checkedAt": "2026-10-02",
+      "support": "per-material contextNode, fragment scheduling"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/GTAONode.html",
+      "checkedAt": "2026-10-02",
+      "support": "prepared AO texture and opaque indirect context"
+    }
+  ],
+  "compatibility": "Pinnedr186 NodeBuilder.prebuild merges material.contextNode; classic material conversion copies enumerable contextNode. Use public material clone, shared existing maps, owned copies only; do not change vendor cache internals.",
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md#hall-ao-preparation003",
+    "evidence": "005 GPU context-only reproduces glass regression without preparation; preparation-only near/context source exact",
+    "changedAction": "remove global context override, exclude alpha materials from context and copy; restorable per-render assignments"
+  },
+  "comparison": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "gateFirst": [
+      "constantAO1 copied opaque material route source near/context exact"
+    ],
+    "views": [
+      "hallDesk",
+      "hall",
+      "hallFloor"
+    ],
+    "checks": [
+      "ownership/array identity/map/scalar preservation and failed-copy/throw restoration tests",
+      "null source near/context gate before actual AO",
+      "actual AO near/context/floor maps/contact inspection",
+      "dream source exact/re-entry/far reservations0/errors",
+      "source rehash/full build"
+    ]
+  },
+  "parameters": {
+    "radius": 0.35,
+    "thickness": 0.35,
+    "resolutionScale": 0.5,
+    "beautyAntialias": true,
+    "opaqueDepthOnly": true,
+    "indirectOnly": true
+  },
+  "technicalTrial": 6,
+  "artTrial": 13,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "latestObservedHandoff": 120,
+    "processedHandoff": 118,
+    "priority": "contacts/AO first;119 incomplete",
+    "requestExtraReview": false
+  },
+  "results": {
+    "nativeReceipt": "parent research-cache/hall-ao-119-006/native-receipt.json",
+    "nativePNGCount": 14,
+    "fullBuildTests": 346,
+    "additionalStudioCredits": 0
+  },
+  "sourceNullGatePassed": true,
+  "contactCompletion": false
+}
