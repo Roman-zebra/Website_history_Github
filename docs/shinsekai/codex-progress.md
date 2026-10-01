@@ -280,3 +280,14 @@ whole-room/continuous/qualified1080p approval. Next initial sleeve rest shape
 with pins/hardware/contact/lighting held, no further bending-only tuning.
 caf90e3 exactWorkersSUCCESS. No Claude model/agent/review/acknowledgement call,
 no new heading; review packet remains deferred through21:45JST.
+
+2026-10-01 — Sleeve-rest118 diagnostic closed: single drop0.035/0.09/0.14,
+all cloth/contact settings fixed. Raw control has unrelated normal/tangent drift;
+narrow retention restores baseline SHA7240 exactly without applying drift.
+0.09/0.14 initially clear but final wall40/122 and rail+hat326/439 pairs;
+both rejected before native render despite validator0/0 and connected/closed
+hardware checks. Private inputs/outputs/receipts preserved, runtime unchanged,
+art26/hybrid23 unchanged. Four retention tests, full307/307 build pass.
+06000ec exactWorkersSUCCESS07:50:45UTC. Next inspect supported shoulder/armhole
+construction in a fresh brief; no large-drop or bending-only repetition.
+No Claude model/agent/review/acknowledgement call or new heading through21:45JST.

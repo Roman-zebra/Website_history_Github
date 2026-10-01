@@ -20,6 +20,9 @@ assert not rail_contact or hat_contact,'Rail contact comparison requires --hat-c
 bending=float(sys.argv[sys.argv.index('--haori-bending')+1]) if '--haori-bending' in sys.argv else 2
 assert math.isfinite(bending) and bending>0,'Invalid haori bending stiffness'
 assert bending==2 or rail_contact,'Bending comparison requires the rail-contact variant'
+sleeve_drop=float(sys.argv[sys.argv.index('--sleeve-drop')+1]) if '--sleeve-drop' in sys.argv else .035
+assert math.isfinite(sleeve_drop) and 0<=sleeve_drop<=.25,'Invalid initial sleeve drop'
+assert '--sleeve-drop' not in sys.argv or rail_contact,'Sleeve comparison requires the rail-contact variant'
 
 source=HERE/'build.py'
 text=source.read_text(encoding='utf8').split('# Five explicit cameras')[0]
@@ -31,6 +34,7 @@ exec(compile(text,str(source),'exec'),scope)
 upper=scope['upper']; scene=bpy.context.scene
 variant='upper-118-cloth-v2-sewn-rail' if rail_contact else 'upper-118-cloth-v2-sewn-hat' if hat_contact else 'upper-118-cloth-v2-sewn' if sewn else 'upper-118-cloth-v2'
 if bending!=2:variant+='-bend-'+str(bending).replace('.','p')
+if '--sleeve-drop' in sys.argv:variant+='-sleeve-'+str(sleeve_drop).replace('.','p')
 out=scope['CACHE']/variant;out.mkdir(exist_ok=True)
 roots={name:bpy.data.objects[name] for name in TARGETS}
 normal_material=next(m for m in bpy.data.materials if m.name.startswith('Original cloth with fine wrinkle normal'))
@@ -100,7 +104,7 @@ def panel(name,root,nu,nv,position,pin,colour,collision=False):
 h=roots['UD_CoatRail_Haori']; z=upper.ZF+1.46;yc=2.185
 if sewn:
     from haori_sewn import build as build_sewn_haori
-    build_sewn_haori(h,upper.ZF,normal_material,receipt,hat_collision=hat_contact,rail_collision=rail_contact,bending_stiffness=bending)
+    build_sewn_haori(h,upper.ZF,normal_material,receipt,hat_collision=hat_contact,rail_collision=rail_contact,bending_stiffness=bending,initial_sleeve_drop=sleeve_drop)
 else:
     for label,x,offset,width,colour in [('back',.255,-.23,.46,(38,44,66)),('frontL',.325,-.23,.205,(38,44,66)),('frontR',.325,.025,.205,(38,44,66))]:
         panel('Haori_'+label,h,8 if label=='back' else 4,16,

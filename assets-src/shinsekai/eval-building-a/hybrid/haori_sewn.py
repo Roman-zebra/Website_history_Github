@@ -9,9 +9,10 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 
-def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bending_stiffness=2):
+def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bending_stiffness=2,initial_sleeve_drop=.035):
     assert not rail_collision or hat_collision,'Rail contact requires the retained hat comparison'
     assert math.isfinite(bending_stiffness) and bending_stiffness>0,'Invalid bending stiffness'
+    assert math.isfinite(initial_sleeve_drop) and 0<=initial_sleeve_drop<=.25,'Invalid initial sleeve drop'
     vertices=[];faces=[];colours=[]
     def vertex(p):
         vertices.append(tuple(p));return len(vertices)-1
@@ -57,7 +58,7 @@ def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bend
             def position(j,i,bodyIds=bodyIds,index=index):
                 p=Vector(vertices[bodyIds[j][index]])
                 p.x+=.04*math.sin(math.pi*j/6)*i/4
-                p.y+=sign*.20*i/4;p.z-=.035*i/4
+                p.y+=sign*.20*i/4;p.z-=initial_sleeve_drop*i/4
                 return tuple(p)
             sides.append(grid(6,4,position,lambda j,i,bodyIds=bodyIds,index=index:bodyIds[j][index] if i==0 else None,(34,40,60)))
         sb,sf=sides
@@ -173,6 +174,7 @@ def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bend
                 y=sum(supportVertices[k].y for k in colliderFaces[j])/3
                 label='peg '+str(min([1.76,1.97,2.18,2.32],key=lambda p:abs(y-p)))
             initialByCollider[label]=initialByCollider.get(label,0)+1
+        assert initialColliderPairs==0,('Initial cloth crosses retained colliders',initialByCollider)
     support=bpy.data.objects.new('Private retained peg collision',supportMesh);scene=bpy.context.scene
     scene.collection.objects.link(support);support.parent=root;support.modifiers.new('Support collision','COLLISION')
     support.collision.thickness_outer=.0006;support.collision.thickness_inner=.0006
@@ -223,7 +225,7 @@ def build(root,zf,material,receipt,hat_collision=False,rail_collision=False,bend
     record=dict(name=obj.name,frames=32,quality=10,pinnedVertices=len(pinned),vertices=len(vertices),
         maxDisplacementMetres=maxShift,closedBodyThickness=.0012,connectedComponents=components,
         allThickenedEdgesHaveTwoFaces=True,pinDisplacementMetres=pinError,pinHardwareDistancesMetres=contact,
-        settings=dict(mass=.008,airDamping=5,tension=60,compression=60,shear=40,bending=bending_stiffness),
+        settings=dict(mass=.008,airDamping=5,tension=60,compression=60,shear=40,bending=bending_stiffness),initialSleeveDropMetres=initial_sleeve_drop,
         colliderTriangles=len(colliderFaces),
         supportScope=('Two fixed attachment points, retained pegs and hat surface; chin cord excluded; discrete final surface check only' if hat_collision else 'Two fixed attachment points and retained-peg collider only; neighbouring hat excluded; not whole garment collision or physical mounting certification'))
     if hat_collision:record.update(hatColliderTriangles=len(hatFaces),finalHatSurfaceTriangleOverlaps=hatOverlaps,initialHatClearanceShiftMetres=initialHatShift)

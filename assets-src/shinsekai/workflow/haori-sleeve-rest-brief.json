@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "roundId": "haori-sleeve-rest-118-20261001",
+  "status": "completed_rejected_candidates",
+  "subject": "Outer sleeve rest shape of the contact-corrected haori",
+  "intendedResult": "Let the sleeve tips hang lower from the same supported shoulder instead of reading as a broad horizontal board.",
+  "baseline": {
+    "commit": "06000ec4dc3b170ad62a94a2315ca18d7eaf37e1",
+    "glbSha256": "7240ebf2851bc40a80e5bb2fc95644b2c4f372a08935a597d8c04f730f0b0f30",
+    "bending": 0.6
+  },
+  "scope": {
+    "change": "Initial outer-sleeve Z drop only; retain shared armhole/seam topology and simulate after the initial-contact gate.",
+    "preserve": [
+      "body and collar pattern",
+      "two source peg pins",
+      "source hardware2364 oriented triangles/UV0/colour and root TRS",
+      "hat/rail/post geometry",
+      "mass/damping/spring settings",
+      "bending0.6",
+      "32frames/quality10",
+      "collision distance2.4mm/quality6",
+      "hat and shoulder/post initial clearance fields",
+      "1.2mm thickness",
+      "runtime material/light/camera/size"
+    ],
+    "defer": [
+      "other clothing",
+      "lighting and texture strength",
+      "whole-room and continuous contact certification",
+      "final visual/historical approval",
+      "qualified1080p performance"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "Blender Z-up, glTF Y-up at runtime",
+    "origin": "Retained source111 root",
+    "dimensionEvidence": "Original inferred clothing; no surveyed garment dimensions"
+  },
+  "singleVariable": {
+    "name": "initial_sleeve_drop",
+    "baseline": 0.035,
+    "candidates": [
+      0.09,
+      0.14
+    ],
+    "meaning": "Outer edge drop grows linearly from zero at the unchanged armhole; not a moved peg or simulated displacement measurement."
+  },
+  "references": [
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/physics/cloth/settings/shape.html",
+      "checkedAt": "2026-10-01",
+      "sourceStatus": "Pinned official4.5 HTML downloaded/read locally",
+      "claimSupported": "The initial mesh ordinarily defines cloth rest shape; fixed vertex weights preserve attachments."
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/physics/cloth/settings/collisions.html",
+      "checkedAt": "2026-10-01",
+      "sourceStatus": "Pinned official4.5 HTML downloaded/read locally",
+      "claimSupported": "Mesh collider and cloth collision must be enabled; check the result rather than only increasing distance."
+    }
+  ],
+  "reusableLessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "applicableLessons": [
+      "initial cloth/peg overlap",
+      "exported contact after changing one setting",
+      "valid GLB does not accept silhouette",
+      "fresh outputs after failure"
+    ],
+    "suspectedCause": "A near-horizontal initial sleeve remains broad despite two bending comparisons.",
+    "evidenceToDistinguishCause": "Matched direct near/context images of bounded sleeve-drop variants, with initial/exported contacts checked first."
+  },
+  "reproducibility": {
+    "newRandomness": false,
+    "frozenSource": "inputs/upper/build-upper-dream.py SHA794f2f436e7e562d861c2af9c0af5f0fa45efd55c269a2db50402d8a47239959",
+    "upperSourceSeeds": "Existing Node name-derived Random and picture helper seeds retained; the sleeve field is deterministic.",
+    "execution": "Blender4.5.10, threads2; serialize each generation/audit/save"
+  },
+  "plan": [
+    "Rebuild explicit0.035 control in a new private output directory and compare its SHA to retained0.6.",
+    "Generate0.09 and0.14 in distinct directories, one after another.",
+    "Require initial collider midsurface0; audit exported neighbouring post/rail/hat and source hardware before native loading.",
+    "Inspect matched hero-haori and upper-window direct images; retain only a useful valid candidate.",
+    "Verify retained candidate on both backends base/dream/save/far, scene reopen and appropriate tests/build; preserve rejected outputs."
+  ],
+  "comparison": {
+    "fixedCameras": [
+      "hero-haori",
+      "upper-window"
+    ],
+    "controls": [
+      "same source sun/environment/fill/exposure",
+      "clothlook",
+      "AO/daylight/wood/wall wear off",
+      "same backend within pairs",
+      "same pins and body pose"
+    ],
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "decision": {
+    "retain": "Existing 0.035 baseline SHA7240ebf2 unchanged",
+    "visualAcceptance": false,
+    "nextStep": "Review shoulder/armhole rest-shape construction; do not repeat large sleeve-drop or bending-only tuning."
+  },
+  "cost": {
+    "paidToolsOrApisAllowed": false
+  },
+  "coordination": {
+    "useExistingBatch": true,
+    "requestExtraReview": false,
+    "newAgents": false
+  },
+  "results": {
+    "roundId": "haori-sleeve-rest-118-20261001",
+    "recordedAt": "2026-10-01T08:20:20.263170+00:00",
+    "baselineSha256": "7240ebf2851bc40a80e5bb2fc95644b2c4f372a08935a597d8c04f730f0b0f30",
+    "sourceHashes": {
+      "assets-src\\shinsekai\\eval-building-a\\hybrid\\build-cloth-v2.py": "f3d1d4b28dc8de13f927c60be49b3d00399aa4e1b632bd3bd8d44e5266f1c264",
+      "assets-src\\shinsekai\\eval-building-a\\hybrid\\haori_sewn.py": "33a1b6abc0c380c6a58a8b2846adab371c90533574a0ac86a175d221fac39db0",
+      "scripts\\shinsekai-glb-retain-cloth.cjs": "ab3ab529b67ac8e062cb9e4ac99cf99d45399bf50ee44235531494f51c8f1342"
+    },
+    "candidates": [
+      {
+        "initialSleeveDropMetres": 0.035,
+        "rawGlbSha256": "625a3d8c71c813dd55ffa6b4a21fc887b4843a37a25b46c1c02dc4ef8950d4c2",
+        "retainedGlbSha256": "7240ebf2851bc40a80e5bb2fc95644b2c4f372a08935a597d8c04f730f0b0f30",
+        "retainedBytes": 3473404,
+        "simulation": {
+          "name": "Haori_connected",
+          "frames": 32,
+          "quality": 10,
+          "pinnedVertices": 2,
+          "vertices": 426,
+          "maxDisplacementMetres": 0.04301526555146459,
+          "closedBodyThickness": 0.0012,
+          "connectedComponents": 1,
+          "allThickenedEdgesHaveTwoFaces": true,
+          "pinDisplacementMetres": 0.0,
+          "pinHardwareDistancesMetres": [
+            0.0006003379821777344,
+            0.0006003379821777344
+          ],
+          "settings": {
+            "mass": 0.008,
+            "airDamping": 5,
+            "tension": 60,
+            "compression": 60,
+            "shear": 40,
+            "bending": 0.6
+          },
+          "initialSleeveDropMetres": 0.035,
+          "colliderTriangles": 770,
+          "supportScope": "Retained rail/four pegs/hat and bounded neighbouring timber post; chin cord excluded. Final exported surface audit still required.",
+          "hatColliderTriangles": 252,
+          "finalHatSurfaceTriangleOverlaps": 0,
+          "initialHatClearanceShiftMetres": 0.12,
+          "railColliderTriangles": 508,
+          "structureColliderTriangles": 10,
+          "initialRailClearanceShiftMetres": 0.07,
+          "initialColliderMidsurfacePairs": 0,
+          "initialColliderPairsByPart": {},
+          "collisionDistanceMetres": 0.0024,
+          "collisionQuality": 6
+        },
+        "privateDirectory": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\upper-118-cloth-v2-sewn-rail-bend-0p6-sleeve-0p035",
+        "decision": "Restored control is byte-identical to retained baseline; raw export is not byte-identical"
+      },
+      {
+        "initialSleeveDropMetres": 0.09,
+        "rawGlbSha256": "6fad48c3cb2ba55cc1a32be02899efc30b2659ef259b59ace972f6070dfa300d",
+        "retainedGlbSha256": "8138f0f39c988fe05d22ff672931e92cf085344e9b07b17810f5c4308d8354cd",
+        "retainedBytes": 3566308,
+        "simulation": {
+          "name": "Haori_connected",
+          "frames": 32,
+          "quality": 10,
+          "pinnedVertices": 2,
+          "vertices": 426,
+          "maxDisplacementMetres": 0.24604488447748873,
+          "closedBodyThickness": 0.0012,
+          "connectedComponents": 1,
+          "allThickenedEdgesHaveTwoFaces": true,
+          "pinDisplacementMetres": 0.0,
+          "pinHardwareDistancesMetres": [
+            0.0006003379821777344,
+            0.0006003379821777344
+          ],
+          "settings": {
+            "mass": 0.008,
+            "airDamping": 5,
+            "tension": 60,
+            "compression": 60,
+            "shear": 40,
+            "bending": 0.6
+          },
+          "initialSleeveDropMetres": 0.09,
+          "colliderTriangles": 770,
+          "supportScope": "Retained rail/four pegs/hat and bounded neighbouring timber post; chin cord excluded. Final exported surface audit still required.",
+          "hatColliderTriangles": 252,
+          "finalHatSurfaceTriangleOverlaps": 288,
+          "initialHatClearanceShiftMetres": 0.12,
+          "railColliderTriangles": 508,
+          "structureColliderTriangles": 10,
+          "initialRailClearanceShiftMetres": 0.07,
+          "initialColliderMidsurfacePairs": 0,
+          "initialColliderPairsByPart": {},
+          "collisionDistanceMetres": 0.0024,
+          "collisionQuality": 6
+        },
+        "privateDirectory": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\upper-118-cloth-v2-sewn-rail-bend-0p6-sleeve-0p09",
+        "exportedNeighbours": {
+          "BldgA_LOD0_sideL": {
+            "surfacePairs": 40,
+            "materials": {
+              "M_Plaster_Int": 40
+            }
+          },
+          "BldgA_Interior_Structure": {
+            "surfacePairs": 0,
+            "materials": {}
+          },
+          "UD_CoatRail_Haori_v2": {
+            "surfacePairs": 326,
+            "materials": {
+              "UD_wood.001": 38,
+              "UD_wood_raw.001": 288
+            }
+          }
+        },
+        "validation": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 20
+        },
+        "decision": "Rejected before native render: wall and retained rail/hat surface intersections"
+      },
+      {
+        "initialSleeveDropMetres": 0.14,
+        "rawGlbSha256": "7ac7aefc28b2f92164ec6955267720e5e7b23c1ab4f58c3b68deb6d20a9d5f76",
+        "retainedGlbSha256": "f00ca322c4c9eb3eeadba58fd3c0f19aafddf7602f173bc934b3d57ede9bc6ef",
+        "retainedBytes": 3567508,
+        "simulation": {
+          "name": "Haori_connected",
+          "frames": 32,
+          "quality": 10,
+          "pinnedVertices": 2,
+          "vertices": 426,
+          "maxDisplacementMetres": 0.293756354547311,
+          "closedBodyThickness": 0.0012,
+          "connectedComponents": 1,
+          "allThickenedEdgesHaveTwoFaces": true,
+          "pinDisplacementMetres": 0.0,
+          "pinHardwareDistancesMetres": [
+            0.0006003379821777344,
+            0.0006003379821777344
+          ],
+          "settings": {
+            "mass": 0.008,
+            "airDamping": 5,
+            "tension": 60,
+            "compression": 60,
+            "shear": 40,
+            "bending": 0.6
+          },
+          "initialSleeveDropMetres": 0.14,
+          "colliderTriangles": 770,
+          "supportScope": "Retained rail/four pegs/hat and bounded neighbouring timber post; chin cord excluded. Final exported surface audit still required.",
+          "hatColliderTriangles": 252,
+          "finalHatSurfaceTriangleOverlaps": 340,
+          "initialHatClearanceShiftMetres": 0.12,
+          "railColliderTriangles": 508,
+          "structureColliderTriangles": 10,
+          "initialRailClearanceShiftMetres": 0.07,
+          "initialColliderMidsurfacePairs": 0,
+          "initialColliderPairsByPart": {},
+          "collisionDistanceMetres": 0.0024,
+          "collisionQuality": 6
+        },
+        "privateDirectory": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\upper-118-cloth-v2-sewn-rail-bend-0p6-sleeve-0p14",
+        "exportedNeighbours": {
+          "BldgA_LOD0_sideL": {
+            "surfacePairs": 122,
+            "materials": {
+              "M_Plaster_Int": 122
+            }
+          },
+          "BldgA_Interior_Structure": {
+            "surfacePairs": 0,
+            "materials": {}
+          },
+          "UD_CoatRail_Haori_v2": {
+            "surfacePairs": 439,
+            "materials": {
+              "UD_wood.001": 99,
+              "UD_wood_raw.001": 340
+            }
+          }
+        },
+        "validation": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 20
+        },
+        "decision": "Rejected before native render: wall and retained rail/hat surface intersections"
+      }
+    ],
+    "nativeImages": [],
+    "newVisualPasses": 0,
+    "runtimeChanged": false,
+    "discardedNonTargetNormalBound": 0.0005,
+    "observedControlDiscardedNormalDelta": 0.00029027462005615234,
+    "scope": "Static garment derivative only; original binary prefix retained, no mounting/containment/continuous-contact or historical/visual certification."
+  }
+}
