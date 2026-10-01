@@ -1,0 +1,29 @@
+{
+  "revision": "aa030cd",
+  "handoff": 115,
+  "scope": "Local-only assembly; original Codex integration code; frozen Claude geometry private; no reference pixels. Not accepted production delivery.",
+  "entries": [
+    {
+      "file": "assets-src/shinsekai/browser-study/tower-base-115.html",
+      "sha256": "9024ce5f2f1f00c0d0a8a069343077634526e6cd4cad67d8307c0f401bfd7b1a"
+    },
+    {
+      "file": "assets-src/shinsekai/browser-study/tower-base-113.mjs",
+      "sha256": "483c44366952b16375436d39a822fd7675c383b8d6ef05f2d33f63338b1e3ff0"
+    },
+    {
+      "file": "assets-src/shinsekai/browser-study/tower-gate-playback.mjs",
+      "sha256": "5090ce45e0f401d4ca35400c1d8a55d16be5caa11d6bea26004151096788c9a3"
+    },
+    {
+      "file": "scripts/serve-shinsekai-study.cjs",
+      "sha256": "6ec19f644b2eb5784fa48dbb2e70625a4bc33189a5c943d2cf7446ba06cd78bc"
+    }
+  ],
+  "runtimeManifest": "parent research-cache/tower-base-115-runtime/manifest.json",
+  "glbValidation": "3 author +1 plain +14 splits: zero errors/warnings",
+  "native": "WebGPU assembly/actual west door/cinema ready; additional native checks ongoing",
+  "sourceIssue": "Hall dressing and benches block west door; reported to Claude; no duplicate source modification",
+  "visualAcceptance": false,
+  "qualified1080p": false
+}

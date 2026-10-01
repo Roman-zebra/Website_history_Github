@@ -9,7 +9,7 @@
     },
     {
       "file": "assets-src/shinsekai/browser-study/tower-base-113.mjs",
-      "sha256": "8efe7dc383b5d739526b33b9c8f8762c9659103f2b1511de0dc0a072a4c6eb07"
+      "sha256": "483c44366952b16375436d39a822fd7675c383b8d6ef05f2d33f63338b1e3ff0"
     },
     {
       "file": "assets-src/shinsekai/browser-study/tower-baluster-instances.mjs",
@@ -23,5 +23,6 @@
       "file": "scripts/shinsekai-glb-cell.cjs",
       "sha256": "bb0c32b32050afe69733664556bed2c49a32b32a44909732ad780f956b2229e0"
     }
-  ]
+  ],
+  "sharedRuntime": "The runtime also serves the explicit115 html route;113 source geometry/revision remains unchanged."
 }
