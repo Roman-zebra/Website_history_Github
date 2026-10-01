@@ -451,7 +451,7 @@
       },
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "beae3c6cb0e9604701e8f8dc024dcaf6c4ba3ec8411f5c121b56a064a1e36fd7"
+        "sha256": "6af94e7d62848cc081e73d45017416c86cdcebc214d8f476c6df718aee9f9c88"
       }
     ],
     "checks": "290/290 build; both native1280x720 backends haori base/dream save/far retirement, new errors/warnings0",
@@ -538,7 +538,7 @@
     "files": [
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "beae3c6cb0e9604701e8f8dc024dcaf6c4ba3ec8411f5c121b56a064a1e36fd7"
+        "sha256": "6af94e7d62848cc081e73d45017416c86cdcebc214d8f476c6df718aee9f9c88"
       },
       {
         "file": "assets-src/shinsekai/browser-study/shop-paper-shadow.mjs",
@@ -573,7 +573,7 @@
       },
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "beae3c6cb0e9604701e8f8dc024dcaf6c4ba3ec8411f5c121b56a064a1e36fd7"
+        "sha256": "6af94e7d62848cc081e73d45017416c86cdcebc214d8f476c6df718aee9f9c88"
       },
       {
         "file": "assets-src/shinsekai/browser-study/daylight-118.md",
@@ -585,5 +585,40 @@
     "visualAcceptance": false,
     "qualified1080p": false,
     "openIssues": "Corner and cloth remain dark; bounded point ranges do not provide physical occlusion. Unmatched cold observations are not FPS or a controlled regression comparison."
+  },
+  "runtimeWallWearCandidate": {
+    "query": "?clothsewn&clothlook&ao&daylight&wallwear",
+    "materials": [
+      "M_Plaster_Int",
+      "UD_plaster"
+    ],
+    "inferred": true,
+    "geometryChanged": false,
+    "originalVertexRGB": true,
+    "newTextureBytes": 0,
+    "colourVariation": 0.03,
+    "roughnessVariation": 0.06,
+    "heightAmplitudes": [
+      0.0001,
+      0.0003
+    ],
+    "files": [
+      {
+        "file": "assets-src/shinsekai/browser-study/shop-wall-wear.mjs",
+        "sha256": "4a48aaa10a9cddb5d1a5451de8427dbdcc348ea76f2a2eef19923757a2e611f5"
+      },
+      {
+        "file": "assets-src/shinsekai/browser-study/building-a.mjs",
+        "sha256": "6af94e7d62848cc081e73d45017416c86cdcebc214d8f476c6df718aee9f9c88"
+      },
+      {
+        "file": "assets-src/shinsekai/browser-study/wall-wear-118.md",
+        "sha256": "4fe4975988430453691c6a0a7a8470d629f7846a696ba99fa94b882863d92a3b"
+      }
+    ],
+    "checks": "295/295 build plus updated5 material tests; both native1280x720 backends upper base/dream/window save/far, no new errors/warnings",
+    "receipt": "parent research-cache/look-dev/wallwear-118/receipt.json",
+    "visualAcceptance": false,
+    "qualified1080p": false
   }
 }

@@ -29,3 +29,10 @@ Daylight comparison limits eight interior lamps to inferred30% study gain and
 base/dream/save/far pass with no new errors; fullbuild294/294. Two trials bring
 total18/hybrid16. Corner/cloth still dark; finite ranges do not prove occlusion.
 Next: wall/wood wear and relief; no review request during conservation.
+
+Inner-wall wallwear comparison preserves source RGB/geometry and existing maps;
+actual shell M_Plaster_Int/interior UD_plaster now selected. Both1280x720
+backends upper base/dream/window saves and far retirement pass, no new errors.
+Full295 build and updated5 material tests pass. One actual surface pass brings
+total19/hybrid17; no-op selection retry excluded. Next timber/cloth contact;
+no visual/final1080p approval or Claude review call during conservation.

@@ -702,6 +702,18 @@ readable, but cloth/corner remain dark; finite ranges do not provide physical
 occlusion. Codex proceeds with material wear/relief. c42df7a exactWorkersSUCCESS.
 No review, acknowledgement or Claude model call requested; same batch heading.
 
+Inner-wall surface candidate now selects actual shell M_Plaster_Int and
+interior UD_plaster; original RGB, geometry/maps retained. Inferred colour.03,
+roughness.06 and direct procedural height derivatives.1mm/.3mm add subtle
+variation, no new texture allocation. First interior-only selection did not
+affect the visible wall; its PNG SHA matched daylight control and is excluded
+as a technical retry. One actual pass brings total19/hybrid17. Both1280x720
+backends upperbase/dream/window save/far activewallmaterials0 and emptycells
+pass with no new errors/warnings; full295 build plus updated5 materialtests.
+Six final PNGs/receipt private wallwear-118. No visual/final1080p approval.
+1d88538 exactWorkers SUCCESS. Codex continues timber and cloth contact; no
+review, acknowledgement, new heading or Claude model call requested.
+
 Codex continues your temporarily transferred cloth
 joints, alongside compression runtime/material wear; unfinished Claudecloth-v2
 is untouched. No model escalation/new chat or periodic acknowledgement needed.

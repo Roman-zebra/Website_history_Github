@@ -21,6 +21,20 @@ test('daylight balance toggles from retained lamp values without compounding or 
  balance.apply(false);assert.equal(upper.intensity,9);assert.equal(other.intensity,3);assert.equal(upper.distance,8);
  balance.apply(true);balance.dispose();assert.equal(upper.intensity,9);assert.equal(upper.distance,8);
 });
+
+test('wall wear retains shared source colours and geometry and excludes existing normal maps and paper',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
+ const {connectShopWallWear}=await studyModule('shop-wall-wear.mjs');
+ const source=new THREE.MeshStandardMaterial({color:0xcbb99a,roughness:.88,vertexColors:true});source.name='M_Plaster_Int';
+ const textured=source.clone();textured.name='UD_plaster';textured.normalMap=new THREE.Texture();
+ const paper=source.clone();paper.name='SHOJI';const prop=source.clone();prop.name='INTERIOR';const geometry=new THREE.BoxGeometry(),scene=new THREE.Group();
+ const a=new THREE.Mesh(geometry,[source,paper,textured,prop]),b=new THREE.Mesh(geometry,source);scene.add(a,b);
+ const before=geometry.getAttribute('position').array.slice();const stats=connectShopWallWear({scene});
+ assert.equal(stats.materials,1);assert.equal(a.material[0],b.material);assert.notEqual(b.material,source);
+ assert.equal(b.material.color.getHex(),source.color.getHex());assert.equal(b.material.vertexColors,true);assert.equal(b.material.roughness,source.roughness);
+ assert.equal(a.material[1],paper);assert.equal(a.material[2],textured);assert.equal(a.material[3],prop,'the general interior prop material is not a wall');assert.equal(a.geometry,geometry);assert.deepEqual(geometry.getAttribute('position').array,before);
+ assert.equal(b.material.userData.studyOriginalWallMaterial,source);assert.ok(b.material.normalNode?.isNode);assert.equal(source.normalNode,undefined);
+});
 test('cloth normal mixing preserves physical fields, shared materials and geometry',async()=>{
  const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
  const {connectShopClothNormal}=await studyModule('shop-cloth-normal.mjs');
