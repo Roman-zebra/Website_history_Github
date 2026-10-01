@@ -543,3 +543,34 @@ light identity/shadow/cache flags; diagnose contacts/fill, then geometric route,
 haori/upper4. Observed120/processed118. Hallart15/BuildingA26/hybrid23/cloth7240.
 TRIPO additional0/lastliveOct1 3200/Oct2 daily09pending; GoalACTIVE.
 Baseline1b2ea9c exactWorkersSUCCESS2026-10-01 21:25:57UTC; next SHA checked afterpush.
+
+
+## Claude119/120 partial fill009 and requested status reply —2026-10-02
+119 remains unfinished; this is an interim reply through the agreed file route.
+Original global sun intensity3 now has optional normal-hall frame gain.1 with
+exact finally restoration; source light identity/RGB/target/shadow/context/cache,
+AO007/range5/2350K/point.5/full maps/AA/geometry remain unchanged. Hemisphere1.2
+and imported hall sun.77862 remain. Gain1 four native near/context controls exact
+on WebGPU/WebGL2. Six actual1280x720 near/context/floor images keep source detail;
+beam gaps/depth darker and desk warm pool more distinct, but contacts still weak
+and emitter clipping remains. Artistic fill adjustment is not geometric shadows.
+Vsrange003 GPUnear785269pixels/max108,context589409/max107,floor678586/max98;
+GLnear785542/max108,context589056/max107,floor678534/max98. Both dream context
+source exact; both reentry near first candidate exact. Both far38980tri75draw,
+no pending/resident room/reserved bytes/maps; fill/source/public AO retire cleanly.
+Four input hashes unchanged;14nativePNGs;349/349 tests; observed warning/error0.
+Near760283tri315draw/context752091293/floor736567257 unchanged; no phone timing
+or GPU savings claim. Optional/default/phone off; visual acceptance not granted.
+Evidence: browser-study/hall-fill-claude119.md,workflow/hall-fill-119-009-brief.json,
+parent research-cache/hall-fill-119-009/native-receipt.json. Named
+fill10-webgpu-hall-base.png,fill10-webgpu-hallFloor-base.png,
+fill10-webgl-hallDesk-base.png are evidence only, no formal review requested.
+Read-only decoded contact inventory/world bounds saved. FloorY.003 and bench
+iron/desk teak merged minima0 do not prove every foot contact; no blanket snap.
+Next component/triangle-level audit separates actual gaps from missing shading,
+then qualified local contact AO/geometric route, haori support/weight, upper4.
+Full completion/review handoff is deferred until all requested items verified.
+Observed120/processed118. Hallart16/BuildingA26/hybrid23/cloth7240. No newtools,
+agents/reviews or charged generation. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;
+GoalACTIVE. Baselineb4a2dfc exactWorkersSUCCESS2026-10-01 22:07:49UTC; nextSHA
+checked after push. One UI timeout resolved after same-handle inspection.

@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude120 contacts/119 incomplete. Range003 optional5m on11points verified both backends with original2350K/intensity.5/decay2/emission40/5/maps/AA;11nativePNGs/dream context original exact both/reentry near exact both/far38980tri75draw/cache+reservation0/public AO state restored/4inputs unchanged/final347tests. Shadow008 seven technical null PNGs fail glass fidelity after5 changed diagnostics; no actual shadow/art, public helper/routes removed, private code/tests preserved; original light ID/alpha flags/whole-pass/split alpha did not qualify, mechanism unproven. Next changed009 isolate unoccluded global sun3 using scoped intensity gain (no new light/shadow flags/cache switch), fixed AO007+range5 near/context/floor, gain1 no-op/source equality first then one lower gain; restore source/default/dream/far. Aim stronger AO proportion/darker beam gaps without changing near maps/AA. This is artistic fill adjustment, not geometric shadow completion; revisit changed shadow route after diagnosis. Then haori/upper4/fullworld. Observed120/processed118. Hallart15/BuildingAart26/hybrid23/cloth7240. Baseline1b2ea9c exactWorkersSUCCESS2026-10-01 21:25:57UTC; check next pushed SHA separately. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/reviews.",
-  "updatedAt": "2026-10-01T22:05:25.656627+00:00",
+  "next": "PRIORITY Claude120 contacts/119 incomplete. Fill009 original globalSun gain.1 (3Å®.3) scoped to normal hall frames, exact finally restoration; no new light/shadow/cache/global context/maps/AA/geometry changes. Four gain1 native near/context PNGs source exact both; six actual views retain detail/darker beam gaps and depth, contacts still weak/emitter clipping remains. Dream source/reentry first candidate exact both; far38980tri75draw/cache+reservation0/helper retired;14PNG/349tests/4inputs unchanged. Hallart16/BuildingA26/hybrid23/cloth7240. Next triangle/component-level contact audit using decoded core node13 floorY.003, desk node10 and furnishings node8; merged bounds alone do not identify individual feet. Separate actual gap from shading before choosing static contact AO with existing Blender or changed geometric route; shadow008 remains rejected. Then haori/upper4/fullworld; no119 completion/review yet, observed120/processed118. Baselineb4a2dfc exactWorkersSUCCESS2026-10-01 22:07:49UTC; next pushed SHA checked separately. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents.",
+  "updatedAt": "2026-10-01T22:31:21.832565+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 347,
+    "fullBuildTests": 349,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -83,7 +83,8 @@
     "hallMaterialAONativeEvidence": "../research-cache/hall-ao-119-006/native-receipt.json",
     "hallDenoisedAONativeEvidence": "../research-cache/hall-ao-119-007/native-receipt.json",
     "hallRangeNativeEvidence": "../research-cache/hall-range-119-003/native-receipt.json",
-    "hallShadowRejectedEvidence": "../research-cache/hall-shadow-119-008/native-receipt.json"
+    "hallShadowRejectedEvidence": "../research-cache/hall-shadow-119-008/native-receipt.json",
+    "hallFillNativeEvidence": "../research-cache/hall-fill-119-009/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 unfinished/120 priority. Finite5m reach implemented+nativeverified; contact shadows and beam/local pools remain. Shadow008 fidelity rejected and removed. Next scoped globalSun intensity diagnostic, then changed geometric shadow route/haori/upper4. Partial file handoff, observed120/processed118; no full119 review request."
+  "pendingClaudeRepairs": "119 unfinished/120 priority. Finite5m and scoped fill009 native verified partial. Contact shadows/emitter clipping, haori support/weight, upper4 and integrated1080p remain. Continue component/triangle contact audit; partial file handoff, no full119 review request."
 }

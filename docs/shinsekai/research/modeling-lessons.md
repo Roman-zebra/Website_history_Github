@@ -146,3 +146,17 @@ Next isolate global interior fill with fixed near/context/floor and null control
 without changing shadow/cache state, then revisit a changed geometric route.
 Evidence: parent hall-shadow-119-008 and hall-range-119-003; browser-study
 hall-shadow-claude119.md / hall-range-claude119.md. No new tool or TRIPO use.
+
+## Hall original-light fill009 (2026-10-02, partial)
+Changing only the original directional intensity uniform during synchronous
+normal hall renders passes four gain1 native source-null controls on both
+backends. Restore each frame's borrowed intensity in finally, including failure;
+never clone the light or toggle shadow/cache/global context for this diagnostic.
+Gain.1 darkens beam gaps and depth while preserving near maps/AA/glass. Both
+dream source and candidate re-entry images are exact; fourteen native PNGs and
+349 tests retained. Contact shading still needs work: a darker image does not
+prove geometric occlusion, and unchanged counters do not qualify phone cost.
+Read-only merged material bounds locate floorY.003 and bench iron/desk teak
+minima0. They do not identify every support; audit components/nearest floor
+triangles before snapping geometry or baking contact AO. No blanket offset.
+Evidence: parent hall-fill-119-009; browser-study/hall-fill-claude119.md.

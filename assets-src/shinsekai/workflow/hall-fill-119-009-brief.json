@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-global-sun-fill-009-20261002",
+  "status": "native_verified_partial_artistic_fill_contacts_unfinished",
+  "subject": "Reduce global unoccluded directional hall fill at original light identity",
+  "baseline": {
+    "commit": "b4a2dfcba1b3b26e8631a240fde0c21387818ddf",
+    "exactWorkersSuccess": "2026-10-01T22:07:49Z",
+    "sourceRevision": "aa030cd",
+    "look": "AO007+range5/2350K/point.5/EV-1.25/sourceSun.01/full maps/AA",
+    "evidence": "parent research-cache/hall-range-119-003/native-receipt.json"
+  },
+  "scope": {
+    "change": "Multiply original global sun intensity by0.1 only during normal hall rendering and restore exact borrowed value in finally",
+    "preserve": [
+      "light identity/RGB/position/target/shadow object/cast flags",
+      "renderer shadow/global context/cache flags",
+      "AO007/maps/geometry/AA/alpha/5m points/intensity.5/emission/exposure",
+      "hemisphere1.2 and imported hall sun.77862",
+      "source/default/phone/dream/exterior/far"
+    ],
+    "defer": [
+      "physical geometric shadows;008 fidelity route rejected, no diagnosis of private cache cause",
+      "other fill/hemi strength until one-factor comparison",
+      "haori/upper4/device timing/full world"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "fixed model/cameras; gain.1 is artistic study, not historic light measurement"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/DirectionalLight.html",
+      "checkedAt": "2026-10-02",
+      "support": "intensity and unchanged light direction/target"
+    }
+  ],
+  "compatibility": "Existing pinnedr186 AnalyticLightNode.update colour multiplies current light.intensity into a uniform; no new light/shadow or renderer-context change. No tool/install/vendor edits.",
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md#hall-shadow008-fidelity-rejection-and-finite-range003",
+    "changedAction": "Use original-light scalar uniform at scoped frame instead of unqualified shadow/cache switch; gain1 no-op gate before actualgain.1"
+  },
+  "comparison": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "sourceGate": "gain1 near/context vs retainedrange003 exactly",
+    "views": [
+      "hallDesk",
+      "hall",
+      "hallFloor"
+    ],
+    "checks": [
+      "success/failure/nested scope/source identity/scalar restoration tests",
+      "main and preparation public state/unchanged maps/alpha",
+      "near detail/beam darkness/local pools/contacts visual inspection",
+      "dream context source/reentry near/far retirement/errors/input hashes/full build"
+    ]
+  },
+  "parameters": {
+    "globalSunSourceIntensity": 3,
+    "gain": 0.1,
+    "candidateIntensity": 0.3,
+    "hemisphereIntensity": 1.2,
+    "allowedGains": [
+      0,
+      0.1,
+      0.25,
+      0.5,
+      1
+    ],
+    "physicalShadowCompletion": false
+  },
+  "technicalTrial": 9,
+  "artTrial": 16,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "observedClaudeHandoff": 120,
+  "processedClaudeHandoff": 118,
+  "119Complete": false,
+  "reviewRequested": false,
+  "sourceNullGatePassed": true,
+  "fullBuildTests": 349,
+  "nativeEvidence": "parent research-cache/hall-fill-119-009/native-receipt.json"
+}
