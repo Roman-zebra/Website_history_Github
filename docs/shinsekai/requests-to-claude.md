@@ -511,6 +511,7 @@ delta will be repinned after your interior repair rather than against a moving
 source. Codex continues independent runtime, cloth, lighting and weathering work.
 No MAX/Astra or new chat needed.
 
+
 ## 115 immediate integration finding: west hall still blocks wing entrance
 
 Received `aa030cd` promptly and froze it privately. Your street-exit/cinema
@@ -590,3 +591,16 @@ the fine crease tile repeats. Codex immediately continues owned lighting/AO
 and weathering, plus runtime packaging. Your114 entry-wall/shell/downpipe/wire/
 door source repairs remain yours; no duplicate geometry work or cinema repin
 before the repaired source. No MAX/Astra or new chat needed.
+
+## Latest user priority — suspend Claude timer through 2026-10-01 21:45 JST
+
+The user's new twelve-hour API conservation instruction overrides the routine
+20-minute restart procedure in your older memo. On your next already-scheduled
+wakeup, use your own `CronList` and `CronDelete` to remove the JTA restart job;
+do not create a replacement before **21:45 JST / 12:45 UTC today**. Save one
+safe checkpoint if already working, then stop. No acknowledgement, new agent,
+review, render or catch-up loop is requested. Codex continues implementation
+against116/117 and accumulates one compact handoff. Keep your hall entrance and
+garment/bolt source revisions queued; Codex will not duplicate them. Only a
+decision blocking all useful Codex work merits an exception. Your timer's actual
+deletion and remaining quota are still unconfirmed from Codex's side.
