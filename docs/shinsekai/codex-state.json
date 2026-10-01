@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude119: isolated exposure-1.25EV and source directional77.862→.77862 verified six native captures both backends, dream PNG hashes exact/far cache0; partial reply posted promptly. AO001 and opaque-depth AO002 remain unapproved: identicalGPU dream glass regression34228pixels/max157; before-AO WebGL dream source hash exact; post-AO GL34211pixels/max156 confirms sameglass regression, bothfar0. Preserve numbered failed trials; do not retry unchanged. Next isolate direct-render framebuffer/transmission reference vs multipass route before new AO revision; independently implement floor roughness.6-.8/walking wear/edge grime as separately scoped fixed-camera source-quality study, then calibrated localwarm lamps/darktimber, haori support/sag/folds/collar/contact and upper earthwall/tatami/cushion/shoji. Full build336/336 after runtime changes; no phone/art/production acceptance. Only optionalstudy flags, defaultsource graphics/AA preserved. Observed119/processed118. 0c1474c exactWorkersSUCCESS16:01:00UTC confirmed; check newest pushed checkpoint next. TRIPO spend0/lastliveOct1 balance3200/Oct2 daily09pending. Hall trials1exposure/2directional/3AO001/4AO002; BuildingAart26/hybrid23/cloth7240 unchanged. GoalACTIVE, no agents/model escalation or automaticClaude review.",
-  "updatedAt": "2026-10-01T16:43:07.000068+00:00",
+  "next": "PRIORITY Claude119: floor roughness.72/.76 and walking/edge/seven bench-foot colour wear verified both native backends, four exact node-copy controls, both dream source PNG exact, far0; prompt partial file reply posted. Source inputs/maps/geometry/full AA retained,17PNGs/private hall-floor-119-001/002, full338/338. GL normal context fresh same-view-order source exact; older direct-context differs, framebuffer order invariance unqualified. Next separately scope wall stone/plaster transition grime, calibrated2200-2500K local lamps/dark timber; isolate transmission/framebuffer vs multipass before changed GTAO trial (AO001/002 unapproved, no unchanged retry). Then haori support/sag/folds/collar/contact and upper earth-wall/tatami/cushion/shoji. Only optional source-quality study flags; no actualphone/art/production acceptance. Observed119/processed118. b0f4bd3 exactWorkersSUCCESS16:46:53UTC verified; check newest pushed checkpoint. TRIPO spend0/lastliveOct1 3200/Oct2 daily09pending. Hall trials5roughness/6colour wear; BuildingAart26/hybrid23/cloth7240 unchanged. GoalACTIVE, no agents/model escalation or automaticClaude review.",
+  "updatedAt": "2026-10-01T17:36:51.428663+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 119,
@@ -68,12 +68,13 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 336,
+    "fullBuildTests": 338,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
     "hallPrefetchNativeEvidence": "../research-cache/hall-prefetch-001/native-receipt.json",
-    "hallDirectionalNativeEvidence": "../research-cache/hall-directional-119-001/native-receipt.json"
+    "hallDirectionalNativeEvidence": "../research-cache/hall-directional-119-001/native-receipt.json",
+    "hallFloorNativeEvidence": "../research-cache/hall-floor-119-002/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 partial exposure/directional verified and replied; AO001/002 failed dream glass control, lamps/timber/floor and haori/upper details pending; processed118 only."
+  "pendingClaudeRepairs": "119 partial exposure/directional/floor verified and promptly replied; wall transition/lamps/timber, qualified AO and haori/upper details pending; processed118 only."
 }

@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-hall-floor-001-20261002",
+  "status": "implemented_native_verified_partial119",
+  "subject": "Hall floor excessive polish, walking wear and edge/bench-foot grime",
+  "baseline": {
+    "commit": "b0f4bd355bbb7088fe40067ac4288b247398b53f",
+    "sourceRevision": "aa030cd",
+    "originalHallSHA256": "4a22e2fed1db757ae884d40e86a378715afbcf7099511d583788dc83d5387218",
+    "lighting": "qualified source directional gain.01 and exposure-1.25EV; no unapproved AO"
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "glTF baked hall-local X/Y/Z",
+    "floorBounds": [
+      0,
+      0.003,
+      -17.2,
+      3.55,
+      0.003,
+      0
+    ],
+    "roomTranslation": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "benchContactEvidence": "parent research-cache/hall-floor-119-001/source-foot-audit.json; seven iron support footprints at y0, x.31"
+  },
+  "scope": {
+    "change": "First preserve-source node-material control; then floor roughness only .72/.76; then colour wear alone against that qualified roughness baseline",
+    "preserve": [
+      "source full-resolution colour/normal maps and UVs",
+      "source geometry/collision/silhouette",
+      "all other materials/glass/lights",
+      "AA beauty1280x720",
+      "dream/exterior source route",
+      "cached-room source restoration"
+    ],
+    "defer": [
+      "stone/plaster wall transition grime",
+      "lamp calibration/dark timber",
+      "GTAO renderer-path repair",
+      "haori/upper-floor remaining119",
+      "realphone qualification"
+    ]
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/MeshStandardMaterial.html",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "roughness-factor/map multiplication and linear non-colour data; preserve source maps",
+      "versionCompatibility": "also inspected existing pinnedr186 node-material.copy/materialColor and current wood-wear implementation"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/TSL.html",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "continuous local-position colour masks without new raster textures; verify pinned exports before native rendering"
+    }
+  ],
+  "reusableLessons": [
+    "Inspect visible material assignment before increasing strength",
+    "One factor per fixed-camera comparison",
+    "Original GLB stays immutable; cached source assignments restored before releasing cloned materials",
+    "Static tests do not replace native close/context/control captures"
+  ],
+  "comparison": {
+    "cameras": {
+      "hall": {
+        "position": [
+          -12.275,
+          1.65,
+          6.9
+        ],
+        "target": [
+          -12.275,
+          1.8,
+          -3
+        ]
+      },
+      "hallFloor": {
+        "position": [
+          -12.35,
+          0.8,
+          6.25
+        ],
+        "target": [
+          -13.2,
+          0.153,
+          4.5
+        ]
+      }
+    },
+    "resolution": [
+      1280,
+      720
+    ],
+    "phases": [
+      "source versus node-copy control",
+      "control versus roughness-only",
+      "roughness-only versus colour wear with roughness fixed"
+    ]
+  },
+  "inferredSettings": {
+    "roughness": {
+      "stone_floor": 0.72,
+      "stone_floor_worn": 0.76
+    },
+    "wear": "continuous walking/edge masks with seven measured bench contacts; strengths/radii are artistic assumptions"
+  },
+  "verification": [
+    "exactly two expected floor materials selected atomically",
+    "other mesh/material/texture/geometry identities preserved",
+    "re-entry does not compound wear or roughness",
+    "both native backends close/context, source dream/far restore",
+    "no new framebuffer/texture warnings or errors",
+    "whole static build and changed-source check"
+  ],
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "useExistingClaudeFile": true,
+    "requestExtraReview": false
+  },
+  "evidence": "parent research-cache/hall-floor-119-002/native-receipt.json",
+  "artTrials": {
+    "roughness": 5,
+    "colourWear": 6
+  },
+  "fullStaticBuildTests": 338
+}

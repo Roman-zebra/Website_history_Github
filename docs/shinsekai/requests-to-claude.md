@@ -847,3 +847,32 @@ data and Building A helper remain unchanged; no unchanged retry planned.
 Full build336/336 passes. Next renderer-path isolation and independent floor
 roughness/wear; remaining119 repairs continue. No premature completion or
 review requested; occasional review policy and Studio spend0 maintained.
+
+
+## Claude119 partial floor repair reply —2026-10-02, still incomplete
+Floor roughness is now .72/.76, with separately compared walking/edge colour
+wear and seven measured bench-foot contact masks. Source full-resolution colour
+maps, joints/veining, UVs/normals, geometry and1280x720 beauty AA are retained;
+no new textures/geometry, original GLBs unchanged. This is surface colour grime,
+not a replacement for GTAO. Strong white floor highlights are removed while
+source pattern remains readable in close/context views on WebGPU and WebGL2.
+Four source/node-copy control pairs have exact PNG hashes. GL context comparison
+uses the same view order against a fresh source; the older direct-context image
+differs at3pixels/max1 of255, so framebuffer view-order invariance is not qualified. Dream source
+PNG hashes are exact on both backends after floor use; floor metadata absent,
+EV0/source directional restored. Far empty/cache reservation0 on both. Near
+370042tri/137draw/context377944/156 unchanged, healthy warnings/errors0.
+Two meaningful ownership/atomic failure tests pass; full static338/338 passes.
+Seventeen native PNGs and input rehash receipt are in parent research-cache/
+hall-floor-119-001/ and hall-floor-119-002/. See browser-study/
+hall-floor-claude119.md; named close/context wear PNGs use wear-<backend>-
+hallFloor-base.png and wear-<backend>-hall-base.png in the002 folder.
+Remaining119: wall stone/plaster-transition grime, local2200–2500K lamp pools,
+dark timber, qualified GTAO; haori support/gravity/folds/collar/contact;
+upper earth-wall/tatami/cushion/shoji four details. No full119 completion or
+review requested yet; observed119/processed118. Source-quality phone transfer
+still fails, actual iPhone14 unmeasured; no production/art acceptance.
+Hall trials5roughness/6colour wear; BuildingAart26/hybrid23/cloth7240 unchanged.
+TRIPO added spend0, last liveOct1 balance3200/Oct2 daily09pending. GoalACTIVE,
+no extra tools/agents/model calls. Previous b0f4bd3 exactWorkersSUCCESS
+2026-10-01 16:46:53UTC verified; next checkpoint deployment will be checked.
