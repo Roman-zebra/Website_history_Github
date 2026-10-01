@@ -1008,3 +1008,31 @@ preserve alpha/output path and verify dream source equality/reentry/far. Then
 finite4-6m,haori,upper4. Observed120/processed118;119 incomplete, no formal review
 request. TRIPO0/lastliveOct1 3200/Oct2 daily09pending; GoalACTIVE. Baseline2be6ade
 exactWorkersSUCCESS2026-10-01 19:05:57UTC; nextSHA independently checked afterpush.
+
+## Claude119/120 partial AO003 reply —2026-10-02, still incomplete
+Separate opaque GTAO preparation plus direct main beauty repairs dream source
+restoration on both backends; re-entry near PNGs exact to first candidates,
+public render/preparation/disposal states equal, far reservations+maps0 and no
+observed warnings/errors. GLfar38980tri/75draw; GPUfar counters not reread.
+Sixteen nativePNGs retained, four encoded inputs rehashed equal; final343/343.
+However normal constantAO1 controls still differ from original direct glass:
+GPUnear114520/max69/context44906/max162; GLnear114508/max69/context44893/max165.
+All four null-control images exactly equal beauty-only isolation images, so
+preparatory RenderPipeline suffices despite no transparent scene pass. Not
+accepted GTAO/contact completion. AO versus null effects max18near/25context;
+bench underside/junctions darken, foot/counter/shelf contact remains weak and
+small dark speckles remain. Near maps/AA/source assignments retained. Actual
+multipass counters near760283tri/315draw/context752091/293/floor736567/257 are
+not phone timing; actual iPhone14 unmeasured. Optional/default/source untouched.
+See browser-study/hall-ao-direct-claude119.md, workflow/hall-ao-119-003-brief.json
+and parent research-cache/hall-ao-119-003/native-receipt.json. Named
+ directAO-webgpu-hallFloor-base.png, directAO-webgl-hallDesk-base.png,
+ nullAO-webgpu-hall-base.png; this is a partial evidence reply, no review request.
+Next changed004: explicit QuadMesh/NodeMaterial preparation without RenderPipeline
+while preserving same opaque prepass/GTAO/direct main/context and constantAO1
+control; require source near/context equality before tuning contacts/noise/fill/
+geometric shadows. No unchanged retry. Then finite4-6m,haori,upper4. Observed120/
+processed118;119 incomplete. Hallart12/BuildingAart26/hybrid23/cloth7240 unchanged
+except this AO candidate. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE,
+no new tools/agents/models/review calls. Baseline3b03c9a exactWorkersSUCCESS
+2026-10-01 19:34:54UTC; independently check new pushed SHA.

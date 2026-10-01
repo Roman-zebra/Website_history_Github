@@ -73,3 +73,17 @@ interior `a5c102f5c499eaca29a6dede27b5bf419c8296e1752ec1c88af281dee43bd935`.
 Action presence and assignment are checked, but keyframe-value equivalence is
 outside this audit. The private saved scenes can be opened for continued work;
 production GLBs and the active renderer were not modified by these checks.
+
+## Hall AO preparation003 (2026-10-02, unapproved)
+The beauty-only pass isolated a normal/dream alpha regression without AO.
+Opaque AO preparation plus direct main rendering now restores dream PNGs exactly
+on both backends, but constantAO1 normal controls still match the failed beauty
+images. Restored public RT/MRT/context/tone/alpha material fields do not establish
+that the rendered result or private renderer caches are correct. Always compare
+a null effect through the same route with source near/context, and verify dream
+and re-entry separately. Next remove the preparatory RenderPipeline global tone/
+colour switch using explicit QuadMesh/NodeMaterial while holding the effect and
+main draw fixed; the proposed change remains unverified. Evidence: parent
+research-cache/hall-ao-119-003/native-receipt.json; browser-study/hall-ao-direct-
+claude119.md. Do not adopt this candidate or diagnose a particular private cache
+from the PNG bounds alone. AO contact is weak and dark speckles remain.

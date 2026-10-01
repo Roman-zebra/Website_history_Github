@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude120 contact shadows/AO: beauty-pass isolation001 both backends reproduces alpha glass regression without AO; source direct six PNGs exact, public states equal but private cache not proven. Next changed repair opaque-only normal/depth AO prepass plus direct beauty with scoped AO context, original alpha/output path; fixed point.5/2350K/full maps/AA, verify near/context/dream exact/reentry/far0/errors. Then finite4-6m, haori, upper four details;119 incomplete/observed120/processed118. Technical trial1/art count11 unchanged,343fullbuild,12PNGs/4inputs unchanged. 2be6ade exactWorkersSUCCESS2026-10-01 19:05:57UTC; verify next pushed SHA separately. TRIPO0/lastliveOct1 3200/Oct2 daily09pending; GoalACTIVE/no newtools/agents/reviews.",
-  "updatedAt": "2026-10-01T19:32:59.952046+00:00",
+  "next": "PRIORITY Claude120 contact shadows/AO. AO003 opaque preparation+direct beauty repairs dream source equality on both backends/reentry exact/public state/far reservations0,16nativePNGs/4inputs unchanged/343tests; normal constantAO1 still matches beauty-only regression (near114520GPU/114508GL,max69). NOT accepted. Next changed AO004 remove RenderPipeline from preparation: explicit QuadMesh/NodeMaterial scheduling same opaque prepass/GTAO, keep direct main AO context/constantAO1 control; require near/context original exact before contact strength/noise/interior fill and geometric shadow tuning. No unchanged retry. Then finite4-6m,haori,upper4;119 incomplete/observed120/processed118. Hallart12/BuildingAart26/hybrid23/cloth7240. 3b03c9a exactWorkersSUCCESS2026-10-01 19:34:54UTC; independently check next pushed SHA. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/reviews.",
+  "updatedAt": "2026-10-01T19:58:28.079842+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -78,7 +78,8 @@
     "hallWallNativeEvidence": "../research-cache/hall-wall-119-001/native-receipt.json",
     "hallLampNativeEvidence": "../research-cache/hall-lamp-119-001/native-receipt.json",
     "hallPointNativeEvidence": "../research-cache/hall-point-119-002/native-receipt.json",
-    "hallPassNativeEvidence": "../research-cache/hall-pass-119-001/native-receipt.json"
+    "hallPassNativeEvidence": "../research-cache/hall-pass-119-001/native-receipt.json",
+    "hallDirectAONativeEvidence": "../research-cache/hall-ao-119-003/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete;120 non-review clarification received: contact shadows/AO first, finite4-6m range second, haori third, upper four details fourth. Point reduction partial replied; emitter clipping/fill/depth/dark timber/GTAO remain. Observed120/processed118."
+  "pendingClaudeRepairs": "119 incomplete/120 priority1 contacts; AO003 restores dream but normal null-control glass fails. Qualified GTAO/contact strength/noise/fill/shadow remain, then finite4-6m,haori,upper4. Partial file reply;observed120/processed118."
 }

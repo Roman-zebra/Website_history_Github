@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-contact-direct-003-20261002",
+  "status": "dream_restoration_exact_normal_null_control_fails_not_accepted",
+  "subject": "Opaque GTAO preparation plus original direct alpha beauty draw",
+  "baseline": {
+    "commit": "3b03c9a",
+    "sourceRevision": "aa030cd",
+    "look": "2350K/point.5/EV-1.25/sourceSun.01/floorwallwear/full maps and AA",
+    "evidence": "parent research-cache/hall-pass-119-001/native-receipt.json"
+  },
+  "scope": {
+    "change": "prepare opaque-only normal/depth and AO separately; direct main renderer with temporary builtinAOContext sampled from prepared texture",
+    "preserve": [
+      "all maps/geometry/material assignments/light/cameras/exposure",
+      "source alpha draw and output conversion",
+      "original direct dream and exterior",
+      "source default and phone routes"
+    ],
+    "defer": [
+      "finite4-6m range",
+      "haori/upper details",
+      "production and phone timing"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "measured model, no geometry change"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/GTAONode.html",
+      "checkedAt": "2026-10-02",
+      "support": "normal/depth preparation, context AO sampling, frame update and disposal"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/Renderer.html",
+      "checkedAt": "2026-10-02",
+      "support": "public contextNode, transparent and output colour/tone behaviour"
+    }
+  ],
+  "compatibility": "Pinnedr186 source: PassTextureNode extends TextureNode with public value texture; builtinAOContext skips transparent materials. Official recipe uses scene beauty pass; this direct adaptation is experimental.",
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "priorFailure": "AO001/002 and beauty-only001 alpha regression; beauty-only proves AO unnecessary",
+    "changedAction": "no transparent scene pass and no physical transmission assumption; scoped context restored with finally"
+  },
+  "comparison": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "views": [
+      "hallDesk",
+      "hall",
+      "hallFloor"
+    ],
+    "controls": "pass001 near/context and original dream; new fixed hallFloor source control",
+    "checks": [
+      "native save and inspect contacts/maps/glass",
+      "dream source hash exact after disposal",
+      "normal re-entry",
+      "far residency0 and no warnings/errors",
+      "source hashes and full build",
+      "same preparation and scoped context with constantAO1 null control; source near/context equality separates AO from alpha colour change"
+    ]
+  },
+  "parameters": {
+    "radius": 0.35,
+    "thickness": 0.35,
+    "resolutionScale": 0.5,
+    "beautyAntialias": true,
+    "opaqueDepthOnly": true,
+    "indirectOnly": true
+  },
+  "technicalTrial": 3,
+  "artTrial": 12,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "latestObservedHandoff": 120,
+    "processedHandoff": 118,
+    "priority": "contact shadows/AO first;119 still incomplete",
+    "requestExtraReview": false
+  },
+  "nativeEvidence": "parent research-cache/hall-ao-119-003/native-receipt.json"
+}
