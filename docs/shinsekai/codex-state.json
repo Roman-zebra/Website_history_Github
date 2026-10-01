@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY latestClaude120 received2026-10-02 03:58JST, non-review of one colour hall image: first contact shadows/AO at bench feet/counter/shelf, second finite4-6m lamp range/depth, third haori, fourth upper four details. Finish in-flight point comparison safely: gains.7/.5/.35 against fixed2350K/emission40-5/EV-1.25/directional.01/floorwallwear; GPUtrials9-11 inspected/retain optional.5; both retained backends dream original exact/reentry source intensity repeated/far0/errors0,14PNGs/4inputs unchanged/343tests; partial file reply, observed120/processed118. Next inspect r186 multipass/transmission/render-target restoration for failedAO001/002 before changed contact/GTAO trial; no unchanged retry. Preserve near maps/geometry/AA/cache snapshots. Then finite range4-6m; source global sun3/hemi1.2 fill/shadow balance and visible-emitter clipping still unresolved; dark timber remains119. No full119/art/production or phone acceptance. a2a40db exactWorkersSUCCESS18:44:30UTC verified; check newest pushed checkpoint. TRIPO0/lastliveOct1 3200/Oct2 daily09pending. BuildingAart26/hybrid23/cloth7240 unchanged. GoalACTIVE/no newtools/agents/model/review calls.",
-  "updatedAt": "2026-10-01T19:04:09.144525+00:00",
+  "next": "PRIORITY Claude120 contact shadows/AO: beauty-pass isolation001 both backends reproduces alpha glass regression without AO; source direct six PNGs exact, public states equal but private cache not proven. Next changed repair opaque-only normal/depth AO prepass plus direct beauty with scoped AO context, original alpha/output path; fixed point.5/2350K/full maps/AA, verify near/context/dream exact/reentry/far0/errors. Then finite4-6m, haori, upper four details;119 incomplete/observed120/processed118. Technical trial1/art count11 unchanged,343fullbuild,12PNGs/4inputs unchanged. 2be6ade exactWorkersSUCCESS2026-10-01 19:05:57UTC; verify next pushed SHA separately. TRIPO0/lastliveOct1 3200/Oct2 daily09pending; GoalACTIVE/no newtools/agents/reviews.",
+  "updatedAt": "2026-10-01T19:32:59.952046+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -77,7 +77,8 @@
     "hallFloorNativeEvidence": "../research-cache/hall-floor-119-002/native-receipt.json",
     "hallWallNativeEvidence": "../research-cache/hall-wall-119-001/native-receipt.json",
     "hallLampNativeEvidence": "../research-cache/hall-lamp-119-001/native-receipt.json",
-    "hallPointNativeEvidence": "../research-cache/hall-point-119-002/native-receipt.json"
+    "hallPointNativeEvidence": "../research-cache/hall-point-119-002/native-receipt.json",
+    "hallPassNativeEvidence": "../research-cache/hall-pass-119-001/native-receipt.json"
   },
   "pendingClaudeRepairs": "119 incomplete;120 non-review clarification received: contact shadows/AO first, finite4-6m range second, haori third, upper four details fourth. Point reduction partial replied; emitter clipping/fill/depth/dark timber/GTAO remain. Observed120/processed118."
 }

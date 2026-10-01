@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-contact-pass-isolation-001-20261002",
+  "status": "native_isolation_complete_regression_reproduced",
+  "subject": "Isolate beauty offscreen/transmission restoration without any AO",
+  "baseline": {
+    "commit": "2be6ade",
+    "sourceRevision": "aa030cd",
+    "evidence": "parent research-cache/hall-point-119-002/native-receipt.json",
+    "look": "2350K/point.5/EV-1.25/directional.01/floorwallwear/full-quality AA"
+  },
+  "scope": {
+    "change": "single antialiased beauty pass only, compared with direct rendering and public renderer-state diagnostics",
+    "preserve": [
+      "no AO, normal/depth prepass or AO context",
+      "all maps/geometry/materials/light/exposure/cameras",
+      "raw direct source/dream/exterior path after pass disposal",
+      "cached source assignments"
+    ],
+    "defer": [
+      "accepted contact/GTAO repair",
+      "finite4-6m range",
+      "haori/upper details",
+      "phone timing"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "measured model, no geometry change"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/PassNode.html",
+      "checkedAt": "2026-10-02",
+      "support": "beauty pass and render-target lifecycle; pinnedr186 source controls actual behaviour",
+      "note": "documentation default transparent false differs from bundled constructor true; use local code and explicit true"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/RenderPipeline.html",
+      "checkedAt": "2026-10-02",
+      "support": "pipeline output colour transform, render/dispose; localr186 source read"
+    }
+  ],
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "suspectedCause": "AO001/002 share dream glass regression despite opaque-only prepass; general beauty/transmission path may be sufficient",
+    "evidence": "separate direct/beauty-only same-view normal/dream images plus before/after public render-target/MRT/context/tone/flags and glass fields; failed source states are not inferred from timeout"
+  },
+  "comparison": {
+    "modes": [
+      "direct",
+      "beauty"
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "resolution": [
+      1280,
+      720
+    ],
+    "near": "hallDesk position[-12.65,1.65,.7],target[-10.85,1.2,.7]",
+    "context": "hall position[-12.275,1.65,6.9],target[-12.275,1.8,-3]",
+    "dreamSourceHashes": {
+      "webgpu": "f14291419ef673c4b4c0d9cd80dd95c043682b45310b3405e45cd2bff07565d1",
+      "webgl": "a73b0050b5ae64d9660d1d96dab563a8b2dc44da6d70b6bad4c81bf288e9ba3b"
+    }
+  },
+  "verification": [
+    "direct diagnostic control matches preceding normal/dream",
+    "beauty-only normal near/context and raw dream after retirement",
+    "public state before/after and retirement, separate from private node/framebuffer cache",
+    "far lifecycle/cache0 and native warnings/errors",
+    "source hashes unchanged/full build"
+  ],
+  "technicalTrial": 1,
+  "artTrial": null,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "latestObservedHandoff": 120,
+    "priority": "contact shadows/AO first; this distinguishes the failed pipeline before a changed repair",
+    "useExistingClaudeFile": true,
+    "requestExtraReview": false
+  },
+  "nativeEvidence": "parent research-cache/hall-pass-119-001/native-receipt.json"
+}

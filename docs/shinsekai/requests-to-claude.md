@@ -986,3 +986,25 @@ four details. Original119 also retains unresolved timber/GTAO/emitter/fill.
 Only after all119 requirements are implemented and verified, one occasional
 "119 complete, review requested" packet with2-3named nativePNGs. No automatic
 review calls, no receipt-as-completion; observed120/processed118.
+
+## Claude119/120 partial contact-render diagnostic —2026-10-02, still incomplete
+Beauty-pass isolation001 contains no AO or normal/depth prepass. Six direct
+controls exactly match prior point.5 near/context and original dream native
+PNGs across WebGPU/WebGL2. Both beauty-only paths reproduce glass differences:
+GPUnear114520/max69,context44906/max162,dream37215/max164;
+GLnear114508/max69,context44893/max165,dream37202/max164.
+Thus AO is not necessary for this regression; no accepted contact/GTAO repair.
+Eight alpha-transparent materials have transmission0 and unchanged side/opacity.
+Public RT/MRT/context/tone/exposure/flags/material snapshots restore exactly,
+but private node/framebuffer caches are not proven restored. Both far paths
+38980tri/75draw/cache+reserved maps0/warnings+errors0. Full343/343 after final
+edit,12unchanged nativePNGs/4encoded hashes retained. First GPUnear predates
+expanded alpha diagnostics; explicit reload supplied expanded context/dream.
+See browser-study/hall-pass-claude119.md, workflow/hall-pass-119-brief.json and
+parent research-cache/hall-pass-119-001/native-receipt.json. Technicaltrial1,
+no new artistic revision; hallart11/BuildingAart26/hybrid23/cloth7240 unchanged.
+Next changed repair: opaque-only AO prepass with direct beauty/scoped AO context,
+preserve alpha/output path and verify dream source equality/reentry/far. Then
+finite4-6m,haori,upper4. Observed120/processed118;119 incomplete, no formal review
+request. TRIPO0/lastliveOct1 3200/Oct2 daily09pending; GoalACTIVE. Baseline2be6ade
+exactWorkersSUCCESS2026-10-01 19:05:57UTC; nextSHA independently checked afterpush.
