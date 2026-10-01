@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "roundId": "tower-placeholder-mask-118-20261001",
+  "status": "retained_technical_repair",
+  "baselineCommit": "95dc1a3",
+  "problem": "tower-base-113.mjs placeholders hides every base backing/curtain when any interior cell loads, exposing unrelated unloaded rooms.",
+  "intendedResult": "Hide only complete placeholder components associated with the currently loaded real room; preserve all other window/door placeholders and restore original index order on unload.",
+  "scope": {
+    "change": "Runtime indexed-face visibility only; no asset re-export or new material",
+    "preserve": [
+      "source vertex/normal/UV/colour/image bytes",
+      "source frames/reveals/glass",
+      "source index buffer object",
+      "source clips and transform",
+      "one loaded cell",
+      "W1 wing backing removal only for cinema",
+      "SW stair head removal only for stair",
+      "far LOD retirement"
+    ],
+    "defer": [
+      "new interiors",
+      "historical acceptance",
+      "combined115 qualified1080p performance",
+      "final effects/performance Claude review"
+    ]
+  },
+  "references": [
+    {
+      "source": "Frozen115/aa030cd INTERFACE.md rooms and placeholder contract",
+      "status": "Read local pinned source",
+      "scope": "Authored inferred bounds; not historical surveyed dimensions"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/BufferGeometry.html",
+      "checkedAt": "2026-10-01",
+      "status": "Official page read; local vendor r186 build authoritative",
+      "scope": "Indexed drawRange counts indices; use fixed source index buffer plus needsUpdate, do not allocate buffers per switch"
+    }
+  ],
+  "coordinates": {
+    "unit": "metre",
+    "system": "Runtime glTFY-up; negate BlenderY into runtimeZ",
+    "volumeRule": "Source clear bounds plus0.5m horizontal/0.1m vertical inferred placeholder-boundary allowance; classify whole exact-position-connected components by box centre, preserve unowned components",
+    "exceptions": "Cinema doorway overlaps neighbouring hall allowance; matching either loaded room can remove shared door backing"
+  },
+  "verification": [
+    "Synthetic disjoint window/door components, UV/normal-split shared positions, transformed root, room change, unknown room and exact restore tests",
+    "Independent actual115 LOD0/1/2 component/triangle ownership and original-attribute/index restoration audit",
+    "Both1280x720 native backends hall/stair/lift/cinema/base/dream and far; backing stats/save/new console errors",
+    "Appropriate full tests/build, smallEnglish commit, pull-rebase/push/exact Workers"
+  ],
+  "comparison": {
+    "cameras": "Existing tower115 fixed views",
+    "buffer": [
+      1280,
+      720
+    ],
+    "lighting": "Source viewer unchanged",
+    "artPass": "Engineering visibility repair; do not count technical retry as material/art trial"
+  },
+  "decision": {
+    "retain": true,
+    "visualAcceptance": false,
+    "nextStep": "Paused at human request for app update. After explicit resume, perform deferred113 native smoke first, then open a fresh roof/wire audit brief."
+  },
+  "cost": {
+    "paidToolsOrApisAllowed": false
+  },
+  "coordination": {
+    "extraClaudeCalls": false,
+    "newAgents": false,
+    "newBatchHeading": false,
+    "reviewDeferredUntil": "2026-10-01T12:45:00Z"
+  },
+  "sourceHashes": {
+    "113": {
+      "lod0": "6904458cacf4cc534c47d846d4befdc1175d471ac698b688a46ead063492943e",
+      "lod1": "2f6866144f15ffd6d0dc6517f9bb87c69c76b8ea2b38246987f59629402dd702",
+      "lod2": "eb2a96a08a9ad67b6a2400fc0025b7b852a03bf08eddc75abd7db450cbb0a28d"
+    },
+    "115": {
+      "lod0": "fd31507f85b393e56b1aba9d09d82b1a3bab1bb2ed000260d5a10a6270e1c96a",
+      "lod1": "29e6ba94ae626ed1f4dba4b8b316e2d7e44dfdcaeae343ec5609fd85868516d4",
+      "lod2": "afad2757a21c79f0c2f3290dcb25df6199590626d0048acb7f1d3c921250db7d"
+    }
+  },
+  "verificationResults": {
+    "tests": {
+      "related": 10,
+      "fullBuild": 311,
+      "failed": 0
+    },
+    "actualAssets": "Both113/115 LOD0/1/2 raw attributes unchanged; exact indices restored",
+    "native": "115 WebGPU and WebGL2: all four cells base/dream, far unload ready=true; hall40/2002, stair380/1662, lift/cinema0/2042, far0/124. Five fresh1280x720 PNGs inspected. No new warnings/errors after08:41UTC. 113 native smoke deferred for human stop; both113/115 actual assets audited.",
+    "additionalClaudeCall": false,
+    "privateReceipt": "research-cache/look-dev/tower-placeholder-118/native-receipt.json"
+  },
+  "implementationHashes": {
+    "tower-base-113.mjs": "ecae209e5e7d7e825b2a1d2f73c3d829e3918b6a954fa41e94377760340c60eb",
+    "tower-placeholder-mask.mjs": "65251bbc7d07f7c82672c4acd499deb81f173aa6c371a18874b79ec5f0d5cb93"
+  },
+  "updatedAt": "2026-10-01T09:11:45.357491+00:00"
+}

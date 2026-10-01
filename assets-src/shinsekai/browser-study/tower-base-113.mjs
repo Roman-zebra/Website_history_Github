@@ -5,6 +5,7 @@ import {waitCaptureFrame,encodeCanvasPng} from './capture-frame.mjs';
 import {repeatedMeshInstances} from './repeated-mesh-instances.mjs';
 import {createTowerBalusterInstances} from './tower-baluster-instances.mjs';
 import {createTowerGatePlayback} from './tower-gate-playback.mjs';
+import {createTowerPlaceholderMask} from './tower-placeholder-mask.mjs';
 const canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const view=document.querySelector('#viewpoint'),dream=document.querySelector('#dream'),measure=document.querySelector('#measure'),capture=document.querySelector('#capture');
 const sliders={car:document.querySelector('#car'),landing:document.querySelector('#landing')};
@@ -28,7 +29,7 @@ const views={north:{pos:[0,10,-48],target:[0,11,0]},hall:{cell:'hall',pos:[-12.2
 if(review==='115')Object.assign(views,{north:{pos:[0,17,-85],target:[0,8,0]},far:{lod:2,pos:[0,30,-145],target:[0,8,0]},wingW:{cell:'hall',pos:[-11.4,1.65,-.3],target:[-17,1.65,-.3]},wingE:{pos:[12,1.65,.3],target:[18,1.65,.3]},exit:{cell:'cinema',pos:[-29.45,1.65,11.7],target:[-29.45,1.65,5.5]}});
 if(cinemaProposal){views.projector={cell:'cinema',pos:[-16.05,5.95,-1.65],target:[-17.35,5.20,-.40]};const option=document.createElement('option');option.value='projector';option.textContent='映写機の修正候補';view.append(option);}
 if(liftProposal){views.liftThreshold={cell:'lift',pos:[0,15.9,1.75],target:[0,15.2,.45]};const option=document.createElement('option');option.value='liftThreshold';option.textContent='昇降機入口の敷居';view.append(option);}
-let exterior,wings,manifest,activeLOD=0,current=null,epoch=0,frame=null,disposed=false,preparing=false,ready=false,captureWait=null,pending=Promise.resolve(),initializing;
+let exterior,wings,manifest,placeholderMask,activeLOD=0,current=null,epoch=0,frame=null,disposed=false,preparing=false,ready=false,captureWait=null,pending=Promise.resolve(),initializing;
 let frames=0,lastTime=null,mixers={};const intervals=[];
 const fail=error=>{if(disposed)return;canvas.dataset.error=error.message;canvas.dataset.ready='false';ready=false;status.textContent='検証失敗：'+error.message;console.error(error);};
 function release(model){if(!model)return;const gs=new Set(),ms=new Set(),ts=new Set();model.scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();if(o.geometry)gs.add(o.geometry);for(const m of [].concat(o.material??[]))ms.add(m);});for(const m of ms){for(const t of Object.values(m))if(t?.isTexture)ts.add(t);m.dispose();}for(const t of ts){t.dispose();t.source?.data?.close?.();}gs.forEach(g=>g.dispose());}
@@ -36,7 +37,7 @@ function request(){if(!disposed&&ready&&!preparing&&!document.hidden&&frame===nu
 function cancel(){if(frame!==null)cancelAnimationFrame(frame);frame=null;lastTime=null;}
 async function settleGPU(){const queue=renderer.backend.isWebGPUBackend?renderer.backend.device?.queue:null;if(!queue)return;let timer;try{await Promise.race([queue.onSubmittedWorkDone(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('GPUの画像保存待機が終了しませんでした。')),5000);})]);}finally{clearTimeout(timer);}}
 function locked(value){view.disabled=dream.disabled=measure.disabled=capture.disabled=value;controls.enabled=!value;for(const key of Object.keys(sliders))sliders[key].disabled=playButtons[key].disabled=value||!mixers[key];}
-function placeholders(){if(!exterior)return;exterior.scene.traverse(o=>{if(/_backing|_curtain/.test(o.name))o.visible=!current;if(/_stairhead_SW$/.test(o.name))o.visible=!current?.cell.startsWith('cell_stair');});wings?.scene.traverse(o=>{if(/_W1_backing_dark$/.test(o.name))o.visible=!current?.cell.startsWith('cell_cinema');});}
+function placeholders(){if(!exterior)return;canvas.dataset.placeholderMask=JSON.stringify(placeholderMask.select(current?.cell??null));exterior.scene.traverse(o=>{if(/_stairhead_SW$/.test(o.name))o.visible=!current?.cell.startsWith('cell_stair');});wings?.scene.traverse(o=>{if(/_W1_backing_dark$/.test(o.name))o.visible=!current?.cell.startsWith('cell_cinema');});}
 function clearCell(){Object.values(mixers).forEach(m=>m.dispose());mixers={};for(const [key,slider]of Object.entries(sliders)){slider.value='0';slider.oninput=null;playButtons[key].onclick=null;}delete canvas.dataset.gateProgress;delete canvas.dataset.cinemaProposal;delete canvas.dataset.hallProposal;delete canvas.dataset.liftProposal;if(current){scene.remove(current.model.scene);release(current.model);current=null;}placeholders();}
 function gates(){mixers={};for(const [key,slider]of Object.entries(sliders)){slider.value='0';const wing=key.startsWith('wing'),model=wing?exterior:current?.model;if(!model)continue;const clipKey=wing?'door_wing_'+key.slice(-1):key==='car'?'car_gate':'landing_gate';const playback=createTowerGatePlayback(THREE,model,clipKey);if(!playback)continue;mixers[key]=playback;playback.scrub(0);slider.oninput=()=>{playback.scrub(Number(slider.value));request();};playButtons[key].onclick=()=>{playback.play();lastTime=null;request();};}}
 function instances(){
@@ -47,8 +48,8 @@ async function assembly(lod,token){
  if(exterior&&activeLOD===lod)return true;
  const models=[];try{models.push(await loader.loadAsync(base+'TB_EXT_LOD'+lod+'.glb'));if(review==='115')models.push(await loader.loadAsync(base+'TW_LOD'+lod+'.glb'));}catch(error){models.forEach(release);throw error;}
  if(disposed||token!==epoch){models.forEach(release);return false;}
- for(const model of [exterior,wings])if(model){scene.remove(model.scene);release(model);}
- [exterior,wings]=models;activeLOD=lod;instances();scene.add(exterior.scene);if(wings)scene.add(wings.scene);canvas.dataset.lod=String(lod);canvas.dataset.wings=wings?'TW_LOD'+lod:'empty';return true;
+ placeholderMask?.dispose();for(const model of [exterior,wings])if(model){scene.remove(model.scene);release(model);}
+ [exterior,wings]=models;activeLOD=lod;instances();scene.add(exterior.scene);if(wings)scene.add(wings.scene);placeholderMask=createTowerPlaceholderMask(THREE,exterior.scene);placeholders();canvas.dataset.lod=String(lod);canvas.dataset.wings=wings?'TW_LOD'+lod:'empty';return true;
 }
 async function select(){
  const token=++epoch;ready=false;canvas.dataset.ready='false';intervals.length=0;cancel();locked(true);status.textContent='部屋を準備中…';
@@ -88,7 +89,7 @@ function draw(time){
 controls.addEventListener('change',request);view.addEventListener('change',select);dream.addEventListener('change',select);measure.addEventListener('change',()=>{intervals.length=0;lastTime=null;request();});
 capture.addEventListener('click',async()=>{locked(true);cancel();try{if(document.hidden||!ready)throw new Error('表示・描画完了後に保存してください。');renderer.render(scene,camera);captureWait=waitCaptureFrame({request:requestAnimationFrame,cancel:cancelAnimationFrame});await captureWait.promise;captureWait=null;renderer.render(scene,camera);await settleGPU();if(disposed||document.hidden||canvas.dataset.error)throw new Error('保存を中止しました。');captureWait=encodeCanvasPng(canvas);const blob=await captureWait.promise;captureWait=null;if(!blob||disposed)throw new Error('画像を保存できませんでした。');const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`tower-base-${review}-${view.value}-${dream.checked?'dream':'base'}-${width}x${height}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);canvas.dataset.capture='saved';}catch(error){status.textContent=error.message;canvas.dataset.capture='failed';}finally{if(!disposed){locked(!ready);request();}}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancel();captureWait?.cancel();}else request();});
-window.addEventListener('pagehide',event=>{cancel();captureWait?.cancel();if(event.persisted)return;disposed=true;epoch++;Promise.allSettled([initializing,pending]).then(()=>{clearCell();release(exterior);release(wings);controls.dispose();renderer.dispose();});});
+window.addEventListener('pagehide',event=>{cancel();captureWait?.cancel();if(event.persisted)return;disposed=true;epoch++;Promise.allSettled([initializing,pending]).then(()=>{clearCell();placeholderMask?.dispose();release(exterior);release(wings);controls.dispose();renderer.dispose();});});
 initializing=(async()=>{try{await renderer.init();if(disposed)throw new DOMException('Page left','AbortError');if(renderer.backend.isWebGPUBackend)renderer.backend.device.addEventListener('uncapturederror',event=>fail(event.error));
  manifest=await fetch(base+'manifest.json').then(r=>{if(!r.ok)throw new Error('manifest '+r.status);return r.json();});canvas.dataset.sourceRevision=manifest.revision;
  if(cinemaProposal){proposalReceipt=await fetch(proposalBase+'lossless-summary.json').then(r=>{if(!r.ok)throw new Error('cinema receipt '+r.status);return r.json();});if(!['cell_cinema','cell_cinema_dream'].every(cell=>proposalReceipt.some(r=>r.cell===cell&&r.compressedBytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid cinema compression receipt');}

@@ -1,14 +1,14 @@
 {
-  "status": "in_progress",
+  "status": "paused",
   "current": "T6",
-  "next": "Active: sleeve relief0.008/0.016 rejected before native for rail+hat10/8; initial0/validator0/0/topology pass, baseline7240/runtime/art26/hybrid23 unchanged. Record full build then commit/pull-rebase/push/Workers. Next independent tower window backing: placeholders currently hides ALL base backing/curtain for ANY loaded cell; create per-cell masks retaining unrelated windows, wingW1 cinema behaviour held. Read manifests/source geometry before brief/authoring; no Claude calls/newagents/review/newheading through21:45JST; heartbeatpaused active.",
-  "updatedAt": "2026-10-01T08:30:18.546260+00:00",
+  "next": "Paused by human for app update. Current window-backing repair retained; full311/localbuild pass, actual113+115 allLOD audit exact, native115 bothbackends fourcells/base/dream/far0newerrors and fivePNGs. After explicit resume: read AGENTS/state/TASKS/PLAN and Claude handoff/branches, perform deferred113 native smoke first; then fresh roof/wire/coplanarity brief. Do not auto-reenable jta or start a new task before user resumes. Cloth7240/art26/hybrid23 retained, Claude economy118 through21:45JST, no calls.",
+  "updatedAt": "2026-10-01T09:11:45.357491+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 118,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
   "coordination": {
-    "heartbeat": "jta; pause during active turn, re-enable before idle",
+    "heartbeat": "jta PAUSED at explicit human request for app update; do not auto-reenable before explicit resume",
     "claudeIntervalMinutes": 60,
     "handoff": "docs/shinsekai/requests-to-claude.md",
     "escalation": "Consult user before MAX/Astra or new group chat",
@@ -22,5 +22,6 @@
       "schedulerReport": "STATE.md reports hourly job9ce3f838; not independently inspected",
       "quotaGuarantee": false
     }
-  }
+  },
+  "pauseReason": "User: pause at a good checkpoint to install update"
 }

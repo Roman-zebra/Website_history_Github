@@ -101,3 +101,15 @@ fails: reject before render, keep baseline7240/runtime/art26/hybrid23 unchanged.
 Private raw/retained/solver/preflight receipt preserved; stop this tuning family.
 7130e0f exactWorkersSUCCESS08:24:22UTC. Next repair per-cell window backing
 visibility independently; no Claude call/review/ack/newheading through21:45JST.
+
+2026-10-01 — Per-cell window backing repair118 retained: whole connected
+components masked in the existing index buffer, source attributes unchanged,
+exact unload restoration. Actual113/115 all three LODs audited; hall40/2002,
+SWstair380/1662, lift/cinema0/2042 atLOD0; far0/124 restores empty cell.
+Four unit/10 related/full311 tests pass, local static build passes. Native115
+WebGPU/WebGL2 four cells base/dream/far ready, no new warnings/errors; five
+fresh1280x720 PNGs inspected. No new asset/material or performance/art approval.
+113 native smoke deferred at human request to stop for app update, then fresh
+roof/wire brief after explicit resume. Art26/hybrid23 and cloth7240 retained.
+Claude batch shortened68% with previous full snapshot/private details retained;
+no Claude model/agent/review/ack call. jta PAUSED, do not auto-reenable.
