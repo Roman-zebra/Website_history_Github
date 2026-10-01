@@ -23,5 +23,17 @@
       "quotaGuarantee": false
     }
   },
-  "pauseReason": "User: pause at a good checkpoint to install update"
+  "pauseReason": "User: pause at a good checkpoint to install update",
+  "integrations": {
+    "tripoStudio": {
+      "checkedAt": "2026-10-01",
+      "documentation": "docs/shinsekai/research/tripo-integration.md",
+      "route": "Studio GLB export -> private intake -> Blender / local browser review",
+      "candidate": "../research-cache/tripo-intake/baluster-001",
+      "directChromeBridge": "connecting; webpage handshake not received; local protocol reception passed",
+      "apiUsed": false,
+      "productionAssetAdopted": false,
+      "generalWorkResumed": false
+    }
+  }
 }

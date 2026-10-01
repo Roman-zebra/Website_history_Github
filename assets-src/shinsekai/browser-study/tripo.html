@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'none'">
+<title>TRIPO × 新世界 — 取り込み確認</title>
+<style>
+  :root{color-scheme:dark;font:15px/1.6 system-ui;background:#18212c;color:#f6f0e4}*{box-sizing:border-box}body{margin:0}canvas{display:block;position:fixed;inset:0;width:100%;height:100%}.panel{position:relative;margin:16px;padding:20px;width:min(360px,calc(100% - 32px));background:#18212cef;border:1px solid #c8a77180;border-radius:12px}h1{font-size:20px;margin:0 0 12px}p{margin:10px 0}a{color:#e8c996}button,input{max-width:100%;font:inherit}button{background:#344657;color:inherit;border:1px solid #8394a3;border-radius:6px;padding:7px 12px;cursor:pointer}button:disabled{opacity:.5}label{display:block;margin:12px 0}.hint{font-size:13px;color:#c4cdd6}#status{overflow-wrap:anywhere}details{margin-top:14px}
+</style>
+<canvas id="view" aria-label="TRIPOから取り込んだ3Dモデル"></canvas>
+<section class="panel">
+<h1>TRIPO × 新世界</h1>
+<p>TRIPOで書き出したGLBを、新世界と同じ描画環境で確認します。</p>
+<label>GLBを選ぶ <input id="file" type="file" accept=".glb"></label>
+<button id="sample" disabled> 取り込んだ柱モデルを開く</button>
+<label><input id="flip" type="checkbox" disabled> 上下を反転して確認</label>
+<button id="reset" disabled> 全体を見る</button>
+<button id="clear" disabled> 閉じる</button>
+<p id="status" role="status">描画の準備中…</p>
+<p class="hint">ドラッグで回転、ホイールで拡大。ファイルはこのブラウザ内で開きます。反転は表示だけに適用します。</p>
+<details><summary>TRIPOでの書き出し</summary><p>モデルのエクスポートでGLBを保存するか、DCC BridgeからBlenderへ送信してください。受け取ったモデルは専用の作業フォルダに保存します。</p><p>ここは採用前の確認用です。実寸・歩行判定・史実との整合性は、個別の確認が必要です。</p><p><a href="https://studio.tripo3d.ai/ja/assets" target="_blank" rel="noopener">TRIPOのアセットを開く</a> · <a href="index.html">新世界の作業画面</a></p></details>
+</section>
+<script type="importmap">{"imports":{"three":"/vendor/three-r186/build/three.webgpu.js","three/webgpu":"/vendor/three-r186/build/three.webgpu.js","three/addons/":"/vendor/three-r186/examples/jsm/"}}</script>
+<script type="module" src="./tripo-viewer.mjs"></script>
+</html>

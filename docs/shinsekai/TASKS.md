@@ -1,5 +1,11 @@
 # Shinsekai task list
 
+2026-10-01 — Separate user-authorized TRIPO integration: see
+`research/tripo-integration.md`. Monthly Studio Pro checked; actual column GLB
+export/private intake/local Blender reception/WebGPU+WebGL2 review completed.
+Chrome's direct DCC handshake remains unverified; export/intake is the working
+route. No API, extra purchase, main asset adoption or general-work/heartbeat resume.
+
 Baseline: `PLAN.md` (v3.6) and the later user decisions recorded in `research/to-codex.md`. The free area is the tower exterior and surrounding street/plaza only; Stripe remains the primary payment provider, with a membership-page alternative deferred to M5. Claude is working locally in the existing "JTA通天閣パーク作成" group; Codex alone writes `main`, while Claude may propose reviewed branches from its separate checkout. Free local/GitHub/Cloudflare work and routine decisions are authorized without repeated requests.
 
 The final site is published from GitHub through the repository's existing Cloudflare Workers build/deploy route. Local files are for authoring and verification only.
