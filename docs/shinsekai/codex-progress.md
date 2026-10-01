@@ -249,3 +249,18 @@ gates1 saves/far cell+metadata cleared/newerrors0; full298tests. Oneactualtower
 repair gives21art/18hybrid; export retries excluded. No historical/safety/final
 1080p certification.05a65ae exactWorkersSUCCESS. Claude heads/handoff unchanged,
 no review/acknowledgement/model call; batching remains under existingheading.
+
+2026-10-01 — Wood118 fixed-camera comparisons: roughness-only/colour-only/combined
+direct WebGPU upper-window PNGs inspected; source reload control SHA identical.
+Source grain/roughness/normal maps, UV/RGB/geometry/physical fields retained;
+selected exterior4/interior6, counter exclusion control byte-identical. Colour
+max1/255, roughness/combined max9/255: subtle diagnostics, no visual/default
+promotion. Both1280x720 backends combined base/dream/save/far activewood0 and
+interior/dream empty/newerrors0. Eleven privatePNGs/receipt; one cold colour
+save failure retried successfully, no stale-output claim. Seven material tests,
+full300build. Three actual trials gives24art/21hybrid; controls/retries excluded.
+95a2ee2 exactWorkersSUCCESS. Public research/lessons/policy adopted with free
+boundaries; existing cloth/interior Blender4.5.10 scene persistence passed,
+not a full shader/keyframe/export/visual certificate. Next garment silhouette/
+post occlusion, pins/hardware/contact preserved. No Claude calls/review requests
+or new heading; review deferred through21:45JST.

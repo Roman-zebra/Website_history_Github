@@ -14,6 +14,7 @@ import {createShopAmbientLook} from './shop-ambient-look.mjs';
 import {connectShopPaperShadows} from './shop-paper-shadow.mjs';
 import {connectShopDaylight} from './shop-daylight.mjs';
 import {connectShopWallWear} from './shop-wall-wear.mjs';
+import {connectShopWoodWear} from './shop-wood-wear.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
@@ -29,6 +30,8 @@ const clothLook=new URLSearchParams(location.search).has('clothlook');
 const ambientDetail=new URLSearchParams(location.search).has('ao');
 const daylight=new URLSearchParams(location.search).has('daylight');
 const wallWear=new URLSearchParams(location.search).has('wallwear');
+const woodWear=new URLSearchParams(location.search).has('woodwear');
+const woodWearMode=new URLSearchParams(location.search).get('woodwear')||'combined';
 const windowLight=daylight||new URLSearchParams(location.search).has('windowlight');
 const capture=document.querySelector('#capture');
 const buttons={cash:document.querySelector('#cash'),storage:document.querySelector('#storage')};
@@ -79,6 +82,7 @@ function prepareScene(reason){
 function render(time=performance.now()){
  canvas.dataset.daylight=interior?.studyDaylight?JSON.stringify(interior.studyDaylight.apply(!dreamCheck.checked)):'off';
  canvas.dataset.wallWear=wallWear?JSON.stringify({exterior:exterior?.studyWallWear??{materials:0},interior:interior?.studyWallWear??{materials:0}}):'off';
+ canvas.dataset.woodWear=woodWear?JSON.stringify({exterior:exterior?.studyWoodWear??{materials:0},interior:interior?.studyWoodWear??{materials:0}}):'off';
  hemi.intensity=interior ? (windowLight ? .22 : .45) : .8;
  scene.environmentIntensity=interior&&windowLight ? .14 : .45;
  canvas.dataset.windowLight=windowLight?JSON.stringify({sun:[-5,9,18],target:[3,0,-4.5],interiorFill:.22,environmentIntensity:scene.environmentIntensity,shadowMap:[2048,2048],inferred:true,geometryChanged:false}):'source comparison';
@@ -105,6 +109,7 @@ function release(model){
  for(const m of materials)if(m.userData.studyOriginalWrinkleMaterial)materials.add(m.userData.studyOriginalWrinkleMaterial);
  for(const m of materials)if(m.userData.studyOriginalShadowMaterial)materials.add(m.userData.studyOriginalShadowMaterial);
  for(const m of materials)if(m.userData.studyOriginalWallMaterial)materials.add(m.userData.studyOriginalWallMaterial);
+ for(const m of materials)if(m.userData.studyOriginalWoodMaterial)materials.add(m.userData.studyOriginalWoodMaterial);
  for(const m of materials){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();}for(const t of textures){t.dispose();t.source?.data?.close?.();}for(const g of geometries)g.dispose();
 }
 async function load(part){
@@ -120,6 +125,7 @@ async function load(part){
  if(part==='exterior-lod0')try{gltf.studyPaperShadows=connectShopPaperShadows(gltf);}catch(error){release(gltf);throw error;}
  if(part==='interior'&&windowLight)try{gltf.studyPaperShadows=connectShopPaperShadows(gltf,{names:['SHOJI']});}catch(error){release(gltf);throw error;}
  if(['interior','exterior-lod0'].includes(part)&&wallWear)try{gltf.studyWallWear=connectShopWallWear(gltf);}catch(error){release(gltf);throw error;}
+ if(['interior','exterior-lod0'].includes(part)&&woodWear)try{gltf.studyWoodWear=connectShopWoodWear(gltf,{mode:woodWearMode});}catch(error){release(gltf);throw error;}
  if(part==='interior'&&clothDetail){
   let cloth;
   try{cloth=await load(clothHat?'upper-cloth-v2-sewn-hat':clothSewn?'upper-cloth-v2-sewn':clothV2?'upper-cloth-v2':'upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth,{suffix:clothV2?'_v2':''});gltf.studyCloth.normal=cloth.studyClothNormal;}

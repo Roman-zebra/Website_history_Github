@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "roundId": "timber-wear-research-method-20261001",
+  "status": "native_diagnostics_complete_optional_candidate",
+  "subject": "Building A runtime timber surface",
+  "intendedResult": "Break up uniform timber roughness while retaining authored grain and readable period interior details.",
+  "baseline": {
+    "contextCommit": "05a65ae",
+    "note": "Production is active; record the exact compared source hashes when capturing images.",
+    "files": [
+      "assets-src/shinsekai/browser-study/building-a.mjs",
+      "assets-src/shinsekai/browser-study/shop-wood-wear.mjs"
+    ],
+    "comparedContextCommit": "95a2ee2533166c47b8bcda8dc64aa5587eb5b4b1",
+    "comparedSourceHashes": {
+      "assets-src/shinsekai/browser-study/building-a.mjs": "9d603bae0316e075a58d13c147594c71a8c538515bdeb7c3b15002e085f87b33",
+      "assets-src/shinsekai/browser-study/shop-wood-wear.mjs": "1668985fd5cc6675ab0715712e2e06f107c5141bff906b6182506f08f3e42706",
+      "assets-src/shinsekai/eval-building-a/hybrid/runtime/interior.glb": "a5c102f5c499eaca29a6dede27b5bf419c8296e1752ec1c88af281dee43bd935",
+      "assets-src/shinsekai/eval-building-a/hybrid/runtime/exterior-lod0.glb": "7c94fee4aea2b336dfd085586d209701044c32b4a3931b41e3048ce25decb97c",
+      "assets-src/shinsekai/eval-building-a/hybrid/runtime/upper-cloth-v2-sewn-hat.glb": "e3da5405d002a9bfc25e4a0e0ac217558c1ea944458aa0370668ebe0179d69a2"
+    }
+  },
+  "scope": {
+    "change": "Optional timber material surface variation",
+    "preserve": [
+      "mesh geometry",
+      "UVs",
+      "vertex colours",
+      "existing grain and normal maps",
+      "hardware",
+      "drawer clips and pivots",
+      "floor reflection calibration",
+      "light and camera settings"
+    ],
+    "defer": [
+      "cloth silhouette",
+      "new objects",
+      "lighting revision",
+      "historical approval",
+      "qualified 1080p performance"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "authoring": "Blender Z-up",
+    "runtime": "glTF/three.js Y-up after loader conversion",
+    "noiseDomain": "positionLocal; object-local coordinates as imported",
+    "origin": "Existing imported object origins; do not relocate",
+    "evidence": "Existing model convention; noise scales are inferred art parameters rather than surveyed dimensions. Check differently scaled objects in close views."
+  },
+  "references": [
+    {
+      "url": "https://x.com/shion_takk/status/2105302605719347253",
+      "claimSupported": "Research-first, scoped, visually reviewed modelling process",
+      "checkedAt": "2026-10-01",
+      "sourceStatus": "public article read in browser"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/MeshStandardMaterial.html",
+      "claimSupported": "Wood dielectric; multiplicative map/factor behaviour and roughness data",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "url": "https://github.com/mrdoob/three.js/blob/r186/src/materials/MeshStandardMaterial.js",
+      "claimSupported": "Pinned r186 material contract",
+      "checkedAt": "2026-10-01"
+    },
+    {
+      "url": "https://threejs.org/manual/pages/color-management.html",
+      "claimSupported": "Linear shader/vertex colours; colour versus non-colour texture interpretation",
+      "checkedAt": "2026-10-01"
+    }
+  ],
+  "observedCandidate": {
+    "materialNames": "^(M_Timber_(Dark|Light|Aged|Natural)|UD_wood(_raw)?)$",
+    "broadNoiseCoefficient": 0.7,
+    "fineNoiseCoefficient": 35,
+    "colourMultiplierCoefficient": 0.04,
+    "roughnessMultiplierCoefficient": 0.12,
+    "roughnessClamp": [
+      0.35,
+      1
+    ],
+    "note": "Observed in the active draft, not accepted visual settings. Two simultaneous changes require isolated comparisons."
+  },
+  "plan": [
+    "Record matched baseline camera, pose, time, light, exposure and source revision.",
+    "Check actual selected timber materials on upper room and a near timber detail.",
+    "Compare roughness-only with colour fixed; preserve source maps and normals.",
+    "Compare colour-only with roughness fixed if colour variation remains useful.",
+    "Retain only visually useful changes; describe any combined result separately.",
+    "Verify both backends, source reload, PNG saving and far-cell disposal; add results to the existing production batch."
+  ],
+  "comparison": {
+    "oneChangedCauseFirst": "roughness variation",
+    "controls": [
+      "same light and exposure",
+      "same camera and resolution",
+      "same base/dream pose",
+      "same backend within each comparison",
+      "same floor and wood normal maps"
+    ],
+    "fixedCameras": [
+      "existing upper-axis",
+      "existing window inspection",
+      "existing near timber/counter view"
+    ],
+    "resolution": [
+      1280,
+      720
+    ],
+    "beforeImages": [
+      "private look-dev/woodwear-118/control-reopened-webgpu.png",
+      "private look-dev/woodwear-118/control-webgl.png"
+    ],
+    "afterImages": [
+      "private look-dev/woodwear-118/roughness-webgpu.png",
+      "private look-dev/woodwear-118/colour-webgpu.png",
+      "private look-dev/woodwear-118/combined-webgpu.png",
+      "private look-dev/woodwear-118/combined-webgl.png"
+    ]
+  },
+  "verification": {
+    "checks": [
+      "selected names match actual objects",
+      "source maps and geometry retained",
+      "no new runtime errors",
+      "WebGPU and WebGL base/dream PNG saving",
+      "far interior/material references disposed",
+      "appropriate current material tests and build"
+    ],
+    "results": [
+      "selected exterior4/interior6",
+      "counter exclusion unchanged",
+      "full300 tests/build",
+      "no new console errors/warnings",
+      "private receipt/source hashes recorded"
+    ],
+    "savedSceneReopened": "not_applicable_to_runtime_only_shader_change",
+    "sourceReloaded": "passed; identical baseline PNG SHA",
+    "webgpu": "three modes inspected; combined base/dream/save/far passed",
+    "webgl": "combined base/dream/save/far passed"
+  },
+  "decision": {
+    "retain": "optional diagnostics only; no default promotion",
+    "visualAcceptance": false,
+    "remainingIssues": [
+      "Subtle timber difference",
+      "Dark room corners and cloth silhouette/post occlusion",
+      "Slow cold WebGL readiness; qualified1080p pending"
+    ],
+    "nextStep": "Cloth silhouette/initial support correction with retained pins and hardware; exported contact audit."
+  },
+  "cost": {
+    "paidToolsOrApisAllowed": false,
+    "newDownloadsRequiredForThisRound": false
+  },
+  "coordination": {
+    "useExistingBatch": true,
+    "requestExtraReview": false,
+    "activeThreadId": "01a0f17d-ce83-7780-869a-56bc0755bbf7"
+  },
+  "reusableLessons": [
+    "actual material selection versus no-op",
+    "source maps/attributes retained",
+    "fresh PNG timestamp/hash before retry"
+  ]
+}

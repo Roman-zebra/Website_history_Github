@@ -50,3 +50,18 @@ allsource vertex/image/clip binary bytes; validator0/0. Base doorway1389rays
 has0missing; maxadjacentstep114.499→23.100mm. Longerpath props and dream+.45m
 remain. Both1280x720 backends gates1/base/dream/save/far pass, newerrors0;
 full298build. Totalart21/hybrid18. Next timber wear/silhouette; review deferred.
+
+2026-10-01 — Wood118 fixed-camera comparisons: roughness-only/colour-only/combined
+direct WebGPU upper-window PNGs inspected; source reload control SHA identical.
+Source grain/roughness/normal maps, UV/RGB/geometry/physical fields retained;
+selected exterior4/interior6, counter exclusion control byte-identical. Colour
+max1/255, roughness/combined max9/255: subtle diagnostics, no visual/default
+promotion. Both1280x720 backends combined base/dream/save/far activewood0 and
+interior/dream empty/newerrors0. Eleven privatePNGs/receipt; one cold colour
+save failure retried successfully, no stale-output claim. Seven material tests,
+full300build. Three actual trials gives24art/21hybrid; controls/retries excluded.
+95a2ee2 exactWorkersSUCCESS. Public research/lessons/policy adopted with free
+boundaries; existing cloth/interior Blender4.5.10 scene persistence passed,
+not a full shader/keyframe/export/visual certificate. Next garment silhouette/
+post occlusion, pins/hardware/contact preserved. No Claude calls/review requests
+or new heading; review deferred through21:45JST.

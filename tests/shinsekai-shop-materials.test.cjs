@@ -35,6 +35,36 @@ test('wall wear retains shared source colours and geometry and excludes existing
  assert.equal(a.material[1],paper);assert.equal(a.material[2],textured);assert.equal(a.material[3],prop,'the general interior prop material is not a wall');assert.equal(a.geometry,geometry);assert.deepEqual(geometry.getAttribute('position').array,before);
  assert.equal(b.material.userData.studyOriginalWallMaterial,source);assert.ok(b.material.normalNode?.isNode);assert.equal(source.normalNode,undefined);
 });
+test('wood wear preserves existing grain, physical fields and shared geometry without double application',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
+ const {connectShopWoodWear}=await studyModule('shop-wood-wear.mjs');
+ const wood=new THREE.MeshPhysicalMaterial({color:0x705237,roughness:.76,clearcoat:.2,vertexColors:true});wood.name='UD_wood';
+ for(const key of ['map','roughnessMap','normalMap','aoMap'])wood[key]=new THREE.Texture();wood.normalScale.set(.35,.35);
+ const painted=wood.clone();painted.name='M_Timber_Paint';const floor=wood.clone();floor.name='Hero polished aisle timber';
+ const paper=wood.clone();paper.name='SHOJI';const sign=wood.clone();sign.name='UD_signboard';
+ const geometry=new THREE.BoxGeometry(),colours=new Float32Array(geometry.getAttribute('position').count*3).fill(.2);
+ geometry.setAttribute('color',new THREE.BufferAttribute(colours,3));const before=geometry.getAttribute('position').array.slice();
+ const scene=new THREE.Group(),a=new THREE.Mesh(geometry,[wood,painted,floor,paper,sign]),b=new THREE.Mesh(geometry,wood);scene.add(a,b);
+ const stats=connectShopWoodWear({scene});assert.equal(stats.materials,1);assert.equal(a.material[0],b.material);assert.notEqual(b.material,wood);
+ for(const key of ['map','roughnessMap','normalMap','aoMap','roughness','clearcoat','vertexColors'])assert.equal(b.material[key],wood[key],key);
+ assert.deepEqual(b.material.normalScale,wood.normalScale);assert.equal(b.material.color.getHex(),wood.color.getHex());
+ assert.ok(b.material.colorNode?.isNode);assert.ok(b.material.roughnessNode?.isNode);assert.equal(wood.colorNode,undefined);
+ assert.deepEqual(a.material.slice(1),[painted,floor,paper,sign]);assert.equal(a.geometry,geometry);assert.equal(geometry.getAttribute('color').array,colours);assert.deepEqual(geometry.getAttribute('position').array,before);
+ const retained=b.material;assert.equal(connectShopWoodWear({scene}).materials,0);assert.equal(b.material,retained);
+});
+
+test('wood diagnostics vary one channel at a time and reject an unknown mode',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
+ const {connectShopWoodWear}=await studyModule('shop-wood-wear.mjs');
+ for(const mode of ['roughness','colour']){
+  const source=new THREE.MeshStandardMaterial({roughness:.7});source.name='M_Timber_Natural';source.map=new THREE.Texture();source.roughnessMap=new THREE.Texture();
+  const scene=new THREE.Group(),mesh=new THREE.Mesh(new THREE.BoxGeometry(),source);scene.add(mesh);
+  connectShopWoodWear({scene},{mode});assert.equal(mesh.material.map,source.map);assert.equal(mesh.material.roughnessMap,source.roughnessMap);
+  assert.equal(mesh.material[mode==='roughness'?'colorNode':'roughnessNode'],null,'diagnostic must leave the other channel on the source path');
+ }
+ assert.throws(()=>connectShopWoodWear({scene:new THREE.Group()},{mode:'unknown'}),/comparison mode/);
+});
+
 test('cloth normal mixing preserves physical fields, shared materials and geometry',async()=>{
  const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
  const {connectShopClothNormal}=await studyModule('shop-cloth-normal.mjs');
