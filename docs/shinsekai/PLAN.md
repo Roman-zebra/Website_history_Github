@@ -197,3 +197,29 @@ PC：Ryzen 5 1600／メモリ 16GB／GTX 1660 SUPER／C ドライブ空き 83.3G
 ## Current role split (user instruction, 2026-09-30; supersedes section6 hierarchy)
 
 Claude is the command centre/supervisor for look and behaviour, sets acceptance criteria and reviews visual milestones. Codex implements renderer/assets/behaviour, validates performance, builds/tests, commits and publishes main. Claude continues facts/sources/rights checks and may rework an item on a claude/* branch; Codex verifies/merges. Continue independent implementation work when useful tasks remain; do not finish a reply merely to wait for another command. Consult the user before MAX/Astra or a new group chat. This records the latest user direction without changing the original scope or budgets.
+
+## User update, 2026-10-01 — resumed production and monthly economy
+
+The user explicitly resumed the interrupted work in a new chat. TRIPO Studio Pro
+(initially called MarblePro, then clarified by the user) is reserved for important
+buildings. Read `research/tripo-monthly-operation.md` and `tripo-policy.json`:
+observed balance3200, monthly included3000, displayed expiry2026-11-01;
+production ceiling2250, reserve minimum800, daily cumulative pacing over31 days.
+Daily scheduled continuation/account checks run09:00 JST through2026-10-31.
+No separately billed API, credit purchase or upgrade. Routine geometry/material
+repair, LOD and repeated details use local free tools and cached originals.
+
+iPhone14 becomes the lightweight delivery target (supersedes the older iPhone12
+example in section3). Start with720px maximum buffer edge/DPR1, baked lighting,
+one nearby interior, reduced effects and strict scene/asset budgets in the monthly
+operation document. Real Safari/iOS measurements remain necessary before claiming
+performance. Existing desktop art comparisons remain fixed and unchanged.
+
+Claude is an occasional supervisor/reviewer at milestones; Codex continues
+implementation independently. The old hourly/frequent review policy does not
+restart after21:45. Free tools without service usage quotas are allowed. Ask before
+adding newly found Reddit/GitHub-distributed tools. Material Maker1.7 was explicitly
+authorized; other earlier ChatGPT paid/limited tool suggestions were not adopted.
+
+Change recorded2026-10-01 by Codex from direct user instructions; parent PLAN.md
+and Claude output remain read-only.

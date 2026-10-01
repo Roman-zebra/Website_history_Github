@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "service": "TRIPO Studio Pro",
+  "periodStart": "2026-10-01",
+  "periodEndExclusive": "2026-11-01",
+  "timeZone": "Asia/Tokyo",
+  "monthlyIncludedCredits": 3000,
+  "spendCeiling": 2250,
+  "reserveFloor": 800,
+  "maxAttemptsPerBrief": 2,
+  "eligibleTargets": ["white-tower", "lunapark-main-gate", "performance-hall", "major-cinema"],
+  "defaultRoute": "local Blender; reuse existing assets",
+  "apiAllowed": false,
+  "topupsAllowed": false,
+  "upgradesAllowed": false,
+  "generationRequires": ["today's visible account balance", "visible cost for the exact operation", "eligible target and scoped brief", "credit reservation via scripts/shinsekai-tripo-budget.mjs"],
+  "reviewPolicy": "Claude reviews occasional milestone batches; no automatic hourly or per-change calls",
+  "observationFile": "../research-cache/tripo-budget/ledger.json",
+  "entitlementObserved": "Pro (3000 credits); balance 3200; displayed expiry 2026-11-01",
+  "sources": ["https://www.tripo3d.ai/pricing", "https://www.tripo3d.ai/ja/help/api-plugins/tripo-studiotripo-api"]
+}
