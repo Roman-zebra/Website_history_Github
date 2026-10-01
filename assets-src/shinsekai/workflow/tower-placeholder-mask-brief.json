@@ -61,7 +61,7 @@
   "decision": {
     "retain": true,
     "visualAcceptance": false,
-    "nextStep": "Paused at human request for app update. After explicit resume, perform deferred113 native smoke first, then open a fresh roof/wire audit brief."
+    "nextStep": "Human resumed; deferred113 smoke completed. Next tower-roof-wire-brief.json read-only audit and mobile cost inventory."
   },
   "cost": {
     "paidToolsOrApisAllowed": false
@@ -70,7 +70,8 @@
     "extraClaudeCalls": false,
     "newAgents": false,
     "newBatchHeading": false,
-    "reviewDeferredUntil": "2026-10-01T12:45:00Z"
+    "reviewDeferredUntil": "2026-10-01T12:45:00Z",
+    "reviewPolicy": "Occasional milestone only; no automatic call after old21:45 deadline"
   },
   "sourceHashes": {
     "113": {
@@ -93,11 +94,12 @@
     "actualAssets": "Both113/115 LOD0/1/2 raw attributes unchanged; exact indices restored",
     "native": "115 WebGPU and WebGL2: all four cells base/dream, far unload ready=true; hall40/2002, stair380/1662, lift/cinema0/2042, far0/124. Five fresh1280x720 PNGs inspected. No new warnings/errors after08:41UTC. 113 native smoke deferred for human stop; both113/115 actual assets audited.",
     "additionalClaudeCall": false,
-    "privateReceipt": "research-cache/look-dev/tower-placeholder-118/native-receipt.json"
+    "privateReceipt": "research-cache/look-dev/tower-placeholder-118/native-receipt.json",
+    "native113Resume": "2026-10-01 both WebGPU/WebGL2 at1280x720: hall/stair/lift/cinema base+dream ready, mask40/2002,380/1662,0/2042,0/2042. North unload room=null, hidden0/retained2042. No captured warning/error. No new115 far qualification or actual-phone measurement."
   },
   "implementationHashes": {
     "tower-base-113.mjs": "ecae209e5e7d7e825b2a1d2f73c3d829e3918b6a954fa41e94377760340c60eb",
     "tower-placeholder-mask.mjs": "65251bbc7d07f7c82672c4acd499deb81f173aa6c371a18874b79ec5f0d5cb93"
   },
-  "updatedAt": "2026-10-01T09:11:45.357491+00:00"
+  "updatedAt": "2026-10-01T12:55:59.031Z"
 }

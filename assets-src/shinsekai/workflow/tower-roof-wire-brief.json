@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "roundId": "tower-roof-wire-119-20261001",
+  "status": "prepared_read_only_audit",
+  "baselineCommit": "26f11bc",
+  "subject": "Frozen tower115 roof, cage wire and coplanar surfaces",
+  "source": {"revision":"aa030cd","manifest":"../research-cache/tower-base-115-runtime/manifest.json","lod0Sha256":"fd31507f85b393e56b1aba9d09d82b1a3bab1bb2ed000260d5a10a6270e1c96a"},
+  "intendedResult": "Identify actual roof/wire overlap or flicker and phone delivery costs before selecting one bounded repair",
+  "scope": {"change":"read-only geometry/material inventory and fixed-view observations first","preserve":["all frozen source bytes","accepted per-room backing mask","lift-floor and opening-era semantics","cloth7240","camera/light baseline"],"defer":["global decimation","historical dimension claims","new TRIPO generation","visual acceptance","real-device fps qualification"]},
+  "coordinates": {"unit":"metre in authored scenario","system":"glTF Y-up, Blender Z-up; BlenderY negated to runtimeZ","datum":"source authored roof/landing contract, not surveyed height"},
+  "lessons": {"reference":"docs/shinsekai/research/modeling-lessons.md","relevant":["valid GLB still looks wrong","GLB import/export changes unrelated attributes"],"rule":"Do not re-export unaffected meshes to fix one overlapping surface"},
+  "references": [
+    {"source":"docs/shinsekai/research/boarding-study.md","supports":"roof floor distinct from shaft/well extent; cage grid and turret route are attributed assumptions"},
+    {"source":"assets-src/shinsekai/browser-study/tower-placeholder-mask.md","supports":"roof windows retain backing; runtime visibility is room-specific"},
+    {"source":"vendor/three-r186/","supports":"pinned renderer implementation; inspect official version-compatible material/depth documentation before a material edit"}
+  ],
+  "comparison": {"oneChangedCause":"none during inventory; define a single cause after finding evidence","fixedCameras":["existing north","existing roof landing","existing lift"],"resolution":[1280,720],"lighting":"unchanged source viewer","backends":["WebGPU","WebGL2"]},
+  "verification": ["record source hashes and mesh/world bounds","check plane separation, duplicate faces and alpha/depth settings without assuming coplanarity from names","inventory transfer bytes/visible triangles/decoded maps against provisional phone budgets","if justified, retain numbered candidate and compare one factor with exact unrelated-attribute audit","real iPhone14 Safari sustained motion/memory later"],
+  "observedMobileGap": {"source115CellBytes":"8.2MB to27.3MB from manifest; all above4MiB stream target","source113NativeCinemaTriangles":241825,"visibleTriangleTarget":160000,"acceptance":false},
+  "cost": {"additionalStudioCredits":0,"paidToolsOrApisAllowed":false},
+  "coordination": {"extraClaudeCalls":false,"newAgents":false,"review":"occasional milestone packet only"}
+}

@@ -671,3 +671,15 @@ hall-entry-patch.md and cinema-patch.md. Private research-cache contains all
 raw/rejected outputs, actual native PNGs/receipts, source hashes and audits.
 Public-only modelling research/lessons/scene-reopen workflow adopted; no paid
 article continuation, model training, global tool setup or new agents.
+
+2026-10-01 human resume supersedes the pause and hourly-review cadence. Claude
+is an occasional milestone supervisor, including after21:45JST; this packet
+does not request an automatic call. Native113 deferred smoke now passes both
+backends/four rooms base/dream/north unload with no captured warnings/errors.
+Source cloth7240, art26/hybrid23 and existing tower115 acceptance limits retained.
+TRIPO live3200, additional spend0; monthly2250/reserve800/daily09JST plan.
+Generic column006/007 locally reduced to0.82/0.93MB and remains private technical
+candidate only. Material Maker1.7 installed with user permission, automatic
+export unverified. iPhone14 budgets now guide derivatives; current desktop
+interiors exceed transfer/triangle budgets. Next roof/wire/coplanarity audit,
+then bounded mobile derivative; no new historic dimension or look approval.

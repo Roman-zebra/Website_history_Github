@@ -119,3 +119,20 @@ fresh1280x720 PNGs inspected. No new asset/material or performance/art approval.
 roof/wire brief after explicit resume. Art26/hybrid23 and cloth7240 retained.
 Claude batch shortened68% with previous full snapshot/private details retained;
 no Claude model/agent/review/ack call. jta PAUSED, do not auto-reenable.
+
+2026-10-01 — Human explicitly resumed T6 in new chat. Native113 deferred smoke
+completed on both1280x720 backends: four rooms base/dream, north unload exact
+backing counts, no captured warnings/errors. Prepared roof/wire/coplanarity
+audit brief; frozen geometry, cloth7240 and art26/hybrid23 remain retained.
+TRIPO Studio Pro live3200/expiryNov1, no charges. Local budget2250/month,
+reserve800, cumulative31-day pacing and daily09JST observation/plan workflow.
+Existing private column locally reduced61MB/1.976Mtri to006:816428B/1000tri,
+007:934944B/4000tri/512px maps, validators0/0. Source immutable and texture-round
+geometry/UV/normals/tangents exact. Seam-gap trials rejected. Mobile-profile
+native load/unload passes; not phone FPS or historical/production acceptance.
+Full319/319 build and later8 budget/intake checks pass. iPhone14 delivery budgets
+added; current interiors still exceed them. Material Maker1.7 user-authorized,
+portable official release installed/start verified; automatic material export
+unverified. GitHub/Reddit additions require permission. Claude reviews occasional
+milestones only, no hourly restart/model/agent calls. jta moved to this chat,
+daily09JST throughOct31, replacing paused10-minute schedule.

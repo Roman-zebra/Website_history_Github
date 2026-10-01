@@ -54,3 +54,11 @@ Native115 WebGPU/WebGL2 now pass all four cells in base/dream plus far
 unload. Five fresh1280x720 captures inspected; no new console warning/error.
 113 native smoke remains explicitly deferred for the human-requested update
 stop. Both113/115 raw assets have already passed the independent audit.
+
+2026-10-01 resumed chat: deferred113 native smoke is now complete. Both
+WebGPU/WebGL2 at1280x720 load hall/stair/lift/cinema in base and dream; masks
+remain40/2002,380/1662,0/2042,0/2042. North unload restores all2042 backing
+triangles and clears the room. No captured new warnings/errors. This turn did
+not rerun115 far-LOD qualification or produce a new visual acceptance; old115
+evidence remains. Prepared next roof/wire/coplanarity brief, with phone budgets
+and actual-device work still open. Claude stays occasional after21:45JST.

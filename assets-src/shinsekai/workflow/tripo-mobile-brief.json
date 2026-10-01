@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "roundId": "tripo-baluster-mobile-001",
+  "status": "local_technical_candidates_retained_no_production_adoption",
+  "subject": "Existing TRIPO baluster transport prototype",
+  "intendedResult": "Reusable local optimization route for iPhone14 candidates without another cloud generation",
+  "baseline": {"commit":"26f11bc","file":"../research-cache/tripo-intake/baluster-001/source.glb","sha256":"6db7954dfd7cefbfac81985b7d94ad3ba80bef76f09f048224131bf0903ef9f5"},
+  "scope": {"change":"geometry reduction first with original images; separate texture-only round after welded geometry baseline","preserve":["private source bytes","source scale/orientation","per-loop UV seams during geometry reduction","exact geometry/UV/normal/tangent bytes during texture-only round"],"defer":["production placement","historical acceptance","iPhone14 actual-device performance"]},
+  "coordinates": {"unit":"unverified source units","system":"glTF Y-up, Blender Z-up after import","origin":"source retained","dimensionEvidence":"AI example; no historical calibration"},
+  "references": [{"url":"https://docs.blender.org/api/4.5/bpy.types.DecimateModifier.html","checkedAt":"2026-10-01","claimSupported":"collapse ratio, triangulation, face count","versionCompatibility":"4.5 documentation downloaded successfully to private cache; Blender4.5.10 RNA verified before execution"}],
+  "reusableLessons":{"reference":"docs/shinsekai/research/modeling-lessons.md","applicableLessons":["valid GLB still looks wrong","GLB import/export changes unrelated attributes"],"suspectedCause":"prototype geometry far exceeds mobile scene budget","evidenceToDistinguishCause":"exact triangle/byte accounting, same-camera silhouette comparison"},
+  "comparison":{"oneChangedCause":"separate geometry and texture-size rounds","controls":["original images in geometry round","geometry/UV/normals/tangents byte-identical in texture round","same source-fit view/light/exposure"],"fixedCameras":["source-fit camera"],"bufferEvidence":"mobile720x324 on desktop; phone viewport override did not take effect","qualifiedFixed1280x720Comparison":false},
+  "targets":{"triangles":[4000,1000],"productionApproved":false},
+  "cost":{"paidToolsOrApisAllowed":false,"additionalStudioCredits":0},
+  "coordination":{"requestExtraReview":false},
+  "results": {
+    "sourceBytes":60956656,
+    "sourceTriangles":1976386,
+    "rejected":"001/003/004 unjoined seam vertices produced black gaps;002 packed-image export did not resize. Preserve failures, do not adopt.",
+    "geometryBaseline":"005 welds only coincident positions at1e-7, keeps per-loop UVs, then collapse1000/4000 with original maps; source unchanged",
+    "textureOnly":"006/007 all3 maps resized512px; independent accessor-byte audit confirms geometry, UV, normals, tangents and indices unchanged against005",
+    "candidates":[{"id":"006","triangles":1000,"bytes":816428,"use":"repeat-prop budget technical candidate"},{"id":"007","triangles":4000,"bytes":934944,"use":"near-view technical candidate; exceeds repeated-prop1000 baseline"}],
+    "gltfValidation":"006/007 zero errors and zero warnings",
+    "estimatedRgbaTextureBytesWithMips":4194304,
+    "native":"007 WebGPU/WebGL2 load/unload passes, source button disabled in mobile profile, no captured warnings/errors;006 WebGPU visually inspected. Successful rendered shape, not a controlled art acceptance.",
+    "privateReceipts":"../research-cache/tripo-mobile-005/receipt.json;006/007/receipt.json;007/texture-only-audit.json",
+    "productionApproved":false,
+    "historicalOrScaleAccepted":false,
+    "actualIPhone14Measured":false,
+    "additionalStudioCredits":0
+  }
+}

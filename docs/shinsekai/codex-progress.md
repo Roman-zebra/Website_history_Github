@@ -312,3 +312,34 @@ fresh1280x720 PNGs inspected. No new asset/material or performance/art approval.
 roof/wire brief after explicit resume. Art26/hybrid23 and cloth7240 retained.
 Claude batch shortened68% with previous full snapshot/private details retained;
 no Claude model/agent/review/ack call. jta PAUSED, do not auto-reenable.
+
+2026-10-01 resume — T6 continued in01a0f756-8ab2-7111-a287-46e329330319.
+Deferred113 WebGPU/WebGL2 smoke completes four rooms base/dream at1280x720,
+room-specific40/2002 and380/1662 masks, lift/cinema0/2042, north unload restores
+all2042, no captured warnings/errors. Next read-only roof/wire/coplanarity brief
+prepared. No new historical/art/continuous FPS acceptance, art26/hybrid23 retained.
+
+Account: visible TRIPO Studio Pro3000, balance3200, expiry2026-11-01, history
+Oct1 grants+3000/+200, no additional charged operation. Private ledger records
+observations;2250 monthly ceiling/800 reserve/cumulative pacing guard tested.
+User calls this Marble but explicitly clarified TRIPO. Major buildings only;
+no API/upgrade/top-up. Daily09JST heartbeat replaces10-minute paused task and
+targets resumed chat forOct1–31. Unknown account state means local-only work.
+
+Local column: source61MB/1,976,386tri unchanged; coincident weld followed by
+collapse and a separate512px texture round gives006(1000tri/816428B),
+007(4000tri/934944B). Validators0errors/0warnings, exact reduced accessor/index
+bytes preserved during texture round, estimated4MiB decoded RGBA+mips. Unwelded
+black-gap candidates and failed packed-image load preserved/rejected. Native007
+WebGPU/WebGL2 load/unload/mobile-profile pass;006 WebGPU inspected. Actual
+viewport remained desktop despite requested390x844 override, so no phone-layout
+claim or fixed1280x720 art comparison. No prototype added to historic tower.
+
+Full319/319 build passed, unrelated generated pages restored; subsequent8
+budget/intake checks and syntax/whitespace pass. iPhone14 budgets documented,
+source115 cells8.2–27.3MB and113cinema dream241825tri need separate mobile
+derivatives. User-authorized Material Maker1.7 official portable archive/hash,
+Vulkan/library/HDR start verified; CLI map export still unsuccessful, no adopted
+maps. Existing Blender remains usable. Read recent ChatGPT tool discussions;
+paid/quota recommendations are not adopted, new GitHub/Reddit tools need consent.
+Claude remains occasional supervisor; no automatic call after old21:45 deadline.
