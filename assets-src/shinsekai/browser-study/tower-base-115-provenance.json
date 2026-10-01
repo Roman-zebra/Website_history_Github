@@ -9,7 +9,7 @@
     },
     {
       "file": "assets-src/shinsekai/browser-study/tower-base-113.mjs",
-      "sha256": "b0069da474cb90944f5615825ec1df640049e66e99cc3be7a754e2c946c03a2f"
+      "sha256": "c865b71f7ffb16bb0717d4b410c67a36abf44912631eabb31a1b9e7290e10760"
     },
     {
       "file": "assets-src/shinsekai/browser-study/tower-gate-playback.mjs",
@@ -17,7 +17,7 @@
     },
     {
       "file": "scripts/serve-shinsekai-study.cjs",
-      "sha256": "1c8ecd18b97c5ad4c4ad266c94ebd1a22753e646b35094672b9227cfe5430d2b"
+      "sha256": "a614ec7e7dacc723a8e532dcf4508fbdc0e464a44d66129063636c759c2693f6"
     },
     {
       "file": "scripts/shinsekai-meshopt-pack.mjs",
@@ -30,12 +30,24 @@
     {
       "file": "vendor/three-r186/examples/jsm/libs/meshopt_decoder.module.js",
       "sha256": "d428e73a000057c6c94bfcedc3412d0c2dc14ca8800e88553aab05113ad2bf19"
+    },
+    {
+      "file": "assets-src/shinsekai/tower-base-adapters/hall-entry-patch.py",
+      "sha256": "c5c80864c9fd69cce1704eaa345f05c7c8ddb6caff38c9a51814cd73e83cef9f"
+    },
+    {
+      "file": "scripts/shinsekai-glb-retain-meshes.cjs",
+      "sha256": "94d952519ccb074f9f34445137e3f3b3d9e196c98dc1d04729ac204d60df7fff"
+    },
+    {
+      "file": "tests/shinsekai-retain-meshes.test.cjs",
+      "sha256": "32e132e4282e71490513be5b8188f97050142b41f4e09a79d4e28e86bbc0282e"
     }
   ],
   "runtimeManifest": "parent research-cache/tower-base-115-runtime/manifest.json",
   "glbValidation": "3 author +1 plain +14 splits: zero errors/warnings",
   "native": "WebGPU assembly/actual west door/cinema ready; additional native checks ongoing",
-  "sourceIssue": "Hall west entry wall/bench obstruction remains;118 transfers independent repair to Codex from frozen115 source",
+  "sourceIssue": "Original115 hall obstruction retained for comparison; explicit118 hallproposal derivative has0 blockers in29,286 rays/variant,0floor missing6461/variant; both1280x720 backends base/dream saved and far LOD2 candidate references cleared, new errors/warnings0",
   "visualAcceptance": false,
   "qualified1080p": false,
   "cinemaProposal": {
@@ -48,6 +60,18 @@
       18956360,
       19433676
     ],
+    "visualAcceptance": false,
+    "qualified1080p": false
+  },
+  "hallProposal": {
+    "query": "?hallproposal",
+    "privateManifest": "parent research-cache/hall-115-proposal/split-summary.json",
+    "nativeReceipt": "parent research-cache/look-dev/hall-115-entry/receipt.json",
+    "bytes": [
+      21442536,
+      21899712
+    ],
+    "native": "Both1280x720 backends base/dream with west gate progress1 saved; far LOD2 cell empty and candidate metadata cleared; new errors/warnings0",
     "visualAcceptance": false,
     "qualified1080p": false
   }
