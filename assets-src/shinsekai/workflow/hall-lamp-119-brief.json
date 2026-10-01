@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-hall-lamp-colour-001-20261002",
+  "status": "native_verified_partial119",
+  "subject": "2350K colour of hall point lights and visible lamp emission, separated from intensity/range",
+  "baseline": {
+    "commit": "58aafe2b46c879aa57769ba05380eddd89ef914a",
+    "sourceRevision": "aa030cd",
+    "preservedLook": "exposure-1.25EV/directional gain.01/floor.72-.76+wear/wall transition colour wear; no unapproved GTAO",
+    "sourceAudits": "parent research-cache/hall-lamp-119-001/source-audit.json and emission-audit.json"
+  },
+  "coordinates": {
+    "units": "metres",
+    "system": "baked glTF X/Y/Z",
+    "roomTranslation": [
+      -14.05,
+      0.15,
+      8.6
+    ]
+  },
+  "selection": {
+    "lights": "11 original point lights in core; source directional unchanged",
+    "materials": "6 independent bulb/lamp_milk sources across core/desk/lamps; curtain emission excluded"
+  },
+  "scope": {
+    "change": "colour only, matching each original linear Rec.709 luminance before display tone mapping",
+    "preserve": [
+      "point intensity/range/decay, emitter strength40/5",
+      "all original maps/roughness/base colours/geometry/UVs/AA",
+      "floor/wall/exposure/directional settings",
+      "cached source objects/assignments and dream/exterior route"
+    ],
+    "defer": [
+      "separate reduced point/emitter intensity comparison",
+      "separate finite range and darker depth",
+      "dark/desaturated timber",
+      "GTAO restoration",
+      "haori/upper details",
+      "realphone performance"
+    ]
+  },
+  "nativeColourProbe": {
+    "blender": "4.5.10 LTS",
+    "engine": "CyclesCPU",
+    "node": "ShaderNodeBlackbody",
+    "kelvin": 2350,
+    "linearRGB": [
+      2.1790616512298584,
+      0.7413240075111389,
+      0.1008404791355133
+    ],
+    "space": "Linear Rec.709; installed OCIO scene_linear role verified",
+    "receipt": "parent research-cache/hall-lamp-119-001/blackbody-probe/receipt.json",
+    "historicalStatus": "inferred requested lamp temperature, not measured1912 spectrum"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/PointLight.html",
+      "checkedAt": "2026-10-02",
+      "supports": "point intensity and distance0/inverse-square defaults; checked pinnedr186 loader"
+    },
+    {
+      "url": "https://threejs.org/manual/pages/color-management.html",
+      "checkedAt": "2026-10-02",
+      "supports": "linear colour input and open-domain HDR; preserve source colour-space annotations"
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/render/shader_nodes/converter/blackbody.html",
+      "checkedAt": "2026-10-02",
+      "status": "reader402; not read, not a verified technical reference; actual pinned native node probe used"
+    }
+  ],
+  "comparison": {
+    "phases": [
+      "source versus independent copies/control",
+      "control versus2350K colour only"
+    ],
+    "resolution": [
+      1280,
+      720
+    ],
+    "cameras": {
+      "hall": {
+        "position": [
+          -12.275,
+          1.65,
+          6.9
+        ],
+        "target": [
+          -12.275,
+          1.8,
+          -3
+        ]
+      },
+      "hallDesk": {
+        "position": [
+          -12.65,
+          1.65,
+          0.7
+        ],
+        "target": [
+          -10.85,
+          1.2,
+          0.7
+        ]
+      }
+    },
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ]
+  },
+  "lessons": [
+    "Separate source units/colour/exposure from inferred staging",
+    "verify actual emitter/light selection before increasing strength",
+    "source control near/context before art factor",
+    "temporary copies/point snapshots restore before cached reuse"
+  ],
+  "verification": [
+    "11 expected points and six emitter sources, no unrelated changes",
+    "linear luminance preserved and source strength/distance/decay fixed",
+    "atomic failed copy and disposal/re-entry preservation",
+    "both native close/context and dream/far controls",
+    "source input hashes unchanged; full build after runtime changes"
+  ],
+  "artTrial": 8,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "useExistingClaudeFile": true,
+    "requestExtraReview": false
+  },
+  "evidence": "parent research-cache/hall-lamp-119-001/native-receipt.json",
+  "fullBuildTests": 342
+}

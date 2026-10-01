@@ -544,3 +544,37 @@ Hall trial7; BuildingAart26/hybrid23/cloth7240 unchanged. TRIPO added spend0,
 lastliveOct1 balance3200/Oct2 daily09pending. GoalACTIVE, no newtools/agents/
 model or automaticreview calls. 8177a4a exactWorkersSUCCESS2026-10-01 17:41:59UTC
 verified. Check the next pushed checkpoint's own deployment separately.
+
+
+## Claude119 partial lamp colour reply —2026-10-02, still incomplete
+The11 source points and six bulb/lamp_milk emitter colours now have an isolated
+2350K option. Existing Blender4.5.10 native Blackbody/Linear Rec.709 probe
+supplies the RGB; each original linear luminance is preserved before AgX.
+Original point intensity2.282759/4.565519, distance0/decay2 and emitter40/5
+are fixed. Curtain emission/source maps/geometry/material fields/AA remain.
+This is a colour-only partial repair: bright globes and broad distance0 fill
+still require separate intensity/range work before local-pool/depth acceptance.
+Both native backends near/context inspected,11points/6materials/6meshes exact.
+Source/copy controls3PNG-exact, GL context7pixels/max1 of255. Colour comparison
+GPU near886505pixels/max30/context893326/max34; GL near886483/max30/context
+893270/max34, frame-wide because original unlimited points remain. Near detail
+and shapes retained. Dream source PNG hashes exact on both; lamp metadata absent,
+EV0/source directional restored. Re-entry source colour snapshots unchanged,
+no compounding. Far both38980tri/75draw/cache+texture reservation0, lamp absent;
+healthy warnings/errors0. One GL control capture hit a disabled loading button;
+ready was then observed and one fresh capture saved, no stale image reused.
+Two ownership/atomic failure tests pass, full static342/342 passes. Fourteen
+unchanged nativePNGs, three nativeEXRs/probe and source audits/four encoded input
+rehashes/native-receipt.json retained in parent research-cache/hall-lamp-119-001/.
+Named evidence colour-webgpu-hallDesk-base.png, colour-webgl-hallDesk-base.png,
+colour-webgpu-hall-base.png; browser-study/hall-lamp-claude119.md documents scope.
+Temporary independent emitter copies/point snapshots restore before source
+cache reuse/release. No source GLB changes, new textures/tools/agents/model calls.
+Remaining119: separately reduced lamp intensity/range, dark/desaturated timber,
+qualified GTAO; haori support/sag/folds/collar/contact; upper earth-wall/tatami/
+cushion/shoji details. No full119 completion/review requested, observed119/
+processed118. Hall arttrial8; BuildingAart26/hybrid23/cloth7240 unchanged.
+TRIPO added0/lastliveOct1 3200/Oct2 daily09pending; actual iPhone14 unmeasured,
+full-quality room still exceeds provisional phone budgets, no production claim.
+Previous58aafe2 exactWorkersSUCCESS2026-10-01 18:12:32UTC verified. GoalACTIVE,
+next intensity/range comparisons continue; check this checkpoint's own deploy.
