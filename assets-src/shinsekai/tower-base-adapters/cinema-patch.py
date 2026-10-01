@@ -6,7 +6,7 @@ Period type references and all assumed dimensions are in cinema-patch.md.
 import ast
 import hashlib
 
-SOURCE_SHA256='0336f17e837f70e7d21faaeeae29867bb709d00c4b055f0f8965f5ca78441c5c'
+SOURCE_SHA256='be0671adbc225763dd0eb14af945864d1e6b2b43e36ec3744c5bf89c59fede8e'
 BODY_SCALE=1.15
 PORT_SHIFT=.1345
 
@@ -23,14 +23,20 @@ def proposed_tree(source_bytes):
     body.extend(ast.parse('''
 with c.grp("var_magazine_housings"):
     for label, ax, az, radius in (("upper", -.40, zt+.92, .235), ("lower", -.40, zt-.05, .175)):
-        # Sheet-metal boxes with an actual bottom film slot; open inspection
+        # Sheet-metal boxes with actual feed slots; open inspection
         # covers show the original reels. Detail and opening angle are inferred.
         y0,y1=.13,.28
         box(c,"iron",(ax-radius,y0,az-radius),(ax-radius+.004,y1,az+radius),r=.0008)
-        box(c,"iron",(ax+radius-.004,y0,az-radius),(ax+radius,y1,az+radius),r=.0008)
+        if label=="lower":
+            # The preserved film path enters the receiving case at its right
+            # side, below centre. An uninterrupted side wall would cut it.
+            for za,zb in ((az-radius,az-.065),(az+.035,az+radius)):
+                box(c,"iron",(ax+radius-.004,y0,za),(ax+radius,y1,zb),r=.0008)
+        else:
+            box(c,"iron",(ax+radius-.004,y0,az-radius),(ax+radius,y1,az+radius),r=.0008)
         box(c,"iron",(ax-radius,y0,az+radius-.004),(ax+radius,y1,az+radius),r=.0008)
         box(c,"iron",(ax-radius,y0,az-radius),(ax+radius,y0+.004,az+radius),r=.0008)
-        for xa,xb in ((ax-radius,ax-.05),(ax+.05,ax+radius)):
+        for xa,xb in (((ax-radius,ax-.05),(ax+.05,ax+radius)) if label=="upper" else ((ax-radius,ax+radius),)):
             box(c,"iron",(xa,y0,az-radius),(xb,y1,az-radius+.004),r=.0008)
         hinge=(ax-radius,y1,az)
         group="anim_magazine_lid_"+label+"_"+tag
@@ -47,6 +53,17 @@ with c.grp("var_magazine_housings"):
     wrapper=ast.parse('with c.at(m=Matrix.Translation((-.06765,0,zt)) @ Matrix.Diagonal((1.15,1.15,1.15,1)) @ Matrix.Translation((0,0,-zt))):\n    pass').body[0]
     wrapper.body=body
     projector.body=projector.body[:split]+[wrapper]
+    projector.body.extend(ast.parse('''
+with c.grp("var_projector_worklamp"):
+    # A: inferred table-mounted shaded inspection lamp, not an Osaka record.
+    tube(c,"iron",(-.82,-.25,zt),(-.82,-.25,zt+1.25),.006,8)
+    tube(c,"iron",(-.82,-.25,zt+1.25),(.05,-.25,zt+1.25),.006,8)
+    with c.at((.05,-.25,zt+1.12)):
+        lathe(c,"paint_dark",[(.10,0),(.075,.035),(.03,.11),(.008,.13)],20,False)
+        with c.at((0,0,.012)):
+            sphere(c,"bulb",.023,12,8)
+    c.light("point","projector_worklamp_"+tag,(.05,-.25,zt+1.12),color=(255,226,188),watt=35,size=.025)
+''').body)
     # Extend the rear tabletop/rear legs so the larger lamphouse is supported.
     class TableSupport(ast.NodeTransformer):
         def visit_UnaryOp(self,node):
@@ -86,4 +103,4 @@ with c.grp("var_magazine_housings"):
             partitions+=1
     if partitions!=1:raise ValueError('Expected one overlapping foyer partition.')
     ast.fix_missing_locations(tree)
-    return tree,{'sourceSHA256':SOURCE_SHA256,'bodyScale':BODY_SCALE,'portShift':PORT_SHIFT,'greenFixturesRemoved':patch.removed,'portConstantsShifted':patch.ports,'overlappingPartitionsOpened':partitions,'magazineCovers':'static105deg outward open; no runtime articulation claim'}
+    return tree,{'sourceSHA256':SOURCE_SHA256,'sourceRevision':'aa030cd','bodyScale':BODY_SCALE,'portShift':PORT_SHIFT,'greenFixturesRemoved':patch.removed,'portConstantsShifted':patch.ports,'overlappingPartitionsOpened':partitions,'magazineCovers':'static105deg outward open; no runtime articulation claim','feedSlots':'upper bottom / lower right-side; original film ribbon retained','worklamp':'A: inferred35W shaded table lamp; two-sided camera review still required'}

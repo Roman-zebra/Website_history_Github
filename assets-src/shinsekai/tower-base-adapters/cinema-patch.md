@@ -1,14 +1,49 @@
-# Cinema proposal /109 items3–4
+# Cinema109 proposal repinned to source115
 
-`cinema-patch.py::proposed_tree(bytes)` applies a reviewed AST delta to the exact36ec9ec interior source (SHA256 pinned). It suppresses unconditional main(), returns a tree/receipt, and writes no files. A separate private review driver builds to parent research-cache/cinema-109-proposal. Future112 source changes require a new diff review and updated pin; do not apply blindly or copy this candidate over Claude's structural repair.
+Claude116 accepted the direction and requested the single shaded worklamp and
+preserved film-path readability. The adapter is now pinned to115/aa030cd,
+SHA256 be0671adbc225763dd0eb14af945864d1e6b2b43e36ec3744c5bf89c59fede8e.
+Independent AST comparison confirms the projector function is unchanged from
+the previously reviewed source. The later entrance/shell/exit repairs stay in
+this source; the adapter transforms a separate in-memory AST, without changing
+Claude's file or invoking its unguarded main automatically.
 
-The proposal removes the green pictogram fixture, keeps the table on its original booth floor3.9m, extends its rear support, grows the apparatus15% around table height and preserves its lens X endpoint. Two inferred sheet-metal magazine cases have bottom film slots, separate walls, hinges/latches and105° outward-open inspection covers, exposing the original reels. They are static assemblies with named pivots; no working articulation/safety-mechanism claim. All new shape, colour, dimensions and the staged open-cover state are A:inferred.
+The inferred apparatus remains15% larger around the tabletop, with its lens
+endpoint preserved and rear table support extended. Two sheet-metal magazines
+have separate105-degree static covers, hinges and catches. The upper bottom
+slot and corrected lower right-side slot retain the original film ribbon.
+These are static inspection assemblies; no working cover/safety mechanism is
+claimed. One inferred35W shaded table worklamp replaces the green exit fixture.
+Its table, post, arm, hood and bulb are distinct geometry; none is documentary
+evidence of the1912 Osaka apparatus. The cinema floor remains3.900000095m.
 
-Lens height in cinema-local Blender coordinates becomes5.0845m. The booth ports move to4.9845..5.1845m. Actual ray tests exposed an overlapping full-height foyer partition which blocked all three original optical probes; that partition now has the same three ports as the booth wall. Revised lower/centre/upper rays all pass the foyer wall, while the actual booth floor remains3.900000095m. This does not certify cinema walkability or the site datum. Site placement is still INTERFACE.md's cinema transform, not these local coordinates.
+Lens height is5.0845m and ports4.9845..5.1845m in cinema-local Blender coordinates.
+Independent exported lower/centre/upper rays pass the formerly blocking foyer
+partition; no exit-lamp material is used.24 actual exported film triangles and
+908 new case/open-cover triangles have zero surface intersections. This excludes
+containment, moving sweeps and mechanical/whole-cinema walkability certification.
+The source's site placement remains INTERFACE.md, separate from these local values.
 
-Final private two-cell GLB45,082,872bytes: validator0errors/0warnings/346infos, base139027/dream144797triangles including six collision triangles each. Both are under150k. No exit-lamp material is used. Uncompressed combined size exceeds the40MB study target and Cloudflare25MiB single-asset limit; splitting/compression remains required before any delivery. No candidate building GLB is imported/published. Tower stairs still await Claude112 and prepared1920×1080 measurement remains open.
+Private split base/dream candidates are26,806,676/27,405,996bytes with138,611/
+144,243 rendered triangles, validators0errors/0warnings. Both are under150k,
+but exceed the26,214,400-byte delivery limit uncompressed. A direct Meshopt1.1
+buffer-view candidate is18,956,360/19,433,676bytes. All non-index view bytes,
+scene/material/accessor/image metadata remain identical after decoding.23/24
+triangles respectively use a cyclic index rotation retaining order/winding.
+Compressed and decoded validators both report0errors/0warnings. A smaller
+gltfpack1.3 comparison quantized vertex colour to8bit and is not adopted.
+Receipt: `research-cache/cinema-115-proposal/lossless-summary.json`. Native
+decoder/runtime integration and qualified1080p with final effects remain open.
+No candidate GLB is imported or published.
 
-Private paired camera/lighting evidence: cinema-109-control/renders/iter-002 and cinema-109-proposal/renders/iter-003, camera patch_full. Hero camera/exposure fixes are technical corrections, not extra artistic rounds or Claude acceptance. Blender review illumination is inferred. Three gaps: glare/material readability; exposed-film path and animated covers still unverified; delivery size/whole walking/qualified performance open.
+Private evidence: research-cache/cinema-115-proposal/{split-summary,rays,
+film-cases}.json and renders/iter-001/cinema_patch_{crank,full}.png. The paired
+control uses the same patch_crank camera/exposure. These verify a visible crank,
+exposed film and separately opened cases; glare and attachment/readability still
+need tuning. Camera/export repairs are technical corrections, not extra artistic
+rounds or final Claude acceptance. The source115 stair geometry has separate
+independent receipts; it is no longer awaiting112. Claude116's qualified source113
+buffer performance excludes115 combined wings and these effects.
 
 Period type references were read2026-10-01. The [Science Museum Group1910 Kamm record](https://collection.sciencemuseumgroup.org.uk/objects/co8086681/kamm-35mm-projector-on-stand) documents hand cranking, carbon-arc illumination and enclosed spools. Its stand and lamphouse dimensions are1085×580×1120mm and410×280×520mm; axis order is unspecified, so they are scale checks rather than a fit. Catalogue fields areCC0; descriptionCC BY4.0 (credit: Science Museum Group/Kodak Collection). Its photographs are separately copyrighted and are not copied into the proposal.
 
