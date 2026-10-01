@@ -24,3 +24,13 @@ test('missing, moved or unrelated replacement meshes leave the original visible'
   assert.ok(names.every(name=>interior.scene.getObjectByName(name).visible));
  }
 });
+
+test('v2 names retain attachment checks against the source placement',async()=>{
+ for(const moved of [false,true]){
+  const {connectShopCloth,names,interior,replacement}=await setup();
+  for(const name of names)replacement.scene.getObjectByName(name).name=name+'_v2';
+  if(moved)replacement.scene.getObjectByName(names[0]+'_v2').position.x+=.001;
+  if(moved){assert.throws(()=>connectShopCloth(interior,replacement,{suffix:'_v2'}));assert.equal(replacement.scene.parent,null);}
+  else{const stats=connectShopCloth(interior,replacement,{suffix:'_v2'});assert.deepEqual(stats.nodes,names.map(n=>n+'_v2'));assert.equal(replacement.scene.parent,interior.scene);}
+ }
+});

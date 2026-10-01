@@ -14,7 +14,7 @@ const port = Number(process.env.JTA_STUDY_PORT || 18765);
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.css': 'text/css', '.jpg':'image/jpeg','.png':'image/png' };
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('JTA_STUDY_PORT must be 1–65535.');
 const allowed = pathname => pathname.startsWith('/assets-src/shinsekai/browser-study/') ||
-  ['/assets-src/shinsekai/eval-building-a/hybrid/review-cameras.json',...['manifest.json','exterior-lod0.glb','exterior-lod1.glb','exterior-lod2.glb','interior.glb','dream.glb','dream-petals.glb','upper-cloth.glb'].map(name=>'/assets-src/shinsekai/eval-building-a/hybrid/runtime/'+name)].includes(pathname) ||
+  ['/assets-src/shinsekai/eval-building-a/hybrid/review-cameras.json',...['manifest.json','exterior-lod0.glb','exterior-lod1.glb','exterior-lod2.glb','interior.glb','dream.glb','dream-petals.glb','upper-cloth.glb','upper-cloth-v2.glb'].map(name=>'/assets-src/shinsekai/eval-building-a/hybrid/runtime/'+name)].includes(pathname) ||
   pathname.startsWith('/vendor/three-r186/') || ['tower-study.glb','tower-study-v3-open-gallery.glb','tower-study-v3-enclosed-box.glb','tower-study-v4-open-gallery.glb','tower-study-v4-enclosed-box.glb','tower-study-v4-look-uv.glb','tower-study-v4-look-ao.glb'].some(name=>pathname === '/assets-src/shinsekai/tower-study/'+name);
 const server = http.createServer((request, response) => {
   if (!['GET', 'HEAD'].includes(request.method)) {

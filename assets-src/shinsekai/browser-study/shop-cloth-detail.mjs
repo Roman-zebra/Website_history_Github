@@ -3,9 +3,10 @@ const targets=['UD_CoatRail_Haori','UD_DryingPole_Cloths','UD_ClothBolt_Spread']
 // Attach only after the complete replacement has loaded and passed placement checks.
 // The interior owns its resources, so stale responses and far-cell retirement
 // use the existing interior disposal path.
-export function connectShopCloth(interior,replacement){
+export function connectShopCloth(interior,replacement,{suffix=''}={}){
+ if(!['','_v2'].includes(suffix))throw new Error('未知の布差し替え版です。');
  const originals=targets.map(name=>interior.scene.getObjectByName(name));
- const revised=targets.map(name=>replacement.scene.getObjectByName(name));
+ const revised=targets.map(name=>replacement.scene.getObjectByName(name+suffix));
  if(originals.some(o=>!o)||revised.some(o=>!o))throw new Error('布の差し替えノードがそろっていません。');
  interior.scene.updateMatrixWorld(true);replacement.scene.updateMatrixWorld(true);
  for(let i=0;i<targets.length;i++){
@@ -17,5 +18,5 @@ export function connectShopCloth(interior,replacement){
  const count=root=>{let sum=0;root.traverse(o=>{if(o.isMesh)sum+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3;});return sum;};
  originals.forEach(o=>originalTriangles+=count(o));revised.forEach(o=>replacementTriangles+=count(o));
  interior.scene.add(replacement.scene);originals.forEach(o=>o.visible=false);
- return {nodes:targets.slice(),originalTriangles,replacementTriangles,addedTriangles:replacementTriangles-originalTriangles};
+ return {nodes:targets.map(name=>name+suffix),originalTriangles,replacementTriangles,addedTriangles:replacementTriangles-originalTriangles};
 }

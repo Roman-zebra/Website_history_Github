@@ -116,3 +116,7 @@ Self-review: curved petals and four profiles improve the coarse ring silhouette,
 ## Claude116/117 material revision
 
 Accepted petals are default; cloth silhouettes remain optional and rejected under117. Mixed normal scales, inferred paper shadow attenuation, corrected glazing shadows and dream colour revision are implemented. `?ao` is a performance-unqualified indirect GTAO candidate. See `../../browser-study/shop-materials-116.md`. Under118 the simulated_v2 cloth shape work transfers to Codex during the twelve-hour economy window.
+
+## Claude118 simulated cloth candidate (artistic round10)
+
+`?clothv2` adds a separate simulated garment/bolt derivative with_v2 names, retaining source hardware and placement. All12 fabric/roll surfaces are closed, runtime attachment/capture/dream/far retirement works on both backends. Max active149770/150000. See `cloth-118-v2.md` and PROVENANCE.json. The preceding116 material/light pass is round9; total10/hybrid9, with review deferred during API conservation. Pin support, sleeve/collar seams and strong white sheen still need work; no acceptance claimed.

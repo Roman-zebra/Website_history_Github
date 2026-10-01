@@ -19,7 +19,8 @@ const dreamCheck=document.querySelector('#dreamLook');
 // Opt-in comparison: compileAsync still increases total readiness time here.
 const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
-const clothDetail=new URLSearchParams(location.search).has('cloth');
+const clothV2=new URLSearchParams(location.search).has('clothv2');
+const clothDetail=clothV2||new URLSearchParams(location.search).has('cloth');
 const ambientDetail=new URLSearchParams(location.search).has('ao');
 const capture=document.querySelector('#capture');
 const buttons={cash:document.querySelector('#cash'),storage:document.querySelector('#storage')};
@@ -96,11 +97,11 @@ async function load(part){
   try{gltf.studyFlowers=connectShopFlowers(gltf);}
   catch(error){release(gltf);throw error;}
  }
- if(part==='upper-cloth')try{gltf.studyClothNormal=connectShopClothNormal(gltf);}catch(error){release(gltf);throw error;}
+ if(part==='upper-cloth'||part==='upper-cloth-v2')try{gltf.studyClothNormal=connectShopClothNormal(gltf);}catch(error){release(gltf);throw error;}
  if(part==='exterior-lod0')try{gltf.studyPaperShadows=connectShopPaperShadows(gltf);}catch(error){release(gltf);throw error;}
  if(part==='interior'&&clothDetail){
   let cloth;
-  try{cloth=await load('upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth);gltf.studyCloth.normal=cloth.studyClothNormal;}
+  try{cloth=await load(clothV2?'upper-cloth-v2':'upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth,{suffix:clothV2?'_v2':''});gltf.studyCloth.normal=cloth.studyClothNormal;}
   catch(error){if(cloth)release(cloth);release(gltf);throw error;}
  }
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);

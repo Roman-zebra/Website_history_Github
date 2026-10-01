@@ -391,5 +391,29 @@
     "AO": "optional GTAO .35m half resolution indirect context; single-sample depth prepass; final performance/acceptance open",
     "checks": "283/283 build; native1280x720 both backends base/dream capture and far retirement, no new errors",
     "receipt": "private parent research-cache/look-dev/shop-116-117/receipt.json"
+  },
+  "runtimeClothV2Candidate": {
+    "file": "runtime/upper-cloth-v2.glb",
+    "bytes": 3477040,
+    "sha256": "73dfb30174358e8e16de778efd320f4c6ee33b5ed672633d6ec9c726f7febf2b",
+    "sourceRevision": "e3dd4e7",
+    "handoff": 118,
+    "validator": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 14
+    },
+    "replacementTriangles": 7828,
+    "maxActiveInteriorWithPetals": 149770,
+    "retainedHardwareTriangles": 2364,
+    "tangentRepair": {
+      "orthogonalized": 109,
+      "fallbacks": 0,
+      "maximumDotBefore": 0.10805574396474293
+    },
+    "simulation": "Eleven original panels,32 Blender cloth frames/quality8, authored pins/self collision; private floor collider for loose bolt; frozen browser geometry",
+    "surfaceCheck": "12 fabric/roll bodies have2 incident triangles per position-welded edge; hardware position/UV0/colour triangles match111",
+    "dimensions": "A:1.2mm fabric; original core axis and inferred winding/fray; patterns/silhouettes are creative estimates",
+    "acceptance": "Optional clothv2 candidate; native both1280x720 backends base/dream captures/far retirement pass, no new errors; joints/pin support/white sheen still need refinement; no visual or final1080p acceptance"
   }
 }
