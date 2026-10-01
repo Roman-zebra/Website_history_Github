@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-hall-wall-001-20261002",
+  "status": "implemented_native_verified_partial119",
+  "subject": "Thin irregular colour grime at the hall stone/plaster transition",
+  "baseline": {
+    "commit": "8177a4a8887c66e777e175c5283b97d5ed1ed6d7",
+    "sourceRevision": "aa030cd",
+    "lighting": "qualified exposure-1.25EV/directional gain.01; floor wear retained, no unapproved AO",
+    "sourceAudit": "parent research-cache/hall-wall-119-001/source-audit.json"
+  },
+  "coordinates": {
+    "units": "metres",
+    "system": "baked glTF hall-local X/Y/Z",
+    "roomTranslation": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "boundaryY": 1.21,
+    "basis": "measured source vertical stone vertices up to1.204 and plaster bottom1.215; boundary-audit.json"
+  },
+  "scope": {
+    "change": "only surface colour around the measured boundary on sandstone/plaster_dk of hall__walls",
+    "preserve": [
+      "original full-resolution maps, UVs, vertex colours, normals, roughness",
+      "geometry/AA/lighting/floor settings",
+      "shared sandstone on windows/doors",
+      "source dream/exterior/cache assignments"
+    ],
+    "defer": [
+      "GTAO restoration",
+      "warm local lamps/dark timber",
+      "haori and upper four details",
+      "real phone validation"
+    ]
+  },
+  "comparison": {
+    "phases": [
+      "source versus node-copy control",
+      "node-copy versus boundary colour wear"
+    ],
+    "cameras": {
+      "hall": {
+        "position": [
+          -12.275,
+          1.65,
+          6.9
+        ],
+        "target": [
+          -12.275,
+          1.8,
+          -3
+        ]
+      },
+      "hallWall": {
+        "position": [
+          -12.35,
+          1.65,
+          5.2
+        ],
+        "target": [
+          -14.035,
+          1.41,
+          3.5
+        ]
+      }
+    },
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ]
+  },
+  "inferredSettings": {
+    "strength": 0.18,
+    "heightFadeMetres": [
+      0.015,
+      0.14
+    ],
+    "normalGating": "vertical faces only",
+    "noise": "two deterministic local scales to avoid a uniform stripe; colour variation only, not geometric grime or AO"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/TSL.html",
+      "checkedAt": "2026-10-02",
+      "supports": "local position/normal and smooth masks; also checked pinnedr186 normalLocal export"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/MeshStandardMaterial.html",
+      "checkedAt": "2026-10-02",
+      "supports": "preserve mapped PBR properties; checked pinned MaterialNode.COLOR and NodeMaterial vertex-colour multiplication"
+    }
+  ],
+  "lessons": [
+    "Inspect actual material selection before tuning strength",
+    "shared material copies must affect intended meshes only and restore source assignments",
+    "fixed source/copy control before the artistic factor",
+    "native near/context/dream/far and source hashes, not test count alone"
+  ],
+  "verification": [
+    "only two measured wall materials/meshes selected",
+    "windows sandstone assignment unchanged despite shared source",
+    "atomic failed-copy cleanup and cached-room restoration",
+    "source/copy native PNG comparisons",
+    "colour wear native close/context and dream/far on both backends",
+    "full static build after runtime changes"
+  ],
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "useExistingClaudeFile": true,
+    "requestExtraReview": false
+  },
+  "artTrial": 7,
+  "fullStaticBuildTests": 340,
+  "nativeEvidence": "parent research-cache/hall-wall-119-001/native-receipt.json"
+}

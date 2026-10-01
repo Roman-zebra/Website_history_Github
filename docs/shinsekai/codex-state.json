@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude119: floor roughness.72/.76 and walking/edge/seven bench-foot colour wear verified both native backends, four exact node-copy controls, both dream source PNG exact, far0; prompt partial file reply posted. Source inputs/maps/geometry/full AA retained,17PNGs/private hall-floor-119-001/002, full338/338. GL normal context fresh same-view-order source exact; older direct-context differs, framebuffer order invariance unqualified. Next separately scope wall stone/plaster transition grime, calibrated2200-2500K local lamps/dark timber; isolate transmission/framebuffer vs multipass before changed GTAO trial (AO001/002 unapproved, no unchanged retry). Then haori support/sag/folds/collar/contact and upper earth-wall/tatami/cushion/shoji. Only optional source-quality study flags; no actualphone/art/production acceptance. Observed119/processed118. b0f4bd3 exactWorkersSUCCESS16:46:53UTC verified; check newest pushed checkpoint. TRIPO spend0/lastliveOct1 3200/Oct2 daily09pending. Hall trials5roughness/6colour wear; BuildingAart26/hybrid23/cloth7240 unchanged. GoalACTIVE, no agents/model escalation or automaticClaude review.",
-  "updatedAt": "2026-10-01T17:36:51.428663+00:00",
+  "next": "PRIORITY Claude119: wall stone/plaster boundary colour grime trial7 verified both native backends close/context; source/copy3exact+GLcontext8pixels/max1; both dream source PNG exact/far0,14PNGs, source inputs/maps/geometry/full AA retained,340/340. Prompt partial file reply posted, observed119/processed118. Next scope local2200-2500K lamp colour then limited intensity/range against fixed exposure-1.25EV/source directional gain.01/floor.72-.76+wear/wallwear; core part contains12source lights, lamp-119-001/source-audit.json, source point values not yet calibrated. Then dark/desaturated timber; isolate transmission/framebuffer vs multipass before changed GTAO trial (AO001/002 unapproved, no unchanged retry); haori support/sag/folds/collar/contact and upper earth-wall/tatami/cushion/shoji. Only optional source-quality study flags, no realphone/art/production acceptance. 8177a4a exactWorkersSUCCESS17:41:59UTC verified; check newest pushed checkpoint next. TRIPO added0/lastliveOct1 3200/Oct2 daily09pending. Hall trial7, BuildingAart26/hybrid23/cloth7240 unchanged. GoalACTIVE, no agents/model escalation/automaticClaude review.",
+  "updatedAt": "2026-10-01T18:09:46.614393+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 119,
@@ -68,13 +68,14 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 338,
+    "fullBuildTests": 340,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
     "hallPrefetchNativeEvidence": "../research-cache/hall-prefetch-001/native-receipt.json",
     "hallDirectionalNativeEvidence": "../research-cache/hall-directional-119-001/native-receipt.json",
-    "hallFloorNativeEvidence": "../research-cache/hall-floor-119-002/native-receipt.json"
+    "hallFloorNativeEvidence": "../research-cache/hall-floor-119-002/native-receipt.json",
+    "hallWallNativeEvidence": "../research-cache/hall-wall-119-001/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 partial exposure/directional/floor verified and promptly replied; wall transition/lamps/timber, qualified AO and haori/upper details pending; processed118 only."
+  "pendingClaudeRepairs": "119 partial exposure/directional/floor/wall-transition colour wear verified and promptly replied; lamp pools/dark timber, qualified GTAO, haori and upper details pending; processed118 only."
 }

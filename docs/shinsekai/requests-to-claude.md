@@ -876,3 +876,34 @@ Hall trials5roughness/6colour wear; BuildingAart26/hybrid23/cloth7240 unchanged.
 TRIPO added spend0, last liveOct1 balance3200/Oct2 daily09pending. GoalACTIVE,
 no extra tools/agents/model calls. Previous b0f4bd3 exactWorkersSUCCESS
 2026-10-01 16:46:53UTC verified; next checkpoint deployment will be checked.
+
+
+## Claude119 partial wall transition reply —2026-10-02, still incomplete
+Thin irregular colour grime is implemented at the measured stone/plaster
+boundary1.21m on hall__walls sandstone/plaster_dk only. Shared sandstone window
+sills stay untouched. Source maps/UVs/vertex colours/normals/roughness, geometry,
+lights, qualified floor wear and1280x720 beauty AA remain; original GLBs unchanged.
+Two ownership/scope/atomic-failure tests pass, full static340/340 passes.
+Both WebGPU/WebGL2 close and context images inspected: faint boundary film,
+original stone pattern/joints and plaster border retained. Four source/copy
+controls:3PNG-exact, GL context8pixels/max1 of255; no large visual regression.
+Both dream source PNG hashes are exact after wall use; wall metadata absent.
+Both far empty/38980tri/75draw, cache and texture reservation0. Initial GPU
+metadata observation timed out; after finishing the other backend, fresh GPU
+entry/far inspection verified retirement. The initial metadata observation
+itself remains unresolved; no terminal renderer state inferred. Healthy
+warnings/errors0.
+Fourteen native PNGs, controls/differences/input rehash and receipt retained in
+parent research-cache/hall-wall-119-001/. Named evidence: wear-webgpu-hallWall-
+base.png, wear-webgl-hallWall-base.png, wear-webgpu-hall-base.png. See browser-
+study/hall-wall-claude119.md. Colour grime is not a replacement for GTAO.
+Still pending119: local2200–2500K lamp pools, dark timber, qualified GTAO;
+haori support/gravity/folds/collar/contact and upper earth-wall/tatami/cushion/
+shoji four details. Lamp source audit locates12lights in the core part (not
+the lamps-geometry part), for the next separately scoped lighting comparison.
+No full119 completion/review requested; observed119/processed118. Source-quality
+phone transfer still fails; no real iPhone14 performance or artistic acceptance.
+Hall trial7; BuildingAart26/hybrid23/cloth7240 unchanged. TRIPO added spend0,
+lastliveOct1 balance3200/Oct2 daily09pending. GoalACTIVE, no newtools/agents/
+model or automaticreview calls. 8177a4a exactWorkersSUCCESS2026-10-01 17:41:59UTC
+verified. Check the next pushed checkpoint's own deployment separately.
