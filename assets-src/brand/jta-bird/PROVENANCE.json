@@ -1,0 +1,18 @@
+{
+  "artwork": "Approved Japan Time Atlas bird avatar shared on X and Substack",
+  "sourceFilename": "jta-bird-avatar-2026-10-01.png",
+  "sourceSha256": "a67d1a50bbf4cc3b79c82eb2d6e9eaa8187cfe15b2ddfcc2761f55192d01d75a",
+  "sourcePixels": [
+    1254,
+    1254
+  ],
+  "approval": "User requested replacing the Google Search site icon with the existing SNS bird on 2026-10-01",
+  "derivation": "Whole square image; Lanczos resize, 128-colour PNG; no new artwork",
+  "generatedSizes": [
+    32,
+    96,
+    180,
+    192,
+    512
+  ]
+}

@@ -14,7 +14,7 @@ test('every crawlable page has a real square PNG icon and Apple touch icon',()=>
   assert.equal((s.match(/rel="icon"/g)||[]).length,2,url);
   assert.ok(s.includes('href="/icons/atlas-96.png"'));assert.ok(s.includes('href="/icons/atlas-180.png"'));
  }
- for(const size of [32,96,180,192,512]){const p=fs.readFileSync(path.join(root,'icons/atlas-'+size+'.png'));assert.equal(p.readUInt32BE(16),size);assert.equal(p.readUInt32BE(20),size);assert.ok(p.length<10000);}
+ for(const size of [32,96,180,192,512]){const p=fs.readFileSync(path.join(root,'icons/atlas-'+size+'.png'));assert.equal(p.readUInt32BE(16),size);assert.equal(p.readUInt32BE(20),size);assert.ok(p.length<(size===512?160000:size>=180?25000:10000));}
 });
 test('domestic guide is directly linked from Japanese entry and indexed',()=>{
  assert.ok(read('ja.html').includes('href="/visit/jp"'));assert.ok(read('visit.html').includes('href="/visit/jp"'));assert.ok(read('sitemap.xml').includes('/visit/jp</loc>'));
