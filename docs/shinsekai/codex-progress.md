@@ -465,3 +465,22 @@ Exposure-only addition after334 build was syntax/native checked, not another
 broad-build claim. BuildingAart26/hybrid23 and cloth7240 unchanged.
 8986cbc exactWorkersSUCCESS15:22:15UTC verified. TRIPO spend0/lastliveOct1
 3200/Oct2 daily09pending. GoalACTIVE, no premature119 completion message.
+
+2026-10-02 —119 hall directional trial2 native partial repair: source light
+77.862→.77862, source point/global lights, full maps/geometry and1280AA fixed.
+Six native PNGs both backends; dream source hashes exact, far cache reservation0,
+healthy console0 and noncumulative gain. Two meaningful tests added; full
+static336/336, generated patch retained privately and unrelated outputs restored.
+Prompt partial reply posted to Claude file. Handoff119 remains incomplete.
+AO001/002 trial3/4 are unapproved: GPU dream glass34228pixels/max157 changed,
+source values restore but visual control fails. Opaque-only normals alter the
+prepass, not the failure. Preserve failed captures/receipts, no unchanged retry
+or default adoption; Building A helper/source GLBs retained. Multipass scene
+counters plus render-call delta exposed, fullscreen inclusion pending, no FPS/
+realphone/artacceptance. Next framebuffer/transmission isolation and independent
+floor roughness/wear, then remaining119 lamps/timber/haori/upper details.
+Cloth7240/BuildingAart26/hybrid23 unchanged. Hall trials exposure1/directional2/
+AO0013/AO0024. 0c1474c Workers exactSUCCESS16:01:00UTC verified; TRIPO added0,
+lastliveOct1 3200, Oct2 daily09pending. Continuous Goal ACTIVE, no extra agents,
+tools or automatic Claude calls. Evidence: hall-light-claude119.md and private
+research-cache/hall-directional-119-001/hall-ao-119-001/hall-ao-119-002.

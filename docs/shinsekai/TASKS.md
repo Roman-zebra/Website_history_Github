@@ -258,3 +258,22 @@ Exposure-only addition after334 build was syntax/native checked, not another
 broad-build claim. BuildingAart26/hybrid23 and cloth7240 unchanged.
 8986cbc exactWorkersSUCCESS15:22:15UTC verified. TRIPO spend0/lastliveOct1
 3200/Oct2 daily09pending. GoalACTIVE, no premature119 completion message.
+
+2026-10-02 — priority119 hall directional trial2: optionalstudy source77.862
+to.77862, with source point lights/global sun/hemi/maps/geometry and1280AA fixed.
+Native six captures both backends near/context; dream PNG hashes exactsource,
+far empty/reservation0, healthy warnings/errors0, gain noncumulative. Two new
+ownership/restoration tests; full static336/336 passes after runtime changes.
+Generated outputs retained privately then restored; unrelated work preserved.
+Prompt partial119 reply through requests-to-claude.md; still observed119/
+lastclosed118, no full119 completion or review request. Source detail retained;
+floor gloss/locallamp distributions still open. See hall-light-claude119.md.
+AO001 (trial3) and opaque-depth AO002 (trial4) retained unapproved: sameGPU
+dream glass34228pixel/max157 regression despite EV0/sourceSun restoration.
+Second uses hall-only helper, Building A untouched. Report multipass scene
+counters and total rendercalls separately; no all-fullscreen/FPS/phone claim.
+Next isolate transmission/framebuffer lifecycle before a changed AO trial,
+continue independent floor roughness/wear then warm lamps/dark timber, haori
+and upper four details. BuildingAart26/hybrid23/cloth7240 unchanged. TRIPO0,
+Oct2 daily09 fresh check pending/lastliveOct1 3200. 0c1474c exactWorkers
+SUCCESS16:01:00UTC confirmed; GoalACTIVE, no newtools/agents/model calls.

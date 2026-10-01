@@ -35,3 +35,13 @@ backends/near/context. Exposure requirement implemented, but overall lighting
 criterion unmet; no completed119 claim. Next source directional-fill reduction
 from measured77.862, followed by lamp distribution/AO/materials. See
 [the comparison record](../../../assets-src/shinsekai/browser-study/hall-exposure-claude119.md).
+
+Second factor verified: source directional77.862→.77862 with point lamps and
+near graphics fixed. Six native captures both backends, dream source PNG hashes
+exact, far empty/reservation0; prompt partial reply posted in the agreed file.
+See [lighting evidence](../../../assets-src/shinsekai/browser-study/hall-light-claude119.md).
+AO trials001/002 currently unapproved: both show the same WebGPU glass-region
+regression on dream return (34228pixels/max157). Opaque-only depth changes the
+prepass but does not resolve that restoration problem. Keep candidate flags
+experimental; no default AO adoption or complete119 claim. Full build336/336
+passes; preserve separate visual/control failure from static-test success.

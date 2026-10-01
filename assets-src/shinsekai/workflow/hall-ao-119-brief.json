@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-hall-ao-001-20261002",
+  "status": "trials001_002_unapproved_both_backends_control",
+  "subject": "Geometry-based indirect contact shade at hall bench feet, trim and wall junctions",
+  "baseline": "hall-directional-119-001; source115 aa030cd full original images/geometry, -1.25EV and source directional gain .01",
+  "singleChange": "Existing pinnedr186 GTAO pipeline, .35m radius/thickness at half-resolution AO only; full1280x720 antialiased beauty remains",
+  "references": [
+    "vendor/three-r186/examples/jsm/tsl/display/GTAONode.js",
+    "existing browser-study/shop-ambient-look.mjs with qualifiedBuildingA native precedent",
+    "vendor/three-r186/build/three.webgpu.js Info.autoReset manual multipass accounting"
+  ],
+  "preserve": [
+    "original full-resolution image maps",
+    "source geometry/silhouettes",
+    "direct and emissive light values",
+    "normal source comparison camera/beauty AA",
+    "dream and exterior control"
+  ],
+  "verification": [
+    "depth input single-sample, beauty retains MSAA",
+    "Report renderer aggregate scene triangles/draws plus total render-call delta; fullscreen draw inclusion is not yet qualified",
+    "both native backends near/context and save",
+    "dream/far restore source route and dispose pipeline",
+    "no new framebuffer/texture errors"
+  ],
+  "defer": [
+    "calibrated lamp temperature",
+    "timber/floor wear",
+    "phone FPS/memory qualification",
+    "full119 completion"
+  ],
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "firstTrial": "research-cache/hall-ao-119-001/native-receipt.json; WebGPU dream glass regression, not accepted",
+  "secondTrialChange": "Hall-only pipeline: exclude transparent glass from normal/depth prepass, retain full original antialiased beauty",
+  "secondTrialOutcome": "GPU34228pixels/max157, GL34211/max156 glass-region dream regression after AO. Fresh pre-AO GL control source PNG exact. Source EV/sun restore; this is renderer-path restoration, not proof of original-GLB corruption. No unchanged retry."
+}

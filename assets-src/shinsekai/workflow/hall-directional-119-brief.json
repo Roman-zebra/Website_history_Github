@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-hall-directional-001-20261002",
+  "status": "native_verified_partial119",
+  "subject": "Remove excessive source directional fill while retaining source point lamps and near material detail",
+  "baseline": "hall-exposure-119-001, -1.25EV; frozen115 aa030cd original GLBs",
+  "singleChange": "Normal hall source directional light gain .01 relative to its existing .003 study conversion:77.862 to.77862; point lamps/global sun/hemisphere unchanged",
+  "inferredSetting": true,
+  "preserve": [
+    "source images and geometry",
+    "source point colours/intensities/ranges",
+    "source camera1280x720 AA",
+    "dream/exterior lighting",
+    "reuse without cumulative light gain"
+  ],
+  "verification": [
+    "restore original directional value before cache retirement",
+    "both native backends near/context capture",
+    "dream source values and far metadata restoration",
+    "source near detail survives lower fill"
+  ],
+  "defer": [
+    "local warm lamp calibration",
+    "GTAO",
+    "timber/floor wear",
+    "phone measurement",
+    "complete119 acceptance"
+  ],
+  "additionalStudioCredits": 0,
+  "newAgents": false,
+  "evidence": "research-cache/hall-directional-119-001/native-receipt.json; six captures both backends, dream source hash exact; far empty/reservation0"
+}

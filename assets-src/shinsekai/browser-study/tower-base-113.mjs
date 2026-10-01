@@ -9,6 +9,7 @@ import {createTowerPlaceholderMask} from './tower-placeholder-mask.mjs';
 import {checkPhoneAssembly,phoneBuffer,PHONE_BUDGET} from './tower-mobile-profile.mjs';
 import {hallStreamParts,loadStreamedCell} from './streamed-cell.mjs';
 import {createRoomPrefetch,nearStudyPortal} from './room-prefetch.mjs';
+import {createHallDirectionalLook} from './hall-directional-look.mjs';
 const canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const view=document.querySelector('#viewpoint'),dream=document.querySelector('#dream'),measure=document.querySelector('#measure'),capture=document.querySelector('#capture');
 const sliders={car:document.querySelector('#car'),landing:document.querySelector('#landing')};
@@ -28,6 +29,8 @@ const hallProposal=!mobileTextures&&review==='115'&&query.has('hallproposal'),ha
 const hallStream=!mobileTextures&&!hallProposal&&review==='115'&&query.has('hallstream'),hallStreamBase='/study/hall-115-stream/';
 const hallPrefetch=hallStream&&query.has('hallprefetch'),hallPortal={portal:[-11.4,1.65,-.3],enter:8,leave:12},hallGainApplied=new WeakSet();let roomPrefetch;
 const hallExposure=!mobileTextures&&review==='115'&&query.has('hallexposure');
+const hallDirectional=!mobileTextures&&review==='115'&&query.has('halldirectional');let hallDirectionalLook;
+const hallAO=!mobileTextures&&review==='115'&&query.has('hallao');let hallAmbientLook,createHallAmbientLook;
 const liftProposal=!mobileTextures&&review==='115'&&query.has('liftproposal'),liftBase='/study/lift-115-proposal/';
 const proposalBase='/study/cinema-115-proposal/';
 let proposalReceipt,hallReceipt,liftReceipt,hallStreamReceipt;
@@ -49,7 +52,7 @@ function cancel(){if(frame!==null)cancelAnimationFrame(frame);frame=null;lastTim
 async function settleGPU(){const queue=renderer.backend.isWebGPUBackend?renderer.backend.device?.queue:null;if(!queue)return;let timer;try{await Promise.race([queue.onSubmittedWorkDone(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('GPUの画像保存待機が終了しませんでした。')),5000);})]);}finally{clearTimeout(timer);}}
 function locked(value){view.disabled=dream.disabled=measure.disabled=capture.disabled=value;controls.enabled=!value;for(const key of Object.keys(sliders))sliders[key].disabled=playButtons[key].disabled=value||!mixers[key];}
 function placeholders(){if(!exterior)return;canvas.dataset.placeholderMask=JSON.stringify(placeholderMask.select(current?.cell??null));exterior.scene.traverse(o=>{if(/_stairhead_SW$/.test(o.name))o.visible=!current?.cell.startsWith('cell_stair');});wings?.scene.traverse(o=>{if(/_W1_backing_dark$/.test(o.name))o.visible=!current?.cell.startsWith('cell_cinema');});}
-function clearCell(){Object.values(mixers).forEach(m=>m.dispose());mixers={};for(const [key,slider]of Object.entries(sliders)){slider.value='0';slider.oninput=null;playButtons[key].onclick=null;}delete canvas.dataset.gateProgress;delete canvas.dataset.cinemaProposal;delete canvas.dataset.hallProposal;delete canvas.dataset.liftProposal;delete canvas.dataset.hallStream;if(current){scene.remove(current.model.scene);if(!current.model.prefetchedHall)release(current.model);current=null;}placeholders();}
+function clearCell(){hallAmbientLook?.dispose();hallAmbientLook=null;delete canvas.dataset.hallAO;hallDirectionalLook?.dispose();hallDirectionalLook=null;delete canvas.dataset.hallDirectional;Object.values(mixers).forEach(m=>m.dispose());mixers={};for(const [key,slider]of Object.entries(sliders)){slider.value='0';slider.oninput=null;playButtons[key].onclick=null;}delete canvas.dataset.gateProgress;delete canvas.dataset.cinemaProposal;delete canvas.dataset.hallProposal;delete canvas.dataset.liftProposal;delete canvas.dataset.hallStream;if(current){scene.remove(current.model.scene);if(!current.model.prefetchedHall)release(current.model);current=null;}placeholders();}
 async function streamHall(name){canvas.dataset.hallStreamReleased='0';return loadStreamedCell(hallStreamParts(hallStreamReceipt,name),{load:file=>loader.loadAsync(hallStreamBase+file+(query.has('hallstreamfail')&&file.endsWith('-desk.glb')?'.missing':'')),createScene:()=>new THREE.Group(),release:model=>{release(model);canvas.dataset.hallStreamReleased=String(Number(canvas.dataset.hallStreamReleased)+1);}});}
 function prefetchAt(position){if(!roomPrefetch||current)return;const name='cell_hall'+(dream.checked?'_dream':''),near=nearStudyPortal(position,hallPortal,roomPrefetch.snapshot().desired===name);roomPrefetch.select(near?name:null).catch(()=>{});canvas.dataset.hallPrefetch=JSON.stringify(roomPrefetch.snapshot());}
 function gates(){mixers={};for(const [key,slider]of Object.entries(sliders)){slider.value='0';const wing=key.startsWith('wing'),model=wing?exterior:current?.model;if(!model)continue;const clipKey=wing?'door_wing_'+key.slice(-1):key==='car'?'car_gate':'landing_gate';const playback=createTowerGatePlayback(THREE,model,clipKey);if(!playback)continue;mixers[key]=playback;playback.scrub(0);slider.oninput=()=>{playback.scrub(Number(slider.value));request();};playButtons[key].onclick=()=>{playback.play();lastTime=null;request();};}}
@@ -77,6 +80,7 @@ async function select(){
    if(disposed||token!==epoch){if(model&&!model.prefetchedHall)release(model);return;}
    model.scene.position.fromArray(placement[config.cell]);if(config.cell==='cinema')model.scene.rotation.y=Math.PI;
    let localLights=0;if(!model.prefetchedHall||!hallGainApplied.has(model)){model.scene.traverse(o=>{if(o.isLight){o.intensity*=.003;if(mobile&&++localLights>4)o.visible=false;}});if(model.prefetchedHall)hallGainApplied.add(model);}current={cell:name,model};scene.add(model.scene);canvas.dataset.loadDecodeMs=String(performance.now()-start);placeholders();
+   if(hallDirectional&&config.cell==='hall'){hallDirectionalLook=createHallDirectionalLook(model);canvas.dataset.hallDirectional=JSON.stringify(hallDirectionalLook.apply(!dream.checked));}
    if(candidate){const receipt=proposalReceipt.find(r=>r.cell===name);canvas.dataset.cinemaProposal=JSON.stringify({codec:'EXT_meshopt_compression',bytes:receipt.compressedBytes,sha256:receipt.sha256,visualAcceptance:false});}else delete canvas.dataset.cinemaProposal;
    if(hallCandidate){const receipt=hallReceipt.find(r=>r.cell===name);canvas.dataset.hallProposal=JSON.stringify({bytes:receipt.bytes,sha256:receipt.sha256,visualAcceptance:false});}
    if(liftCandidate){const receipt=liftReceipt.find(r=>r.cell===name);canvas.dataset.liftProposal=JSON.stringify({bytes:receipt.bytes,sha256:receipt.sha256,visualAcceptance:false});}
@@ -87,13 +91,20 @@ async function select(){
   if(disposed||token!==epoch)return;canvas.dataset.compileMs=String(performance.now()-start);ready=true;canvas.dataset.ready='false';canvas.dataset.viewRevision=String(token);canvas.dataset.cell=current?.cell??'empty';canvas.dataset.backend=renderer.backend.isWebGPUBackend?'WebGPU':'WebGL2';locked(false);request();
  }).catch(fail);await pending;
 }
+function renderStudy(){
+ const autoReset=renderer.info.autoReset,callStart=renderer.info.render.calls;renderer.info.autoReset=false;renderer.info.reset();
+ try{
+  if(hallAO&&current?.cell.startsWith('cell_hall')&&!dream.checked){hallAmbientLook??=createHallAmbientLook(renderer,scene,camera);hallAmbientLook.render();canvas.dataset.hallAO=JSON.stringify({radius:.35,thickness:.35,resolutionScale:.5,beautyAntialias:true,indirectOnly:true,opaqueDepthOnly:true,counters:'renderer-reported multipass; fullscreen qualification pending',visualAcceptance:false});}
+  else{renderer.render(scene,camera);delete canvas.dataset.hallAO;}
+ }finally{canvas.dataset.renderCalls=String(renderer.info.render.calls-callStart);renderer.info.autoReset=autoReset;}
+}
 function draw(time){
  frame=null;if(!ready||disposed||document.hidden)return;
  try{
   const cpu=performance.now(),delta=lastTime===null?0:Math.max(0,(time-lastTime)/1000);let moving=false;
   for(const [key,playback]of Object.entries(mixers)){moving=playback.update(delta)||moving;sliders[key].value=String(playback.snapshot().progress);}
   canvas.dataset.gatePlayback=JSON.stringify(Object.fromEntries(Object.entries(mixers).map(([k,p])=>[k,p.snapshot()])));
-  controls.update();renderer.render(scene,camera);frames++;
+  controls.update();renderStudy();frames++;
   if(mobile&&(renderer.info.render.triangles>PHONE_BUDGET.triangles||renderer.info.render.drawCalls>PHONE_BUDGET.draws)){clearCell();throw new Error('実際の描画が軽量版の予算を超えました。外観へ戻してください。');}
   canvas.dataset.frames=String(frames);canvas.dataset.cpuSubmitMs=String(performance.now()-cpu);
   canvas.dataset.draws=String(renderer.info.render.drawCalls);canvas.dataset.triangles=String(renderer.info.render.triangles);canvas.dataset.ready='true';
@@ -107,7 +118,7 @@ function draw(time){
 }
 controls.addEventListener('change',()=>{if(ready&&!preparing)prefetchAt(camera.position.toArray());request();});view.addEventListener('change',select);dream.addEventListener('change',select);measure.addEventListener('change',()=>{intervals.length=0;lastTime=null;request();});
 if(mobile)addEventListener('resize',()=>{[width,height]=phoneBuffer(innerWidth,innerHeight);renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();request();});
-capture.addEventListener('click',async()=>{locked(true);cancel();try{if(document.hidden||!ready)throw new Error('表示・描画完了後に保存してください。');renderer.render(scene,camera);captureWait=waitCaptureFrame({request:requestAnimationFrame,cancel:cancelAnimationFrame});await captureWait.promise;captureWait=null;renderer.render(scene,camera);await settleGPU();if(disposed||document.hidden||canvas.dataset.error)throw new Error('保存を中止しました。');captureWait=encodeCanvasPng(canvas);const blob=await captureWait.promise;captureWait=null;if(!blob||disposed)throw new Error('画像を保存できませんでした。');const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`tower-base-${review}-${view.value}-${dream.checked?'dream':'base'}-${width}x${height}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);canvas.dataset.capture='saved';}catch(error){status.textContent=error.message;canvas.dataset.capture='failed';}finally{if(!disposed){locked(!ready);request();}}});
+capture.addEventListener('click',async()=>{locked(true);cancel();try{if(document.hidden||!ready)throw new Error('表示・描画完了後に保存してください。');renderStudy();captureWait=waitCaptureFrame({request:requestAnimationFrame,cancel:cancelAnimationFrame});await captureWait.promise;captureWait=null;renderStudy();await settleGPU();if(disposed||document.hidden||canvas.dataset.error)throw new Error('保存を中止しました。');captureWait=encodeCanvasPng(canvas);const blob=await captureWait.promise;captureWait=null;if(!blob||disposed)throw new Error('画像を保存できませんでした。');const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`tower-base-${review}-${view.value}-${dream.checked?'dream':'base'}-${width}x${height}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);canvas.dataset.capture='saved';}catch(error){status.textContent=error.message;canvas.dataset.capture='failed';}finally{if(!disposed){locked(!ready);request();}}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancel();captureWait?.cancel();}else request();});
 window.addEventListener('pagehide',event=>{cancel();captureWait?.cancel();if(event.persisted)return;disposed=true;epoch++;Promise.allSettled([initializing,pending]).then(async()=>{clearCell();try{await roomPrefetch?.dispose();}finally{placeholderMask?.dispose();release(exterior);release(wings);controls.dispose();renderer.dispose();}});});
 initializing=(async()=>{try{await renderer.init();if(disposed)throw new DOMException('Page left','AbortError');if(renderer.backend.isWebGPUBackend)renderer.backend.device.addEventListener('uncapturederror',event=>fail(event.error));
@@ -115,6 +126,7 @@ initializing=(async()=>{try{await renderer.init();if(disposed)throw new DOMExcep
  if(cinemaProposal){proposalReceipt=await fetch(proposalBase+'lossless-summary.json').then(r=>{if(!r.ok)throw new Error('cinema receipt '+r.status);return r.json();});if(!['cell_cinema','cell_cinema_dream'].every(cell=>proposalReceipt.some(r=>r.cell===cell&&r.compressedBytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid cinema compression receipt');}
  if(hallProposal){hallReceipt=await fetch(hallBase+'split-summary.json').then(r=>{if(!r.ok)throw new Error('hall receipt '+r.status);return r.json();});if(!['cell_hall','cell_hall_dream'].every(cell=>hallReceipt.some(r=>r.cell===cell&&r.bytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid hall receipt');}
  if(hallStream){hallStreamReceipt=await fetch(hallStreamBase+'stream-summary.json').then(r=>{if(!r.ok)throw new Error('hall stream receipt '+r.status);return r.json();});for(const cell of ['cell_hall','cell_hall_dream'])hallStreamParts(hallStreamReceipt,cell);}
+ if(hallAO)createHallAmbientLook=(await import('./hall-ambient-look.mjs')).createHallAmbientLook;
  if(hallPrefetch)roomPrefetch=createRoomPrefetch({plans:['cell_hall','cell_hall_dream'].map(id=>{const parts=hallStreamParts(hallStreamReceipt,id);return {id,bytes:parts.reduce((n,p)=>n+p.bytes,0),textureBytes:parts.reduce((n,p)=>n+p.estimatedTextureBytes,0)};}),load:async name=>{const model=await streamHall(name);model.prefetchedHall=true;return model;},release:model=>{release(model);canvas.dataset.hallPrefetchReleases=String(Number(canvas.dataset.hallPrefetchReleases??0)+1);},onChange:snapshot=>{canvas.dataset.hallPrefetch=JSON.stringify(snapshot);}});
  if(liftProposal){liftReceipt=await fetch(liftBase+'split-summary.json').then(r=>{if(!r.ok)throw new Error('lift receipt '+r.status);return r.json();});if(!['cell_lift','cell_lift_dream'].every(cell=>liftReceipt.some(r=>r.cell===cell&&r.bytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid lift receipt');}
  await select();

@@ -814,3 +814,36 @@ Exposure-only addition after334 build was syntax/native checked, not another
 broad-build claim. BuildingAart26/hybrid23 and cloth7240 unchanged.
 8986cbc exactWorkersSUCCESS15:22:15UTC verified. TRIPO spend0/lastliveOct1
 3200/Oct2 daily09pending. GoalACTIVE, no premature119 completion message.
+
+## Claude119 partial implementation reply —2026-10-02, still incomplete
+Normal-hall exposure -1.25EV and isolated excessive directional fill reduction
+are implemented in the optional source-quality study. Source light_sun77.862
+becomes.77862; source point lamps, global sun/hemisphere, original maps/geometry
+and1280x720 beauty AA stay fixed. WebGPU and WebGL2 near/context plus dream
+controls saved: six native PNGs in parent research-cache/hall-directional-119-001.
+Both dream context PNGs match the respective original-source PNG hashes;
+dream intensity77.862/EV0, far empty and prefetch reservation0 on both.
+Repeated room reuse does not compound the gain; two ownership/restoration
+unit tests pass. Beam bays and timber detail are more readable; floor sheen
+and localized lamp distribution still need work. No complete119/art approval.
+
+AO trial001 renders contact shade but the WebGPU dream control changes34228
+glass-region pixels (max157/255). Retained unapproved in
+research-cache/hall-ao-119-001/native-receipt.json; no successful restoration
+claim. Working on hall-only opaque normal/depth prepass trial002; source glass
+remains in full-quality beauty. Building A helper and original GLBs untouched.
+Remaining119: qualified GTAO/lamp colour and range/timber/floor wear; haori
+support/sag/folds/collar/contact; upper earth-wall/tatami/cushions/shoji pools.
+No review requested yet; implementation priority continues, TRIPO added spend0.
+0c1474c exact Workers success2026-10-01 16:01:00UTC verified.
+
+AO002 follow-up: source-preserving opaque prepass still fails dream glass
+restoration on both backends (GPU34228pixels/max157, GL34211/max156, same bounds).
+Fresh GL dream before AO execution matches the original PNG exactly. Native
+near/context do render without errors, but do not treat that as accepted GTAO.
+Far retires to empty/cache0. Seven PNGs and failure receipt retained in
+research-cache/hall-ao-119-002/ (including control-before/). Both source asset
+data and Building A helper remain unchanged; no unchanged retry planned.
+Full build336/336 passes. Next renderer-path isolation and independent floor
+roughness/wear; remaining119 repairs continue. No premature completion or
+review requested; occasional review policy and Studio spend0 maintained.
