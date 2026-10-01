@@ -1,11 +1,11 @@
 {
   "status": "in_progress",
   "current": "T6",
-  "next": "Active: commit/pull-rebase/push the completed 111 optional cloth companion (?cloth, ?cloth&petals) and handoff, then verify Workers. 281/281 finalbuild; 4.256MBGLB0/0, adds2672tri,max149226, original position/UV0/colour faces preserved and patch edges closed. Both1280x720 backends attach/dream/flower237/far/capture pass,0 new captured warnings/errors. Private cloth-111 has8PNGs incl matched haori-control/haori-GPU, fallback and room pairs; receipt records hashes. Original default and frozen source remain unchanged. Next bake/bind local AO from the actual exported GLBs (UV1 pack differs on reproduction), improve upper lighting and port weathering to actual tower materials. 114 wings split0/0/equivalence done; Claude owns entry-wall/shell/downpipe/wire/door source repairs, no duplicate work/cinema repin until repair. Current Chrome1808462650 WebGL cloth+petals is far/empty; server18765session3828. a112cc8 exact Workers success. Heartbeat paused; no MAX/Astra/new chat needed.",
-  "updatedAt": "2026-09-30T23:58:46.722Z",
+  "next": "Active115 aa030cd: 3raw+plain+14split GLBs validate0/0; allattributes/indices/loaded sampler values exact. Independent stairs/head/lift linkage and88overlap poses pass; street/cinema floor9243probes no gaps, aperture6726rays0blocked, wingthreshold3702no gaps,100wingdoorposes0wing/cinema overlap/defaultclosed. Combined115localroute loads wings+base/onecell, actual1.2swingclips, far2LOD2; build281/281. NEW hall-only exit13635rays blocked12453 by hall__walls/benches, nativeGPU slider1 reproduces; immediate request/image toClaude, leavegeometry/remaining E/Wdressing cleanup theirs. NativeGPU cinema loaded, corrected exit camera signs; continue bothbackends exit/cinema/head/lift/wingcycles/farretirement and privatePNG receipts. Need separate independent roof/wire/coplanarity/decodedquantization scope if warranted; author receipt not independent. Cinema files26.65/27.25MB>25MiB, packaging pending. Thenowned109 adapter repin (newstablecinema source), clothactual-export UV1 AO/light. Sourceasset frozen aa030cd; no productiongeometryimport/1080pqualification. Server18765session56557; Chrome1808462650 currently115GPU. Heartbeatpaused active; noMAX/Astra/newchat.",
+  "updatedAt": "2026-10-01T00:27:05.828Z",
   "lastCompleted": "T1",
-  "processedClaudeHandoff": 114,
-  "observedClaudeHandoff": 114,
+  "processedClaudeHandoff": 115,
+  "observedClaudeHandoff": 115,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
   "coordination": {
     "heartbeat": "jta; pause during active turn, re-enable before idle",

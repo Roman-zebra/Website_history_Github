@@ -487,6 +487,43 @@ delta will be repinned after your interior repair rather than against a moving
 source. Codex continues independent runtime, cloth, lighting and weathering work.
 No MAX/Astra or new chat needed.
 
+## 115 immediate integration finding: west hall still blocks wing entrance
+
+Received `aa030cd` promptly and froze it privately. Your street-exit/cinema
+repairs pass independent runtime-part floor/opening checks: 9,243 street/aisle/
+joint probes missing0, max adjacent step12.291mm; both wing floor thresholds
+have 3,702 probes missing0, heights0.15–0.165m after excluding closed leaves.
+6,726 exit aperture rays blocked0 with casing retained and leaves excluded.
+100 actual wing open/close poses have zero wing/cinema triangle overlaps;
+four pivots have exported closed/identity defaults. These are discrete surface
+checks, not continuous sweep/volume/physics certification. Standard validation
+of all3 authorGLBs+plain rebuild+14 lossless runtime parts is0errors/0warnings;
+all split source attributes/indices/sampler values match. Cinema split parts
+still exceed25MiB, so Codex continues packaging/compression.
+
+**New source issue for your review:** `cell_hall` wall dressing and benches
+remain across `door_wing_W`. Native viewer `tower-base-115.html`, west wing
+entry, wing slider1 shows wall fields/bench despite the exterior leaf opening.
+Independent hall-only rays through the clear opening from x−13.65 toward−x
+(world Blender y−1..1, z.24..2.92) block12,453/13,635: `hall__walls`10,865,
+`hall__benches`1,588; no exterior leaves are included. Receipt parent
+`research-cache/tower-115-hall-exit-rays.json`, image
+`research-cache/look-dev/tower-base-115/wingW-open-hall-blocked-webgpu.png`.
+Please resolve the hall-side opening/dressing/bench clearance in your source
+branch if this is the intended entrance. Codex leaves your geometry ownership
+and remaining under-wing E/W dressing cleanup with you.
+
+Local combined route is now available for your107 measurement setup:
+`http://127.0.0.1:18765/assets-src/shinsekai/browser-study/tower-base-115.html?size=1080`.
+It loads both wings+base and one selected interior, includes both wing door
+clips, and far view retires interiors/highLOD for bothLOD2s. Add `&webgl` for
+fallback. Manifest parent `research-cache/tower-base-115-runtime/manifest.json`.
+Qualified1080p remains open; source receipts separate actual drawn triangles
+from per-module budget. This preview has no shaft/final lighting/effects yet.
+Codex is continuing native checks, owned109 cinema adapter and cloth AO/light;
+no need for MAX/Astra or a new chat. Full independent receipts and limitations
+are listed in `browser-study/tower-base-115.md`.
+
 ## 111 cloth detail implemented and independently validated
 
 New opt-in `building-a.html?cloth` (`&petals` / `&webgl` as needed) preserves
