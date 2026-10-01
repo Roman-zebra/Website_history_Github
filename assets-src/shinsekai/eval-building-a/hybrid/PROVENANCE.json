@@ -290,6 +290,26 @@
       "file": "runtime/upper-cloth.glb",
       "bytes": 4256416,
       "sha256": "9afaa3331dc8e20c68ab69c77ba5eeaea26daabc439803f8c4d3b16b0a43a884"
+    },
+    {
+      "file": "build-cloth-v2.py",
+      "bytes": 11632,
+      "sha256": "7e7cc3bd776e275d0d8c1fe5f931f005dfc8de7dc982196254b297a7ade6a0a4"
+    },
+    {
+      "file": "haori_sewn.py",
+      "bytes": 9672,
+      "sha256": "27ccf9cf73a9684dbdde515b771bb26c009553aafacc25188910608608d99476"
+    },
+    {
+      "file": "cloth-118-sewn.md",
+      "bytes": 2822,
+      "sha256": "947ea2092825df4ed0d9265b7fc548abc31bdb5b86a19327ddfd4c1656c21cd7"
+    },
+    {
+      "file": "runtime/upper-cloth-v2-sewn.glb",
+      "bytes": 3465840,
+      "sha256": "6b3bb03b1cd5c575cc1bdfd61fcf290c0f81742d17e69a208ce0b7373526f144"
     }
   ],
   "runtimeValidation": [
@@ -431,12 +451,61 @@
       },
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "a00f9991e200174ebbf5a6acdf1ede01db1b84d9c4f2e0efa4354415fc9372b1"
+        "sha256": "a75789379e658591d94c0e09ecb725f28f39b072bada8916dbfbdac9708cfc97"
       }
     ],
     "checks": "290/290 build; both native1280x720 backends haori base/dream save/far retirement, new errors/warnings0",
     "receipt": "parent research-cache/look-dev/cloth-sheen-118/receipt.json",
     "visualAcceptance": false,
     "qualified1080p": false
+  },
+  "runtimeClothSewnCandidate": {
+    "query": "?clothsewn&clothlook",
+    "file": "runtime/upper-cloth-v2-sewn.glb",
+    "bytes": 3465840,
+    "sha256": "6b3bb03b1cd5c575cc1bdfd61fcf290c0f81742d17e69a208ce0b7373526f144",
+    "sourceRevision": "e3dd4e7",
+    "handoff": 118,
+    "validator": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 14
+    },
+    "replacementTriangles": 7456,
+    "maxActiveInteriorWithPetals": 149398,
+    "retainedHardwareTriangles": 2364,
+    "connectedHaori": {
+      "name": "Haori_connected",
+      "frames": 32,
+      "quality": 10,
+      "pinnedVertices": 2,
+      "vertices": 426,
+      "maxDisplacementMetres": 0.046325287945616515,
+      "closedBodyThickness": 0.0012,
+      "connectedComponents": 1,
+      "allThickenedEdgesHaveTwoFaces": true,
+      "pinDisplacementMetres": 0.0,
+      "pinHardwareDistancesMetres": [
+        0.0006003379821777344,
+        0.0006003379821777344
+      ],
+      "settings": {
+        "mass": 0.008,
+        "airDamping": 5,
+        "tension": 60,
+        "compression": 60,
+        "shear": 40,
+        "bending": 2
+      },
+      "colliderTriangles": 200,
+      "supportScope": "Two fixed attachment points and retained-peg collider only; neighbouring hat excluded; not whole garment collision or physical mounting certification"
+    },
+    "closedExportedFabricBodies": 6,
+    "native": "Both1280x720 backends same haori base/dream saved and far interior/cloth/dream retired, new errors/warnings0; intentional missing-GLB404 disabled capture with explicit failure",
+    "receipt": "parent research-cache/look-dev/cloth-sewn-118/receipt.json",
+    "checks": "293/293 build",
+    "visualAcceptance": false,
+    "qualified1080p": false,
+    "openIssues": "Left sleeve/hat overlap; whole cloth contact and silhouette approval remain open"
   }
 }

@@ -11,15 +11,16 @@ function hardware(asset,node){
   const data=attrs.map(k=>{const a=asset.json.accessors[p.attributes[k]];return asset.data(p.attributes[k],Number(a.type.slice(3)));});
   const indices=asset.data(p.indices,1).flat();
   for(let i=0;i<indices.length;i+=3){
-   const vertices=indices.slice(i,i+3).map(v=>JSON.stringify(data.map(a=>a[v].map(n=>Math.round(n*1e7)/1e7))));
+   const vertices=indices.slice(i,i+3).map(v=>JSON.stringify(data.map(a=>a[v])));
    const rotations=[0,1,2].map(j=>[vertices[j],vertices[(j+1)%3],vertices[(j+2)%3]].join('|'));
    result.push(m+':'+rotations.sort()[0]);
   }
  }
  return result.sort();
 }
-test('simulated cloth retains source hardware triangles, UV0 and colours',()=>{
- const source=h.read(path.join(folder,'upper-cloth.glb')),v2=h.read(path.join(folder,'upper-cloth-v2.glb'));
+for(const file of ['upper-cloth-v2.glb','upper-cloth-v2-sewn.glb']){
+test(file+' retains source hardware triangles, UV0 and colours exactly',()=>{
+ const source=h.read(path.join(folder,'upper-cloth.glb')),v2=h.read(path.join(folder,file));
  let total=0;
  for(const name of names){
   const original=source.node(name),revised=v2.node(name+'_v2');
@@ -34,10 +35,10 @@ test('simulated cloth retains source hardware triangles, UV0 and colours',()=>{
  }
 });
 
-test('simulated fabric bodies and rolled winding have closed exported surfaces',()=>{
- const a=h.read(path.join(folder,'upper-cloth-v2.glb'));
+test(file+' fabric bodies and rolled winding have closed exported surfaces',()=>{
+ const a=h.read(path.join(folder,file));
  const nodes=a.json.nodes.filter(n=>/^(Haori_|Laundry_fold_|Bolt_unrolled$|Bolt_cotton_roll$)/.test(n.name));
- assert.ok(nodes.length>=11);
+ assert.equal(nodes.length,file.includes('sewn')?6:12);
  for(const node of nodes){
   const edges=new Map();
   for(const p of a.json.meshes[node.mesh].primitives){
@@ -50,4 +51,22 @@ test('simulated fabric bodies and rolled winding have closed exported surfaces',
   }
   assert.ok([...edges.values()].every(n=>n===2),node.name+' closed boundary');
  }
+});
+}
+
+test('sewn haori is one connected exported garment with attached sleeves and collar',()=>{
+ const a=h.read(path.join(folder,'upper-cloth-v2-sewn.glb'));
+ const nodes=a.json.nodes.filter(n=>n.mesh!==undefined&&n.name.startsWith('Haori_'));
+ assert.equal(nodes.length,1);assert.equal(nodes[0].name,'Haori_connected');
+ const neighbours=new Map();
+ const edge=(x,y)=>{if(!neighbours.has(x))neighbours.set(x,new Set());neighbours.get(x).add(y);};
+ for(const p of a.json.meshes[nodes[0].mesh].primitives){
+  const positions=a.data(p.attributes.POSITION,3).map(v=>v.map(x=>Math.round(x*1e6)/1e6).join(',')),indices=a.data(p.indices,1).flat();
+  for(let i=0;i<indices.length;i+=3)for(const [j,k]of [[0,1],[1,2],[2,0]]){const x=positions[indices[i+j]],y=positions[indices[i+k]];edge(x,y);edge(y,x);}
+ }
+ const unseen=new Set(neighbours.keys());let components=0;
+ while(unseen.size){components++;const stack=[unseen.values().next().value];unseen.delete(stack[0]);
+  while(stack.length)for(const n of neighbours.get(stack.pop()))if(unseen.delete(n))stack.push(n);
+ }
+ assert.equal(components,1,'shoulder, body, sleeve and collar connectivity');
 });

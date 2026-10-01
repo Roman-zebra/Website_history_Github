@@ -21,7 +21,8 @@ text=text.replace(needle,'upper.build_materials();cloth_state=install(upper);upp
 scope={'__file__':str(source),'__name__':'private_cloth118','install':install}
 exec(compile(text,str(source),'exec'),scope)
 upper=scope['upper']; scene=bpy.context.scene
-out=scope['CACHE']/'upper-118-cloth-v2';out.mkdir(exist_ok=True)
+sewn='--sewn' in sys.argv
+out=scope['CACHE']/('upper-118-cloth-v2-sewn' if sewn else 'upper-118-cloth-v2');out.mkdir(exist_ok=True)
 roots={name:bpy.data.objects[name] for name in TARGETS}
 normal_material=next(m for m in bpy.data.materials if m.name.startswith('Original cloth with fine wrinkle normal'))
 receipt={'sourceRevision':'e3dd4e7','handoff':118,'sourceTags':'A: inferred original garment patterns/colour and Blender cloth simulation, no image pixels','simulation':[],'retainedHardware':{},'photographicAcceptance':False}
@@ -88,19 +89,22 @@ def panel(name,root,nu,nv,position,pin,colour,collision=False):
 # The haori stays over the original pegs. Separate front opening, back, sleeves
 # and folded collar provide shoulder/sleeve/collar silhouettes before settlement.
 h=roots['UD_CoatRail_Haori']; z=upper.ZF+1.46;yc=2.185
-for label,x,offset,width,colour in [('back',.255,-.23,.46,(38,44,66)),('frontL',.325,-.23,.205,(38,44,66)),('frontR',.325,.025,.205,(38,44,66))]:
-    panel('Haori_'+label,h,8 if label=='back' else 4,16,
-          lambda s,t,x=x,offset=offset,width=width:(x+.015*math.sin(17*s)*t,yc+offset+width*s,z-.78*t),
-          lambda s,t:t==0 and .2<=s<=.8,colour)
-for sign in [-1,1]:
-    panel('Haori_sleeve_'+str(sign),h,6,8,
-          lambda s,t,sign=sign:(.285+.045*math.sin(math.pi*t),yc+sign*(.215+.20*s),z-.035*s-.38*t),
-          lambda s,t:s==0,(34,40,60))
-for sign in [-1,1]:
-    panel('Haori_collar_'+str(sign),h,2,12,
-          lambda s,t,sign=sign:(.341+.012*math.sin(math.pi*s),yc+sign*(.015+.13*(1-t))+.045*(s-.5),z-.42*t),
-          lambda s,t:t==0,(90,92,108))
-
+if sewn:
+    from haori_sewn import build as build_sewn_haori
+    build_sewn_haori(h,upper.ZF,normal_material,receipt)
+else:
+    for label,x,offset,width,colour in [('back',.255,-.23,.46,(38,44,66)),('frontL',.325,-.23,.205,(38,44,66)),('frontR',.325,.025,.205,(38,44,66))]:
+        panel('Haori_'+label,h,8 if label=='back' else 4,16,
+              lambda s,t,x=x,offset=offset,width=width:(x+.015*math.sin(17*s)*t,yc+offset+width*s,z-.78*t),
+              lambda s,t:t==0 and .2<=s<=.8,colour)
+    for sign in [-1,1]:
+        panel('Haori_sleeve_'+str(sign),h,6,8,
+              lambda s,t,sign=sign:(.285+.045*math.sin(math.pi*t),yc+sign*(.215+.20*s),z-.035*s-.38*t),
+              lambda s,t:s==0,(34,40,60))
+    for sign in [-1,1]:
+        panel('Haori_collar_'+str(sign),h,2,12,
+              lambda s,t,sign=sign:(.341+.012*math.sin(math.pi*s),yc+sign*(.015+.13*(1-t))+.045*(s-.5),z-.42*t),
+              lambda s,t:t==0,(90,92,108))
 # Three folded garments settle independently over the exact authored pole.
 d=roots['UD_DryingPole_Cloths']
 for k,(xa,width,front,back,col) in enumerate([( .50,.55,.66,.70,(78,96,134)),(2.10,.33,.78,.74,(226,220,204)),(2.56,.33,.60,.64,(150,54,44))]):

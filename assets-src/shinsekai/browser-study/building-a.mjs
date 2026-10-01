@@ -19,7 +19,8 @@ const dreamCheck=document.querySelector('#dreamLook');
 // Opt-in comparison: compileAsync still increases total readiness time here.
 const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
-const clothV2=new URLSearchParams(location.search).has('clothv2');
+const clothSewn=new URLSearchParams(location.search).has('clothsewn');
+const clothV2=clothSewn||new URLSearchParams(location.search).has('clothv2');
 const clothDetail=clothV2||new URLSearchParams(location.search).has('cloth');
 const clothLook=new URLSearchParams(location.search).has('clothlook');
 const ambientDetail=new URLSearchParams(location.search).has('ao');
@@ -98,11 +99,11 @@ async function load(part){
   try{gltf.studyFlowers=connectShopFlowers(gltf);}
   catch(error){release(gltf);throw error;}
  }
- if(part==='upper-cloth'||part==='upper-cloth-v2')try{gltf.studyClothNormal=connectShopClothNormal(gltf,{fibreSheen:clothLook});}catch(error){release(gltf);throw error;}
+ if(['upper-cloth','upper-cloth-v2','upper-cloth-v2-sewn'].includes(part))try{gltf.studyClothNormal=connectShopClothNormal(gltf,{fibreSheen:clothLook});}catch(error){release(gltf);throw error;}
  if(part==='exterior-lod0')try{gltf.studyPaperShadows=connectShopPaperShadows(gltf);}catch(error){release(gltf);throw error;}
  if(part==='interior'&&clothDetail){
   let cloth;
-  try{cloth=await load(clothV2?'upper-cloth-v2':'upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth,{suffix:clothV2?'_v2':''});gltf.studyCloth.normal=cloth.studyClothNormal;}
+  try{cloth=await load(clothSewn?'upper-cloth-v2-sewn':clothV2?'upper-cloth-v2':'upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth,{suffix:clothV2?'_v2':''});gltf.studyCloth.normal=cloth.studyClothNormal;}
   catch(error){if(cloth)release(cloth);release(gltf);throw error;}
  }
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);
@@ -189,11 +190,12 @@ function draw(time){
   canvas.dataset.renderedFrames=String(frames);canvas.dataset.interiorStatus=cells.snapshot()[0].status;canvas.dataset.exteriorLOD=String(currentLOD);
   canvas.dataset.drawerProgress=JSON.stringify(Object.fromEntries([...drawers].map(([k,d])=>[k,d.progress])));
   capture.disabled=currentLOD===null||currentLOD!==requestedLOD||cells.snapshot()[0].status==='loading'||dreamLayer.snapshot().status==='loading';
+  if(cells.snapshot()[0].status==='failed')throw new Error('室内部品の読み込み失敗：'+cells.snapshot()[0].error);
   if(dreamLayer.snapshot().status==='failed')throw new Error('夢部品の読み込み失敗：'+dreamLayer.snapshot().error);
   status.textContent=`${renderer.backend.isWebGPUBackend?'WebGPU':'WebGL 2'} · 外観LOD${currentLOD??'準備中'} · 室内 ${cells.snapshot()[0].status}`;
   metrics.textContent=`${frames}回描画 · CPU送信 ${submitMs.toFixed(1)}ms · 停止時は追加描画なし。ガラス調整は透過色と微小な波打ちの試作です。`;
   if(changed||moving)request();else lastTime=null;
- }catch(error){canvas.dataset.rendererError=error.message;status.textContent='描画失敗：'+error.message;console.error(error);}
+ }catch(error){canvas.dataset.rendererError=error.message;capture.disabled=true;status.textContent='描画失敗：'+error.message;console.error(error);}
 }
 controls.addEventListener('change',request);select.addEventListener('change',pose);glassCheck.addEventListener('change',applyGlass);
 dreamCheck.addEventListener('change',request);

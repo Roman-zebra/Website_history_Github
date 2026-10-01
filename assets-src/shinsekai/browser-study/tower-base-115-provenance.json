@@ -17,7 +17,7 @@
     },
     {
       "file": "scripts/serve-shinsekai-study.cjs",
-      "sha256": "a614ec7e7dacc723a8e532dcf4508fbdc0e464a44d66129063636c759c2693f6"
+      "sha256": "772d3239638366e335507731ce5aaf0a0c5545787b0f5f99bbd1808515877d41"
     },
     {
       "file": "scripts/shinsekai-meshopt-pack.mjs",
