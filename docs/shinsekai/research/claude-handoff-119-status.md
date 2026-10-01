@@ -139,3 +139,48 @@ TRIPO added0/lastliveOct1 3200/Oct2 daily09pending; actual iPhone14 unmeasured,
 full-quality room still exceeds provisional phone budgets, no production claim.
 Previous58aafe2 exactWorkersSUCCESS2026-10-01 18:12:32UTC verified. GoalACTIVE,
 next intensity/range comparisons continue; check this checkpoint's own deploy.
+
+
+## Claude119 partial point-intensity reply —2026-10-02, still incomplete
+Three fixed-camera point-intensity gains .7/.5/.35 were inspected with2350K,
+EV-1.25/directional.01/floor+wall wear/source emission40/5/geometry/maps/AA fixed.
+Retain50% as an optional next-stage baseline: original11points2.282759/4.565519
+become1.141380/2.282759, distance0/decay2 retained. Reduced surface light keeps
+near pattern readable;35% weakens warm local contribution without resolving
+flat depth or white globes. Those defects remain; this is not complete lighting.
+External source sun3/hemi1.2 still add unoccluded study fill; visible-emitter
+clipping and fill/shadow balance remain. Latest120 received during the in-flight
+check gives priority to contact shadows/AO, then finite4-6m range, then haori
+and upper four details. Follow that order after saving this verified comparison.
+One meaningful lifecycle/atomic-failure test added; all3lamp tests pass,
+full static343/343. GPUgain1 near/context reload exactly matches preceding2350K
+PNGs. GL unchanged near exact/context1pixels/max1 of255;
+do not infer full framebuffer view-order invariance. Native differences:
+gain070-webgpu: near881906pixels/max19, context891347/max19; gain050-webgpu: near896174pixels/max36, context896214/max36; gain035-webgpu: near899881pixels/max54, context897234/max54; gain050-webgl: near896146pixels/max36, context896215/max36.
+Both retained near/context inspected: edges/joints/maps remain. Both dream
+source PNG hashes exact, lamp absent/EV0/directional restored; re-entry original
+point snapshots and applied50% values repeat without compounding. Far both
+ready38980tri/75draw/cache+map reservation0/lamp absent; observed errors/warnings0.
+Near381746tri/165draw/context377944tri/156draw, no new maps/geometry/source export.
+Fourteen unchanged nativePNGs and four encoded input rehashes/receipt in parent
+research-cache/hall-point-119-002/. Named gain050-webgpu-hallDesk-base.png,
+gain050-webgl-hallDesk-base.png, gain050-webgpu-hall-base.png; comparison notes
+browser-study/hall-point-claude119.md and workflow/hall-point-119-brief.json.
+Remaining119: emitter clipping/interior fill/finite range/depth, dark timber and
+qualified GTAO; haori support/sag/folds/collar/contact; upper earth-wall/tatami/
+cushion/shoji details. No full119 completion or review requested, observed120/
+processed118. Hall arttrials9/10/11; BuildingAart26/hybrid23/cloth7240 unchanged.
+Actual iPhone14 unmeasured/full-quality hall phone budgets fail; no production
+or artistic acceptance. TRIPO added0/lastliveOct1 3200/Oct2 daily09pending,
+no extra tools/agents/model/review calls. GoalACTIVE. Previousa2a40db exact
+WorkersSUCCESS2026-10-01 18:44:30UTC verified; check next checkpoint separately.
+
+
+## Claude120 received —2026-10-02, not processed or formal review
+Parent read-only to-codex120/03:58JST comments on one earlier colour image only.
+Finish the live point comparison safely, then priority: bench/counter/shelf
+contact shadows+AO; finite4-6m point range and dark depth/pools; haori; upper
+four details. Original119 also retains unresolved timber/GTAO/emitter/fill.
+Only after all119 requirements are implemented and verified, one occasional
+"119 complete, review requested" packet with2-3named nativePNGs. No automatic
+review calls, no receipt-as-completion; observed120/processed118.

@@ -33,7 +33,7 @@ const hallDirectional=!mobileTextures&&review==='115'&&query.has('halldirectiona
 const hallAO=!mobileTextures&&review==='115'&&query.has('hallao');let hallAmbientLook,createHallAmbientLook;
 const hallFloorMode=!mobileTextures&&review==='115'?query.get('hallfloor'):null;let hallFloorLook,createHallFloorLook,cloneHallFloorMaterial,decorateHallFloorWear;
 const hallWallMode=!mobileTextures&&review==='115'?query.get('hallwall'):null;let hallWallLook,createHallWallLook,cloneHallWallMaterial,decorateHallWallWear;
-const hallLampMode=!mobileTextures&&hallStream?query.get('halllamp'):null;let hallLampLook,createHallLampLook;
+const hallLampMode=!mobileTextures&&hallStream?query.get('halllamp'):null,hallPointGain=hallLampMode!==null&&query.has('hallpoint')?Number(query.get('hallpoint')):1;let hallLampLook,createHallLampLook;
 const liftProposal=!mobileTextures&&review==='115'&&query.has('liftproposal'),liftBase='/study/lift-115-proposal/';
 const proposalBase='/study/cinema-115-proposal/';
 let proposalReceipt,hallReceipt,liftReceipt,hallStreamReceipt;
@@ -88,7 +88,7 @@ async function select(){
    if(hallDirectional&&config.cell==='hall'){hallDirectionalLook=createHallDirectionalLook(model);canvas.dataset.hallDirectional=JSON.stringify(hallDirectionalLook.apply(!dream.checked));}
    if(hallFloorMode!==null&&config.cell==='hall'&&!dream.checked){hallFloorLook=createHallFloorLook(model,{mode:hallFloorMode,createMaterial:cloneHallFloorMaterial,decorateWear:decorateHallFloorWear});canvas.dataset.hallFloor=JSON.stringify(hallFloorLook.stats);}
    if(hallWallMode!==null&&config.cell==='hall'&&!dream.checked){hallWallLook=createHallWallLook(model,{mode:hallWallMode,createMaterial:cloneHallWallMaterial,decorateWear:decorateHallWallWear});canvas.dataset.hallWall=JSON.stringify(hallWallLook.stats);}
-   if(hallLampMode!==null&&config.cell==='hall'&&!dream.checked){hallLampLook=createHallLampLook(model,{mode:hallLampMode});canvas.dataset.hallLamp=JSON.stringify(hallLampLook.stats);}
+   if(hallLampMode!==null&&config.cell==='hall'&&!dream.checked){hallLampLook=createHallLampLook(model,{mode:hallLampMode,pointGain:hallPointGain});canvas.dataset.hallLamp=JSON.stringify(hallLampLook.stats);}
    if(candidate){const receipt=proposalReceipt.find(r=>r.cell===name);canvas.dataset.cinemaProposal=JSON.stringify({codec:'EXT_meshopt_compression',bytes:receipt.compressedBytes,sha256:receipt.sha256,visualAcceptance:false});}else delete canvas.dataset.cinemaProposal;
    if(hallCandidate){const receipt=hallReceipt.find(r=>r.cell===name);canvas.dataset.hallProposal=JSON.stringify({bytes:receipt.bytes,sha256:receipt.sha256,visualAcceptance:false});}
    if(liftCandidate){const receipt=liftReceipt.find(r=>r.cell===name);canvas.dataset.liftProposal=JSON.stringify({bytes:receipt.bytes,sha256:receipt.sha256,visualAcceptance:false});}
@@ -137,7 +137,7 @@ initializing=(async()=>{try{await renderer.init();if(disposed)throw new DOMExcep
  if(hallAO)createHallAmbientLook=(await import('./hall-ambient-look.mjs')).createHallAmbientLook;
  if(hallFloorMode!==null){if(!['control','roughness','wear'].includes(hallFloorMode))throw new Error('Invalid hall floor comparison mode');({createHallFloorLook}=await import('./hall-floor-look.mjs'));({cloneHallFloorMaterial,decorateHallFloorWear}=await import('./hall-floor-wear.mjs'));}
  if(hallWallMode!==null){if(!['control','wear'].includes(hallWallMode))throw new Error('Invalid hall wall comparison mode');({createHallWallLook}=await import('./hall-wall-look.mjs'));({cloneHallWallMaterial,decorateHallWallWear}=await import('./hall-wall-wear.mjs'));}
- if(hallLampMode!==null){if(!['control','colour'].includes(hallLampMode))throw new Error('Invalid hall lamp comparison mode');({createHallLampLook}=await import('./hall-lamp-look.mjs'));}
+ if(hallLampMode!==null){if(!['control','colour'].includes(hallLampMode)||![1,.7,.5,.35].includes(hallPointGain)||(hallLampMode==='control'&&hallPointGain!==1))throw new Error('Invalid hall lamp comparison mode');({createHallLampLook}=await import('./hall-lamp-look.mjs'));}
  if(hallPrefetch)roomPrefetch=createRoomPrefetch({plans:['cell_hall','cell_hall_dream'].map(id=>{const parts=hallStreamParts(hallStreamReceipt,id);return {id,bytes:parts.reduce((n,p)=>n+p.bytes,0),textureBytes:parts.reduce((n,p)=>n+p.estimatedTextureBytes,0)};}),load:async name=>{const model=await streamHall(name);model.prefetchedHall=true;return model;},release:model=>{release(model);canvas.dataset.hallPrefetchReleases=String(Number(canvas.dataset.hallPrefetchReleases??0)+1);},onChange:snapshot=>{canvas.dataset.hallPrefetch=JSON.stringify(snapshot);}});
  if(liftProposal){liftReceipt=await fetch(liftBase+'split-summary.json').then(r=>{if(!r.ok)throw new Error('lift receipt '+r.status);return r.json();});if(!['cell_lift','cell_lift_dream'].every(cell=>liftReceipt.some(r=>r.cell===cell&&r.bytes<=26214400&&/^[a-f0-9]{64}$/.test(r.sha256))))throw new Error('Invalid lift receipt');}
  await select();

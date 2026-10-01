@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-hall-point-intensity-002-20261002",
+  "status": "native_verified_partial119",
+  "subject": "Separate point-light intensity reduction with verified2350K colour fixed",
+  "intendedResult": "Reduce excessive broad hall light contribution while retaining near pattern and local warm lamp readability; determine remaining ambient/emitter/depth cause from actual fixed views",
+  "baseline": {
+    "commit": "a2a40db",
+    "sourceRevision": "aa030cd",
+    "look": "EV-1.25/directional.01/floor.72-.76+wear/wallwear/2350K; no unapproved GTAO",
+    "privateEvidence": "parent research-cache/hall-lamp-119-001/native-receipt.json"
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "sourceStatus": "measured scene positions; intensity gains inferred"
+  },
+  "scope": {
+    "change": "multiply11 original runtime point intensities by one fixed gain .7/.5/.35",
+    "preserve": [
+      "2350K linear-luminance matched colours",
+      "distance0/decay2, point position, visible emission40/5",
+      "directional.01, global sunlight/hemisphere, exposure-1.25EV",
+      "all original maps/base fields/geometry/AA",
+      "source snapshots/cache/dream/exterior"
+    ],
+    "defer": [
+      "visible-emitter reduction",
+      "finite-range local pools",
+      "ambient-fill balance/GTAO",
+      "dark timber",
+      "haori/upper details",
+      "realphone performance"
+    ]
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/PointLight.html",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "intensity cd; distance0 inverse-square; decay2 preserved; nonzero cutoff would be inferred nonphysical staging",
+      "versionCompatibility": "checked localr186 GLTFLoader intensity/range path and bundled light implementation"
+    }
+  ],
+  "reusableLessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "applicableLessons": [
+      "Imported interior clips white: record original/runtime units and exposure before changing material",
+      "one factor and actual selection/control images before stronger tuning"
+    ],
+    "suspectedCause": "eleven distance0 points add overlapping fill; emitter40/5 clipping is independent",
+    "evidenceToDistinguishCause": "three gain candidates with fixed exposure/emission/ambient; close/context native comparison; report remaining flat depth honestly"
+  },
+  "comparison": {
+    "oneChangedCause": "point intensity only",
+    "gains": [
+      0.7,
+      0.5,
+      0.35
+    ],
+    "fixedCameras": {
+      "hall": {
+        "position": [
+          -12.275,
+          1.65,
+          6.9
+        ],
+        "target": [
+          -12.275,
+          1.8,
+          -3
+        ]
+      },
+      "hallDesk": {
+        "position": [
+          -12.65,
+          1.65,
+          0.7
+        ],
+        "target": [
+          -10.85,
+          1.2,
+          0.7
+        ]
+      }
+    },
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "controls": "previous native2350K baseline/pointGain1 reload before changed factor"
+  },
+  "verification": {
+    "checks": [
+      "11 measured point snapshot intensities not compounded and restore before cached reuse",
+      "emitter strengths/colours, distance/decay, maps/geometry unchanged",
+      "failed copy and invalid-gain operations atomic",
+      "source2350K near/context reload",
+      "three fixed-camera native candidates then retained both backends/dream/far/error checks",
+      "immutable input rehash and full build"
+    ],
+    "results": [
+      "14nativePNGs, GPUbaseline exact/GLnear exact/context tiny rounding, both dreamsource exact/reentry/far0/errors0",
+      "343fullbuild and 3lamp lifecycle tests passed",
+      "4encoded input hashes unchanged"
+    ]
+  },
+  "artTrials": [
+    9,
+    10,
+    11
+  ],
+  "decision": {
+    "retain": 0.5,
+    "visualAcceptance": false,
+    "remainingIssues": [
+      "full119 incomplete; point reduction alone does not qualify darker depth/local pools or repair visible emission"
+    ],
+    "reason": "Reduced surface light preserves near material reading and more local warm contribution than.35; depth/emitter clipping unresolved."
+  },
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "useExistingClaudeFile": true,
+    "requestExtraReview": false,
+    "latestObservedHandoff": 120,
+    "newPriority": "120 received during native check: finish in-flight point comparison; contact shadows/AO first, finite4-6m lamp range second, haori third, upper four details fourth. Not a formal review."
+  },
+  "evidence": "parent research-cache/hall-point-119-002/native-receipt.json"
+}

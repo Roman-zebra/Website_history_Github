@@ -1,11 +1,11 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude119: isolated2350K lamp colour trial8 verified both native backends near/context, controls3PNGexact+GLcontext7pixels/max1; both dreamsource exact/reentry original RGB/far0/errors0,14PNGs/3nativeEXRs/four encoded inputs unchanged,342/342. Prompt partial file reply posted; observed119/processed118. Next scope separate reduced point intensity and emitter strength, then finite range/depth, against fixedEV-1.25/directional.01/floor.72-.76+wear/wallwear/2350K. Bright globes/broad unlimited fill remain, no complete local-pool criterion. Then dark timber, qualified GTAO after changed renderer-path isolation (AO001/002 unapproved), haori support/sag/folds/collar/contact and upper earth-wall/tatami/cushion/shoji. Source-quality phone room fails budgets/actual iPhone14 unmeasured, no art/production acceptance. 58aafe2 exactWorkersSUCCESS18:12:32UTC verified; check newest pushed checkpoint. TRIPO added0/lastliveOct1 3200/Oct2 daily09pending. Halltrial8; BuildingAart26/hybrid23/cloth7240 unchanged. GoalACTIVE/no newtools/agents/model/review calls.",
-  "updatedAt": "2026-10-01T18:42:02.527721+00:00",
+  "next": "PRIORITY latestClaude120 received2026-10-02 03:58JST, non-review of one colour hall image: first contact shadows/AO at bench feet/counter/shelf, second finite4-6m lamp range/depth, third haori, fourth upper four details. Finish in-flight point comparison safely: gains.7/.5/.35 against fixed2350K/emission40-5/EV-1.25/directional.01/floorwallwear; GPUtrials9-11 inspected/retain optional.5; both retained backends dream original exact/reentry source intensity repeated/far0/errors0,14PNGs/4inputs unchanged/343tests; partial file reply, observed120/processed118. Next inspect r186 multipass/transmission/render-target restoration for failedAO001/002 before changed contact/GTAO trial; no unchanged retry. Preserve near maps/geometry/AA/cache snapshots. Then finite range4-6m; source global sun3/hemi1.2 fill/shadow balance and visible-emitter clipping still unresolved; dark timber remains119. No full119/art/production or phone acceptance. a2a40db exactWorkersSUCCESS18:44:30UTC verified; check newest pushed checkpoint. TRIPO0/lastliveOct1 3200/Oct2 daily09pending. BuildingAart26/hybrid23/cloth7240 unchanged. GoalACTIVE/no newtools/agents/model/review calls.",
+  "updatedAt": "2026-10-01T19:04:09.144525+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
-  "observedClaudeHandoff": 119,
+  "observedClaudeHandoff": 120,
   "resumedInThread": "01a0f756-8ab2-7111-a287-46e329330319",
   "coordination": {
     "heartbeat": "jta ACTIVE daily09:00JST for TRIPO balance/consumption/plan through2026-10-31. Continuous development uses the ACTIVE Goal in this chat and continues after result messages without10-minute wait. SNS folder safety verified, wait gate released. No duplicate concurrent runs.",
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 342,
+    "fullBuildTests": 343,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -76,7 +76,8 @@
     "hallDirectionalNativeEvidence": "../research-cache/hall-directional-119-001/native-receipt.json",
     "hallFloorNativeEvidence": "../research-cache/hall-floor-119-002/native-receipt.json",
     "hallWallNativeEvidence": "../research-cache/hall-wall-119-001/native-receipt.json",
-    "hallLampNativeEvidence": "../research-cache/hall-lamp-119-001/native-receipt.json"
+    "hallLampNativeEvidence": "../research-cache/hall-lamp-119-001/native-receipt.json",
+    "hallPointNativeEvidence": "../research-cache/hall-point-119-002/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 partial exposure/directional/floor/wall and2350K colour verified/replied; reduced intensity/range/local pools/dark timber, qualified GTAO, haori/upper details pending; processed118 only."
+  "pendingClaudeRepairs": "119 incomplete;120 non-review clarification received: contact shadows/AO first, finite4-6m range second, haori third, upper four details fourth. Point reduction partial replied; emitter clipping/fill/depth/dark timber/GTAO remain. Observed120/processed118."
 }

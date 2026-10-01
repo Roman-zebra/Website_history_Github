@@ -9,8 +9,8 @@ export function hallLampColour(rgb){
 }
 
 // Temporary emitter assignments and point-colour snapshots; source stays reusable.
-export function createHallLampLook(model,{mode='colour',createMaterial=source=>source.clone()}={}){
- if(!['control','colour'].includes(mode)||typeof createMaterial!=='function')throw new Error('Invalid hall lamp comparison');
+export function createHallLampLook(model,{mode='colour',pointGain=1,createMaterial=source=>source.clone()}={}){
+ if(!['control','colour'].includes(mode)||typeof createMaterial!=='function'||![1,.7,.5,.35].includes(pointGain)||(mode==='control'&&pointGain!==1))throw new Error('Invalid hall lamp comparison');
  const assignments=[],sources=new Set(),points=[];
  model.scene.traverse(object=>{
   if(object.isPointLight){const canonical=expected.find(name=>object.name.startsWith(name)&&/^(?:_?\d+)?$/.test(object.name.slice(name.length)));const colour=object.color.toArray();points.push({object,canonical,colour,candidate:hallLampColour(colour),intensity:object.intensity,distance:object.distance,decay:object.decay});}
@@ -23,8 +23,8 @@ export function createHallLampLook(model,{mode='colour',createMaterial=source=>s
  const copies=new Map();
  try{for(const source of sources){const rgb=source.emissive.toArray(),candidate=hallLampColour(rgb),copy=createMaterial(source);if(!copy||copy===source)throw new Error('Emitter copy must have independent ownership');copies.set(source,copy);if(copy.emissive===source.emissive)throw new Error('Emitter colour must have independent ownership');if(mode==='colour')copy.emissive.fromArray(candidate);}}
  catch(error){for(const copy of copies.values())copy.dispose();throw error;}
- if(mode==='colour')for(const point of points)point.object.color.fromArray(point.candidate);
+ if(mode==='colour')for(const point of points){point.object.color.fromArray(point.candidate);point.object.intensity=point.intensity*pointGain;}
  for(const {object,original}of assignments)object.material=Array.isArray(original)?original.map(source=>copies.get(source)??source):copies.get(original);
  let disposed=false;
- return {stats:{mode,kelvin:mode==='colour'?2350:null,points:points.length,materials:copies.size,meshes:assignments.length,luminanceMatched:true,intensityAndRangePreserved:true,newTextures:0,geometryChanged:false,inferred:true,visualAcceptance:false,pointColours:points.map(p=>({name:p.object.name,source:p.colour,candidate:mode==='colour'?p.candidate:p.colour,intensity:p.intensity,distance:p.distance,decay:p.decay})),emission:[...copies].map(([source,copy])=>({name:source.name,source:source.emissive.toArray(),candidate:copy.emissive.toArray(),strength:copy.emissiveIntensity}))},dispose(){if(disposed)return;disposed=true;for(const point of points)point.object.color.fromArray(point.colour);for(const {object,original}of assignments)object.material=original;for(const copy of copies.values())copy.dispose();}};
+ return {stats:{mode,kelvin:mode==='colour'?2350:null,pointGain,points:points.length,materials:copies.size,meshes:assignments.length,luminanceMatched:true,intensityAndRangePreserved:pointGain===1,distanceAndDecayPreserved:true,newTextures:0,geometryChanged:false,inferred:true,visualAcceptance:false,pointColours:points.map(p=>({name:p.object.name,source:p.colour,candidate:mode==='colour'?p.candidate:p.colour,sourceIntensity:p.intensity,intensity:p.object.intensity,distance:p.distance,decay:p.decay})),emission:[...copies].map(([source,copy])=>({name:source.name,source:source.emissive.toArray(),candidate:copy.emissive.toArray(),strength:copy.emissiveIntensity}))},dispose(){if(disposed)return;disposed=true;for(const point of points){point.object.color.fromArray(point.colour);point.object.intensity=point.intensity;}for(const {object,original}of assignments)object.material=original;for(const copy of copies.values())copy.dispose();}};
 }
