@@ -35,3 +35,10 @@ test('reduced points restore runtime intensities before re-entry without touchin
  let count=0;assert.throws(()=>createHallLampLook(f.model,{pointGain:.5,createMaterial:s=>{if(++count===3)throw Error('failed copy');return s.clone();}}),/failed copy/);
  f.points.forEach(p=>assert.equal(p.intensity,4.56));f.meshes.forEach((m,i)=>assert.equal(m.material,original[i]));
 });
+
+test('finite lamp reach preserves intensity/decay/emission and restores exact nonuniform source distances on failure and re-entry',async()=>{
+ const {createHallLampLook}=await import('../assets-src/shinsekai/browser-study/hall-lamp-look.mjs'),f=fixture(),distances=f.points.map((p,i)=>p.distance=i*.2),materials=f.meshes.map(m=>m.material);
+ for(const pointRange of [4,5,6,0]){const look=createHallLampLook(f.model,{pointGain:.5,pointRange});f.points.forEach((p,i)=>{assert.equal(p.distance,pointRange||distances[i]);assert.equal(p.intensity,2.28);assert.equal(p.decay,2);assert.equal(look.stats.pointColours[i].sourceDistance,distances[i]);assert.equal(look.stats.pointColours[i].distance,p.distance);});f.meshes.forEach((m,i)=>m.material.forEach((v,j)=>{assert.equal(v.map,f.texture);assert.equal(v.emissiveIntensity,materials[i][j].emissiveIntensity);}));look.dispose();look.dispose();f.points.forEach((p,i)=>{assert.equal(p.distance,distances[i]);assert.equal(p.intensity,4.56);});}
+ for(const pointRange of [-1,1,4.5,NaN,Infinity])assert.throws(()=>createHallLampLook(f.model,{pointRange}),/Invalid/);
+ assert.throws(()=>createHallLampLook(f.model,{mode:'control',pointRange:5}),/Invalid/);let copies=0;assert.throws(()=>createHallLampLook(f.model,{pointRange:5,createMaterial:s=>{if(++copies===3)throw Error('failed copy');return s.clone();}}),/failed copy/);f.points.forEach((p,i)=>assert.equal(p.distance,distances[i]));f.meshes.forEach((m,i)=>assert.equal(m.material,materials[i]));assert.equal(f.sun.intensity,.77862);
+});

@@ -719,3 +719,34 @@ near-room map and original-state restoration; keep AO007/maps/AA/glass/light fix
 Then finite4-6m,haori,upper4. Observed120/processed118. Hallart14,BuildingAart26/
 hybrid23/cloth7240. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE.
 Baselinea070dff exactWorkersSUCCESS2026-10-01 20:48:38UTC; check new SHA afterpush.
+
+
+## Claude119/120 partial range003 + shadow008 diagnostics —2026-10-02
+119 remains unfinished. Existing11hall PointLights now have optional5m reach
+(validated4/5/6m) while preserving2350K/intensity.5/decay2/emission40/5/maps/AA,
+geometry and source shadow state. Original distances restore exactly on failure/
+retirement/re-entry. Both native1280x720 backends save near/context/floor;
+dream context source exact both, re-entry near exact to first5m candidate both,
+far38980tri75draw/cache+reservation0/public AO state restored/4inputs unchanged.
+Eleven nativePNGs retained including one GLdream near without source comparison.
+Final347/347 tests. Both styles retain near map/edge detail; remote specular glow
+reduces, but globalSun3/hemi1.2 still flatten hall. Foot/counter/shelf contacts,
+beam gaps/local pools/emitter clipping remain. No phone timing acceptance.
+Actual vs007 GPUnear865763pixels/max146,context888256/max205,floor910967/max127;
+GLnear865714/max146,context888214/max204,floor911071/max127. Counters unchanged
+near760283tri315draw/context752091293/floor736567257 do not prove GPU savings.
+Shadow008 no-shadow fidelity fails: GPUnear114520/max69,context44907/max162,
+GLnear114508/max69. Four changed repairs do not qualify; split alpha final
+GLnear114506/max70. Seven technicalPNGs/code/tests retained privately; no actual
+shadow/art trial. Public helper/routes removed. Initial348/private final349
+tests passed but imagery failed; exact renderer cache cause remains unproven.
+See browser-study/hall-range-claude119.md and hall-shadow-claude119.md,
+workflow/hall-range-119-003-brief.json/hall-shadow-119-008-brief.json, parent
+research-cache/hall-range-119-003/native-receipt.json and hall-shadow-119-008.
+Named range5-webgpu-hall-base.png,range5-webgpu-hallFloor-base.png,
+range5-webgl-hallDesk-base.png are evidence only, no formal review requested.
+Next changed009 scoped globalSun intensity with gain1 no-op control, unchanged
+light identity/shadow/cache flags; diagnose contacts/fill, then geometric route,
+haori/upper4. Observed120/processed118. Hallart15/BuildingA26/hybrid23/cloth7240.
+TRIPO additional0/lastliveOct1 3200/Oct2 daily09pending; GoalACTIVE.
+Baseline1b2ea9c exactWorkersSUCCESS2026-10-01 21:25:57UTC; next SHA checked afterpush.

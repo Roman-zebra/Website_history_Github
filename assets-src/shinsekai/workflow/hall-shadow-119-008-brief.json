@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-geometric-sun-shadow-008-20261002",
+  "status": "rejected_null_fidelity_gate_private_code_only",
+  "subject": "Occlude global directional hall light with existing roof/wall/bench geometry",
+  "baseline": {
+    "commit": "1b2ea9c",
+    "sourceRevision": "aa030cd",
+    "look": "AO007/2350K/point.5/EV-1.25/sourceSun.01/floorwallwear/full maps/AA",
+    "evidence": "parent research-cache/hall-ao-119-007/native-receipt.json",
+    "exactWorkersSuccess": "2026-10-01T21:25:57Z"
+  },
+  "scope": {
+    "change": "Revision5 shadow opaque beauty only; render alpha in a separate non-clearing pass using original lights/shadow config, same depth buffer, exact public state restoration",
+    "preserve": [
+      "original light RGB/intensity/position/target/direction",
+      "AO007/preparation,hemisphere1.2,sourceSun.77862,points/emission/exposure",
+      "all maps/geometry/alpha material identities/AA/cameras",
+      "original shadow object,mesh flags and renderer config outside scope",
+      "dream/exterior/source/default/phone"
+    ],
+    "defer": [
+      "other fill strength/point shadows until this geometric shadow inspected",
+      "finite range/haori/upper4",
+      "phone timing/production"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "measured model, no geometry change; fit exact room Box3 in owned light camera space"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/DirectionalLightShadow.html",
+      "checkedAt": "2026-10-02",
+      "support": "directional shadow configuration"
+    },
+    {
+      "url": "https://threejs.org/docs/pages/Renderer.html",
+      "checkedAt": "2026-10-02",
+      "support": "public shadowMap config"
+    }
+  ],
+  "compatibility": "Existing pinnedr186 Renderer.shadowMap defaults enabledfalse/transmittedfalse/typePCF. PCFSoftShadowMap removed, do not use. DirectionalLight.copy clones target/shadow; LightShadow.copy clones camera/settings but not map/mapPass. DirectionalLight.dispose disposes owned shadow. AnalyticLightNode checks renderer.enabled/light.castShadow/object.receiveShadow. No vendor editing/install.",
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md#hall-ao-denoise007",
+    "evidence": "AO denoise preserves fidelity but contacts weak; direct global sun3 cannot be occluded by indirect AO",
+    "changedAction": "actual geometric directional shadow, source ownership/restoration and null route first; retain numbered candidate"
+  },
+  "comparison": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "gateFirst": [
+      "owned-light route without cast shadow vs AO007 near/context, preserve source-null fidelity"
+    ],
+    "views": [
+      "hallDesk",
+      "hall",
+      "hallFloor"
+    ],
+    "checks": [
+      "real three light/geometry ownership/restoration/render throw tests",
+      "shadow-map fitting/finite camera/PCF/bias and caster exclusion",
+      "actual contacts/roof/beam/window/alpha/silhouette inspection",
+      "dream/source reentry/far retirement/errors",
+      "source rehash/full build/added renderer work"
+    ]
+  },
+  "parameters": {
+    "mapSize": 1024,
+    "filter": "PCF",
+    "bias": -5E-05,
+    "normalBiasMetres": 0.002,
+    "frustumMarginMetres": 0.5,
+    "depthMarginMetres": 1,
+    "casterPolicy": "all materials opaque; alpha meshes excluded",
+    "mainBeautyOnly": true,
+    "sourceSunIntensity": 3,
+    "beautyAntialias": true,
+    "status": "starting artistic shadow settings, not historical facts or phone-qualified"
+  },
+  "technicalTrial": 8,
+  "artTrial": null,
+  "visualAcceptance": false,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "coordination": {
+    "latestObservedHandoff": 120,
+    "processedHandoff": 118,
+    "priority": "contacts/shadows first;119 incomplete",
+    "requestExtraReview": false
+  },
+  "technicalRevision": 5,
+  "retainedFailure": "Revision1 owned-light null control: GPUnear114520/max69,context44907/max162;GLnear114508/max69. No actual shadow/art rendering. Retained private rejected-owned-light.mjs/tests/initialbrief and3native PNGs. Exact causal light/cache mechanism unproven; revision2 changes light identity only. Revision2 source identity alone leaves GLnear exactly same failed114508/max69. Revision3 changes alpha receive/cast flag scope only. Pinned RenderObject cache key includes receiveShadow; cache causal detail unproven. Revision3 preserving alpha flags leaves GLnear exactly same failed image. Revision4 changes shadow scope timing only, wraps preparation+main instead of main alone; no actual shadow rendering yet. Revision4 consistent preparation/main state also exactly reproduces GLnear failure. Revision5 separates opaque shadow main and original-state alpha rendering. Changes no camera/map/geometry/AA and never clears depth for alpha. No actual shadow/art rendering yet. Revision5 split opaque/alpha changes GLnear114506/max70, still fails. All rejected code retained privately; remove unqualified shadow route from public runtime. No actual shadow/art candidate.349 tests pass for private revision5, not final production build."
+}

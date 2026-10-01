@@ -126,3 +126,23 @@ Next inspect pinned public shadow APIs and add actual geometric occlusion with
 scoped/restorable geometry/light/shadow state. Keep maps/AA/glass/cameras fixed.
 Evidence: parent research-cache/hall-ao-119-007/differences.json,
 vendor-receipt.json and floor-residual-statistics.json; hall-denoise-claude119.md.
+
+## Hall shadow008 fidelity rejection and finite range003 (2026-10-02)
+An independently cloned shadow light, original light with owned shadow, preserved
+alpha flags, consistent preparation/main shadow state and split opaque/alpha
+passes all fail the no-shadow glass fidelity comparison. Retain seven technical
+PNGs and changed code privately; do not call null controls artistic trials or
+adopt an unqualified route because ownership tests pass. Exact private renderer
+cache mechanism remains unproven. Initial348/private final349 tests pass, but
+public shadow helper/routes are removed and qualified007 source is restored.
+
+Continue useful120 work with existing PointLight.distance:0 preserves exact
+source range; optional4/5/6m modifies only local reach. Keep decay2, intensity,
+RGB/emission/maps/AA and restore each original distance, including nonuniform
+ones, before cache re-entry. Validate failure before mutation and disposal twice.
+Finite range reduces remote specular glow, but global unshadowed sun3/hemi1.2
+still keep the hall flat. Do not claim finite range fixes contacts/beam shadows.
+Next isolate global interior fill with fixed near/context/floor and null control,
+without changing shadow/cache state, then revisit a changed geometric route.
+Evidence: parent hall-shadow-119-008 and hall-range-119-003; browser-study
+hall-shadow-claude119.md / hall-range-claude119.md. No new tool or TRIPO use.

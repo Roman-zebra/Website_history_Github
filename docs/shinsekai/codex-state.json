@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY Claude120 contact shadows. AO007 optional depth/normal-aware denoise reduces speckles while source-null near/context EXACT both backends/full maps+AA;14nativePNGs/dream source exact/far38980tri75draw/cache+reservations0/public state restored/4inputs unchanged/346tests. GPUreentry1pixel/max1,GLexact; do not claim exact both. Existing r186 DenoiseNode/SimplexNoise copied unchanged from verified installed npm package/provenance; initial missing-module error resolved, no new errors after repair. Contacts still weak: global sun3 unshadowed/hemi1.2. Next changed008 implement geometric directional shadow on global sun with scoped/restored cast/receive/light/renderer state and near-room fitted map, keep AO007/light/exposure/maps/glass fixed; pinned public DirectionalLightShadow/Renderer docs checked, revalidate pinned shadow config and source ownership before code. Compare null/source and actual near/context/floor, dream/reentry/far; no unchanged denoise retry. Then finite4-6m,haori,upper4;119 incomplete/observed120/processed118. Hallart14/BuildingAart26/hybrid23/cloth7240. Baselinea070dff exactWorkersSUCCESS2026-10-01 20:48:38UTC; check new pushed SHA separately. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/reviews.",
-  "updatedAt": "2026-10-01T21:20:03.251970+00:00",
+  "next": "PRIORITY Claude120 contacts/119 incomplete. Range003 optional5m on11points verified both backends with original2350K/intensity.5/decay2/emission40/5/maps/AA;11nativePNGs/dream context original exact both/reentry near exact both/far38980tri75draw/cache+reservation0/public AO state restored/4inputs unchanged/final347tests. Shadow008 seven technical null PNGs fail glass fidelity after5 changed diagnostics; no actual shadow/art, public helper/routes removed, private code/tests preserved; original light ID/alpha flags/whole-pass/split alpha did not qualify, mechanism unproven. Next changed009 isolate unoccluded global sun3 using scoped intensity gain (no new light/shadow flags/cache switch), fixed AO007+range5 near/context/floor, gain1 no-op/source equality first then one lower gain; restore source/default/dream/far. Aim stronger AO proportion/darker beam gaps without changing near maps/AA. This is artistic fill adjustment, not geometric shadow completion; revisit changed shadow route after diagnosis. Then haori/upper4/fullworld. Observed120/processed118. Hallart15/BuildingAart26/hybrid23/cloth7240. Baseline1b2ea9c exactWorkersSUCCESS2026-10-01 21:25:57UTC; check next pushed SHA separately. TRIPO0/lastliveOct1 3200/Oct2 daily09pending;GoalACTIVE/no newtools/agents/reviews.",
+  "updatedAt": "2026-10-01T22:05:25.656627+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 346,
+    "fullBuildTests": 347,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -81,7 +81,9 @@
     "hallPassNativeEvidence": "../research-cache/hall-pass-119-001/native-receipt.json",
     "hallDirectAONativeEvidence": "../research-cache/hall-ao-119-003/native-receipt.json",
     "hallMaterialAONativeEvidence": "../research-cache/hall-ao-119-006/native-receipt.json",
-    "hallDenoisedAONativeEvidence": "../research-cache/hall-ao-119-007/native-receipt.json"
+    "hallDenoisedAONativeEvidence": "../research-cache/hall-ao-119-007/native-receipt.json",
+    "hallRangeNativeEvidence": "../research-cache/hall-range-119-003/native-receipt.json",
+    "hallShadowRejectedEvidence": "../research-cache/hall-shadow-119-008/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete/120 contacts priority. AO007 reduces speckles with source-null fidelity both, contacts weak; implement scoped geometric direct-light shadows next. Then finite4-6m,haori,upper4. Partial file reply;observed120/processed118."
+  "pendingClaudeRepairs": "119 unfinished/120 priority. Finite5m reach implemented+nativeverified; contact shadows and beam/local pools remain. Shadow008 fidelity rejected and removed. Next scoped globalSun intensity diagnostic, then changed geometric shadow route/haori/upper4. Partial file handoff, observed120/processed118; no full119 review request."
 }

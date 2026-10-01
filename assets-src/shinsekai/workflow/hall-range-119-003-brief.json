@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "roundId": "claude119-finite-lamp-range-003-20261002",
+  "status": "native_verified_optional_partial_119",
+  "subject": "Finite local hall lamp reach, Claude120 priority2 after rejected shadow008 fidelity gate",
+  "baseline": {
+    "commit": "1b2ea9c",
+    "sourceRevision": "aa030cd",
+    "look": "AO007/2350K/point.5/EV-1.25/sourceSun.01/floorwallwear/full maps/AA",
+    "evidence": "parent research-cache/hall-ao-119-007/native-receipt.json"
+  },
+  "scope": {
+    "change": "11 existing hall PointLights distance from0(unlimited) to5m only; validate optional4/5/6m, restore exact original distances on retirement",
+    "preserve": [
+      "existing 2350K RGB/intensity pointGain.5/decay2/emission",
+      "positions/AO007/globalSun3/hemi1.2/sourceSun.77862/exposure",
+      "all maps/geometry/alpha/AA/cameras",
+      "source/default/dream/phone"
+    ],
+    "defer": [
+      "geometric shadow fidelity repair;008 rejected, no actual shadow candidate rendered",
+      "haori/upper4/full world/device timing"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "baked glTF X/Y/Z",
+    "origin": [
+      -14.05,
+      0.15,
+      8.6
+    ],
+    "status": "model coordinates;5m cutoff is artistic instruction, not measured1912 lamp specification"
+  },
+  "references": [
+    {
+      "url": "https://threejs.org/docs/pages/PointLight.html",
+      "checkedAt": "2026-10-02",
+      "support": "distance0 is unlimited;nonzero smooth cutoff;decay2 retained"
+    }
+  ],
+  "compatibility": "Existing pinnedr186 PointLight.distance and PointLightNode/getDistanceAttenuation checked; no new tool or vendor source edits. Local cutoffs are artistic and not physically exact lighting.",
+  "lessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md#hall-ao-denoise007",
+    "changedAction": "Keep proven007 source route;change only finite distance, never accept glass regression to add shadows"
+  },
+  "comparison": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "views": [
+      "hallDesk",
+      "hall",
+      "hallFloor"
+    ],
+    "checks": [
+      "source maps/input hashes/AA preserved",
+      "range5 on11lights/decay intensity unchanged",
+      "native near/context/floor vs retained007",
+      "dream/source equality/reentry/far exact retirement",
+      "meaningful original distance restoration and failure tests/fullbuild"
+    ]
+  },
+  "parameters": {
+    "pointRangeMetres": 5,
+    "allowedRangeMetres": [
+      0,
+      4,
+      5,
+      6
+    ],
+    "pointGain": 0.5,
+    "kelvin": 2350,
+    "visualAcceptance": false
+  },
+  "artTrial": 15,
+  "additionalStudioCredits": 0,
+  "newTools": false,
+  "newAgents": false,
+  "observedClaudeHandoff": 120,
+  "processedClaudeHandoff": 118,
+  "119Complete": false,
+  "reviewRequested": false,
+  "nativeEvidence": "parent research-cache/hall-range-119-003/native-receipt.json",
+  "nativePNGs": 11,
+  "fullBuildTests": 347,
+  "dreamContextSourceExactBoth": true,
+  "reentryNearExactBoth": true,
+  "sourceInputsUnchanged": true,
+  "visualAcceptance": false,
+  "contactCompletion": false
+}
