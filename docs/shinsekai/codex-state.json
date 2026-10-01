@@ -1,17 +1,24 @@
 {
   "status": "in_progress",
   "current": "T6",
-  "next": "Active115 aa030cd: 3raw+plain+14split GLBs validate0/0; allattributes/indices/loaded sampler values exact. Independent stairs/head/lift linkage and88overlap poses pass; street/cinema floor9243probes no gaps, aperture6726rays0blocked, wingthreshold3702no gaps,100wingdoorposes0wing/cinema overlap/defaultclosed. Combined115localroute loads wings+base/onecell, actual1.2swingclips, far2LOD2; build281/281. NEW hall-only exit13635rays blocked12453 by hall__walls/benches, nativeGPU slider1 reproduces; immediate request/image toClaude, leavegeometry/remaining E/Wdressing cleanup theirs. NativeGPU cinema loaded, corrected exit camera signs; continue bothbackends exit/cinema/head/lift/wingcycles/farretirement and privatePNG receipts. Need separate independent roof/wire/coplanarity/decodedquantization scope if warranted; author receipt not independent. Cinema files26.65/27.25MB>25MiB, packaging pending. Thenowned109 adapter repin (newstablecinema source), clothactual-export UV1 AO/light. Sourceasset frozen aa030cd; no productiongeometryimport/1080pqualification. Server18765session56557; Chrome1808462650 currently115GPU. Heartbeatpaused active; noMAX/Astra/newchat.",
-  "updatedAt": "2026-10-01T00:27:05.828Z",
+  "next": "Active: 115route and hall-obstruction request pushed be63e79; exactWorkersSUCCESS.116/117 received, copied.113 scoped1920x1080 render-buffer gate accepted byClaude dedicated240sample/backends6views100fps; CSS1904x1105, no shaft/shadow/AO/SSR/finalfx.117 shapes remainClaude-owned. USER12h ClaudeAPI conservation until2026-10-01T12:45UTC: routine20minClaudecalls suspension requested viahandoff, external scheduler unconfirmed; no new review calls, Codex independently continues. Uncommitted: petals default/legacyflowers comparison; dreamblack.035 bloomthreshold1.05 exposure-.3EV; mixedclothnormals1/.37rotate37; GTAO?ao indirect context (fixedprepassMSAA samples0); papertransmittedshadow .40/.37/.32. Two meaningfulmaterialpreservation testsPASS. NativeGPUAO/materialloaded no newerrors afterMSAAfix; papernewreload upper-window loading, mustfinish bothbackends/base/dream/captures/retirement; initialAOcoldsubmit5707msnotFPS. Candidate109adapterrepinned reviewedASTbe0671..aa030cd/projectorASTsame, addsinferred35Whoodedworklamp/lowercase rightfilmfeedslot. Privatecinema115allbuildsession14767 exportingallrooms95MB; extractcinema-onlyparts/validator/rays/lightandfilm/crankpairedrenders beforecommit. Needsourceprovenance/docs/build283/fullpushafterchecks. Server18765session56557. Heartbeatpaused active; noMAX/Astra/newchat.",
+  "updatedAt": "2026-10-01T00:46:36.2952908Z",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 115,
-  "observedClaudeHandoff": 115,
+  "observedClaudeHandoff": 117,
   "resumedInThread": "01a0f17d-ce83-7780-869a-56bc0755bbf7",
   "coordination": {
     "heartbeat": "jta; pause during active turn, re-enable before idle",
     "claudeIntervalMinutes": 20,
     "handoff": "docs/shinsekai/requests-to-claude.md",
     "escalation": "Consult user before MAX/Astra or new group chat",
-    "supervisor": "Claude: look/behaviour command centre and acceptance; Codex: implementation, tests, perf, main; needs work means implement, Claude will rework means await branch only for that item"
+    "supervisor": "Claude: look/behaviour command centre and acceptance; Codex: implementation, tests, perf, main; needs work means implement, Claude will rework means await branch only for that item",
+    "claudeConservation": {
+      "requestedAt": "2026-10-01T00:45:00Z",
+      "policy": "Suspend routine Claude20min calls; Codex works independently and batches results; only true blocking decisions may escalate",
+      "until": "2026-10-01T12:45:00Z",
+      "externalSchedulerConfirmed": false,
+      "remainingQuota": "unavailable"
+    }
   }
 }

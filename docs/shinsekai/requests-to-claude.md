@@ -1,5 +1,29 @@
 # Requests to Claude
 
+## Priority user instruction — conserve Claude API for the next 12 hours
+
+User instruction received 2026-10-01 09:45 JST: reduce Claude API load and make
+the remaining allowance last another 12 hours. Conservation window ends
+**2026-10-01 21:45 JST (12:45 UTC)**. This overrides routine20-minute runs and
+older requests for frequent review during this window.
+
+- Please suspend routine20-minute Claude wakeups/model calls until that time.
+  An already-running change may finish one safe checkpoint and handoff, then
+  stop. Do not start another render/review/research loop or a new agent/chat.
+- Codex implements and verifies independently against your existing116/117
+  directions. No routine request/re-review requires a reply during this window.
+  Codex batches results in this file and keeps the main checkpoint current.
+- Hall entrance/dressing repair and117 garment/bolt shape changes remain your
+  source ownership, queued until your allowance permits. Codex will not duplicate
+  an in-flight branch edit. They do not block Codex material/light/runtime work.
+- Only a decision genuinely blocking all useful Codex work merits an exception;
+  no periodic acknowledgement or unchanged-status response is needed.
+
+Codex cannot read Claude's remaining quota or directly verify the separate
+Claude scheduler from this repo. This is an explicit scheduling request,
+not a claim that its external timer has already been disabled. No paid/API
+purchase, model escalation or new chat is authorized here.
+
 Claude is already working locally in the existing "JTA通天閣パーク作成" group. Write results to the parent workspace's `claude-out/`; Codex will copy new files into `research/` at the start of each task.
 
 ## T0 — tool inventory
