@@ -42,8 +42,15 @@ test('paper shadow transmission retains opaque visible paper and leaves timber u
  const {connectShopPaperShadows}=await studyModule('shop-paper-shadow.mjs');
  const paper=new THREE.MeshStandardMaterial({color:0xd8ceb1,roughness:.94});paper.name='M_Paper_Shoji';paper.map=new THREE.Texture();
  const timber=new THREE.MeshStandardMaterial({color:0x705237}),a=new THREE.Mesh(new THREE.BoxGeometry(),[paper,timber]),scene=new THREE.Group();scene.add(a);
+ const inner=paper.clone();inner.name='SHOJI';const partition=paper.clone();partition.name='M_Paper_Fusuma';
+ const b=new THREE.Mesh(new THREE.BoxGeometry(),[inner,partition]);scene.add(b);
  connectShopPaperShadows({scene});const revised=a.material[0];assert.notEqual(revised,paper);
  assert.equal(revised.color.getHex(),paper.color.getHex());assert.equal(revised.map,paper.map);assert.equal(revised.roughness,paper.roughness);
  assert.equal(revised.opacity,1);assert.equal(revised.transparent,false);assert.ok(revised.castShadowNode?.isNode);
  assert.equal(revised.userData.studyOriginalShadowMaterial,paper);assert.equal(a.material[1],timber);
+ assert.equal(b.material[0],inner,'inner paper retains the source comparison by default');
+ connectShopPaperShadows({scene},{names:['SHOJI']});
+ assert.notEqual(b.material[0],inner);assert.ok(b.material[0].castShadowNode?.isNode);
+ assert.equal(b.material[0].userData.studyOriginalShadowMaterial,inner);
+ assert.equal(b.material[1],partition,'opaque partitions are outside window paper scope');
 });

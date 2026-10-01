@@ -681,6 +681,18 @@ with lower front-window sun and room weathering; source sides have no windows.
 ce6f15c hall and086ed1c fibre sheen exactWorkers SUCCESS confirmed. No new
 review, acknowledgement, render/research request or Claude model call.
 
+
+Optional windowlight comparison lowers the existing front sun, applies inferred
+shadow transmission to interior SHOJI only, and reduces indoor hemisphere/.14
+environment fill. Two actual light passes bring total16/hybrid14. Both1280x720
+backends upper base/dream/save/far retirement pass, new errors/warnings0;293
+tests pass. Four final PNGs plus source/first-pass comparisons and receipt are
+private in window-light-118. Source defaults/geometry are retained. The room
+still reads flat/warm; daylight point-light balance/material wear are next.
+Unmatched WebGL cold firstSubmit23.454s is recorded, not FPS/regression or
+qualified1080p approval. 9fd70db exactWorkers SUCCESS confirmed. No review or
+acknowledgement request is generated; this stays within the existing batch.
+
 Codex continues your temporarily transferred cloth
 joints, alongside compression runtime/material wear; unfinished Claudecloth-v2
 is untouched. No model escalation/new chat or periodic acknowledgement needed.

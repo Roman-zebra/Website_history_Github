@@ -451,7 +451,7 @@
       },
       {
         "file": "assets-src/shinsekai/browser-study/building-a.mjs",
-        "sha256": "a75789379e658591d94c0e09ecb725f28f39b072bada8916dbfbdac9708cfc97"
+        "sha256": "35d9c84ba4fd9356127ef815d87d214f34dd480d560a29e1a50ebd6547214c6d"
       }
     ],
     "checks": "290/290 build; both native1280x720 backends haori base/dream save/far retirement, new errors/warnings0",
@@ -507,5 +507,52 @@
     "visualAcceptance": false,
     "qualified1080p": false,
     "openIssues": "Left sleeve/hat overlap; whole cloth contact and silhouette approval remain open"
+  },
+  "runtimeWindowLightCandidate": {
+    "query": "?clothsewn&clothlook&ao&windowlight",
+    "sun": [
+      -5,
+      9,
+      18
+    ],
+    "target": [
+      3,
+      0,
+      -4.5
+    ],
+    "interiorFill": 0.22,
+    "interiorEnvironment": 0.14,
+    "farEnvironment": 0.45,
+    "shadowMap": [
+      2048,
+      2048
+    ],
+    "interiorPaperMaterial": "SHOJI",
+    "transmittance": [
+      0.4,
+      0.37,
+      0.32
+    ],
+    "inferred": true,
+    "geometryChanged": false,
+    "files": [
+      {
+        "file": "assets-src/shinsekai/browser-study/building-a.mjs",
+        "sha256": "35d9c84ba4fd9356127ef815d87d214f34dd480d560a29e1a50ebd6547214c6d"
+      },
+      {
+        "file": "assets-src/shinsekai/browser-study/shop-paper-shadow.mjs",
+        "sha256": "2232a17dc91fec7e44a07953f183fc08cf8cb97b7c18100b748920cc7609eb0d"
+      },
+      {
+        "file": "assets-src/shinsekai/browser-study/window-light-118.md",
+        "sha256": "6197620b0bd7caf45dfab837ab2771e93b5ae362d9ef3ef539c3f43d23a4768b"
+      }
+    ],
+    "checks": "293/293 build; both native1280x720 backends base/dream/save/far; new errors/warnings0",
+    "receipt": "parent research-cache/look-dev/window-light-118/receipt.json",
+    "visualAcceptance": false,
+    "qualified1080p": false,
+    "openIssues": "Flat warm room; source point-light balance and material/weathering; cold WebGL readiness"
   }
 }

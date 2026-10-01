@@ -3,12 +3,12 @@ import {vec4} from 'three/tsl';
 
 // Inferred thin paper attenuation; frames and room objects still cast geometry shadows.
 // This is a single-layer shadow approximation, not volumetric light transport.
-export function connectShopPaperShadows(model){
- const replacements=new Map();
+export function connectShopPaperShadows(model,{names=['M_Paper_Shoji']}={}){
+ const replacements=new Map(),selected=new Set(names);
  model.scene.traverse(o=>{
   if(!o.isMesh)return;
   const replace=source=>{
-   if(source.name!=='M_Paper_Shoji')return source;
+   if(!selected.has(source.name))return source;
    if(replacements.has(source))return replacements.get(source);
    const material=new THREE.MeshStandardNodeMaterial().copy(source);
    material.castShadowNode=vec4(.40,.37,.32,1);
