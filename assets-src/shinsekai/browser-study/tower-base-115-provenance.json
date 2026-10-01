@@ -9,7 +9,7 @@
     },
     {
       "file": "assets-src/shinsekai/browser-study/tower-base-113.mjs",
-      "sha256": "483c44366952b16375436d39a822fd7675c383b8d6ef05f2d33f63338b1e3ff0"
+      "sha256": "b0069da474cb90944f5615825ec1df640049e66e99cc3be7a754e2c946c03a2f"
     },
     {
       "file": "assets-src/shinsekai/browser-study/tower-gate-playback.mjs",
@@ -17,13 +17,38 @@
     },
     {
       "file": "scripts/serve-shinsekai-study.cjs",
-      "sha256": "6ec19f644b2eb5784fa48dbb2e70625a4bc33189a5c943d2cf7446ba06cd78bc"
+      "sha256": "1c8ecd18b97c5ad4c4ad266c94ebd1a22753e646b35094672b9227cfe5430d2b"
+    },
+    {
+      "file": "scripts/shinsekai-meshopt-pack.mjs",
+      "sha256": "5e2658a94517df069127f44fca75629a881259d8d6b9be646a45d8450d0b7495"
+    },
+    {
+      "file": "scripts/shinsekai-meshopt-decode.mjs",
+      "sha256": "ce74b3adc471eede83804dc23ce5a7e6a7b63acf2f2b417411dafefafd17e427"
+    },
+    {
+      "file": "vendor/three-r186/examples/jsm/libs/meshopt_decoder.module.js",
+      "sha256": "d428e73a000057c6c94bfcedc3412d0c2dc14ca8800e88553aab05113ad2bf19"
     }
   ],
   "runtimeManifest": "parent research-cache/tower-base-115-runtime/manifest.json",
   "glbValidation": "3 author +1 plain +14 splits: zero errors/warnings",
   "native": "WebGPU assembly/actual west door/cinema ready; additional native checks ongoing",
-  "sourceIssue": "Hall dressing and benches block west door; reported to Claude; no duplicate source modification",
+  "sourceIssue": "Hall west entry wall/bench obstruction remains;118 transfers independent repair to Codex from frozen115 source",
   "visualAcceptance": false,
-  "qualified1080p": false
+  "qualified1080p": false,
+  "cinemaProposal": {
+    "query": "?cinemaproposal",
+    "codec": "EXT_meshopt_compression",
+    "privateManifest": "parent research-cache/cinema-115-proposal/lossless-summary.json",
+    "nativeReceipt": "parent research-cache/look-dev/cinema-115-meshopt/receipt.json",
+    "native": "Both1280x720 backends base/dream loaded and saved;far LOD2 cell empty and candidate metadata cleared;new errors/warnings0",
+    "compressedBytes": [
+      18956360,
+      19433676
+    ],
+    "visualAcceptance": false,
+    "qualified1080p": false
+  }
 }

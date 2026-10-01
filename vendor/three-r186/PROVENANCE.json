@@ -91,6 +91,17 @@
       "file": "examples/jsm/tsl/display/GTAONode.js",
       "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/tsl/display/GTAONode.js",
       "sha256": "0b9caf7f92cc8ad38a796b3060a9e975da43722dffb5e5dfe7709eef9104aa4b"
+    },
+    {
+      "file": "examples/jsm/libs/meshopt_decoder.module.js",
+      "source": "https://registry.npmjs.org/three/-/three-0.186.0.tgz#package/examples/jsm/libs/meshopt_decoder.module.js",
+      "sha256": "d428e73a000057c6c94bfcedc3412d0c2dc14ca8800e88553aab05113ad2bf19",
+      "license": "Meshoptimizer 1.1 MIT; MESHOPT-LICENSE.md"
+    },
+    {
+      "file": "examples/jsm/libs/MESHOPT-LICENSE.md",
+      "source": "https://registry.npmjs.org/meshoptimizer/-/meshoptimizer-1.1.0.tgz#package/LICENSE.md",
+      "sha256": "f03037ca7bad1e3eb7f4a63fa6084a8baabd5ba30d3c239a9a7f35705d873e26"
     }
   ],
   "version": "0.186.0",

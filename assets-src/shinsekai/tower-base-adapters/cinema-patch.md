@@ -32,9 +32,33 @@ scene/material/accessor/image metadata remain identical after decoding.23/24
 triangles respectively use a cyclic index rotation retaining order/winding.
 Compressed and decoded validators both report0errors/0warnings. A smaller
 gltfpack1.3 comparison quantized vertex colour to8bit and is not adopted.
-Receipt: `research-cache/cinema-115-proposal/lossless-summary.json`. Native
-decoder/runtime integration and qualified1080p with final effects remain open.
-No candidate GLB is imported or published.
+Receipt: `research-cache/cinema-115-proposal/lossless-summary.json`. Local
+decoder/runtime integration uses the explicit115 `?cinemaproposal` query, with
+an optional `&webgl` comparison. Other rooms and base/wings retain115 source.
+The candidate-only projector camera has its own selector; the default115 route
+does not load the decoder. Native qualification is recorded below; qualified
+1080p with final effects remains open. No candidate GLB is imported or published.
+
+Reproducible offline packing: `node scripts/shinsekai-meshopt-pack.mjs input.glb
+output.glb path/to/meshoptimizer-1.1.0/meshopt_encoder.js`. The official MIT encoder
+is an authoring dependency in the private research cache, not a site dependency.
+Packing rejects sparse/shared/interleaved/padded layouts requiring another adapter.
+`node scripts/shinsekai-meshopt-decode.mjs output.glb decoded.glb` uses the vendored
+official1.1 decoder. Both reusable packer outputs match the qualified candidate
+SHA256 exactly; both decoder outputs match the qualified private round trips.
+No colour conversion/quantization or texture compression is performed. Triangle
+indices allow cyclic rotation, so this preserves rendered geometry and attributes,
+not every original index byte.
+
+Native1280x720 WebGPU/WebGL2 each load and save normal/dream, then select far
+LOD2 with cell empty and candidate metadata cleared. No new captured errors or
+warnings. Four app-download PNGs and DOM observations are in private
+`research-cache/look-dev/cinema-115-meshopt/receipt.json`. This is a load/capture/
+retirement check, not FPS, proof of memory reclamation or photographic acceptance.
+The source115 viewer still uses plain hemisphere/sun lighting without shadows/
+AO/final effects: the apparatus looks flat/bright, and the inferred lamp support
+occludes the inspection angle. These remain appearance work. No extra art pass
+is counted for decoder/camera/export qualification.
 
 Private evidence: research-cache/cinema-115-proposal/{split-summary,rays,
 film-cases}.json and renders/iter-001/cinema_patch_{crank,full}.png. The paired

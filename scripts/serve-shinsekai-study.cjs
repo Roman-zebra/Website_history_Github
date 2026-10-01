@@ -9,6 +9,8 @@ const towerReview = path.resolve(root, '../research-cache/tower-base-113-runtime
 const towerNames = new Set(['manifest.json', ...[0,1,2].map(n=>`TB_EXT_LOD${n}.glb`), ...['hall','stair','lift','cinema'].flatMap(n=>[`cell_${n}.glb`,`cell_${n}_dream.glb`])]);
 const tower115Review=path.resolve(root,'../research-cache/tower-base-115-runtime');
 const tower115Names=new Set([...towerNames,...[0,1,2].map(n=>`TW_LOD${n}.glb`)]);
+const cinemaProposal=path.resolve(root,'../research-cache/cinema-115-proposal');
+const cinemaNames=new Set(['lossless-summary.json','cell_cinema-lossless-meshopt.glb','cell_cinema_dream-lossless-meshopt.glb']);
 // Keep this origin separate from the main site's development service worker.
 const port = Number(process.env.JTA_STUDY_PORT || 18765);
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.glb': 'model/gltf-binary', '.css': 'text/css', '.jpg':'image/jpeg','.png':'image/png' };
@@ -24,11 +26,13 @@ const server = http.createServer((request, response) => {
   try { pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname); }
   catch { response.writeHead(400).end(); return; }
   if (pathname.includes('\0')) { response.writeHead(400).end(); return; }
+  const cinemaName=pathname.startsWith('/study/cinema-115-proposal/')?pathname.slice('/study/cinema-115-proposal/'.length):null;
+  const cinemaAllowed=cinemaNames.has(cinemaName);
   const reviewPrefix=['113','115'].find(n=>pathname.startsWith('/study/tower-base-'+n+'/'));
   const reviewName=reviewPrefix?pathname.slice(('/study/tower-base-'+reviewPrefix+'/').length):null;
-  const reviewRoot=reviewPrefix==='115'?tower115Review:towerReview;
-  const reviewAllowed=reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName);
-  const file = reviewAllowed?path.resolve(reviewRoot,reviewName):path.resolve(root, `.${pathname}`);
+  const reviewRoot=cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
+  const reviewAllowed=cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
+  const file = reviewAllowed?path.resolve(reviewRoot,cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
   // Check the resolved path as well as the URL, including encoded traversal.
   const relative = `/${path.relative(root, file).split(path.sep).join('/')}`;
   if (reviewAllowed?!file.startsWith(`${reviewRoot}${path.sep}`):(!file.startsWith(`${root}${path.sep}`) || !allowed(relative))) { response.writeHead(403).end(); return; }
