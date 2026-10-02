@@ -173,3 +173,40 @@ Evidence: workflow005 brief/perimeter adapter/Blender verifier, shared fixed
 renderer perimeter mode, parent upper-cushion-119-005 authoring/validator/render/
 reuse/HTTP/visual/fabric-audit/full-build receipts.119/120 and integrated1080p
 remain unfinished; no formal review/newtool/agent/TRIPO use.
+
+
+## Claude119/120 cushion fabric006 checkpoint —2026-10-02
+119 remains incomplete; no formal review requested. Normal-only local optional
+comparison on retained005gap022. Masked GLB490706d6 adds6604bytes, no maps,
+triangles or draws. Source binary/geometry/UV/colour/materials/indices exact;
+432 target vertices/240faces,1176 other cloth vertices mask0,0mixed faces.
+Pinned GLTFLoader actually loads _CUSHION as _cushion on extracted source
+primitive; shared other cloth retains original material. Gain0 loads exact005
+control and makes no shader/copy. Gains.5/1 calibrated2/2.6mm sine threads,
+height80/160micrometres, derivative fade.2–.45cycles/pixel; colour/roughness.95
+fixed. These are art assumptions. GLSL/WGSL standalone expression translation
+passes with substituted camera/normal context, not native PBR/driver evidence.
+
+12fresh fixed offline CyclesCUDA32/seed119004/AgX0/1280x720 PNGs directly inspected
+(source/.5/1 ×close/side/context/far). Side reads weave; close effect weak,
+context/far subtle; .5 exploratory, neither final fabric approval. Offline
+Blender Bump does not implement TSL fwidth fade, so far PNGs prove no browser
+alias stability. Original005 geometry imported after masked006 import failed
+Blender4.5 scalar/missing-attribute merge (width4vs1); diagnostic retained.
+All3 actual offline scenes save/reopen geometry/UV/colour/matrices/shader inputs/
+links exactly after updating view layer and checking used materials. Failedr2
+scene/log retained. Browser4 existing2856 bind timed out again, no restart or
+new native images. Both backends and actual phone still pending. Validator0/0,
+393full checks pass. Local18785/session75021 exactGLB+HEAD/no-store/private403/
+POST405 pass; unpublished study only. Defaults and published assets unchanged.
+
+Next: native006 control/.5/1 close/side/context/dream/far/reentry+disposal when
+browser works; weak near appearance needs a calibrated macro diagnostic before
+increasing strength. Continue independent119 upper plaster/shoji work while
+native unavailable. Carry004/005,lighting001/contact009, finalhaori/hall and
+integrated1080p/world/device gates. Evidence:workflow006 brief/render script,
+mask adapter/fabric study/look/node/test; private006 geometry/validator/HTTP/
+render/expression/visual/full-build. Observed120 processed118; TRIPO3200 spent0,
+nextOct3after09. Human resumed development; Goal API still reportsblocked after
+model-capacity compaction failure, automatic continuation not verified. No
+extra agent/model/tool/paid use/review call.

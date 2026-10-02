@@ -432,3 +432,25 @@ aliasing is a quality issue to qualify, not permission to reduce nearby textures
 or AA. Source attributes/masks/tests alone are not native image acceptance.
 Evidence: workflow005 brief/adapter/verifier, upper-cushion-claude119.md, private
 upper-cushion-119-005 visual/authoring/render/reuse/fabric-source-audit receipts.
+
+
+## Isolate actual cloth before diagnosing detail —2026-10-02
+Fabric006 masks432of1608 vertices on one CLOTH primitive,240faces and0mixed faces.
+Keep the original material shared by unrelated meshes; copy just the selected
+primitive and mask its other1176vertices to0. Gain0 uses exact005 asset/material,
+not a newly normalised shader. Preserve source UV/colour/roughness.95 and all
+binary bytes. Pinned GLTFLoader really lowercases _CUSHION; standalone GLSL/WGSL
+expression translation verifies derivatives and fwidth, not native PBR/driver.
+
+Blender4.5.10 import of this single-primitive SCALAR custom mask failed during
+missing-attribute concatenation (width4vs1). Retain efficient browser mask and
+failed diagnostic; use byte-identical005 geometry for offline material authoring,
+explicitly avoiding a claim of masked-asset Blender qualification. Update scene
+matrices before snapshots and compare actually used materials; all3 corrected
+saved scenes reopen geometry/UV/colour/matrices/shader inputs/links exactly.
+12 matched offline PNGs expose weave in side view but weak close detail. Do not
+boost gain blindly or call subtle far frames proof of runtime alias filtering:
+offline Blender Bump does not reproduce the TSL fwidth fade. Both native backends,
+dream/reentry/disposal and actual phone remain open. Next verify calibrated macro
+and native source/candidate before promoting art. No extra maps/draws/triangles,
+paid credit or tool. Evidence:006 brief/adapters/helpers/test and private receipts.

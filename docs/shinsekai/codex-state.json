@@ -1,15 +1,15 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY120/119 incomplete. Next independent cushion-specific fabric normal round on005gap022 SHA178f76bf: sourceCLOTH lacks normal/basecolour texture,roughness.95; current wrinkle helper companion-only.432targetvertices/240faces/0mixedfaces;UV0 ranges0..5.426,-4.426..1, so calibrate physical coordinates rather than assume0..1. Declare normal-only masked derivative/bump comparison; inspect pinned r186 attribute/bump/fwidth support; preserve geometry/sourceUV/colour/materialfields/allothercloth.0053/22/40mm edge profiles retain80mmmax/XZ/floor/corner/cabinet,36floor vertices fullyexact, bothclosed/reopen/20woodfloor-onlypairs/0other+mergedneighbours/validator0-0/386tests/exactHTTP18784session46014.8fresh+4reusedofflinePNGs inspected;22mm betterthickness butmechanical/plain,40mm slab/coarsebands rejected. Art/native/phoneunapproved; offlineCyCUDA32/seed119004/AgX0/120W40W/world.08 differsbrowserdaylight. Source004e50d/005022178f/04019cc retained. Native005/004 BOTHbackendsclose/side/context/dream/far/reentry pending. User cannot inspectChrome; browser4 Debuggerunattached/bindingtimeouts causeunverified, no kill/restart. Whenavailable finish lighting001 missingGPUcontrols/GLcandidateviews+far/reentry andcontact009 null/.6front/side/context/dream/far/reentry.009defaultoff/006nonzero blockedon008. Carry finalhaori/hall/uppergrain/shojipools/integrated1080p/fullworld/device. Observed120processed118/GoalACTIVE/TRIPO3200spent0nextOct3after09; no paidAPI/newtools/agents/reviewcalls.",
-  "updatedAt": "2026-10-02T08:21:22.030289+00:00",
+  "next": "PRIORITY120/119 incomplete. Fabric006 implemented on005gap022: mask490706d6 +6604bytes/432target/240faces/0mixed/source attributes material binary exact, no maps/tri/draw; null0 exact005; .5/1 normal-only calibrated2/2.6mm threads and80/160um amplitude, fwidth.2-.45. Pinned target GLTFLoader and standalone GLSL/WGSL translation pass; not native PBR/driver evidence. Validator0/0,393fulltests, exact HTTP18785session75021/private403/POST405.12fresh offline fixed source/.5/1 close/side/context/far directly viewed; side weave visible, close weak, neither final fabric approval. Offline Bump unfiltered/not TSL alias proof; masked006 Blender import failed scalar/missing-width4vs1, use unchanged005 geometry for offline only; actual3scenes save/reopen data+shader equal. Failures retained. Next native006 null/.5/1 both backends close/side/context/dream/far/reentry/disposal when available; calibrate macro before boosting weak detail. Continue independent119 upper plaster/shoji while browser bind unavailable. Carry004/005, lighting001 missingcontrols/GLcandidateviews+far/reentry/contact009 null/.6 views/lifetime, finalhaori/hall/integrated1080p/fullworld/device. User cannot inspectChrome; current2856 bind Emulation focus timeout again, no restart. Human resumed manual work; Goal API reportsblocked capacity failure and no resume tool, automatic continuation unverified. Observed120processed118/TRIPO3200spent0nextOct3after09/no agents/models/paid/newtools/reviewcalls.",
+  "updatedAt": "2026-10-02T09:18:31.290208+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
   "resumedInThread": "01a0f756-8ab2-7111-a287-46e329330319",
   "coordination": {
     "heartbeat": "jta ACTIVE daily09:00JST for TRIPO balance/consumption/plan through2026-10-31. Continuous development uses the ACTIVE Goal in this chat and continues after result messages without10-minute wait. SNS folder safety verified, wait gate released. No duplicate concurrent runs.",
-    "continuousGoal": "ACTIVE from2026-10-01, finish JTA world against PLAN/TASKS and inherited user constraints; useful implementation/verification continues after results. Free local development may continue afterOct31, while TRIPO paid use and October daily schedule stop onNov1. App/machine availability, usage limits and required external input remain boundaries.",
+    "continuousGoal": "Human requested resumption after model-capacity compaction error on2026-10-02; manual development resumed from saved next. Goal API still reportsblocked; create_goal rejected unfinished goal, update_goal has no resume status. Automatic continuation awaits application/user-controlled Goal resumption; never mark unfinished world complete to replace goal. October paid-use/schedule boundaries and free-local continuation intent remain.",
     "claudeIntervalMinutes": null,
     "claudeReviewPolicy": "Occasional milestone review only per2026-10-01 user instruction; no hourly restart after21:45JST",
     "handoff": "docs/shinsekai/requests-to-claude.md",
@@ -23,7 +23,10 @@
       "remainingQuota": "unavailable",
       "schedulerReport": "STATE.md reports hourly job9ce3f838; not independently inspected",
       "quotaGuarantee": false
-    }
+    },
+    "goalStatusObserved": "blocked",
+    "userResumeAuthorizedAt": "2026-10-02T09:18:31.290208+00:00",
+    "automaticContinuationVerified": false
   },
   "integrations": {
     "tripoStudio": {
@@ -97,7 +100,8 @@
     "upperHaoriContact009RuntimeEvidence": "../research-cache/haori-wall-contact-119-009-runtime-001/runtime-receipt.json",
     "nextCushionAudit": "../research-cache/haori-wall-contact-119-009-runtime-001/next-cushion-audit.json",
     "upperCushionContourEvidence": "../research-cache/upper-cushion-119-004/visual-receipt.json",
-    "upperCushionPerimeterEvidence": "../research-cache/upper-cushion-119-005/visual-receipt.json"
+    "upperCushionPerimeterEvidence": "../research-cache/upper-cushion-119-005/visual-receipt.json",
+    "upperCushionFabricEvidence": "../research-cache/cushion-fabric-119-006/visual-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete;005 technical/offline thicker-edge comparison qualified but finalcloth art/native/phone unapproved.22mm exploratory baseline,40mm art rejected. Next targeted cushion fabric normal masked/calibrated-coordinate round; current companion cloth shader never touches sourceCLOTH. Carry native005/004/lighting001/contact009 and finalhaori/hall/uppergrain/shojipools/integrated1080p/world/device. Observed120processed118; no formalreview."
+  "pendingClaudeRepairs": "119 incomplete:006 mask/runtime/technical/offline comparison ready, art/native/phone pending; close weave weak, side visible. Carry upper plaster/shoji, all004/005/lighting001/contact009 and finalhaori/hall/integrated1080p/world gates. No formal review; observed120 processed118."
 }

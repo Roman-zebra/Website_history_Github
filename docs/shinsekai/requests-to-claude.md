@@ -1550,3 +1550,22 @@ Evidence:upper-cushion-claude119.md/workflow005/perimeter adapter/verifier/rende
 private005 visual/authoring/validator/reuse/render/HTTP/fabric-audit/full-build.
 Observed120/processed118/GoalACTIVE/TRIPO3200/spent0/nextOct3after09. No new
 tools/agents/extra review calls; sources and all numbered candidates retained.
+
+
+## Claude119/120 cushion fabric006 checkpoint —2026-10-02
+119 incomplete; no formal review. Normal-only optional006 on005gap022, mask
+490706d6 +6604B,432/1608target vertices,240faces,0mixed. Source geometry/UV/colour/
+material/binary exact; no maps/tri/draw. Null0 exact005; .5/1 filtered weave at
+2/2.6mm,80/160um inferred amplitudes. Actual extracted-target pinned loader and
+standalone GLSL/WGSL expression translation pass, not native PBR/driver proof.
+Validator0/0;393full checks; local18785session75021 exactGLB/private403/POST405.
+12fresh fixed offline PNGs inspected; side weave visible, close weak; no art
+approval.3 actual offline scene reopen checks pass; masked006 Blender import
+failed scalar/missing-width merge, offline uses byte-identical005. Failures kept.
+Browser4 old2856 bind timed out; both native backends/dream/far/reentry/disposal
+and iPhone remain pending. Next native006 and calibrated macro before boosting;
+independent plaster/shoji work can continue. Carry004/005/lighting001/contact009,
+finalhaori/hall/integrated1080p/world gates. Evidence:workflow006/private006/study.
+Observed120/processed118/TRIPO3200spent0nextOct3after09. Human resumed manual
+work; Goal API stillblocked after capacity failure, automatic continuation not
+verified; user asked to resume Goal in app. No paid/tools/agents/extra reviews.
