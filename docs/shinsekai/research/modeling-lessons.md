@@ -271,3 +271,19 @@ exact/GL9pixelsmax1 residual not guessed.23freshPNGs/361tests; sourceaudit helpe
 hash is explicitly initial, qualified hash retained separately. SourceGPUdream
 capture failed once, healthy loaded state retry saved without restart. No scene
 editing/export invented for a browser-only shader. Evidence:tatami-claude119.md.
+
+## Preserve qualified controls explicitly and distinguish observation deadlines —2026-10-02
+Heri001 reused8tatami001 frames only with exact source/cushion/shader hashes,
+samecamera/light/AA/flags/reviewtime0 and gain0nocopy tests. FreshsourceGPUcontext
+matchesexact; GLresidual recorded, source macros fresh. Preserve reuse ledger,
+not a false fresh-capture claim. Metric box-face UV verified rather than assumed.
+Normal-only upper fabric at original dark colour/roughness.9 keeps30mmgeometry.
+View actual macro before increasing amplitude; ordinary distance almost unchanged
+by declared frequency filter. No art/historical/motion/mobile approval from PNG
+changes/tests. Browser waits may enforce shorter observation deadlines; GPU
+capture and GL first-render observations expired but actual samehandle later
+saved/loaded. No restart on timeout; confirm captureabsent before clicking again.
+Persist captureError because resumed draw overwrites status and hides failure
+reason. SourceGPUfirstsavefailed, healthyretry recorded/causeunknown; no guessed
+failure.363tests and actualfar1copy+1originaldisposed. ExistingGLshelf bands must
+be isolated before further wall/light qualification. Evidence:heri-claude119.md.

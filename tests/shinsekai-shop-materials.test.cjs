@@ -34,6 +34,27 @@ test('tatami null comparison creates no copy and invalid gain leaves the scene i
  for(const gain of [-1,2,NaN,Infinity])assert.throws(()=>connectShopTatamiNormal({scene},{gain}));assert.equal(mesh.material,source);
 });
 
+test('upper Heri plain-cloth normals retain source fields and data without touching tatami, mapped edging or unrelated props',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');const {connectShopHeriNormal}=await studyModule('shop-heri-normal.mjs');
+ const heri=new THREE.MeshPhysicalMaterial({color:0x151822,roughness:.9,vertexColors:true,sheen:.1,sheenRoughness:.8});heri.name='M_Cloth_Heri';
+ for(const key of ['map','roughnessMap','aoMap'])heri[key]=new THREE.Texture();
+ const tatami=new THREE.MeshStandardMaterial();tatami.name='M_Tatami';const mapped=heri.clone();mapped.normalMap=new THREE.Texture();
+ const geometry=new THREE.BoxGeometry(),before=Object.fromEntries(Object.entries(geometry.attributes).map(([key,a])=>[key,a.array.slice()]));
+ const scene=new THREE.Group(),root=new THREE.Group(),mesh=new THREE.Mesh(geometry,[heri,tatami,mapped,heri]),outside=new THREE.Mesh(geometry,heri);root.name='BldgA_Interior_Structure';root.add(mesh);scene.add(root,outside);
+ assert.equal(connectShopHeriNormal({scene}).materials,1);const copy=mesh.material[0];assert.notEqual(copy,heri);assert.equal(copy,mesh.material[3]);assert.equal(mesh.material[1],tatami);assert.equal(mesh.material[2],mapped);assert.equal(outside.material,heri);
+ for(const key of ['map','roughnessMap','aoMap','roughness','vertexColors','sheen','sheenRoughness'])assert.equal(copy[key],heri[key]);
+ assert.equal(copy.color.getHex(),heri.color.getHex());assert.ok(copy.normalNode?.isNode);assert.equal(copy.userData.studyOriginalHeriMaterial,heri);assert.equal(heri.normalNode,undefined);
+ assert.equal(mesh.geometry,geometry);for(const [key,array]of Object.entries(before))assert.deepEqual(geometry.attributes[key].array,array);
+ assert.equal(connectShopHeriNormal({scene}).materials,0);assert.equal(mesh.material[0],copy);
+});
+
+test('Heri null control and rejected gain keep the original material intact',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');const {connectShopHeriNormal}=await studyModule('shop-heri-normal.mjs');
+ const material=new THREE.MeshStandardMaterial();material.name='M_Cloth_Heri';const scene=new THREE.Group(),root=new THREE.Group(),mesh=new THREE.Mesh(new THREE.BoxGeometry(),material);root.name='BldgA_Interior_Structure';root.add(mesh);scene.add(root);
+ assert.equal(connectShopHeriNormal({scene},{gain:0}).materials,0);assert.equal(mesh.material,material);
+ for(const gain of [-1,2,NaN,Infinity])assert.throws(()=>connectShopHeriNormal({scene},{gain}));assert.equal(mesh.material,material);assert.equal(material.normalNode,undefined);
+});
+
 test('daylight balance toggles from retained lamp values without compounding or touching other lights',async()=>{
  const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
  const {connectShopDaylight}=await studyModule('shop-daylight.mjs');

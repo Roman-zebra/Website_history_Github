@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY119/120 unfinished. Next separate upper tatami Heri fabric qualification, actual plaster grain/shoji pools, rounded cushion/fabric; preserve tatami-normal001 optional and cushion003/source hashes. Tatami normal001: actual named Group binding repaired after0-material diagnostic; scoped upper top1copy, normal-only pitches4.2/20mm, filtered unresolved frequencies. Both native source/candidate near/macro/context viewed: close fine rows/subtle normal near/context max1.23freshPNGs/no reuse,361tests,actualfarLOD2/interior+cloth+dream+tatamiempty/copy1original1disposed; GPUreentryexact/GL9pixelsmax1 residual unknown. GroundGPUexact/GL463pixelsmax1,loadedreviewtime0dreammax1. Existing sourceGLshelf bands remain quality issue. No new maps/draws/tri, extra shader arithmetic and phone/motion measurement open. Private tatami-normal-119-001/native-receipt.json + browser-study/tatami-claude119.md. Cushion003 closed/reopened/0-0validator/all20wood-floor-only contacts,80mmmax/40-43mmseam/165mmshift, but board-like straight outline art unapproved; a5c102f5 source and36701f8f003 unchanged,+48tri/+147712bytes not mobile savings. Haori003/004/006 optional support/sag/local-fold caveats/static wallcontact and final art remain; hall010 static contact/range5/EV-1.25/2350K partial with moving/upper shadows/clippedemitters open. Full119/integrated1080p/world/device not approved; observed120/processed118, interim reply requests-to-claude. Current18778/session74612 retained, no timeout restart. Baselinea09bacd WorkersSUCCESS2026-10-02T01:59:31Z; currentSHA afterpush. FreshOct2TRIPO3200/spent0/nextOct3after09; GoalACTIVE/no newtools/agents/extra reviews.",
-  "updatedAt": "2026-10-02T02:41:28.437447+00:00",
+  "next": "PRIORITY119/120 unfinished. Next isolate existing source GL shelf/cabinet dark bands before qualifying upper plaster grain/shoji pools, then rounded cushion/fabric and final haori/hall corrections. Preserve optional tatami-normal001 and heri-normal001/source/cushion003 exact hashes. Heri001: normal-only upper top1owned copy, dark colour/roughness.9/30mm width/2mm offset/UV/geometry retained; pitches1.6/1.2mm/heights.08/.05mm inferred, unresolved-frequency fade.2.. .45. Both actual source/candidate macro and candidate near/context inspected; cloth grid close, ordinary distance almost unchanged. webgpu macro218767pix/max5,near0pix/max0,context1pix/max1,ground0pix/max0,dream0pix/max0,reentry0pix/max0; webgl macro219943pix/max6,near16pix/max1,context9pix/max1,ground473pix/max1,dream0pix/max0,reentry8pix/max1. 24PNGs includes8explicit reusedtatami001 controls; freshsourceGPUcontextexact/GLresidual separately recorded. ActualfarbothLOD2/interior+cloth+dream+heriempty/copy1original1disposed,loadedreviewtime0dream/errors0.363tests. SourceGPUcontextfirstsavefailed/retryhealthy; browserobservertimeouts duringcapture/GLfirstrender inspectedsamehandle, notterminal/restart. captureError now persists future failure reasons. No newmaps/draws/tri/TRIPO; extra shadercost/phone/motion unqualified. Tatami001/sourcea5c102f5/cushion00336701f8f unchanged. Cushion003 fullfloor contacts/closed80mm/reopen/0-0validator but board-like outline artopen; haori003/004/006 finalart/localcreasecaveats and hall010 moving/upper/clippedemitter issues remain. Full119/integrated1080p/world/device unapproved; observed120/processed118, interimreplyrequests-to-claude. Current18778/session74612 retained. Baseline5023d5e WorkersSUCCESS2026-10-02T02:43:32Z; currentSHA afterpush. TRIPOfreshOct2balance3200/spent0/nextOct3after09; GoalACTIVE/no newtools/agents/reviewcall.",
+  "updatedAt": "2026-10-02T03:06:14.575605+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 361,
+    "fullBuildTests": 363,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -89,7 +89,8 @@
     "haoriSupportNativeEvidence": "../research-cache/haori-support-119-003/native-receipt.json",
     "haoriWallContactNativeEvidence": "../research-cache/haori-wall-contact-119-006/native-receipt.json",
     "upperCushionNativeEvidence": "../research-cache/upper-cushion-119-003/native-receipt.json",
-    "upperTatamiNativeEvidence": "../research-cache/tatami-normal-119-001/native-receipt.json"
+    "upperTatamiNativeEvidence": "../research-cache/tatami-normal-119-001/native-receipt.json",
+    "upperHeriNativeEvidence": "../research-cache/heri-normal-119-001/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete. Partial tatami normal001/source-preserving filtered upper weave native verified; separate Heri/plaster/shoji, rounded cushion/fabric, final haori/hall and integrated1080p remain. Existing GL shelf bands/motion/mobile unqualified. Observed120/processed118. Interim replied, no additional review/agent."
+  "pendingClaudeRepairs": "119 incomplete; tatami001/Heri001 normal-only candidates verified, artistic/historic/motion/mobile unqualified. Next existing sourceGLshelf bands diagnostic/plaster grain/shoji pools/rounded cushion-fabric; finalhaori/hall/integrated1080p pending. Observed120/processed118; interim replied, no extra review/agents."
 }

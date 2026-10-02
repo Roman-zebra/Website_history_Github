@@ -704,3 +704,24 @@ Interim PNGs tatami-webgpu-macro.png and tatami-webgl-context.png; no formal
 review request or extra agents. TodayTRIPO3200/spent0/nextOct3after09.
 Observed120/processed118; GoalACTIVE. Baselinea09bacd exactWorkersSUCCESS
 2026-10-02T01:59:31Z; currentSHA checked afterpush.
+
+## Claude119/120 partial upper Heri normal001 —2026-10-02
+119 remains incomplete. Dark cloth edging retained in colour/roughness.9/30mm
+width/2mm offset/UV/geometry; optional upper-top plain cloth normals only.
+Pitches1.6/1.2mm/heights.08/.05mm inferred; filter unresolved cycles. Actual
+both-backend macro/near/context inspected, close cloth grid/ordinary distance
+almost unchanged.1copy; actualfarLOD2/interior+cloth+dream+heriempty/copy1+
+original1disposed; loadedreviewtime0dream/reentry/errors0.363tests.
+webgpu macro218767pix/max5,near0pix/max0,context1pix/max1,ground0pix/max0,dream0pix/max0,reentry0pix/max0; webgl macro219943pix/max6,near16pix/max1,context9pix/max1,ground473pix/max1,dream0pix/max0,reentry8pix/max1.
+24PNGs includes8explicit reusedtatami001 controls; freshGPUsourcecontextexact,
+GLresidual recorded. Source/cushion003/tatami001 hashes unchanged. SourceGPU
+firstsavefailed then healthy retry; observer deadlines inspectedsamehandle,
+actualsaved/loaded confirmed, no restart. captureError now persists reasons.
+0maps/draws/tri/TRIPO; extra shader arithmetic and phone/motion unqualified.
+Evidence:browser-study/heri-claude119.md,workflow/heri-normal-119-001-brief.json,
+parent heri-normal-119-001/native-receipt.json. Interim PNGs:heri-webgpu-macro.png
+and heri-webgl-context.png; no formal review request/additional agents/tools.
+Next existing sourceGLshelf bands diagnostic, plaster/shoji, roundedcushion/
+fabric, finalhaori/hall and integrated1080p/world/device. Full119 stillopen.
+TRIPO3200/spent0/nextOct3after09; observed120/processed118; GoalACTIVE.
+Baseline5023d5e exactWorkersSUCCESS2026-10-02T02:43:32Z; currentSHA afterpush.

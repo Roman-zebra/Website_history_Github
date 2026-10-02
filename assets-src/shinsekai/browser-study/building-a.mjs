@@ -16,6 +16,7 @@ import {connectShopDaylight} from './shop-daylight.mjs';
 import {connectShopWallWear} from './shop-wall-wear.mjs';
 import {connectShopWoodWear} from './shop-wood-wear.mjs';
 import {connectShopTatamiNormal} from './shop-tatami-normal.mjs';
+import {connectShopHeriNormal} from './shop-heri-normal.mjs';
 import {createHaoriWallContactLook} from './haori-wall-contact-look.mjs';
 import {buildHaoriWallContactNode} from './haori-wall-contact-node.mjs';
 
@@ -29,6 +30,8 @@ const clothSupport=new URLSearchParams(location.search).has('clothsupport');
 const upperCushion=new URLSearchParams(location.search).has('uppercushion');
 const tatamiGain=new URLSearchParams(location.search).has('tatami')?Number(new URLSearchParams(location.search).get('tatami')||1):null;
 if(tatamiGain!==null&&![0,1].includes(tatamiGain))throw new Error('Invalid tatami normal comparison');
+const heriGain=new URLSearchParams(location.search).has('heri')?Number(new URLSearchParams(location.search).get('heri')||1):null;
+if(heriGain!==null&&![0,1].includes(heriGain))throw new Error('Invalid heri normal comparison');
 const haoriContactGain=new URLSearchParams(location.search).has('haoricontact')?Number(new URLSearchParams(location.search).get('haoricontact')):null;
 if(haoriContactGain!==null&&(!clothSupport||![0,.6,1].includes(haoriContactGain)))throw new Error('Invalid haori wall contact comparison');
 const clothRail=clothSupport||new URLSearchParams(location.search).has('clothrail');
@@ -102,6 +105,7 @@ function render(time=performance.now()){
  canvas.dataset.wallWear=wallWear?JSON.stringify({exterior:exterior?.studyWallWear??{materials:0},interior:interior?.studyWallWear??{materials:0}}):'off';
  canvas.dataset.woodWear=woodWear?JSON.stringify({exterior:exterior?.studyWoodWear??{materials:0},interior:interior?.studyWoodWear??{materials:0}}):'off';
  canvas.dataset.tatamiNormal=tatamiGain===null?'off':interior?.studyTatamiNormal?JSON.stringify(interior.studyTatamiNormal):'empty';
+ canvas.dataset.heriNormal=heriGain===null?'off':interior?.studyHeriNormal?JSON.stringify(interior.studyHeriNormal):'empty';
  hemi.intensity=interior ? (windowLight ? .22 : .45) : .8;
  scene.environmentIntensity=interior&&windowLight ? .14 : .45;
  canvas.dataset.windowLight=windowLight?JSON.stringify({sun:[-5,9,18],target:[3,0,-4.5],interiorFill:.22,environmentIntensity:scene.environmentIntensity,shadowMap:[2048,2048],inferred:true,geometryChanged:false}):'source comparison';
@@ -131,9 +135,12 @@ function release(model){
  for(const m of materials)if(m.userData.studyOriginalWallMaterial)materials.add(m.userData.studyOriginalWallMaterial);
  for(const m of materials)if(m.userData.studyOriginalWoodMaterial)materials.add(m.userData.studyOriginalWoodMaterial);
  for(const m of materials)if(m.userData.studyOriginalTatamiMaterial)materials.add(m.userData.studyOriginalTatamiMaterial);
+ for(const m of materials)if(m.userData.studyOriginalHeriMaterial)materials.add(m.userData.studyOriginalHeriMaterial);
  const tatamiOriginals=new Set([...materials].map(m=>m.userData.studyOriginalTatamiMaterial).filter(Boolean));let tatamiCopiesDisposed=0,tatamiOriginalsDisposed=0;
- for(const m of materials){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();if(m.userData.studyOriginalTatamiMaterial)tatamiCopiesDisposed++;if(tatamiOriginals.has(m))tatamiOriginalsDisposed++;}for(const t of textures){t.dispose();t.source?.data?.close?.();}for(const g of geometries)g.dispose();
+ const heriOriginals=new Set([...materials].map(m=>m.userData.studyOriginalHeriMaterial).filter(Boolean));let heriCopiesDisposed=0,heriOriginalsDisposed=0;
+ for(const m of materials){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();if(m.userData.studyOriginalTatamiMaterial)tatamiCopiesDisposed++;if(tatamiOriginals.has(m))tatamiOriginalsDisposed++;if(m.userData.studyOriginalHeriMaterial)heriCopiesDisposed++;if(heriOriginals.has(m))heriOriginalsDisposed++;}for(const t of textures){t.dispose();t.source?.data?.close?.();}for(const g of geometries)g.dispose();
  if(model.studyTatamiNormal)canvas.dataset.tatamiNormalRetired=JSON.stringify({copiesDisposed:tatamiCopiesDisposed,originalsDisposed:tatamiOriginalsDisposed});
+ if(model.studyHeriNormal)canvas.dataset.heriNormalRetired=JSON.stringify({copiesDisposed:heriCopiesDisposed,originalsDisposed:heriOriginalsDisposed});
 }
 async function load(part){
  const loadStart=performance.now();
@@ -152,6 +159,7 @@ async function load(part){
  if(['interior','exterior-lod0'].includes(part)&&wallWear)try{gltf.studyWallWear=connectShopWallWear(gltf);}catch(error){release(gltf);throw error;}
  if(['interior','exterior-lod0'].includes(part)&&woodWear)try{gltf.studyWoodWear=connectShopWoodWear(gltf,{mode:woodWearMode});}catch(error){release(gltf);throw error;}
  if(part==='interior'&&tatamiGain!==null)try{gltf.studyTatamiNormal=connectShopTatamiNormal(gltf,{gain:tatamiGain});if(tatamiGain&&gltf.studyTatamiNormal.materials===0)throw new Error('Tatami comparison did not bind its source material');}catch(error){release(gltf);throw error;}
+ if(part==='interior'&&heriGain!==null)try{gltf.studyHeriNormal=connectShopHeriNormal(gltf,{gain:heriGain});if(heriGain&&gltf.studyHeriNormal.materials===0)throw new Error('Heri comparison did not bind its source material');}catch(error){release(gltf);throw error;}
  if(part==='interior'&&clothDetail){
   let cloth;
   try{cloth=await load(clothRail?'upper-cloth-v2-sewn-rail':clothHat?'upper-cloth-v2-sewn-hat':clothSewn?'upper-cloth-v2-sewn':clothV2?'upper-cloth-v2':'upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth,{suffix:clothV2?'_v2':''});gltf.studyCloth.normal=cloth.studyClothNormal;}
@@ -222,6 +230,7 @@ function pose(){
   'hero-upper-cushion-side':{position:[4.0,5.2,3.73],target:[3.2,5.215,3.50],lens:28},
   'hero-upper-tatami':{position:[1.15,.85,3.95],target:[.95,1.55,3.455],lens:28},
   'hero-upper-tatami-macro':{position:[.6,1.65,3.66],target:[.75,1.95,3.455],lens:35},
+  'hero-upper-heri':{position:[.75,1.92,3.57],target:[.85,2.04,3.457],lens:35},
   'hero-haori':{position:[1.42,2.22,4.50],target:[.26,2.16,4.50],lens:24},
   'hero-haori-side':{position:[.88,3.10,4.55],target:[.40,2.18,4.50],lens:28},
   'hero-haori-support':{position:[1.75,2.22,4.55],target:[.38,2.18,4.55],lens:24},
@@ -270,7 +279,7 @@ dreamCheck.addEventListener('change',request);
 for(const [id,b] of Object.entries(buttons))b.addEventListener('click',()=>{const d=drawers.get(id);if(!d)return;d.target=d.target?0:1;b.textContent=(id==='cash'?'現金引き出し':'階段収納')+(d.target?'を閉じる':'を開く');lastTime=performance.now();request();});
 capture.addEventListener('click',async()=>{
  if(capturing||disposed||document.hidden)return;
- capturing=true;canvas.dataset.capture='pending';cancel();controls.enabled=false;capture.disabled=select.disabled=glassCheck.disabled=dreamCheck.disabled=true;Object.values(buttons).forEach(b=>b.disabled=true);
+ capturing=true;canvas.dataset.capture='pending';delete canvas.dataset.captureError;cancel();controls.enabled=false;capture.disabled=select.disabled=glassCheck.disabled=dreamCheck.disabled=true;Object.values(buttons).forEach(b=>b.disabled=true);
  try{
   // Finish submitted work before capture. No render target is resized for PNG.
   await settleGPU();
@@ -280,7 +289,7 @@ capture.addEventListener('click',async()=>{
   render();await settleGPU();if(canvas.dataset.rendererError)throw new Error('GPU描画失敗のため保存を中止しました。');captureWait=encodeCanvasPng(canvas);const blob=await captureWait.promise;captureWait=null;
   if(disposed||document.hidden||!blob)throw new Error('画像の保存を完了できませんでした。');
   const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`building-a-runtime-${select.value}-${glassCheck.checked?'clear':'authored'}-${dreamCheck.checked?'dream':'base'}-1280x720.png`;link.click();canvas.dataset.capture='saved';setTimeout(()=>URL.revokeObjectURL(url),10000);
- }catch(error){canvas.dataset.capture='failed';status.textContent=error.message;}
+ }catch(error){canvas.dataset.capture='failed';canvas.dataset.captureError=error.message;status.textContent=error.message;}
  finally{
   capturing=false;captureWait=null;
   if(!disposed){controls.enabled=true;select.disabled=glassCheck.disabled=dreamCheck.disabled=false;Object.entries(buttons).forEach(([k,b])=>b.disabled=!drawers.has(k));request();}

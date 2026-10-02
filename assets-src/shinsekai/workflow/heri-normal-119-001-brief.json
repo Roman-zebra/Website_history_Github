@@ -1,0 +1,61 @@
+{
+  "round": "heri-normal-119-001",
+  "scope": "One factor: normal-only plain woven surface on upward upper M_Cloth_Heri descendants of BldgA_Interior_Structure. Preserve dark source colour/roughness0.9/maps/UV/geometry/30mm width/2mm height offset, lower floor, tatami001/cushion003/light/AA.",
+  "inputs": {
+    "interiorSHA256": "a5c102f5c499eaca29a6dede27b5bf419c8296e1752ec1c88af281dee43bd935",
+    "cushion003SHA256": "36701f8fc57e103489747408f11f0d83214e707b7c72b95d523c9e79cd8ea564",
+    "baselineCommit": "5023d5e676623115b37be2722628043126dd9464"
+  },
+  "sourceAudit": "Private heri-normal-119-001/source-audit.json:1296vertices/648triangles,136upward upper and80ground; upperY3.457000017; UV0 projected source X,Y metres, max metric mismatch0. No normal/map in exported source. Named structure is a Group; select its Mesh descendants.",
+  "design": "Inferred plain cloth warp/weft pitches1.6mm/1.2mm and height amplitudes0.08mm/0.05mm, not measured historic material. Colour/roughness/sheen untouched. No invented decorative motif. Same derivative-based unresolved-frequency fade0.2..0.45cycles/pixel as tatami001.",
+  "method": "Pinned r186 normalNode surface-gradient/unconditional UV derivatives, mask normalGeometry.y>0.9 and positionLocal.y>3; gain0 bypasses copying. Interior owns original and copy. No Blender scene mutation/export.",
+  "references": [
+    {
+      "url": "https://github.com/mrdoob/three.js/blob/r186/src/nodes/math/MathNode.js",
+      "status": "Official pinned source read in tatami001 on2026-10-02; same sin/fwidth/smoothstep operations, local exports checked"
+    },
+    {
+      "url": "https://github.com/mrdoob/three.js/blob/r186/src/nodes/accessors/Normal.js",
+      "status": "Official pinned source read in tatami001; same normalGeometry/normalView NORMAL semantics"
+    },
+    {
+      "path": "eval-building-a/hybrid/inputs/opus/build-building-a.py:174,212,426,1576,1670",
+      "status": "Source face/box/finalize/tatami area read; confirmed actual exported metric UV audit"
+    }
+  ],
+  "views": [
+    {
+      "name": "hero-upper-heri",
+      "position": [
+        0.75,
+        1.92,
+        3.57
+      ],
+      "target": [
+        0.85,
+        2.04,
+        3.457
+      ],
+      "lens": 35
+    },
+    "hero-upper-tatami",
+    "upper-corner",
+    "ground-corner regression"
+  ],
+  "checks": [
+    "source geometry/metric UV/material scope audit",
+    "source property/geometry/maps/sharing/null/invalid gain tests with actual Group hierarchy",
+    "native source/candidate macro/near/context both backends and ground regression",
+    "loaded dream/no errors/actual far empty + owned resource disposal/reentry",
+    "fullbuild and unchanged source hashes"
+  ],
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0,
+    "addedTextures": 0,
+    "addedDraws": 0,
+    "addedTriangles": 0,
+    "shaderCost": "Extra derivatives/waves; phone performance unmeasured"
+  },
+  "status": "Optional normal-only upper cloth edge study retained after actual both-backend macro/near/context inspection. Fine macro weave, filtered ordinary distance. Source colour/roughness/width/height/UV/geometry retained; art/historic/motion/mobile approval open.363tests; actualfarLOD2/interior+cloth+dream+heriempty/copy1original1disposed. Private native-receipt.json; webgpu macro218767pix/max5,near0pix/max0,context1pix/max1,ground0pix/max0,dream0pix/max0,reentry0pix/max0; webgl macro219943pix/max6,near16pix/max1,context9pix/max1,ground473pix/max1,dream0pix/max0,reentry8pix/max1"
+}
