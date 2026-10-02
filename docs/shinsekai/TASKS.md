@@ -805,3 +805,29 @@ device. Evidence:haori-light-claude119.md,workflow lighting001/contact009 briefs
 privateupperlamp native-receipt.json/contact009bake-receipt.json.Observed120/
 processed118;GoalACTIVE/TRIPO3200/spent0/nextOct3after09. Final119 complete header
 and2–3reviewPNGs deferred until all requesteditems actuallyready.
+
+
+## Claude119/120 contact009 runtime prepared —2026-10-02
+119 remains incomplete. Optionalcontactbake009 now binds only exactclothfold008;
+old003/006 preserved,nonzero006 rejected onfolds,009 rejected on003/007,
+invalid/unusedflags fail before assets. Defaultoff. Same source material family,
+maps/geometry/AA/planarmask and tested wall lifetime.369fulltests/3focused pass.
+Newlocal18782/session36546 delivers009 exactSHA605384f0/90098bytes and006
+exactSHA6241f568/90058bytes;HEADlength/type/no-store exact;privateblend/receipt/
+traversal/unknownrev403,POST405. Previousservices retained. No new nativeimage:
+existing2856 bind timeout,2857 missing;newlocalhost2859 initialstate opened,
+then directAX/DOM Debuggerunattached. Inheritedhelper referenced stale2855;
+explicit-tab-parameter helpers avoid that separate issue. Browser not killed/
+restarted. Userdisplay/operation question pending; independentfreework continues.
+Lighting001's13frames remain partial; contact009 null/front/side/context/dream/
+far/reentry BOTHbackends allpending. Not art/phone/world acceptance. Evidence:
+workflow/haori-wall-contact-119-009-runtime-001-brief.json,haori-contact-study.mjs,
+private runtime001/runtime-receipt.json/http-receipt.json/full-build.log.
+Next native gates then finalhaori/hall/upper4/integrated1080p/world/device.
+Observed120/processed118;GoalACTIVE/TRIPO3200/spent0/nextOct3after09. No formal
+review/additionalClaude/agents/tools. Prior9fc7658 exactWorkersSUCCESS06:16:37Z;
+currentSHA checked afterpush. Contactmap potential1.33MiB remainsunapprovedphone.
+
+User reply: cannot inspect Chrome now. No native status assumed. Next independent
+free task is rounded-cushion004 source audit/scoped shape preparation; all pending
+browser/native/full119 gates remain.

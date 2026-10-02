@@ -80,3 +80,6 @@ independent free work continues. Lighting001 remaining matched views and all
 historical lighting, motion, physical shadow, phone or art acceptance. Evidence:
 workflow/haori-wall-contact-119-009-runtime-001-brief.json and private matching
 runtime-receipt.json/http-receipt.json/full-build.log; bake in private009.
+
+The user replied that they cannot inspect Chrome now. Continue independent
+rounded-cushion source/shape work; this does not remove any pending native gate.

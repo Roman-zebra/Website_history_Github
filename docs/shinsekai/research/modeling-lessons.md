@@ -355,3 +355,23 @@ Contact009 uses008 geometry with retained006 finiteAO bake settings and real
 save/reopen equality; old006 cannot serve changed geometry. New map preparation
 alone is not native contact acceptance. Evidence:haori-light-claude119.md,
 workflow lighting001/contact009 briefs and private native/bake receipts.
+
+## Pair baked contacts with the geometry they actually used —2026-10-02
+009 is008's bake,006 is003's bake. Reject incompatible nonzero pairs before
+asset loading; a filename or matching512 resolution does not prove correct
+geometry. Retain the old null diagnostic and optional defaultoff behaviour.
+Explicitly allowlist the new PNG without exposing its blend/receipt/cache tree.
+Exact HTTP hashes/HEAD lengths and ownership tests validate routing/lifetime,
+not native visual acceptance.369 tests pass; all009 native views remain pending.
+
+In this CUA session an inherited helper kept naming old2855 after an apparent
+active-tab variable reassignment. Pass the current tab as an explicit function
+argument rather than rely on that helper closure. Separately, direct current
+AX/DOM reported Debugger unattached and binding timed out. Do not call all
+failures a stale helper, guess a GPU cause, restart the browser, or adopt an
+unconfirmed PNG. Ask for visible user status while pursuing independent work.
+Evidence:haori-contact-claude119.md and private009-runtime001 receipts.
+
+The user cannot inspect Chrome now. Proceed with independent source audits and
+offline asset preparation; retain every native gate, rather than wait without
+progress or treat the unavailable user observation as approval.
