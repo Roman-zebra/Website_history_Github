@@ -83,3 +83,8 @@ runtime-receipt.json/http-receipt.json/full-build.log; bake in private009.
 
 The user replied that they cannot inspect Chrome now. Continue independent
 rounded-cushion source/shape work; this does not remove any pending native gate.
+
+After rebasing the parallel5acc126 facility-search/photo update, the integrated
+build passes375 tests. Its changes are retained. The next cushion source audit
+confirms55cm/80mm/CLOTH240tri with seven samples per edge; no new cushion shape
+is yet generated or approved.

@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY120/119: user cannot inspect Chrome now; native browser4 AX/DOM Debuggerunattached/binding timeouts remain unverified external state, no kill/restart. Next independent free work: audit cabinet001/cushion003 source and existing shinsekai-glb-upper-cushion.cjs, declare rounded-outline-only cushion004 keeping80mm thickness/footprint placement/maps/materials, then generate/closed-surface-neighbour/floor/export/reopen/Blender-view checks. Preserve all source candidates and do not substitute offline views for native approval. When browser works finish lighting001 missingGPUcontrols andGLcandidate views/far/reentry, then009 contact null/gain0.6front/side/context/dream/far/reentry bothbackends. Contact009 optional runtime implemented/new18782session36546 exactPNG+private-denialHTTP/369tests;no native009images. Keep defaultoff/old006 blocked onfolds. Finishfinalhaori/hall/upperplastergrain/roundedcushion/shoji/integrated1080p/world/device;119 incomplete/Observed120processed118/GoalACTIVE/TRIPO3200spent0nextOct3after09.",
-  "updatedAt": "2026-10-02T06:40:39.801320+00:00",
+  "next": "PRIORITY120/119: user cannot inspect Chrome now; native browser4 AX/DOM Debuggerunattached/binding timeouts remain unverified external state, no kill/restart. Next independent free work: source audit complete: cabinet00109a0e26d/CLOTH240tri/55cm/80mm/7samples peredge; declare rounded-outline-only cushion004 keeping80mm thickness/footprint placement/maps/materials, then generate/closed-surface-neighbour/floor/export/reopen/Blender-view checks. Preserve all source candidates and do not substitute offline views for native approval. When browser works finish lighting001 missingGPUcontrols andGLcandidate views/far/reentry, then009 contact null/gain0.6front/side/context/dream/far/reentry bothbackends. Contact009 optional runtime implemented/new18782session36546 exactPNG+private-denialHTTP/375tests after5acc126 upstream;no native009images. Keep defaultoff/old006 blocked onfolds. Finishfinalhaori/hall/upperplastergrain/roundedcushion/shoji/integrated1080p/world/device;119 incomplete/Observed120processed118/GoalACTIVE/TRIPO3200spent0nextOct3after09.",
+  "updatedAt": "2026-10-02T06:51:03.518566+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 369,
+    "fullBuildTests": 375,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -94,7 +94,8 @@
     "upperCabinetNativeEvidence": "../research-cache/cabinet-ink-119-001/native-receipt.json",
     "upperHaoriFrontFoldNativeEvidence": "../research-cache/haori-frontfold-119-008/native-receipt.json",
     "upperHaoriLightingEvidence": "../research-cache/haori-upperlamp-119-001/native-receipt.json",
-    "upperHaoriContact009RuntimeEvidence": "../research-cache/haori-wall-contact-119-009-runtime-001/runtime-receipt.json"
+    "upperHaoriContact009RuntimeEvidence": "../research-cache/haori-wall-contact-119-009-runtime-001/runtime-receipt.json",
+    "nextCushionAudit": "../research-cache/haori-wall-contact-119-009-runtime-001/next-cushion-audit.json"
   },
   "pendingClaudeRepairs": "119 incomplete:contact009 runtime369/HTTP checks prepared,lighting001 partial and native009 pending. User cannot inspect Chrome now. Proceed independent roundedcushion004 source audit/scoped shape work,then fullhaori/hall/upper4/integrated/world/device. Observed120/processed118; no additionalreview/agents."
 }

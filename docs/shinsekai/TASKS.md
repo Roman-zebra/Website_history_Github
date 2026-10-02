@@ -831,3 +831,10 @@ currentSHA checked afterpush. Contactmap potential1.33MiB remainsunapprovedphone
 User reply: cannot inspect Chrome now. No native status assumed. Next independent
 free task is rounded-cushion004 source audit/scoped shape preparation; all pending
 browser/native/full119 gates remain.
+
+Upstream5acc126 facility-search/photo changes retained throughrebase; integrated
+full375 tests pass (pre-rebase369). Generated patch saved; only known initially
+clean generated groups restored. Next cushion source audit confirms cabinet001
+SHA09a0e26d,CLOTH240tri,55cm footprint/80mm filled height/centre3.2,5.215/yaw.4;
+seven samples peredge may limit roundness. Source unchanged; geometry revision
+not yet generated or qualified. Evidence:private runtime001/next-cushion-audit.json.
