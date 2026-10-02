@@ -302,6 +302,12 @@ body.roaming .panel:not(.open){transform:translateY(100%)}
   padding:11px 14px;cursor:pointer;border-bottom:1px solid var(--ink-2)}
 .q-item:hover{background:var(--ink-2)}
 .q-item b{display:block;font-size:15px}
+.p-exterior{padding:14px 0;border-bottom:1px solid #d9ded5}
+.p-exterior h3{font-size:14px;margin:0 0 10px}
+.p-exterior-links{display:flex;flex-wrap:wrap;gap:8px}
+.p-exterior-links a{padding:10px 12px;min-height:44px;display:flex;align-items:center;border:1px solid #bdc9bc;border-radius:8px;background:#edf3ee;color:#2c4352;font-size:13px;text-decoration:none}
+.p-exterior-links a:hover,.p-exterior-links a:focus-visible{background:#dbe8db;outline:2px solid #52775b;outline-offset:2px}
+.p-exterior .p-srcnote{margin:10px 0 0}
 .q-item span{display:block;font-size:11px;color:#7d776c;margin-top:2px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .q-none{padding:14px;color:#7d776c;font-size:13px}

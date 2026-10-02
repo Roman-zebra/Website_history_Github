@@ -2351,6 +2351,32 @@ function paintPanelPhoto(o){
     } else cap.textContent = o.cap || '';
     fig.hidden = false;
   } else { fig.hidden = true; img.removeAttribute('src'); img.alt = ''; }
+  const exterior=$('pExterior');
+  if(exterior&&o.img&&!o.img.startsWith(GSI+'/'))fig.after(exterior);
+}
+let exteriorPhotoRequest=null;
+function paintExteriorLinks(o){
+  exteriorPhotoRequest?.abort();exteriorPhotoRequest=null;
+  let section=$('pExterior');
+  if(!section){section=document.createElement('section');section.id='pExterior';section.className='p-exterior';}
+  if(o.img?.startsWith(GSI+'/'))$('pFig').before(section);else $('pFig').after(section);
+  section.replaceChildren();section.hidden=!o.at;
+  if(!o.at)return;
+  const heading=document.createElement('h3');heading.textContent=searchText('See the place from the street','外観・現地の写真','외관・현장 사진','外观与实地照片','外觀與現地照片');section.appendChild(heading);
+  const urls=PlaceMedia.links(o.searchName||o.name,o.at,o.address),nav=document.createElement('div');nav.className='p-exterior-links';
+  for(const [key,label] of [['maps',searchText('Photos on Google Maps ↗','Googleマップの店舗・写真 ↗','Google 지도 사진 ↗','Google地图的店铺与照片 ↗','Google地圖的店家與照片 ↗')],['street',searchText('Street View ↗','ストリートビュー ↗','스트리트 뷰 ↗','街景 ↗','街景 ↗')],['images',searchText('Find exterior photos ↗','外観写真を検索 ↗','외관 사진 검색 ↗','搜索外观照片 ↗','搜尋外觀照片 ↗')]]){
+    const a=document.createElement('a');a.href=urls[key];a.textContent=label;a.target='_blank';a.rel='noopener noreferrer';nav.appendChild(a);
+  }
+  section.appendChild(nav);
+  const note=document.createElement('p');note.className='p-srcnote';note.textContent=searchText('Google opens in another tab. Check the name and address; photos and Street View may be unavailable or older.','Googleを別タブで開きます。店名・住所を確認してください。写真や街景がない場合や、過去の撮影の場合があります。','Google은 새 탭으로 열립니다. 이름과 주소를 확인하세요. 사진이나 거리뷰가 없거나 오래되었을 수 있습니다.','Google在新标签页打开。请核对店名和地址，照片或街景可能缺失或较旧。','Google在新分頁開啟。請核對店名和地址，照片或街景可能缺少或較舊。');section.appendChild(note);
+}
+function loadExteriorPhoto(p){
+  exteriorPhotoRequest?.abort();const controller=new AbortController();exteriorPhotoRequest=controller;
+  const token=panelToken;
+  const timer=setTimeout(()=>controller.abort(),10000);
+  PlaceMedia.photoForPlace(p,controller.signal).then(photo=>{
+    if(photo&&token===panelToken&&!controller.signal.aborted)paintPanelPhoto({...photo,name:p.name});
+  }).catch(()=>{}).finally(()=>clearTimeout(timer));
 }
 function panelShell(o){
   window.AtlasWalking?.clear();
@@ -2373,6 +2399,7 @@ function panelShell(o){
   $('pNoOld').hidden = true;
   $('pNoOld').textContent = '';
   paintPanelPhoto(o);
+  paintExteriorLinks(o);
 
   $('pWord').innerHTML = o.kicker
     ? '<span class="w-jp">' + o.kicker.emoji + '</span><span class="w-txt"><b>'
@@ -2400,7 +2427,7 @@ function panelShell(o){
   const g = $('pGmap');
   if (o.at){
     g.hidden = false;
-    g.href = 'https://www.google.com/maps/search/?api=1&query=' + o.at[0] + ',' + o.at[1];
+    g.href = PlaceMedia.links(o.searchName || o.name, o.at, o.address).maps;
     g.textContent = '📍 ' + t('gmap');
   } else g.hidden = true;
 
@@ -2643,6 +2670,7 @@ function showLocal(p,refresh=false){
   /* 13,653 local spots name their own Wikipedia article. Its lead picture (free images only) shows the
      place better than the aerial tile, which stays for the rest. Late answers for another panel are dropped. */
   const wt = wl && wikiTagParse(tg.wikipedia);
+  if(!wt&&(tg.wikimedia_commons?.startsWith('File:')||tg.name))loadExteriorPhoto({name:tg['name:ja']||tg.name,lat:p.lat,lon:p.lon,file:tg.wikimedia_commons?.startsWith('File:')?tg.wikimedia_commons:''});
   if (wt){
     const token = panelToken;
     wikiExtractByTitle(wt.title, wt.lang).then(pg => {
@@ -2821,7 +2849,7 @@ $('q').addEventListener('keydown', e => {
   if (e.key !== 'Enter') return;
   e.preventDefault();                       // フォーム送信やページ再読込を止める
   const box = $('qResults');
-  if(nationalHits.length&&nationalQuery===$('q').value.trim()){frameNationalHits();box.hidden=true;return;}
+  if(nationalHits.length&&nationalQuery===$('q').value.trim()&&localPOIStatus==='done'){frameNationalHits();box.hidden=true;return;}
   const v = $('q').value.trim();
   if (!v) return;
   clearTimeout(qTimer);
@@ -2831,6 +2859,8 @@ $('q').addEventListener('keydown', e => {
    古い返事が届いて結果が勝手に開き直る（[hidden] が効くようになった今は本当に再表示される）。 */
 let qSeq = 0;
 function dismissSearchResults(){
+  localPOIRequest?.abort();localPOISeq++;
+  if(localPOIStatus==='loading')localPOIStatus='';
   clearTimeout(qTimer);
   ++qSeq;                         // Ignore results from a search already in progress.
   nationalSeq = 0;
@@ -2965,6 +2995,7 @@ function openNational(row){
 
 /* Nationwide results: every match is painted on one canvas, with a keyboard list. */
 let nationalWorker=null,nationalHits=[],nationalLayer=null,nationalQuery='',nationalSeq=0,nationalAllHits=[],nationalScope='all';
+let localPOIRequest=null,localPOIRows=[],localPOIStatus='',localPOILimited=false,localPOIScope='all',localPOISeq=0,storedSearchRows=[],storedSearchReady=false;
 const searchText=(en,ja,ko,cn,tw)=>PlaceUI.pick([en,ja,ko,cn,tw],LANG);
 
 const searchChoices=[
@@ -2973,7 +3004,8 @@ const searchChoices=[
  ['🚂','Abandoned railway','廃線跡','폐선','废弃铁路','廢棄鐵路'],['🕰️','Old town','古い町並み','옛 거리','老街','老街'],['🏭','Industrial heritage','産業遺産','산업유산','工业遗产','工業遺產'],['🚪','Liminal','リミナル','liminal','阈限','閾限'],
  ['🎿','Ski','スキー','스키','滑雪','滑雪'],['🌳','Parks','公園','공원','公園','公園'],['🌿','Gardens','庭園','정원','庭园','庭園'],['⛰️','Hiking','登山','등산','爬山','爬山'],
  ['🏖️','Beaches','海岸','해변','海滩','海灘'],['🕳️','Caves','洞窟','동굴','洞窟','洞窟'],['🦁','Zoos','動物園','동물원','动物园','動物園'],['🐠','Aquariums','水族館','아쿠아리움','水族馆','水族館'],
- ['🎡','Theme park','遊園地','놀이공원','游乐园','遊樂園'],['🚉','Stations','駅','기차역','车站','車站'],['✈️','Airports','空港','공항','机场','機場'],['☕','Cafes','カフェ','카페','咖啡','咖啡']
+ ['🎡','Theme park','遊園地','놀이공원','游乐园','遊樂園'],['🚉','Stations','駅','기차역','车站','車站'],['✈️','Airports','空港','공항','机场','機場'],['☕','Cafes','カフェ','카페','咖啡','咖啡'],
+ ['🍜','Ramen','ラーメン','라멘','拉面','拉麵'],['💊','Pharmacies','薬局','약국','药店','藥局'],['🛒','Convenience stores','コンビニ','편의점','便利店','便利商店']
 ];
 function showSearchSuggestions(){
  const box=$('qResults');box.replaceChildren();box.hidden=false;
@@ -2987,9 +3019,12 @@ function setSearchScope(scope){
  nationalScope=scope;nationalHits=scope==='view'&&map?hitsInBounds(nationalAllHits,map.getBounds()):nationalAllHits;
  searchSummary();paintSearchList();
  if(scope==='all'||nationalHits.length===1)frameNationalHits();else paintNationalHits();
+ if(nationalQuery)searchLocalFacilities(nationalQuery,scope,qSeq);
 }
 
 function clearNationalSearch(){
+ localPOIRequest?.abort();localPOIRequest=null;localPOIRows=[];storedSearchRows=[];localPOIStatus='';localPOILimited=false;localPOISeq++;
+ map?.attributionControl?.removeAttribution('<a href="https://openpoiapi.com/attribution.html" target="_blank" rel="noopener">OpenPOI API · Sources / licences</a>');
  nationalSeq=0;nationalHits=[];nationalAllHits=[];nationalScope='all';nationalQuery='';nationalWorker?.postMessage({type:'cancel'});
  if(map&&nationalLayer){map.removeLayer(nationalLayer);nationalLayer=null;}
  document.getElementById('qSummary')?.remove();
@@ -3015,9 +3050,11 @@ function paintNationalHits(){
 }
 function openSearchHit(row){
  if (!JapanBoundary.contains(row.lat,row.lon)) return;
+ localPOIRequest?.abort();if(localPOIStatus==='loading')localPOIStatus='';
  ++qSeq;nationalSeq=0;$('qResults').hidden=true;$('q').blur();
  if(!map||$('place').hidden)noPush(openMap);
  map.setView([row.lat,row.lon],17);
+ if(row.kind==='openpoi'){showOpenPOI(row);return;}
  if(row.kind==='monument'){openMonument(row.id);return;}
  if(row.facilityTags){showLocal({lat:row.lat,lon:row.lon,tags:row.facilityTags});return;}
  showSavedSpot(row);
@@ -3040,6 +3077,7 @@ function showBroadSearch(data){
  all.textContent=searchText('Search all of Japan','全国を検索する','일본 전국 검색','搜索全日本','搜尋全日本');
  all.onclick=()=>runSearch(q,false,true);
  box.append(note,all);
+ paintLocalSearchControls(box);
 }
 function searchSummary(){
  let el=document.getElementById('qSummary');
@@ -3055,13 +3093,55 @@ function paintSearchList(limit=30){
  count.textContent=searchText('Show all matches on the map','一致した全地点を地図で見る','전체 결과를 지도에서 보기','在地图显示全部结果','在地圖顯示全部結果')+' ('+nationalHits.length.toLocaleString()+')';
  count.onclick=()=>{frameNationalHits();box.hidden=true;};box.appendChild(count);
  for(const row of nationalHits.slice(0,limit)){const btn=document.createElement('button');btn.type='button';btn.className='q-item';
-  const name=document.createElement('b');name.textContent=row.name;btn.appendChild(name);btn.onclick=()=>openSearchHit(row);box.appendChild(btn);}
+  const name=document.createElement('b');name.textContent=row.name;btn.appendChild(name);
+  if(row.address||row.kind==='openpoi'){const sub=document.createElement('span');sub.textContent=[row.address,row.kind==='openpoi'?'OpenPOI · '+(row.category||''):null].filter(Boolean).join(' · ');btn.appendChild(sub);}
+  btn.onclick=()=>openSearchHit(row);box.appendChild(btn);}
  if(nationalHits.length>limit){const more=document.createElement('button');more.type='button';more.className='q-item';more.textContent=searchText('Show more','もっと見る','더 보기','显示更多','顯示更多');more.onclick=()=>paintSearchList(limit+30);box.appendChild(more);}
  if(!nationalHits.length){const p=document.createElement('p');p.className='q-none';p.textContent=nationalScope==='view'?searchText('No matches here. Move the map or choose All Japan.','この範囲には該当地点がありません。地図を広げるか「全国」を選んでください。','이 지역에는 결과가 없습니다. 지도를 넓히거나 일본 전국을 선택하세요.','此区域没有结果，请扩大地图或选择全日本。','此範圍沒有結果，請擴大地圖或選擇全日本。'):searchText('No matching places in this map’s data.','この地図の収録データには該当地点がありません。','이 지도에 수록된 일치 장소가 없습니다.','本地图收录的数据中没有匹配地点。','本地圖收錄的資料中沒有符合地點。');box.appendChild(p);}
  const link=document.createElement('a');link.className='q-item';link.target='_blank';link.rel='noopener noreferrer';
  link.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(nationalQuery+' Japan');link.textContent=searchText('Search Google Maps ↗','Googleマップでも探す ↗','Google 지도에서 검색 ↗','在Google地图搜索 ↗','在Google地圖搜尋 ↗');box.appendChild(link);
+ paintLocalSearchControls(box);
+}
+function paintLocalSearchControls(box){
+ const button=document.createElement('button');button.type='button';button.className='q-item';button.disabled=localPOIStatus==='loading';
+ button.textContent=localPOIStatus==='loading'?searchText('Searching local facilities…','小さな店舗・施設を検索中…','소규모 시설 검색 중…','正在搜索小型设施…','正在搜尋小型設施…'):searchText('Search shops and small facilities','小さな店舗・施設も探す','작은 가게와 시설도 검색','也搜索小店和设施','也搜尋小店與設施');
+ button.onclick=()=>searchLocalFacilities(nationalQuery,nationalScope,qSeq);box.appendChild(button);
+ if(localPOIStatus){const note=document.createElement('p');note.className='q-help';note.setAttribute('role','status');
+  note.textContent=localPOIStatus==='error'?searchText('Local facility search is unavailable. The saved map results remain available. Try again.','店舗・施設検索に接続できませんでした。収録済みの結果は利用できます。再試行してください。','시설 검색에 연결할 수 없습니다. 기존 결과는 이용할 수 있습니다. 다시 시도하세요.','设施搜索暂时无法连接，已有结果仍可使用。请重试。','設施搜尋暫時無法連線，已有結果仍可使用。請重試。'):localPOIStatus==='done'?(localPOILimited?searchText('Only the leading facility matches are shown. Search this area to narrow the results.','施設は上位の候補を表示しています。「この範囲で探す」で絞れます。','시설은 상위 후보만 표시합니다. 이 지역 검색으로 좁히세요.','设施仅显示排名靠前的候选，请搜索此区域缩小范围。','設施僅顯示排名靠前的候選，請搜尋此範圍縮小範圍。'):searchText('Local facility search: ','店舗・施設検索：','시설 검색: ','设施搜索：','設施搜尋：')+localPOIRows.length+' '+searchText('places','件','곳','处','處')):'';
+  if(note.textContent)box.appendChild(note);
+ }
+ if(localPOIRows.length){const credit=document.createElement('a');credit.className='q-help';credit.href=PlaceMedia.attribution;credit.target='_blank';credit.rel='noopener';credit.textContent='OpenPOI API · '+searchText('Sources and licences','出典・ライセンス','출처・라이선스','来源与许可','來源與授權');box.appendChild(credit);}
+}
+async function searchLocalFacilities(query,scope,seq){
+ localPOIRequest?.abort();const controller=new AbortController();localPOIRequest=controller;
+ const mine=++localPOISeq;localPOIStatus='loading';localPOIScope=scope;localPOIRows=[];localPOILimited=false;
+ const choice=searchChoices.find(r=>r.slice(1).some(x=>qnorm(x)===qnorm(query)));
+ const b=scope==='view'&&map?map.getBounds():null,bounds=b?{west:b.getWest(),south:b.getSouth(),east:b.getEast(),north:b.getNorth()}:null;
+ const timer=setTimeout(()=>controller.abort(),10000);paintSearchList();
+ try{
+  const result=await PlaceMedia.search(choice?choice[2]:query,bounds,(lat,lon)=>JapanBoundary.contains(lat,lon),controller.signal,undefined,!!choice);
+  if(seq!==qSeq||mine!==localPOISeq||nationalQuery!==query)return;
+  localPOIRows=result.rows;localPOILimited=result.limited;localPOIStatus='done';
+  if(localPOIRows.length)map?.attributionControl?.addAttribution('<a href="https://openpoiapi.com/attribution.html" target="_blank" rel="noopener">OpenPOI API · Sources / licences</a>');
+ }catch{if(seq!==qSeq||mine!==localPOISeq)return;localPOIStatus='error';}
+ finally{clearTimeout(timer);}
+ if(seq!==qSeq||mine!==localPOISeq)return;
+ nationalAllHits=PlaceMedia.merge(storedSearchRows,scope==='all'?localPOIRows:[]);
+ nationalHits=scope==='view'&&map?PlaceMedia.merge(hitsInBounds(storedSearchRows,map.getBounds()),localPOIRows):nationalAllHits;
+ searchSummary();paintSearchList();
+ if(scope==='all'&&storedSearchReady&&localPOIStatus==='done')frameNationalHits();else paintNationalHits();
+}
+function showOpenPOI(row){
+ lastPanel=()=>showOpenPOI(row);current=null;
+ panelShell({name:row.name,searchName:row.name,address:row.address,at:[row.lat,row.lon],
+  kicker:{emoji:'📍',label:searchText('Local facility','店舗・施設','지역 시설','店铺与设施','店家與設施'),note:'  '+row.category},
+  bodyHTML:'<p>'+esc(row.address||'')+'</p><p class="p-srcnote">'+esc(searchText('Check opening hours and current business details on the official page or Google Maps.','営業時間・営業状況は公式ページやGoogleマップで確認してください。','영업 시간과 영업 여부는 공식 페이지나 Google 지도에서 확인하세요.','请在官网或Google地图核实营业时间与状态。','請在官網或Google地圖核實營業時間與狀態。'))+'</p>'+(row.level!==''&&row.level!=null&&Number(row.level)<8?'<p class="p-srcnote">'+esc(searchText('Approximate location; check the address.','概略位置です。住所を確認してください。','대략적인 위치입니다. 주소를 확인하세요.','位置为大致定位，请核对地址。','位置為大致定位，請核對地址。'))+'</p>':'')+'<p class="p-srcnote"><a href="'+PlaceMedia.attribution+'" target="_blank" rel="noopener">OpenPOI API · '+esc(searchText('Sources and licences','出典・ライセンス','출처・라이선스','来源与许可','來源與授權'))+'</a></p>',
+  img:airPhoto(row.lat,row.lon),cap:t('photoAir'),share:{title:row.name,url:location.href},
+  src:row.attributions.join(' · ')+' · '+row.licenses.join(', ')});
+ if(row.level==null||row.level===''||Number(row.level)>=8)loadExteriorPhoto(row);
 }
 async function runSearch(v,autoPick,explicit){
+ localPOIRequest?.abort();localPOISeq++;localPOIRows=[];storedSearchRows=[];storedSearchReady=false;localPOIStatus='';localPOILimited=false;localPOIScope='all';
  const mine=++qSeq;nationalSeq=mine;nationalQuery=v;
  const box=$('qResults');box.hidden=false;box.innerHTML='<div class="q-none" role="status"></div>';
  const loading=searchText('Searching places across Japan…','全国の地点を検索しています…','일본 전국의 장소를 검색 중…','正在搜索日本各地…','正在搜尋日本各地…');box.firstChild.textContent=loading;
@@ -3071,12 +3151,17 @@ async function runSearch(v,autoPick,explicit){
     if(data.seq!==qSeq||data.seq!==nationalSeq)return;if(data.type==='broad'){showBroadSearch(data);return;}
     if(data.type==='progress'){const status=box.querySelector('[role="status"]');if(status)status.textContent=loading+' '+Math.round(100*data.done/data.total)+'%';return;}
     if(data.type==='error'){box.innerHTML='<div class="q-none" role="status"></div>';box.firstChild.textContent=searchText('Some regions could not load. Please search again.','一部地域を読み込めませんでした。もう一度検索してください。','일부 지역을 불러오지 못했습니다. 다시 검색하세요.','部分地区加载失败，请重试。','部分地區載入失敗，請重試。');return;}
-    nationalAllHits=data.rows.filter(row => JapanBoundary.contains(row.lat,row.lon));
-    nationalScope='all';nationalHits=nationalAllHits;searchSummary();paintSearchList();frameNationalHits();
+    storedSearchReady=true;storedSearchRows=data.rows.filter(row => JapanBoundary.contains(row.lat,row.lon));
+    nationalAllHits=PlaceMedia.merge(storedSearchRows,localPOIScope==='all'?localPOIRows:[]);
+    nationalScope=localPOIScope;
+    nationalHits=nationalScope==='view'&&map?PlaceMedia.merge(hitsInBounds(storedSearchRows,map.getBounds()),localPOIRows):nationalAllHits;
+    searchSummary();paintSearchList();
+    if(localPOIStatus!=='loading'&&nationalScope==='all')frameNationalHits();else paintNationalHits();
    };
    nationalWorker.onerror=()=>{if(nationalSeq===qSeq){box.innerHTML='<div class="q-none">'+esc(searchText('Search could not load. Reload to try again.','検索を読み込めませんでした。再読み込みしてください。','검색을 불러오지 못했습니다. 새로고침하세요.','搜索加载失败，请刷新。','搜尋載入失敗，請重新整理。'))+'</div>';}nationalWorker.terminate();nationalWorker=null;};
   }
   nationalWorker.postMessage({type:'search',seq:mine,query:v,lang:LANG,dataV:DATA_V,auto:!autoPick&&!explicit});
+  if(autoPick||explicit)searchLocalFacilities(v,'all',mine);
  }catch{box.innerHTML='<div class="q-none">'+esc(t('noResults'))+'</div>';}
 }
 
@@ -3335,6 +3420,7 @@ $('mLab').onclick = () => setMode('lab');
 /* Close for good, not just collapse. Without this the sheet sat over the map
    with no way to dismiss it, so the markers underneath were unreachable. */
 function closePanel(){
+  exteriorPhotoRequest?.abort();
   const pn = $('panel');
   pn.classList.remove('open');
   pn.classList.add('closed');
@@ -3414,7 +3500,7 @@ const AUX_UI = {
  copy:['Copy link','リンクをコピー','링크 복사','复制链接','複製連結'],
  manual:['Select and copy this link','リンクを選択してコピー','링크를 선택해 복사하세요','请选择并复制链接','請選取並複製連結'],
  close:['Close','閉じる','닫기','关闭','關閉'],
- search:['Place or category: onsen, castle…','地名・温泉・城・神社など','장소·키워드 (스키, 사찰 등)','地点或关键词：滑雪、寺院等','地點或關鍵字：滑雪、寺院等']
+ search:['Place, shop, address or category','地名・店名・住所・カフェなど','장소・가게・주소・카테고리','地点、店名、地址或类别','地點、店名、地址或類別']
 };
 const uiText = key => PlaceUI.pick(AUX_UI[key], LANG);
 function paintAuxUI(){
@@ -3468,7 +3554,7 @@ function restoreSharedSpot(){
 }
 window.addEventListener('storage',e=>{if(e.key===SAVE_KEY||e.key===null){renderSaved();paintSaveBtn();}});
 $('qResults').addEventListener('keydown',e=>{
-  if(e.key==='Escape'){++qSeq;$('qResults').hidden=true;$('q').focus();return;}
+  if(e.key==='Escape'){dismissSearchResults();$('q').focus();return;}
   if(!['ArrowDown','ArrowUp'].includes(e.key))return;
   const buttons=[...$('qResults').querySelectorAll('button')],i=buttons.indexOf(document.activeElement);
   if(i<0)return;e.preventDefault();const next=i+(e.key==='ArrowDown'?1:-1);
