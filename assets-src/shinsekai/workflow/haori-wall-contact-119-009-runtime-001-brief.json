@@ -1,0 +1,11 @@
+{
+ "round":"haori-wall-contact-119-009-runtime-001","handoff":119,
+ "scope":"One factor: optional static wall-contact map009 on exact clothfold008. Same source geometry/maps/AA/daylight/upperlamp1/exposure/GTAO; compare noflag versus gain0 then gain0 versus0.6. Keep original006/cloth003 and old-mismatch rejection. No default adoption before native qualification.",
+ "inputs":{"cloth008":"c3623f6a06c0e068d834c7adef26c3c33b59f19b949a956d6f6a75788a83aade","contact009":"605384f047d748dbf3652e562efe6a3a364b6a9177b0ac30524f1a17e5bf297a"},
+ "method":"Existing r186 TextureLoader and physical/standard node material copy plus already-tested wall helper. Noncolour512/flipYtrue; same finite planar UV mask. Only new map-revision pairing and exact allowlisted local PNG route; no new renderer or shader API. Reuse pinned source/ownership checks from006 and actual009 Blender receipt.",
+ "coordinates":"Metres, BlenderZup receiverX.18/Y1..3.4/Z3.35..5.55; browser(X,Z,-Y), unchanged006 planar mapping.",
+ "checks":"Pure revision contract prevents nonzero006 on007/008,009 on003/007, unsupported revisions/gains and unused bake flag. Existing ownership/dream/far/copy/map disposal tests remain. Fresh local endpoint must return exact009 SHA/90098bytes and reject privateblend/receipt/traversal. Native noflag/gain0 fidelity/front/side/context,contact0.6 comparisons,dream/far/reentry BOTH backends/fullbuild required. Missing native lighting001 views remain pending and must not be silently qualified.",
+ "cost":{"TRIPO":0,"newTools":0,"addedMapsWhenEnabled":1,"estimatedMiBWithMips":1.333333,"addedDraws":0,"addedGeometry":0},
+ "status":"Declared before runtime mutation; browser binding/observers currently unavailable. Complete useful optional implementation and checks without claiming images,physical shadows,phone,art or119 completion.",
+ "outcome":"Optional pairing/route implemented,369fulltests/3focused pass. New18782 exact009/006PNG GET/HEAD hashes/lengths verified; privateblend/receipt/traversal/unknownrev denied. No new native scene capture, currentAX/DOM Debuggerunattached; all native009 gates pending. Lighting001 partial matrix remains pending. Userdisplaystatus question pending; no browser kill/restart. No asset/material/shader revisions beyond declared map pairing."
+}

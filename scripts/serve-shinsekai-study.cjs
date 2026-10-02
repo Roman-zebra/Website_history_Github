@@ -20,8 +20,7 @@ const hallContactReview=path.resolve(root,'../research-cache/hall-contact-119-01
 const hallContactPath='/study/hall-contact-119-010/floor-contact.png';
 const haoriSupportReview=path.resolve(root,'../research-cache/haori-support-119-003');
 const haoriSupportPath='/study/haori-support-119-003/upper-cloth-support.glb';
-const haoriContactReview=path.resolve(root,'../research-cache/haori-wall-contact-119-006');
-const haoriContactPath='/study/haori-wall-contact-119-006/wall-contact.png';
+const haoriContactReviews=new Map(['006','009'].map(rev=>[`/study/haori-wall-contact-119-${rev}/wall-contact.png`,path.resolve(root,`../research-cache/haori-wall-contact-119-${rev}`)]));
 const cushionReview=path.resolve(root,'../research-cache/upper-cushion-119-003');
 const cushionPath='/study/upper-cushion-119-003/interior-cushion.glb';
 const cabinetReview=path.resolve(root,'../research-cache/cabinet-ink-119-001');
@@ -61,7 +60,7 @@ const server = http.createServer((request, response) => {
   const hallStreamAllowed=hallStreamNames.has(hallStreamName);
   const hallContactAllowed=pathname===hallContactPath;
   const haoriSupportAllowed=pathname===haoriSupportPath;
-  const haoriContactAllowed=pathname===haoriContactPath;
+  const haoriContactAllowed=haoriContactReviews.has(pathname);
   const cushionAllowed=pathname===cushionPath;
   const cabinetAllowed=pathname===cabinetPath;
   const haoriFoldAllowed=haoriFoldReviews.has(pathname);
@@ -71,7 +70,7 @@ const server = http.createServer((request, response) => {
   const mobileName=pathname.startsWith('/study/tower-mobile-115/')?pathname.slice('/study/tower-mobile-115/'.length):null;
   const mobileAllowed=towerMobileNames.has(mobileName);
   const reviewName=reviewPrefix?pathname.slice(('/study/tower-base-'+reviewPrefix+'/').length):null;
-  const reviewRoot=haoriFoldAllowed?haoriFoldReviews.get(pathname):cabinetAllowed?cabinetReview:cushionAllowed?cushionReview:haoriContactAllowed?haoriContactReview:haoriSupportAllowed?haoriSupportReview:hallContactAllowed?hallContactReview:hallStreamAllowed?hallStreamReview:mobileAllowed?towerMobileReview:tripoMobileAllowed?tripoMobileReview:tripoAllowed?tripoReview:liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
+  const reviewRoot=haoriFoldAllowed?haoriFoldReviews.get(pathname):cabinetAllowed?cabinetReview:cushionAllowed?cushionReview:haoriContactAllowed?haoriContactReviews.get(pathname):haoriSupportAllowed?haoriSupportReview:hallContactAllowed?hallContactReview:hallStreamAllowed?hallStreamReview:mobileAllowed?towerMobileReview:tripoMobileAllowed?tripoMobileReview:tripoAllowed?tripoReview:liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
   const reviewAllowed=haoriFoldAllowed||cabinetAllowed||cushionAllowed||haoriContactAllowed||haoriSupportAllowed||hallContactAllowed||hallStreamAllowed||mobileAllowed||tripoMobileAllowed||tripoAllowed||liftAllowed||hallAllowed||cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
   const file = reviewAllowed?path.resolve(reviewRoot,haoriFoldAllowed?'upper-cloth-support.glb':cabinetAllowed?'interior-cabinet.glb':cushionAllowed?'interior-cushion.glb':haoriContactAllowed?'wall-contact.png':haoriSupportAllowed?'upper-cloth-support.glb':hallContactAllowed?'floor-contact.png':hallStreamAllowed?hallStreamName:mobileAllowed?mobileName:tripoMobileAllowed?tripoMobileName:tripoAllowed?tripoName:liftAllowed?liftName:hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
   // Check the resolved path as well as the URL, including encoded traversal.

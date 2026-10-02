@@ -1,4 +1,17 @@
 const test=require('node:test'),assert=require('node:assert/strict');
+test('haori bake selection preserves source comparison and pairs009 only with008 geometry',async()=>{
+ const {resolveHaoriContactStudy:resolve}=await import('../assets-src/shinsekai/browser-study/haori-contact-study.mjs');
+ assert.equal(resolve(),null);assert.equal(resolve({support:true,foldRevision:'008'}),null);
+ for(const gain of [0,.6,1]){
+  assert.deepEqual(resolve({support:true,gain}),{gain,bakeRevision:'006',geometryRevision:'003',path:'/study/haori-wall-contact-119-006/wall-contact.png'});
+  assert.deepEqual(resolve({support:true,gain,foldRevision:'008',bakeRevision:'009'}),{gain,bakeRevision:'009',geometryRevision:'008',path:'/study/haori-wall-contact-119-009/wall-contact.png'});
+ }
+ assert.equal(resolve({support:true,gain:0,foldRevision:'008'}).bakeRevision,'006');
+ for(const foldRevision of ['007','008'])for(const gain of [.6,1])assert.throws(()=>resolve({support:true,gain,foldRevision}),/matching contact bake/);
+ for(const foldRevision of [null,'007'])for(const gain of [0,.6,1])assert.throws(()=>resolve({support:true,gain,foldRevision,bakeRevision:'009'}),/exact front fold008/);
+ for(const gain of [-1,.3,NaN,Infinity])assert.throws(()=>resolve({support:true,gain}));
+ assert.throws(()=>resolve({gain:.6}));assert.throws(()=>resolve({support:true,gain:.6,bakeRevision:'010'}));assert.throws(()=>resolve({bakeRevision:'009'}));
+});
 async function fixture(gain=.6,fail=false){
  const {createHaoriWallContactLook}=await import('../assets-src/shinsekai/browser-study/haori-wall-contact-look.mjs');
  let maps=0,copies=0;const map={isTexture:true,image:{width:512,height:512},colorSpace:'',flipY:true,dispose(){maps++;}},grain={},normal={},plaster={name:'M_Plaster_Int',map:grain,normalMap:normal,colorNode:{wear:true}},other={},original=[plaster,other],geometry={},wall={isMesh:true,material:original,geometry,traverse(fn){fn(this);}},model={scene:{getObjectByName(name){return name==='BldgA_LOD0_sideL'?wall:null;}}};

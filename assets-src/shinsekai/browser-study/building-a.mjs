@@ -19,6 +19,7 @@ import {connectShopTatamiNormal} from './shop-tatami-normal.mjs';
 import {connectShopHeriNormal} from './shop-heri-normal.mjs';
 import {createHaoriWallContactLook} from './haori-wall-contact-look.mjs';
 import {buildHaoriWallContactNode} from './haori-wall-contact-node.mjs';
+import {resolveHaoriContactStudy} from './haori-contact-study.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
@@ -41,8 +42,7 @@ if(heriGain!==null&&![0,1].includes(heriGain))throw new Error('Invalid heri norm
 const sunShadowGain=new URLSearchParams(location.search).has('sunshadow')?Number(new URLSearchParams(location.search).get('sunshadow')):1;
 if(![0,1].includes(sunShadowGain))throw new Error('Invalid sun shadow comparison');
 const haoriContactGain=new URLSearchParams(location.search).has('haoricontact')?Number(new URLSearchParams(location.search).get('haoricontact')):null;
-if(haoriContactGain!==null&&(!clothSupport||![0,.6,1].includes(haoriContactGain)))throw new Error('Invalid haori wall contact comparison');
-if(clothFold&&haoriContactGain)throw new Error('Front fold geometry needs a new contact bake; retain old source comparison separately');
+const haoriContactStudy=resolveHaoriContactStudy({gain:haoriContactGain,support:clothSupport,foldRevision:clothFoldRevision,bakeRevision:new URLSearchParams(location.search).get('contactbake')});
 const clothRail=clothSupport||new URLSearchParams(location.search).has('clothrail');
 const clothHat=clothRail||new URLSearchParams(location.search).has('clothhat');
 const clothSewn=clothHat||new URLSearchParams(location.search).has('clothsewn');
@@ -111,7 +111,7 @@ function render(time=performance.now()){
  if(interior?.studyHaoriContact){
   if(currentLOD===0&&exterior)interior.studyHaoriContact.bind(exterior);
   interior.studyHaoriContact.setEnabled(currentLOD===0&&!dreamCheck.checked);
-  canvas.dataset.haoriContact=JSON.stringify(interior.studyHaoriContact.stats);
+  canvas.dataset.haoriContact=JSON.stringify({...interior.studyHaoriContact.stats,bakeRevision:haoriContactStudy.bakeRevision,geometryRevision:haoriContactStudy.geometryRevision});
  }else canvas.dataset.haoriContact='empty';
  canvas.dataset.daylight=interior?.studyDaylight?JSON.stringify(interior.studyDaylight.apply(!dreamCheck.checked)):'off';
  canvas.dataset.wallWear=wallWear?JSON.stringify({exterior:exterior?.studyWallWear??{materials:0},interior:interior?.studyWallWear??{materials:0}}):'off';
@@ -181,7 +181,7 @@ async function load(part){
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);
  if(part==='interior'&&haoriContactGain!==null){
   let map;try{
-   map=await new THREE.TextureLoader().loadAsync('/study/haori-wall-contact-119-006/wall-contact.png');
+   map=await new THREE.TextureLoader().loadAsync(haoriContactStudy.path);
    if(disposed)throw new DOMException('Page left','AbortError');
    gltf.studyHaoriContact=createHaoriWallContactLook(map,{gain:haoriContactGain,createMaterial:source=>new (source.isMeshPhysicalMaterial?THREE.MeshPhysicalNodeMaterial:THREE.MeshStandardNodeMaterial)().copy(source),buildNode:buildHaoriWallContactNode});
   }catch(error){map?.dispose();release(gltf);throw error;}

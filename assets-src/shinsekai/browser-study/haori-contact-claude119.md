@@ -40,3 +40,43 @@ four items, remaining hall limitations and integrated1080p are carried forward.
 Native validation results are recorded in the private006 receipt after checks.
 
 Native result:22 scenePNGs, four source-null views exact (GPU controls reused005, GL fresh); both fixed-grain loaded dreams exact. GPUreentry exact; GL6pixels/max1 residual, no cause established. Both far contact/cloth/interior empty with map1disposed/original wall restored, observed errors0,355tests. Actual front/side native PNGs viewed on both backends; source detail retained. Static optional candidate, frontal contact subtle; no119/phone acceptance. See private006/native-receipt.json.
+
+## Correct bake for008 geometry:009, runtime001
+
+The new009 map is separately baked from008 geometry and saved/reopened;
+006 remains the retained003 comparison. Optional `contactbake=009` with
+`clothsupport&clothfold=008&haoricontact=0` selects the new null comparison;
+changing only the gain to0.6 selects the contact candidate. The existing
+gain1 remains available, but no strength is visually approved for009.
+The no-contact control omits both `contactbake` and `haoricontact`.
+All other camera/light/material/time/AA flags must match, including the
+partially checked upperlamp1 profile when used. Add `webgl` only for the
+separate backend pair.
+
+Revision selection rejects nonzero006 on any folded garment,009 on003/007,
+invalid gains/revisions and a bake flag without a comparison gain before
+renderer/assets. Legacy folded gain0 with006 remains a source-null diagnostic.
+Default remains off. Same planar mask/material-family/copy/disposal helper;
+no new geometry or draw, one optional512 map/~1.33MiB with mips. DOM contact
+metadata records selected bake and geometry revisions separately from art
+acceptance.
+
+Full369 tests and3 focused pairing/ownership checks pass. Fresh local service
+18782/session36546 serves only the exact006/009 PNG paths, preserving old
+services. GET/HEAD verifies009 SHA605384f0/90098bytes and006 SHA6241f568/
+90058bytes; privateblend/receipt/unknownrevision/traversal return403,POST405.
+This validates delivery and the pairing contract, not native shader rendering.
+
+No new native scene image is saved this round. Existing browser handle binding
+timed out; one new local tab supplied its initial unloaded state, then current
+AX/DOM reported Debugger unattached. An inherited capture helper also referred
+to an old tab despite an attempted variable reassignment; explicit-tab
+parameters separate that issue from the direct-handle failures. The browser
+was not killed or restarted. User display/operation status is requested while
+independent free work continues. Lighting001 remaining matched views and all
+009 null/contact/dream/far/reentry gates on both backends remain pending.
+
+119, finalhaori/hall/upper4/integrated1080p/world/device are incomplete. No
+historical lighting, motion, physical shadow, phone or art acceptance. Evidence:
+workflow/haori-wall-contact-119-009-runtime-001-brief.json and private matching
+runtime-receipt.json/http-receipt.json/full-build.log; bake in private009.
