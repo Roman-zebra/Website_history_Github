@@ -8,6 +8,32 @@ async function studyModule(name){
  return import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 }
 
+test('upper tatami normal retains source material and geometry data, excludes edging/maps/other nodes and shares one owned copy',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
+ const {connectShopTatamiNormal}=await studyModule('shop-tatami-normal.mjs');
+ const tatami=new THREE.MeshPhysicalMaterial({color:0xb4aa73,roughness:.8,metalness:0,vertexColors:true,clearcoat:.1});tatami.name='M_Tatami';
+ for(const key of ['map','roughnessMap','aoMap'])tatami[key]=new THREE.Texture();
+ const heri=new THREE.MeshStandardMaterial({color:0x111222});heri.name='M_Cloth_Heri';
+ const textured=tatami.clone();textured.normalMap=new THREE.Texture();
+ const geometry=new THREE.BoxGeometry(),before=Object.fromEntries(Object.entries(geometry.attributes).map(([key,a])=>[key,a.array.slice()]));
+ const scene=new THREE.Group(),structure=new THREE.Group(),a=new THREE.Mesh(geometry,[tatami,heri,textured,tatami]),prop=new THREE.Mesh(geometry,tatami);
+ structure.name='BldgA_Interior_Structure';a.name='primitive child';prop.name='Unrelated Tatami Prop';structure.add(a);scene.add(structure,prop);
+ const stats=connectShopTatamiNormal({scene});assert.equal(stats.materials,1);assert.equal(a.material[0],a.material[3]);assert.notEqual(a.material[0],tatami);
+ assert.equal(a.material[1],heri);assert.equal(a.material[2],textured);assert.equal(prop.material,tatami);
+ for(const key of ['roughness','metalness','vertexColors','clearcoat','map','roughnessMap','aoMap'])assert.equal(a.material[0][key],tatami[key],key);
+ assert.equal(a.material[0].color.getHex(),tatami.color.getHex());assert.equal(a.geometry,geometry);
+ for(const [key,array]of Object.entries(before))assert.deepEqual(geometry.attributes[key].array,array,key);
+ assert.equal(a.material[0].userData.studyOriginalTatamiMaterial,tatami);assert.ok(a.material[0].normalNode?.isNode);assert.equal(tatami.normalNode,undefined);
+ const revised=a.material[0];assert.equal(connectShopTatamiNormal({scene}).materials,0);assert.equal(a.material[0],revised);
+});
+
+test('tatami null comparison creates no copy and invalid gain leaves the scene intact',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');const {connectShopTatamiNormal}=await studyModule('shop-tatami-normal.mjs');
+ const source=new THREE.MeshStandardMaterial();source.name='M_Tatami';const mesh=new THREE.Mesh(new THREE.BoxGeometry(),source);mesh.name='BldgA_Interior_Structure';const scene=new THREE.Group();scene.add(mesh);
+ assert.equal(connectShopTatamiNormal({scene},{gain:0}).materials,0);assert.equal(mesh.material,source);assert.equal(source.normalNode,undefined);
+ for(const gain of [-1,2,NaN,Infinity])assert.throws(()=>connectShopTatamiNormal({scene},{gain}));assert.equal(mesh.material,source);
+});
+
 test('daylight balance toggles from retained lamp values without compounding or touching other lights',async()=>{
  const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
  const {connectShopDaylight}=await studyModule('shop-daylight.mjs');

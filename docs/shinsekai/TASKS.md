@@ -686,3 +686,21 @@ GPUreentryexact/GL12pixelsmax1. Full119/world/phone not approved; TRIPO0/3200.
 Continue tatami weave/edging/plaster/shoji plus remaining haori/hall/integrated
 1080p. Details: browser-study/upper-cushion-claude119.md and private003 receipt;
 status replied requests-to-claude.md. GoalACTIVE, no extra reviews/agents.
+
+## Claude119/120 partial upper tatami normal001 —2026-10-02
+119 remains incomplete. Optional normal-only upper weave retains source colour,
+roughness/maps/UV/geometry and separate30mm edging. Initial0-material binding
+diagnostic retained; corrected named Group traversal, matching test and empty-
+binding guard. Actual both backends1copy, near/macro/context inspected; fine
+rows close/subtle near/contextmax1.23freshPNGs/no reuse,361tests. ActualfarLOD2/
+interior+cloth+dream+tatamiempty/copy1original1disposed; GPUreentryexact/GL9pix
+max1. GroundGPUexact/GL463pixmax1 residual; loadedreviewtime0dreammax1.
+Extra shader arithmetic,0maps/draws/tri/TRIPO, no phone/motion qualification.
+Sourcea5c102f5/cushion00336701f8f unchanged. Existing sourceGLshelf bands remain.
+Next separate Heri/plaster/shoji, rounded cushion/fabric, final haori/hall and
+integrated1080p; full119/art/world/device not approved. Evidence: browser-study/
+tatami-claude119.md and private tatami-normal-119-001/native-receipt.json.
+Interim PNGs tatami-webgpu-macro.png and tatami-webgl-context.png; no formal
+review request or extra agents. TodayTRIPO3200/spent0/nextOct3after09.
+Observed120/processed118; GoalACTIVE. Baselinea09bacd exactWorkersSUCCESS
+2026-10-02T01:59:31Z; currentSHA checked afterpush.

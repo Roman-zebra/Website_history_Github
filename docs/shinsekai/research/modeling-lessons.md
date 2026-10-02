@@ -255,3 +255,19 @@ retention adds147,712bytes, not mobile savings;48tri/0maps/0draws, TRIPO0.
 Evidence: browser-study/upper-cushion-claude119.md, workflow003 brief/verifier,
 parent upper-cushion-119-001/002/003 receipts. Continue119 upper4 and existing
 haori/hall/integrated1080p limitations, not full119 or iPhone approval.
+
+## Verify actual GLTF hierarchy before increasing invisible normals —2026-10-02
+Tatami001 initially cloned0 materials despite a passing Mesh-only fixture:
+multi-primitive GLTFLoader creates the named structure as a Group. Retain that
+diagnostic, select descendants of the exact root, test matching Group hierarchy,
+and reject gain1 empty binding. Technical repair is not an art parameter trial.
+Read actual normal/UV/material/top coordinates before a mask; source floor
+contains both levels. Filter each procedural frequency with unconditional UV
+derivatives; do not reduce near AA/maps to hide aliasing. Declare macro camera
+diagnostic and compare BOTHsource/candidate there before increasing amplitude.
+Fine close rows/contextmax1 retain optional study, not art/historical/phone or
+motion-shimmer acceptance. Actualfar releasecopy1+original1 verified, GPUreentry
+exact/GL9pixelsmax1 residual not guessed.23freshPNGs/361tests; sourceaudit helper
+hash is explicitly initial, qualified hash retained separately. SourceGPUdream
+capture failed once, healthy loaded state retry saved without restart. No scene
+editing/export invented for a browser-only shader. Evidence:tatami-claude119.md.

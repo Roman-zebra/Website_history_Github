@@ -1,0 +1,78 @@
+{
+  "round": "tatami-normal-119-001",
+  "scope": "One factor: normal-only reed weave on upward-facing upper-floor M_Tatami of BldgA_Interior_Structure. Preserve source colour/roughness/maps/UV/data/geometry,30mm M_Cloth_Heri edging, ground floor, other props, cushion003, light/camera/AA. No blanket CLOTH modification.",
+  "inputs": {
+    "interiorSHA256": "a5c102f5c499eaca29a6dede27b5bf419c8296e1752ec1c88af281dee43bd935",
+    "optionalCushion003SHA256": "36701f8fc57e103489747408f11f0d83214e707b7c72b95d523c9e79cd8ea564",
+    "baselineCommit": "a09bacdff7a940f0d72a939b73f6d2c57a43a812"
+  },
+  "coordinates": "glTF local metres/Y-up, structural node identityTRS. Source upper topsY3.455, groundY.455; top UV0 nominal metres from tatami_area(), slightly scaled by2mm source insets. Tangent+X. Existing source Blender wave variesUV-Y; retain that direction. Edging is separate M_Cloth_Heri,30mm width/2mm above top.",
+  "design": "Inferred art pitches4.2mm main rows/20mm weak tie variation, heights.18mm/.04mm; not measured1912 rush weave. Preserve existing inferred colours. Fade unresolved procedural frequencies using per-fragment UV derivatives rather than reducing nearby render resolution/AA.",
+  "method": "Pinned r186 TSL normalNode surface-gradient bump, source UV0, normalGeometry.y and positionLocal.y mask for upper top only. Filter each periodic wave with cycles-per-pixel fwidth; smoothstep.2.. .45 to zero before half-cycle/pixel. Unconditional derivatives, no fragment divergent branch. gain0 bypasses material cloning. Interior owns original+copy via existing disposal path.",
+  "references": [
+    {
+      "url": "https://github.com/mrdoob/three.js/blob/r186/src/nodes/math/MathNode.js",
+      "claim": "Pinned dFdx/dFdy/fwidth and smoothstep math nodes",
+      "status": "Official tagged source read2026-10-02; local build exports checked"
+    },
+    {
+      "url": "https://github.com/mrdoob/three.js/blob/r186/src/nodes/accessors/Normal.js",
+      "claim": "normalGeometry and normalView resolve underlying normal during NORMAL build",
+      "status": "Official tagged source read2026-10-02"
+    },
+    {
+      "path": "eval-building-a/hybrid/inputs/opus/build-building-a.py:810,1576",
+      "claim": "Source Blender UV-Y wave; actual floor/UV/edging construction; source-generated art",
+      "status": "Local frozen source read"
+    }
+  ],
+  "views": [
+    {
+      "name": "hero-upper-tatami",
+      "position": [
+        1.15,
+        0.85,
+        3.95
+      ],
+      "target": [
+        0.95,
+        1.55,
+        3.455
+      ],
+      "lens": 28
+    },
+    "upper-corner",
+    "ground-corner regression",
+    {
+      "name": "hero-upper-tatami-macro",
+      "position": [
+        0.6,
+        1.65,
+        3.66
+      ],
+      "target": [
+        0.75,
+        1.95,
+        3.455
+      ],
+      "lens": 35,
+      "purpose": "Camera-only diagnostic declared after near comparison max channel delta5; no pitch/amplitude/filter/light change. Compare gain0/1 identically."
+    }
+  ],
+  "checks": [
+    "actual source UV/material/top and edging audit",
+    "material ownership/sharing/source property and geometry preservation tests",
+    "native gain0 vs1 close/context WebGPU/WebGL, source ground unchanged, resolved near/unresolved context inspected",
+    "dream/far/reentry/no errors + actual resource release state",
+    "fullbuild/source hashes/no new data maps"
+  ],
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0,
+    "addedTextures": 0,
+    "addedTriangles": 0,
+    "addedDraws": 0,
+    "shaderCost": "Additional wave/derivative arithmetic; not phone performance qualification"
+  },
+  "status": "Optional normal-only study retained after actual native both-backend near/macro/context inspection; fine rows visible only close. Full tatami/edging art approval OPEN. Corrected Group binding verified1 material; initial helper/diagnostic retained.23 freshPNGs,361tests,actualfar release1copy+1original,reentryGPUexact/GL9pixelsmax1. GroundGPUexact/GL463pixelsmax1. No phone/motion performance approval. See browser-study/tatami-claude119.md and private native receipt."
+}
