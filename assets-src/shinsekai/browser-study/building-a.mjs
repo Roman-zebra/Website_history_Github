@@ -20,6 +20,7 @@ import {connectShopHeriNormal} from './shop-heri-normal.mjs';
 import {createHaoriWallContactLook} from './haori-wall-contact-look.mjs';
 import {buildHaoriWallContactNode} from './haori-wall-contact-node.mjs';
 import {resolveHaoriContactStudy} from './haori-contact-study.mjs';
+import {resolveCushionContourStudy} from './cushion-contour-study.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
@@ -35,6 +36,7 @@ if(clothFold&&!clothSupport)throw new Error('Front fold study requires retained 
 const upperCushion=new URLSearchParams(location.search).has('uppercushion');
 const cabinetInk=new URLSearchParams(location.search).has('cabinetink');
 if(cabinetInk&&!upperCushion)throw new Error('Cabinet study requires its retained cushion003 input');
+const cushionContour=resolveCushionContourStudy({revision:new URLSearchParams(location.search).get('uppercontour'),cushion:upperCushion,cabinet:cabinetInk});
 const tatamiGain=new URLSearchParams(location.search).has('tatami')?Number(new URLSearchParams(location.search).get('tatami')||1):null;
 if(tatamiGain!==null&&![0,1].includes(tatamiGain))throw new Error('Invalid tatami normal comparison');
 const heriGain=new URLSearchParams(location.search).has('heri')?Number(new URLSearchParams(location.search).get('heri')||1):null;
@@ -156,9 +158,9 @@ function release(model){
 }
 async function load(part){
  const loadStart=performance.now();
- const gltf=await loader.loadAsync(cabinetInk&&part==='interior'?'/study/cabinet-ink-119-001/interior-cabinet.glb':upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothFold&&part==='upper-cloth-v2-sewn-rail'?`/study/haori-frontfold-119-${clothFoldRevision}/upper-cloth-support.glb`:clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
+ const gltf=await loader.loadAsync(cushionContour&&part==='interior'?cushionContour.path:cabinetInk&&part==='interior'?'/study/cabinet-ink-119-001/interior-cabinet.glb':upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothFold&&part==='upper-cloth-v2-sewn-rail'?`/study/haori-frontfold-119-${clothFoldRevision}/upper-cloth-support.glb`:clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
  if(part==='interior')canvas.dataset.cabinetInk=cabinetInk?'cabinet-ink-119-001':'source';
- if(part==='interior')canvas.dataset.upperCushion=upperCushion?'upper-cushion-119-003':'sourcea5c102f5';
+ if(part==='interior')canvas.dataset.upperCushion=cushionContour?`${cushionContour.round}-g${cushionContour.revision}`:upperCushion?'upper-cushion-119-003':'sourcea5c102f5';
  if(part==='upper-cloth-v2-sewn-rail')canvas.dataset.clothSupport=clothFold?`haori-frontfold-119-${clothFoldRevision}`:clothSupport?'haori-support-119-003':'source7240';
  gltf.studyLoadMs=performance.now()-loadStart;
  if(disposed){release(gltf);throw new DOMException('Page left','AbortError');}
