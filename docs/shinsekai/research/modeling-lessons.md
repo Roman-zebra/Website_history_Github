@@ -403,3 +403,32 @@ private upper-cushion-119-004. Native both-backend/lifecycle and full119 remain.
 The user cannot inspect Chrome now. Proceed with independent source audits and
 offline asset preparation; retain every native gate, rather than wait without
 progress or treat the unavailable user observation as approval.
+
+## Maximum cushion height and shared cloth helpers are insufficient —2026-10-02
+
+005 changes only the vertical perimeter on004g.35. Source maximum80mm does not
+describe its3mm edge.22/40mm comparisons keep seam centre41.5mm, horizontal
+contour, corner patches, floor patch and36floor vertices byte-exact. Analytic
+height gradients transform existing normals/tangents without introducing another
+smoothing algorithm;3mm null is exact. Both Blender closed/reopen checks retain
+20actual wooden-floor-only pairs and0other/merged neighbours;validator0/0 and
+386fulltests pass.8fresh/4exact-reused fixed offline frames show22mm thicker,
+40mm a hard slab with coarse bands. Neither is final cloth art/native approval.
+Use22mm only as an exploratory fabric baseline, not the largest numerical gap.
+
+The actual sourceCLOTH material has roughness.95 but no normal or base-colour
+texture. `connectShopClothNormal` runs on companion garments with a specific
+wrinkle-material name; `connectShopCloth` replaces only haori/laundry/bolt nodes.
+The merged Sonnet cushion receives neither. Increasing that helper's strength
+cannot repair this cushion. Audit actual node/material assignment first.
+
+005 source audit selects432of1608vertices/240triangles with0mixed target/non-target
+triangles, which permits an exact per-vertex mask in a future local derivative.
+Its UV0 coordinates extend0..5.4261/-4.4261..1. Do not assume UV0 is normalized
+or multiply it by a physical thread count without calibration. Preserve those
+UVs/colours and all other cloth; inspect pinned r186 attribute/bump/derivative
+support before authoring a separate masked normal-only comparison. Far-frequency
+aliasing is a quality issue to qualify, not permission to reduce nearby textures
+or AA. Source attributes/masks/tests alone are not native image acceptance.
+Evidence: workflow005 brief/adapter/verifier, upper-cushion-claude119.md, private
+upper-cushion-119-005 visual/authoring/render/reuse/fabric-source-audit receipts.

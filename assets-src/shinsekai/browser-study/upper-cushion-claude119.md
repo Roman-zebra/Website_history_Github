@@ -122,3 +122,54 @@ Native close/side/context/dream/far/reentry on both backends, fabric/edge art,
 real-phone performance, integrated1080p and full119 remain pending. TRIPO0,
 no new tool/agent/review calls. Evidence: workflow004 brief, contour adapter,
 verification/render scripts and parent `research-cache/upper-cushion-119-004`.
+
+
+## Perimeter005: thicker edge, targeted fabric still pending
+
+Source is contour004g.35 SHA e50d117a; pre-contour cabinet00109a0e26d is a
+read-only grid guide. One variable: perimeter gap3/22/40mm around41.5mm centre,
+retaining maximum80mm, all horizontal position bytes and the exact floor patch.
+Only336body vertices can change;36floor vertices remain fully byte-exact.
+All four corner patches, indices/UV/colours/source materials/maps and unrelated
+vertices remain unchanged. Normals use the analytic vertical height derivative,
+tangents its direct derivative plus orthogonalization, W unchanged.3mm control
+is exact source; this does not introduce a different smoothing algorithm.
+
+22mm candidate SHA178f76bf655cc30cfdbf532767149e48d90f5bae6c32b2e382107a92ee90c909;
+40mm SHA19cc9f00a82ccfcfe25f027417a80950ba4ed32efd84801f24121d11147a8934.
+Each26,133,200bytes (+64,816 append-only bytes),0newtri/draw/maps. This is not a
+phone transport saving. Both actual Blender4.5.10 closed/positive-volume checks
+pass;22mm volume0.01384892411m³,40mm0.01658635317. Each20structural pairs are
+actual wooden floor top3.455; other/merged dressing pairs0. Same source contour,
+floor patch and corner patches verified independently. Saved geometry/UV/colour/
+material-name/matrix snapshots reopen exactly; discrete surface tests are not
+continuous or containment certification. Bothvalidator0/0, full386tests pass.
+
+8fresh fixed CyclesCUDA32/seed119004/AgX0 diagnostic PNGs were directly inspected
+(close/side/context/fulltop for each candidate).4exact004g035 controls reused
+only after source/profile/camera/hash checks; matched receipt checked again.
+22mm reads thicker than3mm control;40mm shows a hard slab and coarse shading
+bands.22mm still has a mechanical side/plain fabric. Keep22mm only as exploratory
+baseline and retain/reject40mm art, not final production approval.
+Offline material/light staging differs from browser daylight. Native both-backend
+close/side/context/dream/far/reentry and actual-phone checks remain pending.
+
+`uppergap=022` or `040` additionally requires `uppercontour=035`, `uppercushion`
+and `cabinetink`; invalid combinations fail before loading. Default remains the
+retained control. Server18784/session46014 exactGLB/HEAD/no-store and private
+scene/receipt/unknown revision/traversal403; POST405. No private tree exposed.
+
+Concrete next finding: sourceCLOTH has no normal/base-colour texture, roughness
+.95. Existing fine-wrinkle helper runs only on upper-cloth companions and requires
+a special material name, so it never reaches this source cushion. One primitive
+has1608vertices;432target vertices/240faces and no mixed target/non-target face.
+Its UV0 bounds extend0..5.4261 and-4.4261..1. Next declare a cushion-specific
+normal-only masked fabric round on22mm, preserving source UV/colour/materials,
+geometry and all other cloth. Check pinned r186 attribute/bump/derivative support
+and calibrate physical coordinates instead of assuming UV0..1. No new maps,
+draws or paid generation. Do not use unqualified native or offline art acceptance.
+
+Evidence: workflow005 brief/perimeter adapter/Blender verifier, shared fixed
+renderer perimeter mode, parent upper-cushion-119-005 authoring/validator/render/
+reuse/HTTP/visual/fabric-audit/full-build receipts.119/120 and integrated1080p
+remain unfinished; no formal review/newtool/agent/TRIPO use.

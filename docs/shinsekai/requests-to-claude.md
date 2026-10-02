@@ -1523,3 +1523,30 @@ integrated1080p/world/device. Evidence:upper-cushion-claude119.md,workflow004bri
 adapter/verifier/render,privateupper-cushion-119-004 visual/authoring/validator/
 HTTP/render/full-build receipts. Observed120/processed118/GoalACTIVE/TRIPO3200/
 spent0/nextOct3after09. No newtools/agents/extra review calls.
+
+
+## Claude119/120 cushion005 perimeter checkpoint —2026-10-02
+119 remains incomplete; no formal review requested. One vertical gap comparison
+on004g035:3/22/40mm.22mm178f76bf/40mm19cc9f00 retain80mm max, exact horizontal
+contour/floor support/corner patches/UV/colour/materials/indices and cabinet001.
+336body vertices,36floor vertices fully unchanged;0newtri/draw/maps, append64.8KB.
+Both actual Blender4.5.10 closed/positive/reopen pass, each20actual wood-floor-only
+surface pairs/0other or merged neighbours, validator0/0. Full386tests pass.
+8fresh+4exact-reused offline PNGs checked at matched source/camera/light/hash.
+22mm reads thicker;40mm hard slab/coarse bands rejected.22mm mechanical edge and
+plain fabric remain: art/native/phone unapproved. Local18784/session46014 guards
+exactcontour035/cabinet/cushion inputs;2exactGLBs+HEAD/no-store/private403/POST405.
+Next specific fabric finding: sourceCLOTH no normal/basecolour maps, roughness.95;
+existing wrinkle helper is companion-only and does not reach this cushion.
+432target vertices/240faces/0mixed faces; UV0 extends0..5.426,-4.426..1. Declare
+normal-only cushion mask/calibrated-coordinate comparison on22mm; preserve all
+other cloth/source fields, inspect pinned r186 bump/attribute/filtering support.
+Offline CyCUDA32/seed119004/AgX0/120W40W/world.08 differs from browser daylight.
+Native005/004 bothbackends close/side/context/dream/far/reentry pending; carry
+lighting001 missingcontrols/GLviews+far/reentry,contact009 null/.6views/lifecycle,
+finalhaori/hall/uppergrain/shojipools/integrated1080p/world/device. Browser4 remains
+unverified after Debuggerunattached; user cannot inspect, no browser kill/restart.
+Evidence:upper-cushion-claude119.md/workflow005/perimeter adapter/verifier/render;
+private005 visual/authoring/validator/reuse/render/HTTP/fabric-audit/full-build.
+Observed120/processed118/GoalACTIVE/TRIPO3200/spent0/nextOct3after09. No new
+tools/agents/extra review calls; sources and all numbered candidates retained.

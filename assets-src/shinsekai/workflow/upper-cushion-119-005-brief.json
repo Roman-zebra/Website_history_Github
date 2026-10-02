@@ -1,17 +1,150 @@
 {
   "schemaVersion": 1,
   "roundId": "upper-cushion-119-005",
-  "status": "declared_before_authoring",
+  "status": "technical_and_offline_checks_complete_art_unapproved",
   "subject": "One source writing-table cushion; vertical perimeter on contour004 g.35",
   "intendedResult": "Readable padded edge in close and side views while keeping a square cushion identity, source fabric and80mm total height.",
-  "baseline": {"commit": "11f8ddffdef5e93c8301ac0b4d0b84677b6e068b", "files": ["../research-cache/upper-cushion-119-004/interior-cushion-g035.glb", "../research-cache/cabinet-ink-119-001/interior-cabinet.glb"], "sha256": {"contour004g035": "e50d117a0249d3d5cc6478c139ef8366d47fc511052531aad9f0862c7bd68b7d", "preContourGuide": "09a0e26d91da8775e29f32cb9967f348f7f519b0df7bfc317fa333445c583397"}},
-  "scope": {"change": "Only perimeter thickness: gap3/22/40mm with centre41.5mm. Top/bottom edges43/40(control),52.5/30.5,61.5/21.5mm. Original sine fill retains80mm top and wooden-floor contact patch; necessary normals/tangents use analytic height derivative, not a new area-weight smoothing algorithm.", "preserve": ["g.35 horizontal positions byte-exact; centre(3.2,5.215)/yaw.4", "80mm maximum/floor support patch/closed240tri topology", "four original corner seam patches and all unrelated vertices", "UV/colour/source material/maps/tangent W/indices/cabinet001", "source binary prefix", "camera/light/exposure/render profile"], "defer": ["fabric/colour/light changes", "native while browser unavailable", "production promotion/full119/phone/world"]},
-  "coordinates": {"unit": "metre", "system": "Blender Z-up, glTF=(X,Z,-Y)", "origin": "unchanged source world frame", "dimensions": {"bodyHalfWidth": 0.275, "sourceCornerPatchHalfWidth": 0.287, "floor": 3.455, "maximumHeight": 0.08, "seamCentre": 0.0415}, "dimensionEvidence": "Source model/floor measurements; edge profile and shape are inferred art, not historical upholstery measurements."},
-  "references": [{"url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html", "checkedAt": "2026-10-02", "claimSupported": "Float POSITION/NORMAL and normalized tangent XYZ/W handedness contract; successfully read in004,005 refetch timed out", "versionCompatibility": "glTF2.0 supported by pinned three r186/Blender4.5.10", "sourceStatus": "official specification; retained prior reading"}, {"url": "https://docs.blender.org/api/4.5/bmesh.ops.html#bmesh.ops.remove_doubles", "checkedAt": "2026-10-02", "claimSupported": "None: fetch402 unavailable; no purchase", "versionCompatibility": "4.5 URL; use actually exercised installed4.5.10 API and existing verifiers", "sourceStatus": "unverified external reference"}],
-  "reusableLessons": {"reference": "docs/shinsekai/research/modeling-lessons.md", "applicableLessons": ["A round outline does not alone make filled cloth", "Full footprint and actual art qualify a cushion", "Preserve unrelated data and exact control"], "suspectedCause": "3mm perimeter still looks papery despite80mm central thickness", "evidenceToDistinguishCause": "Fixed close/side/context plus full top silhouettes; verify actual edge gap, support and unchanged horizontal contour"},
-  "comparison": {"oneChangedCause": "vertical perimeter gap", "controls": ["3mm exact004g.35", "22mm", "40mm"], "fixedCameras": ["close32mm", "side28mm", "context28mm", "top orthographic1.48"], "resolution": [1280,720], "renderProfile": "Cycles CUDA32/seed119004/AgX/exposure0/120W+40W area/world.08, source materials; identical to004 diagnostics, not browser daylight staging", "reusedControls": "004g035 close/side/context and corrected top may be reused only after exact source/camera/light/render receipt/hash checks"},
-  "verification": {"checks": ["exact null/source and input hashes", "horizontal positions/UV/colour/corner patches/unrelated/sourceprefix exact", "height80mm/edgegap/analytic derivative/orthonormal tangent basis", "actual Blender closed-volume/floor-only contacts/all neighbours", "scene save/reopen", "GLB validator", "fixed offline views", "optional guarded browser route/private file denial", "native both backends later", "full build"], "webgpu": "pending", "webgl": "pending"},
-  "decision": {"visualAcceptance": false, "retain": null, "remainingIssues": ["art/fabric/native/full119/device"]},
-  "cost": {"TRIPO": 0, "newTools": 0, "extraTriangles": 0, "extraDraws": 0, "extraMaps": 0, "paidToolsOrApisAllowed": false},
-  "coordination": {"useExistingBatch": true, "requestExtraReview": false}
+  "baseline": {
+    "commit": "11f8ddffdef5e93c8301ac0b4d0b84677b6e068b",
+    "files": [
+      "../research-cache/upper-cushion-119-004/interior-cushion-g035.glb",
+      "../research-cache/cabinet-ink-119-001/interior-cabinet.glb"
+    ],
+    "sha256": {
+      "contour004g035": "e50d117a0249d3d5cc6478c139ef8366d47fc511052531aad9f0862c7bd68b7d",
+      "preContourGuide": "09a0e26d91da8775e29f32cb9967f348f7f519b0df7bfc317fa333445c583397"
+    }
+  },
+  "scope": {
+    "change": "Only perimeter thickness: gap3/22/40mm with centre41.5mm. Top/bottom edges43/40(control),52.5/30.5,61.5/21.5mm. Original sine fill retains80mm top and wooden-floor contact patch; necessary normals/tangents use analytic height derivative, not a new area-weight smoothing algorithm.",
+    "preserve": [
+      "g.35 horizontal positions byte-exact; centre(3.2,5.215)/yaw.4",
+      "80mm maximum/floor support patch/closed240tri topology",
+      "four original corner seam patches and all unrelated vertices",
+      "UV/colour/source material/maps/tangent W/indices/cabinet001",
+      "source binary prefix",
+      "camera/light/exposure/render profile"
+    ],
+    "defer": [
+      "fabric/colour/light changes",
+      "native while browser unavailable",
+      "production promotion/full119/phone/world"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "Blender Z-up, glTF=(X,Z,-Y)",
+    "origin": "unchanged source world frame",
+    "dimensions": {
+      "bodyHalfWidth": 0.275,
+      "sourceCornerPatchHalfWidth": 0.287,
+      "floor": 3.455,
+      "maximumHeight": 0.08,
+      "seamCentre": 0.0415
+    },
+    "dimensionEvidence": "Source model/floor measurements; edge profile and shape are inferred art, not historical upholstery measurements."
+  },
+  "references": [
+    {
+      "url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "Float POSITION/NORMAL and normalized tangent XYZ/W handedness contract; successfully read in004,005 refetch timed out",
+      "versionCompatibility": "glTF2.0 supported by pinned three r186/Blender4.5.10",
+      "sourceStatus": "official specification; retained prior reading"
+    },
+    {
+      "url": "https://docs.blender.org/api/4.5/bmesh.ops.html#bmesh.ops.remove_doubles",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "None: fetch402 unavailable; no purchase",
+      "versionCompatibility": "4.5 URL; use actually exercised installed4.5.10 API and existing verifiers",
+      "sourceStatus": "unverified external reference"
+    },
+    {
+      "url": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "Float32 position/normal, normalized tangentXYZ/handedness and equal attribute count contract",
+      "versionCompatibility": "glTF2.0 used by installed4.5.10/r186; no tool installed",
+      "sourceStatus": "Official specification read through fallback"
+    }
+  ],
+  "reusableLessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "applicableLessons": [
+      "A round outline does not alone make filled cloth",
+      "Full footprint and actual art qualify a cushion",
+      "Preserve unrelated data and exact control"
+    ],
+    "suspectedCause": "3mm perimeter still looks papery despite80mm central thickness",
+    "evidenceToDistinguishCause": "Fixed close/side/context plus full top silhouettes; verify actual edge gap, support and unchanged horizontal contour"
+  },
+  "comparison": {
+    "oneChangedCause": "vertical perimeter gap",
+    "controls": [
+      "3mm exact004g.35",
+      "22mm",
+      "40mm"
+    ],
+    "fixedCameras": [
+      "close32mm",
+      "side28mm",
+      "context28mm",
+      "top orthographic1.48"
+    ],
+    "resolution": [
+      1280,
+      720
+    ],
+    "renderProfile": "Cycles CUDA32/seed119004/AgX/exposure0/120W+40W area/world.08, source materials; identical to004 diagnostics, not browser daylight staging",
+    "reusedControls": "004g035 close/side/context and corrected top may be reused only after exact source/camera/light/render receipt/hash checks"
+  },
+  "verification": {
+    "checks": [
+      "exact null/source and input hashes",
+      "horizontal positions/UV/colour/corner patches/unrelated/sourceprefix exact",
+      "height80mm/edgegap/analytic derivative/orthonormal tangent basis",
+      "actual Blender closed-volume/floor-only contacts/all neighbours",
+      "scene save/reopen",
+      "GLB validator",
+      "fixed offline views",
+      "optional guarded browser route/private file denial",
+      "native both backends later",
+      "full build"
+    ],
+    "webgpu": "pending",
+    "webgl": "pending",
+    "results": [
+      "4new geometry tests +1new route guard; full386pass",
+      "both closed240tri/positive volume/80mm height/actual22.0003 or40.0002mm edge",
+      "horizontal contour/corner patches/floor support exact;36floor vertices fully unchanged",
+      "each20actualwood-floor-only pairs/0other+merged-neighbour pairs",
+      "both actual saved-scene reopen snapshots exact",
+      "bothvalidator0errors/0warnings/558information",
+      "8fresh+4exact-reused offline PNGs; all eight candidates directly inspected",
+      "HTTP exact2GLBs/HEAD/no-store/private4denials403/POST405"
+    ],
+    "savedSceneReopened": "both_verified"
+  },
+  "decision": {
+    "retain": "both numbered candidates;22mm exploratory baseline only;40mm art rejected",
+    "visualAcceptance": false,
+    "reason": "22mm edge reads thicker than3mm control without changing the rounded-square footprint.40mm shows a stronger hard slab with coarse shading bands.22mm also retains a flat mechanical side and plain fabric; neither is final cloth art approval.",
+    "remainingIssues": [
+      "mechanical side/cloth appearance",
+      "native both backends close/side/context/dream/far/reentry",
+      "lighting001/contact009/finalhaori/hall/uppergrain/shojipools/integrated1080p/world/device"
+    ],
+    "nextStep": "Declare cushion-specific normal-only fabric comparison on005gap022. Source audit proves CLOTH has no normal/base-colour texture, roughness.95; current normal helper targets only companion garments. Append exact432one/1176zero vertex mask to this primitive,0mixed triangles. Preserve UV/colour/geometry/materials and all unrelated faces. Calibrate coordinates rather than assume UV0..1; inspect pinned r186 bump/fwidth/attribute support and equivalent offline controls. No paid generation or native acceptance inferred."
+  },
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0,
+    "extraTriangles": 0,
+    "extraDraws": 0,
+    "extraMaps": 0,
+    "paidToolsOrApisAllowed": false
+  },
+  "coordination": {
+    "useExistingBatch": true,
+    "requestExtraReview": false
+  }
 }
