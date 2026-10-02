@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{pathToFileURL}=require('node:url');
-async function fixture(enabled){
+async function fixture(enabled,withUpstream=false){
  const url=p=>pathToFileURL(path.resolve(__dirname,p)).href;
  const THREE=await import(url('../vendor/three-r186/build/three.webgpu.js'));
  let code=fs.readFileSync(path.resolve(__dirname,'../assets-src/shinsekai/browser-study/hall-proxy-shadow-look.mjs'),'utf8');
@@ -9,11 +9,12 @@ async function fixture(enabled){
  const scene=new THREE.Scene(),root=new THREE.Group(),point=new THREE.PointLight(0xffaa77,2),light=new THREE.DirectionalLight(0xffe2ba,3);light.position.set(-20,40,30);scene.add(root,light,point);
  const geometry=new THREE.BoxGeometry(),material=new THREE.MeshStandardNodeMaterial(),glass=new THREE.MeshStandardNodeMaterial({transparent:true,opacity:.3});
  const mesh=new THREE.Mesh(geometry,material),alpha=new THREE.Mesh(geometry,glass);root.add(mesh,alpha);
+ const upstream=withUpstream?new THREE.Mesh(geometry,material):null;if(upstream){upstream.position.copy(light.position).multiplyScalar(1.2);scene.add(upstream);}
  let geometryDisposed=0,sourceDisposed=0;geometry.addEventListener('dispose',()=>geometryDisposed++);material.addEventListener('dispose',()=>sourceDisposed++);
  const originalTarget={name:'original'},originalMRT={name:'mrt'};let target=originalTarget,mrt=originalMRT;
  const draws=[],renderer={isRenderer:true,shadowMap:{enabled:false,type:1},getRenderTarget:()=>target,getMRT:()=>mrt,setRenderTarget:t=>target=t,setMRT:v=>mrt=v,render(s,c){draws.push({scene:s,camera:c,target,mrt});}};
  const scope=createHallProxyShadowLook(renderer,scene,root,light,{enabled});
- return {scope,renderer,draws,mesh,alpha,material,glass,geometry,light,point,originalTarget,originalMRT,get geometryDisposed(){return geometryDisposed;},get sourceDisposed(){return sourceDisposed;}};
+ return {scope,renderer,draws,mesh,alpha,material,glass,geometry,light,point,upstream,THREE,originalTarget,originalMRT,get geometryDisposed(){return geometryDisposed;},get sourceDisposed(){return sourceDisposed;}};
 }
 test('null shadow scopes only opaque copies and restores exact source assignments on draw failure',async()=>{
  const f=await fixture(false),shadow=f.light.shadow,target=f.light.target;
@@ -35,4 +36,10 @@ test('owned light nodes keep original light-id order despite different scene tra
  const f=await fixture(false);assert.ok(f.point.id<f.light.id);
  f.scope.withApplied(()=>{const nodes=f.mesh.material.lightsNode.getBuiltinLights();assert.deepEqual(nodes.map(n=>n.light),[f.point,f.light]);assert.ok(nodes[0].id<nodes[1].id);});
  assert.equal(f.point.intensity,2);assert.equal(f.light.intensity,3);assert.equal(f.point.castShadow,false);f.scope.dispose();assert.equal(f.sourceDisposed,0);
+});
+test('depth range includes upstream casters beyond the light origin and refits their motion without moving the source light',async()=>{
+ const f=await fixture(true,true),lightPosition=f.light.position.clone();f.scope.withApplied(()=>{});
+ const camera=f.draws[0].camera,stats=f.scope.stats.frustum;assert.ok(stats.originShift>0);assert.ok(stats.near<stats.nearestCasterDepth);
+ for(const x of [-.5,.5])for(const y of [-.5,.5])for(const z of [-.5,.5]){const p=new f.THREE.Vector3(x,y,z).applyMatrix4(f.upstream.matrixWorld).applyMatrix4(camera.matrixWorldInverse);assert.ok(-p.z>=camera.near);}
+ const oldShift=stats.originShift;f.upstream.position.multiplyScalar(1.3);f.scope.withApplied(()=>{});assert.ok(f.scope.stats.frustum.originShift>oldShift);assert.deepEqual(f.light.position,lightPosition);assert.equal(f.upstream.material,f.material);f.scope.dispose();assert.equal(f.geometryDisposed,0);assert.equal(f.sourceDisposed,0);
 });

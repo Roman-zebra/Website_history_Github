@@ -11,3 +11,9 @@ test('fill no-op/zero and invalid setup preserve source and reject a mutated inv
  for(const gain of [1,0,.25,.5]){const scope=createHallFillLook(light,{gain});scope.withApplied(()=>assert.equal(light.intensity,3*gain));assert.equal(light.intensity,3);scope.dispose();}
  for(const gain of [-1,.2,NaN,Infinity])assert.throws(()=>createHallFillLook(light,{gain}),/Invalid/);assert.equal(light.intensity,3);assert.throws(()=>createHallFillLook(new THREE.PointLight()),/Invalid/);const scope=createHallFillLook(light);light.intensity=NaN;let called=false;assert.throws(()=>scope.withApplied(()=>called=true),/Invalid/);assert.equal(called,false);assert.ok(Number.isNaN(light.intensity));scope.dispose();
 });
+test('async preparation holds the rendering intensity through completion and rejection, with exclusive ownership and restoration',async()=>{
+ const {THREE,createHallFillLook}=await fixture(),light=new THREE.DirectionalLight(0xffffff,3),scope=createHallFillLook(light,{gain:.25});let finish;
+ const gate=new Promise(resolve=>finish=resolve),pending=scope.withAppliedAsync(async()=>{assert.equal(light.intensity,.75);await gate;assert.equal(light.intensity,.75);return 42;});
+ assert.equal(light.intensity,.75);assert.throws(()=>scope.withApplied(()=>{}),/Invalid/);assert.throws(()=>scope.dispose(),/active/);await assert.rejects(scope.withAppliedAsync(()=>{}),/Invalid/);finish();assert.equal(await pending,42);assert.equal(light.intensity,3);assert.equal(scope.stats.last.sourceRestored,true);
+ await assert.rejects(scope.withAppliedAsync(async()=>{await Promise.resolve();assert.equal(light.intensity,.75);throw Error('compile failed');}),/compile failed/);assert.equal(light.intensity,3);scope.dispose();await assert.rejects(scope.withAppliedAsync(()=>{}),/Invalid/);
+});

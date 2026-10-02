@@ -1,0 +1,28 @@
+{
+  "ticket": "hall-moving-shadow-121-002",
+  "request": "Claude121 moving hall objects and upper/local shadows",
+  "baseline": "326f630; retained115 entrance stream121001; source-bound contact121001; source light/maps/geometry preserved",
+  "factor": "Existing proxy-sun mask at fixed camera and closed/open door poses; compare mask-on versus mask-off for each identical pose",
+  "cameraNeed": "Existing straight entrance camera shows nearly no hall floor; add a fixed near threshold/floor study view so a stationary receiver is visible",
+  "sourceStatus": "Light response inferred; no new historical geometry or source repair",
+  "coordinates": "metres, browser Y-up; threshold source y.15, hall placement[-14.05,.15,8.6]",
+  "gates": [
+    "immutable current source/contact binding",
+    "WebGPU dream/far/reentry lifetime",
+    "fixed camera/lighting/gate pose",
+    "both backends sun/control near and context",
+    "stationary receiver dynamic-shadow change isolated from moving door pixels",
+    "alpha/light/map/geometry preserved",
+    "console and actual native PNGs"
+  ],
+  "reference": "Pinned local three.js r186 DirectionalLightNode setupDirect and existing proxy-helper tests; no dependency update",
+  "remaining": "Point-light and upper shadows, near visual alias/detail gate, finalcloth/BuildingA, integrated1080p/world/actual iPhone14; full119/120/121 incomplete",
+  "cost": "Free local study; no new persistent agent, source regeneration or spend",
+  "result": "Depth bounds repaired,226tests pass.28nativePNGs retained. Source-equivalent glass copies resolve observed reentry: both-backend three-copy controls and WebGPU minimal two-copy sun/control exact. Minimal WebGL/null/context/dream still pending. Moving/local/upper art not accepted.",
+  "rejectedHypotheses": [
+    "equal-depth transparent ties: none observed",
+    "compile fill preparation: matched but same5429pixel/max35 discrepancy"
+  ],
+  "next": "Qualify minimal exterior-glass owned copies on WebGL and both proxy-shadow null/near/context/dream routes before selecting the lifecycle remedy in the existing private hall path. WebGPU two-copy sun and control reentry are pixel exact; three-copy controls exact on both backends. Retain source double-pass/alpha/maps/geometry; reject single-pass appearance change. Then isolate actual moving-door and local/upper shadows (current stationary receiver delta0), finish119/120/121 cloth/BuildingA004/005/details, integrated1080p/world/actual iPhone14; wing floor gaps x-15/-18/-22 remain. Existing full PLAN completion gates unchanged.",
+  "glassFactor": "Source-equivalent owned copy identity versus retained source; separate single-pass diagnostic rejected due4049pixel/max23 appearance change"
+}

@@ -18,18 +18,23 @@ export function createHallProxyShadowLook(renderer,scene,root,light,{enabled=fal
   const materials=[].concat(o.material??[]);
   // Unsupported deformation/alpha is excluded explicitly, never silently flattened.
   if(o.isSkinnedMesh||o.isInstancedMesh||o.morphTargetInfluences||!materials.length||materials.some(m=>!m||m.transparent||m.alphaTest>0))return;
-  const proxy=new THREE.Mesh(o.geometry,depthMaterial);proxy.matrixAutoUpdate=false;proxy.matrix.copy(o.matrixWorld);proxyScene.add(proxy);proxies.push({source:o,proxy});
+  const proxy=new THREE.Mesh(o.geometry,depthMaterial);proxy.matrixAutoUpdate=false;proxy.matrix.copy(o.matrixWorld);proxyScene.add(proxy);const localBounds=o.geometry.boundingBox?.clone()??new THREE.Box3().setFromBufferAttribute(o.geometry.attributes.position);proxies.push({source:o,proxy,localBounds});
  });
  if(!proxies.length){depthMaterial.dispose();throw new Error('No opaque hall shadow casters');}
  const target=new THREE.RenderTarget(mapSize,mapSize,{type:THREE.HalfFloatType,depthBuffer:true,samples:0});target.texture.name='HallProxyShadow121.linearDepth';target.texture.minFilter=target.texture.magFilter=THREE.NearestFilter;
- const bounds=new THREE.Box3().setFromObject(root),projected=new THREE.Box3(),corner=new THREE.Vector3();let frustum;
+ const bounds=new THREE.Box3().setFromObject(root),projected=new THREE.Box3(),corner=new THREE.Vector3(),direction=new THREE.Vector3();let frustum;
  function fit(){
   scene.updateMatrixWorld(true);light.updateWorldMatrix(true,false);light.target.updateWorldMatrix(true,false);
   camera.position.setFromMatrixPosition(light.matrixWorld);camera.lookAt(new THREE.Vector3().setFromMatrixPosition(light.target.matrixWorld));camera.updateMatrixWorld(true);projected.makeEmpty();
+  let nearestCasterDepth=Infinity;
+  for(const {source,proxy,localBounds}of proxies){proxy.matrix.copy(source.matrixWorld);let visible=true;for(let p=source;p;p=p.parent)visible&&=p.visible;proxy.visible=visible;if(!visible)continue;for(const x of [localBounds.min.x,localBounds.max.x])for(const y of [localBounds.min.y,localBounds.max.y])for(const z of [localBounds.min.z,localBounds.max.z]){corner.set(x,y,z).applyMatrix4(proxy.matrix).applyMatrix4(camera.matrixWorldInverse);nearestCasterDepth=Math.min(nearestCasterDepth,-corner.z);}}
+  // Receiver-only fitting clips upstream roofs and moving objects. Keep XY
+  // tightly fitted to the room but include every visible opaque caster in Z.
+  const originShift=Number.isFinite(nearestCasterDepth)?Math.max(0,.5-nearestCasterDepth):0;
+  if(originShift){camera.position.addScaledVector(camera.getWorldDirection(direction),-originShift);camera.updateMatrixWorld(true);nearestCasterDepth+=originShift;}
   for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z])projected.expandByPoint(corner.set(x,y,z).applyMatrix4(camera.matrixWorldInverse));
-  camera.left=projected.min.x-.5;camera.right=projected.max.x+.5;camera.bottom=projected.min.y-.5;camera.top=projected.max.y+.5;camera.near=Math.max(.01,-projected.max.z-2);camera.far=Math.max(camera.near+.1,-projected.min.z+2);camera.updateProjectionMatrix();
-  range.value=camera.far;viewMatrix.value.copy(camera.matrixWorldInverse);projection.value.copy(camera.projectionMatrix);frustum={left:camera.left,right:camera.right,bottom:camera.bottom,top:camera.top,near:camera.near,far:camera.far};
-  for(const {source,proxy}of proxies){proxy.matrix.copy(source.matrixWorld);let visible=true;for(let p=source;p;p=p.parent)visible&&=p.visible;proxy.visible=visible;}
+  camera.left=projected.min.x-.5;camera.right=projected.max.x+.5;camera.bottom=projected.min.y-.5;camera.top=projected.max.y+.5;camera.near=Math.max(.01,Math.min(-projected.max.z,nearestCasterDepth)-.5);camera.far=Math.max(camera.near+.1,-projected.min.z+2);camera.updateProjectionMatrix();
+  range.value=camera.far;viewMatrix.value.copy(camera.matrixWorldInverse);projection.value.copy(camera.projectionMatrix);frustum={left:camera.left,right:camera.right,bottom:camera.bottom,top:camera.top,near:camera.near,far:camera.far,nearestCasterDepth,originShift};
  }
  fit();
  const lightPosition=viewMatrix.mul(vec4(positionWorld,1));
