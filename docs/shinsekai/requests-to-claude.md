@@ -1363,3 +1363,27 @@ Next existing sourceGLshelf bands diagnostic, plaster/shoji, roundedcushion/
 fabric, finalhaori/hall and integrated1080p/world/device. Full119 stillopen.
 TRIPO3200/spent0/nextOct3after09; observed120/processed118; GoalACTIVE.
 Baseline5023d5e exactWorkersSUCCESS2026-10-02T02:43:32Z; currentSHA afterpush.
+
+## Claude119/120 partial cabinet gap repair001 —2026-10-02
+119 remains incomplete. Source tansu ink gap slabs cover wooden drawer fronts
+at only0.95micrometre separation. Actual WebGL GTAOoff/sunshadowoff retained
+bands; GPU sun-off plan superseded/unperformed. Four complete existing closed
+black1mm slabs recessed4mm behind3mm wood bevel; source wood/iron/futon/maps/
+UV/colour/normals/tangents/indices/all unrelatedJSON/full binaryprefix exact.
+Both native source/candidate near and candidate context actually inspected:
+black interference gone with woodgrain and regular shadows/AO/AA retained.
+18PNGs includes6explicit reusedHeri001 controls; loaded reviewtime0dream,
+actualfarbothLOD2/room+cloth+dream+tatami+Heriempty/copy1original1disposed;
+both reentry exact.366tests/validator0-0/Blenderclosed4solids/no outsidecabinet
+surface pairs/save-reopen exact. FirstGPUcontext capture failed GPUwait,
+healthy same-action retry saved; observer deadline did not mean capture saved,
+stale GLdownload rejected and freshbutton action confirmed. No restart.
+144vertexIDs/48 existingtri;8640POSITION/8904GLB extra bytes,0maps/draws/tri/
+TRIPO. Not mobile savings/history/art/device acceptance. Sourcea5c102f5 and
+cushion00336701f8f unchanged. Evidence:browser-study/cabinet-claude119.md,
+workflow/cabinet-ink-119-001-brief.json,private cabinet-ink-119-001/native-
+receipt.json. Interim PNGs cabinet-webgpu-near.png and cabinet-webgl-context.png;
+no formal additional review call. Follow120 finalhall/haori then remaining
+upper plaster/cushion/shoji, integrated1080p/world/device. Observed120/processed
+118; GoalACTIVE. TRIPO3200/spent0/nextOct3after09. Baselineb146db6 exactWorkers
+SUCCESS2026-10-02T03:08:22Z; currentSHA checked afterpush.

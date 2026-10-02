@@ -1,0 +1,53 @@
+{
+  "round": "cabinet-ink-119-001",
+  "scope": "Geometry only: recess the four original1mm black gap slabs behind the tansu drawer fronts by4mm along +X. Preserve complete source binary prefix, wood/iron/futon/other ink geometry, all materials/maps/UV/colour/normals/tangents/indices, cushion003/tatami/Heri/light/camera/AA. No black material removal or texture weakening.",
+  "source": "Frozen a5c102f5 interior; actual optional combined input is cushion00336701f8f. Original and all numbered candidates retained.",
+  "finding": "Actual source UD_Tansu_Futon/UD_ink has eight front triangles atX5.28 overlapping the eight UD_wood_raw fronts on the same plane. Source tansu_chest gap line builds a full slabX5.28..5.281, matching drawer front outerX5.28. Cabinet bands persist in GTAOoff and sunshadowoff native diagnostics. Coplanar geometry is a supported cause to test, not yet visual acceptance. Actual front X differs by0.95micrometres in frozen accessor, not exactly equal.",
+  "coordinates": "Metres glTFYup/sourceBlenderZup. Drawer frontsX5.28..5.30; move only four entire gap slab components from5.28..5.281 to5.284..5.285;4mm is an inferred clearance beyond3mm drawer bevel. Original component count/closedness must be measured before mutation.",
+  "references": [
+    {
+      "path": "eval-building-a/hybrid/inputs/upper/build-upper-dream.py:1515",
+      "claim": "Exact original drawer/ink slab bounds and3mm bevel",
+      "status": "Frozen author source read2026-10-02"
+    },
+    {
+      "url": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc",
+      "claim": "Preserve accessor/buffer contracts, metre coordinates and primitives",
+      "status": "Existing checked project GLB adapter/validator route; no new package"
+    }
+  ],
+  "views": [
+    "upper-corner fixed context",
+    "hero-upper-tansu close, declared before native compare",
+    "ground-corner regression"
+  ],
+  "checks": [
+    "Actual four slab components with48triangles/closed coordinate-welded edges; full projected wood-front overlap measured",
+    "Only selected position X changes; normals/UV/colour/tangents/indices/unrelated JSON/entire inputbinaryprefix exact",
+    "GLBvalidator/reopen geometry and no new structural or outside-cabinet collisions",
+    "Both native source/candidate near/context/error/dream/far/reentry with all shadows restored",
+    "fullbuild/default retained and combined cushion profile guarded"
+  ],
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0,
+    "addedTriangles": 0,
+    "addedDraws": 0,
+    "addedMaps": 0,
+    "transport": "Append-only copied POSITION accessor; extra bytes recorded, not mobile saving"
+  },
+  "status": "Geometry candidate qualified both backends;366tests/validator0-0/Blenderclosed/reopen/no outsidecontacts/18PNGs including6explicitreused controls.119/art/history/motion/mobile/world incomplete. See browser-study/cabinet-claude119.md and private native-receipt.",
+  "fixedNearCamera": {
+    "blenderPosition": [
+      4.3,
+      1.6,
+      4.1
+    ],
+    "target": [
+      5.3,
+      1.91,
+      3.94
+    ],
+    "lens": 32
+  }
+}

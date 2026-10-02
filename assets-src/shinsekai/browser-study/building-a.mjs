@@ -28,10 +28,14 @@ const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
 const clothSupport=new URLSearchParams(location.search).has('clothsupport');
 const upperCushion=new URLSearchParams(location.search).has('uppercushion');
+const cabinetInk=new URLSearchParams(location.search).has('cabinetink');
+if(cabinetInk&&!upperCushion)throw new Error('Cabinet study requires its retained cushion003 input');
 const tatamiGain=new URLSearchParams(location.search).has('tatami')?Number(new URLSearchParams(location.search).get('tatami')||1):null;
 if(tatamiGain!==null&&![0,1].includes(tatamiGain))throw new Error('Invalid tatami normal comparison');
 const heriGain=new URLSearchParams(location.search).has('heri')?Number(new URLSearchParams(location.search).get('heri')||1):null;
 if(heriGain!==null&&![0,1].includes(heriGain))throw new Error('Invalid heri normal comparison');
+const sunShadowGain=new URLSearchParams(location.search).has('sunshadow')?Number(new URLSearchParams(location.search).get('sunshadow')):1;
+if(![0,1].includes(sunShadowGain))throw new Error('Invalid sun shadow comparison');
 const haoriContactGain=new URLSearchParams(location.search).has('haoricontact')?Number(new URLSearchParams(location.search).get('haoricontact')):null;
 if(haoriContactGain!==null&&(!clothSupport||![0,.6,1].includes(haoriContactGain)))throw new Error('Invalid haori wall contact comparison');
 const clothRail=clothSupport||new URLSearchParams(location.search).has('clothrail');
@@ -59,7 +63,8 @@ const scene=new THREE.Scene();scene.background=new THREE.Color(0x8a9ba7);
 const camera=new THREE.PerspectiveCamera(45,1,.03,150);camera.position.set(24,15,27);
 const controls=new OrbitControls(camera,canvas);controls.target.set(3,2,-4.5);controls.enableDamping=true;controls.minDistance=.15;controls.maxDistance=65;
 const hemi=new THREE.HemisphereLight(0xd7e3ee,0x655044,.8);scene.add(hemi);
-const sun=new THREE.DirectionalLight(0xffd3a1,3);sun.position.set(3,12,12);sun.target.position.set(3,0,-4.5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+const sun=new THREE.DirectionalLight(0xffd3a1,3);sun.position.set(3,12,12);sun.target.position.set(3,0,-4.5);sun.castShadow=Boolean(sunShadowGain);sun.shadow.mapSize.set(2048,2048);
+canvas.dataset.sunShadow=JSON.stringify({castShadow:sun.castShadow,bias:-.0001,normalBiasMetres:.01,mapSize:[2048,2048],diagnostic:sunShadowGain===0});
 // Inferred comparison: lower front light reaches deeper through the real sash
 // openings. The source side walls have no windows. Reuse the existing shadow
 // map rather than adding a light or altering window/frame geometry.
@@ -144,7 +149,8 @@ function release(model){
 }
 async function load(part){
  const loadStart=performance.now();
- const gltf=await loader.loadAsync(upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
+ const gltf=await loader.loadAsync(cabinetInk&&part==='interior'?'/study/cabinet-ink-119-001/interior-cabinet.glb':upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
+ if(part==='interior')canvas.dataset.cabinetInk=cabinetInk?'cabinet-ink-119-001':'source';
  if(part==='interior')canvas.dataset.upperCushion=upperCushion?'upper-cushion-119-003':'sourcea5c102f5';
  if(part==='upper-cloth-v2-sewn-rail')canvas.dataset.clothSupport=clothSupport?'haori-support-119-003':'source7240';
  gltf.studyLoadMs=performance.now()-loadStart;
@@ -231,6 +237,7 @@ function pose(){
   'hero-upper-tatami':{position:[1.15,.85,3.95],target:[.95,1.55,3.455],lens:28},
   'hero-upper-tatami-macro':{position:[.6,1.65,3.66],target:[.75,1.95,3.455],lens:35},
   'hero-upper-heri':{position:[.75,1.92,3.57],target:[.85,2.04,3.457],lens:35},
+  'hero-upper-tansu':{position:[4.3,1.60,4.1],target:[5.3,1.91,3.94],lens:32},
   'hero-haori':{position:[1.42,2.22,4.50],target:[.26,2.16,4.50],lens:24},
   'hero-haori-side':{position:[.88,3.10,4.55],target:[.40,2.18,4.50],lens:28},
   'hero-haori-support':{position:[1.75,2.22,4.55],target:[.38,2.18,4.55],lens:24},

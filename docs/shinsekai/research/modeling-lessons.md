@@ -287,3 +287,22 @@ Persist captureError because resumed draw overwrites status and hides failure
 reason. SourceGPUfirstsavefailed, healthyretry recorded/causeunknown; no guessed
 failure.363tests and actualfar1copy+1originaldisposed. ExistingGLshelf bands must
 be isolated before further wall/light qualification. Evidence:heri-claude119.md.
+
+## Inspect near-coplanar dressing before weakening light or wood detail —2026-10-02
+Cabinet ink001 found four full black gap boxes covering wood drawer fronts,
+only0.95micrometres apart. Actual GTAOoff and sunshadowoff GL frames retained
+bands; source geometry and authoring script then identified the overlap.
+Translate complete closed gap components4mm behind the3mm bevel, rather than
+remove all ink or reduce normals/AO/shadows. Both actual native source/candidate
+near views clear interference and retain woodgrain. All other attributes,
+materials, JSON and full binary prefix exact; meaningful tests and independent
+Blender import/closed topology/outside contacts/save-reopen/validator0-0 verify
+scope. Append-only8640POSITION/8904GLB bytes are not savings.18PNGs includes6
+explicit reused controls. Both reentry exact/groundGPUexact/GL14pixmax1;
+dream postprocessing spreads image differences beyond edited drawer. No
+history/art/motion/device or full119 acceptance. PlannedGPUshadowoff explicitly
+superseded/unperformed. A saved capture dataset can belong to a prior view:
+after an observer timeout check whether click actually happened, reject stale
+downloads, then capture once ready. ActualGPUwait failure reason now survives
+status redraw; healthy same-action retry saved, no restart or guessed cause.
+Evidence:browser-study/cabinet-claude119.md and private cabinet-ink-119-001.

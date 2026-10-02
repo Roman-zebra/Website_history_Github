@@ -1,0 +1,35 @@
+{
+  "round": "shelf-band-119-002",
+  "scope": "Diagnostic only: direct sunlight shadow ON/OFF at upper-corner, both backends. Keep AO ON, source/cushion003/cloth/tatami001/Heri001/materials/colour/roughness/light colour-direction-intensity/maps/camera/1280x720/AA/reviewtime0 fixed. No production shadow removal.",
+  "baselineCommit": "b146db6341f1336e000a59f19b85639f1afc89ae",
+  "prior": "Private shelf-band-119-001 actual WebGL GTAO-off still has drawer-front bands; cabinetROI darkpixels8923on/8896off, source retained. Does not identify direct-shadow vs material cause yet.",
+  "sourceSHA256": "a5c102f5c499eaca29a6dede27b5bf419c8296e1752ec1c88af281dee43bd935",
+  "controls": "Explicit retained Heri001 context PNGs, same flags/camera/light/time/resolution; sunshadow=1/source default exact control. Fresh candidate sunshadow=0 actual dataset required.",
+  "coordinates": "Metres glTFY-up/BlenderZ-up; sun world[-5,9,18],target[3,0,-4.5],map2048,camera20mwide/near0.5/far40; sourcebias-0.0001normalized/normalBias0.01m held.",
+  "references": [
+    {
+      "url": "https://github.com/mrdoob/three.js/blob/r186/src/lights/LightShadow.js",
+      "claim": "Tiny depth bias changes can reduce artifacts; increasing normalBias can reduce acne and distort shadows",
+      "status": "Official pinned source read2026-10-02"
+    },
+    {
+      "url": "https://github.com/mrdoob/three.js/blob/r186/src/nodes/lighting/ShadowNode.js",
+      "claim": "Shadow lookup offsets receiver by normalWorld*normalBias, then bias affects shadow coordinates; local vendor matching code checked",
+      "status": "Official pinned source read2026-10-02"
+    }
+  ],
+  "checks": [
+    "ON retains source; invalidflag rejects",
+    "native both backends source vs OFF actual loaded/state/errors/capture",
+    "inspect band and floor shadows, no art approval for shadow-disabled frame",
+    "if bands disappear next one-factor receiver/bias diagnostic; if persist inspect material normal/directlight separately"
+  ],
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0,
+    "newMaps": 0,
+    "newGeometry": 0
+  },
+  "status": "Declared before diagnostic flag; disabled sun shadow is cause isolation only, not a shipping result or mobile saving.",
+  "outcome": "Actual WebGL sun-off frame with AOon retains bands. Planned WebGPU OFF comparison superseded/unperformed once cabinet near-coplanar geometry discovered and both-backend geometry-only repair verified with normal sun shadows. Invalidflag runtime guard implemented but no native invalidflag execution claimed. Not shipping shadow removal; no bias or material-normal changes."
+}
