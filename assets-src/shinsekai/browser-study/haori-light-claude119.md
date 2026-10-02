@@ -91,3 +91,18 @@ Complete the missing light views, then qualify the prepared008 contact map;
 old006 cannot be reused. Hall final art, upper4 and integrated1080p/world/device
 gates remain. Evidence: workflow001 briefs and parent research-cache
 haori-daylight-indirect-119-001 / haori-upperlamp-119-001.
+
+
+## Upperlamp001 native matrix completed —2026-10-02
+119/120 incomplete; optional technical qualification, no default/formal review.
+24fresh1280x720 matched .3/1 front/side/context/window/dream on both backends,
+plus candidatefar/reentry.008/source maps/AA retained; upper4.5m range unchanged.
+Folds more readable; woodgrain/window-grid/floor pools retained. Both dream
+pairs and reentry pixel exact. Far room empty/daylightoff; Tatami+Heri each1copy/
+1originaldisposed; console0. First-view observer deadlines inspected after UI
+completed; actual downloads independently checked, no silent image reuse.
+Evidence: private haori-upperlamp-119-001-native-002/native-receipt.json and
+downloads.json,4overview sheets plus representative originals viewed. Next
+contact009 noflag/0/.6 on008 both-backend native/lifetime; carry finalhaori/hall/
+upper4/integrated/world/device. Existing393checks;1c8d049 Workers success10:03:12Z.
+TRIPO0; Goal API stillblocked, manual development active; no agents/extra reviews.

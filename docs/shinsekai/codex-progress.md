@@ -1145,3 +1145,18 @@ downloads.json;6 overview sheets viewed with representative originals. Next
 upperlamp001 remaining views, contact009 on008, finalhaori/hall/upper4/world.
 393checks/ec38508 Workers success retained. TRIPO0; Goal automatic continuation
 unverified, manual development proceeds; no agents/newtools/extra review calls.
+
+
+## Upperlamp001 native matrix completed —2026-10-02
+119/120 incomplete; optional technical qualification, no default/formal review.
+24fresh1280x720 matched .3/1 front/side/context/window/dream on both backends,
+plus candidatefar/reentry.008/source maps/AA retained; upper4.5m range unchanged.
+Folds more readable; woodgrain/window-grid/floor pools retained. Both dream
+pairs and reentry pixel exact. Far room empty/daylightoff; Tatami+Heri each1copy/
+1originaldisposed; console0. First-view observer deadlines inspected after UI
+completed; actual downloads independently checked, no silent image reuse.
+Evidence: private haori-upperlamp-119-001-native-002/native-receipt.json and
+downloads.json,4overview sheets plus representative originals viewed. Next
+contact009 noflag/0/.6 on008 both-backend native/lifetime; carry finalhaori/hall/
+upper4/integrated/world/device. Existing393checks;1c8d049 Workers success10:03:12Z.
+TRIPO0; Goal API stillblocked, manual development active; no agents/extra reviews.
