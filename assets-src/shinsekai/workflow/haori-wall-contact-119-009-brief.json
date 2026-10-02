@@ -1,0 +1,12 @@
+{
+ "round":"haori-wall-contact-119-009","handoff":119,
+ "scope":"One factor: rebake retained006 static wall contribution with already-qualified008 garment geometry. Keep receiver, four caster roles, radius, samples, seed, map resolution and non-colour semantics fixed. No shape, lighting, material or runtime adoption in this bake round.",
+ "inputs":{"cloth008":"c3623f6a06c0e068d834c7adef26c3c33b59f19b949a956d6f6a75788a83aade","exterior":"7c94fee4aea2b336dfd085586d209701044c32b4a3931b41e3048ce25decb97c"},
+ "coordinates":"Metres, BlenderZup, actual exterior sideL interior plaster atX0.18. ReceiverY1..3.4/Z3.35..5.55, positiveX normal; browser=(X,Z,-Y).",
+ "method":"Reuse official pinned Blender4.5 AO/Emit-bake method previously read and recorded in006 brief. Existing installed4.5.10 API and reproducible006 script, no dependency or tool download. Only garment/bamboo/two cords cast; original combined pegboard/hat excluded. Radius0.55,32AO samples,16Cycles samples,seed119005,512 square,white border,Non-Color. Serialized scene mutation and actual save/reopen snapshot.",
+ "checks":"Assert exact input hashes, receiver bounds and caster roles; finite white-border map; actual packed-image/geometry/UV/matrices/hide/sample/seed/radius save-reopen equality; source hashes unchanged. Preserve006 and all inputs. Native gain0 fidelity/front/side/context/dream/far/reentry on both backends is required before optional runtime qualification; those checks are separate from baking.",
+ "cost":{"TRIPO":0,"newTools":0,"addedTriangles":0,"addedDraws":0,"potentialOwnedMapMiBWithMips":1.333333},
+ "limitations":"Static isolated wall contribution, not moving shadows or whole-room irradiance. Near textures/AA stay fixed. No historical/art/world/phone acceptance.119 incomplete.",
+ "status":"Declared before baking; preserve numbered output and do not overwrite006 or install its old map on008.",
+ "outcome":"Baked with installed4.5.10; input hashes unchanged,512NonColor/whiteborder1/min0.243137,90098bytes/SHA605384f047d748dbf3652e562efe6a3a364b6a9177b0ac30524f1a17e5bf297a. Actual scene saved/reopened and declared snapshot exact; four caster roles confirmed. PNG inspected. Private009 map/blend/bake-receipt retained; no runtime connection/native/art/device qualification."
+}
