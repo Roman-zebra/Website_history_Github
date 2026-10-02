@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY119/120 unfinished. Finish final hall/haori qualification following120 priority, then upper plaster normal+colour grain, rounded cushion fabric and shoji light pools; integrated1080p and world/device gates remain. Cabinet ink001 geometry candidate clears existing dark bands both native backends: four closed1mm black gap solids originally within0.95micrometre of wood face recessed4mm only,48tri/144vertexIDs/8640POSITIONbytes/8904GLBbytes, no addedmaps/draws/tri/TRIPO, all other attributes/JSON/full inputbinaryprefix exact. Sourcea5c102f5/cushion00336701f8f unchanged. Native both source/candidate near and candidate context inspected; regular sun shadows/AO/AA retained, loaded reviewtime0dream, actualfarLOD2/room+cloth+dream+tatami+Heriempty/helpers1copy+1originaldisposed, both reentry exact.18PNGs includes6explicit reusedHeri001 controls.366tests/validator0-0/Blender4.5.10closed/no outsidecabinetcontacts/save-reopen exact. FirstGPUcontext capture failed GPUwait then healthy same-action retry saved; GLobservation prevented click, stale file rejected, actualfresh capture confirmed; no restart. Private cabinet-ink-119-001/native-receipt.json and browser-study/cabinet-claude119.md. GTAOoff and sunshadowoff GLdiagnostics did not remove bands;GPUsun-off explicitly superseded/unperformed. Candidate history/art/motion/realphone unapproved, no mobile saving claim. Currentlocal18779/session46445, olderhealthy18778 retained. Sourcecurrentprivate studies not deployed world. Latestparent120/processed118; interimreplyrequests-to-claude. Baselineb146db6 exactWorkersSUCCESS2026-10-02T03:08:22Z; currentSHA afterpush. Oct2TRIPO3200/spent0/nextOct3after09, GoalACTIVE.",
-  "updatedAt": "2026-10-02T03:47:38.756910+00:00",
+  "next": "PRIORITY120/119: inspect/refine haori frontal local-fold sampling; previous90mm gap and boundary folds leave front flat while side shows volume. Preserve bamboo/cords, sleeve27.5/28.2%sag, collar8.2–9.7mm, roughness.94/weak sheen/maps/source. Hall010 floorcontacts/range5 verified; finalart/upper-moving-shadows/clippedemitters remain. Then upper plaster normal+colour grain, rounded cushionfabric, shoji pools and integrated1080p/world/device gates. Cabinet ink001 done as optional geometry candidate: both native near/context viewed, actualfarbothempty/helpersdisposed/reentryexact;18PNGs(6explicit reusedHeri001controls),366tests/validator0-0/Blender4closed/no outsidecontacts/reopenexact. Source/cushion003 retained,8640POSITION/8904GLB extra bytes,0newmaps/draws/tri/TRIPO. No119/art/history/motion/mobile/world acceptance. Evidence browser-study/cabinet-claude119.md and privatecabinet-ink-119-001/native-receipt.json. FirstGPUcontextcapture GPUwaitfailed/healthyretry saved; oldsavedGLstate/staledownload rejected then freshcapture; no restart. GLGTAOoff and sunshadowoff bands persisted; GPUsunoff superseded/unperformed. Local18779/session46445, old18778 healthyretained. Commit2728a90edbcf7de1414d94ca3df0e6fdd4f95b15 exactWorkersSUCCESS2026-10-02T03:50:33Z. Parentlatest120/processed118/interimreply sent throughrequests-to-claude. Oct2TRIPO3200/spent0/nextOct3after09; GoalACTIVE.",
+  "updatedAt": "2026-10-02T03:50:41.387991+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 363,
+    "fullBuildTests": 366,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -90,7 +90,8 @@
     "haoriWallContactNativeEvidence": "../research-cache/haori-wall-contact-119-006/native-receipt.json",
     "upperCushionNativeEvidence": "../research-cache/upper-cushion-119-003/native-receipt.json",
     "upperTatamiNativeEvidence": "../research-cache/tatami-normal-119-001/native-receipt.json",
-    "upperHeriNativeEvidence": "../research-cache/heri-normal-119-001/native-receipt.json"
+    "upperHeriNativeEvidence": "../research-cache/heri-normal-119-001/native-receipt.json",
+    "upperCabinetNativeEvidence": "../research-cache/cabinet-ink-119-001/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete; tatami001/Heri001 normal-only candidates verified, artistic/historic/motion/mobile unqualified. Next existing sourceGLshelf bands diagnostic/plaster grain/shoji pools/rounded cushion-fabric; finalhaori/hall/integrated1080p pending. Observed120/processed118; interim replied, no extra review/agents."
+  "pendingClaudeRepairs": "119 incomplete; cabinet near-coplanar interference geometry-only fix qualified both backends. Hall010 floorcontacts/range5 verified but finalart/upper/shadow/emitter caveats; prioritize finalhaori according120, front localfold sampling stillcoarse90mm and frontal boardlike look. Then plaster normal+colour grain/rounded cushionfabric/shojipools/integrated1080p/world/device. Observed120/processed118; interim replied; no extra review/agents."
 }
