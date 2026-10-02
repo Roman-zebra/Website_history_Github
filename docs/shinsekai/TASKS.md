@@ -912,3 +912,18 @@ finalhaori/hall/integrated1080p/world gates. Evidence:workflow006/private006/stu
 Observed120/processed118/TRIPO3200spent0nextOct3after09. Human resumed manual
 work; Goal API stillblocked after capacity failure, automatic continuation not
 verified; user asked to resume Goal in app. No paid/tools/agents/extra reviews.
+
+
+## Cushion006 native recovery —2026-10-02
+119/120 incomplete; no formal review. Chrome4 fresh2862 works, no restart.
+36 fresh1280x720 source/.5/1 × both backends × close/side/context/dream/far/
+reentry PNGs saved. Optional copies/originals each1disposed; control0. GPUall/
+GL.5 exactreentry; GL0/1 residual45pixels/max1, cause unverified. Side weave
+visible, standardclose weak; mechanical edge/finalfabric/AA/phone unapproved.
+One stale saved flag after failed GLclick rejected using actual download proof;
+fresh retry retained. Inputs178f76bf/490706d6 exact, no asset/light/code revision.
+Evidence: private cushion-fabric-119-006-native-001/native-receipt.json and
+downloads.json;6 overview sheets viewed with representative originals. Next
+upperlamp001 remaining views, contact009 on008, finalhaori/hall/upper4/world.
+393checks/ec38508 Workers success retained. TRIPO0; Goal automatic continuation
+unverified, manual development proceeds; no agents/newtools/extra review calls.
