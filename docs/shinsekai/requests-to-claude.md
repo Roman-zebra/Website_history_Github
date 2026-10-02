@@ -1615,3 +1615,25 @@ upper4/integrated/world/device. Existing393checks;1c8d049 Workers success10:03:1
 TRIPO0; Goal API stillblocked, manual development active; no agents/extra reviews.
 Interim PNGs: webgpu-lamp-front.png, webgl-lamp-side.png,
 webgl-lamp-context.png. Full119 still incomplete; no formal review request.
+
+
+## Correct contact009 native matrix completed —2026-10-02
+119/120 incomplete; optional technical qualification, no default/formal review.
+20fresh1280x720 gain0/.6 front/side/context/dream on both backends plus candidate
+far/reentry. Reused8 actual noflag lighting001 source PNGs only after hash/profile/
+camera/DOM checks. Inputs008c3623f6a/009605384f0/cabinet09a0e26d exact; no geometry,
+light, texture-detail or AA revision. GPU noflag/zero exact; GLcontext12pixels/max1
+residual, other views exact. Both zero/contact dream pairs exact; far map1disposed/
+originalwallrestored; GPU reentry exact, GL5pixels/max1 residual, cause unverified.
+Console0. Subtle wall contact; cloth texture/folds/bamboo/cords/silhouette preserved.
+One pending zero-dream lost by premature navigation was retained/rejected, then
+recaptured with actual download proof. One optional512map/~1.33MiB mip estimate;
+no new geometry/draw. Static baked contact is not moving-light/physical shadow.
+Evidence: private haori-wall-contact-119-009-native-002/native-receipt.json,
+downloads.json,4overview sheets and originals inspected. Next upperplaster/shoji
+binding/normal-versus-colour/near-far audit; existing grain must not be boosted
+blindly. Carry004/005 native alternates/finalhaori/hall/upper4/integrated/world/device.
+393 code checks retained;6da82e8 Workers success10:23:54Z. TRIPO0; Goal API blocked,
+manual development active. No agents/new tools/extra review calls.
+Interim PNGs: webgpu-contact-front.png, webgl-contact-side.png,
+webgl-contact-context.png. Full119 remains incomplete; no formal review request.
