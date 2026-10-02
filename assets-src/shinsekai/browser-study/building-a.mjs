@@ -27,6 +27,10 @@ const dreamCheck=document.querySelector('#dreamLook');
 const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
 const clothSupport=new URLSearchParams(location.search).has('clothsupport');
+const clothFold=new URLSearchParams(location.search).has('clothfold');
+const clothFoldRevision=clothFold?(new URLSearchParams(location.search).get('clothfold')||'007'):null;
+if(clothFold&&!['007','008'].includes(clothFoldRevision))throw new Error('Invalid front fold revision');
+if(clothFold&&!clothSupport)throw new Error('Front fold study requires retained physical support');
 const upperCushion=new URLSearchParams(location.search).has('uppercushion');
 const cabinetInk=new URLSearchParams(location.search).has('cabinetink');
 if(cabinetInk&&!upperCushion)throw new Error('Cabinet study requires its retained cushion003 input');
@@ -38,6 +42,7 @@ const sunShadowGain=new URLSearchParams(location.search).has('sunshadow')?Number
 if(![0,1].includes(sunShadowGain))throw new Error('Invalid sun shadow comparison');
 const haoriContactGain=new URLSearchParams(location.search).has('haoricontact')?Number(new URLSearchParams(location.search).get('haoricontact')):null;
 if(haoriContactGain!==null&&(!clothSupport||![0,.6,1].includes(haoriContactGain)))throw new Error('Invalid haori wall contact comparison');
+if(clothFold&&haoriContactGain)throw new Error('Front fold geometry needs a new contact bake; retain old source comparison separately');
 const clothRail=clothSupport||new URLSearchParams(location.search).has('clothrail');
 const clothHat=clothRail||new URLSearchParams(location.search).has('clothhat');
 const clothSewn=clothHat||new URLSearchParams(location.search).has('clothsewn');
@@ -149,10 +154,10 @@ function release(model){
 }
 async function load(part){
  const loadStart=performance.now();
- const gltf=await loader.loadAsync(cabinetInk&&part==='interior'?'/study/cabinet-ink-119-001/interior-cabinet.glb':upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
+ const gltf=await loader.loadAsync(cabinetInk&&part==='interior'?'/study/cabinet-ink-119-001/interior-cabinet.glb':upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothFold&&part==='upper-cloth-v2-sewn-rail'?`/study/haori-frontfold-119-${clothFoldRevision}/upper-cloth-support.glb`:clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
  if(part==='interior')canvas.dataset.cabinetInk=cabinetInk?'cabinet-ink-119-001':'source';
  if(part==='interior')canvas.dataset.upperCushion=upperCushion?'upper-cushion-119-003':'sourcea5c102f5';
- if(part==='upper-cloth-v2-sewn-rail')canvas.dataset.clothSupport=clothSupport?'haori-support-119-003':'source7240';
+ if(part==='upper-cloth-v2-sewn-rail')canvas.dataset.clothSupport=clothFold?`haori-frontfold-119-${clothFoldRevision}`:clothSupport?'haori-support-119-003':'source7240';
  gltf.studyLoadMs=performance.now()-loadStart;
  if(disposed){release(gltf);throw new DOMException('Page left','AbortError');}
  if(part==='dream-petals'){
