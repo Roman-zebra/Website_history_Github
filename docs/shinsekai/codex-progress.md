@@ -956,3 +956,33 @@ no formal additional review call. Follow120 finalhall/haori then remaining
 upper plaster/cushion/shoji, integrated1080p/world/device. Observed120/processed
 118; GoalACTIVE. TRIPO3200/spent0/nextOct3after09. Baselineb146db6 exactWorkers
 SUCCESS2026-10-02T03:08:22Z; currentSHA checked afterpush.
+
+
+## Claude119/120 partial haori front-fold007/008 —2026-10-02
+119 remains incomplete.007 four measured midbody folds still left upperhalf
+flat; retained and superseded.008 extends four crests belowshoulder with only
+horizontal refinement:3212garmenttri vs0031916/0075780,9060clothcompaniontri,
++1296tri/+49476GLBbytes,0newmaps/draws/TRIPO. Midbody4–7 has four complete
+21.997–22.873mm crests; small boundarypeaks separate. Shoulder/sleeve/collar/
+back/hem sourcecoords and originalcornerUVcolour/otherobjects exact,003bamboo/
+cordattributesindicesmaterials byteexact. Sourcefrozenprefix/unrelatedmaps/
+materials retained. Blenderoneclosedexportedshell/no neighbourpairs/reopenexact,
+validator0-0/full366tests. Post-settlement shape correction, not new simulation.
+Rawexports/technicalBMeshfailures preserved; transition-ngon-only export-r2
+keeps positions/tri and resolves tangent export. No UD-only helper repair claim.
+Correction:90mm refers to backcentralgap; original front31.1–33.6mm.
+Fresh source/candidate BOTHbackendcompletefront/side inspected at1280x720AA/
+time0/original-source-light/AOoff, support/sag retained and verticalfolds reach
+upperbody; context/dream unchanged. ActualfarLOD2/interiorclothdreamhelpers
+empty/Tatami+Heri each1copy1originaldisposed/reentry checked in native receipt.
+007fulldaylightfront too dark; AOoffalone stayed dark; source-light reveals
+folds. Source-light diagnostic is NOT combineddaylight/AO art approval. Old006
+wallcontactbake rejected on newfoldgeometry. Next isolate daylight indirect
+light onefactor, rebakecontacts aftershape/light, remainingupperplastergrain/
+roundedcushion/shoji/hallart/integrated1080p/world/device. Observed120/processed
+118; no formal review requested/additionalClaude/agents/tools. TRIPO3200/spent0/
+nextOct3after09; GoalACTIVE. Evidence:browser-study/haori-frontfold-claude119.md,
+workflow007/008briefs/generator/export/verifier,private008native-receipt.json.
+Interimimages(private008):fold-webgpu-front.png,fold-webgl-side.png (shape
+diagnostic only). Baseline9ece332 exactWorkersSUCCESS2026-10-02T03:53:03Z;
+currentcommit/exactWorkers checked afterpush. Local18781/session49103.

@@ -306,3 +306,28 @@ after an observer timeout check whether click actually happened, reject stale
 downloads, then capture once ready. ActualGPUwait failure reason now survives
 status redraw; healthy same-action retry saved, no restart or guessed cause.
 Evidence:browser-study/cabinet-claude119.md and private cabinet-ink-119-001.
+
+## Resolve front folds across their curvature, then view the whole body —2026-10-02
+Correct the earlier sampling shorthand:90mm is the back central gap; original
+front intervals are31.1–33.6mm.007's four22mm measured midbody crests did not
+make its upper half read as hanging cloth.008 extends those crests below the
+shoulder while refining only horizontal edges:3212 garment triangles versus
+007's5780, without a phone performance claim. Preserve original pins, sleeves,
+collar, back, hem, support attributes and source UV/colour. Added geometry is
+an inferred post-settlement correction, not a new simulation or art acceptance.
+
+BMesh layer creation/subdivision can invalidate old BMVert wrappers. Snapshot
+source coordinates/IDs and remap fresh vertices after the operation; retain
+technical failures instead of silently restarting. Transition ngons prevented
+Mikk tangents; triangulating only those ngons preserved positions/triangle count
+and exported validator0/0. An UD-only repair helper does not repair this garment.
+Independent closed shell/neighbours/save-reopen and source-retention checks
+remain necessary even when four numeric peaks pass.
+
+Actual full-feature daylight frames were too dark to judge007. AOoff alone
+stayed dark; original-source lighting exposed folds. Treat that as a lighting
+profile diagnostic, not evidence of a particular light's cause. Fresh matched
+source/candidate cameras/light/AA/time are required for geometry comparison;
+the readable diagnostic cannot qualify combined daylight/AO art. Do not reuse
+006's old contact bake on altered geometry. Evidence:haori-frontfold-claude119.md
+and private007/008 retained briefs/technical scripts/scenes/native frames.
