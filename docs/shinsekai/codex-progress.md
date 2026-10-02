@@ -881,3 +881,15 @@ forward; integrated1080p not ready. Observed120/processed118. FreshOct2 TRIPO
 balance3200/consumption0/history no spend; nextOct3 after09. No newtools/agents/
 reviews/charged generation. GoalACTIVE. Baseline5df96cb exactWorkersSUCCESS
 2026-10-01 23:52:31UTC; nextSHA checked separately after push.
+
+## Claude119/120 partial upper cushion003 —2026-10-02
+One source cushion/two open surfaces; actual wooden floor.001 frame crossing
+rejected;002 rearward165mm/003 seam40–43mm and80mm max technically qualified.
+Source retained, floor-only20contacts/other neighbours0, closed/reopen/0-0
+validator, native both backends/dream/actual far empty/reentry,359tests.
+Art still board-like; keep rounded outline/fabric pending. Existing GLshelf
+bands also on source.20PNGs/7reused/2freshGLsource/1unsettled-far diagnostic;
+GPUreentryexact/GL12pixelsmax1. Full119/world/phone not approved; TRIPO0/3200.
+Continue tatami weave/edging/plaster/shoji plus remaining haori/hall/integrated
+1080p. Details: browser-study/upper-cushion-claude119.md and private003 receipt;
+status replied requests-to-claude.md. GoalACTIVE, no extra reviews/agents.

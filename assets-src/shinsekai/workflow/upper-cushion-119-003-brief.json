@@ -1,0 +1,105 @@
+{
+  "round": "upper-cushion-119-003",
+  "scope": "One factor versus002: raise bottom/top seam from18/21mm to40/43mm while maximum filled thickness stays80mm. Same closed topology,165mm rearward placement, colour/UV/material, light, camera, AA and room.",
+  "reason": "Native002 fixed oblique/side images show a closed supported cushion but the thin perimeter still reads as a board.001 retained rejected door-frame crossing;002 retained technically qualified, art unapproved.",
+  "coordinates": "Blender metres Z-up; centre(3.2,5.215),yaw0.4rad,55cm footprint, wooden floor3.4549999237. Dimensions and stitched corner interpretation are inferred art, not documented historic fabric.",
+  "method": "Existing append-only selective source adapter; only filled profile seam elevation changes. Upper floor+43+37*sin(pi*u)*sin(pi*v)mm, lower max(0,40*(1-fill/.65))mm; same central floor support patch. Source corner patches follow seam40..45mm.",
+  "references": "Existing sonnet zabuton/pillow source and verified pinned Blender4.5.10 coordinate weld/normals/GLB workflow. Prior official4.5 refetch402 unavailable; no new tool or purchase.",
+  "views": [
+    "hero-upper-cushion",
+    "hero-upper-cushion-side",
+    "upper-corner"
+  ],
+  "checks": [
+    "closed240tri/positive volume/80mm max/actual wood floor contacts only",
+    "table/door/merged dressing and all neighbours discrete surface audit",
+    "source binary and unrelated data exact",
+    "saved blend reopen + GLB validator0/0",
+    "native002/003 controlled close/side WebGPU/WebGL2 + context and dream/far/reentry",
+    "full build"
+  ],
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0,
+    "extraDraws": 0,
+    "extraTrianglesVersusSource": 48
+  },
+  "status": "003 technical/native verified but art unapproved: straight outline still board-like in dark cloth. Both backends close/side/context viewed, dream loaded/far empty/reentry qualified.20PNGs incl7reused controls +1unsettled-far diagnostic +2freshGLsource controls;359tests. No production/phone/full119 acceptance.",
+  "nativeResults": {
+    "webgpu-near-002-vs003": {
+      "differentPixels": 177010,
+      "maxChannelDelta": 78,
+      "bounds": [
+        108,
+        18,
+        1278,
+        719
+      ]
+    },
+    "webgpu-side-002-vs003": {
+      "differentPixels": 315809,
+      "maxChannelDelta": 130,
+      "bounds": [
+        0,
+        0,
+        1279,
+        719
+      ]
+    },
+    "webgpu-reentry": {
+      "differentPixels": 0,
+      "maxChannelDelta": 0,
+      "bounds": null
+    },
+    "webgpu-source-vs003-context": {
+      "differentPixels": 3553,
+      "maxChannelDelta": 104,
+      "bounds": [
+        414,
+        414,
+        563,
+        496
+      ]
+    },
+    "webgl-near-002-vs003": {
+      "differentPixels": 177169,
+      "maxChannelDelta": 78,
+      "bounds": [
+        108,
+        11,
+        1279,
+        719
+      ]
+    },
+    "webgl-side-002-vs003": {
+      "differentPixels": 317135,
+      "maxChannelDelta": 134,
+      "bounds": [
+        0,
+        0,
+        1279,
+        719
+      ]
+    },
+    "webgl-reentry": {
+      "differentPixels": 12,
+      "maxChannelDelta": 1,
+      "bounds": [
+        112,
+        117,
+        1060,
+        554
+      ]
+    },
+    "webgl-source-vs003-context": {
+      "differentPixels": 3558,
+      "maxChannelDelta": 104,
+      "bounds": [
+        414,
+        414,
+        563,
+        496
+      ]
+    }
+  }
+}

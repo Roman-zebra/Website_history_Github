@@ -1,0 +1,34 @@
+{
+  "round": "upper-cushion-119-002",
+  "scope": "One additional factor versus001 shape: rearward165mm Y placement to clear existing fusuma frame, then re-audit writing-table legs and full structural contacts. Same filled6x6 profile/normals/source colours/UV/material/light/AA and footprint/yaw.",
+  "inputs": "Unchanged sourcea5c102f5; reproduce001 geometry then translate only selected cushion points165mm;001 retained",
+  "coordinates": "Blender metres Z-up; centre(3.2,5.215),yaw0.4rad; actual wooden floor3.4549999237. Rounded body fully behind floor startY4.85; original corner trim overhangs are inferred stitched details.",
+  "design": "Retain source6x6 top/bottom grids, vertex colour/UV and source CLOTH material. Filled80mm form,21mm top/18mm bottom edge,3mm closed side seam; bottom central support patch rests at actual3.455m. Source corner patches compress to5mm seam trim. These are inferred art dimensions, not measured historic cushion.",
+  "method": "Deform only identified cushion surfaces/corner patches and close perimeter24quads (+48tri), reuse source geometry/data and existing puffed pillow method. Recalculate only candidate normals; preserve complete source binary and unrelatedprimitive/data in append-only selectiveGLB adapter. No texture/lighting/AA changes.",
+  "references": [
+    "Pinned Blender4.5 BMesh ops remove_doubles/recalc_face_normals, officialAPI",
+    "Pinned Blender4.5glTF exporter UVs/materials/vertexcolour/axis conversion, officialmanual",
+    "Existing repo authoring sonnet zabuton() and upper pillow()"
+  ],
+  "views": [
+    "hero-upper-cushion close",
+    "upper-window/upper-corner context"
+  ],
+  "checks": [
+    "one closed welded cushion body; side seal; corner trim owned closed islands; finite vertices/UV/colour",
+    "actual bottom contact and no unintended scene-neighbour crossing at fixed pose",
+    "source hashes/unrelated attributes/materials/nodes/lights/animations exact; originalbinaryprefix exact",
+    "save/reopen Blender snapshot andGLB validator",
+    "matching native source/candidate close/context WebGPU/WebGL, dream/far/reentry/disposal",
+    "meaningful source-retention tests/fullbuild"
+  ],
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0,
+    "expectedExtraTriangles": 48,
+    "expectedRoomWithHaori": 149754
+  },
+  "status": "002 closed/80mm/wood floor contact-only verified; native close/side WebGPU+WebGL and GPUcontext saved. Thin straight perimeter still reads as a board, art unapproved.003 changes only seam elevation;002 retained as its fixed-light/camera control.002 lifecycle not separately certified.",
+  "additionalDiagnosticView": {"name":"hero-upper-cushion-side","position":[4,5.2,3.73],"target":[3.2,5.215,3.50],"lens":28,"scope":"Camera-only volume diagnostic, not an artistic geometry improvement"},
+  "referencesStatus": "Official4.5 manual/API refetch402unavailable; no purchase. Use existing verified BMesh normal/weld/export practice from003 plus installed4.5.10 operator definitions; document actual used API in authoring receipt."
+}

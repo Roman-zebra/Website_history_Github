@@ -25,6 +25,7 @@ const dreamCheck=document.querySelector('#dreamLook');
 const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
 const clothSupport=new URLSearchParams(location.search).has('clothsupport');
+const upperCushion=new URLSearchParams(location.search).has('uppercushion');
 const haoriContactGain=new URLSearchParams(location.search).has('haoricontact')?Number(new URLSearchParams(location.search).get('haoricontact')):null;
 if(haoriContactGain!==null&&(!clothSupport||![0,.6,1].includes(haoriContactGain)))throw new Error('Invalid haori wall contact comparison');
 const clothRail=clothSupport||new URLSearchParams(location.search).has('clothrail');
@@ -129,7 +130,8 @@ function release(model){
 }
 async function load(part){
  const loadStart=performance.now();
- const gltf=await loader.loadAsync(clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
+ const gltf=await loader.loadAsync(upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
+ if(part==='interior')canvas.dataset.upperCushion=upperCushion?'upper-cushion-119-003':'sourcea5c102f5';
  if(part==='upper-cloth-v2-sewn-rail')canvas.dataset.clothSupport=clothSupport?'haori-support-119-003':'source7240';
  gltf.studyLoadMs=performance.now()-loadStart;
  if(disposed){release(gltf);throw new DOMException('Page left','AbortError');}
@@ -208,6 +210,8 @@ function bindDrawers(model){
 function pose(){
  const view=select.value;
  const clothShots={
+  'hero-upper-cushion':{position:[4.0,4.35,3.95],target:[3.2,5.05,3.50],lens:32},
+  'hero-upper-cushion-side':{position:[4.0,5.2,3.73],target:[3.2,5.215,3.50],lens:28},
   'hero-haori':{position:[1.42,2.22,4.50],target:[.26,2.16,4.50],lens:24},
   'hero-haori-side':{position:[.88,3.10,4.55],target:[.40,2.18,4.50],lens:28},
   'hero-haori-support':{position:[1.75,2.22,4.55],target:[.38,2.18,4.55],lens:24},

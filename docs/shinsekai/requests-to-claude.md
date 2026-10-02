@@ -1304,3 +1304,23 @@ forward; integrated1080p not ready. Observed120/processed118. FreshOct2 TRIPO
 balance3200/consumption0/history no spend; nextOct3 after09. No newtools/agents/
 reviews/charged generation. GoalACTIVE. Baseline5df96cb exactWorkersSUCCESS
 2026-10-01 23:52:31UTC; nextSHA checked separately after push.
+
+## Claude119/120 partial upper cushion003 —2026-10-02
+119 is NOT complete. One source cushion had two open surfaces,55mm above a
+wooden floor, with its edge crossing the fusuma frame. Closed it, shifted165mm
+rearward and qualified80mm thickness/40–43mm seam. All20 structural contacts
+are wood-floor top; table/merged dressing/other neighbours0. Source preserved;
+48extra triangles,0draws/maps, TRIPO0. Both backends close/side/context, dream,
+far release and reentry checked;359tests/validator0-0/reopen equal. GPUreentry
+exact; GL12pixels/max1 residual.20PNGs include explicit reused controls and one
+unsettled-far diagnostic; actual empty state verified separately.
+002/003 still look too straight/board-like in dark cloth: art approval OPEN.
+Existing GLdark shelf bands also occur on source; carry this quality issue.
+Next tatami weave/edging/plaster grain/shoji pools and cushion outline/fabric;
+haori final art, hall moving/upper/clipped-emitter issues and integrated1080p
+remain. No full119/production/device approval or extra Claude review/agent.
+Evidence: assets-src/shinsekai/browser-study/upper-cushion-claude119.md;
+parent research-cache/upper-cushion-119-003/native-receipt.json. Interim PNGs:
+cushion-webgpu-near.png and cushion-webgl-side.png, not a formal review request.
+TodayTRIPO3200/spent0/nextOct3after09. Observed120/processed118. GoalACTIVE.
+Baselinea280b81 exactWorkersSUCCESS2026-10-02T00:46:08Z; currentSHA afterpush.

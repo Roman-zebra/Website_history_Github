@@ -229,3 +229,29 @@ without guessed cause. Native image changes alone do not prove better art;
 004 custom local crest audit gives three complete back crests11.3–23.0mm, but
 boundary brackets/coarse90.1mm sampling limit final count acceptance. Hem
 inward projection includes taper. Do not promote seeded values to proof.
+
+
+## Full footprint and actual art qualify a cushion —2026-10-02
+Frozen Sonnet zabuton is one cushion with two disconnected open grids/four
+corner blocks. It is above wooden floor, not tatami; source component inventory
+alone gave misleading interpretation. Close/source hash tests are not placement
+approval. Five central rays miss the fusuma-edge crossing; qualify every full
+triangle contact by material + world normal + exact floor height, not just a
+structural-node whitelist.001 has real68wall/frame contacts;002 moves165mm and
+reduces them to20wood-floor-only contacts. Audit SAME merged mesh neighbours
+(writing-table legs) as well as other objects. Preserve rejected numbered output.
+
+003 filled80mm/40-43mm seam is closed/reopened/0-0validator and source data exact,
+but native dark straight outline still reads as a board. Numeric positive volume
+does not prove fabric art. Keep rounded outline/weave qualification pending;
+two attempted profiles remain for next occasional milestone review without
+additional agents/review calls. Full359tests, both actual near/side/context saved,
+source/candidate GLshelf bands are an existing quality issue. A far select value
+before rAF is not released residency: wait for actual LOD2 and empty interior/
+cloth/dream before claiming reentry. First unsettled GPUreturn PNG diagnostic
+retained; correct GPUreentry exact, GL12pixels/max1 residual recorded.20PNGs
+including7reused controls/two fresh sourceGL/one diagnostic. Source binary prefix
+retention adds147,712bytes, not mobile savings;48tri/0maps/0draws, TRIPO0.
+Evidence: browser-study/upper-cushion-claude119.md, workflow003 brief/verifier,
+parent upper-cushion-119-001/002/003 receipts. Continue119 upper4 and existing
+haori/hall/integrated1080p limitations, not full119 or iPhone approval.
