@@ -205,3 +205,27 @@ validator, both reentry exact. GLcontext14pixelsmax1 retained without cause clai
 Evidence: workflow/haori-support-119-001/003-brief.json, browser-study/haori-support-
 claude119.md and parent research-cache/haori-support-119-001/002/003. WallAO, final
 sheen/local crease/hem, upper4 and full119 remain unfinished.
+
+
+## Bound AO casters and freeze existing animated grain for comparison —2026-10-02
+Wall119 receiver is exterior sideL atBlenderX.18, not the interior shell. An
+interior-lifetime shader must restore cached exterior assignments before map
+and material disposal. Exact null gain bypasses copying; temporary dream
+restoration plus glass array reconciliation are tested.005 combined coat-root
+hardware gives a broad AO halo/stripe;006 excludes that original combined
+pegboard/hat, retaining unchanged garment/support. Finite radius.55/32samples/
+Cycles16/seed119005, noncolour512x512 map90058bytes. Additional~1.33MiB with
+mips is a cost, not phone qualification. Blender Object wrappers become invalid
+after reopen: snapshot caster names before it; preserve completed PNG/blend
+and recover receipt only instead of rebaking after a serialization failure.
+Read saved state before retrying any capture observer timeout or navigating.
+
+Timed dream grain.04 changes PNGs even for consecutive source captures. Wait
+for loaded dream geometry and use explicit reviewtime0 only for repeatable
+comparison. Both backend dream controls nowexact, defaults remain timed.
+Four source-null views exact; GPUreentry exact/GL6pixelsmax1 residual retained
+without guessed cause. Native image changes alone do not prove better art;
+006 is optional, frontal wall contact subtle and full119 remains unfinished.
+004 custom local crest audit gives three complete back crests11.3–23.0mm, but
+boundary brackets/coarse90.1mm sampling limit final count acceptance. Hem
+inward projection includes taper. Do not promote seeded values to proof.

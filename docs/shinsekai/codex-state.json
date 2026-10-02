@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY119/120 unfinished. Haori support003 retained optional shape study after new bamboo/cord/connected sleeve construction and32-frame Blender settlement.002 cords hidden,003 lowers support80mm and retains settled shape; source7240/unrelated original binary/materials/maps/nodes exact. Both native complete front/side show support and sleeve volume; sleeve sag107.275/109.809mm=27.5065/28.1562%, folded collar projection8.202-9.713mm.1916cloth+100support; replacement7764/room149706, GLB3582776; validator0/0, source neighbours0surface pairs, connected/closed/reopen equal,353tests.15PNGs including copiedGPUcontext baseline from002 and initial framing diagnostic; current contextsGPUexact/GL14pixelsmax1, both reentryexact/farcloth+interiorempty/errors0. WallAO and final sheen/local10-25mm crease count/depth/hem still unqualified; sampled41-57mm frontXrange includes broad body and is not crease certification. Next measure local crease/back profile then isolated AO/sheens with same complete cameras/light, upper4, integrated1080p notice when ready, production/fullworld/phone. Hall staticcontact010 remains retained partial, moving/upper shadows/emitters clipping open. Hallart17; two haori119 native construction rounds recorded separately; cloth7240 remains frozen. Current18773session36166, earlier18772owned63788 intentionally retired, original18770/18771 retained. Baseline312cbaf exactWorkersSUCCESS2026-10-01 23:08:29UTC; next pushed SHA checked separately. TRIPO0/Oct1lastlive3200/Oct2 after09 daily pending;GoalACTIVE/no newtools/agents/review calls.",
-  "updatedAt": "2026-10-01T23:49:39.889782+00:00",
+  "next": "PRIORITY119/120 unfinished. Next BuildingA upper4: inspect actual frozen tatami/cushion/plaster/shoji geometry/materials, scoped brief and one-factor candidates preserving near maps/AA/quality. Haori003 support/sag retained;004 three complete back crests11.3–23.0mm measured with boundary/90.1mm coarse-sampling caveats; inward hem16.2–21.2mm includes taper. Wall contact006 optional native verified both backends after005 hardware halo/stripe and invertedUV diagnostic rejected; only unchanged003 garment/support cast, original geometry/material maps/light fixed. One90058-byte512x512 data map/~1.33MiB RGBA+mips, no new draw/tri; exterior-sideL source assignments restored by interior owner. Four source-null controls exact (GPU reused005/FreshGL); both fixed-phase dream sources exact after reviewtime0 for time-grain. GPUreentry exact/GL6pixelsmax1 residual unknowncause; both far contact/cloth/interior empty, map1disposed, errors0.22scenePNGs/355tests/reopen equal; source003e033a5cb/ext7c94fee4 unchanged. Retain interim optional static contribution, frontal contact subtle, final sheen/crease artistic acceptance pending. Hall010 static contacts/range5/EV−1.25/2350K/dark depth retained partial; moving/upper shadows/emitters clipping open. Full119/integrated1080p/fullworld/phone not approved. Progress replied via agreed requests-to-claude route at human request. Current18775session15020;18774 is prior005 owned session79301,18773prior003session36166 retained. Baseline5df96cb exactWorkersSUCCESS2026-10-01 23:52:31UTC; nextSHA checked separately. TRIPO freshOct2balance3200/spent0/dailyhistoryno spend/nextOct3after09;GoalACTIVE/no newtools/agents/review calls.",
+  "updatedAt": "2026-10-02T00:44:00.120471+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -27,7 +27,7 @@
   },
   "integrations": {
     "tripoStudio": {
-      "checkedAt": "2026-10-01",
+      "checkedAt": "2026-10-02",
       "documentation": "docs/shinsekai/research/tripo-integration.md",
       "route": "Studio GLB export -> private intake -> Blender / local browser review",
       "candidate": "../research-cache/tripo-intake/baluster-001",
@@ -43,7 +43,7 @@
         "../research-cache/tripo-mobile-006",
         "../research-cache/tripo-mobile-007"
       ],
-      "nextDailyCheck": "2026-10-02 after09:00JST; Oct1 observed3200 is not a freshOct2 observation"
+      "nextDailyCheck": "2026-10-03 after09:00JST"
     },
     "materialMaker": {
       "version": "1.7",
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 353,
+    "fullBuildTests": 355,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -86,7 +86,8 @@
     "hallShadowRejectedEvidence": "../research-cache/hall-shadow-119-008/native-receipt.json",
     "hallFillNativeEvidence": "../research-cache/hall-fill-119-009/native-receipt.json",
     "hallBakedContactNativeEvidence": "../research-cache/hall-contact-119-010/native-receipt.json",
-    "haoriSupportNativeEvidence": "../research-cache/haori-support-119-003/native-receipt.json"
+    "haoriSupportNativeEvidence": "../research-cache/haori-support-119-003/native-receipt.json",
+    "haoriWallContactNativeEvidence": "../research-cache/haori-wall-contact-119-006/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete. Interim status replied via requests-to-claude.md. Haori visible bamboo/cord/sag/volume003 native verified; wallAO/local crease/hem/sheen acceptance pending, then upper4. Hall contact010 static only; moving/upper shadows/clipped emitters and integrated1080p remain. Observed120/processed118."
+  "pendingClaudeRepairs": "119 incomplete; requested status reply updated with native wallcontact006 and measurement004. Next upper4; carry final haori visual acceptance and hall moving/upper/clipped-emitter limitations, integrated1080p notice when ready. Observed120/processed118."
 }

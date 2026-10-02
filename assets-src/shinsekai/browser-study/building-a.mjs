@@ -15,6 +15,8 @@ import {connectShopPaperShadows} from './shop-paper-shadow.mjs';
 import {connectShopDaylight} from './shop-daylight.mjs';
 import {connectShopWallWear} from './shop-wall-wear.mjs';
 import {connectShopWoodWear} from './shop-wood-wear.mjs';
+import {createHaoriWallContactLook} from './haori-wall-contact-look.mjs';
+import {buildHaoriWallContactNode} from './haori-wall-contact-node.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
@@ -23,12 +25,17 @@ const dreamCheck=document.querySelector('#dreamLook');
 const precompile=new URLSearchParams(location.search).has('precompile');
 const flowerInstances=!new URLSearchParams(location.search).has('legacyflowers');
 const clothSupport=new URLSearchParams(location.search).has('clothsupport');
+const haoriContactGain=new URLSearchParams(location.search).has('haoricontact')?Number(new URLSearchParams(location.search).get('haoricontact')):null;
+if(haoriContactGain!==null&&(!clothSupport||![0,.6,1].includes(haoriContactGain)))throw new Error('Invalid haori wall contact comparison');
 const clothRail=clothSupport||new URLSearchParams(location.search).has('clothrail');
 const clothHat=clothRail||new URLSearchParams(location.search).has('clothhat');
 const clothSewn=clothHat||new URLSearchParams(location.search).has('clothsewn');
 const clothV2=clothSewn||new URLSearchParams(location.search).has('clothv2');
 const clothDetail=clothV2||new URLSearchParams(location.search).has('cloth');
 const clothLook=new URLSearchParams(location.search).has('clothlook');
+// Fixed grain phase for repeatable dream comparisons; normal preview stays timed.
+const reviewTime=new URLSearchParams(location.search).has('reviewtime')?Number(new URLSearchParams(location.search).get('reviewtime')):null;
+if(reviewTime!==null&&(!Number.isFinite(reviewTime)||reviewTime<0))throw new Error('Invalid review time');
 const ambientDetail=new URLSearchParams(location.search).has('ao');
 const daylight=new URLSearchParams(location.search).has('daylight');
 const wallWear=new URLSearchParams(location.search).has('wallwear');
@@ -82,6 +89,11 @@ function prepareScene(reason){
  });
 }
 function render(time=performance.now()){
+ if(interior?.studyHaoriContact){
+  if(currentLOD===0&&exterior)interior.studyHaoriContact.bind(exterior);
+  interior.studyHaoriContact.setEnabled(currentLOD===0&&!dreamCheck.checked);
+  canvas.dataset.haoriContact=JSON.stringify(interior.studyHaoriContact.stats);
+ }else canvas.dataset.haoriContact='empty';
  canvas.dataset.daylight=interior?.studyDaylight?JSON.stringify(interior.studyDaylight.apply(!dreamCheck.checked)):'off';
  canvas.dataset.wallWear=wallWear?JSON.stringify({exterior:exterior?.studyWallWear??{materials:0},interior:interior?.studyWallWear??{materials:0}}):'off';
  canvas.dataset.woodWear=woodWear?JSON.stringify({exterior:exterior?.studyWoodWear??{materials:0},interior:interior?.studyWoodWear??{materials:0}}):'off';
@@ -90,7 +102,7 @@ function render(time=performance.now()){
  canvas.dataset.windowLight=windowLight?JSON.stringify({sun:[-5,9,18],target:[3,0,-4.5],interiorFill:.22,environmentIntensity:scene.environmentIntensity,shadowMap:[2048,2048],inferred:true,geometryChanged:false}):'source comparison';
  renderer.toneMappingExposure=dreamCheck.checked ? 1.1*Math.pow(2,-.3) : 1.1;
  if(ambientDetail)ambientLook??=createShopAmbientLook(renderer,scene,camera);
- if(dreamCheck.checked){dreamLook??=createShopDreamLook(renderer,scene,camera,ambientLook?.beautyPass);dreamLook.render(time);}
+ if(dreamCheck.checked){dreamLook??=createShopDreamLook(renderer,scene,camera,ambientLook?.beautyPass);dreamLook.render(reviewTime??time);}
  else if(ambientLook)ambientLook.render();else renderer.render(scene,camera);
  canvas.dataset.look=dreamCheck.checked?'dream':'base';
  canvas.dataset.ambientOcclusion=ambientLook?'GTAO .35m half resolution indirect light':'off';
@@ -105,6 +117,7 @@ function request(){if(ready&&!disposed&&!capturing&&!document.hidden&&frame===nu
 function cancel(){if(frame!==null)cancelAnimationFrame(frame);frame=null;lastTime=null;}
 function meshes(model,fn){model.scene.traverse(o=>{if(o.isMesh)fn(o);});}
 function release(model){
+ if(model.studyHaoriContact){canvas.dataset.haoriContactRetired=JSON.stringify(model.studyHaoriContact.dispose());model.studyHaoriContact=null;}
  model.studyDaylight?.dispose();
  model.studyFlowers?.disposeTextures();
  const geometries=new Set(),materials=new Set(),textures=new Set();meshes(model,o=>{if(o.isInstancedMesh)o.dispose();geometries.add(o.geometry);for(const m of [].concat(o.material,o.userData.authoringMaterial??[]))if(m&&m!==glass)materials.add(m);});
@@ -135,6 +148,13 @@ async function load(part){
   catch(error){if(cloth)release(cloth);release(gltf);throw error;}
  }
  assets.push(part);canvas.dataset.loadedAssets=JSON.stringify(assets);
+ if(part==='interior'&&haoriContactGain!==null){
+  let map;try{
+   map=await new THREE.TextureLoader().loadAsync('/study/haori-wall-contact-119-006/wall-contact.png');
+   if(disposed)throw new DOMException('Page left','AbortError');
+   gltf.studyHaoriContact=createHaoriWallContactLook(map,{gain:haoriContactGain,createMaterial:source=>new (source.isMeshPhysicalMaterial?THREE.MeshPhysicalNodeMaterial:THREE.MeshStandardNodeMaterial)().copy(source),buildNode:buildHaoriWallContactNode});
+  }catch(error){map?.dispose();release(gltf);throw error;}
+ }
  meshes(gltf,o=>{o.castShadow=true;o.receiveShadow=true;
   for(const m of [].concat(o.material))if(m.transmission>0){
    // In this r186 study, nested reflector + physical transmission reuses

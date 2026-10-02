@@ -1,0 +1,79 @@
+{
+  "round": "haori-wall-contact-119-006",
+  "handoff": 119,
+  "scope": "One factor: remove original combined pegboard/hat root mesh from AO caster selection, retaining only003 garment/bamboo/cord geometry.005 broad noisy halo above hardware rejected; orientation-r2 diagnostic inverted vertically and rejected. Restore original UV orientation; source material type preserved.",
+  "input": "Same unchanged003 e033a5cb and exterior7c94fee4 inputs as005",
+  "coordinates": "metres, Blender Z-up. Actual receiver is exterior-owned BldgA_LOD0_sideL M_Plaster_Int at X0.18, Y0-9, Z-0.1-6, identity world matrix. Browser glTF positionWorld=(X,Z,-Y).",
+  "receiver": {
+    "x": 0.18,
+    "y": [
+      1.0,
+      3.4
+    ],
+    "z": [
+      3.35,
+      5.55
+    ],
+    "normal": [
+      1,
+      0,
+      0
+    ],
+    "mapSize": [
+      512,
+      512
+    ],
+    "distance": 0.55,
+    "aoSamples": 32,
+    "cyclesSamples": 16,
+    "seed": 119005
+  },
+  "method": "Only four coat descendants cast: Haori_connected, Haori119_bamboo, Haori119_cord_0/1. Root combined source pegboard/hat retained unchanged in browser but excluded from this cloth-wall contribution. All other005 bake/camera/light/shader gains fixed.",
+  "references": [
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/render/shader_nodes/input/ao.html",
+      "supports": "AO samples finite surrounding geometry; OnlyLocal false; bake output to avoid runtime rays",
+      "status": "Read for preceding010 pinned4.5 round. Current web reader402 unavailable; reuse verified method/installed4.5.10 API, no purchase."
+    },
+    {
+      "url": "https://docs.blender.org/UATEST/manual/en/4.5/render/cycles/baking.html",
+      "supports": "UV map, active image node and Emit bake",
+      "status": "Read for010 pinned4.5 round; current refetch unavailable."
+    },
+    {
+      "source": "vendor/three-r186 material/node implementation and preceding hall-floor-contact-node",
+      "supports": "Non-colour scalar multiply retains original material maps/colour; gain0 bypass must preserve original material assignment"
+    }
+  ],
+  "runtime": {
+    "gains": [
+      0,
+      0.6,
+      1
+    ],
+    "initialCandidate": 0.6,
+    "lifetime": "Interior owns one map and wall copy; exact exterior assignments restored for dream/far/failure and before exterior disposal",
+    "default": "off",
+    "phone": "unapproved optional study",
+    "note": "Same normal physical/standard node material family as source. No source geometry/material asset change."
+  },
+  "views": [
+    "hero-haori-complete",
+    "hero-haori-side-complete",
+    "upper-corner offscreen regression"
+  ],
+  "checks": [
+    "512x512 non-colour PNG, white border/finite values",
+    "source hashes and scene save/reopen exact",
+    "gain0 native source-null front/side fidelity both backends before artistic comparisons",
+    "actual static contact front/side both backends",
+    "dream source restoration, far map/material disposal and reentry",
+    "meaningful ownership/failure tests, full build"
+  ],
+  "limitations": "Static isolated coat contribution, not moving-light shadow or whole-room lighting. Add1MiB RGBA/~1.33MiB with mips, no added draw/tri. Actual phone performance remains unmeasured; near texture/AA unchanged. Final crease acceptance still has boundary/undersampling caveats.",
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0
+  },
+  "result": "Retained optional static contribution; native both backends/four nulls/both fixed-time dreams exact/GPU reentryexact/GL6pixelsmax1 residual; both far disposed/errors0/355tests.22scenePNGs includes reused/diagnostics. Art/final119/phone approval not granted."
+}

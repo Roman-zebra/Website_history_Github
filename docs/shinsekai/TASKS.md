@@ -635,3 +635,42 @@ support-webgpu-hero-haori-complete.png and support-webgl-hero-haori-side-complet
 are interim evidence only; no formal review requested. Observed120/processed118.
 TRIPO0/lastliveOct1 3200/Oct2 after09 pending; no newtool/agent. GoalACTIVE.
 Baseline312cbaf exactWorkersSUCCESS2026-10-01 23:08:29UTC; nextSHA afterpush.
+
+
+## Claude119/120 partial haori wall contact006 —2026-10-02
+119 is NOT complete. This updates the user-requested status reply above.
+004 measurement-only back crests three complete columns11.3–23.0mm across
+rows4–7; frontR14.8–20.5mm, frontL boundary and90.1mm coarse sampling caveats.
+Inward hem projection16.2–21.2mm includes taper; no blanket fold/curl approval.
+006 static geometry-derived cloth-wall contribution now native verified on
+WebGPU/WebGL2. Only retained003 garment/bamboo/cord cast; source combined
+pegboard/hat excluded after005 broad halo/stripe. Original shape/maps/colour/
+roughness.94/fibre gain.35/camera/light/AA fixed. Original003 e033a5cb and
+exterior7c94fee4 unchanged; actual exterior sideL plaster atX.18 receives the
+map.512x512/90058bytes/6241f568…; finite radius.55/32AO/Cycles16/seed119005;
+scene save/reopen snapshot equal. One owned texture/~1.33MiB RGBA+mips, no
+added draw/tri, no mobile cost/savings claim. Interior owns material+map and
+restores cached exterior before disposal; dream temporarily restores source.
+Four null close/side controls exact (GPU reused005 pair; GL freshly captured).
+GPUfront228677pixels/max16,side190771/max22; GLfront228637/max16,side190819/max22.
+Both actual front/side images viewed; soft static wall contribution retained
+optional, frontal contact remains subtle, not full artistic acceptance.22scene
+PNGs includes4reused GPU controls and timed-grain/near diagnostics. Initial dream
+PNG differences are time-varying grain.04, not proof of source restoration;
+opt-in reviewtime0 fixes existing phase, both loaded dream source/candidate
+exact. GPU reentry exact; GL6pixels/max1 residual retained/cause unknown. Both
+far interior/cloth/contact empty, owned texture1disposed/originalWallRestored.
+Observed warning/error0;355/355 full build; new18775 server exactPNG200,private
+scene/receipt/traversal403.005 receipt-only stale Blender wrapper failure
+recovered from saved outputs without rebake; vertically inverted r2 rejected.
+Evidence: browser-study/haori-contact-claude119.md,workflow/haori-shape-audit-
+119-004-brief.json,haori-wall-contact-119-005/006-brief.json,bake/verify helpers;
+parent research-cache/haori-wall-contact-119-006/native-receipt.json. Named
+contact60-webgpu-hero-haori-complete.png and contact60-webgl-hero-haori-side-
+complete.png are interim evidence, not a formal review request. Next BuildingA
+upper4 (actual tatami/cushion/plaster/shoji inventory and one-factor candidates),
+carry final haori sheen/crease acceptance and hall moving/upper/clipping issues
+forward; integrated1080p not ready. Observed120/processed118. FreshOct2 TRIPO
+balance3200/consumption0/history no spend; nextOct3 after09. No newtools/agents/
+reviews/charged generation. GoalACTIVE. Baseline5df96cb exactWorkersSUCCESS
+2026-10-01 23:52:31UTC; nextSHA checked separately after push.

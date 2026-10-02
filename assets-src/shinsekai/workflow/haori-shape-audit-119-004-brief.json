@@ -1,0 +1,10 @@
+{
+ "round":"haori-shape-audit-119-004","scope":"Measurement only; no asset/material/light changes",
+ "input":"haori-support-119-003/settled.blend; original478 midsurface ordering plus Solidify retained",
+ "units":"metres, Blender Z-up",
+ "creaseMethod":"Each saved horizontal body row4-7: front left/right separately in +X and back in -X. A strict interior local crest uses nearest local trough on each side; boundaries also reported explicitly. Depth is projected outward distance from linearly interpolated bracket baseline at crest Y. Boundary brackets do not certify a complete fold. Track row/column identity across all four rows; report every crest, not only passing ones.",
+ "limitations":"Custom sampled geometric diagnostic, not measured historic fabric or curvature-normal prominence. Large gaps/undersampling and broad contour can affect depth; report them. Do not equate seeded four waves or whole row range with final crease acceptance.",
+ "hemMethod":"Compare row8 to row7 for matched back/front columns, project movement along inward X. Report all columns; whole-body taper influences this metric, so inspect native side silhouettes too.",
+ "acceptance":"119 asks3-5 vertical10-25mm body folds and slightly inward hem; uncertain complete-fold evidence stays unqualified. Sleeve/collar previously measured separately. Existing native003 front/side pictures remain reference.",
+ "cost":{"TRIPO":0,"newTools":0}
+}
