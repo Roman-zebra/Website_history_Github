@@ -58,6 +58,8 @@ const wallWear=new URLSearchParams(location.search).has('wallwear');
 const woodWear=new URLSearchParams(location.search).has('woodwear');
 const woodWearMode=new URLSearchParams(location.search).get('woodwear')||'combined';
 const windowLight=daylight||new URLSearchParams(location.search).has('windowlight');
+const upperLampGain=new URLSearchParams(location.search).has('upperlamp')?Number(new URLSearchParams(location.search).get('upperlamp')):null;
+if(upperLampGain!==null&&(!daylight||![.3,1].includes(upperLampGain)))throw new Error('Invalid upper room lamp comparison');
 const capture=document.querySelector('#capture');
 const buttons={cash:document.querySelector('#cash'),storage:document.querySelector('#storage')};
 const renderer=new THREE.WebGPURenderer({canvas,antialias:true,forceWebGL:new URLSearchParams(location.search).has('webgl')});
@@ -197,7 +199,7 @@ async function load(part){
  // Blender source watts were exported as high candela for its review lighting.
  // Calibrate this separate browser study, without changing the authoring GLB.
  gltf.scene.traverse(o=>{if(o.isPointLight){o.userData.studyLightGain=.003;o.intensity*=.003;o.distance=8;}});
- if(part==='interior'&&daylight)gltf.studyDaylight=connectShopDaylight(gltf);
+ if(part==='interior'&&daylight)gltf.studyDaylight=connectShopDaylight(gltf,{upperGain:upperLampGain});
  // Include the optional cloth dependency in total readiness, not only the
  // first interior download. The companion remains inside this cell's lifetime.
  gltf.studyLoadMs=performance.now()-loadStart;

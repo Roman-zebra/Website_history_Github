@@ -69,6 +69,26 @@ test('daylight balance toggles from retained lamp values without compounding or 
  balance.apply(true);balance.dispose();assert.equal(upper.intensity,9);assert.equal(upper.distance,8);
 });
 
+test('upper lamp comparison is isolated, noncompounding and restores dream/disposal source state',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');const {connectShopDaylight}=await studyModule('shop-daylight.mjs');
+ const scene=new THREE.Group(),upper=new THREE.PointLight(0xffaa88,9,7),other=new THREE.PointLight(0xffffff,5,6),sun=new THREE.DirectionalLight(0xffffff,3);
+ upper.name='HybridLamp_upper_room';scene.add(upper,other,sun);const color=upper.color.clone(),position=upper.position.clone();
+ const balance=connectShopDaylight({scene},{upperGain:1});const first=balance.apply(true);balance.apply(true);
+ assert.equal(upper.intensity,9);assert.equal(other.intensity,1.5);assert.equal(sun.intensity,3);assert.equal(first.upperRoom.matched,1);
+ assert.equal(upper.distance,4.5);assert.equal(other.distance,2.5);assert.deepEqual(upper.color,color);assert.deepEqual(upper.position,position);assert.equal(upper.castShadow,false);
+ balance.apply(false);assert.equal(upper.distance,7);assert.equal(other.distance,6);assert.equal(other.intensity,5);
+ balance.apply(true);balance.dispose();balance.dispose();assert.equal(upper.distance,7);assert.equal(other.distance,6);assert.equal(upper.intensity,9);assert.equal(other.intensity,5);
+});
+
+test('invalid or ambiguous upper lamp comparison rejects before touching source lamps',async()=>{
+ const THREE=await import('../vendor/three-r186/build/three.webgpu.js');const {connectShopDaylight}=await studyModule('shop-daylight.mjs');
+ const scene=new THREE.Group(),other=new THREE.PointLight(0xffffff,7,9);scene.add(other);
+ for(const upperGain of [0,-1,2,NaN,Infinity])assert.throws(()=>connectShopDaylight({scene},{upperGain}));
+ assert.throws(()=>connectShopDaylight({scene},{upperGain:1}));assert.equal(other.intensity,7);assert.equal(other.distance,9);
+ for(let i=0;i<2;i++){const light=new THREE.PointLight(0xffaa88,9,8);light.name='HybridLamp_upper_room';scene.add(light);}
+ assert.throws(()=>connectShopDaylight({scene},{upperGain:1}));assert.ok(scene.children.every(o=>o.intensity===(o===other?7:9)));
+});
+
 test('wall wear retains shared source colours and geometry and excludes existing normal maps and paper',async()=>{
  const THREE=await import('../vendor/three-r186/build/three.webgpu.js');
  const {connectShopWallWear}=await studyModule('shop-wall-wear.mjs');
