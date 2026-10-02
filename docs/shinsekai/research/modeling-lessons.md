@@ -372,6 +372,34 @@ failures a stale helper, guess a GPU cause, restart the browser, or adopt an
 unconfirmed PNG. Ask for visible user status while pursuing independent work.
 Evidence:haori-contact-claude119.md and private009-runtime001 receipts.
 
+## A round outline does not alone make filled cloth —2026-10-02
+
+Contour004 retains cabinet001/closed cushion003, all80mm elevations, original
+fabric attributes and240tri topology. An analytic horizontal deformation with
+g.35/.65 curves the source outline and preserves a positive derivative; normal
+inverse transpose and tangent direct derivative/orthogonalization preserve the
+normal-map basis. Original corner seam patches extend12mm beyond the55cm body;
+bound their measured287mm halfwidth too, rather than assuming every cloth vertex
+is within275mm. The initial guard stopped before output; retain that diagnostic.
+
+Both actual Blender4.5.10 checks retain20 wood-floor-only contacts,0 other/merged
+neighbour surface pairs, positive closed volume and exact scene reopen. Neither
+these results nor validator0/0 qualifies the art. Matched offline close/side
+renders expose the3mm seam as a papery edge even after horizontal rounding.
+Keep a modest contour for the next separate vertical perimeter-profile round;
+the stronger setting approaches an oval and is not approved. Fabric still needs
+its own comparison. Preserve both numbered candidates and source materials.
+
+Top-view orthographic scale is horizontal at16:9: .82 crops the rotated source
+cushion vertically. Treat that as a framing diagnostic, correct all controls to
+the same1.48 before qualifying the full silhouette. Isolated top meshes are for
+silhouette inspection; actual close/side/context retain the entire imported room.
+Offline diagnostic area lights differ from browser staging, so neither offline
+colour nor GPU render timing is native/phone evidence. No extra paid generation,
+triangles,draws or maps. Append-only64.8KB is not mobile transfer optimization.
+Evidence: workflow004 brief/adapters/check scripts, upper-cushion-claude119.md,
+private upper-cushion-119-004. Native both-backend/lifecycle and full119 remain.
+
 The user cannot inspect Chrome now. Proceed with independent source audits and
 offline asset preparation; retain every native gate, rather than wait without
 progress or treat the unavailable user observation as approval.

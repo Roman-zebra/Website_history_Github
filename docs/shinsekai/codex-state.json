@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY120/119: user cannot inspect Chrome now; native browser4 AX/DOM Debuggerunattached/binding timeouts remain unverified external state, no kill/restart. Next independent free work: source audit complete: cabinet00109a0e26d/CLOTH240tri/55cm/80mm/7samples peredge; declare rounded-outline-only cushion004 keeping80mm thickness/footprint placement/maps/materials, then generate/closed-surface-neighbour/floor/export/reopen/Blender-view checks. Preserve all source candidates and do not substitute offline views for native approval. When browser works finish lighting001 missingGPUcontrols andGLcandidate views/far/reentry, then009 contact null/gain0.6front/side/context/dream/far/reentry bothbackends. Contact009 optional runtime implemented/new18782session36546 exactPNG+private-denialHTTP/375tests after5acc126 upstream;no native009images. Keep defaultoff/old006 blocked onfolds. Finishfinalhaori/hall/upperplastergrain/roundedcushion/shoji/integrated1080p/world/device;119 incomplete/Observed120processed118/GoalACTIVE/TRIPO3200spent0nextOct3after09.",
-  "updatedAt": "2026-10-02T06:51:03.518566+00:00",
+  "next": "PRIORITY120/119 remains unfinished. User cannot inspectChrome now; browser4 Debuggerunattached/binding timeouts unverified, no browser kill/restart. Independent005 next: declare vertical perimeter-profile-only comparison on retained004 g.35 e50d117a, preserve80mm max/exactfloor support/placement/cabinet/source attributes/maps/light; controlsource003/004 retained.004g.35/.65 contour preserves432vertices/240tri/height/fabric; bothclosed/reopen/20woodfloor-onlypairs/0other+mergedneighbours/validator0-0/381fulltests/exactHTTP18783session15503.15offlinePNGs directly inspected for9fullroom+3correctedtops,3croppedtops diagnostic. g.35 more square; g.65 oval/coarse segments; papery thin seam/plainfabric still unapproved. OfflineCyCUDA32/seed119004/AgX0/120W40W/world.08 differs frombrowser daylight, notnative/phone.005profile first/fabric separately. When browser recovers finish004nativeclose/side/context/dream/far/reentry BOTHbackends; lighting001 missingGPUcontrols/GLcandidateviews+far/reentry;009contact null/.6front/side/context/dream/far/reentry. Runtime009defaultoff/006nonzero blockedonfold008. Carryfinalhaori/hall/plastergrain/shojipools/integrated1080p/world/device/119incomplete. Observed120processed118/GoalACTIVE/TRIPO3200spent0nextOct3after09. Sourcescabinet09a0/00336701/fold008c362/originala5c preserved; no paidAPI/tools/agents/reviewcalls.",
+  "updatedAt": "2026-10-02T07:39:35.520366+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 375,
+    "fullBuildTests": 381,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -95,7 +95,8 @@
     "upperHaoriFrontFoldNativeEvidence": "../research-cache/haori-frontfold-119-008/native-receipt.json",
     "upperHaoriLightingEvidence": "../research-cache/haori-upperlamp-119-001/native-receipt.json",
     "upperHaoriContact009RuntimeEvidence": "../research-cache/haori-wall-contact-119-009-runtime-001/runtime-receipt.json",
-    "nextCushionAudit": "../research-cache/haori-wall-contact-119-009-runtime-001/next-cushion-audit.json"
+    "nextCushionAudit": "../research-cache/haori-wall-contact-119-009-runtime-001/next-cushion-audit.json",
+    "upperCushionContourEvidence": "../research-cache/upper-cushion-119-004/visual-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete:contact009 runtime369/HTTP checks prepared,lighting001 partial and native009 pending. User cannot inspect Chrome now. Proceed independent roundedcushion004 source audit/scoped shape work,then fullhaori/hall/upper4/integrated/world/device. Observed120/processed118; no additionalreview/agents."
+  "pendingClaudeRepairs": "119 incomplete;004 contour technical/offline checks pass but paper-thin perimeter/plain fabric unapproved; next005 verticalprofile/fabric separately. Carry native004/lighting001/contact009, finalhaori/hall/upperplastergrain/shojipools/integrated1080p/world/device. Observed120/processed118; no formalreview or extraClaude calls."
 }

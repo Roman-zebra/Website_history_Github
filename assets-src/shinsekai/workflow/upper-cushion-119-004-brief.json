@@ -1,17 +1,148 @@
 {
   "schemaVersion": 1,
   "roundId": "upper-cushion-119-004",
-  "status": "declared_before_authoring",
+  "status": "technical_checks_and_offline_views_complete_art_unapproved",
   "subject": "One writing-table zabuton in retained cabinet001/closed cushion003",
   "intendedResult": "A softer curved horizontal outline without losing the visible80mm filled thickness or original fabric.",
-  "baseline": {"commit": "d4df13eb4ace738e0dd688724547293074e34578", "files": ["../research-cache/cabinet-ink-119-001/interior-cabinet.glb"], "sha256": {"interior-cabinet.glb": "09a0e26d91da8775e29f32cb9967f348f7f519b0df7bfc317fa333445c583397"}},
-  "scope": {"change": "Horizontal contour only: local u,v map to u*sqrt(1-g*v*v/2),v*sqrt(1-g*u*u/2). Compare g=0,.35,.65; this is an inferred smooth deformation, not a circular fillet or cloth simulation.", "preserve": ["all vertex elevations and80mm height; centre/yaw/mid-edge55cm spans", "closed240tri topology and source four seam patches", "UV/colour/material/maps/indices/tangent handedness", "cabinet001 and all other objects", "full source binary prefix"], "defer": ["fabric shader/light changes", "production promotion", "native acceptance while browser unavailable", "phone performance and full119"]},
-  "coordinates": {"unit": "metre", "system": "Blender Z-up; glTF=(X,Z,-Y)", "origin": "source world frame", "dimensions": {"centreXY": [3.2,5.215], "yaw": 0.4, "halfWidth": 0.275, "floor": 3.455, "height": 0.08, "seamBottomTop": [0.04,0.043]}, "dimensionEvidence": "Model measurements and prior floor-contact checks; upholstery shape/dimensions are inferred art, not documented historic measurements."},
-  "references": [{"url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html", "checkedAt": "2026-10-02", "claimSupported": "VEC3 float positions/normals, normalized normal and tangent XYZ, tangent W handedness, GLB alignment", "versionCompatibility": "glTF2.0 contract used by pinned three r186 and Blender4.5.10", "sourceStatus": "official specification read"}, {"url": "https://docs.blender.org/manual/en/4.5/modeling/meshes/editing/mesh/normals.html", "checkedAt": "2026-10-02", "claimSupported": "None: fetch internal error; do not infer contents", "versionCompatibility": "4.5 URL, unavailable", "sourceStatus": "unverified; existing installed APIs exercised in actual checks"}],
-  "reusableLessons": {"reference": "docs/shinsekai/research/modeling-lessons.md", "applicableLessons": ["Full footprint and actual art qualify a cushion", "Valid GLB still looks wrong", "Preserve unrelated imported data"], "suspectedCause": "003 straight perimeter remains rigid; rounding may help silhouette but coarse7samples/edge may facet", "evidenceToDistinguishCause": "Matched source/soft/strong close, side, top and context renders; inspect silhouette and seam blocks, not pixel difference alone"},
-  "comparison": {"oneChangedCause": "horizontal deformation strength", "controls": ["g0 exact source", "g.35", "g.65"], "fixedCameras": ["close", "side", "top", "context"], "resolution": [1280,720], "lighting": "Explicit fixed local Blender diagnostic light; source materials retained. Not identical to browser daylight profile."},
-  "verification": {"checks": ["source SHA/append-only bytes/unrelated exact", "elevations and tangent basis exact/valid", "closed welded surface/positive volume", "all neighbouring surface pairs and actual wooden floor contacts", "Blender scene save/reopen", "GLB validator", "fixed offline views", "native both backends later", "full build"], "webgpu": "pending", "webgl": "pending"},
-  "decision": {"retain": null, "visualAcceptance": false, "remainingIssues": ["native/browser/fabric/full119/device gates"]},
-  "cost": {"TRIPO": 0, "newTools": 0, "extraTriangles": 0, "extraDraws": 0, "extraMaps": 0, "paidToolsOrApisAllowed": false},
-  "coordination": {"useExistingBatch": true, "requestExtraReview": false}
+  "baseline": {
+    "commit": "d4df13eb4ace738e0dd688724547293074e34578",
+    "files": [
+      "../research-cache/cabinet-ink-119-001/interior-cabinet.glb"
+    ],
+    "sha256": {
+      "interior-cabinet.glb": "09a0e26d91da8775e29f32cb9967f348f7f519b0df7bfc317fa333445c583397"
+    }
+  },
+  "scope": {
+    "change": "Horizontal contour only: local u,v map to u*sqrt(1-g*v*v/2),v*sqrt(1-g*u*u/2). Compare g=0,.35,.65; this is an inferred smooth deformation, not a circular fillet or cloth simulation.",
+    "preserve": [
+      "all vertex elevations and80mm height; centre/yaw/mid-edge55cm spans",
+      "closed240tri topology and source four seam patches",
+      "UV/colour/material/maps/indices/tangent handedness",
+      "cabinet001 and all other objects",
+      "full source binary prefix"
+    ],
+    "defer": [
+      "fabric shader/light changes",
+      "production promotion",
+      "native acceptance while browser unavailable",
+      "phone performance and full119"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "Blender Z-up; glTF=(X,Z,-Y)",
+    "origin": "source world frame",
+    "dimensions": {
+      "centreXY": [
+        3.2,
+        5.215
+      ],
+      "yaw": 0.4,
+      "halfWidth": 0.275,
+      "floor": 3.455,
+      "height": 0.08,
+      "seamBottomTop": [
+        0.04,
+        0.043
+      ],
+      "sourceCornerPatchHalfExtent": 0.287
+    },
+    "dimensionEvidence": "Model measurements and prior floor-contact checks; upholstery shape/dimensions are inferred art, not documented historic measurements."
+  },
+  "references": [
+    {
+      "url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "VEC3 float positions/normals, normalized normal and tangent XYZ, tangent W handedness, GLB alignment",
+      "versionCompatibility": "glTF2.0 contract used by pinned three r186 and Blender4.5.10",
+      "sourceStatus": "official specification read"
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/4.5/modeling/meshes/editing/mesh/normals.html",
+      "checkedAt": "2026-10-02",
+      "claimSupported": "None: fetch internal error; do not infer contents",
+      "versionCompatibility": "4.5 URL, unavailable",
+      "sourceStatus": "unverified; existing installed APIs exercised in actual checks"
+    }
+  ],
+  "reusableLessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "applicableLessons": [
+      "Full footprint and actual art qualify a cushion",
+      "Valid GLB still looks wrong",
+      "Preserve unrelated imported data"
+    ],
+    "suspectedCause": "003 straight perimeter remains rigid; rounding may help silhouette but coarse7samples/edge may facet",
+    "evidenceToDistinguishCause": "Matched source/soft/strong close, side, top and context renders; inspect silhouette and seam blocks, not pixel difference alone"
+  },
+  "comparison": {
+    "oneChangedCause": "horizontal deformation strength",
+    "controls": [
+      "g0 exact source",
+      "g.35",
+      "g.65"
+    ],
+    "fixedCameras": [
+      "close32mm",
+      "side28mm",
+      "context28mm",
+      "top orthographic1.48 corrected for16:9"
+    ],
+    "resolution": [
+      1280,
+      720
+    ],
+    "lighting": "Explicit fixed local Blender diagnostic light; source materials retained. Not identical to browser daylight profile.",
+    "renderProfile": "Cycles CUDA/GTX1660SUPER,32samples/seed119004/AgX/exposure0; fixed120W+40W diagnostic area lights/world.08; original source light rendering disabled identically. Not browser daylight staging."
+  },
+  "verification": {
+    "checks": [
+      "source SHA/append-only bytes/unrelated exact",
+      "elevations and tangent basis exact/valid",
+      "closed welded surface/positive volume",
+      "all neighbouring surface pairs and actual wooden floor contacts",
+      "Blender scene save/reopen",
+      "GLB validator",
+      "fixed offline views",
+      "native both backends later",
+      "full build"
+    ],
+    "webgpu": "pending",
+    "webgl": "pending",
+    "results": [
+      "both closed240tri/positive volumes/80mm exact elevations",
+      "each20actual wooden-floor-only surface pairs/0outside or merged neighbour pairs",
+      "both saved-scene geometry/UV/colour/material-name/matrix reopen snapshots exact",
+      "both GLB validator0errors/0warnings",
+      "4geometry+2optional-route tests; full381pass",
+      "15matched offline PNGs retained including3cropped top diagnostics and3corrected full top views",
+      "exact2HTTP GLBs/HEAD/no-store; private4denials403/POST405"
+    ],
+    "savedSceneReopened": "verified_both",
+    "sourceReloaded": "verified_unchanged"
+  },
+  "decision": {
+    "retain": "both source and numbered contour candidates; g.35 exploratory baseline only",
+    "visualAcceptance": false,
+    "reason": "Both contours curve the perimeter. g.35 retains more square identity; g.65 approaches oval and exhibits coarse segmented curvature. Both still read as a thin papery perimeter with plain fabric and rectangular source corner patches. Shape/edge/fabric art not accepted.",
+    "remainingIssues": [
+      "vertical perimeter thickness/rounded edge/fabric art",
+      "native both backends close/side/context/dream/far/reentry",
+      "real-phone/full119/integrated1080p/world"
+    ],
+    "nextStep": "Declare005 one-factor vertical perimeter-profile comparison on g.35, preserve80mm maximum height/floor support/source attributes/placement/cabinet and horizontal contour. Check contacts/closedness and fixed images; do not stack colour/lighting changes."
+  },
+  "cost": {
+    "TRIPO": 0,
+    "newTools": 0,
+    "extraTriangles": 0,
+    "extraDraws": 0,
+    "extraMaps": 0,
+    "paidToolsOrApisAllowed": false
+  },
+  "coordination": {
+    "useExistingBatch": true,
+    "requestExtraReview": false
+  }
 }

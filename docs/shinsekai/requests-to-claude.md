@@ -1495,3 +1495,31 @@ clean generated groups restored. Next cushion source audit confirms cabinet001
 SHA09a0e26d,CLOTH240tri,55cm footprint/80mm filled height/centre3.2,5.215/yaw.4;
 seven samples peredge may limit roundness. Source unchanged; geometry revision
 not yet generated or qualified. Evidence:private runtime001/next-cushion-audit.json.
+
+
+## Claude119/120 cushion004 contour checkpoint —2026-10-02
+119 remains incomplete; no formal review requested. User cannot inspect Chrome
+now; independent free geometry work continues. Cabinet00109a0e26d retained,
+source003/fabric/UV/colour/material/maps/indices/elevations/80mm height exact.
+Only horizontal contour g0/.35/.65 compared. g.35 e50d117a andg.65 5e194a00:
+432selected vertices/240tri,0newtri/draw/maps; append-only64.8KB is not phone
+savings. Both actual Blender4.5.10 closed/positive/save-reopen pass; each20
+actualwood-floor-only contacts and0other/mergedneighbour pairs. Bothvalidator0/0.
+381fulltests pass. Optionaluppercontour035/065 requiresuppercushion+cabinetink;
+defaultunchanged; local18783/session15503 exactGLB+HEAD/no-store/private403/POST405.
+15matched offlinePNGs: source/soft/strong close/side/context,3originalcroppedtop
+diagnostics and3corrected1.48fulltop views. All qualifiedviews directly inspected.
+Bothround outlines; g.35 more square, g.65 oval/coarse segments. Thin papery seam
+and plainfabric remain: art unapproved. Fixed diagnosticCyCUDA32/seed119004/
+AgX0/120W+40W/world.08 uses source materials, not browser daylight staging.
+Own slowCPUrender stopped only afterexactprocess verification/CUDAdeviceprobe;
+logs retained, noCPUframe reused. First275mmguard rejected12mmoverhangingcorner
+patches beforeoutput; corrected287mm actualbound tested. Sources preserved.
+Next independent005 verticalperimeterprofile only on g.35 with80mmmax/floor
+support/placement/maps/cabinet fixed, then fabric separately. Nativebothbackend
+close/side/context/dream/far/reentry remain pending, as lighting001 missingviews
+and contact009 null/.6views/lifecycle. Carry finalhaori/hall/plastergrain/shojipools/
+integrated1080p/world/device. Evidence:upper-cushion-claude119.md,workflow004brief/
+adapter/verifier/render,privateupper-cushion-119-004 visual/authoring/validator/
+HTTP/render/full-build receipts. Observed120/processed118/GoalACTIVE/TRIPO3200/
+spent0/nextOct3after09. No newtools/agents/extra review calls.
