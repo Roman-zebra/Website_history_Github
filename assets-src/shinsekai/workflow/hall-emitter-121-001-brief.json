@@ -1,0 +1,12 @@
+{
+  "ticket": "hall-emitter-121-001",
+  "request": "Claude119/120/121: restore visible warm emitter detail instead of clipped white globes",
+  "scope": "Opt-in hall emitter material strength only; source textures and room lighting stay fixed",
+  "baseline": "2350K, point .5, range5, exposure-1.25EV, floor/wall wear, denoised AO and contact010",
+  "factor": "emissiveIntensity gain 1/.5/.25/.1 on six temporary bulb and milk-glass materials",
+  "preserve": "Eleven actual point intensities/ranges, source material values, geometry, maps, camera, AA and resolution",
+  "verification": "Native same-camera PNGs and emitter clipping/detail inspection on both backends; retirement and invalid-option ownership checks",
+  "historicalStatus": "Inferred artistic gains; no measured 1912 lamp brightness",
+  "reference": "https://threejs.org/docs/pages/MeshStandardMaterial.html#emissiveIntensity",
+  "publication": "Private study, default gain1; full119 remains incomplete"
+}

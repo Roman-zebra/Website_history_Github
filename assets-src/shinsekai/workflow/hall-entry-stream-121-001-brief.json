@@ -1,0 +1,11 @@
+{
+  "ticket": "hall-entry-stream-121-001",
+  "problem": "Original stream002 bypassed the existing115 entrance repair, leaving wall and benches before moving west gate",
+  "source": "Retained115 hall-115-proposal cell_hall/cell_hall_dream; existing repair reused, geometry not regenerated",
+  "sourceHashes": ["8f5b52ff119135bd0c5fc2c96257420f9c70c5e2758ea8fdd38d1e990a4a5340", "298243933875bacf4a9b758ceea979d42aebb8fea76e49786153035470e79acb"],
+  "route": "Private hallstream&hallentry=115; bounded server whitelist; provenance and old-contact-map guards",
+  "qualification": "8 encoded/8 decoded validator checks0errors0warnings;170 primitives850attributes170materials48ancestors exact except44 permitted cyclic index rotations",
+  "native": "6 native1280x720 closed/open/reentry PNGs across WebGL/WebGPU; both reentries pixel exact",
+  "remaining": "Rebind contact bake; wing floor support missing beyond threshold; shadow lifetime/local-light quality, dream native, capsule, integration/world/actual phone",
+  "acceptance": "Technical private candidate only; no full119/120/121 or historical/phone acceptance"
+}

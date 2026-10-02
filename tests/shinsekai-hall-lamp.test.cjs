@@ -1,4 +1,23 @@
 const test=require('node:test'),assert=require('node:assert/strict');
+
+test('emitter-only gain leaves actual light output and cached sources intact across retirement',async()=>{
+ const {createHallLampLook}=await import('../assets-src/shinsekai/browser-study/hall-lamp-look.mjs'),f=fixture();
+ const originals=f.meshes.map(m=>m.material),pointState=f.points.map(p=>({intensity:p.intensity,distance:p.distance,decay:p.decay}));
+ const look=createHallLampLook(f.model,{emitterGain:.25});
+ assert.equal(look.stats.emissionStrengthPreserved,false);
+ f.meshes.forEach((m,i)=>m.material.forEach((copy,j)=>{assert.equal(copy.emissiveIntensity,originals[i][j].emissiveIntensity*.25);assert.equal(copy.map,originals[i][j].map);assert.equal(originals[i][j].emissiveIntensity,j===0?40:5);}));
+ f.points.forEach((p,i)=>assert.deepEqual({intensity:p.intensity,distance:p.distance,decay:p.decay},pointState[i]));
+ look.dispose();look.dispose();assert.equal(f.disposed,6);f.meshes.forEach((m,i)=>assert.equal(m.material,originals[i]));
+ const reentry=createHallLampLook(f.model);assert.deepEqual(reentry.stats.emission.map(e=>e.strength),[40,5,40,5,40,5]);reentry.dispose();
+});
+
+test('invalid emitter comparisons fail before acquiring copies or modifying the source',async()=>{
+ const {createHallLampLook}=await import('../assets-src/shinsekai/browser-study/hall-lamp-look.mjs'),f=fixture();let copied=0;
+ const createMaterial=s=>{copied++;return s.clone();};
+ for(const emitterGain of [NaN,-1,0,2,.3])assert.throws(()=>createHallLampLook(f.model,{emitterGain,createMaterial}),/Invalid hall/);
+ assert.throws(()=>createHallLampLook(f.model,{mode:'control',emitterGain:.25,createMaterial}),/Invalid hall/);
+ f.meshes[0].material[0].emissiveIntensity=NaN;assert.throws(()=>createHallLampLook(f.model,{createMaterial}),/source emitter/);assert.equal(copied,0);
+});
 class Colour{constructor(rgb){this.rgb=[...rgb];}toArray(){return [...this.rgb];}fromArray(rgb){this.rgb=[...rgb];return this;}clone(){return new Colour(this.rgb);}}
 function fixture(){
  const names=['light_desklamp_a','light_pend10_17','light_pend13_17','light_pend1_17','light_pend4_17','light_pend7_17','light_sconceE4','light_sconceE6','light_sconceW1','light_sconceW3','light_sconceW5'];

@@ -1,0 +1,14 @@
+{
+  "ticket": "hall-proxy-shadow-121-001",
+  "request": "119/120/121 moving and upper-hall shadows",
+  "baseline": "Emitter001 gain.25, full quality source, AO007, fill.25, contact010, 2350K point.5 range5",
+  "factor": "Independent linear light-view depth of current opaque geometry; scoped global-sun shadow context only",
+  "nullGate": "control must match Emitter001 native near/context before actual shadow acceptance",
+  "preserve": "Source geometry/maps, alpha, source lights, renderer shadow flags, near AA and resolution",
+  "scope": "Private opt-in hallproxyshadow control/sun; defaults unchanged",
+  "excludedCasters": "Alpha/alphaTest, instanced, skinned and morph-deformed meshes explicitly excluded pending a separate qualification",
+  "gates": "both backends near/context; null fidelity; static quality; moving gate transforms; outside/dream/reentry; console; measured integration/phone later",
+  "historicalStatus": "Light and shadow artistic response inferred, not measured1912",
+  "reference": "https://threejs.org/docs/pages/NodeMaterial.html",
+  "full119Complete": false
+}
