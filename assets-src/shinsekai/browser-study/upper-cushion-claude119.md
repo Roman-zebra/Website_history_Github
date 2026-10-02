@@ -210,3 +210,14 @@ render/expression/visual/full-build. Observed120 processed118; TRIPO3200 spent0,
 nextOct3after09. Human resumed development; Goal API still reportsblocked after
 model-capacity compaction failure, automatic continuation not verified. No
 extra agent/model/tool/paid use/review call.
+
+
+Cushion006 macro001 follow-up —2026-10-02:3 additional fixed camera-only PNGs
+(source/.5/1) directly inspected from unchanged saved offline scenes. Both weave
+directions resolve; .5 subtle,1 pronounced grid. Keep.5 exploratory and do not
+boost gain to compensate for weak standard close appearance. Macro framing is
+technical calibration, not native/final art approval. Source scene hashes exact.
+Evidence:private006/macro-001 brief/render/visual receipts. Code/build393 and
+exact d5d5fc4 Workers success2026-10-02T09:22:08Z. Goal API stillblocked; official
+user-controlled command is /goal resume, no agent resume tool. Human asked for
+agent takeover, manual development proceeded; automatic continuation unverified.

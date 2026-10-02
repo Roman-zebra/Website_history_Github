@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY120/119 incomplete. Fabric006 implemented on005gap022: mask490706d6 +6604bytes/432target/240faces/0mixed/source attributes material binary exact, no maps/tri/draw; null0 exact005; .5/1 normal-only calibrated2/2.6mm threads and80/160um amplitude, fwidth.2-.45. Pinned target GLTFLoader and standalone GLSL/WGSL translation pass; not native PBR/driver evidence. Validator0/0,393fulltests, exact HTTP18785session75021/private403/POST405.12fresh offline fixed source/.5/1 close/side/context/far directly viewed; side weave visible, close weak, neither final fabric approval. Offline Bump unfiltered/not TSL alias proof; masked006 Blender import failed scalar/missing-width4vs1, use unchanged005 geometry for offline only; actual3scenes save/reopen data+shader equal. Failures retained. Next native006 null/.5/1 both backends close/side/context/dream/far/reentry/disposal when available; calibrate macro before boosting weak detail. Continue independent119 upper plaster/shoji while browser bind unavailable. Carry004/005, lighting001 missingcontrols/GLcandidateviews+far/reentry/contact009 null/.6 views/lifetime, finalhaori/hall/integrated1080p/fullworld/device. User cannot inspectChrome; current2856 bind Emulation focus timeout again, no restart. Human resumed manual work; Goal API reportsblocked capacity failure and no resume tool, automatic continuation unverified. Observed120processed118/TRIPO3200spent0nextOct3after09/no agents/models/paid/newtools/reviewcalls.",
-  "updatedAt": "2026-10-02T09:18:31.290208+00:00",
+  "next": "PRIORITY120/119 incomplete. Fabric006 implemented on005gap022: mask490706d6 +6604bytes/432target/240faces/0mixed/source attributes material binary exact, no maps/tri/draw; null0 exact005; .5/1 normal-only calibrated2/2.6mm threads and80/160um amplitude, fwidth.2-.45. Pinned target GLTFLoader and standalone GLSL/WGSL translation pass; not native PBR/driver evidence. Validator0/0,393fulltests, exact HTTP18785session75021/private403/POST405.12fresh offline fixed source/.5/1 close/side/context/far directly viewed; side weave visible, close weak, neither final fabric approval. Offline Bump unfiltered/not TSL alias proof; masked006 Blender import failed scalar/missing-width4vs1, use unchanged005 geometry for offline only; actual3scenes save/reopen data+shader equal. Failures retained. Next native006 null/.5/1 both backends close/side/context/dream/far/reentry/disposal when available; Macro001 now verifies both weave directions on unchanged saved scenes,3fresh PNGs viewed; .5 subtle/1 pronounced grid. Do not boost gain for weak standard close view. Continue independent119 upper plaster/shoji while browser bind unavailable. Carry004/005, lighting001 missingcontrols/GLcandidateviews+far/reentry/contact009 null/.6 views/lifetime, finalhaori/hall/integrated1080p/fullworld/device. User cannot inspectChrome; current2856 bind Emulation focus timeout again, no restart. Human resumed manual work; Goal API reportsblocked capacity failure and no resume tool, official user command /goal resume; automatic continuation unverified. Observed120processed118/TRIPO3200spent0nextOct3after09/no agents/models/paid/newtools/reviewcalls.",
+  "updatedAt": "2026-10-02T09:26:04.776994+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -26,7 +26,9 @@
     },
     "goalStatusObserved": "blocked",
     "userResumeAuthorizedAt": "2026-10-02T09:18:31.290208+00:00",
-    "automaticContinuationVerified": false
+    "automaticContinuationVerified": false,
+    "goalResumeDocumentation": "https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex",
+    "goalResumeCommand": "/goal resume"
   },
   "integrations": {
     "tripoStudio": {
