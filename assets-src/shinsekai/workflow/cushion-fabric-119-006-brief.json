@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "roundId": "cushion-fabric-119-006",
+  "status": "implemented_technical_offline_checked_native_art_pending",
+  "subject": "One writing-table cushion, retained005gap022",
+  "intendedResult": "Readable fine woven surface close up, stable distant surface; source colour and padded silhouette remain fixed.",
+  "baseline": {
+    "file": "../research-cache/upper-cushion-119-005/interior-cushion-gap022.glb",
+    "sha256": "178f76bf655cc30cfdbf532767149e48d90f5bae6c32b2e382107a92ee90c909"
+  },
+  "scope": {
+    "change": "Normal-only procedural weave, strengths0/.5/1; exact per-vertex mask appended to the single source CLOTH primitive",
+    "preserve": [
+      "all source binary bytes",
+      "geometry/240 cushion triangles/80mm maximum/22mm edge/36 floor vertices",
+      "UVs/colours/roughness.95/material fields/cabinet001",
+      "all1176 non-target cloth vertices and other primitives",
+      "camera/light/exposure/AA"
+    ],
+    "defer": [
+      "colour/roughness/sheen/lighting/geometry",
+      "production promotion",
+      "full119 and device approval"
+    ]
+  },
+  "coordinates": {
+    "unit": "metre",
+    "system": "glTF Y-up, calibrated source-local plane centre(3.2,3.5,-5.215), yaw.4; node transform identity",
+    "pitchesMetres": [
+      0.002,
+      0.0026
+    ],
+    "maximumHeightAmplitudeMetres": 0.00016,
+    "dimensionEvidence": "Source centre and size measured; thread pitches and amplitude are inferred art, not historical fabric measurements. UV0 is not normalized and is preserved."
+  },
+  "references": [
+    {
+      "source": "vendor/three-r186/build/three.webgpu.js",
+      "claimSupported": "Explicit height surface derivatives, normalView/positionView/faceDirection, fwidth; bumpMap instead repeats UV-context texture samples, unsuitable for position-only height",
+      "sourceStatus": "Pinned source inspected; native shader still needs qualification",
+      "sha256": "a78400fa1d359e81fcc12b84ed0a89a7fbecb4b8373e28ae8f9d2b11f6ea13bc"
+    },
+    {
+      "source": "vendor/three-r186/examples/jsm/loaders/GLTFLoader.js",
+      "claimSupported": "Unknown custom semantics lowercased: _CUSHION loads as _cushion",
+      "sourceStatus": "Pinned source inspected",
+      "sha256": "131c0f78c01d19368ae495caa65b3adaa10487810a36a05bb5901b769a35ac16"
+    },
+    {
+      "url": "https://mmikk.github.io/papers3d/mm_sfgrad_bump.pdf",
+      "claimSupported": "None from paper: web reader rejected14.3MB response; vendor implementation is the inspected primary source",
+      "sourceStatus": "Paper unread; do not attribute claims to it"
+    }
+  ],
+  "reusableLessons": {
+    "reference": "docs/shinsekai/research/modeling-lessons.md",
+    "applicable": "Maximum cushion height and shared cloth helpers are insufficient",
+    "cause": "Actual sourceCLOTH has no normal texture and companion helper never binds the cushion"
+  },
+  "comparison": {
+    "gains": [
+      0,
+      0.5,
+      1
+    ],
+    "frequencyFadeCyclesPerPixel": [
+      0.2,
+      0.45
+    ],
+    "fixedViews": [
+      "close",
+      "side",
+      "context",
+      "far"
+    ],
+    "offlineProfile": "Existing004/005 CyclesCUDA32 seed119004, AgX0,1280x720,world.08,120W+40W fixed area lights; equivalent Blender bump is diagnostic and not TSL/browser proof",
+    "nativeGates": "Both WebGPU/WebGL: exact0 control,close/side/context/dream/far/reentry, selection and disposal; pending while browser cannot be inspected"
+  },
+  "technicalChecks": [
+    "input hash and exact target432/1608,240triangles,0mixed faces",
+    "source prefix/indices/materials/all other attributes byte exact",
+    "null gain source material identity; invalid inputs rejected before mutation",
+    "calibrated pattern/nonzero gradient/filter limits and screen-scale invariance",
+    "pinned TSL graph/load if available, not native acceptance",
+    "full existing build and generated-page protection"
+  ],
+  "cost": {
+    "paidGeneration": false,
+    "newTools": false,
+    "newMaps": 0,
+    "newDraws": 0,
+    "newTriangles": 0,
+    "phoneMeasured": false
+  },
+  "results": {
+    "candidateSHA256": "490706d60adff9ab55ed75efb8f50e6afa70013442d4a720c2c312ba4565b04a",
+    "extraBytes": 6604,
+    "validatorErrorsWarnings": [
+      0,
+      0
+    ],
+    "fullBuildTests": 393,
+    "actualLoaderTest": "Pinned GLTFLoader on extracted unchanged target primitive with original attributes and new mask; unrelated image dependencies omitted for Node test",
+    "expressionTest": "Pinned GLSL/WGSL standalone expression translation with substituted camera/normal context; not actual PBR shader/driver/render acceptance",
+    "offlineFrames": 12,
+    "savedBlenderScenes": 3,
+    "maskedBlenderImport": "Failed custom scalar/missing attribute merge; offline uses exact005 source geometry, diagnostic retained",
+    "nativeVerified": false,
+    "phoneMeasured": false
+  }
+}

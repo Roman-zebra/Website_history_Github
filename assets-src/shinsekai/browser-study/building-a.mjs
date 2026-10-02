@@ -21,6 +21,9 @@ import {createHaoriWallContactLook} from './haori-wall-contact-look.mjs';
 import {buildHaoriWallContactNode} from './haori-wall-contact-node.mjs';
 import {resolveHaoriContactStudy} from './haori-contact-study.mjs';
 import {resolveCushionContourStudy} from './cushion-contour-study.mjs';
+import {resolveCushionFabricStudy} from './cushion-fabric-study.mjs';
+import {connectCushionFabric} from './cushion-fabric-look.mjs';
+import {buildCushionFabricNode} from './cushion-fabric-node.mjs';
 
 const base='../eval-building-a/hybrid/',canvas=document.querySelector('#view'),status=document.querySelector('#status'),metrics=document.querySelector('#metrics');
 const select=document.querySelector('#viewpoint'),glassCheck=document.querySelector('#clearGlass');
@@ -37,6 +40,7 @@ const upperCushion=new URLSearchParams(location.search).has('uppercushion');
 const cabinetInk=new URLSearchParams(location.search).has('cabinetink');
 if(cabinetInk&&!upperCushion)throw new Error('Cabinet study requires its retained cushion003 input');
 const cushionContour=resolveCushionContourStudy({revision:new URLSearchParams(location.search).get('uppercontour'),cushion:upperCushion,cabinet:cabinetInk,perimeter:new URLSearchParams(location.search).get('uppergap')});
+const cushionFabric=resolveCushionFabricStudy({value:new URLSearchParams(location.search).get('cushionfabric'),contour:cushionContour});
 const tatamiGain=new URLSearchParams(location.search).has('tatami')?Number(new URLSearchParams(location.search).get('tatami')||1):null;
 if(tatamiGain!==null&&![0,1].includes(tatamiGain))throw new Error('Invalid tatami normal comparison');
 const heriGain=new URLSearchParams(location.search).has('heri')?Number(new URLSearchParams(location.search).get('heri')||1):null;
@@ -120,6 +124,7 @@ function render(time=performance.now()){
  canvas.dataset.woodWear=woodWear?JSON.stringify({exterior:exterior?.studyWoodWear??{materials:0},interior:interior?.studyWoodWear??{materials:0}}):'off';
  canvas.dataset.tatamiNormal=tatamiGain===null?'off':interior?.studyTatamiNormal?JSON.stringify(interior.studyTatamiNormal):'empty';
  canvas.dataset.heriNormal=heriGain===null?'off':interior?.studyHeriNormal?JSON.stringify(interior.studyHeriNormal):'empty';
+ canvas.dataset.cushionFabric=cushionFabric===null?'off':interior?.studyCushionFabric?JSON.stringify({...interior.studyCushionFabric,round:cushionFabric.round}):'empty';
  hemi.intensity=interior ? (windowLight ? .22 : .45) : .8;
  scene.environmentIntensity=interior&&windowLight ? .14 : .45;
  canvas.dataset.windowLight=windowLight?JSON.stringify({sun:[-5,9,18],target:[3,0,-4.5],interiorFill:.22,environmentIntensity:scene.environmentIntensity,shadowMap:[2048,2048],inferred:true,geometryChanged:false}):'source comparison';
@@ -150,15 +155,18 @@ function release(model){
  for(const m of materials)if(m.userData.studyOriginalWoodMaterial)materials.add(m.userData.studyOriginalWoodMaterial);
  for(const m of materials)if(m.userData.studyOriginalTatamiMaterial)materials.add(m.userData.studyOriginalTatamiMaterial);
  for(const m of materials)if(m.userData.studyOriginalHeriMaterial)materials.add(m.userData.studyOriginalHeriMaterial);
+ for(const m of materials)if(m.userData.studyOriginalCushionMaterial)materials.add(m.userData.studyOriginalCushionMaterial);
  const tatamiOriginals=new Set([...materials].map(m=>m.userData.studyOriginalTatamiMaterial).filter(Boolean));let tatamiCopiesDisposed=0,tatamiOriginalsDisposed=0;
  const heriOriginals=new Set([...materials].map(m=>m.userData.studyOriginalHeriMaterial).filter(Boolean));let heriCopiesDisposed=0,heriOriginalsDisposed=0;
- for(const m of materials){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();if(m.userData.studyOriginalTatamiMaterial)tatamiCopiesDisposed++;if(tatamiOriginals.has(m))tatamiOriginalsDisposed++;if(m.userData.studyOriginalHeriMaterial)heriCopiesDisposed++;if(heriOriginals.has(m))heriOriginalsDisposed++;}for(const t of textures){t.dispose();t.source?.data?.close?.();}for(const g of geometries)g.dispose();
+ const cushionOriginals=new Set([...materials].map(m=>m.userData.studyOriginalCushionMaterial).filter(Boolean));let cushionCopiesDisposed=0,cushionOriginalsDisposed=0;
+ for(const m of materials){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();if(m.userData.studyOriginalTatamiMaterial)tatamiCopiesDisposed++;if(tatamiOriginals.has(m))tatamiOriginalsDisposed++;if(m.userData.studyOriginalHeriMaterial)heriCopiesDisposed++;if(heriOriginals.has(m))heriOriginalsDisposed++;if(m.userData.studyOriginalCushionMaterial)cushionCopiesDisposed++;if(cushionOriginals.has(m))cushionOriginalsDisposed++;}for(const t of textures){t.dispose();t.source?.data?.close?.();}for(const g of geometries)g.dispose();
  if(model.studyTatamiNormal)canvas.dataset.tatamiNormalRetired=JSON.stringify({copiesDisposed:tatamiCopiesDisposed,originalsDisposed:tatamiOriginalsDisposed});
  if(model.studyHeriNormal)canvas.dataset.heriNormalRetired=JSON.stringify({copiesDisposed:heriCopiesDisposed,originalsDisposed:heriOriginalsDisposed});
+ if(model.studyCushionFabric)canvas.dataset.cushionFabricRetired=JSON.stringify({copiesDisposed:cushionCopiesDisposed,originalsDisposed:cushionOriginalsDisposed});
 }
 async function load(part){
  const loadStart=performance.now();
- const gltf=await loader.loadAsync(cushionContour&&part==='interior'?cushionContour.path:cabinetInk&&part==='interior'?'/study/cabinet-ink-119-001/interior-cabinet.glb':upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothFold&&part==='upper-cloth-v2-sewn-rail'?`/study/haori-frontfold-119-${clothFoldRevision}/upper-cloth-support.glb`:clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
+ const gltf=await loader.loadAsync(cushionFabric&&part==='interior'?cushionFabric.path:cushionContour&&part==='interior'?cushionContour.path:cabinetInk&&part==='interior'?'/study/cabinet-ink-119-001/interior-cabinet.glb':upperCushion&&part==='interior'?'/study/upper-cushion-119-003/interior-cushion.glb':clothFold&&part==='upper-cloth-v2-sewn-rail'?`/study/haori-frontfold-119-${clothFoldRevision}/upper-cloth-support.glb`:clothSupport&&part==='upper-cloth-v2-sewn-rail'?'/study/haori-support-119-003/upper-cloth-support.glb':base+'runtime/'+part+'.glb');
  if(part==='interior')canvas.dataset.cabinetInk=cabinetInk?'cabinet-ink-119-001':'source';
  if(part==='interior')canvas.dataset.upperCushion=cushionContour?(cushionContour.perimeter?`${cushionContour.round}-gap${cushionContour.perimeter}`:`${cushionContour.round}-g${cushionContour.revision}`):upperCushion?'upper-cushion-119-003':'sourcea5c102f5';
  if(part==='upper-cloth-v2-sewn-rail')canvas.dataset.clothSupport=clothFold?`haori-frontfold-119-${clothFoldRevision}`:clothSupport?'haori-support-119-003':'source7240';
@@ -175,6 +183,7 @@ async function load(part){
  if(['interior','exterior-lod0'].includes(part)&&woodWear)try{gltf.studyWoodWear=connectShopWoodWear(gltf,{mode:woodWearMode});}catch(error){release(gltf);throw error;}
  if(part==='interior'&&tatamiGain!==null)try{gltf.studyTatamiNormal=connectShopTatamiNormal(gltf,{gain:tatamiGain});if(tatamiGain&&gltf.studyTatamiNormal.materials===0)throw new Error('Tatami comparison did not bind its source material');}catch(error){release(gltf);throw error;}
  if(part==='interior'&&heriGain!==null)try{gltf.studyHeriNormal=connectShopHeriNormal(gltf,{gain:heriGain});if(heriGain&&gltf.studyHeriNormal.materials===0)throw new Error('Heri comparison did not bind its source material');}catch(error){release(gltf);throw error;}
+ if(part==='interior'&&cushionFabric)try{gltf.studyCushionFabric=connectCushionFabric(gltf,{gain:cushionFabric.gain,createMaterial:source=>new THREE.MeshStandardNodeMaterial().copy(source),buildNode:buildCushionFabricNode});}catch(error){release(gltf);throw error;}
  if(part==='interior'&&clothDetail){
   let cloth;
   try{cloth=await load(clothRail?'upper-cloth-v2-sewn-rail':clothHat?'upper-cloth-v2-sewn-hat':clothSewn?'upper-cloth-v2-sewn':clothV2?'upper-cloth-v2':'upper-cloth');gltf.studyCloth=connectShopCloth(gltf,cloth,{suffix:clothV2?'_v2':''});gltf.studyCloth.normal=cloth.studyClothNormal;}
