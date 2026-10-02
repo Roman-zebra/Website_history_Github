@@ -4,8 +4,11 @@ from datetime import datetime,timezone
 import hashlib,json,array,sys
 import bpy
 root=Path(__file__).resolve().parents[4]
-source=root/'research-cache/hall-stream-transport-002'
-out=root/'research-cache/hall-contact-119-010'
+args=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
+if len(args) not in (0,2):raise RuntimeError('Expected optional source-directory output-directory after --')
+source=(root/(args[0] if args else 'research-cache/hall-stream-transport-002')).resolve()
+out=(root/(args[1] if args else 'research-cache/hall-contact-119-010')).resolve()
+if not source.is_relative_to(root/'research-cache') or not out.is_relative_to(root/'research-cache') or source==out:raise RuntimeError('Keep distinct source/output caches inside research-cache')
 out.mkdir(parents=True,exist_ok=True)
 if (out/'floor-contact.png').exists():raise RuntimeError('Preserve numbered bake; inspect existing output before another run')
 inputs=[source/f'cell_hall-{part}-decoded.glb' for part in ['core','desk','lamps','furnishings']]
@@ -43,5 +46,6 @@ def snapshot():
 before=snapshot();blend=out/'contact-bake.blend';bpy.ops.wm.save_as_mainfile(filepath=str(blend));bpy.ops.wm.open_mainfile(filepath=str(blend));after=snapshot();assert before==after
 assert hashes=={f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in inputs}
 receipt=dict(at=datetime.now(timezone.utc).isoformat(),blender=bpy.app.version_string,sourceHashes=hashes,sourceUnchanged=True,floorWorldBounds=[lo,hi],mapSize=[512,2048],mapColourSpace='Non-Color',pngBytes=(out/'floor-contact.png').stat().st_size,pngSha256=hashlib.sha256((out/'floor-contact.png').read_bytes()).hexdigest(),minimum=min(values),maximum=max(values),pixelsBelowPoint9=sum(v<.9 for v in values),aoDistance=.45,aoNodeSamples=16,cyclesSamples=16,seed=119010,receiverOnlyGeometryDerivative=True,sourceBrowserGeometryChanged=False,savedSceneReopened=True,snapshotEqual=True,blendBytes=blend.stat().st_size,phoneMeasured=False,visualAcceptance=False)
+receipt['sourceDirectory']=source.relative_to(root).as_posix()
 (out/'bake-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
 print('HALL_CONTACT_BAKE '+json.dumps(receipt),flush=True)

@@ -19,6 +19,8 @@ const hallStreamReview=path.resolve(root,'../research-cache/hall-stream-transpor
 const hallEntryStreamReview=path.resolve(root,'../research-cache/hall-entry-stream-121-001');
 const hallContactReview=path.resolve(root,'../research-cache/hall-contact-119-010');
 const hallContactPath='/study/hall-contact-119-010/floor-contact.png';
+const hallEntryContactReview=path.resolve(root,'../research-cache/hall-contact-entry-121-001');
+const hallEntryContactPaths=new Map(['floor-contact.png','bake-receipt.json'].map(name=>['/study/hall-contact-entry-121/'+name,name]));
 const haoriSupportReview=path.resolve(root,'../research-cache/haori-support-119-003');
 const haoriSupportPath='/study/haori-support-119-003/upper-cloth-support.glb';
 const haoriContactReviews=new Map(['006','009'].map(rev=>[`/study/haori-wall-contact-119-${rev}/wall-contact.png`,path.resolve(root,`../research-cache/haori-wall-contact-119-${rev}`)]));
@@ -66,7 +68,8 @@ const server = http.createServer((request, response) => {
   const hallEntryRequest=pathname.startsWith('/study/hall-entry-121-stream/');
   const hallStreamName=hallEntryRequest?pathname.slice('/study/hall-entry-121-stream/'.length):pathname.startsWith('/study/hall-115-stream/')?pathname.slice('/study/hall-115-stream/'.length):null;
   const hallStreamAllowed=hallStreamNames.has(hallStreamName);
-  const hallContactAllowed=pathname===hallContactPath;
+  const hallEntryContactAllowed=hallEntryContactPaths.has(pathname);
+  const hallContactAllowed=pathname===hallContactPath||hallEntryContactAllowed;
   const haoriSupportAllowed=pathname===haoriSupportPath;
   const haoriContactAllowed=haoriContactReviews.has(pathname);
   const cushionAllowed=pathname===cushionPath;
@@ -81,9 +84,9 @@ const server = http.createServer((request, response) => {
   const mobileName=pathname.startsWith('/study/tower-mobile-115/')?pathname.slice('/study/tower-mobile-115/'.length):null;
   const mobileAllowed=towerMobileNames.has(mobileName);
   const reviewName=reviewPrefix?pathname.slice(('/study/tower-base-'+reviewPrefix+'/').length):null;
-  const reviewRoot=cushionFabricAllowed?cushionFabricReview:cushionPerimeterAllowed?cushionPerimeterReview:cushionContourAllowed?cushionContourReview:haoriFoldAllowed?haoriFoldReviews.get(pathname):cabinetAllowed?cabinetReview:cushionAllowed?cushionReview:haoriContactAllowed?haoriContactReviews.get(pathname):haoriSupportAllowed?haoriSupportReview:hallContactAllowed?hallContactReview:hallStreamAllowed?(hallEntryRequest?hallEntryStreamReview:hallStreamReview):mobileAllowed?towerMobileReview:tripoMobileAllowed?tripoMobileReview:tripoAllowed?tripoReview:liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
+  const reviewRoot=cushionFabricAllowed?cushionFabricReview:cushionPerimeterAllowed?cushionPerimeterReview:cushionContourAllowed?cushionContourReview:haoriFoldAllowed?haoriFoldReviews.get(pathname):cabinetAllowed?cabinetReview:cushionAllowed?cushionReview:haoriContactAllowed?haoriContactReviews.get(pathname):haoriSupportAllowed?haoriSupportReview:hallContactAllowed?(hallEntryContactAllowed?hallEntryContactReview:hallContactReview):hallStreamAllowed?(hallEntryRequest?hallEntryStreamReview:hallStreamReview):mobileAllowed?towerMobileReview:tripoMobileAllowed?tripoMobileReview:tripoAllowed?tripoReview:liftAllowed?liftProposal:hallAllowed?hallProposal:cinemaAllowed?cinemaProposal:reviewPrefix==='115'?tower115Review:towerReview;
   const reviewAllowed=cushionFabricAllowed||cushionPerimeterAllowed||cushionContourAllowed||haoriFoldAllowed||cabinetAllowed||cushionAllowed||haoriContactAllowed||haoriSupportAllowed||hallContactAllowed||hallStreamAllowed||mobileAllowed||tripoMobileAllowed||tripoAllowed||liftAllowed||hallAllowed||cinemaAllowed||(reviewName!==null&&(reviewPrefix==='115'?tower115Names:towerNames).has(reviewName));
-  const file = reviewAllowed?path.resolve(reviewRoot,cushionFabricAllowed?'interior-cushion-fabric.glb':cushionPerimeterAllowed?cushionPerimeterPaths.get(pathname):cushionContourAllowed?cushionContourPaths.get(pathname):haoriFoldAllowed?'upper-cloth-support.glb':cabinetAllowed?'interior-cabinet.glb':cushionAllowed?'interior-cushion.glb':haoriContactAllowed?'wall-contact.png':haoriSupportAllowed?'upper-cloth-support.glb':hallContactAllowed?'floor-contact.png':hallStreamAllowed?hallStreamName:mobileAllowed?mobileName:tripoMobileAllowed?tripoMobileName:tripoAllowed?tripoName:liftAllowed?liftName:hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
+  const file = reviewAllowed?path.resolve(reviewRoot,cushionFabricAllowed?'interior-cushion-fabric.glb':cushionPerimeterAllowed?cushionPerimeterPaths.get(pathname):cushionContourAllowed?cushionContourPaths.get(pathname):haoriFoldAllowed?'upper-cloth-support.glb':cabinetAllowed?'interior-cabinet.glb':cushionAllowed?'interior-cushion.glb':haoriContactAllowed?'wall-contact.png':haoriSupportAllowed?'upper-cloth-support.glb':hallContactAllowed?(hallEntryContactAllowed?hallEntryContactPaths.get(pathname):'floor-contact.png'):hallStreamAllowed?hallStreamName:mobileAllowed?mobileName:tripoMobileAllowed?tripoMobileName:tripoAllowed?tripoName:liftAllowed?liftName:hallAllowed?hallName:cinemaAllowed?cinemaName:reviewName):path.resolve(root, `.${pathname}`);
   // Check the resolved path as well as the URL, including encoded traversal.
   const relative = `/${path.relative(root, file).split(path.sep).join('/')}`;
   if (reviewAllowed?!file.startsWith(`${reviewRoot}${path.sep}`):(!file.startsWith(`${root}${path.sep}`) || !allowed(relative))) { response.writeHead(403).end(); return; }

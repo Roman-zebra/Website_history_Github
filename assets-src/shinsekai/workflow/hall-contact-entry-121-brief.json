@@ -1,0 +1,13 @@
+{
+  "ticket": "hall-contact-entry-121-001",
+  "purpose": "Rebind static contact AO to the existing retained115 repaired entrance source; remove shadows of relocated benches before moving-shadow art qualification.",
+  "inputs": "research-cache/hall-entry-stream-121-001, retained115 hash8f5b52ff119135bd0c5fc2c96257420f9c70c5e2758ea8fdd38d1e990a4a5340",
+  "sourceStatus": "Existing inferred115 scene repair reused unchanged; not new historical evidence",
+  "units": "metres; Blender Z-up with existing glTF import conversion; browser Y-up",
+  "fixed": ["source geometry/materials", "AO distance0.45m", "map512x2048", "Cycles16 and AO16 samples", "seed119010", "Non-Color", "camera/light/backend per comparison"],
+  "oneFactor": "Changed bake input scene from original room to existing repaired room only",
+  "references": ["Existing bake-hall-contact-010.py and saved/reopened010 receipt", "Pinned Blender4.5.10 LTS installed", "Pinned repo/vendor/three-r186/build/three.core.js TextureLoader loads a HTML image into unchanged Texture defaults", "Pinned repo/vendor/three-r186/examples/jsm/loaders/GLTFLoader.js parseAsync accepts verified ArrayBuffer with the existing resource base path"],
+  "verification": ["reopen .blend snapshot exact", "source hashes unchanged", "all four decoded parts bind to stream receipt", "packed and PNG byte hashes before new-source runtime loading", "native near/context/entrance both backends", "gain0 null", "dream/far/reentry/disposal and console"],
+  "gates": "Static AO only. Moving/local-light/upper shadows, wing floor, full119/120/121, integrated1080p and iPhone14 remain unfinished.",
+  "cost": "Existing free local Blender; no spend/download/source regeneration"
+}
