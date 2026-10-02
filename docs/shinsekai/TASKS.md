@@ -779,3 +779,29 @@ workflow007/008briefs/generator/export/verifier,private008native-receipt.json.
 Interimimages(private008):fold-webgpu-front.png,fold-webgl-side.png (shape
 diagnostic only). Baseline9ece332 exactWorkersSUCCESS2026-10-02T03:53:03Z;
 currentcommit/exactWorkers checked afterpush. Local18781/session49103.
+
+
+## Claude119/120 lighting and contact progress —2026-10-02
+119 remains incomplete; interim reply, no completed review request. Environment
+0.14->0.35 failed native front visibility on both backends and runtime removed.
+Upperlamp001 changes only existing upper lamp daytime gain0.3->1,2.690->8.968cd,
+finite4.5m reach; all other lighting/maps/geometry/AA retained.13fresh native
+PNGs:GPUcontrol front,candidate front/side/context/window/dream/reentry;GLcontrol
+front/side/context/window/dream,candidate front. Both front pairs more readable;
+GPU actualfarLOD2/interiorclothdreamhelpers empty/TatamiHeri each1copy1original
+disposed/exactreentry. Missing matchedGPUcontrols andGLcandidate views/far/reentry
+remain unqualified. Capture GPUwait failures retried only afteractualreason;
+CDP observers/near-load commands expired. Documented recovery tab worked, then
+oldhandles vanished and replacement2857 binding timed out twice. Cause unverified;
+no browser kill/restart/unconfirmedsidecapture adoption.368tests passed.
+Contact009 rebakes correct008 geometry only with006 parameters:512NonColor/
+radius.55/32AO/16Cycles/seed119005/whiteborder/90098bytes/SHA605384f0. Actual
+saved-scene reopen snapshot exact; both source hashes unchanged. PNG inspected,
+not connected/runtime qualified. Original006 preserved and stillblocked on008.
+No new lights/draws/tri/tools/TRIPO; contactmap potential1.33MiB is not phone
+approval. Sources003e033a5cb/008c3623f6a/interiora5c102f5/cabinet09a0e26d retained.
+Next finish lighting/nativecontact,finalhaori/hall/upper4/integrated1080p/world/
+device. Evidence:haori-light-claude119.md,workflow lighting001/contact009 briefs,
+privateupperlamp native-receipt.json/contact009bake-receipt.json.Observed120/
+processed118;GoalACTIVE/TRIPO3200/spent0/nextOct3after09. Final119 complete header
+and2–3reviewPNGs deferred until all requesteditems actuallyready.

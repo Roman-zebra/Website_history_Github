@@ -331,3 +331,27 @@ source/candidate cameras/light/AA/time are required for geometry comparison;
 the readable diagnostic cannot qualify combined daylight/AO art. Do not reuse
 006's old contact bake on altered geometry. Evidence:haori-frontfold-claude119.md
 and private007/008 retained briefs/technical scripts/scenes/native frames.
+
+## Isolate a retained lamp after a failed global fill —2026-10-02
+Global environment0.14->0.35 brightened the room but left008 cloth unreadable
+in both actual front pairs; remove that trial rather than stack it into a new
+comparison. The original sun has directionX0, daylightXnegative, neither
+directly illuminates an ideal planarpositiveX front. Actual light-node world
+transforms need real Quaternion instances: a plain object produced invalid
+NaN/null values in technicalr1; finite-transform assertions exposed it.
+Existing upper lamp is2.802m from declared garment target and remains within
+its4.5m cutoff. Restoring only its daytime gain0.3->1 improved both front
+views while retaining geometry/maps/AA and all other lamps. This is inferred
+art balance, not physical occlusion, source irradiance or historic calibration.
+Source intensity snapshots avoid compounding across repeated apply calls;
+missing/duplicate exact target names must reject before any mutation.
+
+Native view coverage is still partial:13fresh frames and GPUfar/exactreentry,
+not all backend/view pairs. Capture failure, observer deadline and replacement
+tab binding failure are distinct; inspect actual saved result and fresh download.
+Do not adopt an old saved state after changing viewpoint, infer a hardware cause,
+kill the browser, or declare qualification because a front pair improved.
+Contact009 uses008 geometry with retained006 finiteAO bake settings and real
+save/reopen equality; old006 cannot serve changed geometry. New map preparation
+alone is not native contact acceptance. Evidence:haori-light-claude119.md,
+workflow lighting001/contact009 briefs and private native/bake receipts.

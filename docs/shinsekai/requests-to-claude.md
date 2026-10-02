@@ -1417,3 +1417,48 @@ workflow007/008briefs/generator/export/verifier,private008native-receipt.json.
 Interimimages(private008):fold-webgpu-front.png,fold-webgl-side.png (shape
 diagnostic only). Baseline9ece332 exactWorkersSUCCESS2026-10-02T03:53:03Z;
 currentcommit/exactWorkers checked afterpush. Local18781/session49103.
+
+## Claude119/120 lighting progress —2026-10-02
+119 remains incomplete; this is an interim reply to the progress question,
+not a completed review packet.008 folds, support, sleeve sag and collar checks
+are retained. A one-factor environment0.14->0.35 comparison failed the native
+front gate on both backends: room brightens but cloth remains unreadable.
+That runtime trial was removed and its four fresh images/code retained.
+The next optional study changes only existing HybridLamp_upper_room daytime
+gain0.3->1 (2.690->8.968cd), preserving finite4.5m reach, all other lamps,
+window shadows, environment0.14, GTAO, maps, geometry and1280x720AA.
+Candidate WebGPU front/side/context/window images show readable folds and
+retained floor light pools; matched-source and WebGL view gates are in flight.
+Dream/far/reentry checks are in flight, not final acceptance.368 full-build
+tests passed. No new lights/maps/draws/geometry/TRIPO consumption.
+Next rebake wallcontact for008, finish cloth art and remaining hall/upper4,
+then integrated1080p/world/device verification.Observed120/processed118;
+no additional Claude review call or agents. TRIPO3200/spent0/nextOct3after09.
+Evidence:browser-study/haori-light-claude119.md,workflow lighting001 briefs;
+private haori-upperlamp-119-001 candidate PNGs. Goal remains ACTIVE.
+
+
+## Claude119/120 lighting and contact progress —2026-10-02
+119 remains incomplete; interim reply, no completed review request. Environment
+0.14->0.35 failed native front visibility on both backends and runtime removed.
+Upperlamp001 changes only existing upper lamp daytime gain0.3->1,2.690->8.968cd,
+finite4.5m reach; all other lighting/maps/geometry/AA retained.13fresh native
+PNGs:GPUcontrol front,candidate front/side/context/window/dream/reentry;GLcontrol
+front/side/context/window/dream,candidate front. Both front pairs more readable;
+GPU actualfarLOD2/interiorclothdreamhelpers empty/TatamiHeri each1copy1original
+disposed/exactreentry. Missing matchedGPUcontrols andGLcandidate views/far/reentry
+remain unqualified. Capture GPUwait failures retried only afteractualreason;
+CDP observers/near-load commands expired. Documented recovery tab worked, then
+oldhandles vanished and replacement2857 binding timed out twice. Cause unverified;
+no browser kill/restart/unconfirmedsidecapture adoption.368tests passed.
+Contact009 rebakes correct008 geometry only with006 parameters:512NonColor/
+radius.55/32AO/16Cycles/seed119005/whiteborder/90098bytes/SHA605384f0. Actual
+saved-scene reopen snapshot exact; both source hashes unchanged. PNG inspected,
+not connected/runtime qualified. Original006 preserved and stillblocked on008.
+No new lights/draws/tri/tools/TRIPO; contactmap potential1.33MiB is not phone
+approval. Sources003e033a5cb/008c3623f6a/interiora5c102f5/cabinet09a0e26d retained.
+Next finish lighting/nativecontact,finalhaori/hall/upper4/integrated1080p/world/
+device. Evidence:haori-light-claude119.md,workflow lighting001/contact009 briefs,
+privateupperlamp native-receipt.json/contact009bake-receipt.json.Observed120/
+processed118;GoalACTIVE/TRIPO3200/spent0/nextOct3after09. Final119 complete header
+and2–3reviewPNGs deferred until all requesteditems actuallyready.

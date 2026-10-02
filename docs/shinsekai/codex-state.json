@@ -1,8 +1,8 @@
 {
   "status": "active",
   "current": "T6",
-  "next": "PRIORITY120/119: resolve haori daylight indirect illumination in a scoped one-factor round using qualified008 geometry; preserve window shadows, nearby maps/AA/roughness/source. Then rebake wallcontact for008 (old006 map rejected by runtime guard), final cloth/sheens/hem art. Hall010 floorcontacts/range5 verified but finalart/upper/moving-shadows/clippedemitters open. Then upper plaster normal+colour grain, rounded cushionfabric, shoji pools and integrated1080p/world/device gates.008 optional geometry is qualified native in original-source-light/AOoff diagnostic, not combined daylight acceptance. Four complete midbody21.997–22.873mm crests,3212garmenttri vs0031916/0075780,9060clothcompaniontri,+49476GLBbytes/0maps/draws/TRIPO. Source003 bamboo/cord attributes exact, original frozenprefix/unrelatedmaps/materials exact; one closed exported shell/no neighbourpairs/reopen/validator0-0/full366tests. Fresh source/candidate bothbackendfront/side/context/dream/far/reentry results in private008/native-receipt.json.007 lower-half-only partial superseded. Correct old90mm front description:90mm is back central gap; original front31.1–33.6mm. Local18781/session49103 current, previous healthyservers retained. Parentlatest120/processed118/interimreply viarequests-to-claude,119 incomplete. Oct2TRIPO3200/spent0/nextOct3after09; GoalACTIVE.",
-  "updatedAt": "2026-10-02T05:05:21.660380+00:00",
+  "next": "PRIORITY120/119: finish upperlamp001 missing native matched views:GPUcontrol side/context/window/dream;GLcandidate side/context/window/dream/far/reentry.13fresh PNGs saved; both front candidates more readable; GPUfar disposal and exactreentry verified. Do not label optional lighting qualified yet. Browser4 replacementtabs2856/2857 listed after originalhandles vanished;2857 binding focus-emulation timed out twice; do not kill/restart browser or accept unconfirmed side capture. Local18781/session49103 HTTP200. Environment.35 failed bothfront gates and runtime removed. Contact009 rebake for008 completed privately:512NonColor/whiteborder/90098bytes/SHA605384f0/sourcehashes/save-reopen exact; no runtime connection. After lighting views, connect correct009 map in own scoped native round; keep old006 blocked on008. Finishhaori art,Hall010 finalart/upper/shadow/emitter,upperplastergrain/roundedcushion/shoji,integrated1080p/world/device.368tests.Observed120/processed118;119 incomplete,GoalACTIVE. TRIPO3200/spent0/nextOct3after09.",
+  "updatedAt": "2026-10-02T06:10:56.814177+00:00",
   "lastCompleted": "T1",
   "processedClaudeHandoff": 118,
   "observedClaudeHandoff": 120,
@@ -68,7 +68,7 @@
     "validatedFiles": 28,
     "validatorErrors": 0,
     "validatorWarnings": 0,
-    "fullBuildTests": 366,
+    "fullBuildTests": 368,
     "fullQualityHallCandidate": "../research-cache/hall-stream-transport-002",
     "hallCandidateNativeVerified": true,
     "hallCandidateNativeEvidence": "../research-cache/hall-stream-transport-002/native-receipt.json",
@@ -92,7 +92,8 @@
     "upperTatamiNativeEvidence": "../research-cache/tatami-normal-119-001/native-receipt.json",
     "upperHeriNativeEvidence": "../research-cache/heri-normal-119-001/native-receipt.json",
     "upperCabinetNativeEvidence": "../research-cache/cabinet-ink-119-001/native-receipt.json",
-    "upperHaoriFrontFoldNativeEvidence": "../research-cache/haori-frontfold-119-008/native-receipt.json"
+    "upperHaoriFrontFoldNativeEvidence": "../research-cache/haori-frontfold-119-008/native-receipt.json",
+    "upperHaoriLightingEvidence": "../research-cache/haori-upperlamp-119-001/native-receipt.json"
   },
-  "pendingClaudeRepairs": "119 incomplete:008frontfold geometry optional source-light native qualified; combineddaylight still too dark, next isolate indirect light, then rebakewallcontact and finalhaori. Hall010 floorcontacts/range5 retained but finalart/shadow/emitter caveats; remainingupper4/integrated/world/device. Observed120/processed118; interimresponse throughagreedfile, no additionalreview/agents."
+  "pendingClaudeRepairs": "119 incomplete: upperlamp001 partial native visibility progress, contact009 bake prepared; finish missing lighting and native contact gates, finalhaori/hall/upper4/integrated/world/device. Observed120/processed118; interim shared-file response sent, no extraClaude reviews/agents."
 }
