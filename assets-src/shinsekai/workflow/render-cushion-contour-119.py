@@ -4,10 +4,13 @@ from pathlib import Path
 from mathutils import Vector
 args=sys.argv[sys.argv.index('--')+1:];root=Path(args[0]).resolve();device=args[1] if len(args)>1 else 'CPU'
 assert device in ('CPU','CUDA');out=root/('renders' if device=='CPU' else 'renders-cuda')
-top_only=len(args)>2 and args[2]=='top'
+mode=args[2] if len(args)>2 else None
+assert mode in (None,'top','perimeter')
+top_only=mode=='top'
 if top_only:out=root/('top-corrected-'+device.lower())
 assert not out.exists();out.mkdir()
 inputs={'source':root.parent/'cabinet-ink-119-001/interior-cabinet.glb','g035':root/'interior-cushion-g035.glb','g065':root/'interior-cushion-g065.glb'}
+if mode=='perimeter':inputs={'gap022':root/'interior-cushion-gap022.glb','gap040':root/'interior-cushion-gap040.glb'}
 views={'close':{'position':[4.0,4.35,3.95],'target':[3.2,5.215,3.50],'lens':32},'side':{'position':[4.0,5.2,3.73],'target':[3.2,5.215,3.50],'lens':28},'top':{'position':[3.2,5.215,4.5],'target':[3.2,5.215,3.50],'ortho':1.48},'context':{'position':[4.8,3.8,4.5],'target':[3.1,5.25,3.65],'lens':28}}
 if top_only:views={'top':views['top']}
 lights=[{'position':[3.2,4.5,5.1],'target':[3.2,5.215,3.5],'energy':120,'size':1.5},{'position':[4.3,5.5,4.6],'target':[3.2,5.215,3.5],'energy':40,'size':1.0}]
