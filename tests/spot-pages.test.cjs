@@ -9,8 +9,20 @@ const sitemap=new Set([...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].ma
 const mKeys=fs.readdirSync(path.join(root,'place')).filter(f=>/^m-.+\.html$/.test(f)).map(f=>f.slice(0,-5));
 const keys=[...activities.map(a=>'a-'+a.id),...liminal.map(p=>'l-'+p.id),...mKeys];
 
-test('36 food and shopping spots, 27 liminal places and 34 landmarks each have five language pages',()=>{
- assert.equal(activities.length,36);assert.equal(liminal.length,27);assert.equal(mKeys.length,landmarks.length);
+test('new dreamcore pages retain original-post attribution and distinguish licensed exterior photography',()=>{
+ for(const id of ['jozankei-view-hotel','the-entente-market-scene'])for(const l of LANGS){
+  const p=liminal.find(p=>p.id===id),html=read('place/'+DIRS[l]+'l-'+id+'.html');
+  assert.ok(html.includes(p.social.url));assert.ok(html.includes(p.social.author));
+  assert.ok(html.includes('https://platform.twitter.com/widgets.js'));assert.ok(html.includes('data-dnt="true"'));
+  assert.ok(!html.includes('pbs.twimg.com'),'no independently rehosted X media');
+  assert.ok(html.includes(p.photoNotes[l]));assert.ok(html.includes(p.visitNotes[l]));
+  if(p.photo){assert.ok(html.includes(p.photo.licenseUrl));assert.ok(html.includes(p.photo.captions[l]));}
+ }
+ assert.ok(!read('place/ja/l-qua-palace.html').includes('platform.twitter.com/widgets.js'),'other articles do not load the new widget');
+});
+
+test('36 food and shopping spots, 29 liminal places and 34 landmarks each have five language pages',()=>{
+ assert.equal(activities.length,36);assert.equal(liminal.length,29);assert.equal(mKeys.length,landmarks.length);
  for(const k of keys)for(const l of LANGS){const f='place/'+DIRS[l]+k+'.html';assert.ok(has(f),f+' is missing');}
 });
 

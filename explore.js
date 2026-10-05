@@ -45,7 +45,7 @@ const JAPAN = { center: [36.2, 138.3], zoom: 5 };
    yesterday's copy from its own HTTP cache without asking the server - which is
    how a rebuilt landmarks.json arrived with no tiers on it. Stamp the release
    onto the URL so a new build is a new resource. Bump with each release. */
-const DATA_V = '0.53';
+const DATA_V = '0.54';
 const dj = u => u + (u.indexOf('?') < 0 ? '?v=' : '&v=') + DATA_V;
 /* The asset version is read from this script's own URL (explore.js?v=…), so what it fetches is what the page and sw.js
    ask for, not a number written here that falls behind (the search worker sat at 0.80). */
@@ -1336,6 +1336,8 @@ const SPOT_ART = Object.freeze({
   "l:okunoshima": "okunoshima-v1.webp",
   "l:outer-underground-discharge": "outer-underground-discharge-v1.webp",
   "l:oya-quarry": "oya-quarry-v1.webp",
+  "l:jozankei-view-hotel": "jozankei-view-hotel-v1.webp",
+  "l:the-entente-market-scene": "the-entente-market-scene-v1.webp",
   "l:qua-palace": "qua-palace-v1.webp",
   "l:sagamiko-arcade": "sagamiko-arcade-v1.webp",
   "l:sarushima": "sarushima-v1.webp",
@@ -2333,7 +2335,7 @@ function photoFields(key, fallbackImg, fallbackCap){
   if (!v) return { img: fallbackImg, cap: fallbackCap, photoKey: key };
   const src2x = v.src2x || v.src.replace('/500px-', '/960px-');
   return { img: v.src, srcset: v.src + ' 500w, ' + src2x + ' 960w', photoKey: key,
-           cap: t('photoBy') + ' \u2014 ' + (v.author ? v.author + ' / ' : '') + v.license,
+           cap: (v.captions?.[LANG] ? v.captions[LANG] + ' · ' : '') + t('photoBy') + ' \u2014 ' + (v.author ? v.author + ' / ' : '') + v.license,
            capHref: v.page || 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(v.file.replace(/ /g, '_')) };
 }
 function paintPanelPhoto(o){
@@ -2776,7 +2778,7 @@ function snsLinks(){
 function showLiminal(p, keepView,refresh=false){
   lastPanel = () => showLiminal(p, true,true);
   const hook = (p.hooks && p.hooks[LANG]) || (LANG === 'ja' ? p.hook_ja : p.hook);
-  const why = LANG === 'ja' ? p.why_ja : LANG === 'en' ? p.why : '';
+  const why = p.photoNotes?.[LANG] || (LANG === 'ja' ? p.why_ja : LANG === 'en' ? p.why : '');
   /* Wikipedia の要約は言語ごとに別の記事から取る。2026-09-09 まで extract は1つしか無く、
      どちらの言語から取れたかで中身の言語が変わっていた。explore.js 側もここだけ
      言語で分岐していなかったため、**英語表示なのに説明が日本語で出ていた**
@@ -2804,6 +2806,7 @@ function showLiminal(p, keepView,refresh=false){
     placeId:'l-'+p.id, adTier:POP_LIM, kind:'liminal', ja: p.ja, name: placeName(p), at: [p.lat, p.lon], query: p.name,
     bodyHTML: '<p>' + esc(hook) + '</p>'
             + (why ? '<h3 class="p-h3">' + t('liminalWhat') + '</h3><p>' + esc(why) + '</p>' : '')
+            + (p.generatedArticle ? '<p><a href="/place/' + ({en:'',ja:'ja/',ko:'ko/','zh-Hans':'zh-cn/','zh-Hant':'zh-tw/'}[LANG] || '') + 'l-' + esc(p.id) + '">' + esc({en:'Photographs and visitor information',ja:'投稿写真と施設の案内を見る',ko:'사진과 방문 안내 보기','zh-Hans':'查看投稿照片与到访信息','zh-Hant':'查看投稿照片與到訪資訊'}[LANG] || 'Photographs and visitor information') + '</a></p>' : '')
             + (p.note && LANG==='en' ? '<p class="p-pick">' + esc(p.note) + '</p>' : '')
             + ((LANG==='en'||LANG==='ja') && (p.extract||p.extract_ja) ? extractHTML({...p,summaries:null},220) : ''),
     ...photoFields('l:' + p.id, p.img || tileURL(NOW_LAYER.id, NOW_LAYER.ext, p.lat, p.lon, 17), p.img ? t('photoBy') : t('photoAir')),

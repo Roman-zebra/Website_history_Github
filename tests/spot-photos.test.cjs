@@ -27,7 +27,7 @@ test('every liminal, food and shopping pin resolves to a local WebP picture at i
   const b=fs.readFileSync(path.join(root,url));assert.equal(b.toString('ascii',0,4),'RIFF');assert.equal(b.toString('ascii',8,12),'WEBP');
   files.add(url);
  }
- assert.equal(liminal.length+activities.length,63);
+ assert.equal(liminal.length+activities.length,65);
  assert.ok(files.size>=58,'separate art for all but the shared places');
  assert.equal(ctx.landmarkArt({artKey:'l:no-such-place'},'p3'),'');
  assert.equal(ctx.landmarkArt({artKey:'l:qua-palace'},'p3'),'/icons/landmarks/qua-palace-v1.webp');
@@ -49,8 +49,8 @@ test('every p1-p3 record and every tab 03/04/05 record has a checked ground-leve
   ...landmarks.map(p=>'lm:'+p.wiki_en),   // every landmark, p4 included (2026-09-29 round 3)
   ...regional.map(p=>'rg:'+p.id),
   ...activities.map(p=>'a:'+p.id),
-  ...liminal.filter(p=>p.id!=='qua-palace').map(p=>'l:'+p.id)];
- assert.equal(want.length,206);
+  ...liminal.filter(p=>p.id!=='qua-palace'&&!p.noFreeGroundPhoto).map(p=>'l:'+p.id)];
+ assert.equal(want.length,207);
  for(const k of want)assert.ok(photos[k],k+' has no photograph');
  const keys=new Set(want);
  for(const k of Object.keys(photos))assert.ok(keys.has(k),k+' is not a p1-p3 or tab 03/04/05 record');

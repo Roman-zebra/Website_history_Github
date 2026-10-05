@@ -1,0 +1,85 @@
+{
+  "packet": "SITE-DREAMCORE-20261005",
+  "checkedAtJst": "2026-10-05",
+  "editorialMethod": "Public original posts and their photos visually inspected. Original editorial interpretation is labelled as such; official access facts are separate. X photos/screenshots are not redistributed. No abandonment or always-empty claim.",
+  "embeddingDocumentation": "https://help.x.com/en/using-x/how-to-embed-a-post",
+  "places": [
+    {
+      "id": "jozankei-view-hotel",
+      "name": "定山渓ビューホテル・水の王国ラグーン",
+      "post": {
+        "url": "https://x.com/poco_a__poco___/status/2105228525808783585",
+        "author": "ぼっち (@poco_a__poco___)",
+        "date": "2026-09-30"
+      },
+      "sources": [
+        "https://www.jozankeiview.com/pool/",
+        "https://www.jozankeiview.com/access/",
+        "https://x.com/poco_a__poco___/status/2105228525808783585"
+      ],
+      "coordinates": [
+        42.96888889,
+        141.1675
+      ],
+      "coordinateSource": "Japanese Wikipedia MediaWiki coordinates",
+      "photographInterpretation": "投稿写真からの読み取り：ピンクのきのこ形の噴水、黄色い支柱、魚の飾り。その上には白い梁の格子が繰り返され、青い水面と暖色の床が映り合う。子ども向けの楽しげな色彩に、人の少ない画角と閉じた天井の広がりが重なると、昔の旅行の記憶に迷い込んだように感じられる。これは写真の構図から受ける印象で、いつも無人という意味ではない。",
+      "interiorImageUse": "Official X embedded post retaining author and original URL; no independent licence assumed",
+      "exteriorImage": {
+        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Jozankei_View_Hotel.JPG/960px-Jozankei_View_Hotel.JPG",
+        "page": "https://commons.wikimedia.org/wiki/File:Jozankei_View_Hotel.JPG",
+        "author": "禁樹なずな",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "captions": {
+          "en": "Hotel exterior, March 2015 (not the pool)",
+          "ja": "ホテル外観・2015年3月撮影（プールの写真ではありません）",
+          "ko": "호텔 외관 · 2015년 3월 촬영(수영장 사진 아님)",
+          "zh-Hans": "酒店外观，2015年3月拍摄（并非泳池照片）",
+          "zh-Hant": "飯店外觀，2015年3月拍攝（並非泳池照片）"
+        }
+      },
+      "pinImage": {
+        "source": "https://commons.wikimedia.org/wiki/File:Jozankei_View_Hotel.JPG",
+        "author": "禁樹なずな",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "changes": "Resized to 256×192 WebP, same CC BY-SA 4.0 licence"
+      }
+    },
+    {
+      "id": "the-entente-market-scene",
+      "name": "ジ・アンタンテ マーケットシーン",
+      "post": {
+        "url": "https://x.com/urbex_34/status/2107019998833324305",
+        "author": "Saho@廃墟と街並み (@urbex_34)",
+        "date": "2026-10-05"
+      },
+      "sources": [
+        "https://www.rokko-island.com/town/195",
+        "https://www.mec-h.com/town/mh-rokkoisland/52",
+        "https://x.com/urbex_34/status/2107019998833324305",
+        "https://x.com/urbex_34/status/2107047373935673683"
+      ],
+      "coordinates": [
+        34.690678,
+        135.267929
+      ],
+      "coordinateSource": "GSI address search: 神戸市東灘区向洋町中5-15; area pin",
+      "photographInterpretation": "投稿写真からの読み取り：格子状のガラス屋根の下に、大きな空白を囲む桃色のタイルと青緑の帯。ガラスのエレベーターや橋状の通路、階段が何層も重なり、下には石と水の景色がある。外の街を建物の中へ持ち込んだような寸法と、少し昔の未来を思わせる色づかいが、日常の商業施設を夢の中の街に変えて見せる。写真で静かに見えることと、施設が無人であることは別の話。",
+      "interiorImageUse": "Official X embedded post retaining author and original URL; no independent licence assumed",
+      "exteriorImage": null,
+      "pinImage": {
+        "source": "国土地理院・地理院タイル（シームレス空中写真）",
+        "url": "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/18/229571/104109.jpg",
+        "lat": 34.690678,
+        "lon": 135.267929,
+        "z": 18,
+        "x": 229571,
+        "y": 104109,
+        "changes": "resized to 256px WebP; no interior photography",
+        "terms": "https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html"
+      }
+    }
+  ],
+  "fallback": "Persistent original-post links remain when the third-party widget is blocked or unavailable."
+}

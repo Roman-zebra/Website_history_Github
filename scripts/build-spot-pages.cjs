@@ -65,8 +65,9 @@ for(const a of activities)spots.push({key:'a-'+a.id,kind:a.category,lat:a.lat,lo
  lead:l=>a.hooks[l],paras:l=>[],notes:l=>a.notes?.[l],english:false,
  map:l=>'/?lang='+encodeURIComponent(l)+'&amp;place=a-'+a.id,
  sources:l=>[a.official&&{url:a.official,label:UI[l].official},...(a.noteSources||[]).map(u=>({url:u,label:new URL(u).hostname.replace(/^www\./,'')}))].filter(Boolean)});
-for(const p of liminal)spots.push({key:'l-'+p.id,id:p.id,kind:'liminal',lat:p.lat,lon:p.lon,emoji:p.emoji,names:p.names,english:true,
- lead:l=>p.hooks?.[l],paras:l=>[p.summaries?.[l],l==='ja'?p.why_ja:null].filter(Boolean),
+for(const p of liminal)spots.push({key:'l-'+p.id,id:p.id,kind:'liminal',lat:p.lat,lon:p.lon,emoji:p.emoji,names:p.names,english:!p.generatedArticle,
+ lead:l=>p.hooks?.[l],paras:l=>[p.summaries?.[l],p.photoNotes?.[l]||(l==='ja'?p.why_ja:null)].filter(Boolean),
+ notes:l=>p.visitNotes?.[l],social:p.social,photo:p.photo,
  // a web-aggregated description is not a Wikipedia excerpt: it gets its own note, and its pages are listed as sources
  wikiText:l=>l==='ja'&&p.extractSrc!=='web (aggregated)'?p.extract_ja:null,webText:l=>l==='ja'&&p.extractSrc==='web (aggregated)'?p.extract_ja:null,
  map:l=>'/?lang='+encodeURIComponent(l)+'&amp;place=l-'+p.id,
@@ -98,6 +99,17 @@ function guideBlock(s,l){
   +'<h2>'+t.sources+'</h2><ul>'+g.sources.map(x=>'<li><a href="'+esc(x.url)+'">'+esc(x.label)+'</a></li>').join('')+'</ul><p class="srcnote">'+t.checked+'</p></section>';
 }
 const alternates=s=>LANGS.map(l=>[l,pageURL(s,l)]).concat([['x-default',pageURL(s,'en')]]);
+function postPhotos(s,l){
+ if(!s.social)return '';
+ const title={en:'Photographs in the original post',ja:'元投稿の写真',ko:'원본 게시물 사진','zh-Hans':'原帖照片','zh-Hant':'原帖照片'}[l];
+ // Standard X blockquote: retain author/date and a usable link when widgets are unavailable.
+ // The widget fetches the original media; this site does not redistribute X photo files.
+ return '<section class="social-post"><h2>'+esc(title)+'</h2><blockquote class="twitter-tweet" data-lang="'+(l.startsWith('zh')?'zh-tw':l)+'" data-dnt="true" data-conversation="none"><a href="'+esc(s.social.url)+'">'+esc(s.social.author)+' · '+esc(s.social.date)+'</a></blockquote><p class="srcnote"><a href="'+esc(s.social.url)+'" rel="noopener">'+esc(title)+' · '+esc(s.social.author)+' · '+esc(s.social.date)+'</a></p></section>';
+}
+function exteriorPhoto(s,l){
+ if(!s.photo)return '';const p=s.photo;
+ return '<figure class="spot-photo"><img src="'+esc(p.src)+'" width="960" height="720" loading="lazy" decoding="async" alt="'+esc(p.captions[l])+'"><figcaption>'+esc(p.captions[l])+' · <a href="'+esc(p.page)+'">'+esc(p.author)+'</a> / <a href="'+esc(p.licenseUrl)+'">'+esc(p.license)+'</a></figcaption></figure>';
+}
 function page(s,l){
  const t=labels[l],u=UI[l],name=s.names[l],url=pageURL(s,l);
  const title=name+' | '+u.title[s.kind]+' | Japan Time Atlas';
@@ -122,12 +134,12 @@ function page(s,l){
   +'<p class="lead">'+esc(s.lead(l))+'</p>'+s.paras(l).map(p=>'<p>'+esc(p)+'</p>').join('')
   +(s.kind==='liminal'?'<p class="caution"><b>⚠</b> '+esc(u.caution)+'</p>':'')
   +((s.kind==='food'||s.kind==='shopping')?'<p class="srcnote">'+esc(u.pin)+'</p>':'')
-  +notes+guideBlock(s,l)+tile(s,l)+wiki+web
+  +postPhotos(s,l)+exteriorPhoto(s,l)+notes+guideBlock(s,l)+tile(s,l)+wiki+web
   +'<section><h2>'+esc(t.source)+'</h2><ul>'+s.sources(l).map(x=>'<li><a href="'+esc(x.url)+'" rel="noopener">'+esc(x.label)+'</a></li>').join('')+'<li><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a></li></ul></section>'
   +'<section><h2>'+esc(t.near)+'</h2><p class="where">'+esc(t.distance)+'</p><ul class="near">'+near.map(o=>'<li><a href="'+o.url+'">'+esc(o.name)+'</a><span>'+(o.d<1?o.d.toFixed(1):Math.round(o.d))+' km</span></li>').join('')+'</ul></section>'
   +'<p class="cta"><a href="'+s.map(l)+'">'+esc(t.open)+'</a></p></main>';
  const footer='<footer><p>Japan Time Atlas · <a href="/about#'+l+'">'+t.about+'</a> · <a class="site-support-link" href="/support">'+t.support+'</a></p><p><a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · Wikipedia (CC BY-SA)</p></footer></body></html>';
- return head+nav+langNav+body+footer;
+ return head+nav+langNav+body+(s.social?'<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>':'')+footer;
 }
 
 const written=[];
@@ -175,6 +187,11 @@ for(const l of LANGS.slice(1)){
 }
 { // English hub: the liminal and famous lists already exist; add the two new ones
  let html=read('places.html');const block=['food','shopping'].map(k=>listHTML('en',k,'h2')).join('');
+ for(const s of spots.filter(s=>s.kind==='liminal'&&!s.english))if(!html.includes('href="'+pageURL(s,'en')+'"')){
+  const at=html.indexOf('<h2>Famous places</h2>'),end=html.lastIndexOf('</ul>',at);
+  if(end<0)throw Error('English hub liminal list missing');
+  html=html.slice(0,end)+'<li><a href="'+pageURL(s,'en')+'">'+esc(s.names.en)+'</a> <span lang="ja">'+esc(s.names.ja)+'</span></li>'+html.slice(end);
+ }
  html=swap(html,block)??html.replace('</main>',()=>'<!--SPOT-LISTS-->'+block+'<!--/SPOT-LISTS--></main>');
  if(!html.includes('<!--SPOT-LISTS-->'))throw Error('places.html: no place for the spot lists');
  write('places.html',html);
