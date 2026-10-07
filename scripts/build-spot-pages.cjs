@@ -3,13 +3,14 @@
    - liminal (data/liminal.json) and landmarks (data/landmarks.json): their English pages already exist
      (place/l-*, place/m-*); this adds Japanese, Korean and both Chinese versions and links them together.
    Thai is not generated: none of these three data sets carries Thai text, and nothing is machine-translated here.
-   Every sentence on these pages comes from the data files (hooks, summaries, notes, Wikipedia extracts);
-   the only text written here is the interface wording below. Runs after build-discovery.cjs. */
+   Descriptions come from the data files and individually dated, sourced editorial guides;
+   interface wording is below. Runs after build-discovery.cjs. */
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),base='https://japantimeatlas.com';
 const ASSET_V=/const ASSET_V = '([^']+)'/.exec(fs.readFileSync(path.join(root,'sw.js'),'utf8'))[1];
 const {labels}=require('./discovery-copy.cjs');
 const {labels:guideLabels,liminalGuides}=require('./place-guides.cjs');
+const editorialGuides=require('./spot-editorial-guides.cjs');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const write=(p,s)=>{fs.mkdirSync(path.dirname(path.join(root,p)),{recursive:true});fs.writeFileSync(path.join(root,p),s);};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -93,6 +94,12 @@ function tile(s,l){
  return '<figure class="spot-aerial"><img src="https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/'+z+'/'+x+'/'+y+'.jpg" width="256" height="256" loading="lazy" decoding="async" alt="'+esc(s.names[l]+' · '+t.now)+'"><figcaption>'+esc(t.now)+' · <a href="https://maps.gsi.go.jp/development/ichiran.html">GSI Tiles</a></figcaption></figure>';
 }
 function guideBlock(s,l){
+ const editorial=editorialGuides[l+'/'+s.key];
+ if(editorial)return '<section class="place-guide" data-source-checked="'+esc(editorial.checkedOn)+'">'
+  +editorial.sections.map(section=>'<h2>'+esc(section.heading)+'</h2>'
+   +(section.paragraphs||[]).map(p=>'<p>'+esc(p)+'</p>').join('')
+   +(section.steps?'<ol>'+section.steps.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ol>':'')).join('')
+  +'<h2>'+esc(editorial.sourcesHeading)+'</h2><ul>'+editorial.sources.map(x=>'<li><a href="'+esc(x.url)+'">'+esc(x.label)+'</a></li>').join('')+'</ul><p class="srcnote">'+esc(editorial.checkedLabel)+'</p></section>';
  const g=s.kind==='liminal'&&liminalGuides[s.id]?.[l];if(!g)return '';const t=guideLabels[l];
  const ps=a=>(a||[]).map(x=>'<p>'+esc(x)+'</p>').join(''),li=a=>a&&a.length?'<ul>'+a.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'';
  return '<section class="place-guide"><h2>'+t.why+'</h2>'+ps(g.why)+'<h2>'+t.look+'</h2>'+li(g.look)+'<h2>'+t.visit+'</h2>'+ps(g.visit)+(g.history?'<h2>'+t.history+'</h2>'+ps(g.history):'')
@@ -112,8 +119,9 @@ function exteriorPhoto(s,l){
 }
 function page(s,l){
  const t=labels[l],u=UI[l],name=s.names[l],url=pageURL(s,l);
+ const editorial=editorialGuides[l+'/'+s.key],lead=editorial?.lead||s.lead(l);
  const title=name+' | '+u.title[s.kind]+' | Japan Time Atlas';
- const description=clip(s.lead(l));
+ const description=clip(lead);
  const schema={'@context':'https://schema.org','@graph':[
   {'@type':'Article',headline:title,description,inLanguage:l,url:base+url,mainEntityOfPage:base+url,
    publisher:{'@type':'Organization',name:'Japan Time Atlas',url:base+'/'},
@@ -126,12 +134,12 @@ function page(s,l){
  const langNav='<nav aria-label="Language">'+LANGS.map(k=>'<a lang="'+k+'" href="'+pageURL(s,k)+'"'+(k===l?' aria-current="page"':'')+'>'+labels[k].name+'</a>').join('')+'</nav>';
  const notes=s.notes&&s.notes(l)?'<section><h2>'+esc(u.notes)+'</h2><p>'+esc(s.notes(l))+'</p><p class="srcnote">'+esc(u.checked)+'</p></section>':'';
  const web=s.webText&&s.webText(l)?'<section lang="ja"><h2>'+esc(u.webHead)+'</h2><p>'+esc(clip(s.webText(l),600))+'</p><p class="srcnote">'+esc(u.webNote)+'</p></section>':'';
- const wiki=s.wikiText&&s.wikiText(l)?'<section lang="ja"><h2>'+esc(u.wiki)+'</h2><p>'+esc(clip(s.wikiText(l),600))+'</p><p class="srcnote">'+esc(u.wikiNote)+'</p></section>':'';
+ const wiki=!editorial&&s.wikiText&&s.wikiText(l)?'<section lang="ja"><h2>'+esc(u.wiki)+'</h2><p>'+esc(clip(s.wikiText(l),600))+'</p><p class="srcnote">'+esc(u.wikiNote)+'</p></section>':'';
  const near=nearby(s,l);
  const body='<main><p class="where">'+esc((s.emoji?s.emoji+' ':'')+u.kind[s.kind])+'</p><h1>'+esc(name)+'</h1>'
   +(l!=='ja'?'<p class="where" lang="ja">'+esc(s.names.ja)+'</p>':'')
   +'<p class="cta"><a href="'+s.map(l)+'">'+esc(t.open)+'</a></p>'
-  +'<p class="lead">'+esc(s.lead(l))+'</p>'+s.paras(l).map(p=>'<p>'+esc(p)+'</p>').join('')
+  +'<p class="lead">'+esc(lead)+'</p>'+(!editorial?s.paras(l).map(p=>'<p>'+esc(p)+'</p>').join(''):'')
   +(s.kind==='liminal'?'<p class="caution"><b>⚠</b> '+esc(u.caution)+'</p>':'')
   +((s.kind==='food'||s.kind==='shopping')?'<p class="srcnote">'+esc(u.pin)+'</p>':'')
   +postPhotos(s,l)+exteriorPhoto(s,l)+notes+guideBlock(s,l)+tile(s,l)+wiki+web
@@ -143,10 +151,15 @@ function page(s,l){
 }
 
 const written=[];
+// Optional bounded regeneration: validate every requested route before any write.
+const onlyArg=process.argv.find(a=>a.startsWith('--only='));
+const only=onlyArg?new Set(onlyArg.slice(7).split(',').map(p=>'/place/'+p)):null;
+if(only)for(const url of only)if(!spots.some(s=>LANGS.some(l=>!(l==='en'&&s.english)&&pageURL(s,l)===url)))throw Error('Not a generated spot page: '+url);
 for(const s of spots)for(const l of LANGS){
  if(l==='en'&&s.english)continue;             // hand-written English page stays
- const url=pageURL(s,l);write(url.slice(1)+'.html',page(s,l));written.push(url);
+ const url=pageURL(s,l);if(only&&!only.has(url))continue;write(url.slice(1)+'.html',page(s,l));written.push(url);
 }
+if(only){console.log('Spot pages: '+written.length+' requested pages written; hubs and sitemap unchanged.');return;}
 
 /* ------------------------------------- the existing English l- / m- pages join their translations */
 for(const s of spots.filter(s=>s.english)){
