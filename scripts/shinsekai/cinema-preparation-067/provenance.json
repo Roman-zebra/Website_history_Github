@@ -988,5 +988,146 @@
     },
     "publicCodeChanged": false,
     "public19CPUChecksRerun": false
+  },
+  "currentCachedShaderSourceObservation": {
+    "revision": "067-U3",
+    "privateSourceOnly": true,
+    "sourceAndModelInputsUnmodified": true,
+    "cpu": {
+      "passed": 45,
+      "failed": 0,
+      "skipped": 0,
+      "public19CheckSuiteUnchangedNotRerun": true
+    },
+    "creation": {
+      "sites": 2,
+      "originalShaderArgumentsUnchanged": true,
+      "weakOwnersOnly": true,
+      "hotFrameHook": false,
+      "extraRenderOrCompile": 0
+    },
+    "capture": {
+      "sites": 2,
+      "originalPNGPathUnchanged": true,
+      "currentActiveOriginalList": true,
+      "liveOriginalOwnedSet": true,
+      "nativeCollectionReadsOnly": true,
+      "sourceGettersOrCallbacksInvoked": 0,
+      "originalCollectorAndMaterialCapsUnchanged": true,
+      "detachedSnapshotBytes": 1048576,
+      "stages": 512,
+      "aggregateStageUTF8Bytes": 16777216
+    },
+    "pairs": [
+      {
+        "backend": "webgpu",
+        "position": "rear",
+        "bindings": 175,
+        "shaderTextExact": true,
+        "listOrderExact": false,
+        "orderDifferencePositions": 4,
+        "changedPixels": 1,
+        "maxChannelDifference": 15,
+        "causeUnconfirmed": true
+      },
+      {
+        "backend": "webgpu",
+        "position": "front",
+        "bindings": 84,
+        "shaderTextExact": true,
+        "listOrderExact": true,
+        "changedPixels": 0,
+        "maxChannelDifference": 0
+      },
+      {
+        "backend": "webgl2",
+        "position": "rear",
+        "bindings": 175,
+        "shaderTextExact": true,
+        "listOrderExact": false,
+        "changedPixels": 35,
+        "maxChannelDifference": 1,
+        "causeUnconfirmed": true,
+        "orderDifferencePositions": 3
+      },
+      {
+        "backend": "webgl2",
+        "position": "front",
+        "bindings": 84,
+        "shaderTextExact": true,
+        "listOrderExact": true,
+        "changedPixels": 18,
+        "maxChannelDifference": 1,
+        "causeUnconfirmed": true
+      }
+    ],
+    "storedBindingShaderTextsExact": true,
+    "scope": {
+      "samePNGUniqueNameMaterialGraphProjection": true,
+      "originalGraphUUIDsCompared": false,
+      "perCaptureUUIDConsistencyChecked": true,
+      "actualGPUSubmissionProven": false,
+      "postprocessingCovered": false,
+      "uniformAndBindingBytesCompared": false,
+      "creationLabelsRetainedSeparately": true
+    },
+    "originalJSONRearWorldMatrices": {
+      "rows": 175,
+      "numericValuesExact": true,
+      "negativeZeroSignAndFloatBitsQualified": false
+    },
+    "defaultSort": {
+      "keys": [
+        "groupOrder",
+        "renderOrder",
+        "projected z",
+        "object id"
+      ],
+      "materialIDUsed": false,
+      "causeUnconfirmed": true,
+      "sortCorrectionApplied": false
+    },
+    "ownedClose": {
+      "controlledDocuments": 4,
+      "ownedModelsRemaining": 0,
+      "textureLeasesRemaining": 0,
+      "runtimesExited0": 2,
+      "listenersClosed": true,
+      "keysDiscarded": true
+    },
+    "archive": {
+      "entries": 278,
+      "bytes": 18763901,
+      "sha256": "302defb1751a3f43314eedf55817fb4d83a0be0dc53041766c3565366b0fe305",
+      "crcAndAllEntryHashesVerified": true,
+      "standalone": false,
+      "embeddedReportEarlierWording": true,
+      "externalReportRevision": 2
+    },
+    "delivery": {
+      "reportID": "1UpFC67w3x7iuO--pfQ1rODvRw5yF2MsF",
+      "archiveID": "1ZEcsN14Nx4TfZglU4T82qtDBh6zhpWt-",
+      "gpuRearBaselinePNGID": "12CNXKGt-kK8V2F75MJqyB9OfXtOo37By",
+      "glFrontCandidatePNGID": "1E0diHntXK_lQjG7Ou7JjRvfLqAuD0SB3",
+      "checkpointID": "14pG6wrLlI6dnUqnyVONAIxGwEEtWhAai",
+      "payloadsRawReadbackVerified": true,
+      "accepted": false,
+      "adopted": false,
+      "acknowledged": false
+    },
+    "next": "Capture original projected-z/object-id sort drivers at the same existing PNG seam; compare before any correction.",
+    "qualification": {
+      "fullCompiledShaderQualified": false,
+      "actualSubmissionQualified": false,
+      "visualAccepted": false,
+      "physicalDeviceQualified": false,
+      "texturePixelsQualified": false,
+      "fullGeometryQualified": false,
+      "fullLifecycleQualified": false,
+      "fullPLAN119120121Complete": false,
+      "full067Complete": false,
+      "cityComplete": false,
+      "productionAdopted": false
+    }
   }
 }
