@@ -1,6 +1,6 @@
 {
   "schema": "JTA_CINEMA_PREPARATION_SOURCE_067",
-  "revision": "K+N+R",
+  "revision": "K+N+R+S",
   "candidateOnly": true,
   "productionAdopted": false,
   "engineFiles": [
@@ -175,6 +175,80 @@
       "actualDrawListQualified": false,
       "fullMaterialShaderStateQualified": false,
       "geometryBufferBytesCompared": false,
+      "controlledVisualParityQualified": false,
+      "externalChromeQualified": false,
+      "physicalDeviceQualified": false,
+      "performance60FPSQualified": false,
+      "accepted": false,
+      "adopted": false
+    }
+  },
+  "indexStateObservation": {
+    "path": "capture-index-state-S067.mjs",
+    "bytes": 12665,
+    "sha256": "4983a78114b2ec6c87ba3059be96023da089bc0f46132eeaf03414b85bef0dc7",
+    "revision": "S",
+    "captureOnly": true,
+    "productionCaller": false,
+    "postOriginalRenderOnly": true,
+    "retainedSourceOwners": 0,
+    "copyBytesPerCapture": 16777216,
+    "retainedCopyBytes": 33554432,
+    "pendingRecordLimit": 16,
+    "canonical": "Uint32 little-endian values, without restart sentinel normalization",
+    "check": {
+      "path": "checks/test-index-state-S067.mjs",
+      "bytes": 11310,
+      "sha256": "a132c6be085aa8418b92a349e3ffeca7fca576f089edbc9eb2ff1e35dfe59a8b"
+    },
+    "nativeEvidenceIncluded": false,
+    "nativeValuesCompared": true,
+    "fullGeometryQualified": false,
+    "actualDrawListQualified": false,
+    "causeQualified": false,
+    "controlledVisualParityQualified": false,
+    "physicalDeviceQualified": false,
+    "accepted": false,
+    "adopted": false,
+    "nativeEvidenceReference": {
+      "metricsSHA256": "418f47c79a399436b05784237b266e79d29135ec9582f156334f475acab95f40",
+      "browserSurface": "Codex In-app Browser",
+      "captures": 8,
+      "uniqueCaptureIDs": 8,
+      "backends": [
+        "WebGPU",
+        "WebGL2"
+      ],
+      "sameBackendAll319MeshIndexValuesEqual": true,
+      "uniqueIndexAttributesPerCapture": 303,
+      "WebGPUWidthDifferentMeshes": 25,
+      "WebGPUWidthDifferentUniqueAttributes": 21,
+      "WebGPUWidthDifferentUniqueElements": 7500,
+      "WebGPURawCopyDeltaBytes": 15000,
+      "restartSentinelDifferences": 0,
+      "WebGL2IndexRawBytesEqual": true,
+      "NnumericInputsMatchedExceptFrameCounters": true,
+      "RdifferencesOnlyWebGPUIndexArrayTypes": true,
+      "allFourStrictClosesVerified": true,
+      "WebGPUPixelComparison": {
+        "rear": {
+          "differentPixels": 1,
+          "maxChannelDifference": 15,
+          "pixel": [
+            1781,
+            112
+          ]
+        },
+        "forwardExact": true
+      },
+      "WebGL2PixelComparison": {
+        "rearDifferentPixels": 30,
+        "forwardDifferentPixels": 16,
+        "maxChannelDifference": 1
+      },
+      "causalTraceQualified": false,
+      "fullGeometryQualified": false,
+      "actualDrawListQualified": false,
       "controlledVisualParityQualified": false,
       "externalChromeQualified": false,
       "physicalDeviceQualified": false,
