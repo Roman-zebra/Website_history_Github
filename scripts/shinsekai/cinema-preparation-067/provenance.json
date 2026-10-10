@@ -1,6 +1,6 @@
 {
   "schema": "JTA_CINEMA_PREPARATION_SOURCE_067",
-  "revision": "K+N",
+  "revision": "K+N+R",
   "candidateOnly": true,
   "productionAdopted": false,
   "engineFiles": [
@@ -111,6 +111,74 @@
       "controlledVisualParityQualified": false,
       "performance60FPSQualified": false,
       "allFourResourceClosesVerified": true,
+      "accepted": false,
+      "adopted": false
+    }
+  },
+  "drawStateObservation": {
+    "path": "capture-draw-state-R067.mjs",
+    "bytes": 16993,
+    "sha256": "6751913ce52669ad343e317945b7d7bd23d2e28d400723056bc93f678ce59b79",
+    "revision": "R",
+    "captureOnly": true,
+    "productionCaller": false,
+    "postOriginalRenderOnly": true,
+    "primitiveSnapshot": true,
+    "ownerLifetimeCPUTest": true,
+    "limits": {
+      "nodes": 16384,
+      "meshes": 2048,
+      "materials": 512,
+      "textures": 1024,
+      "snapshotBytes": 1048576,
+      "parts": 64,
+      "partBytes": 120000
+    },
+    "check": {
+      "path": "checks/test-capture-draw-state-R067.mjs",
+      "bytes": 12028,
+      "sha256": "9ceef74f8eebe764c4e9b6c589b90616f015568d76b50af9a78c37917e937de0"
+    },
+    "nativeEvidenceIncluded": false,
+    "nativeQualified": false,
+    "actualDrawListQualified": false,
+    "fullMaterialShaderStateQualified": false,
+    "geometryBufferBytesCompared": false,
+    "controlledVisualParityQualified": false,
+    "physicalDeviceQualified": false,
+    "accepted": false,
+    "adopted": false,
+    "nativeEvidenceReference": {
+      "metricsSHA256": "81718f8a4e05243a25cb87a39e0c72165764b85bf2c7c0249e5327976868f542",
+      "browserSurface": "Codex In-app Browser",
+      "backends": [
+        "WebGPU",
+        "WebGL2"
+      ],
+      "captures": 12,
+      "uniqueCaptureIDs": 12,
+      "sourceHashesMatch": true,
+      "allFourStrictClosesVerified": true,
+      "WebGPUPixelsExact": true,
+      "WebGPUIndexArrayTypeDifferences": 25,
+      "WebGL2RecordedDrawFieldsExact": true,
+      "WebGL2DifferingPixels": [
+        32,
+        36,
+        38,
+        26,
+        15
+      ],
+      "WebGL2MaxChannelDifference": 1,
+      "causeQualified": false,
+      "indexValuesCompared": false,
+      "actualDrawListQualified": false,
+      "fullMaterialShaderStateQualified": false,
+      "geometryBufferBytesCompared": false,
+      "controlledVisualParityQualified": false,
+      "externalChromeQualified": false,
+      "physicalDeviceQualified": false,
+      "performance60FPSQualified": false,
       "accepted": false,
       "adopted": false
     }

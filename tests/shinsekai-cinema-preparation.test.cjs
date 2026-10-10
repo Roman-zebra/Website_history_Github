@@ -18,6 +18,9 @@ test('067 engine and renderer fixtures retain their verified source hashes', () 
   }
   assert.equal(sha(path.join(candidate, pins.captureObservation.path)), pins.captureObservation.sha256);
   assert.equal(sha(path.join(candidate, pins.captureObservation.fixture.path)), pins.captureObservation.fixture.sha256);
+  assert.equal(sha(path.join(candidate, pins.drawStateObservation.path)), pins.drawStateObservation.sha256);
+  assert.equal(fs.statSync(path.join(candidate, pins.drawStateObservation.path)).size, pins.drawStateObservation.bytes);
+  assert.equal(sha(path.join(candidate, pins.drawStateObservation.check.path)), pins.drawStateObservation.check.sha256);
   assert.equal(sha(path.join(root, pins.fixedVendor.path)), pins.fixedVendor.sha256);
   for (const row of [pins.compiledFragments, pins.historicalObserver, pins.historicalFirstAppearanceObserver]) {
     assert.equal(sha(path.join(candidate, row.path)), row.sha256, row.path);
@@ -87,4 +90,18 @@ test('067 captures retain bounded immutable numeric state and original PNG behav
   assert.equal(rows[1].uploadFailurePreservesCapture,true);
   assert.equal(rows[2].actualFrozenCaptureSeams,true);
   assert.equal(rows[2].exactRestoration,true);
+});
+
+test('067 draw observations release owners, fail closed and preserve actual capture seams', () => {
+  const output=execFileSync(process.execPath,['--expose-gc',path.join(candidate,'checks/test-capture-draw-state-R067.mjs')],{cwd:root,encoding:'utf8',timeout:30000,maxBuffer:1024*1024});
+  const rows=output.trim().split(/\r?\n/).map(line=>JSON.parse(line));
+  assert.equal(rows.length,3);
+  assert.equal(rows[0].passed,true);
+  assert.equal(rows[0].ownerLifetimeVerified,true);
+  assert.equal(rows[0].nativeQualified,false);
+  assert.equal(rows[1].multipartReceipt,true);
+  assert.equal(rows[1].exactSnapshotHash,true);
+  assert.equal(rows[1].uploadFailurePreservesCapture,true);
+  assert.equal(rows[2].actualFrozenCaptureSeams,true);
+  assert.equal(rows[2].originalPromiseBlobErrorsUnchanged,true);
 });
