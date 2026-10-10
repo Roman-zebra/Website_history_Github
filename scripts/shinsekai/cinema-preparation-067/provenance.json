@@ -1183,5 +1183,72 @@
     "productionAdopted": false,
     "full067Accepted": false,
     "fullPLANComplete": false
+  },
+  "currentStoredUniformBindingObservation": {
+    "phase": "067-U3B",
+    "finalVariant": "B4",
+    "candidateOnly": true,
+    "productionAdopted": false,
+    "tests": {
+      "passed": 56,
+      "failed": 0,
+      "skipped": 0
+    },
+    "originalRearPNGs": 4,
+    "bindingsEach": 175,
+    "buffersEach": 178,
+    "storedUniformBitsExactBothBackends": true,
+    "shaderTextAndCurrentOrderExactBothBackends": true,
+    "cameraAndGeometricSortBitsExactBothBackends": true,
+    "originalObjectIDDifferences": {
+      "webgpu": 20,
+      "webgl2": 0
+    },
+    "sourceMetadataRowsDifferEachBackend": 175,
+    "sharedVersionLagEachCapture": {
+      "buffers": 3,
+      "versionsBehind": 1
+    },
+    "cacheFreshnessQualified": false,
+    "perDrawUniformUploadProven": false,
+    "actualGPUBytesRead": false,
+    "sourceGettersUpdatesDrawCompileUploadAdded": 0,
+    "rawBitsAndIDsNotNormalized": true,
+    "residuals": {
+      "webgpu": {
+        "pixels": 3,
+        "maxChannel": 1
+      },
+      "webgl2": {
+        "pixels": 35,
+        "maxChannel": 1
+      }
+    },
+    "visualAccepted": false,
+    "historicalResidualsRetained": true,
+    "initialNativeRefusalsRetained": [
+      "lazy-uuid",
+      "shared-version-equality",
+      "GLSL-visibility-zero",
+      "nullable-source-bool"
+    ],
+    "originalControlledCloses": 4,
+    "ownedRuntimesClosed": 2,
+    "archive": {
+      "entries": 451,
+      "bytes": 23649022,
+      "sha256": "f654376f372a8538f606573c9b0c08af2de27d382bc71cc2c64e1619703e8114",
+      "crcAndEntryHashesVerified": true,
+      "standalone": false,
+      "protectedPayloadsAndKeysIncluded": false
+    },
+    "driveDeliveryReadbackExact": true,
+    "consultantQueued": true,
+    "consultantAcknowledged": false,
+    "outputPostprocessingCovered": false,
+    "physicalDeviceQualified": false,
+    "fullUniformAccepted": false,
+    "full067Accepted": false,
+    "next": "067-U3C original output cache source/CPU contract before private native copies"
   }
 }
