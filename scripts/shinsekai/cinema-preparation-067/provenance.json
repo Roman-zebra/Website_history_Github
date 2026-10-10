@@ -1129,5 +1129,59 @@
       "cityComplete": false,
       "productionAdopted": false
     }
+  },
+  "currentOriginalSortDriverObservation": {
+    "phase": "067-U3A",
+    "scope": "current original cached main-scene rear sort drivers at original PNG capture",
+    "cpu": {
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0
+    },
+    "pairs": {
+      "webgpu": {
+        "bindings": 175,
+        "cameraBitsExact": true,
+        "geometricSortInputsBitsExact": true,
+        "originalOrderExact": true,
+        "originalIDDifferences": 20,
+        "changedPixels": 0,
+        "maxChannelDifference": 0
+      },
+      "webgl2": {
+        "bindings": 175,
+        "cameraBitsExact": true,
+        "geometricSortInputsBitsExact": true,
+        "originalOrderExact": true,
+        "originalIDDifferences": 20,
+        "changedPixels": 32,
+        "maxChannelDifference": 1
+      }
+    },
+    "sourceGettersInvoked": 0,
+    "sourceCallbacksInvoked": 0,
+    "sourceGeometryComputeInvoked": 0,
+    "sourceComparatorInvoked": 0,
+    "sourceResortInvoked": 0,
+    "extraDrawOrCompile": 0,
+    "finiteBinary64BitsPreserved": true,
+    "originalIDsNotNormalized": true,
+    "captureByteCeiling": 1048576,
+    "archiveEntries": 125,
+    "archiveBytes": 10170903,
+    "archiveSHA256": "9fc88876dcd87fa342cc031a76928032fb5e4025baced93c1830a9951cc11e4d",
+    "archiveNonStandalone": true,
+    "ownedServersClosed": 2,
+    "controlledDocumentCloses": 4,
+    "historicalOrderOrPixelCauseConfirmed": false,
+    "actualGPUSubmissionProven": false,
+    "fullShaderAccepted": false,
+    "fullGeometryAccepted": false,
+    "visualAccepted": false,
+    "physicalDeviceAccepted": false,
+    "rightsAccepted": false,
+    "productionAdopted": false,
+    "full067Accepted": false,
+    "fullPLANComplete": false
   }
 }
