@@ -613,5 +613,380 @@
     ],
     "publicCodeChanged": false,
     "public19CPUChecksRerun": false
+  },
+  "materialLightTargetInputObservation": {
+    "schema": "private-stored-material-light-target-input-audit-067-U2H-v1",
+    "observedAt": "2026-10-10T21:10:40.838Z",
+    "privateObserverOnly": true,
+    "productionCaller": false,
+    "pinnedCore": {
+      "path": "shared-private-host/vendor/three-r186/build/three.core.js",
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6",
+      "bytes": 1458113
+    },
+    "originalCompiledSHA256s": [
+      "ae91648592dc67144f7689fa611192a7da881cc000d1d2cc0349db46d9aca17a",
+      "fe2b2e7ecdc6472e078653ff3c458223998ff69deab19eb46009d500d7814830"
+    ],
+    "sourceModelGeometryAndLightsUnmodified": true,
+    "cpu": {
+      "at": "2026-10-10T21:03:03.928Z",
+      "tests": 83,
+      "passed": 83,
+      "failed": 0,
+      "skipped": 0,
+      "sourceCallbacksInvoked": 0,
+      "sourceGettersInvoked": 0,
+      "extraDrawOrCompile": 0,
+      "retainedStrongSourceOwners": 0,
+      "sourceSeams": {
+        "originalExactlyRestored": true,
+        "creationSites": 9,
+        "depthMaterialCopySites": 2
+      },
+      "limitsUnchanged": true,
+      "fullShaderQualified": false,
+      "nativeQualificationPending": true
+    },
+    "privateSourceFiles": [
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/capture-material-inputs-U2067.mjs",
+        "bytes": 15431,
+        "sha256": "b7f42ea26783dd6d922889c151a117dc5d57ad140194f9e7e183365a22760014"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/fixed-material-schema-U2067.mjs",
+        "bytes": 15606,
+        "sha256": "2ef3f3ff920a568d2bcdb48126e99403a972885de3548ab60320af52b40a601e"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/material-private-integration-U2067.mjs",
+        "bytes": 9132,
+        "sha256": "d076e8c6be2b442879640a17dd6fa5bc5a70ae6557c23b0bab548179dc66e98f"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/test-material-inputs-U2067.mjs",
+        "bytes": 10371,
+        "sha256": "2e5e8ca3e6a3a462d98665f5291da8abc43446b312e4c6ed1d19c1da0a9a7f1a"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/test-material-private-integration-U2067.mjs",
+        "bytes": 8389,
+        "sha256": "9d06abd3640ae4b1afff7d70d32f989fe8e4d3240606fed841350bc5cd09125e"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/scoped-light-recipes-U2D067.mjs",
+        "bytes": 11524,
+        "sha256": "4abf16cbcce746216bcc54f1db3d9a10298bae983541d73720908386325e2446"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/test-scoped-light-recipes-U2D067.mjs",
+        "bytes": 5961,
+        "sha256": "096265762046badf8a262b7b7de3942649cc21c7e546e6ccf9d5c04496811580"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/fixed-light-schema-U2E067.mjs",
+        "bytes": 9111,
+        "sha256": "1b26f3d101b80eb433ec5bd127086f6f9962e029797f567518e9e271709ee077"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/capture-selected-lights-U2E067.mjs",
+        "bytes": 9227,
+        "sha256": "6efb1d5e4bb19a652e1703bd28452edbcc2b316c91dad9f3e464f778d2b66c5e"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/test-selected-lights-U2E067.mjs",
+        "bytes": 8236,
+        "sha256": "7e42a8dde313d1238327455f66c169015cf752b4712402ba6f28beff6e92eeb0"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/test-pinned-target-children-U2F067.mjs",
+        "bytes": 8013,
+        "sha256": "f974a53f4e6e537330c476b622542fa7000ba23d8f7aebf5f5dde236a028ff79"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/test-registration-diagnostic-U2G067.mjs",
+        "bytes": 1553,
+        "sha256": "88fedf12b97692443d34a8b1fa944dbcde0a9b999e115ae4156a414761a58671"
+      },
+      {
+        "path": "research-cache/D010-QA/protected-hall-async-pass-side-preparation-067-20261010/material-shader-input-audit-U2H/test-depth-material-copy-U2H067.mjs",
+        "bytes": 2628,
+        "sha256": "e15f90db95151b6e0363ce73445222e9f5870b4845370de3032ed80ea4dfd91f"
+      }
+    ],
+    "native": {
+      "pairs": [
+        {
+          "label": "WebGPU original paused cinema rear",
+          "counts": {
+            "nodes": 515,
+            "meshes": 320,
+            "materials": 179,
+            "textures": 19,
+            "lights": 53,
+            "lightGroups": 2
+          },
+          "cross": {
+            "directOriginalNLights": 33,
+            "registeredProxies": 19,
+            "registeredFills": 1,
+            "qualifiedChildGraphs": 5,
+            "originalNNumericFieldsExact": true
+          },
+          "storedInputsExact": true,
+          "originalNControlsExact": true,
+          "pngExact": true,
+          "changedPixels": 0,
+          "maxAbsoluteChannelDifference": 0,
+          "baselinePNG": {
+            "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/baseline066/WEBGPU-REAR-067-U2H.png",
+            "bytes": 1962996,
+            "sha256": "e5b982abd59e72945375523733df70e12cf35e062fe519b02922f38c1be26746",
+            "width": 1920,
+            "height": 1080
+          },
+          "candidatePNG": {
+            "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/candidate067/WEBGPU-REAR-067-U2H.png",
+            "bytes": 1962996,
+            "sha256": "e5b982abd59e72945375523733df70e12cf35e062fe519b02922f38c1be26746",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "label": "WebGPU original paused cinema front",
+          "counts": {
+            "nodes": 515,
+            "meshes": 320,
+            "materials": 179,
+            "textures": 19,
+            "lights": 53,
+            "lightGroups": 2
+          },
+          "cross": {
+            "directOriginalNLights": 33,
+            "registeredProxies": 19,
+            "registeredFills": 1,
+            "qualifiedChildGraphs": 5,
+            "originalNNumericFieldsExact": true
+          },
+          "storedInputsExact": true,
+          "originalNControlsExact": true,
+          "pngExact": true,
+          "changedPixels": 0,
+          "maxAbsoluteChannelDifference": 0,
+          "baselinePNG": {
+            "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/baseline066/WEBGPU-FRONT-067-U2H.png",
+            "bytes": 1160674,
+            "sha256": "20a2496f2dc1025a599a1967b1f241dd0235d2be9f9c819dd6d57249a33119fc",
+            "width": 1920,
+            "height": 1080
+          },
+          "candidatePNG": {
+            "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/candidate067/WEBGPU-FRONT-067-U2H.png",
+            "bytes": 1160674,
+            "sha256": "20a2496f2dc1025a599a1967b1f241dd0235d2be9f9c819dd6d57249a33119fc",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "label": "WebGL2 original paused cinema rear",
+          "counts": {
+            "nodes": 515,
+            "meshes": 320,
+            "materials": 179,
+            "textures": 19,
+            "lights": 53,
+            "lightGroups": 2
+          },
+          "cross": {
+            "directOriginalNLights": 33,
+            "registeredProxies": 19,
+            "registeredFills": 1,
+            "qualifiedChildGraphs": 5,
+            "originalNNumericFieldsExact": true
+          },
+          "storedInputsExact": true,
+          "originalNControlsExact": true,
+          "pngExact": false,
+          "changedPixels": 32,
+          "maxAbsoluteChannelDifference": 1,
+          "baselinePNG": {
+            "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/baseline066/WEBGL2-REAR-067-U2H.png",
+            "bytes": 1961917,
+            "sha256": "360d14169e86ed7ceb1ed7928246df5315ea1bfa15d04ecc6e64c34566e176eb",
+            "width": 1920,
+            "height": 1080
+          },
+          "candidatePNG": {
+            "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/candidate067/WEBGL2-REAR-067-U2H.png",
+            "bytes": 1961954,
+            "sha256": "d36bef2902168d32e3a41716444b0a0904d4bcb80708140ef8ecd80863ea5f89",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "label": "WebGL2 original paused cinema front",
+          "counts": {
+            "nodes": 515,
+            "meshes": 320,
+            "materials": 179,
+            "textures": 19,
+            "lights": 53,
+            "lightGroups": 2
+          },
+          "cross": {
+            "directOriginalNLights": 33,
+            "registeredProxies": 19,
+            "registeredFills": 1,
+            "qualifiedChildGraphs": 5,
+            "originalNNumericFieldsExact": true
+          },
+          "storedInputsExact": true,
+          "originalNControlsExact": true,
+          "pngExact": false,
+          "changedPixels": 12,
+          "maxAbsoluteChannelDifference": 1,
+          "baselinePNG": {
+            "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/baseline066/WEBGL2-FRONT-067-U2H.png",
+            "bytes": 1160917,
+            "sha256": "95f01bf7eaf69626ea4193ac1da1a148972cea4685bf7275a308f80148f9fe0a",
+            "width": 1920,
+            "height": 1080
+          },
+          "candidatePNG": {
+            "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/candidate067/WEBGL2-FRONT-067-U2H.png",
+            "bytes": 1161173,
+            "sha256": "51a743275b44decc6db5b7194ce4e4e04646796e4f24a38034c79a2ef1f601c2",
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "controlledCloses": [
+        {
+          "side": "baseline",
+          "backend": "webgpu",
+          "gateSessionID": "49b5fb4b-4f72-474b-a042-c0d9db357acd",
+          "parentSessionID": "1c8e31a4-2a1f-4942-99cb-fb73c466a0b3",
+          "qualifiedOwnedResourcesReleased": true,
+          "sourceDisposed": true,
+          "ownedModels": 0,
+          "activeTextureLeases": 0,
+          "hostLeaseState": "closed",
+          "originalCollector": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/baseline066/WEBGPU-CLOSE-ORIGINAL-COLLECTOR-067-U2H.json",
+          "collectorSHA256": "02cb5a8d1a6ad70077796440f90f0f5038ed989fa52f6c71fbffe9171d854db9"
+        },
+        {
+          "side": "candidate",
+          "backend": "webgpu",
+          "gateSessionID": "d6f0cf0e-58eb-4bd4-9429-149f48fd6a95",
+          "parentSessionID": "00b2ef9f-ed24-44fa-b1a1-2cbdd76d4e1c",
+          "qualifiedOwnedResourcesReleased": true,
+          "sourceDisposed": true,
+          "ownedModels": 0,
+          "activeTextureLeases": 0,
+          "hostLeaseState": "closed",
+          "originalCollector": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/candidate067/WEBGPU-CLOSE-ORIGINAL-COLLECTOR-067-U2H.json",
+          "collectorSHA256": "9a9b8b72f5d25912f228d8f4a03a63b0042c2698bc275b84196405c66b0e99a5"
+        },
+        {
+          "side": "baseline",
+          "backend": "webgl2",
+          "gateSessionID": "c440f7ec-2b26-40bf-96b5-5e221a001538",
+          "parentSessionID": "f6bfbac0-632e-47a6-8461-3fab2f3ec413",
+          "qualifiedOwnedResourcesReleased": true,
+          "sourceDisposed": true,
+          "ownedModels": 0,
+          "activeTextureLeases": 0,
+          "hostLeaseState": "closed",
+          "originalCollector": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/baseline066/WEBGL2-CLOSE-ORIGINAL-COLLECTOR-067-U2H.json",
+          "collectorSHA256": "f139cb247de041fd8018dcf8dba90e65d0fe816997660b108400e56d2c1f60a5"
+        },
+        {
+          "side": "candidate",
+          "backend": "webgl2",
+          "gateSessionID": "8d5b5cc1-d3f8-409f-84f2-66a4469af934",
+          "parentSessionID": "dd4b1fb2-d0fa-423f-98a6-2c564c06910e",
+          "qualifiedOwnedResourcesReleased": true,
+          "sourceDisposed": true,
+          "ownedModels": 0,
+          "activeTextureLeases": 0,
+          "hostLeaseState": "closed",
+          "originalCollector": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/candidate067/WEBGL2-CLOSE-ORIGINAL-COLLECTOR-067-U2H.json",
+          "collectorSHA256": "05bad36ef1e56eeaaf6e020806ed561e46814c117e181d4ac6a4285e351388e9"
+        }
+      ],
+      "runtimeDisposals": [
+        {
+          "side": "baseline",
+          "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/baseline066/RUNTIME-DISPOSAL-066.json",
+          "sha256": "301d948d9bef5bcf8aaee81cc4c741e6de45c7b3c8a33e725d81fe93bf6876d2",
+          "record": {
+            "disposed": true,
+            "listenerClosed": true,
+            "keysDiscarded": true,
+            "at": "2026-10-10T21:08:53.915Z"
+          }
+        },
+        {
+          "side": "candidate",
+          "path": "C:/Users/NULL/Documents/Codex/JTA-shinsekai/research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/candidate067/RUNTIME-DISPOSAL-067.json",
+          "sha256": "d846b5f30f3908dd3ab8499ea431e26afda2f20ae2e586fe40ea2f40264d9b28",
+          "record": {
+            "disposed": true,
+            "listenerClosed": true,
+            "keysDiscarded": true,
+            "at": "2026-10-10T21:08:53.962Z"
+          }
+        }
+      ],
+      "warningErrorLogs": {
+        "webgpu": [],
+        "webgl2": []
+      },
+      "historicalResidualsRetained": true,
+      "rgbaToleranceApplied": false,
+      "visualAccepted": false
+    },
+    "archive": {
+      "entries": 272,
+      "bytes": 22840773,
+      "sha256": "ca12f5fabaf68374b67e1a48517412c0c36b4f381679dc69164166334add7029",
+      "crcAndAllEntryHashesVerified": true,
+      "relativePath": "research-cache/DOTS-CODEX-011-20261009/protected-hall-async-pass-side-preparation-067/material-shader-input-audit-U2H/STORED-MATERIAL-LIGHT-TARGET-INPUTS-067-U2H.zip",
+      "standalone": false,
+      "embeddedCheckpointBeforeExternalDelivery": true
+    },
+    "historicalFailuresRetained": [
+      "U2E target child graph refusal",
+      "U2F unknown copied material recipe",
+      "U2G plaster_dk registration gap",
+      "CPU startup input paths",
+      "offline comparison realm/producer-label repairs"
+    ],
+    "qualification": {
+      "storedInputPairsExact": true,
+      "sourceCallbacksInvoked": 0,
+      "sourceGettersInvoked": 0,
+      "sourceLightMethodsInvoked": 0,
+      "extraDrawOrCompile": 0,
+      "retainedStrongSourceOwners": 0,
+      "compiledShaderQualified": false,
+      "texturePixelsQualified": false,
+      "fullGeometryQualified": false,
+      "fullLifecycleQualified": false,
+      "visualAccepted": false,
+      "physicalDeviceQualified": false,
+      "rightsQualified": false,
+      "full067Complete": false,
+      "cityComplete": false,
+      "productionAdopted": false
+    },
+    "publicCodeChanged": false,
+    "public19CPUChecksRerun": false
   }
 }
