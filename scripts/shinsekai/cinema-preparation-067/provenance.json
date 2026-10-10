@@ -256,5 +256,32 @@
       "accepted": false,
       "adopted": false
     }
+  },
+  "abruptRetirementObservation": {
+    "revision": "T",
+    "candidateOnly": true,
+    "fullLifecycleQualified": false,
+    "sourceFixture": {
+      "path": "fixtures/original-backend-observation-T067.txt",
+      "bytes": 3989,
+      "sha256": "1732ee3ed4abeeb7f1a6470e5108421dce52acf2f2c398edb4d32ecd00160fed",
+      "source": "frozen original hall-review-source041.mjs backend diagnostic"
+    },
+    "modules": [
+      {
+        "path": "abrupt-departure-T067.mjs",
+        "sha256": "60834bbb33ab3eb795ac2d452954349789d9d08b787d89e49cbd397fbe35b221"
+      },
+      {
+        "path": "detached-backend-snapshot-T067.mjs",
+        "sha256": "a648800011b8e9436fed525d2409eb92b1be40d298831a2afde21e8e7f044053"
+      }
+    ],
+    "nativeMetricsSHA256": "abd21aac8e713e02c77ad50663e8cce9f66db7a6f3aa9d1212a407b5e80f2894",
+    "readyResourceCounterReleaseBothBackends": true,
+    "hostLeaseClosed": false,
+    "nativeGPUDeviceDestructionConfirmed": false,
+    "consoleErrorUnqualified": true,
+    "pendingCinemaAndReopenQualified": false
   }
 }

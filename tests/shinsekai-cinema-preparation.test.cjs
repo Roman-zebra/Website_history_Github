@@ -123,3 +123,5 @@ test('067 index observers preserve values, separate sentinels and bound concurre
   assert.equal(rows[3].concurrentCopyAdmission,true);
   assert.equal(rows[3].releasedAfterDigest,true);
 });
+
+for(const file of ['test-abrupt-departure-T067.mjs','test-detached-backend-snapshot-T067.mjs'])test('067 '+file,()=>{const output=execFileSync(process.execPath,[path.join(candidate,'checks',file)],{cwd:root,encoding:'utf8',timeout:30000,maxBuffer:1024*1024});const rows=output.trim().split(/\r?\n/).map(JSON.parse);assert.ok(rows.every(r=>r.passed===true&&r.nativeQualified===false));});
