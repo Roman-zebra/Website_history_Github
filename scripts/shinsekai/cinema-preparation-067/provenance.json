@@ -385,5 +385,61 @@
     "physicalDeviceQualified": false,
     "productionAdopted": false,
     "cityComplete": false
+  },
+  "controlledNativeRegression": {
+    "revision": "T6/T6B",
+    "candidateOnly": true,
+    "sourceFilesUnchangedFromT5B": 43,
+    "frozenInputs": 482,
+    "controlledNativeCases": 10,
+    "fixedHubReturnCases": 2,
+    "preAuthorizationColdCloseCases": 2,
+    "sourceResourceCountersZero": true,
+    "hostLeaseClosed": true,
+    "originalGPUWaitConfirmationTrue": true,
+    "fullControlledRawOriginalsArchived": false,
+    "boundedControlledReceiptsSHA256": "8dd59ffb718205dd01ccccbd949ecef8645a7206053e36dc20b5345480320259",
+    "hubDependencyRestore": [
+      {
+        "name": "display-quality-observation.mjs",
+        "bytes": 1395,
+        "sha256": "39e1ed434951c546709a3d13325a50c61a2aec53e5554349c7ef25a31f3027fa",
+        "alreadyFrozenInput": true
+      },
+      {
+        "name": "history-observation.mjs",
+        "bytes": 1258,
+        "sha256": "355855f9d30b0178af6a1602949f3d1bce6831ac57304001d173c3512a6c76f7",
+        "alreadyFrozenInput": true
+      }
+    ],
+    "restoredDependenciesHTTP200": true,
+    "backendAndHDReturnPreservedBoth": true,
+    "hubCanvasModelAndRendererTransportsZero": true,
+    "privatePNGReferences": [
+      {
+        "backend": "webgpu",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 188637,
+        "sha256": "fa8ba9caeab2c8c8420cd9b011288f3ecc2c9dade3850f3a671364fd8da71d39"
+      },
+      {
+        "backend": "webgl2",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 188648,
+        "sha256": "e298fda6ac0736b4614b7fa8887890a5a912ddc0ff589a46e345536840aaf3ec"
+      }
+    ],
+    "noUnchangedCPUChecksRepeated": true,
+    "relatedCPUChecksPreviouslyPassed": 19,
+    "modelAndCompiledRendererUnchanged": true,
+    "scopedControlledRegressionPassed": true,
+    "fullLifecycleQualified": false,
+    "visualAccepted": false,
+    "physicalDeviceQualified": false,
+    "productionAdopted": false,
+    "cityComplete": false
   }
 }
