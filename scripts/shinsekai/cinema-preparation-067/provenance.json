@@ -1,6 +1,6 @@
 {
   "schema": "JTA_CINEMA_PREPARATION_SOURCE_067",
-  "revision": "K",
+  "revision": "K+N",
   "candidateOnly": true,
   "productionAdopted": false,
   "engineFiles": [
@@ -77,5 +77,42 @@
     "performance60FPSQualified": false,
     "accepted": false,
     "adopted": false
+  },
+  "engineRevision": "K",
+  "captureObservation": {
+    "path": "capture-control-N067.mjs",
+    "bytes": 8555,
+    "sha256": "c36c33a0a731deb6259f21fedcdfd68e87d2b8ba7e4a774c5a974543405e1f5a",
+    "revision": "N",
+    "captureOnly": true,
+    "productionCaller": false,
+    "fixture": {
+      "path": "fixtures/original-capture-fragments-N.txt",
+      "bytes": 1484,
+      "sha256": "65d7f29fd634e51ed0465099c22f9bdea925c4e9096cb162d7e8927e1cdb1eb7",
+      "preObservationCompiledSHA256": "94a0412b3d7c2be18f906813ddae48b6deb64eca18ef03d27f2dbda8b5f2bb4c",
+      "originalSourceSHA256": "f96d474d30004a9c235fe8efe9d889b9878d8a36aab768fe6915e85c86afb260",
+      "standaloneRuntime": false
+    },
+    "nativeEvidenceReference": {
+      "metricsSHA256": "c385e8315ba4e09f61baa8ddafdbad758bee4ab0af23d1673f2fec0083d9fb99",
+      "backends": [
+        "WebGPU",
+        "WebGL2"
+      ],
+      "browserSurface": "Codex In-app Browser",
+      "externalChromeQualified": false,
+      "physicalDeviceQualified": false,
+      "independentRearCaptureInputsMatched": true,
+      "WebGPUPixelsExact": true,
+      "WebGL2DifferingPixels": 20,
+      "WebGL2MaxChannelDifference": 1,
+      "pixelCount": 2073600,
+      "controlledVisualParityQualified": false,
+      "performance60FPSQualified": false,
+      "allFourResourceClosesVerified": true,
+      "accepted": false,
+      "adopted": false
+    }
   }
 }

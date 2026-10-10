@@ -16,6 +16,8 @@ test('067 engine and renderer fixtures retain their verified source hashes', () 
     assert.equal(sha(path.join(candidate, row.path)), row.sha256, row.path);
     assert.equal(fs.statSync(path.join(candidate, row.path)).size, row.bytes);
   }
+  assert.equal(sha(path.join(candidate, pins.captureObservation.path)), pins.captureObservation.sha256);
+  assert.equal(sha(path.join(candidate, pins.captureObservation.fixture.path)), pins.captureObservation.fixture.sha256);
   assert.equal(sha(path.join(root, pins.fixedVendor.path)), pins.fixedVendor.sha256);
   for (const row of [pins.compiledFragments, pins.historicalObserver, pins.historicalFirstAppearanceObserver]) {
     assert.equal(sha(path.join(candidate, row.path)), row.sha256, row.path);
@@ -72,4 +74,17 @@ test('067 prior observer loses later first appearances while the candidate retai
   assert.throws(() => execFileSync(process.execPath, [regression, prior], {
     cwd: root, encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'],
   }), /retain later non-projector first appearances/);
+});
+
+
+test('067 captures retain bounded immutable numeric state and original PNG behavior', () => {
+  const output=execFileSync(process.execPath,[path.join(candidate,'checks/test-capture-control-N067.mjs')],{cwd:root,encoding:'utf8',timeout:30000,maxBuffer:1024*1024});
+  const rows=output.trim().split(/\r?\n/).map(line=>JSON.parse(line));
+  assert.equal(rows.length,3);
+  assert.equal(rows[0].passed,true);
+  assert.equal(rows[0].nativeQualified,false);
+  assert.equal(rows[1].exactPNGHash,true);
+  assert.equal(rows[1].uploadFailurePreservesCapture,true);
+  assert.equal(rows[2].actualFrozenCaptureSeams,true);
+  assert.equal(rows[2].exactRestoration,true);
 });
