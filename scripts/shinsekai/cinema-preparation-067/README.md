@@ -1,6 +1,6 @@
 # Cinema preparation candidate 067
 
-This is the source handoff for revision I of the protected hall cinema preparation experiment. The six engine modules retain the exact bytes tested in Chrome. It is a candidate package; production callers and the site build do not load it.
+This is the source handoff for revision K of the protected hall cinema preparation experiment. The six engine modules retain the exact bytes verified in the scoped WebGPU and WebGL2 native review. The review used Codex In-app Browser; external Chrome and physical devices are unqualified. This candidate adds no production callers. The site build runs its CPU checks and excludes this scripts package from copied static assets.
 
 The fixed Three.js r186 renderer queues material sides for each transparent pass. The patch carries the captured side through asynchronous node preparation for `cinema__projector_7`, restoring material side and renderer preparation state in `finally`. Other node inputs retain their original behavior. The queue and pipeline preparation changes are exactly reversible.
 
@@ -12,9 +12,9 @@ From the repository root, run:
 node --test tests/shinsekai-cinema-preparation.test.cjs
 ```
 
-The checks cover the exact vendor and compiled queue/loop formats, 56 side/restoration cases, original return/promise/error identity, bounded observation, inherited property restoration, reload generations, late projector observation, and diagnostic compaction. Backend and object factories in these tests are synthetic. They do not establish native cache reuse or frame rate.
+The checks cover the exact vendor and compiled queue/loop formats, 56 side/restoration cases, original return/promise/error identity, bounded observation, inherited property restoration, reload generations, late projector observation, diagnostic compaction, and six objects whose first visible draws occur in different callbacks. The prior revision I fixture must fail that last regression. Backend and object factories in these tests are synthetic. They do not establish native cache reuse or frame rate.
 
-`provenance.json` pins the six engine modules, existing vendor, historical H observer, and compiled renderer fragments. The fragment file preserves only the original queue method and compilation tail; it is not a standalone renderer. Its source offsets/hash identify the original compiled input, which is not distributed here. Three.js fragments retain the MIT license in `fixtures/THREE-LICENSE.txt`.
+`provenance.json` pins the six engine modules, existing vendor, historical H and I observers, and compiled renderer fragments. The fragment file preserves only the original queue method and compilation tail; it is not a standalone renderer. Its source offsets/hash identify the original compiled input, which is not distributed here. Three.js fragments retain the MIT license in `fixtures/THREE-LICENSE.txt`.
 
 To create a separate patched vendor copy:
 
@@ -39,3 +39,5 @@ Revision I was checked in Chrome on WebGL2 and WebGPU: initial load, same-docume
 The two fixed rear images matched exactly on WebGPU; WebGL2 differed at 25 pixels by at most one channel level. Revision I's first WebGPU reload draw exposed five of the six tracked objects; broader six-object coverage belongs to the preceding H evidence. H's parent receipt overflow remains a recorded failed case. I removes duplicate shader diagnostics while retaining the full pipeline-after hashes, within the unchanged receipt ceiling.
 
 The complete native receipts, images, failures, and input manifest remain in the internal evidence archive. These observations do not establish controlled performance improvement, GPU completion timing, HD 60 FPS, mobile acceptance, art/rights acceptance, payment protection, or whole-city completion. Mainline adoption requires its own integration and acceptance evidence.
+
+The revision K observer records the first scheduled draw for each eligible object name, bounded to32 names and32 rows per phase. It clears these records per cinema generation and keeps the first-ready and first-projector metrics separate. It makes no additional render or compile calls. Native reload evidence retains all six double-pass objects across six different callbacks; normal and pending-compile closure passed in both backends. These observations do not establish frame rate, controlled visual parity, physical-device performance, or production acceptance.

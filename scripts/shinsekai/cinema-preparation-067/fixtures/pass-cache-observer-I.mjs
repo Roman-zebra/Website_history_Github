@@ -1,7 +1,7 @@
 // Private bounded cache observation. No extra renderer, node, pipeline, or GPU calls.
 export function createPassCacheObserver067({limitPerPhase=32}={}){
  const owners=new WeakMap(),active=new Set(),ids=new WeakMap();
- const compileRows=[],firstDrawRows=[],firstObjectDrawIDs=new Map();let serial=0,errors=0,droppedCompile=0,droppedDraw=0,firstDrawID=null,firstProjectorDrawID=null,restored=0,generation=0;
+ const compileRows=[],firstDrawRows=[];let serial=0,errors=0,droppedCompile=0,droppedDraw=0,firstDrawID=null,firstProjectorDrawID=null,restored=0,generation=0;
  const bound=Math.min(64,Math.max(0,limitPerPhase|0));
  const id=x=>{if(!x||typeof x!=='object')return null;let n=ids.get(x);if(!n){n=++serial;ids.set(x,n);}return n;};
  const hash=s=>{if(typeof s!=='string')return null;let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return {length:s.length,fnv1a32:(h>>>0).toString(16).padStart(8,'0')};};
@@ -13,8 +13,7 @@ export function createPassCacheObserver067({limitPerPhase=32}={}){
   if(r?.site!=='scheduled-draw'||r.cinemaState!=='ready')return null;
   if(firstDrawID===null)firstDrawID=r.id;
   if(object.name==='cinema__projector_7'&&firstProjectorDrawID===null){firstProjectorDrawID=r.id;r.projectorVisible067=true;}
-  if(!firstObjectDrawIDs.has(object.name)){if(firstObjectDrawIDs.size>=bound){droppedDraw++;return null;}firstObjectDrawIDs.set(object.name,r.id);}
-  return r.id===firstObjectDrawIDs.get(object.name)?firstDrawRows:null;
+  return r.id===firstDrawID||(object.name==='cinema__projector_7'&&r.id===firstProjectorDrawID)?firstDrawRows:null;
  }
  function describe(renderer,ro,withShader=true){
   if(!ro)return null;
@@ -58,8 +57,8 @@ export function createPassCacheObserver067({limitPerPhase=32}={}){
  function restore(renderer){const state=owners.get(renderer);if(!state)return;for(const b of state.bindings){if(b.object[b.name]!==b.wrapper)throw Error('Cache observer ownership changed '+b.name);if(b.descriptor)Object.defineProperty(b.object,b.name,b.descriptor);else delete b.object[b.name];}
   state.bindings.length=0;state.renderer=null;owners.delete(renderer);active.delete(state);restored++;
  }
- function beginCinemaCompile(){generation++;compileRows.length=0;firstDrawRows.length=0;firstDrawID=null;firstProjectorDrawID=null;firstObjectDrawIDs.clear();droppedCompile=0;droppedDraw=0;}
- function snapshot(){return {schema:'JTA_PASS_CACHE_OBSERVATION_067_K',shaderDiagnosticPlacement:'pipeline after only; object and pipeline before duplicates omitted',generation,retainsOnlyCurrentCinemaGeneration:true,compileRows,firstDrawRows,firstDrawID,firstProjectorDrawID,firstProjectorCanDifferFromFirstCinemaReadyCallback:true,firstObjectDrawIDs:Object.fromEntries(firstObjectDrawIDs),capturesEachObjectFirstScheduledDraw:true,firstObjectIDsBound:bound,firstAppearanceMayDifferFromFirstCinemaReady:true,limitPerPhase:bound,maxRows:bound*2,errors,droppedCompile,droppedDraw,activeOwners:active.size,restoredOwners:restored,shaderHashes:'FNV1a32+length diagnostic only, not cryptographic source pin',extraResourceCalls:false,extraFrames:false,observationCPUIncluded:true,nativeQualified:false};}
+ function beginCinemaCompile(){generation++;compileRows.length=0;firstDrawRows.length=0;firstDrawID=null;firstProjectorDrawID=null;droppedCompile=0;droppedDraw=0;}
+ function snapshot(){return {schema:'JTA_PASS_CACHE_OBSERVATION_067_I',shaderDiagnosticPlacement:'pipeline after only; object and pipeline before duplicates omitted',generation,retainsOnlyCurrentCinemaGeneration:true,compileRows,firstDrawRows,firstDrawID,firstProjectorDrawID,firstProjectorCanDifferFromFirstCinemaReadyCallback:true,limitPerPhase:bound,maxRows:bound*2,errors,droppedCompile,droppedDraw,activeOwners:active.size,restoredOwners:restored,shaderHashes:'FNV1a32+length diagnostic only, not cryptographic source pin',extraResourceCalls:false,extraFrames:false,observationCPUIncluded:true,nativeQualified:false};}
  return Object.freeze({ensure,restore,snapshot,beginCinemaCompile});
 }
 export const passCacheObserver067=createPassCacheObserver067();

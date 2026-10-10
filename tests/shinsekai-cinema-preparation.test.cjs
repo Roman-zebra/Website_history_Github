@@ -17,7 +17,7 @@ test('067 engine and renderer fixtures retain their verified source hashes', () 
     assert.equal(fs.statSync(path.join(candidate, row.path)).size, row.bytes);
   }
   assert.equal(sha(path.join(root, pins.fixedVendor.path)), pins.fixedVendor.sha256);
-  for (const row of [pins.compiledFragments, pins.historicalObserver]) {
+  for (const row of [pins.compiledFragments, pins.historicalObserver, pins.historicalFirstAppearanceObserver]) {
     assert.equal(sha(path.join(candidate, row.path)), row.sha256, row.path);
   }
 });
@@ -29,6 +29,7 @@ for (const file of [
   'test-cinema-preparation-admission-067.mjs',
   'test-generation-observation-067.mjs',
   'test-receipt-compaction-067.mjs',
+  'test-first-object-appearance-067.mjs',
 ]) {
   test(file, () => {
     const result = JSON.parse(execFileSync(process.execPath, [path.join(candidate, 'checks', file)], {
@@ -63,4 +64,12 @@ test('067 patch CLI fails closed and never replaces existing files', () => {
     for (const file of [bad, output]) if (fs.existsSync(file)) fs.unlinkSync(file);
     fs.rmdirSync(dir);
   }
+});
+
+test('067 prior observer loses later first appearances while the candidate retains them', () => {
+  const regression = path.join(candidate, 'checks/test-first-object-appearance-067.mjs');
+  const prior = path.join(candidate, 'fixtures/pass-cache-observer-I.mjs');
+  assert.throws(() => execFileSync(process.execPath, [regression, prior], {
+    cwd: root, encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'pipe'],
+  }), /retain later non-projector first appearances/);
 });

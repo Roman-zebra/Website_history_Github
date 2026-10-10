@@ -1,6 +1,6 @@
 {
   "schema": "JTA_CINEMA_PREPARATION_SOURCE_067",
-  "revision": "I",
+  "revision": "K",
   "candidateOnly": true,
   "productionAdopted": false,
   "engineFiles": [
@@ -26,8 +26,8 @@
     },
     {
       "path": "pass-cache-observer-067.mjs",
-      "bytes": 6171,
-      "sha256": "e40e26dd07669580651103cf3e6c0c9b43a053082f98225efd652cde86d3f83a"
+      "bytes": 6507,
+      "sha256": "93f7e61dabf915a3df034c3570f811ace578264d6f6de4d99a69177c89c40edd"
     },
     {
       "path": "resource-preparation-067.mjs",
@@ -58,5 +58,24 @@
     "sha256": "a35fc1a15a7dda8b23eecdb58777541be1b7fe7aaa5cdbc89bddce601e87c9f4"
   },
   "license": "Three.js derived fragments: MIT; see fixtures/THREE-LICENSE.txt",
-  "nativeEvidenceIncluded": false
+  "nativeEvidenceIncluded": false,
+  "historicalFirstAppearanceObserver": {
+    "path": "fixtures/pass-cache-observer-I.mjs",
+    "sha256": "e40e26dd07669580651103cf3e6c0c9b43a053082f98225efd652cde86d3f83a"
+  },
+  "nativeEvidenceReference": {
+    "schema": "JTA_NATIVE_FIRST_OBJECT_APPEARANCE_067_K",
+    "sha256": "e307e37f16aca25b55374c1f1a5ab94767c11065f304b35b689e77c0064e13bf",
+    "sourceHashesMatch": true,
+    "backends": [
+      "WebGPU",
+      "WebGL2"
+    ],
+    "browserSurface": "Codex In-app Browser",
+    "externalChromeQualified": false,
+    "physicalDeviceQualified": false,
+    "performance60FPSQualified": false,
+    "accepted": false,
+    "adopted": false
+  }
 }

@@ -25,7 +25,13 @@ function stripDuplicates(snapshot){
 }
 const h=fixture(createH),i=fixture(createI),normalized=stripDuplicates(h.snapshot);
 normalized.schema=i.snapshot.schema;normalized.shaderDiagnosticPlacement=i.snapshot.shaderDiagnosticPlacement;
-assert.deepEqual(i.snapshot,normalized);assert.equal(h.objects,i.objects);assert.equal(h.pipelines,i.pipelines);
+assert.deepEqual(i.snapshot.firstObjectDrawIDs,{'cinema__projector_7':1});
+assert.equal(i.snapshot.capturesEachObjectFirstScheduledDraw,true);
+assert.equal(i.snapshot.firstObjectIDsBound,32);
+assert.equal(i.snapshot.firstAppearanceMayDifferFromFirstCinemaReady,true);
+const comparable=structuredClone(i.snapshot);
+for(const key of ['firstObjectDrawIDs','capturesEachObjectFirstScheduledDraw','firstObjectIDsBound','firstAppearanceMayDifferFromFirstCinemaReady'])delete comparable[key];
+assert.deepEqual(comparable,normalized);assert.equal(h.objects,i.objects);assert.equal(h.pipelines,i.pipelines);
 assert.ok(i.snapshot.compileRows.filter(r=>r.method==='pipelines.getForRender').every(r=>r.after.fragment.length===65000));
 assert.ok(i.snapshot.compileRows.filter(r=>r.method==='objects.get').every(r=>!Object.hasOwn(r.after,'fragment')));
 let replay=null;
