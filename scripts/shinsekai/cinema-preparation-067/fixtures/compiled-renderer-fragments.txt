@@ -1,0 +1,57 @@
+// Three.js r186 derived fragments; see THREE-LICENSE.txt. Not a standalone renderer.
+class CompiledRendererFragments {
+  _createObjectPipeline(object, material, scene2, camera2, lightsNode, group, clippingContext, passId) {
+    if (this._compilationPromises !== null) {
+      this._compilationPromises.push({
+        object,
+        material,
+        scene: scene2,
+        camera: camera2,
+        lightsNode,
+        group,
+        clippingContext,
+        passId,
+        renderContext: this._currentRenderContext
+      });
+      return;
+    }
+    const renderObject = this._objects.get(object, material, scene2, camera2, lightsNode, this._currentRenderContext, clippingContext, passId);
+    renderObject.drawRange = object.geometry.drawRange;
+    renderObject.group = group;
+    this._nodes.updateBefore(renderObject);
+    this._geometries.updateForRender(renderObject);
+    this._nodes.updateForRender(renderObject);
+    this._bindings.updateForRender(renderObject);
+    this._pipelines.getForRender(renderObject, this._compilationPromises);
+    this._nodes.updateAfter(renderObject);
+  }
+  async compileAsync(scene2, camera2, targetScene = null, onProgress = null) {
+    const total = compilationPromises.length;
+    let loaded = 0;
+    for (const item of compilationPromises) {
+      const renderObject = this._objects.get(item.object, item.material, item.scene, item.camera, item.lightsNode, item.renderContext, item.clippingContext, item.passId);
+      renderObject.drawRange = item.object.geometry.drawRange;
+      renderObject.group = item.group;
+      await this._nodes.getForRenderAsync(renderObject);
+      this._isPreCompiling = true;
+      this._nodes.updateBefore(renderObject);
+      this._geometries.updateForRender(renderObject);
+      this._nodes.updateForRender(renderObject);
+      this._bindings.updateForRender(renderObject);
+      this._isPreCompiling = false;
+      const pipelinePromises = [];
+      this._pipelines.getForRender(renderObject, pipelinePromises);
+      if (pipelinePromises.length > 0) {
+        await Promise.all(pipelinePromises);
+      }
+      this._isPreCompiling = true;
+      this._nodes.updateAfter(renderObject);
+      this._isPreCompiling = false;
+      loaded++;
+      if (onProgress !== null) {
+        onProgress(new ProgressEvent("progress", { lengthComputable: true, loaded, total }));
+      }
+      await yieldToMain();
+    }
+  }
+}

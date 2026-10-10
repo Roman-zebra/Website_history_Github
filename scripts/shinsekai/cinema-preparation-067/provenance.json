@@ -1,0 +1,62 @@
+{
+  "schema": "JTA_CINEMA_PREPARATION_SOURCE_067",
+  "revision": "I",
+  "candidateOnly": true,
+  "productionAdopted": false,
+  "engineFiles": [
+    {
+      "path": "async-pass-side-067.mjs",
+      "bytes": 4132,
+      "sha256": "a386b914c8298bab998c7699366ec1eb93af8745e50e7c07237675c920fccabb"
+    },
+    {
+      "path": "cinema-preparation-admission-067.mjs",
+      "bytes": 3855,
+      "sha256": "0567bb3c8c3233a033fa37e9dbb64d9552ec0c0fd45f014c5ae98bb7f3fd5e69"
+    },
+    {
+      "path": "compile-draw-hold-067.mjs",
+      "bytes": 1168,
+      "sha256": "30e90b25749e23179cfc7bcc18aa4ab0ae7bb5c2987d1379b00e6a16de99c5f5"
+    },
+    {
+      "path": "cinema-visibility-probe-067.mjs",
+      "bytes": 2458,
+      "sha256": "7981f411e90f3f751ebd2feb33a13028f2c1ea07cdf4d70e9ad6834e715624b6"
+    },
+    {
+      "path": "pass-cache-observer-067.mjs",
+      "bytes": 6171,
+      "sha256": "e40e26dd07669580651103cf3e6c0c9b43a053082f98225efd652cde86d3f83a"
+    },
+    {
+      "path": "resource-preparation-067.mjs",
+      "bytes": 7783,
+      "sha256": "35cc023e2045d16f8c079030be0565846199f666a171a29cba38a84999aace9f"
+    }
+  ],
+  "fixedVendor": {
+    "path": "vendor/three-r186/build/three.webgpu.js",
+    "sha256": "a78400fa1d359e81fcc12b84ed0a89a7fbecb4b8373e28ae8f9d2b11f6ea13bc"
+  },
+  "compiledFragments": {
+    "path": "fixtures/compiled-renderer-fragments.txt",
+    "sha256": "2821895652998d82f3ef2c4848d5d67a42796661b8ba5286a69a2d993b2c6701",
+    "originalSourceSHA256": "f96d474d30004a9c235fe8efe9d889b9878d8a36aab768fe6915e85c86afb260",
+    "originalQueueOffsets": [
+      2170583,
+      2171557
+    ],
+    "originalTailOffsets": [
+      2093056,
+      2094266
+    ],
+    "standaloneRenderer": false
+  },
+  "historicalObserver": {
+    "path": "fixtures/pass-cache-observer-H.mjs",
+    "sha256": "a35fc1a15a7dda8b23eecdb58777541be1b7fe7aaa5cdbc89bddce601e87c9f4"
+  },
+  "license": "Three.js derived fragments: MIT; see fixtures/THREE-LICENSE.txt",
+  "nativeEvidenceIncluded": false
+}
