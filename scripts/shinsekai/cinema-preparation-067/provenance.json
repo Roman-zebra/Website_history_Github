@@ -441,5 +441,43 @@
     "physicalDeviceQualified": false,
     "productionAdopted": false,
     "cityComplete": false
+  },
+  "nonIndexAttributeObservation": {
+    "phase": "067-U1",
+    "privateSourceShipped": false,
+    "limitsUnchanged": true,
+    "cpuChecks": 28,
+    "nativeCaptures": 24,
+    "pairedConditions": 4,
+    "eligibleMeshes": 320,
+    "attributes": 1474,
+    "numericComponents": 12045911,
+    "rawBytes": 48183644,
+    "storedRawAndFiniteNumericHashesMatch": true,
+    "fullShaderTextureGeometryAcceptance": false,
+    "productionAdopted": false,
+    "physicalDeviceQualified": false,
+    "cityComplete": false,
+    "nativeMetricsSHA256": "6036de4929e927e71402db824da73043951f89195f579d582c6b6306b22878fa",
+    "privateArchive": {
+      "sha256": "a09f8cdbb12016d7d184180dc5349bd25bb4a3490f0068510cebad6dc4e3ebaa",
+      "bytes": 53579031,
+      "entries": 354,
+      "crcAndAllEntrySHA256Verified": true,
+      "standalone": false
+    },
+    "privateObserverHashes": [
+      {
+        "path": "attribute-private-integration-U067.mjs",
+        "bytes": 4574,
+        "sha256": "18b0e8d3762f66ff9423babe6c3be6e8bc410fba736f2e16e525d89164cdf670"
+      },
+      {
+        "path": "capture-attribute-state-U067.mjs",
+        "bytes": 16418,
+        "sha256": "2708338b5da6bd9ce08d2c6b261fa4890fdc0442aa90e26a9183bf2fa57e3b0f"
+      }
+    ],
+    "next": "067-U2-bounded-material-shader-input-inventory"
   }
 }
