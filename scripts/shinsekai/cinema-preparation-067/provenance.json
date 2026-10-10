@@ -283,5 +283,107 @@
     "nativeGPUDeviceDestructionConfirmed": false,
     "consoleErrorUnqualified": true,
     "pendingCinemaAndReopenQualified": false
+  },
+  "passiveNativeRetirementObservation": {
+    "revision": "T5B",
+    "candidateOnly": true,
+    "modules": [
+      {
+        "path": "native-device-loss-T3067.mjs",
+        "bytes": 1317,
+        "sha256": "4fd1e53a885d055e8848804ba37f6cba933d3716635d5bc93b446d494d4505d6"
+      },
+      {
+        "path": "parent-gpu-adapter-T4067.mjs",
+        "bytes": 3700,
+        "sha256": "fc6d4d7310de7dd773f490908ff58faf9ff70d979e435fc11a9aba4de2bcee20"
+      },
+      {
+        "path": "passive-native-retirement-T5067.mjs",
+        "bytes": 9889,
+        "sha256": "5d7efcb8d7c56cbb6dfac4b6d2ff02b9c64024552182be729b6331d971641f16"
+      },
+      {
+        "path": "full-native-proof-output-T5B067.mjs",
+        "bytes": 2752,
+        "sha256": "8d12b3f1fd03a265531b9dd5d33596f81b4b5e9f4366b4c1e7f145b77ebe096e"
+      },
+      {
+        "path": "checks/test-native-device-loss-T3067.mjs",
+        "bytes": 1774,
+        "sha256": "6a454e5c5ece696985118ed295f6aa455f6d3ce453a9184c4addd868aad14841"
+      },
+      {
+        "path": "checks/test-parent-gpu-adapter-T4067.mjs",
+        "bytes": 2926,
+        "sha256": "9e35acc12d3137104752dfa4ac1e70ae11e81dcdc9a2dfbe1393d7203f29adf3"
+      },
+      {
+        "path": "checks/test-passive-native-integration-T5067.mjs",
+        "bytes": 8905,
+        "sha256": "d3b0d0eff335fdab18847a705b7bef1a9329d1870542d22487dda8c64ae105d7"
+      },
+      {
+        "path": "checks/test-full-native-proof-output-T5B067.mjs",
+        "bytes": 2427,
+        "sha256": "28f61e979fa64b53c82282ebae22820ac894ddcfef49302613a42aee75c9beed"
+      },
+      {
+        "path": "fixtures/partial-gate-source-T4.json",
+        "bytes": 37441,
+        "sha256": "d5698c119dd199e8fb58b1a2cdd1de352a2810984a0d6c0560e0d3c9d5126479"
+      },
+      {
+        "path": "fixtures/passive-integration-inputs-T5.json",
+        "bytes": 39853,
+        "sha256": "50609d65c943abeec1efdc55209b3903ec33b5863f0d21eb02f66677b634dcae"
+      }
+    ],
+    "sourceBuildId": "38e55b7454463300ba83fa0b6306b48b8ae29192862d2eb005812b3c3711e564",
+    "originalRetirementProofs": [
+      {
+        "name": "WEBGL2-PENDING-FULL-ORIGINAL-067-T5B.json",
+        "bytes": 90292,
+        "sha256": "eddb09918e7ce7055e4053f63dbd1fc23f2bc9ff6ef4c25ac5852d1452b5c451"
+      },
+      {
+        "name": "WEBGL2-READY-FULL-ORIGINAL-067-T5B.json",
+        "bytes": 54959,
+        "sha256": "ed5a5915b751bae27056dc3761339aa4af8e72e8d9c8cd239971f6b7a7966a3c"
+      },
+      {
+        "name": "WEBGPU-PENDING-FULL-ORIGINAL-067-T5B.json",
+        "bytes": 88374,
+        "sha256": "c176e9bfb08d178148bbf17ffb45937d62165c558961b49b06fe783b668a8e5b"
+      },
+      {
+        "name": "WEBGPU-READY-FULL-ORIGINAL-067-T5B.json",
+        "bytes": 55124,
+        "sha256": "4167d711154b2b1a178d1c073a951b49e5cd8b6f672eef9693cc44eb42d3e742"
+      }
+    ],
+    "metricsSHA256": "149dd81cef325d672f8a5a03d9cb25692abdfaf97f5084e9791d8f746b913c16",
+    "privateEvidenceArchive": {
+      "sha256": "960219da90caac14c7a1136f763c0a318f9734eb214d507f902e80894d214fe9",
+      "entries": 119,
+      "bytes": 1054468,
+      "includedInPublicSource": false
+    },
+    "readyAndPendingAbruptCases": 4,
+    "trustedNativePagehide": true,
+    "measuredResourceCountersZero": true,
+    "passiveHostLeaseClosed": true,
+    "nativeGPUDeviceLossDestroyed": true,
+    "rawGPUWaitConfirmation": false,
+    "fullRawOriginalsArchived": true,
+    "sameParentFreshOwnersReopen": true,
+    "consoleWarningsOrErrors": 0,
+    "relatedCPUChecks": 19,
+    "fullLifecycleQualified": false,
+    "controlledRegressionWithParentAdapter": false,
+    "visualAccepted": false,
+    "physicalDeviceQualified": false,
+    "productionAdopted": false,
+    "cityComplete": false
   }
 }
