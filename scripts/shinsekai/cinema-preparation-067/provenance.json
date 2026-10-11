@@ -1715,5 +1715,242 @@
     "sourceMetadataPreservedSeparately": true,
     "publicImplementationAnd19ChecksUnchanged": true,
     "next": "Bounded original WebGPU binding-layout entries/pipeline-layout creation and current owned cache-slot source/CPU provenance before any new isolated native copies; no extra native calls."
+  },
+  "currentStoredOriginalOutputBindingLayoutObservation": {
+    "phase": "067-U3C4A",
+    "report": "https://drive.google.com/file/d/19773ER7z8XekDikgCNL41st8VftAbg1E/view",
+    "archive": "https://drive.google.com/file/d/1MDIiY38qr24ky8qYDGm7npHDR-7PjDPV/view",
+    "CPU": {
+      "total": 104,
+      "passed": 104,
+      "failed": 0,
+      "skipped": 0,
+      "entryCopier": 17,
+      "weakLayoutRegistry": 27,
+      "originalCreationSeams": 4,
+      "isolatedBounds": 3,
+      "reader": 17,
+      "privateIntegration": 11,
+      "comparison": 20,
+      "moduleURLIdentity": 3,
+      "pinnedGroupLifecycle": 2
+    },
+    "native": {
+      "originalRearPNGs": 4,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "outputProgramsPerCapture": 2,
+      "outputBuffersPerCapture": 2,
+      "rawOutputUniformBytes": {
+        "webgpu": 208,
+        "webgl2": 224
+      },
+      "ownGeometryAttributesPerCapture": 2,
+      "ownGeometryRawBytes": 60,
+      "existingMatrixBinary64Numbers": 80,
+      "mainBindings": 175,
+      "mainCPUUniformBuffers": 178,
+      "GPU": {
+        "originalLayouts": 2,
+        "entries": [
+          1,
+          3
+        ],
+        "originalNativeLayoutSlotsKeysWrappersExact": true,
+        "currentGroupIdentityMatchesCreation": [
+          true,
+          false
+        ],
+        "currentWrapperIdentityMatchesCreation": [
+          true,
+          true
+        ],
+        "originalGroupIdentityUnchanged": false,
+        "storedOutputLayoutPipelineGeometryCameraUniformValuesExact": true,
+        "mainShaderUniformMaterialNSamplerTargetCameraGeometricSortValuesExact": true,
+        "orderPositions": 0,
+        "IDRows": 20,
+        "changedPixels": 0,
+        "maxRGBA": 0,
+        "originalPNGFileBytesExact": true
+      },
+      "GL": {
+        "originalLinkedProgramStageRole": true,
+        "GPUCreationLayout": null,
+        "GLBindingLayoutCovered": false,
+        "GLDynamicRasterStateCovered": false,
+        "storedOutputPipelineGeometryCameraUniformValuesExact": true,
+        "mainShaderUniformMaterialNSamplerTargetCameraGeometricSortValuesExact": true,
+        "orderPositions": 0,
+        "IDRows": 20,
+        "changedPixels": 23,
+        "maxRGBA": 1,
+        "allCoordinatesRetained": true,
+        "toleranceApplied": false
+      },
+      "sourceMetadataPreservedSeparately": true,
+      "sharedVersionLags": [
+        {
+          "label": "candidateGPU",
+          "buffers": [
+            {
+              "group": "render",
+              "currentVersion": 4506,
+              "cachedSharedVersion": 4505,
+              "lag": 1
+            },
+            {
+              "group": "render",
+              "currentVersion": 4506,
+              "cachedSharedVersion": 4505,
+              "lag": 1
+            },
+            {
+              "group": "render",
+              "currentVersion": 4506,
+              "cachedSharedVersion": 4505,
+              "lag": 1
+            }
+          ]
+        },
+        {
+          "label": "candidateGL",
+          "buffers": [
+            {
+              "group": "render",
+              "currentVersion": 4530,
+              "cachedSharedVersion": 4529,
+              "lag": 1
+            },
+            {
+              "group": "render",
+              "currentVersion": 4530,
+              "cachedSharedVersion": 4529,
+              "lag": 1
+            },
+            {
+              "group": "render",
+              "currentVersion": 4530,
+              "cachedSharedVersion": 4529,
+              "lag": 1
+            }
+          ]
+        },
+        {
+          "label": "baselineGPU",
+          "buffers": [
+            {
+              "group": "render",
+              "currentVersion": 4522,
+              "cachedSharedVersion": 4521,
+              "lag": 1
+            },
+            {
+              "group": "render",
+              "currentVersion": 4522,
+              "cachedSharedVersion": 4521,
+              "lag": 1
+            },
+            {
+              "group": "render",
+              "currentVersion": 4522,
+              "cachedSharedVersion": 4521,
+              "lag": 1
+            }
+          ]
+        },
+        {
+          "label": "baselineGL",
+          "buffers": [
+            {
+              "group": "render",
+              "currentVersion": 4544,
+              "cachedSharedVersion": 4543,
+              "lag": 1
+            },
+            {
+              "group": "render",
+              "currentVersion": 4544,
+              "cachedSharedVersion": 4543,
+              "lag": 1
+            },
+            {
+              "group": "render",
+              "currentVersion": 4544,
+              "cachedSharedVersion": 4543,
+              "lag": 1
+            }
+          ]
+        }
+      ],
+      "controlledCleanup": {
+        "finalDocuments": 4,
+        "finalModels": 0,
+        "finalTextureLeases": 0,
+        "host": "closed",
+        "candidateEarlyModels": 7,
+        "candidateEarlyTextureLeases": 7,
+        "candidateEarlyFullyDrained": false,
+        "baselineEarlyFullyDrained": true,
+        "initialRefusedCandidateFinalCleanupSaved": true
+      },
+      "servers": {
+        "countIncludingInitialNativeRefusal": 3,
+        "exitCodes": [
+          0,
+          0,
+          0
+        ],
+        "listenersClosed": true,
+        "keysDiscarded": true,
+        "tabsClosed": true,
+        "preStartSafetyAssertionExit": 1,
+        "preStartSafetyAssertionCreatedServer": false
+      },
+      "console": {
+        "fourInspectedWarnErrorListsEmpty": true,
+        "limitPerDocument": 20,
+        "allConsoleCoverageQualified": false
+      },
+      "initial101CPUNativeGroupIdentityRefusalAndSourceAndPreStartAssertionRetained": true,
+      "previousAllPixelAndOrderAndCacheAndEarlyCloseResidualsRetained": true
+    },
+    "archiveSHA256": "36b02e5a6ecc9ffd4763ec1448b461efa35e0cb1d8bbe6c746bed67f51803bed",
+    "archiveBytes": 16214259,
+    "archiveEntries": 342,
+    "rawReadbacksExact": true,
+    "standalone": false,
+    "queued": true,
+    "acknowledged": false,
+    "qualification": {
+      "sourceCPUAndOriginalNativeLayoutCreationProvenanceOnly": true,
+      "originalOrderedNativeLayoutSlotsKeysAndCacheWrappersMatched": true,
+      "originalOutputOwnerStagesHandleAndSuccessMatched": true,
+      "originalBindingGroupIdentityUnchanged": false,
+      "identityDriftRecordedSeparately": true,
+      "originalGPUCreationEntriesOwnCPUCopied": true,
+      "actualGPUBytesRead": false,
+      "actualGPUSubmissionProven": false,
+      "perDrawUploadProven": false,
+      "sampledGPUContentsProven": false,
+      "nativeOpaqueLayoutContentsReadback": false,
+      "GLBindingLayoutCovered": false,
+      "GLDynamicRasterStateCovered": false,
+      "cacheFreshnessQualified": false,
+      "fullPipelineAccepted": false,
+      "fullGeometryAccepted": false,
+      "fullPostprocessingCovered": false,
+      "fullLifecycleAccepted": false,
+      "visualAccepted": false,
+      "rightsQualified": false,
+      "physicalDeviceQualified": false,
+      "full067Accepted": false,
+      "fullPLAN119120121Complete": false,
+      "accepted": false,
+      "adopted": false
+    },
+    "next": "067-RH1 bounded DOTS roundtrip dependency restoration inventory: latest actual branch/commit/uncommitted source manifest+SHA/check commands/evidence Drive URLs, each required existing input/dependency fixed version/hash/approved locator/restore steps and unresolved access; do not copy secrets/protected payload or claim standalone/full transfer-ready; no handoff until actual API stop, editing-stop proof and DOTS receipt."
   }
 }
