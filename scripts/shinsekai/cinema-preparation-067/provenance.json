@@ -1352,5 +1352,136 @@
       "webgpu": 208,
       "webgl2": 224
     }
+  },
+  "currentStoredOutputGeometryCameraObservation": {
+    "phase": "067-U3C2",
+    "at": "2026-10-11T00:25:59.772Z",
+    "cpu": {
+      "total": 53,
+      "geometryCamera": 16,
+      "reader": 17,
+      "integration": 11,
+      "comparison": 9,
+      "fail": 0,
+      "skip": 0
+    },
+    "native": {
+      "originalRearPNGs": 4,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "outputAttributesPerCapture": 2,
+      "rawAttributeBytesPerCapture": 60,
+      "matrixNumbersPerCapture": 80,
+      "originalOutputStagesPerCapture": 2,
+      "originalOutputBuffersPerCapture": 2,
+      "rawOutputUniformBytesPerCapture": {
+        "webgpu": 208,
+        "webgl2": 224
+      },
+      "webgpu": {
+        "outputStoredValuesGeometryCameraExact": true,
+        "shaderExact": true,
+        "uniformExact": true,
+        "samplerExact": true,
+        "materialNExact": true,
+        "mainCameraGeometricSortBitsExact": true,
+        "orderPositions": 3,
+        "IDRows": 7,
+        "changedPixels": 0,
+        "maxChannel": 0,
+        "pngBytesExact": true
+      },
+      "webgl2": {
+        "outputStoredValuesGeometryCameraExact": true,
+        "shaderExact": true,
+        "uniformExact": true,
+        "samplerExact": true,
+        "materialNExact": true,
+        "mainCameraGeometricSortBitsExact": true,
+        "orderPositions": 4,
+        "IDRows": 27,
+        "changedPixels": 30,
+        "maxChannel": 15,
+        "largestCoordinate": [
+          138,
+          112
+        ],
+        "largestAbsoluteRGBA": [
+          14,
+          15,
+          14,
+          0
+        ]
+      },
+      "mainBindingsPerCapture": 175,
+      "mainCPUUniformBuffersPerCapture": 178,
+      "controlledClose": {
+        "documents": 4,
+        "finalModels": 0,
+        "finalTextureLeases": 0,
+        "hostState": "closed",
+        "earlyCandidateFullyDrained": false,
+        "earlyBaselineFullyDrained": true
+      },
+      "servers": {
+        "count": 2,
+        "exitCodes": [
+          0,
+          0
+        ],
+        "listenersClosed": true,
+        "keysDiscarded": true,
+        "tabsClosed": true
+      },
+      "console": {
+        "fourInspectedWarnErrorListsEmpty": true,
+        "limitPerDocument": 20,
+        "allConsoleCoverageQualified": false
+      }
+    },
+    "historicalResidualsRetained": true,
+    "originalMetadataPreservedSeparately": true,
+    "qualification": {
+      "ownCPUAttributeAndMatrixBits": true,
+      "geometryAttributes": 2,
+      "rawAttributeBytes": 60,
+      "existingMatrixNumbers": 80,
+      "sourceMethodsInvoked": 0,
+      "allOriginalPNGAndStageUniformProofsPreserved": true,
+      "actualGPUBytesRead": false,
+      "attributeUploadProven": false,
+      "cameraFreshnessQualified": false,
+      "fullGeometryAccepted": false,
+      "fullPostprocessingCovered": false,
+      "physicalDeviceQualified": false,
+      "full067Accepted": false,
+      "fullPLAN119120121Complete": false,
+      "accepted": false,
+      "adopted": false,
+      "rightsQualified": false,
+      "visualAccepted": false,
+      "fullLifecycleAccepted": false,
+      "cacheFreshnessQualified": false,
+      "actualGPUSubmissionProven": false
+    },
+    "next": "Deliver C2 scoped evidence, original candidate PNGs and current checkpoint to Drive/Claude; then pinned source/CPU contract for original owned output pipeline layout/state creation provenance without extra resource operations.",
+    "report": "https://drive.google.com/file/d/1SaWYwG5PQjS1HdfQg4PXenOysVrqYky0/view",
+    "archive": {
+      "path": "C:\\Users\\NULL\\Documents\\Codex\\JTA-shinsekai\\research-cache\\DOTS-CODEX-011-20261009\\protected-hall-async-pass-side-preparation-067\\EVIDENCE-067-U3C2.zip",
+      "entries": 186,
+      "bytes": 10718910,
+      "sha256": "c7353682c9db7ac03a8e44222ca3f35260314672328fa02640ad0ecfa47898b5",
+      "crcAndAllEntryHashesVerified": true,
+      "standalone": false,
+      "id": "1feayQD2tbT49RPC4AHogyrUeLOip4sRs"
+    },
+    "delivery": {
+      "rawArtifactsAndBridgeNoticeReadbackExact": true,
+      "queued": true,
+      "acknowledged": false
+    },
+    "publicImplementationAnd19ChecksUnchanged": true
   }
 }
