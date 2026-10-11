@@ -1483,5 +1483,237 @@
       "acknowledged": false
     },
     "publicImplementationAnd19ChecksUnchanged": true
+  },
+  "currentStoredOriginalOutputPipelineCreationObservation": {
+    "phase": "067-U3C3",
+    "at": "2026-10-11T01:08:01.439Z",
+    "cpu": {
+      "total": 94,
+      "passed": 94,
+      "failed": 0,
+      "skipped": 0,
+      "descriptor": 18,
+      "weakCreationRegistry": 22,
+      "reader": 17,
+      "privateIntegration": 11,
+      "originalCreationSeams": 11,
+      "comparator": 13,
+      "moduleURLIdentity": 2
+    },
+    "native": {
+      "originalRearPNGs": 4,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "outputProgramsPerCapture": 2,
+      "outputBuffersPerCapture": 2,
+      "rawOutputUniformBytes": {
+        "webgpu": 208,
+        "webgl2": 224
+      },
+      "ownGeometryAttributesPerCapture": 2,
+      "ownGeometryRawBytes": 60,
+      "existingMatrixBinary64NumbersPerCapture": 80,
+      "mainBindings": 175,
+      "mainCPUUniformBuffers": 178,
+      "GPU": {
+        "outputCreationDescriptorBytes": 2085,
+        "originalOwnerHandleStagesAndSuccessMatched": true,
+        "vertexBufferLayouts": 1,
+        "vertexLayoutAttributes": 1,
+        "colorTargets": 1,
+        "storedOutputCreationAndGeometryCameraUniformValuesExact": true,
+        "mainShaderUniformMaterialNSamplerTargetCameraGeometricSortValuesExact": true,
+        "orderPositions": 0,
+        "IDRows": 24,
+        "changedPixels": 0,
+        "maxRGBA": 0,
+        "originalPNGFileBytesExact": true
+      },
+      "GL": {
+        "originalProgramStagesAndSuccessMatched": true,
+        "creationRole": "original-linked-program-and-stages-only",
+        "GLDynamicRasterStateQualified": false,
+        "storedOutputGeometryCameraUniformValuesExact": true,
+        "mainShaderUniformMaterialNSamplerTargetCameraGeometricSortValuesExact": true,
+        "orderPositions": 7,
+        "IDRows": 30,
+        "changedPixels": 44,
+        "maxRGBA": 15,
+        "largestCoordinate": [
+          138,
+          112
+        ],
+        "largestAbsoluteRGBA": [
+          14,
+          15,
+          14,
+          0
+        ],
+        "other43PixelsMax1": true
+      },
+      "sourceMetadataPreservedSeparately": true,
+      "sharedVersionLags": [
+        {
+          "capture": "candidateGPU",
+          "rows": [
+            {
+              "name": "render",
+              "current": 4488,
+              "cached": 4487,
+              "lag": 1
+            },
+            {
+              "name": "render",
+              "current": 4488,
+              "cached": 4487,
+              "lag": 1
+            },
+            {
+              "name": "render",
+              "current": 4488,
+              "cached": 4487,
+              "lag": 1
+            }
+          ]
+        },
+        {
+          "capture": "candidateGL",
+          "rows": [
+            {
+              "name": "render",
+              "current": 4492,
+              "cached": 4491,
+              "lag": 1
+            },
+            {
+              "name": "render",
+              "current": 4492,
+              "cached": 4491,
+              "lag": 1
+            },
+            {
+              "name": "render",
+              "current": 4492,
+              "cached": 4491,
+              "lag": 1
+            }
+          ]
+        },
+        {
+          "capture": "baselineGPU",
+          "rows": [
+            {
+              "name": "render",
+              "current": 4484,
+              "cached": 4483,
+              "lag": 1
+            },
+            {
+              "name": "render",
+              "current": 4484,
+              "cached": 4483,
+              "lag": 1
+            },
+            {
+              "name": "render",
+              "current": 4484,
+              "cached": 4483,
+              "lag": 1
+            }
+          ]
+        },
+        {
+          "capture": "baselineGL",
+          "rows": [
+            {
+              "name": "render",
+              "current": 4508,
+              "cached": 4507,
+              "lag": 1
+            },
+            {
+              "name": "render",
+              "current": 4508,
+              "cached": 4507,
+              "lag": 1
+            },
+            {
+              "name": "render",
+              "current": 4508,
+              "cached": 4507,
+              "lag": 1
+            }
+          ]
+        }
+      ],
+      "controlledCleanup": {
+        "documents": 4,
+        "finalModels": 0,
+        "finalTextureLeases": 0,
+        "host": "closed",
+        "candidateEarlyGateModels": 7,
+        "candidateEarlyGateTextureLeases": 7,
+        "candidateEarlyGateFullyDrained": false,
+        "baselineEarlyGateFullyDrained": true
+      },
+      "servers": {
+        "includingFailedStartup": 3,
+        "exitCodes": [
+          0,
+          0,
+          0
+        ],
+        "listenersClosed": true,
+        "keysDiscarded": true,
+        "tabsClosed": true
+      },
+      "console": {
+        "fourInspectedWarnErrorListsEmpty": true,
+        "limitPerDocument": 20,
+        "allConsoleCoverageQualified": false
+      },
+      "initialFailedStartupAndSourcePatchRefusalsRetained": true
+    },
+    "qualification": {
+      "sourceCPUOnly": false,
+      "creationAttemptNotNativeSuccess": true,
+      "actualGPUBytesRead": false,
+      "actualGPUSubmissionProven": false,
+      "perDrawUploadProven": false,
+      "fullGLDynamicStateCovered": false,
+      "fullPipelineAccepted": false,
+      "visualAccepted": false,
+      "rightsQualified": false,
+      "physicalDeviceQualified": false,
+      "full067Accepted": false,
+      "fullPLANComplete": false,
+      "accepted": false,
+      "adopted": false,
+      "sourceCPUAndOriginalNativeCreationProvenanceOnly": true,
+      "originalNativeValidationCompletionObserved": true,
+      "nativeOpaqueLayoutContentsQualified": false,
+      "GLDynamicRasterStateCovered": false,
+      "allPreviousResidualsRetained": true
+    },
+    "report": "https://drive.google.com/file/d/11V0ybbxis4ZbdQs1lBUKlGxkIMA6DEmT/view",
+    "archive": {
+      "entries": 229,
+      "bytes": 12120399,
+      "sha256": "826fa4f8282e5f9ee17ad6469ee6a1cc9ddb88d3f7e05c90d55ac746f0610452",
+      "id": "1kJ4XMiC0gBU66NDhXTgzql_LA_vC2WUj",
+      "crcAndAllEntryHashesVerified": true,
+      "standalone": false
+    },
+    "delivery": {
+      "rawArtifactsAndBridgeNoticeReadbacksExact": true,
+      "queued": true,
+      "acknowledged": false
+    },
+    "historicalResidualsPreserved": true,
+    "sourceMetadataPreservedSeparately": true,
+    "publicImplementationAnd19ChecksUnchanged": true,
+    "next": "Bounded original WebGPU binding-layout entries/pipeline-layout creation and current owned cache-slot source/CPU provenance before any new isolated native copies; no extra native calls."
   }
 }
