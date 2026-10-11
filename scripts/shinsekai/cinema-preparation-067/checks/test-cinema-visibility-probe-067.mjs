@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {createCinemaVisibilityProbe067} from '../cinema-visibility-probe-067.mjs';
+let calls=0,phase={owner:'cinema'},error=new Error('original'),mode='normal';
+const original=function(){calls++;if(mode==='throw')throw error;return false;};
+const proto={intersectsFrustum:original},object=Object.assign(Object.create(proto),{name:'cinema__projector_7',visible:true,frustumCulled:true,layers:{mask:1},material:{visible:true,side:2},parent:{name:'root',visible:true}});
+const scene={getObjectByName:n=>{assert.equal(n,'cinema__projector_7');return object;}},camera={position:{x:-16,y:1.5,z:0},layers:{mask:1}},renderer={_initialized:true};
+const probe=createCinemaVisibilityProbe067({limit:4});const promise=Promise.resolve(9);
+let invocation=0;
+assert.equal(probe.observeCompile(renderer,scene,camera,phase,()=>{invocation++;assert.equal(object.intersectsFrustum({}),false);return promise;}),promise);
+assert.equal(object.intersectsFrustum,original);assert.equal(Object.hasOwn(object,'intersectsFrustum'),false);assert.equal(calls,1);assert.equal(invocation,1);
+mode='throw';assert.throws(()=>probe.observeCompile(renderer,scene,camera,phase,()=>object.intersectsFrustum({})),e=>e===error);assert.equal(object.intersectsFrustum,original);mode='normal';
+const beforeCalls=calls;assert.equal(probe.observeCompile(renderer,scene,camera,{owner:'hall'},()=>7),7);assert.equal(calls,beforeCalls);
+assert.equal(probe.observeCompile(renderer,{getObjectByName:()=>null},camera,phase,()=>8),8);assert.equal(probe.snapshot().rows[2].found,false);
+assert.equal(probe.observeCompile(renderer,scene,camera,phase,()=>5),5);
+assert.equal(probe.observeCompile(renderer,scene,camera,phase,()=>6),6);
+assert.equal(probe.snapshot().rows.length,4);assert.equal(probe.snapshot().dropped,1);assert.equal(probe.snapshot().errors,0);assert.ok(probe.snapshot().rows.every(r=>r.methodRestored));assert.equal(calls,2);
+console.log(JSON.stringify({revision:'visibility-probe-E',originalIntersectionCalls:calls,extraIntersectionCalls:0,rowsBound:4,returnPromiseIdentity:true,errorIdentity:true,inheritedMethodRestored:true,nativeQualified:false}));

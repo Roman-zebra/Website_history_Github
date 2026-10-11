@@ -1,0 +1,64 @@
+function createRendererBackendObservation(renderer2, { requestedBackend: requestedBackend2 = "webgl2", timeoutMS = 5e3, setTimer = setTimeout, clearTimer = clearTimeout } = {}) {
+  const state2 = { schema: "JTA_RENDERER_BACKEND_OBSERVATION_016", requestedBackend: requestedBackend2, actualBackend: "not-initialized", initializationSucceeded: false, firstFrameObserved: false, retirementObserved: false, gpuDeviceObserved: false, gpuDeviceLossObserved: false, gpuDeviceLoss: null, gpuRetirementConfirmed: false, retirementWaitTimedOut: false, retirementWaitSkipped: false, errors: [], errorCount: 0, errorRecordsDropped: 0, callbacksRestored: false, compatibilityMode: null, samples: null };
+  let device = null, lostPromise = null;
+  const originalError = renderer2.onError;
+  const onError = function(event2) {
+    state2.errorCount++;
+    if (state2.errors.length < 32) state2.errors.push({ api: event2?.api ?? null, type: event2?.type ?? null, message: String(event2?.message ?? "Unknown GPU error") });
+    else state2.errorRecordsDropped++;
+    if (typeof originalError === "function") return originalError.call(this, event2);
+  };
+  renderer2.onError = onError;
+  function inspect2() {
+    const gpu = renderer2.backend?.isWebGPUBackend === true, gl = renderer2.backend?.isWebGLBackend === true;
+    state2.actualBackend = gpu && !gl ? "WebGPU" : gl && !gpu ? "WebGL2" : gpu && gl ? "ambiguous" : "unknown";
+    state2.compatibilityMode = typeof renderer2.backend?.compatibilityMode === "boolean" ? renderer2.backend.compatibilityMode : null;
+    state2.samples = Number.isFinite(renderer2.samples) ? renderer2.samples : null;
+    return state2.actualBackend;
+  }
+  function initialized2() {
+    state2.initializationSucceeded = true;
+    inspect2();
+    if (state2.actualBackend === "WebGPU" && renderer2.backend.device?.lost && typeof renderer2.backend.device.lost.then === "function") {
+      device = renderer2.backend.device;
+      state2.gpuDeviceObserved = true;
+      lostPromise = Promise.resolve(device.lost).then((info) => {
+        state2.gpuDeviceLossObserved = true;
+        state2.gpuDeviceLoss = { reason: info?.reason ?? null, message: String(info?.message ?? "") };
+        return state2.gpuDeviceLoss;
+      }, (error2) => {
+        state2.gpuDeviceLossObserved = true;
+        state2.gpuDeviceLoss = { reason: "promise-rejected", message: String(error2?.message ?? error2) };
+        return state2.gpuDeviceLoss;
+      });
+    }
+  }
+  function firstFrame() {
+    state2.firstFrameObserved = true;
+    inspect2();
+  }
+  async function afterRetirement({ waitForDevice = true } = {}) {
+    if (typeof waitForDevice !== "boolean") throw new TypeError("waitForDevice must be boolean");
+    state2.retirementObserved = true;
+    if (lostPromise && waitForDevice) {
+      let timer;
+      const timeout = new Promise((resolve) => {
+        timer = setTimer(() => resolve(null), timeoutMS);
+      });
+      const loss = await Promise.race([lostPromise, timeout]);
+      clearTimer(timer);
+      state2.retirementWaitTimedOut = loss === null;
+      state2.gpuRetirementConfirmed = loss?.reason === "destroyed";
+    } else if (lostPromise) {
+      state2.retirementWaitSkipped = true;
+      state2.gpuRetirementConfirmed = state2.gpuDeviceLoss?.reason === "destroyed";
+    }
+    if (renderer2.onError === onError) renderer2.onError = originalError;
+    state2.callbacksRestored = renderer2.onError === originalError;
+    device = null;
+  }
+  return Object.freeze({ initialized: initialized2, firstFrame, afterRetirement, snapshot() {
+    return structuredClone({ ...state2, fallbackObserved: state2.initializationSucceeded && requestedBackend2 === "webgpu" && state2.actualBackend === "WebGL2", actualWebGPUFirstFrame: state2.initializationSucceeded && state2.firstFrameObserved && state2.actualBackend === "WebGPU" && state2.errorCount === 0 && (!state2.gpuDeviceLossObserved || state2.gpuDeviceLoss?.reason === "destroyed"), physicalDeviceQualified: false });
+  } });
+}
+
