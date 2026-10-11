@@ -1250,5 +1250,99 @@
     "fullUniformAccepted": false,
     "full067Accepted": false,
     "next": "067-U3C original output cache source/CPU contract before private native copies"
+  },
+  "currentStoredOutputCacheObservation": {
+    "phase": "067-U3C-C1",
+    "scope": "Existing original output quad/current cached pipeline/stored CPU uniform groups linked to same original PNG and main shader/uniform hashes only",
+    "cpu": {
+      "selector": 12,
+      "reader": 17,
+      "integration": 11,
+      "comparison": 6,
+      "total": 46,
+      "fail": 0,
+      "skip": 0
+    },
+    "captures": 4,
+    "outputProgramsPerCapture": 2,
+    "outputBuffersPerCapture": 2,
+    "originalMainBindingsPerCapture": 175,
+    "originalMainBuffersPerCapture": 178,
+    "storedOutputValuesExactBothBackends": true,
+    "storedMainShaderMaterialNCameraSortUniformValuesExact": true,
+    "sourceIDsAndVersionsPreservedSeparately": true,
+    "realPNGResiduals": {
+      "webgpu": {
+        "changedPixels": 1,
+        "maxAbsoluteChannel": 15,
+        "coordinate": [
+          1781,
+          112
+        ],
+        "originalOrderPositions": 4,
+        "originalIDRows": 23
+      },
+      "webgl2": {
+        "changedPixels": 30,
+        "maxAbsoluteChannel": 15,
+        "onlyAboveOneCoordinate": [
+          138,
+          112
+        ],
+        "originalOrderPositions": 7,
+        "originalIDRows": 32
+      }
+    },
+    "historicalU3U3AU3BResidualsPreserved": true,
+    "initialNodeMaterialTypeGetterRefusalPreserved": true,
+    "controlledSourceCleanupsQualified": 4,
+    "earlyGateSnapshotsFullyDrained": {
+      "candidateGPU": false,
+      "candidateGL": false,
+      "baselineGPU": true,
+      "baselineGL": true
+    },
+    "runtimeExitCodes": [
+      0,
+      0
+    ],
+    "listenersClosed": true,
+    "keysDiscarded": true,
+    "protectedInputsAndKeysExcluded": true,
+    "evidence": {
+      "report": "https://drive.google.com/file/d/1kYUqTsScpW-iNJZFUnnqvmj8xforjt61/view",
+      "archive": "https://drive.google.com/file/d/1L6XmHwv9mhAHJ1WUEJIMXjjv78_h-96s/view",
+      "entries": 235,
+      "bytes": 13334763,
+      "sha256": "15a9a60f63818c6d3010aa250aca6eb0cbcd71ebfd00d975328472d63901072d",
+      "crcAndAllEntryHashesVerified": true,
+      "standalone": false,
+      "artifactReadbacksExact": true
+    },
+    "consultantDelivery": {
+      "queued": true,
+      "acknowledged": false,
+      "existingBridgeOnly": true
+    },
+    "qualification": {
+      "cacheFreshnessQualified": false,
+      "actualGPUBytesRead": false,
+      "actualGPUSubmissionProven": false,
+      "perDrawUniformUploadProven": false,
+      "sampledGPUContentsProven": false,
+      "outputGeometryCameraBitsCovered": false,
+      "fullPostprocessingCovered": false,
+      "fullClosePagehideAccepted": false,
+      "visualAccepted": false,
+      "physicalDeviceQualified": false,
+      "full067Accepted": false,
+      "fullPLANComplete": false,
+      "productionAdopted": false
+    },
+    "next": "Original output geometry position/UV raw bits and own orthographic camera matrices; source/CPU contracts before fresh isolated native copies",
+    "outputRawBytesPerCaptureByBackend": {
+      "webgpu": 208,
+      "webgl2": 224
+    }
   }
 }
