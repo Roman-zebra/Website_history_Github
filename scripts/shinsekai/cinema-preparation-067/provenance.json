@@ -1311,13 +1311,21 @@
     "protectedInputsAndKeysExcluded": true,
     "evidence": {
       "report": "https://drive.google.com/file/d/1kYUqTsScpW-iNJZFUnnqvmj8xforjt61/view",
-      "archive": "https://drive.google.com/file/d/1L6XmHwv9mhAHJ1WUEJIMXjjv78_h-96s/view",
-      "entries": 235,
-      "bytes": 13334763,
-      "sha256": "15a9a60f63818c6d3010aa250aca6eb0cbcd71ebfd00d975328472d63901072d",
+      "archive": "https://drive.google.com/file/d/10XOQif77kg31BfhzgsVvm1XkIOFJdOk8/view",
+      "entries": 239,
+      "bytes": 13343978,
+      "sha256": "c5fe5094e9e64532caecf57669b0f44b32b7501608362f56d38c5641795fadd4",
       "crcAndAllEntryHashesVerified": true,
       "standalone": false,
-      "artifactReadbacksExact": true
+      "artifactReadbacksExact": true,
+      "originalArchivePreserved": {
+        "archive": "https://drive.google.com/file/d/1L6XmHwv9mhAHJ1WUEJIMXjjv78_h-96s/view",
+        "entries": 235,
+        "bytes": 13334763,
+        "sha256": "15a9a60f63818c6d3010aa250aca6eb0cbcd71ebfd00d975328472d63901072d"
+      },
+      "recordCorrection": "Stale selector checkpoint and RESULTS CPU counter corrected to46; original logs/native proofs unchanged; explicit record/delivery/gate/stop save arguments",
+      "staleRecordBytesRetained": true
     },
     "consultantDelivery": {
       "queued": true,
