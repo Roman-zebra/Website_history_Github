@@ -7,7 +7,8 @@ cp.execFileSync(process.execPath,[path.join(__dirname,'build-spot-pages.cjs')],{
 cp.execFileSync(process.execPath,[path.join(__dirname,'build-3d-pages.cjs')],{stdio:'inherit'});
 cp.execFileSync(process.execPath,[path.join(__dirname,'build-3d-index.cjs')],{stdio:'inherit'});
 const tests=fs.readdirSync(path.join(root,'tests')).filter(x=>x.endsWith('.test.cjs')).map(x=>path.join(root,'tests',x));
-cp.execFileSync(process.execPath,['--test',...tests],{stdio:'inherit'});
+// Limit parallel test workers so the full nationwide index can coexist with other suites.
+cp.execFileSync(process.execPath,['--test','--test-concurrency=2',...tests],{stdio:'inherit'});
 const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
 const assetVersion=/const ASSET_V = '([^']+)'/.exec(sw)[1],dataVersion=/const DATA_V = '([^']+)'/.exec(sw)[1];
 for(const name of ['app.js','explore.js'])assert.equal(/const DATA_V = '([^']+)'/.exec(fs.readFileSync(path.join(root,name),'utf8'))[1],dataVersion,name+' data version mismatch');
@@ -26,7 +27,7 @@ const directories=['data','icons','3d','place','search','guides','visit','vendor
 const files=['place-media.js','japan-boundary.js','walking-data.js','walking-time.js','walking-time.css','activities-data.js','search-core.js','search-worker.js','visit.html','about.html','about.js','support.html','support.js','th.html','.nojekyll','LICENSE-DATA.md','_headers','_redirects','app.js','atmosphere.js','design.css','explore.css','explore.html','explore.js','explore.webmanifest','index.html','ja.html','kids.html','ko.html','loop.js','manifest.webmanifest','og.jpg','page.css','place-ui.js','places.html','robots.txt','sitemap.xml','553bf2e0eaae7329e0477ae46475d218.txt','style.css','sw.js','zh-cn.html','zh-tw.html'];
 assert.equal(path.dirname(dist),root);
 fs.rmSync(dist,{recursive:true,force:true});fs.mkdirSync(dist);
-for(const name of [...directories,...files])fs.cpSync(path.join(root,name),path.join(dist,name),{recursive:true});
+for(const name of [...directories,...files,'facility-rail.js'])fs.cpSync(path.join(root,name),path.join(dist,name),{recursive:true});
 /* Pages outside the app shells name the root stylesheets and scripts with ?v=. The place, visit and 3D generators take it
    from sw.js, but older hand-made pages (guides, the liminal and landmark place pages) keep the number they were written
    with, and design.css is immutable for a year, so every page in dist is given this release's version. */

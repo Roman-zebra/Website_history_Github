@@ -775,6 +775,7 @@ function buildLiminalCards(){
   for (const b of $('cards').querySelectorAll('.card-lim'))
     b.onclick = e => { if (keepLinkClick(e)) return; e.preventDefault();
                        showLiminal(LIMINAL.find(p => p.id === b.dataset.lim)); };
+  updateFacilityRail(true);
 }
 
 
@@ -805,6 +806,7 @@ function buildActivityCards(){
  ).join('');
  for(const b of $('cards').querySelectorAll('[data-activity]'))
   b.onclick=()=>showActivity(ACTIVITIES.find(p=>p.id===b.dataset.activity));
+ updateFacilityRail(true);
 }
 function showActivity(p,keepView,refresh=false){
  if(!p)return;
@@ -872,8 +874,27 @@ function buildLabCards(){
     + '<p class="card-name">' + esc(it.name[LANG] || it.name.en) + '</p>'
     + '<p class="card-hook">' + esc(it.hook[LANG] || it.hook.en) + '</p>'
     + '</div></a>').join('');
+  updateFacilityRail(true);
 }
 
+const FACILITY_RAIL_COPY = {
+  en: ['Show previous places','Show next places','Scroll sideways to explore. Use the arrows or ← → keys.','{total} places','Places for historical comparison','Liminal places'],
+  ja: ['前の施設を表示','次の施設を表示','横にスクロールして探す。矢印ボタン・← → キーでも操作できます。','全 {total}か所','歴史比較の場所一覧','リミナル施設の一覧'],
+  ko: ['이전 장소 보기','다음 장소 보기','옆으로 스크롤해 둘러보세요. 화살표 버튼과 ← → 키도 사용할 수 있습니다.','전체 {total}곳','역사 비교 장소 목록','리미널 장소 목록'],
+  'zh-Hans': ['显示前面的地点','显示后面的地点','横向滚动探索，也可使用箭头按钮或 ← → 键。','共 {total}个地点','历史比较地点列表','阈限风景地点列表'],
+  'zh-Hant': ['顯示前面的地點','顯示後面的地點','橫向捲動探索，也可使用箭頭按鈕或 ← → 鍵。','共 {total}個地點','歷史比較地點列表','邊界風景地點列表'],
+  th: ['แสดงสถานที่ก่อนหน้า','แสดงสถานที่ถัดไป','เลื่อนด้านข้างเพื่อดูสถานที่ ใช้ปุ่มลูกศรหรือปุ่ม ← → ได้','{total} สถานที่','สถานที่สำหรับเปรียบเทียบภาพในอดีต','สถานที่ลิมินัล']
+};
+let facilityRail = null;
+function updateFacilityRail(reset = false){
+  if (typeof window === 'undefined') return;
+  if (!facilityRail && window.AtlasFacilityRail && $('facilityRailControls'))
+    facilityRail = window.AtlasFacilityRail({track:$('cards'), toolbar:$('facilityRailControls'),
+      previous:$('facilityRailPrevious'), next:$('facilityRailNext'), status:$('facilityRailStatus'), hint:$('facilityRailHint')});
+  const c = FACILITY_RAIL_COPY[LANG] || FACILITY_RAIL_COPY.en;
+  facilityRail?.update({enabled:(mode === 'places' || mode === 'liminal') && !$('cards').hidden, reset,
+    labels:{previous:c[0], next:c[1], hint:c[2], count:c[3], list:c[mode === 'liminal' ? 5 : 4]}});
+}
 function buildCards(){
   window.AtlasWalking?.refresh();
   if (isActivityMode(mode)) return buildActivityCards();
@@ -899,6 +920,7 @@ function buildCards(){
   for (const b of $('cards').querySelectorAll('.card'))
     b.onclick = e => { if (keepLinkClick(e)) return; e.preventDefault();
                        openPlace(PLACES.find(p => p.id === b.dataset.id)); };
+  updateFacilityRail(true);
 }
 
 const DISCOVERY_ENTRY = {"en":["Choose your next walk","Places and photo stories","Country & region guides","Open a guide in your language. Thai guides open the interactive map in English.","/places",["United States","us"],["United Kingdom","gb"],["Australia","au"],["Canada","ca"],["Singapore","sg"],["South Korea · 한국어","kr"],["Taiwan · 繁體中文","tw"],["Hong Kong · 繁體中文","hk"],["Thailand · ไทย","th"]],"ja":["次の街歩きを見つける","場所の解説を読む","国・地域別の旅行案内","日本国内の散歩や、使いたい言語から探せます。タイ語の案内ページから開く地図は英語です。","/ja",["日本国内","jp"]],"ko":["다음 산책 찾기","장소 이야기 읽기","국가·지역별 여행 안내","원하는 언어로 가이드를 선택하세요. 태국어 가이드의 대화형 지도는 영어로 열립니다.","/ko",["한국에서 일본 여행","kr"]],"zh-Hans":["寻找下一段城市漫步","阅读地点故事","国家与地区旅行指南","按语言选择指南。泰语指南中的互动地图以英语打开。","/zh-cn",["从中国大陆出发","cn"],["从新加坡出发 · English","sg"]],"zh-Hant":["尋找下一段城市散步","閱讀地點故事","國家與地區旅行指南","依語言選擇指南。泰語指南中的互動地圖以英語開啟。","/zh-tw",["從台灣出發","tw"],["從香港出發","hk"]]};
@@ -933,6 +955,7 @@ function applyLang(){
   renderSaved();
   paintAuxUI();
   if (PLACES.length) buildCards();
+  updateFacilityRail();
   if (current) openPlace(current, true,true);
   else {
     /* パネルが画面に出ているときだけ描き直す。ホーム画面に戻ったあとでも
@@ -3352,6 +3375,7 @@ function setMode(m){
     $(id).setAttribute('aria-selected', String(m === key));
   }
   $('cards').hidden = (m === 'map');
+  updateFacilityRail();
   $('modeNote').textContent = modeNote();
   const intro = $('limIntro');
   intro.hidden = m !== 'liminal';
