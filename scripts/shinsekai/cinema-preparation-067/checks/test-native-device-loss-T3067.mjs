@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {observeNativeDeviceLossT3067,patchParentDeviceLossT3067} from '../native-device-loss-T3067.mjs';
+const foreign=vm.runInNewContext('Promise.resolve({reason:"destroyed",message:"native loss"})');let foreignThenCalled=0;Object.defineProperty(foreign,'then',{value:()=>{foreignThenCalled++;return undefined;}});
+let calls=0,seen;await observeNativeDeviceLossT3067(foreign,x=>{calls++;seen=x;});assert.equal(calls,1);assert.equal(seen.reason,'destroyed');assert.equal(foreignThenCalled,0);
+const same=Promise.resolve({reason:'destroyed',message:''});const identity=await observeNativeDeviceLossT3067(same,x=>x);assert.equal(identity,await same);
+const error=new Error('native loss rejected');const rejected=Promise.reject(error);let rejectedSeen;await observeNativeDeviceLossT3067(rejected,()=>{throw Error('Rejected native Promise cannot succeed');},e=>{rejectedSeen=e;});assert.equal(rejectedSeen,error);
+assert.throws(()=>observeNativeDeviceLossT3067({then:()=>{}},()=>{}),TypeError);assert.throws(()=>observeNativeDeviceLossT3067(same,null),/Invalid/);
+const original='if(device)Promise.resolve(device.lost).then(info=>{seen=info;});';const p=patchParentDeviceLossT3067(original);assert.equal(p.proof.originalParentExactlyRestored,true);assert.equal(p.proof.deviceRetirementCallsAdded,0);assert.throws(()=>patchParentDeviceLossT3067(original+original),/unique/);assert.throws(()=>patchParentDeviceLossT3067(''),/unique/);
+console.log(JSON.stringify({schema:'CPU_PARENT_NATIVE_DEVICE_LOSS_T3_067',passed:true,foreignPromiseThenPropertyNotCalled:true,promiseValueAndRejectionIdentityPreserved:true,nonNativeThenableRejected:true,parentExactRestoration:true,noDeviceCalls:true,nativeQualified:false}));

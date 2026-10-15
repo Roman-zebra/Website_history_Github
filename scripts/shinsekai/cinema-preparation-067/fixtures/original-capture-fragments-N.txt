@@ -1,0 +1,27 @@
+async function capture() {
+  requirePreparedCapture067();
+  if (controller?.needsTick) controller.pause();
+  viewportOwner?.sync();
+  applyPose();
+  observeRender067(renderer, scene, camera, {site:"original-capture", sourceFrames:frames, ready, disposed, bootDone, cameraId, ownedModels:models.size, hallState:hall.snapshot().state, exteriorState:exterior.snapshot().state, cinemaState:cinema.snapshot().state});
+  const receipt = snapshot2(), blob = await new Promise((r) => canvas.toBlob(r, "image/png"));
+  if (!blob || disposed) throw Error("Capture canceled");
+  const captureId = staticRecorder.downloadPNG(blob, receipt);
+  $("status").textContent = "PNG download requested. Matching receipt is retained below.";
+  event("capture", { captureId });
+  ui();
+}
+
+async capturePNG() {
+    if (!ready || disposed) throw Error("Hall is not ready");
+    requirePreparedCapture067();
+    player.pause("review-native-capture");
+    viewportOwner?.sync();
+    applyPose();
+    observeRender067(renderer, scene, camera, {site:"review-native-capture", sourceFrames:frames, ready, disposed, bootDone, cameraId, ownedModels:models.size, hallState:hall.snapshot().state, exteriorState:exterior.snapshot().state, cinemaState:cinema.snapshot().state});
+    const receipt = JSON.parse(JSON.stringify(snapshot2()));
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    if (!blob || disposed) throw Error("Capture canceled");
+    return { blob, receipt };
+  }
+

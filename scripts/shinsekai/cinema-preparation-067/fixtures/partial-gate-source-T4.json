@@ -1,0 +1,1337 @@
+{
+  "source": {
+    "ready": false,
+    "disposed": true,
+    "rendererBackend": {
+      "schema": "JTA_RENDERER_BACKEND_OBSERVATION_016",
+      "requestedBackend": "webgpu",
+      "actualBackend": "WebGPU",
+      "initializationSucceeded": true,
+      "firstFrameObserved": true,
+      "retirementObserved": true,
+      "gpuDeviceObserved": true,
+      "gpuDeviceLossObserved": true,
+      "gpuDeviceLoss": {
+        "reason": "destroyed",
+        "message": "Device was destroyed."
+      },
+      "gpuRetirementConfirmed": false,
+      "retirementWaitTimedOut": false,
+      "retirementWaitSkipped": true,
+      "errors": [],
+      "errorCount": 0,
+      "errorRecordsDropped": 0,
+      "callbacksRestored": true,
+      "compatibilityMode": false,
+      "samples": 4,
+      "fallbackObserved": false,
+      "actualWebGPUFirstFrame": true,
+      "physicalDeviceQualified": false
+    },
+    "ownedModels": 0,
+    "pendingFetches": 0,
+    "modelTransport": {
+      "mode": "gzip-only",
+      "noAutomaticIdentityFallback": true,
+      "disposed": true,
+      "heldPhase": null,
+      "parsed": 2,
+      "released": 2,
+      "stage": "idle",
+      "activeOperation": false,
+      "activeRole": null,
+      "activeReader": null,
+      "activeDecoder": false,
+      "activeWriter": false,
+      "activeDigest": false,
+      "leaseCount": 0,
+      "owned": {
+        "compressedBytes": 0,
+        "decodedBytes": 0,
+        "chunkBytes": 0,
+        "digestResultBytes": 0,
+        "transientBytes": 0,
+        "totalBytes": 0
+      },
+      "peakOwnedBytes": 17777473,
+      "peakTransientBytes": 17777473,
+      "pendingNative": {
+        "fetch": 0,
+        "read": 0,
+        "write": 0,
+        "close": 0,
+        "digest": 0,
+        "cancel": 0
+      },
+      "pendingNativeTotal": 0,
+      "completed": 2,
+      "failed": 0,
+      "aborted": 0,
+      "accounting": "Explicit app-held ArrayBuffers only. Native queues, fetch, Web Crypto copies, parser references and GC are not measured."
+    },
+    "texturePool": {
+      "artifact": "DOTS-TEXTURE-POOL-001",
+      "activeLeases": 0,
+      "canonicalTextures": 0,
+      "canonicalBitmapObjects": 0,
+      "canonicalRGBAEstimate": 0,
+      "references": 0,
+      "acquisitions": 2,
+      "releases": 2,
+      "duplicateTexturesDisposed": 0,
+      "duplicateImagesClosed": 0,
+      "canonicalImagesClosed": 1
+    },
+    "releaser": {
+      "attempts": 2,
+      "completed": 2,
+      "failures": 0,
+      "errorDetails": []
+    },
+    "rooms": {
+      "exterior": {
+        "id": "exterior",
+        "state": "retired",
+        "generation": 2,
+        "desired": false,
+        "disposed": true,
+        "error": null,
+        "ready": false,
+        "counts": {
+          "fetches": 2,
+          "parses": 2,
+          "ownedParts": 0,
+          "peakOwnedParts": 2,
+          "readyGroups": 0,
+          "adoptions": 1,
+          "releases": 2,
+          "staleResults": 0
+        },
+        "events": [
+          {
+            "kind": "requested",
+            "generation": 1
+          },
+          {
+            "kind": "load-start",
+            "generation": 1
+          },
+          {
+            "kind": "fetch",
+            "generation": 1,
+            "path": "assets/repair.glb"
+          },
+          {
+            "kind": "parsed",
+            "generation": 1,
+            "path": "assets/repair.glb"
+          },
+          {
+            "kind": "fetch",
+            "generation": 1,
+            "path": "assets/wings.glb"
+          },
+          {
+            "kind": "parsed",
+            "generation": 1,
+            "path": "assets/wings.glb"
+          },
+          {
+            "kind": "ready",
+            "generation": 1
+          },
+          {
+            "kind": "retire-requested",
+            "generation": 2,
+            "reason": "candidate-retirement"
+          },
+          {
+            "kind": "released",
+            "generation": 2,
+            "reason": "retired"
+          },
+          {
+            "kind": "retired",
+            "generation": 2
+          }
+        ]
+      },
+      "hall": {
+        "id": "hall",
+        "state": "retired",
+        "generation": 1,
+        "desired": false,
+        "disposed": true,
+        "error": null,
+        "ready": false,
+        "counts": {
+          "fetches": 0,
+          "parses": 0,
+          "ownedParts": 0,
+          "peakOwnedParts": 0,
+          "readyGroups": 0,
+          "adoptions": 0,
+          "releases": 0,
+          "staleResults": 0
+        },
+        "events": [
+          {
+            "kind": "retire-requested",
+            "generation": 1,
+            "reason": "candidate-retirement"
+          },
+          {
+            "kind": "retired",
+            "generation": 1
+          }
+        ]
+      },
+      "cinema": {
+        "id": "cinema",
+        "state": "retired",
+        "generation": 1,
+        "desired": false,
+        "disposed": true,
+        "error": null,
+        "ready": false,
+        "counts": {
+          "fetches": 0,
+          "parses": 0,
+          "ownedParts": 0,
+          "peakOwnedParts": 0,
+          "readyGroups": 0,
+          "adoptions": 0,
+          "releases": 0,
+          "staleResults": 0
+        },
+        "events": [
+          {
+            "kind": "retire-requested",
+            "generation": 1,
+            "reason": "candidate-retirement"
+          },
+          {
+            "kind": "retired",
+            "generation": 1
+          }
+        ]
+      },
+      "stair": {
+        "id": "stair",
+        "state": "retired",
+        "generation": 1,
+        "desired": false,
+        "disposed": true,
+        "error": null,
+        "ready": false,
+        "counts": {
+          "fetches": 0,
+          "parses": 0,
+          "ownedParts": 0,
+          "peakOwnedParts": 0,
+          "readyGroups": 0,
+          "adoptions": 0,
+          "releases": 0,
+          "staleResults": 0
+        },
+        "events": [
+          {
+            "kind": "retire-requested",
+            "generation": 1,
+            "reason": "candidate-retirement"
+          },
+          {
+            "kind": "retired",
+            "generation": 1
+          }
+        ],
+        "proof": null,
+        "mask": null
+      },
+      "cinemaFront": {
+        "id": "cinema-front-proof",
+        "state": "retired",
+        "generation": 1,
+        "desired": false,
+        "disposed": true,
+        "error": null,
+        "ready": false,
+        "counts": {
+          "fetches": 0,
+          "parses": 0,
+          "ownedParts": 0,
+          "peakOwnedParts": 0,
+          "readyGroups": 0,
+          "adoptions": 0,
+          "releases": 0,
+          "staleResults": 0
+        },
+        "events": [
+          {
+            "kind": "retire-requested",
+            "generation": 1,
+            "reason": "candidate-retirement"
+          },
+          {
+            "kind": "retired",
+            "generation": 1
+          }
+        ],
+        "ownedProofs": 0,
+        "parentGeneration": null,
+        "cleanupError": null,
+        "proof": null,
+        "proofRecords": [],
+        "noSceneOrModelOwnership": true
+      }
+    },
+    "frames": 5,
+    "viewport": {
+      "cssWidth": 798,
+      "cssHeight": 448.875,
+      "aspect": 1.7777777777777777,
+      "pixelWidth": 1920,
+      "pixelHeight": 1080,
+      "canvasBackingWidth": 1920,
+      "canvasBackingHeight": 1080,
+      "pixelCount": 2073600,
+      "cameraAspect": 1.7777777777777777,
+      "maxPixels": 2073600,
+      "maxEdge": 2048,
+      "allocations": 1,
+      "projectionUpdates": 1,
+      "invalidSizes": 0,
+      "notifications": 1,
+      "pending": false,
+      "observerAttached": false,
+      "disposed": true
+    },
+    "drawReadiness": {
+      "schema": "JTA_DRAW_READINESS_OBSERVATION_067",
+      "calls": [
+        {
+          "id": 1,
+          "at": 332893.89999997616,
+          "finishedAt": 332905,
+          "cpuSubmissionMs": 11.100000023841858,
+          "outcome": "returned",
+          "site": "initial-exterior",
+          "sourceFrames": 0,
+          "ready": false,
+          "disposed": false,
+          "bootDone": false,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty"
+        },
+        {
+          "id": 2,
+          "at": 332918.6999999285,
+          "finishedAt": 332923,
+          "cpuSubmissionMs": 4.300000071525574,
+          "outcome": "returned",
+          "site": "scheduled-draw",
+          "sourceFrames": 1,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty"
+        },
+        {
+          "id": 3,
+          "at": 342243.5,
+          "finishedAt": 342247.1999999285,
+          "cpuSubmissionMs": 3.6999999284744263,
+          "outcome": "returned",
+          "site": "scheduled-draw",
+          "sourceFrames": 2,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty"
+        },
+        {
+          "id": 4,
+          "at": 362930.09999990463,
+          "finishedAt": 362932.89999997616,
+          "cpuSubmissionMs": 2.8000000715255737,
+          "outcome": "returned",
+          "site": "review-native-capture",
+          "sourceFrames": 3,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty"
+        },
+        {
+          "id": 5,
+          "at": 362966.1999999285,
+          "finishedAt": 362970.2999999523,
+          "cpuSubmissionMs": 4.100000023841858,
+          "outcome": "returned",
+          "site": "scheduled-draw",
+          "sourceFrames": 3,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty"
+        },
+        {
+          "id": 6,
+          "at": 363548.59999990463,
+          "finishedAt": 363551.09999990463,
+          "cpuSubmissionMs": 2.5,
+          "outcome": "returned",
+          "site": "scheduled-draw",
+          "sourceFrames": 4,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty"
+        },
+        {
+          "id": 7,
+          "at": 371994.7999999523,
+          "finishedAt": 371995.2999999523,
+          "cpuSubmissionMs": 0.5,
+          "outcome": "returned",
+          "site": "cleanup",
+          "sourceFrames": 5,
+          "ready": false,
+          "disposed": true,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 0,
+          "hallState": "retired",
+          "exteriorState": "retired",
+          "cinemaState": "retired"
+        }
+      ],
+      "events": [
+        {
+          "at": 331809.5,
+          "kind": "room:exterior:requested",
+          "state": "loading",
+          "owned": 0
+        },
+        {
+          "at": 331810.59999990463,
+          "kind": "room:exterior:load-start",
+          "state": "loading",
+          "owned": 0
+        },
+        {
+          "at": 331810.7999999523,
+          "kind": "room:exterior:fetch",
+          "state": "loading",
+          "owned": 0
+        },
+        {
+          "at": 331831.1999999285,
+          "kind": "verified"
+        },
+        {
+          "at": 331900.59999990463,
+          "kind": "verified"
+        },
+        {
+          "at": 331911.59999990463,
+          "kind": "verified"
+        },
+        {
+          "at": 331912.2999999523,
+          "kind": "verified"
+        },
+        {
+          "at": 331914.09999990463,
+          "kind": "verified"
+        },
+        {
+          "at": 331915.1999999285,
+          "kind": "verified"
+        },
+        {
+          "at": 331963.39999997616,
+          "kind": "verified"
+        },
+        {
+          "at": 331963.6999999285,
+          "kind": "verified"
+        },
+        {
+          "at": 331963.6999999285,
+          "kind": "verified"
+        },
+        {
+          "at": 331963.7999999523,
+          "kind": "verified"
+        },
+        {
+          "at": 331965.39999997616,
+          "kind": "verified"
+        },
+        {
+          "at": 332016.6999999285,
+          "kind": "verified"
+        },
+        {
+          "at": 332104.59999990463,
+          "kind": "verified"
+        },
+        {
+          "at": 332139.2999999523,
+          "kind": "verified"
+        },
+        {
+          "at": 332139.39999997616,
+          "kind": "verified"
+        },
+        {
+          "at": 332256.1999999285,
+          "kind": "room:exterior:parsed",
+          "state": "loading",
+          "owned": 1
+        },
+        {
+          "at": 332257,
+          "kind": "room:exterior:fetch",
+          "state": "loading",
+          "owned": 1
+        },
+        {
+          "at": 332355.39999997616,
+          "kind": "verified"
+        },
+        {
+          "at": 332532.39999997616,
+          "kind": "room:exterior:parsed",
+          "state": "loading",
+          "owned": 2
+        },
+        {
+          "at": 332825.09999990463,
+          "kind": "room:exterior:ready",
+          "state": "ready",
+          "owned": 2
+        },
+        {
+          "at": 332909.1999999285,
+          "kind": "host-clock-interruption"
+        },
+        {
+          "at": 342233.1999999285,
+          "kind": "host-clock-interruption"
+        },
+        {
+          "at": 342233.5,
+          "kind": "controller:paused"
+        },
+        {
+          "at": 362928.39999997616,
+          "kind": "host-clock-interruption"
+        },
+        {
+          "at": 362928.39999997616,
+          "kind": "controller:paused"
+        },
+        {
+          "at": 363545.89999997616,
+          "kind": "host-clock-interruption"
+        },
+        {
+          "at": 363545.89999997616,
+          "kind": "controller:paused"
+        },
+        {
+          "at": 371949,
+          "kind": "retirement:stop:begin"
+        },
+        {
+          "at": 371952.59999990463,
+          "kind": "lower-stair-state",
+          "state": "ending",
+          "generation": 1
+        },
+        {
+          "at": 371952.89999997616,
+          "kind": "host-clock-interruption"
+        },
+        {
+          "at": 371953.2999999523,
+          "kind": "host-clock-interruption"
+        },
+        {
+          "at": 371953.6999999285,
+          "kind": "controller:retired"
+        },
+        {
+          "at": 371954.39999997616,
+          "kind": "room:cinema-front-proof:retire-requested",
+          "state": "retiring",
+          "owned": 0
+        },
+        {
+          "at": 371954.6999999285,
+          "kind": "room:cinema:retire-requested",
+          "state": "retiring",
+          "owned": 0
+        },
+        {
+          "at": 371954.89999997616,
+          "kind": "room:stair:retire-requested",
+          "state": "retiring",
+          "owned": 0
+        },
+        {
+          "at": 371955.09999990463,
+          "kind": "room:hall:retire-requested",
+          "state": "retiring",
+          "owned": 0
+        },
+        {
+          "at": 371955.2999999523,
+          "kind": "room:exterior:retire-requested",
+          "state": "retiring",
+          "owned": 2
+        },
+        {
+          "at": 371955.5,
+          "kind": "retirement:stop:done"
+        },
+        {
+          "at": 371976.39999997616,
+          "kind": "retirement:drain:begin"
+        },
+        {
+          "at": 371979.59999990463,
+          "kind": "lower-stair-state",
+          "state": "ended",
+          "generation": 1
+        },
+        {
+          "at": 371980,
+          "kind": "room:cinema-front-proof:retired",
+          "state": "retired",
+          "owned": 0
+        },
+        {
+          "at": 371980.1999999285,
+          "kind": "room:cinema:retired",
+          "state": "retired",
+          "owned": 0
+        },
+        {
+          "at": 371980.39999997616,
+          "kind": "room:stair:retired",
+          "state": "retired",
+          "owned": 0
+        },
+        {
+          "at": 371980.5,
+          "kind": "room:hall:retired",
+          "state": "retired",
+          "owned": 0
+        },
+        {
+          "at": 371993.2999999523,
+          "kind": "room:exterior:released",
+          "state": "retiring",
+          "owned": 0
+        },
+        {
+          "at": 371993.59999990463,
+          "kind": "room:exterior:retired",
+          "state": "retired",
+          "owned": 0
+        },
+        {
+          "at": 371993.7999999523,
+          "kind": "retirement:drain:done"
+        },
+        {
+          "at": 371994,
+          "kind": "retirement:cleanup:overlays:begin"
+        },
+        {
+          "at": 371994.2999999523,
+          "kind": "retirement:cleanup:overlays:done"
+        },
+        {
+          "at": 371994.5,
+          "kind": "retirement:cleanup:resources:begin"
+        },
+        {
+          "at": 371996.1999999285,
+          "kind": "retirement:cleanup:resources:done"
+        },
+        {
+          "at": 371996.59999990463,
+          "kind": "retirement:done"
+        }
+      ],
+      "count": 7,
+      "droppedCalls": 0,
+      "droppedEvents": 0,
+      "observationErrors": 0,
+      "rendererRetained": false,
+      "extraFramesScheduled": false,
+      "gpuCompletionMeasured": false,
+      "physicalDeviceQualified": false
+    },
+    "resourcePreparation": {
+      "schema": "JTA_RESOURCE_PREPARATION_CPU_067",
+      "cinemaPreparationGeneration": 0,
+      "passCacheObservation": {
+        "schema": "JTA_PASS_CACHE_OBSERVATION_067_K",
+        "shaderDiagnosticPlacement": "pipeline after only; object and pipeline before duplicates omitted",
+        "generation": 0,
+        "retainsOnlyCurrentCinemaGeneration": true,
+        "compileRows": [],
+        "firstDrawRows": [],
+        "firstDrawID": null,
+        "firstProjectorDrawID": null,
+        "firstProjectorCanDifferFromFirstCinemaReadyCallback": true,
+        "firstObjectDrawIDs": {},
+        "capturesEachObjectFirstScheduledDraw": true,
+        "firstObjectIDsBound": 32,
+        "firstAppearanceMayDifferFromFirstCinemaReady": true,
+        "limitPerPhase": 32,
+        "maxRows": 64,
+        "errors": 0,
+        "droppedCompile": 0,
+        "droppedDraw": 0,
+        "activeOwners": 0,
+        "restoredOwners": 1,
+        "shaderHashes": "FNV1a32+length diagnostic only, not cryptographic source pin",
+        "extraResourceCalls": false,
+        "extraFrames": false,
+        "observationCPUIncluded": true,
+        "nativeQualified": false
+      },
+      "cinemaVisibility": {
+        "schema": "JTA_CINEMA_VISIBILITY_067_E",
+        "rows": [],
+        "dropped": 0,
+        "errors": 0,
+        "maxRows": 4,
+        "extraIntersectionCalls": false,
+        "extraRendererCalls": false,
+        "temporaryWrapperRestoredBeforeAsyncWait": true,
+        "nativeQualified": false
+      },
+      "cinemaAdmission": {
+        "schema": "JTA_CINEMA_ADMISSION_067_H",
+        "rows": [],
+        "dropped": 0,
+        "maxRows": 4,
+        "extraCompileOrDrawCalls": false,
+        "normalRenderFrustumUnchanged": true,
+        "restoredBeforeAsyncWait": true,
+        "unknownTransparentDoublePassFrustumPreserved": true,
+        "concurrentCompileOrDrawQualified": false,
+        "nativeQualified": false
+      },
+      "initialPipelineCallsites": [],
+      "firstCinemaReadyRender": null,
+      "firstCinemaProjectorRender": null,
+      "maxCinemaReadyRender": null,
+      "cinemaReadyRenderCount": 0,
+      "cinemaReadyRowsBound": 3,
+      "pipelineStackCaptureCPUms": 0,
+      "stackCaptureIncludedInRenderCPU": true,
+      "methods": {
+        "createTexture": {
+          "count": 4,
+          "inclusiveCPUms": 2.1999998092651367,
+          "exclusiveCPUms": 2.1999998092651367,
+          "maxCPUms": 2.0999999046325684
+        },
+        "createAttribute": {
+          "count": 178,
+          "inclusiveCPUms": 10.600000381469727,
+          "exclusiveCPUms": 10.600000381469727,
+          "maxCPUms": 1.600000023841858
+        },
+        "createIndexAttribute": {
+          "count": 86,
+          "inclusiveCPUms": 7.300000071525574,
+          "exclusiveCPUms": 7.300000071525574,
+          "maxCPUms": 1
+        },
+        "createBindings": {
+          "count": 96,
+          "inclusiveCPUms": 5.500000357627869,
+          "exclusiveCPUms": 5.500000357627869,
+          "maxCPUms": 2.399999976158142
+        },
+        "updateTexture": {
+          "count": 2,
+          "inclusiveCPUms": 41.90000009536743,
+          "exclusiveCPUms": 41.90000009536743,
+          "maxCPUms": 39.90000009536743
+        },
+        "updateBindings": {
+          "count": 94,
+          "inclusiveCPUms": 0.8999998569488525,
+          "exclusiveCPUms": 0.8999998569488525,
+          "maxCPUms": 0.10000002384185791
+        },
+        "createProgram": {
+          "count": 8,
+          "inclusiveCPUms": 0.3999999761581421,
+          "exclusiveCPUms": 0.3999999761581421,
+          "maxCPUms": 0.10000002384185791
+        },
+        "createRenderPipeline": {
+          "count": 8,
+          "inclusiveCPUms": 6.099999785423279,
+          "exclusiveCPUms": 6.099999785423279,
+          "maxCPUms": 4.799999952316284
+        },
+        "generateMipmaps": {
+          "count": 1,
+          "inclusiveCPUms": 4.899999976158142,
+          "exclusiveCPUms": 4.899999976158142,
+          "maxCPUms": 4.899999976158142
+        },
+        "updateAttribute": {
+          "count": 2,
+          "inclusiveCPUms": 0.10000002384185791,
+          "exclusiveCPUms": 0.10000002384185791,
+          "maxCPUms": 0.10000002384185791
+        }
+      },
+      "renders": [
+        {
+          "id": 1,
+          "site": "initial-exterior",
+          "sourceFrames": 0,
+          "ready": false,
+          "disposed": false,
+          "bootDone": false,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty",
+          "cinemaPreparationGeneration": 0,
+          "activeCompileIDs": [],
+          "at": 332893.89999997616,
+          "methods": {
+            "updateAttribute": {
+              "count": 2,
+              "inclusiveCPUms": 0.10000002384185791,
+              "exclusiveCPUms": 0.10000002384185791,
+              "maxCPUms": 0.10000002384185791
+            },
+            "createBindings": {
+              "count": 1,
+              "inclusiveCPUms": 0,
+              "exclusiveCPUms": 0,
+              "maxCPUms": 0
+            },
+            "updateBindings": {
+              "count": 1,
+              "inclusiveCPUms": 0,
+              "exclusiveCPUms": 0,
+              "maxCPUms": 0
+            }
+          },
+          "finishedAt": 332905,
+          "cpuSubmissionMs": 11.100000023841858,
+          "outcome": "returned"
+        },
+        {
+          "id": 2,
+          "site": "scheduled-draw",
+          "sourceFrames": 1,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty",
+          "cinemaPreparationGeneration": 0,
+          "activeCompileIDs": [],
+          "at": 332918.6999999285,
+          "methods": {},
+          "finishedAt": 332923,
+          "cpuSubmissionMs": 4.300000071525574,
+          "outcome": "returned"
+        },
+        {
+          "id": 3,
+          "site": "scheduled-draw",
+          "sourceFrames": 2,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty",
+          "cinemaPreparationGeneration": 0,
+          "activeCompileIDs": [],
+          "at": 342243.5,
+          "methods": {},
+          "finishedAt": 342247.1999999285,
+          "cpuSubmissionMs": 3.6999999284744263,
+          "outcome": "returned"
+        },
+        {
+          "id": 4,
+          "site": "review-native-capture",
+          "sourceFrames": 3,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty",
+          "cinemaPreparationGeneration": 0,
+          "activeCompileIDs": [],
+          "at": 362930.09999990463,
+          "methods": {},
+          "finishedAt": 362932.89999997616,
+          "cpuSubmissionMs": 2.8000000715255737,
+          "outcome": "returned"
+        },
+        {
+          "id": 5,
+          "site": "scheduled-draw",
+          "sourceFrames": 3,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty",
+          "cinemaPreparationGeneration": 0,
+          "activeCompileIDs": [],
+          "at": 362966.1999999285,
+          "methods": {},
+          "finishedAt": 362970.39999997616,
+          "cpuSubmissionMs": 4.200000047683716,
+          "outcome": "returned"
+        },
+        {
+          "id": 6,
+          "site": "scheduled-draw",
+          "sourceFrames": 4,
+          "ready": true,
+          "disposed": false,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 2,
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "cinemaState": "empty",
+          "cinemaPreparationGeneration": 0,
+          "activeCompileIDs": [],
+          "at": 363548.59999990463,
+          "methods": {},
+          "finishedAt": 363551.09999990463,
+          "cpuSubmissionMs": 2.5,
+          "outcome": "returned"
+        },
+        {
+          "id": 7,
+          "site": "cleanup",
+          "sourceFrames": 5,
+          "ready": false,
+          "disposed": true,
+          "bootDone": true,
+          "cameraId": "first",
+          "ownedModels": 0,
+          "hallState": "retired",
+          "exteriorState": "retired",
+          "cinemaState": "retired",
+          "cinemaPreparationGeneration": 0,
+          "activeCompileIDs": [],
+          "at": 371994.7999999523,
+          "methods": {},
+          "finishedAt": 371995.2999999523,
+          "cpuSubmissionMs": 0.5,
+          "outcome": "returned"
+        }
+      ],
+      "compiles": [
+        {
+          "id": 1,
+          "owner": "slot",
+          "hallState": "empty",
+          "exteriorState": "loading",
+          "ownedModels": 2,
+          "at": 332533.1999999285,
+          "finishedAt": 332825,
+          "elapsedMs": 291.8000000715256,
+          "outcome": "resolved",
+          "intervalMethods": {
+            "createTexture": {
+              "count": 4,
+              "inclusiveCPUms": 2.1999998092651367,
+              "exclusiveCPUms": 2.1999998092651367,
+              "maxCPUms": 2.0999999046325684
+            },
+            "createAttribute": {
+              "count": 109,
+              "inclusiveCPUms": 8.700000286102295,
+              "exclusiveCPUms": 8.700000286102295,
+              "maxCPUms": 1.600000023841858
+            },
+            "createIndexAttribute": {
+              "count": 54,
+              "inclusiveCPUms": 7.1000001430511475,
+              "exclusiveCPUms": 7.1000001430511475,
+              "maxCPUms": 1
+            },
+            "createBindings": {
+              "count": 57,
+              "inclusiveCPUms": 4.800000309944153,
+              "exclusiveCPUms": 4.800000309944153,
+              "maxCPUms": 2.399999976158142
+            },
+            "updateTexture": {
+              "count": 2,
+              "inclusiveCPUms": 41.90000009536743,
+              "exclusiveCPUms": 41.90000009536743,
+              "maxCPUms": 39.90000009536743
+            },
+            "updateBindings": {
+              "count": 56,
+              "inclusiveCPUms": 0.7999998331069946,
+              "exclusiveCPUms": 0.7999998331069946,
+              "maxCPUms": 0.10000002384185791
+            },
+            "createProgram": {
+              "count": 5,
+              "inclusiveCPUms": 0.30000007152557373,
+              "exclusiveCPUms": 0.30000007152557373,
+              "maxCPUms": 0.10000002384185791
+            },
+            "createRenderPipeline": {
+              "count": 5,
+              "inclusiveCPUms": 5.599999785423279,
+              "exclusiveCPUms": 5.599999785423279,
+              "maxCPUms": 4.799999952316284
+            },
+            "generateMipmaps": {
+              "count": 1,
+              "inclusiveCPUms": 4.899999976158142,
+              "exclusiveCPUms": 4.899999976158142,
+              "maxCPUms": 4.899999976158142
+            }
+          }
+        },
+        {
+          "id": 2,
+          "owner": "final-startup-scene",
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "ownedModels": 2,
+          "at": 332836.5,
+          "finishedAt": 332876.1999999285,
+          "elapsedMs": 39.699999928474426,
+          "outcome": "resolved",
+          "intervalMethods": {
+            "createAttribute": {
+              "count": 68,
+              "inclusiveCPUms": 1.8000001907348633,
+              "exclusiveCPUms": 1.8000001907348633,
+              "maxCPUms": 0.10000002384185791
+            },
+            "createBindings": {
+              "count": 36,
+              "inclusiveCPUms": 0.6000000238418579,
+              "exclusiveCPUms": 0.6000000238418579,
+              "maxCPUms": 0.10000002384185791
+            },
+            "updateBindings": {
+              "count": 36,
+              "inclusiveCPUms": 0.10000002384185791,
+              "exclusiveCPUms": 0.10000002384185791,
+              "maxCPUms": 0.10000002384185791
+            },
+            "createProgram": {
+              "count": 1,
+              "inclusiveCPUms": 0.09999990463256836,
+              "exclusiveCPUms": 0.09999990463256836,
+              "maxCPUms": 0.09999990463256836
+            },
+            "createRenderPipeline": {
+              "count": 2,
+              "inclusiveCPUms": 0.30000007152557373,
+              "exclusiveCPUms": 0.30000007152557373,
+              "maxCPUms": 0.20000004768371582
+            },
+            "createIndexAttribute": {
+              "count": 32,
+              "inclusiveCPUms": 0.19999992847442627,
+              "exclusiveCPUms": 0.19999992847442627,
+              "maxCPUms": 0.10000002384185791
+            }
+          }
+        },
+        {
+          "id": 3,
+          "owner": "final-output-transform",
+          "hallState": "empty",
+          "exteriorState": "ready",
+          "ownedModels": 2,
+          "at": 332876.59999990463,
+          "finishedAt": 332893.6999999285,
+          "elapsedMs": 17.100000023841858,
+          "outcome": "resolved",
+          "intervalMethods": {
+            "createAttribute": {
+              "count": 1,
+              "inclusiveCPUms": 0.09999990463256836,
+              "exclusiveCPUms": 0.09999990463256836,
+              "maxCPUms": 0.09999990463256836
+            },
+            "createBindings": {
+              "count": 2,
+              "inclusiveCPUms": 0.10000002384185791,
+              "exclusiveCPUms": 0.10000002384185791,
+              "maxCPUms": 0.10000002384185791
+            },
+            "updateBindings": {
+              "count": 1,
+              "inclusiveCPUms": 0,
+              "exclusiveCPUms": 0,
+              "maxCPUms": 0
+            },
+            "createProgram": {
+              "count": 2,
+              "inclusiveCPUms": 0,
+              "exclusiveCPUms": 0,
+              "maxCPUms": 0
+            },
+            "createRenderPipeline": {
+              "count": 1,
+              "inclusiveCPUms": 0.19999992847442627,
+              "exclusiveCPUms": 0.19999992847442627,
+              "maxCPUms": 0.19999992847442627
+            }
+          }
+        }
+      ],
+      "pendingCompiles": 0,
+      "activeBackendOwners": 0,
+      "restoredOwners": 1,
+      "observationErrors": 0,
+      "droppedRenders": 0,
+      "droppedCompiles": 0,
+      "renderCount": 7,
+      "compileCount": 3,
+      "extraResourceCalls": false,
+      "extraFrames": false,
+      "intervalMethodsOverlapRender": true,
+      "gpuCompletionMeasured": false,
+      "physicalDeviceQualified": false
+    },
+    "compileDrawHold": {
+      "schema": "JTA_COMPILE_DRAW_HOLD_067",
+      "deferredDrawCallbacks": 0,
+      "blockedCaptureRequests": 0,
+      "pendingCompilation": false,
+      "extraFramesScheduled": false,
+      "simulationOrUIReplaced": false,
+      "rendererOrSceneRetained": false
+    },
+    "startupTimes": {
+      "moduleReadyMs": 4226.799999952316,
+      "startedMs": 331679.1999999285,
+      "rendererReadyMs": 331806.39999997616,
+      "sourceReadyMs": 332825.5,
+      "firstFrameMs": 332909.09999990463
+    },
+    "renderCPU": {
+      "count": 4,
+      "mean": 3.675000011920929,
+      "max": 4.300000071525574,
+      "p95": 4.300000071525574
+    },
+    "tickCPU": null,
+    "rendererMemory": {
+      "attributes": 0,
+      "attributesSize": 0,
+      "geometries": 0,
+      "indexAttributes": 0,
+      "indexAttributesSize": 0,
+      "indirectStorageAttributes": 0,
+      "indirectStorageAttributesSize": 0,
+      "programs": 0,
+      "programsSize": 0,
+      "readbackBuffers": 0,
+      "readbackBuffersSize": 0,
+      "renderTargets": 0,
+      "storageAttributes": 0,
+      "storageAttributesSize": 0,
+      "textures": 0,
+      "texturesSize": 0,
+      "uniformBuffers": 0,
+      "uniformBuffersSize": 0,
+      "total": 0
+    },
+    "sourceBuildId": "38e55b7454463300ba83fa0b6306b48b8ae29192862d2eb005812b3c3711e564",
+    "lastError": null,
+    "retirementEvents": [
+      {
+        "kind": "retirement:stop:begin",
+        "wallMs": 371949,
+        "phase": "retirement:stop:begin",
+        "status": "stopping",
+        "reason": "pagehide",
+        "step": "stop",
+        "counters": {
+          "ownedModels": 2,
+          "leases": 2,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      },
+      {
+        "kind": "retirement:stop:done",
+        "wallMs": 371955.5,
+        "phase": "retirement:stop:done",
+        "status": "stopping",
+        "reason": "pagehide",
+        "step": "stop",
+        "counters": {
+          "ownedModels": 2,
+          "leases": 2,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      },
+      {
+        "kind": "retirement:drain:begin",
+        "wallMs": 371976.39999997616,
+        "phase": "retirement:drain:begin",
+        "status": "draining",
+        "reason": "pagehide",
+        "step": "drain",
+        "counters": {
+          "ownedModels": 2,
+          "leases": 2,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      },
+      {
+        "kind": "retirement:drain:done",
+        "wallMs": 371993.7999999523,
+        "phase": "retirement:drain:done",
+        "status": "draining",
+        "reason": "pagehide",
+        "step": "drain",
+        "counters": {
+          "ownedModels": 0,
+          "leases": 0,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      },
+      {
+        "kind": "retirement:cleanup:overlays:begin",
+        "wallMs": 371994,
+        "phase": "retirement:cleanup:overlays:begin",
+        "status": "cleaning",
+        "reason": "pagehide",
+        "step": "overlays",
+        "counters": {
+          "ownedModels": 0,
+          "leases": 0,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      },
+      {
+        "kind": "retirement:cleanup:overlays:done",
+        "wallMs": 371994.2999999523,
+        "phase": "retirement:cleanup:overlays:done",
+        "status": "cleaning",
+        "reason": "pagehide",
+        "step": "overlays",
+        "counters": {
+          "ownedModels": 0,
+          "leases": 0,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      },
+      {
+        "kind": "retirement:cleanup:resources:begin",
+        "wallMs": 371994.5,
+        "phase": "retirement:cleanup:resources:begin",
+        "status": "cleaning",
+        "reason": "pagehide",
+        "step": "resources",
+        "counters": {
+          "ownedModels": 0,
+          "leases": 0,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      },
+      {
+        "kind": "retirement:cleanup:resources:done",
+        "wallMs": 371996.2999999523,
+        "phase": "retirement:cleanup:resources:done",
+        "status": "cleaning",
+        "reason": "pagehide",
+        "step": "resources",
+        "counters": {
+          "ownedModels": 0,
+          "leases": 0,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      },
+      {
+        "kind": "retirement:done",
+        "wallMs": 371996.59999990463,
+        "phase": "retirement:done",
+        "status": "retired",
+        "reason": "pagehide",
+        "step": null,
+        "counters": {
+          "ownedModels": 0,
+          "leases": 0,
+          "pendingFetches": 0,
+          "frames": 5
+        }
+      }
+    ]
+  }
+}

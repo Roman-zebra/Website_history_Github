@@ -1,0 +1,42 @@
+import assert from 'node:assert/strict';
+import {captureControlN067,patchCaptureControlN067,CAPTURE_LIMITS_N067} from '../capture-control-N067.mjs';
+const ident=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],m=()=>({elements:[...ident]}),v=()=>({x:0,y:0,z:0}),q=()=>({x:0,y:0,z:0,w:1});
+const node=()=>({name:'',type:'Group',visible:true,children:[],position:v(),quaternion:q(),scale:{x:1,y:1,z:1},matrixWorld:m(),layers:{mask:1}});
+const scene=node(),camera={...node(),type:'PerspectiveCamera',near:.08,far:900,aspect:16/9,fov:55,projectionMatrix:m(),projectionMatrixInverse:m(),matrixWorldInverse:m()};
+const light={...node(),isLight:true,type:'DirectionalLight',intensity:3,color:{r:1,g:.8,b:.6},target:node()};scene.children=[{...node(),visible:false,children:[light]}];
+const renderer={toneMapping:4,toneMappingExposure:1,outputColorSpace:'srgb'},canvas={width:1920,height:1080},detail={backend:'WebGPU',cameraId:'rear',sourceFrames:7,site:'review-native-capture'};
+let forbidden=0;for(const o of [renderer,camera,light,scene,canvas])for(const key of ['render','compileAsync','updateProjectionMatrix','updateMatrixWorld','getWorldPosition','getBoundingClientRect','setSize','traverse','toArray'])o[key]=()=>{forbidden++;throw Error('Observation must not call '+key);};
+const before=JSON.stringify({scene,camera,renderer,canvas});const observation=captureControlN067(scene,camera,renderer,canvas,detail);
+assert.equal(observation.complete,true);assert.equal(observation.lights[0].effectiveVisible,false);assert.deepEqual(observation.camera.position,[0,0,0]);assert.equal(observation.camera.near,.08);assert.equal(observation.canvas.width,1920);assert.equal(observation.renderer.outputColorSpace,'srgb');assert.equal(forbidden,0);assert.equal(JSON.stringify({scene,camera,renderer,canvas}),before);
+assert.equal(Object.isFrozen(observation),true);assert.equal(Object.isFrozen(observation.lights[0].matrixWorld),true);
+light.intensity=7;camera.position.x=2;assert.equal(observation.lights[0].intensity,3);assert.equal(observation.camera.position[0],0);
+assert.equal(captureControlN067(scene,{...camera,near:NaN},renderer,canvas,detail).complete,false);
+const cycle=node();cycle.children=[cycle];assert.equal(captureControlN067(cycle,camera,renderer,canvas,detail).cycle,true);
+const broad=node();broad.children=Array.from({length:CAPTURE_LIMITS_N067.nodes+1},node);const bounded=captureControlN067(broad,camera,renderer,canvas,detail);assert.equal(bounded.truncated,true);assert.equal(bounded.complete,false);assert.ok(bounded.nodes<=CAPTURE_LIMITS_N067.nodes);
+const many=node();many.children=Array.from({length:CAPTURE_LIMITS_N067.lights+1},()=>({...light,children:[]}));const capped=captureControlN067(many,camera,renderer,canvas,detail);assert.equal(capped.lights.length,CAPTURE_LIMITS_N067.lights);assert.equal(capped.complete,false);
+const bad={get children(){throw Error('native property failed');}};assert.equal(captureControlN067(bad,camera,renderer,canvas,detail).complete,false);
+// Apply the exact seams to a native-like capture method. Observe one original render and retain the exact toBlob promise outcome/error behavior.
+const r0='renderer.render(scene, camera);',r1='renderer.render(scene, camera);';
+const source='async function capture() {\n  '+r0+'\n  const receipt = snapshot2(), blob = await new Promise((r) => canvas.toBlob(r, "image/png"));\n  return {blob,receipt};\n}\nconst api={async capturePNG() {\n    '+r1+'\n    const receipt = JSON.parse(JSON.stringify(snapshot2()));\n    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));\n    if (!blob || disposed) throw Error("Capture canceled");\n    return { blob, receipt };\n  }};';
+const patched=patchCaptureControlN067(source,[r0,r1]);assert.equal(patched.proof.originalExactlyRestored,true);assert.equal(patched.source.match(/renderer.render\(scene, camera\);/g).length,2);assert.throws(()=>patchCaptureControlN067(source+'\n'+source,[r0,r1]),/unique/);
+const body=patched.source.slice(patched.source.indexOf('\n')+1);let renders=0,blobCalls=0,disposed=false,expectedBlob={nativePNG:true},rejectRender=null;
+renderer.render=()=>{renders++;if(rejectRender)throw rejectRender;};canvas.toBlob=(resolve,type)=>{blobCalls++;assert.equal(type,'image/png');resolve(expectedBlob);};const receipt={original:'unchanged',viewport:{width:1920,height:1080}};
+const create=new Function('captureControlN067','scene','camera','renderer','canvas','frames','cameraId','rendererObservation','snapshot2','isDisposed',body.replace('if (!blob || disposed)','if (!blob || isDisposed())')+'\nreturn api;');
+const api=create(captureControlN067,scene,camera,renderer,canvas,7,'rear',{snapshot:()=>({actualBackend:'WebGPU'})},()=>JSON.parse(JSON.stringify(receipt)),()=>disposed);
+const promise=api.capturePNG();assert.equal(promise instanceof Promise,true);const result=await promise;assert.equal(result.blob,expectedBlob);const {captureControl,...oldReceipt}=result.receipt;assert.deepEqual(oldReceipt,receipt);assert.equal(renders,1);assert.equal(blobCalls,1);assert.equal(captureControl.complete,true);
+expectedBlob=null;await assert.rejects(api.capturePNG(),/Capture canceled/);expectedBlob={nativePNG:true};disposed=true;await assert.rejects(api.capturePNG(),/Capture canceled/);disposed=false;const exactError=Error('native render error');rejectRender=exactError;await assert.rejects(api.capturePNG(),e=>e===exactError);
+// Observation failure cannot turn an otherwise successful original capture into a rejection.
+rejectRender=null;const softAPI=create(()=>({complete:false}),scene,camera,renderer,canvas,7,'rear',{snapshot:()=>({actualBackend:'WebGPU'})},()=>({...receipt}),()=>false);assert.equal((await softAPI.capturePNG()).blob,expectedBlob);
+console.log(JSON.stringify({passed:true,scope:'bounded immutable capture-only numeric observations and exact original PNG promise/blob/error behavior',extraRender:0,extraCompile:0,retainedOwners:0,nativeQualified:false}));
+
+const {saveCaptureControlPNG_N067}=await import('../capture-control-N067.mjs');const {createHash}=await import('node:crypto');const nativeBlob=new Blob(['fixed native PNG bytes'],{type:'image/png'});let fetchedBody=null,fetchCalls=0;
+const saved=await saveCaptureControlPNG_N067({blob:nativeBlob,receipt:{captureControl:observation}},{sessionID:'synthetic-scope',backend:'webgpu',nativeFetch:async(url,options)=>{fetchCalls++;assert.equal(url,'/api/__qa/receipt');assert.equal(options.method,'POST');assert.equal(options.cache,'no-store');fetchedBody=JSON.parse(options.body);assert.ok(options.body.length<=128000);return {ok:true};}});
+assert.equal(saved.saved,true);assert.equal(fetchCalls,1);assert.equal(fetchedBody.png.sha256,createHash('sha256').update('fixed native PNG bytes').digest('hex'));assert.equal(fetchedBody.png.bytes,nativeBlob.size);assert.deepEqual(fetchedBody.captureControl,JSON.parse(JSON.stringify(observation)));assert.equal(fetchedBody.phase,'capture-control-png-saved');
+const warnings=[];const warn=console.warn;console.warn=x=>warnings.push(x);try{const refused=await saveCaptureControlPNG_N067({blob:nativeBlob,receipt:{captureControl:observation}},{sessionID:'synthetic-scope',backend:'webgpu',nativeFetch:async()=>({ok:false,status:413})});assert.equal(refused.saved,false);assert.equal(warnings.length,1);assert.equal(nativeBlob.size,22);}finally{console.warn=warn;}
+console.log(JSON.stringify({standaloneReceipt:true,exactPNGHash:true,originalReceiptLimit:128000,uploadFailurePreservesCapture:true}));
+
+const {readFileSync}=await import('node:fs');
+const actualFragment=readFileSync(new URL('../fixtures/original-capture-fragments-N.txt',import.meta.url),'utf8');
+const actualAnchors=['original-capture','review-native-capture'].map(site=>actualFragment.split('\n').find(line=>line.includes('observeRender067(renderer, scene, camera, {site:"'+site+'"')).trim());
+const actualPatched=patchCaptureControlN067(actualFragment,actualAnchors);assert.equal(actualPatched.proof.originalExactlyRestored,true);assert.equal(actualPatched.proof.captureSites,2);assert.equal(actualPatched.source.match(/observeRender067\(renderer, scene, camera/g).length,2);assert.equal(actualPatched.source.match(/canvas.toBlob/g).length,2);assert.equal(actualPatched.source.match(/requirePreparedCapture067\(\);/g).length,2);
+console.log(JSON.stringify({actualFrozenCaptureSeams:true,exactRestoration:true,captureSites:2,extraRender:0,extraCompile:0,nativeQualified:false}));

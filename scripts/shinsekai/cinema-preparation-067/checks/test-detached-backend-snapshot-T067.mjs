@@ -1,0 +1,9 @@
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import fs from 'node:fs';
+import {patchDetachedBackendSnapshotT067} from '../detached-backend-snapshot-T067.mjs';
+const fixture=fs.readFileSync(new URL('../fixtures/original-backend-observation-T067.txt',import.meta.url),'utf8');
+const fixed=patchDetachedBackendSnapshotT067(fixture);assert.equal(fixed.proof.originalSourceExactlyRestored,true);assert.throws(()=>patchDetachedBackendSnapshotT067(fixture+fixture),/unique/);assert.throws(()=>patchDetachedBackendSnapshotT067(''),/unique/);
+for(const detached of [false,true]){const context=vm.createContext({structuredClone:detached?()=>undefined:structuredClone,setTimeout,clearTimeout});const factory=vm.runInContext('('+fixed.source+')',context);const renderer={backend:{isWebGLBackend:true,isWebGPUBackend:false},samples:4,onError:()=>{}};const originalError=renderer.onError;const q=factory(renderer);q.initialized();q.firstFrame();renderer.onError({api:'qa',type:'test',message:'bounded error'});const s=q.snapshot();assert.equal(s.actualBackend,'WebGL2');assert.equal(s.errorCount,1);s.errors[0].message='mutated';assert.equal(q.snapshot().errors[0].message,'bounded error');await q.afterRetirement();assert.equal(q.snapshot().callbacksRestored,true);assert.equal(renderer.onError,originalError);assert.equal(q.snapshot().retirementObserved,true);}
+const context=vm.createContext({structuredClone:()=>undefined,setTimeout,clearTimeout});const original=vm.runInContext('('+fixture+')',context);const q=original({backend:{isWebGLBackend:true},samples:4});q.initialized();assert.equal(q.snapshot(),undefined);
+console.log(JSON.stringify({schema:'CPU_DETACHED_BACKEND_T067',passed:true,exactFrozenFunction:true,detachedCloneRegression:true,independentErrorRecords:true,callbacksRestored:true,nativeQualified:false}));
